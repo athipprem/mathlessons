@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factorials & Permutations — Counting Lesson</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; min-height: 100vh; }
+
+    header { background: linear-gradient(135deg, #1565c0 0%, #1e88e5 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; white-space: nowrap; }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p  { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 18px 0 4px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+    .dot.active   { background: #1565c0; }
+    .dot.complete { background: #2e7d32; }
+
+    .screen { display: none; }
+    .screen.visible { display: block; }
+
+    .wrap { max-width: 660px; margin: 0 auto; padding: 28px 20px 60px; }
+
+    .card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .tag-blue   { background: #e3f2fd; color: #1565c0; }
+    .tag-green  { background: #e8f5e9; color: #2e7d32; }
+    .tag-purple { background: #f3e5f5; color: #6a1b9a; }
+    .tag-orange { background: #fff3e0; color: #e65100; }
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
+    p  { font-size: 0.95rem; color: #444; line-height: 1.65; margin-bottom: 10px; }
+    .hi { color: #1565c0; font-weight: 700; }
+    .hi-green { color: #2e7d32; font-weight: 700; }
+    .hint { font-size: 0.82rem; color: #888; }
+
+    /* Box diagram */
+    .boxes { display: flex; align-items: center; gap: 10px; margin: 14px 0; flex-wrap: wrap; }
+    .box { min-width: 70px; height: 70px; border: 2.5px solid #ccc; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; background: #f8f8f8; }
+    .box.active { border-color: #1565c0; background: #e3f2fd; }
+    .box.done   { border-color: #2e7d32; background: #e8f5e9; }
+    .box.fixed  { border-color: #e65100; background: #fff3e0; }
+    .box-num { font-size: 1.5rem; font-weight: 800; color: #1565c0; line-height: 1; }
+    .box-num.green { color: #2e7d32; }
+    .box-num.orange { color: #e65100; }
+    .box-lbl { font-size: 0.65rem; color: #666; font-weight: 600; text-align: center; }
+    .op { font-size: 1.4rem; color: #aaa; font-weight: 700; }
+    .result-box { min-width: 80px; height: 52px; border: 2.5px solid #ccc; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 800; color: #2e7d32; background: #f8f8f8; }
+
+    /* Rule box */
+    .rule-box { background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.9rem; line-height: 1.7; color: #1a3a6e; }
+    .rule-box b { color: #1565c0; }
+
+    /* Input */
+    .input-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 4px; flex-wrap: wrap; }
+    .input-row label { font-size: 0.9rem; color: #555; flex: 1; min-width: 200px; line-height: 1.5; }
+    .input-row input { width: 84px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 700; border: 2px solid #ccc; border-radius: 10px; outline: none; }
+    .input-row input:focus { border-color: #1565c0; box-shadow: 0 0 0 3px rgba(21,101,192,0.15); }
+    .input-correct { border-color: #2e7d32 !important; background: #e8f5e9 !important; color: #1b5e20 !important; }
+    .input-wrong   { border-color: #c62828 !important; background: #ffebee !important; }
+
+    .feedback { font-size: 0.88rem; padding: 10px 14px; border-radius: 8px; margin: 6px 0; line-height: 1.5; }
+    .fb-ok  { background: #e8f5e9; color: #1b5e20; border: 1px solid #81c784; }
+    .fb-err { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; }
+    .fb-hide { display: none; }
+
+    .divider { border: none; border-top: 1.5px solid #eee; margin: 14px 0; }
+    .hidden { display: none; }
+
+    /* Score */
+    .score-big { font-size: 3.2rem; font-weight: 800; color: #1565c0; text-align: center; padding: 1rem 0 0.5rem; }
+
+    /* Buttons */
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+    .btn { display: inline-flex; align-items: center; padding: 12px 22px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; cursor: pointer; border: 2px solid #ccc; background: white; color: #333; transition: background 0.15s; text-decoration: none; }
+    .btn:hover { background: #f0f0f0; }
+    .btn-primary { background: #1565c0; border-color: #1565c0; color: white; }
+    .btn-primary:hover { background: #0d47a1; }
+    .btn-grey { background: #f5f5f5; border-color: #ddd; color: #555; }
+    .btn-grey:hover { background: #ebebeb; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div><a href="index.html">← All Lessons</a></div>
+  <div>
+    <h1>Factorials &amp; Permutations</h1>
+    <p>Art of Counting · Week 5</p>
+  </div>
+</header>
+
+<div class="dots" id="dots"></div>
+
+<div class="wrap">
+
+  <!-- ── Screen 0: Bridge from Week 4 ── -->
+  <div class="screen visible" id="s0">
+    <div class="card">
+      <span class="tag tag-orange">Remember Week 4?</span>
+      <h2>You were SO close on Q5</h2>
+      <p>Q5 was: Prem has 4 books. His Maths book must go in position 1. How many ways can he arrange all 4 books?</p>
+      <p>You wrote <span class="hi">3 × 3 = 9</span>. The correct answer was <span class="hi-green">6</span>.</p>
+      <p>You got the hard part right — position 1 is fixed (1 choice). But for the remaining 3 positions, the options <strong>count down</strong>:</p>
+      <div class="boxes">
+        <div class="box fixed"><div class="box-num orange">1</div><div class="box-lbl">Maths (fixed)</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">3</div><div class="box-lbl">2nd position</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">2</div><div class="box-lbl">3rd position</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">1</div><div class="box-lbl">4th position</div></div>
+        <div class="op">=</div>
+        <div class="result-box">6</div>
+      </div>
+      <p>That countdown — <span class="hi">3 × 2 × 1</span> — has a special name. Today you'll learn it.</p>
+    </div>
+    <button class="btn btn-primary" onclick="goTo(1)">Let's go →</button>
+  </div>
+
+  <!-- ── Screen 1: What is a factorial ── -->
+  <div class="screen" id="s1">
+    <div class="card">
+      <span class="tag tag-blue">Lesson 1 — Factorial</span>
+      <h2>When ALL items are arranged: use factorial</h2>
+      <p>When you fill ALL positions with ALL items (no repeats), every box counts down by 1. This countdown has a shortcut called <strong>factorial</strong>, written with an exclamation mark <span class="hi">!</span></p>
+      <div class="rule-box">
+        <b>4! = 4 × 3 × 2 × 1 = 24</b><br>
+        <b>5! = 5 × 4 × 3 × 2 × 1 = 120</b><br>
+        <b>3! = 3 × 2 × 1 = 6</b>
+      </div>
+      <p>Rule: <span class="hi">n! = n × (n−1) × (n−2) × … × 2 × 1</span></p>
+      <p>Start from n and count down to 1. Multiply them all together.</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-green">Check yourself</span>
+      <h2>How many ways can you arrange 4 different coloured balls?</h2>
+      <div class="boxes">
+        <div class="box active" id="b1a"><div class="box-lbl">1st</div></div>
+        <div class="op">×</div>
+        <div class="box" id="b1b"><div class="box-lbl">2nd</div></div>
+        <div class="op">×</div>
+        <div class="box" id="b1c"><div class="box-lbl">3rd</div></div>
+        <div class="op">×</div>
+        <div class="box" id="b1d"><div class="box-lbl">4th</div></div>
+        <div class="op">=</div>
+        <div class="result-box" id="res1">?</div>
+      </div>
+      <div class="input-row">
+        <label>How many choices for the <span class="hi">1st</span> position? (4 balls available)</label>
+        <input type="number" id="i1a" min="1" max="9" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f1a"></div>
+
+      <div class="hidden" id="sec1b">
+        <div class="input-row">
+          <label>After placing one ball, how many choices for the <span class="hi">2nd</span>?</label>
+          <input type="number" id="i1b" min="1" max="9" placeholder="?">
+        </div>
+        <div class="feedback fb-hide" id="f1b"></div>
+      </div>
+
+      <div class="hidden" id="sec1c">
+        <div class="input-row">
+          <label>Choices for the <span class="hi">3rd</span>?</label>
+          <input type="number" id="i1c" min="1" max="9" placeholder="?">
+        </div>
+        <div class="feedback fb-hide" id="f1c"></div>
+      </div>
+
+      <div class="hidden" id="sec1d">
+        <div class="input-row">
+          <label>Choices for the <span class="hi">4th</span>?</label>
+          <input type="number" id="i1d" min="1" max="9" placeholder="?">
+        </div>
+        <div class="feedback fb-hide" id="f1d"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Screen 2: Partial permutations ── -->
+  <div class="screen" id="s2">
+    <div class="card">
+      <span class="tag tag-blue">Lesson 2 — Partial Permutations</span>
+      <h2>What if you don't fill ALL positions?</h2>
+      <p>Sometimes you only pick a few items from a larger group. You still count down — but you <strong>stop</strong> when your boxes are full.</p>
+      <p>Example: 5 runners race. How many ways can they finish <span class="hi">1st, 2nd, 3rd</span>?</p>
+      <p>You have <span class="hi">3 positions</span> to fill, from <span class="hi">5 runners</span>. Count down, stop after 3 boxes:</p>
+      <div class="boxes">
+        <div class="box done"><div class="box-num green">5</div><div class="box-lbl">1st place</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">4</div><div class="box-lbl">2nd place</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">3</div><div class="box-lbl">3rd place</div></div>
+        <div class="op">=</div>
+        <div class="result-box">60</div>
+      </div>
+      <div class="rule-box">
+        <b>Key rule:</b> Boxes = positions to fill. Start from total available, count down, stop when boxes run out.
+      </div>
+    </div>
+    <div class="card">
+      <span class="tag tag-green">Check yourself</span>
+      <h2>6 students. A teacher picks 2 for a prize (1st and 2nd). How many ways?</h2>
+      <p class="hint">How many positions? How many students available? Count down and stop.</p>
+      <div class="boxes">
+        <div class="box active" id="b2a"><div class="box-lbl">1st prize</div></div>
+        <div class="op">×</div>
+        <div class="box" id="b2b"><div class="box-lbl">2nd prize</div></div>
+        <div class="op">=</div>
+        <div class="result-box" id="res2">?</div>
+      </div>
+      <div class="input-row">
+        <label>Choices for <span class="hi">1st prize</span>?</label>
+        <input type="number" id="i2a" min="1" max="99" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f2a"></div>
+      <div class="hidden" id="sec2b">
+        <div class="input-row">
+          <label>After picking 1st, choices for <span class="hi">2nd prize</span>?</label>
+          <input type="number" id="i2b" min="1" max="99" placeholder="?">
+        </div>
+        <div class="feedback fb-hide" id="f2b"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Screen 3: Fixed positions ── -->
+  <div class="screen" id="s3">
+    <div class="card">
+      <span class="tag tag-blue">Lesson 3 — Fixed Positions</span>
+      <h2>When one position is locked, give it 1 choice</h2>
+      <p>If a specific item <strong>must</strong> go in a specific position, that box gets <span class="hi">1</span> (no choice to make). Then count down normally for the rest.</p>
+      <p>This is exactly Q5 from your Week 4 test — let's get it right this time!</p>
+      <p><strong>4 books on a shelf. Maths book must be 1st. How many arrangements?</strong></p>
+      <div class="boxes">
+        <div class="box fixed"><div class="box-num orange">1</div><div class="box-lbl">Maths (fixed)</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">3</div><div class="box-lbl">2nd</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">2</div><div class="box-lbl">3rd</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">1</div><div class="box-lbl">4th</div></div>
+        <div class="op">=</div>
+        <div class="result-box">6</div>
+      </div>
+      <p>The orange box is fixed = 1. The remaining 3 positions count down: 3 × 2 × 1 = <span class="hi-green">3! = 6</span>.</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-green">Check yourself</span>
+      <h2>5 trophies on a shelf. The gold trophy must go in the middle (position 3). How many arrangements?</h2>
+      <p class="hint">5 positions total. Position 3 is fixed = 1. Fill the other 4 positions with the remaining 4 trophies — count down.</p>
+      <div class="input-row">
+        <label>What is the total number of arrangements?</label>
+        <input type="number" id="i3a" min="1" max="999" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f3a"></div>
+    </div>
+  </div>
+
+  <!-- ── Screen 4: Practice 1 ── -->
+  <div class="screen" id="s4">
+    <div class="card">
+      <span class="tag tag-green">Practice 1</span>
+      <h2>How many ways can 5 friends stand in a row for a photo?</h2>
+      <p class="hint">All 5 positions, all 5 friends. Use factorial.</p>
+      <div class="input-row">
+        <label>Answer:</label>
+        <input type="number" id="i4a" min="1" max="9999" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f4a"></div>
+    </div>
+
+    <div class="card hidden" id="sec4b">
+      <span class="tag tag-green">Practice 2</span>
+      <h2>8 runners enter a race. Medals are given for 1st, 2nd, and 3rd place. How many different medal outcomes are possible?</h2>
+      <p class="hint">3 positions, 8 runners. Count down from 8, stop after 3 boxes.</p>
+      <div class="input-row">
+        <label>Answer:</label>
+        <input type="number" id="i4b" min="1" max="9999" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f4b"></div>
+    </div>
+  </div>
+
+  <!-- ── Screen 5: Challenge ── -->
+  <div class="screen" id="s5">
+    <div class="card">
+      <span class="tag tag-purple">Challenge</span>
+      <h2>Prem has 6 different books. He always puts his favourite book first and his dictionary last. How many ways can he arrange all 6 books?</h2>
+      <p class="hint">Positions 1 and 6 are fixed. How many positions are free? How many books are left for those positions?</p>
+      <div class="input-row">
+        <label>Answer:</label>
+        <input type="number" id="i5a" min="1" max="9999" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f5a"></div>
+    </div>
+  </div>
+
+  <!-- ── Screen 6: Finish ── -->
+  <div class="screen" id="s6">
+    <div class="card" style="text-align:center; padding:2rem 1.5rem;">
+      <div style="font-size:2.5rem; margin-bottom:8px;">🎉</div>
+      <span class="tag tag-green">Lesson Complete!</span>
+      <div class="score-big" id="final-score"></div>
+      <p style="font-size:1rem; margin-bottom:1rem;">Great work, Prem!</p>
+      <div class="rule-box" style="text-align:left;">
+        <b>Full arrangement (all items):</b> n! = n × (n−1) × … × 1<br>
+        <b>Partial (k positions from n items):</b> n × (n−1) × … × (n−k+1)<br>
+        <b>Fixed position:</b> give it 1, then count down the rest
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-grey" onclick="restart()">Try again 🔄</button>
+      <a class="btn btn-primary" href="index.html">All Lessons →</a>
+    </div>
+  </div>
+
+</div><!-- end wrap -->
+
+<script>
+  var totalScreens = 7;
+  var currentScreen = 0;
+  var practiceScore = 0;
+  var practiceTotal = 0;
+
+  function buildDots() {
+    var c = document.getElementById('dots');
+    c.innerHTML = '';
+    for (var i = 0; i < totalScreens; i++) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (i < currentScreen ? ' complete' : i === currentScreen ? ' active' : '');
+      c.appendChild(d);
+    }
+  }
+
+  function goTo(n) {
+    document.getElementById('s' + currentScreen).classList.remove('visible');
+    currentScreen = n;
+    document.getElementById('s' + currentScreen).classList.add('visible');
+    buildDots();
+    window.scrollTo(0, 0);
+  }
+
+  function showFb(id, ok, msg) {
+    var el = document.getElementById(id);
+    el.className = ok ? 'feedback fb-ok' : 'feedback fb-err';
+    el.textContent = msg;
+  }
+
+  function markInput(id, ok) {
+    var el = document.getElementById(id);
+    el.className = ok ? 'input-correct' : 'input-wrong';
+    el.readOnly = ok;
+  }
+
+  function show(id) { document.getElementById(id).classList.remove('hidden'); }
+  function focusIn(id) { setTimeout(function() { var el = document.getElementById(id); if (el) el.focus(); }, 200); }
+
+  function setBox(id, num, cls) {
+    var b = document.getElementById(id);
+    if (!b) return;
+    b.className = 'box ' + (cls || 'done');
+    b.innerHTML = '<div class="box-num ' + (cls === 'fixed' ? 'orange' : 'green') + '">' + num + '</div>';
+  }
+
+  // ── Screen 1 logic ────────────────────────────────────────────────
+  document.getElementById('i1a').addEventListener('input', function() {
+    var v = parseInt(this.value);
+    if (v === 4) {
+      markInput('i1a', true); setBox('b1a', 4);
+      showFb('f1a', true, '✓ 4 balls to start with — correct!');
+      show('sec1b'); focusIn('i1b');
+      document.getElementById('i1a').removeEventListener('input', arguments.callee);
+    } else if (this.value.length > 0) {
+      markInput('i1a', false);
+      showFb('f1a', false, 'Not quite. How many balls are there in total?');
+    }
+  });
+  document.getElementById('i1b').addEventListener('input', function() {
+    var v = parseInt(this.value);
+    if (v === 3) {
+      markInput('i1b', true); setBox('b1b', 3);
+      showFb('f1b', true, '✓ One ball is used — 3 left!');
+      show('sec1c'); focusIn('i1c');
+      this.removeEventListener('input', arguments.callee);
+    } else if (this.value.length > 0) { markInput('i1b', false); showFb('f1b', false, 'One ball is already placed. How many remain?'); }
+  });
+  document.getElementById('i1c').addEventListener('input', function() {
+    var v = parseInt(this.value);
+    if (v === 2) {
+      markInput('i1c', true); setBox('b1c', 2);
+      showFb('f1c', true, '✓ Counting down — 2 left!');
+      show('sec1d'); focusIn('i1d');
+      this.removeEventListener('input', arguments.callee);
+    } else if (this.value.length > 0) { markInput('i1c', false); showFb('f1c', false, 'Two balls are placed. How many remain?'); }
+  });
+  document.getElementById('i1d').addEventListener('input', function() {
+    var v = parseInt(this.value);
+    if (v === 1) {
+      markInput('i1d', true); setBox('b1d', 1);
+      document.getElementById('res1').textContent = '24';
+      document.getElementById('res1').style.color = '#2e7d32';
+      showFb('f1d', true, '✓ 4×3×2×1 = 24. That\'s 4! — well done!');
+      practiceScore++; practiceTotal++;
+      setTimeout(function() { goTo(2); }, 1500);
+      this.removeEventListener('input', arguments.callee);
+    } else if (this.value.length > 0) { markInput('i1d', false); showFb('f1d', false, 'Only one ball left — what number is that?'); }
+  });
+
+  // ── Screen 2 logic ────────────────────────────────────────────────
+  document.getElementById('i2a').addEventListener('input', function() {
+    var v = parseInt(this.value);
+    if (v === 6) {
+      markInput('i2a', true); setBox('b2a', 6);
+      showFb('f2a', true, '✓ 6 students available for 1st prize!');
+      show('sec2b'); focusIn('i2b');
+      this.removeEventListener('input', arguments.callee);
+    } else if (this.value.length > 0) { markInput('i2a', false); showFb('f2a', false, 'How many students are there in total?'); }
+  });
+  document.getElementById('i2b').addEventListener('input', function() {
+    var v = parseInt(this.value);
+    if (v === 5) {
+      markInput('i2b', true); setBox('b2b', 5);
+      document.getElementById('res2').textContent = '30';
+      document.getElementById('res2').style.color = '#2e7d32';
+      showFb('f2b', true, '✓ 6×5 = 30. Only 2 positions, so we stop here!');
+      practiceScore++; practiceTotal++;
+      setTimeout(function() { goTo(3); }, 1500);
+      this.removeEventListener('input', arguments.callee);
+    } else if (this.value.length > 0) { markInput('i2b', false); showFb('f2b', false, 'One student took 1st prize. How many are left for 2nd?'); }
+  });
+
+  // ── Screen 3 logic ────────────────────────────────────────────────
+  document.getElementById('i3a').addEventListener('input', function() {
+    var v = parseInt(this.value);
+    if (v === 24) {
+      markInput('i3a', true);
+      showFb('f3a', true, '✓ 1×4×3×2×1 = 24. Position 3 is fixed (=1), the other 4 positions give 4! = 24!');
+      practiceScore++; practiceTotal++;
+      setTimeout(function() { goTo(4); }, 1500);
+      this.removeEventListener('input', arguments.callee);
+    } else if (this.value.length > 0) {
+      markInput('i3a', false);
+      showFb('f3a', false, 'Hint: position 3 is fixed = 1. You have 4 remaining positions and 4 remaining trophies. Try 1 × 4 × 3 × 2 × 1.');
+    }
+  });
+
+  // ── Screen 4 logic ────────────────────────────────────────────────
+  document.getElementById('i4a').addEventListener('input', function() {
+    var v = parseInt(this.value);
+    if (v === 120) {
+      markInput('i4a', true);
+      showFb('f4a', true, '✓ 5! = 5×4×3×2×1 = 120. Perfect!');
+      practiceScore++; practiceTotal++;
+      show('sec4b'); focusIn('i4b');
+      this.removeEventListener('input', arguments.callee);
+    } else if (this.value.length > 0) {
+      markInput('i4a', false);
+      showFb('f4a', false, 'Hint: 5 positions, 5 friends. Use 5! = 5×4×3×2×1.');
+    }
+  });
+  document.getElementById('i4b').addEventListener('input', function() {
+    var v = parseInt(this.value);
+    if (v === 336) {
+      markInput('i4b', true);
+      showFb('f4b', true, '✓ 8×7×6 = 336. 3 positions from 8 runners — count down and stop after 3!');
+      practiceScore++; practiceTotal++;
+      setTimeout(function() { goTo(5); }, 1500);
+      this.removeEventListener('input', arguments.callee);
+    } else if (this.value.length > 0) {
+      markInput('i4b', false);
+      showFb('f4b', false, 'Hint: 3 positions, start from 8 runners. 8×7×6 = ?');
+    }
+  });
+
+  // ── Screen 5 logic ────────────────────────────────────────────────
+  document.getElementById('i5a').addEventListener('input', function() {
+    var v = parseInt(this.value);
+    // 6 books, pos 1 and 6 fixed = 1×1, remaining 4 positions = 4! = 24
+    if (v === 24) {
+      markInput('i5a', true);
+      showFb('f5a', true, '✓ 1 × 4! × 1 = 1×24×1 = 24. Positions 1 and 6 are fixed (each = 1). The 4 middle positions give 4×3×2×1 = 24!');
+      practiceScore++; practiceTotal++;
+      setTimeout(function() {
+        document.getElementById('final-score').textContent = practiceScore + ' / ' + practiceTotal;
+        goTo(6);
+      }, 1500);
+      this.removeEventListener('input', arguments.callee);
+    } else if (this.value.length > 0) {
+      markInput('i5a', false);
+      showFb('f5a', false, 'Hint: Positions 1 and 6 are fixed (= 1 each). That leaves 4 free positions and 4 remaining books. Try 1 × 4 × 3 × 2 × 1 × 1.');
+    }
+  });
+
+  function restart() {
+    practiceScore = 0; practiceTotal = 0;
+    document.querySelectorAll('input').forEach(function(i) { i.value = ''; i.className = ''; i.readOnly = false; });
+    document.querySelectorAll('.feedback').forEach(function(f) { f.className = 'feedback fb-hide'; });
+    document.querySelectorAll('.hidden').forEach(function(h) { /* keep hidden */ });
+    ['sec1b','sec1c','sec1d','sec2b','sec4b'].forEach(function(id) {
+      var el = document.getElementById(id); if (el) el.classList.add('hidden');
+    });
+    ['b1a','b1b','b1c','b1d'].forEach(function(id) { var el = document.getElementById(id); if (el) { el.className = 'box'; el.innerHTML = '<div class="box-lbl">' + (id === 'b1a' ? '1st' : id === 'b1b' ? '2nd' : id === 'b1c' ? '3rd' : '4th') + '</div>'; }});
+    document.getElementById('b1a').classList.add('active');
+    ['res1','res2'].forEach(function(id) { var el = document.getElementById(id); if (el) { el.textContent = '?'; el.style.color = '#2e7d32'; }});
+    goTo(0);
+  }
+
+  buildDots();
+</script>
+</body>
+</html>
