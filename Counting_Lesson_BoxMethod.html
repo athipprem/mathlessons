@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Box Method — Counting Lesson</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f4f8;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #1565c0 0%, #1e88e5 100%);
+      color: white;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    header a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p  { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+
+    /* ── Progress dots ── */
+    .dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      padding: 18px 0 4px;
+    }
+    .dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: #ccc;
+      transition: background 0.3s;
+    }
+    .dot.active   { background: #1565c0; }
+    .dot.complete { background: #2e7d32; }
+
+    /* ── Main content ── */
+    .screen { display: none; }
+    .screen.visible { display: block; }
+
+    .wrap {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .card-rule {
+      background: #fff8e1;
+      border: 2px solid #f57f17;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+    .card-result {
+      background: #e8f5e9;
+      border: 2px solid #2e7d32;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+    .card-info {
+      background: #e3f2fd;
+      border: 1px solid #90caf9;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 14px;
+    }
+
+    /* ── Typography ── */
+    .label-part { font-size: 0.75rem; color: #999; font-style: italic; margin-bottom: 6px; }
+    .title-big  { font-size: 1.6rem; font-weight: 700; color: #1565c0; text-align: center; margin-bottom: 6px; }
+    .subtitle   { font-size: 0.95rem; color: #555; text-align: center; margin-bottom: 20px; }
+
+    .rule-tag   { font-size: 0.72rem; font-weight: 700; color: #f57f17; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+    .rule-main  { font-size: 1.05rem; font-weight: 700; color: #222; margin-bottom: 4px; }
+    .rule-sub   { font-size: 0.88rem; color: #555; font-style: italic; margin-bottom: 10px; }
+    .rule-row   { font-size: 0.9rem; margin-bottom: 4px; }
+
+    .section-head { font-size: 1rem; font-weight: 700; color: #1565c0; margin-bottom: 8px; margin-top: 4px; }
+    .hint-text  { font-size: 0.82rem; color: #777; font-style: italic; margin-top: 2px; margin-bottom: 10px; }
+    .info-line  { font-size: 0.92rem; margin-bottom: 4px; }
+    .result-big { font-size: 1.1rem; font-weight: 700; color: #2e7d32; margin-bottom: 4px; }
+    .result-sub { font-size: 0.85rem; color: #555; font-style: italic; }
+
+    /* ── Answer input row ── */
+    .answer-row { display: flex; align-items: center; gap: 12px; margin: 12px 0 6px; }
+    .answer-input {
+      width: 90px;
+      font-size: 1.1rem;
+      text-align: center;
+      padding: 8px 10px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .answer-input:focus { border-color: #1565c0; }
+    .answer-input.correct { border-color: #2e7d32; background: #f1f8f2; }
+    .answer-input.wrong   { border-color: #c62828; background: #fff5f5; }
+
+    .feedback {
+      font-size: 0.88rem;
+      font-weight: 600;
+      min-height: 20px;
+      margin-bottom: 6px;
+    }
+    .feedback.ok  { color: #2e7d32; }
+    .feedback.err { color: #c62828; }
+
+    /* ── Sub-steps (hidden until unlocked) ── */
+    .sub-step { display: none; margin-top: 14px; }
+    .sub-step.unlocked { display: block; }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 1px solid #e0e0e0; margin: 14px 0; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-block;
+      background: #1565c0;
+      color: white;
+      border: none;
+      border-radius: 9px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 11px 22px;
+      cursor: pointer;
+      margin-top: 14px;
+      transition: background 0.15s;
+      text-decoration: none;
+    }
+    .btn:hover { background: #0d47a1; }
+    .btn-grey { background: #607d8b; }
+    .btn-grey:hover { background: #455a64; }
+
+    /* ── Box diagram ── */
+    .boxes {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+    .box {
+      width: 56px; height: 52px;
+      border: 2px solid #1565c0;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #e3f2fd;
+      font-size: 0.72rem;
+      color: #1565c0;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .box .box-num { font-size: 1.1rem; }
+    .times { font-size: 1.2rem; color: #777; }
+    .equals { font-size: 1.2rem; color: #555; }
+    .box-answer { background: #e8f5e9; border-color: #2e7d32; color: #2e7d32; }
+
+    /* ── Finish screen ── */
+    .finish-trophy { text-align: center; font-size: 3.5rem; margin: 20px 0 10px; }
+    .finish-title  { text-align: center; font-size: 1.5rem; font-weight: 700; color: #1565c0; margin-bottom: 8px; }
+    .finish-sub    { text-align: center; font-size: 0.95rem; color: #555; margin-bottom: 24px; }
+    .remember-item { font-size: 0.92rem; margin-bottom: 8px; padding-left: 4px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <a href="index.html">← All Lessons</a>
+  </div>
+  <div>
+    <h1>Box Method — Positions vs Options</h1>
+    <p>Art of Counting · Week 4</p>
+  </div>
+</header>
+
+<!-- Progress dots -->
+<div class="dots">
+  <div class="dot active"  id="dot0"></div>
+  <div class="dot"         id="dot1"></div>
+  <div class="dot"         id="dot2"></div>
+  <div class="dot"         id="dot3"></div>
+  <div class="dot"         id="dot4"></div>
+  <div class="dot"         id="dot5"></div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SCREEN 0 — INTRO
+════════════════════════════════════════════════ -->
+<div id="screen-0" class="screen visible">
+  <div class="wrap">
+    <div class="title-big">The Box Method</div>
+    <div class="subtitle">Counting — Positions vs Options</div>
+
+    <div class="card-rule">
+      <div class="rule-tag">The Golden Rule</div>
+      <div class="rule-main">Boxes = POSITIONS (slots to fill)</div>
+      <div class="rule-sub">NOT the number of available options</div>
+      <hr class="divider">
+      <div class="rule-row" style="color:#c62828;">❌  4 options available → draw 4 boxes &nbsp;&nbsp; WRONG</div>
+      <div class="rule-row" style="color:#2e7d32;">✅  2-digit number → draw 2 boxes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RIGHT</div>
+    </div>
+
+    <div class="card">
+      <div class="section-head">What we will work through today:</div>
+      <p style="font-size:0.95rem; margin-bottom:6px;">Using digits <strong>{2, 4, 6, 8}</strong> — how many 2-digit numbers can you make?</p>
+      <p style="font-size:0.9rem; color:#555;">We will look at two cases: <strong>with repeats</strong> and <strong>without repeats</strong>, then you get two practice problems.</p>
+    </div>
+
+    <button class="btn" onclick="goTo(1)">Let's go! →</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SCREEN 1 — WITH REPEATS
+════════════════════════════════════════════════ -->
+<div id="screen-1" class="screen">
+  <div class="wrap">
+    <div class="label-part">Part 1 of 4 — With Repeats</div>
+    <div class="section-head" style="font-size:1.1rem; margin-bottom:12px;">
+      Digits: {2, 4, 6, 8} &nbsp;|&nbsp; 2-digit numbers &nbsp;|&nbsp; Repeats OK
+    </div>
+
+    <!-- Sub-step A: positions -->
+    <div class="card">
+      <div class="section-head">Step 1: How many POSITIONS does a 2-digit number have?</div>
+      <div class="hint-text">Think: there is a tens digit and a units digit.</div>
+      <div class="answer-row">
+        <input class="answer-input" id="s1a-in" type="number" min="1" max="99" placeholder="?">
+        <span style="font-size:0.9rem; color:#555;">positions</span>
+      </div>
+      <div class="feedback" id="s1a-fb"></div>
+    </div>
+
+    <!-- Sub-step B: choices for box 1 (unlocked after A) -->
+    <div class="sub-step" id="s1b">
+      <div class="card-info">
+        <span style="color:#2e7d32; font-weight:700;">Correct! </span>
+        <div class="boxes" style="margin-top:10px;">
+          <div class="box"><span>tens</span></div>
+          <div class="times">×</div>
+          <div class="box"><span>units</span></div>
+        </div>
+        <p style="font-size:0.82rem; color:#555; margin-top:4px;">Two boxes — one per position.</p>
+      </div>
+      <div class="card">
+        <div class="section-head">Step 2: How many choices for Box 1?</div>
+        <div class="hint-text">Count the digits in the list: 2, 4, 6, 8</div>
+        <div class="answer-row">
+          <input class="answer-input" id="s1b-in" type="number" min="1" max="99" placeholder="?">
+          <span style="font-size:0.9rem; color:#555;">choices</span>
+        </div>
+        <div class="feedback" id="s1b-fb"></div>
+      </div>
+    </div>
+
+    <!-- Sub-step C: choices for box 2 (unlocked after B) -->
+    <div class="sub-step" id="s1c">
+      <div class="card">
+        <div class="section-head">Step 3: Choices for Box 2?</div>
+        <div class="hint-text">Repeats OK — the same digits are available again.</div>
+        <div class="answer-row">
+          <input class="answer-input" id="s1c-in" type="number" min="1" max="99" placeholder="?">
+          <span style="font-size:0.9rem; color:#555;">choices</span>
+        </div>
+        <div class="feedback" id="s1c-fb"></div>
+      </div>
+    </div>
+
+    <!-- Sub-step D: result (unlocked after C) -->
+    <div class="sub-step" id="s1d">
+      <div class="card-result">
+        <div class="boxes">
+          <div class="box box-answer"><span class="box-num">4</span><span>choices</span></div>
+          <div class="times">×</div>
+          <div class="box box-answer"><span class="box-num">4</span><span>choices</span></div>
+          <div class="equals">=</div>
+          <span style="font-size:1.4rem; font-weight:700; color:#2e7d32;">16</span>
+        </div>
+        <div class="result-big" style="margin-top:10px;">4 × 4 = 16 different 2-digit numbers!</div>
+        <div class="result-sub">Box 1 (4 choices) × Box 2 (4 choices) = 16 total</div>
+      </div>
+      <button class="btn" onclick="goTo(2)">Next: No Repeats →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SCREEN 2 — NO REPEATS
+════════════════════════════════════════════════ -->
+<div id="screen-2" class="screen">
+  <div class="wrap">
+    <div class="label-part">Part 2 of 4 — No Repeats</div>
+    <div class="section-head" style="font-size:1.1rem; margin-bottom:12px;">
+      Digits: {2, 4, 6, 8} &nbsp;|&nbsp; 2-digit numbers &nbsp;|&nbsp; NO Repeats
+    </div>
+
+    <div class="card-info">
+      <div class="info-line">📦 Positions: still <strong>2</strong> &nbsp;(same question, same answer!)</div>
+      <div class="info-line">Box 1 choices: still <strong>4</strong> &nbsp;(any digit from the list)</div>
+    </div>
+
+    <div class="card">
+      <div class="section-head">Once you place a digit in Box 1, it is used up.</div>
+      <p style="font-size:0.92rem; margin-bottom:10px; color:#444;">How many choices remain for Box 2?</p>
+      <div class="answer-row">
+        <input class="answer-input" id="s2a-in" type="number" min="1" max="99" placeholder="?">
+        <span style="font-size:0.9rem; color:#555;">choices</span>
+      </div>
+      <div class="feedback" id="s2a-fb"></div>
+    </div>
+
+    <div class="sub-step" id="s2b">
+      <div class="card-result">
+        <div class="boxes">
+          <div class="box box-answer"><span class="box-num">4</span><span>choices</span></div>
+          <div class="times">×</div>
+          <div class="box box-answer"><span class="box-num">3</span><span>choices</span></div>
+          <div class="equals">=</div>
+          <span style="font-size:1.4rem; font-weight:700; color:#2e7d32;">12</span>
+        </div>
+        <div class="result-big" style="margin-top:10px;">4 × 3 = 12 different 2-digit numbers!</div>
+        <div class="result-sub">With repeats: 16 &nbsp;·&nbsp; Without repeats: 12 &nbsp;·&nbsp; Makes sense!</div>
+      </div>
+      <button class="btn" onclick="goTo(3)">Practice Time! →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SCREEN 3 — PRACTICE 1  (3-digit, repeats OK)
+════════════════════════════════════════════════ -->
+<div id="screen-3" class="screen">
+  <div class="wrap">
+    <div class="label-part">Practice 1 of 2</div>
+    <div class="section-head" style="font-size:1.1rem; margin-bottom:12px;">
+      Digits: {1, 3, 5, 7} &nbsp;|&nbsp; 3-digit numbers &nbsp;|&nbsp; Repeats OK
+    </div>
+
+    <div class="card">
+      <div class="section-head">How many POSITIONS does a 3-digit number have?</div>
+      <div class="answer-row">
+        <input class="answer-input" id="s3a-in" type="number" min="1" max="99" placeholder="?">
+        <span style="font-size:0.9rem; color:#555;">positions</span>
+      </div>
+      <div class="feedback" id="s3a-fb"></div>
+    </div>
+
+    <div class="sub-step" id="s3b">
+      <div class="card-info">
+        <span style="color:#2e7d32; font-weight:700;">Correct! </span>
+        <div class="boxes" style="margin-top:10px;">
+          <div class="box"><span>100s</span></div>
+          <div class="times">×</div>
+          <div class="box"><span>10s</span></div>
+          <div class="times">×</div>
+          <div class="box"><span>1s</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-head">How many choices for EACH box?</div>
+        <div class="hint-text">Count: 1, 3, 5, 7 — same choices every time (repeats OK)</div>
+        <div class="answer-row">
+          <input class="answer-input" id="s3b-in" type="number" min="1" max="99" placeholder="?">
+          <span style="font-size:0.9rem; color:#555;">choices per box</span>
+        </div>
+        <div class="feedback" id="s3b-fb"></div>
+      </div>
+    </div>
+
+    <div class="sub-step" id="s3c">
+      <div class="card">
+        <div class="section-head">So total = 4 × 4 × 4 = ?</div>
+        <div class="answer-row">
+          <input class="answer-input" id="s3c-in" type="number" min="1" max="999" placeholder="?">
+        </div>
+        <div class="feedback" id="s3c-fb"></div>
+      </div>
+    </div>
+
+    <div class="sub-step" id="s3d">
+      <div class="card-result">
+        <div class="boxes">
+          <div class="box box-answer"><span class="box-num">4</span></div>
+          <div class="times">×</div>
+          <div class="box box-answer"><span class="box-num">4</span></div>
+          <div class="times">×</div>
+          <div class="box box-answer"><span class="box-num">4</span></div>
+          <div class="equals">=</div>
+          <span style="font-size:1.4rem; font-weight:700; color:#2e7d32;">64</span>
+        </div>
+        <div class="result-big" style="margin-top:10px;">64 different 3-digit numbers!</div>
+      </div>
+      <button class="btn" onclick="goTo(4)">Last Practice →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SCREEN 4 — PRACTICE 2  (3-digit, no repeats)
+════════════════════════════════════════════════ -->
+<div id="screen-4" class="screen">
+  <div class="wrap">
+    <div class="label-part">Practice 2 of 2</div>
+    <div class="section-head" style="font-size:1.1rem; margin-bottom:12px;">
+      Digits: {1, 3, 5, 7} &nbsp;|&nbsp; 3-digit numbers &nbsp;|&nbsp; NO Repeats
+    </div>
+
+    <div class="card-info">
+      <div class="boxes">
+        <div class="box"><span>100s</span></div>
+        <div class="times">×</div>
+        <div class="box"><span>10s</span></div>
+        <div class="times">×</div>
+        <div class="box"><span>1s</span></div>
+      </div>
+      <div style="margin-top:10px;">
+        <div class="info-line">Box 1 choices: <strong>4</strong> &nbsp;(any digit)</div>
+        <div class="info-line">Box 2 choices: <strong>3</strong> &nbsp;(one digit already used)</div>
+        <div class="info-line">Box 3 choices: <strong>?</strong></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-head">Box 3: two digits already used up. How many choices left?</div>
+      <div class="answer-row">
+        <input class="answer-input" id="s4a-in" type="number" min="1" max="99" placeholder="?">
+        <span style="font-size:0.9rem; color:#555;">choices</span>
+      </div>
+      <div class="feedback" id="s4a-fb"></div>
+    </div>
+
+    <div class="sub-step" id="s4b">
+      <div class="card">
+        <div class="section-head">So total = 4 × 3 × 2 = ?</div>
+        <div class="answer-row">
+          <input class="answer-input" id="s4b-in" type="number" min="1" max="999" placeholder="?">
+        </div>
+        <div class="feedback" id="s4b-fb"></div>
+      </div>
+    </div>
+
+    <div class="sub-step" id="s4c">
+      <div class="card-result">
+        <div class="boxes">
+          <div class="box box-answer"><span class="box-num">4</span></div>
+          <div class="times">×</div>
+          <div class="box box-answer"><span class="box-num">3</span></div>
+          <div class="times">×</div>
+          <div class="box box-answer"><span class="box-num">2</span></div>
+          <div class="equals">=</div>
+          <span style="font-size:1.4rem; font-weight:700; color:#2e7d32;">24</span>
+        </div>
+        <div class="result-big" style="margin-top:10px;">24 different 3-digit numbers!</div>
+        <div class="result-sub">Pattern: with repeats (64) &gt; without repeats (24). Always!</div>
+      </div>
+      <button class="btn" onclick="goTo(5)">See my score! 🌟</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SCREEN 5 — FINISH
+════════════════════════════════════════════════ -->
+<div id="screen-5" class="screen">
+  <div class="wrap">
+    <div class="finish-trophy">🏆</div>
+    <div class="finish-title">Lesson Complete!</div>
+    <div class="finish-sub">You have mastered the Box Method.</div>
+
+    <div class="card-rule">
+      <div class="rule-tag">Remember</div>
+      <div class="remember-item">1. Count your <strong>POSITIONS</strong> → that is how many boxes to draw</div>
+      <div class="remember-item">2. Fill each box with the number of available choices</div>
+      <div class="remember-item">3. Multiply all boxes together</div>
+      <hr class="divider">
+      <div class="remember-item" style="color:#555; font-style:italic;">With repeats → same choices every box</div>
+      <div class="remember-item" style="color:#555; font-style:italic;">No repeats → subtract 1 choice per box filled</div>
+    </div>
+
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;">
+      <button class="btn btn-grey" onclick="restart()">Start again 🔄</button>
+      <a class="btn" href="index.html">All Lessons →</a>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // ── Screen navigation ────────────────────────────────────────────
+  var totalScreens = 6;
+  var currentScreen = 0;
+
+  function goTo(n) {
+    var screens = document.querySelectorAll('.screen');
+    for (var i = 0; i < screens.length; i++) {
+      screens[i].classList.remove('visible');
+    }
+    screens[n].classList.add('visible');
+    currentScreen = n;
+    updateDots(n);
+    window.scrollTo(0, 0);
+  }
+
+  function updateDots(n) {
+    for (var i = 0; i < totalScreens; i++) {
+      var dot = document.getElementById('dot' + i);
+      if (!dot) continue;
+      dot.classList.remove('active', 'complete');
+      if (i < n)      dot.classList.add('complete');
+      else if (i === n) dot.classList.add('active');
+    }
+  }
+
+  // ── Unlock a sub-step ────────────────────────────────────────────
+  function unlock(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('unlocked');
+  }
+
+  // ── Set feedback ─────────────────────────────────────────────────
+  function fb(id, ok, msg) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = msg;
+    el.className = 'feedback ' + (ok ? 'ok' : 'err');
+  }
+
+  // ── Mark input correct/wrong ────────────────────────────────────
+  function markInput(id, ok) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('correct', 'wrong');
+    el.classList.add(ok ? 'correct' : 'wrong');
+  }
+
+  // ── Get integer from input ───────────────────────────────────────
+  function getInt(id) {
+    var el = document.getElementById(id);
+    if (!el || el.value === '') return null;
+    var v = parseInt(el.value, 10);
+    return isNaN(v) ? null : v;
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  // SCREEN 1 checks
+  // ════════════════════════════════════════════════════════════════
+  document.getElementById('s1a-in').addEventListener('input', function () {
+    var v = getInt('s1a-in');
+    if (v === null) return;
+    if (v === 2) {
+      markInput('s1a-in', true);
+      fb('s1a-fb', true, 'Correct!');
+      unlock('s1b');
+      document.getElementById('s1a-in').removeEventListener('input', arguments.callee);
+    } else {
+      markInput('s1a-in', false);
+      fb('s1a-fb', false, 'Hint: tens digit and units digit — how many positions is that?');
+    }
+  });
+
+  document.getElementById('s1b-in').addEventListener('input', function () {
+    var v = getInt('s1b-in');
+    if (v === null) return;
+    if (v === 4) {
+      markInput('s1b-in', true);
+      fb('s1b-fb', true, 'Correct!  {2, 4, 6, 8} = 4 choices.');
+      unlock('s1c');
+      document.getElementById('s1b-in').removeEventListener('input', arguments.callee);
+    } else {
+      markInput('s1b-in', false);
+      fb('s1b-fb', false, 'Count the digits in {2, 4, 6, 8}.');
+    }
+  });
+
+  document.getElementById('s1c-in').addEventListener('input', function () {
+    var v = getInt('s1c-in');
+    if (v === null) return;
+    if (v === 4) {
+      markInput('s1c-in', true);
+      fb('s1c-fb', true, 'Correct!  Repeats OK → all 4 choices still available.');
+      unlock('s1d');
+      document.getElementById('s1c-in').removeEventListener('input', arguments.callee);
+    } else {
+      markInput('s1c-in', false);
+      fb('s1c-fb', false, 'Repeats are allowed, so the same 4 digits are still available for Box 2.');
+    }
+  });
+
+  // ════════════════════════════════════════════════════════════════
+  // SCREEN 2 checks
+  // ════════════════════════════════════════════════════════════════
+  document.getElementById('s2a-in').addEventListener('input', function () {
+    var v = getInt('s2a-in');
+    if (v === null) return;
+    if (v === 3) {
+      markInput('s2a-in', true);
+      fb('s2a-fb', true, 'Correct!  Started with 4, used 1 for Box 1, so 4 − 1 = 3 remain.');
+      unlock('s2b');
+      document.getElementById('s2a-in').removeEventListener('input', arguments.callee);
+    } else {
+      markInput('s2a-in', false);
+      fb('s2a-fb', false, 'Started with 4 digits. Used 1 for Box 1. How many are left?');
+    }
+  });
+
+  // ════════════════════════════════════════════════════════════════
+  // SCREEN 3 checks
+  // ════════════════════════════════════════════════════════════════
+  document.getElementById('s3a-in').addEventListener('input', function () {
+    var v = getInt('s3a-in');
+    if (v === null) return;
+    if (v === 3) {
+      markInput('s3a-in', true);
+      fb('s3a-fb', true, 'Correct!  3 positions.');
+      unlock('s3b');
+      document.getElementById('s3a-in').removeEventListener('input', arguments.callee);
+    } else {
+      markInput('s3a-in', false);
+      fb('s3a-fb', false, 'Think: hundreds, tens, units — how many positions is that?');
+    }
+  });
+
+  document.getElementById('s3b-in').addEventListener('input', function () {
+    var v = getInt('s3b-in');
+    if (v === null) return;
+    if (v === 4) {
+      markInput('s3b-in', true);
+      fb('s3b-fb', true, 'Correct!  1, 3, 5, 7 = 4 choices per box.');
+      unlock('s3c');
+      document.getElementById('s3b-in').removeEventListener('input', arguments.callee);
+    } else {
+      markInput('s3b-in', false);
+      fb('s3b-fb', false, 'Count the digits: 1, 3, 5, 7.');
+    }
+  });
+
+  document.getElementById('s3c-in').addEventListener('input', function () {
+    var v = getInt('s3c-in');
+    if (v === null) return;
+    if (v === 64) {
+      markInput('s3c-in', true);
+      fb('s3c-fb', true, 'Excellent!  4 × 4 × 4 = 64.');
+      unlock('s3d');
+      document.getElementById('s3c-in').removeEventListener('input', arguments.callee);
+    } else {
+      markInput('s3c-in', false);
+      fb('s3c-fb', false, 'Hint: 4 × 4 = 16, then 16 × 4 = ?');
+    }
+  });
+
+  // ════════════════════════════════════════════════════════════════
+  // SCREEN 4 checks
+  // ════════════════════════════════════════════════════════════════
+  document.getElementById('s4a-in').addEventListener('input', function () {
+    var v = getInt('s4a-in');
+    if (v === null) return;
+    if (v === 2) {
+      markInput('s4a-in', true);
+      fb('s4a-fb', true, 'Correct!  4 − 2 = 2 choices left for Box 3.');
+      unlock('s4b');
+      document.getElementById('s4a-in').removeEventListener('input', arguments.callee);
+    } else {
+      markInput('s4a-in', false);
+      fb('s4a-fb', false, 'Started with 4 digits. Boxes 1 and 2 used 2 of them. How many left?');
+    }
+  });
+
+  document.getElementById('s4b-in').addEventListener('input', function () {
+    var v = getInt('s4b-in');
+    if (v === null) return;
+    if (v === 24) {
+      markInput('s4b-in', true);
+      fb('s4b-fb', true, 'Perfect!  4 × 3 × 2 = 24.');
+      unlock('s4c');
+      document.getElementById('s4b-in').removeEventListener('input', arguments.callee);
+    } else {
+      markInput('s4b-in', false);
+      fb('s4b-fb', false, 'Hint: 4 × 3 = 12, then 12 × 2 = ?');
+    }
+  });
+
+  // ════════════════════════════════════════════════════════════════
+  // Restart
+  // ════════════════════════════════════════════════════════════════
+  function restart() {
+    var subSteps = ['s1b','s1c','s1d','s2b','s3b','s3c','s3d','s4b','s4c'];
+    for (var i = 0; i < subSteps.length; i++) {
+      var el = document.getElementById(subSteps[i]);
+      if (el) el.classList.remove('unlocked');
+    }
+    var inputs = ['s1a-in','s1b-in','s1c-in','s2a-in',
+                  's3a-in','s3b-in','s3c-in','s4a-in','s4b-in'];
+    for (var j = 0; j < inputs.length; j++) {
+      var inp = document.getElementById(inputs[j]);
+      if (inp) {
+        inp.value = '';
+        inp.className = 'answer-input';
+      }
+    }
+    var fbs = ['s1a-fb','s1b-fb','s1c-fb','s2a-fb',
+               's3a-fb','s3b-fb','s3c-fb','s4a-fb','s4b-fb'];
+    for (var k = 0; k < fbs.length; k++) {
+      var fbEl = document.getElementById(fbs[k]);
+      if (fbEl) { fbEl.textContent = ''; fbEl.className = 'feedback'; }
+    }
+    // Re-attach event listeners by reloading page
+    window.location.reload();
+  }
+</script>
+
+</body>
+</html>
