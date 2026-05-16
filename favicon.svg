@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Blue background circle -->
+  <circle cx="50" cy="50" r="50" fill="#1a3a8f"/>
+
+  <!-- Target rings -->
+  <circle cx="46" cy="54" r="34" fill="white" opacity="0.95"/>
+  <circle cx="46" cy="54" r="25" fill="#e53935"/>
+  <circle cx="46" cy="54" r="16" fill="white"/>
+  <circle cx="46" cy="54" r="8"  fill="#e53935"/>
+
+  <!-- Arrow shaft -->
+  <line x1="78" y1="22" x2="51" y2="49" stroke="#ff8f00" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Arrow head -->
+  <polygon points="78,22 65,20 76,11 82,24" fill="#ff8f00"/>
+
+  <!-- Arrow tail feathers -->
+  <line x1="74" y1="26" x2="80" y2="18" stroke="#ff8f00" stroke-width="3" stroke-linecap="round"/>
+  <line x1="70" y1="30" x2="78" y2="24" stroke="#ff8f00" stroke-width="3" stroke-linecap="round"/>
+</svg>
