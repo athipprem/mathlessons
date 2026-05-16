@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LCM & Prime Factorisation — Number Theory</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; min-height: 100vh; }
+
+    header { background: linear-gradient(135deg, #6a1b9a 0%, #9c27b0 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; white-space: nowrap; }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p  { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 18px 0 4px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+    .dot.active   { background: #6a1b9a; }
+    .dot.complete { background: #2e7d32; }
+
+    .screen { display: none; }
+    .screen.visible { display: block; }
+
+    .wrap { max-width: 660px; margin: 0 auto; padding: 28px 20px 60px; }
+
+    .card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .tag-blue   { background: #e3f2fd; color: #1565c0; }
+    .tag-green  { background: #e8f5e9; color: #2e7d32; }
+    .tag-purple { background: #f3e5f5; color: #6a1b9a; }
+    .tag-orange { background: #fff3e0; color: #e65100; }
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
+    p  { font-size: 0.95rem; color: #444; line-height: 1.65; margin-bottom: 10px; }
+    .hi        { color: #6a1b9a; font-weight: 700; }
+    .hi-blue   { color: #1565c0; font-weight: 700; }
+    .hi-green  { color: #2e7d32; font-weight: 700; }
+    .hi-orange { color: #e65100; font-weight: 700; }
+    .hint { font-size: 0.82rem; color: #888; }
+
+    /* Multiples table */
+    .mult-table { display: grid; gap: 6px; margin: 14px 0; }
+    .mult-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .mult-label { font-size: 0.85rem; font-weight: 700; color: #555; min-width: 54px; }
+    .mult-chip { display: inline-flex; align-items: center; justify-content: center; min-width: 42px; height: 36px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; background: #f5f5f5; color: #555; border: 2px solid #e0e0e0; }
+    .mult-chip.match { background: #f3e5f5; color: #6a1b9a; border-color: #9c27b0; }
+    .mult-chip.lcm   { background: #6a1b9a; color: white; border-color: #6a1b9a; }
+
+    /* Factor tree */
+    .tree { font-family: monospace; font-size: 0.95rem; line-height: 1.8; background: #f9f9f9; border-radius: 10px; padding: 14px 18px; margin: 12px 0; color: #333; border: 1.5px solid #e0e0e0; white-space: pre; }
+
+    /* Prime box grid */
+    .prime-grid { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+    .prime-chip { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; font-size: 1.1rem; font-weight: 800; }
+    .prime-chip.p2 { background: #e3f2fd; color: #1565c0; border: 2px solid #90caf9; }
+    .prime-chip.p3 { background: #f3e5f5; color: #6a1b9a; border: 2px solid #ce93d8; }
+    .prime-chip.p5 { background: #fff3e0; color: #e65100; border: 2px solid #ffcc80; }
+    .prime-chip.p7 { background: #e8f5e9; color: #2e7d32; border: 2px solid #a5d6a7; }
+
+    /* Rule box */
+    .rule-box { background: #f3e5f5; border-left: 4px solid #6a1b9a; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.9rem; line-height: 1.7; color: #3b0764; }
+    .rule-box b { color: #6a1b9a; }
+    .rule-box.blue { background: #e3f2fd; border-left-color: #1565c0; color: #1a3a6e; }
+    .rule-box.blue b { color: #1565c0; }
+    .rule-box.green { background: #e8f5e9; border-left-color: #2e7d32; color: #1b3a1b; }
+    .rule-box.green b { color: #2e7d32; }
+
+    /* Input */
+    .input-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 4px; flex-wrap: wrap; }
+    .input-row label { font-size: 0.9rem; color: #555; flex: 1; min-width: 200px; line-height: 1.5; }
+    .input-row input { width: 84px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 700; border: 2px solid #ccc; border-radius: 10px; outline: none; }
+    .input-row input:focus { border-color: #6a1b9a; box-shadow: 0 0 0 3px rgba(106,27,154,0.15); }
+    .input-correct { border-color: #2e7d32 !important; background: #e8f5e9 !important; color: #1b5e20 !important; }
+    .input-wrong   { border-color: #c62828 !important; background: #ffebee !important; }
+
+    .feedback { font-size: 0.88rem; padding: 10px 14px; border-radius: 8px; margin: 6px 0; line-height: 1.5; }
+    .fb-ok  { background: #e8f5e9; color: #1b5e20; border: 1px solid #81c784; }
+    .fb-err { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; }
+    .fb-hide { display: none; }
+
+    .divider { border: none; border-top: 1.5px solid #eee; margin: 14px 0; }
+    .hidden { display: none; }
+
+    .score-big { font-size: 3.2rem; font-weight: 800; color: #6a1b9a; text-align: center; padding: 1rem 0 0.5rem; }
+
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+    .btn { display: inline-flex; align-items: center; padding: 12px 22px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; cursor: pointer; border: 2px solid #ccc; background: white; color: #333; transition: background 0.15s; text-decoration: none; }
+    .btn:hover { background: #f0f0f0; }
+    .btn-primary { background: #6a1b9a; border-color: #6a1b9a; color: white; }
+    .btn-primary:hover { background: #4a148c; }
+    .btn-grey { background: #f5f5f5; border-color: #ddd; color: #555; }
+    .btn-grey:hover { background: #ebebeb; }
+
+    /* Steps reveal */
+    .step-line { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 0.92rem; color: #444; line-height: 1.55; }
+    .step-num { min-width: 26px; height: 26px; border-radius: 50%; background: #6a1b9a; color: white; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .step-num.green { background: #2e7d32; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div><a href="index.html">← All Lessons</a></div>
+  <div>
+    <h1>LCM &amp; Prime Factorisation</h1>
+    <p>Number Theory · Week 5</p>
+  </div>
+</header>
+
+<div class="dots" id="dots"></div>
+
+<div class="wrap">
+
+  <!-- ── Screen 0: What is a multiple? ── -->
+  <div class="screen visible" id="s0">
+    <div class="card">
+      <span class="tag tag-purple">Warm-Up</span>
+      <h2>First — what is a multiple?</h2>
+      <p>A <strong>multiple</strong> of a number is what you get when you multiply it by 1, 2, 3, 4, … and keep going forever.</p>
+      <p>Think of multiples like the times table for that number, just extended:</p>
+
+      <div class="mult-table">
+        <div class="mult-row">
+          <div class="mult-label">×1, ×2…</div>
+          <div class="mult-chip">4</div>
+          <div class="mult-chip">8</div>
+          <div class="mult-chip">12</div>
+          <div class="mult-chip">16</div>
+          <div class="mult-chip">20</div>
+          <div class="mult-chip">24</div>
+          <div class="mult-chip">…</div>
+        </div>
+      </div>
+
+      <p>Those are the <span class="hi">multiples of 4</span> — every number that 4 divides into exactly.</p>
+      <p>Now, two different numbers will sometimes share a multiple. The <strong>smallest</strong> one they share is called the <strong>LCM</strong> — Lowest Common Multiple.</p>
+      <div class="rule-box">
+        <b>LCM</b> = the <b>smallest</b> number that <b>both</b> numbers divide into exactly.
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="goTo(1)">Got it — show me how →</button>
+  </div>
+
+  <!-- ── Screen 1: Listing method ── -->
+  <div class="screen" id="s1">
+    <div class="card">
+      <span class="tag tag-blue">Method 1 — Listing</span>
+      <h2>Find LCM by listing multiples</h2>
+      <p>Let's find the LCM of <span class="hi">4</span> and <span class="hi">6</span>.</p>
+      <p><strong>Step 1:</strong> List multiples of each number until you spot one they share.</p>
+
+      <div class="mult-table">
+        <div class="mult-row">
+          <div class="mult-label">4 :</div>
+          <div class="mult-chip">4</div>
+          <div class="mult-chip">8</div>
+          <div class="mult-chip match">12</div>
+          <div class="mult-chip">16</div>
+          <div class="mult-chip">20</div>
+          <div class="mult-chip match">24</div>
+          <div class="mult-chip">…</div>
+        </div>
+        <div class="mult-row">
+          <div class="mult-label">6 :</div>
+          <div class="mult-chip">6</div>
+          <div class="mult-chip match">12</div>
+          <div class="mult-chip">18</div>
+          <div class="mult-chip match">24</div>
+          <div class="mult-chip">30</div>
+          <div class="mult-chip">…</div>
+        </div>
+      </div>
+
+      <p>The purple numbers appear in <strong>both</strong> rows. The very first one is <span class="hi">12</span>.</p>
+      <div class="rule-box">
+        LCM(4, 6) = <b>12</b> — the smallest number both 4 and 6 divide into.
+      </div>
+      <p class="hint">⚠️ Common mistake: students sometimes write 24 because they list too fast. Always take the <em>first</em> match.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag tag-purple">Your turn</span>
+      <h2>Find LCM(3, 5) by listing</h2>
+      <p>Multiples of 3: 3, 6, 9, 12, <strong>15</strong>, 18 …<br>
+         Multiples of 5: 5, 10, <strong>15</strong>, 20 …</p>
+      <div class="input-row">
+        <label>What is LCM(3, 5)?</label>
+        <input type="number" id="i1" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f1"></div>
+      <div class="hint">Tip: look for the first number in both lists.</div>
+    </div>
+
+    <div id="next1" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(2)">Next: faster method →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 2: What is a prime? ── -->
+  <div class="screen" id="s2">
+    <div class="card">
+      <span class="tag tag-purple">Number Theory Key Fact</span>
+      <h2>Primes — the building blocks of all numbers</h2>
+      <p>A <strong>prime number</strong> has exactly two factors: <span class="hi">1</span> and <span class="hi">itself</span>. It can't be broken down further.</p>
+      <div class="prime-grid">
+        <div class="prime-chip p2">2</div>
+        <div class="prime-chip p3">3</div>
+        <div class="prime-chip p5">5</div>
+        <div class="prime-chip p7">7</div>
+        <div class="prime-chip p2" style="width:auto;padding:0 12px;">11</div>
+        <div class="prime-chip p3" style="width:auto;padding:0 12px;">13</div>
+        <div class="prime-chip p5" style="width:auto;padding:0 12px;">17</div>
+        <div class="prime-chip p7" style="width:auto;padding:0 12px;">19</div>
+      </div>
+      <p><strong>1 is NOT a prime</strong> — it only has one factor (itself), not two.</p>
+      <div class="rule-box">
+        Every number can be written as a product of primes. This is called its <b>prime factorisation</b>.<br><br>
+        Example: <b>12 = 2 × 2 × 3</b> &nbsp;(or 2² × 3)
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag tag-purple">Quick Check</span>
+      <h2>Is 1 a prime number?</h2>
+      <p>Think about the definition: a prime has exactly <strong>two</strong> factors.</p>
+      <div style="display:flex; gap:12px; margin:14px 0;">
+        <button class="btn btn-grey" id="btn-yes" onclick="checkPrime('yes')">Yes, 1 is prime</button>
+        <button class="btn btn-grey" id="btn-no"  onclick="checkPrime('no')">No, 1 is NOT prime</button>
+      </div>
+      <div class="feedback fb-hide" id="f2"></div>
+    </div>
+
+    <div id="next2" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(3)">Next: factor trees →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 3: Factor tree ── -->
+  <div class="screen" id="s3">
+    <div class="card">
+      <span class="tag tag-blue">Method 2 — Factor Tree</span>
+      <h2>Prime factorisation with a factor tree</h2>
+      <p>A factor tree breaks a number down step by step until every branch ends in a prime.</p>
+      <p><strong>Example: Break down 12</strong></p>
+      <div class="tree">       12
+      /  \
+     4    3  ← prime ✓
+    / \
+   2   2  ← both prime ✓
+
+12 = 2 × 2 × 3</div>
+      <p><strong>Example: Break down 18</strong></p>
+      <div class="tree">       18
+      /  \
+     6    3  ← prime ✓
+    / \
+   2   3  ← both prime ✓
+
+18 = 2 × 3 × 3</div>
+      <div class="rule-box">
+        Keep splitting until <b>every branch is a prime</b>. The primes at the ends are the answer.
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag tag-purple">Your turn</span>
+      <h2>Prime factorisation of 20</h2>
+      <p>Split 20 into a factor tree. Here's the start:</p>
+      <div class="tree">       20
+      /  \
+     4    5  ← prime ✓
+    / \
+   ?   ?  ← what are these?</div>
+      <p>The two bottom branches of the 4 are both <span class="hi">2</span>.</p>
+      <p>So 20 = 2 × 2 × 5. How many prime factors does 20 have in total?</p>
+      <div class="input-row">
+        <label>How many prime factors? (count: 2, 2, 5)</label>
+        <input type="number" id="i3" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f3"></div>
+    </div>
+
+    <div id="next3" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(4)">Next: LCM the fast way →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 4: LCM using prime factorisation ── -->
+  <div class="screen" id="s4">
+    <div class="card">
+      <span class="tag tag-blue">Method 2 — LCM via Prime Factorisation</span>
+      <h2>The fast way to find LCM</h2>
+      <p>Listing works fine for small numbers, but for bigger numbers (like 12 and 18) a factor tree is much faster. Here's the method:</p>
+
+      <div class="step-line"><div class="step-num">1</div><div>Write the <strong>prime factorisation</strong> of each number.</div></div>
+      <div class="step-line"><div class="step-num">2</div><div>For each prime, take the <strong>highest power</strong> that appears in either number.</div></div>
+      <div class="step-line"><div class="step-num">3</div><div><strong>Multiply</strong> those highest powers together.</div></div>
+
+      <div class="divider"></div>
+      <p><strong>Example: LCM(12, 18)</strong></p>
+      <div class="tree">12 = 2² × 3¹
+18 = 2¹ × 3²
+
+Highest power of 2 → 2²  =  4
+Highest power of 3 → 3²  =  9
+
+LCM = 4 × 9 = 36</div>
+      <div class="rule-box">
+        LCM(12, 18) = <b>36</b>. Check: 36 ÷ 12 = 3 ✓ &nbsp; 36 ÷ 18 = 2 ✓
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag tag-purple">Your turn</span>
+      <h2>Find LCM(8, 12) using prime factorisation</h2>
+      <p>First, factorise both:</p>
+      <div class="tree"> 8 = 2 × 2 × 2 = 2³
+12 = 2 × 2 × 3 = 2² × 3</div>
+      <p>Highest power of <span class="hi-blue">2</span> → 2³ = 8<br>
+         Highest power of <span class="hi">3</span> → 3¹ = 3</p>
+      <p>So LCM = 8 × 3 = ?</p>
+      <div class="input-row">
+        <label>LCM(8, 12) = ?</label>
+        <input type="number" id="i4" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f4"></div>
+    </div>
+
+    <div id="next4" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(5)">Next: word problems →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 5: Word problems ── -->
+  <div class="screen" id="s5">
+    <div class="card">
+      <span class="tag tag-orange">Word Problems</span>
+      <h2>When does LCM appear in real life?</h2>
+      <p>LCM shows up whenever two things happen on different cycles and you need to find when they <strong>meet again at the same time</strong>.</p>
+      <div class="rule-box blue">
+        <b>Signal phrases:</b> "at the same time again", "both happen together", "next time they meet", "after every X and every Y"
+      </div>
+      <p><strong>Classic example:</strong> Bus A comes every 4 minutes. Bus B comes every 6 minutes. They just left together. When do they next leave at the same time?</p>
+      <p>LCM(4, 6) = 12. Answer: <span class="hi-green">in 12 minutes</span>.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag tag-orange">Practice 1</span>
+      <h2>The bell problem</h2>
+      <p>Bell A rings every <strong>3 minutes</strong>. Bell B rings every <strong>5 minutes</strong>. They ring together at 9:00 am.</p>
+      <p>When is the <strong>next time</strong> they ring together?</p>
+      <div class="input-row">
+        <label>How many minutes after 9:00 am do they ring together again?</label>
+        <input type="number" id="i5a" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f5a"></div>
+    </div>
+
+    <div class="card hidden" id="c5b">
+      <span class="tag tag-orange">Practice 2</span>
+      <h2>The sticker problem</h2>
+      <p>Prem has stickers in packs of <strong>8</strong>. His friend has stickers in packs of <strong>12</strong>. They want to share equally so each gets the same number of stickers, with no leftovers.</p>
+      <p>What is the <strong>smallest total</strong> number of stickers they need?</p>
+      <div class="input-row">
+        <label>Smallest total stickers = LCM(8, 12) = ?</label>
+        <input type="number" id="i5b" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f5b"></div>
+    </div>
+
+    <div id="next5" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(6)">Final challenge →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 6: Challenge ── -->
+  <div class="screen" id="s6">
+    <div class="card">
+      <span class="tag tag-orange">Challenge</span>
+      <h2>Three buses — when do they ALL meet?</h2>
+      <p>Three buses leave the station together at 8:00 am.</p>
+      <p>Bus 1 returns every <strong>4 minutes</strong>.<br>
+         Bus 2 returns every <strong>6 minutes</strong>.<br>
+         Bus 3 returns every <strong>10 minutes</strong>.</p>
+      <p>What is the <strong>earliest time</strong> all three buses are at the station together again?</p>
+      <div class="rule-box">
+        <b>Hint:</b> Find LCM of all three numbers.<br>
+        4 = 2² &nbsp;|&nbsp; 6 = 2 × 3 &nbsp;|&nbsp; 10 = 2 × 5<br>
+        Highest powers: 2² × 3 × 5 = ?
+      </div>
+      <div class="input-row">
+        <label>LCM(4, 6, 10) = ? (the number of minutes)</label>
+        <input type="number" id="i6" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f6"></div>
+    </div>
+    <div id="next6" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(7)">See my results →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 7: Finish ── -->
+  <div class="screen" id="s7">
+    <div class="card">
+      <span class="tag tag-green">🎉 Lesson Complete!</span>
+      <h2>You finished LCM &amp; Prime Factorisation!</h2>
+      <div class="score-big" id="final-score"></div>
+      <p style="text-align:center; color:#888; font-size:0.88rem;" id="score-label"></p>
+      <hr class="divider">
+      <div class="rule-box green">
+        <b>3 things to remember:</b><br>
+        1️⃣ LCM = smallest number both (or all) numbers divide into exactly.<br>
+        2️⃣ To find LCM fast: prime factorise → take the <b>highest power</b> of each prime → multiply.<br>
+        3️⃣ In word problems, look for "same time again" or "both together" — that's your LCM signal.
+      </div>
+      <hr class="divider">
+      <div class="btn-row">
+        <button class="btn btn-grey" onclick="restartLesson()">Try again 🔄</button>
+        <a class="btn btn-primary" href="index.html">All Lessons →</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end .wrap -->
+
+<script>
+  // ── State ──────────────────────────────────────────────────
+  var NUM_SCREENS = 8; // s0..s7
+  var currentScreen = 0;
+  var score = 0;
+  var attempted = {}; // tracks first-try status per question
+  var firstTry = {};  // true if answered correctly on first attempt
+
+  // ── Dot navigation ────────────────────────────────────────
+  function buildDots() {
+    var container = document.getElementById('dots');
+    container.innerHTML = '';
+    for (var i = 0; i < NUM_SCREENS; i++) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (i === currentScreen ? ' active' : '') + (i < currentScreen ? ' complete' : '');
+      container.appendChild(d);
+    }
+  }
+
+  function goTo(n) {
+    document.getElementById('s' + currentScreen).classList.remove('visible');
+    currentScreen = n;
+    document.getElementById('s' + currentScreen).classList.add('visible');
+    buildDots();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (n === 7) showFinish();
+  }
+
+  // ── Generic answer check ──────────────────────────────────
+  function check(inputId, feedbackId, correctAnswer, nextId, msg, wrongMsg, onFirstCorrect) {
+    var inp = document.getElementById(inputId);
+    var fb  = document.getElementById(feedbackId);
+    if (inp.disabled) return;
+
+    var val = parseInt(inp.value, 10);
+    if (isNaN(val)) return;
+
+    if (val === correctAnswer) {
+      inp.classList.add('input-correct');
+      inp.disabled = true;
+      fb.className = 'feedback fb-ok';
+      fb.innerHTML = msg;
+      if (!attempted[inputId]) { score++; firstTry[inputId] = true; }
+      attempted[inputId] = true;
+      if (onFirstCorrect) onFirstCorrect();
+      var nxt = document.getElementById(nextId);
+      if (nxt) nxt.classList.remove('hidden');
+    } else {
+      inp.classList.add('input-wrong');
+      fb.className = 'feedback fb-err';
+      fb.innerHTML = wrongMsg;
+      attempted[inputId] = true;
+      setTimeout(function() { inp.classList.remove('input-wrong'); }, 600);
+    }
+  }
+
+  // ── Screen 1: LCM by listing ──────────────────────────────
+  document.getElementById('i1').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkI1();
+  });
+  function checkI1() {
+    check('i1','f1', 15, 'next1',
+      '✅ Correct! 15 is the first number in both lists. LCM(3, 5) = 15.',
+      '❌ Not quite. List the multiples: 3, 6, 9, 12, <b>15</b>… and 5, 10, <b>15</b>… First match?');
+  }
+
+  // ── Screen 2: Is 1 prime? (button check) ──────────────────
+  var primeAnswered = false;
+  function checkPrime(choice) {
+    if (primeAnswered) return;
+    var fb = document.getElementById('f2');
+    if (choice === 'no') {
+      document.getElementById('btn-no').style.background = '#e8f5e9';
+      document.getElementById('btn-no').style.borderColor = '#2e7d32';
+      fb.className = 'feedback fb-ok';
+      fb.innerHTML = '✅ Correct! 1 only has one factor (itself), not two. So 1 is NOT prime.';
+      if (!attempted['prime']) { score++; firstTry['prime'] = true; }
+      attempted['prime'] = true;
+      primeAnswered = true;
+      document.getElementById('next2').classList.remove('hidden');
+    } else {
+      document.getElementById('btn-yes').style.background = '#ffebee';
+      document.getElementById('btn-yes').style.borderColor = '#c62828';
+      fb.className = 'feedback fb-err';
+      fb.innerHTML = '❌ Not quite. A prime needs <em>exactly two</em> factors. 1 only has one factor — itself.';
+      attempted['prime'] = true;
+    }
+  }
+
+  // ── Screen 3: How many prime factors in 20 ────────────────
+  document.getElementById('i3').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkI3();
+  });
+  function checkI3() {
+    check('i3','f3', 3, 'next3',
+      '✅ Right! 20 = 2 × 2 × 5 — that\'s <b>3</b> prime factors (counting repeats).',
+      '❌ Count again: 20 = 2 × 2 × 5. How many numbers are you multiplying?');
+  }
+
+  // ── Screen 4: LCM(8,12) ───────────────────────────────────
+  document.getElementById('i4').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkI4();
+  });
+  function checkI4() {
+    check('i4','f4', 24, 'next4',
+      '✅ LCM(8, 12) = 24. Check: 24 ÷ 8 = 3 ✓ &nbsp; 24 ÷ 12 = 2 ✓',
+      '❌ Use the prime method: 2³ × 3 = 8 × 3 = ?');
+  }
+
+  // ── Screen 5a: Bell problem ───────────────────────────────
+  document.getElementById('i5a').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkI5a();
+  });
+  function checkI5a() {
+    check('i5a','f5a', 15, null,
+      '✅ Correct! LCM(3, 5) = 15 minutes. They ring together again at 9:15 am.',
+      '❌ Find LCM(3, 5). Multiples of 3: 3, 6, 9, 12, 15… Multiples of 5: 5, 10, 15…',
+      function() {
+        document.getElementById('c5b').classList.remove('hidden');
+      });
+  }
+
+  // ── Screen 5b: Sticker problem ────────────────────────────
+  document.getElementById('i5b').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkI5b();
+  });
+  function checkI5b() {
+    check('i5b','f5b', 24, 'next5',
+      '✅ LCM(8, 12) = 24 stickers. Both can share 24 exactly (8×3=24, 12×2=24).',
+      '❌ Use prime factorisation: 8=2³, 12=2²×3. Highest: 2³×3 = 8×3 = ?');
+  }
+
+  // ── Screen 6: Three buses ─────────────────────────────────
+  document.getElementById('i6').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkI6();
+  });
+  function checkI6() {
+    check('i6','f6', 60, 'next6',
+      '✅ LCM(4, 6, 10) = 60 minutes. All three buses meet again at 9:00 am! (8:00 + 60 min)',
+      '❌ Highest powers: 2²×3×5 = 4×3×5 = ? Try again.');
+  }
+
+  // ── Finish ────────────────────────────────────────────────
+  function showFinish() {
+    var total = 6; // i1, prime, i3, i4, i5a, i5b, i6 = 7 questions... wait, i5b unlocks after i5a, both count
+    // Questions: i1(1), prime(1), i3(1), i4(1), i5a(1), i5b(1), i6(1) = 7 total
+    total = 7;
+    // Recount score from firstTry keys
+    var s = 0;
+    var keys = ['i1','prime','i3','i4','i5a','i5b','i6'];
+    for (var k = 0; k < keys.length; k++) {
+      if (firstTry[keys[k]]) s++;
+    }
+    document.getElementById('final-score').textContent = s + ' / ' + total;
+    var msg = s === total ? '🏆 Perfect score! You nailed it!' :
+              s >= 5 ? '⭐ Great work! Almost there.' :
+              s >= 3 ? '💪 Good effort. Review the factor tree method.' :
+              '📖 Keep practising — revisit the examples above.';
+    document.getElementById('score-label').textContent = msg;
+  }
+
+  function restartLesson() {
+    score = 0;
+    attempted = {};
+    firstTry = {};
+    primeAnswered = false;
+    // Reset all inputs
+    var inputs = document.querySelectorAll('input[type=number]');
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].value = '';
+      inputs[i].disabled = false;
+      inputs[i].className = '';
+    }
+    // Reset feedbacks
+    var fbs = document.querySelectorAll('.feedback');
+    for (var j = 0; j < fbs.length; j++) { fbs[j].className = 'feedback fb-hide'; fbs[j].innerHTML = ''; }
+    // Reset next buttons
+    var nexts = ['next1','next2','next3','next4','next5','next6'];
+    for (var n = 0; n < nexts.length; n++) {
+      var el = document.getElementById(nexts[n]);
+      if (el) el.classList.add('hidden');
+    }
+    // Reset button styles
+    var btns = [document.getElementById('btn-yes'), document.getElementById('btn-no')];
+    for (var b = 0; b < btns.length; b++) {
+      if (btns[b]) { btns[b].style.background = ''; btns[b].style.borderColor = ''; }
+    }
+    // Re-hide practice 2 card
+    document.getElementById('c5b').classList.add('hidden');
+    goTo(0);
+  }
+
+  // ── Init ──────────────────────────────────────────────────
+  buildDots();
+</script>
+</body>
+</html>
