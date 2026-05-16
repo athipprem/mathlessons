@@ -13,8 +13,6 @@
       background: #f4f6fb;
       color: #1a1a2e;
       min-height: 100vh;
-      font-size: 14px;
-      line-height: 1.5;
     }
 
     /* ── Password overlay ── */
@@ -94,9 +92,35 @@
       height: 100%;
       background: #fff;
       border-radius: 20px;
-      transition: width 0.6s ease;
     }
     .progress-label { font-size: 0.8rem; opacity: 0.8; margin-top: 6px; }
+
+    /* ── Tab navigation ── */
+    .tab-nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      background: #0d47a1;
+      padding: 10px 20px;
+    }
+    .tab-btn {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 9px 22px;
+      cursor: pointer;
+      transition: background 0.15s;
+      letter-spacing: 0.3px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tab-btn:hover { background: rgba(255,255,255,0.28); }
+    .tab-btn.active { background: white; color: #1565c0; }
 
     /* ── Main layout ── */
     main {
@@ -138,46 +162,23 @@
     }
     .lesson-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
 
-    .lesson-card.counting  { border-top-color: #1e88e5; }
-    .lesson-card.number    { border-top-color: #7b1fa2; }
-    .lesson-card.algebra   { border-top-color: #e65100; }
-    .lesson-card.arithmetic{ border-top-color: #2e7d32; }
-    .lesson-card.geometry  { border-top-color: #00838f; }
-    .lesson-card.reasoning { border-top-color: #c62828; }
-    .lesson-card.coming    { border-top-color: #ccc; opacity: 0.6; }
+    .lesson-card.counting   { border-top-color: #1e88e5; }
+    .lesson-card.number     { border-top-color: #7b1fa2; }
+    .lesson-card.algebra    { border-top-color: #e65100; }
+    .lesson-card.arithmetic { border-top-color: #2e7d32; }
+    .lesson-card.geometry   { border-top-color: #00838f; }
+    .lesson-card.reasoning  { border-top-color: #c62828; }
+    .lesson-card.coming     { border-top-color: #ccc; opacity: 0.6; }
 
-    .card-week {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: #aaa;
-    }
-    .card-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #222;
-      line-height: 1.3;
-    }
-    .card-desc {
-      font-size: 0.82rem;
-      color: #666;
-      line-height: 1.4;
-      flex: 1;
-    }
+    .card-week  { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #aaa; }
+    .card-title { font-size: 1rem; font-weight: 700; color: #222; line-height: 1.3; }
+    .card-desc  { font-size: 0.82rem; color: #666; line-height: 1.4; flex: 1; }
 
     /* Status badge */
-    .badge {
-      display: inline-block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 20px;
-      width: fit-content;
-    }
-    .badge-new     { background: #e3f2fd; color: #1565c0; }
-    .badge-done    { background: #e8f5e9; color: #2e7d32; }
-    .badge-soon    { background: #f5f5f5; color: #999; }
+    .badge       { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 20px; width: fit-content; }
+    .badge-new   { background: #e3f2fd; color: #1565c0; }
+    .badge-done  { background: #e8f5e9; color: #2e7d32; }
+    .badge-soon  { background: #f5f5f5; color: #999; }
 
     /* Start button */
     .btn-start {
@@ -208,197 +209,6 @@
       font-size: 0.8rem;
       color: #aaa;
     }
-
-    /* ── Tab navigation ── */
-    .tab-nav {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      background: #0d47a1;
-      padding: 10px 20px;
-    }
-    .tab-btn {
-      background: rgba(255,255,255,0.15);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      padding: 9px 22px;
-      cursor: pointer;
-      transition: background 0.15s;
-      letter-spacing: 0.3px;
-    }
-    .tab-btn:hover   { background: rgba(255,255,255,0.25); }
-    .tab-btn.active  { background: white; color: #1565c0; }
-
-    /* ── Panel visibility ── */
-    #dashboard-panel { display: none; }
-    #dashboard-panel.visible { display: block; }
-    #lessons-panel.hidden    { display: none; }
-
-    /* ═══════════════════════════════════════════════════════════════
-       DASHBOARD STYLES
-    ═══════════════════════════════════════════════════════════════ */
-    .dash-container { max-width: 1100px; margin: 0 auto; padding: 24px 20px 60px; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-    /* Card base — dashboard version */
-    #dashboard-panel .card {
-      background: white;
-      border-radius: 12px;
-      padding: 20px 22px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
-      border: 1px solid #e8edf5;
-    }
-    .card-title {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #718096;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
-
-    /* STAT ROW — competition results */
-    .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
-    .stat-box { background: white; border-radius: 10px; padding: 14px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #e8edf5; text-align: center; }
-    .stat-box .medal { font-size: 26px; margin-bottom: 4px; }
-    .stat-box .comp-name { font-size: 10px; color: #718096; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    .stat-box .result { font-size: 14px; font-weight: 700; color: #1a1a2e; margin: 4px 0 2px; }
-    .stat-box .sub { font-size: 11px; color: #667eea; font-weight: 600; }
-
-    /* SCORE TREND */
-    .trend-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-    .trend-box { background: white; border-radius: 10px; padding: 14px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #e8edf5; display: flex; align-items: center; gap: 12px; }
-    .tcircle { width: 54px; height: 54px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; color: white; }
-    .tcircle .n { font-size: 18px; font-weight: 800; line-height: 1; }
-    .tcircle .d { font-size: 10px; opacity: 0.85; }
-    .trend-body strong { display: block; font-size: 12px; color: #1a1a2e; }
-    .trend-body span { font-size: 11px; color: #718096; }
-    .trend-delta { font-size: 13px; font-weight: 800; margin-left: auto; }
-
-    /* Q TABLE */
-    .q-table { width: 100%; border-collapse: collapse; font-size: 11px; }
-    .q-table th { text-align: left; padding: 4px 6px; color: #718096; font-weight: 700; border-bottom: 1px solid #edf2f7; font-size: 10px; text-transform: uppercase; }
-    .q-table td { padding: 4px 6px; border-bottom: 1px solid #f7fafc; vertical-align: top; }
-    .q-table tr:last-child td { border-bottom: none; }
-    .q-pass { color: #276749; font-weight: 700; }
-    .q-fail { color: #c53030; font-weight: 700; }
-    .lw { background: #f0fff4; color: #276749; font-size: 10px; padding: 1px 5px; border-radius: 6px; font-weight: 600; white-space: nowrap; }
-    .lm { background: #ebf4ff; color: #2b6cb0; font-size: 10px; padding: 1px 5px; border-radius: 6px; font-weight: 600; white-space: nowrap; }
-    .lh { background: #faf5ff; color: #6b46c1; font-size: 10px; padding: 1px 5px; border-radius: 6px; font-weight: 600; white-space: nowrap; }
-
-    /* GAPS */
-    .gap-item { margin-bottom: 11px; }
-    .gap-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-    .gap-label { font-size: 13px; font-weight: 600; color: #1a1a2e; }
-    .gap-score { font-size: 11px; color: #718096; }
-    .gap-bar { height: 8px; background: #edf2f7; border-radius: 4px; overflow: hidden; }
-    .gap-fill { height: 100%; border-radius: 4px; }
-    .g1 { background: linear-gradient(90deg, #fc4e4e, #ff7675); }
-    .g2 { background: linear-gradient(90deg, #f6993f, #fdcb6e); }
-    .g3 { background: linear-gradient(90deg, #667eea, #764ba2); }
-    .gs { background: linear-gradient(90deg, #43e97b, #38f9d7); }
-    .gh { background: #e2e8f0; }
-    .gpill { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 8px; text-transform: uppercase; }
-    .p1 { background: #fff5f5; color: #c53030; }
-    .p2 { background: #fffaf0; color: #c05621; }
-    .p3 { background: #ebf4ff; color: #2b6cb0; }
-    .ps { background: #f0fff4; color: #276749; }
-    .ph { background: #f7fafc; color: #a0aec0; }
-
-    /* SESSION LOG */
-    .session-item { display: grid; grid-template-columns: 58px 1fr auto; gap: 10px; align-items: start; padding: 10px 0; border-bottom: 1px solid #f0f4f8; }
-    .session-item:last-child { border-bottom: none; }
-    .wk-badge { border-radius: 8px; padding: 6px 4px; text-align: center; font-size: 12px; font-weight: 700; line-height: 1.3; color: white; }
-    .wk-badge .wk { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; }
-    .session-body strong { display: block; font-size: 13px; color: #1a1a2e; margin-bottom: 3px; }
-    .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 3px; }
-    .tag { font-size: 11px; padding: 2px 7px; border-radius: 10px; font-weight: 500; }
-    .tg { background: #edf2f7; color: #4a5568; }
-    .tgreen { background: #f0fff4; color: #276749; }
-    .tpurple { background: #faf5ff; color: #6b46c1; }
-    .torange { background: #fff5e6; color: #c05621; }
-    .tblue { background: #ebf4ff; color: #2b6cb0; }
-    .tred { background: #fff5f5; color: #c53030; }
-    .snote { font-size: 11px; color: #718096; }
-    .sstatus { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 10px; white-space: nowrap; }
-    .sdone { background: #f0fff4; color: #276749; }
-    .sready { background: #ebf4ff; color: #2b6cb0; }
-    .sup { background: #f7fafc; color: #718096; }
-
-    /* PLAN */
-    .plan-item { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0f4f8; }
-    .plan-item:last-child { border-bottom: none; }
-    .pnum { width: 22px; height: 22px; border-radius: 50%; background: #667eea; color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-    .plan-item strong { display: block; font-size: 13px; color: #1a1a2e; }
-    .plan-item span { font-size: 12px; color: #718096; }
-
-    /* TASKS */
-    .task-item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0f4f8; }
-    .task-item:last-child { border-bottom: none; }
-    .tcheck { width: 18px; height: 18px; border: 2px solid #cbd5e0; border-radius: 4px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-    .tcheck.done { background: #667eea; border-color: #667eea; color: white; font-size: 11px; }
-    .task-text { font-size: 13px; color: #2d3748; flex: 1; }
-    .task-text.done-text { text-decoration: line-through; color: #a0aec0; }
-    .owner { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; flex-shrink: 0; }
-    .oc { color: #6b46c1; background: #faf5ff; }
-    .op { color: #276749; background: #f0fff4; }
-    .ol { color: #c05621; background: #fff5e6; }
-
-    /* RADAR */
-    .chart-wrap { display: flex; align-items: center; justify-content: center; }
-    .radar-legend { display: flex; gap: 16px; justify-content: center; margin-top: 8px; }
-    .radar-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #4a5568; }
-
-    /* INSIGHT */
-    .insight { border-radius: 10px; padding: 12px 14px; margin-top: 12px; }
-    .insight.blue { background: linear-gradient(135deg,#667eea11,#764ba211); border: 1px solid #667eea33; }
-    .insight.green { background: linear-gradient(135deg,#43e97b11,#38f9d711); border: 1px solid #43e97b33; }
-    .insight.orange { background: linear-gradient(135deg,#f6993f11,#fdcb6e11); border: 1px solid #f6993f33; }
-    .insight-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 4px; }
-    .il-blue { color: #667eea; }
-    .il-green { color: #276749; }
-    .il-orange { color: #c05621; }
-    .insight p { font-size: 12px; color: #4a5568; line-height: 1.6; }
-
-    /* TIMELINE */
-    .timeline-bar { background: #edf2f7; border-radius: 8px; height: 12px; margin: 10px 0 6px; overflow: hidden; }
-    .timeline-fill { background: linear-gradient(90deg,#667eea,#764ba2); height: 100%; border-radius: 8px; width: 8%; }
-    .timeline-labels { display: flex; justify-content: space-between; font-size: 11px; color: #718096; }
-    .tm { display: flex; justify-content: space-between; font-size: 12px; margin-top: 10px; padding: 8px 12px; background: #f7fafc; border-radius: 8px; }
-    .tm span:first-child { color: #4a5568; font-weight: 500; }
-    .tm span:last-child { color: #667eea; font-weight: 700; }
-
-    /* LESSONS LIBRARY */
-    .lesson-lib-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f0f4f8; }
-    .lesson-lib-item:last-child { border-bottom: none; }
-    .lesson-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg,#667eea,#764ba2); color: white; font-size: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .lesson-lib-body strong { display: block; font-size: 13px; color: #1a1a2e; margin-bottom: 2px; }
-    .lesson-lib-body span { font-size: 12px; color: #718096; }
-
-    .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a0aec0; margin: 24px 0 12px; }
-
-    /* Header badges (dashboard header row) */
-    .dash-header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%); color: white; padding: 22px 28px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .dash-header-left h2 { font-size: 18px; font-weight: 700; }
-    .dash-header-left p { font-size: 12px; color: #a0aec0; margin-top: 3px; }
-    .header-badges { display: flex; gap: 8px; flex-wrap: wrap; }
-    .hbadge { border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 500; }
-    .hbadge.gold   { background: rgba(255,196,0,0.2); border: 1px solid rgba(255,196,0,0.4); color: #ffd700; }
-    .hbadge.green  { background: rgba(72,187,120,0.2); border: 1px solid rgba(72,187,120,0.4); color: #68d391; }
-    .hbadge.orange { background: rgba(246,153,63,0.25); border: 1px solid rgba(246,153,63,0.5); color: #fbd38d; }
-
-    @media (max-width: 700px) {
-      .grid-2 { grid-template-columns: 1fr; }
-      .stat-row { grid-template-columns: 1fr 1fr; }
-      .trend-row { grid-template-columns: 1fr 1fr; }
-    }
   </style>
 </head>
 <body>
@@ -420,21 +230,17 @@
   <h1>🎯 Prem's Math Lessons</h1>
   <p>Grade 4 · ISA 2027 Training · Competition Prep</p>
   <div class="progress-bar-wrap">
-    <div class="progress-bar-fill" style="width: 8%;"></div>
+    <div class="progress-bar-fill" style="width: 11%;"></div>
   </div>
-  <p class="progress-label">3 of 36 sessions complete</p>
+  <p class="progress-label">4 of 36 sessions complete</p>
 </header>
 
 <!-- ── Tab navigation ── -->
 <div class="tab-nav">
-  <button class="tab-btn active" id="tab-lessons"   onclick="switchTab('lessons')">📚 Lessons</button>
-  <button class="tab-btn"        id="tab-dashboard" onclick="switchTab('dashboard')">📊 Dashboard</button>
+  <button class="tab-btn active">📚 Lessons</button>
+  <a class="tab-btn" href="Prems_Math_Coach_Dashboard.html" target="_blank">📊 Dashboard ↗</a>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     LESSONS PANEL
-════════════════════════════════════════════════════ -->
-<div id="lessons-panel">
 <main>
 
   <!-- ── Art of Counting ── -->
@@ -526,319 +332,14 @@
   </div>
 
 </main>
-</div><!-- end lessons-panel -->
-
-<!-- ═══════════════════════════════════════════════════
-     DASHBOARD PANEL
-════════════════════════════════════════════════════ -->
-<div id="dashboard-panel">
-
-  <!-- Dark sub-header with competition badges -->
-  <div class="dash-header">
-    <div class="dash-header-left">
-      <h2>🎯 Prem's Math Coach — Dashboard</h2>
-      <p>Grade 4 → Grade 5 &nbsp;|&nbsp; ISA 2027: Top 5% &nbsp;|&nbsp; Coach: Chusaki &nbsp;|&nbsp; Updated: 16 May 2026</p>
-    </div>
-    <div class="header-badges">
-      <span class="hbadge gold">🥈 Kangaroo Silver 2026</span>
-      <span class="hbadge gold">🥉 ASMOPSS Bronze 2025</span>
-      <span class="hbadge green">Top 10% Globally</span>
-      <span class="hbadge orange">W4 Delivered — Awaiting Results</span>
-    </div>
-  </div>
-
-  <div class="dash-container">
-
-    <!-- COMPETITION STANDING -->
-    <div class="section-label">📊 Competition Standing</div>
-    <div class="stat-row">
-      <div class="stat-box"><div class="medal">📝</div><div class="comp-name">ISA 2026</div><div class="result">~600 pts</div><div class="sub">90th+ percentile</div></div>
-      <div class="stat-box"><div class="medal">🥉</div><div class="comp-name">ASMOPSS 2025</div><div class="result">Bronze</div><div class="sub">94th percentile nationally</div></div>
-      <div class="stat-box"><div class="medal">🥈</div><div class="comp-name">Kangaroo 2026</div><div class="result">Silver</div><div class="sub">Above avg all categories</div></div>
-      <div class="stat-box"><div class="medal">🎽</div><div class="comp-name">SASMO 2026</div><div class="result">Hon. Mention</div><div class="sub">8,515 students, 40 countries</div></div>
-    </div>
-
-    <!-- SCORE TREND -->
-    <div class="section-label">📈 Score Trend</div>
-    <div class="trend-row">
-      <div class="trend-box">
-        <div class="tcircle" style="background:linear-gradient(135deg,#a0aec0,#718096)"><span class="n">6</span><span class="d">/15</span></div>
-        <div class="trend-body"><strong>Week 1</strong><span>Counting · Arithmetic · Number Theory</span></div>
-      </div>
-      <div class="trend-box" style="border-color:#c6f6d5">
-        <div class="tcircle" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"><span class="n">12</span><span class="d">/15</span></div>
-        <div class="trend-body"><strong>Week 2</strong><span>Algebra · Arithmetic · Counting</span></div>
-        <span class="trend-delta" style="color:#43e97b">+6 ⬆</span>
-      </div>
-      <div class="trend-box" style="border-color:#fbd38d">
-        <div class="tcircle" style="background:linear-gradient(135deg,#f6993f,#fdcb6e)"><span class="n">9</span><span class="d">/15</span></div>
-        <div class="trend-body"><strong>Week 3</strong><span>Algebra 4/5 · Arith 4/5 · Counting 1/5</span></div>
-        <span class="trend-delta" style="color:#f6993f">−3 ⬇</span>
-      </div>
-    </div>
-    <div style="background:#fffaf0;border:1px solid #fbd38d;border-radius:10px;padding:11px 14px;font-size:12px;color:#744210;margin-bottom:20px">
-      <strong>⚠ Context on Week 3 drop:</strong> Algebra + Arithmetic = 8/10 (strong). The 9/15 is entirely Counting (1/5) — a single fixable misconception: positions vs available options. Not a regression.
-    </div>
-
-    <!-- WEEK 3 RESULTS + GAPS -->
-    <div class="section-label">📋 Week 3 Results &amp; Priority Gaps</div>
-    <div class="grid-2">
-
-      <div class="card">
-        <div class="card-title"><span class="dot" style="background:#f6993f"></span>Week 3 — Question Breakdown</div>
-        <div style="background:#f0fff4;border:1px solid #c6f6d5;border-radius:8px;padding:9px 12px;margin-bottom:10px;font-size:12px;color:#276749">
-          <strong>✨ Zero arithmetic slips</strong> — final-step habit is fixed. Q4 spotted TWO rules for square numbers unprompted.
-        </div>
-        <table class="q-table">
-          <tr><th>Q</th><th>Topic</th><th>Lvl</th><th>Result</th><th>Note</th></tr>
-          <tr><td>Q1</td><td>Algebra — combined terms</td><td><span class="lw">Warm</span></td><td class="q-pass">✓</td><td>3□=15, clean</td></tr>
-          <tr><td>Q2</td><td>Algebra — work backwards</td><td><span class="lw">Warm</span></td><td class="q-pass">✓</td><td>Listed all 5 terms backwards</td></tr>
-          <tr><td>Q3</td><td>Algebra — word problem</td><td><span class="lm">Med</span></td><td class="q-fail">✗</td><td>Reversed subtraction but forgot to ÷2</td></tr>
-          <tr><td>Q4</td><td>Algebra — square numbers</td><td><span class="lm">Med</span></td><td class="q-pass">✓</td><td>✨ Found TWO rules (n² AND odd differences)</td></tr>
-          <tr><td>Q5</td><td>Algebra — tile sequence</td><td><span class="lh">Hard</span></td><td class="q-pass">✓</td><td>Listed all 8 rows correctly</td></tr>
-          <tr><td>Q6</td><td>Arithmetic — multiply shortcut</td><td><span class="lw">Warm</span></td><td class="q-pass">✓</td><td>×10÷2 shortcut, perfect</td></tr>
-          <tr><td>Q7</td><td>Arithmetic — multi-step money</td><td><span class="lw">Warm</span></td><td class="q-pass">✓</td><td>Underlined LEFT — habit holding</td></tr>
-          <tr><td>Q8</td><td>Arithmetic — rectangle perimeter</td><td><span class="lm">Med</span></td><td class="q-pass">✓</td><td>✨ Drew rect, 54÷6=9, clean</td></tr>
-          <tr><td>Q9</td><td>Arithmetic — two-step word</td><td><span class="lm">Med</span></td><td class="q-pass">✓</td><td>24×5=120, 120−85=35</td></tr>
-          <tr><td>Q10</td><td>Arithmetic — fraction of remainder</td><td><span class="lh">Hard</span></td><td class="q-fail">✗</td><td>Applied 1/3 to all 30 instead of remaining 18</td></tr>
-          <tr><td>Q11</td><td>Counting — 2-digit, CAN repeat</td><td><span class="lw">Warm</span></td><td class="q-fail">✗</td><td>Drew 4 boxes (options) not 2 boxes (positions)</td></tr>
-          <tr><td>Q12</td><td>Counting — 2-digit, NO repeat</td><td><span class="lw">Warm</span></td><td class="q-fail">✗</td><td>Same error — 4×3×2×1 instead of 4×3</td></tr>
-          <tr><td>Q13</td><td>Counting — 3-category meal sets</td><td><span class="lm">Med</span></td><td class="q-pass">✓</td><td>4×3×2=24, clean (slots obvious)</td></tr>
-          <tr><td>Q14</td><td>Counting — 4 trophy arrangements</td><td><span class="lm">Med</span></td><td class="q-fail">✗</td><td>Used 4×4×4×4 — kept repeats AND wrong box count</td></tr>
-          <tr><td>Q15</td><td>Counting — letters+digits, no repeat</td><td><span class="lh">Hard</span></td><td class="q-fail">✗</td><td>Used all 6 items instead of selecting 2 from each</td></tr>
-        </table>
-      </div>
-
-      <div class="card">
-        <div class="card-title"><span class="dot" style="background:#fc4e4e"></span>Priority Gaps</div>
-
-        <div class="gap-item">
-          <div class="gap-header"><span class="gap-label">Counting — Positions vs Options</span><span class="gpill p1">Priority 1</span></div>
-          <div class="gap-score">W3: 1/5 — draws boxes = options, not positions. Core confusion. Q11/12/14/15 all same root.</div>
-          <div class="gap-bar"><div class="gap-fill g1" style="width:30%"></div></div>
-        </div>
-        <div class="gap-item">
-          <div class="gap-header"><span class="gap-label">Algebra — Multi-step word problems</span><span class="gpill p2">Priority 2</span></div>
-          <div class="gap-score">Q3: forgot to undo doubling. Teach "last step first" reverse-order method.</div>
-          <div class="gap-bar"><div class="gap-fill g2" style="width:65%"></div></div>
-        </div>
-        <div class="gap-item">
-          <div class="gap-header"><span class="gap-label">Arithmetic — Fraction of a remainder</span><span class="gpill p2">Priority 3</span></div>
-          <div class="gap-score">Q10: applied 1/3 to total instead of remaining group</div>
-          <div class="gap-bar"><div class="gap-fill g2" style="width:60%"></div></div>
-        </div>
-        <div class="gap-item">
-          <div class="gap-header"><span class="gap-label">Number Theory (LCM &amp; Factorial)</span><span class="gpill ph">On Hold</span></div>
-          <div class="gap-score">Not yet studied — notify Chusaki when Prem is ready</div>
-          <div class="gap-bar"><div class="gap-fill gh" style="width:20%"></div></div>
-        </div>
-        <div class="gap-item">
-          <div class="gap-header"><span class="gap-label">Arithmetic accuracy ✓</span><span class="gpill ps">Fixed ⬆</span></div>
-          <div class="gap-score">Zero slips W3 — final-step checking habit locked in</div>
-          <div class="gap-bar"><div class="gap-fill gs" style="width:80%"></div></div>
-        </div>
-        <div class="gap-item" style="margin-bottom:0">
-          <div class="gap-header"><span class="gap-label">Algebraic Thinking ✓</span><span class="gpill ps">Strength</span></div>
-          <div class="gap-score">W2: 5/5 · W3: 4/5 · Spotted 2 rules for square numbers unprompted</div>
-          <div class="gap-bar"><div class="gap-fill gs" style="width:85%"></div></div>
-        </div>
-
-        <div class="insight orange" style="margin-top:14px">
-          <div class="insight-label il-orange">Root Cause — Counting</div>
-          <p><strong>Prem draws boxes = number of available options.</strong> Correct: boxes = number of positions/slots. Q13 worked because rice/curry/drink obviously map to 3 slots. Q11/12 broke because "4 digits" ≠ "4 slots." One concept to fix unlocks all 4 Qs.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- WEEK 4 PLAN + RADAR -->
-    <div class="section-label">📈 Week 4 Plan &amp; Skills Profile</div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title"><span class="dot" style="background:#f6993f"></span>Week 4 Focus Areas</div>
-        <div style="font-size:11px;color:#718096;margin-bottom:12px">Counting (positions fix) · Algebra (work backwards) · Arithmetic (fractions) &nbsp;·&nbsp; Test delivered, awaiting results</div>
-        <div class="plan-item">
-          <div class="pnum">1</div>
-          <div><strong>Counting — Positions vs Options (Q1–Q5)</strong><br><span>Q1: 4×4=16 · Q2: 4×3=12 · Q3: 3×4×2=24 · Q4: 4×3×2=24 · Q5: 1×3×2×1=6 (fixed position)</span></div>
-        </div>
-        <div class="plan-item">
-          <div class="pnum">2</div>
-          <div><strong>Algebra — Work Backwards (Q6–Q10)</strong><br><span>2-step → 3-step → word problems. "Last step first" method throughout.</span></div>
-        </div>
-        <div class="plan-item">
-          <div class="pnum">3</div>
-          <div><strong>Arithmetic — Fractions (Q11–Q15)</strong><br><span>Fraction of total → fraction of remainder → two &amp; three successive fractions</span></div>
-        </div>
-        <div class="plan-item" style="border-bottom:none">
-          <div class="pnum" style="background:#a0aec0;font-size:13px">⏳</div>
-          <div><strong style="color:#a0aec0">Factorial &amp; LCM — Week 5 (planned)</strong><br><span>Factorial is next once box method confirmed. LCM taught from scratch.</span></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title"><span class="dot" style="background:#43e97b"></span>Skills Radar</div>
-        <div class="chart-wrap">
-          <svg id="radarSvg" viewBox="0 0 320 265" width="320" height="265" xmlns="http://www.w3.org/2000/svg"></svg>
-        </div>
-        <div class="radar-legend">
-          <div class="radar-legend-item"><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="#667eea"/></svg>Prem (current)</div>
-          <div class="radar-legend-item"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="#f6993f" stroke-width="2" stroke-dasharray="4,3"/></svg>Target (Top 5%)</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SESSION LOG + TIMELINE -->
-    <div class="section-label">📓 Session Log &amp; Timeline</div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title"><span class="dot"></span>Weekly Sessions</div>
-        <div class="session-item">
-          <div class="wk-badge" style="background:#a0aec0"><div class="wk">WK</div>01</div>
-          <div class="session-body">
-            <strong>Counting · Arithmetic · Number Theory</strong>
-            <div class="tags"><span class="tag tgreen">6/15</span><span class="tag tpurple">Both Challenges ✓</span></div>
-          </div>
-          <span class="sstatus sdone">✓ Done</span>
-        </div>
-        <div class="session-item">
-          <div class="wk-badge" style="background:#43e97b"><div class="wk">WK</div>02</div>
-          <div class="session-body">
-            <strong>Algebra · Arithmetic · Counting</strong>
-            <div class="tags"><span class="tag tgreen">12/15 ⬆</span><span class="tag tpurple">Algebra 5/5 ✨</span></div>
-            <div class="snote">Keyword habit adopted — Q7 &amp; Q9 both correct</div>
-          </div>
-          <span class="sstatus sdone">✓ Done</span>
-        </div>
-        <div class="session-item">
-          <div class="wk-badge" style="background:#f6993f"><div class="wk">WK</div>03</div>
-          <div class="session-body">
-            <strong>Algebra · Arithmetic · Counting (deeper)</strong>
-            <div class="tags"><span class="tag torange">9/15</span><span class="tag tgreen">Arith: 0 slips ✓</span><span class="tag tred">Counting: 1/5</span></div>
-            <div class="snote">Counting drop = one fixable misconception (positions vs options)</div>
-          </div>
-          <span class="sstatus sdone">✓ Done</span>
-        </div>
-        <div class="session-item">
-          <div class="wk-badge" style="background:#667eea"><div class="wk">WK</div>04</div>
-          <div class="session-body">
-            <strong>Counting (positions fix) · Algebra (work backwards) · Fractions</strong>
-            <div class="tags"><span class="tag torange">Awaiting Results</span><span class="tag tblue">Lesson: Box Method</span></div>
-            <div class="snote">Test delivered — 15 Qs across all 3 sections</div>
-          </div>
-          <span class="sstatus sready">⏱ In Progress</span>
-        </div>
-        <div class="session-item">
-          <div class="wk-badge" style="background:#edf2f7;color:#a0aec0"><div class="wk">WK</div>05</div>
-          <div class="session-body">
-            <strong>Factorials &amp; Permutations · Number Theory (LCM)</strong>
-            <div class="tags"><span class="tag tg">Planned</span><span class="tag tg">On Hold items unlock here</span></div>
-            <div class="snote">Natural next step once box method confirmed in W4</div>
-          </div>
-          <span class="sstatus sup">📅 Upcoming</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title"><span class="dot" style="background:#f6993f"></span>Road to ISA 2027</div>
-        <div class="timeline-bar"><div class="timeline-fill"></div></div>
-        <div class="timeline-labels"><span>Week 1 (May 2026)</span><span>ISA 2027 (Feb 2027)</span></div>
-        <div style="margin-top:12px">
-          <div class="tm"><span>📅 Sessions completed</span><span>3 / ~36</span></div>
-          <div class="tm"><span>📅 Weeks remaining</span><span>~33 weeks</span></div>
-          <div class="tm"><span>🏆 ISA 2027 Target</span><span>Top 5% Globally</span></div>
-          <div class="tm"><span>🎽 Competition Season</span><span>2026–27</span></div>
-        </div>
-        <div class="insight green">
-          <div class="insight-label il-green">📈 Progress Pattern</div>
-          <p>Prem learns fast when a concept is properly introduced — Algebra clicked 5/5 in its first week. The listing instinct in Counting (Q13/Q15 W2, Q11–15 W3) is the same systematic thinking that got the Challenge Qs in W1. Redirect it with the slot/box framework and it will click the same way.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- LESSONS LIBRARY -->
-    <div class="section-label">📚 Lessons Library</div>
-    <div class="card">
-      <div class="card-title"><span class="dot" style="background:#764ba2"></span>Interactive Lessons — open index.html in Chrome</div>
-      <div class="lesson-lib-item">
-        <div class="lesson-icon">📚</div>
-        <div class="lesson-lib-body">
-          <strong>Lessons Hub — index.html</strong>
-          <span>Password-protected hub with score tracker, topic performance bars, and all lesson cards. Update scores in weeklyResults array after each test.</span>
-        </div>
-        <span style="font-size:11px;font-weight:600;color:#276749;background:#f0fff4;padding:3px 10px;border-radius:10px;white-space:nowrap;margin-left:10px">Live</span>
-      </div>
-      <div class="lesson-lib-item">
-        <div class="lesson-icon">△</div>
-        <div class="lesson-lib-body">
-          <strong>Counting — With &amp; Without Repeats</strong>
-          <span>Week 3 prep. Box method for repeats allowed vs no repeats. Step-locked, ~10–15 mins.</span>
-        </div>
-        <span style="font-size:11px;font-weight:600;color:#764ba2;background:#faf5ff;padding:3px 10px;border-radius:10px;white-space:nowrap;margin-left:10px">Ready</span>
-      </div>
-      <div class="lesson-lib-item">
-        <div class="lesson-icon">▪</div>
-        <div class="lesson-lib-body">
-          <strong>Counting — Box Method (Positions vs Options)</strong>
-          <span>Week 4 prep. The golden rule: slots = positions, not options. Targets W3 Q11/12/14/15 root cause.</span>
-        </div>
-        <span style="font-size:11px;font-weight:600;color:#764ba2;background:#faf5ff;padding:3px 10px;border-radius:10px;white-space:nowrap;margin-left:10px">Ready</span>
-      </div>
-      <div class="lesson-lib-item" style="opacity:0.5">
-        <div class="lesson-icon" style="background:#a0aec0">+</div>
-        <div class="lesson-lib-body">
-          <strong>Coming: Factorials &amp; Permutations · LCM &amp; Prime Factorisation</strong>
-          <span>Planned for Weeks 5–6</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- NEXT STEPS -->
-    <div class="section-label">✅ Next Steps</div>
-    <div class="card">
-      <div class="card-title"><span class="dot" style="background:#f6993f"></span>Action Items</div>
-      <div class="task-item"><div class="tcheck"></div><div class="task-text">Prem completes Week 4 test and shares results</div><span class="owner op">Prem</span></div>
-      <div class="task-item"><div class="tcheck"></div><div class="task-text">Analyse Week 4 results &amp; create Week 5 test (Factorials + LCM)</div><span class="owner oc">Chusaki</span></div>
-      <div class="task-item"><div class="tcheck"></div><div class="task-text">Notify Chusaki when Prem has studied Factorial &amp; LCM (needed for Week 5)</div><span class="owner ol">Lui</span></div>
-      <div style="border-top:1px dashed #e2e8f0;margin:10px 0 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:#cbd5e0">Completed</div>
-      <div class="task-item"><div class="tcheck done">✓</div><div class="task-text done-text">Create &amp; deliver Week 4 test + Box Method lesson</div><span class="owner oc">Chusaki</span></div>
-      <div class="task-item"><div class="tcheck done">✓</div><div class="task-text done-text">Prem completes Week 3 test (9/15)</div><span class="owner op">Prem</span></div>
-      <div class="task-item"><div class="tcheck done">✓</div><div class="task-text done-text">Create &amp; deliver Week 3 test + Counting lesson</div><span class="owner oc">Chusaki</span></div>
-      <div class="task-item"><div class="tcheck done">✓</div><div class="task-text done-text">Prem completes Week 2 test (12/15 ⬆)</div><span class="owner op">Prem</span></div>
-      <div class="task-item"><div class="tcheck done">✓</div><div class="task-text done-text">Create &amp; deliver Week 2 test</div><span class="owner oc">Chusaki</span></div>
-      <div class="task-item"><div class="tcheck done">✓</div><div class="task-text done-text">Prem completes Week 1 test (6/15)</div><span class="owner op">Prem</span></div>
-      <div class="task-item"><div class="tcheck done">✓</div><div class="task-text done-text">Create &amp; deliver Week 1 test</div><span class="owner oc">Chusaki</span></div>
-    </div>
-
-    <div style="height:32px"></div>
-  </div><!-- end dash-container -->
-</div><!-- end dashboard-panel -->
 
 <footer>
   Updated: May 2026 &nbsp;·&nbsp; ISA 2027 target: Top 5% &nbsp;·&nbsp; Competition target: Medal 🥇
 </footer>
 
 <script>
-  // ── Tab switching ─────────────────────────────────────────────────
-  function switchTab(tab) {
-    var lessons   = document.getElementById('lessons-panel');
-    var dashboard = document.getElementById('dashboard-panel');
-    var btnL = document.getElementById('tab-lessons');
-    var btnD = document.getElementById('tab-dashboard');
-
-    if (tab === 'dashboard') {
-      lessons.classList.add('hidden');
-      dashboard.classList.add('visible');
-      btnL.classList.remove('active');
-      btnD.classList.add('active');
-    } else {
-      dashboard.classList.remove('visible');
-      lessons.classList.remove('hidden');
-      btnD.classList.remove('active');
-      btnL.classList.add('active');
-    }
-  }
-
   // ── Password gate ─────────────────────────────────────────────────
-  // Password is stored as a SHA-256 hash — plain text never appears in source
+  // Password stored as SHA-256 hash — plain text never appears in source
   var PW_HASH = '151e06e680ff58b6a02780877e3e2d8c447b968f959abf2983044bb6c7a2b2ab';
 
   if (sessionStorage.getItem('unlocked') === 'yes') {
@@ -871,98 +372,6 @@
       }
     });
   }
-
-  // ── Radar chart ───────────────────────────────────────────────────
-  (function () {
-    var svg = document.getElementById('radarSvg');
-    var cx = 160, cy = 135, r = 96;
-    var labels  = ['Logic &\nReasoning', 'Geometry', 'Number\nSense', 'Algebra', 'Counting', 'Arithmetic', 'Number\nTheory', 'Applied\nProblems'];
-    var prem    = [85, 72, 88, 82, 28, 72, 42, 18];
-    var target  = [90, 85, 90, 85, 80, 85, 82, 80];
-    var n = labels.length;
-    var NS = 'http://www.w3.org/2000/svg';
-
-    function ang(i)  { return (Math.PI * 2 * i / n) - Math.PI / 2; }
-    function pt(val, i) { var a = ang(i), s = val / 100; return [cx + r * s * Math.cos(a), cy + r * s * Math.sin(a)]; }
-    function polyPts(vals) { return vals.map(function(v, i) { return pt(v, i).join(','); }).join(' '); }
-    function el(tag, attrs) {
-      var e = document.createElementNS(NS, tag);
-      Object.keys(attrs).forEach(function(k) { e.setAttribute(k, attrs[k]); });
-      svg.appendChild(e);
-      return e;
-    }
-
-    // Grid rings
-    [20, 40, 60, 80, 100].forEach(function(v) {
-      el('polygon', {
-        points: Array.from({length: n}, function(_, i) { return pt(v, i).join(','); }).join(' '),
-        fill: v === 100 ? 'rgba(0,0,0,0.02)' : 'none',
-        stroke: 'rgba(0,0,0,0.09)',
-        'stroke-width': '1'
-      });
-    });
-
-    // Spokes
-    for (var i = 0; i < n; i++) {
-      var p = pt(100, i);
-      el('line', { x1: cx, y1: cy, x2: p[0], y2: p[1], stroke: 'rgba(0,0,0,0.09)', 'stroke-width': '1' });
-    }
-
-    // Target polygon
-    el('polygon', { points: polyPts(target), fill: 'rgba(246,153,63,0.06)', stroke: 'rgba(246,153,63,0.8)', 'stroke-width': '1.8', 'stroke-dasharray': '5,4' });
-
-    // Prem polygon
-    el('polygon', { points: polyPts(prem), fill: 'rgba(102,126,234,0.18)', stroke: 'rgba(102,126,234,0.95)', 'stroke-width': '2.2' });
-
-    // Dots
-    prem.forEach(function(v, i) {
-      var p = pt(v, i);
-      el('circle', { cx: p[0], cy: p[1], r: '4.5', fill: '#667eea', stroke: '#fff', 'stroke-width': '2' });
-    });
-
-    // Labels
-    labels.forEach(function(label, i) {
-      var lp = pt(120, i), lx = lp[0], ly = lp[1];
-      var anchor = lx < cx - 8 ? 'end' : lx > cx + 8 ? 'start' : 'middle';
-      var lines = label.split('\n'), lineH = 12;
-      var baseY = ly - ((lines.length - 1) * lineH / 2);
-      lines.forEach(function(line, li) {
-        var t = document.createElementNS(NS, 'text');
-        t.setAttribute('x', lx);
-        t.setAttribute('y', baseY + li * lineH);
-        t.setAttribute('text-anchor', anchor);
-        t.setAttribute('font-size', '9.5');
-        t.setAttribute('font-family', 'system-ui,sans-serif');
-        t.setAttribute('fill', '#4a5568');
-        t.setAttribute('font-weight', '600');
-        t.textContent = line;
-        svg.appendChild(t);
-      });
-    });
-  })();
-
-  // ── Task checkboxes ───────────────────────────────────────────────
-  document.querySelectorAll('.tcheck:not(.done)').forEach(function(cb) {
-    cb.addEventListener('click', function() {
-      cb.classList.toggle('on');
-      if (cb.classList.contains('on')) {
-        cb.textContent = '✓';
-        cb.style.background = '#667eea';
-        cb.style.borderColor = '#667eea';
-        cb.style.color = 'white';
-        cb.style.fontSize = '11px';
-        cb.nextElementSibling.style.textDecoration = 'line-through';
-        cb.nextElementSibling.style.color = '#a0aec0';
-      } else {
-        cb.textContent = '';
-        cb.style.background = '';
-        cb.style.borderColor = '';
-        cb.style.color = '';
-        cb.nextElementSibling.style.textDecoration = '';
-        cb.nextElementSibling.style.color = '#2d3748';
-      }
-    });
-  });
 </script>
 
 </body>
