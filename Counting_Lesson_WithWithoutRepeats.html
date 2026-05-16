@@ -6,8 +6,15 @@
 <title>Counting Lesson — With and Without Repeats</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: Arial, sans-serif; background: #f4f6f4; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 2rem 1rem; }
-#app { background: #ffffff; border-radius: 16px; padding: 2rem; max-width: 620px; width: 100%; box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+body { font-family: Arial, sans-serif; background: #f0f4f8; min-height: 100vh; }
+#app { background: #ffffff; border-radius: 16px; padding: 2rem; max-width: 620px; width: 100%; margin: 28px auto 60px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+
+/* ── Header ── */
+header { background: linear-gradient(135deg, #1565c0 0%, #1e88e5 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; white-space: nowrap; }
+header a:hover { color: white; }
+header h1 { font-size: 1.15rem; }
+header p  { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
 .screen { display: none; }
 .screen.active { display: block; animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -55,6 +62,17 @@ p { font-size: 15px; color: #444444; line-height: 1.65; margin-bottom: 0.75rem; 
 </style>
 </head>
 <body>
+
+<header>
+  <div>
+    <a href="index.html">← All Lessons</a>
+  </div>
+  <div>
+    <h1>With &amp; Without Repeats</h1>
+    <p>Art of Counting · Week 3</p>
+  </div>
+</header>
+
 <div id="app">
   <div class="progress" id="progress"></div>
 
@@ -262,7 +280,10 @@ p { font-size: 15px; color: #444444; line-height: 1.65; margin-bottom: 0.75rem; 
         No repeats: each box counts down by 1
       </div>
     </div>
-    <button class="btn" onclick="restartLesson()">Try again</button>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;">
+      <button class="btn" onclick="restartLesson()">Try again 🔄</button>
+      <a class="btn btn-primary" href="index.html">All Lessons →</a>
+    </div>
   </div>
 </div>
 
