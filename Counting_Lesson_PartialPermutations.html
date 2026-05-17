@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partial Permutations — Counting Lesson</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; min-height: 100vh; }
+
+    header { background: linear-gradient(135deg, #1565c0 0%, #1e88e5 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; white-space: nowrap; }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p  { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 18px 0 4px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+    .dot.active   { background: #1565c0; }
+    .dot.complete { background: #2e7d32; }
+
+    .screen { display: none; }
+    .screen.visible { display: block; }
+    .wrap { max-width: 660px; margin: 0 auto; padding: 28px 20px 60px; }
+
+    .card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .tag-blue   { background: #e3f2fd; color: #1565c0; }
+    .tag-green  { background: #e8f5e9; color: #2e7d32; }
+    .tag-orange { background: #fff3e0; color: #e65100; }
+    .tag-red    { background: #ffebee; color: #c62828; }
+
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
+    p  { font-size: 0.95rem; color: #444; line-height: 1.65; margin-bottom: 10px; }
+    .hi        { color: #1565c0; font-weight: 700; }
+    .hi-green  { color: #2e7d32; font-weight: 700; }
+    .hi-orange { color: #e65100; font-weight: 700; }
+    .hi-red    { color: #c62828; font-weight: 700; }
+    .hint { font-size: 0.82rem; color: #888; }
+
+    /* Box diagram */
+    .boxes { display: flex; align-items: center; gap: 10px; margin: 14px 0; flex-wrap: wrap; }
+    .box { min-width: 72px; height: 72px; border: 2.5px solid #ccc; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; background: #f8f8f8; }
+    .box.active { border-color: #1565c0; background: #e3f2fd; }
+    .box.done   { border-color: #2e7d32; background: #e8f5e9; }
+    .box.fixed  { border-color: #e65100; background: #fff3e0; }
+    .box.faded  { border-color: #ddd; background: #f9f9f9; opacity: 0.4; }
+    .box-num { font-size: 1.5rem; font-weight: 800; color: #1565c0; line-height: 1; }
+    .box-num.green  { color: #2e7d32; }
+    .box-num.orange { color: #e65100; }
+    .box-num.grey   { color: #aaa; }
+    .box-lbl { font-size: 0.65rem; color: #666; font-weight: 600; text-align: center; }
+    .op { font-size: 1.4rem; color: #aaa; font-weight: 700; }
+    .result-box { min-width: 80px; height: 52px; border: 2.5px solid #2e7d32; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 800; color: #2e7d32; background: #f0fff4; }
+    .stop-sign { font-size: 1.6rem; margin: 0 4px; }
+
+    /* Comparison table */
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+    .compare-box { border-radius: 12px; padding: 14px 16px; }
+    .compare-box.wrong { background: #ffebee; border: 2px solid #ef9a9a; }
+    .compare-box.right { background: #e8f5e9; border: 2px solid #a5d6a7; }
+    .compare-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+    .compare-label.red   { color: #c62828; }
+    .compare-label.green { color: #2e7d32; }
+
+    /* Rule box */
+    .rule-box { background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.92rem; line-height: 1.8; color: #1a3a6e; }
+    .rule-box b { color: #1565c0; }
+    .rule-box.green { background: #e8f5e9; border-left-color: #2e7d32; color: #1b3a1b; }
+    .rule-box.green b { color: #2e7d32; }
+    .rule-box.orange { background: #fff3e0; border-left-color: #e65100; color: #4a1a00; }
+    .rule-box.orange b { color: #e65100; }
+
+    /* Step checklist */
+    .step-line { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 0.92rem; color: #444; line-height: 1.55; }
+    .step-num { min-width: 26px; height: 26px; border-radius: 50%; background: #1565c0; color: white; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+
+    /* Input */
+    .input-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 4px; flex-wrap: wrap; }
+    .input-row label { font-size: 0.9rem; color: #555; flex: 1; min-width: 200px; line-height: 1.5; }
+    .input-row input { width: 84px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 700; border: 2px solid #ccc; border-radius: 10px; outline: none; }
+    .input-row input:focus { border-color: #1565c0; box-shadow: 0 0 0 3px rgba(21,101,192,0.15); }
+    .input-correct { border-color: #2e7d32 !important; background: #e8f5e9 !important; color: #1b5e20 !important; }
+    .input-wrong   { border-color: #c62828 !important; background: #ffebee !important; }
+
+    .feedback { font-size: 0.88rem; padding: 10px 14px; border-radius: 8px; margin: 6px 0; line-height: 1.5; }
+    .fb-ok   { background: #e8f5e9; color: #1b5e20; border: 1px solid #81c784; }
+    .fb-err  { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; }
+    .fb-hide { display: none; }
+
+    .divider { border: none; border-top: 1.5px solid #eee; margin: 14px 0; }
+    .hidden { display: none; }
+    .score-big { font-size: 3.2rem; font-weight: 800; color: #1565c0; text-align: center; padding: 1rem 0 0.5rem; }
+
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+    .btn { display: inline-flex; align-items: center; padding: 12px 22px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; cursor: pointer; border: 2px solid #ccc; background: white; color: #333; transition: background 0.15s; text-decoration: none; }
+    .btn:hover { background: #f0f0f0; }
+    .btn-primary { background: #1565c0; border-color: #1565c0; color: white; }
+    .btn-primary:hover { background: #0d47a1; }
+    .btn-grey { background: #f5f5f5; border-color: #ddd; color: #555; }
+    .btn-grey:hover { background: #ebebeb; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div><a href="index.html">← All Lessons</a></div>
+  <div>
+    <h1>Partial Permutations</h1>
+    <p>Art of Counting · Week 6</p>
+  </div>
+</header>
+
+<div class="dots" id="dots"></div>
+
+<div class="wrap">
+
+  <!-- ── Screen 0: What went wrong in Week 5 ── -->
+  <div class="screen visible" id="s0">
+    <div class="card">
+      <span class="tag tag-red">Week 5 Review</span>
+      <h2>The same mistake appeared 3 times</h2>
+      <p>In Week 5, Q2, Q3, and Q5 all had the same root cause. Let's look at Q2:</p>
+      <p><em>Prem has 4 different books. He picks 2 books to put on display, in order. How many arrangements?</em></p>
+      <div class="compare">
+        <div class="compare-box wrong">
+          <div class="compare-label red">❌ What you wrote</div>
+          <div class="boxes" style="margin:8px 0">
+            <div class="box active"><div class="box-num">4</div></div>
+            <div class="op" style="font-size:1rem">×</div>
+            <div class="box active"><div class="box-num">3</div></div>
+            <div class="op" style="font-size:1rem">×</div>
+            <div class="box active"><div class="box-num">2</div></div>
+            <div class="op" style="font-size:1rem">×</div>
+            <div class="box active"><div class="box-num">1</div></div>
+          </div>
+          <p style="font-size:0.85rem;color:#c62828">= 24 &nbsp;❌ (that's 4!)</p>
+        </div>
+        <div class="compare-box right">
+          <div class="compare-label green">✅ Correct thinking</div>
+          <div class="boxes" style="margin:8px 0">
+            <div class="box done"><div class="box-num green">4</div></div>
+            <div class="op" style="font-size:1rem">×</div>
+            <div class="box done"><div class="box-num green">3</div></div>
+            <div class="op" style="font-size:1rem">🛑</div>
+            <div class="box faded"><div class="box-num grey">2</div></div>
+            <div class="op" style="font-size:1rem">×</div>
+            <div class="box faded"><div class="box-num grey">1</div></div>
+          </div>
+          <p style="font-size:0.85rem;color:#2e7d32">= 12 &nbsp;✅ (stop after 2 slots!)</p>
+        </div>
+      </div>
+      <p>You filled <span class="hi">4 slots</span> when only <span class="hi-green">2 slots</span> needed filling. Today you'll learn exactly when to stop.</p>
+    </div>
+    <button class="btn btn-primary" onclick="goTo(1)">Show me the rule →</button>
+  </div>
+
+  <!-- ── Screen 1: The golden question ── -->
+  <div class="screen" id="s1">
+    <div class="card">
+      <span class="tag tag-blue">The Key Question</span>
+      <h2>Always ask this first: "How many slots am I filling?"</h2>
+      <p>Before you draw a single box, count the <strong>slots</strong> — the positions that need to be filled. Then draw exactly that many boxes and count down.</p>
+      <div class="rule-box">
+        <b>Step 1:</b> How many slots to fill? Call it <b>k</b>.<br>
+        <b>Step 2:</b> How many items available? Call it <b>n</b>.<br>
+        <b>Step 3:</b> Write k boxes. Fill them: n, n−1, n−2 … stop after k boxes.<br>
+        <b>Step 4:</b> Multiply.
+      </div>
+      <p><strong>Example: 6 runners, medals for top 3 (Gold, Silver, Bronze)</strong></p>
+      <div class="step-line"><div class="step-num">1</div><div>Slots to fill = <span class="hi">3</span> (Gold, Silver, Bronze)</div></div>
+      <div class="step-line"><div class="step-num">2</div><div>Items available = <span class="hi">6</span> runners</div></div>
+      <div class="step-line"><div class="step-num">3</div><div>Draw 3 boxes, count down from 6:</div></div>
+      <div class="boxes">
+        <div class="box done"><div class="box-num green">6</div><div class="box-lbl">Gold</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">5</div><div class="box-lbl">Silver</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">4</div><div class="box-lbl">Bronze</div></div>
+        <div class="op">=</div>
+        <div class="result-box">120</div>
+      </div>
+      <p class="hint">⛔ Stop after 3 boxes — do NOT continue to ×3×2×1. That would give 6! = 720 (which is what you wrote in Week 5 Q3).</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-blue">Quick Check</span>
+      <h2>How many slots? 5 friends, choose 2 for a photo, in order (left and right)</h2>
+      <p>Don't solve it yet — just tell me: how many slots need filling?</p>
+      <div class="input-row">
+        <label>Number of slots = ?</label>
+        <input type="number" id="i1" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f1"></div>
+    </div>
+    <div id="next1" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(2)">Now solve it →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 2: Practice partial pick ── -->
+  <div class="screen" id="s2">
+    <div class="card">
+      <span class="tag tag-blue">Practice 1</span>
+      <h2>5 friends, choose 2 for a photo (left and right positions)</h2>
+      <p>Slots = 2. Items = 5. Draw 2 boxes and count down from 5:</p>
+      <div class="boxes">
+        <div class="box done"><div class="box-num green">5</div><div class="box-lbl">Left</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">4</div><div class="box-lbl">Right</div></div>
+        <div class="op">=</div>
+        <div class="result-box">?</div>
+      </div>
+      <div class="input-row">
+        <label>5 × 4 = ?</label>
+        <input type="number" id="i2" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f2"></div>
+      <div class="hint">Remember: only 2 slots, so only 2 boxes. Stop there.</div>
+    </div>
+    <div id="next2" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(3)">Next →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 3: Full vs partial side by side ── -->
+  <div class="screen" id="s3">
+    <div class="card">
+      <span class="tag tag-blue">Full vs Partial — spot the difference</span>
+      <h2>This is the question that tripped you up in Week 5</h2>
+      <p>Read carefully — the word <strong>"all"</strong> vs a specific number tells you everything.</p>
+      <div class="compare">
+        <div class="compare-box right" style="border-color:#90caf9;background:#e3f2fd">
+          <div class="compare-label" style="color:#1565c0">Full arrangement</div>
+          <p style="font-size:0.85rem;color:#1a3a6e;margin-bottom:8px">"Arrange <strong>all 4</strong> books on a shelf"</p>
+          <div class="boxes" style="margin:6px 0;gap:6px">
+            <div class="box active" style="min-width:48px;height:48px"><div class="box-num" style="font-size:1.1rem">4</div></div>
+            <div class="op" style="font-size:1rem">×</div>
+            <div class="box active" style="min-width:48px;height:48px"><div class="box-num" style="font-size:1.1rem">3</div></div>
+            <div class="op" style="font-size:1rem">×</div>
+            <div class="box active" style="min-width:48px;height:48px"><div class="box-num" style="font-size:1.1rem">2</div></div>
+            <div class="op" style="font-size:1rem">×</div>
+            <div class="box active" style="min-width:48px;height:48px"><div class="box-num" style="font-size:1.1rem">1</div></div>
+          </div>
+          <p style="font-size:0.85rem;color:#1565c0;font-weight:700">4! = 24 &nbsp;✅</p>
+        </div>
+        <div class="compare-box right">
+          <div class="compare-label green">Partial pick</div>
+          <p style="font-size:0.85rem;color:#1b3a1b;margin-bottom:8px">"Pick <strong>2 books</strong> from 4, in order"</p>
+          <div class="boxes" style="margin:6px 0;gap:6px">
+            <div class="box done" style="min-width:48px;height:48px"><div class="box-num green" style="font-size:1.1rem">4</div></div>
+            <div class="op" style="font-size:1rem">×</div>
+            <div class="box done" style="min-width:48px;height:48px"><div class="box-num green" style="font-size:1.1rem">3</div></div>
+            <div class="op" style="font-size:1rem">🛑</div>
+            <div class="box faded" style="min-width:48px;height:48px"><div class="box-num grey" style="font-size:1.1rem">2</div></div>
+            <div class="op" style="font-size:1rem">×</div>
+            <div class="box faded" style="min-width:48px;height:48px"><div class="box-num grey" style="font-size:1.1rem">1</div></div>
+          </div>
+          <p style="font-size:0.85rem;color:#2e7d32;font-weight:700">4 × 3 = 12 &nbsp;✅</p>
+        </div>
+      </div>
+      <div class="rule-box">
+        <b>Signal words for partial picks:</b> "choose X", "pick X", "select X", "top X places", "X winners", "X prizes" — whenever you're picking a <em>subset</em>, only draw that many boxes.
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="goTo(4)">Practise more →</button>
+  </div>
+
+  <!-- ── Screen 4: Practice 2 ── -->
+  <div class="screen" id="s4">
+    <div class="card">
+      <span class="tag tag-blue">Practice 2</span>
+      <h2>8 athletes, 3 medals (Gold, Silver, Bronze)</h2>
+      <p>Step 1: How many slots? <span class="hi">3</span> (one per medal)<br>
+         Step 2: Items available? <span class="hi">8</span> athletes<br>
+         Step 3: Draw 3 boxes, count down from 8.</p>
+      <div class="boxes">
+        <div class="box done"><div class="box-num green">8</div><div class="box-lbl">Gold</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">7</div><div class="box-lbl">Silver</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">6</div><div class="box-lbl">Bronze</div></div>
+        <div class="op">=</div>
+        <div class="result-box">?</div>
+      </div>
+      <div class="input-row">
+        <label>8 × 7 × 6 = ?</label>
+        <input type="number" id="i4" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f4"></div>
+    </div>
+    <div id="next4" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(5)">Next →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 5: Fixed positions ── -->
+  <div class="screen" id="s5">
+    <div class="card">
+      <span class="tag tag-orange">Watch out — Fixed Positions</span>
+      <h2>When some slots are fixed, they count as 1 choice</h2>
+      <p>This is exactly what caught you in Week 5 Q5: <em>"4-digit password. First digit must be 1, last must be 9. Middle two digits chosen from {2,3,4,5}, no repeats."</em></p>
+      <p>Slots = 4. But two are <span class="hi-orange">fixed</span>:</p>
+      <div class="boxes">
+        <div class="box fixed"><div class="box-num orange">1</div><div class="box-lbl">Must be 1</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">4</div><div class="box-lbl">2nd digit</div></div>
+        <div class="op">×</div>
+        <div class="box done"><div class="box-num green">3</div><div class="box-lbl">3rd digit</div></div>
+        <div class="op">×</div>
+        <div class="box fixed"><div class="box-num orange">1</div><div class="box-lbl">Must be 9</div></div>
+        <div class="op">=</div>
+        <div class="result-box">12</div>
+      </div>
+      <p>Fixed slots always get a <span class="hi-orange">1</span>. The free slots count down from how many options are left.</p>
+      <div class="rule-box orange">
+        <b>Fixed position rule:</b> Write a 1 in every fixed slot. Then fill the free slots by counting down from the available pool.
+      </div>
+    </div>
+    <div class="card">
+      <span class="tag tag-orange">Practice 3</span>
+      <h2>5 students in a row. Class captain must be at position 1.</h2>
+      <p>Position 1 is fixed (1 choice). Positions 2–5 are free — 4 remaining students, count down.</p>
+      <div class="input-row">
+        <label>Total arrangements = 1 × 4 × 3 × 2 × 1 = ?</label>
+        <input type="number" id="i5" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f5"></div>
+    </div>
+    <div id="next5" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(6)">Final challenge →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 6: Challenge ── -->
+  <div class="screen" id="s6">
+    <div class="card">
+      <span class="tag tag-orange">Challenge</span>
+      <h2>Word problem — read carefully</h2>
+      <p>A school is choosing students for 3 roles: <strong>President, Vice-President, and Treasurer</strong>. There are <strong>10 students</strong> to choose from. Each student can only hold one role.</p>
+      <p>How many different ways can the 3 roles be filled?</p>
+      <div class="rule-box">
+        <b>Ask yourself:</b><br>
+        — How many slots? ___<br>
+        — How many students available? ___<br>
+        — Draw ___ boxes and count down from 10.
+      </div>
+      <div class="input-row">
+        <label>Answer = ?</label>
+        <input type="number" id="i6" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f6"></div>
+    </div>
+    <div id="next6" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(7)">See my results →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 7: Finish ── -->
+  <div class="screen" id="s7">
+    <div class="card">
+      <span class="tag tag-green">🎉 Lesson Complete!</span>
+      <h2>You finished Partial Permutations!</h2>
+      <div class="score-big" id="final-score"></div>
+      <p style="text-align:center;color:#888;font-size:0.88rem" id="score-label"></p>
+      <hr class="divider">
+      <div class="rule-box green">
+        <b>3 rules to remember:</b><br>
+        1️⃣ <b>Ask first:</b> "How many slots am I filling?" — draw exactly that many boxes.<br>
+        2️⃣ <b>Count down</b> from n, one number per box, stop when boxes are full.<br>
+        3️⃣ <b>Fixed slots = 1.</b> Free slots count down from the remaining pool.
+      </div>
+      <hr class="divider">
+      <div class="btn-row">
+        <button class="btn btn-grey" onclick="restartLesson()">Try again 🔄</button>
+        <a class="btn btn-primary" href="index.html">All Lessons →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  var NUM_SCREENS = 8;
+  var currentScreen = 0;
+  var firstTry = {};
+  var attempted = {};
+
+  function buildDots() {
+    var c = document.getElementById('dots');
+    c.innerHTML = '';
+    for (var i = 0; i < NUM_SCREENS; i++) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (i === currentScreen ? ' active' : '') + (i < currentScreen ? ' complete' : '');
+      c.appendChild(d);
+    }
+  }
+
+  function goTo(n) {
+    document.getElementById('s' + currentScreen).classList.remove('visible');
+    currentScreen = n;
+    document.getElementById('s' + currentScreen).classList.add('visible');
+    buildDots();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (n === 7) showFinish();
+  }
+
+  function check(inputId, feedbackId, correct, nextId, okMsg, errMsg, onCorrect) {
+    var inp = document.getElementById(inputId);
+    var fb  = document.getElementById(feedbackId);
+    if (inp.disabled) return;
+    var val = parseInt(inp.value, 10);
+    if (isNaN(val)) return;
+    if (val === correct) {
+      inp.classList.add('input-correct');
+      inp.disabled = true;
+      fb.className = 'feedback fb-ok';
+      fb.innerHTML = okMsg;
+      if (!attempted[inputId]) { firstTry[inputId] = true; }
+      attempted[inputId] = true;
+      if (onCorrect) onCorrect();
+      var nxt = document.getElementById(nextId);
+      if (nxt) nxt.classList.remove('hidden');
+    } else {
+      inp.classList.add('input-wrong');
+      fb.className = 'feedback fb-err';
+      fb.innerHTML = errMsg;
+      attempted[inputId] = true;
+      setTimeout(function() { inp.classList.remove('input-wrong'); }, 600);
+    }
+  }
+
+  // S1: how many slots
+  document.getElementById('i1').addEventListener('keydown', function(e) { if (e.key==='Enter') check('i1','f1',2,'next1','✅ Correct! 2 slots — left position and right position.','❌ Count the positions to fill: left and right = ?'); });
+
+  // S2: 5×4
+  document.getElementById('i2').addEventListener('keydown', function(e) { if (e.key==='Enter') check('i2','f2',20,'next2','✅ 5 × 4 = 20. Two slots, stopped after 2 boxes — perfect!','❌ 5 × 4 = ? Try again.'); });
+
+  // S4: 8×7×6
+  document.getElementById('i4').addEventListener('keydown', function(e) { if (e.key==='Enter') check('i4','f4',336,'next4','✅ 8 × 7 × 6 = 336. Three slots filled, stopped there — exactly right.','❌ 8 × 7 × 6 = ? Work it step by step.'); });
+
+  // S5: 1×4×3×2×1
+  document.getElementById('i5').addEventListener('keydown', function(e) { if (e.key==='Enter') check('i5','f5',24,'next5','✅ 1 × 4 × 3 × 2 × 1 = 24. Fixed slot = 1, then the 4 free slots count down.','❌ Fixed slot = 1. Remaining 4 students fill positions 2–5: 4×3×2×1 = ?'); });
+
+  // S6: 10×9×8
+  document.getElementById('i6').addEventListener('keydown', function(e) { if (e.key==='Enter') check('i6','f6',720,'next6','✅ 10 × 9 × 8 = 720. Three slots (President, VP, Treasurer), count down from 10 — stop after 3 boxes!','❌ 3 slots → 3 boxes. Count down from 10: 10 × 9 × 8 = ?'); });
+
+  function showFinish() {
+    var keys = ['i1','i2','i4','i5','i6'];
+    var s = 0;
+    for (var k = 0; k < keys.length; k++) { if (firstTry[keys[k]]) s++; }
+    var total = keys.length;
+    document.getElementById('final-score').textContent = s + ' / ' + total;
+    document.getElementById('score-label').textContent =
+      s === total ? '🏆 Perfect! The partial permutation rule is locked in.' :
+      s >= 4 ? '⭐ Great work — almost there!' :
+      s >= 3 ? '💪 Good. Review the "how many slots?" step once more.' :
+      '📖 Revisit the examples — the rule will click!';
+  }
+
+  function restartLesson() {
+    firstTry = {}; attempted = {};
+    document.querySelectorAll('input[type=number]').forEach(function(i) { i.value=''; i.disabled=false; i.className=''; });
+    document.querySelectorAll('.feedback').forEach(function(f) { f.className='feedback fb-hide'; f.innerHTML=''; });
+    ['next1','next2','next4','next5','next6'].forEach(function(id) { var el=document.getElementById(id); if(el) el.classList.add('hidden'); });
+    goTo(0);
+  }
+
+  buildDots();
+</script>
+</body>
+</html>
