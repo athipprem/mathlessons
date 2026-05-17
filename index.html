@@ -205,6 +205,33 @@
       pointer-events: none;
     }
 
+    /* ── Section divider ── */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 36px 0 20px;
+    }
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: #e0e0e0;
+      border-radius: 2px;
+    }
+    .section-divider-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #555;
+      white-space: nowrap;
+      padding: 6px 14px;
+      background: #eef2f8;
+      border-radius: 20px;
+    }
+
     /* ── Footer ── */
     footer {
       text-align: center;
@@ -246,32 +273,16 @@
 
 <main>
 
-  <!-- ── Art of Counting ── -->
+  <!-- ══════════════════════════════════════════
+       SECTION 1 — THIS WEEK
+       ══════════════════════════════════════════ -->
+  <div class="section-divider">
+    <div class="section-divider-label">📅 To Learn This Week</div>
+  </div>
+
   <div class="topic-section">
     <div class="topic-label">🔢 Art of Counting</div>
     <div class="card-grid">
-
-      <div class="lesson-card counting">
-        <div class="card-week">Week 3</div>
-        <div class="card-title">With &amp; Without Repeats</div>
-        <div class="card-desc">Learn when order matters and how to count arrangements using the box method.</div>
-        <div class="badge-row">
-          <span class="badge badge-new">Lesson: New</span>
-          <span class="badge badge-test-done">✓ Test 9/15</span>
-        </div>
-        <a class="btn-start" href="Counting_Lesson_WithWithoutRepeats.html">Start</a>
-      </div>
-
-      <div class="lesson-card counting">
-        <div class="card-week">Week 4</div>
-        <div class="card-title">Box Method: Positions vs Options</div>
-        <div class="card-desc">The golden rule — boxes = positions to fill, not the number of available options.</div>
-        <div class="badge-row">
-          <span class="badge badge-new">Lesson: New</span>
-          <span class="badge badge-test-done">✓ Test 14/15</span>
-        </div>
-        <a class="btn-start" href="Counting_Lesson_BoxMethod.html">Start</a>
-      </div>
 
       <div class="lesson-card counting">
         <div class="card-week">Week 5</div>
@@ -287,7 +298,6 @@
     </div>
   </div>
 
-  <!-- ── Number Theory ── -->
   <div class="topic-section">
     <div class="topic-label">🔍 Number Theory</div>
     <div class="card-grid">
@@ -303,6 +313,55 @@
         <a class="btn-start" href="NumberTheory_Lesson_LCM.html">Start</a>
       </div>
 
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 2 — COMPLETED
+       ══════════════════════════════════════════ -->
+  <div class="section-divider">
+    <div class="section-divider-label">✅ Completed Lessons</div>
+  </div>
+
+  <div class="topic-section">
+    <div class="topic-label">🔢 Art of Counting</div>
+    <div class="card-grid">
+
+      <div class="lesson-card counting">
+        <div class="card-week">Week 3</div>
+        <div class="card-title">With &amp; Without Repeats</div>
+        <div class="card-desc">Learn when order matters and how to count arrangements using the box method.</div>
+        <div class="badge-row">
+          <span class="badge badge-done">✓ Lesson Done</span>
+          <span class="badge badge-test-done">✓ Test 9/15</span>
+        </div>
+        <a class="btn-start" href="Counting_Lesson_WithWithoutRepeats.html">Review</a>
+      </div>
+
+      <div class="lesson-card counting">
+        <div class="card-week">Week 4</div>
+        <div class="card-title">Box Method: Positions vs Options</div>
+        <div class="card-desc">The golden rule — boxes = positions to fill, not the number of available options.</div>
+        <div class="badge-row">
+          <span class="badge badge-done">✓ Lesson Done</span>
+          <span class="badge badge-test-done">✓ Test 14/15</span>
+        </div>
+        <a class="btn-start" href="Counting_Lesson_BoxMethod.html">Review</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 3 — COMING SOON
+       ══════════════════════════════════════════ -->
+  <div class="section-divider">
+    <div class="section-divider-label">🔒 Coming Soon</div>
+  </div>
+
+  <div class="topic-section">
+    <div class="card-grid">
+
       <div class="lesson-card number coming">
         <div class="card-week">Coming Soon</div>
         <div class="card-title">Primes &amp; Divisibility</div>
@@ -311,14 +370,6 @@
         <a class="btn-start disabled" href="#">Coming Soon</a>
       </div>
 
-    </div>
-  </div>
-
-  <!-- ── Algebraic Thinking ── -->
-  <div class="topic-section">
-    <div class="topic-label">🔡 Algebraic Thinking</div>
-    <div class="card-grid">
-
       <div class="lesson-card algebra coming">
         <div class="card-week">Coming Soon</div>
         <div class="card-title">Multi-step Word Problems</div>
@@ -326,14 +377,6 @@
         <span class="badge badge-soon">Soon</span>
         <a class="btn-start disabled" href="#">Coming Soon</a>
       </div>
-
-    </div>
-  </div>
-
-  <!-- ── Arithmetic ── -->
-  <div class="topic-section">
-    <div class="topic-label">➕ Arithmetic</div>
-    <div class="card-grid">
 
       <div class="lesson-card arithmetic coming">
         <div class="card-week">Coming Soon</div>
