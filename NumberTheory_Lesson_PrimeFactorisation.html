@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Factorisation — Number Theory</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; min-height: 100vh; }
+
+    header { background: linear-gradient(135deg, #6a1b9a 0%, #9c27b0 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; white-space: nowrap; }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p  { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 18px 0 4px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+    .dot.active   { background: #6a1b9a; }
+    .dot.complete { background: #2e7d32; }
+
+    .screen { display: none; }
+    .screen.visible { display: block; }
+    .wrap { max-width: 660px; margin: 0 auto; padding: 28px 20px 60px; }
+
+    .card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .tag-purple { background: #f3e5f5; color: #6a1b9a; }
+    .tag-green  { background: #e8f5e9; color: #2e7d32; }
+    .tag-orange { background: #fff3e0; color: #e65100; }
+    .tag-red    { background: #ffebee; color: #c62828; }
+    .tag-blue   { background: #e3f2fd; color: #1565c0; }
+
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
+    p  { font-size: 0.95rem; color: #444; line-height: 1.65; margin-bottom: 10px; }
+    .hi        { color: #6a1b9a; font-weight: 700; }
+    .hi-blue   { color: #1565c0; font-weight: 700; }
+    .hi-green  { color: #2e7d32; font-weight: 700; }
+    .hi-orange { color: #e65100; font-weight: 700; }
+    .hint { font-size: 0.82rem; color: #888; }
+
+    /* Tree display */
+    .tree { font-family: monospace; font-size: 1rem; line-height: 1.9; background: #f9f9f9; border-radius: 10px; padding: 14px 18px; margin: 12px 0; color: #333; border: 1.5px solid #e0e0e0; white-space: pre; }
+
+    /* Prime chips */
+    .prime-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; align-items: center; }
+    .prime-chip { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 10px; font-size: 1.1rem; font-weight: 800; }
+    .p2 { background: #e3f2fd; color: #1565c0; border: 2px solid #90caf9; }
+    .p3 { background: #f3e5f5; color: #6a1b9a; border: 2px solid #ce93d8; }
+    .p5 { background: #fff3e0; color: #e65100; border: 2px solid #ffcc80; }
+    .p7 { background: #e8f5e9; color: #2e7d32; border: 2px solid #a5d6a7; }
+    .ptimes { font-size: 1.2rem; color: #aaa; font-weight: 700; }
+
+    /* Rule box */
+    .rule-box { border-left: 4px solid #6a1b9a; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.9rem; line-height: 1.7; }
+    .rule-box         { background: #f3e5f5; color: #3b0764; }
+    .rule-box b       { color: #6a1b9a; }
+    .rule-box.blue    { background: #e3f2fd; border-left-color: #1565c0; color: #1a3a6e; }
+    .rule-box.blue b  { color: #1565c0; }
+    .rule-box.green   { background: #e8f5e9; border-left-color: #2e7d32; color: #1b3a1b; }
+    .rule-box.green b { color: #2e7d32; }
+
+    /* Step line */
+    .step-line { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 0.92rem; color: #444; line-height: 1.55; }
+    .step-num { min-width: 26px; height: 26px; border-radius: 50%; background: #6a1b9a; color: white; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .step-num.green { background: #2e7d32; }
+
+    /* Input */
+    .input-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 4px; flex-wrap: wrap; }
+    .input-row label { font-size: 0.9rem; color: #555; flex: 1; min-width: 200px; line-height: 1.5; }
+    .input-row input { width: 84px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 700; border: 2px solid #ccc; border-radius: 10px; outline: none; }
+    .input-row input:focus { border-color: #6a1b9a; box-shadow: 0 0 0 3px rgba(106,27,154,0.15); }
+    .input-correct { border-color: #2e7d32 !important; background: #e8f5e9 !important; color: #1b5e20 !important; }
+    .input-wrong   { border-color: #c62828 !important; background: #ffebee !important; }
+
+    /* Multi-input row */
+    .multi-input { display: flex; align-items: center; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
+    .multi-input span { font-size: 1.1rem; color: #555; }
+    .mini-input { width: 60px; height: 44px; text-align: center; font-size: 1.2rem; font-weight: 700; border: 2px solid #ccc; border-radius: 8px; outline: none; }
+    .mini-input:focus { border-color: #6a1b9a; }
+
+    .feedback { font-size: 0.88rem; padding: 10px 14px; border-radius: 8px; margin: 6px 0; line-height: 1.5; }
+    .fb-ok   { background: #e8f5e9; color: #1b5e20; border: 1px solid #81c784; }
+    .fb-err  { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; }
+    .fb-hide { display: none; }
+
+    .divider { border: none; border-top: 1.5px solid #eee; margin: 14px 0; }
+    .hidden { display: none; }
+    .score-big { font-size: 3.2rem; font-weight: 800; color: #6a1b9a; text-align: center; padding: 1rem 0 0.5rem; }
+
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+    .btn { display: inline-flex; align-items: center; padding: 12px 22px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; cursor: pointer; border: 2px solid #ccc; background: white; color: #333; transition: background 0.15s; text-decoration: none; }
+    .btn:hover { background: #f0f0f0; }
+    .btn-primary { background: #6a1b9a; border-color: #6a1b9a; color: white; }
+    .btn-primary:hover { background: #4a148c; }
+    .btn-grey { background: #f5f5f5; border-color: #ddd; color: #555; }
+    .btn-grey:hover { background: #ebebeb; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div><a href="index.html">← All Lessons</a></div>
+  <div>
+    <h1>Prime Factorisation — Deep Drill</h1>
+    <p>Number Theory · Week 6</p>
+  </div>
+</header>
+
+<div class="dots" id="dots"></div>
+
+<div class="wrap">
+
+  <!-- ── Screen 0: Why this lesson exists ── -->
+  <div class="screen visible" id="s0">
+    <div class="card">
+      <span class="tag tag-red">Week 5 Gap</span>
+      <h2>Q7 and Q8 were both blank — here's why</h2>
+      <p>In Week 5 you left Q7 (prime factorisation of 36) and Q8 (LCM via prime factorisation) completely blank. But here's what's interesting:</p>
+      <p><strong>Q10</strong> — the hardest LCM question — you got <span class="hi-green">correct</span>. LCM(6, 9, 12) = 36 ✅</p>
+      <p>So you <em>can</em> do prime factorisation. The problem was you didn't recognise Q7 and Q8 as "use the factor tree" questions.</p>
+      <div class="rule-box blue">
+        <b>The trigger:</b> Any time a question says "prime factorisation", "factor tree", "write as a product of primes", or asks for LCM of numbers bigger than 20 → go straight to the factor tree.
+      </div>
+      <p>This lesson is about making that trigger automatic.</p>
+    </div>
+    <button class="btn btn-primary" onclick="goTo(1)">Let's drill it →</button>
+  </div>
+
+  <!-- ── Screen 1: Factor tree review ── -->
+  <div class="screen" id="s1">
+    <div class="card">
+      <span class="tag tag-purple">Quick Review — Factor Tree</span>
+      <h2>How to build a factor tree</h2>
+      <div class="step-line"><div class="step-num">1</div><div>Split the number into any two factors (not 1 and itself).</div></div>
+      <div class="step-line"><div class="step-num">2</div><div>Keep splitting each branch until every end is a prime.</div></div>
+      <div class="step-line"><div class="step-num">3</div><div>Collect all the primes at the ends — that's your answer.</div></div>
+
+      <p style="margin-top:12px"><strong>Example: 36</strong> — this was Q7 in Week 5</p>
+      <div class="tree">        36
+       /  \
+      4    9
+     / \  / \
+    2   2 3   3
+
+36 = 2 × 2 × 3 × 3 = 2² × 3²</div>
+      <div class="rule-box">
+        All four ends are prime ✓ &nbsp;→&nbsp; <b>36 = 2² × 3²</b>
+      </div>
+    </div>
+    <div class="card">
+      <span class="tag tag-purple">Your turn — Q7 from Week 5</span>
+      <h2>Prime factorisation of 36</h2>
+      <p>Using the tree above: 36 = 2<sup>?</sup> × 3<sup>?</sup></p>
+      <p>What is the power of 2? (how many 2s multiply together?)</p>
+      <div class="input-row">
+        <label>Power of 2 in 36 = 2 to the power of ?</label>
+        <input type="number" id="i1a" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f1a"></div>
+    </div>
+    <div class="card hidden" id="c1b">
+      <p>And the power of 3?</p>
+      <div class="input-row">
+        <label>Power of 3 in 36 = 3 to the power of ?</label>
+        <input type="number" id="i1b" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f1b"></div>
+    </div>
+    <div id="next1" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(2)">Next tree →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 2: Factor tree practice ── -->
+  <div class="screen" id="s2">
+    <div class="card">
+      <span class="tag tag-purple">Factor Tree Practice</span>
+      <h2>Build the factor tree for 48</h2>
+      <p>Here's one way to start — complete it yourself on paper:</p>
+      <div class="tree">        48
+       /  \
+      6    8
+     / \  / \
+    2   3 2   4
+             / \
+            2   2
+
+48 = 2 × 2 × 2 × 2 × 3 = 2⁴ × 3</div>
+      <div class="input-row">
+        <label>How many prime factors does 48 have in total? (count all: 2, 2, 2, 2, 3)</label>
+        <input type="number" id="i2" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f2"></div>
+    </div>
+    <div id="next2" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(3)">Now use it for LCM →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 3: LCM method recap ── -->
+  <div class="screen" id="s3">
+    <div class="card">
+      <span class="tag tag-blue">LCM via Prime Factorisation</span>
+      <h2>This was Q8 in Week 5 — let's nail it</h2>
+      <p><em>Find LCM(12, 18) using prime factorisation.</em></p>
+      <div class="step-line"><div class="step-num">1</div><div>Factorise both numbers.</div></div>
+      <div class="tree">12 = 2² × 3
+18 = 2  × 3²</div>
+      <div class="step-line"><div class="step-num">2</div><div>For each prime, take the <strong>highest power</strong> from either number.</div></div>
+      <div class="tree">Highest power of 2 → 2² = 4   (from 12)
+Highest power of 3 → 3² = 9   (from 18)</div>
+      <div class="step-line"><div class="step-num">3</div><div>Multiply the highest powers together.</div></div>
+      <div class="tree">LCM = 4 × 9 = 36</div>
+      <div class="rule-box">
+        Check: 36 ÷ 12 = 3 ✓ &nbsp;&nbsp; 36 ÷ 18 = 2 ✓ &nbsp;→&nbsp; <b>LCM(12, 18) = 36</b>
+      </div>
+    </div>
+    <div class="card">
+      <span class="tag tag-purple">Your turn</span>
+      <h2>Find LCM(12, 18) — answer</h2>
+      <div class="input-row">
+        <label>LCM(12, 18) = ?</label>
+        <input type="number" id="i3" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f3"></div>
+    </div>
+    <div id="next3" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(4)">Try a new one →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 4: Fresh LCM practice ── -->
+  <div class="screen" id="s4">
+    <div class="card">
+      <span class="tag tag-purple">LCM Practice — Fresh Numbers</span>
+      <h2>Find LCM(20, 30) using prime factorisation</h2>
+      <p>Step 1 — factorise both:</p>
+      <div class="tree">20 = 2² × 5
+30 = 2  × 3 × 5</div>
+      <p>Step 2 — highest powers:</p>
+      <div class="tree">Highest 2 → 2² = 4
+Highest 3 → 3¹ = 3
+Highest 5 → 5¹ = 5</div>
+      <p>Step 3 — LCM = 4 × 3 × 5 = ?</p>
+      <div class="input-row">
+        <label>LCM(20, 30) = ?</label>
+        <input type="number" id="i4" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f4"></div>
+    </div>
+    <div id="next4" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(5)">Word problem →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 5: Trigger recognition ── -->
+  <div class="screen" id="s5">
+    <div class="card">
+      <span class="tag tag-orange">Trigger Recognition</span>
+      <h2>Know when to use the factor tree</h2>
+      <div class="rule-box">
+        <b>Use the factor tree when you see:</b><br>
+        ✅ "Write the prime factorisation of ___"<br>
+        ✅ "Express as a product of prime factors"<br>
+        ✅ "Find LCM of ___ and ___ using prime factorisation"<br>
+        ✅ LCM of numbers &gt; 20 (listing gets slow)<br>
+        ✅ LCM of 3 or more numbers<br><br>
+        <b>Listing is fine when:</b><br>
+        ✅ Both numbers are small (under 15) and you can list quickly
+      </div>
+      <p><strong>Word problem — read and decide:</strong></p>
+      <p>Lights on a street blink on different cycles. Light A blinks every <strong>15 seconds</strong>, Light B every <strong>20 seconds</strong>. They blink together at the start. How many seconds until they next blink together?</p>
+      <div class="input-row">
+        <label>LCM(15, 20) = ? (use the factor tree method)</label>
+        <input type="number" id="i5" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f5"></div>
+      <div class="hint" style="margin-top:8px">15 = 3 × 5 &nbsp;|&nbsp; 20 = 2² × 5 &nbsp;→&nbsp; highest powers: 2² × 3 × 5 = ?</div>
+    </div>
+    <div id="next5" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(6)">Final challenge →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 6: Challenge ── -->
+  <div class="screen" id="s6">
+    <div class="card">
+      <span class="tag tag-orange">Challenge</span>
+      <h2>Find LCM(24, 36) — show every step</h2>
+      <p>Try it yourself on paper first, then type your answer.</p>
+      <div class="rule-box">
+        <b>Hint — factorise each:</b><br>
+        24 = ? &nbsp;&nbsp; 36 = ?<br>
+        Then take the highest power of each prime.
+      </div>
+      <div class="input-row">
+        <label>LCM(24, 36) = ?</label>
+        <input type="number" id="i6" placeholder="?">
+      </div>
+      <div class="feedback fb-hide" id="f6"></div>
+      <div class="hint" style="margin-top:8px">24 = 2³ × 3 &nbsp;|&nbsp; 36 = 2² × 3² &nbsp;→&nbsp; highest: 2³ × 3² = 8 × 9 = ?</div>
+    </div>
+    <div id="next6" class="hidden">
+      <button class="btn btn-primary" onclick="goTo(7)">See my results →</button>
+    </div>
+  </div>
+
+  <!-- ── Screen 7: Finish ── -->
+  <div class="screen" id="s7">
+    <div class="card">
+      <span class="tag tag-green">🎉 Lesson Complete!</span>
+      <h2>You finished Prime Factorisation!</h2>
+      <div class="score-big" id="final-score"></div>
+      <p style="text-align:center;color:#888;font-size:0.88rem" id="score-label"></p>
+      <hr class="divider">
+      <div class="rule-box green">
+        <b>3 things to remember:</b><br>
+        1️⃣ <b>Factor tree trigger:</b> "prime factorisation", "product of primes", LCM of big numbers → draw the tree immediately.<br>
+        2️⃣ <b>Tree rule:</b> keep splitting until every branch end is prime. Collect those primes.<br>
+        3️⃣ <b>LCM rule:</b> take the <b>highest power</b> of each prime that appears → multiply together.
+      </div>
+      <hr class="divider">
+      <div class="btn-row">
+        <button class="btn btn-grey" onclick="restartLesson()">Try again 🔄</button>
+        <a class="btn btn-primary" href="index.html">All Lessons →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  var NUM_SCREENS = 8;
+  var currentScreen = 0;
+  var firstTry = {};
+  var attempted = {};
+
+  function buildDots() {
+    var c = document.getElementById('dots');
+    c.innerHTML = '';
+    for (var i = 0; i < NUM_SCREENS; i++) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (i === currentScreen ? ' active' : '') + (i < currentScreen ? ' complete' : '');
+      c.appendChild(d);
+    }
+  }
+
+  function goTo(n) {
+    document.getElementById('s' + currentScreen).classList.remove('visible');
+    currentScreen = n;
+    document.getElementById('s' + currentScreen).classList.add('visible');
+    buildDots();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (n === 7) showFinish();
+  }
+
+  function check(inputId, feedbackId, correct, nextId, okMsg, errMsg, onCorrect) {
+    var inp = document.getElementById(inputId);
+    var fb  = document.getElementById(feedbackId);
+    if (inp.disabled) return;
+    var val = parseInt(inp.value, 10);
+    if (isNaN(val)) return;
+    if (val === correct) {
+      inp.classList.add('input-correct');
+      inp.disabled = true;
+      fb.className = 'feedback fb-ok';
+      fb.innerHTML = okMsg;
+      if (!attempted[inputId]) firstTry[inputId] = true;
+      attempted[inputId] = true;
+      if (onCorrect) onCorrect();
+      var nxt = document.getElementById(nextId);
+      if (nxt) nxt.classList.remove('hidden');
+    } else {
+      inp.classList.add('input-wrong');
+      fb.className = 'feedback fb-err';
+      fb.innerHTML = errMsg;
+      attempted[inputId] = true;
+      setTimeout(function() { inp.classList.remove('input-wrong'); }, 600);
+    }
+  }
+
+  // S1a: power of 2 in 36
+  document.getElementById('i1a').addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    check('i1a','f1a', 2, null,
+      '✅ Yes! 36 = 2 × 2 × 3 × 3, so two 2s → 2².',
+      '❌ Count the 2s in the tree: 2 × 2 × 3 × 3. How many 2s?',
+      function() { document.getElementById('c1b').classList.remove('hidden'); });
+  });
+
+  // S1b: power of 3 in 36
+  document.getElementById('i1b').addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    check('i1b','f1b', 2, 'next1',
+      '✅ Correct! Two 3s → 3². So 36 = 2² × 3². This was Q7 — now you\'ve got it!',
+      '❌ Count the 3s: 2 × 2 × 3 × 3. How many 3s?');
+  });
+
+  // S2: 5 prime factors in 48
+  document.getElementById('i2').addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    check('i2','f2', 5, 'next2',
+      '✅ Right! 2, 2, 2, 2, 3 — five prime factors (with repeats). 48 = 2⁴ × 3.',
+      '❌ Count every prime at the bottom of the tree: 2, 2, 2, 2, 3 = ?');
+  });
+
+  // S3: LCM(12,18)
+  document.getElementById('i3').addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    check('i3','f3', 36, 'next3',
+      '✅ LCM(12, 18) = 36. Highest powers: 2² × 3² = 4 × 9 = 36. Check: 36÷12=3 ✓ 36÷18=2 ✓',
+      '❌ Take highest power of 2 (that\'s 2²=4 from 12) and highest power of 3 (that\'s 3²=9 from 18). Multiply: 4 × 9 = ?');
+  });
+
+  // S4: LCM(20,30)
+  document.getElementById('i4').addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    check('i4','f4', 60, 'next4',
+      '✅ LCM(20, 30) = 60. 2² × 3 × 5 = 4 × 3 × 5 = 60. Check: 60÷20=3 ✓ 60÷30=2 ✓',
+      '❌ Highest powers: 2²=4, 3¹=3, 5¹=5. Multiply: 4 × 3 × 5 = ?');
+  });
+
+  // S5: LCM(15,20)
+  document.getElementById('i5').addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    check('i5','f5', 60, 'next5',
+      '✅ LCM(15, 20) = 60. 2² × 3 × 5 = 4 × 3 × 5 = 60. The lights blink together after 60 seconds.',
+      '❌ 15=3×5, 20=2²×5. Highest: 2²×3×5 = 4×15 = ?');
+  });
+
+  // S6: LCM(24,36)
+  document.getElementById('i6').addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    check('i6','f6', 72, 'next6',
+      '✅ LCM(24, 36) = 72. 24=2³×3, 36=2²×3². Highest: 2³×3² = 8×9 = 72. Check: 72÷24=3 ✓ 72÷36=2 ✓',
+      '❌ 24=2³×3, 36=2²×3². Highest power of 2 is 2³=8. Highest power of 3 is 3²=9. 8×9=?');
+  });
+
+  function showFinish() {
+    var keys = ['i1a','i1b','i2','i3','i4','i5','i6'];
+    var s = 0;
+    for (var k = 0; k < keys.length; k++) { if (firstTry[keys[k]]) s++; }
+    document.getElementById('final-score').textContent = s + ' / ' + keys.length;
+    document.getElementById('score-label').textContent =
+      s === keys.length ? '🏆 Perfect! Factor trees are locked in.' :
+      s >= 6 ? '⭐ Excellent — almost there!' :
+      s >= 4 ? '💪 Good effort. Review the highest-power step.' :
+      '📖 Revisit the examples and try once more.';
+  }
+
+  function restartLesson() {
+    firstTry = {}; attempted = {};
+    document.querySelectorAll('input[type=number]').forEach(function(i) { i.value=''; i.disabled=false; i.className=''; });
+    document.querySelectorAll('.feedback').forEach(function(f) { f.className='feedback fb-hide'; f.innerHTML=''; });
+    ['next1','next2','next3','next4','next5','next6','c1b'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) { if (id === 'c1b') el.classList.add('hidden'); else el.classList.add('hidden'); }
+    });
+    goTo(0);
+  }
+
+  buildDots();
+</script>
+</body>
+</html>
