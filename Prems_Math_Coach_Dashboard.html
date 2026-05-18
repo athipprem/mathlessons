@@ -9,6 +9,18 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f6fb; color: #1a1a2e; font-size: 14px; line-height: 1.5; }
 
+  /* PASSWORD OVERLAY */
+  #pw-overlay { position:fixed; inset:0; background:rgba(15,20,40,0.92); display:flex; align-items:center; justify-content:center; z-index:9999; backdrop-filter:blur(4px); }
+  #pw-overlay.hidden { display:none; }
+  .pw-box { background:#fff; border-radius:18px; padding:36px 32px 30px; width:320px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,0.35); }
+  .pw-box h2 { font-size:1.4rem; color:#1565c0; margin-bottom:6px; }
+  .pw-box p { font-size:0.85rem; color:#718096; margin-bottom:20px; }
+  .pw-input { width:100%; padding:11px 14px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; outline:none; margin-bottom:10px; transition:border-color 0.2s; }
+  .pw-input:focus { border-color:#1565c0; }
+  .pw-btn { width:100%; padding:11px; background:linear-gradient(135deg,#1565c0,#1e88e5); color:white; border:none; border-radius:10px; font-size:1rem; font-weight:600; cursor:pointer; }
+  .pw-btn:hover { opacity:0.92; }
+  .pw-error { font-size:0.8rem; color:#e53e3e; margin-top:8px; min-height:16px; }
+
   .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%); color: white; padding: 28px 32px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
   .header-left h1 { font-size: 22px; font-weight: 700; }
   .header-left p { font-size: 12px; color: #a0aec0; margin-top: 3px; }
@@ -148,6 +160,19 @@
 </style>
 </head>
 <body>
+
+<!-- PASSWORD GATE -->
+<div id="pw-overlay">
+  <div class="pw-box">
+    <div style="font-size:2.2rem;margin-bottom:10px">📊</div>
+    <h2>Coach Dashboard</h2>
+    <p>Enter the password to continue</p>
+    <input class="pw-input" id="pw-input" type="password" placeholder="Password"
+           onkeydown="if(event.key==='Enter') checkDashPw()">
+    <button class="pw-btn" onclick="checkDashPw()">Unlock →</button>
+    <div class="pw-error" id="pw-error"></div>
+  </div>
+</div>
 
 <div class="header">
   <div class="header-left">
@@ -455,6 +480,37 @@
 </div>
 
 <script>
+// ── Dashboard password gate ────────────────────────────────────────────────
+// Same hash & sessionStorage key as index.html — shared session = one unlock
+var DASH_PW_HASH = '151e06e680ff58b6a02780877e3e2d8c447b968f959abf2983044bb6c7a2b2ab';
+
+if (sessionStorage.getItem('unlocked') === 'yes') {
+  document.getElementById('pw-overlay').classList.add('hidden');
+} else {
+  document.getElementById('pw-input').focus();
+}
+
+function hashString(str) {
+  return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(function(buf) {
+    return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+  });
+}
+
+function checkDashPw() {
+  var entered = document.getElementById('pw-input').value;
+  hashString(entered).then(function(hash) {
+    if (hash === DASH_PW_HASH) {
+      sessionStorage.setItem('unlocked', 'yes');
+      document.getElementById('pw-overlay').classList.add('hidden');
+    } else {
+      document.getElementById('pw-error').textContent = 'Wrong password. Try again!';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  });
+}
+// ──────────────────────────────────────────────────────────────────────────
+
 (function() {
   var svg = document.getElementById('radarSvg');
   var cx = 160, cy = 135, r = 96;
