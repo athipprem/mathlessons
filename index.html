@@ -475,4 +475,66 @@
 </footer>
 
 <script>
-  // ── Password gate ─────────────────────────────────────────────�
+  // Password gate
+  var PW_HASH = '151e06e680ff58b6a02780877e3e2d8c447b968f959abf2983044bb6c7a2b2ab';
+
+  if (sessionStorage.getItem('unlocked') === 'yes') {
+    document.getElementById('pw-overlay').classList.add('hidden');
+  }
+
+  function hashString(str) {
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(function(buf) {
+      return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+    });
+  }
+
+  function checkPassword() {
+    var entered = document.getElementById('pw-input').value;
+    hashString(entered).then(function(hash) {
+      if (hash === PW_HASH) {
+        sessionStorage.setItem('unlocked', 'yes');
+        document.getElementById('pw-overlay').classList.add('hidden');
+      } else {
+        document.getElementById('pw-error').textContent = 'Wrong password. Try again!';
+        document.getElementById('pw-input').value = '';
+        document.getElementById('pw-input').focus();
+      }
+    });
+  }
+
+  function openDashboard() {
+    var url = 'Prems_Math_Coach_Dashboard.html';
+    if (sessionStorage.getItem('unlocked') === 'yes') {
+      url += '?hub=' + Date.now();
+    }
+    window.open(url, '_blank');
+  }
+
+  // Time to ISA 2027 progress bar (live)
+  (function() {
+    var start   = new Date('2026-05-14');
+    var isaDate = new Date('2027-02-26');
+    var now     = new Date();
+    var totalMs   = isaDate - start;
+    var elapsedMs = now - start;
+    var pct       = Math.min(100, Math.max(0, (elapsedMs / totalMs) * 100));
+    var msLeft    = isaDate - now;
+    var weeksLeft = Math.ceil(msLeft / (7 * 24 * 60 * 60 * 1000));
+    var daysLeft  = Math.ceil(msLeft / (24 * 60 * 60 * 1000));
+    document.getElementById('time-bar').style.width = pct.toFixed(1) + '%';
+    document.getElementById('weeks-left-stat').textContent = weeksLeft + ' wks left';
+    document.getElementById('time-label').textContent =
+      daysLeft + ' days to ISA 2027  ·  ' + pct.toFixed(0) + '% of prep time elapsed';
+  })();
+
+  // Skills achievement bar -- update SKILL_PCT each unit after radar review
+  // Unit 5: current sum=528, target sum=677 => 78%
+  (function() {
+    var SKILL_PCT = 78;
+    document.getElementById('skill-bar').style.width  = SKILL_PCT + '%';
+    document.getElementById('skill-stat').textContent = SKILL_PCT + '%';
+  })();
+</script>
+
+</body>
+</html>
