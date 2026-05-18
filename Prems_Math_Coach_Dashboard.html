@@ -484,7 +484,13 @@
 // Same hash & sessionStorage key as index.html — shared session = one unlock
 var DASH_PW_HASH = '151e06e680ff58b6a02780877e3e2d8c447b968f959abf2983044bb6c7a2b2ab';
 
-if (sessionStorage.getItem('unlocked') === 'yes') {
+// Check 1: already unlocked in this tab
+// Check 2: came from index.html with a fresh timestamp token (within 15 seconds)
+var hubToken = new URLSearchParams(window.location.search).get('hub');
+var tokenValid = hubToken && (Date.now() - parseInt(hubToken, 10)) < 15000;
+
+if (sessionStorage.getItem('unlocked') === 'yes' || tokenValid) {
+  sessionStorage.setItem('unlocked', 'yes');   // carry the session forward in this tab
   document.getElementById('pw-overlay').classList.add('hidden');
 } else {
   document.getElementById('pw-input').focus();
