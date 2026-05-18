@@ -268,7 +268,7 @@
 <!-- ── Tab navigation ── -->
 <div class="tab-nav">
   <button class="tab-btn active">📚 Lessons</button>
-  <a class="tab-btn" href="Prems_Math_Coach_Dashboard.html" target="_blank">📊 Dashboard ↗</a>
+  <a class="tab-btn" href="#" onclick="openDashboard();return false;">📊 Dashboard ↗</a>
 </div>
 
 <main>
@@ -444,6 +444,14 @@
       var bytes = Array.from(new Uint8Array(buffer));
       return bytes.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
     });
+  }
+
+  function openDashboard() {
+    var url = 'Prems_Math_Coach_Dashboard.html';
+    if (sessionStorage.getItem('unlocked') === 'yes') {
+      url += '?hub=' + Date.now();   // timestamp token — valid for 15 s on dashboard
+    }
+    window.open(url, '_blank');
   }
 
   function checkPassword() {
