@@ -3,161 +3,182 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prem's Math Coach — Dashboard</title>
+<title>Prem's Math Coach Dashboard</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
-  :root { color-scheme: light; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f6fb; color: #1a1a2e; font-size: 14px; line-height: 1.5; }
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f8; color: #1a1a2e; font-size: 13px; line-height: 1.5; height: 100vh; overflow: hidden; }
 
-  /* PASSWORD OVERLAY */
-  #pw-overlay { position:fixed; inset:0; background:rgba(15,20,40,0.92); display:flex; align-items:center; justify-content:center; z-index:9999; backdrop-filter:blur(4px); }
-  #pw-overlay.hidden { display:none; }
-  .pw-box { background:#fff; border-radius:18px; padding:36px 32px 30px; width:320px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,0.35); }
-  .pw-box h2 { font-size:1.4rem; color:#1565c0; margin-bottom:6px; }
-  .pw-box p { font-size:0.85rem; color:#718096; margin-bottom:20px; }
-  .pw-input { width:100%; padding:11px 14px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; outline:none; margin-bottom:10px; transition:border-color 0.2s; }
-  .pw-input:focus { border-color:#1565c0; }
-  .pw-btn { width:100%; padding:11px; background:linear-gradient(135deg,#1565c0,#1e88e5); color:white; border:none; border-radius:10px; font-size:1rem; font-weight:600; cursor:pointer; }
-  .pw-btn:hover { opacity:0.92; }
-  .pw-error { font-size:0.8rem; color:#e53e3e; margin-top:8px; min-height:16px; }
+/* PASSWORD OVERLAY */
+#pw-overlay { position:fixed; inset:0; background:rgba(15,20,40,0.92); display:flex; align-items:center; justify-content:center; z-index:9999; backdrop-filter:blur(4px); }
+#pw-overlay.hidden { display:none; }
+.pw-box { background:#fff; border-radius:18px; padding:36px 32px 30px; width:320px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,0.35); }
+.pw-box h2 { font-size:1.4rem; color:#1565c0; margin-bottom:6px; }
+.pw-box p { font-size:0.85rem; color:#718096; margin-bottom:20px; }
+.pw-input { width:100%; padding:11px 14px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; outline:none; margin-bottom:10px; transition:border-color 0.2s; }
+.pw-input:focus { border-color:#1565c0; }
+.pw-btn { width:100%; padding:11px; background:linear-gradient(135deg,#1565c0,#1e88e5); color:white; border:none; border-radius:10px; font-size:1rem; font-weight:600; cursor:pointer; }
+.pw-btn:hover { opacity:0.92; }
+.pw-error { font-size:0.8rem; color:#e53e3e; margin-top:8px; min-height:16px; }
 
-  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%); color: white; padding: 28px 32px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  .header-left h1 { font-size: 22px; font-weight: 700; }
-  .header-left p { font-size: 12px; color: #a0aec0; margin-top: 3px; }
-  .header-badges { display: flex; gap: 8px; flex-wrap: wrap; }
-  .badge { border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 500; }
-  .badge.gold { background: rgba(255,196,0,0.2); border: 1px solid rgba(255,196,0,0.4); color: #ffd700; }
-  .badge.green { background: rgba(72,187,120,0.2); border: 1px solid rgba(72,187,120,0.4); color: #68d391; }
-  .badge.orange { background: rgba(246,153,63,0.25); border: 1px solid rgba(246,153,63,0.5); color: #fbd38d; }
+/* APP SHELL */
+#app { display:flex; height:100vh; overflow:hidden; }
 
-  .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+/* SIDEBAR */
+#sidebar { width:64px; background:#0f3460; display:flex; flex-direction:column; align-items:center; padding:14px 0; gap:4px; flex-shrink:0; }
+.sb-logo { width:38px; height:38px; border-radius:12px; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; font-size:18px; margin-bottom:12px; }
+.sb-btn { width:44px; height:44px; border-radius:10px; border:none; background:transparent; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:rgba(255,255,255,0.45); transition:all 0.15s; position:relative; }
+.sb-btn:hover { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.8); }
+.sb-btn.active { background:rgba(255,255,255,0.18); color:white; }
+.sb-btn .sb-icon { font-size:18px; line-height:1; }
+.sb-btn .sb-lbl { font-size:7.5px; font-weight:600; letter-spacing:0.3px; text-transform:uppercase; opacity:0.8; }
+.sb-divider { width:28px; height:1px; background:rgba(255,255,255,0.12); margin:6px 0; }
+.sb-spacer { flex:1; }
+.sb-btn.back-btn { color:rgba(255,255,255,0.35); font-size:11px; }
 
-  .card { background: white; border-radius: 12px; padding: 20px 22px; box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04); border: 1px solid #e8edf5; }
-  .card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #718096; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
-  .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+/* MAIN AREA */
+#main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
 
-  /* STAT ROW */
-  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
-  .stat-box { background: white; border-radius: 10px; padding: 14px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #e8edf5; text-align: center; }
-  .stat-box .medal { font-size: 26px; margin-bottom: 4px; }
-  .stat-box .comp-name { font-size: 10px; color: #718096; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-  .stat-box .result { font-size: 14px; font-weight: 700; color: #1a1a2e; margin: 4px 0 2px; }
-  .stat-box .sub { font-size: 11px; color: #667eea; font-weight: 600; }
+/* TOPBAR */
+#topbar { background:#fff; border-bottom:1px solid #e8edf5; padding:0 20px; height:52px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+#topbar-title { font-size:15px; font-weight:700; color:#1a1a2e; }
+#topbar-sub { font-size:11px; color:#718096; margin-left:10px; }
+.topbar-right { display:flex; align-items:center; gap:12px; }
+.tb-badge { border-radius:20px; padding:3px 10px; font-size:11px; font-weight:600; }
+.tb-gold   { background:rgba(255,196,0,0.15); border:1px solid rgba(255,196,0,0.35); color:#b7791f; }
+.tb-orange { background:#fff5e6; border:1px solid #fbd38d; color:#c05621; }
+.tb-blue   { background:#e3f2fd; border:1px solid #90caf9; color:#1565c0; }
+.tb-silver { background:#f5f5f5; border:1px solid #9e9e9e; color:#424242; }
+.tb-purple { background:#f3e5f5; border:1px solid #ce93d8; color:#6a1b9a; }
+.tb-link { font-size:11px; color:#667eea; text-decoration:none; font-weight:600; }
+.tb-link:hover { text-decoration:underline; }
 
-  /* SCORE TREND */
-  .trend-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-  .trend-box { background: white; border-radius: 10px; padding: 14px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #e8edf5; display: flex; align-items: center; gap: 12px; }
-  .tcircle { width: 54px; height: 54px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; color: white; }
-  .tcircle .n { font-size: 18px; font-weight: 800; line-height: 1; }
-  .tcircle .d { font-size: 10px; opacity: 0.85; }
-  .trend-body strong { display: block; font-size: 12px; color: #1a1a2e; }
-  .trend-body span { font-size: 11px; color: #718096; }
-  .trend-delta { font-size: 13px; font-weight: 800; margin-left: auto; }
+/* HERO STATS */
+#hero { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; padding:14px 20px; background:#fff; border-bottom:1px solid #e8edf5; flex-shrink:0; }
+.hero-box { background:#f7f9fd; border-radius:10px; padding:10px 14px; border:1px solid #e8edf5; }
+.hero-val { font-size:22px; font-weight:800; color:#1a1a2e; line-height:1.1; }
+.hero-lbl { font-size:10px; color:#718096; margin-top:2px; font-weight:600; text-transform:uppercase; letter-spacing:0.4px; }
+.hero-sub { font-size:10px; font-weight:600; margin-top:1px; }
 
-  /* Q TABLE */
-  .q-table { width: 100%; border-collapse: collapse; font-size: 11px; }
-  .q-table th { text-align: left; padding: 4px 6px; color: #718096; font-weight: 700; border-bottom: 1px solid #edf2f7; font-size: 10px; text-transform: uppercase; }
-  .q-table td { padding: 4px 6px; border-bottom: 1px solid #f7fafc; vertical-align: top; }
-  .q-table tr:last-child td { border-bottom: none; }
-  .q-pass { color: #276749; font-weight: 700; }
-  .q-fail { color: #c53030; font-weight: 700; }
-  .lw { background: #f0fff4; color: #276749; font-size: 10px; padding: 1px 5px; border-radius: 6px; font-weight: 600; white-space: nowrap; }
-  .lm { background: #ebf4ff; color: #2b6cb0; font-size: 10px; padding: 1px 5px; border-radius: 6px; font-weight: 600; white-space: nowrap; }
-  .lh { background: #faf5ff; color: #6b46c1; font-size: 10px; padding: 1px 5px; border-radius: 6px; font-weight: 600; white-space: nowrap; }
+/* CONTENT AREA */
+#content { flex:1; overflow-y:auto; padding:20px; }
+.panel { display:none; }
+.panel.active { display:block; }
 
-  /* GAPS */
-  .gap-item { margin-bottom: 11px; }
-  .gap-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-  .gap-label { font-size: 13px; font-weight: 600; color: #1a1a2e; }
-  .gap-score { font-size: 11px; color: #718096; }
-  .gap-bar { height: 8px; background: #edf2f7; border-radius: 4px; overflow: hidden; }
-  .gap-fill { height: 100%; border-radius: 4px; }
-  .g1 { background: linear-gradient(90deg, #fc4e4e, #ff7675); }
-  .g2 { background: linear-gradient(90deg, #f6993f, #fdcb6e); }
-  .g3 { background: linear-gradient(90deg, #667eea, #764ba2); }
-  .gs { background: linear-gradient(90deg, #43e97b, #38f9d7); }
-  .gh { background: #e2e8f0; }
-  .gpill { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 8px; text-transform: uppercase; }
-  .p1 { background: #fff5f5; color: #c53030; }
-  .p2 { background: #fffaf0; color: #c05621; }
-  .p3 { background: #ebf4ff; color: #2b6cb0; }
-  .ps { background: #f0fff4; color: #276749; }
-  .ph { background: #f7fafc; color: #a0aec0; }
+/* SECTION LABELS */
+.sec-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#a0aec0; margin:0 0 10px; }
 
-  /* SESSION LOG */
-  .session-item { display: grid; grid-template-columns: 58px 1fr auto; gap: 10px; align-items: start; padding: 10px 0; border-bottom: 1px solid #f0f4f8; }
-  .session-item:last-child { border-bottom: none; }
-  .wk-badge { border-radius: 8px; padding: 6px 4px; text-align: center; font-size: 12px; font-weight: 700; line-height: 1.3; color: white; }
-  .wk-badge .wk { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; }
-  .session-body strong { display: block; font-size: 13px; color: #1a1a2e; margin-bottom: 3px; }
-  .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 3px; }
-  .tag { font-size: 11px; padding: 2px 7px; border-radius: 10px; font-weight: 500; }
-  .tg { background: #edf2f7; color: #4a5568; }
-  .tgreen { background: #f0fff4; color: #276749; }
-  .tpurple { background: #faf5ff; color: #6b46c1; }
-  .torange { background: #fff5e6; color: #c05621; }
-  .tblue { background: #ebf4ff; color: #2b6cb0; }
-  .tred { background: #fff5f5; color: #c53030; }
-  .snote { font-size: 11px; color: #718096; }
-  .sstatus { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 10px; white-space: nowrap; }
-  .sdone { background: #f0fff4; color: #276749; }
-  .sready { background: #ebf4ff; color: #2b6cb0; }
-  .sup { background: #f7fafc; color: #718096; }
+/* CARDS */
+.card { background:#fff; border-radius:12px; padding:18px 20px; border:1px solid #e8edf5; margin-bottom:16px; }
+.card-hd { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#718096; margin-bottom:14px; display:flex; align-items:center; gap:6px; }
+.dot { width:6px; height:6px; border-radius:50%; display:inline-block; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
 
-  /* PLAN */
-  .plan-item { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0f4f8; }
-  .plan-item:last-child { border-bottom: none; }
-  .pnum { width: 22px; height: 22px; border-radius: 50%; background: #667eea; color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-  .plan-item strong { display: block; font-size: 13px; color: #1a1a2e; }
-  .plan-item span { font-size: 12px; color: #718096; }
+/* SCORE BAR CHART */
+.bar-chart { display:flex; align-items:flex-end; gap:8px; height:80px; padding-bottom:0; }
+.bc-unit { display:flex; flex-direction:column; align-items:center; flex:1; }
+.bc-bar-wrap { height:60px; display:flex; align-items:flex-end; justify-content:center; width:100%; flex-shrink:0; }
+.bc-bar { width:100%; max-width:32px; border-radius:4px 4px 0 0; transition:height 0.3s; }
+.bc-score { font-size:9px; font-weight:700; color:#1a1a2e; margin-top:3px; }
+.bc-lbl { font-size:9px; color:#718096; margin-top:1px; }
+.bc-delta { font-size:8px; font-weight:700; margin-top:1px; }
 
-  /* TASKS */
-  .task-item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0f4f8; }
-  .task-item:last-child { border-bottom: none; }
-  .tcheck { width: 18px; height: 18px; border: 2px solid #cbd5e0; border-radius: 4px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-  .tcheck.done { background: #667eea; border-color: #667eea; color: white; font-size: 11px; }
-  .task-text { font-size: 13px; color: #2d3748; flex: 1; }
-  .task-text.done-text { text-decoration: line-through; color: #a0aec0; }
-  .owner { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; flex-shrink: 0; }
-  .oc { color: #6b46c1; background: #faf5ff; }
-  .op { color: #276749; background: #f0fff4; }
-  .ol { color: #c05621; background: #fff5e6; }
+/* GAPS */
+.gap-item { margin-bottom:12px; }
+.gap-item:last-child { margin-bottom:0; }
+.gap-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+.gap-label { font-size:12px; font-weight:600; color:#1a1a2e; }
+.gap-score { font-size:11px; color:#718096; margin-bottom:4px; }
+.gap-bar { height:7px; background:#edf2f7; border-radius:4px; overflow:hidden; }
+.gap-fill { height:100%; border-radius:4px; }
+.g1 { background:#fc4e4e; } .g2 { background:#f6993f; } .g3 { background:#667eea; } .gs { background:#43e97b; }
+.gpill { font-size:10px; font-weight:700; padding:2px 7px; border-radius:8px; text-transform:uppercase; }
+.p1 { background:#fff5f5; color:#c53030; } .p2 { background:#fffaf0; color:#c05621; }
+.ps { background:#f0fff4; color:#276749; } .ph { background:#f7fafc; color:#a0aec0; }
 
-  /* RADAR */
-  .chart-wrap { display: flex; align-items: center; justify-content: center; }
-  .radar-legend { display: flex; gap: 16px; justify-content: center; margin-top: 8px; }
-  .radar-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #4a5568; }
+/* INSIGHT BOX */
+.insight { border-radius:10px; padding:11px 14px; margin-top:12px; }
+.insight.orange { background:#fff8e1; border:1px solid #fbd38d; }
+.insight.green { background:#f0fff4; border:1px solid #c6f6d5; }
+.insight.blue { background:#ebf8ff; border:1px solid #bee3f8; }
+.insight-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:4px; }
+.il-orange { color:#c05621; } .il-green { color:#276749; } .il-blue { color:#2b6cb0; }
+.insight p { font-size:11px; color:#4a5568; line-height:1.6; }
 
-  /* INSIGHT */
-  .insight { border-radius: 10px; padding: 12px 14px; margin-top: 12px; }
-  .insight.blue { background: linear-gradient(135deg,#667eea11,#764ba211); border: 1px solid #667eea33; }
-  .insight.green { background: linear-gradient(135deg,#43e97b11,#38f9d711); border: 1px solid #43e97b33; }
-  .insight.orange { background: linear-gradient(135deg,#f6993f11,#fdcb6e11); border: 1px solid #f6993f33; }
-  .insight-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 4px; }
-  .il-blue { color: #667eea; }
-  .il-green { color: #276749; }
-  .il-orange { color: #c05621; }
-  .insight p { font-size: 12px; color: #4a5568; line-height: 1.6; }
+/* Q TABLE */
+.q-table { width:100%; border-collapse:collapse; font-size:11px; }
+.q-table th { text-align:left; padding:4px 6px; color:#718096; font-weight:700; border-bottom:1px solid #edf2f7; font-size:10px; text-transform:uppercase; }
+.q-table td { padding:4px 6px; border-bottom:1px solid #f7fafc; vertical-align:top; }
+.q-table tr:last-child td { border-bottom:none; }
+.q-pass { color:#276749; font-weight:700; } .q-fail { color:#c53030; font-weight:700; }
+.lw { background:#f0fff4; color:#276749; font-size:10px; padding:1px 5px; border-radius:6px; font-weight:600; white-space:nowrap; }
+.lm { background:#ebf4ff; color:#2b6cb0; font-size:10px; padding:1px 5px; border-radius:6px; font-weight:600; white-space:nowrap; }
+.lh { background:#faf5ff; color:#6b46c1; font-size:10px; padding:1px 5px; border-radius:6px; font-weight:600; white-space:nowrap; }
 
-  /* TIMELINE */
-  .timeline-bar { background: #edf2f7; border-radius: 8px; height: 12px; margin: 10px 0 6px; overflow: hidden; }
-  .timeline-fill { background: linear-gradient(90deg,#667eea,#764ba2); height: 100%; border-radius: 8px; width: 8%; }
-  .timeline-labels { display: flex; justify-content: space-between; font-size: 11px; color: #718096; }
-  .tm { display: flex; justify-content: space-between; font-size: 12px; margin-top: 10px; padding: 8px 12px; background: #f7fafc; border-radius: 8px; }
-  .tm span:first-child { color: #4a5568; font-weight: 500; }
-  .tm span:last-child { color: #667eea; font-weight: 700; }
+/* SESSION LOG */
+.session-item { display:grid; grid-template-columns:56px 1fr auto; gap:10px; align-items:start; padding:10px 0; border-bottom:1px solid #f0f4f8; }
+.session-item:last-child { border-bottom:none; }
+.ut-badge { border-radius:8px; padding:6px 4px; text-align:center; font-size:13px; font-weight:800; line-height:1.3; color:white; }
+.ut-badge .ut { font-size:8px; text-transform:uppercase; letter-spacing:0.5px; opacity:0.8; }
+.session-body strong { display:block; font-size:12px; color:#1a1a2e; margin-bottom:3px; }
+.tags { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:3px; }
+.tag { font-size:10px; padding:2px 7px; border-radius:10px; font-weight:600; }
+.tgreen { background:#f0fff4; color:#276749; } .tpurple { background:#faf5ff; color:#6b46c1; }
+.torange { background:#fff5e6; color:#c05621; } .tblue { background:#ebf4ff; color:#2b6cb0; }
+.tred { background:#fff5f5; color:#c53030; }
+.snote { font-size:10px; color:#718096; }
+.sstatus { font-size:10px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; }
+.sdone { background:#f0fff4; color:#276749; } .sready { background:#ebf4ff; color:#2b6cb0; }
 
-  /* LESSONS */
-  .lesson-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f0f4f8; }
-  .lesson-item:last-child { border-bottom: none; }
-  .lesson-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg,#667eea,#764ba2); color: white; font-size: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .lesson-body strong { display: block; font-size: 13px; color: #1a1a2e; margin-bottom: 2px; }
-  .lesson-body span { font-size: 12px; color: #718096; }
+/* RADAR */
+.chart-wrap { display:flex; align-items:center; justify-content:center; }
+.radar-legend { display:flex; gap:16px; justify-content:center; margin-top:8px; }
+.radar-legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:#4a5568; }
 
-  .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a0aec0; margin: 24px 0 12px; }
-  @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } .stat-row, .trend-row { grid-template-columns: 1fr 1fr; } }
+/* SKILL BARS */
+.skill-row { display:flex; align-items:center; gap:8px; margin-bottom:7px; }
+.skill-name { font-size:11px; color:#4a5568; width:96px; flex-shrink:0; }
+.skill-track { flex:1; height:8px; background:#edf2f7; border-radius:4px; overflow:hidden; }
+.skill-fill { height:100%; border-radius:4px; }
+.skill-pct { font-size:10px; font-weight:700; color:#4a5568; width:30px; text-align:right; }
+.skill-gap { font-size:9px; color:#a0aec0; width:36px; text-align:right; }
+
+/* COMPETITION STAT BOXES */
+.comp-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.comp-box { background:#f7f9fd; border:1px solid #e8edf5; border-radius:10px; padding:14px 12px; text-align:center; }
+.comp-box .medal { font-size:24px; margin-bottom:4px; }
+.comp-name { font-size:9px; color:#718096; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; }
+.comp-result { font-size:13px; font-weight:700; color:#1a1a2e; margin:3px 0 2px; }
+.comp-sub { font-size:10px; color:#667eea; font-weight:600; }
+
+/* TIMELINE */
+.timeline-bar { background:#edf2f7; border-radius:8px; height:10px; margin:10px 0 6px; overflow:hidden; }
+.timeline-fill { height:100%; width:12%; background:linear-gradient(90deg,#667eea,#764ba2); border-radius:8px; }
+.timeline-labels { display:flex; justify-content:space-between; font-size:10px; color:#718096; }
+.tm { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f0f4f8; font-size:12px; }
+.tm:last-child { border-bottom:none; }
+.tm span:last-child { color:#667eea; font-weight:700; }
+
+/* LESSONS */
+.lesson-item { display:flex; align-items:flex-start; gap:12px; padding:10px 0; border-bottom:1px solid #f0f4f8; }
+.lesson-item:last-child { border-bottom:none; }
+.lesson-icon { width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg,#667eea,#764ba2); color:white; font-size:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.lesson-body strong { display:block; font-size:12px; color:#1a1a2e; margin-bottom:2px; }
+.lesson-body span { font-size:11px; color:#718096; }
+.lesson-badge { font-size:10px; font-weight:600; color:#276749; background:#f0fff4; padding:3px 9px; border-radius:10px; white-space:nowrap; margin-left:auto; flex-shrink:0; align-self:center; }
+
+/* TASKS */
+.task-item { display:flex; align-items:flex-start; gap:10px; padding:7px 0; border-bottom:1px solid #f0f4f8; }
+.task-item:last-child { border-bottom:none; }
+.tcheck { width:16px; height:16px; border-radius:4px; border:2px solid #cbd5e0; cursor:pointer; flex-shrink:0; margin-top:1px; display:flex; align-items:center; justify-content:center; font-size:10px; }
+.tcheck.done { background:#276749; border-color:#276749; color:white; }
+.task-text { flex:1; font-size:12px; color:#1a1a2e; }
+.task-text.done-text { text-decoration:line-through; color:#a0aec0; }
+.owner { font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; white-space:nowrap; flex-shrink:0; }
+.op { background:#faf5ff; color:#6b46c1; } .oc { background:#ebf4ff; color:#2b6cb0; }
+.task-divider { border-top:1px dashed #e2e8f0; margin:6px 0 4px; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:#cbd5e0; padding-top:6px; }
 </style>
 </head>
 <body>
@@ -165,344 +186,448 @@
 <!-- PASSWORD GATE -->
 <div id="pw-overlay">
   <div class="pw-box">
-    <div style="font-size:2.2rem;margin-bottom:10px">📊</div>
+    <div style="font-size:2.2rem;margin-bottom:10px">&#128202;</div>
     <h2>Coach Dashboard</h2>
     <p>Enter the password to continue</p>
     <input class="pw-input" id="pw-input" type="password" placeholder="Password"
            onkeydown="if(event.key==='Enter') checkDashPw()">
-    <button class="pw-btn" onclick="checkDashPw()">Unlock →</button>
+    <button class="pw-btn" onclick="checkDashPw()">Unlock &#8594;</button>
     <div class="pw-error" id="pw-error"></div>
   </div>
 </div>
 
-<div class="header">
-  <div class="header-left">
-    <h1>&#127919; Prem's Math Coach</h1>
-    <p>Grade 4 &rarr; Grade 5 &nbsp;|&nbsp; ISA 2027: Top 5% &nbsp;|&nbsp; Coach: Chusaki &nbsp;|&nbsp; Updated: 17 May 2026</p>
-  </div>
-  <div class="header-badges">
-    <span class="badge gold">&#129352; Kangaroo Silver 2026</span>
-    <span class="badge gold">&#129353; ASMOPSS Bronze 2025</span>
-    <span class="badge green">Top 10% Globally</span>
-    <span class="badge orange">W5: 9/15 &mdash; Partial perms + prime factorisation gaps</span>
-  </div>
-</div>
+<!-- APP SHELL -->
+<div id="app">
 
-<div class="container">
+  <!-- SIDEBAR -->
+  <nav id="sidebar">
+    <div class="sb-logo">&#127919;</div>
+    <button class="sb-btn active" onclick="showPanel('overview',this)" title="Overview">
+      <span class="sb-icon">&#128202;</span>
+      <span class="sb-lbl">Overview</span>
+    </button>
+    <button class="sb-btn" onclick="showPanel('skills',this)" title="Skills Radar">
+      <span class="sb-icon">&#127987;</span>
+      <span class="sb-lbl">Skills</span>
+    </button>
+    <button class="sb-btn" onclick="showPanel('sessions',this)" title="Session Log">
+      <span class="sb-icon">&#128203;</span>
+      <span class="sb-lbl">Sessions</span>
+    </button>
+    <button class="sb-btn" onclick="showPanel('results',this)" title="Unit Results">
+      <span class="sb-icon">&#128221;</span>
+      <span class="sb-lbl">Results</span>
+    </button>
+    <button class="sb-btn" onclick="showPanel('lessons',this)" title="Lessons Library">
+      <span class="sb-icon">&#128218;</span>
+      <span class="sb-lbl">Lessons</span>
+    </button>
+    <div class="sb-spacer"></div>
+    <div class="sb-divider"></div>
+    <button class="sb-btn back-btn" onclick="window.location.href='index.html'" title="Back to Lessons">
+      <span class="sb-icon" style="font-size:14px">&#8592;</span>
+      <span class="sb-lbl">Index</span>
+    </button>
+  </nav>
 
-  <!-- COMPETITION STANDING -->
-  <div class="section-label">&#128202; Competition Standing</div>
-  <div class="stat-row">
-    <div class="stat-box"><div class="medal">&#128221;</div><div class="comp-name">ISA 2026</div><div class="result">~600 pts</div><div class="sub">90th+ percentile</div></div>
-    <div class="stat-box"><div class="medal">&#129353;</div><div class="comp-name">ASMOPSS 2025</div><div class="result">Bronze</div><div class="sub">94th percentile nationally</div></div>
-    <div class="stat-box"><div class="medal">&#129352;</div><div class="comp-name">Kangaroo 2026</div><div class="result">Silver</div><div class="sub">Above avg all categories</div></div>
-    <div class="stat-box"><div class="medal">&#127885;</div><div class="comp-name">SASMO 2026</div><div class="result">Hon. Mention</div><div class="sub">8,515 students, 40 countries</div></div>
-  </div>
+  <!-- MAIN AREA -->
+  <div id="main">
 
-  <!-- SCORE TREND -->
-  <div class="section-label">&#128200; Score Trend</div>
-  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px">
-    <div class="trend-box">
-      <div class="tcircle" style="background:linear-gradient(135deg,#a0aec0,#718096)"><span class="n">6</span><span class="d">/15</span></div>
-      <div class="trend-body"><strong>Unit 1</strong><span>Counting &middot; Arith &middot; NT</span></div>
-    </div>
-    <div class="trend-box" style="border-color:#c6f6d5">
-      <div class="tcircle" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"><span class="n">12</span><span class="d">/15</span></div>
-      <div class="trend-body"><strong>Unit 2</strong><span>Algebra &middot; Arith &middot; Counting</span></div>
-      <span class="trend-delta" style="color:#43e97b">+6 &#11014;</span>
-    </div>
-    <div class="trend-box" style="border-color:#fbd38d">
-      <div class="tcircle" style="background:linear-gradient(135deg,#f6993f,#fdcb6e)"><span class="n">9</span><span class="d">/15</span></div>
-      <div class="trend-body"><strong>Unit 3</strong><span>Counting 1/5</span></div>
-      <span class="trend-delta" style="color:#f6993f">&minus;3 &#11015;</span>
-    </div>
-    <div class="trend-box" style="border-color:#667eea">
-      <div class="tcircle" style="background:linear-gradient(135deg,#667eea,#764ba2)"><span class="n">14</span><span class="d">/15</span></div>
-      <div class="trend-body"><strong>Unit 4 &#127775;</strong><span>Algebra 5/5 &middot; Arith 5/5</span></div>
-      <span class="trend-delta" style="color:#667eea">+5 &#11014;</span>
-    </div>
-    <div class="trend-box" style="border-color:#fbd38d">
-      <div class="tcircle" style="background:linear-gradient(135deg,#f6993f,#fdcb6e)"><span class="n">9</span><span class="d">/15</span></div>
-      <div class="trend-body"><strong>Unit 5</strong><span>Factorial 2/5 &middot; LCM 3/5</span></div>
-      <span class="trend-delta" style="color:#f6993f">&minus;5 &#11015;</span>
-    </div>
-  </div>
-  <div style="background:#fff8e1;border:1px solid #fbd38d;border-radius:10px;padding:11px 14px;font-size:12px;color:#744210;margin-bottom:20px">
-    <strong>&#128269; Unit 5 analysis:</strong> Partial permutations not grasped &mdash; Q2, Q3, Q5 all used full n! instead of stopping after k slots (2/5 Factorials). Q7 &amp; Q8 blank &mdash; prime factorisation method not applied despite lesson. LCM by listing correct (Q6, Q9 ✓). Challenge Q10 LCM(6,9,12)=36 correct ✓. Algebra 4/5 &mdash; Q12 divided instead of multiplied when undoing "give half."
-  </div>
-
-  <!-- WEEK 5 RESULTS + GAPS -->
-  <div class="section-label">&#128203; Unit 5 Results &amp; Priority Gaps</div>
-  <div class="grid-2">
-
-    <div class="card">
-      <div class="card-title"><span class="dot" style="background:#f6993f"></span>Unit 5 &mdash; Question Breakdown (9/15)</div>
-      <div style="background:#fff8e1;border:1px solid #fbd38d;border-radius:8px;padding:9px 12px;margin-bottom:10px;font-size:12px;color:#744210">
-        <strong>Factorials 2/5 &middot; LCM 3/5 &middot; Algebra 4/5.</strong> Partial permutation rule not yet grasped. Q7 &amp; Q8 blank despite lesson. Q10 challenge correct &#127775;.
+    <!-- TOPBAR -->
+    <div id="topbar">
+      <div style="display:flex;align-items:baseline;gap:0">
+        <span id="topbar-title">Overview</span>
+        <span id="topbar-sub">&nbsp;&mdash;&nbsp;Unit 6 in progress &nbsp;|&nbsp; Coach: Chusaki &nbsp;|&nbsp; Updated: 18 May 2026</span>
       </div>
-      <table class="q-table">
-        <tr><th>Q</th><th>Topic</th><th>Lvl</th><th>Result</th><th>Note</th></tr>
-        <tr><td>Q1</td><td>Factorials &mdash; 5 friends in a row (5!)</td><td><span class="lw">Warm</span></td><td class="q-pass">&#10003;</td><td>5&times;4&times;3&times;2&times;1=120, clean</td></tr>
-        <tr><td>Q2</td><td>Factorials &mdash; pick 2 books from 4, in order</td><td><span class="lw">Warm</span></td><td class="q-fail">&#10007;</td><td>Got 24 (4!), correct 12 (4&times;3) &mdash; used all 4 slots not 2</td></tr>
-        <tr><td>Q3</td><td>Factorials &mdash; 6 students, top 3 places</td><td><span class="lm">Med</span></td><td class="q-fail">&#10007;</td><td>Got 720 (6!), correct 120 (6&times;5&times;4) &mdash; didn't stop after 3 slots</td></tr>
-        <tr><td>Q4</td><td>Factorials &mdash; 5 trophies, gold fixed in middle</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>4&times;3&times;2&times;1=24 &#10003;</td></tr>
-        <tr><td>Q5</td><td>Factorials &mdash; 4-digit password, 2 ends fixed</td><td><span class="lh">Hard</span></td><td class="q-fail">&#10007;</td><td>Got 24, correct 12 (1&times;4&times;3&times;1) &mdash; ignored fixed ends</td></tr>
-        <tr><td>Q6</td><td>LCM &mdash; LCM(4, 10) by listing</td><td><span class="lw">Warm</span></td><td class="q-pass">&#10003;</td><td>Listed correctly &rarr; 20</td></tr>
-        <tr><td>Q7</td><td>LCM &mdash; prime factorisation of 36</td><td><span class="lw">Warm</span></td><td class="q-fail">&#10007;</td><td>Blank &mdash; factor tree attempted but no answer written</td></tr>
-        <tr><td>Q8</td><td>LCM &mdash; LCM(12, 18) via prime factorisation</td><td><span class="lm">Med</span></td><td class="q-fail">&#10007;</td><td>Blank &mdash; method not applied</td></tr>
-        <tr><td>Q9</td><td>LCM &mdash; bell word problem LCM(6, 8)</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>10:24 am &#10003;</td></tr>
-        <tr><td>Q10</td><td>LCM &mdash; 3-bus challenge LCM(6, 9, 12)</td><td><span class="lh">Hard</span></td><td class="q-pass">&#10003;</td><td>&#127775; 2&sup2;&times;3&sup2;=36 &mdash; correct!</td></tr>
-        <tr><td>Q11</td><td>Algebra &mdash; think of a number (&times;3, &minus;7=20)</td><td><span class="lw">Warm</span></td><td class="q-pass">&#10003;</td><td>27&divide;3=9 &#10003;</td></tr>
-        <tr><td>Q12</td><td>Algebra &mdash; stickers, work backwards</td><td><span class="lw">Warm</span></td><td class="q-fail">&#10007;</td><td>Got 6, correct 24 &mdash; &divide;2 instead of &times;2 on reverse</td></tr>
-        <tr><td>Q13</td><td>Algebra &mdash; pencil box equation</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>20&minus;4=16, 16&divide;4=4 &#10003;</td></tr>
-        <tr><td>Q14</td><td>Algebra &mdash; 3 consecutive numbers sum to 48</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>15, 16, 17 &#10003;</td></tr>
-        <tr><td>Q15</td><td>Algebra &mdash; hens &amp; rabbits (20 heads, 56 legs)</td><td><span class="lh">Hard</span></td><td class="q-pass">&#10003;</td><td>&#127775; 12 hens, 8 rabbits &mdash; systematic trial &#10003;</td></tr>
-      </table>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><span class="dot" style="background:#fc4e4e"></span>Priority Gaps</div>
-
-      <div class="gap-item">
-        <div class="gap-header"><span class="gap-label">Partial Permutations (k slots from n)</span><span class="gpill p1">Priority 1</span></div>
-        <div class="gap-score">W5: 2/5 &mdash; Q2, Q3, Q5 all applied full n! instead of stopping after k picks. W6 lesson targets this directly.</div>
-        <div class="gap-bar"><div class="gap-fill g1" style="width:30%"></div></div>
-      </div>
-      <div class="gap-item">
-        <div class="gap-header"><span class="gap-label">Prime Factorisation Method</span><span class="gpill p1">Priority 1</span></div>
-        <div class="gap-score">W5: Q7 &amp; Q8 blank &mdash; trigger not recognised. Can do it (Q10 correct). W6 lesson drills the trigger.</div>
-        <div class="gap-bar"><div class="gap-fill g1" style="width:25%"></div></div>
-      </div>
-      <div class="gap-item">
-        <div class="gap-header"><span class="gap-label">Algebra &mdash; Work backwards &#10003;</span><span class="gpill ps">Strength</span></div>
-        <div class="gap-score">W4: 5/5 &middot; W5: 4/5 (one &divide;/&times; slip on Q12). Consistent strength overall.</div>
-        <div class="gap-bar"><div class="gap-fill gs" style="width:85%"></div></div>
-      </div>
-      <div class="gap-item">
-        <div class="gap-header"><span class="gap-label">Arithmetic &mdash; Fractions &#10003;</span><span class="gpill ps">Fixed &#11014;</span></div>
-        <div class="gap-score">W4: 5/5 &mdash; 3-step successive fractions correct. Locked in.</div>
-        <div class="gap-bar"><div class="gap-fill gs" style="width:88%"></div></div>
-      </div>
-      <div class="gap-item" style="margin-bottom:0">
-        <div class="gap-header"><span class="gap-label">Algebraic Thinking &#10003;</span><span class="gpill ps">Strength</span></div>
-        <div class="gap-score">W2: 5/5 &middot; W3: 4/5 &middot; W4: 5/5 &middot; W5: 4/5 &mdash; consistent. Hens &amp; rabbits challenge correct.</div>
-        <div class="gap-bar"><div class="gap-fill gs" style="width:88%"></div></div>
-      </div>
-
-      <div class="insight orange" style="margin-top:14px">
-        <div class="insight-label il-orange">&#128269; W5 Pattern &mdash; Same root, different forms</div>
-        <p><strong>One root cause, three misses:</strong> Q2, Q3, and Q5 all failed for the same reason &mdash; Prem applied full n! countdown without first asking &ldquo;how many slots am I filling?&rdquo; Q7 and Q8 were left blank despite Q10 (the hardest LCM) being correct &mdash; a trigger gap, not a skill gap. Unit 6 lessons target both: the &ldquo;how many slots?&rdquo; habit for partial permutations, and the recognition cue for prime factorisation.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- WEEK 5 DELIVERED + RADAR -->
-  <div class="section-label">&#128200; Unit 5 Delivered &amp; Skills Profile</div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title"><span class="dot" style="background:#43e97b"></span>Unit 5 Package &mdash; Ready for Prem</div>
-      <div style="font-size:11px;color:#276749;background:#f0fff4;border:1px solid #c6f6d5;border-radius:8px;padding:8px 12px;margin-bottom:12px">&#10003; Lessons built &middot; Test delivered &middot; All on-hold topics cleared</div>
-      <div class="plan-item">
-        <div class="pnum" style="background:#43e97b">&#10003;</div>
-        <div><strong>Counting &mdash; Factorials &amp; Permutations lesson</strong><br><span>8 screens. Bridges W4 Q5 miss &rarr; factorial notation &rarr; partial permutations &rarr; fixed positions. File: Counting_Lesson_Factorials.html</span></div>
-      </div>
-      <div class="plan-item">
-        <div class="pnum" style="background:#43e97b">&#10003;</div>
-        <div><strong>Number Theory &mdash; LCM &amp; Prime Factorisation lesson</strong><br><span>8 screens. Multiples &rarr; listing method &rarr; primes &rarr; factor tree &rarr; highest-power rule &rarr; 3-bus challenge. File: NumberTheory_Lesson_LCM.html</span></div>
-      </div>
-      <div class="plan-item" style="border-bottom:none">
-        <div class="pnum" style="background:#43e97b">&#10003;</div>
-        <div><strong>Unit 5 Test delivered</strong><br><span>15 Qs: Factorials (Q1&ndash;5) &middot; LCM (Q6&ndash;10) &middot; Algebra harder (Q11&ndash;15). File: Unit Tests\Unit_05_Test_Factorials_LCM_Algebra.docx</span></div>
+      <div class="topbar-right">
+        <span class="tb-badge tb-blue">&#128221; ISA 2026 &middot; 90th+ pct</span>
+        <span class="tb-badge tb-orange">&#129351; ASMOPSS 2025 &middot; Bronze</span>
+        <span class="tb-badge tb-silver">&#129352; Kangaroo 2026 &middot; Silver</span>
+        <span class="tb-badge tb-purple">&#127885; SASMO 2026 &middot; Hon. Mention</span>
+        <span class="tb-badge tb-gold">&#128221; Unit 5: 9/15 &mdash; gaps identified</span>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-title"><span class="dot" style="background:#43e97b"></span>Skills Radar</div>
-      <div class="chart-wrap">
-        <svg id="radarSvg" viewBox="0 0 320 265" width="320" height="265" xmlns="http://www.w3.org/2000/svg"></svg>
+    <!-- HERO STATS (always visible) -->
+    <div id="hero">
+      <div class="hero-box">
+        <div class="hero-val" style="color:#667eea">78%</div>
+        <div class="hero-lbl">Skills toward top 5%</div>
+        <div class="hero-sub" style="color:#667eea">See Skills panel for detail</div>
       </div>
-      <div class="radar-legend">
-        <div class="radar-legend-item"><svg width="12" height="12"><circle cx="6" cy="6" r="4" fill="#a0aec0"/></svg>Before Unit 1</div>
-        <div class="radar-legend-item"><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="#667eea"/></svg>Now (W5)</div>
-        <div class="radar-legend-item"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="#f6993f" stroke-width="2" stroke-dasharray="4,3"/></svg>Target (Top 5%)</div>
+      <div class="hero-box">
+        <div class="hero-val" style="color:#f6993f">9 / 15</div>
+        <div class="hero-lbl">Last unit score (Unit 5)</div>
+        <div class="hero-sub" style="color:#f6993f">&#11015; &minus;5 from Unit 4 (14/15)</div>
+      </div>
+      <div class="hero-box">
+        <div class="hero-val">5</div>
+        <div class="hero-lbl">Units completed</div>
+        <div class="hero-sub" style="color:#a0aec0">Unit 6 ready to start</div>
+      </div>
+      <div class="hero-box">
+        <div class="hero-val" id="weeks-left-hero">&#8212;</div>
+        <div class="hero-lbl">Weeks to ISA 2027</div>
+        <div class="hero-sub" style="color:#a0aec0" id="days-left-hero">calculating...</div>
       </div>
     </div>
-  </div>
 
-  <!-- SESSION LOG + TIMELINE -->
-  <div class="section-label">&#128211; Session Log &amp; Timeline</div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title"><span class="dot"></span>Weekly Sessions</div>
-      <div class="session-item">
-        <div class="wk-badge" style="background:#edf2f7;color:#a0aec0"><div class="wk">UT</div>06</div>
-        <div class="session-body">
-          <strong>Partial Permutations &middot; Prime Factorisation &middot; Algebra</strong>
-          <div class="tags"><span class="tag tblue">Lessons Ready</span><span class="tag tgreen">Test Delivered</span></div>
-          <div class="snote">Gap-close unit — targeting W5 Q2/Q3/Q5 (partial perms) and Q7/Q8 (prime factorisation)</div>
+    <!-- CONTENT PANELS -->
+    <div id="content">
+
+      <!-- PANEL: OVERVIEW -->
+      <div class="panel active" id="panel-overview">
+        <div class="grid-2">
+
+          <!-- Score bar chart + analysis -->
+          <div>
+            <div class="card">
+              <div class="card-hd"><span class="dot" style="background:#667eea"></span>Unit Score History</div>
+              <div class="bar-chart">
+                <div class="bc-unit">
+                  <div class="bc-bar-wrap"><div class="bc-bar" style="height:40%;background:#a0aec0"></div></div>
+                  <div class="bc-score">6</div><div class="bc-lbl">U1</div>
+                </div>
+                <div class="bc-unit">
+                  <div class="bc-bar-wrap"><div class="bc-bar" style="height:80%;background:#43e97b"></div></div>
+                  <div class="bc-score">12</div><div class="bc-delta" style="color:#43e97b">+6&#11014;</div><div class="bc-lbl">U2</div>
+                </div>
+                <div class="bc-unit">
+                  <div class="bc-bar-wrap"><div class="bc-bar" style="height:60%;background:#f6993f"></div></div>
+                  <div class="bc-score">9</div><div class="bc-delta" style="color:#f6993f">&#8722;3&#11015;</div><div class="bc-lbl">U3</div>
+                </div>
+                <div class="bc-unit">
+                  <div class="bc-bar-wrap"><div class="bc-bar" style="height:93%;background:#667eea"></div></div>
+                  <div class="bc-score">14&#127775;</div><div class="bc-delta" style="color:#667eea">+5&#11014;</div><div class="bc-lbl">U4</div>
+                </div>
+                <div class="bc-unit">
+                  <div class="bc-bar-wrap"><div class="bc-bar" style="height:60%;background:#f6993f"></div></div>
+                  <div class="bc-score">9</div><div class="bc-delta" style="color:#f6993f">&#8722;5&#11015;</div><div class="bc-lbl">U5</div>
+                </div>
+                <div class="bc-unit">
+                  <div class="bc-bar-wrap"><div class="bc-bar" style="height:5%;background:#e2e8f0;border:1px dashed #ccc;box-sizing:border-box"></div></div>
+                  <div class="bc-score" style="color:#a0aec0">?</div><div class="bc-lbl">U6</div>
+                </div>
+              </div>
+              <div class="insight orange" style="margin-top:14px">
+                <div class="insight-lbl il-orange">&#128269; Unit 5 pattern</div>
+                <p><strong>One root cause, three misses:</strong> Q2, Q3, Q5 all failed &mdash; Prem applied full n! without asking &ldquo;how many slots?&rdquo; Q7 &amp; Q8 blank despite Q10 (hardest) being correct &mdash; trigger gap, not skill gap. Unit 6 closes both.</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-hd"><span class="dot" style="background:#f6993f"></span>Action Items &mdash; Unit 6</div>
+              <div class="task-item"><div class="tcheck"></div><div class="task-text">Prem studies Unit 6 Partial Permutations lesson</div><span class="owner op">Prem</span></div>
+              <div class="task-item"><div class="tcheck"></div><div class="task-text">Prem studies Unit 6 Prime Factorisation lesson</div><span class="owner op">Prem</span></div>
+              <div class="task-item"><div class="tcheck"></div><div class="task-text">Prem completes Unit 6 test</div><span class="owner op">Prem</span></div>
+              <div class="task-item"><div class="tcheck"></div><div class="task-text">Analyse Unit 6 results &amp; update all 4 files</div><span class="owner oc">Chusaki</span></div>
+              <div class="task-divider">Completed</div>
+              <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Build Unit 6 lessons + test (Partial Perms + Prime Factorisation)</div><span class="owner oc">Chusaki</span></div>
+              <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Unit 5 test completed (9/15 &mdash; gaps identified)</div><span class="owner op">Prem</span></div>
+              <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Unit 4 test completed (14/15 &#11014; best score)</div><span class="owner op">Prem</span></div>
+            </div>
+          </div>
+
+          <!-- Priority gaps -->
+          <div>
+            <div class="card">
+              <div class="card-hd"><span class="dot" style="background:#fc4e4e"></span>Priority Gaps</div>
+              <div class="gap-item">
+                <div class="gap-header"><span class="gap-label">Partial Permutations (k slots)</span><span class="gpill p1">Priority 1</span></div>
+                <div class="gap-score">U5: 2/5 &mdash; Q2, Q3, Q5 used full n! instead of stopping after k picks</div>
+                <div class="gap-bar"><div class="gap-fill g1" style="width:30%"></div></div>
+              </div>
+              <div class="gap-item">
+                <div class="gap-header"><span class="gap-label">Prime Factorisation trigger</span><span class="gpill p1">Priority 1</span></div>
+                <div class="gap-score">U5: Q7 &amp; Q8 blank &mdash; method not triggered (Q10 correct, so skill exists)</div>
+                <div class="gap-bar"><div class="gap-fill g1" style="width:25%"></div></div>
+              </div>
+              <div class="gap-item">
+                <div class="gap-header"><span class="gap-label">Algebra &mdash; work backwards</span><span class="gpill ps">Strength</span></div>
+                <div class="gap-score">U4: 5/5 &middot; U5: 4/5 (one divide/multiply slip). Consistent.</div>
+                <div class="gap-bar"><div class="gap-fill gs" style="width:85%"></div></div>
+              </div>
+              <div class="gap-item">
+                <div class="gap-header"><span class="gap-label">Arithmetic &mdash; fractions</span><span class="gpill ps">Fixed &#11014;</span></div>
+                <div class="gap-score">U4: 5/5 &mdash; 3-step successive fractions correct. Locked in.</div>
+                <div class="gap-bar"><div class="gap-fill gs" style="width:88%"></div></div>
+              </div>
+              <div class="gap-item" style="margin-bottom:0">
+                <div class="gap-header"><span class="gap-label">Algebraic thinking</span><span class="gpill ps">Strength</span></div>
+                <div class="gap-score">U2: 5/5 &middot; U3: 4/5 &middot; U4: 5/5 &middot; U5: 4/5 &mdash; hens &amp; rabbits challenge correct.</div>
+                <div class="gap-bar"><div class="gap-fill gs" style="width:88%"></div></div>
+              </div>
+              <div class="insight green" style="margin-top:14px">
+                <div class="insight-lbl il-green">&#128200; Progress pattern</div>
+                <p>Prem learns fast when a concept is introduced well &mdash; Algebra clicked 5/5 in its first unit. The same systematic instinct that got the Challenge Qs in U1 will click for counting once the slot/box framework is automatic.</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-hd"><span class="dot" style="background:#f6993f"></span>Road to ISA 2027</div>
+              <div style="margin-bottom:14px">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+                  <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#4a5568">&#127919; Skills achievement</span>
+                  <span style="font-size:12px;font-weight:700;color:#b7791f">78%</span>
+                </div>
+                <div style="background:#edf2f7;border-radius:8px;height:10px;overflow:hidden">
+                  <div style="width:78%;height:100%;background:linear-gradient(90deg,#ffd700,#f6993f);border-radius:8px"></div>
+                </div>
+                <div style="font-size:10px;color:#718096;margin-top:3px;text-align:right">vs Top 5% target &nbsp;&middot;&nbsp; 78% achieved</div>
+              </div>
+              <div style="margin-bottom:14px">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+                  <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#4a5568">&#9202; Prep time elapsed</span>
+                  <span style="font-size:12px;font-weight:700;color:#667eea" id="ov-time-pct">...%</span>
+                </div>
+                <div style="background:#edf2f7;border-radius:8px;height:10px;overflow:hidden">
+                  <div style="height:100%;background:linear-gradient(90deg,#667eea,#764ba2);border-radius:8px" id="ov-time-bar"></div>
+                </div>
+                <div style="font-size:10px;color:#718096;margin-top:3px;text-align:right" id="ov-time-label">calculating...</div>
+              </div>
+              <div>
+                <div class="tm"><span>&#127942; ISA 2027 target</span><span>Top 5% Globally</span></div>
+                <div class="tm"><span>&#127885; Competition season</span><span>2026&ndash;27</span></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <span class="sstatus sready">&#128218; Ready</span>
       </div>
-      <div class="session-item">
-        <div class="wk-badge" style="background:linear-gradient(135deg,#f6993f,#fdcb6e)"><div class="wk">UT</div>05</div>
-        <div class="session-body">
-          <strong>Factorials &amp; Permutations &middot; LCM &middot; Algebraic Thinking</strong>
-          <div class="tags"><span class="tag torange">9/15</span><span class="tag tred">Factorial 2/5</span><span class="tag torange">LCM 3/5</span><span class="tag tgreen">Algebra 4/5</span></div>
-          <div class="snote">Partial permutations not grasped &mdash; full n! applied to all Qs. Q7 &amp; Q8 blank (prime factorisation).</div>
-        </div>
-        <span class="sstatus sdone">&#10003; Done</span>
-      </div>
-      <div class="session-item">
-        <div class="wk-badge" style="background:#667eea"><div class="wk">UT</div>04</div>
-        <div class="session-body">
-          <strong>Counting (positions fix) &middot; Algebra (work backwards) &middot; Fractions</strong>
-          <div class="tags"><span class="tag tpurple">14/15 &#127775; Best yet</span><span class="tag tpurple">Algebra 5/5</span><span class="tag tgreen">Arith 5/5</span></div>
-          <div class="snote">Counting 4/5 &mdash; Q5 miss = direct bridge to factorial (3&times;2&times;1)</div>
-        </div>
-        <span class="sstatus sdone">&#10003; Done</span>
-      </div>
-      <div class="session-item">
-        <div class="wk-badge" style="background:#f6993f"><div class="wk">UT</div>03</div>
-        <div class="session-body">
-          <strong>Algebra &middot; Arithmetic &middot; Counting (deeper)</strong>
-          <div class="tags"><span class="tag torange">9/15</span><span class="tag tgreen">Arith: 0 slips &#10003;</span><span class="tag tred">Counting: 1/5</span></div>
-          <div class="snote">Counting drop = one fixable misconception (positions vs options)</div>
-        </div>
-        <span class="sstatus sdone">&#10003; Done</span>
-      </div>
-      <div class="session-item">
-        <div class="wk-badge" style="background:#43e97b"><div class="wk">UT</div>02</div>
-        <div class="session-body">
-          <strong>Algebra &middot; Arithmetic &middot; Counting</strong>
-          <div class="tags"><span class="tag tgreen">12/15 &#11014;</span><span class="tag tpurple">Algebra 5/5 &#127775;</span></div>
-          <div class="snote">Keyword habit adopted &mdash; Q7 &amp; Q9 both correct</div>
-        </div>
-        <span class="sstatus sdone">&#10003; Done</span>
-      </div>
-      <div class="session-item">
-        <div class="wk-badge" style="background:#a0aec0"><div class="wk">UT</div>01</div>
-        <div class="session-body">
-          <strong>Counting &middot; Arithmetic &middot; Number Theory</strong>
-          <div class="tags"><span class="tag tgreen">6/15</span><span class="tag tpurple">Both Challenges &#10003;</span></div>
-        </div>
-        <span class="sstatus sdone">&#10003; Done</span>
-      </div>
-    </div>
 
-    <div class="card">
-      <div class="card-title"><span class="dot" style="background:#f6993f"></span>Road to ISA 2027</div>
-      <div class="timeline-bar"><div class="timeline-fill"></div></div>
-      <div class="timeline-labels"><span>Unit 1 (May 2026)</span><span>ISA 2027 (Feb 2027)</span></div>
-      <div style="margin-top:12px">
-        <div class="tm"><span>&#128197; Sessions completed</span><span>5 / ~36</span></div>
-        <div class="tm"><span>&#128197; Weeks remaining</span><span>~31 weeks</span></div>
-        <div class="tm"><span>&#127942; ISA 2027 Target</span><span>Top 5% Globally</span></div>
-        <div class="tm"><span>&#127885; Competition Season</span><span>2026&ndash;27</span></div>
+      <!-- PANEL: SKILLS -->
+      <div class="panel" id="panel-skills">
+        <div class="grid-2" style="margin-bottom:16px">
+          <div class="card">
+            <div class="card-hd"><span class="dot" style="background:#667eea"></span>Skills Radar</div>
+            <div class="chart-wrap">
+              <svg id="radarSvg" viewBox="0 0 320 270" width="320" height="270" xmlns="http://www.w3.org/2000/svg"></svg>
+            </div>
+            <div class="radar-legend">
+              <div class="radar-legend-item"><svg width="12" height="12"><circle cx="6" cy="6" r="4" fill="#a0aec0"/></svg>Before Unit 1</div>
+              <div class="radar-legend-item"><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="#667eea"/></svg>Now (U5)</div>
+              <div class="radar-legend-item"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="#f6993f" stroke-width="2" stroke-dasharray="4,3"/></svg>Target (Top 5%)</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-hd"><span class="dot" style="background:#43e97b"></span>Skill vs Target Breakdown</div>
+            <div style="margin-bottom:10px;font-size:10px;color:#718096">Current score / target score &mdash; 78% overall</div>
+            <div class="skill-row"><div class="skill-name">Logic &amp; Reasoning</div><div class="skill-track"><div class="skill-fill" style="width:94%;background:#43e97b"></div></div><div class="skill-pct">85</div><div class="skill-gap" style="color:#43e97b">+5</div></div>
+            <div class="skill-row"><div class="skill-name">Number Sense</div><div class="skill-track"><div class="skill-fill" style="width:98%;background:#43e97b"></div></div><div class="skill-pct">88</div><div class="skill-gap" style="color:#43e97b">+3</div></div>
+            <div class="skill-row"><div class="skill-name">Algebra</div><div class="skill-track"><div class="skill-fill" style="width:98%;background:#43e97b"></div></div><div class="skill-pct">88</div><div class="skill-gap" style="color:#43e97b">+13</div></div>
+            <div class="skill-row"><div class="skill-name">Arithmetic</div><div class="skill-track"><div class="skill-fill" style="width:94%;background:#43e97b"></div></div><div class="skill-pct">80</div><div class="skill-gap" style="color:#43e97b">+35</div></div>
+            <div class="skill-row"><div class="skill-name">Geometry</div><div class="skill-track"><div class="skill-fill" style="width:85%;background:#f6993f"></div></div><div class="skill-pct">72</div><div class="skill-gap" style="color:#f6993f">+4</div></div>
+            <div class="skill-row"><div class="skill-name">Counting</div><div class="skill-track"><div class="skill-fill" style="width:69%;background:#f6993f"></div></div><div class="skill-pct">55</div><div class="skill-gap" style="color:#f6993f">+35</div></div>
+            <div class="skill-row"><div class="skill-name">Number Theory</div><div class="skill-track"><div class="skill-fill" style="width:51%;background:#fc4e4e"></div></div><div class="skill-pct">42</div><div class="skill-gap" style="color:#fc4e4e">+7</div></div>
+            <div class="skill-row"><div class="skill-name">Applied Problems</div><div class="skill-track"><div class="skill-fill" style="width:22%;background:#fc4e4e"></div></div><div class="skill-pct">18</div><div class="skill-gap" style="color:#fc4e4e">+3</div></div>
+            <div style="margin-top:14px;padding:10px 12px;background:#f7f9fd;border-radius:8px;font-size:11px;color:#4a5568">
+              <strong>Target:</strong> [90,85,90,85,80,85,82,80] &mdash; sum 677 &nbsp;|&nbsp; <strong>Current:</strong> [85,72,88,88,55,80,42,18] &mdash; sum 528 &nbsp;|&nbsp; <strong>Achievement: 78%</strong>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><span class="dot" style="background:#ffd700"></span>Competition Standing</div>
+          <div class="comp-row">
+            <div class="comp-box"><div class="medal">&#128221;</div><div class="comp-name">ISA 2026</div><div class="comp-result">~600 pts</div><div class="comp-sub">90th+ percentile</div></div>
+            <div class="comp-box"><div class="medal">&#129353;</div><div class="comp-name">ASMOPSS 2025</div><div class="comp-result">Bronze</div><div class="comp-sub">94th percentile nationally</div></div>
+            <div class="comp-box"><div class="medal">&#129352;</div><div class="comp-name">Kangaroo 2026</div><div class="comp-result">Silver</div><div class="comp-sub">Above avg all categories</div></div>
+            <div class="comp-box"><div class="medal">&#127885;</div><div class="comp-name">SASMO 2026</div><div class="comp-result">Hon. Mention</div><div class="comp-sub">8,515 students, 40 countries</div></div>
+          </div>
+        </div>
       </div>
-      <div class="insight green">
-        <div class="insight-label il-green">&#128200; Progress Pattern</div>
-        <p>Prem learns fast when a concept is properly introduced &mdash; Algebra clicked 5/5 in its first unit. The listing instinct in Counting (Q13/Q15 W2, Q11&ndash;15 W3) is the same systematic thinking that got the Challenge Qs in W1. Redirect it with the slot/box framework and it will click the same way.</p>
-      </div>
-    </div>
-  </div>
 
-  <!-- LESSONS LIBRARY -->
-  <div class="section-label">&#128218; Lessons Library</div>
-  <div class="card">
-    <div class="card-title"><span class="dot" style="background:#764ba2"></span>Interactive Lessons &mdash; open index.html in Chrome</div>
-    <div class="lesson-item">
-      <div class="lesson-icon">&#128218;</div>
-      <div class="lesson-body">
-        <strong>Lessons Hub &mdash; index.html</strong>
-        <span>Password-protected hub with score tracker, topic performance bars, and all lesson cards. Update scores in weeklyResults array after each test.</span>
+      <!-- PANEL: SESSIONS -->
+      <div class="panel" id="panel-sessions">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-hd"><span class="dot"></span>Unit Log &mdash; newest first</div>
+            <div class="session-item">
+              <div class="ut-badge" style="background:#e2e8f0;color:#a0aec0"><div class="ut">UT</div>06</div>
+              <div class="session-body">
+                <strong>Partial Permutations &middot; Prime Factorisation &middot; Algebra</strong>
+                <div class="tags"><span class="tag tblue">Lessons Ready</span><span class="tag tgreen">Test Delivered</span></div>
+                <div class="snote">Gap-close unit &mdash; targets U5 Q2/Q3/Q5 (partial perms) + Q7/Q8 (prime factorisation)</div>
+              </div>
+              <span class="sstatus sready">&#128218; Ready</span>
+            </div>
+            <div class="session-item">
+              <div class="ut-badge" style="background:linear-gradient(135deg,#f6993f,#fdcb6e)"><div class="ut">UT</div>05</div>
+              <div class="session-body">
+                <strong>Factorials &amp; Permutations &middot; LCM &middot; Algebraic Thinking</strong>
+                <div class="tags"><span class="tag torange">9/15</span><span class="tag" style="background:#fff5f5;color:#c53030">Factorial 2/5</span><span class="tag torange">LCM 3/5</span><span class="tag tgreen">Algebra 4/5</span></div>
+                <div class="snote">Partial permutations not grasped &mdash; full n! on all Qs. Q7 &amp; Q8 blank.</div>
+              </div>
+              <span class="sstatus sdone">&#10003; Done</span>
+            </div>
+            <div class="session-item">
+              <div class="ut-badge" style="background:#667eea"><div class="ut">UT</div>04</div>
+              <div class="session-body">
+                <strong>Counting (positions fix) &middot; Algebra (work backwards) &middot; Fractions</strong>
+                <div class="tags"><span class="tag tpurple">14/15 &#127775;</span><span class="tag tpurple">Algebra 5/5</span><span class="tag tgreen">Arith 5/5</span></div>
+                <div class="snote">Q5 miss = direct bridge to factorial (3&times;2&times;1)</div>
+              </div>
+              <span class="sstatus sdone">&#10003; Done</span>
+            </div>
+            <div class="session-item">
+              <div class="ut-badge" style="background:#f6993f"><div class="ut">UT</div>03</div>
+              <div class="session-body">
+                <strong>Algebra &middot; Arithmetic &middot; Counting (deeper)</strong>
+                <div class="tags"><span class="tag torange">9/15</span><span class="tag tgreen">Arith: 0 slips</span><span class="tag" style="background:#fff5f5;color:#c53030">Counting: 1/5</span></div>
+                <div class="snote">Counting drop = positions vs options misconception (fixed in U4)</div>
+              </div>
+              <span class="sstatus sdone">&#10003; Done</span>
+            </div>
+            <div class="session-item">
+              <div class="ut-badge" style="background:#43e97b"><div class="ut">UT</div>02</div>
+              <div class="session-body">
+                <strong>Algebra &middot; Arithmetic &middot; Counting</strong>
+                <div class="tags"><span class="tag tgreen">12/15 &#11014;</span><span class="tag tpurple">Algebra 5/5 &#127775;</span></div>
+                <div class="snote">Keyword underlining habit adopted &mdash; Q7 &amp; Q9 both correct</div>
+              </div>
+              <span class="sstatus sdone">&#10003; Done</span>
+            </div>
+            <div class="session-item">
+              <div class="ut-badge" style="background:#a0aec0"><div class="ut">UT</div>01</div>
+              <div class="session-body">
+                <strong>Counting &middot; Arithmetic &middot; Number Theory</strong>
+                <div class="tags"><span class="tag tgreen">6/15</span><span class="tag tpurple">Both challenges &#10003;</span></div>
+                <div class="snote">LCM blank. Factorial not yet known. Strong on challenge logic.</div>
+              </div>
+              <span class="sstatus sdone">&#10003; Done</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-hd"><span class="dot" style="background:#f6993f"></span>ISA 2027 Timeline</div>
+            <div class="timeline-bar"><div class="timeline-fill"></div></div>
+            <div class="timeline-labels"><span>Unit 1 (May 2026)</span><span>ISA 2027 (Feb 2027)</span></div>
+            <div style="margin-top:12px">
+              <div class="tm"><span>&#128197; Units completed</span><span>5 / ~36</span></div>
+              <div class="tm"><span>&#128197; Weeks remaining</span><span id="tm-weeks-2">...</span></div>
+              <div class="tm"><span>&#127942; ISA 2027 target</span><span>Top 5% Globally</span></div>
+              <div class="tm"><span>&#127885; Competition season</span><span>2026&ndash;27</span></div>
+            </div>
+            <div class="insight blue" style="margin-top:14px">
+              <div class="insight-lbl il-blue">&#128200; Learning velocity</div>
+              <p>5 units, 5 weeks. Average score trending up despite hard-topic weeks (U5 dropped due to new concepts, not regression). Algebra and Number Sense are above target already.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <span style="font-size:11px;font-weight:600;color:#276749;background:#f0fff4;padding:3px 10px;border-radius:10px;white-space:nowrap;margin-left:10px">Live</span>
-    </div>
-    <div class="lesson-item">
-      <div class="lesson-icon">&#9651;</div>
-      <div class="lesson-body">
-        <strong>Counting &mdash; With &amp; Without Repeats</strong>
-        <span>Unit 3. Box method for repeats allowed vs no repeats. Step-locked, ~10&ndash;15 mins.</span>
-      </div>
-      <span style="font-size:11px;font-weight:600;color:#276749;background:#f0fff4;padding:3px 10px;border-radius:10px;white-space:nowrap;margin-left:10px">&#10003; Test 9/15</span>
-    </div>
-    <div class="lesson-item">
-      <div class="lesson-icon">&#9726;</div>
-      <div class="lesson-body">
-        <strong>Counting &mdash; Box Method (Positions vs Options)</strong>
-        <span>Unit 4. The golden rule: slots = positions, not options. Targets W3 Q11/12/14/15 root cause.</span>
-      </div>
-      <span style="font-size:11px;font-weight:600;color:#276749;background:#f0fff4;padding:3px 10px;border-radius:10px;white-space:nowrap;margin-left:10px">&#10003; Test 14/15</span>
-    </div>
-    <div class="lesson-item">
-      <div class="lesson-icon" style="background:linear-gradient(135deg,#1565c0,#1e88e5)">!</div>
-      <div class="lesson-body">
-        <strong>Counting &mdash; Factorials &amp; Permutations</strong>
-        <span>Unit 5. Bridges W4 Q5 miss &rarr; 5! notation &rarr; partial permutations &rarr; fixed positions &rarr; challenge. File: Counting_Lesson_Factorials.html</span>
-      </div>
-      <span style="font-size:11px;font-weight:600;color:#276749;background:#f0fff4;padding:3px 10px;border-radius:10px;white-space:nowrap;margin-left:10px">&#10003; Test 9/15</span>
-    </div>
-    <div class="lesson-item">
-      <div class="lesson-icon" style="background:linear-gradient(135deg,#6a1b9a,#9c27b0)">&#128270;</div>
-      <div class="lesson-body">
-        <strong>Number Theory &mdash; LCM &amp; Prime Factorisation</strong>
-        <span>Unit 5. Listing &rarr; primes &rarr; factor tree &rarr; highest-power rule &rarr; word problems &rarr; 3-bus challenge. File: NumberTheory_Lesson_LCM.html</span>
-      </div>
-      <span style="font-size:11px;font-weight:600;color:#276749;background:#f0fff4;padding:3px 10px;border-radius:10px;white-space:nowrap;margin-left:10px">&#10003; Test 9/15</span>
-    </div>
-  </div>
 
-  <!-- NEXT STEPS -->
-  <div class="section-label">&#9989; Next Steps</div>
-  <div class="card">
-    <div class="card-title"><span class="dot" style="background:#f6993f"></span>Action Items</div>
-    <div class="task-item"><div class="tcheck"></div><div class="task-text">Prem studies Unit 6 lessons (Partial Permutations + Prime Factorisation)</div><span class="owner op">Prem</span></div>
-    <div class="task-item"><div class="tcheck"></div><div class="task-text">Prem completes Unit 6 test</div><span class="owner op">Prem</span></div>
-    <div class="task-item"><div class="tcheck"></div><div class="task-text">Analyse Unit 6 results &amp; update all 4 files</div><span class="owner oc">Chusaki</span></div>
-    <div style="border-top:1px dashed #e2e8f0;margin:6px 0 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:#cbd5e0">Completed by Chusaki</div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Build Unit 6 lessons (Partial Permutations + Prime Factorisation) &amp; deliver test docx</div><span class="owner oc">Chusaki</span></div>
-    <div style="border-top:1px dashed #e2e8f0;margin:10px 0 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:#cbd5e0">Completed</div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Prem completes Unit 5 test (9/15 &mdash; partial perms + prime factorisation gaps identified)</div><span class="owner op">Prem</span></div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Analyse Unit 5 results &amp; update all 4 files</div><span class="owner oc">Chusaki</span></div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Build Unit 5 lessons (Factorials + LCM) &amp; deliver test docx</div><span class="owner oc">Chusaki</span></div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Restructure index.html (This Unit / Completed / Coming Soon)</div><span class="owner oc">Chusaki</span></div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Prem completes Unit 4 test (14/15 &#11014; Best score yet!)</div><span class="owner op">Prem</span></div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Analyse Unit 4 results &amp; update exec summary</div><span class="owner oc">Chusaki</span></div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Create &amp; deliver Unit 4 test + Box Method lesson</div><span class="owner oc">Chusaki</span></div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Prem completes Unit 3 test (9/15)</div><span class="owner op">Prem</span></div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Create &amp; deliver Unit 3 test + Counting lesson</div><span class="owner oc">Chusaki</span></div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Prem completes Unit 2 test (12/15 &#11014;)</div><span class="owner op">Prem</span></div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Create &amp; deliver Unit 2 test</div><span class="owner oc">Chusaki</span></div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Prem completes Unit 1 test (6/15)</div><span class="owner op">Prem</span></div>
-    <div class="task-item"><div class="tcheck done">&#10003;</div><div class="task-text done-text">Create &amp; deliver Unit 1 test</div><span class="owner oc">Chusaki</span></div>
-  </div>
+      <!-- PANEL: RESULTS -->
+      <div class="panel" id="panel-results">
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-hd"><span class="dot" style="background:#f6993f"></span>Unit 5 &mdash; Question Breakdown (9/15)</div>
+          <div style="background:#fff8e1;border:1px solid #fbd38d;border-radius:8px;padding:9px 12px;margin-bottom:12px;font-size:11px;color:#744210">
+            <strong>Factorials 2/5 &middot; LCM 3/5 &middot; Algebra 4/5.</strong> Partial permutation rule not yet grasped. Q7 &amp; Q8 blank despite lesson. Q10 challenge correct &#127775;.
+          </div>
+          <table class="q-table">
+            <tr><th>Q</th><th>Topic</th><th>Lvl</th><th>Result</th><th>Note</th></tr>
+            <tr><td>Q1</td><td>Factorials &mdash; 5 friends in a row (5!)</td><td><span class="lw">Warm</span></td><td class="q-pass">&#10003;</td><td>5&times;4&times;3&times;2&times;1=120, clean</td></tr>
+            <tr><td>Q2</td><td>Factorials &mdash; pick 2 books from 4, in order</td><td><span class="lw">Warm</span></td><td class="q-fail">&#10007;</td><td>Got 24 (4!), correct 12 (4&times;3) &mdash; used all 4 slots not 2</td></tr>
+            <tr><td>Q3</td><td>Factorials &mdash; 6 students, top 3 places</td><td><span class="lm">Med</span></td><td class="q-fail">&#10007;</td><td>Got 720 (6!), correct 120 (6&times;5&times;4) &mdash; did not stop after 3 slots</td></tr>
+            <tr><td>Q4</td><td>Factorials &mdash; 5 trophies, gold fixed in middle</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>4&times;3&times;2&times;1=24 &#10003;</td></tr>
+            <tr><td>Q5</td><td>Factorials &mdash; 4-digit password, 2 ends fixed</td><td><span class="lh">Hard</span></td><td class="q-fail">&#10007;</td><td>Got 24, correct 12 (1&times;4&times;3&times;1) &mdash; ignored fixed ends</td></tr>
+            <tr><td>Q6</td><td>LCM &mdash; LCM(4, 10) by listing</td><td><span class="lw">Warm</span></td><td class="q-pass">&#10003;</td><td>Listed correctly &rarr; 20</td></tr>
+            <tr><td>Q7</td><td>LCM &mdash; prime factorisation of 36</td><td><span class="lw">Warm</span></td><td class="q-fail">&#10007;</td><td>Blank &mdash; factor tree attempted but no answer written</td></tr>
+            <tr><td>Q8</td><td>LCM &mdash; LCM(12, 18) via prime factorisation</td><td><span class="lm">Med</span></td><td class="q-fail">&#10007;</td><td>Blank &mdash; method not applied</td></tr>
+            <tr><td>Q9</td><td>LCM &mdash; bell problem LCM(6, 8)</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>10:24 am &#10003;</td></tr>
+            <tr><td>Q10</td><td>LCM &mdash; 3-bus challenge LCM(6, 9, 12)</td><td><span class="lh">Hard</span></td><td class="q-pass">&#10003;</td><td>&#127775; 2&sup2;&times;3&sup2;=36 &mdash; correct!</td></tr>
+            <tr><td>Q11</td><td>Algebra &mdash; think of a number (&times;3, &minus;7=20)</td><td><span class="lw">Warm</span></td><td class="q-pass">&#10003;</td><td>27&divide;3=9 &#10003;</td></tr>
+            <tr><td>Q12</td><td>Algebra &mdash; stickers, work backwards</td><td><span class="lw">Warm</span></td><td class="q-fail">&#10007;</td><td>Got 6, correct 24 &mdash; divided instead of multiplied on reverse</td></tr>
+            <tr><td>Q13</td><td>Algebra &mdash; pencil box equation</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>20&minus;4=16, 16&divide;4=4 &#10003;</td></tr>
+            <tr><td>Q14</td><td>Algebra &mdash; 3 consecutive numbers sum to 48</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>15, 16, 17 &#10003;</td></tr>
+            <tr><td>Q15</td><td>Algebra &mdash; hens &amp; rabbits (20 heads, 56 legs)</td><td><span class="lh">Hard</span></td><td class="q-pass">&#10003;</td><td>&#127775; 12 hens, 8 rabbits &mdash; systematic trial &#10003;</td></tr>
+          </table>
+        </div>
+        <div class="insight orange">
+          <div class="insight-lbl il-orange">&#128269; Unit 5 pattern &mdash; same root, different forms</div>
+          <p><strong>One root cause, three misses:</strong> Q2, Q3, and Q5 all failed for the same reason &mdash; Prem applied full n! countdown without first asking "how many slots am I filling?" Q7 and Q8 were left blank despite Q10 (the hardest LCM) being correct &mdash; a trigger gap, not a skill gap. Unit 6 lessons target both: the "how many slots?" habit for partial permutations, and the recognition cue for prime factorisation.</p>
+        </div>
+      </div>
 
-  <div style="height:32px"></div>
-</div>
+      <!-- PANEL: LESSONS -->
+      <div class="panel" id="panel-lessons">
+        <div class="card">
+          <div class="card-hd"><span class="dot" style="background:#764ba2"></span>Lessons Library &mdash; open in Chrome from index.html</div>
+          <div class="lesson-item">
+            <div class="lesson-icon">&#128218;</div>
+            <div class="lesson-body">
+              <strong>Lessons Hub &mdash; index.html</strong>
+              <span>Password-protected hub with all lesson cards, progress bars, and dual ISA countdown. Open in Chrome.</span>
+            </div>
+            <span class="lesson-badge">Live</span>
+          </div>
+          <div class="lesson-item">
+            <div class="lesson-icon" style="background:linear-gradient(135deg,#1565c0,#1e88e5)">&#9633;</div>
+            <div class="lesson-body">
+              <strong>Counting &mdash; With &amp; Without Repeats</strong>
+              <span>Unit 3. Box method for repeats allowed vs no repeats. Step-locked, ~10&ndash;15 mins. File: Counting_Lesson_WithWithoutRepeats.html</span>
+            </div>
+            <span class="lesson-badge">&#10003; Test 9/15</span>
+          </div>
+          <div class="lesson-item">
+            <div class="lesson-icon" style="background:linear-gradient(135deg,#1565c0,#1e88e5)">&#9726;</div>
+            <div class="lesson-body">
+              <strong>Counting &mdash; Box Method (Positions vs Options)</strong>
+              <span>Unit 4. Golden rule: slots = positions, not options. Targets U3 Q11/12/14/15 root cause. File: Counting_Lesson_BoxMethod.html</span>
+            </div>
+            <span class="lesson-badge">&#10003; Test 14/15</span>
+          </div>
+          <div class="lesson-item">
+            <div class="lesson-icon" style="background:linear-gradient(135deg,#1565c0,#1e88e5)">!</div>
+            <div class="lesson-body">
+              <strong>Counting &mdash; Factorials &amp; Permutations</strong>
+              <span>Unit 5. Bridges U4 Q5 miss &rarr; factorial notation &rarr; partial permutations &rarr; fixed positions. File: Counting_Lesson_Factorials.html</span>
+            </div>
+            <span class="lesson-badge">&#10003; Test 9/15</span>
+          </div>
+          <div class="lesson-item">
+            <div class="lesson-icon" style="background:linear-gradient(135deg,#6a1b9a,#9c27b0)">&#128270;</div>
+            <div class="lesson-body">
+              <strong>Number Theory &mdash; LCM &amp; Prime Factorisation</strong>
+              <span>Unit 5. Listing &rarr; primes &rarr; factor trees &rarr; highest-power rule &rarr; 3-bus challenge. File: NumberTheory_Lesson_LCM.html</span>
+            </div>
+            <span class="lesson-badge">&#10003; Test 9/15</span>
+          </div>
+          <div class="lesson-item">
+            <div class="lesson-icon" style="background:linear-gradient(135deg,#1565c0,#1e88e5)">P</div>
+            <div class="lesson-body">
+              <strong>Counting &mdash; Partial Permutations</strong>
+              <span>Unit 6. Gap-close: "how many slots?" rule. Opens with U5 Q2 mistake side-by-side comparison. File: Counting_Lesson_PartialPermutations.html</span>
+            </div>
+            <span class="lesson-badge" style="background:#fff8e1;color:#c05621;">&#128218; Unit 6</span>
+          </div>
+          <div class="lesson-item">
+            <div class="lesson-icon" style="background:linear-gradient(135deg,#6a1b9a,#9c27b0)">&#128269;</div>
+            <div class="lesson-body">
+              <strong>Number Theory &mdash; Prime Factorisation (drill)</strong>
+              <span>Unit 6. Gap-close: trigger recognition for prime factorisation. Opens with U5 Q7/Q8 vs Q10 paradox. File: NumberTheory_Lesson_PrimeFactorisation.html</span>
+            </div>
+            <span class="lesson-badge" style="background:#fff8e1;color:#c05621;">&#128218; Unit 6</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /app -->
 
 <script>
-// ── Dashboard password gate ────────────────────────────────────────────────
-// Same hash & sessionStorage key as index.html — shared session = one unlock
+// PASSWORD GATE
 var DASH_PW_HASH = '151e06e680ff58b6a02780877e3e2d8c447b968f959abf2983044bb6c7a2b2ab';
-
-// Check 1: already unlocked in this tab
-// Check 2: came from index.html with a fresh timestamp token (within 15 seconds)
 var hubToken = new URLSearchParams(window.location.search).get('hub');
 var tokenValid = hubToken && (Date.now() - parseInt(hubToken, 10)) < 15000;
-
 if (sessionStorage.getItem('unlocked') === 'yes' || tokenValid) {
-  sessionStorage.setItem('unlocked', 'yes');   // carry the session forward in this tab
+  sessionStorage.setItem('unlocked', 'yes');
   document.getElementById('pw-overlay').classList.add('hidden');
 } else {
   document.getElementById('pw-input').focus();
 }
-
 function hashString(str) {
   return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(function(buf) {
     return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
   });
 }
-
 function checkDashPw() {
   var entered = document.getElementById('pw-input').value;
   hashString(entered).then(function(hash) {
@@ -516,57 +641,80 @@ function checkDashPw() {
     }
   });
 }
-// ──────────────────────────────────────────────────────────────────────────
 
+// SIDEBAR NAV
+var panelTitles = { overview:'Overview', skills:'Skills & Radar', sessions:'Session Log', results:'Unit Results', lessons:'Lessons Library' };
+function showPanel(name, btn) {
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.sb-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('panel-' + name).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('topbar-title').textContent = panelTitles[name] || name;
+  if (name === 'skills') buildRadar();
+}
+
+// LIVE COUNTDOWN
 (function() {
+  var start   = new Date('2026-05-14');
+  var isa     = new Date('2027-02-26');
+  var now     = new Date();
+  var msLeft  = isa - now;
+  var totalMs = isa - start;
+  var pct     = Math.min(100, Math.max(0, ((now - start) / totalMs) * 100));
+  var weeksLeft = Math.ceil(msLeft / (7*24*60*60*1000));
+  var daysLeft  = Math.ceil(msLeft / (24*60*60*1000));
+  document.getElementById('weeks-left-hero').textContent = weeksLeft;
+  document.getElementById('days-left-hero').textContent = daysLeft + ' days remaining';
+  if (document.getElementById('tm-weeks-2')) document.getElementById('tm-weeks-2').textContent = '~' + weeksLeft + ' weeks';
+  var ovBar = document.getElementById('ov-time-bar');
+  var ovPct = document.getElementById('ov-time-pct');
+  var ovLbl = document.getElementById('ov-time-label');
+  if (ovBar) ovBar.style.width = pct.toFixed(1) + '%';
+  if (ovPct) ovPct.textContent = pct.toFixed(0) + '%';
+  if (ovLbl) ovLbl.textContent = daysLeft + ' days left · ' + weeksLeft + ' weeks remaining';
+})();
+
+// TASK CHECKBOXES
+document.querySelectorAll('.tcheck:not(.done)').forEach(function(cb){
+  cb.addEventListener('click', function(){
+    cb.classList.toggle('on');
+    var txt = cb.nextElementSibling;
+    if (cb.classList.contains('on')) {
+      cb.textContent = '\u2713'; cb.style.cssText = 'background:#276749;border-color:#276749;color:white;';
+      txt.style.cssText = 'text-decoration:line-through;color:#a0aec0;';
+    } else {
+      cb.textContent = ''; cb.style.cssText = '';
+      txt.style.cssText = '';
+    }
+  });
+});
+
+// RADAR CHART (lazy-built when Skills panel opens)
+var radarBuilt = false;
+function buildRadar() {
+  if (radarBuilt) return;
+  radarBuilt = true;
   var svg = document.getElementById('radarSvg');
-  var cx = 160, cy = 135, r = 96;
+  var cx = 160, cy = 137, r = 96;
   var labels  = ['Logic &\nReasoning','Geometry','Number\nSense','Algebra','Counting','Arithmetic','Number\nTheory','Applied\nProblems'];
-
-  // Baseline: estimated from competition results BEFORE Unit 1
-  // Logic=80 (Kangaroo dominant), Geometry=68 (above avg), NumberSense=85 (Kangaroo 8/8),
-  // Algebra=75 (above avg Kangaroo), Counting=20 (SASMO 1 vs avg 2.38),
-  // Arithmetic=45 (SASMO 4 vs avg 7.65), NumberTheory=35 (SASMO 4 vs avg 7.65),
-  // Applied=15 (ASMOPSS 0/6 hard questions)
-  var baseline = [80, 68, 85, 75, 20, 45, 35, 15];
-
-  // Current: after Unit 4 (14/15)
-  var current  = [85, 72, 88, 88, 55, 80, 42, 18];
-
-  // Target: Top 5% ISA 2027
-  var target   = [90, 85, 90, 85, 80, 85, 82, 80];
-
+  var baseline = [80,68,85,75,20,45,35,15];
+  var current  = [85,72,88,88,55,80,42,18];
+  var target   = [90,85,90,85,80,85,82,80];
   var n = labels.length;
   var NS = 'http://www.w3.org/2000/svg';
-  function ang(i) { return (Math.PI*2*i/n) - Math.PI/2; }
-  function pt(val,i) { var a=ang(i),s=val/100; return [cx+r*s*Math.cos(a), cy+r*s*Math.sin(a)]; }
-  function polyPts(vals) { return vals.map(function(v,i){return pt(v,i).join(',');}).join(' '); }
-  function el(tag,attrs) { var e=document.createElementNS(NS,tag); Object.keys(attrs).forEach(function(k){e.setAttribute(k,attrs[k]);}); svg.appendChild(e); return e; }
-
-  // Grid rings
+  function ang(i){ return (Math.PI*2*i/n) - Math.PI/2; }
+  function pt(val,i){ var a=ang(i),s=val/100; return [cx+r*s*Math.cos(a), cy+r*s*Math.sin(a)]; }
+  function polyPts(vals){ return vals.map(function(v,i){return pt(v,i).join(',');}).join(' '); }
+  function el(tag,attrs){ var e=document.createElementNS(NS,tag); Object.keys(attrs).forEach(function(k){e.setAttribute(k,attrs[k]);}); svg.appendChild(e); return e; }
   [20,40,60,80,100].forEach(function(v){
-    el('polygon',{points:Array.from({length:n},function(_,i){return pt(v,i).join(',');}).join(' '),
-      fill:v===100?'rgba(0,0,0,0.02)':'none',stroke:'rgba(0,0,0,0.09)','stroke-width':'1'});
+    el('polygon',{points:Array.from({length:n},function(_,i){return pt(v,i).join(',');}).join(' '),fill:v===100?'rgba(0,0,0,0.02)':'none',stroke:'rgba(0,0,0,0.09)','stroke-width':'1'});
   });
-  // Spokes
   for(var i=0;i<n;i++){var p=pt(100,i);el('line',{x1:cx,y1:cy,x2:p[0],y2:p[1],stroke:'rgba(0,0,0,0.09)','stroke-width':'1'});}
-
-  // Target polygon (orange dashed)
   el('polygon',{points:polyPts(target),fill:'rgba(246,153,63,0.05)',stroke:'rgba(246,153,63,0.8)','stroke-width':'1.8','stroke-dasharray':'5,4'});
-
-  // Baseline polygon (light gray, dotted — before Unit 1)
   el('polygon',{points:polyPts(baseline),fill:'rgba(160,174,192,0.12)',stroke:'rgba(160,174,192,0.7)','stroke-width':'1.6','stroke-dasharray':'3,3'});
-
-  // Current polygon (solid blue — after Unit 4)
   el('polygon',{points:polyPts(current),fill:'rgba(102,126,234,0.18)',stroke:'rgba(102,126,234,0.95)','stroke-width':'2.2'});
-
-  // Baseline dots (gray)
   baseline.forEach(function(v,i){var p=pt(v,i);el('circle',{cx:p[0],cy:p[1],r:'3.5',fill:'#a0aec0',stroke:'#fff','stroke-width':'1.5'});});
-
-  // Current dots (blue)
   current.forEach(function(v,i){var p=pt(v,i);el('circle',{cx:p[0],cy:p[1],r:'4.5',fill:'#667eea',stroke:'#fff','stroke-width':'2'});});
-
-  // Labels
   labels.forEach(function(label,i){
     var lp=pt(120,i),lx=lp[0],ly=lp[1];
     var anchor=lx<cx-8?'end':lx>cx+8?'start':'middle';
@@ -579,19 +727,7 @@ function checkDashPw() {
       t.textContent=line;svg.appendChild(t);
     });
   });
-})();
-document.querySelectorAll('.tcheck:not(.done)').forEach(function(cb){
-  cb.addEventListener('click',function(){
-    cb.classList.toggle('on');
-    if(cb.classList.contains('on')){
-      cb.textContent='✓';cb.style.background='#667eea';cb.style.borderColor='#667eea';cb.style.color='white';cb.style.fontSize='11px';
-      cb.nextElementSibling.style.textDecoration='line-through';cb.nextElementSibling.style.color='#a0aec0';
-    } else {
-      cb.textContent='';cb.style.background='';cb.style.borderColor='';cb.style.color='';
-      cb.nextElementSibling.style.textDecoration='';cb.nextElementSibling.style.color='#2d3748';
-    }
-  });
-});
+}
 </script>
 </body>
 </html>
