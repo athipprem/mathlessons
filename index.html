@@ -321,22 +321,28 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div class="panel" id="panel-progress">
         <div class="grid-2">
           <div class="card">
-            <div class="card-hd"><span class="dot" style="background:#667eea"></span>Time to ISA 2027</div>
-            <div class="prog-block">
-              <div class="prog-meta">
-                <span class="prog-title">&#9202; Prep time elapsed</span>
-                <span class="prog-stat" id="time-pct-stat">...%</span>
+            <div class="card-hd"><span class="dot" style="background:#f6993f"></span>Road to ISA 2027</div>
+            <div style="margin-bottom:14px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+                <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#4a5568">&#127919; Skills achievement</span>
+                <span style="font-size:12px;font-weight:700;color:#b7791f">78%</span>
               </div>
-              <div class="prog-wrap">
-                <div class="prog-fill bar-time" id="time-bar" style="width:0%"></div>
+              <div style="background:#edf2f7;border-radius:8px;height:10px;overflow:hidden">
+                <div style="width:78%;height:100%;background:linear-gradient(90deg,#ffd700,#f6993f);border-radius:8px"></div>
               </div>
-              <p class="prog-label" id="time-label">Loading...</p>
+              <div style="font-size:10px;color:#718096;margin-top:3px;text-align:right">vs Top 5% target &nbsp;&middot;&nbsp; 78% achieved</div>
             </div>
-            <div class="tl-bar"><div class="tl-fill" id="tl-fill" style="width:0%"></div></div>
-            <div class="tl-labels"><span>May 2026 (start)</span><span>ISA 2027 (Feb)</span></div>
-            <div style="margin-top:12px">
-              <div class="tm"><span>&#128197; Units completed</span><span>5 / ~36</span></div>
-              <div class="tm"><span>&#128197; Weeks remaining</span><span id="tm-weeks">...</span></div>
+            <div style="margin-bottom:14px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+                <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#4a5568">&#9202; Prep time elapsed</span>
+                <span style="font-size:12px;font-weight:700;color:#667eea" id="ov-time-pct">...%</span>
+              </div>
+              <div style="background:#edf2f7;border-radius:8px;height:10px;overflow:hidden">
+                <div style="height:100%;background:linear-gradient(90deg,#667eea,#764ba2);border-radius:8px" id="ov-time-bar"></div>
+              </div>
+              <div style="font-size:10px;color:#718096;margin-top:3px;text-align:right" id="ov-time-label">calculating...</div>
+            </div>
+            <div>
               <div class="tm"><span>&#127942; ISA 2027 target</span><span>Top 5% Globally</span></div>
               <div class="tm"><span>&#127885; Competition season</span><span>2026&ndash;27</span></div>
             </div>
@@ -445,16 +451,12 @@ function openDashboard() {
   document.getElementById('days-left-hero').textContent  = daysLeft + ' days remaining';
   document.getElementById('topbar-days').textContent = daysLeft;
 
-  var tb = document.getElementById('time-bar');
-  var tf = document.getElementById('tl-fill');
-  if (tb) tb.style.width = pct.toFixed(1) + '%';
-  if (tf) tf.style.width = pct.toFixed(1) + '%';
-  var ts = document.getElementById('time-pct-stat');
-  var tl = document.getElementById('time-label');
-  var tw = document.getElementById('tm-weeks');
-  if (ts) ts.textContent = pct.toFixed(0) + '%';
-  if (tl) tl.textContent = daysLeft + ' days left  \u00b7  ' + pct.toFixed(0) + '% elapsed';
-  if (tw) tw.textContent = '~' + weeksLeft + ' weeks';
+  var ovBar = document.getElementById('ov-time-bar');
+  var ovPct = document.getElementById('ov-time-pct');
+  var ovLbl = document.getElementById('ov-time-label');
+  if (ovBar) ovBar.style.width = pct.toFixed(1) + '%';
+  if (ovPct) ovPct.textContent = pct.toFixed(0) + '%';
+  if (ovLbl) ovLbl.textContent = daysLeft + ' days left \u00b7 ' + weeksLeft + ' weeks remaining';
 })();
 
 // SKILLS BAR (update SKILL_PCT each unit after radar review)
