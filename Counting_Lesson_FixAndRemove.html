@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fix &amp; Remove — Partial Permutations</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; min-height: 100vh; }
+
+    header { background: linear-gradient(135deg, #1565c0 0%, #1e88e5 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; white-space: nowrap; }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p  { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 18px 0 4px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+    .dot.active   { background: #1565c0; }
+    .dot.complete { background: #2e7d32; }
+
+    .screen { display: none; }
+    .screen.visible { display: block; }
+    .wrap { max-width: 660px; margin: 0 auto; padding: 28px 20px 60px; }
+
+    .card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .tag-blue   { background: #e3f2fd; color: #1565c0; }
+    .tag-green  { background: #e8f5e9; color: #2e7d32; }
+    .tag-orange { background: #fff3e0; color: #e65100; }
+    .tag-red    { background: #ffebee; color: #c62828; }
+    .tag-purple { background: #f3e5f5; color: #6a1b9a; }
+
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
+    p  { font-size: 0.95rem; color: #444; line-height: 1.65; margin-bottom: 10px; }
+    .hi        { color: #1565c0; font-weight: 700; }
+    .hi-green  { color: #2e7d32; font-weight: 700; }
+    .hi-orange { color: #e65100; font-weight: 700; }
+    .hi-red    { color: #c62828; font-weight: 700; }
+
+    .rule-box { background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.92rem; line-height: 1.8; color: #1a3a6e; }
+    .rule-box b { color: #1565c0; }
+    .rule-box.green  { background: #e8f5e9; border-left-color: #2e7d32; color: #1b3a1b; }
+    .rule-box.green b { color: #2e7d32; }
+    .rule-box.orange { background: #fff3e0; border-left-color: #e65100; color: #4a1a00; }
+    .rule-box.orange b { color: #e65100; }
+
+    /* Box method */
+    .boxes { display: flex; align-items: center; gap: 8px; margin: 16px 0; flex-wrap: wrap; }
+    .box { min-width: 70px; height: 70px; border: 2.5px solid #ccc; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; background: #f8f8f8; }
+    .box.free   { border-color: #1565c0; background: #e3f2fd; }
+    .box.fixed  { border-color: #e65100; background: #fff3e0; }
+    .box.done   { border-color: #2e7d32; background: #e8f5e9; }
+    .box.empty  { border-color: #ddd; background: #fafafa; opacity: 0.5; }
+    .box-num { font-size: 1.5rem; font-weight: 800; line-height: 1; }
+    .box-num.blue   { color: #1565c0; }
+    .box-num.orange { color: #e65100; }
+    .box-num.green  { color: #2e7d32; }
+    .box-num.grey   { color: #bbb; }
+    .box-lbl { font-size: 0.62rem; color: #666; font-weight: 600; text-align: center; line-height: 1.2; }
+    .op { font-size: 1.4rem; color: #aaa; font-weight: 700; }
+    .result-box { min-width: 80px; height: 52px; border: 2.5px solid #2e7d32; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 800; color: #2e7d32; background: #f0fff4; }
+
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+    .compare-box { border-radius: 12px; padding: 14px 16px; }
+    .compare-box.wrong { background: #ffebee; border: 2px solid #ef9a9a; }
+    .compare-box.right { background: #e8f5e9; border: 2px solid #a5d6a7; }
+    .compare-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+    .compare-label.red   { color: #c62828; }
+    .compare-label.green { color: #2e7d32; }
+
+    .step-line { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 0.92rem; color: #444; line-height: 1.55; }
+    .step-num { min-width: 26px; height: 26px; border-radius: 50%; background: #1565c0; color: white; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .step-num.orange { background: #e65100; }
+
+    .input-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 4px; flex-wrap: wrap; }
+    .input-row label { font-size: 0.9rem; color: #555; flex: 1; min-width: 180px; line-height: 1.5; }
+    input[type=number] { width: 90px; padding: 9px 12px; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; font-weight: 700; text-align: center; outline: none; transition: border-color 0.2s; }
+    input:focus { border-color: #1565c0; }
+    input.correct { border-color: #2e7d32; background: #f0fff4; }
+    input.wrong   { border-color: #c62828; background: #fff5f5; }
+    .feedback { font-size: 0.85rem; margin-top: 6px; min-height: 18px; font-weight: 600; }
+    .feedback.ok  { color: #2e7d32; }
+    .feedback.err { color: #c62828; }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; border: none; cursor: pointer; transition: opacity 0.15s, transform 0.1s; }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-blue   { background: linear-gradient(135deg,#1565c0,#1e88e5); color: white; }
+    .btn-green  { background: linear-gradient(135deg,#2e7d32,#43a047); color: white; }
+    .btn-orange { background: linear-gradient(135deg,#e65100,#f57c00); color: white; }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+
+    .reveal { display: none; margin-top: 14px; }
+    .reveal.show { display: block; }
+
+    .badge { display: inline-block; background: linear-gradient(135deg,#ffd700,#f59e0b); color: #7c4f00; font-weight: 800; font-size: 1rem; padding: 8px 20px; border-radius: 20px; text-align: center; }
+
+    /* Pool visual */
+    .pool { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+    .chip { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 8px; font-weight: 800; font-size: 1rem; border: 2px solid; }
+    .chip.avail  { background: #e3f2fd; border-color: #1565c0; color: #1565c0; }
+    .chip.used   { background: #e8f5e9; border-color: #2e7d32; color: #2e7d32; }
+    .chip.fixed  { background: #fff3e0; border-color: #e65100; color: #e65100; }
+    .chip.gone   { background: #f5f5f5; border-color: #ccc; color: #ccc; text-decoration: line-through; }
+    .chip-label  { font-size: 0.72rem; color: #888; text-align: center; margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">&#8592; Hub</a>
+  <div>
+    <h1>Fix &amp; Remove — Partial Permutations</h1>
+    <p>Unit 7 &nbsp;·&nbsp; Counting &nbsp;·&nbsp; ~15 mins</p>
+  </div>
+</header>
+
+<div class="dots" id="dots"></div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 1 — The Q4 mistake
+═══════════════════════════════════════════ -->
+<div class="screen visible" id="s0">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-red">The Mistake from Unit 6</span>
+    <h2>Q4: 5-digit code, first digit = 5, last digit = 1</h2>
+    <p>Fill in the 3 middle positions using the remaining digits {2, 3, 4}.</p>
+    <div class="compare">
+      <div class="compare-box wrong">
+        <div class="compare-label red">❌ What Prem did</div>
+        <div class="boxes" style="gap:5px;margin:8px 0">
+          <div class="box fixed"><div class="box-num orange">1</div><div class="box-lbl">fixed</div></div>
+          <div class="op">×</div>
+          <div class="box free"><div class="box-num blue">5</div><div class="box-lbl">pos 2</div></div>
+          <div class="op">×</div>
+          <div class="box free"><div class="box-num blue">4</div><div class="box-lbl">pos 3</div></div>
+          <div class="op">×</div>
+          <div class="box free"><div class="box-num blue">3</div><div class="box-lbl">pos 4</div></div>
+          <div class="op">×</div>
+          <div class="box fixed"><div class="box-num orange">1</div><div class="box-lbl">fixed</div></div>
+        </div>
+        <p style="font-size:0.85rem;color:#c62828">Got 1×5×4×3×1 = <b>60</b> ✗</p>
+        <p style="font-size:0.82rem;color:#777;margin-top:4px">Used all 5 digits for the free slots — but 5 and 1 are already fixed and gone!</p>
+      </div>
+      <div class="compare-box right">
+        <div class="compare-label green">✅ Correct method</div>
+        <div class="boxes" style="gap:5px;margin:8px 0">
+          <div class="box fixed"><div class="box-num orange">1</div><div class="box-lbl">fixed=5</div></div>
+          <div class="op">×</div>
+          <div class="box done"><div class="box-num green">3</div><div class="box-lbl">pos 2</div></div>
+          <div class="op">×</div>
+          <div class="box done"><div class="box-num green">2</div><div class="box-lbl">pos 3</div></div>
+          <div class="op">×</div>
+          <div class="box done"><div class="box-num green">1</div><div class="box-lbl">pos 4</div></div>
+          <div class="op">×</div>
+          <div class="box fixed"><div class="box-num orange">1</div><div class="box-lbl">fixed=1</div></div>
+        </div>
+        <p style="font-size:0.85rem;color:#2e7d32">Gets 1×3×2×1×1 = <b>6</b> ✓</p>
+        <p style="font-size:0.82rem;color:#777;margin-top:4px">After fixing 5 and 1, only {2,3,4} remain — 3 choices for 3 slots.</p>
+      </div>
+    </div>
+  </div>
+  <div class="btn-row"><button class="btn btn-blue" onclick="go(1)">Learn the Fix &amp; Remove rule &#8594;</button></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 2 — The Rule
+═══════════════════════════════════════════ -->
+<div class="screen" id="s1">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-blue">The Rule</span>
+    <h2>Fix &amp; Remove — 4 steps, every time</h2>
+
+    <div class="step-line">
+      <div class="step-num orange">1</div>
+      <div><b>Draw one box per position</b> — as many boxes as there are slots in total (e.g. 5 boxes for a 5-digit number).</div>
+    </div>
+    <div class="step-line">
+      <div class="step-num orange">2</div>
+      <div><b>Fill fixed positions first</b> — write "1" in each fixed box and label what digit is fixed there. Colour or mark these boxes.</div>
+    </div>
+    <div class="step-line">
+      <div class="step-num orange">3</div>
+      <div><b>Remove the fixed digits from the pool</b> — cross them out from your available digits. Count what's left.</div>
+    </div>
+    <div class="step-line">
+      <div class="step-num orange">4</div>
+      <div><b>Fill the free boxes</b> — count down from the reduced pool size. Multiply everything.</div>
+    </div>
+
+    <div class="rule-box orange">
+      <b>The key question for Step 3:</b> "After fixing those positions, how many digits are still available for the free slots?"<br><br>
+      Always answer this before writing any number in a free box.
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="tag tag-blue">You already know this</span>
+    <h2>This is just the box method from Unit 3 — with a pre-step</h2>
+    <p>The box method you learned in Unit 3 already works perfectly here. The only new thing is <span class="hi-orange">Step 2+3: fix first, then remove from the pool</span> before you start filling free boxes.</p>
+    <div class="rule-box green">
+      <b>Unit 3 box method</b> = count choices per slot, multiply<br>
+      <b>Fix &amp; Remove (U7)</b> = fix locked slots → remove those digits → then do the box method on the rest<br><br>
+      Same tool, one extra pre-step.
+    </div>
+  </div>
+
+  <div class="btn-row"><button class="btn btn-blue" onclick="go(2)">Try it &#8594;</button></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 3 — Practice 1
+═══════════════════════════════════════════ -->
+<div class="screen" id="s2">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-orange">Practice 1 — Warm Up</span>
+    <h2>A 4-digit code uses digits {1, 2, 3, 4} once each. The first digit must be 3. How many codes are possible?</h2>
+
+    <p>Step through it:</p>
+
+    <div style="margin:14px 0">
+      <p><b>Step 1 — Pool before fixing:</b></p>
+      <div class="pool">
+        <div style="text-align:center"><div class="chip avail">1</div></div>
+        <div style="text-align:center"><div class="chip avail">2</div></div>
+        <div style="text-align:center"><div class="chip fixed">3</div><div class="chip-label">fixed</div></div>
+        <div style="text-align:center"><div class="chip avail">4</div></div>
+      </div>
+    </div>
+
+    <div style="margin:14px 0">
+      <p><b>Step 2 — After removing 3, pool for free slots:</b></p>
+      <div class="pool">
+        <div style="text-align:center"><div class="chip used">1</div></div>
+        <div style="text-align:center"><div class="chip used">2</div></div>
+        <div style="text-align:center"><div class="chip gone">3</div></div>
+        <div style="text-align:center"><div class="chip used">4</div></div>
+      </div>
+      <p style="font-size:0.85rem;color:#666;margin-top:6px">3 is gone. Remaining: {1, 2, 4} — <b>3 digits</b> for <b>3 free slots</b>.</p>
+    </div>
+
+    <p><b>Step 3 — Fill the boxes:</b></p>
+    <div class="boxes">
+      <div class="box fixed"><div class="box-num orange">1</div><div class="box-lbl">pos 1 (=3)</div></div>
+      <div class="op">×</div>
+      <div class="box free"><div class="box-num blue">3</div><div class="box-lbl">pos 2</div></div>
+      <div class="op">×</div>
+      <div class="box free"><div class="box-num blue">2</div><div class="box-lbl">pos 3</div></div>
+      <div class="op">×</div>
+      <div class="box free"><div class="box-num blue">1</div><div class="box-lbl">pos 4</div></div>
+    </div>
+
+    <div class="input-row">
+      <label>Answer (1 × 3 × 2 × 1 = ?)</label>
+      <input type="number" id="p1" placeholder="?" onchange="checkP1()">
+    </div>
+    <div class="feedback" id="fb1"></div>
+
+    <div class="reveal" id="rev1">
+      <div style="font-size:1.2rem;font-weight:800;color:#2e7d32;padding:10px;background:#e8f5e9;border-radius:8px;text-align:center">
+        1 × 3 × 2 × 1 = 6 codes ✓
+      </div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-orange" onclick="showRev('rev1',2,'next1')">Show answer</button>
+    <button class="btn btn-blue" id="next1" onclick="go(3)" style="display:none">Next &#8594;</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 4 — Practice 2: two fixed ends
+═══════════════════════════════════════════ -->
+<div class="screen" id="s3">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-orange">Practice 2 — The Q4 Type</span>
+    <h2>A 4-digit number uses digits {1, 2, 3, 4, 5} once each. First digit = 2, last digit = 4. How many 4-digit numbers are possible?</h2>
+    <p>Wait — there are only 4 positions but 5 digits available. You choose 4 of 5.</p>
+
+    <div class="rule-box" style="margin-bottom:12px">
+      <b>Fix first:</b> Remove 2 and 4 from the pool. Pool for free slots = {1, 3, 5} = <b>3 digits</b>. Two free middle positions.
+    </div>
+
+    <div class="boxes">
+      <div class="box fixed"><div class="box-num orange">1</div><div class="box-lbl">pos 1 (=2)</div></div>
+      <div class="op">×</div>
+      <div class="box free"><div class="box-num blue">3</div><div class="box-lbl">pos 2</div></div>
+      <div class="op">×</div>
+      <div class="box free"><div class="box-num blue">2</div><div class="box-lbl">pos 3</div></div>
+      <div class="op">×</div>
+      <div class="box fixed"><div class="box-num orange">1</div><div class="box-lbl">pos 4 (=4)</div></div>
+    </div>
+
+    <div class="input-row">
+      <label>Answer (1 × 3 × 2 × 1 = ?)</label>
+      <input type="number" id="p2" placeholder="?" onchange="checkP2()">
+    </div>
+    <div class="feedback" id="fb2"></div>
+
+    <div class="reveal" id="rev2">
+      <div style="font-size:1.2rem;font-weight:800;color:#2e7d32;padding:10px;background:#e8f5e9;border-radius:8px;text-align:center">
+        6 numbers ✓
+      </div>
+      <p style="margin-top:10px;font-size:0.9rem">This is exactly Q4 from Unit 6 but with different digits. The pattern is identical: fix both ends, remove them from the pool, count down the middle.</p>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-orange" onclick="showRev('rev2',3,'next2')">Show answer</button>
+    <button class="btn btn-blue" id="next2" onclick="go(4)" style="display:none">Next &#8594;</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 5 — Challenge: middle fixed
+═══════════════════════════════════════════ -->
+<div class="screen" id="s4">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-red">Challenge — Competition Style</span>
+    <h2>6 runners race. A medal is given to positions 1, 2, 3. Runner A must win gold (pos 1). How many ways can silver and bronze be awarded?</h2>
+
+    <p>Think about it: Runner A is fixed in position 1. The remaining 5 runners compete for 2 spots (silver and bronze), order matters.</p>
+
+    <div class="rule-box">
+      <b>Step 1 — Fix:</b> Position 1 = Runner A. Only 1 way to fill it.<br>
+      <b>Step 2 — Remove:</b> Runner A is gone. Pool = 5 runners for 2 free slots.<br>
+      <b>Step 3 — Fill free boxes:</b> [1] × [?] × [?]
+    </div>
+
+    <div class="boxes" style="margin:16px 0">
+      <div class="box fixed"><div class="box-num orange">1</div><div class="box-lbl">gold (A)</div></div>
+      <div class="op">×</div>
+      <div class="box free"><div class="box-num blue" id="cbox1">?</div><div class="box-lbl">silver</div></div>
+      <div class="op">×</div>
+      <div class="box free"><div class="box-num blue" id="cbox2">?</div><div class="box-lbl">bronze</div></div>
+    </div>
+
+    <div class="input-row">
+      <label>Choices for silver (after fixing A):</label>
+      <input type="number" id="c1a" placeholder="?">
+    </div>
+    <div class="input-row">
+      <label>Choices for bronze:</label>
+      <input type="number" id="c1b" placeholder="?">
+    </div>
+    <div class="input-row">
+      <label>Total ways:</label>
+      <input type="number" id="c1c" placeholder="?">
+    </div>
+    <div class="feedback" id="fb_c1"></div>
+    <div class="btn-row" style="margin-top:10px">
+      <button class="btn btn-green" onclick="checkC1()">Check my answer</button>
+    </div>
+
+    <div class="reveal" id="rev3">
+      <div style="font-size:1.2rem;font-weight:800;color:#2e7d32;padding:10px;background:#e8f5e9;border-radius:8px;text-align:center">
+        1 × 5 × 4 = 20 ways ✓
+      </div>
+      <p style="margin-top:8px;font-size:0.9rem">A is fixed (1 way). 5 runners left for silver, then 4 for bronze. Fix &amp; Remove works the same when the fixed position is somewhere in the middle.</p>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-orange" onclick="showRev('rev3',4,'next3')">Show answer</button>
+    <button class="btn btn-blue" id="next3" onclick="go(5)" style="display:none">Finish &#8594;</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 6 — Wrap-up
+═══════════════════════════════════════════ -->
+<div class="screen" id="s5">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-green">Lesson Complete ✓</span>
+    <h2>Fix &amp; Remove is locked in.</h2>
+
+    <div class="rule-box green">
+      <b>Every time you see "some positions are fixed":</b><br>
+      1. Draw all the boxes<br>
+      2. Put 1 in the fixed boxes, label the digit<br>
+      3. Cross those digits out of your pool<br>
+      4. Fill the remaining boxes counting down from the reduced pool<br>
+      5. Multiply everything
+    </div>
+
+    <p>This is the box method from Unit 3, with the Fix &amp; Remove pre-step. You now own both versions.</p>
+
+    <div style="text-align:center;margin-top:20px">
+      <div class="badge">🌟 Fix &amp; Remove — Done!</div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-blue" onclick="window.location.href='index.html'">&#8592; Back to Hub</button>
+  </div>
+</div>
+</div>
+
+<script>
+var total = 6;
+var current = 0;
+
+function buildDots() {
+  var d = document.getElementById('dots');
+  for (var i = 0; i < total; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.id = 'dot' + i;
+    d.appendChild(dot);
+  }
+}
+buildDots();
+
+function go(n) {
+  document.getElementById('s' + current).classList.remove('visible');
+  document.getElementById('dot' + current).className = 'dot complete';
+  current = n;
+  document.getElementById('s' + current).classList.add('visible');
+  document.getElementById('dot' + current).className = 'dot active';
+  window.scrollTo(0, 0);
+}
+
+function showRev(id, screen, nextId) {
+  document.getElementById(id).classList.add('show');
+  if (nextId) {
+    var btn = document.getElementById(nextId);
+    if (btn) btn.style.display = 'inline-flex';
+  }
+}
+
+function checkP1() {
+  var v = parseInt(document.getElementById('p1').value);
+  var fb = document.getElementById('fb1');
+  if (v === 6) {
+    fb.className = 'feedback ok'; fb.textContent = '✓ Correct! 6 codes.';
+    document.getElementById('p1').className = 'correct';
+    showRev('rev1', 2, 'next1');
+  } else {
+    fb.className = 'feedback err'; fb.textContent = '✗ Multiply the box numbers: 1 × 3 × 2 × 1';
+    document.getElementById('p1').className = 'wrong';
+  }
+}
+
+function checkP2() {
+  var v = parseInt(document.getElementById('p2').value);
+  var fb = document.getElementById('fb2');
+  if (v === 6) {
+    fb.className = 'feedback ok'; fb.textContent = '✓ Correct! 6 numbers.';
+    document.getElementById('p2').className = 'correct';
+    showRev('rev2', 3, 'next2');
+  } else {
+    fb.className = 'feedback err'; fb.textContent = '✗ After removing 2 and 4, how many choices for the middle slots?';
+    document.getElementById('p2').className = 'wrong';
+  }
+}
+
+function checkC1() {
+  var a = parseInt(document.getElementById('c1a').value);
+  var b = parseInt(document.getElementById('c1b').value);
+  var c = parseInt(document.getElementById('c1c').value);
+  var fb = document.getElementById('fb_c1');
+  if (a === 5 && b === 4 && c === 20) {
+    fb.className = 'feedback ok'; fb.textContent = '✓ Perfect! 1 × 5 × 4 = 20 ways.';
+    document.getElementById('cbox1').textContent = '5';
+    document.getElementById('cbox2').textContent = '4';
+    showRev('rev3', 4, 'next3');
+  } else if (c === 20) {
+    fb.className = 'feedback ok'; fb.textContent = '✓ Correct answer! Check your individual box values too.';
+    showRev('rev3', 4, 'next3');
+  } else {
+    fb.className = 'feedback err'; fb.textContent = '✗ Remember: fix Runner A first, then count the remaining runners for each slot.';
+  }
+}
+</script>
+</body>
+</html>
