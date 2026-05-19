@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Factorisation Reflex — Unit 8</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; min-height: 100vh; }
+    header { background: linear-gradient(135deg,#1565c0 0%,#1e88e5 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 18px 0 4px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+    .dot.active { background: #1565c0; }
+    .dot.complete { background: #2e7d32; }
+    .screen { display: none; }
+    .screen.visible { display: block; }
+    .wrap { max-width: 660px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .tag-blue { background: #e3f2fd; color: #1565c0; }
+    .tag-green { background: #e8f5e9; color: #2e7d32; }
+    .tag-orange { background: #fff3e0; color: #e65100; }
+    .tag-red { background: #ffebee; color: #c62828; }
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
+    p { font-size: 0.95rem; color: #444; line-height: 1.65; margin-bottom: 10px; }
+    .hi { color: #1565c0; font-weight: 700; }
+    .hi-green { color: #2e7d32; font-weight: 700; }
+    .hi-red { color: #c62828; font-weight: 700; }
+    .hi-orange { color: #e65100; font-weight: 700; }
+    .rule-box { background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.95rem; line-height: 1.8; color: #1a3a6e; }
+    .rule-box b { color: #1565c0; }
+    .rule-box.green { background: #e8f5e9; border-left-color: #2e7d32; color: #1b3a1b; }
+    .rule-box.green b { color: #2e7d32; }
+    .rule-box.orange { background: #fff3e0; border-left-color: #e65100; color: #4a1a00; }
+    .rule-box.orange b { color: #e65100; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+    .compare-box { border-radius: 12px; padding: 14px 16px; }
+    .compare-box.wrong { background: #ffebee; border: 2px solid #ef9a9a; }
+    .compare-box.right { background: #e8f5e9; border: 2px solid #a5d6a7; }
+    .compare-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+    .compare-label.red { color: #c62828; }
+    .compare-label.green { color: #2e7d32; }
+    .trigger-demo { background: #f8f9ff; border-radius: 12px; padding: 16px 18px; margin: 14px 0; border: 1.5px solid #e0e0e0; }
+    .trigger-demo p { font-size: 0.95rem; color: #444; margin-bottom: 8px; }
+    .kw { display: inline; background: #1565c0; color: white; padding: 1px 7px; border-radius: 5px; font-weight: 700; cursor: default; }
+    .kw.orange { background: #e65100; }
+    .kw.green { background: #2e7d32; }
+    .ritual-box { background: linear-gradient(135deg,#e3f2fd,#bbdefb); border-radius: 14px; padding: 18px 22px; margin: 14px 0; text-align: center; border: 2px dashed #1565c0; }
+    .ritual-step { font-size: 1.1rem; font-weight: 800; color: #0d47a1; margin: 6px 0; }
+    .ritual-arrow { font-size: 1.4rem; color: #1565c0; }
+    .input-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 4px; flex-wrap: wrap; }
+    .input-row label { font-size: 0.9rem; color: #555; flex: 1; min-width: 200px; line-height: 1.5; }
+    input[type=number] { width: 90px; padding: 9px 12px; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; font-weight: 700; text-align: center; outline: none; transition: border-color 0.2s; }
+    input:focus { border-color: #1565c0; }
+    input.correct { border-color: #2e7d32; background: #f0fff4; }
+    input.wrong { border-color: #c62828; background: #fff5f5; }
+    .feedback { font-size: 0.85rem; margin-top: 6px; min-height: 18px; font-weight: 600; }
+    .feedback.ok { color: #2e7d32; }
+    .feedback.err { color: #c62828; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; border: none; cursor: pointer; transition: opacity 0.15s, transform 0.1s; }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-blue { background: linear-gradient(135deg,#1565c0,#1e88e5); color: white; }
+    .btn-green { background: linear-gradient(135deg,#2e7d32,#43a047); color: white; }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .reveal { display: none; margin-top: 14px; }
+    .reveal.show { display: block; }
+    .prime-eq { font-size: 1.3rem; font-weight: 800; color: #2e7d32; text-align: center; margin: 14px 0; padding: 12px; background: #e8f5e9; border-radius: 10px; }
+    .multi-input { display: flex; align-items: center; gap: 8px; margin: 14px 0 4px; flex-wrap: wrap; font-size: 1rem; font-weight: 700; color: #333; }
+    .multi-input input { width: 72px; }
+    .badge { display: inline-block; background: linear-gradient(135deg,#ffd700,#f59e0b); color: #7c4f00; font-weight: 800; font-size: 1rem; padding: 8px 20px; border-radius: 20px; }
+    .step-line { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 0.92rem; color: #444; line-height: 1.55; }
+    .step-num { min-width: 26px; height: 26px; border-radius: 50%; background: #1565c0; color: white; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .big-num { font-size: 2.4rem; font-weight: 900; color: #1565c0; text-align: center; display: block; margin: 10px 0; }
+    table.tree-t { border-collapse: collapse; margin: 0 auto 14px; }
+    table.tree-t td { text-align: center; padding: 2px 8px; font-weight: 700; font-size: 0.95rem; }
+    .node { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 50%; font-weight: 800; font-size: 1rem; border: 2.5px solid; }
+    .node.start { background: #e3f2fd; border-color: #1565c0; color: #1565c0; width: 52px; height: 52px; font-size: 1.15rem; }
+    .node.mid { background: #fff3e0; border-color: #e65100; color: #e65100; }
+    .node.prime { background: #e8f5e9; border-color: #2e7d32; color: #2e7d32; }
+    .vl { width: 2px; height: 18px; background: #ccc; margin: 0 auto; }
+    .hl { display: flex; justify-content: center; gap: 48px; }
+    .hl2 { display: flex; justify-content: center; gap: 80px; }
+    .branch { display: flex; flex-direction: column; align-items: center; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">&#8592; Hub</a>
+  <div>
+    <h1>Prime Factorisation — Reflex Training</h1>
+    <p>Unit 8 &nbsp;·&nbsp; Number Theory &nbsp;·&nbsp; ~15 mins</p>
+  </div>
+</header>
+<div class="dots" id="dots"></div>
+
+<!-- SCREEN 0: THE PARADOX -->
+<div class="screen visible" id="s0">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-red">Why did this keep happening?</div>
+    <h2>3 units. Same blank. Every time.</h2>
+    <p>Look at what happened in Unit 7 Section A:</p>
+    <div class="compare">
+      <div class="compare-box wrong">
+        <div class="compare-label red">&#10007; Q1, Q2, Q3 — blank</div>
+        <p style="font-size:0.88rem;color:#555;margin:0">Factorise 18 into prime factors.</p>
+        <p style="font-size:0.88rem;color:#555;margin:4px 0 0">Factorise 60 into prime factors.</p>
+        <p style="font-size:0.88rem;color:#555;margin:4px 0 0">Factorise 84 into prime factors.</p>
+        <p style="font-size:0.75rem;font-style:italic;color:#c62828;margin-top:8px">Nothing written. 0 marks.</p>
+      </div>
+      <div class="compare-box right">
+        <div class="compare-label green">&#10003; Q4 — correct!</div>
+        <p style="font-size:0.88rem;color:#555;margin:0">Find the number N, where N is divisible by 4, 7, and 3, and N &lt; 100.</p>
+        <p style="font-size:0.75rem;font-weight:700;color:#2e7d32;margin-top:8px">Answer: 84 &#10003;</p>
+      </div>
+    </div>
+    <p>The skill is <span class="hi">there</span>. You got Q4 correct. The problem is <span class="hi-red">not the maths</span> — it's <span class="hi-red">not starting</span>.</p>
+    <p>When a question says "Factorise 18", your brain hasn't been automatically thinking: <em>draw a tree.</em> Today we fix that.</p>
+    <div class="btn-row">
+      <button class="btn btn-blue" onclick="go(1)">Let's fix it &#8594;</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 1: THE RITUAL -->
+<div class="screen" id="s1">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-blue">The New Rule</div>
+    <h2>See the trigger word. Draw the tree. Immediately.</h2>
+    <p>There are only 3 trigger words you need to recognise. When you see any of them, your hand moves to the paper <span class="hi">before your brain finishes reading the question.</span></p>
+    <div class="trigger-demo">
+      <p>&#128270; Watch for these words:</p>
+      <p style="margin: 10px 0; line-height: 2.2;">
+        <span class="kw">factorise</span> &nbsp;
+        <span class="kw">prime factors</span> &nbsp;
+        <span class="kw">express as a product of primes</span>
+      </p>
+      <p style="font-size:0.85rem;color:#666;margin:0">Any of these = draw your tree first, read the rest second.</p>
+    </div>
+    <div class="ritual-box">
+      <div class="ritual-step">&#128269; See trigger word</div>
+      <div class="ritual-arrow">&#8595;</div>
+      <div class="ritual-step">&#9998; Draw tree top circle</div>
+      <div class="ritual-arrow">&#8595;</div>
+      <div class="ritual-step">&#128200; Then read and solve</div>
+    </div>
+    <p>The tree doesn't cost you time. It <span class="hi-green">saves</span> time — once the tree is drawn, the answer writes itself.</p>
+    <div class="btn-row">
+      <button class="btn btn-blue" onclick="go(2)">Spot the trigger words &#8594;</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 2: TRIGGER RECOGNITION -->
+<div class="screen" id="s2">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-orange">Trigger Spotting</div>
+    <h2>Which questions need a factor tree?</h2>
+    <p>Read each question. Count how many need a factor tree. Then answer below.</p>
+    <div class="trigger-demo" style="margin-bottom:10px">
+      <p><b>Q1:</b> How many ways can 5 students sit in a row?</p>
+    </div>
+    <div class="trigger-demo" style="margin-bottom:10px">
+      <p><b>Q2:</b> <span class="kw">Factorise</span> 72 into <span class="kw">prime factors</span>.</p>
+    </div>
+    <div class="trigger-demo" style="margin-bottom:10px">
+      <p><b>Q3:</b> Find LCM(12, 18) using the <span class="kw">prime factorisation</span> method.</p>
+    </div>
+    <div class="trigger-demo" style="margin-bottom:10px">
+      <p><b>Q4:</b> What is 15% of 240?</p>
+    </div>
+    <div class="trigger-demo" style="margin-bottom:10px">
+      <p><b>Q5:</b> <span class="kw">Express 48 as a product of prime factors.</span></p>
+    </div>
+    <p style="margin-top:14px">How many of these 5 questions need you to draw a factor tree?</p>
+    <div class="input-row">
+      <label>Number of questions that need a tree:</label>
+      <input type="number" id="tr0" min="0" max="5" onkeydown="if(event.key==='Enter')checkTrigger()">
+    </div>
+    <div class="feedback" id="fbtr"></div>
+    <div class="btn-row">
+      <button class="btn btn-blue" onclick="checkTrigger()">Check</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 3: FACTORISE 36 -->
+<div class="screen" id="s3">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-blue">Practice 1 of 3</div>
+    <h2>Factorise 36 into prime factors.</h2>
+    <p>&#128161; Trigger spotted: draw your tree now. Work down until every branch ends in a circle prime.</p>
+    <div style="text-align:center;margin:18px 0">
+      <div class="branch">
+        <div class="node start">36</div>
+        <div class="vl"></div>
+        <div class="hl">
+          <div class="branch">
+            <div class="node mid">4</div>
+            <div class="vl"></div>
+            <div class="hl">
+              <div class="branch"><div class="node prime">2</div></div>
+              <div class="branch"><div class="node prime">2</div></div>
+            </div>
+          </div>
+          <div class="branch">
+            <div class="node mid">9</div>
+            <div class="vl"></div>
+            <div class="hl">
+              <div class="branch"><div class="node prime">3</div></div>
+              <div class="branch"><div class="node prime">3</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rule-box">
+      <b>Reading off the primes:</b> Collect all the <span style="color:#2e7d32">green circles</span>: 2, 2, 3, 3<br>
+      Write as powers: <b>36 = 2² × 3²</b>
+    </div>
+    <p>Fill in the exponents:</p>
+    <div class="multi-input">
+      <span>36 = 2</span>
+      <sup><input type="number" id="a36e" min="1" max="9" placeholder="?"></sup>
+      <span>× 3</span>
+      <sup><input type="number" id="b36e" min="1" max="9" placeholder="?"></sup>
+    </div>
+    <div class="feedback" id="fb36"></div>
+    <div class="reveal" id="rev36">
+      <div class="prime-eq">36 = 2² × 3² &#10003;</div>
+      <p>Perfect. The tree told you everything — you just had to read it off.</p>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-blue" onclick="check36()">Check</button>
+      <button class="btn btn-green" id="next4" style="display:none" onclick="go(4)">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 4: FACTORISE 72 -->
+<div class="screen" id="s4">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-blue">Practice 2 of 3</div>
+    <h2>Factorise 72 into prime factors.</h2>
+    <p>Draw your tree on paper first. Then fill in the answer below.</p>
+    <div class="rule-box orange"><b>Hint:</b> Try 72 ÷ 2 = 36. Now factorise 36 (you already know that one!).<br>So 72 = 2 × 36 = 2 × 2² × 3² = 2³ × 3²</div>
+    <div class="multi-input">
+      <span>72 = 2</span>
+      <sup><input type="number" id="a72e" min="1" max="9" placeholder="?"></sup>
+      <span>× 3</span>
+      <sup><input type="number" id="b72e" min="1" max="9" placeholder="?"></sup>
+    </div>
+    <div class="feedback" id="fb72"></div>
+    <div class="reveal" id="rev72">
+      <div class="prime-eq">72 = 2³ × 3² &#10003;</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-blue" onclick="check72()">Check</button>
+      <button class="btn btn-green" id="next5" style="display:none" onclick="go(5)">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 5: FACTORISE 180 -->
+<div class="screen" id="s5">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-blue">Practice 3 of 3 — same as the test!</div>
+    <h2>Factorise 180 into prime factors.</h2>
+    <p>Draw your full tree on paper. 180 has three different prime factors.</p>
+    <div class="rule-box"><b>Starting point:</b> 180 ÷ 2 = 90. Then 90 ÷ 2 = 45. Then 45 ÷ 3 = 15. Then 15 ÷ 3 = 5. Done.</div>
+    <div class="multi-input" style="flex-wrap:wrap;gap:6px">
+      <span>180 = 2</span>
+      <sup><input type="number" id="a180e" min="1" max="9" placeholder="?"></sup>
+      <span>× 3</span>
+      <sup><input type="number" id="b180e" min="1" max="9" placeholder="?"></sup>
+      <span>× 5</span>
+      <sup><input type="number" id="c180e" min="1" max="9" placeholder="?"></sup>
+    </div>
+    <div class="feedback" id="fb180"></div>
+    <div class="reveal" id="rev180">
+      <div class="prime-eq">180 = 2² × 3² × 5 &#10003;</div>
+      <p>The prime 5 appears once so its power is 1 — no need to write the ¹.</p>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-blue" onclick="check180()">Check</button>
+      <button class="btn btn-green" id="next6" style="display:none" onclick="go(6)">Finish &#8594;</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 6: DONE -->
+<div class="screen" id="s6">
+<div class="wrap">
+  <div class="card" style="text-align:center;padding:36px 24px">
+    <div class="badge">&#127775; Reflex Trained!</div>
+    <h2 style="margin-top:20px">The ritual is yours now.</h2>
+    <div class="ritual-box" style="text-align:left;margin-top:16px">
+      <div class="ritual-step">&#128269; See "factorise" / "prime factors"</div>
+      <div class="ritual-arrow" style="text-align:center">&#8595;</div>
+      <div class="ritual-step">&#9998; Draw the top circle. Immediately.</div>
+      <div class="ritual-arrow" style="text-align:center">&#8595;</div>
+      <div class="ritual-step">&#128200; Split down. Collect primes. Done.</div>
+    </div>
+    <p style="margin-top:16px;color:#555">In the test: the moment you see the trigger — pencil moves. No thinking first. Tree first.</p>
+    <div class="btn-row" style="justify-content:center;margin-top:20px">
+      <a href="index.html" class="btn btn-green">&#8592; Back to Hub</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+var total = 7, current = 0;
+function buildDots() {
+  var d = document.getElementById('dots');
+  for (var i = 0; i < total; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    d.appendChild(dot);
+  }
+}
+buildDots();
+function go(n) {
+  document.getElementById('s' + current).classList.remove('visible');
+  document.getElementById('dots').children[current].className = 'dot complete';
+  current = n;
+  document.getElementById('s' + current).classList.add('visible');
+  document.getElementById('dots').children[current].className = 'dot active';
+  window.scrollTo(0, 0);
+}
+function checkTrigger() {
+  var v = parseInt(document.getElementById('tr0').value);
+  var fb = document.getElementById('fbtr');
+  if (v === 3) {
+    fb.className = 'feedback ok';
+    fb.textContent = '✓ Correct! Q2 (factorise), Q3 (prime factorisation method), Q5 (express as product of primes) — all need a tree. Q1 and Q4 do not.';
+    document.getElementById('tr0').className = 'correct';
+    setTimeout(function(){ go(3); }, 1400);
+  } else {
+    fb.className = 'feedback err';
+    fb.textContent = '✗ Count again — look for the trigger words highlighted in blue.';
+    document.getElementById('tr0').className = 'wrong';
+  }
+}
+function check36() {
+  var a = parseInt(document.getElementById('a36e').value);
+  var b = parseInt(document.getElementById('b36e').value);
+  var fb = document.getElementById('fb36');
+  if (a === 2 && b === 2) {
+    fb.className = 'feedback ok'; fb.textContent = '✓ Perfect! 36 = 2² × 3²';
+    document.getElementById('a36e').className = 'correct';
+    document.getElementById('b36e').className = 'correct';
+    document.getElementById('rev36').classList.add('show');
+    document.getElementById('next4').style.display = 'inline-flex';
+  } else {
+    fb.className = 'feedback err'; fb.textContent = '✗ Check your tree — count the 2s and 3s separately.';
+  }
+}
+function check72() {
+  var a = parseInt(document.getElementById('a72e').value);
+  var b = parseInt(document.getElementById('b72e').value);
+  var fb = document.getElementById('fb72');
+  if (a === 3 && b === 2) {
+    fb.className = 'feedback ok'; fb.textContent = '✓ Yes! 72 = 2³ × 3²';
+    document.getElementById('a72e').className = 'correct';
+    document.getElementById('b72e').className = 'correct';
+    document.getElementById('rev72').classList.add('show');
+    document.getElementById('next5').style.display = 'inline-flex';
+  } else {
+    fb.className = 'feedback err'; fb.textContent = '✗ Redraw the tree. 72 ÷ 2 = 36, and 36 = 2² × 3², so 72 = ?';
+  }
+}
+function check180() {
+  var a = parseInt(document.getElementById('a180e').value);
+  var b = parseInt(document.getElementById('b180e').value);
+  var c = parseInt(document.getElementById('c180e').value);
+  var fb = document.getElementById('fb180');
+  if (a === 2 && b === 2 && c === 1) {
+    fb.className = 'feedback ok'; fb.textContent = '✓ Perfect! 180 = 2² × 3² × 5';
+    document.getElementById('a180e').className = 'correct';
+    document.getElementById('b180e').className = 'correct';
+    document.getElementById('c180e').className = 'correct';
+    document.getElementById('rev180').classList.add('show');
+    document.getElementById('next6').style.display = 'inline-flex';
+  } else {
+    fb.className = 'feedback err'; fb.textContent = '✗ Check again. The three primes are 2, 3, and 5.';
+  }
+}
+</script>
+</body>
+</html>

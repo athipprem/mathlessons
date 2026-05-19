@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factor Enumeration — Unit 8</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; min-height: 100vh; }
+    header { background: linear-gradient(135deg,#1565c0 0%,#1e88e5 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 18px 0 4px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+    .dot.active { background: #1565c0; }
+    .dot.complete { background: #2e7d32; }
+    .screen { display: none; }
+    .screen.visible { display: block; }
+    .wrap { max-width: 660px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .tag-blue { background: #e3f2fd; color: #1565c0; }
+    .tag-green { background: #e8f5e9; color: #2e7d32; }
+    .tag-orange { background: #fff3e0; color: #e65100; }
+    .tag-red { background: #ffebee; color: #c62828; }
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
+    p { font-size: 0.95rem; color: #444; line-height: 1.65; margin-bottom: 10px; }
+    .hi { color: #1565c0; font-weight: 700; }
+    .hi-green { color: #2e7d32; font-weight: 700; }
+    .hi-red { color: #c62828; font-weight: 700; }
+    .hi-orange { color: #e65100; font-weight: 700; }
+    .rule-box { background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.95rem; line-height: 1.8; color: #1a3a6e; }
+    .rule-box b { color: #1565c0; }
+    .rule-box.green { background: #e8f5e9; border-left-color: #2e7d32; color: #1b3a1b; }
+    .rule-box.green b { color: #2e7d32; }
+    .rule-box.orange { background: #fff3e0; border-left-color: #e65100; color: #4a1a00; }
+    .pair-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.9rem; }
+    .pair-table th { background: #e3f2fd; color: #1565c0; padding: 8px 12px; text-align: left; font-weight: 700; border-bottom: 2px solid #bbdefb; }
+    .pair-table td { padding: 7px 12px; border-bottom: 1px solid #f0f0f0; color: #333; }
+    .pair-table tr:last-child td { border-bottom: none; }
+    .pair-table td.factor { color: #2e7d32; font-weight: 700; }
+    .pair-table td.stop { color: #e65100; font-style: italic; font-size: 0.82rem; }
+    .sqrt-note { background: #fff3e0; border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; color: #6d3300; margin: 10px 0; }
+    .factor-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+    .chip { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; font-weight: 800; font-size: 1rem; background: #e8f5e9; color: #2e7d32; border: 2px solid #a5d6a7; }
+    .chip.miss { background: #ffebee; color: #c62828; border-color: #ef9a9a; }
+    .input-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 4px; flex-wrap: wrap; }
+    .input-row label { font-size: 0.9rem; color: #555; flex: 1; min-width: 180px; line-height: 1.5; }
+    input[type=number], input[type=text] { width: 90px; padding: 9px 12px; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; font-weight: 700; text-align: center; outline: none; transition: border-color 0.2s; }
+    input:focus { border-color: #1565c0; }
+    input.correct { border-color: #2e7d32; background: #f0fff4; }
+    input.wrong { border-color: #c62828; background: #fff5f5; }
+    .feedback { font-size: 0.85rem; margin-top: 6px; min-height: 18px; font-weight: 600; }
+    .feedback.ok { color: #2e7d32; }
+    .feedback.err { color: #c62828; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; border: none; cursor: pointer; transition: opacity 0.15s, transform 0.1s; }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-blue { background: linear-gradient(135deg,#1565c0,#1e88e5); color: white; }
+    .btn-green { background: linear-gradient(135deg,#2e7d32,#43a047); color: white; }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .reveal { display: none; margin-top: 14px; }
+    .reveal.show { display: block; }
+    .prime-eq { font-size: 1.15rem; font-weight: 800; color: #2e7d32; text-align: center; margin: 12px 0; padding: 12px; background: #e8f5e9; border-radius: 10px; }
+    .badge { display: inline-block; background: linear-gradient(135deg,#ffd700,#f59e0b); color: #7c4f00; font-weight: 800; font-size: 1rem; padding: 8px 20px; border-radius: 20px; }
+    .step-line { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 0.92rem; color: #444; line-height: 1.55; }
+    .step-num { min-width: 26px; height: 26px; border-radius: 50%; background: #1565c0; color: white; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">&#8592; Hub</a>
+  <div>
+    <h1>Factor Enumeration — Systematic Pair Listing</h1>
+    <p>Unit 8 &nbsp;·&nbsp; Number Theory &nbsp;·&nbsp; ~15 mins</p>
+  </div>
+</header>
+<div class="dots" id="dots"></div>
+
+<!-- SCREEN 0: THE PROBLEM -->
+<div class="screen visible" id="s0">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-red">What went wrong in Unit 7</div>
+    <h2>Q5 — the incomplete factor list</h2>
+    <p>Unit 7, Q5: "Factorise 200, then list all its factors."</p>
+    <p>You factorised 200 = 2³ × 5². Good start. But the factor list had two errors:</p>
+    <div class="factor-chips">
+      <div class="chip">1</div><div class="chip">2</div><div class="chip">4</div>
+      <div class="chip">5</div><div class="chip">8</div><div class="chip">10</div>
+      <div class="chip">20</div><div class="chip">25</div>
+      <div class="chip miss">40 ✗</div>
+      <div class="chip">50</div><div class="chip">100</div><div class="chip">200</div>
+    </div>
+    <p><span class="hi-red">Factor 40 was missing.</span> That's not a knowledge gap — it's a <span class="hi-red">method gap</span>. Without a system, it's easy to skip one.</p>
+    <p>Today you'll learn <span class="hi">the pair method</span> — a step-by-step approach that makes it impossible to miss a factor.</p>
+    <div class="btn-row">
+      <button class="btn btn-blue" onclick="go(1)">Learn the method &#8594;</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 1: THE METHOD -->
+<div class="screen" id="s1">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-blue">The Pair Method</div>
+    <h2>Start from 1. Work up to √N. List pairs.</h2>
+    <p>Every factor has a <span class="hi">partner</span>. If 2 × 12 = 24, then both 2 and 12 are factors of 24. Finding one automatically gives you the other.</p>
+    <div class="rule-box">
+      <b>The 3-step system:</b><br>
+      1. Start with 1 × N &nbsp; (always works)<br>
+      2. Try 2, 3, 4, 5 … — keep the ones that divide evenly<br>
+      3. <b>Stop when you reach √N</b> — you've found all pairs
+    </div>
+    <p>Let's see it with <span class="hi">24</span>. &nbsp; √24 ≈ 4.9, so we stop after testing 4.</p>
+    <table class="pair-table">
+      <tr><th>Try</th><th>Divides 24?</th><th>Pair → Factor 1</th><th>Factor 2</th></tr>
+      <tr><td>1</td><td>✓ always</td><td class="factor">1</td><td class="factor">24</td></tr>
+      <tr><td>2</td><td>✓ 24÷2=12</td><td class="factor">2</td><td class="factor">12</td></tr>
+      <tr><td>3</td><td>✓ 24÷3=8</td><td class="factor">3</td><td class="factor">8</td></tr>
+      <tr><td>4</td><td>✓ 24÷4=6</td><td class="factor">4</td><td class="factor">6</td></tr>
+      <tr><td>5</td><td class="stop">✗ 24÷5=4.8 → skip</td><td>—</td><td>—</td></tr>
+      <tr><td>≥5</td><td class="stop">Stop — past √24 ≈ 4.9</td><td colspan="2" class="stop">All pairs found ✓</td></tr>
+    </table>
+    <div class="prime-eq">Factors of 24: 1, 2, 3, 4, 6, 8, 12, 24 &nbsp;(8 factors)</div>
+    <p>Written in order: 1, 2, 3, 4, 6, 8, 12, 24. <span class="hi-green">Nothing missed.</span></p>
+    <div class="btn-row">
+      <button class="btn btn-blue" onclick="go(2)">Try it: factors of 36 &#8594;</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 2: PRACTICE 36 -->
+<div class="screen" id="s2">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-blue">Practice 1 of 2</div>
+    <h2>List ALL factors of 36.</h2>
+    <p>Use the pair method. √36 = 6, so test 1, 2, 3, 4, 5, 6 and stop.</p>
+    <div class="sqrt-note">&#128161; √36 = exactly 6. So 6×6=36 — 6 pairs with itself. Include it once only.</div>
+    <div class="input-row">
+      <label>How many factors does 36 have in total?</label>
+      <input type="number" id="cnt36" min="1" max="20" onkeydown="if(event.key==='Enter')check36cnt()">
+    </div>
+    <div class="feedback" id="fb36cnt"></div>
+    <div class="reveal" id="rev36">
+      <div class="prime-eq">Factors of 36: 1, 2, 3, 4, 6, 9, 12, 18, 36 &nbsp;(9 factors)</div>
+      <p>Pairs: 1×36, 2×18, 3×12, 4×9, 6×6. &nbsp;9 factors total — 6 pairs with itself so count it once.</p>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-blue" onclick="check36cnt()">Check</button>
+      <button class="btn btn-green" id="next3" style="display:none" onclick="go(3)">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 3: PRACTICE 90 -->
+<div class="screen" id="s3">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-orange">Practice 2 of 2 — same as the test!</div>
+    <h2>List ALL factors of 90. How many are there?</h2>
+    <p>√90 ≈ 9.5, so test 1 through 9. Write your pairs on paper first.</p>
+    <div class="rule-box orange"><b>Pairs to test:</b> 1×90, 2×45, 3×30, 5×18, 6×15, 9×10. <br>Does 4 divide 90? 90÷4=22.5 — no. Does 7? 90÷7≈12.9 — no. Does 8? 90÷8=11.25 — no.</div>
+    <div class="input-row">
+      <label>How many factors does 90 have in total?</label>
+      <input type="number" id="cnt90" min="1" max="20" onkeydown="if(event.key==='Enter')check90cnt()">
+    </div>
+    <div class="feedback" id="fb90cnt"></div>
+    <div class="reveal" id="rev90">
+      <div class="prime-eq">Factors of 90: 1, 2, 3, 5, 6, 9, 10, 15, 18, 30, 45, 90 &nbsp;(12 factors)</div>
+      <p>6 pairs × 2 = 12 factors. <span class="hi-green">None missing when you use the pair method.</span></p>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-blue" onclick="check90cnt()">Check</button>
+      <button class="btn btn-green" id="next4" style="display:none" onclick="go(4)">Finish &#8594;</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 4: DONE -->
+<div class="screen" id="s4">
+<div class="wrap">
+  <div class="card" style="text-align:center;padding:36px 24px">
+    <div class="badge">&#127775; Method Locked In!</div>
+    <h2 style="margin-top:20px">The pair method — never miss a factor again.</h2>
+    <div class="rule-box" style="text-align:left;margin-top:16px">
+      <b>On the test for Q4 and Q5:</b><br>
+      1. Write 1 × N first<br>
+      2. Try 2, 3, 4 … until you reach √N<br>
+      3. Write both numbers from each pair<br>
+      4. Count them all and write the total
+    </div>
+    <p style="color:#555;margin-top:10px">Factor 40 will never go missing again.</p>
+    <div class="btn-row" style="justify-content:center;margin-top:20px">
+      <a href="index.html" class="btn btn-green">&#8592; Back to Hub</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+var total = 5, current = 0;
+function buildDots() {
+  var d = document.getElementById('dots');
+  for (var i = 0; i < total; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    d.appendChild(dot);
+  }
+}
+buildDots();
+function go(n) {
+  document.getElementById('s' + current).classList.remove('visible');
+  document.getElementById('dots').children[current].className = 'dot complete';
+  current = n;
+  document.getElementById('s' + current).classList.add('visible');
+  document.getElementById('dots').children[current].className = 'dot active';
+  window.scrollTo(0, 0);
+}
+function check36cnt() {
+  var v = parseInt(document.getElementById('cnt36').value);
+  var fb = document.getElementById('fb36cnt');
+  if (v === 9) {
+    fb.className = 'feedback ok'; fb.textContent = '✓ Correct! 9 factors.';
+    document.getElementById('cnt36').className = 'correct';
+    document.getElementById('rev36').classList.add('show');
+    document.getElementById('next3').style.display = 'inline-flex';
+  } else {
+    fb.className = 'feedback err'; fb.textContent = '✗ Try again — list your pairs: 1×36, 2×18, 3×12, 4×9, 6×6.';
+    document.getElementById('cnt36').className = 'wrong';
+  }
+}
+function check90cnt() {
+  var v = parseInt(document.getElementById('cnt90').value);
+  var fb = document.getElementById('fb90cnt');
+  if (v === 12) {
+    fb.className = 'feedback ok'; fb.textContent = '✓ Correct! 12 factors.';
+    document.getElementById('cnt90').className = 'correct';
+    document.getElementById('rev90').classList.add('show');
+    document.getElementById('next4').style.display = 'inline-flex';
+  } else {
+    fb.className = 'feedback err';
+    if (v < 12) fb.textContent = '✗ You\'re missing some. Check: does 5 divide 90? Does 6? Does 9?';
+    else fb.textContent = '✗ Too many — did you count any number twice?';
+    document.getElementById('cnt90').className = 'wrong';
+  }
+}
+</script>
+</body>
+</html>

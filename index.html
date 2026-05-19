@@ -178,7 +178,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <span id="topbar-sub">&nbsp;&mdash;&nbsp;Grade 4 &nbsp;|&nbsp; ISA 2027 Training &nbsp;|&nbsp; Coach: Chusaki</span>
       </div>
       <div class="topbar-right">
-        <span class="tb-badge tb-blue">Unit 7 up next</span>
+        <span class="tb-badge tb-orange">Unit 8 — Lessons Ready</span>
         <span class="tb-badge tb-orange">&#8987; <span id="topbar-days">...</span> days to ISA 2027</span>
       </div>
     </div>
@@ -186,17 +186,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <!-- HERO STATS -->
     <div id="hero">
       <div class="hero-box">
-        <div class="hero-val" style="color:#43e97b">Unit 6 &#10003;</div>
-        <div class="hero-lbl">Last unit done</div>
-        <div class="hero-sub" style="color:#43e97b">12/15 &mdash; Unit 7 up next</div>
+        <div class="hero-val" style="color:#f6993f">Unit 8 &#9654;</div>
+        <div class="hero-lbl">Current unit</div>
+        <div class="hero-sub" style="color:#f6993f">Lessons ready &mdash; test pending</div>
       </div>
       <div class="hero-box">
-        <div class="hero-val">6</div>
+        <div class="hero-val">7</div>
         <div class="hero-lbl">Units completed</div>
         <div class="hero-sub" style="color:#a0aec0">All with tests done</div>
       </div>
       <div class="hero-box">
-        <div class="hero-val" style="color:#f6993f">82%</div>
+        <div class="hero-val" id="idx-hero-skill" style="color:#f6993f">83%</div>
         <div class="hero-lbl">Skills achievement</div>
         <div class="hero-sub" style="color:#f6993f">vs Top 5% target</div>
       </div>
@@ -213,25 +213,41 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <!-- PANEL: THIS UNIT -->
       <div class="panel active" id="panel-thisunit">
         <div class="card">
-          <div class="card-hd"><span class="dot" style="background:#43e97b"></span>Unit 6 Complete &mdash; 12/15 (80%)</div>
-          <p style="font-size:12px;color:#4a5568;line-height:1.7">Partial permutations 4/5 &mdash; major improvement from 2/5 in Unit 5. Algebra 5/5 perfect (third time). Prime factorisation trigger gap still present: Q6/Q7 blank but Q8&ndash;Q10 all correct including 3-swimmer challenge. All 3 challenge questions correct &#127775;</p>
+          <div class="card-hd"><span class="dot" style="background:#a0aec0"></span>Unit 7 Result &mdash; 10/15 (67%)</div>
+          <p style="font-size:12px;color:#4a5568;line-height:1.7">Prime Fact 1/5 (Q1&ndash;Q3 blank, trigger not firing &mdash; 3rd unit). Q4 correct (84 &#10003;). Q5 incomplete (missed factor 40). Fix &amp; Remove 4/5. Algebra 5/5 perfect. Trigger gap + factor enumeration are the U8 focus.</p>
         </div>
         <div class="card" style="margin-top:0">
-          <div class="card-hd"><span class="dot" style="background:#1565c0"></span>Unit 7 &mdash; Lessons Ready</div>
-          <div class="grid-3" style="margin-top:12px">
-            <div class="lesson-card number">
-              <div class="lc-unit">Number Theory &middot; Unit 7</div>
-              <div class="lc-title">Prime Factorisation Standalone Drill</div>
-              <div class="lc-desc">Build the factor tree reflex. Trigger words, step-locked practice, standalone questions without LCM context.</div>
-              <div class="lc-badges"><span class="badge badge-done">&#10003; Lesson Ready</span></div>
-              <a class="btn-start number" href="NumberTheory_Lesson_PrimeFactorisationDrill.html">Start</a>
+          <div class="card-hd"><span class="dot" style="background:#f6993f"></span>Unit 8 &mdash; Lessons Delivered &middot; Test Pending</div>
+          <div class="grid-3" style="margin-top:4px">
+            <div class="lesson-card number" style="border-top-color:#7b1fa2">
+              <div class="lc-unit">Number Theory &middot; Unit 8</div>
+              <div class="lc-title">Prime Factorisation Reflex</div>
+              <div class="lc-desc">New trigger ritual &mdash; see the word, draw the tree immediately. Fixes Q1&ndash;Q3 blank pattern.</div>
+              <div class="lc-badges">
+                <span class="badge badge-new">&#9654; Active</span>
+                <span class="badge badge-test-open">&#9201; Test Pending</span>
+              </div>
+              <a class="btn-start number" href="NumberTheory_Lesson_PrimeFactReflex.html">Start</a>
             </div>
-            <div class="lesson-card counting">
-              <div class="lc-unit">Art of Counting &middot; Unit 7</div>
-              <div class="lc-title">Fix &amp; Remove</div>
-              <div class="lc-desc">Fixed-position pool reduction using the box method. Fix first, remove from pool, then count the free slots.</div>
-              <div class="lc-badges"><span class="badge badge-done">&#10003; Lesson Ready</span></div>
-              <a class="btn-start" href="Counting_Lesson_FixAndRemove.html">Start</a>
+            <div class="lesson-card number" style="border-top-color:#7b1fa2">
+              <div class="lc-unit">Number Theory &middot; Unit 8</div>
+              <div class="lc-title">Factor Enumeration</div>
+              <div class="lc-desc">Systematic pair method &mdash; 1&times;N, test 2, 3 &hellip; stop at &radic;N. Never miss a factor again.</div>
+              <div class="lc-badges">
+                <span class="badge badge-new">&#9654; Active</span>
+                <span class="badge badge-test-open">&#9201; Test Pending</span>
+              </div>
+              <a class="btn-start number" href="NumberTheory_Lesson_FactorEnumeration.html">Start</a>
+            </div>
+            <div class="lesson-card counting" style="border-top-color:#1e88e5">
+              <div class="lc-unit">Art of Counting &middot; Unit 8</div>
+              <div class="lc-title">Double-Constraint Permutations</div>
+              <div class="lc-desc">Fix &amp; Remove applied twice &mdash; two fixed slots, remove both from pool, count free slots down.</div>
+              <div class="lc-badges">
+                <span class="badge badge-new">&#9654; Active</span>
+                <span class="badge badge-test-open">&#9201; Test Pending</span>
+              </div>
+              <a class="btn-start" href="Counting_Lesson_DoubleConstraint.html">Start</a>
             </div>
           </div>
         </div>
@@ -241,6 +257,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div class="panel" id="panel-completed">
         <div class="sec-div">Art of Counting</div>
         <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card counting">
+            <div class="lc-unit">Art of Counting &middot; Unit 7</div>
+            <div class="lc-title">Fix &amp; Remove</div>
+            <div class="lc-desc">Fixed-position pool reduction. Fix first, remove from pool, then count the free slots with the box method.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 10/15</span>
+            </div>
+            <a class="btn-start" href="Counting_Lesson_FixAndRemove.html">Review</a>
+          </div>
           <div class="lesson-card counting">
             <div class="lc-unit">Art of Counting &middot; Unit 6</div>
             <div class="lc-title">Partial Permutations</div>
@@ -257,7 +283,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
             <div class="lc-desc">5! and n&times;(n&minus;1)&times;&hellip; shortcut for full arrangements and partial picks.</div>
             <div class="lc-badges">
               <span class="badge badge-done">&#10003; Lesson Done</span>
-              <span class="badge badge-test-done">&#10003; Test 9/15</span>
+              <span class="badge badge-test-done">&#10003; Test 10/15</span>
             </div>
             <a class="btn-start" href="Counting_Lesson_Factorials.html">Review</a>
           </div>
@@ -277,13 +303,23 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
             <div class="lc-desc">Learn when order matters and how to count arrangements using the box method.</div>
             <div class="lc-badges">
               <span class="badge badge-done">&#10003; Lesson Done</span>
-              <span class="badge badge-test-done">&#10003; Test 9/15</span>
+              <span class="badge badge-test-done">&#10003; Test 10/15</span>
             </div>
             <a class="btn-start" href="Counting_Lesson_WithWithoutRepeats.html">Review</a>
           </div>
         </div>
         <div class="sec-div">Number Theory</div>
         <div class="grid-3">
+          <div class="lesson-card number">
+            <div class="lc-unit">Number Theory &middot; Unit 7</div>
+            <div class="lc-title">Prime Factorisation Standalone Drill</div>
+            <div class="lc-desc">Build the factor tree reflex. Trigger words, step-locked practice, standalone Qs without LCM context.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 10/15</span>
+            </div>
+            <a class="btn-start number" href="NumberTheory_Lesson_PrimeFactorisationDrill.html">Review</a>
+          </div>
           <div class="lesson-card number">
             <div class="lc-unit">Number Theory &middot; Unit 6</div>
             <div class="lc-title">Prime Factorisation &mdash; Deep Drill</div>
@@ -300,7 +336,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
             <div class="lc-desc">List method, factor trees, and highest-power rule for fast LCM.</div>
             <div class="lc-badges">
               <span class="badge badge-done">&#10003; Lesson Done</span>
-              <span class="badge badge-test-done">&#10003; Test 9/15</span>
+              <span class="badge badge-test-done">&#10003; Test 10/15</span>
             </div>
             <a class="btn-start number" href="NumberTheory_Lesson_LCM.html">Review</a>
           </div>
@@ -342,12 +378,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
             <div style="margin-bottom:14px">
               <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
                 <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#4a5568">&#127919; Skills achievement</span>
-                <span style="font-size:12px;font-weight:700;color:#b7791f">82%</span>
+                <span id="idx-road-pct" style="font-size:12px;font-weight:700;color:#b7791f">83%</span>
               </div>
               <div style="background:#edf2f7;border-radius:8px;height:10px;overflow:hidden">
-                <div style="width:82%;height:100%;background:linear-gradient(90deg,#ffd700,#f6993f);border-radius:8px"></div>
+                <div id="idx-road-bar" style="width:83%;height:100%;background:linear-gradient(90deg,#ffd700,#f6993f);border-radius:8px"></div>
               </div>
-              <div style="font-size:10px;color:#718096;margin-top:3px;text-align:right">vs Top 5% target &nbsp;&middot;&nbsp; 82% achieved</div>
+              <div id="idx-road-lbl" style="font-size:10px;color:#718096;margin-top:3px;text-align:right">vs Top 5% target &nbsp;&middot;&nbsp; 83% achieved</div>
             </div>
             <div style="margin-bottom:14px">
               <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
@@ -369,27 +405,18 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
             <div class="prog-block">
               <div class="prog-meta">
                 <span class="prog-title">&#127919; Overall achievement</span>
-                <span class="prog-stat" id="skill-stat">82%</span>
+                <span class="prog-stat" id="skill-stat">83%</span>
               </div>
               <div class="prog-wrap">
-                <div class="prog-fill bar-skill" id="skill-bar" style="width:82%"></div>
+                <div class="prog-fill bar-skill" id="skill-bar" style="width:83%"></div>
               </div>
               <p class="prog-label">Full radar on Dashboard &rarr;</p>
             </div>
             <div style="margin-top:14px">
-              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:#718096;margin-bottom:10px">Skill Breakdown (after Unit 5)</div>
-              <div class="skill-row"><div class="skill-name">Logic &amp; Reasoning</div><div class="skill-track"><div class="skill-fill" style="width:94%;background:#43e97b"></div></div><span class="skill-pct" style="color:#276749">85</span></div>
-              <div class="skill-row"><div class="skill-name">Number Sense</div><div class="skill-track"><div class="skill-fill" style="width:98%;background:#43e97b"></div></div><span class="skill-pct" style="color:#276749">88</span></div>
-              <div class="skill-row"><div class="skill-name">Algebra</div><div class="skill-track"><div class="skill-fill" style="width:98%;background:#43e97b"></div></div><span class="skill-pct" style="color:#276749">88</span></div>
-              <div class="skill-row"><div class="skill-name">Arithmetic</div><div class="skill-track"><div class="skill-fill" style="width:94%;background:#43e97b"></div></div><span class="skill-pct" style="color:#276749">80</span></div>
-              <div class="skill-row"><div class="skill-name">Geometry</div><div class="skill-track"><div class="skill-fill" style="width:85%;background:#f6993f"></div></div><span class="skill-pct" style="color:#c05621">72</span></div>
-              <div class="skill-row"><div class="skill-name">Counting</div><div class="skill-track"><div class="skill-fill" style="width:69%;background:#f6993f"></div></div><span class="skill-pct" style="color:#c05621">55</span></div>
-              <div class="skill-row"><div class="skill-name">Number Theory</div><div class="skill-track"><div class="skill-fill" style="width:51%;background:#fc4e4e"></div></div><span class="skill-pct" style="color:#c53030">42</span></div>
-              <div class="skill-row"><div class="skill-name">Applied Problems</div><div class="skill-track"><div class="skill-fill" style="width:22%;background:#fc4e4e"></div></div><span class="skill-pct" style="color:#c53030">18</span></div>
+              <div id="idx-skill-heading" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:#718096;margin-bottom:10px">Skill Breakdown</div>
+              <div id="idx-skill-bars"></div>
             </div>
-            <div style="margin-top:12px;padding:9px 12px;background:#f7f9fd;border-radius:8px;border:1px solid #e8edf5;font-size:11px;color:#4a5568">
-              Current sum 555 &nbsp;|&nbsp; Target sum 677 &nbsp;|&nbsp; <strong>82% to top 5%</strong>
-            </div>
+            <div id="idx-skill-summary" style="margin-top:12px;padding:9px 12px;background:#f7f9fd;border-radius:8px;border:1px solid #e8edf5;font-size:11px;color:#4a5568"></div>
           </div>
         </div>
       </div>
@@ -398,6 +425,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   </div><!-- /main -->
 </div><!-- /app -->
 
+<script src="prem_data.js"></script>
 <script>
 // PASSWORD GATE
 var PW_HASH = 324799088;
@@ -474,15 +502,29 @@ function openDashboard() {
   if (ovPct) ovPct.textContent = pct.toFixed(0) + '%';
   if (ovLbl) ovLbl.textContent = daysLeft + ' days left · ' + weeksLeft + ' weeks remaining';
 })();
-
-// SKILL PROGRESS BAR
 (function() {
-  var SKILL_PCT = 82;
+  var SKILL_PCT = 83;
   var skillBar  = document.getElementById('skill-bar');
   var skillStat = document.getElementById('skill-stat');
-  if (skillBar)  skillBar.style.width     = SKILL_PCT + '%';
-  if (skillStat) skillStat.textContent    = SKILL_PCT + '%';
+  if (skillBar)  skillBar.style.width = SKILL_PCT + '%';
+  if (skillStat) skillStat.textContent = SKILL_PCT + '%';
 })();
+
+// ── Render from prem_data.js ─────────────────────────────────────────
+PREM_DATA.renderSkillBars('idx-skill-bars', false);
+PREM_DATA.renderSkillSummary('idx-skill-summary');
+PREM_DATA.renderAchievement('idx-road-pct', 'idx-road-bar', 'idx-road-lbl');
+// Hero skill %
+var ihs = document.getElementById('idx-hero-skill');
+if (ihs) ihs.textContent = PREM_DATA.achievement() + '%';
+// Overall achievement bar (already has ids skill-stat / skill-bar)
+var ss = document.getElementById('skill-stat');
+var sb = document.getElementById('skill-bar');
+if (ss) ss.textContent = PREM_DATA.achievement() + '%';
+if (sb) sb.style.width  = PREM_DATA.achievement() + '%';
+// Skill heading — update unit number dynamically
+var sh = document.getElementById('idx-skill-heading');
+if (sh) sh.textContent = 'Skill Breakdown (after Unit ' + PREM_DATA.lastUnit.n + ')';
 </script>
 </body>
 </html>
