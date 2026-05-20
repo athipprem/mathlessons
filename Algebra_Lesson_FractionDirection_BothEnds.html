@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraction Direction &amp; Both-Ends Perms — Unit 9</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; min-height: 100vh; }
+    header { background: linear-gradient(135deg,#2e7d32 0%,#43a047 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 18px 0 4px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+    .dot.active { background: #2e7d32; }
+    .dot.complete { background: #1565c0; }
+    .screen { display: none; }
+    .screen.visible { display: block; }
+    .wrap { max-width: 660px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .tag-green { background: #e8f5e9; color: #2e7d32; }
+    .tag-red { background: #ffebee; color: #c62828; }
+    .tag-blue { background: #e3f2fd; color: #1565c0; }
+    .tag-orange { background: #fff3e0; color: #e65100; }
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
+    p { font-size: 0.95rem; color: #444; line-height: 1.65; margin-bottom: 10px; }
+    .hi { color: #2e7d32; font-weight: 700; }
+    .hi-red { color: #c62828; font-weight: 700; }
+    .hi-blue { color: #1565c0; font-weight: 700; }
+    .hi-orange { color: #e65100; font-weight: 700; }
+    .rule-box { background: #e8f5e9; border-left: 4px solid #2e7d32; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.95rem; line-height: 1.8; color: #1b3a1b; }
+    .rule-box b { color: #2e7d32; }
+    .rule-box.red { background: #ffebee; border-left-color: #c62828; color: #4a0000; }
+    .rule-box.red b { color: #c62828; }
+    .rule-box.blue { background: #e3f2fd; border-left-color: #1565c0; color: #0a2040; }
+    .rule-box.blue b { color: #1565c0; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+    .compare-box { border-radius: 12px; padding: 14px 16px; }
+    .compare-box.wrong { background: #ffebee; border: 2px solid #ef9a9a; }
+    .compare-box.right { background: #e8f5e9; border: 2px solid #a5d6a7; }
+    .compare-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+    .compare-label.red { color: #c62828; }
+    .compare-label.green { color: #2e7d32; }
+    .worked { background: #fffde7; border-radius: 12px; padding: 16px 20px; margin: 14px 0; border: 1.5px solid #f9a825; }
+    .worked-title { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; color: #f57f17; margin-bottom: 10px; }
+    .wline { font-size: 0.93rem; color: #333; line-height: 1.7; margin: 4px 0; }
+    .wline b { color: #1565c0; }
+    .ans-box { background: #e8f5e9; border-radius: 8px; padding: 8px 14px; margin-top: 10px; font-weight: 700; font-size: 0.95rem; color: #1b5e20; }
+    .seats { display: flex; gap: 8px; align-items: center; justify-content: center; margin: 16px 0; flex-wrap: wrap; }
+    .seat { width: 52px; height: 52px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; border: 2.5px solid; }
+    .seat-fixed { background: #e8f5e9; border-color: #2e7d32; color: #1b5e20; }
+    .seat-free { background: #e3f2fd; border-color: #1565c0; color: #1565c0; }
+    .seat-any { background: #f7f9fd; border-color: #ccc; color: #718096; }
+    .seat-label { font-size: 0.72rem; color: #718096; text-align: center; margin-top: 4px; }
+    input[type=number] { width: 90px; padding: 9px 12px; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; font-weight: 700; text-align: center; outline: none; transition: border-color 0.2s; }
+    input:focus { border-color: #2e7d32; }
+    input.correct { border-color: #2e7d32; background: #f0fff4; }
+    input.wrong { border-color: #c62828; background: #fff5f5; }
+    .input-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 4px; flex-wrap: wrap; }
+    .input-row label { font-size: 0.9rem; color: #555; flex: 1; min-width: 180px; line-height: 1.5; }
+    .feedback { font-size: 0.85rem; margin-top: 6px; min-height: 18px; font-weight: 600; }
+    .feedback.ok { color: #2e7d32; }
+    .feedback.err { color: #c62828; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; border: none; cursor: pointer; transition: opacity 0.15s, transform 0.1s; }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-green { background: linear-gradient(135deg,#2e7d32,#43a047); color: white; }
+    .btn-blue { background: linear-gradient(135deg,#1565c0,#1e88e5); color: white; }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .reveal { display: none; margin-top: 10px; }
+    .reveal.show { display: block; }
+    .eq { font-size: 1.2rem; font-weight: 800; color: #2e7d32; text-align: center; margin: 12px 0; padding: 10px; background: #e8f5e9; border-radius: 10px; }
+    .badge { display: inline-block; background: linear-gradient(135deg,#ffd700,#f59e0b); color: #7c4f00; font-weight: 800; font-size: 1rem; padding: 8px 20px; border-radius: 20px; }
+    .method-box { background: #f8f9ff; border-radius: 12px; padding: 16px 20px; margin: 14px 0; border: 1.5px solid #e0e0e0; }
+    .step-line { display: flex; align-items: flex-start; gap: 10px; margin: 10px 0; font-size: 0.93rem; color: #333; line-height: 1.6; }
+    .step-num { min-width: 26px; height: 26px; border-radius: 50%; background: #2e7d32; color: white; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  </style>
+</head>
+<body>
+<header>
+  <div>
+    <a href="index.html">← Back to Lessons</a>
+    <h1>🔀 Fraction Direction &amp; Both-Ends Permutations</h1>
+    <p>Unit 9 · Algebra + Counting · Coach: Chusaki</p>
+  </div>
+</header>
+
+<div class="dots" id="dots"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 1 -->
+<div class="screen visible" id="s0">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-red">U8 Q13 Gap Fix</span>
+    <h2>Part 1: Fraction Direction — "Give Away" Problems</h2>
+    <p>In U8 Q13, Tom gave away ⅓ of his stickers and had 24 left. The answer was 36, but the common mistake was writing 72 — which comes from multiplying by 3 instead of the right operation.</p>
+    <div class="compare">
+      <div class="compare-box wrong">
+        <div class="compare-label red">❌ Common Mistake</div>
+        <p style="font-size:0.88rem;color:#555">"Gave ⅓ away" → think of ⅓ → do × 3<br>24 × 3 = <b>72 ✗</b></p>
+      </div>
+      <div class="compare-box right">
+        <div class="compare-label green">✅ Correct Thinking</div>
+        <p style="font-size:0.88rem;color:#555">Gave ⅓ away → <em>kept</em> ⅔ → 24 = ⅔ × N<br>N = 24 ÷ ⅔ = <b>36 ✓</b></p>
+      </div>
+    </div>
+    <div class="rule-box">
+      <b>The key shift:</b> When someone GIVES AWAY a fraction, ask: "What fraction did they KEEP?"<br><br>
+      Gave away ⅓ → kept <b>⅔</b><br>
+      Gave away ¼ → kept <b>¾</b><br>
+      Gave away ⅖ → kept <b>⅗</b>
+    </div>
+    <p>Then work backwards: if the amount left = kept fraction × original,<br>then original = amount left <span class="hi">÷ kept fraction</span></p>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-green" onclick="next()">Next → Worked Example ➜</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 2 -->
+<div class="screen" id="s1">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-blue">Fraction Direction</span>
+    <h2>Worked Examples + Practice</h2>
+    <div class="worked">
+      <div class="worked-title">📘 Worked Example</div>
+      <p style="font-size:0.93rem;color:#555;margin-bottom:10px"><b>Q:</b> Tom gave away ⅓ of his stickers and had 24 left. How many did he start with?</p>
+      <div class="wline"><b>Gave away ⅓ → kept ⅔</b></div>
+      <div class="wline">24 = <b>⅔</b> × original</div>
+      <div class="wline">Original = 24 ÷ ⅔ = 24 × <b>3/2</b> = <b>36</b></div>
+      <div class="ans-box">He started with 36 stickers ✓</div>
+    </div>
+    <p>Now try these. First, write what fraction they <em>kept</em>, then find the original.</p>
+
+    <p><b>Q1.</b> Maya gave away ¼ of her sweets and had 30 left. How many did she start with?</p>
+    <div class="input-row">
+      <label>Original amount:</label>
+      <input type="number" id="q1" min="0" max="200" placeholder="?">
+      <button class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q1',40,'fb1')">Check</button>
+    </div>
+    <div class="feedback" id="fb1"></div>
+    <div class="reveal" id="r1"><div class="eq">Kept ¾ → 30 = ¾ × N → N = 30 ÷ ¾ = 30 × 4/3 = 40</div></div>
+
+    <hr style="margin:18px 0;border:none;border-top:1px solid #eee">
+
+    <p><b>Q2.</b> A shop sold ⅖ of its books. 18 books remain. How many books did the shop have originally?</p>
+    <div class="input-row">
+      <label>Original books:</label>
+      <input type="number" id="q2" min="0" max="200" placeholder="?">
+      <button class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q2',30,'fb2')">Check</button>
+    </div>
+    <div class="feedback" id="fb2"></div>
+    <div class="reveal" id="r2"><div class="eq">Sold ⅖ → kept ⅗ → 18 = ⅗ × N → N = 18 ÷ ⅗ = 18 × 5/3 = 30</div></div>
+
+    <hr style="margin:18px 0;border:none;border-top:1px solid #eee">
+
+    <p><b>Q3. ⭐</b> Ben spent ⅓ of his money, then spent another $8 on lunch. He had $16 left. How much did he start with?</p>
+    <div class="input-row">
+      <label>Ben's starting amount ($):</label>
+      <input type="number" id="q3" min="0" max="200" placeholder="?">
+      <button class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q3',36,'fb3')">Check</button>
+    </div>
+    <div class="feedback" id="fb3"></div>
+    <div class="reveal" id="r3"><div class="eq">After lunch: 16+8=24. Kept ⅔ → 24 = ⅔ × N → N = 24 × 3/2 = 36</div></div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-green" onclick="next()">Next → Part 2: Both-Ends Perms ➜</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 3 -->
+<div class="screen" id="s2">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-orange">U8 Q7 Gap Fix</span>
+    <h2>Part 2: Both-Ends Permutations</h2>
+    <p>In U8 Q7: 8 students in a row, two specific ones (Maya and Leo) must be at the two ends. How many arrangements?</p>
+    <p>The mistake: treating it like a single-end fix and counting 5! = 120, or forgetting that the two end people can also swap positions.</p>
+    <div class="seats">
+      <div><div class="seat seat-fixed">M or L</div><div class="seat-label">End 1</div></div>
+      <div><div class="seat seat-free">★</div><div class="seat-label">Middle 1</div></div>
+      <div><div class="seat seat-free">★</div><div class="seat-label">Middle 2</div></div>
+      <div><div class="seat seat-free">★</div><div class="seat-label">Middle 3</div></div>
+      <div><div class="seat seat-free">★</div><div class="seat-label">Middle 4</div></div>
+      <div><div class="seat seat-free">★</div><div class="seat-label">Middle 5</div></div>
+      <div><div class="seat seat-free">★</div><div class="seat-label">Middle 6</div></div>
+      <div><div class="seat seat-fixed">L or M</div><div class="seat-label">End 2</div></div>
+    </div>
+    <div class="rule-box blue">
+      <b>Method — Both ends fixed:</b><br>
+      Step 1: Arrange the 2 end people → <b>2! = 2 ways</b> (Maya left + Leo right, OR Leo left + Maya right)<br>
+      Step 2: Arrange the remaining (n−2) middle people → <b>(n−2)!</b><br>
+      Step 3: Multiply → <b>Total = 2 × (n−2)!</b>
+    </div>
+    <p>For 8 students: 2 × 6! = 2 × 720 = <span class="hi-blue">1440</span></p>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-green" onclick="next()">Next → Practice Both-Ends ➜</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 4 -->
+<div class="screen" id="s3">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-blue">Both-Ends Practice</span>
+    <h2>Practice: Both-Ends Permutations</h2>
+
+    <p><b>Q4.</b> 6 people stand in a row. Anna and Ben must be at the two ends. How many arrangements?</p>
+    <div class="input-row">
+      <label>Number of arrangements:</label>
+      <input type="number" id="q4" min="0" max="999" placeholder="?">
+      <button class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q4',48,'fb4')">Check</button>
+    </div>
+    <div class="feedback" id="fb4"></div>
+    <div class="reveal" id="r4"><div class="eq">2 × (6−2)! = 2 × 4! = 2 × 24 = 48</div></div>
+
+    <hr style="margin:18px 0;border:none;border-top:1px solid #eee">
+
+    <p><b>Q5.</b> 7 children stand in a row for a photo. The two tallest must stand at both ends. How many ways can all 7 be arranged?</p>
+    <div class="input-row">
+      <label>Number of ways:</label>
+      <input type="number" id="q5" min="0" max="9999" placeholder="?">
+      <button class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q5',240,'fb5')">Check</button>
+    </div>
+    <div class="feedback" id="fb5"></div>
+    <div class="reveal" id="r5"><div class="eq">2 × (7−2)! = 2 × 5! = 2 × 120 = 240</div></div>
+
+    <hr style="margin:18px 0;border:none;border-top:1px solid #eee">
+
+    <p><b>Q6. ⭐</b> 5 students in a row. Student A must be at the LEFT end. Student B must be at the RIGHT end. (They cannot swap.) How many arrangements?</p>
+    <div class="input-row">
+      <label>Number of arrangements:</label>
+      <input type="number" id="q6" min="0" max="999" placeholder="?">
+      <button class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q6',6,'fb6')">Check</button>
+    </div>
+    <div class="feedback" id="fb6"></div>
+    <div class="reveal" id="r6">
+      <div class="eq">1 way for ends (A fixed left, B fixed right) × 3! middle = 6</div>
+      <div class="rule-box" style="margin-top:10px"><b>Note:</b> When the question says each person is fixed at a SPECIFIC end (not "either end"), use 1 × (n−2)! not 2 × (n−2)!. If they can be at EITHER end, use 2 × (n−2)!.</div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-green" onclick="next()">Next → Summary ➜</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 5 -->
+<div class="screen" id="s4">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-green">🏆 Done!</span>
+    <h2>Two Gap Fixes — Locked In</h2>
+    <div class="rule-box">
+      <b>Fraction Direction:</b><br>
+      "Gave away X" → ask "What fraction was KEPT?" → kept = (1 − X)<br>
+      Amount left = kept × original → original = amount left ÷ kept fraction
+    </div>
+    <div class="rule-box blue" style="margin-top:0">
+      <b>Both-Ends Permutations:</b><br>
+      Two specific people at EITHER end → 2 × (n−2)!<br>
+      Each person at a SPECIFIC end (no swap) → 1 × (n−2)!
+    </div>
+    <p>These two error types are common in ISA and competition problems. Now you have the framework — the question is just deciding which version applies.</p>
+    <div style="text-align:center;margin-top:18px">
+      <span class="badge">✅ Both U8 gaps — fixed</span>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-green" onclick="window.location.href='index.html'">← Back to All Lessons</button>
+  </div>
+</div>
+</div>
+
+<script>
+var TOTAL = 5;
+var current = 0;
+
+function buildDots() {
+  var d = document.getElementById('dots');
+  for (var i = 0; i < TOTAL; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.id = 'dot' + i;
+    d.appendChild(dot);
+  }
+}
+
+function chk(id, ans, fbId) {
+  var v = parseInt(document.getElementById(id).value);
+  var fb = document.getElementById(fbId);
+  var revId = 'r' + id.replace('q','');
+  var rev = document.getElementById(revId);
+  if (v === ans) {
+    fb.textContent = '✅ Correct!'; fb.className = 'feedback ok';
+    if (rev) rev.classList.add('show');
+  } else {
+    fb.textContent = '✗ Not quite. Check your method and try again!'; fb.className = 'feedback err';
+    if (rev) rev.classList.add('show');
+  }
+}
+
+function next() {
+  document.getElementById('s'+current).classList.remove('visible');
+  document.getElementById('dot'+current).classList.remove('active');
+  document.getElementById('dot'+current).classList.add('complete');
+  current++;
+  document.getElementById('s'+current).classList.add('visible');
+  document.getElementById('dot'+current).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+buildDots();
+</script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ratio Basics — Unit 9</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; min-height: 100vh; }
+    header { background: linear-gradient(135deg,#e65100 0%,#f57c00 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 18px 0 4px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+    .dot.active { background: #e65100; }
+    .dot.complete { background: #2e7d32; }
+    .screen { display: none; }
+    .screen.visible { display: block; }
+    .wrap { max-width: 660px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .tag-orange { background: #fff3e0; color: #e65100; }
+    .tag-blue { background: #e3f2fd; color: #1565c0; }
+    .tag-green { background: #e8f5e9; color: #2e7d32; }
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
+    p { font-size: 0.95rem; color: #444; line-height: 1.65; margin-bottom: 10px; }
+    .hi { color: #e65100; font-weight: 700; }
+    .hi-blue { color: #1565c0; font-weight: 700; }
+    .hi-green { color: #2e7d32; font-weight: 700; }
+    .hi-red { color: #c62828; font-weight: 700; }
+    .rule-box { background: #fff3e0; border-left: 4px solid #e65100; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.95rem; line-height: 1.8; color: #3a1500; }
+    .rule-box b { color: #e65100; }
+    .rule-box.blue { background: #e3f2fd; border-left-color: #1565c0; color: #0a2040; }
+    .rule-box.blue b { color: #1565c0; }
+    .rule-box.green { background: #e8f5e9; border-left-color: #2e7d32; color: #1b3a1b; }
+    .rule-box.green b { color: #2e7d32; }
+    .ratio-vis { display: flex; gap: 6px; align-items: center; justify-content: center; margin: 16px 0; flex-wrap: wrap; }
+    .ratio-block { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; color: white; }
+    .rb-a { background: #1565c0; }
+    .rb-b { background: #e65100; }
+    .ratio-label { font-size: 0.8rem; color: #718096; text-align: center; }
+    .method-box { background: #f8f9ff; border-radius: 12px; padding: 16px 20px; margin: 14px 0; border: 1.5px solid #e0e0e0; }
+    .method-step { display: flex; align-items: flex-start; gap: 10px; margin: 10px 0; font-size: 0.93rem; color: #333; line-height: 1.6; }
+    .step-num { min-width: 26px; height: 26px; border-radius: 50%; background: #e65100; color: white; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .worked { background: #fffde7; border-radius: 12px; padding: 16px 20px; margin: 14px 0; border: 1.5px solid #f9a825; }
+    .worked-title { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; color: #f57f17; margin-bottom: 10px; }
+    .wline { font-size: 0.93rem; color: #333; line-height: 1.7; margin: 4px 0; }
+    .wline b { color: #1565c0; }
+    .ans-box { background: #e8f5e9; border-radius: 8px; padding: 8px 14px; margin-top: 10px; font-weight: 700; font-size: 0.95rem; color: #1b5e20; }
+    input[type=number] { width: 90px; padding: 9px 12px; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; font-weight: 700; text-align: center; outline: none; transition: border-color 0.2s; }
+    input:focus { border-color: #e65100; }
+    input.correct { border-color: #2e7d32; background: #f0fff4; }
+    input.wrong { border-color: #c62828; background: #fff5f5; }
+    .input-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 4px; flex-wrap: wrap; }
+    .input-row label { font-size: 0.9rem; color: #555; flex: 1; min-width: 180px; line-height: 1.5; }
+    .feedback { font-size: 0.85rem; margin-top: 6px; min-height: 18px; font-weight: 600; }
+    .feedback.ok { color: #2e7d32; }
+    .feedback.err { color: #c62828; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; border: none; cursor: pointer; transition: opacity 0.15s, transform 0.1s; }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-orange { background: linear-gradient(135deg,#e65100,#f57c00); color: white; }
+    .btn-green { background: linear-gradient(135deg,#2e7d32,#43a047); color: white; }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .reveal { display: none; margin-top: 10px; }
+    .reveal.show { display: block; }
+    .badge { display: inline-block; background: linear-gradient(135deg,#ffd700,#f59e0b); color: #7c4f00; font-weight: 800; font-size: 1rem; padding: 8px 20px; border-radius: 20px; }
+    .big-ratio { font-size: 2.2rem; font-weight: 900; color: #e65100; text-align: center; margin: 10px 0; }
+    .eq { font-size: 1.2rem; font-weight: 800; color: #2e7d32; text-align: center; margin: 12px 0; padding: 10px; background: #e8f5e9; border-radius: 10px; }
+  </style>
+</head>
+<body>
+<header>
+  <div>
+    <a href="index.html">← Back to Lessons</a>
+    <h1>➗ Ratio Basics</h1>
+    <p>Unit 9 · Arithmetic · Coach: Chusaki</p>
+  </div>
+</header>
+
+<div class="dots" id="dots"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 1 -->
+<div class="screen visible" id="s0">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-orange">🆕 New Topic</span>
+    <h2>What is a Ratio?</h2>
+    <p>A ratio compares two quantities. <span class="hi">3 : 2</span> means "for every 3 of the first thing, there are 2 of the second."</p>
+    <div class="big-ratio">3 : 2</div>
+    <div style="display:flex;gap:6px;justify-content:center;margin:16px 0;flex-wrap:wrap">
+      <div><div class="ratio-vis"><div class="ratio-block rb-a">A</div><div class="ratio-block rb-a">A</div><div class="ratio-block rb-a">A</div><div class="ratio-block rb-b">B</div><div class="ratio-block rb-b">B</div></div><div class="ratio-label">Ratio 3:2</div></div>
+    </div>
+    <div class="rule-box">
+      <b>Key vocabulary:</b><br>
+      • The ratio <b>3:2</b> has <b>5 total parts</b> (3+2)<br>
+      • The ratio <b>2:5</b> has <b>7 total parts</b> (2+5)<br>
+      • Each "part" has the same value — we find it by dividing the total or difference
+    </div>
+    <p>Two types of ratio problems appear in ISA:</p>
+    <div class="method-box">
+      <div class="method-step"><div class="step-num">A</div><b>Given the total</b> — find each amount<br><small style="color:#888">e.g. "Ratio 2:3, total = 20, find each part"</small></div>
+      <div class="method-step"><div class="step-num">B</div><b>Given the difference</b> — find each amount<br><small style="color:#888">e.g. "Ratio 2:5, difference = 21, find each part" ← this was U8 Q14</small></div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-orange" onclick="next()">Next → Type A: Given Total ➜</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 2 -->
+<div class="screen" id="s1">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-blue">Type A</span>
+    <h2>Ratio + Total → Find Each Part</h2>
+    <div class="worked">
+      <div class="worked-title">📘 Worked Example</div>
+      <p style="font-size:0.93rem;color:#555;margin-bottom:10px"><b>Question:</b> Red and blue marbles are in the ratio 2 : 3. There are 20 marbles in total. How many of each colour?</p>
+      <div class="wline"><b>Step 1: Count total parts:</b> 2 + 3 = 5 parts</div>
+      <div class="wline"><b>Step 2: Value of 1 part:</b> 20 ÷ 5 = 4</div>
+      <div class="wline"><b>Step 3: Multiply:</b> Red = 2 × 4 = <b>8</b> &nbsp;|&nbsp; Blue = 3 × 4 = <b>12</b></div>
+      <div class="wline"><b>Check:</b> 8 + 12 = 20 ✓</div>
+      <div class="ans-box">Red = 8 &nbsp;|&nbsp; Blue = 12</div>
+    </div>
+    <div class="rule-box blue">
+      <b>Formula (Total type):</b><br>
+      1 part = Total ÷ (sum of ratio)<br>
+      Each amount = ratio number × (1 part)
+    </div>
+  </div>
+  <div class="card">
+    <span class="tag tag-orange">Practice</span>
+    <h2>Try It</h2>
+    <p><b>Q1.</b> Boys and girls in a class are in ratio 3 : 4. There are 28 students. How many boys?</p>
+    <div class="input-row">
+      <label>Number of boys:</label>
+      <input type="number" id="q1" min="0" max="99" placeholder="?">
+      <button class="btn btn-orange" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q1',12,'fb1')">Check</button>
+    </div>
+    <div class="feedback" id="fb1"></div>
+    <div class="reveal" id="r1"><div class="eq">3+4=7 parts &nbsp;|&nbsp; 28÷7=4 &nbsp;|&nbsp; Boys = 3×4 = 12</div></div>
+
+    <hr style="margin:18px 0;border:none;border-top:1px solid #eee">
+
+    <p><b>Q2.</b> Money is shared in ratio 5 : 3. Total = $48. Find the larger share.</p>
+    <div class="input-row">
+      <label>Larger share ($):</label>
+      <input type="number" id="q2" min="0" max="99" placeholder="?">
+      <button class="btn btn-orange" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q2',30,'fb2')">Check</button>
+    </div>
+    <div class="feedback" id="fb2"></div>
+    <div class="reveal" id="r2"><div class="eq">5+3=8 parts &nbsp;|&nbsp; 48÷8=6 &nbsp;|&nbsp; Larger = 5×6 = $30</div></div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-orange" onclick="next()">Next → Type B: Given Difference ➜</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 3 -->
+<div class="screen" id="s2">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-orange">Type B — ISA Favourite</span>
+    <h2>Ratio + Difference → Find Each Part</h2>
+    <p>This is the type from U8 Q14 — the one left blank. It looks harder but uses the same idea.</p>
+    <div class="worked">
+      <div class="worked-title">📘 Worked Example</div>
+      <p style="font-size:0.93rem;color:#555;margin-bottom:10px"><b>Question:</b> Two amounts are in ratio 2 : 5. The difference between them is 21. Find each amount.</p>
+      <div class="wline"><b>Step 1: Difference in parts:</b> 5 − 2 = 3 parts</div>
+      <div class="wline"><b>Step 2: Value of 1 part:</b> 21 ÷ 3 = 7</div>
+      <div class="wline"><b>Step 3: Multiply:</b> Smaller = 2 × 7 = <b>14</b> &nbsp;|&nbsp; Larger = 5 × 7 = <b>35</b></div>
+      <div class="wline"><b>Check:</b> 35 − 14 = 21 ✓ &nbsp;|&nbsp; 14 : 35 = 2 : 5 ✓</div>
+      <div class="ans-box">Smaller = 14 &nbsp;|&nbsp; Larger = 35</div>
+    </div>
+    <div class="rule-box">
+      <b>Formula (Difference type):</b><br>
+      1 part = Difference ÷ (difference of ratio numbers)<br>
+      Each amount = ratio number × (1 part)
+    </div>
+  </div>
+  <div class="card">
+    <span class="tag tag-orange">Practice</span>
+    <h2>Try It</h2>
+    <p><b>Q3.</b> Two bags of rice are in ratio 3 : 7. The heavier bag has 16 kg more. How heavy is the heavier bag?</p>
+    <div class="input-row">
+      <label>Heavier bag (kg):</label>
+      <input type="number" id="q3" min="0" max="99" placeholder="?">
+      <button class="btn btn-orange" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q3',28,'fb3')">Check</button>
+    </div>
+    <div class="feedback" id="fb3"></div>
+    <div class="reveal" id="r3"><div class="eq">7−3=4 parts &nbsp;|&nbsp; 16÷4=4 &nbsp;|&nbsp; Heavier = 7×4 = 28 kg</div></div>
+
+    <hr style="margin:18px 0;border:none;border-top:1px solid #eee">
+
+    <p><b>Q4.</b> Leo saved $15 more than Maya. Their savings are in ratio 8 : 3. How much did Leo save?</p>
+    <div class="input-row">
+      <label>Leo's savings ($):</label>
+      <input type="number" id="q4" min="0" max="99" placeholder="?">
+      <button class="btn btn-orange" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q4',24,'fb4')">Check</button>
+    </div>
+    <div class="feedback" id="fb4"></div>
+    <div class="reveal" id="r4"><div class="eq">8−3=5 parts &nbsp;|&nbsp; 15÷5=3 &nbsp;|&nbsp; Leo = 8×3 = $24</div></div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-orange" onclick="next()">Next → Challenge Problems ➜</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 4 -->
+<div class="screen" id="s3">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-blue">Challenge</span>
+    <h2>Mixed Practice — Spot the Type First</h2>
+    <p>Before solving each question, decide: <span class="hi">Total type</span> or <span class="hi">Difference type</span>?</p>
+
+    <div class="method-box" style="margin-bottom:14px">
+      <div class="method-step"><div class="step-num" style="background:#1565c0">T</div><b>Total given</b> → 1 part = Total ÷ sum of ratio</div>
+      <div class="method-step"><div class="step-num" style="background:#e65100">D</div><b>Difference given</b> → 1 part = Difference ÷ difference of ratio</div>
+    </div>
+
+    <p><b>Q5.</b> Apples and oranges are in ratio 4:1. There are 35 fruits total. How many apples?</p>
+    <div class="input-row">
+      <label>Apples:</label>
+      <input type="number" id="q5" min="0" max="99" placeholder="?">
+      <button class="btn btn-orange" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q5',28,'fb5')">Check</button>
+    </div>
+    <div class="feedback" id="fb5"></div>
+    <div class="reveal" id="r5"><div class="eq">Total type: 4+1=5 | 35÷5=7 | Apples = 4×7 = 28</div></div>
+
+    <hr style="margin:18px 0;border:none;border-top:1px solid #eee">
+
+    <p><b>Q6.</b> Tom has 18 more stickers than Lily. Their stickers are in ratio 5:2. How many does Lily have?</p>
+    <div class="input-row">
+      <label>Lily's stickers:</label>
+      <input type="number" id="q6" min="0" max="99" placeholder="?">
+      <button class="btn btn-orange" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q6',12,'fb6')">Check</button>
+    </div>
+    <div class="feedback" id="fb6"></div>
+    <div class="reveal" id="r6"><div class="eq">Difference type: 5−2=3 | 18÷3=6 | Lily = 2×6 = 12</div></div>
+
+    <hr style="margin:18px 0;border:none;border-top:1px solid #eee">
+
+    <p><b>Q7.</b> ⭐ Red beads and blue beads are in ratio 3:5. The blue beads are 24 more than the red. How many beads are there altogether?</p>
+    <div class="input-row">
+      <label>Total beads:</label>
+      <input type="number" id="q7" min="0" max="200" placeholder="?">
+      <button class="btn btn-orange" style="padding:8px 16px;font-size:0.85rem" onclick="chk('q7',96,'fb7')">Check</button>
+    </div>
+    <div class="feedback" id="fb7"></div>
+    <div class="reveal" id="r7"><div class="eq">5−3=2 | 24÷2=12 per part | Red=36, Blue=60 | Total=96</div></div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-orange" onclick="next()">Next → Summary ➜</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 5 -->
+<div class="screen" id="s4">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-green">🏆 Done!</span>
+    <h2>Ratio — Two Methods, One Key Step</h2>
+    <p>Every ratio problem starts the same way: <span class="hi">find the value of 1 part</span>. Then multiply.</p>
+    <div class="rule-box green">
+      <b>Given TOTAL:</b> 1 part = Total ÷ (a + b)<br>
+      <b>Given DIFFERENCE:</b> 1 part = Difference ÷ (b − a)<br><br>
+      Then: Amount A = a × (1 part) &nbsp;|&nbsp; Amount B = b × (1 part)
+    </div>
+    <p><span class="hi-green">Always check your answer:</span> add both amounts → should equal the total (if total type), or subtract → should equal the difference (if difference type).</p>
+    <div style="text-align:center;margin-top:18px">
+      <span class="badge">✅ Ratio Basics — mastered</span>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-green" onclick="window.location.href='index.html'">← Back to All Lessons</button>
+  </div>
+</div>
+</div>
+
+<script>
+var TOTAL = 5;
+var current = 0;
+
+function buildDots() {
+  var d = document.getElementById('dots');
+  for (var i = 0; i < TOTAL; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.id = 'dot' + i;
+    d.appendChild(dot);
+  }
+}
+
+function chk(id, ans, fbId) {
+  var v = parseInt(document.getElementById(id).value);
+  var fb = document.getElementById(fbId);
+  var revId = 'r' + id.replace('q','');
+  var rev = document.getElementById(revId);
+  if (v === ans) {
+    fb.textContent = '✅ Correct!'; fb.className = 'feedback ok';
+    if (rev) rev.classList.add('show');
+  } else {
+    fb.textContent = '✗ Not quite. Try again!'; fb.className = 'feedback err';
+    if (rev) rev.classList.add('show');
+  }
+}
+
+function next() {
+  document.getElementById('s'+current).classList.remove('visible');
+  document.getElementById('dot'+current).classList.remove('active');
+  document.getElementById('dot'+current).classList.add('complete');
+  current++;
+  document.getElementById('s'+current).classList.add('visible');
+  document.getElementById('dot'+current).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+buildDots();
+</script>
+</body>
+</html>

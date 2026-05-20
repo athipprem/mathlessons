@@ -152,20 +152,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <span class="sb-icon">&#9989;</span>
       <span class="sb-lbl">Done</span>
     </button>
-    <button class="sb-btn" onclick="showPanel('coming',this)" title="Coming Soon">
-      <span class="sb-icon">&#128274;</span>
-      <span class="sb-lbl">Soon</span>
-    </button>
+
     <button class="sb-btn" onclick="showPanel('progress',this)" title="Progress &amp; Goals">
       <span class="sb-icon">&#128200;</span>
       <span class="sb-lbl">Progress</span>
     </button>
-    <div class="sb-spacer"></div>
     <div class="sb-divider"></div>
     <button class="sb-btn" onclick="openDashboard()" title="Coach Dashboard">
       <span class="sb-icon" style="font-size:15px">&#128202;</span>
       <span class="sb-lbl">Board</span>
     </button>
+    <div class="sb-spacer"></div>
   </nav>
 
   <!-- MAIN -->
@@ -178,7 +175,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <span id="topbar-sub">&nbsp;&mdash;&nbsp;Grade 4 &nbsp;|&nbsp; ISA 2027 Training &nbsp;|&nbsp; Coach: Chusaki</span>
       </div>
       <div class="topbar-right">
-        <span class="tb-badge tb-orange">Unit 8 — Lessons Ready</span>
+        <span class="tb-badge tb-orange">Unit 9 — Lessons Ready</span>
         <span class="tb-badge tb-orange">&#8987; <span id="topbar-days">...</span> days to ISA 2027</span>
       </div>
     </div>
@@ -212,42 +209,40 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
       <!-- PANEL: THIS UNIT -->
       <div class="panel active" id="panel-thisunit">
-        <div class="card">
-          <div class="card-hd"><span class="dot" style="background:#a0aec0"></span>Unit 7 Result &mdash; 10/15 (67%)</div>
-          <p style="font-size:12px;color:#4a5568;line-height:1.7">Prime Fact 1/5 (Q1&ndash;Q3 blank, trigger not firing &mdash; 3rd unit). Q4 correct (84 &#10003;). Q5 incomplete (missed factor 40). Fix &amp; Remove 4/5. Algebra 5/5 perfect. Trigger gap + factor enumeration are the U8 focus.</p>
-        </div>
+        <!-- JS-rendered last unit pattern box (reads from prem_data.js) -->
+        <div id="idx-unit-pattern" style="margin-bottom:12px"></div>
         <div class="card" style="margin-top:0">
-          <div class="card-hd"><span class="dot" style="background:#f6993f"></span>Unit 8 &mdash; Lessons Delivered &middot; Test Pending</div>
+          <div class="card-hd"><span class="dot" style="background:#9B59B6"></span>Unit 9 &mdash; Lessons Ready &middot; Test Pending &#128203;</div>
           <div class="grid-3" style="margin-top:4px">
-            <div class="lesson-card number" style="border-top-color:#7b1fa2">
-              <div class="lc-unit">Number Theory &middot; Unit 8</div>
-              <div class="lc-title">Prime Factorisation Reflex</div>
-              <div class="lc-desc">New trigger ritual &mdash; see the word, draw the tree immediately. Fixes Q1&ndash;Q3 blank pattern.</div>
+            <div class="lesson-card number" style="border-top-color:#5C0F8B">
+              <div class="lc-unit">Number Theory &middot; Unit 9</div>
+              <div class="lc-title">Pre-Scan Protocol</div>
+              <div class="lc-desc">5-step pre-scan ritual to fix the 4-unit prime factorisation trigger gap. Scan all Qs first &mdash; circle every trigger word before answering.</div>
               <div class="lc-badges">
-                <span class="badge badge-new">&#9654; Active</span>
-                <span class="badge badge-test-open">&#9201; Test Pending</span>
+                <span class="badge badge-new">&#9654; New</span>
+                <span class="badge" style="background:#f3e8ff;color:#5C0F8B">Priority 1 &#128683;</span>
               </div>
-              <a class="btn-start number" href="NumberTheory_Lesson_PrimeFactReflex.html">Start</a>
+              <a class="btn-start number" href="NumberTheory_Lesson_PreScanProtocol.html">Start</a>
             </div>
-            <div class="lesson-card number" style="border-top-color:#7b1fa2">
-              <div class="lc-unit">Number Theory &middot; Unit 8</div>
-              <div class="lc-title">Factor Enumeration</div>
-              <div class="lc-desc">Systematic pair method &mdash; 1&times;N, test 2, 3 &hellip; stop at &radic;N. Never miss a factor again.</div>
+            <div class="lesson-card" style="border-top-color:#c05621">
+              <div class="lc-unit">Arithmetic &middot; Unit 9</div>
+              <div class="lc-title">Ratio Basics</div>
+              <div class="lc-desc">Type A (ratio + total) and Type B (ratio + difference). 1 part = Total &divide; sum; or Difference &divide; (diff of ratio numbers).</div>
               <div class="lc-badges">
-                <span class="badge badge-new">&#9654; Active</span>
-                <span class="badge badge-test-open">&#9201; Test Pending</span>
+                <span class="badge badge-new">&#9654; New</span>
+                <span class="badge" style="background:#fff5e6;color:#c05621">First time &#128218;</span>
               </div>
-              <a class="btn-start number" href="NumberTheory_Lesson_FactorEnumeration.html">Start</a>
+              <a class="btn-start" style="background:linear-gradient(135deg,#f6993f,#f59e0b)" href="Arithmetic_Lesson_RatioBasics.html">Start</a>
             </div>
-            <div class="lesson-card counting" style="border-top-color:#1e88e5">
-              <div class="lc-unit">Art of Counting &middot; Unit 8</div>
-              <div class="lc-title">Double-Constraint Permutations</div>
-              <div class="lc-desc">Fix &amp; Remove applied twice &mdash; two fixed slots, remove both from pool, count free slots down.</div>
+            <div class="lesson-card counting" style="border-top-color:#1a5c1a">
+              <div class="lc-unit">Algebra &middot; Art of Counting &middot; Unit 9</div>
+              <div class="lc-title">Fraction Direction &amp; Both-Ends</div>
+              <div class="lc-desc">Fix fraction &ldquo;give away&rdquo; direction (work from what&rsquo;s kept) and both-ends permutations: 2&times;(n&minus;2)! vs 2&times;(n&minus;1)!.</div>
               <div class="lc-badges">
-                <span class="badge badge-new">&#9654; Active</span>
-                <span class="badge badge-test-open">&#9201; Test Pending</span>
+                <span class="badge badge-new">&#9654; New</span>
+                <span class="badge badge-done">Gap fix &#11014;</span>
               </div>
-              <a class="btn-start" href="Counting_Lesson_DoubleConstraint.html">Start</a>
+              <a class="btn-start" style="background:linear-gradient(135deg,#43e97b,#38f9d7);color:#1a3a1a" href="Algebra_Lesson_FractionDirection_BothEnds.html">Start</a>
             </div>
           </div>
         </div>
@@ -255,63 +250,101 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
       <!-- PANEL: COMPLETED -->
       <div class="panel" id="panel-completed">
+        <!-- FILTER BAR -->
+        <div id="done-filter-bar" style="display:flex;gap:8px;margin-bottom:16px;align-items:center">
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#718096">Group by:</span>
+          <button id="done-btn-topic" onclick="doneFilter('topic')" style="padding:4px 14px;border-radius:20px;border:1.5px solid #667eea;background:#667eea;color:#fff;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:0.3px">By Topic</button>
+          <button id="done-btn-unit"  onclick="doneFilter('unit')"  style="padding:4px 14px;border-radius:20px;border:1.5px solid #cbd5e0;background:transparent;color:#718096;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:0.3px">By Unit</button>
+        </div>
+        <!-- VIEW: BY TOPIC -->
+        <div id="done-by-topic">
         <div class="sec-div">Art of Counting</div>
         <div class="grid-3" style="margin-bottom:20px">
-          <div class="lesson-card counting">
-            <div class="lc-unit">Art of Counting &middot; Unit 7</div>
+          <div class="lesson-card counting" data-unit="8" data-topic="counting">
+            <div class="lc-unit">Art of Counting · Unit 8</div>
+            <div class="lc-title">Double-Constraint Permutations</div>
+            <div class="lc-desc">Fix &amp; Remove applied twice — two fixed slots, remove both from pool, count free slots down.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 9/15</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#667eea,#764ba2)" href="Counting_Lesson_DoubleConstraint.html">Review</a>
+          </div>
+          <div class="lesson-card counting" data-unit="7" data-topic="counting">
+            <div class="lc-unit">Art of Counting · Unit 7</div>
             <div class="lc-title">Fix &amp; Remove</div>
             <div class="lc-desc">Fixed-position pool reduction. Fix first, remove from pool, then count the free slots with the box method.</div>
             <div class="lc-badges">
               <span class="badge badge-done">&#10003; Lesson Done</span>
               <span class="badge badge-test-done">&#10003; Test 10/15</span>
             </div>
-            <a class="btn-start" href="Counting_Lesson_FixAndRemove.html">Review</a>
+            <a class="btn-start" style="background:linear-gradient(135deg,#667eea,#764ba2)" href="Counting_Lesson_FixAndRemove.html">Review</a>
           </div>
-          <div class="lesson-card counting">
-            <div class="lc-unit">Art of Counting &middot; Unit 6</div>
+          <div class="lesson-card counting" data-unit="6" data-topic="counting">
+            <div class="lc-unit">Art of Counting · Unit 6</div>
             <div class="lc-title">Partial Permutations</div>
             <div class="lc-desc">How many slots am I filling? Count down from n, stop after k boxes. Fixed-position constraint drill.</div>
             <div class="lc-badges">
               <span class="badge badge-done">&#10003; Lesson Done</span>
               <span class="badge badge-test-done">&#10003; Test 12/15</span>
             </div>
-            <a class="btn-start" href="Counting_Lesson_PartialPermutations.html">Review</a>
+            <a class="btn-start" style="background:linear-gradient(135deg,#667eea,#764ba2)" href="Counting_Lesson_PartialPermutations.html">Review</a>
           </div>
-          <div class="lesson-card counting">
-            <div class="lc-unit">Art of Counting &middot; Unit 5</div>
+          <div class="lesson-card counting" data-unit="5" data-topic="counting">
+            <div class="lc-unit">Art of Counting · Unit 5</div>
             <div class="lc-title">Factorials &amp; Permutations</div>
             <div class="lc-desc">5! and n&times;(n&minus;1)&times;&hellip; shortcut for full arrangements and partial picks.</div>
             <div class="lc-badges">
               <span class="badge badge-done">&#10003; Lesson Done</span>
               <span class="badge badge-test-done">&#10003; Test 10/15</span>
             </div>
-            <a class="btn-start" href="Counting_Lesson_Factorials.html">Review</a>
+            <a class="btn-start" style="background:linear-gradient(135deg,#667eea,#764ba2)" href="Counting_Lesson_Factorials.html">Review</a>
           </div>
-          <div class="lesson-card counting">
-            <div class="lc-unit">Art of Counting &middot; Unit 4</div>
+          <div class="lesson-card counting" data-unit="4" data-topic="counting">
+            <div class="lc-unit">Art of Counting · Unit 4</div>
             <div class="lc-title">Box Method: Positions vs Options</div>
-            <div class="lc-desc">The golden rule &mdash; boxes = positions to fill, not the number of available options.</div>
+            <div class="lc-desc">The golden rule — boxes = positions to fill, not the number of available options.</div>
             <div class="lc-badges">
               <span class="badge badge-done">&#10003; Lesson Done</span>
               <span class="badge badge-test-done">&#10003; Test 14/15 &#127775;</span>
             </div>
-            <a class="btn-start" href="Counting_Lesson_BoxMethod.html">Review</a>
+            <a class="btn-start" style="background:linear-gradient(135deg,#667eea,#764ba2)" href="Counting_Lesson_BoxMethod.html">Review</a>
           </div>
-          <div class="lesson-card counting">
-            <div class="lc-unit">Art of Counting &middot; Unit 3</div>
+          <div class="lesson-card counting" data-unit="3" data-topic="counting">
+            <div class="lc-unit">Art of Counting · Unit 3</div>
             <div class="lc-title">With &amp; Without Repeats</div>
             <div class="lc-desc">Learn when order matters and how to count arrangements using the box method.</div>
             <div class="lc-badges">
               <span class="badge badge-done">&#10003; Lesson Done</span>
               <span class="badge badge-test-done">&#10003; Test 10/15</span>
             </div>
-            <a class="btn-start" href="Counting_Lesson_WithWithoutRepeats.html">Review</a>
+            <a class="btn-start" style="background:linear-gradient(135deg,#667eea,#764ba2)" href="Counting_Lesson_WithWithoutRepeats.html">Review</a>
           </div>
         </div>
         <div class="sec-div">Number Theory</div>
-        <div class="grid-3">
-          <div class="lesson-card number">
-            <div class="lc-unit">Number Theory &middot; Unit 7</div>
+        <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card number" data-unit="8" data-topic="number">
+            <div class="lc-unit">Number Theory · Unit 8</div>
+            <div class="lc-title">Prime Factorisation Reflex</div>
+            <div class="lc-desc">New trigger ritual — see the word, draw the tree immediately. Pre-scan protocol escalation.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 9/15</span>
+            </div>
+            <a class="btn-start number" href="NumberTheory_Lesson_PrimeFactReflex.html">Review</a>
+          </div>
+          <div class="lesson-card number" data-unit="8" data-topic="number">
+            <div class="lc-unit">Number Theory · Unit 8</div>
+            <div class="lc-title">Factor Enumeration</div>
+            <div class="lc-desc">Systematic pair method — 1&times;N, test 2, 3 &hellip; stop at &radic;N. Factor count formula (a+1)(b+1)&hellip;</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 9/15</span>
+            </div>
+            <a class="btn-start number" href="NumberTheory_Lesson_FactorEnumeration.html">Review</a>
+          </div>
+          <div class="lesson-card number" data-unit="7" data-topic="number">
+            <div class="lc-unit">Number Theory · Unit 7</div>
             <div class="lc-title">Prime Factorisation Standalone Drill</div>
             <div class="lc-desc">Build the factor tree reflex. Trigger words, step-locked practice, standalone Qs without LCM context.</div>
             <div class="lc-badges">
@@ -320,8 +353,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
             </div>
             <a class="btn-start number" href="NumberTheory_Lesson_PrimeFactorisationDrill.html">Review</a>
           </div>
-          <div class="lesson-card number">
-            <div class="lc-unit">Number Theory &middot; Unit 6</div>
+          <div class="lesson-card number" data-unit="6" data-topic="number">
+            <div class="lc-unit">Number Theory · Unit 6</div>
             <div class="lc-title">Prime Factorisation &mdash; Deep Drill</div>
             <div class="lc-desc">Factor tree triggers, highest-power rule, and LCM application. Closes Q7/Q8 blank from Unit 5.</div>
             <div class="lc-badges">
@@ -330,8 +363,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
             </div>
             <a class="btn-start number" href="NumberTheory_Lesson_PrimeFactorisation.html">Review</a>
           </div>
-          <div class="lesson-card number">
-            <div class="lc-unit">Number Theory &middot; Unit 5</div>
+          <div class="lesson-card number" data-unit="5" data-topic="number">
+            <div class="lc-unit">Number Theory · Unit 5</div>
             <div class="lc-title">LCM &amp; Prime Factorisation</div>
             <div class="lc-desc">List method, factor trees, and highest-power rule for fast LCM.</div>
             <div class="lc-badges">
@@ -341,34 +374,140 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
             <a class="btn-start number" href="NumberTheory_Lesson_LCM.html">Review</a>
           </div>
         </div>
-      </div>
-
-      <!-- PANEL: COMING SOON -->
-      <div class="panel" id="panel-coming">
-        <div class="grid-3">
-          <div class="lesson-card number coming">
-            <div class="lc-unit">Coming Soon</div>
-            <div class="lc-title">Primes &amp; Divisibility</div>
-            <div class="lc-desc">Why 1 is not prime, and divisibility rules for 2, 3, 5, 9.</div>
-            <span class="badge badge-soon">Soon</span>
-            <a class="btn-start disabled" href="#">Coming Soon</a>
+        </div>
+        <!-- VIEW: BY UNIT -->
+        <div id="done-by-unit" style="display:none">
+        <div class="sec-div">Unit 8 &mdash; 9/15 (60%)</div>
+        <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card counting" data-unit="8" data-topic="counting">
+            <div class="lc-unit">Art of Counting · Unit 8</div>
+            <div class="lc-title">Double-Constraint Permutations</div>
+            <div class="lc-desc">Fix &amp; Remove applied twice — two fixed slots, remove both from pool, count free slots down.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 9/15</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#667eea,#764ba2)" href="Counting_Lesson_DoubleConstraint.html">Review</a>
           </div>
-          <div class="lesson-card algebra coming">
-            <div class="lc-unit">Coming Soon</div>
-            <div class="lc-title">Multi-step Word Problems</div>
-            <div class="lc-desc">Undo operations in reverse order &mdash; "last step first" method.</div>
-            <span class="badge badge-soon">Soon</span>
-            <a class="btn-start disabled" href="#">Coming Soon</a>
+          <div class="lesson-card number" data-unit="8" data-topic="number">
+            <div class="lc-unit">Number Theory · Unit 8</div>
+            <div class="lc-title">Prime Factorisation Reflex</div>
+            <div class="lc-desc">New trigger ritual — see the word, draw the tree immediately. Pre-scan protocol escalation.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 9/15</span>
+            </div>
+            <a class="btn-start number" href="NumberTheory_Lesson_PrimeFactReflex.html">Review</a>
           </div>
-          <div class="lesson-card arithmetic coming">
-            <div class="lc-unit">Coming Soon</div>
-            <div class="lc-title">Fraction of a Remainder</div>
-            <div class="lc-desc">Apply each fraction to its own group, not the original total.</div>
-            <span class="badge badge-soon">Soon</span>
-            <a class="btn-start disabled" href="#">Coming Soon</a>
+          <div class="lesson-card number" data-unit="8" data-topic="number">
+            <div class="lc-unit">Number Theory · Unit 8</div>
+            <div class="lc-title">Factor Enumeration</div>
+            <div class="lc-desc">Systematic pair method — 1&times;N, test 2, 3 &hellip; stop at &radic;N. Factor count formula (a+1)(b+1)&hellip;</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 9/15</span>
+            </div>
+            <a class="btn-start number" href="NumberTheory_Lesson_FactorEnumeration.html">Review</a>
           </div>
         </div>
+        <div class="sec-div">Unit 7 &mdash; 10/15</div>
+        <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card counting" data-unit="7" data-topic="counting">
+            <div class="lc-unit">Art of Counting · Unit 7</div>
+            <div class="lc-title">Fix &amp; Remove</div>
+            <div class="lc-desc">Fixed-position pool reduction. Fix first, remove from pool, then count the free slots with the box method.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 10/15</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#667eea,#764ba2)" href="Counting_Lesson_FixAndRemove.html">Review</a>
+          </div>
+          <div class="lesson-card number" data-unit="7" data-topic="number">
+            <div class="lc-unit">Number Theory · Unit 7</div>
+            <div class="lc-title">Prime Factorisation Standalone Drill</div>
+            <div class="lc-desc">Build the factor tree reflex. Trigger words, step-locked practice, standalone Qs without LCM context.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 10/15</span>
+            </div>
+            <a class="btn-start number" href="NumberTheory_Lesson_PrimeFactorisationDrill.html">Review</a>
+          </div>
+        </div>
+        <div class="sec-div">Unit 6 &mdash; 12/15</div>
+        <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card counting" data-unit="6" data-topic="counting">
+            <div class="lc-unit">Art of Counting · Unit 6</div>
+            <div class="lc-title">Partial Permutations</div>
+            <div class="lc-desc">How many slots am I filling? Count down from n, stop after k boxes. Fixed-position constraint drill.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 12/15</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#667eea,#764ba2)" href="Counting_Lesson_PartialPermutations.html">Review</a>
+          </div>
+          <div class="lesson-card number" data-unit="6" data-topic="number">
+            <div class="lc-unit">Number Theory · Unit 6</div>
+            <div class="lc-title">Prime Factorisation &mdash; Deep Drill</div>
+            <div class="lc-desc">Factor tree triggers, highest-power rule, and LCM application. Closes Q7/Q8 blank from Unit 5.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 12/15</span>
+            </div>
+            <a class="btn-start number" href="NumberTheory_Lesson_PrimeFactorisation.html">Review</a>
+          </div>
+        </div>
+        <div class="sec-div">Unit 5 &mdash; 10/15</div>
+        <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card counting" data-unit="5" data-topic="counting">
+            <div class="lc-unit">Art of Counting · Unit 5</div>
+            <div class="lc-title">Factorials &amp; Permutations</div>
+            <div class="lc-desc">5! and n&times;(n&minus;1)&times;&hellip; shortcut for full arrangements and partial picks.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 10/15</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#667eea,#764ba2)" href="Counting_Lesson_Factorials.html">Review</a>
+          </div>
+          <div class="lesson-card number" data-unit="5" data-topic="number">
+            <div class="lc-unit">Number Theory · Unit 5</div>
+            <div class="lc-title">LCM &amp; Prime Factorisation</div>
+            <div class="lc-desc">List method, factor trees, and highest-power rule for fast LCM.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 10/15</span>
+            </div>
+            <a class="btn-start number" href="NumberTheory_Lesson_LCM.html">Review</a>
+          </div>
+        </div>
+        <div class="sec-div">Unit 4</div>
+        <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card counting" data-unit="4" data-topic="counting">
+            <div class="lc-unit">Art of Counting · Unit 4</div>
+            <div class="lc-title">Box Method: Positions vs Options</div>
+            <div class="lc-desc">The golden rule — boxes = positions to fill, not the number of available options.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 14/15 &#127775;</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#667eea,#764ba2)" href="Counting_Lesson_BoxMethod.html">Review</a>
+          </div>
+        </div>
+        <div class="sec-div">Unit 3</div>
+        <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card counting" data-unit="3" data-topic="counting">
+            <div class="lc-unit">Art of Counting · Unit 3</div>
+            <div class="lc-title">With &amp; Without Repeats</div>
+            <div class="lc-desc">Learn when order matters and how to count arrangements using the box method.</div>
+            <div class="lc-badges">
+              <span class="badge badge-done">&#10003; Lesson Done</span>
+              <span class="badge badge-test-done">&#10003; Test 10/15</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#667eea,#764ba2)" href="Counting_Lesson_WithWithoutRepeats.html">Review</a>
+          </div>
+        </div>
+        </div>
       </div>
+
 
       <!-- PANEL: PROGRESS -->
       <div class="panel" id="panel-progress">
@@ -459,7 +598,6 @@ function checkPassword() {
 var panelTitles = {
   thisunit:  'This Unit',
   completed: 'Completed Lessons',
-  coming:    'Coming Soon',
   progress:  'Progress & Goals'
 };
 function showPanel(name, btn) {
@@ -471,6 +609,20 @@ function showPanel(name, btn) {
 }
 
 // OPEN DASHBOARD (hub token auth)
+
+// DONE PANEL FILTER
+function doneFilter(mode) {
+  document.getElementById('done-by-topic').style.display = mode === 'topic' ? '' : 'none';
+  document.getElementById('done-by-unit').style.display  = mode === 'unit'  ? '' : 'none';
+  var bt = document.getElementById('done-btn-topic');
+  var bu = document.getElementById('done-btn-unit');
+  if (bt && bu) {
+    var on  = 'padding:4px 14px;border-radius:20px;border:1.5px solid #667eea;background:#667eea;color:#fff;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:0.3px';
+    var off = 'padding:4px 14px;border-radius:20px;border:1.5px solid #cbd5e0;background:transparent;color:#718096;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:0.3px';
+    bt.style.cssText = mode === 'topic' ? on : off;
+    bu.style.cssText = mode === 'unit'  ? on : off;
+  }
+}
 function openDashboard() {
   var url = 'Prems_Math_Coach_Dashboard.html';
   if (sessionStorage.getItem('unlocked') === 'yes') {
@@ -514,6 +666,22 @@ function openDashboard() {
 PREM_DATA.renderSkillBars('idx-skill-bars', false);
 PREM_DATA.renderSkillSummary('idx-skill-summary');
 PREM_DATA.renderAchievement('idx-road-pct', 'idx-road-bar', 'idx-road-lbl');
+// ── Unit pattern box (always shows latest completed unit) ──────────────
+(function() {
+  var el = document.getElementById('idx-unit-pattern');
+  if (!el || !PREM_DATA.lastUnit) return;
+  var u = PREM_DATA.lastUnit;
+  var dot = u.delta >= 0 ? '#43e97b' : '#f6993f';
+  var trend = u.delta >= 0 ? ('&#11014; +' + u.delta) : ('&#11015; ' + u.delta);
+  el.innerHTML =
+    '<div class="card" style="border-left:4px solid ' + dot + ';padding:12px 14px">' +
+    '<div class="card-hd" style="margin-bottom:6px">' +
+    '<span class="dot" style="background:' + dot + '"></span>' +
+    'Unit ' + u.n + ' Pattern &mdash; ' + u.score + '/' + u.outOf + ' (' + u.pct + '%) ' + trend +
+    '</div>' +
+    '<div class="insight orange" style="margin:0;font-size:12px;line-height:1.7">' + u.patternInsight + '</div>' +
+    '</div>';
+})();
 // Hero skill %
 var ihs = document.getElementById('idx-hero-skill');
 if (ihs) ihs.textContent = PREM_DATA.achievement() + '%';

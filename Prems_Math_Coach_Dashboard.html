@@ -214,13 +214,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <span class="sb-icon">&#128221;</span>
       <span class="sb-lbl">Results</span>
     </button>
-
-    <div class="sb-spacer"></div>
     <div class="sb-divider"></div>
     <button class="sb-btn back-btn" onclick="window.location.href='index.html'" title="Back to Lessons">
       <span class="sb-icon" style="font-size:14px">&#8592;</span>
       <span class="sb-lbl">Index</span>
     </button>
+    <div class="sb-spacer"></div>
   </nav>
 
   <!-- MAIN AREA -->
@@ -230,14 +229,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <div id="topbar">
       <div style="display:flex;align-items:baseline;gap:0">
         <span id="topbar-title">Overview</span>
-        <span id="topbar-sub">&nbsp;&mdash;&nbsp;Unit 8 lessons delivered &nbsp;|&nbsp; Test pending &nbsp;|&nbsp; Coach: Chusaki &nbsp;|&nbsp; Updated: 19 May 2026</span>
+        <span id="topbar-sub">&nbsp;&mdash;&nbsp;Unit 8 done: 9/15 &nbsp;|&nbsp; Unit 9 Lessons Ready &nbsp;|&nbsp; Coach: Chusaki &nbsp;|&nbsp; Updated: 20 May 2026</span>
       </div>
       <div class="topbar-right">
         <span class="tb-badge tb-blue">&#128221; ISA 2026 &middot; 90th+ pct</span>
         <span class="tb-badge tb-orange">&#129351; ASMOPSS 2025 &middot; Bronze</span>
         <span class="tb-badge tb-silver">&#129352; Kangaroo 2026 &middot; Silver</span>
         <span class="tb-badge tb-purple">&#127885; SASMO 2026 &middot; Hon. Mention</span>
-        <span class="tb-badge tb-orange">&#128218; Unit 8 &mdash; Lessons Ready</span>
+        <span class="tb-badge tb-orange">&#128218; Unit 9 &mdash; Lessons Ready</span>
       </div>
     </div>
 
@@ -246,17 +245,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div class="hero-box">
         <div class="hero-val" id="dash-hero-skill" style="color:#667eea">83%</div>
         <div class="hero-lbl">Skills toward top 5%</div>
-        <div class="hero-sub" style="color:#667eea">Up from 82% after U7</div>
+        <div class="hero-sub" id="dash-hero-skill-sub" style="color:#718096">...</div>
       </div>
       <div class="hero-box">
-        <div class="hero-val" style="color:#f6993f">10 / 15</div>
-        <div class="hero-lbl">Last unit score (Unit 7)</div>
-        <div class="hero-sub" style="color:#f6993f">&#11015; &#8722;2 from Unit 6 (12/15)</div>
+        <div class="hero-val" id="dash-hero-score-val">&#8212;</div>
+        <div class="hero-lbl" id="dash-hero-score-lbl">Last unit score</div>
+        <div class="hero-sub" id="dash-hero-score-sub">...</div>
       </div>
       <div class="hero-box">
-        <div class="hero-val">7</div>
+        <div class="hero-val" id="dash-hero-units-val">&#8212;</div>
         <div class="hero-lbl">Units completed</div>
-        <div class="hero-sub" style="color:#f6993f">U8 lessons delivered</div>
+        <div class="hero-sub" id="dash-hero-units-sub">...</div>
       </div>
       <div class="hero-box">
         <div class="hero-val" id="weeks-left-hero">&#8212;</div>
@@ -272,15 +271,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div class="panel active" id="panel-overview">
         <div class="grid-2">
 
-          <!-- Score bar chart + analysis -->
+          <!-- Left column: Score chart + Unit Log -->
           <div>
             <div class="card">
               <div class="card-hd"><span class="dot" style="background:#667eea"></span>Unit Score History</div>
               <div class="bar-chart" id="dash-score-chart"></div>
-              <div class="insight orange" style="margin-top:14px">
-                <div class="insight-lbl il-orange">&#128269; Unit 7 pattern</div>
-                <p><strong>Prime factorisation 1/5 &mdash; trigger still not firing, 3rd consecutive unit.</strong> Q1/Q2/Q3 blank. Q4 correct (84). Q5 wrong (factor listing). Fix &amp; Remove strong: 4/5 (Q6&ndash;Q9 correct, Q10 double-constraint blank). Algebra 5/5 &mdash; fourth consecutive perfect score. Trigger gap remains #1 priority for U8.</p>
-              </div>
+              <div class="insight orange" id="dash-pattern-insight" style="margin-top:14px"></div>
             </div>
 
             <div class="card">
@@ -289,35 +285,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
             </div>
           </div>
 
-          <!-- Priority gaps -->
+          <!-- Right column: Priority gaps + Road to ISA -->
           <div>
             <div class="card">
               <div class="card-hd"><span class="dot" style="background:#fc4e4e"></span>Priority Gaps</div>
-              <div class="gap-item">
-                <div class="gap-header"><span class="gap-label">Prime Factorisation standalone trigger</span><span class="gpill p1">Priority 1</span></div>
-                <div class="gap-score">U5/U6/U7: Q1&ndash;Q3 blank for 3 consecutive units. Q4 correct (84 &#10003;). Q5 incomplete (missed 40). Section score 1/5. Knowledge is present &mdash; standalone trigger not yet firing.</div>
-                <div class="gap-bar"><div class="gap-fill g1" style="width:15%"></div></div>
-              </div>
-              <div class="gap-item">
-                <div class="gap-header"><span class="gap-label">Double-constraint permutations</span><span class="gpill p2">Priority 2</span></div>
-                <div class="gap-score">U7 Q10: blank &mdash; two independent fixed conditions simultaneously (e.g. no-0 first AND digit fixed middle)</div>
-                <div class="gap-bar"><div class="gap-fill g2" style="width:40%"></div></div>
-              </div>
-              <div class="gap-item">
-                <div class="gap-header"><span class="gap-label">Factor enumeration &mdash; listing all factors</span><span class="gpill p2">Priority 3</span></div>
-                <div class="gap-score">U7 Q5: missed factor 40, wrote 9 instead of 4 &mdash; no systematic listing method</div>
-                <div class="gap-bar"><div class="gap-fill g2" style="width:45%"></div></div>
-              </div>
-              <div class="gap-item">
-                <div class="gap-header"><span class="gap-label">Fix &amp; Remove (fixed-position pool)</span><span class="gpill ps">Fixed &#11014;</span></div>
-                <div class="gap-score">U6 Q4 miss &rarr; U7 Q6&ndash;Q9 all correct (4/5). Pool reduction habit established.</div>
-                <div class="gap-bar"><div class="gap-fill gs" style="width:80%"></div></div>
-              </div>
-              <div class="gap-item" style="margin-bottom:0">
-                <div class="gap-header"><span class="gap-label">Algebra</span><span class="gpill ps">Strength</span></div>
-                <div class="gap-score">U4/U5/U6/U7: 5/5 &middot; 4/5 &middot; 5/5 &middot; 5/5 &mdash; four consecutive near-perfect. Chickens &amp; cows challenge correct.</div>
-                <div class="gap-bar"><div class="gap-fill gs" style="width:94%"></div></div>
-              </div>
+              <div id="dash-priority-gaps"></div>
             </div>
 
             <div class="card">
@@ -361,7 +333,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
             </div>
             <div class="radar-legend">
               <div class="radar-legend-item"><svg width="12" height="12"><circle cx="6" cy="6" r="4" fill="#a0aec0"/></svg>Before Unit 1</div>
-              <div class="radar-legend-item"><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="#667eea"/></svg>Now (U7)</div>
+              <div class="radar-legend-item"><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="#667eea"/></svg><span id="dash-radar-legend-unit">Now (U8)</span></div>
               <div class="radar-legend-item"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="#f6993f" stroke-width="2" stroke-dasharray="4,3"/></svg>Target (Top 5%)</div>
             </div>
           </div>
@@ -383,37 +355,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         </div>
       </div>
 
-      <!-- PANEL: SESSIONS -->
       <!-- PANEL: RESULTS -->
       <div class="panel" id="panel-results">
-        <div class="card" style="margin-bottom:16px">
-          <div class="card-hd"><span class="dot" style="background:#667eea"></span>Unit 7 &mdash; Question Breakdown (10/15)</div>
-          <div style="background:#fff8e1;border:1px solid #fbd38d;border-radius:8px;padding:9px 12px;margin-bottom:12px;font-size:11px;color:#744210">
-            <strong>Prime Fact 1/5 &middot; Fix &amp; Remove 4/5 &middot; Algebra 5/5.</strong> Q1/Q2/Q3 blank (trigger not firing). Q4 correct (84 &#10003;). Q5 incomplete (missed factor 40). Fix &amp; Remove solid improvement. Algebra 5/5 perfect (4th consecutive).
-          </div>
-          <table class="q-table">
-            <tr><th>Q</th><th>Topic</th><th>Lvl</th><th>Result</th><th>Note</th></tr>
-            <tr><td>Q1</td><td>Prime Factorisation &mdash; factorise 18</td><td><span class="lw">Warm</span></td><td class="q-fail">&#10007;</td><td>Blank &mdash; standalone trigger did not fire</td></tr>
-            <tr><td>Q2</td><td>Prime Factorisation &mdash; factorise 60</td><td><span class="lw">Warm</span></td><td class="q-fail">&#10007;</td><td>Blank &mdash; trigger did not fire</td></tr>
-            <tr><td>Q3</td><td>Prime Factorisation &mdash; factorise 84</td><td><span class="lw">Warm</span></td><td class="q-fail">&#10007;</td><td>Blank &mdash; trigger did not fire</td></tr>
-            <tr><td>Q4</td><td>Prime Factorisation &mdash; find N=84 from clues</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>84 &#10003; &mdash; correct via clue reasoning</td></tr>
-            <tr><td>Q5</td><td>Prime Factorisation &mdash; factorise 200, list all factors</td><td><span class="lh">Hard</span></td><td class="q-fail">&#10007;</td><td>Factor listing incomplete &mdash; missed 40, wrote 9 instead of 4</td></tr>
-            <tr><td>Q6</td><td>Fix &amp; Remove &mdash; 3 books, last slot fixed</td><td><span class="lw">Warm</span></td><td class="q-pass">&#10003;</td><td>3&times;2&times;1=6 &#10003;</td></tr>
-            <tr><td>Q7</td><td>Fix &amp; Remove &mdash; 4 digits, first slot fixed</td><td><span class="lw">Warm</span></td><td class="q-pass">&#10003;</td><td>4&times;3&times;2&times;1=24 &#10003;</td></tr>
-            <tr><td>Q8</td><td>Fix &amp; Remove &mdash; 4-digit, two fixed ends</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>3&times;2=6 &#10003;</td></tr>
-            <tr><td>Q9</td><td>Fix &amp; Remove &mdash; 5 items full arrangement</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>5&times;4&times;3&times;2&times;1=120 &#10003;</td></tr>
-            <tr><td>Q10 &#11088;</td><td>Fix &amp; Remove &mdash; 5-digit, two independent constraints</td><td><span class="lh">Hard</span></td><td class="q-fail">&#10007;</td><td>Blank &mdash; double-constraint not yet taught</td></tr>
-            <tr><td>Q11</td><td>Algebra &mdash; find unknown age</td><td><span class="lw">Warm</span></td><td class="q-pass">&#10003;</td><td>9 &#10003;</td></tr>
-            <tr><td>Q12</td><td>Algebra &mdash; find value from equation</td><td><span class="lw">Warm</span></td><td class="q-pass">&#10003;</td><td>36 &#10003;</td></tr>
-            <tr><td>Q13</td><td>Algebra &mdash; find total from ratio</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>24 &#10003;</td></tr>
-            <tr><td>Q14</td><td>Algebra &mdash; 3 consecutive even numbers</td><td><span class="lm">Med</span></td><td class="q-pass">&#10003;</td><td>24, 26, 28 &#10003;</td></tr>
-            <tr><td>Q15 &#11088;</td><td>Algebra &mdash; chickens &amp; cows challenge</td><td><span class="lh">Hard</span></td><td class="q-pass">&#10003;</td><td>&#127775; 8 chickens &mdash; systematic method</td></tr>
-          </table>
-        </div>
-        <div class="insight orange" style="margin-bottom:16px">
-          <div class="insight-lbl il-orange">&#128269; Unit 7 pattern</div>
-          <p><strong>Prime factorisation: 1/5 for third consecutive unit.</strong> Q1/Q2/Q3 blank (trigger absent). Q4 correct (84 via clue). Q5 factor listing incomplete. Fix &amp; Remove is working &mdash; 4/5 with correct pool reduction on Q6&ndash;Q9. Q10 (double-constraint) blank as expected. Algebra 5/5 &mdash; four in a row. U8 must force the factor tree trigger via a new habit-building method.</p>
-        </div>
+        <div class="card" style="margin-bottom:16px" id="dash-q-breakdown"></div>
+        <div class="insight orange" id="dash-analysis-insight" style="margin-bottom:16px"></div>
       </div>
 
       
@@ -593,7 +538,12 @@ PREM_DATA.renderSessionLog('dash-session-log');
 PREM_DATA.renderSkillBars('dash-skill-bars', true);
 PREM_DATA.renderSkillSummary('dash-skill-summary');
 PREM_DATA.renderAchievement('dash-road-pct', 'dash-road-bar', 'dash-road-lbl');
-// Hero skill %
+PREM_DATA.renderHero();
+PREM_DATA.renderPatternInsight('dash-pattern-insight');
+PREM_DATA.renderPriorityGaps('dash-priority-gaps');
+PREM_DATA.renderQBreakdown('dash-q-breakdown');
+PREM_DATA.renderAnalysisInsight('dash-analysis-insight');
+// Hero skill % (box 1 value — computed dynamically)
 var dhs = document.getElementById('dash-hero-skill');
 if (dhs) dhs.textContent = PREM_DATA.achievement() + '%';
 // Skill meta line
@@ -601,4 +551,4 @@ var dsm = document.getElementById('dash-skill-meta');
 if (dsm) dsm.textContent = 'Current score / target score — ' + PREM_DATA.achievement() + '% overall';
 </script>
 </body>
-</html>
+</html> 

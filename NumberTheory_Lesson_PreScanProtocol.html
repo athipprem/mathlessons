@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-Scan Protocol — Unit 9</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; min-height: 100vh; }
+    header { background: linear-gradient(135deg,#6a0dad 0%,#9c27b0 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 18px 0 4px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+    .dot.active { background: #6a0dad; }
+    .dot.complete { background: #2e7d32; }
+    .screen { display: none; }
+    .screen.visible { display: block; }
+    .wrap { max-width: 660px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .tag-purple { background: #f3e5f5; color: #6a0dad; }
+    .tag-red { background: #ffebee; color: #c62828; }
+    .tag-green { background: #e8f5e9; color: #2e7d32; }
+    .tag-blue { background: #e3f2fd; color: #1565c0; }
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
+    p { font-size: 0.95rem; color: #444; line-height: 1.65; margin-bottom: 10px; }
+    .hi { color: #6a0dad; font-weight: 700; }
+    .hi-red { color: #c62828; font-weight: 700; }
+    .hi-green { color: #2e7d32; font-weight: 700; }
+    .rule-box { background: #f3e5f5; border-left: 4px solid #6a0dad; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.95rem; line-height: 1.8; color: #3a003a; }
+    .rule-box b { color: #6a0dad; }
+    .rule-box.green { background: #e8f5e9; border-left-color: #2e7d32; color: #1b3a1b; }
+    .rule-box.green b { color: #2e7d32; }
+    .rule-box.red { background: #ffebee; border-left-color: #c62828; color: #4a0000; }
+    .rule-box.red b { color: #c62828; }
+    .step-line { display: flex; align-items: flex-start; gap: 10px; margin: 10px 0; font-size: 0.93rem; color: #333; line-height: 1.6; }
+    .step-num { min-width: 28px; height: 28px; border-radius: 50%; background: #6a0dad; color: white; font-size: 0.8rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .kw { display: inline; background: #6a0dad; color: white; padding: 1px 8px; border-radius: 5px; font-weight: 700; }
+    .kw.orange { background: #e65100; }
+    .ritual-box { background: linear-gradient(135deg,#f3e5f5,#e1bee7); border-radius: 14px; padding: 20px 24px; margin: 14px 0; border: 2px dashed #6a0dad; }
+    .ritual-step { font-size: 1.05rem; font-weight: 800; color: #4a0069; margin: 8px 0; display: flex; align-items: center; gap: 10px; }
+    .r-num { background: #6a0dad; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 0.85rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .scan-list { background: #f8f9ff; border-radius: 12px; padding: 16px 18px; margin: 14px 0; border: 1.5px solid #e0e0e0; }
+    .scan-q { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; color: #333; }
+    .scan-q:last-child { border-bottom: none; }
+    .scan-q .qn { min-width: 28px; font-weight: 800; color: #9c27b0; }
+    .circle-btn { background: #f3e5f5; border: 2px solid #9c27b0; color: #6a0dad; border-radius: 8px; padding: 3px 12px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .circle-btn.circled { background: #6a0dad; color: white; border-color: #6a0dad; }
+    .feedback { font-size: 0.85rem; margin-top: 6px; min-height: 18px; font-weight: 600; }
+    .feedback.ok { color: #2e7d32; }
+    .feedback.err { color: #c62828; }
+    input[type=number] { width: 90px; padding: 9px 12px; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; font-weight: 700; text-align: center; outline: none; transition: border-color 0.2s; }
+    input:focus { border-color: #6a0dad; }
+    input.correct { border-color: #2e7d32; background: #f0fff4; }
+    input.wrong { border-color: #c62828; background: #fff5f5; }
+    .input-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 4px; flex-wrap: wrap; }
+    .input-row label { font-size: 0.9rem; color: #555; flex: 1; min-width: 200px; line-height: 1.5; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; border: none; cursor: pointer; transition: opacity 0.15s, transform 0.1s; }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-purple { background: linear-gradient(135deg,#6a0dad,#9c27b0); color: white; }
+    .btn-green { background: linear-gradient(135deg,#2e7d32,#43a047); color: white; }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .reveal { display: none; margin-top: 14px; }
+    .reveal.show { display: block; }
+    .prime-eq { font-size: 1.3rem; font-weight: 800; color: #2e7d32; text-align: center; margin: 14px 0; padding: 12px; background: #e8f5e9; border-radius: 10px; }
+    .badge { display: inline-block; background: linear-gradient(135deg,#ffd700,#f59e0b); color: #7c4f00; font-weight: 800; font-size: 1rem; padding: 8px 20px; border-radius: 20px; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+    .compare-box { border-radius: 12px; padding: 14px 16px; }
+    .compare-box.wrong { background: #ffebee; border: 2px solid #ef9a9a; }
+    .compare-box.right { background: #e8f5e9; border: 2px solid #a5d6a7; }
+    .compare-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+    .compare-label.red { color: #c62828; }
+    .compare-label.green { color: #2e7d32; }
+  </style>
+</head>
+<body>
+<header>
+  <div>
+    <a href="index.html">← Back to Lessons</a>
+    <h1>🔍 Pre-Scan Protocol</h1>
+    <p>Unit 9 · Number Theory · Coach: Chusaki</p>
+  </div>
+</header>
+
+<div class="dots" id="dots"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 1 -->
+<div class="screen visible" id="s0">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-red">⚠️ 4 Units — Same Mistake</span>
+    <h2>Why Does the Trigger Keep Failing?</h2>
+    <p>In Units 5, 6, 7, and 8, Q1–Q3 were left <span class="hi-red">completely blank</span>. All of them were prime factorisation questions. You know how to do factor trees — we've drilled them many times. So what's going wrong?</p>
+    <div class="rule-box red">
+      <b>The problem:</b> When you sit down and see Q1 — "Factorise 56" — your brain jumps straight to "what's the answer?" It doesn't say "this is prime factorisation". The <b>trigger word</b> ("factorise") hasn't been spotted yet, so the method never loads.
+    </div>
+    <p>This is a <span class="hi">cold-start problem</span>. The method is in your head — but it doesn't activate unless you consciously recognise the keyword first.</p>
+    <div class="compare">
+      <div class="compare-box wrong">
+        <div class="compare-label red">❌ What happens now</div>
+        <p style="font-size:0.88rem;color:#555">See Q1 → blank mind → skip → blank</p>
+      </div>
+      <div class="compare-box right">
+        <div class="compare-label green">✅ What we need</div>
+        <p style="font-size:0.88rem;color:#555">Spot keyword FIRST → trigger loads → solve</p>
+      </div>
+    </div>
+    <p>The solution is a <span class="hi">pre-scan</span> — a 60-second habit you do before writing a single answer.</p>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-purple" onclick="next()">Next → The Protocol ➜</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 2 -->
+<div class="screen" id="s1">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-purple">🔍 The Protocol</span>
+    <h2>Pre-Scan: 5 Steps Before You Answer Q1</h2>
+    <p>Every time you receive a test paper, do this <span class="hi">before writing any answer</span>:</p>
+    <div class="ritual-box">
+      <div class="ritual-step"><div class="r-num">1</div> Pick up your pencil. Don't start writing yet.</div>
+      <div class="ritual-step"><div class="r-num">2</div> Read through ALL questions — just the question text, not solving.</div>
+      <div class="ritual-step"><div class="r-num">3</div> Circle every trigger word you see:<br>
+        <span style="margin-left:40px"><span class="kw">prime</span> &nbsp; <span class="kw">factor</span> &nbsp; <span class="kw">factorise</span> &nbsp; <span class="kw">factors of</span> &nbsp; <span class="kw orange">how many factors</span></span></div>
+      <div class="ritual-step"><div class="r-num">4</div> Count how many you circled → write that number in the margin.</div>
+      <div class="ritual-step"><div class="r-num">5</div> NOW start answering from Q1.</div>
+    </div>
+    <div class="rule-box green">
+      <b>Why it works:</b> Reading all questions first tells your brain what methods are needed <em>before</em> it needs them. By the time you reach Q1, your brain already knows a factor tree is coming — so it fires immediately.
+    </div>
+    <p>The scan takes about <span class="hi">60 seconds</span>. It will save you 3+ blank questions every test.</p>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-purple" onclick="next()">Next → Practice the Scan ➜</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 3 -->
+<div class="screen" id="s2">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-blue">✏️ Practice</span>
+    <h2>Practice Scan: Find the Trigger Words</h2>
+    <p>Here are 10 question titles. Click <b>Circle</b> on every question that contains a prime / factor trigger. Don't solve — just spot and circle.</p>
+    <div class="scan-list" id="scanList"></div>
+    <div class="feedback" id="scanFb"></div>
+    <div class="reveal" id="scanReveal">
+      <div class="rule-box green">
+        <b>✅ You should have circled:</b> Q1, Q3, Q5, Q7, Q10 — all contain factor/prime/factorise triggers. Q2, Q4, Q6, Q8, Q9 are permutations or algebra — different method.
+      </div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-purple" onclick="checkScan()">Check My Scan</button>
+    <button class="btn btn-purple" onclick="next()" id="scanNext" style="display:none">Next → Factor Tree Drill ➜</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 4 -->
+<div class="screen" id="s3">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-purple">🌳 Factor Tree Drill</span>
+    <h2>Now Drill: Prime Factorisation</h2>
+    <p>You spotted the keywords in the scan. Now fire the method. Write each answer as a product of prime factors.</p>
+    <div class="input-row">
+      <label><b>Q1.</b> Factorise 84. Write as: <b>2<sup>a</sup> × 3<sup>b</sup> × 7<sup>c</sup></b><br><small style="color:#888">Hint: 84 = 4 × 21</small></label>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:4px">
+      <span style="font-weight:700">2<sup style="font-size:0.75rem">a</sup>: </span><input type="number" id="q1a" min="0" max="5" placeholder="a">
+      <span style="font-weight:700">3<sup style="font-size:0.75rem">b</sup>: </span><input type="number" id="q1b" min="0" max="5" placeholder="b">
+      <span style="font-weight:700">7<sup style="font-size:0.75rem">c</sup>: </span><input type="number" id="q1c" min="0" max="5" placeholder="c">
+      <button class="btn btn-purple" style="padding:8px 16px;font-size:0.85rem" onclick="checkQ1()">Check</button>
+    </div>
+    <div class="feedback" id="fb1"></div>
+    <div class="reveal" id="rev1"><div class="prime-eq">84 = 2² × 3 × 7</div></div>
+
+    <hr style="margin:20px 0;border:none;border-top:1px solid #eee">
+
+    <div class="input-row">
+      <label><b>Q2.</b> Factorise 180. Write as: <b>2<sup>a</sup> × 3<sup>b</sup> × 5<sup>c</sup></b><br><small style="color:#888">Hint: 180 = 4 × 45</small></label>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:4px">
+      <span style="font-weight:700">2<sup style="font-size:0.75rem">a</sup>: </span><input type="number" id="q2a" min="0" max="5" placeholder="a">
+      <span style="font-weight:700">3<sup style="font-size:0.75rem">b</sup>: </span><input type="number" id="q2b" min="0" max="5" placeholder="b">
+      <span style="font-weight:700">5<sup style="font-size:0.75rem">c</sup>: </span><input type="number" id="q2c" min="0" max="5" placeholder="c">
+      <button class="btn btn-purple" style="padding:8px 16px;font-size:0.85rem" onclick="checkQ2()">Check</button>
+    </div>
+    <div class="feedback" id="fb2"></div>
+    <div class="reveal" id="rev2"><div class="prime-eq">180 = 2² × 3² × 5</div></div>
+
+    <hr style="margin:20px 0;border:none;border-top:1px solid #eee">
+
+    <div class="input-row">
+      <label><b>Q3.</b> N = 2³ × 3 × 5. How many factors does N have?<br><small style="color:#888">Formula: (3+1)(1+1)(1+1)</small></label>
+      <input type="number" id="q3" min="1" max="99" placeholder="?">
+      <button class="btn btn-purple" style="padding:8px 16px;font-size:0.85rem" onclick="checkQ3()">Check</button>
+    </div>
+    <div class="feedback" id="fb3"></div>
+    <div class="reveal" id="rev3"><div class="prime-eq">4 × 2 × 2 = 16 factors</div></div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-purple" onclick="next()">Next → Key Habit ➜</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SCREEN 5 -->
+<div class="screen" id="s4">
+<div class="wrap">
+  <div class="card">
+    <span class="tag tag-green">🏆 Done!</span>
+    <h2>The One Habit That Changes Everything</h2>
+    <p>You don't need to get faster or smarter to fix the blank problem. You just need <span class="hi">one 60-second habit</span> at the start of every test.</p>
+    <div class="ritual-box">
+      <div class="ritual-step" style="font-size:1.2rem;justify-content:center">🔍 SCAN FIRST. Answer second.</div>
+    </div>
+    <div class="rule-box">
+      <b>From U9 onwards — every test, every time:</b><br>
+      1. Scan all questions. Circle trigger keywords.<br>
+      2. Count the circles. Write the number in margin.<br>
+      3. <em>Then</em> start Q1.
+    </div>
+    <p>The trigger gap has lasted 4 units not because you can't factorise, but because the signal to start never fired. The scan fires it.</p>
+    <div style="text-align:center;margin-top:18px">
+      <span class="badge">✅ Pre-Scan Protocol — installed</span>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-green" onclick="window.location.href='index.html'">← Back to All Lessons</button>
+  </div>
+</div>
+</div>
+
+<script>
+var TOTAL = 5;
+var current = 0;
+
+var scanQuestions = [
+  { q:'Q1',  text:'Factorise 252 into prime factors.',                         trigger: true },
+  { q:'Q2',  text:'In how many ways can 5 books be arranged on a shelf?',      trigger: false },
+  { q:'Q3',  text:'How many factors does 120 have?',                           trigger: true },
+  { q:'Q4',  text:'Solve: 3x + 7 = 28. Find x.',                              trigger: false },
+  { q:'Q5',  text:'Write 360 as a product of its prime factors.',              trigger: true },
+  { q:'Q6',  text:'8 students stand in a row. How many arrangements?',         trigger: false },
+  { q:'Q7',  text:'Find all factor pairs of 96.',                              trigger: true },
+  { q:'Q8',  text:'Anna is 3 times older than Ben. Together they are 32. Find each age.', trigger: false },
+  { q:'Q9',  text:'4 friends choose seats from 6. How many ways?',            trigger: false },
+  { q:'Q10', text:'N = 2² × 5 × 7. Find the number of factors of N.',        trigger: true },
+];
+
+function buildDots() {
+  var d = document.getElementById('dots');
+  for (var i = 0; i < TOTAL; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.id = 'dot' + i;
+    d.appendChild(dot);
+  }
+}
+
+function buildScan() {
+  var html = '';
+  scanQuestions.forEach(function(sq, i) {
+    html += '<div class="scan-q"><span class="qn">' + sq.q + '</span><span style="flex:1">' + sq.text + '</span>' +
+            '<button class="circle-btn" id="cb' + i + '" onclick="toggleCircle(' + i + ')">Circle</button></div>';
+  });
+  document.getElementById('scanList').innerHTML = html;
+}
+
+function toggleCircle(i) {
+  var btn = document.getElementById('cb' + i);
+  btn.classList.toggle('circled');
+  btn.textContent = btn.classList.contains('circled') ? '✓ Circled' : 'Circle';
+}
+
+function checkScan() {
+  var correct = 0, wrong = 0;
+  scanQuestions.forEach(function(sq, i) {
+    var circled = document.getElementById('cb' + i).classList.contains('circled');
+    if (circled === sq.trigger) correct++;
+    else wrong++;
+  });
+  var fb = document.getElementById('scanFb');
+  var rev = document.getElementById('scanReveal');
+  if (wrong === 0) {
+    fb.textContent = '✅ Perfect scan! All 5 trigger questions found, no false positives.';
+    fb.className = 'feedback ok';
+  } else {
+    fb.textContent = wrong + ' question(s) wrong. Check: trigger words are prime / factor / factorise / factors of / how many factors.';
+    fb.className = 'feedback err';
+  }
+  rev.classList.add('show');
+  document.getElementById('scanNext').style.display = 'inline-flex';
+}
+
+function checkQ1() {
+  var a = parseInt(document.getElementById('q1a').value);
+  var b = parseInt(document.getElementById('q1b').value);
+  var c = parseInt(document.getElementById('q1c').value);
+  var fb = document.getElementById('fb1');
+  if (a===2 && b===1 && c===1) {
+    fb.textContent = '✅ Correct! 84 = 2² × 3 × 7'; fb.className='feedback ok';
+    document.getElementById('rev1').classList.add('show');
+  } else { fb.textContent = '✗ Not quite. Try again — 84 = 4 × 21 = 4 × 3 × 7'; fb.className='feedback err'; }
+}
+function checkQ2() {
+  var a = parseInt(document.getElementById('q2a').value);
+  var b = parseInt(document.getElementById('q2b').value);
+  var c = parseInt(document.getElementById('q2c').value);
+  var fb = document.getElementById('fb2');
+  if (a===2 && b===2 && c===1) {
+    fb.textContent = '✅ Correct! 180 = 2² × 3² × 5'; fb.className='feedback ok';
+    document.getElementById('rev2').classList.add('show');
+  } else { fb.textContent = '✗ Not quite. 180 = 4 × 45 = 4 × 9 × 5'; fb.className='feedback err'; }
+}
+function checkQ3() {
+  var v = parseInt(document.getElementById('q3').value);
+  var fb = document.getElementById('fb3');
+  if (v===16) {
+    fb.textContent = '✅ Correct! (3+1)(1+1)(1+1) = 4×2×2 = 16'; fb.className='feedback ok';
+    document.getElementById('rev3').classList.add('show');
+  } else { fb.textContent = '✗ Use the formula: (power+1) for each prime, multiply them.'; fb.className='feedback err'; }
+}
+
+function next() {
+  document.getElementById('s'+current).classList.remove('visible');
+  document.getElementById('dot'+current).classList.remove('active');
+  document.getElementById('dot'+current).classList.add('complete');
+  current++;
+  document.getElementById('s'+current).classList.add('visible');
+  document.getElementById('dot'+current).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+buildDots();
+buildScan();
+</script>
+</body>
+</html>
