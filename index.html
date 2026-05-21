@@ -183,12 +183,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <!-- HERO STATS -->
     <div id="hero">
       <div class="hero-box">
-        <div class="hero-val" style="color:#f6993f">Unit 8 &#9654;</div>
+        <div class="hero-val" id="idx-hero-current-unit" style="color:#f6993f">&mdash;</div>
         <div class="hero-lbl">Current unit</div>
-        <div class="hero-sub" style="color:#f6993f">Lessons ready &mdash; test pending</div>
+        <div class="hero-sub" id="idx-hero-current-sub" style="color:#f6993f">&mdash;</div>
       </div>
       <div class="hero-box">
-        <div class="hero-val">7</div>
+        <div class="hero-val" id="idx-hero-units-done">&mdash;</div>
         <div class="hero-lbl">Units completed</div>
         <div class="hero-sub" style="color:#a0aec0">All with tests done</div>
       </div>
@@ -744,6 +744,16 @@ PREM_DATA.renderAchievement('idx-road-pct', 'idx-road-bar', 'idx-road-lbl');
     '</div>' +
     '<div class="insight orange" style="margin:0;font-size:12px;line-height:1.7">' + u.patternInsight + '</div>' +
     '</div>';
+})();
+// Hero: current unit + units completed (always from prem_data.js — never hardcode)
+(function() {
+  var cu  = PREM_DATA.currentUnit;
+  var elV = document.getElementById('idx-hero-current-unit');
+  var elS = document.getElementById('idx-hero-current-sub');
+  if (elV) elV.textContent = 'Unit ' + cu.n + ' ►';
+  if (elS) elS.textContent = cu.status;
+  var elD = document.getElementById('idx-hero-units-done');
+  if (elD) elD.textContent = PREM_DATA.scores.filter(function(s){ return s.score !== null && s.score !== undefined; }).length;
 })();
 // Hero skill %
 var ihs = document.getElementById('idx-hero-skill');
