@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Factorisation — The Number Recipe · Unit 10</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; min-height: 100vh; }
+    header { background: linear-gradient(135deg,#1565c0 0%,#1e88e5 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 18px 0 4px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+    .dot.active { background: #1565c0; }
+    .dot.complete { background: #2e7d32; }
+    .screen { display: none; }
+    .screen.visible { display: block; }
+    .wrap { max-width: 660px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .tag-blue  { background: #e3f2fd; color: #1565c0; }
+    .tag-green { background: #e8f5e9; color: #2e7d32; }
+    .tag-orange{ background: #fff3e0; color: #e65100; }
+    .tag-purple{ background: #f3e8ff; color: #6a1b9a; }
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
+    p  { font-size: 0.95rem; color: #444; line-height: 1.65; margin-bottom: 10px; }
+    .hi        { color: #1565c0; font-weight: 700; }
+    .hi-green  { color: #2e7d32; font-weight: 700; }
+    .hi-red    { color: #c62828; font-weight: 700; }
+    .hi-orange { color: #e65100; font-weight: 700; }
+    .hi-purple { color: #6a1b9a; font-weight: 700; }
+    .rule-box { background: #e3f2fd; border-left: 4px solid #1565c0; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.95rem; line-height: 1.8; color: #1a3a6e; }
+    .rule-box b { color: #1565c0; }
+    .rule-box.green { background: #e8f5e9; border-left-color: #2e7d32; color: #1b3a1b; }
+    .rule-box.green b { color: #2e7d32; }
+    .rule-box.orange { background: #fff3e0; border-left-color: #e65100; color: #4a1a00; }
+    .rule-box.orange b { color: #e65100; }
+    .rule-box.purple { background: #f3e8ff; border-left-color: #6a1b9a; color: #3a1060; }
+    .rule-box.purple b { color: #6a1b9a; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; border: none; cursor: pointer; transition: opacity 0.15s, transform 0.1s; }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-blue  { background: linear-gradient(135deg,#1565c0,#1e88e5); color: white; }
+    .btn-green { background: linear-gradient(135deg,#2e7d32,#43a047); color: white; }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .reveal { display: none; margin-top: 14px; }
+    .reveal.show { display: block; }
+    /* Factor tree visuals */
+    .tree-wrap { display: flex; flex-direction: column; align-items: center; margin: 18px 0; gap: 0; }
+    .tree-row  { display: flex; justify-content: center; align-items: flex-start; gap: 4px; }
+    .tree-col  { display: flex; flex-direction: column; align-items: center; }
+    .node { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; font-weight: 800; font-size: 1rem; border: 2.5px solid; }
+    .node.start  { background: #e3f2fd; border-color: #1565c0; color: #1565c0; width: 54px; height: 54px; font-size: 1.2rem; }
+    .node.mid    { background: #fff3e0; border-color: #e65100; color: #e65100; }
+    .node.prime  { background: #e8f5e9; border-color: #2e7d32; color: #2e7d32; }
+    .node.unknown{ background: #f5f5f5; border-color: #aaa; color: #777; font-size: 1.3rem; }
+    .vline { width: 2px; height: 20px; background: #bbb; margin: 0 auto; }
+    .branch-pair { display: flex; gap: 60px; }
+    .branch-pair-3 { display: flex; gap: 36px; }
+    .connector { position: relative; width: 100%; }
+    /* prime label badge */
+    .prime-label { display: inline-block; background: #2e7d32; color: white; font-size: 0.7rem; font-weight: 800; padding: 1px 7px; border-radius: 10px; margin-left: 4px; vertical-align: middle; }
+    /* answer inputs */
+    input[type=number], input[type=text] { width: 80px; padding: 8px 10px; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; font-weight: 700; text-align: center; outline: none; transition: border-color 0.2s; }
+    input:focus { border-color: #1565c0; }
+    input.correct { border-color: #2e7d32; background: #f0fff4; }
+    input.wrong   { border-color: #c62828; background: #fff5f5; }
+    .input-row { display: flex; align-items: center; gap: 10px; margin: 12px 0 4px; flex-wrap: wrap; font-size: 0.95rem; color: #444; }
+    .feedback { font-size: 0.85rem; margin-top: 4px; min-height: 18px; font-weight: 600; }
+    .feedback.ok  { color: #2e7d32; }
+    .feedback.err { color: #c62828; }
+    .big-eq { font-size: 1.4rem; font-weight: 900; color: #2e7d32; text-align: center; background: #e8f5e9; border-radius: 10px; padding: 12px; margin: 14px 0; }
+    .step-line { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 0.93rem; color: #444; line-height: 1.55; }
+    .step-num { min-width: 26px; height: 26px; border-radius: 50%; background: #1565c0; color: white; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .step-num.green { background: #2e7d32; }
+    .lego-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 14px 0; }
+    .lego { padding: 8px 14px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; border: 3px solid; }
+    .lego.p { background: #e8f5e9; border-color: #2e7d32; color: #2e7d32; }
+    .lego.op { background: #f3e8ff; border-color: #6a1b9a; color: #6a1b9a; }
+    .times-sign { font-size: 1.3rem; font-weight: 900; color: #666; align-self: center; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+    .compare-box { border-radius: 12px; padding: 14px 16px; }
+    .compare-box.wrong { background: #ffebee; border: 2px solid #ef9a9a; }
+    .compare-box.right { background: #e8f5e9; border: 2px solid #a5d6a7; }
+    .compare-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+    .compare-label.red { color: #c62828; }
+    .compare-label.green { color: #2e7d32; }
+    .badge { display: inline-block; background: linear-gradient(135deg,#ffd700,#f59e0b); color: #7c4f00; font-weight: 800; font-size: 1rem; padding: 8px 20px; border-radius: 20px; }
+    .prime-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 14px 0; }
+    .prime-chip { padding: 6px 14px; background: #e8f5e9; border: 2px solid #2e7d32; border-radius: 20px; font-weight: 800; color: #2e7d32; font-size: 1rem; }
+    .notprime-chip { padding: 6px 14px; background: #f5f5f5; border: 2px solid #bbb; border-radius: 20px; font-weight: 700; color: #888; font-size: 1rem; text-decoration: line-through; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">&#8592; Hub</a>
+  <div>
+    <h1>Prime Factorisation — The Number Recipe</h1>
+    <p>Unit 10 &nbsp;·&nbsp; Number Theory &nbsp;·&nbsp; ~20 mins</p>
+  </div>
+</header>
+<div class="dots" id="dots"></div>
+
+<!-- SCREEN 0: THE REAL PROBLEM -->
+<div class="screen visible" id="s0">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-orange">Starting fresh</div>
+    <h2>We've tried the method. Now we learn the concept.</h2>
+    <p>Here's what happened over 5 units: you were taught <em>how</em> to do prime factorisation, but the <span class="hi-red">why and what</span> never clicked. Without understanding it, no method sticks.</p>
+    <div class="compare">
+      <div class="compare-box wrong">
+        <div class="compare-label red">&#10007; 5 units of blanks</div>
+        <p style="font-size:0.88rem;color:#555;margin:0">"Factorise 72"</p>
+        <p style="font-size:0.75rem;font-style:italic;color:#c62828;margin-top:8px">Brain: I don't know what this means.</p>
+      </div>
+      <div class="compare-box right">
+        <div class="compare-label green">&#10003; After today</div>
+        <p style="font-size:0.88rem;color:#555;margin:0">"Factorise 72"</p>
+        <p style="font-size:0.75rem;font-weight:700;color:#2e7d32;margin-top:8px">Brain: Find the recipe. Start dividing.</p>
+      </div>
+    </div>
+    <p>Today is different. No drill, no method first. We start with one question: <span class="hi">what IS a prime number?</span></p>
+    <div class="btn-row"><button class="btn btn-blue" onclick="go(1)">Let's find out &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 1: WHAT IS A PRIME? -->
+<div class="screen" id="s1">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-blue">The Building Block</div>
+    <h2>A prime number can't be split into equal groups.</h2>
+    <p>Try to share <span class="hi">7</span> sweets equally between friends (not counting 1 friend or 7 friends). Can you do it?</p>
+    <p>No. 7 only divides evenly by 1 and itself. That's a prime.</p>
+    <p>Now try <span class="hi">6</span> sweets. Can you split equally?</p>
+    <p>Yes — 2 groups of 3, or 3 groups of 2. So 6 is <span class="hi-red">not prime</span> — it can be broken down.</p>
+    <div class="rule-box">
+      <b>Prime number</b> = only divisible by 1 and itself. Can't be broken down further.<br>
+      <b>Not prime</b> = has at least one other factor. Can be split.
+    </div>
+    <p>Which of these are prime? Tap each one:</p>
+    <div class="prime-grid" id="prime-grid">
+      <div class="prime-chip" style="cursor:pointer;opacity:0.5" onclick="checkPrime(this,2,true)">2</div>
+      <div class="prime-chip" style="cursor:pointer;opacity:0.5" onclick="checkPrime(this,4,false)">4</div>
+      <div class="prime-chip" style="cursor:pointer;opacity:0.5" onclick="checkPrime(this,3,true)">3</div>
+      <div class="prime-chip" style="cursor:pointer;opacity:0.5" onclick="checkPrime(this,6,false)">6</div>
+      <div class="prime-chip" style="cursor:pointer;opacity:0.5" onclick="checkPrime(this,5,true)">5</div>
+      <div class="prime-chip" style="cursor:pointer;opacity:0.5" onclick="checkPrime(this,9,false)">9</div>
+      <div class="prime-chip" style="cursor:pointer;opacity:0.5" onclick="checkPrime(this,7,true)">7</div>
+      <div class="prime-chip" style="cursor:pointer;opacity:0.5" onclick="checkPrime(this,11,true)">11</div>
+      <div class="prime-chip" style="cursor:pointer;opacity:0.5" onclick="checkPrime(this,13,true)">13</div>
+    </div>
+    <div class="feedback" id="prime-fb"></div>
+    <div class="btn-row"><button class="btn btn-blue" onclick="go(2)">Now the big idea &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 2: THE RECIPE METAPHOR -->
+<div class="screen" id="s2">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-purple">The Big Idea</div>
+    <h2>Every number has a secret recipe made of primes.</h2>
+    <p>Think of primes like <span class="hi-purple">Lego bricks</span>. Every number you can think of is built by multiplying a set of these prime bricks together.</p>
+    <p>For example, the recipe for <span class="hi">12</span> is:</p>
+    <div class="lego-row">
+      <div class="lego p">2</div>
+      <div class="times-sign">×</div>
+      <div class="lego p">2</div>
+      <div class="times-sign">×</div>
+      <div class="lego p">3</div>
+      <div class="times-sign">=</div>
+      <div class="lego op">12</div>
+    </div>
+    <p>Three prime bricks — two 2s and one 3. Multiply them: 2 × 2 × 3 = 12. ✓</p>
+    <p>The recipe for <span class="hi">18</span> is:</p>
+    <div class="lego-row">
+      <div class="lego p">2</div>
+      <div class="times-sign">×</div>
+      <div class="lego p">3</div>
+      <div class="times-sign">×</div>
+      <div class="lego p">3</div>
+      <div class="times-sign">=</div>
+      <div class="lego op">18</div>
+    </div>
+    <p>Check: 2 × 3 × 3 = 18. ✓</p>
+    <div class="rule-box purple">
+      <b>"Prime factorisation"</b> just means: find the recipe.<br>
+      Break the number down until every piece is a prime.
+    </div>
+    <div class="btn-row"><button class="btn btn-blue" onclick="go(3)">How do we find the recipe? &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 3: THE METHOD — FACTOR TREE -->
+<div class="screen" id="s3">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-blue">The Method</div>
+    <h2>The Factor Tree — split until everything is prime.</h2>
+    <p>Pick any multiplication fact you know that makes the number. Keep splitting each piece until you can't anymore.</p>
+    <p>Let's find the recipe for <span class="hi">12</span>:</p>
+
+    <div class="tree-wrap">
+      <div class="tree-row"><div class="node start">12</div></div>
+      <div class="vline"></div>
+      <div class="tree-row">
+        <div style="display:flex;gap:60px">
+          <div class="tree-col">
+            <div class="node mid">4</div>
+            <div class="vline"></div>
+            <div style="display:flex;gap:24px">
+              <div class="node prime">2</div>
+              <div class="node prime">2</div>
+            </div>
+          </div>
+          <div class="tree-col" style="padding-top:0">
+            <div class="node prime">3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:8px">Step by step:</p>
+    <div class="step-line"><div class="step-num">1</div><span>12 = 4 × 3 &nbsp;(pick any pair you know)</span></div>
+    <div class="step-line"><div class="step-num">2</div><span>3 is prime — circle it ✓. Now split 4.</span></div>
+    <div class="step-line"><div class="step-num">3</div><span>4 = 2 × 2 — both prime — circle them ✓</span></div>
+    <div class="step-line"><div class="step-num green">4</div><span>Recipe: <b>2 × 2 × 3</b> — all the circled numbers</span></div>
+
+    <div class="big-eq">12 = 2 × 2 × 3</div>
+    <div class="btn-row"><button class="btn btn-blue" onclick="go(4)">Try 18 yourself &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 4: GUIDED PRACTICE — 18 -->
+<div class="screen" id="s4">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-green">Your Turn</div>
+    <h2>Find the recipe for 18.</h2>
+    <p>Start with a pair you know: 18 = 2 × 9. Now split the 9.</p>
+
+    <div class="tree-wrap">
+      <div class="tree-row"><div class="node start">18</div></div>
+      <div class="vline"></div>
+      <div class="tree-row">
+        <div style="display:flex;gap:60px">
+          <div class="tree-col">
+            <div class="node prime">2</div>
+          </div>
+          <div class="tree-col">
+            <div class="node mid">9</div>
+            <div class="vline"></div>
+            <div style="display:flex;gap:24px">
+              <div class="node unknown" id="n18a">?</div>
+              <div class="node unknown" id="n18b">?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>9 splits into <span class="hi">two equal primes</span>. What are they?</p>
+    <div class="input-row">
+      9 = <input type="number" id="i18a" placeholder="?" onchange="check18()"> × <input type="number" id="i18b" placeholder="?" onchange="check18()">
+    </div>
+    <div class="feedback" id="fb18"></div>
+    <div class="reveal" id="r18">
+      <div class="big-eq">18 = 2 × 3 × 3</div>
+      <p>The recipe has one 2 and two 3s. Notice 3 × 3 = 9, and 2 × 9 = 18. ✓</p>
+    </div>
+    <div class="btn-row"><button class="btn btn-blue" onclick="go(5)">Next number &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 5: PRACTICE — 36 -->
+<div class="screen" id="s5">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-green">Build the tree</div>
+    <h2>Find the recipe for 36.</h2>
+    <p>36 = 4 × 9. You know how to split both of those now.</p>
+
+    <div class="tree-wrap">
+      <div class="tree-row"><div class="node start">36</div></div>
+      <div class="vline"></div>
+      <div class="tree-row">
+        <div style="display:flex;gap:60px">
+          <div class="tree-col">
+            <div class="node mid">4</div>
+            <div class="vline"></div>
+            <div style="display:flex;gap:24px">
+              <div class="node unknown" id="n36a">?</div>
+              <div class="node unknown" id="n36b">?</div>
+            </div>
+          </div>
+          <div class="tree-col">
+            <div class="node mid">9</div>
+            <div class="vline"></div>
+            <div style="display:flex;gap:24px">
+              <div class="node unknown" id="n36c">?</div>
+              <div class="node unknown" id="n36d">?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>4 splits into: <span class="hi">? × ?</span> &nbsp;and&nbsp; 9 splits into: <span class="hi">? × ?</span></p>
+    <div class="input-row">
+      4 = <input type="number" id="i36a" placeholder="?" style="width:60px" onchange="check36()">
+      × <input type="number" id="i36b" placeholder="?" style="width:60px" onchange="check36()">
+      &nbsp;&nbsp; 9 = <input type="number" id="i36c" placeholder="?" style="width:60px" onchange="check36()">
+      × <input type="number" id="i36d" placeholder="?" style="width:60px" onchange="check36()">
+    </div>
+    <div class="feedback" id="fb36"></div>
+    <div class="reveal" id="r36">
+      <div class="big-eq">36 = 2 × 2 × 3 × 3</div>
+      <p>Or written neatly: 2² × 3². Four prime bricks total.</p>
+    </div>
+    <div class="btn-row"><button class="btn btn-blue" onclick="go(6)">Bigger number &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 6: PRACTICE — 72 -->
+<div class="screen" id="s6">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-green">Level up</div>
+    <h2>Find the recipe for 72.</h2>
+    <p>72 = 8 × 9. You can handle both halves now — use the tree below.</p>
+
+    <div class="tree-wrap">
+      <div class="tree-row"><div class="node start">72</div></div>
+      <div class="vline"></div>
+      <div class="tree-row">
+        <div style="display:flex;gap:60px">
+          <div class="tree-col">
+            <div class="node mid">8</div>
+            <div class="vline"></div>
+            <div style="display:flex;gap:8px">
+              <div class="node unknown" id="n72a">?</div>
+              <div class="node unknown" id="n72b">?</div>
+              <div class="node unknown" id="n72c">?</div>
+            </div>
+          </div>
+          <div class="tree-col">
+            <div class="node mid">9</div>
+            <div class="vline"></div>
+            <div style="display:flex;gap:24px">
+              <div class="node unknown" id="n72d">?</div>
+              <div class="node unknown" id="n72e">?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>8 = 2 × 2 × 2 (three 2s). 9 = 3 × 3. What's the full recipe?</p>
+    <div class="input-row">
+      72 = 2 × 2 × 2 × <input type="number" id="i72a" placeholder="?" style="width:60px" onchange="check72()">
+      × <input type="number" id="i72b" placeholder="?" style="width:60px" onchange="check72()">
+    </div>
+    <div class="feedback" id="fb72"></div>
+    <div class="reveal" id="r72">
+      <div class="big-eq">72 = 2³ × 3²</div>
+      <p>Three 2s and two 3s. Multiply to check: 8 × 9 = 72. ✓</p>
+    </div>
+    <div class="btn-row"><button class="btn btn-blue" onclick="go(7)">One more &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 7: INDEPENDENT — 60 -->
+<div class="screen" id="s7">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-green">On your own</div>
+    <h2>Find the recipe for 60. No hints.</h2>
+    <p>Pick any starting split. Keep going until everything is prime.</p>
+    <p><em>Hint if stuck: 60 = 4 × 15.</em></p>
+    <div class="rule-box">
+      Write your factor tree on paper, then enter the recipe below.<br>
+      The recipe for 60 = 2 × 2 × 3 × ?
+    </div>
+    <div class="input-row">
+      60 = 2 × 2 × 3 × <input type="number" id="i60" placeholder="?" onchange="check60()">
+    </div>
+    <div class="feedback" id="fb60"></div>
+    <div class="reveal" id="r60">
+      <div class="big-eq">60 = 2² × 3 × 5</div>
+      <p>From 4 × 15: 4 = 2×2, 15 = 3×5. All four pieces are prime. ✓</p>
+    </div>
+    <div class="btn-row"><button class="btn btn-blue" onclick="go(8)">The key rule &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 8: THE KEY RULE — ALWAYS START -->
+<div class="screen" id="s8">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-orange">The New Habit</div>
+    <h2>When you see a big number — immediately start a tree.</h2>
+    <p>The only reason the last 5 tests went blank is you didn't start. The maths isn't hard — you just proved that. The habit is: <span class="hi">pencil touches paper the moment you see the number.</span></p>
+    <div class="rule-box orange">
+      <b>See: "Factorise 72"</b><br>
+      → Pencil moves. Write 72 at the top.<br>
+      → Pick any split you know: 72 = 8 × 9<br>
+      → Keep splitting. Done.
+    </div>
+    <p>You don't need to see the whole tree before you start. Just write the number and pick <em>any</em> split. The tree builds itself.</p>
+    <div class="rule-box green">
+      <b>You already know:</b> 2×2=4, 3×3=9, 2×4=8, 4×4=16<br>
+      That's all you need to start any factor tree.
+    </div>
+    <div class="btn-row"><button class="btn btn-green" onclick="go(9)">I'm ready &#127881;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 9: COMPLETE -->
+<div class="screen" id="s9">
+<div class="wrap">
+  <div class="card" style="text-align:center">
+    <div style="font-size:3rem;margin-bottom:12px">🏆</div>
+    <h2>The Number Recipe — Done!</h2>
+    <p style="margin-bottom:20px">You now understand <em>what</em> prime factorisation is, not just how to do it. That's the difference.</p>
+    <div class="big-eq" style="font-size:1.1rem;line-height:1.8">
+      12 = 2 × 2 × 3<br>
+      18 = 2 × 3 × 3<br>
+      36 = 2² × 3²<br>
+      72 = 2³ × 3²<br>
+      60 = 2² × 3 × 5
+    </div>
+    <p style="margin-top:16px">You found all five recipes today. On the test: see a big number, draw the tree, find the recipe. Same thing.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a href="index.html" class="btn btn-blue">&#8592; Back to Hub</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+  var N = 10;
+  var cur = 0;
+
+  function buildDots() {
+    var d = document.getElementById('dots');
+    d.innerHTML = '';
+    for (var i = 0; i < N; i++) {
+      var el = document.createElement('div');
+      el.className = 'dot' + (i === cur ? ' active' : (i < cur ? ' complete' : ''));
+      d.appendChild(el);
+    }
+  }
+
+  function go(n) {
+    document.getElementById('s' + cur).classList.remove('visible');
+    cur = n;
+    document.getElementById('s' + cur).classList.add('visible');
+    buildDots();
+    window.scrollTo(0, 0);
+  }
+
+  function checkPrime(el, num, isPrime) {
+    if (isPrime) {
+      el.style.background = '#e8f5e9';
+      el.style.borderColor = '#2e7d32';
+      el.style.color = '#2e7d32';
+      el.style.opacity = '1';
+      document.getElementById('prime-fb').textContent = num + ' is prime ✓ — only 1 and ' + num + ' divide it.';
+      document.getElementById('prime-fb').className = 'feedback ok';
+    } else {
+      el.style.background = '#ffebee';
+      el.style.borderColor = '#c62828';
+      el.style.color = '#c62828';
+      el.style.opacity = '1';
+      document.getElementById('prime-fb').textContent = num + ' is NOT prime — it has other factors.';
+      document.getElementById('prime-fb').className = 'feedback err';
+    }
+  }
+
+  function check18() {
+    var a = parseInt(document.getElementById('i18a').value);
+    var b = parseInt(document.getElementById('i18b').value);
+    var fb = document.getElementById('fb18');
+    if (isNaN(a) || isNaN(b)) return;
+    if ((a===3&&b===3)||(a===3&&b===3)) {
+      fb.textContent = '✓ 9 = 3 × 3. Both prime!';
+      fb.className = 'feedback ok';
+      document.getElementById('n18a').textContent = '3';
+      document.getElementById('n18a').className = 'node prime';
+      document.getElementById('n18b').textContent = '3';
+      document.getElementById('n18b').className = 'node prime';
+      document.getElementById('r18').classList.add('show');
+    } else {
+      fb.textContent = '✗ Try again — 9 splits into two of the same prime.';
+      fb.className = 'feedback err';
+    }
+  }
+
+  function check36() {
+    var a = parseInt(document.getElementById('i36a').value);
+    var b = parseInt(document.getElementById('i36b').value);
+    var c = parseInt(document.getElementById('i36c').value);
+    var d = parseInt(document.getElementById('i36d').value);
+    var fb = document.getElementById('fb36');
+    if (isNaN(a)||isNaN(b)||isNaN(c)||isNaN(d)) return;
+    var ok4 = (a===2&&b===2)||(a===2&&b===2);
+    var ok9 = (c===3&&d===3)||(c===3&&d===3);
+    if (ok4 && ok9) {
+      fb.textContent = '✓ 4 = 2×2 and 9 = 3×3. Four prime bricks!';
+      fb.className = 'feedback ok';
+      ['n36a','n36b'].forEach(function(id){var n=document.getElementById(id);n.textContent='2';n.className='node prime';});
+      ['n36c','n36d'].forEach(function(id){var n=document.getElementById(id);n.textContent='3';n.className='node prime';});
+      document.getElementById('r36').classList.add('show');
+    } else {
+      fb.textContent = '✗ Not quite. 4 splits into 2×2, and 9 splits into 3×3.';
+      fb.className = 'feedback err';
+    }
+  }
+
+  function check72() {
+    var a = parseInt(document.getElementById('i72a').value);
+    var b = parseInt(document.getElementById('i72b').value);
+    var fb = document.getElementById('fb72');
+    if (isNaN(a)||isNaN(b)) return;
+    if (a===3&&b===3) {
+      fb.textContent = '✓ 72 = 2×2×2×3×3. Five prime bricks!';
+      fb.className = 'feedback ok';
+      ['n72a','n72b','n72c'].forEach(function(id){var n=document.getElementById(id);n.textContent='2';n.className='node prime';});
+      ['n72d','n72e'].forEach(function(id){var n=document.getElementById(id);n.textContent='3';n.className='node prime';});
+      document.getElementById('r72').classList.add('show');
+    } else {
+      fb.textContent = '✗ The last two bricks both come from 9. What is 9 made of?';
+      fb.className = 'feedback err';
+    }
+  }
+
+  function check60() {
+    var a = parseInt(document.getElementById('i60').value);
+    var fb = document.getElementById('fb60');
+    if (isNaN(a)) return;
+    if (a===5) {
+      fb.textContent = '✓ 60 = 2×2×3×5. Four prime bricks!';
+      fb.className = 'feedback ok';
+      document.getElementById('r60').classList.add('show');
+    } else {
+      fb.textContent = '✗ Almost — what is 15 made of? (15 = 3 × ?)';
+      fb.className = 'feedback err';
+    }
+  }
+
+  buildDots();
+</script>
+</body>
+</html>

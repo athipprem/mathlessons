@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraction Direction — Two-Step · Unit 10</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; min-height: 100vh; }
+    header { background: linear-gradient(135deg,#2e7d32 0%,#43a047 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+    header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; }
+    header a:hover { color: white; }
+    header h1 { font-size: 1.15rem; }
+    header p { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 18px 0 4px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+    .dot.active { background: #2e7d32; }
+    .dot.complete { background: #1565c0; }
+    .screen { display: none; }
+    .screen.visible { display: block; }
+    .wrap { max-width: 660px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .tag-blue   { background: #e3f2fd; color: #1565c0; }
+    .tag-green  { background: #e8f5e9; color: #2e7d32; }
+    .tag-orange { background: #fff3e0; color: #e65100; }
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
+    p  { font-size: 0.95rem; color: #444; line-height: 1.65; margin-bottom: 10px; }
+    .hi        { color: #2e7d32; font-weight: 700; }
+    .hi-blue   { color: #1565c0; font-weight: 700; }
+    .hi-red    { color: #c62828; font-weight: 700; }
+    .hi-orange { color: #e65100; font-weight: 700; }
+    .rule-box { background: #e8f5e9; border-left: 4px solid #2e7d32; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.95rem; line-height: 1.8; color: #1b3a1b; }
+    .rule-box b { color: #2e7d32; }
+    .rule-box.blue { background: #e3f2fd; border-left-color: #1565c0; color: #1a3a6e; }
+    .rule-box.blue b { color: #1565c0; }
+    .rule-box.orange { background: #fff3e0; border-left-color: #e65100; color: #4a1a00; }
+    .rule-box.orange b { color: #e65100; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; border: none; cursor: pointer; transition: opacity 0.15s, transform 0.1s; }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-green { background: linear-gradient(135deg,#2e7d32,#43a047); color: white; }
+    .btn-blue  { background: linear-gradient(135deg,#1565c0,#1e88e5); color: white; }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .reveal { display: none; margin-top: 14px; }
+    .reveal.show { display: block; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+    .compare-box { border-radius: 12px; padding: 14px 16px; }
+    .compare-box.wrong { background: #ffebee; border: 2px solid #ef9a9a; }
+    .compare-box.right { background: #e8f5e9; border: 2px solid #a5d6a7; }
+    .compare-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+    .compare-label.red { color: #c62828; }
+    .compare-label.green { color: #2e7d32; }
+    .step-line { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 0.93rem; color: #444; line-height: 1.55; }
+    .step-num { min-width: 26px; height: 26px; border-radius: 50%; background: #2e7d32; color: white; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .step-num.blue { background: #1565c0; }
+    .big-eq { font-size: 1.3rem; font-weight: 900; color: #2e7d32; text-align: center; background: #e8f5e9; border-radius: 10px; padding: 12px; margin: 14px 0; }
+    .big-eq.blue { color: #1565c0; background: #e3f2fd; }
+    .big-eq.orange { color: #c62828; background: #ffebee; }
+    input[type=number] { width: 90px; padding: 8px 10px; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; font-weight: 700; text-align: center; outline: none; transition: border-color 0.2s; }
+    input:focus { border-color: #2e7d32; }
+    input.correct { border-color: #2e7d32; background: #f0fff4; }
+    input.wrong   { border-color: #c62828; background: #fff5f5; }
+    .input-row { display: flex; align-items: center; gap: 10px; margin: 12px 0 4px; flex-wrap: wrap; font-size: 0.95rem; color: #444; }
+    .feedback { font-size: 0.85rem; margin-top: 4px; min-height: 18px; font-weight: 600; }
+    .feedback.ok  { color: #2e7d32; }
+    .feedback.err { color: #c62828; }
+    /* Flow chain */
+    .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin: 14px 0; justify-content: center; }
+    .flow-box { padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; text-align: center; }
+    .flow-box.start { background: #e3f2fd; color: #1565c0; border: 2px solid #1565c0; }
+    .flow-box.op    { background: #fff3e0; color: #e65100; border: 2px solid #f59e0b; font-size: 0.8rem; }
+    .flow-box.kept  { background: #e8f5e9; color: #2e7d32; border: 2px solid #2e7d32; }
+    .flow-box.final { background: #1a1a2e; color: white; border: 2px solid #1a1a2e; }
+    .flow-arrow { font-size: 1.2rem; color: #999; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">&#8592; Hub</a>
+  <div>
+    <h1>Fraction Direction — Two-Step</h1>
+    <p>Unit 10 &nbsp;·&nbsp; Algebraic Thinking &nbsp;·&nbsp; ~15 mins</p>
+  </div>
+</header>
+<div class="dots" id="dots"></div>
+
+<!-- SCREEN 0: REVIEW ONE-STEP -->
+<div class="screen visible" id="s0">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-green">Review</div>
+    <h2>One-step fraction problems — you've got this.</h2>
+    <p>In Unit 9 you got Q11 correct. Let's make sure the method is clear before adding a second step.</p>
+    <div class="rule-box blue">
+      <b>Q11 type:</b> "Gave away 2/5 of his sweets. Has 18 left. How many did he start with?"<br><br>
+      Gave away 2/5 → <b>kept 3/5</b><br>
+      3/5 of total = 18<br>
+      Total = 18 ÷ (3/5) = 18 × 5/3 = <b>30</b>
+    </div>
+    <p>The key rule: always work with the <span class="hi">kept fraction</span>, not the given-away fraction. Then divide the leftover amount by the kept fraction.</p>
+    <div class="rule-box">
+      <b>Formula:</b> Total = leftover ÷ (kept fraction)
+    </div>
+    <div class="btn-row"><button class="btn btn-green" onclick="go(1)">Now add a second step &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 1: Q12 THE MISTAKE -->
+<div class="screen" id="s1">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-orange">What went wrong in Q12</div>
+    <h2>Two operations, one mistake.</h2>
+    <p>Q12 was: "A shopkeeper sold 3/7 of his stock in the morning, then 1/4 of the remainder in the afternoon. 24 items were left. How many did he start with?"</p>
+    <div class="compare">
+      <div class="compare-box wrong">
+        <div class="compare-label red">✗ What happened</div>
+        <p style="font-size:0.88rem;color:#444;margin:0">Treated 1/4 as taken from the original, or got confused after the first step.</p>
+        <p style="font-size:0.8rem;color:#c62828;margin-top:8px">Got 96. Correct answer: 56.</p>
+      </div>
+      <div class="compare-box right">
+        <div class="compare-label green">✓ The fix</div>
+        <p style="font-size:0.88rem;color:#444;margin:0">Track what's <strong>kept</strong> at each step. The second fraction applies to <strong>what's left after step 1</strong>.</p>
+        <p style="font-size:0.8rem;color:#2e7d32;margin-top:8px">Chain the kept fractions, then divide once at the end.</p>
+      </div>
+    </div>
+    <div class="btn-row"><button class="btn btn-green" onclick="go(2)">Walk through it &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 2: THE METHOD -->
+<div class="screen" id="s2">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-green">The Method</div>
+    <h2>Chain the kept fractions. Divide once at the end.</h2>
+    <p>Q12: Sold 3/7 in morning, then 1/4 of remainder in afternoon. 24 left.</p>
+
+    <div class="flow">
+      <div class="flow-box start">Total<br><small>= ?</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box op">Sold 3/7<br><small>keep 4/7</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box op">Sold 1/4<br>of rest<br><small>keep 3/4</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box final">24 left</div>
+    </div>
+
+    <div class="step-line"><div class="step-num">1</div><span>Morning: sold 3/7 → kept <span class="hi">4/7</span> of original</span></div>
+    <div class="step-line"><div class="step-num">2</div><span>Afternoon: sold 1/4 of the remainder → kept <span class="hi">3/4</span> of remainder</span></div>
+    <div class="step-line"><div class="step-num">3</div><span>So fraction of original still left = 4/7 × 3/4 = <span class="hi">12/28 = 3/7</span></span></div>
+    <div class="step-line"><div class="step-num blue">4</div><span>3/7 of total = 24 → total = 24 ÷ (3/7) = 24 × 7/3 = <span class="hi">56</span></span></div>
+
+    <div class="big-eq">Total = 24 ÷ (3/7) = 56</div>
+    <div class="rule-box">
+      <b>Two-step rule:</b> Multiply the kept fractions together (4/7 × 3/4), then divide the final leftover by that product.
+    </div>
+    <div class="btn-row"><button class="btn btn-green" onclick="go(3)">Guided practice &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 3: GUIDED PRACTICE -->
+<div class="screen" id="s3">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-green">Practice 1 — Guided</div>
+    <h2>A baker made some rolls. Sold 1/3 in the morning, then 1/2 of what remained in the afternoon. 10 rolls were left. How many rolls did he make?</h2>
+
+    <div class="step-line"><div class="step-num">1</div><span>Sold 1/3 in morning → kept <span class="hi">?/3</span></span></div>
+    <div class="input-row">
+      Morning kept fraction = <input type="number" id="ig1a" placeholder="?" style="width:60px">/3
+      <span id="g1check1" style="font-size:0.9rem;font-weight:700"></span>
+    </div>
+
+    <div class="step-line"><div class="step-num">2</div><span>Sold 1/2 of remainder → kept <span class="hi">?/2</span></span></div>
+    <div class="input-row">
+      Afternoon kept fraction = <input type="number" id="ig1b" placeholder="?" style="width:60px">/2
+      <span id="g1check2" style="font-size:0.9rem;font-weight:700"></span>
+    </div>
+
+    <div class="step-line"><div class="step-num">3</div><span>Fraction left = (2/3) × (1/2) = <span class="hi">1/3</span></span></div>
+    <div class="step-line"><div class="step-num blue">4</div><span>1/3 of total = 10 → total = 10 ÷ (1/3) = ?</span></div>
+    <div class="input-row">
+      Total = 10 × 3 = <input type="number" id="ig1c" placeholder="?" onchange="checkG1()">
+    </div>
+    <div class="feedback" id="fbg1"></div>
+    <div class="reveal" id="rg1">
+      <div class="big-eq">Total = 30 rolls ✓</div>
+      <p>Kept 2/3 × 1/2 = 1/3. Then 10 ÷ (1/3) = 30.</p>
+    </div>
+    <div class="btn-row"><button class="btn btn-green" onclick="go(4)">Independent practice &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 4: INDEPENDENT PRACTICE -->
+<div class="screen" id="s4">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-green">Practice 2 — On Your Own</div>
+    <h2>A farm collected eggs. 2/5 were sent to market in the morning. Then 1/3 of the remaining eggs were broken. 16 eggs were left. How many eggs were collected?</h2>
+    <p>Work through all four steps on paper first, then enter your answer.</p>
+    <div class="rule-box blue">
+      Step 1: What fraction kept after morning?<br>
+      Step 2: What fraction kept after breakage?<br>
+      Step 3: Multiply the two kept fractions.<br>
+      Step 4: Divide 16 by that fraction.
+    </div>
+    <div class="input-row">
+      Total eggs = <input type="number" id="ip4" placeholder="?" onchange="checkP4()">
+    </div>
+    <div class="feedback" id="fbp4"></div>
+    <div class="reveal" id="rp4">
+      <div class="big-eq">Total = 40 eggs ✓</div>
+      <p>Kept 3/5 in morning. Kept 2/3 after breakage. Product = 3/5 × 2/3 = 6/15 = 2/5.<br>
+      16 ÷ (2/5) = 16 × 5/2 = 40. ✓</p>
+    </div>
+    <div class="btn-row"><button class="btn btn-green" onclick="go(5)">One more &#8594;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 5: FINAL PRACTICE -->
+<div class="screen" id="s5">
+<div class="wrap">
+  <div class="card">
+    <div class="tag tag-green">Practice 3</div>
+    <h2>Mia had some stickers. She gave 1/4 to her sister, then gave 2/3 of what was left to her friend. She has 10 stickers left. How many did she start with?</h2>
+    <div class="input-row">
+      Total stickers = <input type="number" id="ip5" placeholder="?" onchange="checkP5()">
+    </div>
+    <div class="feedback" id="fbp5"></div>
+    <div class="reveal" id="rp5">
+      <div class="big-eq">Total = 40 stickers ✓</div>
+      <p>Kept 3/4 after sister. Kept 1/3 after friend. Product = 3/4 × 1/3 = 1/4.<br>
+      10 ÷ (1/4) = 10 × 4 = 40. ✓</p>
+    </div>
+    <div class="btn-row"><button class="btn btn-green" onclick="go(6)">Done &#127881;</button></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 6: COMPLETE -->
+<div class="screen" id="s6">
+<div class="wrap">
+  <div class="card" style="text-align:center">
+    <div style="font-size:3rem;margin-bottom:12px">✅</div>
+    <h2>Fraction Direction Two-Step — Complete!</h2>
+    <p>You extended the one-step method into two steps. The pattern is always the same:</p>
+    <div class="rule-box" style="text-align:left">
+      1. Find the <b>kept fraction</b> at each step.<br>
+      2. <b>Multiply</b> all the kept fractions together.<br>
+      3. <b>Divide</b> the final leftover by that product.
+    </div>
+    <p>If a question has three operations, same method — just multiply three kept fractions before dividing.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a href="index.html" class="btn btn-green">&#8592; Back to Hub</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+  var N = 7; var cur = 0;
+  function buildDots() {
+    var d = document.getElementById('dots'); d.innerHTML = '';
+    for (var i = 0; i < N; i++) {
+      var el = document.createElement('div');
+      el.className = 'dot' + (i===cur?' active':(i<cur?' complete':''));
+      d.appendChild(el);
+    }
+  }
+  function go(n) {
+    document.getElementById('s'+cur).classList.remove('visible');
+    cur = n;
+    document.getElementById('s'+cur).classList.add('visible');
+    buildDots(); window.scrollTo(0,0);
+  }
+
+  // Guided practice live checks
+  document.getElementById('ig1a').addEventListener('input', function() {
+    var el = document.getElementById('g1check1');
+    el.textContent = this.value=='2' ? ' ✓' : (this.value ? ' ✗' : '');
+    el.style.color = this.value=='2' ? '#2e7d32' : '#c62828';
+  });
+  document.getElementById('ig1b').addEventListener('input', function() {
+    var el = document.getElementById('g1check2');
+    el.textContent = this.value=='1' ? ' ✓' : (this.value ? ' ✗' : '');
+    el.style.color = this.value=='1' ? '#2e7d32' : '#c62828';
+  });
+
+  function checkG1() {
+    var v = parseInt(document.getElementById('ig1c').value);
+    var fb = document.getElementById('fbg1');
+    if (isNaN(v)) return;
+    if (v===30) { fb.textContent='✓ 30 rolls!'; fb.className='feedback ok'; document.getElementById('rg1').classList.add('show'); }
+    else { fb.textContent='✗ 10 × 3 = ?'; fb.className='feedback err'; }
+  }
+  function checkP4() {
+    var v = parseInt(document.getElementById('ip4').value);
+    var fb = document.getElementById('fbp4');
+    if (isNaN(v)) return;
+    if (v===40) { fb.textContent='✓ 40 eggs!'; fb.className='feedback ok'; document.getElementById('rp4').classList.add('show'); }
+    else { fb.textContent='✗ Check your kept fractions and their product.'; fb.className='feedback err'; }
+  }
+  function checkP5() {
+    var v = parseInt(document.getElementById('ip5').value);
+    var fb = document.getElementById('fbp5');
+    if (isNaN(v)) return;
+    if (v===40) { fb.textContent='✓ 40 stickers!'; fb.className='feedback ok'; document.getElementById('rp5').classList.add('show'); }
+    else { fb.textContent='✗ What fraction did Mia keep after giving to sister? Then after friend?'; fb.className='feedback err'; }
+  }
+  buildDots();
+</script>
+</body>
+</html>
