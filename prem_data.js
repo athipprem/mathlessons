@@ -21,41 +21,41 @@ var PREM_DATA = {
 
   // ── Current state ────────────────────────────────────────────────
   currentUnit: {
-    n:           10,
-    status:      'Lessons In Progress',
+    n:           11,
+    status:      'Planning',
     testPending: false
   },
   lastUnit: {
-    n: 9, score: 8, outOf: 15, pct: 53, delta: -1, prevScore: 9,
+    n: 10, score: 15, outOf: 15, pct: 100, delta: +7, prevScore: 8,
 
     // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Unit 9 pattern &mdash; 8/15 (53%)',
-    patternInsight: '<strong>Prime fact 1/5 &mdash; trigger still not firing, 5th consecutive unit. Pre-scan box printed on the paper and still ignored.</strong> Q1/Q2/Q4/Q5 blank. Q3 partial &#10003; (got factor count 16, showed 120 in working). Ratio FIRST EXPOSURE 4/5 &mdash; strong. Q8 wrong = slip only (found 1 part correctly then halved it again). Fraction direction: Q11 &#10003;, Q12 &#10007; (lost thread at step 2, got 96). Both-ends: Q13 &#10003; (either end = 2&times;4!), Q14 &#10007; (fixed ends &mdash; forgot &times;2 for swapping tall/short). Algebra: Q15 &#10003;.',
+    patternLabel:   'Unit 10 pattern &mdash; 15/15 (100%) &#127775;',
+    patternInsight: '<strong>Perfect score &mdash; first 15/15. Three simultaneous breakthroughs.</strong> Prime factorisation FINALLY clicked (5/5) after 5 consecutive blank units &mdash; the concept-first &ldquo;Number Recipe&rdquo; lesson worked. Both-ends-fixed swap rule applied perfectly on all questions (Q8, Q9, Q10 &mdash; all &times;2 correct, same type as U9 Q14 which was wrong). Fraction direction two-step nailed Q12, Q13, and the hard &#9733; Q15 (library/two-operations chain). Factor trees drawn on every prime fact question. All working shown.',
 
     // ── Results panel analysis insight ───────────────────────────────
-    analysisLabel:   'Unit 9 analysis',
-    analysisInsight: '<strong>Prime factorisation trigger: 5th consecutive unit, still blank on Q1/Q2/Q4/Q5.</strong> The pre-scan reminder box was printed directly on the test &mdash; he still did not use it. A printed reminder is clearly not enough. U10 must introduce a physical ritual: pencil underlines trigger words BEFORE writing anything. Ratio new topic 4/5 is genuinely impressive &mdash; both Type A and Type B landed. Q8 wrong was a slip (correct setup: 48&divide;2=24, then mistakenly halved to 12 before &times;5). Fraction direction: Q11 one-step worked; Q12 two-step lost at second step (calculated 96, likely treated 1/4 as the remaining fraction). Both-ends perms: Q13 &#10003; (either end = 2&times;(n&minus;1)!), Q14 &#10007; &mdash; he knew to do 4! for middles but forgot to multiply by 2 for swapping tall and short between ends.',
+    analysisLabel:   'Unit 10 analysis',
+    analysisInsight: '<strong>The five-unit prime factorisation drought ends at U10 &mdash; 5/5 on Section A.</strong> Root cause was conceptual (didn&rsquo;t know what primes were) not procedural. Concept-first lesson introduced primes as &ldquo;building blocks you can&rsquo;t break further&rdquo; &mdash; factor trees became natural after that. Both-ends-fixed: previously wrote 4! = 24 and stopped; now consistently applies &times;2 for swapping. Q8 (Ben + Sara), Q9 (tallest + shortest), Q10 (Tom + Sue) &mdash; all three fixed-ends formats correct. Fraction direction: Q12 two-step correct (kept 3/5&times;3/4=9/20, so 18&divide;9/20=40). Q13 correct (kept 1/4, 10&times;4=40). Q15 &#9733; correct &mdash; kept 5/8&times;4/5=1/2, so 112&times;2=224. Zero errors across all 15 questions.',
 
     // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>Sec A (Prime Fact &amp; Factor Enum) 1/5 &middot; Sec B (Ratio Basics) 4/5 &middot; Sec C (Fraction Dir + Both-Ends + Algebra) 3/5.</strong> Prime fact: Q1/Q2/Q4/Q5 blank &mdash; 5th unit, pre-scan ignored. Ratio first exposure 4/5 &#11014;. Q8 slip (halved part twice). Fraction dir Q12 wrong (two-step). Both-ends Q14 wrong (forgot &times;2). Q15 work-backwards &#10003;.',
+    qSummary: '<strong>Sec A (Prime Fact) 5/5 &#9733; &middot; Sec B (Both-Ends) 5/5 &#9733; &middot; Sec C (Fraction Dir + Algebra) 5/5 &#9733;.</strong> All three target gaps resolved in a single test. Prime fact 5/5 after 5 blank units. Both-ends-fixed swap rule perfect on all formats. Fraction two-step Q12 &#10003; Q13 &#10003; Q15 &#10003; (hard). First perfect score.',
 
     // ── Q-by-Q breakdown (lvl: w=Warm  m=Med  h=Hard) ────────────────
     qBreakdown: [
-      { q:'Q1',  topic:'Prime Fact &mdash; factorise 72',                            lvl:'w', pass:false, note:'Blank &mdash; trigger not firing, 5th consecutive unit. Pre-scan box on test, still ignored.' },
-      { q:'Q2',  topic:'Factor Enum &mdash; how many factors does 48 have?',         lvl:'w', pass:false, note:'Blank &mdash; trigger not firing' },
-      { q:'Q3',  topic:'Prime Fact + Factor Count &mdash; 2&sup3;&times;3&times;5', lvl:'m', pass:true,  note:'Wrote 16 (factor count) &#10003;. Working shows 120 correctly. Full credit given.' },
-      { q:'Q4',  topic:'LCM &mdash; 2&sup2;&times;3 and 2&times;3&sup2;',           lvl:'m', pass:false, note:'Blank &mdash; trigger not firing' },
-      { q:'Q5',  topic:'Factor Enum &mdash; how many factors does 180 have?',        lvl:'h', pass:false, note:'Blank &mdash; trigger not firing' },
-      { q:'Q6',  topic:'Ratio Type A &mdash; 3:5 total 64, find Ali',               lvl:'w', pass:true,  note:'24 &#10003; &mdash; 1 part = 8, Ali = 24' },
-      { q:'Q7',  topic:'Ratio Type A &mdash; 4:7 total 33, find blue',              lvl:'w', pass:true,  note:'21 &#10003; &mdash; 1 part = 3, blue = 21' },
-      { q:'Q8',  topic:'Ratio Type B &mdash; 5:3 diff = $48, find Jake',            lvl:'m', pass:false, note:'Wrote 60. Working: 48&divide;2=24 &#10003; then used 12&times;5=60 &#10007;. Halved again by mistake. Correct: 24&times;5=120.' },
-      { q:'Q9',  topic:'Ratio 3-way &mdash; 2:3:5 total 120, largest share',        lvl:'m', pass:true,  note:'60 &#10003; &mdash; 1 part = 12, largest = 5&times;12' },
-      { q:'Q10', topic:'Ratio Type B &mdash; 3:8 diff = 20kg, find cat food',       lvl:'m', pass:true,  note:'12 kg &#10003; &mdash; 1 part = 4, cat = 3&times;4' },
-      { q:'Q11', topic:'Fraction Direction &mdash; gave &frac25;, lost &frac13;, left 16', lvl:'m', pass:true,  note:'40 &#10003; &mdash; fraction lesson landed. Correct two-step.' },
-      { q:'Q12', topic:'Fraction Direction &mdash; sold &frac37; morn, &frac14; of rest, left 24', lvl:'h', pass:false, note:'Working shows 96 (answer blank). Likely took &frac14; as remaining fraction. Correct: kept &frac37; of start; 24&divide;(&frac37;)=56.' },
-      { q:'Q13', topic:'Both-Ends &mdash; 5 people, A at either end',               lvl:'m', pass:true,  note:'48 &#10003; &mdash; 2&times;4!=48. Both-ends either end formula correct.' },
-      { q:'Q14', topic:'Both-Ends &mdash; 6 students, tall &amp; short at fixed ends', lvl:'m', pass:false, note:'Wrote 24 (4! only). Forgot &times;2 for swapping tall &amp; short between ends. Correct: 2&times;4!=48.' },
-      { q:'Q15', topic:'Work-Backwards Algebra &mdash; &times;3&minus;7&divide;2=10', lvl:'w', pass:true,  note:'9 &#10003; &mdash; reverse steps correct.' }
+      { q:'Q1',  topic:'Prime Fact &mdash; factorise 24',                              lvl:'w', pass:true,  note:'2&sup3;&times;3 &#10003; &mdash; factor tree drawn, trigger fired immediately. First clean prime fact after 5 blank units.' },
+      { q:'Q2',  topic:'Prime Fact &mdash; factorise 45',                              lvl:'w', pass:true,  note:'3&sup2;&times;5 &#10003; &mdash; factor tree drawn correctly.' },
+      { q:'Q3',  topic:'Factor Count &mdash; how many factors does 36 have?',          lvl:'m', pass:true,  note:'9 &#10003; &mdash; enumerated factors of 36 correctly. (2+1)(2+1)=9.' },
+      { q:'Q4',  topic:'Prime Fact &mdash; factorise 120',                             lvl:'m', pass:true,  note:'2&sup3;&times;5&times;3 &#10003; &mdash; full factor tree shown, all prime branches correct.' },
+      { q:'Q5',  topic:'LCM &mdash; LCM(18, 24)',                                     lvl:'m', pass:true,  note:'72 &#10003; &mdash; listing multiples method, circled 72 correctly.' },
+      { q:'Q6',  topic:'Both-Ends &mdash; 5 people, youngest at one end',             lvl:'w', pass:true,  note:'48 &#10003; &mdash; 4!&times;2=48. One-person-at-end formula correct.' },
+      { q:'Q7',  topic:'Both-Ends &mdash; 6 people, Ali at one end',                  lvl:'w', pass:true,  note:'240 &#10003; &mdash; 5!&times;2=240. Correct.' },
+      { q:'Q8',  topic:'Both-Ends Fixed &mdash; 5 people, Ben + Sara at fixed ends',  lvl:'m', pass:true,  note:'12 &#10003; &mdash; 3!&times;2=12. Exact type that was wrong in U9 Q14 &mdash; now nailed.' },
+      { q:'Q9',  topic:'Both-Ends Fixed &mdash; 7 people, tallest + shortest at ends',lvl:'m', pass:true,  note:'240 &#10003; &mdash; 5!&times;2=240. &times;2 swap rule applied correctly.' },
+      { q:'Q10', topic:'Both-Ends Fixed &mdash; 6 people, Tom + Sue at ends',         lvl:'m', pass:true,  note:'48 &#10003; &mdash; 4!&times;2=48. Either-one-at-either-end format handled correctly.' },
+      { q:'Q11', topic:'Fraction Direction &mdash; gave &frac13;, 20 left',           lvl:'w', pass:true,  note:'30 &#10003; &mdash; kept 2/3=20, total=30. Solid.' },
+      { q:'Q12', topic:'Fraction Two-Step &mdash; sold 2/5, gave &frac14; of rest, 18 left', lvl:'m', pass:true, note:'40 &#10003; &mdash; kept 3/5&times;3/4=9/20, 18&divide;(9/20)=40. Was wrong in U9 &mdash; now correct.' },
+      { q:'Q13', topic:'Fraction Two-Step &mdash; 1/4 broke, sold 2/3 of rest, 10 left',     lvl:'m', pass:true, note:'40 &#10003; &mdash; kept 3/4&times;1/3=1/4, 10&times;4=40. Clean working.' },
+      { q:'Q14', topic:'Work-Backwards &mdash; &times;4 &minus;6 &divide;2 = 7',     lvl:'w', pass:true,  note:'5 &#10003; &mdash; 7&times;2=14, 14+6=20, 20&divide;4=5. Reverse steps correct.' },
+      { q:'Q15', topic:'Fraction Two-Step &#9733; &mdash; borrowed 3/8, then 1/5 of rest, 112 left', lvl:'h', pass:true, note:'224 &#10003; &mdash; kept 5/8&times;4/5=1/2, 112&times;2=224. Hardest question, full marks.' }
     ]
   },
 
@@ -68,13 +68,13 @@ var PREM_DATA = {
     { name: 'Algebra',           c: 91, t: 85 },
     { name: 'Arithmetic',        c: 82, t: 85 },
     { name: 'Geometry',          c: 72, t: 80 },
-    { name: 'Counting',          c: 70, t: 85 },
-    { name: 'Number Theory',     c: 50, t: 82 },
-    { name: 'Applied Problems',  c: 22, t: 80 }
+    { name: 'Counting',          c: 78, t: 85 },
+    { name: 'Number Theory',     c: 68, t: 82 },
+    { name: 'Applied Problems',  c: 38, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 72, 88, 91, 70, 82, 50, 22],
+  radarCurrent:  [87, 72, 88, 91, 78, 82, 68, 38],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -89,11 +89,25 @@ var PREM_DATA = {
     { n:6, score:12, delta:+3,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:7, score:10, delta:-2,   color:'linear-gradient(135deg,#667eea,#764ba2)', star:false },
     { n:8, score:9,  delta:-1,   color:'linear-gradient(135deg,#f6993f,#fdcb6e)', star:false },
-    { n:9, score:8,  delta:-1,   color:'linear-gradient(135deg,#f6993f,#fdcb6e)', star:false }
+    { n:9,  score:8,  delta:-1,   color:'linear-gradient(135deg,#f6993f,#fdcb6e)', star:false },
+    { n:10, score:15, delta:+7,   color:'linear-gradient(135deg,#43e97b,#667eea)', star:true  }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 10,
+      badge: 'linear-gradient(135deg,#43e97b,#667eea)',
+      title: 'Prime Fact Recipe &middot; Both-Ends Fixed &middot; Fraction Direction Two-Step',
+      tags: [
+        { t:'15/15 &#127775; PERFECT', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Prime Fact 5/5 &#10003;', c:'tgreen' },
+        { t:'Both-Ends 5/5 &#10003;', c:'tgreen' },
+        { t:'Fraction Dir 5/5 &#10003;', c:'tgreen' }
+      ],
+      note: 'First perfect score. Sec A: 5/5 &mdash; prime fact trigger finally fired after 5 blank units; factor trees drawn on every Q. Sec B: 5/5 &mdash; &times;2 swap rule applied on all both-ends formats including fixed ends (Q8, Q9, Q10). Sec C: 5/5 &mdash; Q12 two-step fraction correct (was wrong in U9). Q15 &#9733; hard two-step correct (kept 1/2, 112&times;2=224).',
+      status: 'done'
+    },
     {
       n: 9,
       badge: 'linear-gradient(135deg,#9B59B6,#6C3483)',
@@ -210,45 +224,39 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'Prime Fact trigger &mdash; <strong>5 units blank</strong>',
-      pill:      'p1', pillText: 'Priority 1 &#128683;',
-      score:     'U5&ndash;U9: Q1/Q2/Q4/Q5 blank in U9 despite pre-scan box printed on test. <strong>Written reminder failed.</strong> U10 escalation: physical ritual &mdash; pencil underlines every trigger word before writing anything.',
-      fillClass: 'g1', fillPct: 8
+      label:     'Prime Fact trigger &mdash; <strong>RESOLVED U10 &#10003;</strong>',
+      pill:      'ps', pillText: 'Fixed &#11014; U10',
+      score:     'U10 Sec A 5/5 &mdash; all five prime fact questions correct. Factor trees drawn on every question. Concept-first lesson (The Number Recipe) cracked the 5-unit drought. Fully solid.',
+      fillClass: 'gs', fillPct: 95
     },
     {
-      label:     'Both-ends fixed ends &mdash; missing &times;2',
-      pill:      'p1', pillText: 'Priority 2 &#128308;',
-      score:     'U9 Q14: wrote 24 (4! correct for middles) but forgot &times;2 for swapping tall &amp; short between ends. Correct: 2&times;4!=48. Got Q13 (either end) right. One targeted drill needed.',
-      fillClass: 'g1', fillPct: 30
+      label:     'Both-ends fixed &mdash; <strong>RESOLVED U10 &#10003;</strong>',
+      pill:      'ps', pillText: 'Fixed &#11014; U10',
+      score:     'U10 Q8/Q9/Q10 all correct. &times;2 swap rule now instinctive on all both-ends formats (one-person-at-end AND fixed-ends). Was wrong in U9 Q14 &mdash; now nailed.',
+      fillClass: 'gs', fillPct: 95
     },
     {
-      label:     'Fraction direction &mdash; two-step sequence',
-      pill:      'p2', pillText: 'Priority 3',
-      score:     'U9 Q12: one-step fraction (Q11) now solid &#10003;. Two-step lost at step 2 &mdash; calculated 96 (likely took &frac14; as remaining). Correct: track kept fractions through each step. One more drill.',
-      fillClass: 'g2', fillPct: 40
+      label:     'Fraction direction two-step &mdash; <strong>RESOLVED U10 &#10003;</strong>',
+      pill:      'ps', pillText: 'Fixed &#11014; U10',
+      score:     'U10 Q12/Q13/Q15 all correct. Two-step chain method solid: multiply kept fractions, divide total at end. Q15 &#9733; (hard) also correct.',
+      fillClass: 'gs', fillPct: 95
     },
     {
-      label:     'Ratio Type B &mdash; calculation slip watch',
-      pill:      'p2', pillText: 'Watch',
-      score:     'U9 Q8: correct setup (48&divide;2=24) then halved again to 12 before &times;5. Not a conceptual gap &mdash; slip. Monitor in U10. No lesson needed.',
-      fillClass: 'g2', fillPct: 70
+      label:     'Geometry &amp; Spatial Reasoning',
+      pill:      'p1', pillText: 'Next focus',
+      score:     'Not yet tested in unit format. Lowest skill score (72/80 target). U11 onwards should rotate geometry in.',
+      fillClass: 'g2', fillPct: 72
     },
     {
-      label:     'Ratio basics',
-      pill:      'ps', pillText: 'Taught &#11014; U9',
-      score:     'U9 first exposure 4/5 &mdash; both Type A (total) and Type B (difference) landed. Q8 wrong = slip only. Strong start.',
-      fillClass: 'gs', fillPct: 80
-    },
-    {
-      label:     'Factor enumeration',
-      pill:      'ps', pillText: 'Fixed &#11014; U8',
-      score:     'U8 Q4/Q5 both correct. U9 Q3 correct (factor count 16 &amp; number 120). Pair method fully solid.',
-      fillClass: 'gs', fillPct: 90
+      label:     'Ratio Type B &mdash; calculation discipline',
+      pill:      'p2', pillText: 'Monitor',
+      score:     'U9 Q8 slip (halved 1-part twice). Not tested in U10. Continue monitoring &mdash; not a conceptual gap.',
+      fillClass: 'g2', fillPct: 75
     }
   ],
 
   // ── Radar legend unit label ───────────────────────────────────────
-  radarLegendUnit: 'U9'
+  radarLegendUnit: 'U10'
 
 };
 
