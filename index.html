@@ -175,7 +175,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <span id="topbar-sub">&nbsp;&mdash;&nbsp;Grade 4 &nbsp;|&nbsp; ISA 2027 Training &nbsp;|&nbsp; Coach: Chusaki</span>
       </div>
       <div class="topbar-right">
-        <span class="tb-badge tb-green">Unit 11 — Planning</span>
+        <span class="tb-badge tb-green" id="idx-topbar-unit-badge">Unit 11 — Lessons In Progress</span>
         <span class="tb-badge tb-orange">&#8987; <span id="topbar-days">...</span> days to ISA 2027</span>
       </div>
     </div>
@@ -212,11 +212,39 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <!-- JS-rendered last unit pattern box (reads from prem_data.js) -->
         <div id="idx-unit-pattern" style="margin-bottom:12px"></div>
         <div class="card" style="margin-top:0">
-          <div class="card-hd"><span class="dot" style="background:#718096"></span>Unit 11 &mdash; Planning</div>
-          <div style="margin-top:12px;padding:18px;background:#f8fafc;border-radius:10px;border:1px dashed #cbd5e0;text-align:center;color:#718096">
-            <div style="font-size:24px;margin-bottom:8px">&#128203;</div>
-            <div style="font-weight:700;color:#4a5568;margin-bottom:4px">Unit 11 — Coming Next</div>
-            <div style="font-size:12px">Lessons will appear here once the unit is planned. Topics rotate: Geometry &amp; Spatial Reasoning is due.</div>
+          <div class="card-hd"><span class="dot" style="background:#00838F"></span>Unit 11 &mdash; Lessons In Progress</div>
+          <div class="grid-3" style="margin-top:14px">
+
+            <div class="lesson-card" style="border-top-color:#00838F" data-unit="11" data-topic="geometry">
+              <div class="lc-unit" style="color:#00838F">Geometry &middot; Unit 11</div>
+              <div class="lc-title">Perimeter &amp; Area</div>
+              <div class="lc-desc">Rectangle, square, L-shapes, composite figures, and path problems. Sketch &rarr; label &rarr; formula every time.</div>
+              <div class="lc-badges">
+                <span class="badge" style="background:#e0f7fa;color:#006064">&#9733; Lesson Ready</span>
+              </div>
+              <a class="btn-start" style="background:linear-gradient(135deg,#00838F,#006064)" href="Geometry_Lesson_PerimeterArea.html">Start Lesson</a>
+            </div>
+
+            <div class="lesson-card" style="border-top-color:#E65100" data-unit="11" data-topic="counting">
+              <div class="lc-unit" style="color:#E65100">Art of Counting &middot; Unit 11</div>
+              <div class="lc-title">Both-Ends &mdash; All Three Types</div>
+              <div class="lc-desc">Fixes M1 Q7 slip. Three types + &times;2 decision check: either end, fixed one end, two people swap.</div>
+              <div class="lc-badges">
+                <span class="badge" style="background:#fff3e0;color:#bf360c">&#9733; Lesson Ready</span>
+              </div>
+              <a class="btn-start" style="background:linear-gradient(135deg,#E65100,#BF360C)" href="Counting_Lesson_BothEndsReinforce.html">Start Lesson</a>
+            </div>
+
+            <div class="lesson-card" style="border-top-color:#283593" data-unit="11" data-topic="patterns">
+              <div class="lc-unit" style="color:#283593">Patterns &middot; Unit 11</div>
+              <div class="lc-title">Consecutive Numbers &amp; nth Term</div>
+              <div class="lc-desc">Fixes M1 Q18 (listing &rarr; middle shortcut). Middle = sum &divide; count. nth term = first + (n&minus;1)&times;d.</div>
+              <div class="lc-badges">
+                <span class="badge" style="background:#eef2ff;color:#283593">&#9733; Lesson Ready</span>
+              </div>
+              <a class="btn-start" style="background:linear-gradient(135deg,#283593,#1A237E)" href="Patterns_Lesson_ConsecutiveNumbers.html">Start Lesson</a>
+            </div>
+
           </div>
         </div>
       </div>
@@ -416,6 +444,35 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         </div>
         <!-- VIEW: BY UNIT -->
         <div id="done-by-unit" style="display:none">
+        <div class="sec-div" style="background:linear-gradient(135deg,#4527A0,#7C3AED);color:#fff">&#9733; Milestone Test 1 &mdash; Units 1&ndash;10 &mdash; 14/15 ISA &middot; 2/5 Kangaroo</div>
+        <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card" style="border-top-color:#4527A0" data-unit="M1" data-topic="milestone">
+            <div class="lc-unit" style="color:#4527A0">ISA Section &middot; Milestone 1</div>
+            <div class="lc-title">Sec A–C Comprehensive (Q1–Q15)</div>
+            <div class="lc-desc">14/15. Sec A 5/5 &#10003; (prime fact solid). Sec C 5/5 &#10003; (Q15&#9733; $280). Q7 &#10007; Both-Ends ×2 forgotten &mdash; 4!=24 instead of 48.</div>
+            <div class="lc-badges">
+              <span class="badge" style="background:#f0fff4;color:#276749;font-weight:700">&#10003; 14/15 ISA</span>
+              <span class="badge" style="background:#fff5e6;color:#c05621">&#9888; Q7 slip</span>
+            </div>
+          </div>
+          <div class="lesson-card" style="border-top-color:#7C3AED" data-unit="M1" data-topic="kangaroo">
+            <div class="lc-unit" style="color:#7C3AED">Kangaroo Bonus &middot; Milestone 1</div>
+            <div class="lc-title">Q16–Q20 Cold Exposure</div>
+            <div class="lc-desc">2/5. Q16 &#10003; digit puzzle &middot; Q17 &#10003; grid squares. Q18 &#10007; consecutive (no algebraic shortcut). Q19 &#10007; staircase paths (used 6!). Q20 &#10007; units digit cycle.</div>
+            <div class="lc-badges">
+              <span class="badge" style="background:#EDE7F6;color:#4527A0">2/5 Kangaroo</span>
+              <span class="badge" style="background:#EDE7F6;color:#4527A0">Applied: developing</span>
+            </div>
+          </div>
+          <div class="lesson-card" style="border-top-color:#9D4EDD;background:#faf7ff" data-unit="M1" data-topic="insight">
+            <div class="lc-unit" style="color:#9D4EDD">Coach Insight &middot; Milestone 1</div>
+            <div class="lc-title">What It Reveals</div>
+            <div class="lc-desc">Both-Ends ×2 not fully automatic under pressure. Applied instinct limited to familiar types &mdash; Q18/Q19/Q20 required tools not yet seen. Introduce consecutive-number algebra and multi-step ISA problems in U11+.</div>
+            <div class="lc-badges">
+              <span class="badge" style="background:#EDE7F6;color:#4527A0">&#128196; Diagnostic</span>
+            </div>
+          </div>
+        </div>
         <div class="sec-div">Unit 10 &mdash; 15/15 (100%) &#127775; PERFECT</div>
         <div class="grid-3" style="margin-bottom:20px">
           <div class="lesson-card number" data-unit="10" data-topic="number">
@@ -781,6 +838,7 @@ function openDashboard() {
 PREM_DATA.renderSkillBars('idx-skill-bars', false);
 PREM_DATA.renderSkillSummary('idx-skill-summary');
 PREM_DATA.renderAchievement('idx-road-pct', 'idx-road-bar', 'idx-road-lbl');
+PREM_DATA.renderUnitBadge('idx-topbar-unit-badge');
 // ── Unit pattern box (always shows latest completed unit) ──────────────
 (function() {
   var el = document.getElementById('idx-unit-pattern');

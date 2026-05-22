@@ -15,47 +15,53 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '21 May 2026',
+  updated:        '22 May 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
   currentUnit: {
     n:           11,
-    status:      'Planning',
+    status:      'Lessons In Progress',
     testPending: false
   },
   lastUnit: {
-    n: 10, score: 15, outOf: 15, pct: 100, delta: +7, prevScore: 8,
+    n: 'M1', score: 14, outOf: 15, pct: 93, delta: -1, prevScore: 15,
 
     // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Unit 10 pattern &mdash; 15/15 (100%) &#127775;',
-    patternInsight: '<strong>Perfect score &mdash; first 15/15. Three simultaneous breakthroughs.</strong> Prime factorisation FINALLY clicked (5/5) after 5 consecutive blank units &mdash; the concept-first &ldquo;Number Recipe&rdquo; lesson worked. Both-ends-fixed swap rule applied perfectly on all questions (Q8, Q9, Q10 &mdash; all &times;2 correct, same type as U9 Q14 which was wrong). Fraction direction two-step nailed Q12, Q13, and the hard &#9733; Q15 (library/two-operations chain). Factor trees drawn on every prime fact question. All working shown.',
+    patternLabel:   'Milestone 1 &mdash; 14/15 (93%) ISA &middot; 2/5 Kangaroo',
+    patternInsight: '<strong>Comprehensive review across U1&ndash;U10. ISA 14/15 &mdash; one slip.</strong> Q7 ❌ Both-Ends &ldquo;either end&rdquo; format: wrote 4!=24, forgot &times;2 (correct 48). This type fires less automatically than &ldquo;fixed ends&rdquo; under timed pressure. Everything else clean &mdash; prime fact trigger solid, fraction two-step solid, work-backwards solid, Q15&#9733; $280 correct. Kangaroo 2/5: Q16 digit puzzle &#10003; Q17 grid squares &#10003; Q18 consecutive &#10007; (no algebraic shortcut) Q19 staircase &#10007; (applied 6!, not Fibonacci) Q20 units digit &#10007; (cycle period not known). Applied Problems radar raised 38&rarr;42.',
 
     // ── Results panel analysis insight ───────────────────────────────
-    analysisLabel:   'Unit 10 analysis',
-    analysisInsight: '<strong>The five-unit prime factorisation drought ends at U10 &mdash; 5/5 on Section A.</strong> Root cause was conceptual (didn&rsquo;t know what primes were) not procedural. Concept-first lesson introduced primes as &ldquo;building blocks you can&rsquo;t break further&rdquo; &mdash; factor trees became natural after that. Both-ends-fixed: previously wrote 4! = 24 and stopped; now consistently applies &times;2 for swapping. Q8 (Ben + Sara), Q9 (tallest + shortest), Q10 (Tom + Sue) &mdash; all three fixed-ends formats correct. Fraction direction: Q12 two-step correct (kept 3/5&times;3/4=9/20, so 18&divide;9/20=40). Q13 correct (kept 1/4, 10&times;4=40). Q15 &#9733; correct &mdash; kept 5/8&times;4/5=1/2, so 112&times;2=224. Zero errors across all 15 questions.',
+    analysisLabel:   'Milestone 1 analysis &mdash; Units 1&ndash;10',
+    analysisInsight: '<strong>ISA section: 14/15 &mdash; single miss at Q7.</strong> Sec A 5/5: prime factorisation trigger firing reliably on all formats, factor trees on every question. Sec B 4/5: Q7 &#10007; wrote 4!=24 for &ldquo;6 people, one person at either end&rdquo; &mdash; forgot &times;2=48. The &times;2 fires for fixed-ends (two named people) but slipped on the one-person-either-end format under timed pressure. Sec C 5/5: fraction two-step, both-ends-fixed (Q12), work-backwards, Q15&#9733; $280 all perfect. Kangaroo 2/5 (diagnostic, not scored): Q16 2-digit puzzle &#10003; (verified 74&minus;47=27). Q17 grid squares &#10003; (1&times;1+2&times;2+3&times;3=14, drew it). Q18 consecutive &#10007; (tried listing, middle=sum&divide;count shortcut not in toolkit). Q19 staircase 6 steps &#10007; (applied 6! &mdash; path-counting Fibonacci-type not recognised). Q20 units digit 7&sup1;&sup5; &#10007; (drew some 7s but period-4 cycle not extracted).',
 
     // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>Sec A (Prime Fact) 5/5 &#9733; &middot; Sec B (Both-Ends) 5/5 &#9733; &middot; Sec C (Fraction Dir + Algebra) 5/5 &#9733;.</strong> All three target gaps resolved in a single test. Prime fact 5/5 after 5 blank units. Both-ends-fixed swap rule perfect on all formats. Fraction two-step Q12 &#10003; Q13 &#10003; Q15 &#10003; (hard). First perfect score.',
+    qSummary: '<strong>ISA: Sec A 5/5 &#9733; &middot; Sec B 4/5 (Q7 &#10007; &times;2 slip) &middot; Sec C 5/5 &#9733; Q15&#9733; &#10003;.</strong> Kangaroo 2/5: Q16 &#10003; digit puzzle &middot; Q17 &#10003; grid squares &middot; Q18 &#10007; consecutive &middot; Q19 &#10007; staircase paths &middot; Q20 &#10007; units digit cycle.',
 
     // ── Q-by-Q breakdown (lvl: w=Warm  m=Med  h=Hard) ────────────────
+    // ISA Q1-Q15 + Kangaroo Q16-Q20 (diagnostic, marked kangaroo:true)
     qBreakdown: [
-      { q:'Q1',  topic:'Prime Fact &mdash; factorise 24',                              lvl:'w', pass:true,  note:'2&sup3;&times;3 &#10003; &mdash; factor tree drawn, trigger fired immediately. First clean prime fact after 5 blank units.' },
-      { q:'Q2',  topic:'Prime Fact &mdash; factorise 45',                              lvl:'w', pass:true,  note:'3&sup2;&times;5 &#10003; &mdash; factor tree drawn correctly.' },
-      { q:'Q3',  topic:'Factor Count &mdash; how many factors does 36 have?',          lvl:'m', pass:true,  note:'9 &#10003; &mdash; enumerated factors of 36 correctly. (2+1)(2+1)=9.' },
-      { q:'Q4',  topic:'Prime Fact &mdash; factorise 120',                             lvl:'m', pass:true,  note:'2&sup3;&times;5&times;3 &#10003; &mdash; full factor tree shown, all prime branches correct.' },
-      { q:'Q5',  topic:'LCM &mdash; LCM(18, 24)',                                     lvl:'m', pass:true,  note:'72 &#10003; &mdash; listing multiples method, circled 72 correctly.' },
-      { q:'Q6',  topic:'Both-Ends &mdash; 5 people, youngest at one end',             lvl:'w', pass:true,  note:'48 &#10003; &mdash; 4!&times;2=48. One-person-at-end formula correct.' },
-      { q:'Q7',  topic:'Both-Ends &mdash; 6 people, Ali at one end',                  lvl:'w', pass:true,  note:'240 &#10003; &mdash; 5!&times;2=240. Correct.' },
-      { q:'Q8',  topic:'Both-Ends Fixed &mdash; 5 people, Ben + Sara at fixed ends',  lvl:'m', pass:true,  note:'12 &#10003; &mdash; 3!&times;2=12. Exact type that was wrong in U9 Q14 &mdash; now nailed.' },
-      { q:'Q9',  topic:'Both-Ends Fixed &mdash; 7 people, tallest + shortest at ends',lvl:'m', pass:true,  note:'240 &#10003; &mdash; 5!&times;2=240. &times;2 swap rule applied correctly.' },
-      { q:'Q10', topic:'Both-Ends Fixed &mdash; 6 people, Tom + Sue at ends',         lvl:'m', pass:true,  note:'48 &#10003; &mdash; 4!&times;2=48. Either-one-at-either-end format handled correctly.' },
-      { q:'Q11', topic:'Fraction Direction &mdash; gave &frac13;, 20 left',           lvl:'w', pass:true,  note:'30 &#10003; &mdash; kept 2/3=20, total=30. Solid.' },
-      { q:'Q12', topic:'Fraction Two-Step &mdash; sold 2/5, gave &frac14; of rest, 18 left', lvl:'m', pass:true, note:'40 &#10003; &mdash; kept 3/5&times;3/4=9/20, 18&divide;(9/20)=40. Was wrong in U9 &mdash; now correct.' },
-      { q:'Q13', topic:'Fraction Two-Step &mdash; 1/4 broke, sold 2/3 of rest, 10 left',     lvl:'m', pass:true, note:'40 &#10003; &mdash; kept 3/4&times;1/3=1/4, 10&times;4=40. Clean working.' },
-      { q:'Q14', topic:'Work-Backwards &mdash; &times;4 &minus;6 &divide;2 = 7',     lvl:'w', pass:true,  note:'5 &#10003; &mdash; 7&times;2=14, 14+6=20, 20&divide;4=5. Reverse steps correct.' },
-      { q:'Q15', topic:'Fraction Two-Step &#9733; &mdash; borrowed 3/8, then 1/5 of rest, 112 left', lvl:'h', pass:true, note:'224 &#10003; &mdash; kept 5/8&times;4/5=1/2, 112&times;2=224. Hardest question, full marks.' }
+      { q:'Q1',  topic:'Prime Fact &mdash; factorise 36',                                    lvl:'w', pass:true,  note:'2&sup2;&times;3&sup2; &#10003; &mdash; factor tree drawn. Trigger firing reliably.' },
+      { q:'Q2',  topic:'Factor Count &mdash; how many factors does 24 have?',                lvl:'w', pass:true,  note:'8 &#10003; &mdash; factor pairs listed correctly: 1,2,3,4,6,8,12,24.' },
+      { q:'Q3',  topic:'LCM &mdash; LCM(15, 20)',                                           lvl:'m', pass:true,  note:'60 &#10003; &mdash; listed multiples of 20: 20,40,60. LCM method solid.' },
+      { q:'Q4',  topic:'Factorials &mdash; 6 t-shirt colours, 1 worn each day for 6 days',  lvl:'m', pass:true,  note:'720 &#10003; &mdash; 6!=720. Factorial trigger correct.' },
+      { q:'Q5',  topic:'Prime Fact &mdash; factors of 90 (prime+composite count)',           lvl:'m', pass:true,  note:'12 &#10003; &mdash; 90=2&times;3&sup2;&times;5, factor count (1+1)(2+1)(1+1)=12.' },
+      { q:'Q6',  topic:'Ratio &mdash; 3:5, 24 stamps total',                                lvl:'w', pass:true,  note:'A=9, B=15 &#10003; &mdash; 1 part=24&divide;8=3, ratio applied correctly.' },
+      { q:'Q7',  topic:'Both-Ends &mdash; 6 people, one person at either end',              lvl:'m', pass:false, note:'&#10007; Wrote 4!=24. Correct: 2&times;5!=48. &times;2 forgotten &mdash; &ldquo;either end&rdquo; format under timed pressure. Sec A fixed-ends fine; this type needs one more drill.' },
+      { q:'Q8',  topic:'Ratio Type B &mdash; difference given',                             lvl:'m', pass:true,  note:'&#10003; Ratio difference problem solved correctly.' },
+      { q:'Q9',  topic:'Fraction Two-Step &mdash; multi-operation',                         lvl:'m', pass:true,  note:'&#10003; Kept-fraction chain method applied correctly.' },
+      { q:'Q10', topic:'3-Way Ratio &mdash; three quantities',                              lvl:'m', pass:true,  note:'&#10003; 3-way ratio handled correctly.' },
+      { q:'Q11', topic:'Work-Backwards &mdash; &times;3 then &minus;5',                    lvl:'w', pass:true,  note:'&#10003; Reversed steps correctly.' },
+      { q:'Q12', topic:'Both-Ends Fixed &mdash; 7 people, two named at ends',              lvl:'m', pass:true,  note:'&#10003; 2&times;5!=240. Fixed-ends swap rule applied. Solid.' },
+      { q:'Q13', topic:'Fraction Two-Step &mdash; two kept fractions chained',              lvl:'m', pass:true,  note:'&#10003; Kept-fraction chain correct.' },
+      { q:'Q14', topic:'Work-Backwards &mdash; &times;2 +10 &divide;3',                    lvl:'m', pass:true,  note:'&#10003; Multi-step reverse correct.' },
+      { q:'Q15', topic:'Multi-Step Word Problem &#9733; &mdash; fundraising $280',          lvl:'h', pass:true,  note:'$280 &#10003; &mdash; hardest question, full working shown. Applied Problems instinct strong.' },
+      { q:'Q16', topic:'[Kangaroo] 2-digit puzzle &mdash; sum 11, reversed +27',           lvl:'m', pass:true,  note:'47 &#10003; &mdash; tried 47, verified 74&minus;47=27. Smart checking.' },
+      { q:'Q17', topic:'[Kangaroo] Count all squares in 3&times;3 grid',                   lvl:'m', pass:true,  note:'14 &#10003; &mdash; drew grid, counted 1&times;1 (9) + 2&times;2 (4) + 3&times;3 (1) systematically.' },
+      { q:'Q18', topic:'[Kangaroo] Sum of 5 consecutive = 100, find largest',              lvl:'h', pass:false, note:'&#10007; Blank. Tried listing 16&ndash;20=90. Shortcut not known: middle=100&divide;5=20, so 18,19,20,21,22, largest=22. U11 lesson targets this.' },
+      { q:'Q19', topic:'[Kangaroo] Frog staircase 6 steps (1 or 2 at a time)',             lvl:'h', pass:false, note:'&#10007; Applied 6!=720. Correct=13 (path-counting, Fibonacci type). Not ISA curriculum &mdash; diagnostic gap noted.' },
+      { q:'Q20', topic:'[Kangaroo] Units digit of 7&sup1;&sup5;',                          lvl:'h', pass:false, note:'&#10007; Blank after drawing some 7s. Period-4 cycle (7,9,3,1) not extracted. 7&sup1;&sup5;: 15 mod 4=3 &rarr; units digit=3. Not ISA curriculum &mdash; diagnostic gap noted.' }
     ]
   },
 
@@ -70,11 +76,11 @@ var PREM_DATA = {
     { name: 'Geometry',          c: 72, t: 80 },
     { name: 'Counting',          c: 78, t: 85 },
     { name: 'Number Theory',     c: 68, t: 82 },
-    { name: 'Applied Problems',  c: 38, t: 80 }
+    { name: 'Applied Problems',  c: 42, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 72, 88, 91, 78, 82, 68, 38],
+  radarCurrent:  [87, 72, 88, 91, 78, 82, 68, 42],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -90,11 +96,25 @@ var PREM_DATA = {
     { n:7, score:10, delta:-2,   color:'linear-gradient(135deg,#667eea,#764ba2)', star:false },
     { n:8, score:9,  delta:-1,   color:'linear-gradient(135deg,#f6993f,#fdcb6e)', star:false },
     { n:9,  score:8,  delta:-1,   color:'linear-gradient(135deg,#f6993f,#fdcb6e)', star:false },
-    { n:10, score:15, delta:+7,   color:'linear-gradient(135deg,#43e97b,#667eea)', star:true  }
+    { n:10, score:15, delta:+7,   color:'linear-gradient(135deg,#43e97b,#667eea)', star:true  },
+    { n:'M1', label:'M1', score:14, delta:-1,   color:'linear-gradient(135deg,#4527A0,#7C3AED)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 'M1',
+      badge: 'linear-gradient(135deg,#4527A0,#7C3AED)',
+      title: 'Milestone Test 1 &middot; Units 1&ndash;10 Comprehensive Review',
+      tags: [
+        { t:'14/15 ISA &#9733;', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Q7 slip (Both-Ends &times;2)', c:'torange' },
+        { t:'2/5 Kangaroo', s:'background:#EDE7F6;color:#4527A0' },
+        { t:'Applied: developing', s:'background:#EDE7F6;color:#4527A0' }
+      ],
+      note: 'ISA 14/15: Sec A 5/5 &#10003; (prime fact solid, trigger firing every Q), Sec C 5/5 &#10003; (Q15&#9733; $280 &#10003;). Sec B 4/5 &mdash; Q7 &#10007; Both-Ends 1-person: wrote 4!=24, forgot &times;2 (same regression from U8; got it right 3&times; in U10). Kangaroo 2/5: Q16 &#10003; (digit puzzle, verified 74&minus;47=27), Q17 &#10003; (grid squares, drew and counted). Q18 &#10007; blank (tried listing 16&ndash;20=90, no algebraic shortcut). Q19 &#10007; used 6! (staircase paths &#8800; permutation). Q20 &#10007; blank (units digit cycle not known).',
+      status: 'done'
+    },
     {
       n: 10,
       badge: 'linear-gradient(135deg,#43e97b,#667eea)',
@@ -224,34 +244,40 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'Prime Fact trigger &mdash; <strong>RESOLVED U10 &#10003;</strong>',
-      pill:      'ps', pillText: 'Fixed &#11014; U10',
-      score:     'U10 Sec A 5/5 &mdash; all five prime fact questions correct. Factor trees drawn on every question. Concept-first lesson (The Number Recipe) cracked the 5-unit drought. Fully solid.',
+      label:     'Both-Ends &times;2 rule &mdash; <strong>slipped in M1 Q7</strong>',
+      pill:      'p2', pillText: 'Monitor &#128992;',
+      score:     'M1 Q7: both-ends one-person &mdash; wrote 4!=24, forgot &times;2=48. Got ALL 5 both-ends Qs correct in U10, then slipped here. The &times;2 fires reliably on &ldquo;fixed ends&rdquo; format but is not yet automatic on &ldquo;one person at one end&rdquo; under pressure. Needs one more reinforcement drill.',
+      fillClass: 'g2', fillPct: 60
+    },
+    {
+      label:     'Consecutive number sequences &mdash; algebraic approach',
+      pill:      'p2', pillText: 'New gap',
+      score:     'M1 Q18: sum of 5 consecutive = 100 &mdash; tried listing (16&ndash;20=90) but no algebraic shortcut. Key insight not yet seen: middle term = sum&divide;count = 100&divide;5 = 20, so numbers are 18,19,20,21,22. This pattern also appears in ISA word problems.',
+      fillClass: 'g2', fillPct: 20
+    },
+    {
+      label:     'Applied Problems &mdash; Kangaroo instinct developing',
+      pill:      'p2', pillText: '2/5 Kangaroo',
+      score:     'Q16 &#10003; digit puzzle, Q17 &#10003; grid squares. Q18 &#10007; (consecutive = listing not algebra). Q19 &#10007; (staircase paths &mdash; used 6! instead of recognising path-counting type). Q20 &#10007; (units digit cycle unknown). Applied instinct developing but limited to familiar problem types. Introduce harder ISA multi-step in upcoming units.',
+      fillClass: 'g2', fillPct: 38
+    },
+    {
+      label:     'Prime Fact trigger &mdash; RESOLVED &amp; holding',
+      pill:      'ps', pillText: 'Solid &#10003;',
+      score:     'M1 Sec A 5/5 &#10003;. Factor trees on every question. U10 5/5. Drought over &mdash; trigger fully automatic now.',
+      fillClass: 'gs', fillPct: 97
+    },
+    {
+      label:     'Both-Ends fixed ends (&times;2 swap) &mdash; RESOLVED',
+      pill:      'ps', pillText: 'Solid &#10003;',
+      score:     'U10 Q8/Q9/Q10 all correct. M1 Q12 (7 students, fixed ends) correct &#10003;. Fixed-ends format fully solid. Issue is now only the &ldquo;one person at end&rdquo; format under pressure.',
       fillClass: 'gs', fillPct: 95
     },
     {
-      label:     'Both-ends fixed &mdash; <strong>RESOLVED U10 &#10003;</strong>',
-      pill:      'ps', pillText: 'Fixed &#11014; U10',
-      score:     'U10 Q8/Q9/Q10 all correct. &times;2 swap rule now instinctive on all both-ends formats (one-person-at-end AND fixed-ends). Was wrong in U9 Q14 &mdash; now nailed.',
-      fillClass: 'gs', fillPct: 95
-    },
-    {
-      label:     'Fraction direction two-step &mdash; <strong>RESOLVED U10 &#10003;</strong>',
-      pill:      'ps', pillText: 'Fixed &#11014; U10',
-      score:     'U10 Q12/Q13/Q15 all correct. Two-step chain method solid: multiply kept fractions, divide total at end. Q15 &#9733; (hard) also correct.',
-      fillClass: 'gs', fillPct: 95
-    },
-    {
-      label:     'Geometry &amp; Spatial Reasoning',
-      pill:      'p1', pillText: 'Next focus',
-      score:     'Not yet tested in unit format. Lowest skill score (72/80 target). U11 onwards should rotate geometry in.',
-      fillClass: 'g2', fillPct: 72
-    },
-    {
-      label:     'Ratio Type B &mdash; calculation discipline',
-      pill:      'p2', pillText: 'Monitor',
-      score:     'U9 Q8 slip (halved 1-part twice). Not tested in U10. Continue monitoring &mdash; not a conceptual gap.',
-      fillClass: 'g2', fillPct: 75
+      label:     'Fraction direction two-step &mdash; RESOLVED &amp; holding',
+      pill:      'ps', pillText: 'Solid &#10003;',
+      score:     'M1 Q9 &#10003;, Q13 &#10003;, Q15&#9733; &#10003;. All fraction direction types solid. Bar model method consistent.',
+      fillClass: 'gs', fillPct: 97
     }
   ],
 
@@ -267,6 +293,16 @@ PREM_DATA.achievement = function() { return Math.round(this.skillSum() / this.ta
 PREM_DATA.skillColor  = function(c, t) {
   var r = c / t;
   return r >= 1 ? '#43e97b' : r >= 0.85 ? '#f6993f' : '#fc4e4e';
+};
+
+// ── Render: unit status badge (topbar) ───────────────────────────────
+PREM_DATA.renderUnitBadge = function(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var cu = this.currentUnit;
+  el.textContent = 'Unit ' + cu.n + ' — ' + cu.status;
+  el.className = el.className.replace(/\btb-orange\b|\btb-green\b/g, '').trim();
+  el.className += (cu.status === 'Test Pending') ? ' tb-orange' : ' tb-green';
 };
 
 // ── Render: skill bars ────────────────────────────────────────────────
@@ -323,7 +359,7 @@ PREM_DATA.renderScoreChart = function(containerId) {
     html += '<div class="bc-bar-wrap"><div class="bc-bar" style="height:' + h + '%;background:' + s.color + '"></div></div>';
     html += '<div class="bc-score">' + s.score + (s.star ? '&#127775;' : '') + '</div>';
     if (dl) html += '<div class="bc-delta" style="' + dlColor + '">' + dl + '</div>';
-    html += '<div class="bc-lbl">U' + s.n + '</div>';
+    html += '<div class="bc-lbl">' + (s.label || ('U' + s.n)) + '</div>';
     html += '</div>';
   });
   el.innerHTML = html;

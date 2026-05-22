@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geometry — Perimeter & Area · Unit 11</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0fdfc;color:#1a1a2e;min-height:100vh}
+.hdr{background:linear-gradient(135deg,#00838F,#006064);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:space-between}
+.hdr-left h1{font-size:22px;font-weight:800;letter-spacing:-0.3px}
+.hdr-left p{font-size:13px;opacity:.85;margin-top:3px}
+.progress-bar{background:rgba(255,255,255,.2);border-radius:20px;height:8px;width:200px;margin-top:8px}
+.progress-fill{background:#80DEEA;border-radius:20px;height:8px;transition:width .4s}
+.badge{background:rgba(255,255,255,.2);border-radius:12px;padding:6px 14px;font-size:12px;font-weight:600}
+.screen{display:none;max-width:820px;margin:30px auto;padding:0 20px 40px}
+.screen.active{display:block}
+.card{background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(0,131,143,.1);margin-bottom:18px}
+.card-blue{border-left:5px solid #00838F}
+h2{font-size:20px;color:#006064;margin-bottom:14px;font-weight:700}
+h3{font-size:16px;color:#00838F;margin-bottom:10px;font-weight:600}
+.formula{background:#E0F7FA;border:2px solid #80DEEA;border-radius:10px;padding:14px 18px;font-size:18px;font-weight:700;color:#006064;text-align:center;margin:14px 0}
+.tip{background:#FFF8E1;border-left:4px solid #F9A825;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#5d4037;margin:12px 0}
+.example{background:#f8fffe;border:1px solid #80DEEA;border-radius:10px;padding:18px;margin:14px 0}
+.example-title{font-size:13px;font-weight:700;color:#00838F;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.shape-svg{display:block;margin:16px auto}
+.step{display:flex;gap:14px;align-items:flex-start;margin:10px 0;padding:10px;background:#f8fffe;border-radius:8px}
+.step-num{background:#00838F;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-text{font-size:15px;line-height:1.5}
+.input-row{display:flex;align-items:center;gap:12px;margin:14px 0;flex-wrap:wrap}
+.inp{border:2px solid #80DEEA;border-radius:8px;padding:8px 14px;font-size:18px;width:100px;text-align:center;outline:none;font-family:inherit}
+.inp:focus{border-color:#00838F}
+.btn{background:linear-gradient(135deg,#00838F,#006064);color:#fff;border:none;border-radius:10px;padding:11px 24px;font-size:15px;font-weight:600;cursor:pointer;transition:.2s}
+.btn:hover{opacity:.9}
+.btn-sec{background:#E0F7FA;color:#006064;border:2px solid #80DEEA}
+.btn-sec:hover{background:#B2EBF2}
+.nav{display:flex;gap:12px;margin-top:24px;justify-content:space-between;align-items:center}
+.reveal{display:none;background:#E0F7FA;border-radius:8px;padding:12px 16px;margin-top:10px;color:#006064;font-weight:600}
+.reveal.show{display:block}
+.correct{color:#2e7d32;font-weight:700}
+.wrong{color:#c62828;font-weight:700}
+.feedback{display:none;margin-top:8px;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600}
+.feedback.show{display:block}
+.feedback.ok{background:#E8F5E9;color:#2e7d32}
+.feedback.no{background:#FFEBEE;color:#c62828}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tag{display:inline-block;background:#E0F7FA;color:#006064;border-radius:6px;padding:3px 10px;font-size:13px;font-weight:600;margin:2px}
+.screen-counter{font-size:13px;opacity:.7;font-weight:600}
+.big-formula{font-size:22px;font-weight:800;color:#006064;background:#E0F7FA;border-radius:10px;padding:16px;text-align:center;margin:12px 0}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>📐 Geometry — Perimeter & Area</h1>
+    <p>Unit 11 · Lesson 1 · Coach Chusaki</p>
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:12%"></div></div>
+  </div>
+  <div style="text-align:right">
+    <div class="badge" id="screen-badge">Screen 1 / 8</div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 1 — Welcome ═══════════════════════════════════════════════════ -->
+<div class="screen active" id="s1">
+  <div class="card card-blue">
+    <h2>📐 What is Geometry?</h2>
+    <p style="font-size:16px;line-height:1.7;margin-bottom:14px">Geometry is the study of <strong>shapes, sizes, and spaces</strong>. In this lesson you'll learn two key measurements every ISA question on shapes uses:</p>
+    <div class="grid2" style="margin:16px 0">
+      <div style="background:#E0F7FA;border-radius:12px;padding:18px;text-align:center">
+        <div style="font-size:36px">🔲</div>
+        <div style="font-weight:700;font-size:18px;color:#006064;margin-top:8px">Perimeter</div>
+        <div style="font-size:14px;margin-top:4px;color:#555">The distance <strong>around</strong> the outside of a shape</div>
+      </div>
+      <div style="background:#E0F7FA;border-radius:12px;padding:18px;text-align:center">
+        <div style="font-size:36px">🟦</div>
+        <div style="font-weight:700;font-size:18px;color:#006064;margin-top:8px">Area</div>
+        <div style="font-size:14px;margin-top:4px;color:#555">The amount of space <strong>inside</strong> a shape</div>
+      </div>
+    </div>
+    <div class="tip">💡 <strong>Memory trick:</strong> Perimeter = "Perimeter walks <em>around</em> the fence." Area = "Area fills the floor <em>inside</em> the fence."</div>
+  </div>
+  <div class="nav">
+    <div class="screen-counter">1 of 8</div>
+    <button class="btn" onclick="go(2)">Let's start →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 2 — Perimeter ════════════════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <div class="card card-blue">
+    <h2>Perimeter — Walking the Outside</h2>
+    <p style="margin-bottom:12px;font-size:15px">Perimeter = <strong>sum of all sides</strong>. For a rectangle, you can use a shortcut:</p>
+    <div class="big-formula">Perimeter = 2 × (length + width)</div>
+
+    <svg class="shape-svg" width="340" height="160" viewBox="0 0 340 160">
+      <rect x="40" y="30" width="260" height="100" fill="#E0F7FA" stroke="#00838F" stroke-width="3" rx="4"/>
+      <text x="170" y="22" text-anchor="middle" font-size="15" fill="#006064" font-weight="bold">14 cm</text>
+      <text x="10" y="85" text-anchor="middle" font-size="15" fill="#006064" font-weight="bold">6 cm</text>
+      <text x="170" y="152" text-anchor="middle" font-size="15" fill="#006064" font-weight="bold">14 cm</text>
+      <text x="330" y="85" text-anchor="middle" font-size="15" fill="#006064" font-weight="bold">6 cm</text>
+    </svg>
+
+    <div class="example">
+      <div class="example-title">Worked Example</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Add length + width: 14 + 6 = <strong>20</strong></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Multiply by 2: 20 × 2 = <strong>40 cm</strong></div></div>
+    </div>
+
+    <div class="tip">⚠️ Don't forget the <strong>unit</strong>! Perimeter is always in cm, m, etc. (not cm² — that's area).</div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(1)">← Back</button>
+    <div class="screen-counter">2 of 8</div>
+    <button class="btn" onclick="go(3)">Area →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 3 — Area of Rectangle & Square ═══════════════════════════════ -->
+<div class="screen" id="s3">
+  <div class="card card-blue">
+    <h2>Area of Rectangles & Squares</h2>
+    <div class="grid2">
+      <div>
+        <div class="formula">Area = length × width</div>
+        <p style="font-size:14px;margin-top:8px;color:#555">The number of unit squares that fit inside.</p>
+        <svg width="180" height="130" viewBox="0 0 180 130">
+          <rect x="20" y="20" width="140" height="90" fill="#E0F7FA" stroke="#00838F" stroke-width="2.5" rx="3"/>
+          <text x="90" y="14" text-anchor="middle" font-size="13" fill="#006064" font-weight="bold">9 cm</text>
+          <text x="8" y="68" text-anchor="middle" font-size="13" fill="#006064" font-weight="bold">6 cm</text>
+          <text x="90" y="74" text-anchor="middle" font-size="16" fill="#00838F" font-weight="bold">9 × 6</text>
+          <text x="90" y="96" text-anchor="middle" font-size="16" fill="#006064" font-weight="bold">= 54 cm²</text>
+        </svg>
+      </div>
+      <div>
+        <div class="formula">Square: side × side = side²</div>
+        <p style="font-size:14px;margin-top:8px;color:#555">A square has 4 equal sides.</p>
+        <svg width="180" height="130" viewBox="0 0 180 130">
+          <rect x="30" y="15" width="110" height="100" fill="#E0F7FA" stroke="#00838F" stroke-width="2.5" rx="3"/>
+          <text x="85" y="10" text-anchor="middle" font-size="13" fill="#006064" font-weight="bold">8 cm</text>
+          <text x="15" y="70" text-anchor="middle" font-size="13" fill="#006064" font-weight="bold">8 cm</text>
+          <text x="85" y="70" text-anchor="middle" font-size="16" fill="#00838F" font-weight="bold">8 × 8</text>
+          <text x="85" y="92" text-anchor="middle" font-size="16" fill="#006064" font-weight="bold">= 64 cm²</text>
+        </svg>
+      </div>
+    </div>
+    <div class="tip">💡 <strong>Area is always in cm² (or m²)</strong> — because you're multiplying cm × cm, you get square centimetres.</div>
+    <h3 style="margin-top:16px">Quick Check</h3>
+    <p style="font-size:15px;margin-bottom:10px">A square has perimeter 28 cm. What is its area?</p>
+    <div class="input-row">
+      <input class="inp" id="q3" placeholder="?" type="number">
+      <button class="btn" onclick="check('q3','64','s3fb')">Check</button>
+    </div>
+    <div class="feedback" id="s3fb"></div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(2)">← Back</button>
+    <div class="screen-counter">3 of 8</div>
+    <button class="btn" onclick="go(4)">Triangles →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 4 — Area of Triangle ═════════════════════════════════════════ -->
+<div class="screen" id="s4">
+  <div class="card card-blue">
+    <h2>Area of a Triangle</h2>
+    <p style="margin-bottom:12px;font-size:15px">A triangle is <strong>exactly half</strong> a rectangle with the same base and height.</p>
+    <div class="big-formula">Area of triangle = ½ × base × height</div>
+
+    <svg class="shape-svg" width="300" height="160" viewBox="0 0 300 160">
+      <rect x="40" y="30" width="220" height="110" fill="#E0F7FA" stroke="#80DEEA" stroke-width="1.5" stroke-dasharray="6,4" rx="2"/>
+      <polygon points="40,140 260,140 40,30" fill="#80DEEA" stroke="#006064" stroke-width="2.5"/>
+      <text x="150" y="155" text-anchor="middle" font-size="14" fill="#006064" font-weight="bold">base = 10 cm</text>
+      <line x1="40" y1="30" x2="40" y2="140" stroke="#F9A825" stroke-width="2" stroke-dasharray="5,3"/>
+      <text x="28" y="90" text-anchor="middle" font-size="13" fill="#F9A825" font-weight="bold">h=8</text>
+      <text x="110" y="105" text-anchor="middle" font-size="14" fill="#006064" font-weight="bold">½ × 10 × 8 = 40 cm²</text>
+    </svg>
+
+    <div class="tip">⚠️ The height must be <strong>perpendicular</strong> (at 90°) to the base — it's the <em>straight-up</em> measurement, not the slanted side.</div>
+
+    <h3 style="margin-top:16px">Quick Check</h3>
+    <p style="font-size:15px;margin-bottom:10px">A triangle has base 12 cm and height 7 cm. What is its area?</p>
+    <div class="input-row">
+      <input class="inp" id="q4" placeholder="?" type="number">
+      <span style="font-size:15px;color:#555">cm²</span>
+      <button class="btn" onclick="check('q4','42','s4fb')">Check</button>
+    </div>
+    <div class="feedback" id="s4fb"></div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(3)">← Back</button>
+    <div class="screen-counter">4 of 8</div>
+    <button class="btn" onclick="go(5)">L-Shapes →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 5 — Composite / L-Shape ══════════════════════════════════════ -->
+<div class="screen" id="s5">
+  <div class="card card-blue">
+    <h2>Composite Shapes — The Split Trick</h2>
+    <p style="margin-bottom:12px;font-size:15px">When a shape is unusual (like an L-shape), <strong>split it into rectangles</strong>, find each area, then add.</p>
+
+    <svg class="shape-svg" width="320" height="200" viewBox="0 0 320 200">
+      <!-- L shape -->
+      <polygon points="30,20 200,20 200,90 120,90 120,180 30,180" fill="#B2EBF2" stroke="#006064" stroke-width="2.5"/>
+      <!-- dimensions -->
+      <text x="115" y="14" text-anchor="middle" font-size="13" fill="#006064" font-weight="bold">10 cm</text>
+      <text x="205" y="58" text-anchor="middle" font-size="13" fill="#006064" font-weight="bold">4 cm</text>
+      <text x="10" y="100" text-anchor="middle" font-size="13" fill="#006064" font-weight="bold">8 cm</text>
+      <text x="75" y="192" text-anchor="middle" font-size="13" fill="#006064" font-weight="bold">6 cm</text>
+      <!-- split line -->
+      <line x1="30" y1="90" x2="120" y2="90" stroke="#F9A825" stroke-width="2" stroke-dasharray="6,4"/>
+      <!-- labels -->
+      <text x="80" y="60" text-anchor="middle" font-size="14" fill="#00838F" font-weight="bold">Part A</text>
+      <text x="72" y="140" text-anchor="middle" font-size="14" fill="#006064" font-weight="bold">Part B</text>
+    </svg>
+
+    <div class="example">
+      <div class="example-title">Method: Outer minus Cut-out</div>
+      <p style="font-size:14px;margin-bottom:10px">OR: imaginary full rectangle <strong>minus</strong> the missing corner piece.</p>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Full rectangle: 10 × 8 = <strong>80 cm²</strong></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Missing corner: 4 × 4 = <strong>16 cm²</strong></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">L-shape area: 80 − 16 = <strong>64 cm²</strong></div></div>
+    </div>
+    <div class="tip">💡 Two methods work: <em>split into parts</em> OR <em>full rectangle minus cut-out</em>. Use whichever feels natural.</div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(4)">← Back</button>
+    <div class="screen-counter">5 of 8</div>
+    <button class="btn" onclick="go(6)">Practice 1 →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 6 — Practice 1 ═══════════════════════════════════════════════ -->
+<div class="screen" id="s6">
+  <div class="card card-blue">
+    <h2>Practice 1 — Perimeter & Area</h2>
+
+    <p style="font-size:15px;margin-bottom:14px"><strong>Q1.</strong> A rectangle is 14 cm long and 6 cm wide.</p>
+    <div class="grid2">
+      <div>
+        <p style="font-size:14px;margin-bottom:8px">a) What is its <strong>perimeter</strong>?</p>
+        <div class="input-row">
+          <input class="inp" id="p1a" placeholder="?" type="number">
+          <span style="font-size:14px">cm</span>
+          <button class="btn" onclick="check('p1a','40','fb1a')">✓</button>
+        </div>
+        <div class="feedback" id="fb1a"></div>
+      </div>
+      <div>
+        <p style="font-size:14px;margin-bottom:8px">b) What is its <strong>area</strong>?</p>
+        <div class="input-row">
+          <input class="inp" id="p1b" placeholder="?" type="number">
+          <span style="font-size:14px">cm²</span>
+          <button class="btn" onclick="check('p1b','84','fb1b')">✓</button>
+        </div>
+        <div class="feedback" id="fb1b"></div>
+      </div>
+    </div>
+
+    <hr style="margin:20px 0;border:none;border-top:1px solid #E0F7FA">
+
+    <p style="font-size:15px;margin-bottom:14px"><strong>Q2.</strong> An L-shaped room is 10 m wide and 8 m tall overall. A rectangular section 4 m wide and 3 m tall is cut from one corner. What is the area of the room?</p>
+    <div class="input-row">
+      <input class="inp" id="p1c" placeholder="?" type="number">
+      <span style="font-size:14px">m²</span>
+      <button class="btn" onclick="check('p1c','68','fb1c')">✓</button>
+    </div>
+    <div class="feedback" id="fb1c"></div>
+    <button class="btn btn-sec" style="margin-top:10px" onclick="showReveal('rev6')">Show hint</button>
+    <div class="reveal" id="rev6">Full rectangle: 10×8=80. Cut-out: 4×3=12. L-area = 80−12 = <strong>68 m²</strong></div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(5)">← Back</button>
+    <div class="screen-counter">6 of 8</div>
+    <button class="btn" onclick="go(7)">Practice 2 →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 7 — Practice 2 (Path Problem) ════════════════════════════════ -->
+<div class="screen" id="s7">
+  <div class="card card-blue">
+    <h2>Practice 2 — The Path Problem ⭐</h2>
+    <p style="font-size:15px;margin-bottom:12px">A path <strong>around the outside</strong> of a shape is a favourite ISA question type. The method:</p>
+
+    <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Find the outer rectangle</strong> (pool + path on all sides)</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Find the inner shape</strong> (just the pool/garden)</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Subtract:</strong> Outer − Inner = Path area</div></div>
+
+    <div class="tip">⚠️ If the path is 2 m wide on each side, the outer length = inner + <strong>2+2 = 4 m</strong> extra (both sides!).</div>
+
+    <div style="background:#f8fffe;border-radius:10px;padding:18px;margin-top:16px;border:1px solid #80DEEA">
+      <p style="font-size:15px;font-weight:600;margin-bottom:12px">A rectangular garden is 15 m long and 10 m wide. A path 2 m wide runs along the <em>inside</em> of all four edges. What is the area of the path?</p>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Inner lawn: (15−2−2) × (10−2−2) = 11 × 6 = <strong>66 m²</strong></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Full garden: 15 × 10 = <strong>150 m²</strong></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Path area: 150 − 66 = <strong>84 m²</strong> ✓</div></div>
+    </div>
+
+    <hr style="margin:20px 0;border:none;border-top:1px solid #E0F7FA">
+    <p style="font-size:15px;margin-bottom:10px"><strong>Your turn:</strong> A pool is 20 m × 12 m. A tiled path 3 m wide surrounds the <em>outside</em>. What is the path area?</p>
+    <div class="input-row">
+      <input class="inp" id="p2" placeholder="?" type="number">
+      <span style="font-size:14px">m²</span>
+      <button class="btn" onclick="check('p2','228','fb2')">✓</button>
+    </div>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn btn-sec" style="margin-top:10px" onclick="showReveal('rev7')">Show working</button>
+    <div class="reveal" id="rev7">Outer: (20+6)×(12+6) = 26×18 = 468. Pool: 240. Path = 468−240 = <strong>228 m²</strong></div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(6)">← Back</button>
+    <div class="screen-counter">7 of 8</div>
+    <button class="btn" onclick="go(8)">Finish →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 8 — Summary ══════════════════════════════════════════════════ -->
+<div class="screen" id="s8">
+  <div class="card card-blue">
+    <h2>🎉 Lesson Complete!</h2>
+    <p style="font-size:15px;margin-bottom:18px">Here are the <strong>4 rules</strong> to keep in mind for every geometry ISA question:</p>
+
+    <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Perimeter</strong> = 2 × (length + width). Unit: cm or m.</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Area of rectangle</strong> = length × width. Unit: cm² or m².</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Area of triangle</strong> = ½ × base × height.</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text"><strong>L-shape / path</strong> = full rectangle − cut-out (or outer − inner).</div></div>
+
+    <div class="tip" style="margin-top:18px">📝 <strong>ISA tip:</strong> Always draw and label the shape in your working. Label all sides you know. Then pick the right formula.</div>
+
+    <div style="text-align:center;margin-top:24px">
+      <div style="font-size:48px">📐</div>
+      <div style="font-size:20px;font-weight:700;color:#006064;margin-top:8px">Geometry unlocked!</div>
+      <div style="font-size:14px;color:#718096;margin-top:4px">Ready for Lesson 2 → Both-Ends ×2</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(7)">← Back</button>
+    <div class="screen-counter">8 of 8</div>
+    <a href="Counting_Lesson_BothEndsReinforce.html" class="btn">Next Lesson →</a>
+  </div>
+</div>
+
+<script>
+var total = 8;
+function go(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width = Math.round(n/total*100)+'%';
+  document.getElementById('screen-badge').textContent = 'Screen '+n+' / '+total;
+  window.scrollTo(0,0);
+}
+function check(id, ans, fbId) {
+  var val = document.getElementById(id).value.trim();
+  var fb = document.getElementById(fbId);
+  fb.className = 'feedback show';
+  if (val === ans) {
+    fb.className = 'feedback show ok';
+    fb.textContent = '✅ Correct! ' + ans + (fbId.includes('p1a') ? ' cm' : fbId.includes('p1b') ? ' cm²' : '');
+  } else {
+    fb.className = 'feedback show no';
+    fb.textContent = '❌ Not quite. Try again — check your formula!';
+  }
+}
+function showReveal(id) {
+  document.getElementById(id).classList.add('show');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patterns & Consecutive Numbers · Unit 11</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#EEF2FF;color:#1a1a2e;min-height:100vh}
+.hdr{background:linear-gradient(135deg,#283593,#1A237E);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:space-between}
+.hdr-left h1{font-size:22px;font-weight:800}
+.hdr-left p{font-size:13px;opacity:.85;margin-top:3px}
+.progress-bar{background:rgba(255,255,255,.2);border-radius:20px;height:8px;width:200px;margin-top:8px}
+.progress-fill{background:#9FA8DA;border-radius:20px;height:8px;transition:width .4s}
+.badge{background:rgba(255,255,255,.2);border-radius:12px;padding:6px 14px;font-size:12px;font-weight:600}
+.screen{display:none;max-width:820px;margin:30px auto;padding:0 20px 40px}
+.screen.active{display:block}
+.card{background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(40,53,147,.1);margin-bottom:18px;border-left:5px solid #283593}
+h2{font-size:20px;color:#1A237E;margin-bottom:14px;font-weight:700}
+h3{font-size:16px;color:#283593;margin-bottom:10px;font-weight:600}
+.formula{background:#E8EAF6;border:2px solid #9FA8DA;border-radius:10px;padding:14px 18px;font-size:18px;font-weight:700;color:#1A237E;text-align:center;margin:14px 0}
+.big-formula{font-size:22px;font-weight:800;color:#1A237E;background:#E8EAF6;border-radius:10px;padding:16px;text-align:center;margin:12px 0}
+.tip{background:#E8EAF6;border-left:4px solid #283593;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#283593;margin:12px 0}
+.example{background:#f5f6ff;border:1px solid #9FA8DA;border-radius:10px;padding:18px;margin:14px 0}
+.example-title{font-size:13px;font-weight:700;color:#283593;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.step{display:flex;gap:14px;align-items:flex-start;margin:10px 0;padding:10px;background:#f5f6ff;border-radius:8px}
+.step-num{background:#283593;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-text{font-size:15px;line-height:1.5}
+.btn{background:linear-gradient(135deg,#283593,#1A237E);color:#fff;border:none;border-radius:10px;padding:11px 24px;font-size:15px;font-weight:600;cursor:pointer;transition:.2s}
+.btn:hover{opacity:.9}
+.btn-sec{background:#E8EAF6;color:#283593;border:2px solid #9FA8DA}
+.btn-sec:hover{background:#C5CAE9}
+.nav{display:flex;gap:12px;margin-top:24px;justify-content:space-between;align-items:center}
+.reveal{display:none;background:#E8EAF6;border-radius:8px;padding:12px 16px;margin-top:10px;color:#1A237E;font-weight:600}
+.reveal.show{display:block}
+.feedback{display:none;margin-top:8px;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600}
+.feedback.show{display:block}
+.feedback.ok{background:#E8F5E9;color:#2e7d32}
+.feedback.no{background:#FFEBEE;color:#c62828}
+.input-row{display:flex;align-items:center;gap:12px;margin:14px 0;flex-wrap:wrap}
+.inp{border:2px solid #9FA8DA;border-radius:8px;padding:8px 14px;font-size:18px;width:100px;text-align:center;outline:none;font-family:inherit}
+.inp:focus{border-color:#283593}
+.screen-counter{font-size:13px;opacity:.7;font-weight:600}
+.num-row{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;align-items:center}
+.num-chip{background:#283593;color:#fff;border-radius:8px;padding:8px 16px;font-size:18px;font-weight:700}
+.num-chip.mid{background:linear-gradient(135deg,#f9a825,#f57f17);font-size:20px}
+.num-chip.blank{background:#E8EAF6;color:#283593;border:2px dashed #9FA8DA}
+.arrow{font-size:20px;color:#283593;font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.alert-box{background:#FFF8E1;border:2px solid #F9A825;border-radius:10px;padding:16px;margin:14px 0}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>🔢 Patterns & Consecutive Numbers</h1>
+    <p>Unit 11 · Lesson 3 · Coach Chusaki</p>
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:14%"></div></div>
+  </div>
+  <div style="text-align:right">
+    <div class="badge" id="screen-badge">Screen 1 / 7</div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 1 — What Went Wrong in M1 Q18 ════════════════════════════════ -->
+<div class="screen active" id="s1">
+  <div class="card">
+    <h2>🔍 What Happened in Milestone Q18?</h2>
+    <p style="font-size:15px;margin-bottom:12px"><strong>Milestone Q18:</strong> The sum of 5 consecutive whole numbers is 100. What is the largest of the 5 numbers?</p>
+
+    <div style="background:#FFEBEE;border:2px solid #EF9A9A;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-weight:600;margin-bottom:8px">What you tried: listing numbers</p>
+      <p>16, 17, 18, 19, 20 → sum = 90. Not quite 100...</p>
+      <p style="margin-top:6px;color:#c62828">You ran out of time before finding the answer.</p>
+    </div>
+
+    <div style="background:#E8F5E9;border:2px solid #A5D6A7;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-weight:600;margin-bottom:8px">The smart way — takes 5 seconds:</p>
+      <p><strong>Middle number = Total ÷ Count = 100 ÷ 5 = 20</strong></p>
+      <p style="margin-top:6px">So the 5 numbers are: 18, 19, <strong style="color:#2e7d32">20</strong>, 21, 22. Largest = <strong>22</strong>.</p>
+    </div>
+
+    <div class="tip">💡 <strong>The key insight:</strong> In any set of consecutive numbers, the <strong>middle number equals the average</strong>. Average = sum ÷ count. This lesson teaches you this and more.</div>
+  </div>
+  <div class="nav">
+    <div class="screen-counter">1 of 7</div>
+    <button class="btn" onclick="go(2)">Learn the trick →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 2 — Arithmetic Sequences ════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <div class="card">
+    <h2>Arithmetic Sequences — The Constant Jump</h2>
+    <p style="font-size:15px;margin-bottom:12px">An <strong>arithmetic sequence</strong> is a list of numbers where each term increases by the same amount — called the <strong>common difference (d)</strong>.</p>
+
+    <div class="num-row">
+      <div class="num-chip">5</div><div class="arrow">+4→</div>
+      <div class="num-chip">9</div><div class="arrow">+4→</div>
+      <div class="num-chip">13</div><div class="arrow">+4→</div>
+      <div class="num-chip">17</div><div class="arrow">+4→</div>
+      <div class="num-chip">21</div>
+    </div>
+    <p style="font-size:14px;color:#555;margin-bottom:14px">Common difference d = 4. Each jump is the same.</p>
+
+    <div class="big-formula">nth term = first term + (n − 1) × d</div>
+
+    <div class="example">
+      <div class="example-title">Finding the 10th term</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">First term = 5, d = 4, n = 10</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">10th term = 5 + (10−1) × 4 = 5 + 36 = <strong>41</strong></div></div>
+    </div>
+
+    <h3 style="margin-top:16px">Quick Check</h3>
+    <p style="font-size:15px;margin-bottom:8px">Sequence: 3, 8, 13, 18, 23, ... What is the 8th term?</p>
+    <div class="input-row">
+      <input class="inp" id="q2" placeholder="?" type="number">
+      <button class="btn" onclick="check('q2','38','fb2')">Check</button>
+    </div>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn btn-sec" style="margin-top:8px" onclick="showReveal('rev2')">Show working</button>
+    <div class="reveal" id="rev2">d = 5. 8th term = 3 + (8−1)×5 = 3 + 35 = <strong>38</strong></div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(1)">← Back</button>
+    <div class="screen-counter">2 of 7</div>
+    <button class="btn" onclick="go(3)">Consecutive Numbers →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 3 — Consecutive Numbers: The Middle Trick ════════════════════ -->
+<div class="screen" id="s3">
+  <div class="card">
+    <h2>Consecutive Numbers — The Middle Trick</h2>
+    <p style="font-size:15px;margin-bottom:14px"><strong>Consecutive numbers</strong> are numbers that follow each other: like 7, 8, 9, 10, 11. The common difference is <strong>always 1</strong>.</p>
+
+    <div style="background:#E8EAF6;border-radius:12px;padding:20px;margin:14px 0;text-align:center">
+      <p style="font-size:16px;font-weight:700;color:#1A237E;margin-bottom:12px">For consecutive numbers with an odd count:</p>
+      <div class="num-row" style="justify-content:center">
+        <div class="num-chip">n−2</div>
+        <div class="num-chip">n−1</div>
+        <div class="num-chip mid">n</div>
+        <div class="num-chip">n+1</div>
+        <div class="num-chip">n+2</div>
+      </div>
+      <p style="margin-top:12px;font-size:15px">Sum = 5n &nbsp;→&nbsp; <strong>middle = Sum ÷ count</strong></p>
+    </div>
+
+    <div class="example">
+      <div class="example-title">M1 Q18 — Solved in 3 steps</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">5 consecutive numbers, sum = 100</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Middle = 100 ÷ 5 = <strong>20</strong></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Numbers: 18, 19, 20, 21, 22. Largest = <strong>22</strong></div></div>
+    </div>
+
+    <div class="tip">⚠️ This works when the count is <strong>odd</strong> (3, 5, 7 numbers). For even counts — see next screen!</div>
+
+    <h3 style="margin-top:14px">Quick Check</h3>
+    <p style="font-size:15px;margin-bottom:8px">The sum of 3 consecutive numbers is 54. What is the largest?</p>
+    <div class="input-row">
+      <input class="inp" id="q3" placeholder="?" type="number">
+      <button class="btn" onclick="check('q3','19','fb3')">Check</button>
+    </div>
+    <div class="feedback" id="fb3"></div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(2)">← Back</button>
+    <div class="screen-counter">3 of 7</div>
+    <button class="btn" onclick="go(4)">Even Count & Evens →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 4 — Even Count & Consecutive Evens ════════════════════════════ -->
+<div class="screen" id="s4">
+  <div class="card">
+    <h2>Even Count & Consecutive Even Numbers</h2>
+
+    <h3>When count is even — use algebra</h3>
+    <p style="font-size:15px;margin-bottom:10px">4 consecutive numbers: let them be <strong>n, n+1, n+2, n+3</strong>.</p>
+    <div class="example">
+      <div class="example-title">Sum of 4 consecutive = 58. Find the largest.</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">n + (n+1) + (n+2) + (n+3) = 58</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">4n + 6 = 58 → 4n = 52 → n = 13</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Numbers: 13, 14, 15, 16. Largest = <strong>16</strong></div></div>
+    </div>
+
+    <hr style="margin:16px 0;border:none;border-top:1px solid #C5CAE9">
+
+    <h3>Consecutive Even (or Odd) Numbers</h3>
+    <p style="font-size:15px;margin-bottom:10px">Consecutive <strong>even</strong> numbers go up by 2: n, n+2, n+4, n+6...</p>
+    <div class="example">
+      <div class="example-title">Sum of 4 consecutive even numbers = 60. Find the smallest.</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">n + (n+2) + (n+4) + (n+6) = 60</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">4n + 12 = 60 → 4n = 48 → n = 12</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Numbers: 12, 14, 16, 18. Smallest = <strong>12</strong></div></div>
+    </div>
+
+    <h3 style="margin-top:14px">Quick Check</h3>
+    <p style="font-size:15px;margin-bottom:8px">Sum of 5 consecutive even numbers = 80. What is the smallest?</p>
+    <div class="input-row">
+      <input class="inp" id="q4" placeholder="?" type="number">
+      <button class="btn" onclick="check('q4','12','fb4')">Check</button>
+    </div>
+    <div class="feedback" id="fb4"></div>
+    <button class="btn btn-sec" style="margin-top:8px" onclick="showReveal('rev4')">Show working</button>
+    <div class="reveal" id="rev4">n, n+2, n+4, n+6, n+8. Sum=5n+20=80. 5n=60. n=12. Smallest=<strong>12</strong>.</div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(3)">← Back</button>
+    <div class="screen-counter">4 of 7</div>
+    <button class="btn" onclick="go(5)">Finding Missing Terms →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 5 — Finding Missing Terms ════════════════════════════════════ -->
+<div class="screen" id="s5">
+  <div class="card">
+    <h2>Finding Missing Terms — Use the Gap</h2>
+    <p style="font-size:15px;margin-bottom:14px">If you know two terms and their positions, you can find <strong>d</strong> and work backwards to find any term.</p>
+
+    <div class="example">
+      <div class="example-title">The 4th term is 29. Each term increases by 6. Find the 1st term.</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">4th term = 29, d = 6</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">Go back 3 steps: 29 − 3×6 = 29 − 18 = <strong>11</strong></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Verify: 11, 17, 23, 29 ✓</div></div>
+    </div>
+
+    <div class="alert-box">
+      <p style="font-weight:700;margin-bottom:8px">⭐ Hard type — finding d first:</p>
+      <div class="example">
+        <div class="example-title">3rd term = 15, 7th term = 35. Find d and the 1st term.</div>
+        <div class="step"><div class="step-num">1</div><div class="step-text">From 3rd to 7th = 4 steps. Increase = 35 − 15 = 20</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">d = 20 ÷ 4 = <strong>5</strong></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">1st term = 15 − 2×5 = <strong>5</strong></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Sequence: 5, 10, 15, 20, 25, 30, 35 ✓</div></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:14px">Quick Check</h3>
+    <p style="font-size:15px;margin-bottom:8px">A sequence increases by 6 each time. The 4th term is 29. What is the 1st term?</p>
+    <div class="input-row">
+      <input class="inp" id="q5" placeholder="?" type="number">
+      <button class="btn" onclick="check('q5','11','fb5')">Check</button>
+    </div>
+    <div class="feedback" id="fb5"></div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(4)">← Back</button>
+    <div class="screen-counter">5 of 7</div>
+    <button class="btn" onclick="go(6)">Practice →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 6 — Full Practice ════════════════════════════════════════════ -->
+<div class="screen" id="s6">
+  <div class="card">
+    <h2>Full Practice</h2>
+
+    <div style="border:1px solid #C5CAE9;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-weight:600;font-size:15px;margin-bottom:8px">Q1. The sum of 3 consecutive whole numbers is 39. What is the largest?</p>
+      <div class="input-row">
+        <input class="inp" id="p6a" placeholder="?" type="number">
+        <button class="btn" onclick="check('p6a','14','fb6a')">Check</button>
+      </div>
+      <div class="feedback" id="fb6a"></div>
+    </div>
+
+    <div style="border:1px solid #C5CAE9;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-weight:600;font-size:15px;margin-bottom:8px">Q2. Sequence: 4, 7, 10, 13, ___, ___. What is the 10th term?</p>
+      <div class="input-row">
+        <input class="inp" id="p6b" placeholder="?" type="number">
+        <button class="btn" onclick="check('p6b','31','fb6b')">Check</button>
+      </div>
+      <div class="feedback" id="fb6b"></div>
+      <button class="btn btn-sec" style="margin-top:8px" onclick="showReveal('rev6b')">Hint</button>
+      <div class="reveal" id="rev6b">d=3. 10th = 4 + 9×3 = 4+27 = <strong>31</strong></div>
+    </div>
+
+    <div style="border:1px solid #C5CAE9;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-weight:600;font-size:15px;margin-bottom:8px">Q3 ⭐. The 3rd term of a sequence is 15 and the 7th term is 35. What is the sum of the first 5 terms?</p>
+      <div class="input-row">
+        <input class="inp" id="p6c" placeholder="?" type="number">
+        <button class="btn" onclick="check('p6c','75','fb6c')">Check</button>
+      </div>
+      <div class="feedback" id="fb6c"></div>
+      <button class="btn btn-sec" style="margin-top:8px" onclick="showReveal('rev6c')">Show working</button>
+      <div class="reveal" id="rev6c">d=(35−15)÷4=5. 1st term=15−2×5=5. Sequence: 5,10,15,20,25. Sum=<strong>75</strong></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(5)">← Back</button>
+    <div class="screen-counter">6 of 7</div>
+    <button class="btn" onclick="go(7)">Summary →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 7 — Summary ══════════════════════════════════════════════════ -->
+<div class="screen" id="s7">
+  <div class="card">
+    <h2>🎉 Lesson Complete!</h2>
+    <p style="font-size:15px;margin-bottom:16px">Four things to remember:</p>
+
+    <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Arithmetic sequence:</strong> nth term = first + (n−1) × d</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Consecutive numbers (odd count):</strong> middle = sum ÷ count</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Consecutive even/odd:</strong> let first = n, then n, n+2, n+4... set up equation</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Find d:</strong> d = (later term − earlier term) ÷ (number of steps between them)</div></div>
+
+    <div class="tip" style="margin-top:18px">📝 <strong>ISA tip:</strong> When you see "sum of consecutive," your first move is always: <strong>sum ÷ count = middle number</strong>. Write it down before anything else.</div>
+
+    <div style="text-align:center;margin-top:24px">
+      <div style="font-size:48px">🔢</div>
+      <div style="font-size:20px;font-weight:700;color:#1A237E;margin-top:8px">Patterns unlocked!</div>
+      <div style="font-size:14px;color:#718096;margin-top:4px">M1 Q18 won't catch you again. All 3 lessons done — test time!</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(6)">← Back</button>
+    <div class="screen-counter">7 of 7</div>
+    <span class="btn" style="background:linear-gradient(135deg,#283593,#1A237E)">✅ All Lessons Done!</span>
+  </div>
+</div>
+
+<script>
+var total=7;
+function go(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width=Math.round(n/total*100)+'%';
+  document.getElementById('screen-badge').textContent='Screen '+n+' / '+total;
+  window.scrollTo(0,0);
+}
+function check(id,ans,fbId){
+  var val=document.getElementById(id).value.trim();
+  var fb=document.getElementById(fbId);
+  if(val===ans){fb.className='feedback show ok';fb.textContent='✅ Correct — '+ans+'!';}
+  else{fb.className='feedback show no';fb.textContent='❌ Not quite. Try again!';}
+}
+function showReveal(id){document.getElementById(id).classList.add('show');}
+</script>
+</body>
+</html>

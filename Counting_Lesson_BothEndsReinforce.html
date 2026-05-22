@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Both-Ends ×2 — The Final Lock · Unit 11</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#FFF8F0;color:#1a1a2e;min-height:100vh}
+.hdr{background:linear-gradient(135deg,#E65100,#BF360C);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:space-between}
+.hdr-left h1{font-size:22px;font-weight:800}
+.hdr-left p{font-size:13px;opacity:.85;margin-top:3px}
+.progress-bar{background:rgba(255,255,255,.25);border-radius:20px;height:8px;width:200px;margin-top:8px}
+.progress-fill{background:#FFCC80;border-radius:20px;height:8px;transition:width .4s}
+.badge{background:rgba(255,255,255,.2);border-radius:12px;padding:6px 14px;font-size:12px;font-weight:600}
+.screen{display:none;max-width:820px;margin:30px auto;padding:0 20px 40px}
+.screen.active{display:block}
+.card{background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(230,81,0,.1);margin-bottom:18px;border-left:5px solid #E65100}
+h2{font-size:20px;color:#BF360C;margin-bottom:14px;font-weight:700}
+h3{font-size:16px;color:#E65100;margin-bottom:10px;font-weight:600}
+.formula{background:#FFF3E0;border:2px solid #FFCC80;border-radius:10px;padding:14px 18px;font-size:18px;font-weight:700;color:#BF360C;text-align:center;margin:14px 0}
+.big-formula{font-size:22px;font-weight:800;color:#BF360C;background:#FFF3E0;border-radius:10px;padding:16px;text-align:center;margin:12px 0}
+.tip{background:#FFF3E0;border-left:4px solid #E65100;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#5d4037;margin:12px 0}
+.step{display:flex;gap:14px;align-items:flex-start;margin:10px 0;padding:10px;background:#FFF8F0;border-radius:8px}
+.step-num{background:#E65100;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-text{font-size:15px;line-height:1.5}
+.btn{background:linear-gradient(135deg,#E65100,#BF360C);color:#fff;border:none;border-radius:10px;padding:11px 24px;font-size:15px;font-weight:600;cursor:pointer;transition:.2s}
+.btn:hover{opacity:.9}
+.btn-sec{background:#FFF3E0;color:#BF360C;border:2px solid #FFCC80}
+.btn-sec:hover{background:#FFE0B2}
+.nav{display:flex;gap:12px;margin-top:24px;justify-content:space-between;align-items:center}
+.reveal{display:none;background:#FFF3E0;border-radius:8px;padding:12px 16px;margin-top:10px;color:#BF360C;font-weight:600}
+.reveal.show{display:block}
+.feedback{display:none;margin-top:8px;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600}
+.feedback.show{display:block}
+.feedback.ok{background:#E8F5E9;color:#2e7d32}
+.feedback.no{background:#FFEBEE;color:#c62828}
+.input-row{display:flex;align-items:center;gap:12px;margin:14px 0;flex-wrap:wrap}
+.inp{border:2px solid #FFCC80;border-radius:8px;padding:8px 14px;font-size:18px;width:100px;text-align:center;outline:none;font-family:inherit}
+.inp:focus{border-color:#E65100}
+.type-box{border:2px solid #FFCC80;border-radius:12px;padding:18px;margin:10px 0;background:#FFF8F0}
+.type-box h3{margin-bottom:6px}
+.screen-counter{font-size:13px;opacity:.7;font-weight:600}
+.red-box{background:#FFEBEE;border:2px solid #EF9A9A;border-radius:10px;padding:16px;margin:14px 0}
+.green-box{background:#E8F5E9;border:2px solid #A5D6A7;border-radius:10px;padding:16px;margin:14px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:14px 0}
+th{background:#BF360C;color:#fff;padding:8px 12px;text-align:left}
+td{padding:8px 12px;border-bottom:1px solid #FFE0B2}
+tr:nth-child(even) td{background:#FFF8F0}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>🔁 Both-Ends ×2 — The Final Lock</h1>
+    <p>Unit 11 · Lesson 2 · Coach Chusaki</p>
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:14%"></div></div>
+  </div>
+  <div style="text-align:right">
+    <div class="badge" id="screen-badge">Screen 1 / 7</div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 1 — The M1 Moment ════════════════════════════════════════════ -->
+<div class="screen active" id="s1">
+  <div class="card">
+    <h2>⚠️ What Happened in Milestone Q7?</h2>
+    <p style="font-size:15px;margin-bottom:12px">You got <strong>every</strong> Both-Ends question right in Unit 10. Then in Milestone Q7:</p>
+
+    <div class="red-box">
+      <p style="font-weight:600;margin-bottom:8px">Milestone Q7: 5 children in a row. Mia at one end. How many arrangements?</p>
+      <p>Your answer: <strong style="color:#c62828">24</strong> &nbsp;(4×3×2×1 = 24)</p>
+      <p>Correct answer: <strong style="color:#2e7d32">48</strong> &nbsp;(2 × 4! = 48)</p>
+    </div>
+
+    <p style="font-size:15px;margin:12px 0">You did <strong>4!</strong> correctly — but stopped. The ×2 was missing.</p>
+
+    <div class="tip">💡 <strong>Why ×2?</strong> "One end" means Mia can stand at the <em>LEFT</em> end OR the <em>RIGHT</em> end. That's 2 options for Mia's position — so you multiply by 2.</div>
+
+    <div class="green-box" style="margin-top:14px">
+      <p style="font-weight:700;color:#2e7d32">Goal of this lesson: Make ×2 so automatic that you NEVER forget it again.</p>
+    </div>
+  </div>
+  <div class="nav">
+    <div class="screen-counter">1 of 7</div>
+    <button class="btn" onclick="go(2)">Let's fix it →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 2 — Three Types ════════════════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <div class="card">
+    <h2>The Three Both-Ends Types</h2>
+    <p style="font-size:15px;margin-bottom:14px">There are exactly <strong>3 types</strong>. Each has a rule. Learn all three — and when to use ×2.</p>
+
+    <div class="type-box">
+      <h3 style="color:#E65100">Type 1 — One person, either end</h3>
+      <p style="font-size:14px">"Ali must be at <strong>one end</strong>" (can be left OR right)</p>
+      <div class="big-formula" style="font-size:18px">2 × (n−1)!</div>
+      <p style="font-size:13px;color:#555">×2 because Ali can be at LEFT end or RIGHT end</p>
+    </div>
+
+    <div class="type-box">
+      <h3 style="color:#E65100">Type 2 — Two people, fixed ends (either order)</h3>
+      <p style="font-size:14px">"Ben at one end AND Sara at the other" (either order)</p>
+      <div class="big-formula" style="font-size:18px">2 × (n−2)!</div>
+      <p style="font-size:13px;color:#555">×2 because Ben–Sara or Sara–Ben at the ends</p>
+    </div>
+
+    <div class="type-box">
+      <h3 style="color:#E65100">Type 3 — One person, ONE specific end</h3>
+      <p style="font-size:14px">"The teacher must be at the <strong>left end only</strong>"</p>
+      <div class="big-formula" style="font-size:18px">(n−1)!</div>
+      <p style="font-size:13px;color:#555">NO ×2 — only one valid position for that person</p>
+    </div>
+
+    <div class="tip">🔑 <strong>The ×2 rule:</strong> If the person(s) can be at <em>either</em> end → ×2. If locked to ONE specific end → no ×2.</div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(1)">← Back</button>
+    <div class="screen-counter">2 of 7</div>
+    <button class="btn" onclick="go(3)">The Check →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 3 — The ×2 Check ══════════════════════════════════════════════ -->
+<div class="screen" id="s3">
+  <div class="card">
+    <h2>The Automatic ×2 Check</h2>
+    <p style="font-size:15px;margin-bottom:14px">Before writing your answer on any Both-Ends question, run this <strong>2-second check</strong>:</p>
+
+    <div style="background:#FFF3E0;border:2px solid #E65100;border-radius:12px;padding:20px;margin:14px 0">
+      <p style="font-size:17px;font-weight:700;color:#BF360C;margin-bottom:12px">Ask yourself: "Can the person(s) be at EITHER end?"</p>
+      <div class="grid2">
+        <div style="background:#E8F5E9;border-radius:8px;padding:14px">
+          <p style="font-weight:700;color:#2e7d32;margin-bottom:6px">YES → ×2</p>
+          <p style="font-size:13px">"must be at one end"<br>"at one of the two ends"<br>"either order at the ends"</p>
+        </div>
+        <div style="background:#FFEBEE;border-radius:8px;padding:14px">
+          <p style="font-weight:700;color:#c62828;margin-bottom:6px">NO → no ×2</p>
+          <p style="font-size:13px">"at the left end"<br>"at the right end specifically"<br>"at the front only"</p>
+        </div>
+      </div>
+    </div>
+
+    <table>
+      <tr><th>Question wording</th><th>×2?</th><th>Formula</th></tr>
+      <tr><td>Mia at one end (5 people)</td><td style="color:#2e7d32;font-weight:700">✓ ×2</td><td>2 × 4! = 48</td></tr>
+      <tr><td>Teacher at LEFT end only (6 people)</td><td style="color:#c62828;font-weight:700">✗ no</td><td>5! = 120</td></tr>
+      <tr><td>Tall + short at the two ends (7 people)</td><td style="color:#2e7d32;font-weight:700">✓ ×2</td><td>2 × 5! = 240</td></tr>
+      <tr><td>Tom at one end, Sue at the other (6)</td><td style="color:#2e7d32;font-weight:700">✓ ×2</td><td>2 × 4! = 48</td></tr>
+    </table>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(2)">← Back</button>
+    <div class="screen-counter">3 of 7</div>
+    <button class="btn" onclick="go(4)">Practice →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 4 — Practice Type Sorting ════════════════════════════════════ -->
+<div class="screen" id="s4">
+  <div class="card">
+    <h2>Practice — Identify & Solve</h2>
+    <p style="font-size:15px;margin-bottom:16px">For each question, decide: <strong>which type?</strong> Then calculate.</p>
+
+    <div style="border:1px solid #FFE0B2;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-weight:600;font-size:15px;margin-bottom:10px">Q1. 5 people in a row. Jack must be at one end (either end). Arrangements?</p>
+      <div class="input-row">
+        <input class="inp" id="p4a" placeholder="?" type="number">
+        <button class="btn" onclick="check('p4a','48','fb4a')">Check</button>
+      </div>
+      <div class="feedback" id="fb4a"></div>
+    </div>
+
+    <div style="border:1px solid #FFE0B2;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-weight:600;font-size:15px;margin-bottom:10px">Q2. 6 students in a row. The head girl must stand at the right end specifically. Arrangements?</p>
+      <div class="input-row">
+        <input class="inp" id="p4b" placeholder="?" type="number">
+        <button class="btn" onclick="check('p4b','120','fb4b')">Check</button>
+      </div>
+      <div class="feedback" id="fb4b"></div>
+    </div>
+
+    <div style="border:1px solid #FFE0B2;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-weight:600;font-size:15px;margin-bottom:10px">Q3. 7 children in a row. The oldest and youngest must each be at one of the two ends (either order). Arrangements?</p>
+      <div class="input-row">
+        <input class="inp" id="p4c" placeholder="?" type="number">
+        <button class="btn" onclick="check('p4c','240','fb4c')">Check</button>
+      </div>
+      <div class="feedback" id="fb4c"></div>
+    </div>
+
+    <button class="btn btn-sec" onclick="showReveal('rev4')">Show all answers</button>
+    <div class="reveal" id="rev4">
+      Q1: Type 1, ×2 → 2×4! = 48 ✓<br>
+      Q2: Type 3, no ×2 → 5! = 120 ✓<br>
+      Q3: Type 2, ×2 → 2×5! = 240 ✓
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(3)">← Back</button>
+    <div class="screen-counter">4 of 7</div>
+    <button class="btn" onclick="go(5)">More →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 5 — Advanced Practice ════════════════════════════════════════ -->
+<div class="screen" id="s5">
+  <div class="card">
+    <h2>Advanced Practice</h2>
+    <p style="font-size:15px;margin-bottom:16px">These are the ISA-level difficulty questions. Apply the ×2 check every time.</p>
+
+    <div style="border:1px solid #FFE0B2;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-weight:600;font-size:15px;margin-bottom:10px">Q4. 8 people stand in a row. The two youngest must each be at one of the two ends. How many arrangements?</p>
+      <div class="input-row">
+        <input class="inp" id="p5a" placeholder="?" type="number">
+        <button class="btn" onclick="check('p5a','1440','fb5a')">Check</button>
+      </div>
+      <div class="feedback" id="fb5a"></div>
+      <button class="btn btn-sec" style="margin-top:8px" onclick="showReveal('rev5a')">Hint</button>
+      <div class="reveal" id="rev5a">Two people at ends (either order) → Type 2: 2 × (8−2)! = 2 × 6! = 2 × 720 = 1440</div>
+    </div>
+
+    <div style="border:1px solid #FFE0B2;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-weight:600;font-size:15px;margin-bottom:10px">Q5. 4 friends stand in a row. How many arrangements have Ali at the LEFT end and Ben at the RIGHT end?</p>
+      <div class="input-row">
+        <input class="inp" id="p5b" placeholder="?" type="number">
+        <button class="btn" onclick="check('p5b','2','fb5b')">Check</button>
+      </div>
+      <div class="feedback" id="fb5b"></div>
+      <button class="btn btn-sec" style="margin-top:8px" onclick="showReveal('rev5b')">Hint</button>
+      <div class="reveal" id="rev5b">Both ends fixed, specific positions → NO ×2: (4−2)! = 2! = 2</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(4)">← Back</button>
+    <div class="screen-counter">5 of 7</div>
+    <button class="btn" onclick="go(6)">Speed Drill →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 6 — Speed Drill ═══════════════════════════════════════════════ -->
+<div class="screen" id="s6">
+  <div class="card">
+    <h2>⚡ Speed Drill — 60 Seconds</h2>
+    <p style="font-size:15px;margin-bottom:14px">Read each question. Apply ×2 check. Write answer. Speed is the goal.</p>
+    <table>
+      <tr><th>#</th><th>Question</th><th>Answer</th></tr>
+      <tr><td>1</td><td>6 people, Zoe at either end</td><td style="color:#2e7d32;font-weight:700">2×5! = 240</td></tr>
+      <tr><td>2</td><td>5 people, Leo at LEFT end only</td><td style="color:#2e7d32;font-weight:700">4! = 24</td></tr>
+      <tr><td>3</td><td>7 people, tallest + shortest at ends</td><td style="color:#2e7d32;font-weight:700">2×5! = 240</td></tr>
+      <tr><td>4</td><td>4 people, anyone at either end</td><td style="color:#2e7d32;font-weight:700">4! = 24 (no restriction!)</td></tr>
+      <tr><td>5</td><td>8 people, captain at one end</td><td style="color:#2e7d32;font-weight:700">2×7! = 10080</td></tr>
+      <tr><td>6</td><td>6 people, Max at one end, Min at other</td><td style="color:#2e7d32;font-weight:700">2×4! = 48</td></tr>
+    </table>
+    <div class="tip" style="margin-top:14px">🔑 Say it out loud before each answer: <em>"Can they be at either end? YES → ×2. NO → no ×2."</em></div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(5)">← Back</button>
+    <div class="screen-counter">6 of 7</div>
+    <button class="btn" onclick="go(7)">Summary →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 7 — Summary ══════════════════════════════════════════════════ -->
+<div class="screen" id="s7">
+  <div class="card">
+    <h2>🔒 Locked In!</h2>
+
+    <div style="background:#FFF3E0;border:2px solid #E65100;border-radius:12px;padding:20px;text-align:center;margin-bottom:18px">
+      <p style="font-size:19px;font-weight:800;color:#BF360C">The ×2 Rule — One Final Time</p>
+      <p style="font-size:15px;margin-top:8px">If the person(s) can be at <strong>either</strong> end → multiply by <strong>2</strong></p>
+      <p style="font-size:15px;margin-top:6px">If locked to <strong>one specific</strong> end → <strong>no ×2</strong></p>
+    </div>
+
+    <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Type 1</strong> (one person, either end): 2 × (n−1)!</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Type 2</strong> (two people, either order at ends): 2 × (n−2)!</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Type 3</strong> (one specific end): (n−1)! — no ×2</div></div>
+
+    <div style="text-align:center;margin-top:24px">
+      <div style="font-size:48px">🔒</div>
+      <div style="font-size:20px;font-weight:700;color:#BF360C;margin-top:8px">×2 is locked in!</div>
+      <div style="font-size:14px;color:#718096;margin-top:4px">Milestone Q7 won't happen again → Lesson 3: Patterns</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(6)">← Back</button>
+    <div class="screen-counter">7 of 7</div>
+    <a href="Patterns_Lesson_ConsecutiveNumbers.html" class="btn">Next Lesson →</a>
+  </div>
+</div>
+
+<script>
+var total=7;
+function go(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width=Math.round(n/total*100)+'%';
+  document.getElementById('screen-badge').textContent='Screen '+n+' / '+total;
+  window.scrollTo(0,0);
+}
+function check(id,ans,fbId){
+  var val=document.getElementById(id).value.trim();
+  var fb=document.getElementById(fbId);
+  fb.className='feedback show';
+  if(val===ans){fb.className='feedback show ok';fb.textContent='✅ Correct — '+ans+'!';}
+  else{fb.className='feedback show no';fb.textContent='❌ Not quite. Check: ×2 needed or not?';}
+}
+function showReveal(id){document.getElementById(id).classList.add('show');}
+</script>
+</body>
+</html>
