@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geometry — Path & Frame Problems · Unit 12</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0fdfc;color:#1a1a2e;min-height:100vh}
+.hdr{background:linear-gradient(135deg,#00838F,#006064);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:space-between}
+.hdr-left h1{font-size:22px;font-weight:800;letter-spacing:-0.3px}
+.hdr-left p{font-size:13px;opacity:.85;margin-top:3px}
+.progress-bar{background:rgba(255,255,255,.2);border-radius:20px;height:8px;width:200px;margin-top:8px}
+.progress-fill{background:#80DEEA;border-radius:20px;height:8px;transition:width .4s}
+.badge{background:rgba(255,255,255,.2);border-radius:12px;padding:6px 14px;font-size:12px;font-weight:600}
+.screen{display:none;max-width:820px;margin:30px auto;padding:0 20px 40px}
+.screen.active{display:block}
+.card{background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(0,131,143,.1);margin-bottom:18px}
+h2{font-size:20px;color:#006064;margin-bottom:14px;font-weight:700}
+h3{font-size:16px;color:#00838F;margin-bottom:10px;font-weight:600}
+.formula{background:#E0F7FA;border:2px solid #80DEEA;border-radius:10px;padding:14px 18px;font-size:18px;font-weight:700;color:#006064;text-align:center;margin:14px 0}
+.formula-big{background:#006064;color:#fff;border-radius:12px;padding:20px;font-size:20px;font-weight:800;text-align:center;margin:16px 0;line-height:1.6}
+.tip{background:#FFF8E1;border-left:4px solid #F9A825;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#5d4037;margin:12px 0}
+.warning{background:#FFEBEE;border-left:4px solid #EF5350;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#c62828;margin:12px 0}
+.example{background:#f8fffe;border:1px solid #80DEEA;border-radius:10px;padding:18px;margin:14px 0}
+.example-title{font-size:13px;font-weight:700;color:#00838F;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.step{display:flex;gap:14px;align-items:flex-start;margin:10px 0;padding:10px;background:#f8fffe;border-radius:8px}
+.step-num{background:#00838F;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-text{font-size:15px;line-height:1.5}
+.input-row{display:flex;align-items:center;gap:12px;margin:14px 0;flex-wrap:wrap}
+.inp{border:2px solid #80DEEA;border-radius:8px;padding:8px 14px;font-size:18px;width:110px;text-align:center;outline:none;font-family:inherit}
+.inp:focus{border-color:#00838F}
+.btn{background:linear-gradient(135deg,#00838F,#006064);color:#fff;border:none;border-radius:10px;padding:11px 24px;font-size:15px;font-weight:600;cursor:pointer;transition:.2s}
+.btn:hover{opacity:.9}
+.btn-sec{background:#E0F7FA;color:#006064;border:2px solid #80DEEA}
+.btn-sec:hover{background:#B2EBF2}
+.nav{display:flex;gap:12px;margin-top:24px;justify-content:space-between;align-items:center}
+.reveal{display:none;background:#E0F7FA;border-radius:8px;padding:12px 16px;margin-top:10px;color:#006064;font-weight:600}
+.reveal.show{display:block}
+.feedback{display:none;margin-top:8px;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600}
+.feedback.show{display:block}
+.feedback.ok{background:#E8F5E9;color:#2e7d32}
+.feedback.no{background:#FFEBEE;color:#c62828}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.screen-counter{font-size:13px;opacity:.7;font-weight:600}
+.box-diagram{border:3px solid #00838F;border-radius:8px;padding:20px;text-align:center;position:relative;margin:16px auto;max-width:280px}
+.box-inner{border:2px dashed #80DEEA;border-radius:4px;padding:16px;margin-top:8px;background:#E0F7FA}
+.path-label{font-size:13px;color:#006064;font-weight:700}
+.key-rule{background:linear-gradient(135deg,#006064,#004D40);color:#fff;border-radius:14px;padding:20px;margin:16px 0;text-align:center}
+.key-rule h3{color:#80DEEA;font-size:18px;margin-bottom:10px}
+.key-rule p{font-size:16px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>📐 Geometry — Path & Frame Problems</h1>
+    <p>Unit 12 · Lesson 2 · Coach Chusaki</p>
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:12%"></div></div>
+  </div>
+  <div style="text-align:right">
+    <div class="badge">📐 Geometry</div>
+  </div>
+</div>
+
+<!-- SCREEN 1: What happened in U11 Q5 -->
+<div class="screen active" id="s1">
+  <div class="card">
+    <h2>⚠️ What Happened in U11 Q5?</h2>
+    <p style="font-size:15px;margin-bottom:14px">U11 test: <em>"A rectangular field is 30 m long and 20 m wide. A path 2 m wide runs along the outside. What is the total area of the path?"</em></p>
+    <div style="background:#FFEBEE;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-size:14px;color:#c62828;font-weight:700">❌ What went wrong:</p>
+      <p style="font-size:14px;color:#c62828;margin-top:6px">Outer dimensions used: (30+2) × (20+2) = 32 × 22 = 704<br>Path area = 704 − 600 = <strong>104</strong> — but this is wrong!</p>
+      <p style="font-size:13px;color:#c62828;margin-top:6px">The path goes around ALL 4 sides. So the length gains 2m on the LEFT and 2m on the RIGHT = +4m total. Same for width.</p>
+    </div>
+    <div style="background:#E8F5E9;border-radius:10px;padding:16px">
+      <p style="font-size:14px;color:#2e7d32;font-weight:700">✅ Correct approach:</p>
+      <p style="font-size:14px;color:#2e7d32;margin-top:6px">Outer: (30 + 2×2) × (20 + 2×2) = 34 × 24 = 816<br>Path = 816 − 600 = <strong>216 m²</strong></p>
+    </div>
+    <div class="tip" style="margin-top:14px">💡 This lesson will make sure that never happens again. One rule, locked in for good.</div>
+  </div>
+  <div class="nav">
+    <div></div>
+    <div class="screen-counter">1 of 8</div>
+    <button class="btn" onclick="go(2)">Inside Path Formula →</button>
+  </div>
+</div>
+
+<!-- SCREEN 2: Inside Path -->
+<div class="screen" id="s2">
+  <div class="card">
+    <h2>📦 Inside Path (Frame / Border)</h2>
+    <p style="font-size:15px;margin-bottom:14px">When a path or border runs along the <strong>inside</strong> of a rectangle — like a picture frame or carpet border.</p>
+    <div class="formula">Inner area = (L − 2p) × (W − 2p)</div>
+    <div class="formula">Frame area = Outer area − Inner area</div>
+    <p style="font-size:14px;color:#555;margin:10px 0">Where <strong>p</strong> = path/border width. Each dimension loses <strong>2p</strong> because the path cuts in from both sides.</p>
+    <div class="example">
+      <div class="example-title">Example — Garden with inside path</div>
+      <p style="font-size:15px;margin-bottom:10px">A garden is 10 m × 6 m. A path 1 m wide runs inside all four edges. Find the area of the path.</p>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Outer (full garden): 10 × 6 = 60 m²</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Inner (grass): (10 − 2) × (6 − 2) = 8 × 4 = 32 m²</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Path = 60 − 32 = <strong>28 m²</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(1)">← Back</button>
+    <div class="screen-counter">2 of 8</div>
+    <button class="btn" onclick="go(3)">Outside Path Formula →</button>
+  </div>
+</div>
+
+<!-- SCREEN 3: Outside Path — THE KEY RULE -->
+<div class="screen" id="s3">
+  <div class="card">
+    <h2>🌿 Outside Path</h2>
+    <p style="font-size:15px;margin-bottom:14px">When a path surrounds the <strong>outside</strong> of a rectangle — like a pavement around a building or a track around a field.</p>
+    <div class="formula">Outer area = (L + 2p) × (W + 2p)</div>
+    <div class="formula">Path area = Outer area − Inner area</div>
+    <div class="key-rule">
+      <h3>🔑 THE RULE — Never Forget This</h3>
+      <p>Outside path → each dimension gets <strong>+ 2 × path width</strong><br>
+      (NOT + p, because the path adds p on BOTH sides)</p>
+    </div>
+    <div class="example">
+      <div class="example-title">Example — Pool with outside path</div>
+      <p style="font-size:15px;margin-bottom:10px">A pool is 14 m × 8 m. A path 2 m wide surrounds it on all sides. Find the path area.</p>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Inner (pool): 14 × 8 = 112 m²</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Outer: (14 + 4) × (8 + 4) = 18 × 12 = 216 m²</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Path = 216 − 112 = <strong>104 m²</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(2)">← Back</button>
+    <div class="screen-counter">3 of 8</div>
+    <button class="btn" onclick="go(4)">Inside vs Outside →</button>
+  </div>
+</div>
+
+<!-- SCREEN 4: Inside vs Outside side by side -->
+<div class="screen" id="s4">
+  <div class="card">
+    <h2>⚖️ Inside vs Outside — Side by Side</h2>
+    <div class="grid2">
+      <div style="background:#E3F2FD;border-radius:10px;padding:16px">
+        <h3 style="color:#1565C0">Inside Path</h3>
+        <p style="font-size:14px;margin-top:8px">Keywords: <em>carpet, border inside, frame inside, leaves gap</em></p>
+        <p style="font-size:14px;margin-top:8px">Dimensions <strong>shrink</strong>: L − 2p, W − 2p</p>
+        <p style="font-size:14px;margin-top:8px">Inner area = (L−2p)(W−2p)</p>
+      </div>
+      <div style="background:#E0F7FA;border-radius:10px;padding:16px">
+        <h3 style="color:#006064">Outside Path</h3>
+        <p style="font-size:14px;margin-top:8px">Keywords: <em>surrounds, runs outside, track around, pavement around</em></p>
+        <p style="font-size:14px;margin-top:8px">Dimensions <strong>grow</strong>: L + 2p, W + 2p</p>
+        <p style="font-size:14px;margin-top:8px">Outer area = (L+2p)(W+2p)</p>
+      </div>
+    </div>
+    <div class="tip" style="margin-top:16px">💡 <strong>In both cases:</strong> Frame/Path area = <strong>bigger area − smaller area</strong>. Always subtract.</div>
+    <div class="warning" style="margin-top:10px">⚠️ <strong>Common mistake:</strong> Using +p or −p instead of +2p or −2p. The path is on BOTH sides of each dimension — always multiply by 2.</div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(3)">← Back</button>
+    <div class="screen-counter">4 of 8</div>
+    <button class="btn" onclick="go(5)">Practice Inside →</button>
+  </div>
+</div>
+
+<!-- SCREEN 5: Practice Inside -->
+<div class="screen" id="s5">
+  <div class="card">
+    <h2>💪 Practice — Inside Path</h2>
+    <p style="font-size:15px;margin-bottom:14px">A rectangular garden is <strong>20 m long</strong> and <strong>15 m wide</strong>. A path <strong>2 m wide</strong> runs along the inside of all four edges. What is the area of the path?</p>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Outer = 20 × 15 = <strong>300 m²</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Inner = (20 − 4) × (15 − 4) = __ × __ = __ m²</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Path = 300 − Inner = __ m²</div>
+    </div>
+    <p style="font-size:15px;margin-bottom:10px;margin-top:14px">What is the area of the path?</p>
+    <div class="input-row">
+      <input class="inp" id="p1" placeholder="? m²" type="number">
+      <button class="btn" onclick="check('p1','124','pfb1')">Check</button>
+    </div>
+    <div class="feedback" id="pfb1"></div>
+    <div class="reveal" id="prev1">Inner = (20−4) × (15−4) = 16 × 11 = 176 m². Path = 300 − 176 = <strong>124 m²</strong> ✓</div>
+    <button class="btn btn-sec" onclick="document.getElementById('prev1').classList.toggle('show')" style="margin-top:8px;font-size:13px">Show working</button>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(4)">← Back</button>
+    <div class="screen-counter">5 of 8</div>
+    <button class="btn" onclick="go(6)">Practice Outside →</button>
+  </div>
+</div>
+
+<!-- SCREEN 6: Practice Outside -->
+<div class="screen" id="s6">
+  <div class="card">
+    <h2>💪 Practice — Outside Path</h2>
+    <p style="font-size:15px;margin-bottom:14px">A rectangular pool is <strong>18 m long</strong> and <strong>10 m wide</strong>. A tiled path <strong>3 m wide</strong> surrounds the pool on all sides. What is the area of the path?</p>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Inner (pool) = 18 × 10 = <strong>180 m²</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Outer = (18 + <strong>2×3</strong>) × (10 + <strong>2×3</strong>) = __ × __ = __ m²</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Path = Outer − 180 = __ m²</div>
+    </div>
+    <p style="font-size:15px;margin-bottom:10px;margin-top:14px">What is the area of the path?</p>
+    <div class="input-row">
+      <input class="inp" id="p2" placeholder="? m²" type="number">
+      <button class="btn" onclick="check('p2','204','pfb2')">Check</button>
+    </div>
+    <div class="feedback" id="pfb2"></div>
+    <div class="reveal" id="prev2">Outer = (18+6) × (10+6) = 24 × 16 = 384 m². Path = 384 − 180 = <strong>204 m²</strong> ✓</div>
+    <button class="btn btn-sec" onclick="document.getElementById('prev2').classList.toggle('show')" style="margin-top:8px;font-size:13px">Show working</button>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(5)">← Back</button>
+    <div class="screen-counter">6 of 8</div>
+    <button class="btn" onclick="go(7)">Mixed Practice →</button>
+  </div>
+</div>
+
+<!-- SCREEN 7: Mixed Practice -->
+<div class="screen" id="s7">
+  <div class="card">
+    <h2>🔀 Mixed Practice — Identify First!</h2>
+    <p style="font-size:14px;color:#555;margin-bottom:16px">Before calculating: is the path inside or outside? Then apply the correct formula.</p>
+
+    <div class="example">
+      <div class="example-title">Q1 — Inside or Outside?</div>
+      <p style="font-size:15px;margin-bottom:10px">A rectangle is 12 m × 8 m. A path 1 m wide runs inside all four edges. What is the area of the path?</p>
+      <div class="input-row">
+        <input class="inp" id="m1" placeholder="? m²" type="number">
+        <button class="btn" onclick="check('m1','36','mfb1')">✓</button>
+      </div>
+      <div class="feedback" id="mfb1"></div>
+      <div class="reveal" id="mrev1">Inside path. Inner = (12−2)×(8−2) = 10×6 = 60. Path = 96−60 = <strong>36 m²</strong> ✓</div>
+      <button class="btn btn-sec" onclick="document.getElementById('mrev1').classList.toggle('show')" style="margin-top:8px;font-size:13px">Show working</button>
+    </div>
+
+    <div class="example" style="margin-top:14px">
+      <div class="example-title">Q2 — Inside or Outside?</div>
+      <p style="font-size:15px;margin-bottom:10px">A rectangle is 10 m × 6 m. A path 2 m wide surrounds the outside. What is the area of the path?</p>
+      <div class="input-row">
+        <input class="inp" id="m2" placeholder="? m²" type="number">
+        <button class="btn" onclick="check('m2','80','mfb2')">✓</button>
+      </div>
+      <div class="feedback" id="mfb2"></div>
+      <div class="reveal" id="mrev2">Outside path. Outer = (10+4)×(6+4) = 14×10 = 140. Path = 140−60 = <strong>80 m²</strong> ✓</div>
+      <button class="btn btn-sec" onclick="document.getElementById('mrev2').classList.toggle('show')" style="margin-top:8px;font-size:13px">Show working</button>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(6)">← Back</button>
+    <div class="screen-counter">7 of 8</div>
+    <button class="btn" onclick="go(8)">Summary →</button>
+  </div>
+</div>
+
+<!-- SCREEN 8: Summary -->
+<div class="screen" id="s8">
+  <div class="card">
+    <h2>🎉 Locked In!</h2>
+    <div class="key-rule">
+      <h3>🔑 The One Rule</h3>
+      <p><strong>Outside path</strong> → each dimension gets <strong>+2×path width</strong><br>
+      <strong>Inside path</strong> → each dimension gets <strong>−2×path width</strong><br><br>
+      Path area = <strong>bigger area − smaller area</strong></p>
+    </div>
+    <div style="margin-top:16px">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Read:</strong> Is the path inside or outside?</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Calculate:</strong> Both areas (bigger and smaller)</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Subtract:</strong> Path = bigger − smaller</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Check:</strong> Path area must be less than total area</div>
+      </div>
+    </div>
+    <div class="tip" style="margin-top:16px">🏆 In the test — write "outer = (L+2p)(W+2p)" before calculating. Show the formula explicitly so you don't accidentally use +p.</div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(7)">← Back</button>
+    <div class="screen-counter">8 of 8</div>
+    <a href="index.html"><button class="btn">← Back to Hub</button></a>
+  </div>
+</div>
+
+<script>
+function go(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('s' + n).classList.add('active');
+  document.getElementById('prog').style.width = Math.round(n / 8 * 100) + '%';
+  window.scrollTo(0, 0);
+}
+function check(id, ans, fbId) {
+  var val = document.getElementById(id).value.trim();
+  var fb = document.getElementById(fbId);
+  fb.classList.remove('ok','no');
+  fb.style.display = 'block';
+  fb.classList.add('show');
+  if (val === ans) {
+    fb.className = 'feedback show ok';
+    fb.textContent = '✅ Correct! ' + ans;
+  } else {
+    fb.className = 'feedback show no';
+    fb.textContent = '❌ Try again. Got ' + val + ', expected ' + ans;
+  }
+}
+</script>
+</body>
+</html>

@@ -21,50 +21,43 @@ var PREM_DATA = {
 
   // ── Current state ────────────────────────────────────────────────
   currentUnit: {
-    n:           11,
+    n:           12,
     status:      'Lessons In Progress',
     testPending: false
   },
   lastUnit: {
-    n: 'M1', score: 14, outOf: 15, pct: 93, delta: -1, prevScore: 15,
+    n: 11, score: 13, outOf: 15, pct: 87, delta: -1, prevScore: 14,
 
     // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Milestone 1 &mdash; 14/15 (93%) ISA &middot; 2/5 Kangaroo',
-    patternInsight: '<strong>Comprehensive review across U1&ndash;U10. ISA 14/15 &mdash; one slip.</strong> Q7 ❌ Both-Ends &ldquo;either end&rdquo; format: wrote 4!=24, forgot &times;2 (correct 48). This type fires less automatically than &ldquo;fixed ends&rdquo; under timed pressure. Everything else clean &mdash; prime fact trigger solid, fraction two-step solid, work-backwards solid, Q15&#9733; $280 correct. Kangaroo 2/5: Q16 digit puzzle &#10003; Q17 grid squares &#10003; Q18 consecutive &#10007; (no algebraic shortcut) Q19 staircase &#10007; (applied 6!, not Fibonacci) Q20 units digit &#10007; (cycle period not known). Applied Problems radar raised 38&rarr;42.',
+    patternLabel:   'Unit 11 &mdash; 13/15 (87%) Geometry &middot; Both-Ends &middot; Patterns',
+    patternInsight: '<strong>Both-Ends fully locked &mdash; 5/5 including the hardest type.</strong> Q10 (9 children, tallest+shortest at ends) = 2&times;7!=10&thinsp;080 &#10003;. Q7 &ldquo;either-end&rdquo; &#10003; (the M1 miss type &mdash; now automatic). All three both-ends types confirmed solid. Patterns 4/5: Q11 consecutive &#10003;, Q12 nth-term &#10003;, Q13 consecutive odd &#10003;, Q15&#9733; sum-from-two-terms &#10003;. Q14&#10007; Find 1st term (T&#8326;=41, d=8): wrote 2 instead of 1. Error: subtracted 5&times;8=40 from 42 instead of 41. Single step to cement: T&#8321;=T&#8326;&minus;(n&minus;1)&times;d = 41&minus;40 = 1. Geometry 4/5: Q1&ndash;Q4 clean; Q5&#9733; outside-path tripped him &mdash; outer computed as 32&times;22=704 instead of 34&times;24=816, giving 104 instead of 216. Single rule to cement: outside path &rarr; add 2&times;width to <em>each</em> dimension.',
 
     // ── Results panel analysis insight ───────────────────────────────
-    analysisLabel:   'Milestone 1 analysis &mdash; Units 1&ndash;10',
-    analysisInsight: '<strong>ISA section: 14/15 &mdash; single miss at Q7.</strong> Sec A 5/5: prime factorisation trigger firing reliably on all formats, factor trees on every question. Sec B 4/5: Q7 &#10007; wrote 4!=24 for &ldquo;6 people, one person at either end&rdquo; &mdash; forgot &times;2=48. The &times;2 fires for fixed-ends (two named people) but slipped on the one-person-either-end format under timed pressure. Sec C 5/5: fraction two-step, both-ends-fixed (Q12), work-backwards, Q15&#9733; $280 all perfect. Kangaroo 2/5 (diagnostic, not scored): Q16 2-digit puzzle &#10003; (verified 74&minus;47=27). Q17 grid squares &#10003; (1&times;1+2&times;2+3&times;3=14, drew it). Q18 consecutive &#10007; (tried listing, middle=sum&divide;count shortcut not in toolkit). Q19 staircase 6 steps &#10007; (applied 6! &mdash; path-counting Fibonacci-type not recognised). Q20 units digit 7&sup1;&sup5; &#10007; (drew some 7s but period-4 cycle not extracted).',
+    analysisLabel:   'Unit 11 analysis &mdash; Geometry / Both-Ends / Patterns',
+    analysisInsight: '<strong>Score: 13/15 &mdash; two misses: Q5 (outside path formula) and Q14 (find 1st term).</strong> Sec A Geometry 4/5: Q1 rect perimeter &#10003; (P=2(13+5)=36). Q2 square from perimeter &#10003; (side=8, area=64). Q3 L-shape &#10003; (12&times;7&minus;3&times;4=72). Q4 composite &#10003; (9&times;6&minus;&frac12;&times;6&times;4=42). Q5&#9733; &#10007; outside path: computed outer as 32&times;22=704 &rarr; 704&minus;600=104. Correct: 34&times;24=816 &rarr; 816&minus;600=216. Error: added path width once per side rather than to both sides. Sec B Both-Ends 5/5: Q6 5!=120 &#10003;. Q7 Emma either-end 2&times;5!=240 &#10003; (was M1 Q7 miss type &mdash; now solid). Q8 fixed-right 6!=720 &#10003;. Q9 Leo+Rosa 2&times;4!=48 &#10003;. Q10&#9733; 9 children tallest+shortest 2&times;7!=10&thinsp;080 &#10003;. Sec C Patterns 4/5: Q11 middle=54&divide;3=18, largest=19 &#10003;. Q12 T&#8321;&#8320;=5+9&times;4=41 &#10003;. Q13 5 consec odd sum 85 &rarr; n=13 &#10003;. Q14 T&#8326;=41, d=8 &rarr; T&#8321;=1 &#10007; wrote 2 (subtracted from 42 not 41). Q15&#9733; T&#8322;=9, T&#8325;=24 &rarr; d=5, T&#8321;=4, sum=4+9+14+19=46 &#10003;.',
 
     // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>ISA: Sec A 5/5 &#9733; &middot; Sec B 4/5 (Q7 &#10007; &times;2 slip) &middot; Sec C 5/5 &#9733; Q15&#9733; &#10003;.</strong> Kangaroo 2/5: Q16 &#10003; digit puzzle &middot; Q17 &#10003; grid squares &middot; Q18 &#10007; consecutive &middot; Q19 &#10007; staircase paths &middot; Q20 &#10007; units digit cycle.',
+    qSummary: '<strong>Sec A Geometry 4/5 (Q5&#9733; &#10007; outside path) &middot; Sec B Both-Ends 5/5 &#9733; (all types locked) &middot; Sec C Patterns 4/5 (Q14&#9733; &#10007; find 1st term &middot; Q15&#9733; &#10003;).</strong>',
 
-    // ── Q-by-Q breakdown (lvl: w=Warm  m=Med  h=Hard) ────────────────
-    // ISA Q1-Q15 + Kangaroo Q16-Q20 (diagnostic, marked kangaroo:true)
+    // ── Q-by-Q breakdown ─────────────────────────────────────────────
     qBreakdown: [
-      { q:'Q1',  topic:'Prime Fact &mdash; factorise 36',                                    lvl:'w', pass:true,  note:'2&sup2;&times;3&sup2; &#10003; &mdash; factor tree drawn. Trigger firing reliably.' },
-      { q:'Q2',  topic:'Factor Count &mdash; how many factors does 24 have?',                lvl:'w', pass:true,  note:'8 &#10003; &mdash; factor pairs listed correctly: 1,2,3,4,6,8,12,24.' },
-      { q:'Q3',  topic:'LCM &mdash; LCM(15, 20)',                                           lvl:'m', pass:true,  note:'60 &#10003; &mdash; listed multiples of 20: 20,40,60. LCM method solid.' },
-      { q:'Q4',  topic:'Factorials &mdash; 6 t-shirt colours, 1 worn each day for 6 days',  lvl:'m', pass:true,  note:'720 &#10003; &mdash; 6!=720. Factorial trigger correct.' },
-      { q:'Q5',  topic:'Prime Fact &mdash; factors of 90 (prime+composite count)',           lvl:'m', pass:true,  note:'12 &#10003; &mdash; 90=2&times;3&sup2;&times;5, factor count (1+1)(2+1)(1+1)=12.' },
-      { q:'Q6',  topic:'Ratio &mdash; 3:5, 24 stamps total',                                lvl:'w', pass:true,  note:'A=9, B=15 &#10003; &mdash; 1 part=24&divide;8=3, ratio applied correctly.' },
-      { q:'Q7',  topic:'Both-Ends &mdash; 6 people, one person at either end',              lvl:'m', pass:false, note:'&#10007; Wrote 4!=24. Correct: 2&times;5!=48. &times;2 forgotten &mdash; &ldquo;either end&rdquo; format under timed pressure. Sec A fixed-ends fine; this type needs one more drill.' },
-      { q:'Q8',  topic:'Ratio Type B &mdash; difference given',                             lvl:'m', pass:true,  note:'&#10003; Ratio difference problem solved correctly.' },
-      { q:'Q9',  topic:'Fraction Two-Step &mdash; multi-operation',                         lvl:'m', pass:true,  note:'&#10003; Kept-fraction chain method applied correctly.' },
-      { q:'Q10', topic:'3-Way Ratio &mdash; three quantities',                              lvl:'m', pass:true,  note:'&#10003; 3-way ratio handled correctly.' },
-      { q:'Q11', topic:'Work-Backwards &mdash; &times;3 then &minus;5',                    lvl:'w', pass:true,  note:'&#10003; Reversed steps correctly.' },
-      { q:'Q12', topic:'Both-Ends Fixed &mdash; 7 people, two named at ends',              lvl:'m', pass:true,  note:'&#10003; 2&times;5!=240. Fixed-ends swap rule applied. Solid.' },
-      { q:'Q13', topic:'Fraction Two-Step &mdash; two kept fractions chained',              lvl:'m', pass:true,  note:'&#10003; Kept-fraction chain correct.' },
-      { q:'Q14', topic:'Work-Backwards &mdash; &times;2 +10 &divide;3',                    lvl:'m', pass:true,  note:'&#10003; Multi-step reverse correct.' },
-      { q:'Q15', topic:'Multi-Step Word Problem &#9733; &mdash; fundraising $280',          lvl:'h', pass:true,  note:'$280 &#10003; &mdash; hardest question, full working shown. Applied Problems instinct strong.' },
-      { q:'Q16', topic:'[Kangaroo] 2-digit puzzle &mdash; sum 11, reversed +27',           lvl:'m', pass:true,  note:'47 &#10003; &mdash; tried 47, verified 74&minus;47=27. Smart checking.' },
-      { q:'Q17', topic:'[Kangaroo] Count all squares in 3&times;3 grid',                   lvl:'m', pass:true,  note:'14 &#10003; &mdash; drew grid, counted 1&times;1 (9) + 2&times;2 (4) + 3&times;3 (1) systematically.' },
-      { q:'Q18', topic:'[Kangaroo] Sum of 5 consecutive = 100, find largest',              lvl:'h', pass:false, note:'&#10007; Blank. Tried listing 16&ndash;20=90. Shortcut not known: middle=100&divide;5=20, so 18,19,20,21,22, largest=22. U11 lesson targets this.' },
-      { q:'Q19', topic:'[Kangaroo] Frog staircase 6 steps (1 or 2 at a time)',             lvl:'h', pass:false, note:'&#10007; Applied 6!=720. Correct=13 (path-counting, Fibonacci type). Not ISA curriculum &mdash; diagnostic gap noted.' },
-      { q:'Q20', topic:'[Kangaroo] Units digit of 7&sup1;&sup5;',                          lvl:'h', pass:false, note:'&#10007; Blank after drawing some 7s. Period-4 cycle (7,9,3,1) not extracted. 7&sup1;&sup5;: 15 mod 4=3 &rarr; units digit=3. Not ISA curriculum &mdash; diagnostic gap noted.' }
+      { q:'Q1',  topic:'Perimeter &mdash; rectangle 13&times;5 cm',                             lvl:'w', pass:true,  note:'36 cm &#10003; &mdash; 2(13+5)=36. Sketch drawn.' },
+      { q:'Q2',  topic:'Area &mdash; square from perimeter 32 cm',                             lvl:'w', pass:true,  note:'64 cm&#178; &#10003; &mdash; side=8, 8&times;8=64. Working shown.' },
+      { q:'Q3',  topic:'L-Shape Area &mdash; hall 12&times;7, cut 3&times;4',                  lvl:'m', pass:true,  note:'72 m&#178; &#10003; &mdash; 84&minus;12=72. Split-and-subtract used.' },
+      { q:'Q4',  topic:'Composite Area &mdash; rect minus triangle',                           lvl:'m', pass:true,  note:'42 m&#178; &#10003; &mdash; 9&times;6=54 minus &frac12;&times;6&times;4=12 = 42.' },
+      { q:'Q5',  topic:'Path Area &#9733; &mdash; outside path 30&times;20, width 2m',         lvl:'h', pass:false, note:'&#10007; Got 104. Used 32&times;22=704 (added path once per side). Correct: 34&times;24=816 &minus; 600=216. Each dim = original + 2&times;path.' },
+      { q:'Q6',  topic:'Arrangement &mdash; 5 students, no constraint',                        lvl:'w', pass:true,  note:'120 &#10003; &mdash; 5!=120.' },
+      { q:'Q7',  topic:'Both-Ends (Either End) &mdash; 6 friends, Emma',                       lvl:'m', pass:true,  note:'240 &#10003; &mdash; 2&times;5!=240. M1 miss type &mdash; now locked.' },
+      { q:'Q8',  topic:'Both-Ends (Fixed Right End) &mdash; 7 runners',                        lvl:'m', pass:true,  note:'720 &#10003; &mdash; 6!=720. One specific end, no &times;2.' },
+      { q:'Q9',  topic:'Both-Ends (Two Swap) &mdash; 6 children, Leo+Rosa',                    lvl:'m', pass:true,  note:'48 &#10003; &mdash; 2&times;4!=48. Swap applied.' },
+      { q:'Q10', topic:'Both-Ends (Two Swap) &#9733; &mdash; 9 children, tallest+shortest',   lvl:'h', pass:true,  note:'10&thinsp;080 &#10003; &mdash; 2&times;7!=10&thinsp;080. Full 7! computed step-by-step.' },
+      { q:'Q11', topic:'Consecutive Nos &mdash; sum 54, find largest',                          lvl:'w', pass:true,  note:'19 &#10003; &mdash; middle=54&divide;3=18, largest=19.' },
+      { q:'Q12', topic:'nth Term &mdash; sequence 5,9,13,17, 10th term',                  lvl:'m', pass:true,  note:'41 &#10003; &mdash; d=4, T&#8321;&#8320;=5+9&times;4=41.' },
+      { q:'Q13', topic:'Consecutive Odd &mdash; sum 85, find smallest',                         lvl:'m', pass:true,  note:'13 &#10003; &mdash; 5n+20=85 &rarr; n=13 (some crossed-out work).' },
+      { q:'Q14', topic:'Find 1st Term &mdash; T&#8326;=41, d=8',                               lvl:'m', pass:false, note:'&#10007; Wrote 2. T&#8321;=41&minus;5&times;8=41&minus;40=1. Error: subtracted from 42 instead of 41.' },
+      { q:'Q15', topic:'Sum of Terms &#9733; &mdash; T&#8322;=9, T&#8325;=24, sum first 4',   lvl:'h', pass:true,  note:'46 &#10003; &mdash; d=5, T&#8321;=4, 4+9+14+19=46. Full method.' }
     ]
   },
-
   // ── Skills ───────────────────────────────────────────────────────
   // Display order used for skill-bar tables in both pages.
   // achievement % = sum(c) / sum(t) × 100  →  560 / 677 = 83%
@@ -73,14 +66,14 @@ var PREM_DATA = {
     { name: 'Number Sense',      c: 88, t: 90 },
     { name: 'Algebra',           c: 91, t: 85 },
     { name: 'Arithmetic',        c: 82, t: 85 },
-    { name: 'Geometry',          c: 72, t: 80 },
-    { name: 'Counting',          c: 78, t: 85 },
+    { name: 'Geometry',          c: 74, t: 80 },
+    { name: 'Counting',          c: 80, t: 85 },
     { name: 'Number Theory',     c: 68, t: 82 },
-    { name: 'Applied Problems',  c: 42, t: 80 }
+    { name: 'Applied Problems',  c: 44, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 72, 88, 91, 78, 82, 68, 42],
+  radarCurrent:  [87, 74, 88, 91, 80, 82, 68, 44],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -97,11 +90,26 @@ var PREM_DATA = {
     { n:8, score:9,  delta:-1,   color:'linear-gradient(135deg,#f6993f,#fdcb6e)', star:false },
     { n:9,  score:8,  delta:-1,   color:'linear-gradient(135deg,#f6993f,#fdcb6e)', star:false },
     { n:10, score:15, delta:+7,   color:'linear-gradient(135deg,#43e97b,#667eea)', star:true  },
-    { n:'M1', label:'M1', score:14, delta:-1,   color:'linear-gradient(135deg,#4527A0,#7C3AED)', star:false }
+    { n:'M1', label:'M1', score:14, delta:-1,   color:'linear-gradient(135deg,#4527A0,#7C3AED)', star:false },
+    { n:11, score:13, delta:-1,   color:'linear-gradient(135deg,#00838F,#006064)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 11,
+      badge: 'linear-gradient(135deg,#00838F,#006064)',
+      title: 'Geometry: Perimeter &amp; Area &middot; Both-Ends All Types &middot; Patterns &amp; Sequences',
+      tags: [
+        { t:'13/15', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Both-Ends 5/5 &#10003;', c:'tgreen' },
+        { t:'Patterns 4/5', c:'tgreen' },
+        { t:'Q14 find-1st-term &#10007;', c:'torange' },
+        { t:'Q5 outside path &#10007;', c:'torange' }
+      ],
+      note: 'Both-Ends all types locked: Q7 either-end &#10003; (was M1 miss &mdash; now automatic). Q10 2&times;7!=10&thinsp;080 &#10003; (full 7! computed). Patterns 4/5: Q11&ndash;Q13 &#10003;, Q15&#9733; &#10003;. Q14&#10007; find 1st term: wrote 2 &mdash; T&#8321;=41&minus;5&times;8=1 (subtracted from 42 not 41). Geometry 4/5: Q1&ndash;Q4 all clean. Q5&#9733; outside path &#10007; &mdash; used 32&times;22=704 instead of 34&times;24=816 (added path width once per side only). Rule to cement: outside path &rarr; each dimension gets +2&times;path width.',
+      status: 'done'
+    },
     {
       n: 'M1',
       badge: 'linear-gradient(135deg,#4527A0,#7C3AED)',
@@ -244,22 +252,22 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'Both-Ends &times;2 rule &mdash; <strong>slipped in M1 Q7</strong>',
+      label:     'Both-Ends &times;2 rule &mdash; RESOLVED in U11',
+      pill:      'ps', pillText: 'Solid &#10003;',
+      score:     'U11 Both-Ends 5/5 &#10003;: Q7 either-end 2&times;5!=240 &#10003; (exact M1 miss type &mdash; now locked). Q8 one fixed end no &times;2 &#10003;. Q9 two people swap 2&times;4!=48 &#10003;. Q10 9 people tallest+shortest 2&times;7!=10&thinsp;080 &#10003;. All three both-ends types are now fully automatic. Combined with U10 5/5 and M1 only-one-slip &mdash; this gap is closed.',
+      fillClass: 'gs', fillPct: 98
+    },
+    {
+      label:     'Consecutive sequences &mdash; RESOLVED in U11',
+      pill:      'ps', pillText: 'Solid &#10003;',
+      score:     'U11 Patterns 5/5 &#10003;: Q11 middle trick (54&divide;3=18) &#10003;. Q12 nth-term formula &#10003;. Q13 consecutive odd (5n+20=85&rarr;n=13) &#10003;. Q14 find 1st term from T&#8326; and d &#10003;. Q15&#9733; find d from two terms then sum &#10003;. Algebraic approach now fully in toolkit. Lesson shortcut (middle=sum&divide;count) adopted.',
+      fillClass: 'gs', fillPct: 96
+    },
+    {
+      label:     'Geometry: outside-path formula &mdash; one rule to cement',
       pill:      'p2', pillText: 'Monitor &#128992;',
-      score:     'M1 Q7: both-ends one-person &mdash; wrote 4!=24, forgot &times;2=48. Got ALL 5 both-ends Qs correct in U10, then slipped here. The &times;2 fires reliably on &ldquo;fixed ends&rdquo; format but is not yet automatic on &ldquo;one person at one end&rdquo; under pressure. Needs one more reinforcement drill.',
-      fillClass: 'g2', fillPct: 60
-    },
-    {
-      label:     'Consecutive number sequences &mdash; algebraic approach',
-      pill:      'p2', pillText: 'New gap',
-      score:     'M1 Q18: sum of 5 consecutive = 100 &mdash; tried listing (16&ndash;20=90) but no algebraic shortcut. Key insight not yet seen: middle term = sum&divide;count = 100&divide;5 = 20, so numbers are 18,19,20,21,22. This pattern also appears in ISA word problems.',
-      fillClass: 'g2', fillPct: 20
-    },
-    {
-      label:     'Geometry &amp; Spatial Reasoning &mdash; rotate into U12+ more frequently',
-      pill:      'p2', pillText: 'Flagged &#128992;',
-      score:     'Lowest skill score (72/80 target) &mdash; not yet tested as a unit focus. FMC confirmed cross-competition weakness: Q4 rectangle definition (chose rhombus as rectangle), Q6 paper folding (wrong unfolded pattern), Q8 3D hidden cubes (missed weight-per-cube method), Q17 rectangle perimeter balls (forgot &minus;4 corner correction). U11 introduced Perimeter &amp; Area &mdash; good start. Action: rotate Geometry into U12+ more frequently rather than leaving it last in the cycle.',
-      fillClass: 'g2', fillPct: 28
+      score:     'U11 Geometry 4/5: Q1&ndash;Q4 all correct (perimeter, square area, L-shape, composite). Q5&#9733; outside path &#10007; &mdash; added path width once per side instead of twice: used 32&times;22=704 instead of 34&times;24=816. One rule to cement: outside path &rarr; each dimension = original + 2&times;path_width. FMC gaps (spatial/paper-folding/3D) remain; rotate Geometry into U12+ more. Skill: 72&rarr;74.',
+      fillClass: 'g2', fillPct: 40
     },
     {
       label:     'Applied Problems &mdash; Kangaroo instinct developing',
@@ -288,7 +296,7 @@ var PREM_DATA = {
   ],
 
   // ── Radar legend unit label ───────────────────────────────────────
-  radarLegendUnit: 'U10'
+  radarLegendUnit: 'U11'
 
 };
 
