@@ -256,6 +256,12 @@ var PREM_DATA = {
       fillClass: 'g2', fillPct: 20
     },
     {
+      label:     'Geometry &amp; Spatial Reasoning &mdash; rotate into U12+ more frequently',
+      pill:      'p2', pillText: 'Flagged &#128992;',
+      score:     'Lowest skill score (72/80 target) &mdash; not yet tested as a unit focus. FMC confirmed cross-competition weakness: Q4 rectangle definition (chose rhombus as rectangle), Q6 paper folding (wrong unfolded pattern), Q8 3D hidden cubes (missed weight-per-cube method), Q17 rectangle perimeter balls (forgot &minus;4 corner correction). U11 introduced Perimeter &amp; Area &mdash; good start. Action: rotate Geometry into U12+ more frequently rather than leaving it last in the cycle.',
+      fillClass: 'g2', fillPct: 28
+    },
+    {
       label:     'Applied Problems &mdash; Kangaroo instinct developing',
       pill:      'p2', pillText: '2/5 Kangaroo',
       score:     'Q16 &#10003; digit puzzle, Q17 &#10003; grid squares. Q18 &#10007; (consecutive = listing not algebra). Q19 &#10007; (staircase paths &mdash; used 6! instead of recognising path-counting type). Q20 &#10007; (units digit cycle unknown). Applied instinct developing but limited to familiar problem types. Introduce harder ISA multi-step in upcoming units.',
