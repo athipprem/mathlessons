@@ -1,20 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Blue background circle -->
-  <circle cx="50" cy="50" r="50" fill="#1a3a8f"/>
-
-  <!-- Target rings -->
-  <circle cx="46" cy="54" r="34" fill="white" opacity="0.95"/>
-  <circle cx="46" cy="54" r="25" fill="#e53935"/>
-  <circle cx="46" cy="54" r="16" fill="white"/>
-  <circle cx="46" cy="54" r="8"  fill="#e53935"/>
-
-  <!-- Arrow shaft -->
-  <line x1="78" y1="22" x2="51" y2="49" stroke="#ff8f00" stroke-width="6" stroke-linecap="round"/>
-
-  <!-- Arrow head -->
-  <polygon points="78,22 65,20 76,11 82,24" fill="#ff8f00"/>
-
-  <!-- Arrow tail feathers -->
-  <line x1="74" y1="26" x2="80" y2="18" stroke="#ff8f00" stroke-width="3" stroke-linecap="round"/>
-  <line x1="70" y1="30" x2="78" y2="24" stroke="#ff8f00" stroke-width="3" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="lgL" x1="0%" y1="0%" x2="60%" y2="100%">
+      <stop offset="0%" style="stop-color:#EF3B36"/>
+      <stop offset="100%" style="stop-color:#C0150E"/>
+    </linearGradient>
+    <linearGradient id="lgR" x1="100%" y1="0%" x2="40%" y2="100%">
+      <stop offset="0%" style="stop-color:#EF3B36"/>
+      <stop offset="100%" style="stop-color:#C0150E"/>
+    </linearGradient>
+    <linearGradient id="lgIL" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7B0C08"/>
+      <stop offset="100%" style="stop-color:#4A0604"/>
+    </linearGradient>
+    <linearGradient id="lgIR" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7B0C08"/>
+      <stop offset="100%" style="stop-color:#4A0604"/>
+    </linearGradient>
+    <filter id="ds">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#00000040"/>
+    </filter>
+  </defs>
+  <g filter="url(#ds)">
+    <!-- Left outer leg (bright red) -->
+    <polygon points="6,82 22,82 22,26 50,58 50,42 22,10 6,10" fill="url(#lgL)"/>
+    <!-- Left inner fold (dark red) -->
+    <polygon points="22,26 50,58 50,42 22,10" fill="url(#lgIL)"/>
+    <!-- Right inner fold (dark red) -->
+    <polygon points="78,26 50,58 50,42 78,10" fill="url(#lgIR)"/>
+    <!-- Right outer leg (bright red) -->
+    <polygon points="94,82 78,82 78,26 50,58 50,42 78,10 94,10" fill="url(#lgR)"/>
+  </g>
 </svg>
