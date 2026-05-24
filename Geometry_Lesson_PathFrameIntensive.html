@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geometry — Path & Frame: The ×2 Drill · Unit 13</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0fdfc;color:#1a1a2e;min-height:100vh}
+.hdr{background:linear-gradient(135deg,#00838F,#004D40);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:space-between}
+.hdr-left h1{font-size:22px;font-weight:800;letter-spacing:-0.3px}
+.hdr-left p{font-size:13px;opacity:.85;margin-top:3px}
+.progress-bar{background:rgba(255,255,255,.2);border-radius:20px;height:8px;width:200px;margin-top:8px}
+.progress-fill{background:#80DEEA;border-radius:20px;height:8px;transition:width .4s}
+.badge{background:rgba(255,255,255,.2);border-radius:12px;padding:6px 14px;font-size:12px;font-weight:600}
+.screen{display:none;max-width:820px;margin:30px auto;padding:0 20px 40px}
+.screen.active{display:block}
+.card{background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(0,131,143,.1);margin-bottom:18px}
+h2{font-size:20px;color:#006064;margin-bottom:14px;font-weight:700}
+h3{font-size:16px;color:#00838F;margin-bottom:10px;font-weight:600}
+.rule-box{background:linear-gradient(135deg,#004D40,#006064);color:#fff;border-radius:14px;padding:22px;margin:16px 0;text-align:center}
+.rule-box h3{color:#80DEEA;font-size:19px;margin-bottom:12px}
+.rule-box p{font-size:16px;line-height:1.7}
+.formula{background:#E0F7FA;border:2px solid #80DEEA;border-radius:10px;padding:14px 18px;font-size:17px;font-weight:700;color:#006064;text-align:center;margin:12px 0}
+.tip{background:#FFF8E1;border-left:4px solid #F9A825;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#5d4037;margin:12px 0}
+.warning{background:#FFEBEE;border-left:4px solid #EF5350;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#c62828;margin:12px 0}
+.success{background:#E8F5E9;border-left:4px solid #43A047;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#2e7d32;margin:12px 0}
+.example{background:#f8fffe;border:1px solid #80DEEA;border-radius:10px;padding:18px;margin:14px 0}
+.example-title{font-size:13px;font-weight:700;color:#00838F;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.step{display:flex;gap:14px;align-items:flex-start;margin:10px 0;padding:10px;background:#f8fffe;border-radius:8px}
+.step-num{background:#00838F;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-text{font-size:15px;line-height:1.5}
+.input-row{display:flex;align-items:center;gap:12px;margin:14px 0;flex-wrap:wrap}
+.inp{border:2px solid #80DEEA;border-radius:8px;padding:8px 14px;font-size:18px;width:120px;text-align:center;outline:none;font-family:inherit}
+.inp:focus{border-color:#00838F}
+.btn{background:linear-gradient(135deg,#00838F,#004D40);color:#fff;border:none;border-radius:10px;padding:11px 24px;font-size:15px;font-weight:600;cursor:pointer;transition:.2s}
+.btn:hover{opacity:.9}
+.btn-sec{background:#E0F7FA;color:#006064;border:2px solid #80DEEA}
+.btn-sec:hover{background:#B2EBF2}
+.nav{display:flex;gap:12px;margin-top:24px;justify-content:space-between;align-items:center}
+.reveal{display:none;background:#E0F7FA;border-radius:8px;padding:12px 16px;margin-top:10px;color:#006064;font-weight:600;font-size:15px}
+.reveal.show{display:block}
+.feedback{display:none;margin-top:8px;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600}
+.feedback.show{display:block}
+.feedback.ok{background:#E8F5E9;color:#2e7d32}
+.feedback.no{background:#FFEBEE;color:#c62828}
+.screen-counter{font-size:13px;opacity:.7;font-weight:600}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pq{background:#f8fffe;border:1px solid #B2EBF2;border-radius:10px;padding:18px;margin-bottom:14px}
+.pq-title{font-size:12px;font-weight:700;color:#00838F;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.pq-text{font-size:15px;color:#1a1a2e;line-height:1.5;margin-bottom:12px}
+.dim-box{display:inline-flex;align-items:center;justify-content:center;border:3px solid #00838F;border-radius:10px;padding:12px 20px;font-size:18px;font-weight:700;color:#006064;margin:10px 0}
+.path-tag{background:#E0F7FA;color:#006064;border-radius:6px;padding:3px 10px;font-size:13px;font-weight:700;margin-left:8px}
+.error-box{background:#FFEBEE;border:2px solid #EF5350;border-radius:10px;padding:16px;margin:12px 0}
+.error-title{color:#c62828;font-weight:700;font-size:14px;margin-bottom:6px}
+.cheat-row{display:flex;gap:12px;margin:10px 0;align-items:center}
+.cheat-label{background:#006064;color:#fff;border-radius:8px;padding:8px 16px;font-weight:700;font-size:14px;min-width:90px;text-align:center}
+.cheat-formula{font-size:15px;color:#1a1a2e;padding:8px 14px;background:#E0F7FA;border-radius:8px;flex:1}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>📐 Path & Frame — The ×2 Drill</h1>
+    <p>Unit 13 · Lesson 1 · Coach Chusaki</p>
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:10%"></div></div>
+  </div>
+  <div style="text-align:right">
+    <div class="badge">📐 Geometry · INTENSIVE</div>
+  </div>
+</div>
+
+<!-- S1: U12 post-mortem -->
+<div class="screen active" id="s1">
+  <div class="card">
+    <h2>⚠️ What Went Wrong in Unit 12?</h2>
+    <p style="font-size:15px;margin-bottom:14px">In Unit 12, three path questions went wrong — Q6, Q7, and Q9. Every single one had the same mistake:</p>
+    <div class="error-box">
+      <div class="error-title">❌ The Error — Used ×1 instead of ×2</div>
+      <p style="font-size:14px;color:#c62828;margin-top:6px">Q6: inner path — subtracted the path width ONCE from each dimension instead of TWICE.<br>
+      Got 13×7 = 91 m². Correct answer: (14−<strong>2</strong>)×(8−<strong>2</strong>) = 12×6 = 72 m²</p>
+    </div>
+    <div class="error-box">
+      <div class="error-title">❌ Q7 &amp; Q9 — Same root cause</div>
+      <p style="font-size:14px;color:#c62828;margin-top:6px">Q7: applied the outside formula when the question asked for the inside path.<br>
+      Q9: added the path width once per side instead of twice (once on each end).</p>
+    </div>
+    <div class="tip">💡 The path goes along ALL 4 sides. So each dimension changes by 2p — once on each end. This lesson locks that in permanently.</div>
+  </div>
+  <div class="nav">
+    <div></div>
+    <div class="screen-counter">1 of 10</div>
+    <button class="btn" onclick="go(2)">The ONE Rule →</button>
+  </div>
+</div>
+
+<!-- S2: The Rule -->
+<div class="screen" id="s2">
+  <div class="card">
+    <h2>🔑 The ONE Rule — Always ×2</h2>
+    <div class="rule-box">
+      <h3>Every path goes along BOTH ends of every dimension</h3>
+      <p>Inside path → each dimension <strong>loses 2p</strong> (p from each end)<br>
+      Outside path → each dimension <strong>gains 2p</strong> (p on each end)</p>
+    </div>
+    <div class="cheat-row">
+      <div class="cheat-label">INNER</div>
+      <div class="cheat-formula">Inner area = (L − <strong>2p</strong>) × (W − <strong>2p</strong>)<br>Path area = Outer − Inner</div>
+    </div>
+    <div class="cheat-row">
+      <div class="cheat-label">OUTER</div>
+      <div class="cheat-formula">Outer area = (L + <strong>2p</strong>) × (W + <strong>2p</strong>)<br>Path area = Outer − Inner (original)</div>
+    </div>
+    <div class="cheat-row">
+      <div class="cheat-label">FRAME</div>
+      <div class="cheat-formula">Frame area = Outer − Inner opening<br>Inner opening = (L − <strong>2b</strong>) × (W − <strong>2b</strong>)</div>
+    </div>
+    <div class="warning">🚨 Never subtract or add p just once. The path has TWO ends on every side. Always 2p.</div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(1)">← Back</button>
+    <div class="screen-counter">2 of 10</div>
+    <button class="btn" onclick="go(3)">Inner Path — Practice →</button>
+  </div>
+</div>
+
+<!-- S3: Inner path example + 2 practice -->
+<div class="screen" id="s3">
+  <div class="card">
+    <h2>📦 Inner Path — Worked Example</h2>
+    <div class="example">
+      <div class="example-title">Example — Room with inside carpet border</div>
+      <p style="font-size:15px;margin-bottom:10px">A room is <strong>20 m × 12 m</strong>. A carpet path <strong>2 m wide</strong> runs inside all four walls. Find the area of the path.</p>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Full room: 20 × 12 = <strong>240 m²</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Inner (uncarpeted): (20 − 2×2) × (12 − 2×2) = <strong>16 × 8 = 128 m²</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Path = 240 − 128 = <strong>112 m²</strong></div>
+      </div>
+    </div>
+    <div class="success">✅ Key step: 2×2 = 4. Subtract 4 from EACH dimension. Both ends of the 20m get 2m, both ends of the 12m get 2m.</div>
+  </div>
+  <div class="card">
+    <h2>🏋️ Practice — Inner Path</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 1</div>
+      <div class="pq-text">A rectangular garden is <strong>16 m long and 10 m wide</strong>. A stone path <strong>2 m wide</strong> runs inside all four edges. What is the area of the stone path?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Path area =</span>
+        <input class="inp" id="p1" placeholder="m²" onkeydown="if(event.key==='Enter')chk('p1',88,'p1r','p1f','(16−4)×(10−4) = 12×8 = 96 m² total inner, path = 160−96 = 64 m²')">
+        <button class="btn" onclick="chk('p1',88,'p1r','p1f','(16−4)×(10−4)=12×8=96 m² inner. Path = 160−96 = 64 m²')">Check</button>
+      </div>
+      <div class="reveal" id="p1r"></div>
+      <div class="feedback" id="p1f"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-title">Practice 2</div>
+      <div class="pq-text">A rectangular field is <strong>15 m long and 9 m wide</strong>. A path <strong>2 m wide</strong> runs inside all four sides. What is the area of the inner grassy region?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Inner area =</span>
+        <input class="inp" id="p2" placeholder="m²" onkeydown="if(event.key==='Enter')chk('p2',55,'p2r','p2f','(15−4)×(9−4)=11×5=55 m²')">
+        <button class="btn" onclick="chk('p2',55,'p2r','p2f','(15−4)×(9−4) = 11×5 = 55 m²')">Check</button>
+      </div>
+      <div class="reveal" id="p2r"></div>
+      <div class="feedback" id="p2f"></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(2)">← Back</button>
+    <div class="screen-counter">3 of 10</div>
+    <button class="btn" onclick="go(4)">Outer Path →</button>
+  </div>
+</div>
+
+<!-- S4: Outer path example + 2 practice -->
+<div class="screen" id="s4">
+  <div class="card">
+    <h2>🔲 Outer Path — Worked Example</h2>
+    <div class="example">
+      <div class="example-title">Example — Footpath around a pond</div>
+      <p style="font-size:15px;margin-bottom:10px">A rectangular pond is <strong>14 m × 8 m</strong>. A concrete path <strong>3 m wide</strong> is built all around the outside. Find the area of the path.</p>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Outer (pond + path): (14 + 2×3) × (8 + 2×3) = <strong>20 × 14 = 280 m²</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Inner (pond only): 14 × 8 = <strong>112 m²</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Path = 280 − 112 = <strong>168 m²</strong></div>
+      </div>
+    </div>
+    <div class="success">✅ Key step: 2×3 = 6. Add 6 to EACH dimension. The path extends 3m on both sides of the 14m, and 3m on both sides of the 8m.</div>
+  </div>
+  <div class="card">
+    <h2>🏋️ Practice — Outer Path</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 3</div>
+      <div class="pq-text">A rectangular swimming pool is <strong>22 m long and 14 m wide</strong>. A tiled path <strong>3 m wide</strong> runs all around the outside. What is the area of the tiled path?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Path area =</span>
+        <input class="inp" id="p3" placeholder="m²" onkeydown="if(event.key==='Enter')chk('p3',276,'p3r','p3f','(22+6)×(14+6)−22×14=28×20−308=560−308=252 m²')">
+        <button class="btn" onclick="chk('p3',252,'p3r','p3f','(22+2×3)×(14+2×3)−22×14 = 28×20−308 = 560−308 = 252 m²')">Check</button>
+      </div>
+      <div class="reveal" id="p3r"></div>
+      <div class="feedback" id="p3f"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-title">Practice 4</div>
+      <div class="pq-text">A square courtyard has a side of <strong>16 m</strong>. A path <strong>2 m wide</strong> is built all around the outside. What is the area of the path?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Path area =</span>
+        <input class="inp" id="p4" placeholder="m²" onkeydown="if(event.key==='Enter')chk('p4',144,'p4r','p4f','(16+4)×(16+4)−16×16=400−256=144 m²')">
+        <button class="btn" onclick="chk('p4',144,'p4r','p4f','(16+2×2)×(16+2×2)−16×16 = 20×20−256 = 400−256 = 144 m²')">Check</button>
+      </div>
+      <div class="reveal" id="p4r"></div>
+      <div class="feedback" id="p4f"></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(3)">← Back</button>
+    <div class="screen-counter">4 of 10</div>
+    <button class="btn" onclick="go(5)">Frame & Border →</button>
+  </div>
+</div>
+
+<!-- S5: Frame/border + 2 practice -->
+<div class="screen" id="s5">
+  <div class="card">
+    <h2>🖼️ Frame &amp; Border — Worked Example</h2>
+    <div class="example">
+      <div class="example-title">Example — Photo frame area</div>
+      <p style="font-size:15px;margin-bottom:10px">A photo frame has outer dimensions <strong>18 cm × 14 cm</strong>. The wooden border is <strong>2 cm wide</strong> all around. Find the area of the wooden frame.</p>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Outer (total frame): 18 × 14 = <strong>252 cm²</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Opening (photo): (18 − 2×2) × (14 − 2×2) = <strong>14 × 10 = 140 cm²</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Frame = 252 − 140 = <strong>112 cm²</strong></div>
+      </div>
+    </div>
+    <div class="tip">💡 A frame IS an inside path! The border cuts into both ends of the length and both ends of the width.</div>
+  </div>
+  <div class="card">
+    <h2>🏋️ Practice — Frame &amp; Border</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 5</div>
+      <div class="pq-text">A rectangular poster frame has outer dimensions <strong>24 cm × 18 cm</strong>. The frame border is <strong>4 cm wide</strong> all around. Find the area of the frame (not the poster).</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Frame area =</span>
+        <input class="inp" id="p5" placeholder="cm²" onkeydown="if(event.key==='Enter')chk('p5',272,'p5r','p5f','24×18−(24−8)×(18−8)=432−16×10=432−160=272 cm²')">
+        <button class="btn" onclick="chk('p5',272,'p5r','p5f','24×18−(24−2×4)×(18−2×4) = 432−16×10 = 432−160 = 272 cm²')">Check</button>
+      </div>
+      <div class="reveal" id="p5r"></div>
+      <div class="feedback" id="p5f"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-title">Practice 6</div>
+      <div class="pq-text">A rectangular mirror frame has outer dimensions <strong>28 cm × 20 cm</strong>. The frame border is <strong>3 cm wide</strong> all around. Find the area of the frame.</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Frame area =</span>
+        <input class="inp" id="p6" placeholder="cm²" onkeydown="if(event.key==='Enter')chk('p6',296,'p6r','p6f','28×20−(28−6)×(20−6)=560−22×14=560−308=252 cm²')">
+        <button class="btn" onclick="chk('p6',252,'p6r','p6f','28×20−(28−2×3)×(20−2×3) = 560−22×14 = 560−308 = 252 cm²')">Check</button>
+      </div>
+      <div class="reveal" id="p6r"></div>
+      <div class="feedback" id="p6f"></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(4)">← Back</button>
+    <div class="screen-counter">5 of 10</div>
+    <button class="btn" onclick="go(6)">The Cost/Tiles Twist →</button>
+  </div>
+</div>
+
+<!-- S6: Cost/Tiles twist -->
+<div class="screen" id="s6">
+  <div class="card">
+    <h2>💰 The Twist — Cost &amp; Tiles</h2>
+    <p style="font-size:15px;margin-bottom:14px">Sometimes the question doesn't just ask for the path area — it asks for a <strong>cost</strong> or the <strong>number of tiles</strong>. Same method, just one more step.</p>
+    <div class="example">
+      <div class="example-title">Example — Cost of tiling a path</div>
+      <p style="font-size:15px;margin-bottom:10px">A room is <strong>30 m × 20 m</strong>. A path <strong>3 m wide</strong> runs inside. Tiles cost <strong>$4 per m²</strong>. Find the total cost.</p>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Inner area: (30−6)×(20−6) = 24×14 = 336 m²</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Path area = 30×20 − 336 = 600 − 336 = <strong>264 m²</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Cost = 264 × $4 = <strong>$1,056</strong></div>
+      </div>
+    </div>
+    <div class="example">
+      <div class="example-title">Example — Number of tiles needed</div>
+      <p style="font-size:15px;margin-bottom:10px">A garden is <strong>34 m × 26 m</strong>. A path <strong>4 m wide</strong> runs inside. Each tile covers <strong>2 m²</strong>. How many tiles?</p>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Inner: (34−8)×(26−8) = 26×18 = 468 m²</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Path = 34×26 − 468 = 884 − 468 = <strong>416 m²</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Tiles = 416 ÷ 2 = <strong>208 tiles</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(5)">← Back</button>
+    <div class="screen-counter">6 of 10</div>
+    <button class="btn" onclick="go(7)">Practice — Tiles &amp; Cost →</button>
+  </div>
+</div>
+
+<!-- S7: Tiles/cost practice -->
+<div class="screen" id="s7">
+  <div class="card">
+    <h2>🏋️ Practice — Cost &amp; Tiles</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 7</div>
+      <div class="pq-text">A rectangular hall is <strong>28 m long and 18 m wide</strong>. A tiled path <strong>4 m wide</strong> runs inside all four walls. Each tile covers <strong>0.5 m²</strong>. How many tiles are needed?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Tiles =</span>
+        <input class="inp" id="p7" placeholder="tiles" onkeydown="if(event.key==='Enter')chk('p7',688,'p7r','p7f','inner=(20)(10)=200m², path=504−200=304m², tiles=304÷0.5=608 tiles')">
+        <button class="btn" onclick="chk('p7',608,'p7r','p7f','Inner=(28−8)×(18−8)=20×10=200 m². Path=28×18−200=504−200=304 m². Tiles=304÷0.5=608 tiles')">Check</button>
+      </div>
+      <div class="reveal" id="p7r"></div>
+      <div class="feedback" id="p7f"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-title">Practice 8</div>
+      <div class="pq-text">A square garden has a side of <strong>22 m</strong>. A path <strong>3 m wide</strong> runs inside all four walls. Paving costs <strong>$6 per m²</strong>. Find the total cost.</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Cost = $</span>
+        <input class="inp" id="p8" placeholder="$" onkeydown="if(event.key==='Enter')chk('p8',1896,'p8r','p8f','inner=(16)(16)=256m², path=484−256=228m², cost=228×6=$1,368')">
+        <button class="btn" onclick="chk('p8',1368,'p8r','p8f','Inner=(22−6)×(22−6)=16×16=256 m². Path=22×22−256=484−256=228 m². Cost=228×$6=$1,368')">Check</button>
+      </div>
+      <div class="reveal" id="p8r"></div>
+      <div class="feedback" id="p8f"></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(6)">← Back</button>
+    <div class="screen-counter">7 of 10</div>
+    <button class="btn" onclick="go(8)">Mixed Drill →</button>
+  </div>
+</div>
+
+<!-- S8: Mixed challenge -->
+<div class="screen" id="s8">
+  <div class="card">
+    <h2>⚡ Mixed Drill — All Three Types</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 9 — Outer path</div>
+      <div class="pq-text">A rectangular building is <strong>32 m long and 20 m wide</strong>. A concrete path <strong>2 m wide</strong> is built all around the outside. Find the area of the concrete path.</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Path area =</span>
+        <input class="inp" id="p9" placeholder="m²" onkeydown="if(event.key==='Enter')chk('p9',240,'p9r','p9f','(36)(24)−32×20=864−640=224 m²')">
+        <button class="btn" onclick="chk('p9',224,'p9r','p9f','(32+4)×(20+4)−32×20 = 36×24−640 = 864−640 = 224 m²')">Check</button>
+      </div>
+      <div class="reveal" id="p9r"></div>
+      <div class="feedback" id="p9f"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-title">Practice 10 — Frame</div>
+      <div class="pq-text">A rectangular notice board has outer dimensions <strong>32 cm × 24 cm</strong>. The frame border is <strong>4 cm wide</strong> all around. Find the area of the frame.</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Frame area =</span>
+        <input class="inp" id="p10" placeholder="cm²" onkeydown="if(event.key==='Enter')chk('p10',384,'p10r','p10f','32×24−(24)(16)=768−384=384 cm²')">
+        <button class="btn" onclick="chk('p10',384,'p10r','p10f','32×24−(32−8)×(24−8) = 768−24×16 = 768−384 = 384 cm²')">Check</button>
+      </div>
+      <div class="reveal" id="p10r"></div>
+      <div class="feedback" id="p10f"></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(7)">← Back</button>
+    <div class="screen-counter">8 of 10</div>
+    <button class="btn" onclick="go(9)">Error Spotter →</button>
+  </div>
+</div>
+
+<!-- S9: Error spotter -->
+<div class="screen" id="s9">
+  <div class="card">
+    <h2>🔍 Error Spotter — Find the Mistake</h2>
+    <p style="font-size:15px;margin-bottom:14px">Two students solved the same problem. One is wrong. Can you spot the mistake?</p>
+    <div style="background:#f5f5f5;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-size:15px;font-weight:700;margin-bottom:10px">Problem: A park is 18 m × 12 m. A path 3 m wide runs inside. Find the path area.</p>
+      <div class="grid2">
+        <div style="background:#FFEBEE;border-radius:10px;padding:14px">
+          <p style="font-weight:700;color:#c62828;margin-bottom:6px">Student A</p>
+          <p style="font-size:14px">Inner = (18−3)×(12−3) = 15×9 = 135<br>Path = 216−135 = 81 m²</p>
+        </div>
+        <div style="background:#E8F5E9;border-radius:10px;padding:14px">
+          <p style="font-weight:700;color:#2e7d32;margin-bottom:6px">Student B</p>
+          <p style="font-size:14px">Inner = (18−6)×(12−6) = 12×6 = 72<br>Path = 216−72 = 144 m²</p>
+        </div>
+      </div>
+    </div>
+    <button class="btn" onclick="document.getElementById('espotter').classList.add('show')" style="margin-bottom:10px">Reveal Answer</button>
+    <div class="reveal" id="espotter">✅ Student B is correct! Student A only subtracted the path width ONCE from each dimension (3 instead of 6). The path cuts in from both ends: L loses 3m on the left AND 3m on the right = −6m total. Always ×2!</div>
+    <div class="tip" style="margin-top:14px">📌 Before every path question — write: <strong>"Each dimension changes by 2p"</strong> at the top of your working.</div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(8)">← Back</button>
+    <div class="screen-counter">9 of 10</div>
+    <button class="btn" onclick="go(10)">Cheat Sheet →</button>
+  </div>
+</div>
+
+<!-- S10: Cheat sheet -->
+<div class="screen" id="s10">
+  <div class="card">
+    <h2>📋 Your Path &amp; Frame Cheat Sheet</h2>
+    <div class="cheat-row">
+      <div class="cheat-label" style="background:#1565C0">INNER</div>
+      <div class="cheat-formula"><strong>(L − 2p) × (W − 2p)</strong> = inner area<br>Path area = L×W − inner</div>
+    </div>
+    <div class="cheat-row">
+      <div class="cheat-label" style="background:#2e7d32">OUTER</div>
+      <div class="cheat-formula"><strong>(L + 2p) × (W + 2p)</strong> = outer total<br>Path area = outer − L×W</div>
+    </div>
+    <div class="cheat-row">
+      <div class="cheat-label" style="background:#6a1b9a">FRAME</div>
+      <div class="cheat-formula"><strong>Outer − (L − 2b) × (W − 2b)</strong> = frame<br>b = border width</div>
+    </div>
+    <div class="warning" style="margin-top:16px">🚨 THE GOLDEN RULE: Path width ALWAYS multiplied by 2. No exceptions.</div>
+    <div class="tip">✅ Completed: 10 problems. Path formula: LOCKED. You're ready for the test.</div>
+    <div style="text-align:center;margin-top:20px">
+      <a href="index.html" style="display:inline-block;background:linear-gradient(135deg,#00838F,#004D40);color:#fff;padding:12px 28px;border-radius:12px;font-weight:700;text-decoration:none;font-size:15px">← Back to Hub</a>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(9)">← Back</button>
+    <div class="screen-counter">10 of 10</div>
+    <div></div>
+  </div>
+</div>
+
+<script>
+var total=10;
+function go(n){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width=(n/total*100)+'%';
+  window.scrollTo(0,0);
+}
+function chk(inputId, correct, revealId, feedbackId, explanation){
+  var val=parseFloat(document.getElementById(inputId).value.replace(/[^0-9.]/g,''));
+  var rev=document.getElementById(revealId);
+  var fb=document.getElementById(feedbackId);
+  rev.textContent='✅ Answer: '+correct+' — '+explanation;
+  rev.classList.add('show');
+  if(Math.abs(val-correct)<0.05){
+    fb.textContent='✅ Correct! Well done.';
+    fb.className='feedback show ok';
+  } else {
+    fb.textContent='❌ Not quite. Check your working — did you use ×2 for the path width?';
+    fb.className='feedback show no';
+  }
+}
+</script>
+</body>
+</html>

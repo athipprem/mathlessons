@@ -21,41 +21,41 @@ var PREM_DATA = {
 
   // ── Current state ────────────────────────────────────────────────
   currentUnit: {
-    n:           12,
+    n:           13,
     status:      'Lessons In Progress',
     testPending: false
   },
   lastUnit: {
-    n: 11, score: 13, outOf: 15, pct: 87, delta: -1, prevScore: 14,
+    n: 12, score: 10, outOf: 15, pct: 67, delta: -3, prevScore: 13,
 
     // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Unit 11 &mdash; 13/15 (87%) Geometry &middot; Both-Ends &middot; Patterns',
-    patternInsight: '<strong>Both-Ends fully locked &mdash; 5/5 including the hardest type.</strong> Q10 (9 children, tallest+shortest at ends) = 2&times;7!=10&thinsp;080 &#10003;. Q7 &ldquo;either-end&rdquo; &#10003; (the M1 miss type &mdash; now automatic). All three both-ends types confirmed solid. Patterns 4/5: Q11 consecutive &#10003;, Q12 nth-term &#10003;, Q13 consecutive odd &#10003;, Q15&#9733; sum-from-two-terms &#10003;. Q14&#10007; Find 1st term (T&#8326;=41, d=8): wrote 2 instead of 1. Error: subtracted 5&times;8=40 from 42 instead of 41. Single step to cement: T&#8321;=T&#8326;&minus;(n&minus;1)&times;d = 41&minus;40 = 1. Geometry 4/5: Q1&ndash;Q4 clean; Q5&#9733; outside-path tripped him &mdash; outer computed as 32&times;22=704 instead of 34&times;24=816, giving 104 instead of 216. Single rule to cement: outside path &rarr; add 2&times;width to <em>each</em> dimension.',
+    patternLabel:   'Unit 12 &mdash; 10/15 (67%) HCF &amp; LCM &middot; Path &amp; Frame &middot; Multi-Step',
+    patternInsight: '<strong>Path formula still not locked &mdash; 3 misses in Sec B.</strong> Q6 inner area &#10007;: subtracted path width once per side (13&times;7=91 instead of 12&times;6=72). Q7 inside path &#10007;: applied outside formula &mdash; added 2m instead of subtracting. Q9 outside path &#10007;: added width once per dimension (28&times;17=476 instead of 31&times;20=620). Q10&#9733; outside path &#10003; (correct calculation). Two blanks: Q4 (HCF bouquet word problem &mdash; not attempted) and Q15&#9733;&#9733; (ratio+cost combo &mdash; not attempted). Sec C structured problems 4/5 showing real strength.',
 
     // ── Results panel analysis insight ───────────────────────────────
-    analysisLabel:   'Unit 11 analysis &mdash; Geometry / Both-Ends / Patterns',
-    analysisInsight: '<strong>Score: 13/15 &mdash; two misses: Q5 (outside path formula) and Q14 (find 1st term).</strong> Sec A Geometry 4/5: Q1 rect perimeter &#10003; (P=2(13+5)=36). Q2 square from perimeter &#10003; (side=8, area=64). Q3 L-shape &#10003; (12&times;7&minus;3&times;4=72). Q4 composite &#10003; (9&times;6&minus;&frac12;&times;6&times;4=42). Q5&#9733; &#10007; outside path: computed outer as 32&times;22=704 &rarr; 704&minus;600=104. Correct: 34&times;24=816 &rarr; 816&minus;600=216. Error: added path width once per side rather than to both sides. Sec B Both-Ends 5/5: Q6 5!=120 &#10003;. Q7 Emma either-end 2&times;5!=240 &#10003; (was M1 Q7 miss type &mdash; now solid). Q8 fixed-right 6!=720 &#10003;. Q9 Leo+Rosa 2&times;4!=48 &#10003;. Q10&#9733; 9 children tallest+shortest 2&times;7!=10&thinsp;080 &#10003;. Sec C Patterns 4/5: Q11 middle=54&divide;3=18, largest=19 &#10003;. Q12 T&#8321;&#8320;=5+9&times;4=41 &#10003;. Q13 5 consec odd sum 85 &rarr; n=13 &#10003;. Q14 T&#8326;=41, d=8 &rarr; T&#8321;=1 &#10007; wrote 2 (subtracted from 42 not 41). Q15&#9733; T&#8322;=9, T&#8325;=24 &rarr; d=5, T&#8321;=4, sum=4+9+14+19=46 &#10003;.',
+    analysisLabel:   'Unit 12 analysis &mdash; HCF &amp; LCM / Path &amp; Frame / Multi-Step',
+    analysisInsight: '<strong>Score: 10/15 &mdash; five misses: Q4 (blank), Q6 Q7 Q9 (path formula), Q15 (blank).</strong> Sec A HCF&amp;LCM 4/5: Q1 HCF(16,28)=4 &#10003;. Q2 HCF(30,45)=15 &#10003;. Q3 LCM(9,15)=45 &#10003;. Q4 &#10007; HCF applied (bouquets) &mdash; left blank, no attempt. Q5&#9733; LCM buses 9:36 a.m. &#10003; (working shown: 12&rarr;24&rarr;36, 18&rarr;36). Sec B Path&amp;Frame 2/5: Q6 &#10007; inner area: wrote 21 (computed 13&times;7=91 then 112&minus;91=21 &mdash; subtracted path width once per side; correct inner = 12&times;6=72). Q7 &#10007; inside path: wrote 46 (used outside formula &mdash; computed 14&times;11=154 then 154&minus;108=46; correct = 108&minus;40=68). Q8 frame &#10003; 936&minus;600=336 &#10003;. Q9 &#10007; outside path: wrote 126 (added width once: 28&times;17=476 then 476&minus;350=126; correct = 31&times;20&minus;350=270). Q10&#9733; &#10003; 50&times;35&minus;1000=750 &#10003; (full working shown). Sec C Multi-Step 4/5: Q11 ratio &#10003; (16). Q12 work-back &#10003; ($60, 2&times;36+24=96 wait &mdash; correct: 2(x&minus;24)=72&rarr;x=60 &#10003;). Q13 ratio diff &#10003; (48). Q14&#9733; fraction remaining &#10003; (192). Q15&#9733;&#9733; &#10007; ratio+cost combo &mdash; left blank, no attempt.',
 
     // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>Sec A Geometry 4/5 (Q5&#9733; &#10007; outside path) &middot; Sec B Both-Ends 5/5 &#9733; (all types locked) &middot; Sec C Patterns 4/5 (Q14&#9733; &#10007; find 1st term &middot; Q15&#9733; &#10003;).</strong>',
+    qSummary: '<strong>Sec A HCF&amp;LCM 4/5 (Q4 blank) &middot; Sec B Path&amp;Frame 2/5 &#9733; (Q6 Q7 Q9 path formula &#10007;) &middot; Sec C Multi-Step 4/5 (Q15&#9733;&#9733; blank).</strong>',
 
     // ── Q-by-Q breakdown ─────────────────────────────────────────────
     qBreakdown: [
-      { q:'Q1',  topic:'Perimeter &mdash; rectangle 13&times;5 cm',                             lvl:'w', pass:true,  note:'36 cm &#10003; &mdash; 2(13+5)=36. Sketch drawn.' },
-      { q:'Q2',  topic:'Area &mdash; square from perimeter 32 cm',                             lvl:'w', pass:true,  note:'64 cm&#178; &#10003; &mdash; side=8, 8&times;8=64. Working shown.' },
-      { q:'Q3',  topic:'L-Shape Area &mdash; hall 12&times;7, cut 3&times;4',                  lvl:'m', pass:true,  note:'72 m&#178; &#10003; &mdash; 84&minus;12=72. Split-and-subtract used.' },
-      { q:'Q4',  topic:'Composite Area &mdash; rect minus triangle',                           lvl:'m', pass:true,  note:'42 m&#178; &#10003; &mdash; 9&times;6=54 minus &frac12;&times;6&times;4=12 = 42.' },
-      { q:'Q5',  topic:'Path Area &#9733; &mdash; outside path 30&times;20, width 2m',         lvl:'h', pass:false, note:'&#10007; Got 104. Used 32&times;22=704 (added path once per side). Correct: 34&times;24=816 &minus; 600=216. Each dim = original + 2&times;path.' },
-      { q:'Q6',  topic:'Arrangement &mdash; 5 students, no constraint',                        lvl:'w', pass:true,  note:'120 &#10003; &mdash; 5!=120.' },
-      { q:'Q7',  topic:'Both-Ends (Either End) &mdash; 6 friends, Emma',                       lvl:'m', pass:true,  note:'240 &#10003; &mdash; 2&times;5!=240. M1 miss type &mdash; now locked.' },
-      { q:'Q8',  topic:'Both-Ends (Fixed Right End) &mdash; 7 runners',                        lvl:'m', pass:true,  note:'720 &#10003; &mdash; 6!=720. One specific end, no &times;2.' },
-      { q:'Q9',  topic:'Both-Ends (Two Swap) &mdash; 6 children, Leo+Rosa',                    lvl:'m', pass:true,  note:'48 &#10003; &mdash; 2&times;4!=48. Swap applied.' },
-      { q:'Q10', topic:'Both-Ends (Two Swap) &#9733; &mdash; 9 children, tallest+shortest',   lvl:'h', pass:true,  note:'10&thinsp;080 &#10003; &mdash; 2&times;7!=10&thinsp;080. Full 7! computed step-by-step.' },
-      { q:'Q11', topic:'Consecutive Nos &mdash; sum 54, find largest',                          lvl:'w', pass:true,  note:'19 &#10003; &mdash; middle=54&divide;3=18, largest=19.' },
-      { q:'Q12', topic:'nth Term &mdash; sequence 5,9,13,17, 10th term',                  lvl:'m', pass:true,  note:'41 &#10003; &mdash; d=4, T&#8321;&#8320;=5+9&times;4=41.' },
-      { q:'Q13', topic:'Consecutive Odd &mdash; sum 85, find smallest',                         lvl:'m', pass:true,  note:'13 &#10003; &mdash; 5n+20=85 &rarr; n=13 (some crossed-out work).' },
-      { q:'Q14', topic:'Find 1st Term &mdash; T&#8326;=41, d=8',                               lvl:'m', pass:false, note:'&#10007; Wrote 2. T&#8321;=41&minus;5&times;8=41&minus;40=1. Error: subtracted from 42 instead of 41.' },
-      { q:'Q15', topic:'Sum of Terms &#9733; &mdash; T&#8322;=9, T&#8325;=24, sum first 4',   lvl:'h', pass:true,  note:'46 &#10003; &mdash; d=5, T&#8321;=4, 4+9+14+19=46. Full method.' }
+      { q:'Q1',  topic:'HCF &mdash; find HCF(16,28)',                              lvl:'w', pass:true,  note:'4 &#10003; &mdash; crossed out first attempt, corrected to 4.' },
+      { q:'Q2',  topic:'HCF &mdash; find HCF(30,45)',                              lvl:'w', pass:true,  note:'15 &#10003;' },
+      { q:'Q3',  topic:'LCM &mdash; find LCM(9,15)',                               lvl:'w', pass:true,  note:'45 &#10003; &mdash; working shown in margins.' },
+      { q:'Q4',  topic:'HCF Applied &mdash; bouquets, HCF(56,42)',                 lvl:'m', pass:false, note:'&#10007; Left blank &mdash; no attempt. Answer is 14 (56=2&#179;&times;7, 42=2&times;3&times;7 &rarr; HCF=14).' },
+      { q:'Q5',  topic:'LCM Applied &#9733; &mdash; buses every 12 &amp; 18 min', lvl:'h', pass:true,  note:'9:36 a.m. &#10003; &mdash; listed multiples: 12&rarr;24&rarr;36, 18&rarr;36. LCM=36 min.' },
+      { q:'Q6',  topic:'Inner Area &mdash; 14&times;8 room, 1m tile border',       lvl:'m', pass:false, note:'&#10007; Wrote 21. Computed 13&times;7=91 (subtracted width once per side), then 112&minus;91=21 = tile area. Correct inner floor = 12&times;6=72. Same &times;1 error as U11 Q5 outside path.' },
+      { q:'Q7',  topic:'Inside Path Area &mdash; 12&times;9 park, 2m footpath',    lvl:'m', pass:false, note:'&#10007; Wrote 46. Used outside formula: 14&times;11=154, then 154&minus;108=46. Should subtract 2p not add. Correct: 108&minus;40=68.' },
+      { q:'Q8',  topic:'Frame Area &mdash; 36&times;26 outer, 30&times;20 inner',  lvl:'m', pass:true,  note:'336 cm&#178; &#10003; &mdash; 36&times;26=936, 30&times;20=600, 936&minus;600=336. Working shown.' },
+      { q:'Q9',  topic:'Outside Path Area &mdash; 25&times;14 field, 3m track',    lvl:'m', pass:false, note:'&#10007; Wrote 126. Added width once per dimension: (25+3)&times;(14+3)=28&times;17=476, then 476&minus;350=126. Correct: (25+6)&times;(14+6)=31&times;20=620, 620&minus;350=270.' },
+      { q:'Q10', topic:'Outside Path Area &#9733; &mdash; 40&times;25 garden, 5m path', lvl:'h', pass:true, note:'750 m&#178; &#10003; &mdash; 50&times;35=1750, 40&times;25=1000, 1750&minus;1000=750. Full working shown.' },
+      { q:'Q11', topic:'Ratio &mdash; red:yellow=2:3, 24 yellow &rarr; red',       lvl:'w', pass:true,  note:'16 &#10003;' },
+      { q:'Q12', topic:'Work Backwards &mdash; spent $24, doubled &rarr; $72',     lvl:'m', pass:true,  note:'$60 &#10003; &mdash; working shown: 72&divide;2=36, 36+24=60.' },
+      { q:'Q13', topic:'Ratio Diff &mdash; fiction:nonfiction=5:3, 72 nonfiction', lvl:'m', pass:true,  note:'48 &#10003; &mdash; 72&divide;3=24, fiction=120, diff=48.' },
+      { q:'Q14', topic:'Fraction Remaining &#9733; &mdash; 3/8 Mon, 1/4 rem Tue, 90 left', lvl:'h', pass:true, note:'192 &#10003; &mdash; after Mon 5/8 left, &frac34; of that remains=90 &rarr; after-Mon=120, total=120&divide;(5/8)=192.' },
+      { q:'Q15', topic:'Ratio+Cost &#9733;&#9733; &mdash; folders $5, notebooks $3, ratio 2:3, total $380', lvl:'h', pass:false, note:'&#10007; Left blank &mdash; no attempt. Answer: 19k=380&rarr;k=20, folders=40.' }
     ]
   },
   // ── Skills ───────────────────────────────────────────────────────
@@ -66,14 +66,14 @@ var PREM_DATA = {
     { name: 'Number Sense',      c: 88, t: 90 },
     { name: 'Algebra',           c: 91, t: 85 },
     { name: 'Arithmetic',        c: 82, t: 85 },
-    { name: 'Geometry',          c: 74, t: 80 },
+    { name: 'Geometry',          c: 62, t: 80 },
     { name: 'Counting',          c: 80, t: 85 },
-    { name: 'Number Theory',     c: 68, t: 82 },
-    { name: 'Applied Problems',  c: 44, t: 80 }
+    { name: 'Number Theory',     c: 72, t: 82 },
+    { name: 'Applied Problems',  c: 48, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 74, 88, 91, 80, 82, 68, 44],
+  radarCurrent:  [87, 62, 88, 91, 80, 82, 72, 48],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -91,11 +91,26 @@ var PREM_DATA = {
     { n:9,  score:8,  delta:-1,   color:'linear-gradient(135deg,#f6993f,#fdcb6e)', star:false },
     { n:10, score:15, delta:+7,   color:'linear-gradient(135deg,#43e97b,#667eea)', star:true  },
     { n:'M1', label:'M1', score:14, delta:-1,   color:'linear-gradient(135deg,#4527A0,#7C3AED)', star:false },
-    { n:11, score:13, delta:-1,   color:'linear-gradient(135deg,#00838F,#006064)', star:false }
+    { n:11, score:13, delta:-1,   color:'linear-gradient(135deg,#00838F,#006064)', star:false },
+    { n:12, score:10, delta:-3,   color:'linear-gradient(135deg,#1565C0,#0D47A1)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 12,
+      badge: 'linear-gradient(135deg,#1565C0,#0D47A1)',
+      title: 'HCF &amp; LCM &middot; Path &amp; Frame Problems &middot; Multi-Step Word Problems',
+      tags: [
+        { t:'10/15', s:'background:#fff3cd;color:#856404;font-weight:700' },
+        { t:'HCF&amp;LCM 4/5', c:'tgreen' },
+        { t:'Path formula 2/5 &#10007;', c:'torange' },
+        { t:'Q4 blank &#10007;', c:'torange' },
+        { t:'Q15 blank &#10007;', c:'torange' }
+      ],
+      note: 'Path formula still misfiring: Q6 inner area &#10007; (subtracted width once per side &rarr; 21 instead of 72), Q7 inside path &#10007; (used outside formula &rarr; 46 instead of 68), Q9 outside path &#10007; (added width once &rarr; 126 instead of 270). Q10&#9733; outside path &#10003; (750 &#10003;). Two blanks: Q4 HCF word problem and Q15&#9733;&#9733; ratio+cost. HCF&amp;LCM pure computation solid (Q1&ndash;Q3 &#10003;, Q5 LCM buses &#10003;). Sec C structured multi-step strong: Q11&ndash;Q14 all &#10003; including Q14&#9733; fraction remaining.',
+      status: 'done'
+    },
     {
       n: 11,
       badge: 'linear-gradient(135deg,#00838F,#006064)',
@@ -264,10 +279,10 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 96
     },
     {
-      label:     'Geometry: outside-path formula &mdash; one rule to cement',
+      label:     'Geometry: path formula (ALL types) &mdash; CRITICAL priority',
       pill:      'p2', pillText: 'Monitor &#128992;',
-      score:     'U11 Geometry 4/5: Q1&ndash;Q4 all correct (perimeter, square area, L-shape, composite). Q5&#9733; outside path &#10007; &mdash; added path width once per side instead of twice: used 32&times;22=704 instead of 34&times;24=816. One rule to cement: outside path &rarr; each dimension = original + 2&times;path_width. FMC gaps (spatial/paper-folding/3D) remain; rotate Geometry into U12+ more. Skill: 72&rarr;74.',
-      fillClass: 'g2', fillPct: 40
+      score:     'U12 Path&amp;Frame 2/5: Q6 inner area &#10007; (subtracted width once per side: 13&times;7=91, not 12&times;6=72). Q7 inside path &#10007; (applied outside formula: added 2m instead of subtracting, got 46 instead of 68). Q9 outside path &#10007; (added width once: 28&times;17 not 31&times;20, got 126 instead of 270). Q10&#9733; &#10003; outside path (750 &#10003; with full working). Error is consistent: all three wrong Qs used &#215;1 path-width, not &#215;2. Must cement: EACH dimension gets +2p or &minus;2p, never +p or &minus;p. Geometry skill: 74&rarr;62.',
+      fillClass: 'g1', fillPct: 20
     },
     {
       label:     'Applied Problems &mdash; Kangaroo instinct developing',
@@ -296,7 +311,7 @@ var PREM_DATA = {
   ],
 
   // ── Radar legend unit label ───────────────────────────────────────
-  radarLegendUnit: 'U11'
+  radarLegendUnit: 'U12'
 
 };
 

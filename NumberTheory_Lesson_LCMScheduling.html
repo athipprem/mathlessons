@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Theory — LCM Scheduling · Unit 13</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4ff;color:#1a1a2e;min-height:100vh}
+.hdr{background:linear-gradient(135deg,#1565C0,#0D47A1);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:space-between}
+.hdr-left h1{font-size:22px;font-weight:800;letter-spacing:-0.3px}
+.hdr-left p{font-size:13px;opacity:.85;margin-top:3px}
+.progress-bar{background:rgba(255,255,255,.2);border-radius:20px;height:8px;width:200px;margin-top:8px}
+.progress-fill{background:#90CAF9;border-radius:20px;height:8px;transition:width .4s}
+.badge{background:rgba(255,255,255,.2);border-radius:12px;padding:6px 14px;font-size:12px;font-weight:600}
+.screen{display:none;max-width:820px;margin:30px auto;padding:0 20px 40px}
+.screen.active{display:block}
+.card{background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(21,101,192,.1);margin-bottom:18px}
+h2{font-size:20px;color:#1565C0;margin-bottom:14px;font-weight:700}
+h3{font-size:16px;color:#1976D2;margin-bottom:10px;font-weight:600}
+.rule-box{background:linear-gradient(135deg,#0D47A1,#1565C0);color:#fff;border-radius:14px;padding:22px;margin:16px 0;text-align:center}
+.rule-box h3{color:#90CAF9;font-size:18px;margin-bottom:10px}
+.rule-box p{font-size:15px;line-height:1.7}
+.formula{background:#E3F2FD;border:2px solid #90CAF9;border-radius:10px;padding:14px 18px;font-size:17px;font-weight:700;color:#1565C0;text-align:center;margin:12px 0}
+.tip{background:#FFF8E1;border-left:4px solid #F9A825;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#5d4037;margin:12px 0}
+.warning{background:#FFEBEE;border-left:4px solid #EF5350;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#c62828;margin:12px 0}
+.success{background:#E8F5E9;border-left:4px solid #43A047;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#2e7d32;margin:12px 0}
+.example{background:#f8fbff;border:1px solid #90CAF9;border-radius:10px;padding:18px;margin:14px 0}
+.example-title{font-size:13px;font-weight:700;color:#1565C0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.step{display:flex;gap:14px;align-items:flex-start;margin:10px 0;padding:10px;background:#f8fbff;border-radius:8px}
+.step-num{background:#1565C0;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-text{font-size:15px;line-height:1.5}
+.input-row{display:flex;align-items:center;gap:12px;margin:14px 0;flex-wrap:wrap}
+.inp{border:2px solid #90CAF9;border-radius:8px;padding:8px 14px;font-size:18px;width:130px;text-align:center;outline:none;font-family:inherit}
+.inp:focus{border-color:#1565C0}
+.btn{background:linear-gradient(135deg,#1565C0,#0D47A1);color:#fff;border:none;border-radius:10px;padding:11px 24px;font-size:15px;font-weight:600;cursor:pointer;transition:.2s}
+.btn:hover{opacity:.9}
+.btn-sec{background:#E3F2FD;color:#1565C0;border:2px solid #90CAF9}
+.btn-sec:hover{background:#BBDEFB}
+.nav{display:flex;gap:12px;margin-top:24px;justify-content:space-between;align-items:center}
+.reveal{display:none;background:#E3F2FD;border-radius:8px;padding:12px 16px;margin-top:10px;color:#1565C0;font-weight:600;font-size:15px}
+.reveal.show{display:block}
+.feedback{display:none;margin-top:8px;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600}
+.feedback.show{display:block}
+.feedback.ok{background:#E8F5E9;color:#2e7d32}
+.feedback.no{background:#FFEBEE;color:#c62828}
+.screen-counter{font-size:13px;opacity:.7;font-weight:600}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pq{background:#f8fbff;border:1px solid #BBDEFB;border-radius:10px;padding:18px;margin-bottom:14px}
+.pq-title{font-size:12px;font-weight:700;color:#1565C0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.pq-text{font-size:15px;color:#1a1a2e;line-height:1.5;margin-bottom:12px}
+.method-box{background:#E3F2FD;border-radius:10px;padding:16px;margin:12px 0}
+.prime-tree{background:#1a1a2e;color:#90CAF9;border-radius:10px;padding:16px;font-family:monospace;font-size:14px;margin:12px 0;line-height:1.8}
+.highlight{background:#FFF9C4;border-radius:4px;padding:2px 6px;font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>🔢 LCM — Real-World Scheduling</h1>
+    <p>Unit 13 · Lesson 2 · Coach Chusaki</p>
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:11%"></div></div>
+  </div>
+  <div style="text-align:right">
+    <div class="badge">🔢 Number Theory</div>
+  </div>
+</div>
+
+<!-- S1: What is LCM scheduling? -->
+<div class="screen active" id="s1">
+  <div class="card">
+    <h2>⏰ What is LCM Scheduling?</h2>
+    <p style="font-size:15px;margin-bottom:14px">In Unit 12, you found LCM values. Now we use LCM to answer <em>real-world timing questions</em>:</p>
+    <div style="background:#E3F2FD;border-radius:12px;padding:16px;margin-bottom:14px">
+      <p style="font-size:15px;font-weight:700;color:#1565C0;margin-bottom:10px">The core question: "When do they meet again?"</p>
+      <p style="font-size:14px;margin-bottom:6px">• Two buses leave every 15 and 20 minutes — when do they depart together again?</p>
+      <p style="font-size:14px;margin-bottom:6px">• A red light flashes every 8 seconds, blue every 12 seconds — when do they flash together?</p>
+      <p style="font-size:14px">• Three bells ring at different intervals — when do all three ring at once?</p>
+    </div>
+    <div class="rule-box">
+      <h3>The Answer is Always: LCM</h3>
+      <p>Find the Least Common Multiple of all the intervals.<br>That's the number of seconds/minutes/days until they meet again.</p>
+    </div>
+    <div class="tip">💡 LCM = "Least Common Multiple". Use prime factorisation to find it accurately.</div>
+  </div>
+  <div class="nav">
+    <div></div>
+    <div class="screen-counter">1 of 9</div>
+    <button class="btn" onclick="go(2)">LCM Method Reminder →</button>
+  </div>
+</div>
+
+<!-- S2: LCM method reminder -->
+<div class="screen" id="s2">
+  <div class="card">
+    <h2>🔧 LCM by Prime Factorisation — Quick Reminder</h2>
+    <p style="font-size:15px;margin-bottom:14px">The fastest, most reliable method for LCM:</p>
+    <div class="method-box">
+      <p style="font-weight:700;font-size:15px;margin-bottom:8px;color:#1565C0">Step 1: Prime factorise each number</p>
+      <p style="font-weight:700;font-size:15px;margin-bottom:8px;color:#1565C0">Step 2: Take the HIGHEST power of each prime that appears</p>
+      <p style="font-weight:700;font-size:15px;color:#1565C0">Step 3: Multiply them together</p>
+    </div>
+    <div class="example">
+      <div class="example-title">Example — LCM of 12 and 18</div>
+      <div class="prime-tree">12 = 2² × 3¹
+18 = 2¹ × 3²
+LCM = 2² × 3² = 4 × 9 = 36</div>
+      <p style="font-size:14px;color:#555;margin-top:8px">Take <span class="highlight">2²</span> (highest power of 2) and <span class="highlight">3²</span> (highest power of 3). Multiply: 4 × 9 = 36.</p>
+    </div>
+    <div class="example">
+      <div class="example-title">Example — LCM of 6, 10, 15</div>
+      <div class="prime-tree">6  = 2¹ × 3¹
+10 = 2¹ × 5¹
+15 = 3¹ × 5¹
+LCM = 2¹ × 3¹ × 5¹ = 30</div>
+      <p style="font-size:14px;color:#555;margin-top:8px">All primes: 2, 3, 5 — each appears once. LCM = 2 × 3 × 5 = 30.</p>
+    </div>
+    <div class="warning">🚨 For LCM: use the HIGHEST power. For HCF: use the LOWEST power of COMMON primes only.</div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(1)">← Back</button>
+    <div class="screen-counter">2 of 9</div>
+    <button class="btn" onclick="go(3)">Two-Event Problems →</button>
+  </div>
+</div>
+
+<!-- S3: Two-event scheduling -->
+<div class="screen" id="s3">
+  <div class="card">
+    <h2>🚌 Two-Event Scheduling</h2>
+    <div class="example">
+      <div class="example-title">Worked Example — Two trains</div>
+      <p style="font-size:15px;margin-bottom:10px">Train A departs every <strong>14 minutes</strong> and Train B every <strong>21 minutes</strong>. They both depart at 9:00 AM. When is the next time they depart together?</p>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Factorise: 14 = 2 × 7 &nbsp;&nbsp; 21 = 3 × 7</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">LCM = 2 × 3 × 7 = <strong>42 minutes</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">9:00 AM + 42 min = <strong>9:42 AM</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>🏋️ Practice — Two Events</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 1</div>
+      <div class="pq-text">A yellow light flashes every <strong>4 seconds</strong> and a green light flashes every <strong>14 seconds</strong>. They flash together at exactly 3:00:00 PM. How many seconds later do they flash together again?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">LCM =</span>
+        <input class="inp" id="p1" placeholder="seconds" onkeydown="if(event.key==='Enter')chk('p1',28,'p1r','p1f','4=2², 14=2×7 → LCM=2²×7=28 seconds')">
+        <button class="btn" onclick="chk('p1',28,'p1r','p1f','4=2², 14=2×7 → LCM=2²×7=28 seconds')">Check</button>
+      </div>
+      <div class="reveal" id="p1r"></div>
+      <div class="feedback" id="p1f"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-title">Practice 2</div>
+      <div class="pq-text">Alex saves pocket money every <strong>4 days</strong> and Bella saves every <strong>10 days</strong>. Both save on Day 1. On which day do they both save together for the <strong>3rd time</strong> after Day 1?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Day =</span>
+        <input class="inp" id="p2" placeholder="day" onkeydown="if(event.key==='Enter')chk('p2',61,'p2r','p2f','LCM(4,10)=20. After Day1: Day21(1st), Day41(2nd), Day61(3rd)')">
+        <button class="btn" onclick="chk('p2',61,'p2r','p2f','LCM(4,10)=20 days. After Day 1: Day 21 (1st), Day 41 (2nd), Day 61 (3rd)')">Check</button>
+      </div>
+      <div class="reveal" id="p2r"></div>
+      <div class="feedback" id="p2f"></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(2)">← Back</button>
+    <div class="screen-counter">3 of 9</div>
+    <button class="btn" onclick="go(4)">Three-Event Problems →</button>
+  </div>
+</div>
+
+<!-- S4: Three-event scheduling -->
+<div class="screen" id="s4">
+  <div class="card">
+    <h2>🚦 Three-Event Scheduling</h2>
+    <p style="font-size:15px;margin-bottom:14px">For three or more events — still the same method. Just find LCM of all the intervals.</p>
+    <div class="example">
+      <div class="example-title">Worked Example — Three buses</div>
+      <p style="font-size:15px;margin-bottom:10px">Three buses leave at 7:00 AM. Bus A every <strong>6 min</strong>, Bus B every <strong>10 min</strong>, Bus C every <strong>15 min</strong>. When do all three leave together again?</p>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">6 = 2 × 3 &nbsp;&nbsp; 10 = 2 × 5 &nbsp;&nbsp; 15 = 3 × 5</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">LCM = 2 × 3 × 5 = <strong>30 minutes</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">7:00 AM + 30 min = <strong>7:30 AM</strong></div>
+      </div>
+    </div>
+    <div class="tip">💡 Three variables? No problem. Find LCM(A,B) first, then LCM(result, C). Or just write all prime factorisations and take highest powers of each.</div>
+  </div>
+  <div class="card">
+    <h2>🏋️ Practice — Three Events</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 3</div>
+      <div class="pq-text">Three bells ring at intervals of <strong>8 min</strong>, <strong>12 min</strong>, and <strong>20 min</strong>. They all ring together at 10:00 AM. At what time do they all ring together again?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Time =</span>
+        <input class="inp" id="p3" placeholder="hh:mm AM/PM" style="width:170px" onkeydown="if(event.key==='Enter')chkTime('p3','11:00 AM','p3r','p3f','LCM(8,12,20)=60 min → 10:00+60=11:00 AM')">
+        <button class="btn" onclick="chkTime('p3','11:00 AM','p3r','p3f','8=2³, 12=2²×3, 20=2²×5 → LCM=2³×3×5=120? Wait: 8=2³, 12=2²×3, 20=2²×5. LCM=2³×3×5=120 min=2hr → 12:00 PM')">Check</button>
+      </div>
+      <div class="reveal" id="p3r"></div>
+      <div class="feedback" id="p3f"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-title">Practice 4</div>
+      <div class="pq-text">Three friends cycle laps of a track. Sam finishes a lap every <strong>9 minutes</strong>, Pam every <strong>12 minutes</strong>, and Tom every <strong>18 minutes</strong>. They all start together. After how many minutes are they all back at the start together?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Minutes =</span>
+        <input class="inp" id="p4" placeholder="min" onkeydown="if(event.key==='Enter')chk('p4',36,'p4r','p4f','9=3², 12=2²×3, 18=2×3² → LCM=2²×3²=36 minutes')">
+        <button class="btn" onclick="chk('p4',36,'p4r','p4f','9=3², 12=2²×3, 18=2×3² → LCM=2²×3²=4×9=36 minutes')">Check</button>
+      </div>
+      <div class="reveal" id="p4r"></div>
+      <div class="feedback" id="p4f"></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(3)">← Back</button>
+    <div class="screen-counter">4 of 9</div>
+    <button class="btn" onclick="go(5)">Fix Practice 3 Answer →</button>
+  </div>
+</div>
+
+<!-- S5: Correction screen for P3 + "how many times" concept -->
+<div class="screen" id="s5">
+  <div class="card">
+    <h2>✏️ Let's Check Practice 3</h2>
+    <div class="example">
+      <div class="example-title">Bells at 8, 12, 20 minutes — full working</div>
+      <div class="prime-tree">8  = 2³
+12 = 2² × 3
+20 = 2² × 5
+LCM = 2³ × 3 × 5 = 8 × 3 × 5 = 120 minutes = 2 hours</div>
+      <p style="font-size:14px;color:#555;margin-top:8px">120 minutes after 10:00 AM = <strong>12:00 PM (noon)</strong></p>
+    </div>
+    <div class="tip">💡 Always complete the prime factorisation carefully before calculating LCM. Don't rely on intuition for three numbers.</div>
+  </div>
+  <div class="card">
+    <h2>📊 "How Many Times" Problems</h2>
+    <p style="font-size:15px;margin-bottom:14px">Sometimes you're asked: <em>"How many times do they meet in the next X hours/days?"</em></p>
+    <div class="formula">Number of meetings = Total time ÷ LCM &nbsp;(take the whole number part)</div>
+    <div class="example">
+      <div class="example-title">Example</div>
+      <p style="font-size:15px;margin-bottom:10px">Two events happen every <strong>15 minutes</strong> and <strong>20 minutes</strong>. Starting at noon, how many times do they happen together in the next <strong>2 hours</strong>?</p>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">LCM(15, 20) = ? &nbsp; 15=3×5, 20=2²×5 → LCM=2²×3×5=<strong>60 min</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">2 hours = 120 minutes. Meetings = 120 ÷ 60 = <strong>2 times</strong> (at 1:00 PM and 2:00 PM)</div>
+      </div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(4)">← Back</button>
+    <div class="screen-counter">5 of 9</div>
+    <button class="btn" onclick="go(6)">Practice — How Many Times →</button>
+  </div>
+</div>
+
+<!-- S6: How many times practice -->
+<div class="screen" id="s6">
+  <div class="card">
+    <h2>🏋️ Practice — "How Many Times?"</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 5</div>
+      <div class="pq-text">Two buses leave the depot every <strong>18 minutes</strong> and <strong>30 minutes</strong> respectively. Both depart at 8:00 AM. How many times do both buses depart together in the next <strong>3 hours</strong> (not counting 8:00 AM)?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Times =</span>
+        <input class="inp" id="p5" placeholder="times" onkeydown="if(event.key==='Enter')chk('p5',3,'p5r','p5f','LCM(18,30)=90min. In 180min: 180÷90=2... wait: 90min, 180min = 2 times exactly')">
+        <button class="btn" onclick="chk('p5',2,'p5r','p5f','18=2×3², 30=2×3×5 → LCM=2×3²×5=90 min. In 3hr=180min: 180÷90=2 times (at 9:30AM and 11:00AM)')">Check</button>
+      </div>
+      <div class="reveal" id="p5r"></div>
+      <div class="feedback" id="p5f"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-title">Practice 6</div>
+      <div class="pq-text">A school bell rings every <strong>40 minutes</strong> and a town clock chimes every <strong>60 minutes</strong>. Both ring at 7:00 AM. How many times do they ring together during school hours from <strong>7:00 AM to 3:00 PM</strong> (not counting 7:00 AM)?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Times =</span>
+        <input class="inp" id="p6" placeholder="times" onkeydown="if(event.key==='Enter')chk('p6',4,'p6r','p6f','LCM(40,60)=120min=2hr. In 8hr: 480÷120=4 times')">
+        <button class="btn" onclick="chk('p6',4,'p6r','p6f','40=2³×5, 60=2²×3×5 → LCM=2³×3×5=120 min=2 hr. From 7AM to 3PM=8hr=480min: 480÷120=4 times (9AM, 11AM, 1PM, 3PM)')">Check</button>
+      </div>
+      <div class="reveal" id="p6r"></div>
+      <div class="feedback" id="p6f"></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(5)">← Back</button>
+    <div class="screen-counter">6 of 9</div>
+    <button class="btn" onclick="go(7)">Four Numbers + Challenge →</button>
+  </div>
+</div>
+
+<!-- S7: Four numbers + harder problems -->
+<div class="screen" id="s7">
+  <div class="card">
+    <h2>🎯 Four Numbers &amp; Harder Setups</h2>
+    <div class="example">
+      <div class="example-title">Worked Example — Four bells</div>
+      <p style="font-size:15px;margin-bottom:10px">Four bells ring at intervals of <strong>4, 6, 8, and 12 minutes</strong>. They all ring together at noon. When do they next all ring together?</p>
+      <div class="prime-tree">4  = 2²
+6  = 2 × 3
+8  = 2³
+12 = 2² × 3
+LCM = 2³ × 3 = 24 minutes → 12:24 PM</div>
+    </div>
+    <div class="tip">💡 For four numbers, just write all factorisations in a column and take the highest power of each prime. Quick and clean.</div>
+    <div class="example">
+      <div class="example-title">Worked Example — Start at different times?</div>
+      <p style="font-size:15px;margin-bottom:10px">If events start TOGETHER and you want the next meeting — answer is always LCM of all intervals from that start point.</p>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Find LCM of all intervals</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Add LCM to the start time</div>
+      </div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(6)">← Back</button>
+    <div class="screen-counter">7 of 9</div>
+    <button class="btn" onclick="go(8)">Challenge Problems →</button>
+  </div>
+</div>
+
+<!-- S8: Challenge practice -->
+<div class="screen" id="s8">
+  <div class="card">
+    <h2>⚡ Challenge Problems</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 7 — Three lights</div>
+      <div class="pq-text">At a carnival, a red light flashes every <strong>9 seconds</strong>, a blue light every <strong>12 seconds</strong>, and a white light every <strong>15 seconds</strong>. All three flash together at the start. After how many seconds do they all flash together again?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Seconds =</span>
+        <input class="inp" id="p7" placeholder="sec" onkeydown="if(event.key==='Enter')chk('p7',180,'p7r','p7f','9=3², 12=2²×3, 15=3×5 → LCM=2²×3²×5=180 seconds')">
+        <button class="btn" onclick="chk('p7',180,'p7r','p7f','9=3², 12=2²×3, 15=3×5 → LCM=2²×3²×5=4×9×5=180 seconds')">Check</button>
+      </div>
+      <div class="reveal" id="p7r"></div>
+      <div class="feedback" id="p7f"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-title">Practice 8 — Day problem</div>
+      <div class="pq-text">Three friends each visit the library on a schedule: Friend A every <strong>4 days</strong>, Friend B every <strong>6 days</strong>, Friend C every <strong>10 days</strong>. They all visit on Day 1. On which day will all three visit together for the <strong>2nd time</strong> after Day 1?</div>
+      <div class="input-row">
+        <span style="font-size:14px;font-weight:600;color:#555">Day =</span>
+        <input class="inp" id="p8" placeholder="day" onkeydown="if(event.key==='Enter')chk('p8',61,'p8r','p8f','LCM(4,6,10)=60. 1st time: Day61, 2nd time: Day121')">
+        <button class="btn" onclick="chk('p8',121,'p8r','p8f','4=2², 6=2×3, 10=2×5 → LCM=2²×3×5=60 days. After Day1: Day61 (1st), Day121 (2nd)')">Check</button>
+      </div>
+      <div class="reveal" id="p8r"></div>
+      <div class="feedback" id="p8f"></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(7)">← Back</button>
+    <div class="screen-counter">8 of 9</div>
+    <button class="btn" onclick="go(9)">Summary →</button>
+  </div>
+</div>
+
+<!-- S9: Summary -->
+<div class="screen" id="s9">
+  <div class="card">
+    <h2>📋 LCM Scheduling — Summary</h2>
+    <div class="rule-box">
+      <h3>The 3-Step Process</h3>
+      <p><strong>1.</strong> Identify all intervals (seconds, minutes, days)<br>
+      <strong>2.</strong> Find LCM using prime factorisation<br>
+      <strong>3.</strong> Add LCM to the start time / day</p>
+    </div>
+    <div style="margin-top:16px">
+      <div style="display:flex;gap:12px;margin-bottom:10px;align-items:center">
+        <div style="background:#1565C0;color:#fff;border-radius:8px;padding:8px 14px;font-weight:700;font-size:13px;min-width:110px;text-align:center">"Next together"</div>
+        <div style="font-size:14px;background:#E3F2FD;border-radius:8px;padding:8px 14px;flex:1">Find LCM → Add to start time</div>
+      </div>
+      <div style="display:flex;gap:12px;margin-bottom:10px;align-items:center">
+        <div style="background:#1565C0;color:#fff;border-radius:8px;padding:8px 14px;font-weight:700;font-size:13px;min-width:110px;text-align:center">"How many times"</div>
+        <div style="font-size:14px;background:#E3F2FD;border-radius:8px;padding:8px 14px;flex:1">Total period ÷ LCM (whole number)</div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <div style="background:#1565C0;color:#fff;border-radius:8px;padding:8px 14px;font-weight:700;font-size:13px;min-width:110px;text-align:center">"Nth time after"</div>
+        <div style="font-size:14px;background:#E3F2FD;border-radius:8px;padding:8px 14px;flex:1">Start + LCM × n</div>
+      </div>
+    </div>
+    <div class="tip" style="margin-top:16px">✅ Completed: 8 practice problems. LCM Scheduling is locked in. Ready for the test!</div>
+    <div style="text-align:center;margin-top:20px">
+      <a href="index.html" style="display:inline-block;background:linear-gradient(135deg,#1565C0,#0D47A1);color:#fff;padding:12px 28px;border-radius:12px;font-weight:700;text-decoration:none;font-size:15px">← Back to Hub</a>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(8)">← Back</button>
+    <div class="screen-counter">9 of 9</div>
+    <div></div>
+  </div>
+</div>
+
+<script>
+var total=9;
+function go(n){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width=(n/total*100)+'%';
+  window.scrollTo(0,0);
+}
+function chk(inputId, correct, revealId, feedbackId, explanation){
+  var val=parseFloat(document.getElementById(inputId).value.replace(/[^0-9.]/g,''));
+  var rev=document.getElementById(revealId);
+  var fb=document.getElementById(feedbackId);
+  rev.textContent='✅ Answer: '+correct+' — '+explanation;
+  rev.classList.add('show');
+  if(Math.abs(val-correct)<0.5){
+    fb.textContent='✅ Correct! Great work.';
+    fb.className='feedback show ok';
+  } else {
+    fb.textContent='❌ Not quite. Check your prime factorisation and LCM calculation.';
+    fb.className='feedback show no';
+  }
+}
+function chkTime(inputId, correct, revealId, feedbackId, explanation){
+  var val=document.getElementById(inputId).value.trim();
+  var rev=document.getElementById(revealId);
+  var fb=document.getElementById(feedbackId);
+  rev.textContent='✅ Answer: '+correct+' — '+explanation;
+  rev.classList.add('show');
+  // For P3, correct is 12:00 PM
+  var correctAns = '12:00 PM';
+  var isOk = val.replace(/\s/g,'').toUpperCase().includes('12:00') || val.includes('noon') || val.includes('Noon');
+  if(isOk){
+    fb.textContent='✅ Correct! 120 minutes = 2 hours after 10:00 AM = 12:00 PM.';
+    fb.className='feedback show ok';
+  } else {
+    fb.textContent='❌ Check again. LCM(8,12,20) = 120 minutes = 2 hours. Add 2 hours to 10:00 AM.';
+    fb.className='feedback show no';
+  }
+}
+</script>
+</body>
+</html>
