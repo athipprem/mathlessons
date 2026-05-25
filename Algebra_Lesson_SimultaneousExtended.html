@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algebra — Simultaneous Equations Extended · Unit 14</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#F5F0FF;color:#1a1a2e;min-height:100vh}
+.hdr{background:linear-gradient(135deg,#4527A0,#6a1b9a);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:space-between}
+.hdr-left h1{font-size:22px;font-weight:800;letter-spacing:-0.3px}
+.hdr-left p{font-size:13px;opacity:.85;margin-top:3px}
+.progress-bar{background:rgba(255,255,255,.2);border-radius:20px;height:8px;width:200px;margin-top:8px}
+.progress-fill{background:#CE93D8;border-radius:20px;height:8px;transition:width .4s}
+.badge{background:rgba(255,255,255,.2);border-radius:12px;padding:6px 14px;font-size:12px;font-weight:600}
+.screen{display:none;max-width:820px;margin:30px auto;padding:0 20px 40px}
+.screen.active{display:block}
+.card{background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(69,39,160,.12);margin-bottom:18px}
+h2{font-size:20px;color:#4527A0;margin-bottom:14px;font-weight:700}
+h3{font-size:16px;color:#6a1b9a;margin-bottom:10px;font-weight:600}
+.rule-box{background:linear-gradient(135deg,#4527A0,#6a1b9a);color:#fff;border-radius:14px;padding:22px;margin:16px 0;text-align:center}
+.rule-box h3{color:#CE93D8;font-size:18px;margin-bottom:10px}
+.rule-box p{font-size:15px;line-height:1.7}
+.formula{background:#EDE7F6;border:2px solid #CE93D8;border-radius:10px;padding:14px 18px;font-size:17px;font-weight:700;color:#4527A0;text-align:center;margin:12px 0}
+.tip{background:#FFF8E1;border-left:4px solid #F9A825;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#5d4037;margin:12px 0}
+.warning{background:#FFEBEE;border-left:4px solid #EF5350;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#c62828;margin:12px 0}
+.success{background:#E8F5E9;border-left:4px solid #43A047;border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:#2e7d32;margin:12px 0}
+.example{background:#F5F0FF;border:1px solid #CE93D8;border-radius:10px;padding:18px;margin:14px 0}
+.example-title{font-size:13px;font-weight:700;color:#6a1b9a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.step{display:flex;gap:14px;align-items:flex-start;margin:10px 0;padding:10px;background:#F5F0FF;border-radius:8px}
+.step-num{background:#6a1b9a;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.step-text{font-size:15px;line-height:1.5}
+.inp{border:2px solid #CE93D8;border-radius:8px;padding:8px 14px;font-size:18px;width:110px;text-align:center;outline:none;font-family:inherit}
+.inp:focus{border-color:#4527A0}
+.btn{background:linear-gradient(135deg,#4527A0,#6a1b9a);color:#fff;border:none;border-radius:10px;padding:11px 24px;font-size:15px;font-weight:600;cursor:pointer;transition:.2s}
+.btn:hover{opacity:.9}
+.btn-sec{background:#EDE7F6;color:#4527A0;border:2px solid #CE93D8}
+.btn-sec:hover{background:#D1C4E9}
+.nav{display:flex;gap:12px;margin-top:24px;justify-content:space-between;align-items:center}
+.reveal{display:none;background:#EDE7F6;border-radius:8px;padding:12px 16px;margin-top:10px;color:#4527A0;font-weight:600;font-size:15px}
+.reveal.show{display:block}
+.input-row{display:flex;align-items:center;gap:10px;margin:12px 0;flex-wrap:wrap;font-size:14px}
+.screen-counter{font-size:13px;opacity:.7;font-weight:600}
+.pq{background:#F5F0FF;border:1px solid #D1C4E9;border-radius:10px;padding:18px;margin-bottom:14px}
+.pq-title{font-size:12px;font-weight:700;color:#6a1b9a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.pq-text{font-size:15px;color:#1a1a2e;line-height:1.5;margin-bottom:12px}
+.bar-model{background:#fff;border:2px solid #CE93D8;border-radius:10px;padding:14px;margin:10px 0;font-size:14px}
+.bar-row{display:flex;align-items:center;gap:8px;margin:6px 0}
+.bar-label{font-weight:700;color:#4527A0;width:60px;font-size:14px}
+.bar-fill{background:linear-gradient(90deg,#CE93D8,#9C27B0);border-radius:4px;height:24px;display:flex;align-items:center;padding-left:8px;color:#fff;font-weight:700;font-size:13px}
+.error-box{background:#FFEBEE;border:2px solid #EF5350;border-radius:10px;padding:16px;margin:12px 0}
+.error-title{color:#c62828;font-weight:700;font-size:14px;margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>🔗 Simultaneous Equations — Extended</h1>
+    <p>Unit 14 · Lesson 3 · Coach Chusaki</p>
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:11%"></div></div>
+  </div>
+  <div style="text-align:right">
+    <div class="badge">➕ Algebra · Extended</div>
+  </div>
+</div>
+
+<!-- S1: What we learned, what's next -->
+<div class="screen active" id="s1">
+  <div class="card">
+    <h2>📈 Building on U13 — What's New</h2>
+    <p style="font-size:15px;margin-bottom:14px">In U13 you scored <strong>4/5</strong> on simultaneous equations — excellent debut! The only miss was Q13 (misread — gave notebook price instead of book price). Today we extend to harder types.</p>
+
+    <div style="background:#EDE7F6;border-radius:10px;padding:16px;margin-bottom:14px">
+      <p style="font-size:14px;font-weight:700;color:#4527A0;margin-bottom:10px">U13 Types (mastered ✅):</p>
+      <p style="font-size:14px;line-height:1.8">✅ Sum & Difference (two numbers, given sum and diff)<br>
+      ✅ Multiple relationship (A = k × B)<br>
+      ✅ Two-variable totals (animal legs type)<br>
+      ✅ Three-person chain (A=B+c, C=kB)</p>
+    </div>
+
+    <div style="background:#F5F0FF;border:2px solid #CE93D8;border-radius:10px;padding:16px">
+      <p style="font-size:14px;font-weight:700;color:#6a1b9a;margin-bottom:10px">U14 New Types:</p>
+      <p style="font-size:14px;line-height:1.8">🆕 Perimeter + length/width relationship<br>
+      🆕 Price × multiple relationship (always read what's asked!)<br>
+      🆕 Mixed coin / note problems (two denominations)<br>
+      🆕 Vehicle wheel problems (generalised legs type)<br>
+      🆕 Three unknowns with × and + relationships</p>
+    </div>
+
+    <div class="warning"><strong>⚠️ Q13 lesson:</strong> Always re-read the question before writing your answer. Underline the word they ask for (book? notebook? boys? girls?).</div>
+  </div>
+  <div class="nav">
+    <span></span>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="screen-counter">1 / 9</span>
+      <button class="btn" onclick="go(2)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- S2: Perimeter type -->
+<div class="screen" id="s2">
+  <div class="card">
+    <h2>📏 Type 1: Perimeter + Length/Width</h2>
+    <p style="font-size:15px;margin-bottom:12px">The perimeter gives you L + W = half the perimeter. Then the length/width relationship gives you the second equation.</p>
+
+    <div class="formula">Perimeter = 2(L + W) &nbsp;→&nbsp; L + W = Perimeter ÷ 2</div>
+
+    <div class="example">
+      <div class="example-title">📋 Example</div>
+      <p style="font-size:15px;margin-bottom:12px">The perimeter of a rectangle is <strong>40 cm</strong>. The length is <strong>4 cm more</strong> than the width. Find the length and width.</p>
+      <div class="step"><div class="step-num">1</div><div class="step-text">L + W = 40 ÷ 2 = <strong>20</strong></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">L = W + 4, so W + 4 + W = 20 → 2W = 16 → <strong>W = 8 cm</strong></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">L = 8 + 4 = <strong>12 cm</strong> ✅ &nbsp; Check: perimeter = 2(12+8) = 40 ✓</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✏️ Practice</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 1</div>
+      <div class="pq-text">A rectangle has a perimeter of <strong>52 cm</strong>. The length is <strong>6 cm more</strong> than the width. Find the <strong>length</strong>.</div>
+      <div class="input-row">L + W = 52 ÷ 2 = <input class="inp" id="p1lw" placeholder="?"></div>
+      <div class="input-row">L = W + 6, so 2W + 6 = <input class="inp" id="p1eq" placeholder="?"> → W = <input class="inp" id="p1w" placeholder="?"></div>
+      <div class="input-row">Length = <input class="inp" id="p1l" placeholder="?"> cm</div>
+      <button class="btn btn-sec" onclick="revealP1()">Check</button>
+      <div class="reveal" id="rev-p1">L+W=26. 2W+6=26 → W=10. L=10+6=<strong>16 cm</strong> ✅ &nbsp; Check: 2(16+10)=52 ✓</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(1)">← Back</button>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="screen-counter">2 / 9</span>
+      <button class="btn" onclick="go(3)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- S3: Price × multiple (READ THE QUESTION!) -->
+<div class="screen" id="s3">
+  <div class="card">
+    <h2>💲 Type 2: Price × Multiple — Read Carefully!</h2>
+
+    <div class="error-box">
+      <div class="error-title">⚠️ U13 Q13 Trap — Don't fall in again!</div>
+      <p style="font-size:14px">Q13: "A book costs $4 more than a notebook. Together $9.20. Cost of the <strong>book</strong>?"<br>
+      Correct: notebook = $2.60, <strong>book = $6.60</strong>. You gave $2.60 — you found the notebook but wrote it as the book.<br>
+      <strong>Fix:</strong> Underline the word they ask for BEFORE you solve. Circle your final answer and check it matches.</div>
+    </div>
+
+    <div class="example">
+      <div class="example-title">📋 Example — Price Multiple</div>
+      <p style="font-size:15px;margin-bottom:12px">A book costs <strong>4 times</strong> as much as a pencil. Together they cost <strong>$3.75</strong>. Find the cost of the <strong>book</strong>.</p>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Let pencil = p. Book = 4p. Together: 5p = $3.75 → p = <strong>75¢</strong>.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><u>Book</u> = 4 × 75¢ = <strong>$3.00</strong> ✅ (re-read: asked for book, not pencil!)</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✏️ Practice</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 2</div>
+      <div class="pq-text">A juice costs <strong>3 times</strong> as much as a biscuit. Together they cost <strong>$2.80</strong>. Find the cost of the <strong>juice</strong>.</div>
+      <div class="input-row">4 × biscuit = $2.80 → biscuit = <input class="inp" id="p2b" placeholder="$?"></div>
+      <div class="input-row">Juice = 3 × biscuit = <input class="inp" id="p2j" placeholder="$?"></div>
+      <button class="btn btn-sec" onclick="revealP2()">Check</button>
+      <div class="reveal" id="rev-p2">Biscuit = $2.80÷4 = $0.70. Juice = 3×$0.70 = <strong>$2.10</strong> ✅ (asked for juice, not biscuit)</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(2)">← Back</button>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="screen-counter">3 / 9</span>
+      <button class="btn" onclick="go(4)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- S4: Coin / mixed denomination -->
+<div class="screen" id="s4">
+  <div class="card">
+    <h2>🪙 Type 3: Mixed Coin Problems</h2>
+    <p style="font-size:15px;margin-bottom:12px">Two types of coin (or note). Given: total number of coins AND total value → two equations, solve for both.</p>
+
+    <div class="example">
+      <div class="example-title">📋 Example</div>
+      <p style="font-size:15px;margin-bottom:12px">A piggy bank has <strong>25 coins</strong> — only 5¢ and 25¢ coins. Total value is <strong>$2.45</strong>. How many <strong>25¢ coins</strong> are there?</p>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Let f = 5¢ coins, t = 25¢ coins.<br>f + t = 25 (total coins)<br>5f + 25t = 245 (total cents)</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">From eq1: f = 25 − t. Substitute: 5(25−t) + 25t = 245 → 125 − 5t + 25t = 245 → 20t = 120 → <strong>t = 6</strong>.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">6 coins of 25¢ ✅ &nbsp; Check: f = 19, 5×19+25×6 = 95+150 = 245¢ = $2.45 ✓</div></div>
+    </div>
+
+    <div class="tip"><strong>Method shortcut:</strong> Multiply the count equation by the smaller coin value, then subtract from the total value equation to isolate the bigger coin.</div>
+  </div>
+
+  <div class="card">
+    <h2>✏️ Practice</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 3</div>
+      <div class="pq-text">A jar has <strong>20 coins</strong> — only 10¢ and 50¢ coins. Total value is <strong>$5.20</strong>. How many <strong>50¢ coins</strong> are there?</div>
+      <div class="input-row">Coins: a + b = 20 &nbsp;·&nbsp; Value: 10a + 50b = <input class="inp" id="p3val" placeholder="? ¢"></div>
+      <div class="input-row">Substitute: 10(20−b) + 50b = 520 → <input class="inp" id="p3mid" placeholder="?">b = <input class="inp" id="p3rhs" placeholder="?"> → b = <input class="inp" id="p3b" placeholder="?"></div>
+      <button class="btn btn-sec" onclick="revealP3()">Check</button>
+      <div class="reveal" id="rev-p3">520 cents. 200 + 40b = 520 → 40b = 320 → b = <strong>8 coins of 50¢</strong> ✅ &nbsp; Check: 12×10+8×50=120+400=520¢ ✓</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(3)">← Back</button>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="screen-counter">4 / 9</span>
+      <button class="btn" onclick="go(5)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- S5: Vehicle wheel type -->
+<div class="screen" id="s5">
+  <div class="card">
+    <h2>🚲 Type 4: Vehicles & Wheels (Generalised Legs)</h2>
+    <p style="font-size:15px;margin-bottom:12px">Same as animal legs — but with vehicles and wheels. Two equations: total count + total wheels.</p>
+
+    <div class="example">
+      <div class="example-title">📋 Example</div>
+      <p style="font-size:15px;margin-bottom:12px">A shed has <strong>12 vehicles</strong> — bikes (2 wheels) and tricycles (3 wheels). Total <strong>28 wheels</strong>. How many <strong>tricycles</strong>?</p>
+      <div class="step"><div class="step-num">1</div><div class="step-text">b + t = 12 (vehicles) &nbsp;&nbsp; 2b + 3t = 28 (wheels)</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">b = 12 − t. Substitute: 2(12−t) + 3t = 28 → 24 + t = 28 → <strong>t = 4</strong></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">4 tricycles ✅ &nbsp; Check: b=8. Wheels: 16+12=28 ✓</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✏️ Practice</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 4</div>
+      <div class="pq-text">A car park has <strong>24 vehicles</strong> — motorbikes (2 wheels) and trucks (6 wheels). Total <strong>80 wheels</strong>. How many <strong>motorbikes</strong>?</div>
+      <div class="input-row">m + t = 24 &nbsp;·&nbsp; 2m + 6t = 80</div>
+      <div class="input-row">2(24−t) + 6t = 80 → 48 + <input class="inp" id="p4mid" placeholder="?">t = 80 → t = <input class="inp" id="p4t" placeholder="?"></div>
+      <div class="input-row">Motorbikes = 24 − t = <input class="inp" id="p4m" placeholder="?"></div>
+      <button class="btn btn-sec" onclick="revealP4()">Check</button>
+      <div class="reveal" id="rev-p4">48 + 4t = 80 → 4t = 32 → t = 8 trucks. Motorbikes = 24−8 = <strong>16</strong> ✅ &nbsp; Check: 32+48=80 ✓</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(4)">← Back</button>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="screen-counter">5 / 9</span>
+      <button class="btn" onclick="go(6)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- S6: Three-person extended -->
+<div class="screen" id="s6">
+  <div class="card">
+    <h2>👥 Type 5: Three-Person (× and + Together)</h2>
+    <p style="font-size:15px;margin-bottom:12px">You solved three-person in U13. Now the relationships use both multiplication and addition together.</p>
+
+    <div class="example">
+      <div class="example-title">📋 Example</div>
+      <p style="font-size:15px;margin-bottom:12px">Three friends saved money. Ben saved <strong>3 times</strong> as much as Sam. Ali saved <strong>Sam + $8</strong>. Together they saved <strong>$48</strong>. Find each person's amount.</p>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Let Sam = S. Ben = 3S. Ali = S + 8.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text">S + 3S + S + 8 = 48 → 5S + 8 = 48 → 5S = 40 → <strong>S = $8</strong></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">Ben = $24 &nbsp;·&nbsp; Ali = $16 ✅ &nbsp; Check: 8+24+16=48 ✓</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✏️ Practice</h2>
+    <div class="pq">
+      <div class="pq-title">Practice 5 ★</div>
+      <div class="pq-text">Three children collect stamps. Kai collects <strong>4 times</strong> as many as Leo. Mia collects <strong>Leo + 12</strong>. Together they collect <strong>72</strong> stamps. How many does <strong>Kai</strong> collect?</div>
+      <div class="input-row">Leo + 4×Leo + Leo+12 = 72 → <input class="inp" id="p5eq" placeholder="?">L + 12 = 72</div>
+      <div class="input-row">Leo = <input class="inp" id="p5l" placeholder="?"> &nbsp;·&nbsp; Kai = 4 × Leo = <input class="inp" id="p5k" placeholder="?"></div>
+      <button class="btn btn-sec" onclick="revealP5()">Check</button>
+      <div class="reveal" id="rev-p5">6L+12=72 → 6L=60 → L=10. Kai = 4×10 = <strong>40 stamps</strong> ✅ &nbsp; Check: 10+40+22=72 ✓</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(5)">← Back</button>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="screen-counter">6 / 9</span>
+      <button class="btn" onclick="go(7)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- S7: Mixed drill -->
+<div class="screen" id="s7">
+  <div class="card">
+    <h2>🔀 Mixed Drill — All Types</h2>
+
+    <div class="pq">
+      <div class="pq-title">Drill A — Perimeter</div>
+      <div class="pq-text">A rectangle has perimeter <strong>62 cm</strong>. Length is <strong>9 cm more</strong> than width. Find the <strong>width</strong>.</div>
+      <div class="input-row">L+W = <input class="inp" id="da-lw" placeholder="?"> → W = <input class="inp" id="da-w" placeholder="?"> cm</div>
+      <button class="btn btn-sec" onclick="revealDA()">Check</button>
+      <div class="reveal" id="rev-da">L+W=31. L=W+9 → 2W+9=31 → W=<strong>11 cm</strong> ✅ L=20 cm. Check: 2(20+11)=62 ✓</div>
+    </div>
+
+    <div class="pq">
+      <div class="pq-title">Drill B — Coins</div>
+      <div class="pq-text">A wallet has <strong>18 notes</strong> — $2 and $5 notes. Total value <strong>$60</strong>. How many <strong>$5 notes</strong>?</div>
+      <div class="input-row">2a + 5b = 60, a+b=18 → b = <input class="inp" id="db-b" placeholder="?"> notes</div>
+      <button class="btn btn-sec" onclick="revealDB()">Check</button>
+      <div class="reveal" id="rev-db">2(18−b)+5b=60 → 36+3b=60 → 3b=24 → b=<strong>8 notes of $5</strong> ✅ Check: 10×2+8×5=20+40=60 ✓</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(6)">← Back</button>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="screen-counter">7 / 9</span>
+      <button class="btn" onclick="go(8)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- S8: Speed-reading check (re-read before answering) -->
+<div class="screen" id="s8">
+  <div class="card">
+    <h2>👁️ "What Did They Ask?" Drill</h2>
+    <p style="font-size:15px;margin-bottom:14px">For each problem: solve it, then underline what's asked and double-check your answer matches.</p>
+
+    <div class="pq">
+      <div class="pq-title">Check 1</div>
+      <div class="pq-text">A bag has red and blue marbles. Red = <strong>3 × blue</strong>. Together <strong>48 marbles</strong>. The question asks: how many <strong>blue</strong> marbles?</div>
+      <div class="input-row">Blue = <input class="inp" id="c1b" placeholder="?"> &nbsp; (NOT the red answer!)</div>
+      <button class="btn btn-sec" onclick="revealC1()">Check</button>
+      <div class="reveal" id="rev-c1">3b+b=48 → 4b=48 → b=<strong>12 blue marbles</strong> ✅ Red=36. Question asked for blue — answer is 12, not 36.</div>
+    </div>
+
+    <div class="pq">
+      <div class="pq-title">Check 2</div>
+      <div class="pq-text">A cinema sold adult and child tickets. Adults: $8, Children: $5. Sold <strong>30 tickets</strong> for total <strong>$195</strong>. How many <strong>adult</strong> tickets?</div>
+      <div class="input-row">8a + 5(30−a) = 195 → 3a = <input class="inp" id="c2a" placeholder="?"> → adults = <input class="inp" id="c2ans" placeholder="?"></div>
+      <button class="btn btn-sec" onclick="revealC2()">Check</button>
+      <div class="reveal" id="rev-c2">8a+150−5a=195 → 3a=45 → a=<strong>15 adult tickets</strong> ✅ Child=15. Question asked for adult — answer is 15.</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(7)">← Back</button>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="screen-counter">8 / 9</span>
+      <button class="btn" onclick="go(9)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- S9: Summary -->
+<div class="screen" id="s9">
+  <div class="card">
+    <h2>📋 Summary — Extended SimEq Types</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;font-size:14px">
+      <div style="background:#EDE7F6;border-radius:8px;padding:12px;border:1.5px solid #CE93D8">
+        <div style="font-weight:700;color:#4527A0;margin-bottom:6px">📏 Perimeter Type</div>
+        L+W = Perimeter÷2, then use the length/width difference
+      </div>
+      <div style="background:#EDE7F6;border-radius:8px;padding:12px;border:1.5px solid #CE93D8">
+        <div style="font-weight:700;color:#4527A0;margin-bottom:6px">💲 Price × Multiple</div>
+        kA + A = total → A = total ÷ (k+1). Then find the right item!
+      </div>
+      <div style="background:#EDE7F6;border-radius:8px;padding:12px;border:1.5px solid #CE93D8">
+        <div style="font-weight:700;color:#4527A0;margin-bottom:6px">🪙 Coin/Note Type</div>
+        n₁+n₂=count, v₁n₁+v₂n₂=total. Substitute & solve.
+      </div>
+      <div style="background:#EDE7F6;border-radius:8px;padding:12px;border:1.5px solid #CE93D8">
+        <div style="font-weight:700;color:#4527A0;margin-bottom:6px">🚲 Wheel Type</div>
+        Like legs: count equation + wheels equation. Substitute.
+      </div>
+    </div>
+
+    <div class="rule-box">
+      <h3>🎯 Golden Rule</h3>
+      <p><strong>After solving — re-read the question.</strong><br>
+      Underline what they ask for. Make sure your final answer matches it.<br>
+      Don't give the notebook price when they asked for the book!</p>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-sec" onclick="go(8)">← Back</button>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="screen-counter">9 / 9</span>
+      <button class="btn" onclick="alert('Lesson complete! 🎉 5 new SimEq types in the toolkit.')">Finish ✓</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TOTAL = 9;
+function go(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width = (n/TOTAL*100)+'%';
+  window.scrollTo(0,0);
+}
+function reveal(id){ document.getElementById(id).classList.toggle('show'); }
+function revealP1(){ reveal('rev-p1'); }
+function revealP2(){ reveal('rev-p2'); }
+function revealP3(){ reveal('rev-p3'); }
+function revealP4(){ reveal('rev-p4'); }
+function revealP5(){ reveal('rev-p5'); }
+function revealDA(){ reveal('rev-da'); }
+function revealDB(){ reveal('rev-db'); }
+function revealC1(){ reveal('rev-c1'); }
+function revealC2(){ reveal('rev-c2'); }
+</script>
+</body>
+</html>
