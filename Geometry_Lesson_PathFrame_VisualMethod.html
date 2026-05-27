@@ -205,13 +205,14 @@ h3{font-size:16px;color:#00838F;margin-bottom:10px;font-weight:600}
       <div class="pq-text">A swimming pool area is <strong>40 m long and 24 m wide</strong>. A tiled border <strong>2 m wide</strong> runs inside all four walls. Find the area of the tiled border.</div>
       <div class="input-row">
         <span style="font-size:14px">Inner dims: (40−<b>4</b>) × (24−<b>4</b>) = </span>
-        <input class="inp" id="s3p1a" placeholder="?" style="width:60px"> × <input class="inp" id="s3p1b" placeholder="?" style="width:60px">
+        <input class="inp" inputmode="numeric" id="s3p1a" placeholder="?" style="width:60px"> × <input class="inp" inputmode="numeric" id="s3p1b" placeholder="?" style="width:60px">
       </div>
       <div class="input-row">
         <span style="font-size:14px">Path area = 40×24 − inner = 960 − </span>
-        <input class="inp" id="s3p1c" placeholder="?"> <span>= </span><input class="inp" id="s3p1d" placeholder="? m²">
+        <input class="inp" inputmode="numeric" id="s3p1c" placeholder="?"> <span>= </span><input class="inp" inputmode="numeric" id="s3p1d" placeholder="? m²">
       </div>
-      <button class="btn btn-sec" onclick="revealS3P1()">Check</button>
+      <button class="btn btn-sec" onclick="checkS3P1()">Check</button>
+      <div class="feedback" id="fb-s3p1"></div>
       <div class="reveal" id="rev-s3p1">Inner = 36 × 20 = 720 m². Path = 960 − 720 = <strong>240 m²</strong> ✅<br><small>L−2p = 40−4 = 36; W−2p = 24−4 = 20</small></div>
     </div>
   </div>
@@ -259,12 +260,13 @@ h3{font-size:16px;color:#00838F;margin-bottom:10px;font-weight:600}
       <div class="pq-title">Practice 2</div>
       <div class="pq-text">A rectangular lawn is <strong>18 m long and 12 m wide</strong>. A concrete path <strong>3 m wide</strong> is built outside all four sides. Find the area of the concrete path.</div>
       <div class="input-row">
-        <span style="font-size:14px">Outer = (18+6) × (12+6) = </span><input class="inp" id="s4p2a" placeholder="?" style="width:70px">×<input class="inp" id="s4p2b" placeholder="?" style="width:70px"> = <input class="inp" id="s4p2c" placeholder="?">
+        <span style="font-size:14px">Outer = (18+6) × (12+6) = </span><input class="inp" inputmode="numeric" id="s4p2a" placeholder="?" style="width:70px">×<input class="inp" inputmode="numeric" id="s4p2b" placeholder="?" style="width:70px"> = <input class="inp" inputmode="numeric" id="s4p2c" placeholder="?">
       </div>
       <div class="input-row">
-        <span style="font-size:14px">Path = outer − 18×12 = </span><input class="inp" id="s4p2d" placeholder="?"> − 216 = <input class="inp" id="s4p2e" placeholder="? m²">
+        <span style="font-size:14px">Path = outer − 18×12 = </span><input class="inp" inputmode="numeric" id="s4p2d" placeholder="?"> − 216 = <input class="inp" inputmode="numeric" id="s4p2e" placeholder="? m²">
       </div>
-      <button class="btn btn-sec" onclick="revealS4P2()">Check</button>
+      <button class="btn btn-sec" onclick="checkS4P2()">Check</button>
+      <div class="feedback" id="fb-s4p2"></div>
       <div class="reveal" id="rev-s4p2">Outer = 24 × 18 = 432 m². Path = 432 − 216 = <strong>216 m²</strong> ✅</div>
     </div>
   </div>
@@ -308,12 +310,13 @@ h3{font-size:16px;color:#00838F;margin-bottom:10px;font-weight:600}
       <div class="pq-title">Practice 3 — Frame</div>
       <div class="pq-text">A wooden frame has outer dimensions <strong>44 cm × 30 cm</strong>. The frame is <strong>3 cm wide</strong> on all sides. Find the frame area.</div>
       <div class="input-row">
-        <span style="font-size:14px">Inner = (44−6) × (30−6) = </span><input class="inp" id="s5p3a" placeholder="?">×<input class="inp" id="s5p3b" placeholder="?"> = <input class="inp" id="s5p3c" placeholder="?">
+        <span style="font-size:14px">Inner = (44−6) × (30−6) = </span><input class="inp" inputmode="numeric" id="s5p3a" placeholder="?">×<input class="inp" inputmode="numeric" id="s5p3b" placeholder="?"> = <input class="inp" inputmode="numeric" id="s5p3c" placeholder="?">
       </div>
       <div class="input-row">
-        <span style="font-size:14px">Frame = 44×30 − inner = 1320 − </span><input class="inp" id="s5p3d" placeholder="?"> = <input class="inp" id="s5p3e" placeholder="? cm²">
+        <span style="font-size:14px">Frame = 44×30 − inner = 1320 − </span><input class="inp" inputmode="numeric" id="s5p3d" placeholder="?"> = <input class="inp" inputmode="numeric" id="s5p3e" placeholder="? cm²">
       </div>
-      <button class="btn btn-sec" onclick="revealS5P3()">Check</button>
+      <button class="btn btn-sec" onclick="checkS5P3()">Check</button>
+      <div class="feedback" id="fb-s5p3"></div>
       <div class="reveal" id="rev-s5p3">Inner = 38 × 24 = 912 cm². Frame = 1320 − 912 = <strong>408 cm²</strong> ✅</div>
     </div>
   </div>
@@ -357,12 +360,13 @@ h3{font-size:16px;color:#00838F;margin-bottom:10px;font-weight:600}
       <div class="pq-title">Practice 4</div>
       <div class="pq-text">A square garden has a side length of <strong>16 m</strong>. A path <strong>2 m wide</strong> runs outside all four sides. Find the area of the path.</div>
       <div class="input-row">
-        <span style="font-size:14px">Outer side = 16 + 2×2 = </span><input class="inp" id="s6p4a" placeholder="?"> m
+        <span style="font-size:14px">Outer side = 16 + 2×2 = </span><input class="inp" inputmode="numeric" id="s6p4a" placeholder="?"> m
       </div>
       <div class="input-row">
-        <span style="font-size:14px">Path = outer² − 16² = </span><input class="inp" id="s6p4b" placeholder="?"> − 256 = <input class="inp" id="s6p4c" placeholder="? m²">
+        <span style="font-size:14px">Path = outer² − 16² = </span><input class="inp" inputmode="numeric" id="s6p4b" placeholder="?"> − 256 = <input class="inp" inputmode="numeric" id="s6p4c" placeholder="? m²">
       </div>
-      <button class="btn btn-sec" onclick="revealS6P4()">Check</button>
+      <button class="btn btn-sec" onclick="checkS6P4()">Check</button>
+      <div class="feedback" id="fb-s6p4"></div>
       <div class="reveal" id="rev-s6p4">Outer side = 20m. Outer area = 400. Path = 400 − 256 = <strong>144 m²</strong> ✅</div>
     </div>
   </div>
@@ -395,15 +399,16 @@ h3{font-size:16px;color:#00838F;margin-bottom:10px;font-weight:600}
       <div class="pq-title">Practice 5</div>
       <div class="pq-text">A rectangular pool area is <strong>30 m long and 18 m wide</strong>. A path <strong>3 m wide</strong> runs outside all four sides. Paving costs <strong>$6 per m²</strong>. Find the total cost.</div>
       <div class="input-row">
-        <span style="font-size:14px">Outer = (30+6) × (18+6) = </span><input class="inp" id="s7p5a" placeholder="?">×<input class="inp" id="s7p5b" placeholder="?"> = <input class="inp" id="s7p5c" placeholder="?">
+        <span style="font-size:14px">Outer = (30+6) × (18+6) = </span><input class="inp" inputmode="numeric" id="s7p5a" placeholder="?">×<input class="inp" inputmode="numeric" id="s7p5b" placeholder="?"> = <input class="inp" inputmode="numeric" id="s7p5c" placeholder="?">
       </div>
       <div class="input-row">
-        <span style="font-size:14px">Path = outer − 30×18 = </span><input class="inp" id="s7p5d" placeholder="?"> − 540 = <input class="inp" id="s7p5e" placeholder="?"> m²
+        <span style="font-size:14px">Path = outer − 30×18 = </span><input class="inp" inputmode="numeric" id="s7p5d" placeholder="?"> − 540 = <input class="inp" inputmode="numeric" id="s7p5e" placeholder="?"> m²
       </div>
       <div class="input-row">
-        <span style="font-size:14px">Cost = path × $6 = </span><input class="inp" id="s7p5f" placeholder="$?">
+        <span style="font-size:14px">Cost = path × $6 = </span><input class="inp" inputmode="numeric" id="s7p5f" placeholder="$?">
       </div>
-      <button class="btn btn-sec" onclick="revealS7P5()">Check</button>
+      <button class="btn btn-sec" onclick="checkS7P5()">Check</button>
+      <div class="feedback" id="fb-s7p5"></div>
       <div class="reveal" id="rev-s7p5">Outer = 36 × 24 = 864 m². Path = 864 − 540 = 324 m². Cost = 324 × 6 = <strong>$1944</strong> ✅</div>
     </div>
   </div>
@@ -425,18 +430,20 @@ h3{font-size:16px;color:#00838F;margin-bottom:10px;font-weight:600}
     <div class="pq">
       <div class="pq-title">Drill A</div>
       <div class="pq-text">A rectangular room is <strong>28 m × 16 m</strong>. A carpet covers the entire floor except a <strong>2 m border</strong> around the inside edges. Find the carpet area.</div>
-      <div class="input-row"><span>Type: </span><input class="inp" id="s8da" placeholder="inner/outer/frame" style="width:160px"></div>
-      <div class="input-row"><span style="font-size:14px">Carpet area = </span><input class="inp" id="s8da2" placeholder="? m²"></div>
-      <button class="btn btn-sec" onclick="revealS8A()">Check</button>
+      <div class="input-row"><span>Type: </span><select class="inp" id="s8da" style="width:160px"><option value="">-- select type --</option><option value="inner">inner</option><option value="outer">outer</option><option value="frame">frame</option></select></div>
+      <div class="input-row"><span style="font-size:14px">Carpet area = </span><input class="inp" inputmode="numeric" id="s8da2" placeholder="? m²"></div>
+      <button class="btn btn-sec" onclick="checkS8A()">Check</button>
+      <div class="feedback" id="fb-s8a"></div>
       <div class="reveal" id="rev-s8a">Type: <strong>Inner</strong>. Carpet = inner area = (28−4)×(16−4) = 24×12 = <strong>288 m²</strong> ✅<br><small>(The border is the path; the carpet is the inner region)</small></div>
     </div>
 
     <div class="pq">
       <div class="pq-title">Drill B</div>
       <div class="pq-text">A rectangular frame has outer measurements <strong>36 cm × 24 cm</strong>. The wood frame is <strong>4 cm wide</strong>. Find the frame (wood) area.</div>
-      <div class="input-row"><span>Type: </span><input class="inp" id="s8db" placeholder="inner/outer/frame" style="width:160px"></div>
-      <div class="input-row"><span style="font-size:14px">Frame area = </span><input class="inp" id="s8db2" placeholder="? cm²"></div>
-      <button class="btn btn-sec" onclick="revealS8B()">Check</button>
+      <div class="input-row"><span>Type: </span><select class="inp" id="s8db" style="width:160px"><option value="">-- select type --</option><option value="inner">inner</option><option value="outer">outer</option><option value="frame">frame</option></select></div>
+      <div class="input-row"><span style="font-size:14px">Frame area = </span><input class="inp" inputmode="numeric" id="s8db2" placeholder="? cm²"></div>
+      <button class="btn btn-sec" onclick="checkS8B()">Check</button>
+      <div class="feedback" id="fb-s8b"></div>
       <div class="reveal" id="rev-s8b">Type: <strong>Frame</strong>. Inner = (36−8)×(24−8) = 28×16 = 448. Frame = 36×24−448 = 864−448 = <strong>416 cm²</strong> ✅</div>
     </div>
   </div>
@@ -460,8 +467,9 @@ h3{font-size:16px;color:#00838F;margin-bottom:10px;font-weight:600}
       <div class="pq-text">A park is 25m × 18m. Inside path 2m wide. Student wrote:<br>
       Inner = (25−2) × (18−2) = 23 × 16 = 368. Path = 450 − 368 = 82 m²</div>
       <div class="input-row"><span style="font-size:14px">Error is: </span><input class="inp" id="s9e1" placeholder="?" style="width:280px"></div>
-      <div class="input-row"><span style="font-size:14px">Correct path area = </span><input class="inp" id="s9e1b" placeholder="? m²"></div>
-      <button class="btn btn-sec" onclick="revealS9E1()">Check</button>
+      <div class="input-row"><span style="font-size:14px">Correct path area = </span><input class="inp" inputmode="numeric" id="s9e1b" placeholder="? m²"></div>
+      <button class="btn btn-sec" onclick="checkS9E1()">Check</button>
+      <div class="feedback" id="fb-s9e1"></div>
       <div class="reveal" id="rev-s9e1">Error: subtracted p only once (−2) instead of twice (−4). Correct: inner = (25−4)×(18−4) = 21×14 = 294. Path = 25×18−294 = 450−294 = <strong>156 m²</strong> ✅</div>
     </div>
 
@@ -470,8 +478,9 @@ h3{font-size:16px;color:#00838F;margin-bottom:10px;font-weight:600}
       <div class="pq-text">Frame outer 30cm × 22cm, border 3cm. Student wrote:<br>
       Outer = (30+6) × (22+6) = 36 × 28 = 1008. Frame = 1008 − 660 = 348 cm²</div>
       <div class="input-row"><span style="font-size:14px">Error is: </span><input class="inp" id="s9e2" placeholder="?" style="width:280px"></div>
-      <div class="input-row"><span style="font-size:14px">Correct frame area = </span><input class="inp" id="s9e2b" placeholder="? cm²"></div>
-      <button class="btn btn-sec" onclick="revealS9E2()">Check</button>
+      <div class="input-row"><span style="font-size:14px">Correct frame area = </span><input class="inp" inputmode="numeric" id="s9e2b" placeholder="? cm²"></div>
+      <button class="btn btn-sec" onclick="checkS9E2()">Check</button>
+      <div class="feedback" id="fb-s9e2"></div>
       <div class="reveal" id="rev-s9e2">Error: treated 30×22 as inner and added border — but 30×22 ARE the outer dims! Inner = (30−6)×(22−6) = 24×16 = 384. Frame = 30×22−384 = 660−384 = <strong>276 cm²</strong> ✅</div>
     </div>
   </div>
@@ -519,7 +528,8 @@ h3{font-size:16px;color:#00838F;margin-bottom:10px;font-weight:600}
     <button class="btn btn-sec" onclick="go(9)">← Back</button>
     <div style="display:flex;gap:8px;align-items:center">
       <span class="screen-counter">10 / 10</span>
-      <button class="btn" onclick="alert('Lesson complete! 🎉 You now have the visual method — use it on every test question.')">Finish ✓</button>
+      <button class="btn" ><a href="index.html" style="text-decoration:none"><button class="btn" style="background:linear-gradient(135deg,#006064,#004D40)">🏠 Back to Hub</button></a>
+
     </div>
   </div>
 </div>
@@ -532,19 +542,68 @@ function go(n) {
   document.getElementById('prog').style.width = (n/TOTAL*100)+'%';
   window.scrollTo(0,0);
 }
-function reveal(id) {
-  var el = document.getElementById(id);
-  el.classList.toggle('show');
+function chk(inputId, correct, revealId, fbId) {
+  var raw = document.getElementById(inputId).value.trim().replace(/[$,]/g,'');
+  var val = parseInt(raw, 10);
+  var fb  = document.getElementById(fbId);
+  if (val === correct) {
+    fb.className = 'feedback ok show';
+    fb.textContent = '✅ Correct!';
+    document.getElementById(revealId).classList.add('show');
+  } else {
+    fb.className = 'feedback no show';
+    fb.textContent = '❌ Not quite — try again!';
+  }
 }
-function revealS3P1() { reveal('rev-s3p1'); }
-function revealS4P2() { reveal('rev-s4p2'); }
-function revealS5P3() { reveal('rev-s5p3'); }
-function revealS6P4() { reveal('rev-s6p4'); }
-function revealS7P5() { reveal('rev-s7p5'); }
-function revealS8A()  { reveal('rev-s8a');  }
-function revealS8B()  { reveal('rev-s8b');  }
-function revealS9E1() { reveal('rev-s9e1'); }
-function revealS9E2() { reveal('rev-s9e2'); }
+function chkDec(inputId, correct, revealId, fbId) {
+  var raw = document.getElementById(inputId).value.trim().replace(/[$,]/g,'');
+  var val = Math.round(parseFloat(raw) * 100);
+  var exp = Math.round(correct * 100);
+  var fb  = document.getElementById(fbId);
+  if (val === exp) {
+    fb.className = 'feedback ok show';
+    fb.textContent = '✅ Correct!';
+    document.getElementById(revealId).classList.add('show');
+  } else {
+    fb.className = 'feedback no show';
+    fb.textContent = '❌ Not quite — try again!';
+  }
+}
+function chk2(id1, ans1, id2, ans2, revealId, fbId) {
+  var v1 = parseInt(document.getElementById(id1).value.trim(), 10);
+  var v2 = parseInt(document.getElementById(id2).value.trim(), 10);
+  var fb  = document.getElementById(fbId);
+  if (v1 === ans1 && v2 === ans2) {
+    fb.className = 'feedback ok show';
+    fb.textContent = '✅ Correct — both right!';
+    document.getElementById(revealId).classList.add('show');
+  } else {
+    fb.className = 'feedback no show';
+    fb.textContent = '❌ Not quite — try again!';
+  }
+}
+function chkType(typeId, typeAns, numId, numAns, revealId, fbId) {
+  var t  = document.getElementById(typeId).value.trim().toLowerCase();
+  var v  = parseInt(document.getElementById(numId).value.trim(), 10);
+  var fb = document.getElementById(fbId);
+  if (t === typeAns.toLowerCase() && v === numAns) {
+    fb.className = 'feedback ok show';
+    fb.textContent = '✅ Correct — type and answer both right!';
+    document.getElementById(revealId).classList.add('show');
+  } else {
+    fb.className = 'feedback no show';
+    fb.textContent = '❌ Not quite — try again!';
+  }
+}
+function checkS3P1() { chk('s3p1d', 240,  'rev-s3p1', 'fb-s3p1'); }
+function checkS4P2() { chk('s4p2e', 216,  'rev-s4p2', 'fb-s4p2'); }
+function checkS5P3() { chk('s5p3e', 408,  'rev-s5p3', 'fb-s5p3'); }
+function checkS6P4() { chk('s6p4c', 144,  'rev-s6p4', 'fb-s6p4'); }
+function checkS7P5() { chk('s7p5f', 1944, 'rev-s7p5', 'fb-s7p5'); }
+function checkS8A()  { chkType('s8da', 'inner', 's8da2', 288, 'rev-s8a', 'fb-s8a'); }
+function checkS8B()  { chkType('s8db', 'frame', 's8db2', 416, 'rev-s8b', 'fb-s8b'); }
+function checkS9E1() { chk('s9e1b', 156,  'rev-s9e1', 'fb-s9e1'); }
+function checkS9E2() { chk('s9e2b', 276,  'rev-s9e2', 'fb-s9e2'); }
 </script>
 </body>
 </html>

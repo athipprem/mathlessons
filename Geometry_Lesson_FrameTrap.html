@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frame Trap — Unit 15 Geometry</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1a1a2e;min-height:100vh}
+
+/* ── Topnav ── */
+.lesson-topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;padding:0 20px;height:44px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.ltn-hub{color:#a0aec0;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.3px}
+.ltn-hub:hover{color:#fff}
+.ltn-title{color:#fff;font-size:14px;font-weight:700;letter-spacing:.2px}
+.ltn-pill{background:#004D40;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;letter-spacing:.3px}
+
+/* ── Layout ── */
+.wrap{max-width:780px;margin:0 auto;padding:24px 16px 60px}
+.hero{background:linear-gradient(135deg,#004D40,#00695C);color:#fff;border-radius:14px;padding:28px 28px 22px;margin-bottom:24px}
+.hero h1{font-size:26px;font-weight:800;margin-bottom:6px}
+.hero p{font-size:14px;opacity:.85;line-height:1.6}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:12px;font-weight:700;margin-top:10px}
+
+/* ── Cards / Screens ── */
+.screen{display:none}
+.screen.active{display:block}
+.card{background:#fff;border-radius:12px;padding:22px 22px 18px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.07);border-left:4px solid #004D40}
+.card h2{font-size:16px;font-weight:800;color:#004D40;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.card h3{font-size:15px;font-weight:700;color:#1a1a2e;margin:14px 0 8px}
+.card p{font-size:14px;line-height:1.7;margin-bottom:10px;color:#2d3748}
+.card ul{padding-left:20px;margin-bottom:10px}
+.card ul li{font-size:14px;line-height:1.8;color:#2d3748}
+.highlight{background:#e0f2f1;border-radius:8px;padding:12px 16px;margin:10px 0;font-size:14px;border-left:3px solid #004D40}
+.warn{background:#fff3e0;border-radius:8px;padding:12px 16px;margin:10px 0;font-size:14px;border-left:3px solid #e65100;color:#5d2f00}
+.rule-box{background:#1a1a2e;color:#fff;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px;line-height:1.7}
+.rule-box strong{color:#80cbc4}
+
+/* ── Diagrams ── */
+.diagram{background:#f7fafc;border:2px solid #b2dfdb;border-radius:10px;padding:16px;margin:12px 0;text-align:center;font-family:monospace;font-size:13px;line-height:1.8;color:#004D40}
+
+/* ── Practice ── */
+.practice{background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:16px;margin:12px 0}
+.practice p{font-size:14px;line-height:1.7;margin-bottom:8px}
+.inp-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0}
+.inp{border:2px solid #b2dfdb;border-radius:8px;padding:8px 12px;font-size:15px;width:110px;font-weight:700;color:#004D40;background:#fff}
+.inp:focus{outline:none;border-color:#004D40}
+select.inp{width:160px}
+.btn{background:linear-gradient(135deg,#004D40,#00695C);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:14px;font-weight:700;cursor:pointer;margin-top:6px}
+.btn:hover{opacity:.9}
+.feedback{border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;margin-top:6px;display:none}
+.feedback.ok.show{display:block;background:#dcfce7;color:#166534}
+.feedback.no.show{display:block;background:#fee2e2;color:#991b1b}
+.reveal{display:none;margin-top:10px;background:#fff;border:1.5px dashed #86efac;border-radius:8px;padding:12px;font-size:13px;line-height:1.7;color:#166534}
+.reveal.show{display:block}
+.reveal strong{color:#004D40}
+
+/* ── Nav ── */
+.nav-row{display:flex;justify-content:space-between;margin-top:22px;gap:12px;flex-wrap:wrap}
+.btn-nav{padding:10px 24px;border-radius:10px;border:none;font-size:14px;font-weight:700;cursor:pointer}
+.btn-back{background:#e2e8f0;color:#4a5568}
+.btn-next{background:linear-gradient(135deg,#004D40,#00695C);color:#fff}
+.progress{display:flex;gap:6px;justify-content:center;margin-bottom:20px}
+.dot{width:10px;height:10px;border-radius:50%;background:#b2dfdb;transition:.3s}
+.dot.done{background:#00695C}
+.dot.active{background:#004D40;transform:scale(1.3)}
+</style>
+</head>
+<body>
+
+<!-- Topnav -->
+<div class="lesson-topnav">
+  <a href="index.html" class="ltn-hub">&#8592; Hub</a>
+  <span class="ltn-title">Frame Trap &mdash; Visual Fix</span>
+  <span class="ltn-pill">Unit 15 &middot; Lesson 1</span>
+</div>
+
+<div class="wrap">
+
+  <!-- Progress dots -->
+  <div class="progress">
+    <div class="dot active" id="d1"></div>
+    <div class="dot" id="d2"></div>
+    <div class="dot" id="d3"></div>
+    <div class="dot" id="d4"></div>
+    <div class="dot" id="d5"></div>
+    <div class="dot" id="d6"></div>
+    <div class="dot" id="d7"></div>
+    <div class="dot" id="d8"></div>
+    <div class="dot" id="d9"></div>
+  </div>
+
+  <!-- ══ SCREEN 1 — Hero ══ -->
+  <div class="screen active" id="s1">
+    <div class="hero">
+      <h1>🖼️ Frame Trap &mdash; Visual Fix</h1>
+      <p>You've solved inner paths and outer paths perfectly. But the <strong>frame type</strong> — where the outer dimensions are already given — has tripped you up 4 times in a row. Today we fix that permanently.</p>
+      <div class="hero-badge">Unit 15 · Geometry · Lesson 1</div>
+    </div>
+    <div class="card">
+      <h2>🎯 What We're Fixing</h2>
+      <p>In the frame type, the question gives you the <strong>outer rectangle dimensions</strong> already. There is no garden or pool to add onto — the outer box IS the big number.</p>
+      <div class="warn">❌ The Trap: "The outer is 40 cm × 28 cm, border is 4 cm" → student adds 4 cm outward → WRONG. The outer is already given. You subtract inward.</div>
+      <div class="highlight">✅ The Fix: <strong>Outer is given → subtract border × 2 from each side to get inner → Frame = Outer − Inner</strong></div>
+      <p>Today you'll master this with a visual anchor and 6 practice problems. All 6 will give you the outer dimensions. Never add outward.</p>
+    </div>
+    <div class="nav-row"><span></span><button class="btn-nav btn-next" onclick="go(2)">Start ➜</button></div>
+  </div>
+
+  <!-- ══ SCREEN 2 — The Visual Anchor ══ -->
+  <div class="screen" id="s2">
+    <div class="card">
+      <h2>🖼️ The Visual Anchor</h2>
+      <p>Imagine a picture frame sitting on a table. What you see from the outside is the <strong>outer rectangle</strong>. The photo inside is the <strong>inner rectangle</strong>.</p>
+      <div class="diagram">
+┌─────────────────────────┐  ← Outer (given in question)
+│  ┌───────────────────┐  │
+│  │                   │  │  ← Border width (given)
+│  │   Inner (find     │  │
+│  │   this area)      │  │
+│  └───────────────────┘  │
+└─────────────────────────┘
+Frame area = Outer area − Inner area</div>
+      <div class="rule-box">
+        <strong>3-Step Frame Rule:</strong><br>
+        Step 1: Find outer area = length × width (already given)<br>
+        Step 2: Find inner dims = each side − (border × 2)<br>
+        Step 3: Frame = Outer − Inner
+      </div>
+      <div class="warn">🚨 Key check: Does inner length = outer length − 2×border? If you got a BIGGER number, you went the wrong way!</div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(1)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(3)">Next ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN 3 — Worked Example ══ -->
+  <div class="screen" id="s3">
+    <div class="card">
+      <h2>📐 Worked Example</h2>
+      <p>A rectangular mirror has outer dimensions <strong>40 cm × 28 cm</strong>. The frame border is <strong>4 cm</strong> wide. Find the area of the frame.</p>
+      <div class="diagram">
+Outer: 40 × 28 cm  (THIS IS GIVEN — don't touch it)
+Border: 4 cm wide all around
+
+Inner length = 40 − (4 × 2) = 40 − 8 = 32 cm
+Inner width  = 28 − (4 × 2) = 28 − 8 = 20 cm
+
+Outer area = 40 × 28 = 1120 cm²
+Inner area = 32 × 20 =  640 cm²
+Frame area = 1120 − 640 = 480 cm²</div>
+      <div class="highlight">Answer: Frame area = <strong>480 cm²</strong></div>
+      <p style="font-size:13px;color:#5d2f00;margin-top:8px">⚠️ This was U14 Q3 — you added 4 cm outward and got ~608 cm². Notice: inner = outer − 8, NOT outer + 8.</p>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(2)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(4)">Try it ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN 4 — Practice P1 & P2 ══ -->
+  <div class="screen" id="s4">
+    <div class="card">
+      <h2>✏️ Practice 1 &amp; 2</h2>
+
+      <h3>P1. A rectangular wooden board has outer dimensions 25 cm × 18 cm. The frame border is 3 cm wide. What is the area of the frame?</h3>
+      <p>Step 1: Inner dims = (25 − ?) × (18 − ?)</p>
+      <div class="inp-row">
+        Frame area = <input class="inp" id="p1a" inputmode="numeric" placeholder="cm²"> cm²
+      </div>
+      <div class="feedback" id="fb-p1"></div>
+      <div class="reveal" id="rev-p1">
+        <strong>Working:</strong> Outer = 25×18 = 450 cm². Inner = (25−6)×(18−6) = 19×12 = 228 cm². Frame = 450 − 228 = <strong>222 cm²</strong>
+      </div>
+      <button class="btn" onclick="checkP1()">Check ✓</button>
+
+      <h3 style="margin-top:20px">P2. A rectangular tray has outer dimensions 32 cm × 24 cm. The raised border is 4 cm wide. Find the area of the base (inner area).</h3>
+      <p><em>Note: this time find the INNER area, not the frame.</em></p>
+      <div class="inp-row">
+        Inner area = <input class="inp" id="p2a" inputmode="numeric" placeholder="cm²"> cm²
+      </div>
+      <div class="feedback" id="fb-p2"></div>
+      <div class="reveal" id="rev-p2">
+        <strong>Working:</strong> Inner = (32−8)×(24−8) = 24×16 = <strong>384 cm²</strong>
+      </div>
+      <button class="btn" onclick="checkP2()">Check ✓</button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(3)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(5)">Next ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN 5 — Square Frames ══ -->
+  <div class="screen" id="s5">
+    <div class="card">
+      <h2>⬛ Square Frames</h2>
+      <p>When the outer shape is a <strong>square</strong>, both sides shrink by the same amount. The rule is the same — subtract border × 2 from the given outer side.</p>
+      <div class="rule-box">
+        Square frame: Outer side = S, border = b<br>
+        Inner side = S − 2b<br>
+        Frame = S² − (S−2b)²
+      </div>
+
+      <h3>P3. A square photo frame has an outer side of 20 cm. The frame border is 2 cm wide. What is the area of the frame?</h3>
+      <div class="inp-row">
+        Frame area = <input class="inp" id="p3a" inputmode="numeric" placeholder="cm²"> cm²
+      </div>
+      <div class="feedback" id="fb-p3"></div>
+      <div class="reveal" id="rev-p3">
+        <strong>Working:</strong> Outer = 20² = 400. Inner side = 20−4 = 16. Inner = 16² = 256. Frame = 400 − 256 = <strong>144 cm²</strong>
+      </div>
+      <button class="btn" onclick="checkP3()">Check ✓</button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(4)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(6)">Next ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN 6 — Frame + Cost ══ -->
+  <div class="screen" id="s6">
+    <div class="card">
+      <h2>💰 Frame + Cost</h2>
+      <p>Some questions ask for the <strong>cost</strong> of making the frame. You first find the frame area, then multiply by the cost per unit area.</p>
+      <div class="highlight">Frame area → × cost per cm² → Total cost</div>
+
+      <h3>P4. A rectangular decorative border has outer dimensions 48 cm × 36 cm and a border width of 6 cm. The border material costs $4 per cm². What is the total cost?</h3>
+      <div class="inp-row">
+        Frame area = <input class="inp" id="p4a" inputmode="numeric" placeholder="cm²"> cm²
+        &nbsp;&nbsp; Total cost = $<input class="inp" id="p4b" inputmode="numeric" placeholder="$">
+      </div>
+      <div class="feedback" id="fb-p4"></div>
+      <div class="reveal" id="rev-p4">
+        <strong>Working:</strong> Outer = 48×36 = 1728 cm². Inner = (48−12)×(36−12) = 36×24 = 864 cm². Frame = 1728 − 864 = 864 cm². Cost = 864 × $4 = <strong>$3,456</strong>
+      </div>
+      <button class="btn" onclick="checkP4()">Check ✓</button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(5)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(7)">Next ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN 7 — Frame + Tiles ══ -->
+  <div class="screen" id="s7">
+    <div class="card">
+      <h2>🧱 Frame + Tiles</h2>
+      <p>Another twist: the frame area is covered with tiles. Find the number of tiles needed.</p>
+      <div class="highlight">Frame area ÷ tile area = number of tiles (round up if needed)</div>
+
+      <h3>P5. A rectangular wall has outer dimensions 50 cm × 35 cm. A 5 cm border is tiled with square tiles, each 1 cm². How many tiles are needed?</h3>
+      <div class="inp-row">
+        Frame area = <input class="inp" id="p5a" inputmode="numeric" placeholder="cm²"> cm²
+        &nbsp;&nbsp; Tiles needed = <input class="inp" id="p5b" inputmode="numeric" placeholder="tiles">
+      </div>
+      <div class="feedback" id="fb-p5"></div>
+      <div class="reveal" id="rev-p5">
+        <strong>Working:</strong> Outer = 50×35 = 1750. Inner = (50−10)×(35−10) = 40×25 = 1000. Frame = 1750 − 1000 = 750 cm². Tiles = 750 ÷ 1 = <strong>750 tiles</strong>
+      </div>
+      <button class="btn" onclick="checkP5()">Check ✓</button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(6)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(8)">Next ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN 8 — Mixed Challenge ══ -->
+  <div class="screen" id="s8">
+    <div class="card">
+      <h2>🏆 Mixed Challenge</h2>
+      <p>Now try two problems back-to-back — no hints. Remember: outer is given, subtract inward.</p>
+
+      <h3>C1. A rectangular signboard has outer dimensions 60 cm × 40 cm. The border is 5 cm wide and painted at a cost of $1.50 per cm². What is the total painting cost?</h3>
+      <div class="inp-row">
+        Frame area = <input class="inp" id="c1a" inputmode="numeric" placeholder="cm²"> cm²
+      </div>
+      <div class="inp-row">
+        Total cost = $<input class="inp" id="c1b" inputmode="numeric" placeholder="$">
+      </div>
+      <div class="feedback" id="fb-c1"></div>
+      <div class="reveal" id="rev-c1">
+        <strong>Working:</strong> Outer = 60×40 = 2400. Inner = (60−10)×(40−10) = 50×30 = 1500. Frame = 2400−1500 = 900 cm². Cost = 900 × $1.50 = <strong>$1,350</strong>
+      </div>
+      <button class="btn" onclick="checkC1()">Check ✓</button>
+
+      <h3 style="margin-top:20px">C2. A square tile design has an outer side of 30 cm with a 3 cm border. The border is made of gold tiles costing $5 per cm². What is the total cost?</h3>
+      <div class="inp-row">
+        Total cost = $<input class="inp" id="c2a" inputmode="numeric" placeholder="$">
+      </div>
+      <div class="feedback" id="fb-c2"></div>
+      <div class="reveal" id="rev-c2">
+        <strong>Working:</strong> Outer = 30² = 900. Inner = (30−6)² = 24² = 576. Frame = 900−576 = 324 cm². Cost = 324 × $5 = <strong>$1,620</strong>
+      </div>
+      <button class="btn" onclick="checkC2()">Check ✓</button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(7)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(9)">Finish ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN 9 — Summary ══ -->
+  <div class="screen" id="s9">
+    <div class="card">
+      <h2>🎉 Frame Trap — Conquered!</h2>
+      <div class="rule-box">
+        <strong>The Frame Rule (never forget):</strong><br>
+        1️⃣ Outer dims are GIVEN — they are already the big numbers<br>
+        2️⃣ Inner = each outer dim − (border × 2)<br>
+        3️⃣ Frame = Outer area − Inner area<br>
+        4️⃣ If they ask for cost: Frame area × cost per unit<br>
+        4️⃣ If they ask for tiles: Frame area ÷ tile area
+      </div>
+      <div class="highlight">🔑 Quick check: Is my inner SMALLER than my outer? If no → you went the wrong way!</div>
+      <p style="margin-top:14px;font-size:14px">You have 6 practice problems under your belt. The test will give you 5 frame questions — all with outer dims given. Apply the 3-step rule and you'll get them all.</p>
+      <div style="margin-top:20px">
+        <a href="index.html" style="text-decoration:none"><button class="btn" style="background:linear-gradient(135deg,#004D40,#00695C);font-size:15px;padding:12px 28px">🏠 Back to Hub</button></a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end wrap -->
+
+<script>
+var cur = 1;
+var total = 9;
+
+function go(n) {
+  document.getElementById('s'+cur).classList.remove('active');
+  document.getElementById('d'+cur).classList.remove('active');
+  document.getElementById('d'+cur).classList.add('done');
+  cur = n;
+  document.getElementById('s'+cur).classList.add('active');
+  document.getElementById('d'+cur).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function chk(inputId, correct, revealId, fbId) {
+  var raw = document.getElementById(inputId).value.trim().replace(/[$,]/g,'');
+  var val = parseInt(raw, 10);
+  var fb  = document.getElementById(fbId);
+  if (val === correct) {
+    fb.className = 'feedback ok show';
+    fb.textContent = '✅ Correct!';
+    document.getElementById(revealId).classList.add('show');
+  } else {
+    fb.className = 'feedback no show';
+    fb.textContent = '❌ Not quite — try again!';
+  }
+}
+
+function chk2(id1, ans1, id2, ans2, revealId, fbId) {
+  var v1 = parseInt(document.getElementById(id1).value.trim().replace(/[$,]/g,''), 10);
+  var v2 = parseInt(document.getElementById(id2).value.trim().replace(/[$,]/g,''), 10);
+  var fb = document.getElementById(fbId);
+  if (v1 === ans1 && v2 === ans2) {
+    fb.className = 'feedback ok show';
+    fb.textContent = '✅ Both correct!';
+    document.getElementById(revealId).classList.add('show');
+  } else {
+    fb.className = 'feedback no show';
+    fb.textContent = '❌ Not quite — check both answers and try again!';
+  }
+}
+
+function checkP1() { chk('p1a', 222, 'rev-p1', 'fb-p1'); }
+function checkP2() { chk('p2a', 384, 'rev-p2', 'fb-p2'); }
+function checkP3() { chk('p3a', 144, 'rev-p3', 'fb-p3'); }
+function checkP4() { chk2('p4a', 864, 'p4b', 3456, 'rev-p4', 'fb-p4'); }
+function checkP5() { chk2('p5a', 750, 'p5b', 750, 'rev-p5', 'fb-p5'); }
+function checkC1() { chk2('c1a', 900, 'c1b', 1350, 'rev-c1', 'fb-c1'); }
+function checkC2() { chk('c2a', 1620, 'rev-c2', 'fb-c2'); }
+</script>
+</body>
+</html>

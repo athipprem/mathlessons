@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HCF Three-Item — Unit 15 Number Theory</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1a1a2e;min-height:100vh}
+
+/* ── Topnav ── */
+.lesson-topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;padding:0 20px;height:44px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.ltn-hub{color:#a0aec0;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.3px}
+.ltn-hub:hover{color:#fff}
+.ltn-title{color:#fff;font-size:14px;font-weight:700;letter-spacing:.2px}
+.ltn-pill{background:#0D47A1;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;letter-spacing:.3px}
+
+.wrap{max-width:780px;margin:0 auto;padding:24px 16px 60px}
+.hero{background:linear-gradient(135deg,#0D47A1,#1565C0);color:#fff;border-radius:14px;padding:28px 28px 22px;margin-bottom:24px}
+.hero h1{font-size:26px;font-weight:800;margin-bottom:6px}
+.hero p{font-size:14px;opacity:.85;line-height:1.6}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:12px;font-weight:700;margin-top:10px}
+
+.screen{display:none}
+.screen.active{display:block}
+.card{background:#fff;border-radius:12px;padding:22px 22px 18px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.07);border-left:4px solid #1565C0}
+.card h2{font-size:16px;font-weight:800;color:#0D47A1;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.card h3{font-size:15px;font-weight:700;color:#1a1a2e;margin:14px 0 8px}
+.card p{font-size:14px;line-height:1.7;margin-bottom:10px;color:#2d3748}
+.highlight{background:#e3f2fd;border-radius:8px;padding:12px 16px;margin:10px 0;font-size:14px;border-left:3px solid #1565C0}
+.warn{background:#fff3e0;border-radius:8px;padding:12px 16px;margin:10px 0;font-size:14px;border-left:3px solid #e65100;color:#5d2f00}
+.rule-box{background:#1a1a2e;color:#fff;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px;line-height:1.8}
+.rule-box strong{color:#90caf9}
+.diagram{background:#f7fafc;border:2px solid #90caf9;border-radius:10px;padding:16px;margin:12px 0;font-family:monospace;font-size:13px;line-height:1.9;color:#0D47A1}
+
+.inp-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0}
+.inp{border:2px solid #90caf9;border-radius:8px;padding:8px 12px;font-size:15px;width:110px;font-weight:700;color:#0D47A1;background:#fff}
+.inp:focus{outline:none;border-color:#0D47A1}
+.btn{background:linear-gradient(135deg,#0D47A1,#1565C0);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:14px;font-weight:700;cursor:pointer;margin-top:6px}
+.btn:hover{opacity:.9}
+.feedback{border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;margin-top:6px;display:none}
+.feedback.ok.show{display:block;background:#dcfce7;color:#166534}
+.feedback.no.show{display:block;background:#fee2e2;color:#991b1b}
+.reveal{display:none;margin-top:10px;background:#fff;border:1.5px dashed #90caf9;border-radius:8px;padding:12px;font-size:13px;line-height:1.7;color:#0D47A1}
+.reveal.show{display:block}
+.reveal strong{color:#0D47A1}
+
+.nav-row{display:flex;justify-content:space-between;margin-top:22px;gap:12px;flex-wrap:wrap}
+.btn-nav{padding:10px 24px;border-radius:10px;border:none;font-size:14px;font-weight:700;cursor:pointer}
+.btn-back{background:#e2e8f0;color:#4a5568}
+.btn-next{background:linear-gradient(135deg,#0D47A1,#1565C0);color:#fff}
+.progress{display:flex;gap:6px;justify-content:center;margin-bottom:20px}
+.dot{width:10px;height:10px;border-radius:50%;background:#90caf9;transition:.3s}
+.dot.done{background:#1565C0}
+.dot.active{background:#0D47A1;transform:scale(1.3)}
+</style>
+</head>
+<body>
+
+<div class="lesson-topnav">
+  <a href="index.html" class="ltn-hub">&#8592; Hub</a>
+  <span class="ltn-title">HCF Three-Item Applied</span>
+  <span class="ltn-pill">Unit 15 &middot; Lesson 3</span>
+</div>
+
+<div class="wrap">
+  <div class="progress">
+    <div class="dot active" id="d1"></div>
+    <div class="dot" id="d2"></div>
+    <div class="dot" id="d3"></div>
+    <div class="dot" id="d4"></div>
+    <div class="dot" id="d5"></div>
+    <div class="dot" id="d6"></div>
+    <div class="dot" id="d7"></div>
+  </div>
+
+  <!-- ══ S1 — Intro ══ -->
+  <div class="screen active" id="s1">
+    <div class="hero">
+      <h1>🔢 HCF Three-Item Applied</h1>
+      <p>You can find HCF of two numbers perfectly. But in U14, Q9★ gave you <strong>three quantities</strong> and you gave up. Today we extend HCF to three items — it's the same idea, just one extra step.</p>
+      <div class="hero-badge">Unit 15 · Number Theory · Lesson 3</div>
+    </div>
+    <div class="card">
+      <h2>🎯 What's New Today</h2>
+      <p>HCF of 2 items: find the biggest number that divides into both.<br>HCF of 3 items: find the biggest number that divides into all three.</p>
+      <div class="highlight">The method is identical — just extend your prime factorisation to all three numbers and take the lowest power of each common prime.</div>
+      <p>Keywords that signal HCF: <strong>"equal groups", "identical pieces", "no leftovers", "largest/greatest", "cut into equal", "each bag/box/set gets the same"</strong></p>
+    </div>
+    <div class="nav-row"><span></span><button class="btn-nav btn-next" onclick="go(2)">Start ➜</button></div>
+  </div>
+
+  <!-- ══ S2 — Warm-Up Review ══ -->
+  <div class="screen" id="s2">
+    <div class="card">
+      <h2>🔁 Warm-Up: Two-Item HCF Review</h2>
+      <p>Quick review of the method you already know.</p>
+      <div class="diagram">
+HCF(24, 36):
+24 = 2³ × 3
+36 = 2² × 3²
+Common primes: 2 and 3
+Take lowest power: 2² × 3 = 4 × 3 = 12
+HCF(24, 36) = 12</div>
+
+      <h3>WU1. Find HCF(45, 75).</h3>
+      <p>45 = 3² × 5 &nbsp;&nbsp; 75 = 3 × 5²</p>
+      <div class="inp-row">HCF = <input class="inp" id="wu1" inputmode="numeric" placeholder="answer"></div>
+      <div class="feedback" id="fb-wu1"></div>
+      <div class="reveal" id="rev-wu1"><strong>Answer: 15</strong> — Common primes: 3 and 5. Lowest powers: 3¹ × 5¹ = 15.</div>
+      <button class="btn" onclick="checkWU1()">Check ✓</button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(1)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(3)">Next ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ S3 — Three-Item Method ══ -->
+  <div class="screen" id="s3">
+    <div class="card">
+      <h2>🔑 The Three-Item HCF Method</h2>
+      <p>Extending to 3 numbers: factorise all three, then take the lowest power of each prime that appears in <strong>all three</strong>.</p>
+      <div class="diagram">
+HCF(30, 45, 60):
+30 = 2 × 3 × 5
+45 = 3² × 5
+60 = 2² × 3 × 5
+
+Common primes (in ALL three): 3 and 5
+Lowest power of 3: 3¹ (appears as 3¹ in 30 and 60, 3² in 45 → take 3¹)
+Lowest power of 5: 5¹
+
+HCF = 3 × 5 = 15</div>
+      <div class="highlight">Key step: a prime must appear in ALL THREE numbers to be in the HCF. If it's missing from even one, it drops out.</div>
+      <div class="rule-box">
+        <strong>3-Item HCF Steps:</strong><br>
+        1. Prime factorise all three numbers<br>
+        2. Circle primes that appear in ALL three<br>
+        3. Take the lowest power of each circled prime<br>
+        4. Multiply them together → that's your HCF
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(2)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(4)">Practice ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ S4 — Practice P1 & P2 ══ -->
+  <div class="screen" id="s4">
+    <div class="card">
+      <h2>✏️ Practice — Three-Item HCF</h2>
+
+      <h3>P1. A florist has 48 red roses, 72 white roses, and 96 pink roses. She wants to make identical bouquets using all flowers, no flowers left over. What is the greatest number of bouquets she can make?</h3>
+      <div class="diagram">
+48 = 2⁴ × 3
+72 = 2³ × 3²
+96 = 2⁵ × 3
+Common primes: 2 and 3. Lowest powers: ?</div>
+      <div class="inp-row">Greatest number of bouquets = <input class="inp" id="p1h" inputmode="numeric" placeholder="bouquets"></div>
+      <div class="feedback" id="fb-p1h"></div>
+      <div class="reveal" id="rev-p1h"><strong>Answer: 24</strong> — Lowest power of 2: 2³=8. Lowest power of 3: 3¹=3. HCF = 8×3 = 24 bouquets. Each has 48/24=2 red, 72/24=3 white, 96/24=4 pink.</div>
+      <button class="btn" onclick="checkP1h()">Check ✓</button>
+
+      <h3 style="margin-top:20px">P2. Three wooden planks are 56 cm, 84 cm, and 140 cm long. They are cut into equal pieces with no waste. What is the longest possible piece length?</h3>
+      <div class="inp-row">Longest piece = <input class="inp" id="p2h" inputmode="numeric" placeholder="cm"> cm</div>
+      <div class="feedback" id="fb-p2h"></div>
+      <div class="reveal" id="rev-p2h"><strong>Answer: 28 cm</strong> — 56=2³×7, 84=2²×3×7, 140=2²×5×7. Common: 2² and 7. HCF = 4×7 = 28.</div>
+      <button class="btn" onclick="checkP2h()">Check ✓</button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(3)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(5)">Next ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ S5 — Applied Context ══ -->
+  <div class="screen" id="s5">
+    <div class="card">
+      <h2>🎒 Applied: Bags, Sets, Groups</h2>
+      <p>The most common test format: you're told three item quantities and asked to find the maximum number of identical bags/sets/groups with no items left over. The answer is always HCF of the three quantities.</p>
+      <div class="highlight">Max identical groups = HCF(quantity 1, quantity 2, quantity 3)</div>
+
+      <h3>P3. A store has 60 toy cars, 90 building blocks, and 45 puzzles. The store wants to pack them into identical gift bags with no items left over, using as many bags as possible. How many bags can be packed?</h3>
+      <div class="inp-row">Number of bags = <input class="inp" id="p3h" inputmode="numeric" placeholder="bags"></div>
+      <div class="feedback" id="fb-p3h"></div>
+      <div class="reveal" id="rev-p3h"><strong>Answer: 15</strong> — 60=2²×3×5, 90=2×3²×5, 45=3²×5. Common: 3 and 5. Lowest: 3¹×5 = 15. Each bag: 60/15=4 cars, 90/15=6 blocks, 45/15=3 puzzles.</div>
+      <button class="btn" onclick="checkP3h()">Check ✓</button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(4)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(6)">Challenge ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ S6 — Challenge ══ -->
+  <div class="screen" id="s6">
+    <div class="card">
+      <h2>🏆 Challenge Problem</h2>
+      <p>This is the type that tripped you up in U14 Q9★. Work through it step by step — don't give up.</p>
+
+      <h3>C1. A teacher has 90 pencils, 60 rulers, and 120 erasers. She makes identical prize packs with no items left over. What is the maximum number of packs? How many of each item is in each pack?</h3>
+      <div class="inp-row">Max packs = <input class="inp" id="c1a" inputmode="numeric" placeholder="packs"></div>
+      <div class="feedback" id="fb-c1"></div>
+      <div class="reveal" id="rev-c1">
+        <strong>Answer: 30 packs</strong><br>
+        90 = 2 × 3² × 5<br>
+        60 = 2² × 3 × 5<br>
+        120 = 2³ × 3 × 5<br>
+        Common primes: 2, 3, 5. Lowest powers: 2¹ × 3¹ × 5¹ = 30<br>
+        Each pack: 90/30=3 pencils, 60/30=2 rulers, 120/30=4 erasers
+      </div>
+      <button class="btn" onclick="checkC1()">Check ✓</button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(5)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(7)">Finish ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ S7 — Summary ══ -->
+  <div class="screen" id="s7">
+    <div class="card">
+      <h2>✅ HCF Three-Item — Done!</h2>
+      <div class="rule-box">
+        <strong>The Rule:</strong><br>
+        1. Prime factorise all THREE numbers<br>
+        2. Only keep primes that appear in ALL three<br>
+        3. Take the LOWEST power of each<br>
+        4. Multiply → HCF<br><br>
+        <strong>Keyword triggers:</strong> equal groups · identical bags · no leftovers · largest piece · greatest number of sets
+      </div>
+      <div class="highlight">Remember Q9★ from U14? Three types of items, equal bags. HCF of all three quantities. Next time, don't give up — just factorise all three and find the common primes!</div>
+      <div style="margin-top:20px">
+        <a href="index.html" style="text-decoration:none"><button class="btn" style="background:linear-gradient(135deg,#0D47A1,#1565C0);font-size:15px;padding:12px 28px">🏠 Back to Hub</button></a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var cur=1;
+function go(n){
+  document.getElementById('s'+cur).classList.remove('active');
+  document.getElementById('d'+cur).classList.remove('active');
+  document.getElementById('d'+cur).classList.add('done');
+  cur=n;
+  document.getElementById('s'+cur).classList.add('active');
+  document.getElementById('d'+cur).classList.add('active');
+  window.scrollTo(0,0);
+}
+function chk(inputId,correct,revealId,fbId){
+  var val=parseInt(document.getElementById(inputId).value.trim().replace(/[$,]/g,''),10);
+  var fb=document.getElementById(fbId);
+  if(val===correct){fb.className='feedback ok show';fb.textContent='✅ Correct!';document.getElementById(revealId).classList.add('show');}
+  else{fb.className='feedback no show';fb.textContent='❌ Not quite — try again!';}
+}
+function checkWU1(){chk('wu1',15,'rev-wu1','fb-wu1');}
+function checkP1h(){chk('p1h',24,'rev-p1h','fb-p1h');}
+function checkP2h(){chk('p2h',28,'rev-p2h','fb-p2h');}
+function checkP3h(){chk('p3h',15,'rev-p3h','fb-p3h');}
+function checkC1(){chk('c1a',30,'rev-c1','fb-c1');}
+</script>
+</body>
+</html>

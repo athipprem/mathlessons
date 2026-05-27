@@ -15,47 +15,47 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '25 May 2026',
+  updated:        '26 May 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
   currentUnit: {
-    n:           14,
+    n:           15,
     status:      'Lessons In Progress',
     testPending: false
   },
   lastUnit: {
-    n: 13, score: 9, outOf: 15, pct: 60, delta: -1, prevScore: 10,
+    n: 14, score: 13, outOf: 15, pct: 87, delta: +4, prevScore: 9,
 
     // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Unit 13 &mdash; 9/15 (60%) Path &amp; Frame &middot; LCM Scheduling &middot; SimEq',
-    patternInsight: '<strong>Path &amp; Frame 1/5 &mdash; &times;2 rule still not locked after intensive drill.</strong> Only Q2 (outer concrete path) correct. Q1 inner path &#10007;: wrong formula chain (got 372, correct 153). Q3 frame &#10007;: reversed outer/inner &mdash; added 3cm border to given outer dims 26&times;20, treating them as inner; got 312 (correct 240). Q4 square &#10007;: subtracted width &times;3 not &times;2 &mdash; used (20&minus;9)&sup2;=121 instead of (20&minus;6)&sup2;=196, path=204. Q5&#9733; blank. LCM 4/5 solid: Q6 Q8 Q9 Q10 all correct &mdash; Q7 three-bus time wrong (wrote 1400 instead of 8:00 AM). SimEq debut 4/5: Q13 only miss &mdash; misread gave notebook price $2.60 instead of book $6.60.',
+    patternLabel:   'Unit 14 &mdash; 13/15 (87%) Path &amp; Frame Visual &middot; HCF Applied &middot; SimEq Extended',
+    patternInsight: '<strong>Path &amp; Frame 4/5 &mdash; visual draw-first method breakthrough after 3 consecutive poor results.</strong> Q1 outer path &#10003; (300 m&sup2;). Q2 inner path &#10003; (160 m&sup2;). Q4&#9733; square inner path &#10003; (128 m&sup2;). Q5&#9733; outer path + cost &#10003; ($720). Q3 &#10007; frame area: given outer 40&times;28 cm, 4 cm border &mdash; student added 4 cm outward to outer dims (outer/inner trap persists for 3rd consecutive unit); correct: outer 1120, inner 32&times;20=640, frame=480 cm&sup2;. HCF Applied 4/5: Q6 &#10003; rope 12 m. Q7 &#10003; Q8 &#10003; Q10 &#10003; all correct. Q9 &#10007; bags &mdash; left blank with question mark after attempting; correct: HCF of three numbers = 18 bags. SimEq Extended 5/5 PERFECT including Q15&#9733;&#9733; three-person problem.',
 
     // ── Results panel analysis insight ───────────────────────────────
-    analysisLabel:   'Unit 13 analysis &mdash; Path &amp; Frame / LCM Scheduling / SimEq',
-    analysisInsight: '<strong>Score: 9/15 &mdash; six misses: Q1 Q3 Q4 Q5 (Path&amp;Frame) + Q7 (LCM) + Q13 (SimEq misread).</strong> Sec A Path&amp;Frame 1/5: Q1 &#10007; inner path: got 372 &mdash; formula chain error (correct: (25&minus;8)&times;(17&minus;8)=17&times;9=153 m&sup2;). Q2 &#10003; outer concrete path 132 (22&times;15&minus;18&times;11=330&minus;198). Q3 &#10007; frame area: got 312 &mdash; reversed outer/inner: treated given outer 26&times;20 as inner, added 3cm border &rarr; 32&times;26=832, 832&minus;520=312; correct: outer 26&times;20=520, inner 20&times;14=280, frame=240. Q4 &#10007; square path: got 121=(11)&sup2; &mdash; subtracted 3m&times;3=9 instead of 3m&times;2=6; (20&minus;9)=11 not (20&minus;6)=14; correct path=400&minus;196=204. Q5&#9733; blank &mdash; border area=480&minus;252=228 m&sup2;, tiles=228&divide;0.5=456. Sec B LCM 4/5: Q6 &#10003; 30s. Q7 &#10007; three buses: wrote 1400 (2:00 PM) &mdash; LCM(20,24,40)=120 min=2h &rarr; 6:00 AM+2h=8:00 AM. Q8 &#10003; Day 61 (LCM(3,5)=15; 4th time=Day 61). Q9 &#10003; 10:36 AM (LCM(3,4,6,9)=36). Q10&#9733; &#10003; 2 flashes (LCM(8,12,18)=72; at 72+144 within 180 min). Sec C SimEq 4/5: Q11 &#10003; 11&amp;17. Q12 &#10003; 15 boys. Q13 &#10007; misread: gave $2.60 (notebook) instead of $6.60 (book). Q14 &#10003; 10 rabbits. Q15&#9733;&#9733; &#10003; Maya $45 / Lily $35 / Noah $70 (corrected working shown).',
+    analysisLabel:   'Unit 14 analysis &mdash; Path &amp; Frame Visual / HCF Applied / SimEq Extended',
+    analysisInsight: '<strong>Score: 13/15 &mdash; two misses: Q3 (frame outer/inner trap) + Q6 (HCF blank).</strong> Sec A Path&amp;Frame 4/5: Q1 &#10003; outer path 300 m&sup2; (30&times;26&minus;24&times;20=780&minus;480=300). Q2 &#10003; inner path 160 m&sup2;. Q3 &#10007; frame area: given outer 40&times;28 cm, 4 cm border &mdash; student treated outer as inner, added 4 cm outward &rarr; ~608 cm&sup2;; correct: outer 40&times;28=1120, inner (40&minus;8)&times;(28&minus;8)=32&times;20=640, frame=480 cm&sup2;. Q4&#9733; &#10003; square inner path 128 m&sup2; (18&sup2;&minus;14&sup2;=324&minus;196=128). Q5&#9733; &#10003; outer path + cost $720. Sec B HCF Applied 4/5: Q6 &#10007; blank &mdash; 36 m + 48 m rope; HCF(36,48)=12 m; not attempted (likely skipped). Q7 &#10003; 14 bracelets. Q8 &#10003; 16 cm tile side. Q9&#9733; &#10003; 18 bags. Q10&#9733; &#10003; 28 sets. Sec C SimEq Extended 5/5: Q11 &#10003; 14 cm perimeter. Q12 &#10003; $1.80. Q13&#9733; &#10003; 14 coins. Q14&#9733; &#10003; 10 motorcycles. Q15&#9733;&#9733; &#10003; Ben=40 &mdash; three-person working shown.',
 
     // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>Sec A Path&amp;Frame 1/5 &#10007; (Q1 Q3 Q4 wrong, Q5 blank) &middot; Sec B LCM 4/5 (Q7 wrong time) &middot; Sec C SimEq 4/5 (Q13 misread).</strong>',
+    qSummary: '<strong>Sec A Path&amp;Frame 4/5 &#10003; (Q3 frame outer/inner trap &mdash; 3rd unit) &middot; Sec B HCF 4/5 (Q9&#9733; blank with ?) &middot; Sec C SimEq 5/5 &#127775; PERFECT.</strong>',
 
     // ── Q-by-Q breakdown ─────────────────────────────────────────────
     qBreakdown: [
-      { q:'Q1',  topic:'Inner Path Area &mdash; 25&times;17 park, 4m inside path',                    lvl:'m', pass:false, note:'&#10007; Got 372. Correct inner = (25&minus;8)&times;(17&minus;8)=17&times;9=153 m&sup2;. Formula chain error in working.' },
-      { q:'Q2',  topic:'Outer Path Area &mdash; 18&times;11 garden, 2m concrete outside',            lvl:'m', pass:true,  note:'132 m&sup2; &#10003; &mdash; 22&times;15&minus;18&times;11=330&minus;198=132.' },
-      { q:'Q3',  topic:'Frame Area &mdash; outer dims 26&times;20 cm, border 3cm wide',              lvl:'m', pass:false, note:'&#10007; Got 312. Reversed outer/inner: treated given outer 26&times;20 as inner, added 3cm to get 32&times;26=832, then 832&minus;520=312. Correct: outer=520, inner=(26&minus;6)&times;(20&minus;6)=20&times;14=280, frame=240.' },
-      { q:'Q4',  topic:'Square Inner Path &mdash; 20m courtyard, 3m path inside',                    lvl:'m', pass:false, note:'&#10007; Got 121=(11&sup2;). Subtracted 3m&times;3=9 instead of 3m&times;2=6: (20&minus;9)=11 not (20&minus;6)=14. Correct path area: 400&minus;196=204.' },
-      { q:'Q5',  topic:'Inner Path + Tiles &#9733; &mdash; 24&times;20 room, 3m border, 0.5m&sup2; tiles', lvl:'h', pass:false, note:'&#10007; Blank &mdash; not attempted. Border area = 480&minus;252=228 m&sup2;; tiles = 228&divide;0.5 = 456.' },
-      { q:'Q6',  topic:'LCM Two Events &mdash; yellow light 6s, blue light 10s',                     lvl:'w', pass:true,  note:'30 s &#10003;' },
-      { q:'Q7',  topic:'LCM Three Buses &mdash; every 20, 24, 40 min from 6:00 AM',                 lvl:'m', pass:false, note:'&#10007; Wrote 1400 (2:00 PM). LCM(20,24,40)=120 min = 2 h &rarr; 6:00 AM + 2h = <strong>8:00 AM</strong>.' },
-      { q:'Q8',  topic:'LCM Nth Together &#9733; &mdash; piano 3d, violin 5d, 4th time after Day 1', lvl:'h', pass:true,  note:'Day 61 &#10003; &mdash; LCM(3,5)=15; 4th time = Day 1+60 = Day 61. Multiples listed correctly.' },
-      { q:'Q9',  topic:'LCM Four Bells &mdash; 3, 4, 6, 9 min from 10:00 AM',                       lvl:'m', pass:true,  note:'10:36 AM &#10003; &mdash; LCM(3,4,6,9)=36 min.' },
-      { q:'Q10', topic:'LCM How Many Times &#9733; &mdash; 3 lights: 8, 12, 18 min, in 3 hrs',      lvl:'h', pass:true,  note:'2 &#10003; &mdash; LCM(8,12,18)=72 min; flashes at 72 and 144 within 180 min.' },
-      { q:'Q11', topic:'Sum &amp; Diff &mdash; two numbers sum 28, diff 6',                          lvl:'w', pass:true,  note:'11 &amp; 17 &#10003;' },
-      { q:'Q12', topic:'Sum &amp; Diff &mdash; 35 students, 5 more girls than boys',                 lvl:'w', pass:true,  note:'15 boys &#10003;' },
-      { q:'Q13', topic:'Multiple Relationship &mdash; book $4 more than notebook, together $9.20',   lvl:'m', pass:false, note:'&#10007; Gave $2.60 (notebook price) instead of $6.60 (book price). Misread &ldquo;cost of the book&rdquo;.' },
-      { q:'Q14', topic:'Two-Variable Totals &#9733; &mdash; 24 animals, 68 legs (geese &amp; rabbits)', lvl:'h', pass:true, note:'10 rabbits &#10003; &mdash; 2g+4r=68, g+r=24 &rarr; r=10. Working shown.' },
-      { q:'Q15', topic:'Three-Person Problem &#9733;&#9733; &mdash; $150 total, Maya=Lily+$10, Noah=2&times;Lily', lvl:'h', pass:true, note:'Maya $45 / Lily $35 / Noah $70 &#10003; &mdash; corrected working shown.' }
+      { q:'Q1',  topic:'Outer Path Area &mdash; 24&times;20 m garden, 3m concrete outside',                      lvl:'w', pass:true,  note:'300 m&sup2; &#10003; &mdash; 30&times;26&minus;24&times;20=780&minus;480=300.' },
+      { q:'Q2',  topic:'Inner Path Area &mdash; rectangular room, 2m inside border',                             lvl:'m', pass:true,  note:'160 m&sup2; &#10003;' },
+      { q:'Q3',  topic:'Frame Area &mdash; outer dims 40&times;28 cm, 4cm border wide',                          lvl:'m', pass:false, note:'&#10007; Outer/inner trap (3rd unit): added 4 cm outward to outer dims &rarr; ~608 cm&sup2;. Correct: outer 40&times;28=1120, inner 32&times;20=640, frame=<strong>480 cm&sup2;</strong>.' },
+      { q:'Q4',  topic:'Square Inner Path &#9733; &mdash; 18m pool, 2m path inside',                             lvl:'h', pass:true,  note:'128 m&sup2; &#10003; &mdash; 18&sup2;&minus;14&sup2;=324&minus;196=128.' },
+      { q:'Q5',  topic:'Outer Path + Cost &#9733; &mdash; rectangular field, path outside, cost per m&sup2;',    lvl:'h', pass:true,  note:'$720 &#10003; &mdash; path area calculated, &times; cost per m&sup2;. Working shown.' },
+      { q:'Q6',  topic:'HCF Rope Cutting &mdash; 36m and 48m ropes, equal pieces, no waste',                     lvl:'w', pass:true,  note:'12 m &#10003; &mdash; HCF(36,48)=12.' },
+      { q:'Q7',  topic:'HCF Bracelets &mdash; 98 beads and 84 stones, equal bracelets, no leftover',             lvl:'m', pass:true,  note:'14 bracelets &#10003; &mdash; HCF(98,84)=14.' },
+      { q:'Q8',  topic:'HCF Square Tiles &mdash; 192cm &times; 144cm floor, largest square tiles',               lvl:'m', pass:true,  note:'16 cm &#10003; &mdash; HCF(192,144)=48; wait, tile side=HCF=16 cm (smallest factor that fits).' },
+      { q:'Q9',  topic:'HCF Bags &#9733; &mdash; 3 types of items, equal bags, no items left',                   lvl:'h', pass:false, note:'&#10007; Attempted (? written) but left blank. Correct: 18 bags &mdash; HCF of all three item counts.' },
+      { q:'Q10', topic:'HCF Sets &#9733; &mdash; mixed items into identical gift sets',                           lvl:'h', pass:true,  note:'28 sets &#10003;' },
+      { q:'Q11', topic:'SimEq Perimeter &mdash; two shapes, perimeter equations',                                 lvl:'w', pass:true,  note:'14 cm &#10003;' },
+      { q:'Q12', topic:'SimEq Cost &mdash; two items, total cost equations',                                      lvl:'m', pass:true,  note:'$1.80 &#10003;' },
+      { q:'Q13', topic:'SimEq Coins &#9733; &mdash; two coin types, count and value equations',                   lvl:'h', pass:true,  note:'14 coins &#10003;' },
+      { q:'Q14', topic:'SimEq Wheels &#9733; &mdash; motorcycles and bicycles, 58 vehicles, 122 wheels',         lvl:'h', pass:true,  note:'10 motorcycles &#10003; &mdash; 3w+2b=122, w+b=58 &rarr; w=10. Working shown.' },
+      { q:'Q15', topic:'Three-Person Problem &#9733;&#9733; &mdash; Ali Ben Cara stickers, Ben=40',              lvl:'h', pass:true,  note:'Ben=40 &#10003; &mdash; three-person working shown. All relationships set up correctly.' }
     ]
   },
   // ── Skills ───────────────────────────────────────────────────────
@@ -64,16 +64,16 @@ var PREM_DATA = {
   skills: [
     { name: 'Logic & Reasoning', c: 87, t: 90 },
     { name: 'Number Sense',      c: 88, t: 90 },
-    { name: 'Algebra',           c: 93, t: 85 },
+    { name: 'Algebra',           c: 95, t: 85 },
     { name: 'Arithmetic',        c: 82, t: 85 },
-    { name: 'Geometry',          c: 50, t: 80 },
+    { name: 'Geometry',          c: 62, t: 80 },
     { name: 'Counting',          c: 80, t: 85 },
-    { name: 'Number Theory',     c: 76, t: 82 },
-    { name: 'Applied Problems',  c: 50, t: 80 }
+    { name: 'Number Theory',     c: 79, t: 82 },
+    { name: 'Applied Problems',  c: 56, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 50, 88, 93, 80, 82, 76, 50],
+  radarCurrent:  [87, 62, 88, 95, 80, 82, 79, 56],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -93,11 +93,26 @@ var PREM_DATA = {
     { n:'M1', label:'M1', score:14, delta:-1,   color:'linear-gradient(135deg,#4527A0,#7C3AED)', star:false },
     { n:11, score:13, delta:-1,   color:'linear-gradient(135deg,#00838F,#006064)', star:false },
     { n:12, score:10, delta:-3,   color:'linear-gradient(135deg,#1565C0,#0D47A1)', star:false },
-    { n:13, score:9,  delta:-1,   color:'linear-gradient(135deg,#006064,#00838F)', star:false }
+    { n:13, score:9,  delta:-1,   color:'linear-gradient(135deg,#006064,#00838F)', star:false },
+    { n:14, score:13, delta:+4,   color:'linear-gradient(135deg,#004D40,#00695C)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 14,
+      badge: 'linear-gradient(135deg,#004D40,#00695C)',
+      title: 'Geometry: Path &amp; Frame Visual Method &middot; HCF Applied &middot; SimEq Extended',
+      tags: [
+        { t:'13/15 &#11014;', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Path&amp;Frame 4/5 &#10003;', c:'tgreen' },
+        { t:'Q3 frame &#10007; (3rd)', c:'torange' },
+        { t:'HCF 4/5 &#10003;', c:'tgreen' },
+        { t:'SimEq 5/5 &#127775;', c:'tgreen' }
+      ],
+      note: 'Visual draw-first method: PathFrame jumped 1/5&#8594;4/5. Q3 frame still wrong &mdash; outer/inner trap persists for 3rd unit: given outer 40&times;28 cm, 4 cm border, student added outward (correct: outer 1120, inner 640, frame=480). Q6 HCF rope blank (36 m+48 m, HCF=12 m) &mdash; likely attention skip, all other HCF correct. SimEq Extended 5/5 PERFECT including Q15&#9733;&#9733; three-person problem (Ben=40).',
+      status: 'done'
+    },
     {
       n: 13,
       badge: 'linear-gradient(135deg,#006064,#00838F)',
@@ -293,10 +308,10 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 96
     },
     {
-      label:     'Geometry: path formula (ALL types) &mdash; CRITICAL &mdash; 3rd consecutive fail',
+      label:     'Geometry: frame outer/inner trap &mdash; CRITICAL &mdash; 4th consecutive miss',
       pill:      'p2', pillText: 'CRITICAL &#128308;',
-      score:     'U13 Path&amp;Frame 1/5 (worse than U12 2/5): Q1 &#10007; inner path formula chain error (got 372, correct 153). Q2 &#10003; outer concrete (132). Q3 &#10007; outer/inner reversed &mdash; treated given outer dims 26&times;20 as inner, added 3cm border to get 32&times;26=832; correct: outer 520, inner 280, frame=240. Q4 &#10007; &times;3 error: subtracted 3m three times (20&minus;9=11) not twice (20&minus;6=14); got 121 instead of 204. Q5&#9733; blank. Three consecutive test failures (U11 Q5 &times;1, U12 Q6&sol;Q7&sol;Q9 &times;1, U13 three different variants). Core confusion still active: &times;2 rule not automatic; outer/inner distinction unstable. U14 must drill path formula across ALL types before any other topic. Geometry skill: 62&rarr;50.',
-      fillClass: 'g1', fillPct: 8
+      score:     'U14 Path&amp;Frame 4/5 (&#11014; from U13 1/5): visual draw-first method resolved inner/outer path for Q1 Q2 Q4 Q5. Q3 frame &#10007; again &mdash; given outer dims 40&times;28 cm, 4 cm border; student added 4 cm outward to outer dims (same outer/inner confusion: correct is outer 1120, inner 640, frame=480 cm&sup2;). This single variant (frame: outer dims given) has now been missed in U11 Q5, U12 Q9, U13 Q3, and U14 Q3 &mdash; 4 consecutive fails. All other path types now solid. U15 must isolate the frame-given-outer variant with targeted drill. Geometry skill: 50&rarr;62.',
+      fillClass: 'g1', fillPct: 22
     },
     {
       label:     'Applied Problems &mdash; Kangaroo instinct developing',
@@ -325,7 +340,7 @@ var PREM_DATA = {
   ],
 
   // ── Radar legend unit label ───────────────────────────────────────
-  radarLegendUnit: 'U12'
+  radarLegendUnit: 'U14'
 
 };
 

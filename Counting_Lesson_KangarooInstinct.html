@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kangaroo Instinct — Unit 15 Counting</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1a1a2e;min-height:100vh}
+
+/* ── Topnav ── */
+.lesson-topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;padding:0 20px;height:44px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.ltn-hub{color:#a0aec0;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.3px}
+.ltn-hub:hover{color:#fff}
+.ltn-title{color:#fff;font-size:14px;font-weight:700;letter-spacing:.2px}
+.ltn-pill{background:#4527A0;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;letter-spacing:.3px}
+
+/* ── Layout ── */
+.wrap{max-width:780px;margin:0 auto;padding:24px 16px 60px}
+.hero{background:linear-gradient(135deg,#4527A0,#6a1b9a);color:#fff;border-radius:14px;padding:28px 28px 22px;margin-bottom:24px}
+.hero h1{font-size:26px;font-weight:800;margin-bottom:6px}
+.hero p{font-size:14px;opacity:.85;line-height:1.6}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.2);border-radius:20px;padding:4px 14px;font-size:12px;font-weight:700;margin-top:10px}
+
+.screen{display:none}
+.screen.active{display:block}
+.card{background:#fff;border-radius:12px;padding:22px 22px 18px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.07);border-left:4px solid #4527A0}
+.card h2{font-size:16px;font-weight:800;color:#4527A0;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.card h3{font-size:15px;font-weight:700;color:#1a1a2e;margin:14px 0 8px}
+.card p{font-size:14px;line-height:1.7;margin-bottom:10px;color:#2d3748}
+.highlight{background:#ede7f6;border-radius:8px;padding:12px 16px;margin:10px 0;font-size:14px;border-left:3px solid #4527A0}
+.warn{background:#fff3e0;border-radius:8px;padding:12px 16px;margin:10px 0;font-size:14px;border-left:3px solid #e65100;color:#5d2f00}
+.rule-box{background:#1a1a2e;color:#fff;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px;line-height:1.8}
+.rule-box strong{color:#ce93d8}
+.diagram{background:#f7fafc;border:2px solid #d1c4e9;border-radius:10px;padding:16px;margin:12px 0;font-family:monospace;font-size:13px;line-height:1.8;color:#4527A0}
+.table-sm{border-collapse:collapse;margin:10px 0;font-size:13px}
+.table-sm th,.table-sm td{border:1px solid #d1c4e9;padding:6px 12px;text-align:center}
+.table-sm th{background:#ede7f6;font-weight:700;color:#4527A0}
+
+.practice{background:#f5f0ff;border:1.5px solid #b39ddb;border-radius:10px;padding:16px;margin:12px 0}
+.inp-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0}
+.inp{border:2px solid #b39ddb;border-radius:8px;padding:8px 12px;font-size:15px;width:110px;font-weight:700;color:#4527A0;background:#fff}
+.inp:focus{outline:none;border-color:#4527A0}
+.btn{background:linear-gradient(135deg,#4527A0,#6a1b9a);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:14px;font-weight:700;cursor:pointer;margin-top:6px}
+.btn:hover{opacity:.9}
+.feedback{border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;margin-top:6px;display:none}
+.feedback.ok.show{display:block;background:#dcfce7;color:#166534}
+.feedback.no.show{display:block;background:#fee2e2;color:#991b1b}
+.reveal{display:none;margin-top:10px;background:#fff;border:1.5px dashed #b39ddb;border-radius:8px;padding:12px;font-size:13px;line-height:1.7;color:#4527A0}
+.reveal.show{display:block}
+.reveal strong{color:#4527A0}
+
+.nav-row{display:flex;justify-content:space-between;margin-top:22px;gap:12px;flex-wrap:wrap}
+.btn-nav{padding:10px 24px;border-radius:10px;border:none;font-size:14px;font-weight:700;cursor:pointer}
+.btn-back{background:#e2e8f0;color:#4a5568}
+.btn-next{background:linear-gradient(135deg,#4527A0,#6a1b9a);color:#fff}
+.progress{display:flex;gap:6px;justify-content:center;margin-bottom:20px}
+.dot{width:10px;height:10px;border-radius:50%;background:#d1c4e9;transition:.3s}
+.dot.done{background:#6a1b9a}
+.dot.active{background:#4527A0;transform:scale(1.3)}
+</style>
+</head>
+<body>
+
+<div class="lesson-topnav">
+  <a href="index.html" class="ltn-hub">&#8592; Hub</a>
+  <span class="ltn-title">Kangaroo Instinct</span>
+  <span class="ltn-pill">Unit 15 &middot; Lesson 2</span>
+</div>
+
+<div class="wrap">
+  <div class="progress">
+    <div class="dot active" id="d1"></div>
+    <div class="dot" id="d2"></div>
+    <div class="dot" id="d3"></div>
+    <div class="dot" id="d4"></div>
+    <div class="dot" id="d5"></div>
+    <div class="dot" id="d6"></div>
+    <div class="dot" id="d7"></div>
+    <div class="dot" id="d8"></div>
+  </div>
+
+  <!-- ══ S1 — Intro ══ -->
+  <div class="screen active" id="s1">
+    <div class="hero">
+      <h1>🦘 Kangaroo Instinct</h1>
+      <p>Competition math has patterns that don't look like normal school work. Once you know the tricks, they're fast. Today: <strong>units digit cycles</strong>, <strong>staircase counting</strong>, and <strong>consecutive number shortcuts</strong>.</p>
+      <div class="hero-badge">Unit 15 · Art of Counting · Lesson 2</div>
+    </div>
+    <div class="card">
+      <h2>🎯 Three Skills Today</h2>
+      <p><strong>1. Units Digit Cycles</strong> — What's the last digit of 3²⁰? Powers repeat in a cycle of 4. You don't need to compute 3²⁰.</p>
+      <p><strong>2. Staircase Counting</strong> — How many ways to climb stairs? This is the Fibonacci pattern. M1 Q19 went wrong here. Today we fix it.</p>
+      <p><strong>3. Consecutive Number Trick</strong> — Sum of consecutive numbers → the middle value is the key.</p>
+    </div>
+    <div class="nav-row"><span></span><button class="btn-nav btn-next" onclick="go(2)">Start ➜</button></div>
+  </div>
+
+  <!-- ══ S2 — Units Digit Cycles ══ -->
+  <div class="screen" id="s2">
+    <div class="card">
+      <h2>🔄 Skill 1: Units Digit Cycles</h2>
+      <p>When you multiply numbers, only the last digit matters for the answer's last digit. Powers of any number repeat with a cycle of at most 4.</p>
+      <div class="rule-box">
+        <strong>How to find the units digit of n^k:</strong><br>
+        Step 1: Find the units digit of n^1, n^2, n^3, n^4<br>
+        Step 2: The pattern repeats every 4 steps<br>
+        Step 3: Find k mod 4 → tells you which position in the cycle<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If remainder = 0 → use the 4th value in the cycle
+      </div>
+      <p><strong>Common cycles to memorise:</strong></p>
+      <table class="table-sm">
+        <tr><th>Base</th><th>^1</th><th>^2</th><th>^3</th><th>^4</th><th>Cycle</th></tr>
+        <tr><td>2</td><td>2</td><td>4</td><td>8</td><td>6</td><td>2,4,8,6</td></tr>
+        <tr><td>3</td><td>3</td><td>9</td><td>7</td><td>1</td><td>3,9,7,1</td></tr>
+        <tr><td>4</td><td>4</td><td>6</td><td>4</td><td>6</td><td>4,6,4,6</td></tr>
+        <tr><td>7</td><td>7</td><td>9</td><td>3</td><td>1</td><td>7,9,3,1</td></tr>
+        <tr><td>8</td><td>8</td><td>4</td><td>2</td><td>6</td><td>8,4,2,6</td></tr>
+        <tr><td>9</td><td>9</td><td>1</td><td>9</td><td>1</td><td>9,1,9,1</td></tr>
+      </table>
+      <div class="highlight">Example: Units digit of 2^10 → cycle is 2,4,8,6. 10 ÷ 4 = 2 rem 2 → position 2 → units digit = <strong>4</strong></div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(1)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(3)">Practice ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ S3 — Units Digit Practice ══ -->
+  <div class="screen" id="s3">
+    <div class="card">
+      <h2>✏️ Units Digit Practice</h2>
+
+      <h3>WU1. What is the units digit of 2^10?</h3>
+      <p>Cycle of 2: 2, 4, 8, 6. 10 ÷ 4 = 2 remainder 2 → position 2 in cycle.</p>
+      <div class="inp-row">Units digit = <input class="inp" id="wu1" inputmode="numeric" placeholder="0-9"></div>
+      <div class="feedback" id="fb-wu1"></div>
+      <div class="reveal" id="rev-wu1"><strong>Answer: 4</strong> — cycle: 2,4,8,6. Position 2 → 4</div>
+      <button class="btn" onclick="checkWU1()">Check ✓</button>
+
+      <h3 style="margin-top:20px">P1. What is the units digit of 4^7?</h3>
+      <p>Cycle of 4: 4, 6, 4, 6 ... 7 ÷ 4 = 1 remainder 3 → position 3 in cycle.</p>
+      <div class="inp-row">Units digit = <input class="inp" id="p1u" inputmode="numeric" placeholder="0-9"></div>
+      <div class="feedback" id="fb-p1u"></div>
+      <div class="reveal" id="rev-p1u"><strong>Answer: 4</strong> — cycle: 4,6,4,6. Remainder 3 → position 3 → 4</div>
+      <button class="btn" onclick="checkP1u()">Check ✓</button>
+
+      <h3 style="margin-top:20px">P2. What is the units digit of 9^11?</h3>
+      <p>Cycle of 9: 9, 1, 9, 1 ... 11 ÷ 4 = 2 remainder 3 → position 3 in cycle.</p>
+      <div class="inp-row">Units digit = <input class="inp" id="p2u" inputmode="numeric" placeholder="0-9"></div>
+      <div class="feedback" id="fb-p2u"></div>
+      <div class="reveal" id="rev-p2u"><strong>Answer: 9</strong> — cycle: 9,1,9,1. Remainder 3 → position 3 → 9</div>
+      <button class="btn" onclick="checkP2u()">Check ✓</button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(2)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(4)">Next Skill ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ S4 — Staircase Counting ══ -->
+  <div class="screen" id="s4">
+    <div class="card">
+      <h2>🪜 Skill 2: Staircase Counting</h2>
+      <p>In M1 Q19, you used 6! for a staircase problem. That was the wrong tool. Staircase counting uses the <strong>Fibonacci pattern</strong>.</p>
+      <div class="warn">❌ Wrong: 6! = 720 — that's permutations, not staircase paths.<br>✅ Right: Build a table step by step.</div>
+      <div class="rule-box">
+        <strong>Staircase Rule (1 or 2 steps at a time):</strong><br>
+        f(1) = 1 way &nbsp;&nbsp; f(2) = 2 ways<br>
+        f(n) = f(n−1) + f(n−2) &nbsp; ← add the previous two!<br><br>
+        <strong>Why?</strong> To reach step n, you came from step n−1 (1 jump) OR step n−2 (2 jump). So total ways = ways to reach n−1 + ways to reach n−2.
+      </div>
+      <div class="diagram">
+n =  1   2   3   4   5   6   7   8   9  10
+f =  1   2   3   5   8  13  21  34  55  89
+
+Build it: each number = sum of the two before it</div>
+      <div class="highlight">🦘 Remember: f(5) = 8 ways. f(6) = 13 ways. f(7) = 21 ways. These are common in competition problems!</div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(3)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(5)">Practice ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ S5 — Staircase Practice ══ -->
+  <div class="screen" id="s5">
+    <div class="card">
+      <h2>✏️ Staircase Practice</h2>
+
+      <h3>P3. A frog can jump 1 or 2 steps at a time. How many ways can it reach the 5th step?</h3>
+      <p>Build your table: f(1)=1, f(2)=2, f(3)=?, f(4)=?, f(5)=?</p>
+      <div class="inp-row">f(5) = <input class="inp" id="p3s" inputmode="numeric" placeholder="ways"> ways</div>
+      <div class="feedback" id="fb-p3s"></div>
+      <div class="reveal" id="rev-p3s"><strong>Answer: 8 ways</strong> — f(3)=3, f(4)=5, f(5)=8</div>
+      <button class="btn" onclick="checkP3s()">Check ✓</button>
+
+      <h3 style="margin-top:20px">P4. A rabbit reaches the 7th step, jumping 1 or 2 steps at a time. How many ways?</h3>
+      <div class="inp-row">f(7) = <input class="inp" id="p4s" inputmode="numeric" placeholder="ways"> ways</div>
+      <div class="feedback" id="fb-p4s"></div>
+      <div class="reveal" id="rev-p4s"><strong>Answer: 21 ways</strong> — f(5)=8, f(6)=13, f(7)=21</div>
+      <button class="btn" onclick="checkP4s()">Check ✓</button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(4)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(6)">Next Skill ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ S6 — Consecutive Numbers ══ -->
+  <div class="screen" id="s6">
+    <div class="card">
+      <h2>🔢 Skill 3: Consecutive Number Trick</h2>
+      <p>When a question says "sum of N consecutive numbers = S", the middle value is always S ÷ N.</p>
+      <div class="rule-box">
+        <strong>Middle Value Rule:</strong><br>
+        Sum of consecutive numbers ÷ count = middle value<br><br>
+        For odd count (3, 5, 7 ...): middle is literally the centre number<br>
+        Then list outward: middle−2, middle−1, <strong>middle</strong>, middle+1, middle+2
+      </div>
+      <div class="highlight">Example: Sum of 3 consecutive = 48 → middle = 48÷3 = 16 → numbers are 15, 16, 17</div>
+      <div class="highlight">Example: Sum of 5 consecutive even = 60 → middle = 60÷5 = 12 → numbers are 8, 10, 12, 14, 16</div>
+      <div class="warn">For consecutive ODD: spacing is 2. Middle = sum÷count (must be odd to work).</div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(5)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(7)">Practice ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ S7 — Consecutive Practice ══ -->
+  <div class="screen" id="s7">
+    <div class="card">
+      <h2>✏️ Consecutive Practice</h2>
+
+      <h3>P5. The sum of 3 consecutive numbers is 54. What is the largest number?</h3>
+      <div class="inp-row">Largest = <input class="inp" id="p5c" inputmode="numeric" placeholder="answer"></div>
+      <div class="feedback" id="fb-p5c"></div>
+      <div class="reveal" id="rev-p5c"><strong>Answer: 19</strong> — middle = 54÷3 = 18. Numbers: 17, 18, 19. Largest = 19.</div>
+      <button class="btn" onclick="checkP5c()">Check ✓</button>
+
+      <h3 style="margin-top:20px">P6. The sum of 5 consecutive even numbers is 60. What is the smallest number?</h3>
+      <p>Hint: spacing for even is 2. Middle = 60÷5 = 12.</p>
+      <div class="inp-row">Smallest = <input class="inp" id="p6c" inputmode="numeric" placeholder="answer"></div>
+      <div class="feedback" id="fb-p6c"></div>
+      <div class="reveal" id="rev-p6c"><strong>Answer: 8</strong> — middle = 12. Numbers: 8, 10, 12, 14, 16. Smallest = 8.</div>
+      <button class="btn" onclick="checkP6c()">Check ✓</button>
+
+      <h3 style="margin-top:20px">P7. The sum of 7 consecutive numbers is 98. What is the middle number?</h3>
+      <div class="inp-row">Middle = <input class="inp" id="p7c" inputmode="numeric" placeholder="answer"></div>
+      <div class="feedback" id="fb-p7c"></div>
+      <div class="reveal" id="rev-p7c"><strong>Answer: 14</strong> — middle = 98÷7 = 14.</div>
+      <button class="btn" onclick="checkP7c()">Check ✓</button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="go(6)">← Back</button>
+      <button class="btn-nav btn-next" onclick="go(8)">Finish ➜</button>
+    </div>
+  </div>
+
+  <!-- ══ S8 — Summary ══ -->
+  <div class="screen" id="s8">
+    <div class="card">
+      <h2>🏆 Three Kangaroo Tools — Locked In!</h2>
+      <div class="rule-box">
+        <strong>1. Units Digit Cycles:</strong><br>
+        n^k → find cycle (4 values), use k mod 4 to pick position (rem 0 → last)<br><br>
+        <strong>2. Staircase (1 or 2 steps):</strong><br>
+        f(n) = f(n−1) + f(n−2). Start: f(1)=1, f(2)=2. Never use factorial!<br><br>
+        <strong>3. Consecutive Numbers:</strong><br>
+        Middle = Sum ÷ Count. List outward from middle.
+      </div>
+      <div class="highlight">🦘 These three patterns come up in EVERY Kangaroo paper. Once you see them, they're fast marks.</div>
+      <div style="margin-top:20px">
+        <a href="index.html" style="text-decoration:none"><button class="btn" style="background:linear-gradient(135deg,#4527A0,#6a1b9a);font-size:15px;padding:12px 28px">🏠 Back to Hub</button></a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var cur=1;
+function go(n){
+  document.getElementById('s'+cur).classList.remove('active');
+  document.getElementById('d'+cur).classList.remove('active');
+  document.getElementById('d'+cur).classList.add('done');
+  cur=n;
+  document.getElementById('s'+cur).classList.add('active');
+  document.getElementById('d'+cur).classList.add('active');
+  window.scrollTo(0,0);
+}
+function chk(inputId,correct,revealId,fbId){
+  var val=parseInt(document.getElementById(inputId).value.trim(),10);
+  var fb=document.getElementById(fbId);
+  if(val===correct){fb.className='feedback ok show';fb.textContent='✅ Correct!';document.getElementById(revealId).classList.add('show');}
+  else{fb.className='feedback no show';fb.textContent='❌ Not quite — try again!';}
+}
+function checkWU1(){chk('wu1',4,'rev-wu1','fb-wu1');}
+function checkP1u(){chk('p1u',4,'rev-p1u','fb-p1u');}
+function checkP2u(){chk('p2u',9,'rev-p2u','fb-p2u');}
+function checkP3s(){chk('p3s',8,'rev-p3s','fb-p3s');}
+function checkP4s(){chk('p4s',21,'rev-p4s','fb-p4s');}
+function checkP5c(){chk('p5c',19,'rev-p5c','fb-p5c');}
+function checkP6c(){chk('p6c',8,'rev-p6c','fb-p6c');}
+function checkP7c(){chk('p7c',14,'rev-p7c','fb-p7c');}
+</script>
+</body>
+</html>

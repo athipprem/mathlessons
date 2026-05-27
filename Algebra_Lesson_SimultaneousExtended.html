@@ -121,10 +121,11 @@ h3{font-size:16px;color:#6a1b9a;margin-bottom:10px;font-weight:600}
     <div class="pq">
       <div class="pq-title">Practice 1</div>
       <div class="pq-text">A rectangle has a perimeter of <strong>52 cm</strong>. The length is <strong>6 cm more</strong> than the width. Find the <strong>length</strong>.</div>
-      <div class="input-row">L + W = 52 ÷ 2 = <input class="inp" id="p1lw" placeholder="?"></div>
-      <div class="input-row">L = W + 6, so 2W + 6 = <input class="inp" id="p1eq" placeholder="?"> → W = <input class="inp" id="p1w" placeholder="?"></div>
-      <div class="input-row">Length = <input class="inp" id="p1l" placeholder="?"> cm</div>
-      <button class="btn btn-sec" onclick="revealP1()">Check</button>
+      <div class="input-row">L + W = 52 ÷ 2 = <input class="inp" inputmode="numeric" id="p1lw" placeholder="?"></div>
+      <div class="input-row">L = W + 6, so 2W + 6 = <input class="inp" inputmode="numeric" id="p1eq" placeholder="?"> → W = <input class="inp" inputmode="numeric" id="p1w" placeholder="?"></div>
+      <div class="input-row">Length = <input class="inp" inputmode="numeric" id="p1l" placeholder="?"> cm</div>
+      <button class="btn btn-sec" onclick="checkP1()">Check</button>
+      <div class="feedback" id="fb-p1"></div>
       <div class="reveal" id="rev-p1">L+W=26. 2W+6=26 → W=10. L=10+6=<strong>16 cm</strong> ✅ &nbsp; Check: 2(16+10)=52 ✓</div>
     </div>
   </div>
@@ -162,9 +163,10 @@ h3{font-size:16px;color:#6a1b9a;margin-bottom:10px;font-weight:600}
     <div class="pq">
       <div class="pq-title">Practice 2</div>
       <div class="pq-text">A juice costs <strong>3 times</strong> as much as a biscuit. Together they cost <strong>$2.80</strong>. Find the cost of the <strong>juice</strong>.</div>
-      <div class="input-row">4 × biscuit = $2.80 → biscuit = <input class="inp" id="p2b" placeholder="$?"></div>
-      <div class="input-row">Juice = 3 × biscuit = <input class="inp" id="p2j" placeholder="$?"></div>
-      <button class="btn btn-sec" onclick="revealP2()">Check</button>
+      <div class="input-row">4 × biscuit = $2.80 → biscuit = <input class="inp" inputmode="numeric" id="p2b" placeholder="$?"></div>
+      <div class="input-row">Juice = 3 × biscuit = <input class="inp" inputmode="numeric" id="p2j" placeholder="$?"></div>
+      <button class="btn btn-sec" onclick="checkP2()">Check</button>
+      <div class="feedback" id="fb-p2"></div>
       <div class="reveal" id="rev-p2">Biscuit = $2.80÷4 = $0.70. Juice = 3×$0.70 = <strong>$2.10</strong> ✅ (asked for juice, not biscuit)</div>
     </div>
   </div>
@@ -199,9 +201,10 @@ h3{font-size:16px;color:#6a1b9a;margin-bottom:10px;font-weight:600}
     <div class="pq">
       <div class="pq-title">Practice 3</div>
       <div class="pq-text">A jar has <strong>20 coins</strong> — only 10¢ and 50¢ coins. Total value is <strong>$5.20</strong>. How many <strong>50¢ coins</strong> are there?</div>
-      <div class="input-row">Coins: a + b = 20 &nbsp;·&nbsp; Value: 10a + 50b = <input class="inp" id="p3val" placeholder="? ¢"></div>
-      <div class="input-row">Substitute: 10(20−b) + 50b = 520 → <input class="inp" id="p3mid" placeholder="?">b = <input class="inp" id="p3rhs" placeholder="?"> → b = <input class="inp" id="p3b" placeholder="?"></div>
-      <button class="btn btn-sec" onclick="revealP3()">Check</button>
+      <div class="input-row">Coins: a + b = 20 &nbsp;·&nbsp; Value: 10a + 50b = <input class="inp" inputmode="numeric" id="p3val" placeholder="? ¢"></div>
+      <div class="input-row">Substitute: 10(20−b) + 50b = 520 → <input class="inp" inputmode="numeric" id="p3mid" placeholder="?">b = <input class="inp" inputmode="numeric" id="p3rhs" placeholder="?"> → b = <input class="inp" inputmode="numeric" id="p3b" placeholder="?"></div>
+      <button class="btn btn-sec" onclick="checkP3()">Check</button>
+      <div class="feedback" id="fb-p3"></div>
       <div class="reveal" id="rev-p3">520 cents. 200 + 40b = 520 → 40b = 320 → b = <strong>8 coins of 50¢</strong> ✅ &nbsp; Check: 12×10+8×50=120+400=520¢ ✓</div>
     </div>
   </div>
@@ -235,9 +238,10 @@ h3{font-size:16px;color:#6a1b9a;margin-bottom:10px;font-weight:600}
       <div class="pq-title">Practice 4</div>
       <div class="pq-text">A car park has <strong>24 vehicles</strong> — motorbikes (2 wheels) and trucks (6 wheels). Total <strong>80 wheels</strong>. How many <strong>motorbikes</strong>?</div>
       <div class="input-row">m + t = 24 &nbsp;·&nbsp; 2m + 6t = 80</div>
-      <div class="input-row">2(24−t) + 6t = 80 → 48 + <input class="inp" id="p4mid" placeholder="?">t = 80 → t = <input class="inp" id="p4t" placeholder="?"></div>
-      <div class="input-row">Motorbikes = 24 − t = <input class="inp" id="p4m" placeholder="?"></div>
-      <button class="btn btn-sec" onclick="revealP4()">Check</button>
+      <div class="input-row">2(24−t) + 6t = 80 → 48 + <input class="inp" inputmode="numeric" id="p4mid" placeholder="?">t = 80 → t = <input class="inp" inputmode="numeric" id="p4t" placeholder="?"></div>
+      <div class="input-row">Motorbikes = 24 − t = <input class="inp" inputmode="numeric" id="p4m" placeholder="?"></div>
+      <button class="btn btn-sec" onclick="checkP4()">Check</button>
+      <div class="feedback" id="fb-p4"></div>
       <div class="reveal" id="rev-p4">48 + 4t = 80 → 4t = 32 → t = 8 trucks. Motorbikes = 24−8 = <strong>16</strong> ✅ &nbsp; Check: 32+48=80 ✓</div>
     </div>
   </div>
@@ -270,9 +274,10 @@ h3{font-size:16px;color:#6a1b9a;margin-bottom:10px;font-weight:600}
     <div class="pq">
       <div class="pq-title">Practice 5 ★</div>
       <div class="pq-text">Three children collect stamps. Kai collects <strong>4 times</strong> as many as Leo. Mia collects <strong>Leo + 12</strong>. Together they collect <strong>72</strong> stamps. How many does <strong>Kai</strong> collect?</div>
-      <div class="input-row">Leo + 4×Leo + Leo+12 = 72 → <input class="inp" id="p5eq" placeholder="?">L + 12 = 72</div>
-      <div class="input-row">Leo = <input class="inp" id="p5l" placeholder="?"> &nbsp;·&nbsp; Kai = 4 × Leo = <input class="inp" id="p5k" placeholder="?"></div>
-      <button class="btn btn-sec" onclick="revealP5()">Check</button>
+      <div class="input-row">Leo + 4×Leo + Leo+12 = 72 → <input class="inp" inputmode="numeric" id="p5eq" placeholder="?">L + 12 = 72</div>
+      <div class="input-row">Leo = <input class="inp" inputmode="numeric" id="p5l" placeholder="?"> &nbsp;·&nbsp; Kai = 4 × Leo = <input class="inp" inputmode="numeric" id="p5k" placeholder="?"></div>
+      <button class="btn btn-sec" onclick="checkP5()">Check</button>
+      <div class="feedback" id="fb-p5"></div>
       <div class="reveal" id="rev-p5">6L+12=72 → 6L=60 → L=10. Kai = 4×10 = <strong>40 stamps</strong> ✅ &nbsp; Check: 10+40+22=72 ✓</div>
     </div>
   </div>
@@ -293,16 +298,18 @@ h3{font-size:16px;color:#6a1b9a;margin-bottom:10px;font-weight:600}
     <div class="pq">
       <div class="pq-title">Drill A — Perimeter</div>
       <div class="pq-text">A rectangle has perimeter <strong>62 cm</strong>. Length is <strong>9 cm more</strong> than width. Find the <strong>width</strong>.</div>
-      <div class="input-row">L+W = <input class="inp" id="da-lw" placeholder="?"> → W = <input class="inp" id="da-w" placeholder="?"> cm</div>
-      <button class="btn btn-sec" onclick="revealDA()">Check</button>
+      <div class="input-row">L+W = <input class="inp" inputmode="numeric" id="da-lw" placeholder="?"> → W = <input class="inp" inputmode="numeric" id="da-w" placeholder="?"> cm</div>
+      <button class="btn btn-sec" onclick="checkDA()">Check</button>
+      <div class="feedback" id="fb-da"></div>
       <div class="reveal" id="rev-da">L+W=31. L=W+9 → 2W+9=31 → W=<strong>11 cm</strong> ✅ L=20 cm. Check: 2(20+11)=62 ✓</div>
     </div>
 
     <div class="pq">
       <div class="pq-title">Drill B — Coins</div>
       <div class="pq-text">A wallet has <strong>18 notes</strong> — $2 and $5 notes. Total value <strong>$60</strong>. How many <strong>$5 notes</strong>?</div>
-      <div class="input-row">2a + 5b = 60, a+b=18 → b = <input class="inp" id="db-b" placeholder="?"> notes</div>
-      <button class="btn btn-sec" onclick="revealDB()">Check</button>
+      <div class="input-row">2a + 5b = 60, a+b=18 → b = <input class="inp" inputmode="numeric" id="db-b" placeholder="?"> notes</div>
+      <button class="btn btn-sec" onclick="checkDB()">Check</button>
+      <div class="feedback" id="fb-db"></div>
       <div class="reveal" id="rev-db">2(18−b)+5b=60 → 36+3b=60 → 3b=24 → b=<strong>8 notes of $5</strong> ✅ Check: 10×2+8×5=20+40=60 ✓</div>
     </div>
   </div>
@@ -324,16 +331,18 @@ h3{font-size:16px;color:#6a1b9a;margin-bottom:10px;font-weight:600}
     <div class="pq">
       <div class="pq-title">Check 1</div>
       <div class="pq-text">A bag has red and blue marbles. Red = <strong>3 × blue</strong>. Together <strong>48 marbles</strong>. The question asks: how many <strong>blue</strong> marbles?</div>
-      <div class="input-row">Blue = <input class="inp" id="c1b" placeholder="?"> &nbsp; (NOT the red answer!)</div>
-      <button class="btn btn-sec" onclick="revealC1()">Check</button>
+      <div class="input-row">Blue = <input class="inp" inputmode="numeric" id="c1b" placeholder="?"> &nbsp; (NOT the red answer!)</div>
+      <button class="btn btn-sec" onclick="checkC1()">Check</button>
+      <div class="feedback" id="fb-c1"></div>
       <div class="reveal" id="rev-c1">3b+b=48 → 4b=48 → b=<strong>12 blue marbles</strong> ✅ Red=36. Question asked for blue — answer is 12, not 36.</div>
     </div>
 
     <div class="pq">
       <div class="pq-title">Check 2</div>
       <div class="pq-text">A cinema sold adult and child tickets. Adults: $8, Children: $5. Sold <strong>30 tickets</strong> for total <strong>$195</strong>. How many <strong>adult</strong> tickets?</div>
-      <div class="input-row">8a + 5(30−a) = 195 → 3a = <input class="inp" id="c2a" placeholder="?"> → adults = <input class="inp" id="c2ans" placeholder="?"></div>
-      <button class="btn btn-sec" onclick="revealC2()">Check</button>
+      <div class="input-row">8a + 5(30−a) = 195 → 3a = <input class="inp" inputmode="numeric" id="c2a" placeholder="?"> → adults = <input class="inp" inputmode="numeric" id="c2ans" placeholder="?"></div>
+      <button class="btn btn-sec" onclick="checkC2()">Check</button>
+      <div class="feedback" id="fb-c2"></div>
       <div class="reveal" id="rev-c2">8a+150−5a=195 → 3a=45 → a=<strong>15 adult tickets</strong> ✅ Child=15. Question asked for adult — answer is 15.</div>
     </div>
   </div>
@@ -381,7 +390,7 @@ h3{font-size:16px;color:#6a1b9a;margin-bottom:10px;font-weight:600}
     <button class="btn btn-sec" onclick="go(8)">← Back</button>
     <div style="display:flex;gap:8px;align-items:center">
       <span class="screen-counter">9 / 9</span>
-      <button class="btn" onclick="alert('Lesson complete! 🎉 5 new SimEq types in the toolkit.')">Finish ✓</button>
+      <a href="index.html" style="text-decoration:none"><button class="btn" style="background:linear-gradient(135deg,#6a1b9a,#4527A0)">🏠 Back to Hub</button></a>
     </div>
   </div>
 </div>
@@ -394,16 +403,68 @@ function go(n) {
   document.getElementById('prog').style.width = (n/TOTAL*100)+'%';
   window.scrollTo(0,0);
 }
-function reveal(id){ document.getElementById(id).classList.toggle('show'); }
-function revealP1(){ reveal('rev-p1'); }
-function revealP2(){ reveal('rev-p2'); }
-function revealP3(){ reveal('rev-p3'); }
-function revealP4(){ reveal('rev-p4'); }
-function revealP5(){ reveal('rev-p5'); }
-function revealDA(){ reveal('rev-da'); }
-function revealDB(){ reveal('rev-db'); }
-function revealC1(){ reveal('rev-c1'); }
-function revealC2(){ reveal('rev-c2'); }
+function chk(inputId, correct, revealId, fbId) {
+  var raw = document.getElementById(inputId).value.trim().replace(/[$,]/g,'');
+  var val = parseInt(raw, 10);
+  var fb  = document.getElementById(fbId);
+  if (val === correct) {
+    fb.className = 'feedback ok show';
+    fb.textContent = '✅ Correct!';
+    document.getElementById(revealId).classList.add('show');
+  } else {
+    fb.className = 'feedback no show';
+    fb.textContent = '❌ Not quite — try again!';
+  }
+}
+function chkDec(inputId, correct, revealId, fbId) {
+  var raw = document.getElementById(inputId).value.trim().replace(/[$,]/g,'');
+  var val = Math.round(parseFloat(raw) * 100);
+  var exp = Math.round(correct * 100);
+  var fb  = document.getElementById(fbId);
+  if (val === exp) {
+    fb.className = 'feedback ok show';
+    fb.textContent = '✅ Correct!';
+    document.getElementById(revealId).classList.add('show');
+  } else {
+    fb.className = 'feedback no show';
+    fb.textContent = '❌ Not quite — try again!';
+  }
+}
+function chk2(id1, ans1, id2, ans2, revealId, fbId) {
+  var v1 = parseInt(document.getElementById(id1).value.trim(), 10);
+  var v2 = parseInt(document.getElementById(id2).value.trim(), 10);
+  var fb  = document.getElementById(fbId);
+  if (v1 === ans1 && v2 === ans2) {
+    fb.className = 'feedback ok show';
+    fb.textContent = '✅ Correct — both right!';
+    document.getElementById(revealId).classList.add('show');
+  } else {
+    fb.className = 'feedback no show';
+    fb.textContent = '❌ Not quite — try again!';
+  }
+}
+function chkType(typeId, typeAns, numId, numAns, revealId, fbId) {
+  var t  = document.getElementById(typeId).value.trim().toLowerCase();
+  var v  = parseInt(document.getElementById(numId).value.trim(), 10);
+  var fb = document.getElementById(fbId);
+  if (t === typeAns.toLowerCase() && v === numAns) {
+    fb.className = 'feedback ok show';
+    fb.textContent = '✅ Correct — type and answer both right!';
+    document.getElementById(revealId).classList.add('show');
+  } else {
+    fb.className = 'feedback no show';
+    fb.textContent = '❌ Not quite — try again!';
+  }
+}
+function checkP1()  { chk('p1l',    16,   'rev-p1',  'fb-p1');  }
+function checkP2()  { chkDec('p2j', 2.10, 'rev-p2',  'fb-p2');  }
+function checkP3()  { chk('p3b',    8,    'rev-p3',  'fb-p3');  }
+function checkP4()  { chk('p4m',    16,   'rev-p4',  'fb-p4');  }
+function checkP5()  { chk('p5k',    40,   'rev-p5',  'fb-p5');  }
+function checkDA()  { chk('da-w',   11,   'rev-da',  'fb-da');  }
+function checkDB()  { chk('db-b',   8,    'rev-db',  'fb-db');  }
+function checkC1()  { chk('c1b',    12,   'rev-c1',  'fb-c1');  }
+function checkC2()  { chk('c2ans',  15,   'rev-c2',  'fb-c2');  }
 </script>
 </body>
 </html>

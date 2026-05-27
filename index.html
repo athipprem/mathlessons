@@ -179,7 +179,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <span id="topbar-sub">&nbsp;&mdash;&nbsp;Grade 4 &nbsp;|&nbsp; ISA 2027 Training &nbsp;|&nbsp; Coach: Chusaki</span>
       </div>
       <div class="topbar-right">
-        <span class="tb-badge tb-green" id="idx-topbar-unit-badge">Unit 13 — Lessons In Progress</span>
+        <span class="tb-badge tb-green" id="idx-topbar-unit-badge">Unit 15 — Lessons In Progress</span>
         <span class="tb-badge tb-orange">&#8987; <span id="topbar-days">...</span> days to ISA 2027</span>
       </div>
     </div>
@@ -216,35 +216,35 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <!-- JS-rendered last unit pattern box (reads from prem_data.js) -->
         <div id="idx-unit-pattern" style="margin-bottom:12px"></div>
         <div class="grid-3">
-          <!-- U14 Lesson 1 -->
-          <div class="lesson-card" style="border-top-color:#006064" data-unit="14" data-topic="geometry">
-            <div class="lc-unit">Geometry &middot; Unit 14</div>
-            <div class="lc-title">Path &amp; Frame &mdash; Visual Draw-First Method</div>
-            <div class="lc-desc">Draw-it-first approach targeting U13 errors: inner paths, outer paths, frame traps, square paths, cost twists.</div>
+          <!-- U15 Lesson 1: Geometry Frame Trap -->
+          <div class="lesson-card geometry" data-unit="15" data-topic="geometry">
+            <div class="lc-unit">Geometry &middot; Unit 15 &middot; Lesson 1</div>
+            <div class="lc-title">Frame Trap Fix &mdash; Outer Dims Given</div>
+            <div class="lc-desc">Conquering the 4-consecutive-miss frame trap: outer dims ARE the big box — always subtract inward. 6 drills: rectangles, squares, cost variants. Zero inner-anchor confusion.</div>
             <div class="lc-badges">
-              <span class="badge" style="background:#e0f2f1;color:#004D40;font-weight:700">&#128214; Lesson Ready</span>
+              <span class="badge badge-done">&#10003; Lesson Done</span>
             </div>
-            <a class="btn-start" style="background:linear-gradient(135deg,#006064,#00838F)" href="Geometry_Lesson_PathFrame_VisualMethod.html">Open Lesson</a>
+            <a class="btn-start" style="background:linear-gradient(135deg,#004D40,#00695C)" href="Geometry_Lesson_FrameTrap.html">Open Lesson</a>
           </div>
-          <!-- U14 Lesson 2 -->
-          <div class="lesson-card" style="border-top-color:#1565C0" data-unit="14" data-topic="number">
-            <div class="lc-unit">Number Theory &middot; Unit 14</div>
-            <div class="lc-title">HCF Applied &mdash; Real-World Grouping &amp; Cutting</div>
-            <div class="lc-desc">Keyword recognition for HCF word problems: cutting ropes, identical groups, largest tiles, equal bags, three-number HCF.</div>
+          <!-- U15 Lesson 2: Art of Counting Kangaroo Instinct -->
+          <div class="lesson-card counting" data-unit="15" data-topic="counting">
+            <div class="lc-unit">Art of Counting &middot; Unit 15 &middot; Lesson 2</div>
+            <div class="lc-title">Kangaroo Instinct &mdash; Units Digit &amp; Staircases</div>
+            <div class="lc-desc">Three Kangaroo-style tools: units digit cycles (period-4 trick), staircase counting (Fibonacci — never factorial!), and consecutive number middle trick.</div>
             <div class="lc-badges">
-              <span class="badge" style="background:#e3f2fd;color:#0D47A1;font-weight:700">&#128214; Lesson Ready</span>
+              <span class="badge badge-done">&#10003; Lesson Done</span>
             </div>
-            <a class="btn-start" style="background:linear-gradient(135deg,#1565C0,#0D47A1)" href="NumberTheory_Lesson_HCFApplied.html">Open Lesson</a>
+            <a class="btn-start" style="background:linear-gradient(135deg,#4527A0,#6a1b9a)" href="Counting_Lesson_KangarooInstinct.html">Open Lesson</a>
           </div>
-          <!-- U14 Lesson 3 -->
-          <div class="lesson-card" style="border-top-color:#6a1b9a" data-unit="14" data-topic="algebra">
-            <div class="lc-unit">Algebra &middot; Unit 14</div>
-            <div class="lc-title">Simultaneous Equations Extended</div>
-            <div class="lc-desc">New SimEq types: perimeter &amp; dimensions, coin problems, vehicle/wheel, three-person. Re-read drill targeting U13 Q13 misread.</div>
+          <!-- U15 Lesson 3: HCF Three-Item -->
+          <div class="lesson-card number-theory" data-unit="15" data-topic="number-theory">
+            <div class="lc-unit">Number Theory &middot; Unit 15 &middot; Lesson 3</div>
+            <div class="lc-title">HCF Three-Item Applied &mdash; Never Give Up on &#9733;</div>
+            <div class="lc-desc">Extending HCF to three numbers: prime-factorise all three, keep only primes common to ALL, take lowest power, multiply. Targets U14 Q9&#9733; (blank with ?).</div>
             <div class="lc-badges">
-              <span class="badge" style="background:#ede7f6;color:#4527A0;font-weight:700">&#128214; Lesson Ready</span>
+              <span class="badge badge-done">&#10003; Lesson Done</span>
             </div>
-            <a class="btn-start" style="background:linear-gradient(135deg,#6a1b9a,#4527A0)" href="Algebra_Lesson_SimultaneousExtended.html">Open Lesson</a>
+            <a class="btn-start" style="background:linear-gradient(135deg,#0D47A1,#1565C0)" href="NumberTheory_Lesson_HCFThreeItem.html">Open Lesson</a>
           </div>
         </div>
       </div>
@@ -344,6 +344,26 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         </div>
         <div class="sec-div">Number Theory</div>
         <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card" style="border-top-color:#004D40" data-unit="14" data-topic="number">
+            <div class="lc-unit" style="color:#004D40">Number Theory &middot; Unit 14</div>
+            <div class="lc-title">HCF Applied &mdash; Real-World Grouping &amp; Cutting</div>
+            <div class="lc-desc">4/5 &#10003;. Q6 rope &#10003; 12m. Q7 Q8 Q10 &#10003;. Q9&#9733; &#10007; blank with ? (three-item HCF bags &mdash; attempted, gave up). Keyword recognition mostly solid.</div>
+            <div class="lc-badges">
+              <span class="badge" style="background:#e0f2f1;color:#004D40">4/5 &#10003;</span>
+              <span class="badge" style="background:#fff3e0;color:#e65100">Q6 blank &#10007;</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#004D40,#00695C)" href="NumberTheory_Lesson_HCFApplied.html">Review</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#1565C0" data-unit="13" data-topic="number">
+            <div class="lc-unit" style="color:#1565C0">Number Theory &middot; Unit 13</div>
+            <div class="lc-title">LCM Scheduling</div>
+            <div class="lc-desc">4/5 &#10003;. Q6 Q8 Q9 Q10 all correct. Q7 &#10007; three-bus: wrote 14:00 instead of 8:00 AM. Two-event and four-event LCM solid.</div>
+            <div class="lc-badges">
+              <span class="badge" style="background:#f0fff4;color:#276749">4/5 &#10003;</span>
+              <span class="badge" style="background:#fff5e6;color:#c05621">Q7 time calc &#10007;</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#1565C0,#0D47A1)" href="NumberTheory_Lesson_LCMScheduling.html">Review</a>
+          </div>
           <div class="lesson-card number" data-unit="12" data-topic="number">
             <div class="lc-unit">Number Theory &middot; Unit 12</div>
             <div class="lc-title">HCF &amp; LCM</div>
@@ -453,6 +473,15 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         </div>
         <div class="sec-div">Algebra</div>
         <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card" style="border-top-color:#4a148c" data-unit="14" data-topic="algebra">
+            <div class="lc-unit" style="color:#4a148c">Algebra &middot; Unit 14</div>
+            <div class="lc-title">Simultaneous Equations Extended</div>
+            <div class="lc-desc">5/5 &#127775; PERFECT. Perimeter, cost, coins, vehicle/wheel, three-person chain. Q15&#9733;&#9733; Ben=40 &#10003;. SimEq toolkit fully extended.</div>
+            <div class="lc-badges">
+              <span class="badge" style="background:#ede7f6;color:#4a148c;font-weight:700">5/5 &#127775; PERFECT</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#4a148c,#6a1b9a)" href="Algebra_Lesson_SimultaneousExtended.html">Review</a>
+          </div>
           <div class="lesson-card" style="border-top-color:#6a1b9a" data-unit="13" data-topic="algebra">
             <div class="lc-unit" style="color:#6a1b9a">Algebra &middot; Unit 13</div>
             <div class="lc-title">Simultaneous Equations Intro</div>
@@ -466,6 +495,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         </div>
         <div class="sec-div">Geometry</div>
         <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card" style="border-top-color:#004D40" data-unit="14" data-topic="geometry">
+            <div class="lc-unit" style="color:#004D40">Geometry &middot; Unit 14</div>
+            <div class="lc-title">Path &amp; Frame &mdash; Visual Draw-First Method</div>
+            <div class="lc-desc">4/5 &#10003; breakthrough. Visual method resolved inner/outer path. Q3 frame &#10007; (outer dims trap persists &mdash; 4th unit). All other types now solid.</div>
+            <div class="lc-badges">
+              <span class="badge" style="background:#e0f2f1;color:#004D40;font-weight:700">4/5 &#10003; Visual Method</span>
+              <span class="badge" style="background:#fff3e0;color:#e65100">Q3 Frame &#10007; still</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#004D40,#00695C)" href="Geometry_Lesson_PathFrame_VisualMethod.html">Review</a>
+          </div>
           <div class="lesson-card" style="border-top-color:#006064" data-unit="13" data-topic="geometry">
             <div class="lc-unit" style="color:#006064">Geometry &middot; Unit 13</div>
             <div class="lc-title">Path &amp; Frame &mdash; The &times;2 Drill</div>
@@ -500,6 +539,38 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         </div>
         <!-- VIEW: BY UNIT -->
         <div id="done-by-unit" style="display:none">
+        <div class="sec-div">Unit 14 &mdash; 13/15 (87%) &#11014; Path &amp; Frame Visual &middot; HCF Applied &middot; SimEq Extended</div>
+        <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card" style="border-top-color:#004D40" data-unit="14" data-topic="geometry">
+            <div class="lc-unit" style="color:#004D40">Geometry &middot; Unit 14</div>
+            <div class="lc-title">Path &amp; Frame &mdash; Visual Draw-First Method</div>
+            <div class="lc-desc">4/5 &#10003;. Draw-it-first method resolved inner/outer path types. Q3 frame (given outer) still &#10007; — 4th consecutive miss of this variant. Q4&#9733; Q5&#9733; both correct.</div>
+            <div class="lc-badges">
+              <span class="badge" style="background:#e0f2f1;color:#004D40;font-weight:700">4/5 &#10003; Visual Method</span>
+              <span class="badge" style="background:#fff3e0;color:#e65100">Q3 Frame Trap &#10007;</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#004D40,#00695C)" href="Geometry_Lesson_PathFrame_VisualMethod.html">Review</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#004D40" data-unit="14" data-topic="number">
+            <div class="lc-unit" style="color:#004D40">Number Theory &middot; Unit 14</div>
+            <div class="lc-title">HCF Applied &mdash; Real-World Grouping &amp; Cutting</div>
+            <div class="lc-desc">4/5 &#10003;. Q6 rope &#10003; 12m. Q7 Q8 Q10 &#10003;. Q9&#9733; &#10007; blank with ? &mdash; three-item HCF bags attempted but abandoned (correct: 18 bags). Grouping, tiles, sets all solid.</div>
+            <div class="lc-badges">
+              <span class="badge" style="background:#e0f2f1;color:#004D40">4/5 &#10003;</span>
+              <span class="badge" style="background:#fff3e0;color:#e65100">Q6 blank &#10007;</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#004D40,#00695C)" href="NumberTheory_Lesson_HCFApplied.html">Review</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#4a148c" data-unit="14" data-topic="algebra">
+            <div class="lc-unit" style="color:#4a148c">Algebra &middot; Unit 14</div>
+            <div class="lc-title">Simultaneous Equations Extended</div>
+            <div class="lc-desc">5/5 &#127775; PERFECT. All extended types correct: perimeter, cost, coins, vehicle/wheel, three-person. Q15&#9733;&#9733; Ben=40 &#10003;. SimEq now fully toolkit-ready.</div>
+            <div class="lc-badges">
+              <span class="badge" style="background:#ede7f6;color:#4a148c;font-weight:700">5/5 &#127775; PERFECT</span>
+            </div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#4a148c,#6a1b9a)" href="Algebra_Lesson_SimultaneousExtended.html">Review</a>
+          </div>
+        </div>
         <div class="sec-div">Unit 13 &mdash; 9/15 (60%) &#11015; Path &amp; Frame &middot; LCM Scheduling &middot; SimEq</div>
         <div class="grid-3" style="margin-bottom:20px">
           <div class="lesson-card" style="border-top-color:#006064" data-unit="13" data-topic="geometry">
