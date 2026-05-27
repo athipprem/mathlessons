@@ -106,25 +106,100 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1a1a2e;mi
   <div class="screen" id="s2">
     <div class="card">
       <h2>🔄 Skill 1: Units Digit Cycles</h2>
-      <p>When you multiply numbers, only the last digit matters for the answer's last digit. Powers of any number repeat with a cycle of at most 4.</p>
-      <div class="rule-box">
-        <strong>How to find the units digit of n^k:</strong><br>
-        Step 1: Find the units digit of n^1, n^2, n^3, n^4<br>
-        Step 2: The pattern repeats every 4 steps<br>
-        Step 3: Find k mod 4 → tells you which position in the cycle<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If remainder = 0 → use the 4th value in the cycle
+      <!-- WHY section -->
+      <div style="background:#ede7f6;border-radius:10px;padding:14px 16px;margin-bottom:16px;border-left:4px solid #4527A0">
+        <div style="font-size:12px;font-weight:700;color:#4527A0;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px">💡 Why do we need this?</div>
+        <div style="font-size:14px;line-height:1.7;margin-bottom:8px">Competition problems ask things like: <strong>"What is the units digit of 3²⁰?"</strong><br>You cannot compute 3²⁰ — it is a 10-digit number. But you only need the <em>last digit</em> of the answer.</div>
+        <div style="font-size:14px;line-height:1.7">The trick: when multiplying, the last digit of the answer depends <strong>only on the last digits</strong> of the numbers you multiply. So you only need to track that one digit.</div>
+        <div style="background:#fff;border-radius:8px;padding:8px 12px;margin-top:8px;font-size:13px;color:#4527A0">Example: 27 × 3 = 81. Units digit of 81 = <strong>1</strong>. That's the same as units digit of 7 × 3 = 21 → last digit <strong>1</strong>. ✓</div>
       </div>
-      <p><strong>Common cycles to memorise:</strong></p>
-      <table class="table-sm">
-        <tr><th>Base</th><th>^1</th><th>^2</th><th>^3</th><th>^4</th><th>Cycle</th></tr>
-        <tr><td>2</td><td>2</td><td>4</td><td>8</td><td>6</td><td>2,4,8,6</td></tr>
-        <tr><td>3</td><td>3</td><td>9</td><td>7</td><td>1</td><td>3,9,7,1</td></tr>
-        <tr><td>4</td><td>4</td><td>6</td><td>4</td><td>6</td><td>4,6,4,6</td></tr>
-        <tr><td>7</td><td>7</td><td>9</td><td>3</td><td>1</td><td>7,9,3,1</td></tr>
-        <tr><td>8</td><td>8</td><td>4</td><td>2</td><td>6</td><td>8,4,2,6</td></tr>
-        <tr><td>9</td><td>9</td><td>1</td><td>9</td><td>1</td><td>9,1,9,1</td></tr>
-      </table>
-      <div class="highlight">Example: Units digit of 2^10 → cycle is 2,4,8,6. 10 ÷ 4 = 2 rem 2 → position 2 → units digit = <strong>4</strong></div>
+
+      <!-- BUILDING THE CYCLE for base 3 -->
+      <div style="font-size:14px;font-weight:700;color:#4527A0;margin-bottom:10px">🔨 Step 1 — Build the cycle for base 3 (full multiplication):</div>
+      <div style="overflow-x:auto;margin-bottom:8px">
+        <table style="border-collapse:collapse;width:100%;font-size:14px;min-width:320px">
+          <tr style="background:#4527A0;color:#fff">
+            <th style="padding:9px 12px;text-align:center">Power</th>
+            <th style="padding:9px 12px">Full calculation</th>
+            <th style="padding:9px 12px;text-align:center">Answer</th>
+            <th style="padding:9px 12px;text-align:center;background:#6a1b9a">Units digit</th>
+          </tr>
+          <tr style="background:#f3e5f5">
+            <td style="padding:8px 12px;font-weight:800;text-align:center">3¹</td>
+            <td style="padding:8px 12px">= 3</td>
+            <td style="padding:8px 12px;font-weight:700;text-align:center">3</td>
+            <td style="padding:8px 12px;font-weight:800;color:#4527A0;text-align:center;background:#ede7f6;font-size:16px">3</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 12px;font-weight:800;text-align:center">3²</td>
+            <td style="padding:8px 12px">3 × 3 = </td>
+            <td style="padding:8px 12px;font-weight:700;text-align:center">9</td>
+            <td style="padding:8px 12px;font-weight:800;color:#4527A0;text-align:center;background:#ede7f6;font-size:16px">9</td>
+          </tr>
+          <tr style="background:#f3e5f5">
+            <td style="padding:8px 12px;font-weight:800;text-align:center">3³</td>
+            <td style="padding:8px 12px">3 × 3 × 3 = </td>
+            <td style="padding:8px 12px;font-weight:700;text-align:center">27</td>
+            <td style="padding:8px 12px;font-weight:800;color:#4527A0;text-align:center;background:#ede7f6;font-size:16px">7</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 12px;font-weight:800;text-align:center">3⁴</td>
+            <td style="padding:8px 12px">3 × 3 × 3 × 3 = </td>
+            <td style="padding:8px 12px;font-weight:700;text-align:center">81</td>
+            <td style="padding:8px 12px;font-weight:800;color:#4527A0;text-align:center;background:#ede7f6;font-size:16px">1</td>
+          </tr>
+          <tr style="background:#f3e5f5">
+            <td style="padding:8px 12px;font-weight:800;text-align:center">3⁵</td>
+            <td style="padding:8px 12px">3 × 3 × 3 × 3 × 3 = </td>
+            <td style="padding:8px 12px;font-weight:700;text-align:center">243</td>
+            <td style="padding:8px 12px;font-weight:800;text-align:center;background:#4527A0;color:#fff;font-size:16px">3 ← repeats!</td>
+          </tr>
+        </table>
+      </div>
+      <div style="background:#e8eaf6;border-radius:8px;padding:11px 14px;margin-bottom:16px;font-size:14px;color:#283593">
+        🔁 <strong>The cycle restarts at 3⁵!</strong> Units digits repeat every 4 steps: <strong style="color:#4527A0">3 → 9 → 7 → 1 → 3 → 9 → 7 → 1 → …</strong>
+      </div>
+
+      <!-- THE SHORTCUT -->
+      <div style="background:#4527A0;border-radius:10px;padding:14px 16px;margin-bottom:16px;color:#fff">
+        <div style="font-size:12px;font-weight:700;color:#ce93d8;margin-bottom:8px;text-transform:uppercase;letter-spacing:.4px">⚡ Step 2 — The Shortcut (once you see why it works)</div>
+        <div style="font-size:14px;margin-bottom:6px">Instead of the full multiplication, you only need to multiply the <strong>previous units digit</strong> by the base:</div>
+        <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:8px 12px;font-size:14px;line-height:1.9">
+          3 → 3×3=<strong>9</strong> → 9×3=2<strong>7</strong> → 7×3=2<strong>1</strong> → 1×3=<strong>3</strong> (same as start!)
+        </div>
+        <div style="font-size:13px;color:#ce93d8;margin-top:8px">Same cycle, much faster. This is where the table comes from.</div>
+      </div>
+
+      <!-- HOW TO USE: 3-step method -->
+      <div style="font-size:14px;font-weight:700;color:#4527A0;margin-bottom:10px">📋 Step 3 — How to find any units digit (3-step method):</div>
+      <div class="rule-box">
+        <strong>Step 1:</strong> Find the cycle for the base (or use the table below)<br>
+        <strong>Step 2:</strong> Divide the power by 4 → find the remainder<br>
+        <strong>Step 3:</strong> Remainder 1→position 1, rem 2→pos 2, rem 3→pos 3, rem 0→pos 4<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Remainder 0 means the power is exactly divisible by 4 → use the 4th value</em>
+      </div>
+
+      <!-- Cycles reference table -->
+      <div style="font-size:14px;font-weight:700;color:#4527A0;margin:14px 0 8px">📊 Common cycles to memorise:</div>
+      <div style="overflow-x:auto">
+        <table style="border-collapse:collapse;width:100%;font-size:14px;min-width:280px">
+          <tr style="background:#4527A0;color:#fff">
+            <th style="padding:8px 12px;text-align:center">Base</th>
+            <th style="padding:8px 12px;text-align:center">^1</th>
+            <th style="padding:8px 12px;text-align:center">^2</th>
+            <th style="padding:8px 12px;text-align:center">^3</th>
+            <th style="padding:8px 12px;text-align:center">^4</th>
+            <th style="padding:8px 12px">Cycle</th>
+          </tr>
+          <tr style="background:#f3e5f5"><td style="padding:7px 12px;text-align:center;font-weight:700">2</td><td style="text-align:center;padding:7px">2</td><td style="text-align:center;padding:7px">4</td><td style="text-align:center;padding:7px">8</td><td style="text-align:center;padding:7px">6</td><td style="padding:7px 12px;font-weight:700;color:#4527A0">2,4,8,6</td></tr>
+          <tr><td style="padding:7px 12px;text-align:center;font-weight:700">3</td><td style="text-align:center;padding:7px">3</td><td style="text-align:center;padding:7px">9</td><td style="text-align:center;padding:7px">7</td><td style="text-align:center;padding:7px">1</td><td style="padding:7px 12px;font-weight:700;color:#4527A0">3,9,7,1</td></tr>
+          <tr style="background:#f3e5f5"><td style="padding:7px 12px;text-align:center;font-weight:700">4</td><td style="text-align:center;padding:7px">4</td><td style="text-align:center;padding:7px">6</td><td style="text-align:center;padding:7px">4</td><td style="text-align:center;padding:7px">6</td><td style="padding:7px 12px;font-weight:700;color:#4527A0">4,6,4,6</td></tr>
+          <tr><td style="padding:7px 12px;text-align:center;font-weight:700">7</td><td style="text-align:center;padding:7px">7</td><td style="text-align:center;padding:7px">9</td><td style="text-align:center;padding:7px">3</td><td style="text-align:center;padding:7px">1</td><td style="padding:7px 12px;font-weight:700;color:#4527A0">7,9,3,1</td></tr>
+          <tr style="background:#f3e5f5"><td style="padding:7px 12px;text-align:center;font-weight:700">8</td><td style="text-align:center;padding:7px">8</td><td style="text-align:center;padding:7px">4</td><td style="text-align:center;padding:7px">2</td><td style="text-align:center;padding:7px">6</td><td style="padding:7px 12px;font-weight:700;color:#4527A0">8,4,2,6</td></tr>
+          <tr><td style="padding:7px 12px;text-align:center;font-weight:700">9</td><td style="text-align:center;padding:7px">9</td><td style="text-align:center;padding:7px">1</td><td style="text-align:center;padding:7px">9</td><td style="text-align:center;padding:7px">1</td><td style="padding:7px 12px;font-weight:700;color:#4527A0">9,1,9,1</td></tr>
+        </table>
+      </div>
+      <div class="highlight" style="margin-top:12px">Worked example: Units digit of 2¹⁰ → cycle is 2,4,8,6. &nbsp;10 ÷ 4 = 2 rem <strong>2</strong> → position 2 → units digit = <strong>4</strong></div>
     </div>
     <div class="nav-row">
       <button class="btn-nav btn-back" onclick="go(1)">← Back</button>

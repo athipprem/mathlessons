@@ -190,7 +190,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <h2>Coach Dashboard</h2>
     <p>Enter the password to continue</p>
     <input class="pw-input" id="pw-input" type="password" placeholder="Password"
-           onkeydown="if(event.key==='Enter') checkDashPw()">
+           onkeydown="if(event.key==='Enter') checkDashPw()" inputmode="numeric">
     <button class="pw-btn" onclick="checkDashPw()">Unlock &#8594;</button>
     <div class="pw-error" id="pw-error"></div>
   </div>
@@ -374,7 +374,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 <script src="prem_data.js"></script>
 <script>
 // PASSWORD GATE
-var DASH_PW_HASH = 324799088;
+var DASH_PW_HASH = 2088511772;
 function djb2(str) {
   var h = 5381;
   for (var i = 0; i < str.length; i++) {
