@@ -233,23 +233,63 @@ Total = 4x = 72  →  x = 18</div>
     <h2>🐓 Method 3 — Two-Variable Totals</h2>
     <div class="method-tag">TYPE: Two items with different values</div>
     <p style="font-size:15px;margin-bottom:14px">These problems give you TWO totals — count of items AND a total value (legs, cost, weight, etc.).</p>
-    <div class="example">
-      <div class="example-title">Worked Example — Ducks and Turtles</div>
-      <p style="font-size:15px;margin-bottom:10px">A pond has ducks (2 legs) and turtles (4 legs). There are <strong>20 animals</strong> and <strong>56 legs</strong> in total. How many turtles?</p>
+
+    <!-- PRIMARY METHOD: Assumption / Guess Smart -->
+    <div class="example" style="border-left:4px solid #7b1fa2;margin-bottom:18px">
+      <div class="example-title" style="background:#f3e5f5;color:#6a1b9a">⭐ Primary Method — Assume &amp; Adjust (Guess Smart)</div>
+      <p style="font-size:15px;margin-bottom:12px">A pond has ducks (2 legs) and turtles (4 legs). There are <strong>20 animals</strong> and <strong>56 legs</strong> in total. How many turtles?</p>
       <div class="step">
         <div class="step-num">1</div>
-        <div class="step-text">Let turtles = t. Then ducks = 20 − t.</div>
+        <div class="step-text"><strong>Assume ALL are ducks</strong> (the simpler one).<br>20 ducks × 2 legs = <strong>40 legs</strong>.</div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <div class="step-text">Legs equation: 4t + 2(20 − t) = 56<br>4t + 40 − 2t = 56 → 2t = 16 → t = <strong>8</strong></div>
+        <div class="step-text"><strong>Find extra legs</strong>: We actually have 56 legs.<br>Extra = 56 − 40 = <strong>16 extra legs</strong>.</div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <div class="step-text">Turtles = 8, Ducks = 12. Check: 4(8)+2(12) = 32+24 = 56 ✅</div>
+        <div class="step-text"><strong>Each swap</strong> (duck → turtle) adds 4 − 2 = <strong>2 extra legs</strong>.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Number of turtles</strong> = Extra legs ÷ Extra per swap = 16 ÷ 2 = <strong>8 turtles</strong> ✅<br>Check: 8 turtles (32 legs) + 12 ducks (24 legs) = 56 ✓</div>
       </div>
     </div>
-    <div class="tip">💡 Quick trick: if ALL animals had 2 legs → 2×20=40 legs. But we have 56. Extra legs = 56−40=16. Each turtle has 2 extra legs → turtles = 16÷2 = 8. Same answer!</div>
+
+    <!-- BRACKET EXPANSION BOX -->
+    <div style="background:#fff3e0;border:2px solid #ff9800;border-radius:10px;padding:14px 18px;margin-bottom:18px">
+      <div style="font-size:13px;font-weight:700;color:#e65100;margin-bottom:8px">📐 Before the Advanced Method — The Bracket Rule</div>
+      <p style="font-size:14px;margin-bottom:8px">To use equations you need to know: <strong>a(b − c) = a×b − a×c</strong></p>
+      <p style="font-size:14px;margin-bottom:6px">Example: <strong>2(20 − t)</strong></p>
+      <div style="background:#fff;border-radius:8px;padding:10px 14px;font-size:14px;line-height:1.8">
+        Step 1: Multiply 2 × 20 = <strong>40</strong><br>
+        Step 2: Multiply 2 × t = <strong>2t</strong><br>
+        Step 3: Put it together: 2(20 − t) = <strong>40 − 2t</strong>
+      </div>
+      <p style="font-size:13px;color:#bf360c;margin-top:8px;margin-bottom:0">⚠️ Always distribute the number to BOTH terms inside the bracket.</p>
+    </div>
+
+    <!-- ADVANCED METHOD: Equation -->
+    <div class="example" style="border-left:4px solid #1565c0">
+      <div class="example-title" style="background:#e3f2fd;color:#0d47a1">🔬 Advanced Path — Equation Method (same problem)</div>
+      <p style="font-size:14px;margin-bottom:10px;color:#555">Same ducks &amp; turtles problem — now solved with equations. You get the same answer!</p>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Let T = turtles. Then ducks = 20 − T.<br><em>(If there are 20 animals total and T are turtles, the rest must be ducks.)</em></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Write the legs equation:<br>4T + 2(20 − T) = 56</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Expand the bracket using the rule above:<br>4T + <strong>40 − 2T</strong> = 56<br><em>(2×20=40, and 2×T=2T)</em></div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">Simplify: 4T − 2T = 2T, so:<br>2T + 40 = 56 → 2T = 16 → T = <strong>8</strong> ✅</div>
+      </div>
+    </div>
   </div>
   <div class="nav">
     <button class="btn btn-sec" onclick="go(5)">← Back</button>
