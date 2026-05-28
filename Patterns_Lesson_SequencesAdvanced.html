@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arithmetic Sequences — Unit 16 Lesson 3</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#0f0f1a;color:#e2e8f0;min-height:100vh}
+.lesson-topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;padding:0 20px;height:44px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.ltn-hub{color:#a0aec0;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.3px}
+.ltn-hub:hover{color:#fff}
+.ltn-title{color:#fff;font-size:14px;font-weight:700;letter-spacing:.2px}
+.ltn-pill{background:#0D47A1;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;letter-spacing:.3px}
+.ltn-nav-btn{background:#0D47A1;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;text-decoration:none;letter-spacing:.3px;opacity:.9}
+.ltn-nav-btn:hover{opacity:1}
+.container{max-width:760px;margin:0 auto;padding:24px 16px 40px}
+.screen{display:none}.screen.active{display:block}
+.prog-bar{background:rgba(255,255,255,.1);border-radius:20px;height:6px;margin-bottom:22px}
+.prog-fill{height:6px;border-radius:20px;background:linear-gradient(90deg,#0D47A1,#42A5F5);transition:width .4s}
+h2{font-size:22px;font-weight:800;color:#90CAF9;margin-bottom:8px}
+h3{font-size:17px;font-weight:700;color:#90CAF9;margin-bottom:10px}
+p{font-size:15px;line-height:1.65;color:#cbd5e0;margin-bottom:10px}
+.card{background:#1a1a2e;border-radius:14px;padding:22px 24px;margin-bottom:18px;border:1px solid rgba(255,255,255,.08)}
+.steps{display:flex;flex-direction:column;gap:10px;margin:12px 0}
+.step{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.04);border-radius:10px;padding:12px 14px}
+.step-num{min-width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;background:#0D47A1;color:#fff;flex-shrink:0}
+.step-body{line-height:1.55;font-size:14.5px;color:#e2e8f0}
+.info-box{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14.5px;line-height:1.65}
+.info-blue{background:rgba(13,71,161,.2);border:1px solid #1565C0}
+.info-orange{background:rgba(230,115,0,.12);border:1px solid #E65100;color:#FFB74D}
+.info-green{background:rgba(27,94,32,.15);border:1px solid #2E7D32}
+/* SEQUENCE VISUAL */
+.seq-visual{display:flex;align-items:flex-end;gap:0;margin:16px 0;overflow-x:auto;padding-bottom:8px}
+.seq-term{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.seq-box{width:52px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;color:#fff;margin-bottom:6px}
+.seq-lbl{font-size:11px;color:#a0aec0;font-weight:600}
+.seq-arrow{font-size:12px;color:#64B5F6;font-weight:700;padding:0 4px;align-self:center;padding-bottom:22px}
+.diff-badge{background:#0D47A1;color:#fff;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:700;margin:0 2px;white-space:nowrap}
+/* FORMULA BOX */
+.formula-box{background:#1e2a4a;border:2px solid #1565C0;border-radius:12px;padding:18px 22px;margin:14px 0;text-align:center}
+.formula-main{font-size:24px;font-weight:800;color:#90CAF9;margin-bottom:8px;letter-spacing:1px}
+.formula-parts{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:10px}
+.fp{text-align:center}
+.fp-val{font-size:20px;font-weight:800;color:#42A5F5}
+.fp-lbl{font-size:12px;color:#a0aec0;margin-top:2px}
+/* WORKED EXAMPLES */
+.we-problem{background:rgba(13,71,161,.12);border:1px solid #1565C0;border-radius:12px;padding:16px;margin-bottom:14px}
+.we-title{font-size:14px;font-weight:800;color:#90CAF9;margin-bottom:8px}
+.we-steps{display:flex;flex-direction:column;gap:8px}
+.we-step{background:rgba(255,255,255,.05);border-radius:8px;padding:10px 12px;font-size:14px;line-height:1.6}
+.ws-num{display:inline-block;background:#0D47A1;color:#fff;font-weight:800;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;margin-right:6px}
+.we-ans{background:#1a2a3a;border:1px solid #1565C0;border-radius:8px;padding:8px 12px;font-size:14px;font-weight:700;color:#90CAF9;margin-top:8px}
+/* PRACTICE */
+.problem{background:#1a1a2e;border-radius:12px;padding:18px 20px;margin-bottom:16px;border-left:4px solid #1565C0}
+.q-num{font-size:11px;font-weight:800;color:#90CAF9;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.q-text{font-size:15px;line-height:1.65;margin-bottom:12px;color:#e2e8f0}
+.inp-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.inp{background:#0f0f1a;border:2px solid #4a5568;border-radius:8px;color:#fff;font-size:16px;padding:7px 0;width:80px;text-align:center;font-weight:700}
+.inp:focus{outline:none;border-color:#90CAF9}
+.btn{padding:9px 20px;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:14px;transition:.2s}
+.btn-check{background:linear-gradient(135deg,#0D47A1,#42A5F5);color:#fff}
+.btn-check:hover{opacity:.9}
+.btn-next{background:linear-gradient(135deg,#0D47A1,#1565C0);color:#fff;margin-top:16px;padding:12px 28px;font-size:15px;border-radius:10px;width:100%;border:none;cursor:pointer;font-weight:700}
+.btn-next:hover{opacity:.9}
+.feedback{font-size:14px;font-weight:700;padding:8px 14px;border-radius:8px;display:none;margin-top:8px}
+.feedback.show{display:block}
+.feedback.ok{background:#1a3a2e;color:#68d391;border:1px solid #2f6b4a}
+.feedback.err{background:#3a1a1a;color:#fc8181;border:1px solid #7a2a2a}
+.reveal{display:none;background:rgba(255,255,255,.04);border-radius:10px;padding:14px;margin-top:10px;font-size:14px;line-height:1.65;border-left:3px solid #90CAF9}
+.reveal.show{display:block}
+.ans-label{font-size:14px;color:#90CAF9;font-weight:700;margin-right:4px}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.sg-item{background:rgba(13,71,161,.15);border:1px solid #1565C0;border-radius:10px;padding:14px}
+.sg-title{font-weight:800;color:#90CAF9;margin-bottom:6px;font-size:14px}
+.sg-body{font-size:13.5px;line-height:1.6;color:#cbd5e0;font-family:monospace}
+@media(max-width:500px){.summary-grid{grid-template-columns:1fr}.formula-parts{gap:12px}}
+</style>
+</head>
+<body>
+
+<div class="lesson-topnav">
+  <a href="index.html" class="ltn-hub">&#8592; Hub</a>
+  <span class="ltn-title">Arithmetic Sequences</span>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="ltn-pill">Unit 16 &middot; Lesson 3</span>
+    <a href="Algebra_Lesson_BarModelUnknowns.html" class="ltn-nav-btn">&#8592; Prev: Bar Model</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="prog-bar"><div class="prog-fill" id="prog" style="width:20%"></div></div>
+
+  <!-- ══════════════ SCREEN 1 — WHAT IS A SEQUENCE ══════════════ -->
+  <div class="screen active" id="s1">
+    <h2>Arithmetic Sequences</h2>
+    <p style="color:#a0aec0;font-size:14px;margin-bottom:18px">Unit 16 · Lesson 3 — Patterns &amp; Number Theory</p>
+    <div class="card">
+      <h3>What is an arithmetic sequence?</h3>
+      <p>An arithmetic sequence is a list of numbers where you <strong>add the same amount</strong> each time. That amount is called the <strong>common difference</strong> (we write it as <em>d</em>).</p>
+      <div class="seq-visual">
+        <div class="seq-term">
+          <div class="seq-box" style="height:44px;background:#0D47A1">3</div>
+          <div class="seq-lbl">T₁</div>
+        </div>
+        <div class="seq-arrow">+4&nbsp;→</div>
+        <div class="seq-term">
+          <div class="seq-box" style="height:52px;background:#1565C0">7</div>
+          <div class="seq-lbl">T₂</div>
+        </div>
+        <div class="seq-arrow">+4&nbsp;→</div>
+        <div class="seq-term">
+          <div class="seq-box" style="height:60px;background:#1976D2">11</div>
+          <div class="seq-lbl">T₃</div>
+        </div>
+        <div class="seq-arrow">+4&nbsp;→</div>
+        <div class="seq-term">
+          <div class="seq-box" style="height:68px;background:#1E88E5">15</div>
+          <div class="seq-lbl">T₄</div>
+        </div>
+        <div class="seq-arrow">+4&nbsp;→</div>
+        <div class="seq-term">
+          <div class="seq-box" style="height:76px;background:#2196F3">19</div>
+          <div class="seq-lbl">T₅</div>
+        </div>
+        <div class="seq-arrow">+4&nbsp;→</div>
+        <div class="seq-term">
+          <div class="seq-box" style="height:84px;background:#42A5F5">23</div>
+          <div class="seq-lbl">T₆</div>
+        </div>
+      </div>
+      <p>In the sequence <strong>3, 7, 11, 15, 19, 23…</strong></p>
+      <div class="info-box info-blue">
+        <strong>a</strong> = first term = <strong>3</strong><br>
+        <strong>d</strong> = common difference = <strong>4</strong> (we always add 4)<br>
+        <strong>T₁ = 3, T₂ = 7, T₃ = 11, …</strong>
+      </div>
+    </div>
+    <div class="card">
+      <h3>How do we find any term?</h3>
+      <p>Look at the pattern:</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">T₁</div>
+          <div class="step-body">= 3 = 3 + 0×4 = <strong>a + 0×d</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-num">T₂</div>
+          <div class="step-body">= 7 = 3 + 1×4 = <strong>a + 1×d</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-num">T₃</div>
+          <div class="step-body">= 11 = 3 + 2×4 = <strong>a + 2×d</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-num">Tₙ</div>
+          <div class="step-body">= a + (n−1)×d &nbsp;&nbsp;← <strong>The formula!</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="formula-box">
+      <div class="formula-main">T<sub>n</sub> = a + (n − 1) × d</div>
+      <div class="formula-parts">
+        <div class="fp"><div class="fp-val" style="color:#90CAF9">Tₙ</div><div class="fp-lbl">the nth term</div></div>
+        <div class="fp"><div class="fp-val" style="color:#F48FB1">a</div><div class="fp-lbl">first term</div></div>
+        <div class="fp"><div class="fp-val" style="color:#FFD54F">n</div><div class="fp-lbl">which term</div></div>
+        <div class="fp"><div class="fp-val" style="color:#A5D6A7">d</div><div class="fp-lbl">common difference</div></div>
+      </div>
+    </div>
+    <button class="btn-next" onclick="go(2)">See Worked Examples &#8594;</button>
+  </div>
+
+  <!-- ══════════════ SCREEN 2 — WORKED EXAMPLES ══════════════ -->
+  <div class="screen" id="s2">
+    <h2>How to Use the Formula</h2>
+    <p>Three types of sequence questions — let&rsquo;s work through each one.</p>
+
+    <div class="card">
+      <h3>Type A — Find a specific term</h3>
+      <div class="we-problem">
+        <div class="we-title">The sequence 3, 7, 11, 15, … What is the 20th term?</div>
+        <div class="we-steps">
+          <div class="we-step"><span class="ws-num">1</span><strong>Identify a and d.</strong> a = 3, d = 4 (difference between each pair)</div>
+          <div class="we-step"><span class="ws-num">2</span><strong>Apply the formula.</strong> T₂₀ = 3 + (20−1) × 4 = 3 + 19 × 4</div>
+          <div class="we-step"><span class="ws-num">3</span><strong>Calculate.</strong> 19 × 4 = 76. T₂₀ = 3 + 76 = <strong>79</strong></div>
+        </div>
+        <div class="we-ans">T₂₀ = 79 ✓</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Type B — Use the nth-term formula</h3>
+      <div class="we-problem">
+        <div class="we-title">The nth term of a sequence is 5n − 2. Find T₃ + T₆.</div>
+        <div class="we-steps">
+          <div class="we-step"><span class="ws-num">1</span><strong>Substitute n = 3.</strong> T₃ = 5(3) − 2 = 15 − 2 = <strong>13</strong></div>
+          <div class="we-step"><span class="ws-num">2</span><strong>Substitute n = 6.</strong> T₆ = 5(6) − 2 = 30 − 2 = <strong>28</strong></div>
+          <div class="we-step"><span class="ws-num">3</span><strong>Add.</strong> T₃ + T₆ = 13 + 28 = <strong>41</strong></div>
+        </div>
+        <div class="we-ans">Sum = 41 ✓</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Type C — Find the first term given other terms</h3>
+      <div class="we-problem">
+        <div class="we-title">In a sequence, T₄ = 22 and T₇ = 37. Find the first term.</div>
+        <div class="we-steps">
+          <div class="we-step"><span class="ws-num">1</span><strong>Find d.</strong> From T₄ to T₇ is 3 steps. T₇ − T₄ = 37 − 22 = 15. d = 15 ÷ 3 = <strong>5</strong></div>
+          <div class="we-step"><span class="ws-num">2</span><strong>Work back from T₄.</strong> T₄ = a + 3d = 22. So a = 22 − 3×5 = 22 − 15 = <strong>7</strong></div>
+          <div class="we-step"><span class="ws-num">3</span><strong>Check.</strong> Sequence: 7, 12, 17, 22, 27, 32, 37 ✓</div>
+        </div>
+        <div class="we-ans">First term = 7, d = 5 ✓</div>
+      </div>
+    </div>
+
+    <button class="btn-next" onclick="go(3)">Practice Problems &#8594;</button>
+  </div>
+
+  <!-- ══════════════ SCREEN 3 — PRACTICE ══════════════ -->
+  <div class="screen" id="s3">
+    <h2>Practice — 5 Problems</h2>
+    <p>Apply what you have learned. Show your working in your notebook.</p>
+
+    <!-- P1 -->
+    <div class="problem">
+      <div class="q-num">Problem 1 — Find the Term</div>
+      <div class="q-text">The sequence starts: <strong>3, 7, 11, 15, …</strong><br>What is the <strong>20th term</strong>?</div>
+      <div class="inp-row">
+        <span class="ans-label">T₂₀ =</span>
+        <input class="inp" id="p1" inputmode="numeric" placeholder="?">
+        <button class="btn btn-check" onclick="chk('p1',79,'rev1','fb1')">Check</button>
+      </div>
+      <div class="feedback" id="fb1"></div>
+      <div class="reveal" id="rev1">
+        <strong>Working:</strong><br>
+        a = 3, d = 4<br>
+        T₂₀ = 3 + (20−1) × 4 = 3 + 76 = <strong>79 ✓</strong>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="problem">
+      <div class="q-num">Problem 2 — nth Term Formula</div>
+      <div class="q-text">The nth term of a sequence is <strong>5n − 2</strong>.<br>What is the <strong>sum of the 3rd term and the 6th term</strong>?</div>
+      <div class="inp-row">
+        <span class="ans-label">T₃ + T₆ =</span>
+        <input class="inp" id="p2" inputmode="numeric" placeholder="?">
+        <button class="btn btn-check" onclick="chk('p2',41,'rev2','fb2')">Check</button>
+      </div>
+      <div class="feedback" id="fb2"></div>
+      <div class="reveal" id="rev2">
+        <strong>Working:</strong><br>
+        T₃ = 5(3)−2 = 13<br>
+        T₆ = 5(6)−2 = 28<br>
+        Sum = 13 + 28 = <strong>41 ✓</strong>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="problem">
+      <div class="q-num">Problem 3 — Find the First Term</div>
+      <div class="q-text">In an arithmetic sequence, the <strong>4th term is 22</strong> and the <strong>7th term is 37</strong>.<br>What is the <strong>first term</strong>?</div>
+      <div class="inp-row">
+        <span class="ans-label">T₁ =</span>
+        <input class="inp" id="p3" inputmode="numeric" placeholder="?">
+        <button class="btn btn-check" onclick="chk('p3',7,'rev3','fb3')">Check</button>
+      </div>
+      <div class="feedback" id="fb3"></div>
+      <div class="reveal" id="rev3">
+        <strong>Working:</strong><br>
+        d = (37−22) ÷ (7−4) = 15 ÷ 3 = 5<br>
+        T₄ = a + 3d → 22 = a + 15 → a = <strong>7 ✓</strong><br>
+        <span style="color:#68d391;font-size:13px">Check: 7, 12, 17, 22, 27, 32, 37 ✓</span>
+      </div>
+    </div>
+
+    <!-- P4 ★ -->
+    <div class="problem">
+      <div class="q-num">Problem 4 — Dot Pattern ★</div>
+      <div class="q-text">A pattern of dots grows as shown below:<br>
+        <strong>Row 1:</strong> 1 dot &nbsp; <strong>Row 2:</strong> 3 dots &nbsp; <strong>Row 3:</strong> 6 dots &nbsp; <strong>Row 4:</strong> 10 dots<br><br>
+        Each row adds one <em>more</em> dot than the previous row added. (Row 2 adds 2, Row 3 adds 3, and so on.)<br>
+        How many dots are in <strong>Row 8</strong>?</div>
+      <div class="inp-row">
+        <span class="ans-label">Row 8 =</span>
+        <input class="inp" id="p4" inputmode="numeric" placeholder="?">
+        <span style="color:#90CAF9;font-weight:700">dots</span>
+        <button class="btn btn-check" onclick="chk('p4',36,'rev4','fb4')">Check</button>
+      </div>
+      <div class="feedback" id="fb4"></div>
+      <div class="reveal" id="rev4">
+        <strong>Working (build the rows):</strong><br>
+        R1=1, R2=1+2=3, R3=3+3=6, R4=6+4=10, R5=10+5=15,<br>
+        R6=15+6=21, R7=21+7=28, R8=28+8 = <strong>36 dots ✓</strong><br>
+        <span style="color:#68d391;font-size:13px">Formula shortcut: Row n = n(n+1)/2. Row 8 = 8×9/2 = 36 ✓</span>
+      </div>
+    </div>
+
+    <!-- P5 ★★ -->
+    <div class="problem">
+      <div class="q-num">Problem 5 — Two Conditions ★★</div>
+      <div class="q-text">An arithmetic sequence has first term <strong>a</strong> and common difference <strong>d</strong>.<br>The <strong>sum of the first 3 terms is 9</strong> and the <strong>4th term is 7</strong>.<br>Find the <strong>10th term</strong>.</div>
+      <div class="inp-row">
+        <span class="ans-label">T₁₀ =</span>
+        <input class="inp" id="p5" inputmode="numeric" placeholder="?">
+        <button class="btn btn-check" onclick="chk('p5',19,'rev5','fb5')">Check</button>
+      </div>
+      <div class="feedback" id="fb5"></div>
+      <div class="reveal" id="rev5">
+        <strong>Working:</strong><br>
+        Sum of first 3 = T₁ + T₂ + T₃ = 3a + 3d = 9 → a + d = 3<br>
+        T₄ = a + 3d = 7<br>
+        From a = 3 − d: (3−d) + 3d = 7 → 2d = 4 → d = 2<br>
+        a = 3 − 2 = 1<br>
+        T₁₀ = 1 + 9×2 = 1 + 18 = <strong>19 ✓</strong><br>
+        <span style="color:#68d391;font-size:13px">Check: 1, 3, 5, 7, … · Sum 1+3+5=9 ✓ · T₄=7 ✓</span>
+      </div>
+    </div>
+
+    <button class="btn-next" onclick="go(4)">See the Summary &#8594;</button>
+  </div>
+
+  <!-- ══════════════ SCREEN 4 — SUMMARY ══════════════ -->
+  <div class="screen" id="s4">
+    <h2>Lesson Complete! 🎉</h2>
+    <p>You now know how to work with arithmetic sequences in any direction.</p>
+    <div class="formula-box" style="margin-bottom:16px">
+      <div class="formula-main">T<sub>n</sub> = a + (n − 1) × d</div>
+    </div>
+    <div class="summary-grid">
+      <div class="sg-item">
+        <div class="sg-title">Find a term (Type A)</div>
+        <div class="sg-body">Tₙ = a + (n−1)d<br>Plug in a, n, d.</div>
+      </div>
+      <div class="sg-item">
+        <div class="sg-title">Use nth-term rule (Type B)</div>
+        <div class="sg-body">T_n given as formula.<br>Substitute n directly.</div>
+      </div>
+      <div class="sg-item">
+        <div class="sg-title">Find d from two terms (Type C)</div>
+        <div class="sg-body">d = (Tₘ − Tₙ) ÷ (m−n)<br>Then find a from T₁ = a.</div>
+      </div>
+      <div class="sg-item">
+        <div class="sg-title">Two conditions (Type D)</div>
+        <div class="sg-body">Write two equations in a and d. Solve the system (like SimEq!).</div>
+      </div>
+    </div>
+    <div class="info-box info-green" style="margin-top:4px">
+      <strong>Key habit:</strong> Always write down <em>a</em> and <em>d</em> before applying the formula. Double-check d by computing T₂ − T₁ and T₃ − T₂ — they must be equal.
+    </div>
+    <a href="index.html" style="text-decoration:none">
+      <button class="btn" style="background:linear-gradient(135deg,#0D47A1,#1565C0);color:#fff;padding:13px 28px;font-size:16px;border-radius:12px;width:100%;margin-top:6px;font-weight:700;border:none;cursor:pointer">&#127968; Back to Hub</button>
+    </a>
+  </div>
+
+</div>
+
+<script>
+var screens = 4;
+function go(n) {
+  for (var i = 1; i <= screens; i++) {
+    document.getElementById('s'+i).classList.remove('active');
+  }
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width = Math.round(n/screens*100)+'%';
+  window.scrollTo(0,0);
+}
+function chk(inpId, correct, revId, fbId) {
+  var v = parseInt(document.getElementById(inpId).value.trim(), 10);
+  var fb = document.getElementById(fbId);
+  var rv = document.getElementById(revId);
+  if (v === correct) {
+    fb.innerHTML = '&#10003; Correct! Well done.';
+    fb.className = 'feedback ok show';
+    if (rv) rv.classList.add('show');
+  } else {
+    fb.innerHTML = '&#10007; Not quite &mdash; try again!';
+    fb.className = 'feedback err show';
+  }
+}
+</script>
+</body>
+</html>

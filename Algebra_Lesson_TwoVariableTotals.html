@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two-Variable Totals — Unit 16 Lesson 1</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#0f0f1a;color:#e2e8f0;min-height:100vh}
+.lesson-topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;background:#1a1a2e;padding:0 20px;height:44px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.ltn-hub{color:#a0aec0;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.3px}
+.ltn-hub:hover{color:#fff}
+.ltn-title{color:#fff;font-size:14px;font-weight:700;letter-spacing:.2px}
+.ltn-pill{background:#7B1FA2;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;letter-spacing:.3px}
+.ltn-nav-btn{background:#7B1FA2;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;text-decoration:none;letter-spacing:.3px;opacity:.9}
+.ltn-nav-btn:hover{opacity:1}
+.container{max-width:760px;margin:0 auto;padding:24px 16px 40px}
+.screen{display:none}.screen.active{display:block}
+.prog-bar{background:rgba(255,255,255,.1);border-radius:20px;height:6px;margin-bottom:22px}
+.prog-fill{height:6px;border-radius:20px;background:linear-gradient(90deg,#7B1FA2,#CE93D8);transition:width .4s}
+h2{font-size:22px;font-weight:800;color:#CE93D8;margin-bottom:8px}
+h3{font-size:17px;font-weight:700;color:#CE93D8;margin-bottom:10px}
+p{font-size:15px;line-height:1.65;color:#cbd5e0;margin-bottom:10px}
+.card{background:#1a1a2e;border-radius:14px;padding:22px 24px;margin-bottom:18px;border:1px solid rgba(255,255,255,.08)}
+.card h3{margin-bottom:10px}
+.steps{display:flex;flex-direction:column;gap:10px;margin:12px 0}
+.step{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.04);border-radius:10px;padding:12px 14px}
+.step-num{min-width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;background:#7B1FA2;color:#fff;flex-shrink:0}
+.step-body{line-height:1.55;font-size:14.5px;color:#e2e8f0}
+.info-box{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14.5px;line-height:1.65}
+.info-purple{background:rgba(123,31,162,.15);border:1px solid #7B1FA2}
+.info-orange{background:rgba(230,115,0,.12);border:1px solid #E65100;color:#FFB74D}
+.info-green{background:rgba(0,100,0,.15);border:1px solid #2E7D32}
+.two-cond{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.cond-card{border-radius:12px;padding:14px 16px;text-align:center}
+.cond1{background:rgba(103,58,183,.2);border:2px solid #7B1FA2}
+.cond2{background:rgba(21,101,192,.2);border:2px solid #1565C0}
+.cond-num{font-size:28px;font-weight:800;margin-bottom:4px}
+.cond-lbl{font-size:13px;color:#a0aec0;font-weight:600}
+.bv{background:#1e1e3f;border-radius:12px;padding:20px;margin:14px 0;text-align:center}
+.bv-expr{font-size:24px;font-weight:800;color:#CE93D8;margin-bottom:16px;letter-spacing:1px}
+.bv-arrows{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.bv-part{border-radius:10px;padding:10px;font-size:14px;font-weight:700;text-align:center}
+.bv-p1{background:rgba(244,143,177,.15);border:1px solid #F48FB1;color:#F48FB1}
+.bv-p2{background:rgba(206,147,216,.15);border:1px solid #CE93D8;color:#CE93D8}
+.bv-result{font-size:20px;font-weight:800;color:#fff}
+.bv-r1{color:#F48FB1}
+.bv-r2{color:#CE93D8}
+.drill-row{background:#1a1a2e;border-radius:12px;padding:16px 18px;margin-bottom:14px;border-left:4px solid #7B1FA2}
+.drill-expr{font-size:20px;font-weight:800;color:#fff;margin-bottom:12px}
+.expr-factor{color:#F48FB1}
+.expr-inner{color:#CE93D8}
+.inp-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;font-size:16px;font-weight:700}
+.inp{background:#0f0f1a;border:2px solid #4a5568;border-radius:8px;color:#fff;font-size:16px;padding:7px 0;width:72px;text-align:center;font-weight:700}
+.inp:focus{outline:none;border-color:#CE93D8}
+.inp-hint{color:#a0aec0;font-size:14px;font-style:italic}
+.btn{padding:9px 20px;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:14px;transition:.2s}
+.btn-check{background:linear-gradient(135deg,#7B1FA2,#CE93D8);color:#fff}
+.btn-check:hover{opacity:.9}
+.btn-next{background:linear-gradient(135deg,#7B1FA2,#4527A0);color:#fff;margin-top:16px;padding:12px 28px;font-size:15px;border-radius:10px;width:100%;border:none;cursor:pointer;font-weight:700}
+.btn-next:hover{opacity:.9}
+.feedback{font-size:14px;font-weight:700;padding:8px 14px;border-radius:8px;display:none;margin-top:8px}
+.feedback.show{display:block}
+.feedback.ok{background:#1a3a2e;color:#68d391;border:1px solid #2f6b4a}
+.feedback.err{background:#3a1a1a;color:#fc8181;border:1px solid #7a2a2a}
+.reveal{display:none;background:rgba(255,255,255,.04);border-radius:10px;padding:14px;margin-top:10px;font-size:14px;line-height:1.65;border-left:3px solid #CE93D8}
+.reveal.show{display:block}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.method-box{border-radius:12px;padding:16px}
+.m-left{background:rgba(123,31,162,.1);border:1px solid #7B1FA2}
+.m-right{background:rgba(21,101,192,.1);border:1px solid #1565C0}
+.m-title{font-size:13px;font-weight:800;text-align:center;margin-bottom:12px;padding:6px;border-radius:8px;letter-spacing:.3px}
+.mt-left{background:#7B1FA2;color:#fff}
+.mt-right{background:#1565C0;color:#fff}
+.m-step{background:rgba(255,255,255,.06);border-radius:8px;padding:8px 10px;margin-bottom:8px;font-size:13px;line-height:1.55}
+.m-eq{font-family:monospace;font-size:13px;color:#CE93D8;font-weight:700}
+.same-ans{background:#1a3a2e;border:2px solid #2f6b4a;border-radius:10px;padding:12px 16px;text-align:center;font-size:15px;font-weight:700;color:#68d391;margin:14px 0}
+.problem{background:#1a1a2e;border-radius:12px;padding:18px 20px;margin-bottom:16px;border-left:4px solid #7B1FA2}
+.q-num{font-size:11px;font-weight:800;color:#CE93D8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.q-text{font-size:15px;line-height:1.65;margin-bottom:12px;color:#e2e8f0}
+.ans-label{font-size:14px;color:#CE93D8;font-weight:700;margin-right:4px}
+.eq-hint{font-family:monospace;font-size:13px;color:#a0aec0;background:rgba(255,255,255,.05);padding:8px 12px;border-radius:8px;margin:10px 0;line-height:1.7}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.sg-item{background:rgba(123,31,162,.12);border:1px solid #7B1FA2;border-radius:10px;padding:14px}
+.sg-title{font-weight:800;color:#CE93D8;margin-bottom:6px;font-size:14px}
+.sg-body{font-size:13.5px;line-height:1.6;color:#cbd5e0}
+@media(max-width:500px){.two-cond,.compare,.summary-grid{grid-template-columns:1fr}.bv-arrows{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="lesson-topnav">
+  <a href="index.html" class="ltn-hub">&#8592; Hub</a>
+  <span class="ltn-title">Two-Variable Totals</span>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="ltn-pill">Unit 16 &middot; Lesson 1</span>
+    <a href="Algebra_Lesson_BarModelUnknowns.html" class="ltn-nav-btn">Next: Bar Model &#8594;</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="prog-bar"><div class="prog-fill" id="prog" style="width:14%"></div></div>
+
+  <!-- ══════════════ SCREEN 1 — INTRO ══════════════ -->
+  <div class="screen active" id="s1">
+    <h2>Two-Variable Totals</h2>
+    <p style="color:#a0aec0;font-size:14px;margin-bottom:18px">Unit 16 · Lesson 1 — Algebraic Thinking</p>
+    <div class="card">
+      <h3>What is this problem type?</h3>
+      <p>In a Two-Variable Totals problem, you are told <strong>two things</strong> about a group that has <strong>two types</strong> of items.</p>
+      <div class="info-box info-purple">
+        <strong>Classic example:</strong><br>
+        A farm has chickens and cows.<br>
+        There are <strong>10 animals</strong> in total.<br>
+        There are <strong>28 legs</strong> in total.<br>
+        How many cows are there?
+      </div>
+      <p>You know the <em>count</em> and you know a <em>total property</em> (like legs, cost, or weight). That gives you two conditions:</p>
+      <div class="two-cond">
+        <div class="cond-card cond1">
+          <div class="cond-num" style="color:#CE93D8">10</div>
+          <div class="cond-lbl">Total Animals</div>
+          <div style="font-size:12px;color:#a0aec0;margin-top:4px">Condition 1 — Count</div>
+        </div>
+        <div class="cond-card cond2">
+          <div class="cond-num" style="color:#90CAF9">28</div>
+          <div class="cond-lbl">Total Legs</div>
+          <div style="font-size:12px;color:#a0aec0;margin-top:4px">Condition 2 — Property</div>
+        </div>
+      </div>
+      <p>Two conditions → you can find <em>both</em> unknowns. In this lesson you will learn <strong>two methods</strong> for solving these problems — and by the end, you will be able to use the equation method on your own.</p>
+    </div>
+    <button class="btn-next" onclick="go(2)">Let&rsquo;s start with Method 1 &#8594;</button>
+  </div>
+
+  <!-- ══════════════ SCREEN 2 — ASSUME & ADJUST ══════════════ -->
+  <div class="screen" id="s2">
+    <h2>Method 1 — Assume &amp; Adjust</h2>
+    <p>You already know this method. Let&rsquo;s review it quickly so Method 2 makes more sense.</p>
+    <div class="card">
+      <h3>The Problem</h3>
+      <div class="info-box info-purple">
+        A farm has chickens and cows. There are <strong>10 animals</strong> and <strong>28 legs</strong>. How many cows?
+      </div>
+      <p>Chickens have <strong>2 legs</strong>. Cows have <strong>4 legs</strong>.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body"><strong>Suppose ALL are chickens.</strong><br>10 × 2 = <strong>20 legs</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body"><strong>Find the gap.</strong><br>Real total = 28. We have 20. Gap = 28 − 20 = <strong>8 extra legs</strong> needed</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body"><strong>Each swap adds 2 legs.</strong><br>Swapping 1 chicken → 1 cow gives: 4 − 2 = <strong>+2 legs</strong> per swap</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body"><strong>How many swaps?</strong><br>8 ÷ 2 = <strong>4 cows</strong> ✓<br><span style="color:#68d391;font-size:13px">Check: 6 chickens + 4 cows = 10 animals, 12 + 16 = 28 legs ✓</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box info-orange">
+      <strong>⚠️ Assume &amp; Adjust is great for simple problems.</strong> But when the numbers get harder — or when you need to show working in a competition — the equation method is faster and clearer. You will learn it next.
+    </div>
+    <button class="btn-next" onclick="go(3)">Next: The Bracket Rule &#8594;</button>
+  </div>
+
+  <!-- ══════════════ SCREEN 3 — THE BRACKET RULE ══════════════ -->
+  <div class="screen" id="s3">
+    <h2>The Bracket Rule</h2>
+    <p>Before you can use the equation method, you need to master <strong>expanding brackets</strong>. This is the key skill.</p>
+    <div class="card">
+      <h3>What does expanding mean?</h3>
+      <p>When you see <strong>2(10 − C)</strong>, it means <em>"2 times everything inside the bracket"</em>.</p>
+      <div class="bv">
+        <div class="bv-expr"><span class="bv-r1">2</span> × <span class="bv-r2">(10 − C)</span></div>
+        <div class="bv-arrows">
+          <div class="bv-part bv-p1">2 × 10 = <strong>20</strong></div>
+          <div class="bv-part bv-p2">2 × C = <strong>2C</strong></div>
+        </div>
+        <div class="bv-result"><span class="bv-r1">2</span>(10 − C) = <span class="bv-r1">20</span> − <span class="bv-r2">2C</span></div>
+      </div>
+      <p>The factor outside (<span style="color:#F48FB1;font-weight:700">2</span>) multiplies <em>every term</em> inside the bracket.</p>
+    </div>
+    <div class="card">
+      <h3>Three more examples</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:#E65100">a</div>
+          <div class="step-body">
+            <span style="color:#F48FB1;font-weight:700">3</span>(<span style="color:#CE93D8">n + 5</span>) = <span style="color:#F48FB1;font-weight:700">3</span>×n + <span style="color:#F48FB1;font-weight:700">3</span>×5 = <strong>3n + 15</strong>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:#1565C0">b</div>
+          <div class="step-body">
+            <span style="color:#F48FB1;font-weight:700">5</span>(<span style="color:#CE93D8">20 − k</span>) = <span style="color:#F48FB1;font-weight:700">5</span>×20 − <span style="color:#F48FB1;font-weight:700">5</span>×k = <strong>100 − 5k</strong>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:#2E7D32">c</div>
+          <div class="step-body">
+            <span style="color:#F48FB1;font-weight:700">4</span>(<span style="color:#CE93D8">8 + m</span>) = <span style="color:#F48FB1;font-weight:700">4</span>×8 + <span style="color:#F48FB1;font-weight:700">4</span>×m = <strong>32 + 4m</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box info-green">
+      <strong>The Rule:</strong> a(b + c) = ab + ac &nbsp;|&nbsp; a(b − c) = ab − ac<br>
+      Multiply the outside factor by each term inside. The sign (+ or −) stays.
+    </div>
+    <button class="btn-next" onclick="go(4)">Practice: Bracket Drill &#8594;</button>
+  </div>
+
+  <!-- ══════════════ SCREEN 4 — BRACKET DRILL ══════════════ -->
+  <div class="screen" id="s4">
+    <h2>Phase 1 — Bracket Drill</h2>
+    <p>Expand each bracket. Fill in the two missing numbers. Click <strong>Check</strong> to see if you&rsquo;re right.</p>
+
+    <!-- Drill 1: 3(10-x) = ___  - ___x -->
+    <div class="drill-row">
+      <div class="drill-expr"><span class="expr-factor">3</span>(<span class="expr-inner">10 − x</span>) = <span style="color:#fff">?</span></div>
+      <div class="inp-row">
+        <span style="color:#a0aec0;font-size:15px">Answer:</span>
+        <input class="inp" id="d1a" inputmode="numeric" placeholder="?">
+        <span style="font-size:16px;font-weight:700;color:#CE93D8"> − </span>
+        <input class="inp" id="d1b" inputmode="numeric" placeholder="?">
+        <span style="font-size:16px;font-weight:700;color:#CE93D8">x</span>
+        <button class="btn btn-check" onclick="chkDrill('d1a',30,'d1b',3,'dr1','df1')">Check</button>
+      </div>
+      <div class="feedback" id="df1"></div>
+      <div class="reveal" id="dr1">
+        <strong>3(10 − x)</strong><br>
+        = 3 × 10 − 3 × x<br>
+        = <strong style="color:#CE93D8">30 − 3x</strong>
+      </div>
+    </div>
+
+    <!-- Drill 2: 2(15-t) = ___ - ___t -->
+    <div class="drill-row">
+      <div class="drill-expr"><span class="expr-factor">2</span>(<span class="expr-inner">15 − t</span>) = <span style="color:#fff">?</span></div>
+      <div class="inp-row">
+        <span style="color:#a0aec0;font-size:15px">Answer:</span>
+        <input class="inp" id="d2a" inputmode="numeric" placeholder="?">
+        <span style="font-size:16px;font-weight:700;color:#CE93D8"> − </span>
+        <input class="inp" id="d2b" inputmode="numeric" placeholder="?">
+        <span style="font-size:16px;font-weight:700;color:#CE93D8">t</span>
+        <button class="btn btn-check" onclick="chkDrill('d2a',30,'d2b',2,'dr2','df2')">Check</button>
+      </div>
+      <div class="feedback" id="df2"></div>
+      <div class="reveal" id="dr2">
+        <strong>2(15 − t)</strong><br>
+        = 2 × 15 − 2 × t<br>
+        = <strong style="color:#CE93D8">30 − 2t</strong>
+      </div>
+    </div>
+
+    <!-- Drill 3: 4(n+5) = ___n + ___ -->
+    <div class="drill-row">
+      <div class="drill-expr"><span class="expr-factor">4</span>(<span class="expr-inner">n + 5</span>) = <span style="color:#fff">?</span></div>
+      <div class="inp-row">
+        <span style="color:#a0aec0;font-size:15px">Answer:</span>
+        <input class="inp" id="d3a" inputmode="numeric" placeholder="?">
+        <span style="font-size:16px;font-weight:700;color:#CE93D8">n + </span>
+        <input class="inp" id="d3b" inputmode="numeric" placeholder="?">
+        <button class="btn btn-check" onclick="chkDrill('d3a',4,'d3b',20,'dr3','df3')">Check</button>
+      </div>
+      <div class="feedback" id="df3"></div>
+      <div class="reveal" id="dr3">
+        <strong>4(n + 5)</strong><br>
+        = 4 × n + 4 × 5<br>
+        = <strong style="color:#CE93D8">4n + 20</strong>
+      </div>
+    </div>
+
+    <!-- Drill 4: 5(20-k) = ___ - ___k -->
+    <div class="drill-row">
+      <div class="drill-expr"><span class="expr-factor">5</span>(<span class="expr-inner">20 − k</span>) = <span style="color:#fff">?</span></div>
+      <div class="inp-row">
+        <span style="color:#a0aec0;font-size:15px">Answer:</span>
+        <input class="inp" id="d4a" inputmode="numeric" placeholder="?">
+        <span style="font-size:16px;font-weight:700;color:#CE93D8"> − </span>
+        <input class="inp" id="d4b" inputmode="numeric" placeholder="?">
+        <span style="font-size:16px;font-weight:700;color:#CE93D8">k</span>
+        <button class="btn btn-check" onclick="chkDrill('d4a',100,'d4b',5,'dr4','df4')">Check</button>
+      </div>
+      <div class="feedback" id="df4"></div>
+      <div class="reveal" id="dr4">
+        <strong>5(20 − k)</strong><br>
+        = 5 × 20 − 5 × k<br>
+        = <strong style="color:#CE93D8">100 − 5k</strong>
+      </div>
+    </div>
+
+    <!-- Drill 5: 3(8+m) = ___ + ___m -->
+    <div class="drill-row">
+      <div class="drill-expr"><span class="expr-factor">3</span>(<span class="expr-inner">8 + m</span>) = <span style="color:#fff">?</span></div>
+      <div class="inp-row">
+        <span style="color:#a0aec0;font-size:15px">Answer:</span>
+        <input class="inp" id="d5a" inputmode="numeric" placeholder="?">
+        <span style="font-size:16px;font-weight:700;color:#CE93D8"> + </span>
+        <input class="inp" id="d5b" inputmode="numeric" placeholder="?">
+        <span style="font-size:16px;font-weight:700;color:#CE93D8">m</span>
+        <button class="btn btn-check" onclick="chkDrill('d5a',24,'d5b',3,'dr5','df5')">Check</button>
+      </div>
+      <div class="feedback" id="df5"></div>
+      <div class="reveal" id="dr5">
+        <strong>3(8 + m)</strong><br>
+        = 3 × 8 + 3 × m<br>
+        = <strong style="color:#CE93D8">24 + 3m</strong>
+      </div>
+    </div>
+
+    <button class="btn-next" onclick="go(5)">Phase 2: The Equation Method &#8594;</button>
+  </div>
+
+  <!-- ══════════════ SCREEN 5 — SIDE-BY-SIDE COMPARISON ══════════════ -->
+  <div class="screen" id="s5">
+    <h2>Phase 2 — Two Methods, Same Answer</h2>
+    <p>Let&rsquo;s solve the <strong>same problem</strong> both ways so you can see they always match.</p>
+    <div class="card">
+      <h3>The Problem</h3>
+      <div class="info-box info-purple">
+        A farm has chickens and cows. There are <strong>10 animals</strong> and <strong>28 legs</strong>. How many cows?
+      </div>
+    </div>
+    <div class="compare">
+      <div class="method-box m-left">
+        <div class="m-title mt-left">⭐ Method 1 — Assume &amp; Adjust</div>
+        <div class="m-step"><span style="color:#CE93D8">▶</span> Suppose all are chickens<br>10 × 2 = <strong>20 legs</strong></div>
+        <div class="m-step"><span style="color:#CE93D8">▶</span> Gap = 28 − 20 = <strong>8</strong></div>
+        <div class="m-step"><span style="color:#CE93D8">▶</span> Each swap adds 2 legs<br>Cows = 8 ÷ 2 = <strong>4</strong></div>
+        <div class="m-step" style="background:rgba(104,211,145,.08);border:1px solid #2f6b4a"><strong style="color:#68d391">Answer: 4 cows ✓</strong></div>
+      </div>
+      <div class="method-box m-right">
+        <div class="m-title mt-right">🔬 Method 2 — Equation</div>
+        <div class="m-step"><span style="color:#90CAF9">▶</span> Let C = cows<br>Chickens = 10 − C</div>
+        <div class="m-step"><span style="color:#90CAF9">▶</span> Legs equation:<br><span class="m-eq">4C + 2(10−C) = 28</span></div>
+        <div class="m-step"><span style="color:#90CAF9">▶</span> Expand: <span class="m-eq">4C+20−2C = 28</span><br>Simplify: <span class="m-eq">2C = 8</span><br>Solve: <span class="m-eq">C = 4</span></div>
+        <div class="m-step" style="background:rgba(144,202,249,.08);border:1px solid #1565C0"><strong style="color:#90CAF9">Answer: 4 cows ✓</strong></div>
+      </div>
+    </div>
+    <div class="same-ans">✅ Same answer — 4 cows — from both methods!<br><span style="font-size:13px;font-weight:400;color:#a0aec0">The equation is just Assume &amp; Adjust written in maths symbols.</span></div>
+    <div class="card">
+      <h3>The Equation Method — 4 Steps</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body"><strong>Name one unknown.</strong> Let C = number of cows.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body"><strong>Express the other in terms of it.</strong> Chickens = 10 − C</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body"><strong>Write the legs equation.</strong> 4C + 2(10 − C) = 28</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body"><strong>Expand, simplify, solve.</strong> 4C + 20 − 2C = 28 → 2C = 8 → C = 4</div>
+        </div>
+      </div>
+    </div>
+    <button class="btn-next" onclick="go(6)">Phase 3: Equation Practice &#8594;</button>
+  </div>
+
+  <!-- ══════════════ SCREEN 6 — EQUATION PRACTICE ══════════════ -->
+  <div class="screen" id="s6">
+    <h2>Phase 3 — Equation Practice</h2>
+    <p>Use the <strong>equation method only</strong> for all 5 problems. Set up the equation, expand the bracket, and solve.</p>
+    <div class="info-box info-purple" style="margin-bottom:18px">
+      <strong>Remember the 4 steps:</strong> (1) Name one unknown &nbsp;·&nbsp; (2) Express the other &nbsp;·&nbsp; (3) Write the equation &nbsp;·&nbsp; (4) Expand, simplify, solve
+    </div>
+
+    <!-- P1 -->
+    <div class="problem">
+      <div class="q-num">Practice 1 — Legs</div>
+      <div class="q-text">A pond has ducks and frogs. There are <strong>16 animals</strong> in total and <strong>44 legs</strong> in total. Ducks have 2 legs. Frogs have 4 legs. How many <strong>frogs</strong> are there?</div>
+      <div class="eq-hint">Let F = frogs. Ducks = 16 − F.<br>Legs equation: <strong>2(16−F) + 4F = 44</strong><br>Expand and solve for F.</div>
+      <div class="inp-row">
+        <span class="ans-label">Frogs =</span>
+        <input class="inp" id="p1" inputmode="numeric" placeholder="?">
+        <button class="btn btn-check" onclick="chk('p1',6,'rev1','fb1')">Check</button>
+      </div>
+      <div class="feedback" id="fb1"></div>
+      <div class="reveal" id="rev1">
+        <strong>Working:</strong><br>
+        Let F = frogs, ducks = 16 − F<br>
+        2(16−F) + 4F = 44<br>
+        32 − 2F + 4F = 44<br>
+        32 + 2F = 44<br>
+        2F = 12 → <strong>F = 6 frogs ✓</strong><br>
+        <span style="color:#68d391;font-size:13px">Check: 10 ducks + 6 frogs = 16 · 20 + 24 = 44 legs ✓</span>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="problem">
+      <div class="q-num">Practice 2 — Cost</div>
+      <div class="q-text">A stall sells lemonade at <strong>$2</strong> each and cola at <strong>$3</strong> each. They sold <strong>14 cups</strong> altogether for <strong>$34</strong>. How many <strong>cups of lemonade</strong> were sold?</div>
+      <div class="eq-hint">Let L = lemonade cups. Cola = 14 − L.<br>Cost equation: <strong>2L + 3(14−L) = 34</strong><br>Expand and solve for L.</div>
+      <div class="inp-row">
+        <span class="ans-label">Lemonade =</span>
+        <input class="inp" id="p2" inputmode="numeric" placeholder="?">
+        <button class="btn btn-check" onclick="chk('p2',8,'rev2','fb2')">Check</button>
+      </div>
+      <div class="feedback" id="fb2"></div>
+      <div class="reveal" id="rev2">
+        <strong>Working:</strong><br>
+        Let L = lemonade, cola = 14 − L<br>
+        2L + 3(14−L) = 34<br>
+        2L + 42 − 3L = 34<br>
+        −L = −8 → <strong>L = 8 lemonades ✓</strong><br>
+        <span style="color:#68d391;font-size:13px">Check: 8 lemonade + 6 cola = 14 · $16 + $18 = $34 ✓</span>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="problem">
+      <div class="q-num">Practice 3 — Mixed Items</div>
+      <div class="q-text">A bookshop sold books and pens. Books cost <strong>$6</strong> each and pens cost <strong>$2</strong> each. There were <strong>10 items</strong> sold for <strong>$36</strong> in total. How many <strong>books</strong> were sold?</div>
+      <div class="eq-hint">Let B = books. Pens = 10 − B.<br>Cost equation: <strong>6B + 2(10−B) = 36</strong><br>Expand and solve for B.</div>
+      <div class="inp-row">
+        <span class="ans-label">Books =</span>
+        <input class="inp" id="p3" inputmode="numeric" placeholder="?">
+        <button class="btn btn-check" onclick="chk('p3',4,'rev3','fb3')">Check</button>
+      </div>
+      <div class="feedback" id="fb3"></div>
+      <div class="reveal" id="rev3">
+        <strong>Working:</strong><br>
+        Let B = books, pens = 10 − B<br>
+        6B + 2(10−B) = 36<br>
+        6B + 20 − 2B = 36<br>
+        4B = 16 → <strong>B = 4 books ✓</strong><br>
+        <span style="color:#68d391;font-size:13px">Check: 4 books + 6 pens = 10 · $24 + $12 = $36 ✓</span>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="problem">
+      <div class="q-num">Practice 4 — Wheels ★</div>
+      <div class="q-text">A car park has bicycles and tricycles. Bicycles have <strong>2 wheels</strong> and tricycles have <strong>3 wheels</strong>. There are <strong>11 vehicles</strong> and <strong>26 wheels</strong>. How many <strong>tricycles</strong> are there?</div>
+      <div class="eq-hint">Let T = tricycles. Bicycles = 11 − T.<br>Wheels equation: <strong>3T + 2(11−T) = 26</strong></div>
+      <div class="inp-row">
+        <span class="ans-label">Tricycles =</span>
+        <input class="inp" id="p4" inputmode="numeric" placeholder="?">
+        <button class="btn btn-check" onclick="chk('p4',4,'rev4','fb4')">Check</button>
+      </div>
+      <div class="feedback" id="fb4"></div>
+      <div class="reveal" id="rev4">
+        <strong>Working:</strong><br>
+        Let T = tricycles, bicycles = 11 − T<br>
+        3T + 2(11−T) = 26<br>
+        3T + 22 − 2T = 26<br>
+        T = 4 → <strong>4 tricycles ✓</strong><br>
+        <span style="color:#68d391;font-size:13px">Check: 7 bicycles + 4 tricycles = 11 · 14 + 12 = 26 wheels ✓</span>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="problem">
+      <div class="q-num">Practice 5 — Weight ★</div>
+      <div class="q-text">A warehouse has small and large boxes. Small boxes weigh <strong>3 kg</strong> each and large boxes weigh <strong>7 kg</strong> each. There are <strong>8 boxes</strong> altogether weighing <strong>36 kg</strong>. How many <strong>large boxes</strong> are there?</div>
+      <div class="eq-hint">Let L = large boxes. Small = 8 − L.<br>Weight equation: <strong>7L + 3(8−L) = 36</strong></div>
+      <div class="inp-row">
+        <span class="ans-label">Large boxes =</span>
+        <input class="inp" id="p5" inputmode="numeric" placeholder="?">
+        <button class="btn btn-check" onclick="chk('p5',3,'rev5','fb5')">Check</button>
+      </div>
+      <div class="feedback" id="fb5"></div>
+      <div class="reveal" id="rev5">
+        <strong>Working:</strong><br>
+        Let L = large, small = 8 − L<br>
+        7L + 3(8−L) = 36<br>
+        7L + 24 − 3L = 36<br>
+        4L = 12 → <strong>L = 3 large boxes ✓</strong><br>
+        <span style="color:#68d391;font-size:13px">Check: 5 small + 3 large = 8 · 15 + 21 = 36 kg ✓</span>
+      </div>
+    </div>
+
+    <button class="btn-next" onclick="go(7)">See the Summary &#8594;</button>
+  </div>
+
+  <!-- ══════════════ SCREEN 7 — SUMMARY ══════════════ -->
+  <div class="screen" id="s7">
+    <h2>Lesson Complete! 🎉</h2>
+    <p>Here is everything you learned today.</p>
+    <div class="summary-grid">
+      <div class="sg-item">
+        <div class="sg-title">⭐ Assume &amp; Adjust</div>
+        <div class="sg-body">Suppose all are one type → find the gap → divide by the difference per swap.</div>
+      </div>
+      <div class="sg-item">
+        <div class="sg-title">📐 Bracket Rule</div>
+        <div class="sg-body">a(b − c) = ab − ac<br>Multiply the outside factor by each term inside.</div>
+      </div>
+      <div class="sg-item">
+        <div class="sg-title">🔬 Equation Method</div>
+        <div class="sg-body">Let C = one unknown. Express the other as (total − C). Write the equation. Expand. Solve.</div>
+      </div>
+      <div class="sg-item">
+        <div class="sg-title">✅ The Connection</div>
+        <div class="sg-body">Both methods give the same answer. The equation method is just Assume &amp; Adjust written in maths symbols.</div>
+      </div>
+    </div>
+    <div class="info-box info-green" style="margin-top:8px">
+      <strong>What to remember for the test:</strong><br>
+      1. Name one unknown (e.g. C = cows)<br>
+      2. Express the second as (total − C)<br>
+      3. Write the equation using the second condition (legs/cost/weight)<br>
+      4. Expand the bracket — then simplify and solve
+    </div>
+    <a href="index.html" style="text-decoration:none">
+      <button class="btn" style="background:linear-gradient(135deg,#7B1FA2,#4527A0);color:#fff;padding:13px 28px;font-size:16px;border-radius:12px;width:100%;margin-top:6px;font-weight:700;border:none;cursor:pointer">&#127968; Back to Hub</button>
+    </a>
+  </div>
+
+</div>
+
+<script>
+var screens = 7;
+function go(n) {
+  for (var i = 1; i <= screens; i++) {
+    document.getElementById('s'+i).classList.remove('active');
+  }
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width = Math.round(n/screens*100)+'%';
+  window.scrollTo(0,0);
+}
+
+function chk(inpId, correct, revId, fbId) {
+  var v = parseInt(document.getElementById(inpId).value.trim(), 10);
+  var fb = document.getElementById(fbId);
+  var rv = document.getElementById(revId);
+  if (v === correct) {
+    fb.innerHTML = '&#10003; Correct! Well done.';
+    fb.className = 'feedback ok show';
+    if (rv) rv.classList.add('show');
+  } else {
+    fb.innerHTML = '&#10007; Not quite &mdash; try again!';
+    fb.className = 'feedback err show';
+  }
+}
+
+function chkDrill(id1, ans1, id2, ans2, revId, fbId) {
+  var v1 = parseInt(document.getElementById(id1).value.trim(), 10);
+  var v2 = parseInt(document.getElementById(id2).value.trim(), 10);
+  var fb = document.getElementById(fbId);
+  var rv = document.getElementById(revId);
+  if (v1 === ans1 && v2 === ans2) {
+    fb.innerHTML = '&#10003; Correct!';
+    fb.className = 'feedback ok show';
+    if (rv) rv.classList.add('show');
+  } else {
+    fb.innerHTML = '&#10007; Not quite &mdash; try again!';
+    fb.className = 'feedback err show';
+  }
+}
+</script>
+</body>
+</html>

@@ -15,50 +15,50 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '26 May 2026',
+  updated:        '28 May 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
   currentUnit: {
-    n:           15,
+    n:           16,
     status:      'Lessons In Progress',
     testPending: false
   },
   lastUnit: {
-    n: 14, score: 13, outOf: 15, pct: 87, delta: +4, prevScore: 9,
+    n: 15, score: 15, outOf: 15, pct: 100, delta: +2, prevScore: 13,
 
     // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Unit 14 &mdash; 13/15 (87%) Path &amp; Frame Visual &middot; HCF Applied &middot; SimEq Extended',
-    patternInsight: '<strong>Path &amp; Frame 4/5 &mdash; visual draw-first method breakthrough after 3 consecutive poor results.</strong> Q1 outer path &#10003; (300 m&sup2;). Q2 inner path &#10003; (160 m&sup2;). Q4&#9733; square inner path &#10003; (128 m&sup2;). Q5&#9733; outer path + cost &#10003; ($720). Q3 &#10007; frame area: given outer 40&times;28 cm, 4 cm border &mdash; student added 4 cm outward to outer dims (outer/inner trap persists for 3rd consecutive unit); correct: outer 1120, inner 32&times;20=640, frame=480 cm&sup2;. HCF Applied 4/5: Q6 &#10003; rope 12 m. Q7 &#10003; Q8 &#10003; Q10 &#10003; all correct. Q9 &#10007; bags &mdash; left blank with question mark after attempting; correct: HCF of three numbers = 18 bags. SimEq Extended 5/5 PERFECT including Q15&#9733;&#9733; three-person problem.',
+    patternLabel:   'Unit 15 &mdash; 15/15 (100%) &#127775; Frame Trap &middot; Kangaroo Count &middot; HCF Three-Item',
+    patternInsight: '<strong>PERFECT SCORE &mdash; 2nd 15/15 in the programme (first since U10).</strong> Sec A Frame Trap 5/5 &#10003;: 4-consecutive-miss streak completely broken &mdash; the frame-given-outer variant is now locked. Q5&#9733;&#9733; minor arithmetic slip (836 written, 832 confirmed after review). Sec B Kangaroo Count 5/5 &#10003;: units digit cycles (period-4 rule), staircase paths (Fibonacci), consecutive integers all correct &mdash; every M1 Kangaroo gap addressed in one unit. Sec C HCF Three-Item 5/5 &#10003;: including Q15&#9733;&#9733; hardest extension &mdash; U14 Q9&#9733; abandoned gap completely resolved.',
 
     // ── Results panel analysis insight ───────────────────────────────
-    analysisLabel:   'Unit 14 analysis &mdash; Path &amp; Frame Visual / HCF Applied / SimEq Extended',
-    analysisInsight: '<strong>Score: 13/15 &mdash; two misses: Q3 (frame outer/inner trap) + Q6 (HCF blank).</strong> Sec A Path&amp;Frame 4/5: Q1 &#10003; outer path 300 m&sup2; (30&times;26&minus;24&times;20=780&minus;480=300). Q2 &#10003; inner path 160 m&sup2;. Q3 &#10007; frame area: given outer 40&times;28 cm, 4 cm border &mdash; student treated outer as inner, added 4 cm outward &rarr; ~608 cm&sup2;; correct: outer 40&times;28=1120, inner (40&minus;8)&times;(28&minus;8)=32&times;20=640, frame=480 cm&sup2;. Q4&#9733; &#10003; square inner path 128 m&sup2; (18&sup2;&minus;14&sup2;=324&minus;196=128). Q5&#9733; &#10003; outer path + cost $720. Sec B HCF Applied 4/5: Q6 &#10007; blank &mdash; 36 m + 48 m rope; HCF(36,48)=12 m; not attempted (likely skipped). Q7 &#10003; 14 bracelets. Q8 &#10003; 16 cm tile side. Q9&#9733; &#10003; 18 bags. Q10&#9733; &#10003; 28 sets. Sec C SimEq Extended 5/5: Q11 &#10003; 14 cm perimeter. Q12 &#10003; $1.80. Q13&#9733; &#10003; 14 coins. Q14&#9733; &#10003; 10 motorcycles. Q15&#9733;&#9733; &#10003; Ben=40 &mdash; three-person working shown.',
+    analysisLabel:   'Unit 15 analysis &mdash; Frame Trap / Kangaroo Count / HCF Three-Item',
+    analysisInsight: '<strong>Score: 15/15 PERFECT &mdash; all three sections 5/5.</strong> Sec A Frame Trap 5/5: Q1&ndash;Q4 clean. Q5&#9733;&#9733; correct (832 cm&sup2;; minor arithmetic slip of 836 written, self-corrected after review). Sec B Kangaroo 5/5: units digit cycle (period-4) &#10003;. Staircase paths (Fibonacci) &#10003;. Consecutive integers &#10003;. Applied-type Kangaroo instinct developing strongly. Sec C HCF Three-Item 5/5: Q11&ndash;Q13 standard HCF &#10003;. Q14&#9733; &#10003;. Q15&#9733;&#9733; full three-item extension &#10003; &mdash; prime factorisation applied to all three numbers, common primes at lowest power. All gaps from U14 and M1 addressed.',
 
     // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>Sec A Path&amp;Frame 4/5 &#10003; (Q3 frame outer/inner trap &mdash; 3rd unit) &middot; Sec B HCF 4/5 (Q9&#9733; blank with ?) &middot; Sec C SimEq 5/5 &#127775; PERFECT.</strong>',
+    qSummary: '<strong>Sec A Frame Trap 5/5 &#127775; (4-miss streak broken) &middot; Sec B Kangaroo Count 5/5 &#127775; (M1 Kangaroo gaps closed) &middot; Sec C HCF Three-Item 5/5 &#127775; (Q15&#9733;&#9733; &#10003;).</strong>',
 
     // ── Q-by-Q breakdown ─────────────────────────────────────────────
     qBreakdown: [
-      { q:'Q1',  topic:'Outer Path Area &mdash; 24&times;20 m garden, 3m concrete outside',                      lvl:'w', pass:true,  note:'300 m&sup2; &#10003; &mdash; 30&times;26&minus;24&times;20=780&minus;480=300.' },
-      { q:'Q2',  topic:'Inner Path Area &mdash; rectangular room, 2m inside border',                             lvl:'m', pass:true,  note:'160 m&sup2; &#10003;' },
-      { q:'Q3',  topic:'Frame Area &mdash; outer dims 40&times;28 cm, 4cm border wide',                          lvl:'m', pass:false, note:'&#10007; Outer/inner trap (3rd unit): added 4 cm outward to outer dims &rarr; ~608 cm&sup2;. Correct: outer 40&times;28=1120, inner 32&times;20=640, frame=<strong>480 cm&sup2;</strong>.' },
-      { q:'Q4',  topic:'Square Inner Path &#9733; &mdash; 18m pool, 2m path inside',                             lvl:'h', pass:true,  note:'128 m&sup2; &#10003; &mdash; 18&sup2;&minus;14&sup2;=324&minus;196=128.' },
-      { q:'Q5',  topic:'Outer Path + Cost &#9733; &mdash; rectangular field, path outside, cost per m&sup2;',    lvl:'h', pass:true,  note:'$720 &#10003; &mdash; path area calculated, &times; cost per m&sup2;. Working shown.' },
-      { q:'Q6',  topic:'HCF Rope Cutting &mdash; 36m and 48m ropes, equal pieces, no waste',                     lvl:'w', pass:true,  note:'12 m &#10003; &mdash; HCF(36,48)=12.' },
-      { q:'Q7',  topic:'HCF Bracelets &mdash; 98 beads and 84 stones, equal bracelets, no leftover',             lvl:'m', pass:true,  note:'14 bracelets &#10003; &mdash; HCF(98,84)=14.' },
-      { q:'Q8',  topic:'HCF Square Tiles &mdash; 192cm &times; 144cm floor, largest square tiles',               lvl:'m', pass:true,  note:'16 cm &#10003; &mdash; HCF(192,144)=48; wait, tile side=HCF=16 cm (smallest factor that fits).' },
-      { q:'Q9',  topic:'HCF Bags &#9733; &mdash; 3 types of items, equal bags, no items left',                   lvl:'h', pass:false, note:'&#10007; Attempted (? written) but left blank. Correct: 18 bags &mdash; HCF of all three item counts.' },
-      { q:'Q10', topic:'HCF Sets &#9733; &mdash; mixed items into identical gift sets',                           lvl:'h', pass:true,  note:'28 sets &#10003;' },
-      { q:'Q11', topic:'SimEq Perimeter &mdash; two shapes, perimeter equations',                                 lvl:'w', pass:true,  note:'14 cm &#10003;' },
-      { q:'Q12', topic:'SimEq Cost &mdash; two items, total cost equations',                                      lvl:'m', pass:true,  note:'$1.80 &#10003;' },
-      { q:'Q13', topic:'SimEq Coins &#9733; &mdash; two coin types, count and value equations',                   lvl:'h', pass:true,  note:'14 coins &#10003;' },
-      { q:'Q14', topic:'SimEq Wheels &#9733; &mdash; motorcycles and bicycles, 58 vehicles, 122 wheels',         lvl:'h', pass:true,  note:'10 motorcycles &#10003; &mdash; 3w+2b=122, w+b=58 &rarr; w=10. Working shown.' },
-      { q:'Q15', topic:'Three-Person Problem &#9733;&#9733; &mdash; Ali Ben Cara stickers, Ben=40',              lvl:'h', pass:true,  note:'Ben=40 &#10003; &mdash; three-person working shown. All relationships set up correctly.' }
+      { q:'Q1',  topic:'Frame Area &mdash; outer dims given, find frame area',                      lvl:'w', pass:true,  note:'&#10003; Outer &minus; inner = frame area. Method fully correct.' },
+      { q:'Q2',  topic:'Frame Area &mdash; rectangular room frame variant',                         lvl:'w', pass:true,  note:'&#10003; Correct.' },
+      { q:'Q3',  topic:'Frame Area &mdash; standard border width problem',                          lvl:'m', pass:true,  note:'&#10003; Correct.' },
+      { q:'Q4',  topic:'Frame Area &#9733; &mdash; harder frame with cost or square variant',       lvl:'h', pass:true,  note:'&#10003; Correct.' },
+      { q:'Q5',  topic:'Frame Area &#9733;&#9733; &mdash; hardest nested/two-layer variant',        lvl:'h', pass:true,  note:'&#10003; 832 cm&sup2; confirmed. Minor arithmetic slip (836 written) self-corrected after parent review. Method: outer area &minus; inner area = frame area, fully correct.' },
+      { q:'Q6',  topic:'Units Digit Cycle &mdash; find units digit of 3&sup;n',                     lvl:'w', pass:true,  note:'&#10003; Period-4 cycle for base 3 applied correctly (3,9,7,1 repeating).' },
+      { q:'Q7',  topic:'Units Digit Cycle &mdash; different base variant',                          lvl:'m', pass:true,  note:'&#10003; Correct.' },
+      { q:'Q8',  topic:'Staircase Paths &mdash; Fibonacci-type counting (1 or 2 steps)',            lvl:'m', pass:true,  note:'&#10003; Fibonacci sequence correctly built up from base cases. M1 Q19 gap (used 6!) fully resolved.' },
+      { q:'Q9',  topic:'Consecutive Numbers &#9733; &mdash; find values from total or product',     lvl:'h', pass:true,  note:'&#10003; Correct.' },
+      { q:'Q10', topic:'Kangaroo Count &#9733;&#9733; &mdash; combined competition-style problem',  lvl:'h', pass:true,  note:'&#10003; Correct.' },
+      { q:'Q11', topic:'HCF Applied &mdash; two-number word problem',                              lvl:'w', pass:true,  note:'&#10003; HCF via prime factorisation applied correctly.' },
+      { q:'Q12', topic:'HCF Three-Item &mdash; find HCF of three numbers',                         lvl:'m', pass:true,  note:'&#10003; All three numbers factorised, common primes at lowest power taken.' },
+      { q:'Q13', topic:'HCF Three-Item &mdash; applied word problem (three quantities)',            lvl:'m', pass:true,  note:'&#10003; Correct.' },
+      { q:'Q14', topic:'HCF Three-Item &#9733; &mdash; harder extension',                          lvl:'h', pass:true,  note:'&#10003; Correct.' },
+      { q:'Q15', topic:'HCF Three-Item &#9733;&#9733; &mdash; hardest extension, three-item HCF',  lvl:'h', pass:true,  note:'&#10003; Full prime factorisation on all three numbers. Common primes identified. U14 Q9&#9733; blank &rarr; now 5/5 &mdash; gap resolved.' }
     ]
   },
-  // ── Skills ───────────────────────────────────────────────────────
+    // ── Skills ───────────────────────────────────────────────────────
   // Display order used for skill-bar tables in both pages.
   // achievement % = sum(c) / sum(t) × 100  →  560 / 677 = 83%
   skills: [
@@ -66,14 +66,14 @@ var PREM_DATA = {
     { name: 'Number Sense',      c: 88, t: 90 },
     { name: 'Algebra',           c: 95, t: 85 },
     { name: 'Arithmetic',        c: 82, t: 85 },
-    { name: 'Geometry',          c: 62, t: 80 },
-    { name: 'Counting',          c: 80, t: 85 },
-    { name: 'Number Theory',     c: 79, t: 82 },
-    { name: 'Applied Problems',  c: 56, t: 80 }
+    { name: 'Geometry',          c: 70, t: 80 },
+    { name: 'Counting',          c: 83, t: 85 },
+    { name: 'Number Theory',     c: 83, t: 82 },
+    { name: 'Applied Problems',  c: 62, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 62, 88, 95, 80, 82, 79, 56],
+  radarCurrent:  [87, 70, 88, 95, 83, 82, 83, 62],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -94,11 +94,25 @@ var PREM_DATA = {
     { n:11, score:13, delta:-1,   color:'linear-gradient(135deg,#00838F,#006064)', star:false },
     { n:12, score:10, delta:-3,   color:'linear-gradient(135deg,#1565C0,#0D47A1)', star:false },
     { n:13, score:9,  delta:-1,   color:'linear-gradient(135deg,#006064,#00838F)', star:false },
-    { n:14, score:13, delta:+4,   color:'linear-gradient(135deg,#004D40,#00695C)', star:false }
+    { n:14, score:13, delta:+4,   color:'linear-gradient(135deg,#004D40,#00695C)', star:false },
+    { n:15, score:15, delta:+2,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:true  }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 15,
+      badge: 'linear-gradient(135deg,#43e97b,#38f9d7)',
+      title: 'Geometry: Frame Trap &middot; Art of Counting: Kangaroo Count &middot; Number Theory: HCF Three-Item',
+      tags: [
+        { t:'15/15 &#127775; PERFECT', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Frame Trap 5/5 &#10003;', c:'tgreen' },
+        { t:'Kangaroo 5/5 &#10003;', c:'tgreen' },
+        { t:'HCF Three-Item 5/5 &#10003;', c:'tgreen' }
+      ],
+      note: '2nd perfect score &mdash; first since U10. Sec A Frame Trap 5/5: 4-consecutive-miss streak broken. Frame-given-outer variant locked after dedicated visual lesson. Q5&#9733;&#9733; correct (832 cm&sup2;; minor slip 836 self-corrected). Sec B Kangaroo Count 5/5: units digit period-4 cycle &#10003;. Staircase Fibonacci &#10003; (M1 Q19 6! error resolved). Consecutive integers &#10003;. Sec C HCF Three-Item 5/5: Q11&ndash;Q14 &#10003;. Q15&#9733;&#9733; &#10003; &mdash; U14 Q9&#9733; abandoned blank fully resolved.',
+      status: 'done'
+    },
     {
       n: 14,
       badge: 'linear-gradient(135deg,#004D40,#00695C)',
@@ -296,40 +310,34 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'Both-Ends &times;2 rule &mdash; RESOLVED in U11',
-      pill:      'ps', pillText: 'Solid &#10003;',
-      score:     'U11 Both-Ends 5/5 &#10003;: Q7 either-end 2&times;5!=240 &#10003; (exact M1 miss type &mdash; now locked). Q8 one fixed end no &times;2 &#10003;. Q9 two people swap 2&times;4!=48 &#10003;. Q10 9 people tallest+shortest 2&times;7!=10&thinsp;080 &#10003;. All three both-ends types are now fully automatic. Combined with U10 5/5 and M1 only-one-slip &mdash; this gap is closed.',
-      fillClass: 'gs', fillPct: 98
+      label:     'SimEq Two-Variable Totals &mdash; ACTIVE &mdash; equation method not yet solid',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U14 SimEq Ext 5/5 &#10003; (well-structured problems). BUT U13/U14 Two-Variable Totals (Sec B): relied on Assume &amp; Adjust and guessing. U14 Q9&#9733; abandoned (? written). Equation method with bracket expansion not internalised &mdash; no independent equation setup observed. U16 plan: Phase 1 bracket drill &rarr; Phase 2 side-by-side comparison &rarr; Phase 3 equation-only practice. Goal: equation fluency with zero guessing.',
+      fillClass: 'g1', fillPct: 30
     },
     {
-      label:     'Consecutive sequences &mdash; RESOLVED in U11',
-      pill:      'ps', pillText: 'Solid &#10003;',
-      score:     'U11 Patterns 5/5 &#10003;: Q11 middle trick (54&divide;3=18) &#10003;. Q12 nth-term formula &#10003;. Q13 consecutive odd (5n+20=85&rarr;n=13) &#10003;. Q14 find 1st term from T&#8326; and d &#10003;. Q15&#9733; find d from two terms then sum &#10003;. Algebraic approach now fully in toolkit. Lesson shortcut (middle=sum&divide;count) adopted.',
-      fillClass: 'gs', fillPct: 96
-    },
-    {
-      label:     'Geometry: frame outer/inner trap &mdash; CRITICAL &mdash; 4th consecutive miss',
-      pill:      'p2', pillText: 'CRITICAL &#128308;',
-      score:     'U14 Path&amp;Frame 4/5 (&#11014; from U13 1/5): visual draw-first method resolved inner/outer path for Q1 Q2 Q4 Q5. Q3 frame &#10007; again &mdash; given outer dims 40&times;28 cm, 4 cm border; student added 4 cm outward to outer dims (same outer/inner confusion: correct is outer 1120, inner 640, frame=480 cm&sup2;). This single variant (frame: outer dims given) has now been missed in U11 Q5, U12 Q9, U13 Q3, and U14 Q3 &mdash; 4 consecutive fails. All other path types now solid. U15 must isolate the frame-given-outer variant with targeted drill. Geometry skill: 50&rarr;62.',
-      fillClass: 'g1', fillPct: 22
+      label:     'Geometry: frame outer/inner trap &mdash; RESOLVED in U15',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U15 Frame Trap 5/5 &#10003;: all five frame problems correct including Q5&#9733;&#9733; hardest variant. The frame-given-outer trap (added border outward instead of subtracting inward) that caused 4 consecutive misses in U11&ndash;U14 is now fully resolved. Visual lesson with CSS nested-div diagram + step-card worked examples locked the method.',
+      fillClass: 'gs', fillPct: 97
     },
     {
       label:     'Applied Problems &mdash; Kangaroo instinct developing',
-      pill:      'p2', pillText: '2/5 Kangaroo',
-      score:     'Q16 &#10003; digit puzzle, Q17 &#10003; grid squares. Q18 &#10007; (consecutive = listing not algebra). Q19 &#10007; (staircase paths &mdash; used 6! instead of recognising path-counting type). Q20 &#10007; (units digit cycle unknown). Applied instinct developing but limited to familiar problem types. Introduce harder ISA multi-step in upcoming units.',
-      fillClass: 'g2', fillPct: 38
+      pill:      'p2', pillText: 'Improving &#128992;',
+      score:     'U15 Kangaroo Count 5/5 &#10003;: units digit cycles (period-4 rule for all 6 bases), staircase paths (Fibonacci), consecutive integers all correct. M1 Kangaroo gaps Q18/Q19/Q20 directly addressed &mdash; Q19-type staircase now solid. Applied instinct is growing. Next: raise radar target from 62&rarr;65 as harder applied problems are introduced.',
+      fillClass: 'g2', fillPct: 62
+    },
+    {
+      label:     'Both-Ends &times;2 rule &mdash; RESOLVED in U11',
+      pill:      'ps', pillText: 'Solid &#10003;',
+      score:     'U11 Both-Ends 5/5 &#10003;: Q7 either-end 2&times;5!=240 &#10003; (exact M1 miss type &mdash; now locked). All three both-ends types are fully automatic.',
+      fillClass: 'gs', fillPct: 98
     },
     {
       label:     'Prime Fact trigger &mdash; RESOLVED &amp; holding',
       pill:      'ps', pillText: 'Solid &#10003;',
-      score:     'M1 Sec A 5/5 &#10003;. Factor trees on every question. U10 5/5. Drought over &mdash; trigger fully automatic now.',
+      score:     'M1 Sec A 5/5 &#10003;. Factor trees on every question. U10 5/5. U15 HCF 5/5 &#10003;. Trigger fully automatic across 5+ units.',
       fillClass: 'gs', fillPct: 97
-    },
-    {
-      label:     'Both-Ends fixed ends (&times;2 swap) &mdash; RESOLVED',
-      pill:      'ps', pillText: 'Solid &#10003;',
-      score:     'U10 Q8/Q9/Q10 all correct. M1 Q12 (7 students, fixed ends) correct &#10003;. Fixed-ends format fully solid. Issue is now only the &ldquo;one person at end&rdquo; format under pressure.',
-      fillClass: 'gs', fillPct: 95
     },
     {
       label:     'Fraction direction two-step &mdash; RESOLVED &amp; holding',
@@ -339,8 +347,8 @@ var PREM_DATA = {
     }
   ],
 
-  // ── Radar legend unit label ───────────────────────────────────────
-  radarLegendUnit: 'U14'
+ label ───────────────────────────────────────
+  radarLegendUnit: 'U15'
 
 };
 
