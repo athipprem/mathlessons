@@ -15,47 +15,47 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '28 May 2026',
+  updated:        '29 May 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
   currentUnit: {
-    n:           16,
+    n:           17,
     status:      'Lessons In Progress',
     testPending: false
   },
   lastUnit: {
-    n: 15, score: 15, outOf: 15, pct: 100, delta: +2, prevScore: 13,
+    n: 16, score: 15, outOf: 15, pct: 100, delta: 0, prevScore: 15,
 
     // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Unit 15 &mdash; 15/15 (100%) &#127775; Frame Trap &middot; Kangaroo Count &middot; HCF Three-Item',
-    patternInsight: '<strong>PERFECT SCORE &mdash; 2nd 15/15 in the programme (first since U10).</strong> Sec A Frame Trap 5/5 &#10003;: 4-consecutive-miss streak completely broken &mdash; the frame-given-outer variant is now locked. Q5&#9733;&#9733; minor arithmetic slip (836 written, 832 confirmed after review). Sec B Kangaroo Count 5/5 &#10003;: units digit cycles (period-4 rule), staircase paths (Fibonacci), consecutive integers all correct &mdash; every M1 Kangaroo gap addressed in one unit. Sec C HCF Three-Item 5/5 &#10003;: including Q15&#9733;&#9733; hardest extension &mdash; U14 Q9&#9733; abandoned gap completely resolved.',
+    patternLabel:   'Unit 16 &mdash; 15/15 (100%) &#127775; Bar Model Algebra &middot; SimEq Two-Variable &middot; Sequences',
+    patternInsight: '<strong>PERFECT SCORE &mdash; 3rd 15/15 in the programme.</strong> Sec A Bar Model &amp; Algebraic Unknowns 5/5 &#10003;: clean variable setup throughout; multi-condition problems (Maya pocket money, rectangle perimeter) handled correctly. Sec B SimEq Two-Variable 5/5 &#10003;: equation method now solid &mdash; bracket expansion applied independently on all 5 problems. Sec C Sequences 5/5 &#10003; &mdash; but important note: Prem solved all by listing terms manually, not using T&#8345; formula. Left a message: &ldquo;Don&rsquo;t understand the formula, so I just list it down.&rdquo; Formula lesson needs full rebuild in U17.',
 
     // ── Results panel analysis insight ───────────────────────────────
-    analysisLabel:   'Unit 15 analysis &mdash; Frame Trap / Kangaroo Count / HCF Three-Item',
-    analysisInsight: '<strong>Score: 15/15 PERFECT &mdash; all three sections 5/5.</strong> Sec A Frame Trap 5/5: Q1&ndash;Q4 clean. Q5&#9733;&#9733; correct (832 cm&sup2;; minor arithmetic slip of 836 written, self-corrected after review). Sec B Kangaroo 5/5: units digit cycle (period-4) &#10003;. Staircase paths (Fibonacci) &#10003;. Consecutive integers &#10003;. Applied-type Kangaroo instinct developing strongly. Sec C HCF Three-Item 5/5: Q11&ndash;Q13 standard HCF &#10003;. Q14&#9733; &#10003;. Q15&#9733;&#9733; full three-item extension &#10003; &mdash; prime factorisation applied to all three numbers, common primes at lowest power. All gaps from U14 and M1 addressed.',
+    analysisLabel:   'Unit 16 analysis &mdash; Bar Model / SimEq Two-Variable / Sequences',
+    analysisInsight: '<strong>Score: 15/15 PERFECT &mdash; all three sections 5/5.</strong> Sec A Bar Model 5/5: Q1&ndash;Q3 bar model word problems correct. Q4&#9733; rectangle perimeter (2W+5 setup) &#10003;. Q5&#9733; Maya pocket money (x&minus;18=x&divide;2) &#10003;. Sec B SimEq 5/5: Q6 buses/wheels &#10003;. Q7&#9733; tickets &#10003;. Q8 fruit stall &#10003;. Q9&#9733; coins &#10003;. Q10&#9733;&#9733; pen costs &#10003;. Equation method with bracket expansion confirmed solid. Sec C Sequences 5/5: all correct BUT Prem listed every term by hand (e.g. T&#8321;&#8325; by counting 15 terms). Formula T&#8345;=a+(n&minus;1)d not used or understood. Left handwritten message to coach: &ldquo;Don&rsquo;t understand the formula, so I just list it down.&rdquo; U17 Lesson 1 must rebuild from first principles.',
 
     // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>Sec A Frame Trap 5/5 &#127775; (4-miss streak broken) &middot; Sec B Kangaroo Count 5/5 &#127775; (M1 Kangaroo gaps closed) &middot; Sec C HCF Three-Item 5/5 &#127775; (Q15&#9733;&#9733; &#10003;).</strong>',
+    qSummary: '<strong>Sec A Bar Model 5/5 &#127775; &middot; Sec B SimEq Two-Variable 5/5 &#127775; (equation method confirmed) &middot; Sec C Sequences 5/5 &#127775; (listed manually &mdash; formula rebuild needed in U17).</strong>',
 
     // ── Q-by-Q breakdown ─────────────────────────────────────────────
     qBreakdown: [
-      { q:'Q1',  topic:'Frame Area &mdash; outer dims given, find frame area',                      lvl:'w', pass:true,  note:'&#10003; Outer &minus; inner = frame area. Method fully correct.' },
-      { q:'Q2',  topic:'Frame Area &mdash; rectangular room frame variant',                         lvl:'w', pass:true,  note:'&#10003; Correct.' },
-      { q:'Q3',  topic:'Frame Area &mdash; standard border width problem',                          lvl:'m', pass:true,  note:'&#10003; Correct.' },
-      { q:'Q4',  topic:'Frame Area &#9733; &mdash; harder frame with cost or square variant',       lvl:'h', pass:true,  note:'&#10003; Correct.' },
-      { q:'Q5',  topic:'Frame Area &#9733;&#9733; &mdash; hardest nested/two-layer variant',        lvl:'h', pass:true,  note:'&#10003; 832 cm&sup2; confirmed. Minor arithmetic slip (836 written) self-corrected after parent review. Method: outer area &minus; inner area = frame area, fully correct.' },
-      { q:'Q6',  topic:'Units Digit Cycle &mdash; find units digit of 3&sup;n',                     lvl:'w', pass:true,  note:'&#10003; Period-4 cycle for base 3 applied correctly (3,9,7,1 repeating).' },
-      { q:'Q7',  topic:'Units Digit Cycle &mdash; different base variant',                          lvl:'m', pass:true,  note:'&#10003; Correct.' },
-      { q:'Q8',  topic:'Staircase Paths &mdash; Fibonacci-type counting (1 or 2 steps)',            lvl:'m', pass:true,  note:'&#10003; Fibonacci sequence correctly built up from base cases. M1 Q19 gap (used 6!) fully resolved.' },
-      { q:'Q9',  topic:'Consecutive Numbers &#9733; &mdash; find values from total or product',     lvl:'h', pass:true,  note:'&#10003; Correct.' },
-      { q:'Q10', topic:'Kangaroo Count &#9733;&#9733; &mdash; combined competition-style problem',  lvl:'h', pass:true,  note:'&#10003; Correct.' },
-      { q:'Q11', topic:'HCF Applied &mdash; two-number word problem',                              lvl:'w', pass:true,  note:'&#10003; HCF via prime factorisation applied correctly.' },
-      { q:'Q12', topic:'HCF Three-Item &mdash; find HCF of three numbers',                         lvl:'m', pass:true,  note:'&#10003; All three numbers factorised, common primes at lowest power taken.' },
-      { q:'Q13', topic:'HCF Three-Item &mdash; applied word problem (three quantities)',            lvl:'m', pass:true,  note:'&#10003; Correct.' },
-      { q:'Q14', topic:'HCF Three-Item &#9733; &mdash; harder extension',                          lvl:'h', pass:true,  note:'&#10003; Correct.' },
-      { q:'Q15', topic:'HCF Three-Item &#9733;&#9733; &mdash; hardest extension, three-item HCF',  lvl:'h', pass:true,  note:'&#10003; Full prime factorisation on all three numbers. Common primes identified. U14 Q9&#9733; blank &rarr; now 5/5 &mdash; gap resolved.' }
+      { q:'Q1',  topic:'Bar Model &mdash; Stamps (Sam 4&times; Ken, total 60)',                     lvl:'w', pass:true,  note:'&#10003; Let K=Ken, Sam=4K. 5K=60 &rarr; K=12, Sam=48. Clean setup.' },
+      { q:'Q2',  topic:'Bar Model &mdash; Cycling Distance (total 95 km, diff 13)',                  lvl:'w', pass:true,  note:'&#10003; S+(S+13)=95 &rarr; S=41. Correct.' },
+      { q:'Q3',  topic:'Bar Model &mdash; Library Books (non-fiction 3&times; fiction, total 72)',    lvl:'w', pass:true,  note:'&#10003; 4F=72 &rarr; F=18. Correct.' },
+      { q:'Q4',  topic:'Algebraic Unknowns &#9733; &mdash; Rectangle Perimeter',                    lvl:'h', pass:true,  note:'&#10003; L=2W+5, perimeter 52. 2(3W+5)=52 &rarr; W=7. Correct.' },
+      { q:'Q5',  topic:'Algebraic Unknowns &#9733; &mdash; Pocket Money (half after spending $18)', lvl:'h', pass:true,  note:'&#10003; x&minus;18=x&divide;2 &rarr; x=36. Correct.' },
+      { q:'Q6',  topic:'SimEq Two-Variable &mdash; Buses &amp; Cars (wheels)',                      lvl:'w', pass:true,  note:'&#10003; 6B+4(18&minus;B)=80 &rarr; B=4. Equation method applied.' },
+      { q:'Q7',  topic:'SimEq Two-Variable &#9733; &mdash; Tickets ($12/$7, 20 for $195)',          lvl:'h', pass:true,  note:'&#10003; 12A+7(20&minus;A)=195 &rarr; A=11. Correct.' },
+      { q:'Q8',  topic:'SimEq Two-Variable &mdash; Fruit Stall ($3/$1.50, 10 for $21)',             lvl:'w', pass:true,  note:'&#10003; 3M+1.5(10&minus;M)=21 &rarr; M=4. Correct.' },
+      { q:'Q9',  topic:'SimEq Two-Variable &#9733; &mdash; 5c/10c Coins (24 coins, $1.95)',         lvl:'h', pass:true,  note:'&#10003; 10T+5(24&minus;T)=195 &rarr; T=15. Correct.' },
+      { q:'Q10', topic:'SimEq Two-Variable &#9733;&#9733; &mdash; Pen Costs (80c/50c, 15 pens, $9)',lvl:'h', pass:true,  note:'&#10003; 80R+50(15&minus;R)=900 &rarr; R=5. Correct.' },
+      { q:'Q11', topic:'Arithmetic Sequence &mdash; T&#8321;&#8325; (seq 5,9,13,17&hellip;)',        lvl:'w', pass:true,  note:'&#10003; Listed all 15 terms manually: 5,9,13&hellip;61. Got correct answer but did NOT use T&#8345; formula.' },
+      { q:'Q12', topic:'Arithmetic Sequence &mdash; T&#8328; (a=6, d=3)',                           lvl:'w', pass:true,  note:'&#10003; Listed terms: 6,9,12,15,18,21,24,27. Correct.' },
+      { q:'Q13', topic:'Arithmetic Sequence &#9733; &mdash; Find first term (T&#8325;=29, T&#8328;=44)',lvl:'h', pass:true, note:'&#10003; Correct. Working shows back-calculation.' },
+      { q:'Q14', topic:'Arithmetic Sequence &#9733; &mdash; Cinema Seats (T&#8321;&#8322;, a=15 d=3)',lvl:'h', pass:true, note:'&#10003; Listed rows: 15,18,21&hellip;48. Correct by counting, not formula.' },
+      { q:'Q15', topic:'Arithmetic Sequence &#9733;&#9733; &mdash; Two Conditions (T&#8322;=8, T&#8325;=17 &rarr; T&#8321;&#8320;)',lvl:'h', pass:true, note:'&#10003; Correct. Note left by Prem: &ldquo;Don&rsquo;t understand the formula, so I just list it down.&rdquo; &mdash; U17 formula rebuild essential.' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -64,16 +64,16 @@ var PREM_DATA = {
   skills: [
     { name: 'Logic & Reasoning', c: 87, t: 90 },
     { name: 'Number Sense',      c: 88, t: 90 },
-    { name: 'Algebra',           c: 95, t: 85 },
+    { name: 'Algebra',           c: 96, t: 85 },
     { name: 'Arithmetic',        c: 82, t: 85 },
     { name: 'Geometry',          c: 70, t: 80 },
     { name: 'Counting',          c: 83, t: 85 },
     { name: 'Number Theory',     c: 83, t: 82 },
-    { name: 'Applied Problems',  c: 62, t: 80 }
+    { name: 'Applied Problems',  c: 65, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 70, 88, 95, 83, 82, 83, 62],
+  radarCurrent:  [87, 70, 88, 96, 83, 82, 83, 65],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -95,11 +95,25 @@ var PREM_DATA = {
     { n:12, score:10, delta:-3,   color:'linear-gradient(135deg,#1565C0,#0D47A1)', star:false },
     { n:13, score:9,  delta:-1,   color:'linear-gradient(135deg,#006064,#00838F)', star:false },
     { n:14, score:13, delta:+4,   color:'linear-gradient(135deg,#004D40,#00695C)', star:false },
-    { n:15, score:15, delta:+2,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:true  }
+    { n:15, score:15, delta:+2,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:true  },
+    { n:16, score:15, delta:0,    color:'linear-gradient(135deg,#FFD700,#FFA500)',  star:true  }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 16,
+      badge: 'linear-gradient(135deg,#FFD700,#FFA500)',
+      title: 'Bar Model Algebra &middot; SimEq Two-Variable &middot; Sequences',
+      tags: [
+        { t:'15/15 &#127775;', c:'tgreen' },
+        { t:'Bar Model 5/5 &#127775;', c:'tgreen' },
+        { t:'SimEq 5/5 &#127775;', c:'tpurple' },
+        { t:'Sequences 5/5 &#9888;', c:'torange' }
+      ],
+      note: '3rd perfect score in programme. Sec A: bar model word problems 5/5, multi-condition algebra &#10003;. Sec B: SimEq equation method confirmed solid &mdash; all 5 by bracket expansion, no guessing. Sec C: 5/5 &#10003; BUT all solved by listing terms manually, not using formula. Prem left note to coach: &ldquo;Don&rsquo;t understand the formula, so I just list it down.&rdquo; U17 Lesson 1 = formula rebuild.',
+      status: 'done'
+    },
     {
       n: 15,
       badge: 'linear-gradient(135deg,#43e97b,#38f9d7)',
@@ -310,10 +324,16 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'SimEq Two-Variable Totals &mdash; ACTIVE &mdash; equation method not yet solid',
+      label:     'Sequences Formula T&#8345;=a+(n&minus;1)d &mdash; ACTIVE &mdash; Prem lists manually, formula not understood',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U14 SimEq Ext 5/5 &#10003; (well-structured problems). BUT U13/U14 Two-Variable Totals (Sec B): relied on Assume &amp; Adjust and guessing. U14 Q9&#9733; abandoned (? written). Equation method with bracket expansion not internalised &mdash; no independent equation setup observed. U16 plan: Phase 1 bracket drill &rarr; Phase 2 side-by-side comparison &rarr; Phase 3 equation-only practice. Goal: equation fluency with zero guessing.',
-      fillClass: 'g1', fillPct: 30
+      score:     'U16 Sequences 5/5 &#10003; but all solved by listing terms one by one. Prem left message: &ldquo;Don&rsquo;t understand the formula, so I just list it down.&rdquo; Method works for small n but will fail on T&#8325;&#8320; or T&#8321;&#8320;&#8320; in ISA. U17 Lesson 1 rebuilds formula from first principles: listing &rarr; counting jumps &rarr; formula emerges naturally.',
+      fillClass: 'g1', fillPct: 20
+    },
+    {
+      label:     'SimEq Two-Variable Totals &mdash; RESOLVING &mdash; equation method now solid',
+      pill:      'p2', pillText: 'Resolving &#128992;',
+      score:     'U16 SimEq Two-Variable 5/5 &#10003;: equation method with bracket expansion applied independently across all 5 problems including Q10&#9733;&#9733;. Significant improvement from U13/U14 where Assume &amp; Adjust was used. Goal achieved: equation fluency confirmed.',
+      fillClass: 'g2', fillPct: 80
     },
     {
       label:     'Geometry: frame outer/inner trap &mdash; RESOLVED in U15',
@@ -347,7 +367,7 @@ var PREM_DATA = {
     }
   ],
 
-  radarLegendUnit: 'U15'
+  radarLegendUnit: 'U16'
 
 };
 

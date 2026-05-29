@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sequences Formula — Unit 17 Lesson 1</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4ff;color:#1a1a2e;min-height:100vh}
+
+/* ── Topnav ── */
+.topnav{display:flex;align-items:center;justify-content:space-between;background:#1A237E;color:#fff;padding:10px 18px;gap:8px}
+.topnav a.hub-btn{color:#fff;text-decoration:none;font-size:13px;background:rgba(255,255,255,0.15);padding:5px 10px;border-radius:6px;white-space:nowrap}
+.topnav a.hub-btn:hover{background:rgba(255,255,255,0.28)}
+.topnav .nav-title{font-size:14px;font-weight:700;text-align:center;flex:1}
+.topnav .nav-pill{font-size:11px;background:rgba(255,255,255,0.18);padding:3px 8px;border-radius:10px;white-space:nowrap}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{background:rgba(255,255,255,0.15);border:none;color:#fff;padding:5px 11px;border-radius:6px;cursor:pointer;font-size:13px}
+.nav-btn:hover{background:rgba(255,255,255,0.28)}
+.nav-btn:disabled{opacity:0.35;cursor:default}
+
+/* ── Screen ── */
+.screen{display:none;max-width:780px;margin:0 auto;padding:24px 16px 40px}
+.screen.active{display:block}
+.card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 12px rgba(26,35,126,0.08);margin-bottom:18px}
+
+/* ── Accent colours ── */
+.accent{color:#1A237E}
+h2{color:#1A237E;font-size:1.25rem;margin-bottom:14px}
+h3{color:#283593;font-size:1.05rem;margin-bottom:10px}
+
+/* ── Sequence visual ── */
+.seq-visual{display:flex;align-items:flex-end;gap:6px;margin:18px 0;flex-wrap:wrap}
+.seq-bar{display:flex;flex-direction:column;align-items:center;gap:4px}
+.seq-bar .bar{background:linear-gradient(180deg,#3949AB,#1A237E);border-radius:4px 4px 0 0;width:36px;transition:height 0.4s}
+.seq-bar .val{font-size:13px;font-weight:700;color:#1A237E}
+.seq-bar .idx{font-size:11px;color:#666}
+.jump-row{display:flex;align-items:center;gap:4px;margin:8px 0;flex-wrap:wrap}
+.jump-arrow{font-size:20px;color:#E64A19}
+.jump-label{background:#FFF3E0;color:#E64A19;font-weight:700;font-size:12px;padding:2px 7px;border-radius:8px}
+
+/* ── Step cards ── */
+.step-card{border-left:4px solid #1A237E;background:#EEF2FF;padding:14px 16px;border-radius:0 10px 10px 0;margin:12px 0}
+.step-num{font-size:11px;font-weight:700;color:#5C6BC0;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.step-body{font-size:15px;color:#1a1a2e}
+
+/* ── Formula box ── */
+.formula-box{background:linear-gradient(135deg,#1A237E,#283593);color:#fff;border-radius:12px;padding:20px;text-align:center;margin:16px 0}
+.formula-big{font-size:1.5rem;font-weight:700;letter-spacing:1px;margin-bottom:10px}
+.formula-parts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.fp{padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600}
+.fp-a{background:#F48FB1;color:#880E4F}
+.fp-n{background:#FFF176;color:#F57F17}
+.fp-d{background:#A5D6A7;color:#1B5E20}
+
+/* ── Jump table ── */
+.jump-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+.jump-table th{background:#1A237E;color:#fff;padding:8px 10px;text-align:center}
+.jump-table td{padding:8px 10px;text-align:center;border-bottom:1px solid #E8EAF6}
+.jump-table tr:nth-child(even) td{background:#F5F6FF}
+.jump-table .hl{background:#FFF9C4;font-weight:700;color:#E65100}
+
+/* ── Worked example ── */
+.worked{background:#F3F4FF;border-radius:10px;padding:16px;margin:14px 0;border:1px solid #C5CAE9}
+.worked-q{font-weight:700;color:#283593;margin-bottom:10px;font-size:15px}
+.worked-step{display:flex;align-items:flex-start;gap:10px;margin:6px 0}
+.ws-num{background:#1A237E;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px}
+.ws-text{font-size:14px;color:#1a1a2e}
+.ws-answer{background:#E8F5E9;border-radius:8px;padding:8px 12px;color:#1B5E20;font-weight:700;font-size:14px;margin-top:8px}
+
+/* ── Practice ── */
+.pq{background:#fff;border:2px solid #C5CAE9;border-radius:10px;padding:16px;margin:14px 0}
+.pq-text{font-size:15px;margin-bottom:12px;color:#1a1a2e}
+.pq-input{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pq-input input{border:2px solid #9FA8DA;border-radius:8px;padding:8px 12px;font-size:15px;width:130px;outline:none}
+.pq-input input:focus{border-color:#1A237E}
+.pq-btn{background:#1A237E;color:#fff;border:none;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600}
+.pq-btn:hover{background:#283593}
+.pq-feedback{margin-top:10px;padding:9px 14px;border-radius:8px;font-size:14px;font-weight:600;display:none}
+.pq-feedback.correct{background:#E8F5E9;color:#1B5E20;display:block}
+.pq-feedback.wrong{background:#FFEBEE;color:#B71C1C;display:block}
+
+/* ── Highlight colours ── */
+.hl-a{color:#C2185B;font-weight:700}
+.hl-d{color:#2E7D32;font-weight:700}
+.hl-n{color:#E65100;font-weight:700}
+.hl-ans{color:#1565C0;font-weight:700}
+
+/* ── Why it matters box ── */
+.why-box{background:#FFF3E0;border-left:4px solid #E64A19;border-radius:0 10px 10px 0;padding:14px 16px;margin:14px 0}
+.why-title{font-weight:700;color:#E64A19;margin-bottom:6px;font-size:14px}
+
+/* ── Summary ── */
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:520px){.summary-grid{grid-template-columns:1fr}}
+.sg-card{background:#EEF2FF;border-radius:10px;padding:14px;border-top:3px solid #1A237E}
+.sg-title{font-size:12px;font-weight:700;color:#5C6BC0;text-transform:uppercase;margin-bottom:6px}
+.sg-body{font-size:14px;color:#1a1a2e}
+
+.btn-hub{display:block;width:fit-content;margin:24px auto 0;background:linear-gradient(135deg,#1A237E,#283593);color:#fff;text-decoration:none;padding:13px 32px;border-radius:10px;font-size:15px;font-weight:700;text-align:center}
+.btn-hub:hover{opacity:0.9}
+</style>
+</head>
+<body>
+
+<!-- Topnav -->
+<nav class="topnav">
+  <a href="index.html" class="hub-btn">← Hub</a>
+  <span class="nav-title">Sequences Formula</span>
+  <div class="nav-right">
+    <span class="nav-pill">Unit 17 · Lesson 1</span>
+    <button class="nav-btn" id="prevBtn" onclick="goScreen(-1)" disabled>← Prev</button>
+    <button class="nav-btn" id="nextBtn" onclick="goScreen(1)">Next →</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 1 — You already understand sequences! -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="screen active" id="s0">
+  <div class="card">
+    <h2>You already understand sequences! 🎉</h2>
+    <p style="font-size:15px;line-height:1.7;margin-bottom:16px">
+      In Unit 16, you got <strong>5/5 on sequences</strong> — and you left a note:<br>
+      <em style="color:#1A237E">"Don't understand the formula, so I just list it down."</em>
+    </p>
+    <p style="font-size:15px;line-height:1.7;margin-bottom:16px">
+      Here's the thing — <strong>listing is correct!</strong> It's exactly the right thinking.<br>
+      This lesson shows you that the formula is just a <em>shortcut for listing</em> — nothing magic, nothing scary.
+    </p>
+    <div class="why-box">
+      <div class="why-title">⚠ Why the formula matters</div>
+      <p style="font-size:14px;line-height:1.6">Listing works for T₁₅ (15 terms). But what if ISA asks for <strong>T₅₀</strong> or <strong>T₁₀₀</strong>? You'd need to list 100 terms — that takes too long. The formula gets you there in 3 seconds.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Let's start with a sequence you know</h3>
+    <p style="font-size:14px;margin-bottom:14px">Here's the sequence: <strong>3, 7, 11, 15, 19, 23, …</strong></p>
+
+    <div class="seq-visual" id="seqBars">
+      <div class="seq-bar"><div class="bar" style="height:30px"></div><div class="val">3</div><div class="idx">T₁</div></div>
+      <div class="seq-bar"><div class="bar" style="height:50px"></div><div class="val">7</div><div class="idx">T₂</div></div>
+      <div class="seq-bar"><div class="bar" style="height:70px"></div><div class="val">11</div><div class="idx">T₃</div></div>
+      <div class="seq-bar"><div class="bar" style="height:90px"></div><div class="val">15</div><div class="idx">T₄</div></div>
+      <div class="seq-bar"><div class="bar" style="height:110px"></div><div class="val">19</div><div class="idx">T₅</div></div>
+      <div class="seq-bar"><div class="bar" style="height:130px"></div><div class="val">23</div><div class="idx">T₆</div></div>
+    </div>
+
+    <div class="jump-row">
+      <span style="font-weight:700;color:#1A237E">T₁=3</span>
+      <span class="jump-arrow">→</span><span class="jump-label">+4</span>
+      <span style="font-weight:700;color:#1A237E">T₂=7</span>
+      <span class="jump-arrow">→</span><span class="jump-label">+4</span>
+      <span style="font-weight:700;color:#1A237E">T₃=11</span>
+      <span class="jump-arrow">→</span><span class="jump-label">+4</span>
+      <span style="font-weight:700;color:#1A237E">T₄=15</span>
+      <span class="jump-arrow">→</span><span class="jump-label">+4</span>
+      <span style="font-weight:700;color:#1A237E">…</span>
+    </div>
+
+    <div class="step-card" style="margin-top:16px">
+      <div class="step-num">Key observation</div>
+      <div class="step-body">Every term is <strong>+4 from the one before</strong>. The first term is <strong>3</strong>. These two facts are all we need.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 2 — Counting the jumps -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="screen" id="s1">
+  <div class="card">
+    <h2>The secret: count the jumps</h2>
+    <p style="font-size:15px;line-height:1.7;margin-bottom:16px">
+      When you list to find T₅, you do this:
+    </p>
+
+    <table class="jump-table">
+      <tr><th>Term</th><th>Value</th><th>How many +4 jumps from T₁?</th></tr>
+      <tr><td>T₁</td><td>3</td><td class="hl">0 jumps → 3 + 0×4 = <strong>3</strong></td></tr>
+      <tr><td>T₂</td><td>7</td><td class="hl">1 jump → 3 + 1×4 = <strong>7</strong></td></tr>
+      <tr><td>T₃</td><td>11</td><td class="hl">2 jumps → 3 + 2×4 = <strong>11</strong></td></tr>
+      <tr><td>T₄</td><td>15</td><td class="hl">3 jumps → 3 + 3×4 = <strong>15</strong></td></tr>
+      <tr><td>T₅</td><td>19</td><td class="hl">4 jumps → 3 + 4×4 = <strong>19</strong></td></tr>
+      <tr><td>T₁₀</td><td>?</td><td class="hl">9 jumps → 3 + 9×4 = <strong>39</strong></td></tr>
+      <tr><td>T₅₀</td><td>?</td><td class="hl">49 jumps → 3 + 49×4 = <strong>199</strong></td></tr>
+    </table>
+
+    <div class="step-card">
+      <div class="step-num">The pattern</div>
+      <div class="step-body">To get term <strong>n</strong>, you make <strong>(n − 1) jumps</strong> of +4 from the start.<br>
+      So: Term n = <strong>3</strong> + <strong>(n − 1)</strong> × <strong>4</strong></div>
+    </div>
+
+    <div class="step-card" style="border-color:#E64A19;background:#FFF3E0">
+      <div class="step-num" style="color:#E64A19">Why (n − 1) and not n?</div>
+      <div class="step-body">T₁ needs <strong>0</strong> jumps (not 1). T₅ needs <strong>4</strong> jumps (not 5). It's always <em>one less than the term number</em>.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>This IS the formula</h3>
+    <div class="formula-box">
+      <div class="formula-big">T<sub>n</sub> = <span style="color:#F48FB1">a</span> + (n − 1) × <span style="color:#A5D6A7">d</span></div>
+      <div class="formula-parts">
+        <div class="fp fp-a"><span style="color:#880E4F">a</span> = first term</div>
+        <div class="fp fp-n"><span style="color:#F57F17">n</span> = term number you want</div>
+        <div class="fp fp-d"><span style="color:#1B5E20">d</span> = common difference (the jump)</div>
+      </div>
+    </div>
+    <p style="font-size:14px;line-height:1.7;color:#555">You are not memorising a magic rule. You are just counting jumps: start at <span class="hl-a">a</span>, take <span class="hl-n">(n−1)</span> jumps of size <span class="hl-d">d</span>.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 3 — Worked examples -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <div class="card">
+    <h2>Using the formula — 3 worked examples</h2>
+
+    <!-- Type A: find Tₙ -->
+    <h3>Type A — Find a specific term</h3>
+    <div class="worked">
+      <div class="worked-q">Q: The sequence is 5, 9, 13, 17, … Find the 20th term.</div>
+      <div class="worked-step"><div class="ws-num">1</div><div class="ws-text">Identify: <span class="hl-a">a = 5</span>, <span class="hl-d">d = 4</span>, <span class="hl-n">n = 20</span></div></div>
+      <div class="worked-step"><div class="ws-num">2</div><div class="ws-text">Substitute: T₂₀ = <span class="hl-a">5</span> + (<span class="hl-n">20</span> − 1) × <span class="hl-d">4</span></div></div>
+      <div class="worked-step"><div class="ws-num">3</div><div class="ws-text">= 5 + 19 × 4 = 5 + 76</div></div>
+      <div class="ws-answer">T₂₀ = 81</div>
+    </div>
+
+    <!-- Type B: find first term -->
+    <h3 style="margin-top:18px">Type B — Find the first term</h3>
+    <div class="worked">
+      <div class="worked-q">Q: In an arithmetic sequence, d = 3. The 6th term is 20. Find the first term.</div>
+      <div class="worked-step"><div class="ws-num">1</div><div class="ws-text">Known: <span class="hl-d">d = 3</span>, T₆ = 20, <span class="hl-n">n = 6</span></div></div>
+      <div class="worked-step"><div class="ws-num">2</div><div class="ws-text">Formula: 20 = <span class="hl-a">a</span> + (6 − 1) × <span class="hl-d">3</span> = <span class="hl-a">a</span> + 15</div></div>
+      <div class="worked-step"><div class="ws-num">3</div><div class="ws-text"><span class="hl-a">a</span> = 20 − 15</div></div>
+      <div class="ws-answer">First term a = 5</div>
+    </div>
+
+    <!-- Type C: find d from two terms -->
+    <h3 style="margin-top:18px">Type C — Find d from two terms</h3>
+    <div class="worked">
+      <div class="worked-q">Q: The 3rd term is 11 and the 7th term is 23. Find d and T₁.</div>
+      <div class="worked-step"><div class="ws-num">1</div><div class="ws-text">From T₃ to T₇ is 4 jumps. Gap = 23 − 11 = 12.</div></div>
+      <div class="worked-step"><div class="ws-num">2</div><div class="ws-text"><span class="hl-d">d = 12 ÷ 4 = 3</span></div></div>
+      <div class="worked-step"><div class="ws-num">3</div><div class="ws-text">T₃ = a + 2d → 11 = a + 6 → <span class="hl-a">a = 5</span></div></div>
+      <div class="ws-answer">d = 3, first term = 5, so T₁₀ = 5 + 9×3 = 32</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 4 — Practice -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="screen" id="s3">
+  <div class="card">
+    <h2>Practice — Use the formula, not listing!</h2>
+    <p style="font-size:14px;color:#555;margin-bottom:4px">For each question, write down <span class="hl-a">a</span>, <span class="hl-d">d</span>, <span class="hl-n">n</span> first, then substitute.</p>
+  </div>
+
+  <!-- Q1 -->
+  <div class="pq">
+    <div class="pq-text"><strong>Q1.</strong> The sequence is 2, 6, 10, 14, … What is the <strong>25th term</strong>?<br><span style="font-size:13px;color:#555">(a = 2, d = 4, n = 25)</span></div>
+    <div class="pq-input">
+      <input type="number" inputmode="numeric" id="p1" placeholder="T₂₅ = ?">
+      <button class="pq-btn" onclick="chk('p1',98,'fb1')">Check</button>
+    </div>
+    <div class="pq-feedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="pq">
+    <div class="pq-text"><strong>Q2.</strong> An arithmetic sequence has first term 7 and common difference 5. What is the <strong>12th term</strong>?</div>
+    <div class="pq-input">
+      <input type="number" inputmode="numeric" id="p2" placeholder="T₁₂ = ?">
+      <button class="pq-btn" onclick="chk('p2',62,'fb2')">Check</button>
+    </div>
+    <div class="pq-feedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="pq">
+    <div class="pq-text"><strong>Q3.</strong> The 4th term of a sequence is 19 and the common difference is 4. What is the <strong>first term</strong>?</div>
+    <div class="pq-input">
+      <input type="number" inputmode="numeric" id="p3" placeholder="a = ?">
+      <button class="pq-btn" onclick="chk('p3',7,'fb3')">Check</button>
+    </div>
+    <div class="pq-feedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="pq">
+    <div class="pq-text"><strong>Q4.</strong> The 2nd term is 9 and the 5th term is 18. What is the <strong>common difference</strong> d?</div>
+    <div class="pq-input">
+      <input type="number" inputmode="numeric" id="p4" placeholder="d = ?">
+      <button class="pq-btn" onclick="chk('p4',3,'fb4')">Check</button>
+    </div>
+    <div class="pq-feedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="pq">
+    <div class="pq-text"><strong>Q5.</strong> A sequence starts at 100 and decreases by 6 each time: 100, 94, 88, … What is the <strong>15th term</strong>?<br><span style="font-size:13px;color:#555">(Hint: d = −6)</span></div>
+    <div class="pq-input">
+      <input type="number" inputmode="numeric" id="p5" placeholder="T₁₅ = ?">
+      <button class="pq-btn" onclick="chk('p5',16,'fb5')">Check</button>
+    </div>
+    <div class="pq-feedback" id="fb5"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 5 — Summary -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="screen" id="s4">
+  <div class="card">
+    <h2>What you've learned ✅</h2>
+
+    <div class="formula-box">
+      <div class="formula-big">T<sub>n</sub> = <span style="color:#F48FB1">a</span> + (n − 1) × <span style="color:#A5D6A7">d</span></div>
+      <div style="font-size:14px;margin-top:8px;opacity:0.85">Start at a · take (n−1) jumps of size d</div>
+    </div>
+
+    <div class="summary-grid">
+      <div class="sg-card">
+        <div class="sg-title">a = first term</div>
+        <div class="sg-body">The starting value of the sequence</div>
+      </div>
+      <div class="sg-card">
+        <div class="sg-title">d = common difference</div>
+        <div class="sg-body">The fixed jump between terms (+ve or −ve)</div>
+      </div>
+      <div class="sg-card">
+        <div class="sg-title">n = term number</div>
+        <div class="sg-body">Which term you want to find</div>
+      </div>
+      <div class="sg-card">
+        <div class="sg-title">Why (n − 1)?</div>
+        <div class="sg-body">T₁ = 0 jumps, T₂ = 1 jump, T₅ = 4 jumps — always one less</div>
+      </div>
+    </div>
+
+    <div class="step-card" style="margin-top:8px">
+      <div class="step-num">3 types to know</div>
+      <div class="step-body">
+        <strong>Type A</strong> — Given a, d, n → find Tₙ (substitute directly)<br>
+        <strong>Type B</strong> — Given d and one term → find first term a (rearrange)<br>
+        <strong>Type C</strong> — Given two terms → find d = gap ÷ jumps, then find a
+      </div>
+    </div>
+  </div>
+
+  <a href="index.html" class="btn-hub">← Back to Hub</a>
+</div>
+
+<script>
+var current = 0;
+var total = 5;
+
+function goScreen(dir) {
+  document.getElementById('s' + current).classList.remove('active');
+  current += dir;
+  document.getElementById('s' + current).classList.add('active');
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === total - 1;
+  window.scrollTo(0, 0);
+}
+
+function chk(inputId, correct, fbId) {
+  var val = parseInt(document.getElementById(inputId).value);
+  var fb = document.getElementById(fbId);
+  fb.className = 'pq-feedback';
+  if (isNaN(val)) {
+    fb.className = 'pq-feedback wrong';
+    fb.textContent = 'Enter a number first.';
+    return;
+  }
+  if (val === correct) {
+    fb.className = 'pq-feedback correct';
+    fb.textContent = '✓ Correct! ' + getHint(inputId, correct);
+  } else {
+    fb.className = 'pq-feedback wrong';
+    fb.textContent = 'Not quite — check your substitution. Try again!';
+  }
+}
+
+function getHint(id, ans) {
+  var hints = {
+    'p1': 'T₂₅ = 2 + 24×4 = 2 + 96 = 98 ✓',
+    'p2': 'T₁₂ = 7 + 11×5 = 7 + 55 = 62 ✓',
+    'p3': 'T₄ = a + 3×4 = 19 → a = 19 − 12 = 7 ✓',
+    'p4': 'From T₂ to T₅ = 3 jumps. Gap = 18−9 = 9. d = 9÷3 = 3 ✓',
+    'p5': 'T₁₅ = 100 + 14×(−6) = 100 − 84 = 16 ✓'
+  };
+  return hints[id] || '';
+}
+</script>
+</body>
+</html>
