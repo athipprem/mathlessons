@@ -347,7 +347,6 @@ var PREM_DATA = {
     }
   ],
 
- label ───────────────────────────────────────
   radarLegendUnit: 'U15'
 
 };
