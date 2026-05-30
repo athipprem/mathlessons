@@ -21,41 +21,41 @@ var PREM_DATA = {
 
   // ── Current state ────────────────────────────────────────────────
   currentUnit: {
-    n:           18,
+    n:           19,
     status:      'Lessons In Progress',
     testPending: false
   },
   lastUnit: {
-    n: 17, score: 10, outOf: 15, pct: 67, delta: -5, prevScore: 15,
+    n: 18, score: 11, outOf: 15, pct: 73, delta: +1, prevScore: 10,
 
     // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Unit 17 &mdash; 10/15 (67%) Sequences Formula &middot; Ratio &amp; Proportion',
-    patternInsight: '<strong>10/15 (67%) &mdash; new topics dip, expected.</strong> Sec A Sequences 4/5: Q5 wrong &mdash; divided gap by 2 instead of counting 3 jumps between T&#8323; and T&#8326;. Q1&ndash;Q4 correct. Sec B Mixed 3/5: Q6 wrong (listed to get 99 instead of 105 &mdash; arithmetic slip in long listing run, exact reason formula matters). Q7&#9733; &#10003; (first negative term, T&#8321;&#8322;). Q8&#9733;&#9733; &#10003; (two-conditions). Sec C Ratio 3/5: Q9&ndash;Q11 correct. Q12 &#10003;. Q13&#9733; &#10003; (give-and-equal). Q14&#9733; &#10003; (ratio changes). Q15&#9733;&#9733; blank (ages ratio change). Formula still not used under test pressure; listing cost a point on Q6.',
+    patternLabel:   'Unit 18 &mdash; 11/15 (73%) Sequences Jump Drill &middot; Ratio Advanced',
+    patternInsight: '<strong>11/15 (73%) &mdash; Sec A 3/5, Sec B 3/5, Sec C 5/5 PERFECT.</strong> Sec A: Q1&#10003; Q2&#10003; Q3&#10003; (formula correct). Q4&#10007; 67 (jump-count: divided by 5 position instead of 4 gaps, d=4 not 5). Q5&#10007; T8 (solved n&gt;8.5 but rounded DOWN &mdash; must round UP to 9). Sec B: Q6&#10007; 92 (arithmetic slip; d correct). Q7&#10003; Q8&#10003; Q9&#10003; (listed to get 69 &mdash; correct answer, still listing). Q10&#10007; blank (two-conditions setup 2a+12d=54 not attempted). Sec C Ratio Advanced 5/5 &#127775; PERFECT &mdash; all k-method types correct: add &#10003;, remove &#10003;, ages &#10003; (Q12), transfer &#10003; (Q15). Complete turnaround from U17 Q15 blank. Ratio fully mastered.',
 
     // ── Results panel analysis insight ───────────────────────────────
-    analysisLabel:   'Unit 16 analysis &mdash; Bar Model / SimEq Two-Variable / Sequences',
-    analysisInsight: '<strong>Score: 10/15 (67%) &mdash; Sec A 4/5, Sec B 3/5, Sec C 3/5.</strong> Sec A Sequences: Q1 T&#8321;&#8328;=55 &#10003;. Q2 T&#8321;&#8320;=62 &#10003;. Q3 T&#8321;&#8325;=73 &#10003;. Q4 first term=7 &#10003; (listed terms to find). Q5&#9733; d=4 &#10007; (wrote 6 &mdash; divided gap 12 by 2 instead of 3 jumps). Sec B: Q6&#9733; T&#8322;&#8320;=105 &#10007; (answered 99 &mdash; arithmetic slip after listing 16 steps from T&#8324;=25). Q7&#9733; T&#8321;&#8322; first negative &#10003;. Q8&#9733;&#9733; first term=2 &#10003;. Q9 Kate=21 &#10003;. Q10 OJ=20 &#10003;. Sec C: Q11 yellow=60 &#10003;. Q12 total=49 &#10003;. Q13&#9733; John=$80 &#10003;. Q14&#9733; red=12 &#10003;. Q15&#9733;&#9733; son age blank (ratio-change ages not attempted).',
+    analysisLabel:   'Unit 18 analysis &mdash; Sequences Jump Drill / Ratio Advanced',
+    analysisInsight: '<strong>Score: 11/15 (73%) &mdash; Sec A 3/5, Sec B 3/5, Sec C 5/5.</strong> Sec A: Q1&ndash;Q3 &#10003;. Q4&#10007; 67 (jump-count: divided gap by 5 instead of 4 &rarr; d=4 not 5, T&#8321;&#8325;=67 not 77). Q5&#10007; T8 (solved inequality n&gt;8.5 but rounded DOWN to 8 &mdash; must round UP to 9). Sec B: Q6&#10007; 92 arithmetic slip (d correct, computation error). Q7 &#10003; Q8 &#10003;. Q9 &#10003; (listed to get 69 &mdash; still avoiding formula). Q10&#10007; blank &mdash; two-conditions type 2a+36=54 not attempted. Sec C: ALL 5 ratio-change problems correct including Q12&#9733; ages &#10003; and Q15&#9733;&#9733; transfer &#10003;. Ratio Advanced 5/5 &mdash; complete turnaround from U17 Q15 blank.',
 
     // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>Sec A Sequences 4/5 &middot; Sec B Mixed 3/5 (Q6 listed=99 wrong, formula=105) &middot; Sec C Ratio debut 3/5 (Q15&#9733;&#9733; blank).</strong>',
+    qSummary: '<strong>Sec A Sequences 3/5 (Q4 jump-count err, Q5 off-by-one) &middot; Sec B Challenge 3/5 (Q6 92&#10007; Q10 blank) &middot; Sec C Ratio Advanced 5/5 &#127775; PERFECT.</strong>',
 
     // ── Q-by-Q breakdown ─────────────────────────────────────────────
     qBreakdown: [
-      { q:'Q1',  topic:'Arithmetic Sequence &mdash; T&#8321;&#8328; (seq 4,7,10&hellip;)',             lvl:'w', pass:true,  note:'&#10003; T&#8321;&#8328;=4+17&times;3=55. Used formula correctly.' },
-      { q:'Q2',  topic:'Arithmetic Sequence &mdash; T&#8321;&#8320; (a=8, d=6)',                      lvl:'w', pass:true,  note:'&#10003; T&#8321;&#8320;=8+9&times;6=62.' },
-      { q:'Q3',  topic:'Arithmetic Sequence &mdash; T&#8321;&#8325; (a=3, d=5)',                      lvl:'w', pass:true,  note:'&#10003; T&#8321;&#8325;=3+14&times;5=73.' },
-      { q:'Q4',  topic:'Arithmetic Sequence &#9733; &mdash; Find first term (T&#8325;=31, d=6)',      lvl:'m', pass:true,  note:'&#10003; Listed terms: 7,13,19,25,31 to find a=7. Correct answer, but still listing.' },
-      { q:'Q5',  topic:'Arithmetic Sequence &#9733; &mdash; Find d (T&#8323;=14, T&#8326;=26)',       lvl:'m', pass:false, note:'&#10007; Wrote d=6. Error: divided gap (26&minus;14=12) by 2 instead of 3 jumps. T&#8323;&rarr;T&#8326; = 3 jumps, not 2. d=12&divide;3=4.' },
-      { q:'Q6',  topic:'Arithmetic Sequence &#9733; &mdash; Find T&#8322;&#8320; (T&#8324;=25, T&#8329;=50)',lvl:'h',pass:false,note:'&#10007; Answered 99. Listed forward from T&#8324;=25 and made arithmetic slip at some step (correct: d=5, a=10, T&#8322;&#8320;=105). Proves listing fails on large n.' },
-      { q:'Q7',  topic:'Arithmetic Sequence &#9733; &mdash; Decreasing (50,45,40&hellip;, first negative)', lvl:'h', pass:true,  note:'&#10003; T&#8321;&#8322;=50+11&times;(&minus;5)=&minus;5. First negative correctly identified.' },
-      { q:'Q8',  topic:'Arithmetic Sequence &#9733;&#9733; &mdash; Two conditions (T&#8324;+T&#8328;=44, d=4)', lvl:'h', pass:true,  note:'&#10003; 2a+40=44 &rarr; a=2. Correct algebraic setup.' },
-      { q:'Q9',  topic:'Ratio &mdash; Share by Ratio (56 pencils, Kate:Luke=3:5)',                    lvl:'w', pass:true,  note:'&#10003; 1 part=7. Kate=3&times;7=21.' },
-      { q:'Q10', topic:'Ratio &mdash; Find One Quantity (OJ:mango=2:3, 30 mango)',                    lvl:'w', pass:true,  note:'&#10003; 1 part=10. OJ=2&times;10=20.' },
-      { q:'Q11', topic:'Ratio &mdash; Three-Part (2:3:5, 120 beads, yellow)',                         lvl:'w', pass:true,  note:'&#10003; 1 part=12. Yellow=5&times;12=60.' },
-      { q:'Q12', topic:'Ratio &#9733; &mdash; Find Total (boys:girls=3:4, 28 girls)',                 lvl:'m', pass:true,  note:'&#10003; 1 part=7. Total=7&times;7=49.' },
-      { q:'Q13', topic:'Ratio &#9733; &mdash; Give-and-Equal (John:Mary=5:3, gives $16)',             lvl:'m', pass:true,  note:'&#10003; 5k&minus;16=3k+16 &rarr; k=16. John=$80.' },
-      { q:'Q14', topic:'Ratio Changes &#9733; &mdash; Remove Items (red:green=2:5, remove 6 green)', lvl:'h', pass:true,  note:'&#10003; 2k:(5k&minus;6)=1:2 &rarr; k=6. Red=12.' },
-      { q:'Q15', topic:'Ratio Changes &#9733;&#9733; &mdash; Ages (father:son=4:1, in 6 yrs=2:1)',   lvl:'h', pass:false, note:'&#10007; Left blank. Ratio-change ages variant not attempted. U18 targeted practice needed.' }
+      { q:'Q1',  topic:'Sequences &mdash; Tₙ from first term and d (formula)',                      lvl:'w', pass:true,  note:'&#10003; Formula applied correctly. Tₙ = a + (n&minus;1)d.' },
+      { q:'Q2',  topic:'Sequences &mdash; Tₙ from first term and d (medium)',                        lvl:'w', pass:true,  note:'&#10003; Correct. Formula used without listing.' },
+      { q:'Q3',  topic:'Sequences &mdash; Tₙ from first term and d (medium)',                        lvl:'w', pass:true,  note:'&#10003; Correct. Formula used without listing.' },
+      { q:'Q4',  topic:'Sequences &#9733; &mdash; Find d from two given terms (T&#8325;, T&#8329;)', lvl:'m', pass:false, note:'&#10007; Got 67 instead of 77. Jump-count error: divided gap by 5 (term position) instead of 4 (number of jumps). T&#8325;&rarr;T&#8329; = 4 jumps, d = gap&divide;4. Same error type as U17 in new form.' },
+      { q:'Q5',  topic:'Sequences &#9733; &mdash; Inequality rounding (first term below X)',         lvl:'m', pass:false, note:'&#10007; Answered T8 instead of T9. Set up inequality n&gt;8.5 correctly but rounded DOWN to 8. Rule: n&gt;8.5 means first whole number is 9. Always round UP.' },
+      { q:'Q6',  topic:'Sequences &#9733; &mdash; Find T&#8322;&#8320; by formula (large index)',    lvl:'h', pass:false, note:'&#10007; Got 92 instead of 82. Method correct (found d, found a). Arithmetic slip in final computation. Formula approach was used &mdash; improvement from listing, but computation error.' },
+      { q:'Q7',  topic:'Sequences &#9733; &mdash; Decreasing sequence, find term value',             lvl:'h', pass:true,  note:'&#10003; Correct. Negative d handled properly.' },
+      { q:'Q8',  topic:'Sequences &#9733; &mdash; Two conditions (T&#8323;+T&#8327;=40, d=4)',       lvl:'h', pass:true,  note:'&#10003; Correct. 2a+24=40 &rarr; a=8. Algebraic setup solid.' },
+      { q:'Q9',  topic:'Sequences &#9733; &mdash; Find term value (listed to get 69)',               lvl:'h', pass:true,  note:'&#10003; Correct answer (69). Achieved by listing &mdash; formula would have been faster. Correct result counts.' },
+      { q:'Q10', topic:'Sequences &#9733;&#9733; &mdash; Two conditions (T&#8324;+T&#8321;&#8320;=54, find a)', lvl:'h', pass:false, note:'&#10007; Left blank. Did not attempt. Setup: a+3d + a+9d=54 &rarr; 2a+12d=54. Bridges to SimEq (already strong). This is the key U19 target.' },
+      { q:'Q11', topic:'Ratio Changes &mdash; Add items, find new ratio',                           lvl:'w', pass:true,  note:'&#10003; k-method applied correctly.' },
+      { q:'Q12', topic:'Ratio Changes &#9733; &mdash; Ages variant (father:son, years later)',       lvl:'m', pass:true,  note:'&#10003; Ages ratio-change correct &mdash; complete turnaround from U17 Q15 blank.' },
+      { q:'Q13', topic:'Ratio Changes &#9733; &mdash; Give-and-equal variant',                      lvl:'m', pass:true,  note:'&#10003; k-method setup correct.' },
+      { q:'Q14', topic:'Ratio Changes &#9733; &mdash; Remove items variant',                        lvl:'h', pass:true,  note:'&#10003; Correct. Removed correctly and ratio confirmed.' },
+      { q:'Q15', topic:'Ratio Changes &#9733;&#9733; &mdash; Transfer variant (hardest type)',      lvl:'h', pass:true,  note:'&#10003; Transfer (give-and-take between two people) correctly solved. Ratio Advanced fully mastered.' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -97,11 +97,25 @@ var PREM_DATA = {
     { n:14, score:13, delta:+4,   color:'linear-gradient(135deg,#004D40,#00695C)', star:false },
     { n:15, score:15, delta:+2,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:true  },
     { n:16, score:15, delta:0,    color:'linear-gradient(135deg,#FFD700,#FFA500)',  star:true  },
-    { n:17, score:10, delta:-5,   color:'linear-gradient(135deg,#1565C0,#0D47A1)',  star:false }
+    { n:17, score:10, delta:-5,   color:'linear-gradient(135deg,#1565C0,#0D47A1)',  star:false },
+    { n:18, score:11, delta:+1,   color:'linear-gradient(135deg,#E65100,#F57C00)',  star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 18,
+      badge: 'linear-gradient(135deg,#E65100,#F57C00)',
+      title: 'Sequences Jump Drill &middot; Ratio Advanced (Before &amp; After)',
+      tags: [
+        { t:'11/15 &#11014;', c:'torange' },
+        { t:'Sequences 3/5', c:'torange' },
+        { t:'Seq Challenge 3/5', c:'torange' },
+        { t:'Ratio Advanced 5/5 &#127775;', c:'tgreen' }
+      ],
+      note: 'Sec A 3/5: Q4 jump-count error (divided by 5 pos instead of 4 gaps). Q5 off-by-one on inequality rounding (n&gt;8.5 &rarr; rounded to 8 not 9). Sec B 3/5: Q6 arithmetic slip on T&#8322;&#8320; (method correct, d correct). Q10 blank &mdash; two-conditions 2a+36=54 type not attempted. Sec C Ratio Advanced 5/5 &#127775; PERFECT &mdash; complete turnaround from U17 Q15 blank: ages &#10003;, transfer &#10003; (Q15). Ratio fully mastered. U19: inequality rounding + two-conditions + Angles debut.',
+      status: 'done'
+    },
     {
       n: 17,
       badge: 'linear-gradient(135deg,#1565C0,#0D47A1)',
@@ -338,16 +352,28 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'Sequences Formula &mdash; ACTIVE &mdash; jump counting error + listing habit under pressure',
+      label:     'Sequences: Inequality Rounding &amp; Two-Conditions &mdash; ACTIVE',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U17: Q5 wrong (d=6 instead of 4 &mdash; divided by 2 not 3 jumps). Q6 wrong (listed 16 steps, arithmetic slip gave 99 not 105 &mdash; formula would give instant correct answer). Still listing under test pressure despite U17 formula lesson. U18 Lesson 1: targeted jump-counting drill + formula-under-pressure practice. Key rule: T&#8339; to T&#8345; = (n&minus;m) jumps.',
-      fillClass: 'g1', fillPct: 35
+      score:     'U18 Q5 &#10007;: solved n&gt;8.5 correctly but rounded DOWN to 8 (correct: 9). U18 Q10 blank: two-conditions setup 2a+12d=54 not attempted. U19 Lesson 1 targets both. Key rule: n&gt;8.5 means FIRST whole integer = 9 (round UP). Two-conditions bridges to SimEq &mdash; Prem already strong there.',
+      fillClass: 'g1', fillPct: 50
     },
     {
-      label:     'Ratio Changes (before/after, ages) &mdash; ACTIVE &mdash; Q15 blank',
+      label:     'Sequences: Jump-Count Error (still persisting) &mdash; ACTIVE',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U17 ratio debut strong: Type A/B/C all attempted. Q13 give-and-equal &#10003;. Q14 remove-items &#10003;. But Q15 ages ratio change left blank &mdash; not attempted. U18 Lesson 2 targets ratio-change ages and harder before/after variants.',
-      fillClass: 'g1', fillPct: 40
+      score:     'U17 Q5 &#10007; (divided by 2 not 3). U18 Q4 &#10007; (divided by 5 position not 4 gaps). Two consecutive units with same error type in different disguise. Key rule: Tₘ&rarr;Tₙ = (n&minus;m) jumps, NOT term-count. U19 test includes jump-count Qs to confirm lock.',
+      fillClass: 'g1', fillPct: 55
+    },
+    {
+      label:     'Geometry: Angles &mdash; UNTOUCHED &mdash; major ISA topic',
+      pill:      'p2', pillText: 'NEW &#128308;',
+      score:     'Zero angles exposure across 18 units. ISA Grade 5 regularly tests triangle (180&deg;), quadrilateral (360&deg;), straight line, vertically opposite, and finding unknowns algebraically. U19 Lesson 2 introduces all types. Strong algebra foundation means learning curve is gentle.',
+      fillClass: 'g1', fillPct: 0
+    },
+    {
+      label:     'Ratio Changes (before/after, ages) &mdash; RESOLVED in U18',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U18 Sec C 5/5 &#127775; PERFECT. All k-method types correct: add &#10003;, remove &#10003;, ages &#10003; (Q12), transfer &#10003; (Q15). Complete turnaround from U17 Q15 blank. Ratio Advanced fully mastered.',
+      fillClass: 'gs', fillPct: 97
     },
     {
       label:     'SimEq Two-Variable Totals &mdash; RESOLVING &mdash; equation method now solid',
@@ -387,7 +413,7 @@ var PREM_DATA = {
     }
   ],
 
-  radarLegendUnit: 'U17'
+  radarLegendUnit: 'U18'
 
 };
 

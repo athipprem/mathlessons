@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angles — Unit 19 Lesson 2</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#E8F5E9;color:#1a1a2e;min-height:100vh}
+.topnav{display:flex;align-items:center;justify-content:space-between;background:#004D40;color:#fff;padding:10px 18px;gap:8px}
+.topnav a.hub-btn{color:#fff;text-decoration:none;font-size:13px;background:rgba(255,255,255,0.15);padding:5px 10px;border-radius:6px;white-space:nowrap}
+.topnav a.hub-btn:hover{background:rgba(255,255,255,0.28)}
+.topnav .nav-title{font-size:14px;font-weight:700;text-align:center;flex:1}
+.topnav .nav-pill{font-size:11px;background:rgba(255,255,255,0.18);padding:3px 8px;border-radius:10px;white-space:nowrap}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{background:rgba(255,255,255,0.15);border:none;color:#fff;padding:5px 11px;border-radius:6px;cursor:pointer;font-size:13px}
+.nav-btn:hover{background:rgba(255,255,255,0.28)}
+.nav-btn:disabled{opacity:0.35;cursor:default}
+.screen{display:none;max-width:780px;margin:0 auto;padding:24px 16px 40px}
+.screen.active{display:block}
+.card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 12px rgba(0,77,64,0.08);margin-bottom:18px}
+h2{color:#004D40;font-size:1.25rem;margin-bottom:14px}
+h3{color:#00695C;font-size:1.05rem;margin-bottom:10px}
+.step-card{border-left:4px solid #004D40;background:#E8F5E9;padding:14px 16px;border-radius:0 10px 10px 0;margin:12px 0}
+.step-num{font-size:11px;font-weight:700;color:#00796B;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.step-body{font-size:15px;color:#1a1a2e;line-height:1.6}
+.rule-box{background:linear-gradient(135deg,#004D40,#00695C);color:#fff;border-radius:12px;padding:18px;text-align:center;margin:14px 0}
+.rule-big{font-size:1.3rem;font-weight:700;margin-bottom:6px}
+.rule-sub{font-size:13px;opacity:0.85}
+/* angle diagrams */
+.angle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
+@media(max-width:520px){.angle-grid{grid-template-columns:1fr}}
+.angle-card{background:#fff;border-radius:10px;padding:16px;border-top:3px solid #004D40;text-align:center}
+.angle-card svg{display:block;margin:0 auto 8px}
+.angle-label{font-size:12px;font-weight:700;color:#004D40;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.angle-val{font-size:18px;font-weight:700;color:#004D40}
+.angle-desc{font-size:12px;color:#666;margin-top:4px}
+/* triangle visual */
+.tri-vis{display:flex;justify-content:center;margin:18px 0}
+.tri-vis svg{max-width:320px;width:100%}
+/* algebra highlight */
+.alg-box{background:#FFF3E0;border-left:4px solid #E65100;border-radius:0 10px 10px 0;padding:14px 16px;margin:14px 0}
+.alg-title{font-weight:700;color:#E65100;margin-bottom:8px;font-size:14px}
+/* worked */
+.worked{background:#F1F8F6;border-radius:10px;padding:16px;margin:14px 0;border:1px solid #A5D6A7}
+.worked-q{font-weight:700;color:#004D40;margin-bottom:10px;font-size:15px}
+.ws{display:flex;align-items:flex-start;gap:10px;margin:6px 0}
+.ws-num{background:#004D40;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px}
+.ws-text{font-size:14px;color:#1a1a2e;line-height:1.5}
+.ws-ans{background:#E8F5E9;border-radius:8px;padding:8px 12px;color:#1B5E20;font-weight:700;font-size:14px;margin-top:8px}
+/* practice */
+.pq{background:#fff;border:2px solid #A5D6A7;border-radius:10px;padding:16px;margin:14px 0}
+.pq-text{font-size:15px;margin-bottom:10px;color:#1a1a2e;line-height:1.5}
+.pq-input{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pq-input input{border:2px solid #80CBC4;border-radius:8px;padding:8px 12px;font-size:15px;width:110px;outline:none}
+.pq-input input:focus{border-color:#004D40}
+.pq-btn{background:#004D40;color:#fff;border:none;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600}
+.pq-btn:hover{background:#00695C}
+.pq-feedback{margin-top:8px;padding:9px 14px;border-radius:8px;font-size:14px;font-weight:600;display:none}
+.pq-feedback.correct{background:#E8F5E9;color:#1B5E20;display:block}
+.pq-feedback.wrong{background:#FFEBEE;color:#B71C1C;display:block}
+/* multi-input */
+.mi-row{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}
+.mi-row label{font-size:13px;font-weight:700;color:#004D40;min-width:60px}
+.mi-row input{border:2px solid #80CBC4;border-radius:8px;padding:7px 10px;font-size:14px;width:90px;outline:none}
+/* summary */
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:520px){.summary-grid{grid-template-columns:1fr}}
+.sg-card{background:#E8F5E9;border-radius:10px;padding:14px;border-top:3px solid #004D40}
+.sg-title{font-size:12px;font-weight:700;color:#00796B;text-transform:uppercase;margin-bottom:6px}
+.sg-body{font-size:14px;color:#1a1a2e;line-height:1.5}
+.btn-hub{display:block;width:fit-content;margin:24px auto 0;background:linear-gradient(135deg,#004D40,#00695C);color:#fff;text-decoration:none;padding:13px 32px;border-radius:10px;font-size:15px;font-weight:700;text-align:center}
+.btn-hub:hover{opacity:0.9}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a href="index.html" class="hub-btn">← Hub</a>
+  <span class="nav-title">Angles</span>
+  <div class="nav-right">
+    <span class="nav-pill">Unit 19 · Lesson 2</span>
+    <button class="nav-btn" id="prevBtn" onclick="goScreen(-1)" disabled>← Prev</button>
+    <button class="nav-btn" id="nextBtn" onclick="goScreen(1)">Next →</button>
+  </div>
+</nav>
+
+<!-- ══ SCREEN 1 — The big picture ══ -->
+<div class="screen active" id="s0">
+  <div class="card">
+    <h2>Angles — your first geometry expansion 📐</h2>
+    <p style="font-size:15px;line-height:1.7;margin-bottom:14px">
+      We've covered perimeter, area, path, and frame. Now: <strong>angles</strong> — a major ISA topic for Grade 5 that hasn't appeared in our programme yet.
+    </p>
+    <p style="font-size:15px;line-height:1.7;margin-bottom:14px">
+      The good news: most angle problems reduce to <strong>simple algebra</strong>, and you're already strong there. This lesson will feel familiar.
+    </p>
+    <div class="angle-grid">
+      <div class="angle-card">
+        <svg viewBox="0 0 100 90" width="90" height="80">
+          <polygon points="10,80 50,10 90,80" fill="#E8F5E9" stroke="#004D40" stroke-width="2.5"/>
+          <text x="50" y="58" text-anchor="middle" font-size="11" fill="#004D40" font-weight="700">180°</text>
+          <text x="50" y="72" text-anchor="middle" font-size="9" fill="#004D40">total</text>
+        </svg>
+        <div class="angle-label">Triangle</div>
+        <div class="angle-val">= 180°</div>
+        <div class="angle-desc">Sum of all 3 angles</div>
+      </div>
+      <div class="angle-card">
+        <svg viewBox="0 0 100 90" width="90" height="80">
+          <rect x="10" y="15" width="80" height="60" fill="#E8F5E9" stroke="#004D40" stroke-width="2.5"/>
+          <text x="50" y="52" text-anchor="middle" font-size="11" fill="#004D40" font-weight="700">360°</text>
+          <text x="50" y="66" text-anchor="middle" font-size="9" fill="#004D40">total</text>
+        </svg>
+        <div class="angle-label">Quadrilateral</div>
+        <div class="angle-val">= 360°</div>
+        <div class="angle-desc">Any 4-sided shape</div>
+      </div>
+      <div class="angle-card">
+        <svg viewBox="0 0 100 90" width="90" height="80">
+          <line x1="5" y1="60" x2="95" y2="60" stroke="#004D40" stroke-width="2.5"/>
+          <line x1="50" y1="60" x2="70" y2="20" stroke="#00796B" stroke-width="2" stroke-dasharray="4"/>
+          <path d="M55,60 Q58,50 63,48" fill="none" stroke="#E65100" stroke-width="1.5"/>
+          <text x="50" y="52" text-anchor="middle" font-size="10" fill="#E65100">a°</text>
+          <path d="M42,60 Q39,50 35,48" fill="none" stroke="#1565C0" stroke-width="1.5"/>
+          <text x="33" y="52" text-anchor="middle" font-size="10" fill="#1565C0">b°</text>
+          <text x="50" y="80" text-anchor="middle" font-size="9" fill="#004D40">a + b = 180°</text>
+        </svg>
+        <div class="angle-label">Straight Line</div>
+        <div class="angle-val">= 180°</div>
+        <div class="angle-desc">Angles on one side</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 2 — Triangle rule + visual ══ -->
+<div class="screen" id="s1">
+  <div class="card">
+    <h2>Triangle — angles always add to 180° ▲</h2>
+    <p style="font-size:14px;margin-bottom:16px;line-height:1.6">
+      No matter what shape a triangle is — big, small, tilted — its three angles always sum to exactly 180°.
+    </p>
+
+    <div class="tri-vis">
+      <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Triangle -->
+        <polygon points="60,170 280,170 170,30" fill="#E8F5E9" stroke="#004D40" stroke-width="2.5"/>
+        <!-- Angle arcs -->
+        <path d="M80,170 Q85,155 95,148" fill="none" stroke="#E64A19" stroke-width="2"/>
+        <path d="M260,170 Q255,155 248,148" fill="none" stroke="#1565C0" stroke-width="2"/>
+        <path d="M162,48 Q170,58 178,48" fill="none" stroke="#7B1FA2" stroke-width="2"/>
+        <!-- Labels -->
+        <text x="70" y="155" font-size="15" fill="#E64A19" font-weight="700">a°</text>
+        <text x="248" y="155" font-size="15" fill="#1565C0" font-weight="700">b°</text>
+        <text x="160" y="76" font-size="15" fill="#7B1FA2" font-weight="700">c°</text>
+        <!-- Sum -->
+        <text x="170" y="190" text-anchor="middle" font-size="14" fill="#004D40" font-weight="700">a + b + c = 180°</text>
+      </svg>
+    </div>
+
+    <div class="rule-box">
+      <div class="rule-big">Any triangle: angle₁ + angle₂ + angle₃ = 180°</div>
+      <div class="rule-sub">So: missing angle = 180° − (sum of the other two)</div>
+    </div>
+
+    <div class="worked">
+      <div class="worked-q">Find the missing angle x in a triangle where the other two are 65° and 72°.</div>
+      <div class="ws"><div class="ws-num">1</div><div class="ws-text">x + 65 + 72 = 180</div></div>
+      <div class="ws"><div class="ws-num">2</div><div class="ws-text">x + 137 = 180</div></div>
+      <div class="ws"><div class="ws-num">3</div><div class="ws-text">x = 180 − 137 = <strong>43°</strong></div></div>
+      <div class="ws-ans">✅ x = 43°</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 3 — Special triangles ══ -->
+<div class="screen" id="s2">
+  <div class="card">
+    <h2>Special triangles to know ⭐</h2>
+    <div class="angle-grid">
+      <div class="angle-card" style="border-color:#E64A19">
+        <svg viewBox="0 0 100 90" width="90" height="80">
+          <polygon points="10,80 50,80 50,20" fill="#FFF3E0" stroke="#E64A19" stroke-width="2.5"/>
+          <rect x="50" y="72" width="8" height="8" fill="none" stroke="#E64A19" stroke-width="1.5"/>
+          <text x="24" y="72" font-size="9" fill="#E64A19">90°</text>
+        </svg>
+        <div class="angle-label" style="color:#E64A19">Right Triangle</div>
+        <div class="angle-val" style="color:#E64A19">90° inside</div>
+        <div class="angle-desc">Other two angles add to 90°</div>
+      </div>
+      <div class="angle-card" style="border-color:#1565C0">
+        <svg viewBox="0 0 100 90" width="90" height="80">
+          <polygon points="10,80 90,80 50,10" fill="#E3F2FD" stroke="#1565C0" stroke-width="2.5"/>
+          <text x="50" y="50" text-anchor="middle" font-size="8" fill="#1565C0">60° each</text>
+        </svg>
+        <div class="angle-label" style="color:#1565C0">Equilateral</div>
+        <div class="angle-val" style="color:#1565C0">60° each</div>
+        <div class="angle-desc">All 3 sides equal → 180÷3</div>
+      </div>
+      <div class="angle-card" style="border-color:#7B1FA2">
+        <svg viewBox="0 0 100 90" width="90" height="80">
+          <polygon points="10,80 90,80 50,15" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="2.5"/>
+          <line x1="10" y1="80" x2="47" y2="18" stroke="#7B1FA2" stroke-width="1.5" stroke-dasharray="3"/>
+          <text x="50" y="55" text-anchor="middle" font-size="8" fill="#7B1FA2">2 equal angles</text>
+        </svg>
+        <div class="angle-label" style="color:#7B1FA2">Isosceles</div>
+        <div class="angle-val" style="color:#7B1FA2">2 equal angles</div>
+        <div class="angle-desc">Base angles are always equal</div>
+      </div>
+    </div>
+
+    <div class="alg-box">
+      <div class="alg-title">💡 Isosceles shortcut — used in ISA!</div>
+      <p style="font-size:14px;line-height:1.6">If a triangle has two equal sides, the two base angles are equal. So if you know one base angle is 50°, the other is also 50°, and the apex = 180 − 50 − 50 = <strong>80°</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 4 — Straight line + vertically opposite + at a point ══ -->
+<div class="screen" id="s3">
+  <div class="card">
+    <h2>Three more rules — straight line, crossing lines, and a point 🔵</h2>
+
+    <h3>Rule 1 — Straight line = 180°</h3>
+    <div class="card" style="background:#F1F8F6;box-shadow:none;padding:16px;margin-bottom:0">
+      <svg viewBox="0 0 340 80" width="100%" style="display:block;margin:0 auto">
+        <line x1="10" y1="50" x2="330" y2="50" stroke="#004D40" stroke-width="2.5"/>
+        <line x1="170" y1="50" x2="210" y2="15" stroke="#00796B" stroke-width="2.5"/>
+        <path d="M178,50 Q180,42 186,38" fill="none" stroke="#E64A19" stroke-width="1.5"/>
+        <text x="192" y="40" font-size="13" fill="#E64A19" font-weight="700">a°</text>
+        <path d="M162,50 Q160,42 154,38" fill="none" stroke="#1565C0" stroke-width="1.5"/>
+        <text x="144" y="40" font-size="13" fill="#1565C0" font-weight="700">b°</text>
+        <text x="170" y="72" text-anchor="middle" font-size="12" fill="#004D40" font-weight="700">a + b = 180°</text>
+      </svg>
+    </div>
+
+    <h3 style="margin-top:18px">Rule 2 — Vertically Opposite Angles are EQUAL</h3>
+    <p style="font-size:14px;margin-bottom:10px;line-height:1.5">When two straight lines cross, the angles opposite each other are always equal.</p>
+    <div class="card" style="background:#F1F8F6;box-shadow:none;padding:16px;margin-bottom:0">
+      <svg viewBox="0 0 200 160" width="200" style="display:block;margin:0 auto">
+        <line x1="10" y1="20" x2="190" y2="140" stroke="#004D40" stroke-width="2.5"/>
+        <line x1="190" y1="20" x2="10" y2="140" stroke="#004D40" stroke-width="2.5"/>
+        <ellipse cx="100" cy="80" rx="18" ry="12" fill="#E64A19" opacity="0.2"/>
+        <ellipse cx="100" cy="80" rx="18" ry="12" fill="#E64A19" opacity="0.2" transform="rotate(180 100 80)"/>
+        <text x="100" y="44" text-anchor="middle" font-size="13" fill="#E64A19" font-weight="700">a°</text>
+        <text x="100" y="118" text-anchor="middle" font-size="13" fill="#E64A19" font-weight="700">a°</text>
+        <text x="30" y="84" font-size="13" fill="#1565C0" font-weight="700">b°</text>
+        <text x="162" y="84" font-size="13" fill="#1565C0" font-weight="700">b°</text>
+      </svg>
+    </div>
+
+    <h3 style="margin-top:18px">Rule 3 — Angles at a point = 360°</h3>
+    <p style="font-size:14px;line-height:1.5">All angles around a single point add up to 360°. Think of a full circle.</p>
+    <div class="rule-box" style="margin-top:10px">
+      <div class="rule-big">Straight line: a + b = 180° &nbsp;|&nbsp; Full turn: all angles = 360°</div>
+      <div class="rule-sub">Vertically opposite: the two facing angles are always equal</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 5 — Quadrilateral ══ -->
+<div class="screen" id="s4">
+  <div class="card">
+    <h2>Quadrilateral — angles add to 360° ◻</h2>
+    <p style="font-size:14px;margin-bottom:14px;line-height:1.5">
+      Any four-sided shape (square, rectangle, trapezium, rhombus, irregular) has angles summing to 360°. <br>
+      <strong>Why?</strong> Split it into two triangles — each triangle has 180°, so 2 × 180° = 360°.
+    </p>
+
+    <div class="tri-vis">
+      <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,160 300,160 260,40 80,40" fill="#E8F5E9" stroke="#004D40" stroke-width="2.5"/>
+        <line x1="40" y1="160" x2="260" y2="40" stroke="#00796B" stroke-width="1.5" stroke-dasharray="5"/>
+        <text x="55" y="148" font-size="14" fill="#E64A19" font-weight="700">a°</text>
+        <text x="278" y="150" font-size="14" fill="#1565C0" font-weight="700">b°</text>
+        <text x="248" y="58" font-size="14" fill="#7B1FA2" font-weight="700">c°</text>
+        <text x="76" y="58" font-size="14" fill="#E65100" font-weight="700">d°</text>
+        <text x="170" y="192" text-anchor="middle" font-size="14" fill="#004D40" font-weight="700">a + b + c + d = 360°</text>
+      </svg>
+    </div>
+
+    <div class="worked">
+      <div class="worked-q">A quadrilateral has angles 95°, 110°, 85°, and x°. Find x.</div>
+      <div class="ws"><div class="ws-num">1</div><div class="ws-text">95 + 110 + 85 + x = 360</div></div>
+      <div class="ws"><div class="ws-num">2</div><div class="ws-text">290 + x = 360</div></div>
+      <div class="ws"><div class="ws-num">3</div><div class="ws-text">x = 70°</div></div>
+      <div class="ws-ans">✅ x = 70°</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 6 — Algebra + angles ══ -->
+<div class="screen" id="s5">
+  <div class="card">
+    <h2>Finding unknowns algebraically ⭐ — your strength!</h2>
+    <p style="font-size:14px;margin-bottom:14px;line-height:1.5">
+      ISA loves combining angle rules with algebra. This is where your algebra skills give you a huge advantage.
+    </p>
+
+    <div class="alg-box">
+      <div class="alg-title">🔑 The method — always the same</div>
+      <p style="font-size:14px;line-height:1.6">
+        Write the equation using the angle sum rule.<br>
+        Collect like terms. Solve for x.<br>
+        Check by substituting back.
+      </p>
+    </div>
+
+    <div class="worked">
+      <div class="worked-q">Example 1: A triangle has angles x°, 2x°, and 30°. Find x.</div>
+      <div class="ws"><div class="ws-num">1</div><div class="ws-text">x + 2x + 30 = 180 &nbsp;(triangle rule)</div></div>
+      <div class="ws"><div class="ws-num">2</div><div class="ws-text">3x + 30 = 180 → 3x = 150</div></div>
+      <div class="ws"><div class="ws-num">3</div><div class="ws-text">x = 50° &nbsp;→ angles are 50°, 100°, 30°</div></div>
+      <div class="ws-ans">✅ x = 50° · Check: 50 + 100 + 30 = 180 ✓</div>
+    </div>
+
+    <div class="worked">
+      <div class="worked-q">Example 2: Two angles on a straight line are (3x + 10)° and (2x + 20)°. Find x.</div>
+      <div class="ws"><div class="ws-num">1</div><div class="ws-text">(3x + 10) + (2x + 20) = 180 &nbsp;(straight line)</div></div>
+      <div class="ws"><div class="ws-num">2</div><div class="ws-text">5x + 30 = 180 → 5x = 150</div></div>
+      <div class="ws"><div class="ws-num">3</div><div class="ws-text">x = 30° &nbsp;→ angles are 100° and 80°</div></div>
+      <div class="ws-ans">✅ x = 30° · Check: 100 + 80 = 180 ✓</div>
+    </div>
+
+    <div class="worked">
+      <div class="worked-q">Example 3: Vertically opposite angles. One is (4x − 10)° and the opposite is (2x + 30)°. Find x.</div>
+      <div class="ws"><div class="ws-num">1</div><div class="ws-text">Vertically opposite → they are equal: 4x − 10 = 2x + 30</div></div>
+      <div class="ws"><div class="ws-num">2</div><div class="ws-text">2x = 40 → x = 20°</div></div>
+      <div class="ws-ans">✅ x = 20° · Angle = 4(20)−10 = 70°</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 7 — Practice basic angles ══ -->
+<div class="screen" id="s6">
+  <div class="card">
+    <h2>Practice — Basic Angle Rules 🔢</h2>
+
+    <div class="pq">
+      <div class="pq-text"><strong>Q1.</strong> A triangle has angles 47° and 68°. Find the third angle.</div>
+      <div class="pq-input">
+        <input type="number" inputmode="numeric" id="q1" placeholder="?°">
+        <button class="pq-btn" onclick="chk('q1',65,'q1fb')">Check</button>
+      </div>
+      <div class="pq-feedback" id="q1fb"></div>
+    </div>
+
+    <div class="pq">
+      <div class="pq-text"><strong>Q2.</strong> A quadrilateral has angles 80°, 95°, and 110°. Find the fourth angle.</div>
+      <div class="pq-input">
+        <input type="number" inputmode="numeric" id="q2" placeholder="?°">
+        <button class="pq-btn" onclick="chk('q2',75,'q2fb')">Check</button>
+      </div>
+      <div class="pq-feedback" id="q2fb"></div>
+    </div>
+
+    <div class="pq">
+      <div class="pq-text"><strong>Q3.</strong> Two angles on a straight line are 54° and x°. Find x.</div>
+      <div class="pq-input">
+        <input type="number" inputmode="numeric" id="q3" placeholder="?°">
+        <button class="pq-btn" onclick="chk('q3',126,'q3fb')">Check</button>
+      </div>
+      <div class="pq-feedback" id="q3fb"></div>
+    </div>
+
+    <div class="pq">
+      <div class="pq-text"><strong>Q4.</strong> An isosceles triangle has a base angle of 38°. Find the apex angle.</div>
+      <div class="pq-input">
+        <input type="number" inputmode="numeric" id="q4" placeholder="?°">
+        <button class="pq-btn" onclick="chk('q4',104,'q4fb')">Check</button>
+      </div>
+      <div class="pq-feedback" id="q4fb"></div>
+    </div>
+
+    <div class="pq">
+      <div class="pq-text"><strong>Q5.</strong> Three angles meet at a point. Two are 140° and 85°. Find the third.</div>
+      <div class="pq-input">
+        <input type="number" inputmode="numeric" id="q5" placeholder="?°">
+        <button class="pq-btn" onclick="chk('q5',135,'q5fb')">Check</button>
+      </div>
+      <div class="pq-feedback" id="q5fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 8 — Practice algebraic angles ══ -->
+<div class="screen" id="s7">
+  <div class="card">
+    <h2>Practice — Algebra + Angles ⭐⭐</h2>
+
+    <div class="pq">
+      <div class="pq-text"><strong>Q6.</strong> A triangle has angles x°, (x + 20)°, and (x + 40)°. Find x and the largest angle.</div>
+      <div class="mi-row"><label>x =</label><input type="number" inputmode="numeric" id="q6a" placeholder="?"></div>
+      <div class="mi-row"><label>Largest =</label><input type="number" inputmode="numeric" id="q6b" placeholder="?°"></div>
+      <button class="pq-btn" onclick="chk2('q6a',40,'q6b',80,'q6fb')">Check</button>
+      <div class="pq-feedback" id="q6fb"></div>
+    </div>
+
+    <div class="pq">
+      <div class="pq-text"><strong>Q7 ⭐.</strong> Two angles on a straight line are (5x + 5)° and (4x − 5)°. Find x and both angles.</div>
+      <div class="mi-row"><label>x =</label><input type="number" inputmode="numeric" id="q7a" placeholder="?"></div>
+      <div class="mi-row"><label>Larger angle =</label><input type="number" inputmode="numeric" id="q7b" placeholder="?°"></div>
+      <button class="pq-btn" onclick="chk2('q7a',20,'q7b',105,'q7fb')">Check</button>
+      <div class="pq-feedback" id="q7fb"></div>
+    </div>
+
+    <div class="pq">
+      <div class="pq-text"><strong>Q8 ⭐.</strong> Vertically opposite angles: one is (5x + 8)° and the opposite is (3x + 36)°. Find x.</div>
+      <div class="pq-input">
+        <input type="number" inputmode="numeric" id="q8" placeholder="x = ?">
+        <button class="pq-btn" onclick="chk('q8',14,'q8fb')">Check</button>
+      </div>
+      <div class="pq-feedback" id="q8fb"></div>
+    </div>
+
+    <div class="pq">
+      <div class="pq-text"><strong>Q9 ⭐⭐.</strong> A quadrilateral has angles x°, 2x°, (x + 30)°, and 90°. Find x and the largest angle.</div>
+      <div class="mi-row"><label>x =</label><input type="number" inputmode="numeric" id="q9a" placeholder="?"></div>
+      <div class="mi-row"><label>Largest =</label><input type="number" inputmode="numeric" id="q9b" placeholder="?°"></div>
+      <button class="pq-btn" onclick="chk2('q9a',60,'q9b',120,'q9fb')">Check</button>
+      <div class="pq-feedback" id="q9fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 9 — Summary ══ -->
+<div class="screen" id="s8">
+  <div class="card">
+    <h2>Lesson Summary — Angles toolkit 🚀</h2>
+
+    <div class="summary-grid">
+      <div class="sg-card">
+        <div class="sg-title">Triangle</div>
+        <div class="sg-body">All 3 angles = 180°<br>Isosceles → 2 base angles equal<br>Equilateral → all 60°<br>Right triangle → other two add to 90°</div>
+      </div>
+      <div class="sg-card">
+        <div class="sg-title">Quadrilateral</div>
+        <div class="sg-body">All 4 angles = 360°<br>Missing angle = 360 − sum of others<br>Square/rectangle → all 90°</div>
+      </div>
+      <div class="sg-card">
+        <div class="sg-title">Straight line &amp; crossing</div>
+        <div class="sg-body">Straight line → angles add to 180°<br>Vertically opposite → always equal<br>Angles at a point → 360°</div>
+      </div>
+      <div class="sg-card">
+        <div class="sg-title">Algebra method</div>
+        <div class="sg-body">Write the rule equation<br>Collect like terms<br>Solve for x<br>Always verify by substituting back</div>
+      </div>
+    </div>
+
+    <div class="rule-box" style="margin-top:18px">
+      <div class="rule-big">Triangle = 180° · Quad = 360° · Straight line = 180°</div>
+      <div class="rule-sub">Vertically opposite = equal · Full turn = 360°</div>
+    </div>
+
+    <a href="index.html" class="btn-hub">← Back to Hub</a>
+  </div>
+</div>
+
+<script>
+const screens = document.querySelectorAll('.screen');
+let cur = 0;
+function goScreen(dir) {
+  screens[cur].classList.remove('active');
+  cur += dir;
+  screens[cur].classList.add('active');
+  document.getElementById('prevBtn').disabled = cur === 0;
+  document.getElementById('nextBtn').disabled = cur === screens.length - 1;
+  window.scrollTo(0,0);
+}
+function chk(id, ans, fbId) {
+  const v = parseInt(document.getElementById(id).value);
+  const fb = document.getElementById(fbId);
+  if (isNaN(v)) { fb.className='pq-feedback wrong'; fb.textContent='Enter a number.'; return; }
+  if (v === ans) { fb.className='pq-feedback correct'; fb.textContent='✅ Correct!'; }
+  else { fb.className='pq-feedback wrong'; fb.textContent='❌ Check your angle rule — write the equation first, then solve.'; }
+}
+function chk2(id1,a1,id2,a2,fbId) {
+  const v1=parseInt(document.getElementById(id1).value);
+  const v2=parseInt(document.getElementById(id2).value);
+  const fb=document.getElementById(fbId);
+  if(isNaN(v1)||isNaN(v2)){fb.className='pq-feedback wrong';fb.textContent='Fill both boxes.';return;}
+  if(v1===a1&&v2===a2){fb.className='pq-feedback correct';fb.textContent='✅ Both correct!';}
+  else if(v1!==a1){fb.className='pq-feedback wrong';fb.textContent='❌ x is wrong — set up the angle sum equation and solve step by step.';}
+  else{fb.className='pq-feedback wrong';fb.textContent='❌ x is correct! Now substitute back to find the largest angle.';}
+}
+</script>
+</body>
+</html>
