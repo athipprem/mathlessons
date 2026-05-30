@@ -15,47 +15,47 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '29 May 2026',
+  updated:        '30 May 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
   currentUnit: {
-    n:           17,
+    n:           18,
     status:      'Lessons In Progress',
     testPending: false
   },
   lastUnit: {
-    n: 16, score: 15, outOf: 15, pct: 100, delta: 0, prevScore: 15,
+    n: 17, score: 10, outOf: 15, pct: 67, delta: -5, prevScore: 15,
 
     // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Unit 16 &mdash; 15/15 (100%) &#127775; Bar Model Algebra &middot; SimEq Two-Variable &middot; Sequences',
-    patternInsight: '<strong>PERFECT SCORE &mdash; 3rd 15/15 in the programme.</strong> Sec A Bar Model &amp; Algebraic Unknowns 5/5 &#10003;: clean variable setup throughout; multi-condition problems (Maya pocket money, rectangle perimeter) handled correctly. Sec B SimEq Two-Variable 5/5 &#10003;: equation method now solid &mdash; bracket expansion applied independently on all 5 problems. Sec C Sequences 5/5 &#10003; &mdash; but important note: Prem solved all by listing terms manually, not using T&#8345; formula. Left a message: &ldquo;Don&rsquo;t understand the formula, so I just list it down.&rdquo; Formula lesson needs full rebuild in U17.',
+    patternLabel:   'Unit 17 &mdash; 10/15 (67%) Sequences Formula &middot; Ratio &amp; Proportion',
+    patternInsight: '<strong>10/15 (67%) &mdash; new topics dip, expected.</strong> Sec A Sequences 4/5: Q5 wrong &mdash; divided gap by 2 instead of counting 3 jumps between T&#8323; and T&#8326;. Q1&ndash;Q4 correct. Sec B Mixed 3/5: Q6 wrong (listed to get 99 instead of 105 &mdash; arithmetic slip in long listing run, exact reason formula matters). Q7&#9733; &#10003; (first negative term, T&#8321;&#8322;). Q8&#9733;&#9733; &#10003; (two-conditions). Sec C Ratio 3/5: Q9&ndash;Q11 correct. Q12 &#10003;. Q13&#9733; &#10003; (give-and-equal). Q14&#9733; &#10003; (ratio changes). Q15&#9733;&#9733; blank (ages ratio change). Formula still not used under test pressure; listing cost a point on Q6.',
 
     // ── Results panel analysis insight ───────────────────────────────
     analysisLabel:   'Unit 16 analysis &mdash; Bar Model / SimEq Two-Variable / Sequences',
-    analysisInsight: '<strong>Score: 15/15 PERFECT &mdash; all three sections 5/5.</strong> Sec A Bar Model 5/5: Q1&ndash;Q3 bar model word problems correct. Q4&#9733; rectangle perimeter (2W+5 setup) &#10003;. Q5&#9733; Maya pocket money (x&minus;18=x&divide;2) &#10003;. Sec B SimEq 5/5: Q6 buses/wheels &#10003;. Q7&#9733; tickets &#10003;. Q8 fruit stall &#10003;. Q9&#9733; coins &#10003;. Q10&#9733;&#9733; pen costs &#10003;. Equation method with bracket expansion confirmed solid. Sec C Sequences 5/5: all correct BUT Prem listed every term by hand (e.g. T&#8321;&#8325; by counting 15 terms). Formula T&#8345;=a+(n&minus;1)d not used or understood. Left handwritten message to coach: &ldquo;Don&rsquo;t understand the formula, so I just list it down.&rdquo; U17 Lesson 1 must rebuild from first principles.',
+    analysisInsight: '<strong>Score: 10/15 (67%) &mdash; Sec A 4/5, Sec B 3/5, Sec C 3/5.</strong> Sec A Sequences: Q1 T&#8321;&#8328;=55 &#10003;. Q2 T&#8321;&#8320;=62 &#10003;. Q3 T&#8321;&#8325;=73 &#10003;. Q4 first term=7 &#10003; (listed terms to find). Q5&#9733; d=4 &#10007; (wrote 6 &mdash; divided gap 12 by 2 instead of 3 jumps). Sec B: Q6&#9733; T&#8322;&#8320;=105 &#10007; (answered 99 &mdash; arithmetic slip after listing 16 steps from T&#8324;=25). Q7&#9733; T&#8321;&#8322; first negative &#10003;. Q8&#9733;&#9733; first term=2 &#10003;. Q9 Kate=21 &#10003;. Q10 OJ=20 &#10003;. Sec C: Q11 yellow=60 &#10003;. Q12 total=49 &#10003;. Q13&#9733; John=$80 &#10003;. Q14&#9733; red=12 &#10003;. Q15&#9733;&#9733; son age blank (ratio-change ages not attempted).',
 
     // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>Sec A Bar Model 5/5 &#127775; &middot; Sec B SimEq Two-Variable 5/5 &#127775; (equation method confirmed) &middot; Sec C Sequences 5/5 &#127775; (listed manually &mdash; formula rebuild needed in U17).</strong>',
+    qSummary: '<strong>Sec A Sequences 4/5 &middot; Sec B Mixed 3/5 (Q6 listed=99 wrong, formula=105) &middot; Sec C Ratio debut 3/5 (Q15&#9733;&#9733; blank).</strong>',
 
     // ── Q-by-Q breakdown ─────────────────────────────────────────────
     qBreakdown: [
-      { q:'Q1',  topic:'Bar Model &mdash; Stamps (Sam 4&times; Ken, total 60)',                     lvl:'w', pass:true,  note:'&#10003; Let K=Ken, Sam=4K. 5K=60 &rarr; K=12, Sam=48. Clean setup.' },
-      { q:'Q2',  topic:'Bar Model &mdash; Cycling Distance (total 95 km, diff 13)',                  lvl:'w', pass:true,  note:'&#10003; S+(S+13)=95 &rarr; S=41. Correct.' },
-      { q:'Q3',  topic:'Bar Model &mdash; Library Books (non-fiction 3&times; fiction, total 72)',    lvl:'w', pass:true,  note:'&#10003; 4F=72 &rarr; F=18. Correct.' },
-      { q:'Q4',  topic:'Algebraic Unknowns &#9733; &mdash; Rectangle Perimeter',                    lvl:'h', pass:true,  note:'&#10003; L=2W+5, perimeter 52. 2(3W+5)=52 &rarr; W=7. Correct.' },
-      { q:'Q5',  topic:'Algebraic Unknowns &#9733; &mdash; Pocket Money (half after spending $18)', lvl:'h', pass:true,  note:'&#10003; x&minus;18=x&divide;2 &rarr; x=36. Correct.' },
-      { q:'Q6',  topic:'SimEq Two-Variable &mdash; Buses &amp; Cars (wheels)',                      lvl:'w', pass:true,  note:'&#10003; 6B+4(18&minus;B)=80 &rarr; B=4. Equation method applied.' },
-      { q:'Q7',  topic:'SimEq Two-Variable &#9733; &mdash; Tickets ($12/$7, 20 for $195)',          lvl:'h', pass:true,  note:'&#10003; 12A+7(20&minus;A)=195 &rarr; A=11. Correct.' },
-      { q:'Q8',  topic:'SimEq Two-Variable &mdash; Fruit Stall ($3/$1.50, 10 for $21)',             lvl:'w', pass:true,  note:'&#10003; 3M+1.5(10&minus;M)=21 &rarr; M=4. Correct.' },
-      { q:'Q9',  topic:'SimEq Two-Variable &#9733; &mdash; 5c/10c Coins (24 coins, $1.95)',         lvl:'h', pass:true,  note:'&#10003; 10T+5(24&minus;T)=195 &rarr; T=15. Correct.' },
-      { q:'Q10', topic:'SimEq Two-Variable &#9733;&#9733; &mdash; Pen Costs (80c/50c, 15 pens, $9)',lvl:'h', pass:true,  note:'&#10003; 80R+50(15&minus;R)=900 &rarr; R=5. Correct.' },
-      { q:'Q11', topic:'Arithmetic Sequence &mdash; T&#8321;&#8325; (seq 5,9,13,17&hellip;)',        lvl:'w', pass:true,  note:'&#10003; Listed all 15 terms manually: 5,9,13&hellip;61. Got correct answer but did NOT use T&#8345; formula.' },
-      { q:'Q12', topic:'Arithmetic Sequence &mdash; T&#8328; (a=6, d=3)',                           lvl:'w', pass:true,  note:'&#10003; Listed terms: 6,9,12,15,18,21,24,27. Correct.' },
-      { q:'Q13', topic:'Arithmetic Sequence &#9733; &mdash; Find first term (T&#8325;=29, T&#8328;=44)',lvl:'h', pass:true, note:'&#10003; Correct. Working shows back-calculation.' },
-      { q:'Q14', topic:'Arithmetic Sequence &#9733; &mdash; Cinema Seats (T&#8321;&#8322;, a=15 d=3)',lvl:'h', pass:true, note:'&#10003; Listed rows: 15,18,21&hellip;48. Correct by counting, not formula.' },
-      { q:'Q15', topic:'Arithmetic Sequence &#9733;&#9733; &mdash; Two Conditions (T&#8322;=8, T&#8325;=17 &rarr; T&#8321;&#8320;)',lvl:'h', pass:true, note:'&#10003; Correct. Note left by Prem: &ldquo;Don&rsquo;t understand the formula, so I just list it down.&rdquo; &mdash; U17 formula rebuild essential.' }
+      { q:'Q1',  topic:'Arithmetic Sequence &mdash; T&#8321;&#8328; (seq 4,7,10&hellip;)',             lvl:'w', pass:true,  note:'&#10003; T&#8321;&#8328;=4+17&times;3=55. Used formula correctly.' },
+      { q:'Q2',  topic:'Arithmetic Sequence &mdash; T&#8321;&#8320; (a=8, d=6)',                      lvl:'w', pass:true,  note:'&#10003; T&#8321;&#8320;=8+9&times;6=62.' },
+      { q:'Q3',  topic:'Arithmetic Sequence &mdash; T&#8321;&#8325; (a=3, d=5)',                      lvl:'w', pass:true,  note:'&#10003; T&#8321;&#8325;=3+14&times;5=73.' },
+      { q:'Q4',  topic:'Arithmetic Sequence &#9733; &mdash; Find first term (T&#8325;=31, d=6)',      lvl:'m', pass:true,  note:'&#10003; Listed terms: 7,13,19,25,31 to find a=7. Correct answer, but still listing.' },
+      { q:'Q5',  topic:'Arithmetic Sequence &#9733; &mdash; Find d (T&#8323;=14, T&#8326;=26)',       lvl:'m', pass:false, note:'&#10007; Wrote d=6. Error: divided gap (26&minus;14=12) by 2 instead of 3 jumps. T&#8323;&rarr;T&#8326; = 3 jumps, not 2. d=12&divide;3=4.' },
+      { q:'Q6',  topic:'Arithmetic Sequence &#9733; &mdash; Find T&#8322;&#8320; (T&#8324;=25, T&#8329;=50)',lvl:'h',pass:false,note:'&#10007; Answered 99. Listed forward from T&#8324;=25 and made arithmetic slip at some step (correct: d=5, a=10, T&#8322;&#8320;=105). Proves listing fails on large n.' },
+      { q:'Q7',  topic:'Arithmetic Sequence &#9733; &mdash; Decreasing (50,45,40&hellip;, first negative)', lvl:'h', pass:true,  note:'&#10003; T&#8321;&#8322;=50+11&times;(&minus;5)=&minus;5. First negative correctly identified.' },
+      { q:'Q8',  topic:'Arithmetic Sequence &#9733;&#9733; &mdash; Two conditions (T&#8324;+T&#8328;=44, d=4)', lvl:'h', pass:true,  note:'&#10003; 2a+40=44 &rarr; a=2. Correct algebraic setup.' },
+      { q:'Q9',  topic:'Ratio &mdash; Share by Ratio (56 pencils, Kate:Luke=3:5)',                    lvl:'w', pass:true,  note:'&#10003; 1 part=7. Kate=3&times;7=21.' },
+      { q:'Q10', topic:'Ratio &mdash; Find One Quantity (OJ:mango=2:3, 30 mango)',                    lvl:'w', pass:true,  note:'&#10003; 1 part=10. OJ=2&times;10=20.' },
+      { q:'Q11', topic:'Ratio &mdash; Three-Part (2:3:5, 120 beads, yellow)',                         lvl:'w', pass:true,  note:'&#10003; 1 part=12. Yellow=5&times;12=60.' },
+      { q:'Q12', topic:'Ratio &#9733; &mdash; Find Total (boys:girls=3:4, 28 girls)',                 lvl:'m', pass:true,  note:'&#10003; 1 part=7. Total=7&times;7=49.' },
+      { q:'Q13', topic:'Ratio &#9733; &mdash; Give-and-Equal (John:Mary=5:3, gives $16)',             lvl:'m', pass:true,  note:'&#10003; 5k&minus;16=3k+16 &rarr; k=16. John=$80.' },
+      { q:'Q14', topic:'Ratio Changes &#9733; &mdash; Remove Items (red:green=2:5, remove 6 green)', lvl:'h', pass:true,  note:'&#10003; 2k:(5k&minus;6)=1:2 &rarr; k=6. Red=12.' },
+      { q:'Q15', topic:'Ratio Changes &#9733;&#9733; &mdash; Ages (father:son=4:1, in 6 yrs=2:1)',   lvl:'h', pass:false, note:'&#10007; Left blank. Ratio-change ages variant not attempted. U18 targeted practice needed.' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -65,7 +65,7 @@ var PREM_DATA = {
     { name: 'Logic & Reasoning', c: 87, t: 90 },
     { name: 'Number Sense',      c: 88, t: 90 },
     { name: 'Algebra',           c: 96, t: 85 },
-    { name: 'Arithmetic',        c: 82, t: 85 },
+    { name: 'Arithmetic',        c: 83, t: 85 },
     { name: 'Geometry',          c: 70, t: 80 },
     { name: 'Counting',          c: 83, t: 85 },
     { name: 'Number Theory',     c: 83, t: 82 },
@@ -73,7 +73,7 @@ var PREM_DATA = {
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 70, 88, 96, 83, 82, 83, 65],
+  radarCurrent:  [87, 70, 88, 96, 83, 83, 83, 65],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -96,11 +96,25 @@ var PREM_DATA = {
     { n:13, score:9,  delta:-1,   color:'linear-gradient(135deg,#006064,#00838F)', star:false },
     { n:14, score:13, delta:+4,   color:'linear-gradient(135deg,#004D40,#00695C)', star:false },
     { n:15, score:15, delta:+2,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:true  },
-    { n:16, score:15, delta:0,    color:'linear-gradient(135deg,#FFD700,#FFA500)',  star:true  }
+    { n:16, score:15, delta:0,    color:'linear-gradient(135deg,#FFD700,#FFA500)',  star:true  },
+    { n:17, score:10, delta:-5,   color:'linear-gradient(135deg,#1565C0,#0D47A1)',  star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 17,
+      badge: 'linear-gradient(135deg,#1565C0,#0D47A1)',
+      title: 'Sequences Formula &middot; Ratio &amp; Proportion',
+      tags: [
+        { t:'10/15 &#11015;', c:'torange' },
+        { t:'Sequences 4/5', c:'torange' },
+        { t:'Mixed 3/5', c:'torange' },
+        { t:'Ratio 3/5', c:'torange' }
+      ],
+      note: 'New topic dip (expected). Sequences: formula still not used under pressure; Q5 &#10007; jump-count error (&#247;2 not &#247;3); Q6 &#10007; listed 16 steps and got 99 (correct 105) &mdash; exactly why formula matters. Ratio debut solid: Q9&ndash;Q14 all correct including Type C give-and-equal and remove-items. Q15&#9733;&#9733; ages ratio-change left blank. U18: jump-drill + ratio-change ages.',
+      status: 'done'
+    },
     {
       n: 16,
       badge: 'linear-gradient(135deg,#FFD700,#FFA500)',
@@ -324,10 +338,16 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'Sequences Formula T&#8345;=a+(n&minus;1)d &mdash; ACTIVE &mdash; Prem lists manually, formula not understood',
+      label:     'Sequences Formula &mdash; ACTIVE &mdash; jump counting error + listing habit under pressure',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U16 Sequences 5/5 &#10003; but all solved by listing terms one by one. Prem left message: &ldquo;Don&rsquo;t understand the formula, so I just list it down.&rdquo; Method works for small n but will fail on T&#8325;&#8320; or T&#8321;&#8320;&#8320; in ISA. U17 Lesson 1 rebuilds formula from first principles: listing &rarr; counting jumps &rarr; formula emerges naturally.',
-      fillClass: 'g1', fillPct: 20
+      score:     'U17: Q5 wrong (d=6 instead of 4 &mdash; divided by 2 not 3 jumps). Q6 wrong (listed 16 steps, arithmetic slip gave 99 not 105 &mdash; formula would give instant correct answer). Still listing under test pressure despite U17 formula lesson. U18 Lesson 1: targeted jump-counting drill + formula-under-pressure practice. Key rule: T&#8339; to T&#8345; = (n&minus;m) jumps.',
+      fillClass: 'g1', fillPct: 35
+    },
+    {
+      label:     'Ratio Changes (before/after, ages) &mdash; ACTIVE &mdash; Q15 blank',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U17 ratio debut strong: Type A/B/C all attempted. Q13 give-and-equal &#10003;. Q14 remove-items &#10003;. But Q15 ages ratio change left blank &mdash; not attempted. U18 Lesson 2 targets ratio-change ages and harder before/after variants.',
+      fillClass: 'g1', fillPct: 40
     },
     {
       label:     'SimEq Two-Variable Totals &mdash; RESOLVING &mdash; equation method now solid',
@@ -367,7 +387,7 @@ var PREM_DATA = {
     }
   ],
 
-  radarLegendUnit: 'U16'
+  radarLegendUnit: 'U17'
 
 };
 
