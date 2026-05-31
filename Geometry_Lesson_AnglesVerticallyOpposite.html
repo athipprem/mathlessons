@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vertically Opposite Angles — Unit 20 Lesson 1</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#E8F5E9;color:#1a1a2e;min-height:100vh}
+.topnav{display:flex;align-items:center;justify-content:space-between;background:#004D40;color:#fff;padding:10px 18px;gap:8px}
+.topnav a.hub-btn{color:#fff;text-decoration:none;font-size:13px;background:rgba(255,255,255,0.15);padding:5px 10px;border-radius:6px}
+.topnav a.hub-btn:hover{background:rgba(255,255,255,0.28)}
+.topnav .nav-title{font-size:14px;font-weight:700;text-align:center;flex:1}
+.topnav .nav-pill{font-size:11px;background:rgba(255,255,255,0.18);padding:3px 8px;border-radius:10px}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{background:rgba(255,255,255,0.15);border:none;color:#fff;padding:5px 11px;border-radius:6px;cursor:pointer;font-size:13px}
+.nav-btn:hover{background:rgba(255,255,255,0.28)}
+.nav-btn:disabled{opacity:0.35;cursor:default}
+.screen{display:none;max-width:780px;margin:0 auto;padding:24px 16px 40px}
+.screen.active{display:block}
+.card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 12px rgba(0,77,64,0.09);margin-bottom:18px}
+h2{color:#004D40;font-size:1.25rem;margin-bottom:14px}
+h3{color:#00695C;font-size:1.05rem;margin-bottom:10px}
+.step-card{border-left:4px solid #004D40;background:#E8F5E9;padding:14px 16px;border-radius:0 10px 10px 0;margin:12px 0}
+.step-num{font-size:11px;font-weight:700;color:#00796B;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.step-body{font-size:15px;color:#1a1a2e;line-height:1.6}
+.rule-box{background:linear-gradient(135deg,#004D40,#00695C);color:#fff;border-radius:12px;padding:18px;text-align:center;margin:14px 0}
+.rule-big{font-size:1.3rem;font-weight:700;margin-bottom:6px}
+.rule-sub{font-size:13px;opacity:0.85}
+.warn-box{background:#FFF9C4;border-left:4px solid #F9A825;border-radius:0 10px 10px 0;padding:14px 16px;margin:14px 0}
+.warn-title{font-weight:700;color:#F57F17;margin-bottom:6px;font-size:14px}
+.worked{background:#F1F8F6;border-radius:10px;padding:16px;margin:14px 0;border:1px solid #A5D6A7}
+.worked-q{font-weight:700;color:#004D40;margin-bottom:10px;font-size:15px}
+.ws{display:flex;align-items:flex-start;gap:10px;margin:6px 0}
+.ws-num{background:#004D40;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px}
+.ws-text{font-size:14px;color:#1a1a2e;line-height:1.5}
+.ws-ans{background:#E8F5E9;border-radius:8px;padding:8px 12px;color:#1B5E20;font-weight:700;font-size:14px;margin-top:8px}
+.pq{background:#fff;border:2px solid #A5D6A7;border-radius:10px;padding:16px;margin:14px 0}
+.pq-text{font-size:15px;margin-bottom:10px;color:#1a1a2e;line-height:1.5}
+.pq-input{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pq-input input{border:2px solid #80CBC4;border-radius:8px;padding:8px 12px;font-size:15px;width:110px;outline:none}
+.pq-input input:focus{border-color:#004D40}
+.pq-btn{background:#004D40;color:#fff;border:none;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600}
+.pq-btn:hover{background:#00695C}
+.pq-feedback{margin-top:8px;padding:9px 14px;border-radius:8px;font-size:14px;font-weight:600;display:none}
+.pq-feedback.correct{background:#E8F5E9;color:#1B5E20;display:block}
+.pq-feedback.wrong{background:#FFEBEE;color:#B71C1C;display:block}
+.mi-row{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}
+.mi-row label{font-size:13px;font-weight:700;color:#004D40;min-width:80px}
+.mi-row input{border:2px solid #80CBC4;border-radius:8px;padding:7px 10px;font-size:14px;width:90px;outline:none}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:520px){.summary-grid{grid-template-columns:1fr}}
+.sg-card{background:#E8F5E9;border-radius:10px;padding:14px;border-top:3px solid #004D40}
+.sg-title{font-size:12px;font-weight:700;color:#00796B;text-transform:uppercase;margin-bottom:6px}
+.sg-body{font-size:14px;color:#1a1a2e;line-height:1.5}
+.btn-hub{display:block;width:fit-content;margin:24px auto 0;background:linear-gradient(135deg,#004D40,#00695C);color:#fff;text-decoration:none;padding:13px 32px;border-radius:10px;font-size:15px;font-weight:700;text-align:center}
+.btn-hub:hover{opacity:0.9}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a href="index.html" class="hub-btn">← Hub</a>
+  <span class="nav-title">Vertically Opposite Angles</span>
+  <div class="nav-right">
+    <span class="nav-pill">Unit 20 · Lesson 1</span>
+    <button class="nav-btn" id="prevBtn" onclick="goScreen(-1)" disabled>← Prev</button>
+    <button class="nav-btn" id="nextBtn" onclick="goScreen(1)">Next →</button>
+  </div>
+</nav>
+
+<!-- SCREEN 1 — What happens when two lines cross -->
+<div class="screen active" id="s0">
+  <div class="card">
+    <h2>When two lines cross, something special happens 🔀</h2>
+    <p style="font-size:15px;line-height:1.7;margin-bottom:14px">Two straight lines cross and make 4 angles. Look at the diagram below carefully.</p>
+    <svg viewBox="0 0 340 260" style="display:block;margin:0 auto;max-width:340px;width:100%">
+      <line x1="30" y1="220" x2="310" y2="40" stroke="#004D40" stroke-width="3"/>
+      <line x1="30" y1="40" x2="310" y2="220" stroke="#004D40" stroke-width="3"/>
+      <!-- angle arcs -->
+      <path d="M170,130 m25,0 a25,25 0 0,0 -17,-18" fill="none" stroke="#E64A19" stroke-width="2.5"/>
+      <path d="M170,130 m-25,0 a25,25 0 0,0 17,18" fill="none" stroke="#E64A19" stroke-width="2.5"/>
+      <path d="M170,130 m0,-25 a25,25 0 0,0 17,18" fill="none" stroke="#1565C0" stroke-width="2.5"/>
+      <path d="M170,130 m0,25 a25,25 0 0,0 -17,-18" fill="none" stroke="#1565C0" stroke-width="2.5"/>
+      <!-- labels -->
+      <text x="215" y="122" font-size="18" fill="#E64A19" font-weight="700" font-family="Arial">a°</text>
+      <text x="118" y="148" font-size="18" fill="#E64A19" font-weight="700" font-family="Arial">a°</text>
+      <text x="174" y="105" font-size="18" fill="#1565C0" font-weight="700" font-family="Arial">b°</text>
+      <text x="148" y="168" font-size="18" fill="#1565C0" font-weight="700" font-family="Arial">b°</text>
+      <text x="30" y="250" font-size="13" fill="#555" font-family="Arial">The angles opposite each other are called VERTICALLY OPPOSITE</text>
+    </svg>
+    <div class="rule-box" style="margin-top:16px">
+      <div class="rule-big">Vertically opposite angles are ALWAYS equal</div>
+      <div class="rule-sub">The two orange angles are equal. The two blue angles are equal.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 2 — Why are they equal? -->
+<div class="screen" id="s1">
+  <div class="card">
+    <h2>Why are they equal? — The straight-line proof 📐</h2>
+    <p style="font-size:14px;line-height:1.6;margin-bottom:14px">Here's how to prove it using only what you already know.</p>
+    <svg viewBox="0 0 340 200" style="display:block;margin:0 auto;max-width:320px;width:100%">
+      <line x1="20" y1="100" x2="320" y2="100" stroke="#004D40" stroke-width="2.5"/>
+      <line x1="170" y1="20" x2="170" y2="180" stroke="#004D40" stroke-width="2.5"/>
+      <text x="195" y="88" font-size="17" fill="#E64A19" font-weight="700" font-family="Arial">a°</text>
+      <text x="135" y="88" font-size="17" fill="#1565C0" font-weight="700" font-family="Arial">b°</text>
+      <text x="135" y="125" font-size="17" fill="#E64A19" font-weight="700" font-family="Arial">a°</text>
+      <text x="195" y="125" font-size="17" fill="#1565C0" font-weight="700" font-family="Arial">b°</text>
+    </svg>
+    <div class="step-card">
+      <div class="step-num">Step 1</div>
+      <div class="step-body">a° + b° = 180° (angles on a straight line)</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Step 2</div>
+      <div class="step-body">b° + a° = 180° (the other straight line — same rule)</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Conclusion</div>
+      <div class="step-body">Both times we get 180°, so the two a° angles must be equal. Same for the two b° angles. <strong>Opposite angles are always equal!</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3 — Basic application -->
+<div class="screen" id="s2">
+  <div class="card">
+    <h2>Using the rule — finding all four angles 🔢</h2>
+    <p style="font-size:14px;margin-bottom:14px">When two lines cross and you know ONE angle, you can find ALL FOUR.</p>
+    <div class="worked">
+      <div class="worked-q">Two lines cross. One angle is 70°. Find all four angles.</div>
+      <svg viewBox="0 0 300 200" style="display:block;margin:10px auto;max-width:280px;width:100%">
+        <line x1="20" y1="170" x2="280" y2="30" stroke="#004D40" stroke-width="2.5"/>
+        <line x1="20" y1="30" x2="280" y2="170" stroke="#004D40" stroke-width="2.5"/>
+        <text x="168" y="93" font-size="15" fill="#E64A19" font-weight="700" font-family="Arial">70°</text>
+        <text x="108" y="120" font-size="15" fill="#E64A19" font-weight="700" font-family="Arial">70°</text>
+        <text x="150" y="78" font-size="15" fill="#1565C0" font-weight="700" font-family="Arial">110°</text>
+        <text x="130" y="138" font-size="15" fill="#1565C0" font-weight="700" font-family="Arial">110°</text>
+      </svg>
+      <div class="ws"><div class="ws-num">1</div><div class="ws-text">Vertically opposite → the angle directly across = <strong>70°</strong></div></div>
+      <div class="ws"><div class="ws-num">2</div><div class="ws-text">Adjacent angle (on straight line) = 180 − 70 = <strong>110°</strong></div></div>
+      <div class="ws"><div class="ws-num">3</div><div class="ws-text">The 4th angle = vertically opposite to 110° = <strong>110°</strong></div></div>
+      <div class="ws-ans">✅ Four angles: 70°, 110°, 70°, 110°</div>
+    </div>
+    <div class="rule-box">
+      <div class="rule-big">One angle known → always get: angle, 180−angle, angle, 180−angle</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 4 — Practice basic -->
+<div class="screen" id="s3">
+  <div class="card">
+    <h2>Practice — Finding all four angles</h2>
+    <div class="pq">
+      <div class="pq-text"><strong>Q1.</strong> Two lines cross. One angle is 55°. Write all four angles.</div>
+      <div class="mi-row"><label>Angle 1 =</label><input type="number" inputmode="numeric" id="q1a" placeholder="?°"></div>
+      <div class="mi-row"><label>Angle 2 =</label><input type="number" inputmode="numeric" id="q1b" placeholder="?°"></div>
+      <div class="mi-row"><label>Angle 3 =</label><input type="number" inputmode="numeric" id="q1c" placeholder="?°"></div>
+      <div class="mi-row"><label>Angle 4 =</label><input type="number" inputmode="numeric" id="q1d" placeholder="?°"></div>
+      <button class="pq-btn" onclick="chk4('q1a',55,'q1b',125,'q1c',55,'q1d',125,'q1fb')">Check</button>
+      <div class="pq-feedback" id="q1fb"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-text"><strong>Q2.</strong> Two lines cross. One angle is 112°. Write all four angles (smallest first).</div>
+      <div class="mi-row"><label>Angle 1 =</label><input type="number" inputmode="numeric" id="q2a" placeholder="?°"></div>
+      <div class="mi-row"><label>Angle 2 =</label><input type="number" inputmode="numeric" id="q2b" placeholder="?°"></div>
+      <div class="mi-row"><label>Angle 3 =</label><input type="number" inputmode="numeric" id="q2c" placeholder="?°"></div>
+      <div class="mi-row"><label>Angle 4 =</label><input type="number" inputmode="numeric" id="q2d" placeholder="?°"></div>
+      <button class="pq-btn" onclick="chk4('q2a',68,'q2b',112,'q2c',68,'q2d',112,'q2fb')">Check</button>
+      <div class="pq-feedback" id="q2fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 5 — Algebra version -->
+<div class="screen" id="s4">
+  <div class="card">
+    <h2>Vertically opposite + algebra ⭐</h2>
+    <p style="font-size:15px;line-height:1.7;margin-bottom:14px">
+      ISA sometimes labels the crossing angles with expressions. Since vertically opposite angles are <strong>equal</strong>, you just set them equal and solve — exactly like SimEq!
+    </p>
+    <div class="worked">
+      <div class="worked-q">Two lines cross. One angle is (3x + 12)° and the vertically opposite angle is (5x − 4)°. Find x and the angle size.</div>
+      <div class="ws"><div class="ws-num">1</div><div class="ws-text">Vertically opposite → set equal: 3x + 12 = 5x − 4</div></div>
+      <div class="ws"><div class="ws-num">2</div><div class="ws-text">Collect: 12 + 4 = 5x − 3x → 16 = 2x → x = 8</div></div>
+      <div class="ws"><div class="ws-num">3</div><div class="ws-text">Angle = 3(8) + 12 = 24 + 12 = <strong>36°</strong></div></div>
+      <div class="ws"><div class="ws-num">4</div><div class="ws-text">Check: 5(8) − 4 = 40 − 4 = 36° ✓ Both equal!</div></div>
+      <div class="ws-ans">✅ x = 8, angle = 36°</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Key rule</div>
+      <div class="step-body">Vertically opposite → expressions are equal → solve like algebra. Always check by substituting back into both expressions.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 6 — Practice algebra -->
+<div class="screen" id="s5">
+  <div class="card">
+    <h2>Practice — Algebra with vertically opposite ⭐</h2>
+    <div class="pq">
+      <div class="pq-text"><strong>Q3.</strong> Vertically opposite angles: (3x + 9)° and (x + 27)°. Find x and the angle.</div>
+      <div class="mi-row"><label>x =</label><input type="number" inputmode="numeric" id="q3x" placeholder="?"></div>
+      <div class="mi-row"><label>Angle =</label><input type="number" inputmode="numeric" id="q3a" placeholder="?°"></div>
+      <button class="pq-btn" onclick="chk2('q3x',9,'q3a',36,'q3fb')">Check</button>
+      <div class="pq-feedback" id="q3fb"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-text"><strong>Q4 ⭐.</strong> Vertically opposite angles: (7x − 5)° and (4x + 16)°. Find x and the angle.</div>
+      <div class="mi-row"><label>x =</label><input type="number" inputmode="numeric" id="q4x" placeholder="?"></div>
+      <div class="mi-row"><label>Angle =</label><input type="number" inputmode="numeric" id="q4a" placeholder="?°"></div>
+      <button class="pq-btn" onclick="chk2('q4x',7,'q4a',44,'q4fb')">Check</button>
+      <div class="pq-feedback" id="q4fb"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-text"><strong>Q5 ⭐.</strong> Two lines cross. One angle is (4x + 20)°. Find x if the adjacent angle (on a straight line) is 60°.</div>
+      <div class="mi-row"><label>x =</label><input type="number" inputmode="numeric" id="q5x" placeholder="?"></div>
+      <button class="pq-btn" onclick="chk1('q5x',25,'q5fb')">Check</button>
+      <div class="pq-feedback" id="q5fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 7 — Summary -->
+<div class="screen" id="s6">
+  <div class="card">
+    <h2>Summary — Vertically Opposite Angles 🚀</h2>
+    <div class="summary-grid">
+      <div class="sg-card">
+        <div class="sg-title">The rule</div>
+        <div class="sg-body">Two lines cross → opposite angles are always equal. Adjacent angles add to 180°.</div>
+      </div>
+      <div class="sg-card">
+        <div class="sg-title">One angle given</div>
+        <div class="sg-body">Four angles = angle°, (180−angle)°, angle°, (180−angle)°</div>
+      </div>
+      <div class="sg-card">
+        <div class="sg-title">Algebra version</div>
+        <div class="sg-body">Set the two opposite expressions equal → solve → check by substituting both.</div>
+      </div>
+      <div class="sg-card">
+        <div class="sg-title">Why they're equal</div>
+        <div class="sg-body">Each pair adds to 180° with the same adjacent angle → so both must be equal.</div>
+      </div>
+    </div>
+    <div class="rule-box" style="margin-top:16px">
+      <div class="rule-big">Crossing lines → opposite = equal · adjacent = 180°</div>
+    </div>
+    <a href="index.html" class="btn-hub">← Back to Hub</a>
+  </div>
+</div>
+
+<script>
+const screens=document.querySelectorAll('.screen');let cur=0;
+function goScreen(d){screens[cur].classList.remove('active');cur+=d;screens[cur].classList.add('active');document.getElementById('prevBtn').disabled=cur===0;document.getElementById('nextBtn').disabled=cur===screens.length-1;window.scrollTo(0,0);}
+function chk1(id,ans,fbId){const v=parseInt(document.getElementById(id).value);const fb=document.getElementById(fbId);if(isNaN(v)){fb.className='pq-feedback wrong';fb.textContent='Enter a number.';return;}if(v===ans){fb.className='pq-feedback correct';fb.textContent='✅ Correct!';}else{fb.className='pq-feedback wrong';fb.textContent='❌ Not quite — check your working.';}}
+function chk2(id1,a1,id2,a2,fbId){const v1=parseInt(document.getElementById(id1).value);const v2=parseInt(document.getElementById(id2).value);const fb=document.getElementById(fbId);if(isNaN(v1)||isNaN(v2)){fb.className='pq-feedback wrong';fb.textContent='Fill both boxes.';return;}if(v1===a1&&v2===a2){fb.className='pq-feedback correct';fb.textContent='✅ Both correct!';}else if(v1!==a1){fb.className='pq-feedback wrong';fb.textContent='❌ x is wrong — set the two expressions equal and solve.';}else{fb.className='pq-feedback wrong';fb.textContent='❌ x is right! Substitute back to find the angle.';}}
+function chk4(i1,a1,i2,a2,i3,a3,i4,a4,fbId){const vals=[i1,i2,i3,i4].map(id=>parseInt(document.getElementById(id).value));const ans=[a1,a2,a3,a4];const fb=document.getElementById(fbId);if(vals.some(isNaN)){fb.className='pq-feedback wrong';fb.textContent='Fill all four boxes.';return;}const ok=vals.every((v,i)=>v===ans[i])||([...vals].sort((a,b)=>a-b).join(',')===[...ans].sort((a,b)=>a-b).join(','));if(ok){fb.className='pq-feedback correct';fb.textContent='✅ All four correct!';}else{fb.className='pq-feedback wrong';fb.textContent='❌ Check — vert. opp. = equal, adjacent = 180°.';}}
+</script>
+</body>
+</html>

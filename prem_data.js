@@ -15,47 +15,47 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '30 May 2026',
+  updated:        '31 May 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
   currentUnit: {
-    n:           19,
+    n:           20,
     status:      'Lessons In Progress',
     testPending: false
   },
   lastUnit: {
-    n: 18, score: 11, outOf: 15, pct: 73, delta: +1, prevScore: 10,
+    n: 19, score: 11, outOf: 15, pct: 73, delta: 0, prevScore: 11,
 
     // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Unit 18 &mdash; 11/15 (73%) Sequences Jump Drill &middot; Ratio Advanced',
-    patternInsight: '<strong>11/15 (73%) &mdash; Sec A 3/5, Sec B 3/5, Sec C 5/5 PERFECT.</strong> Sec A: Q1&#10003; Q2&#10003; Q3&#10003; (formula correct). Q4&#10007; 67 (jump-count: divided by 5 position instead of 4 gaps, d=4 not 5). Q5&#10007; T8 (solved n&gt;8.5 but rounded DOWN &mdash; must round UP to 9). Sec B: Q6&#10007; 92 (arithmetic slip; d correct). Q7&#10003; Q8&#10003; Q9&#10003; (listed to get 69 &mdash; correct answer, still listing). Q10&#10007; blank (two-conditions setup 2a+12d=54 not attempted). Sec C Ratio Advanced 5/5 &#127775; PERFECT &mdash; all k-method types correct: add &#10003;, remove &#10003;, ages &#10003; (Q12), transfer &#10003; (Q15). Complete turnaround from U17 Q15 blank. Ratio fully mastered.',
+    patternLabel:   'Unit 19 &mdash; 11/15 (73%) Sequences Final &middot; Angles',
+    patternInsight: '<strong>11/15 (73%) &mdash; Sec A 5/5 PERFECT &#127775;, Sec B 6/10.</strong> Sec A Sequences: all 5 correct &mdash; inequality rounding &#10003; (Q3/Q4), two-conditions &#10003; (Q5, listed to get answer), formula used correctly. Sec B Angles: Q6&#10003; Q7&#10003; Q8&#10003; Q10&#10003; Q11&#10003; Q12&#10003;. Q9&#10007; blank (vertically opposite &mdash; rule not applied at all). Q13&#10007; blank (vert-opp + algebra &mdash; same missing trigger). Q14&#10007; started but blank (quad algebra setup visible, did not complete). Q15&#10007; blank (drew isosceles triangle, no attempt at algebra). U20: vert-opp drill + advanced angle algebra.',
 
     // ── Results panel analysis insight ───────────────────────────────
-    analysisLabel:   'Unit 18 analysis &mdash; Sequences Jump Drill / Ratio Advanced',
-    analysisInsight: '<strong>Score: 11/15 (73%) &mdash; Sec A 3/5, Sec B 3/5, Sec C 5/5.</strong> Sec A: Q1&ndash;Q3 &#10003;. Q4&#10007; 67 (jump-count: divided gap by 5 instead of 4 &rarr; d=4 not 5, T&#8321;&#8325;=67 not 77). Q5&#10007; T8 (solved inequality n&gt;8.5 but rounded DOWN to 8 &mdash; must round UP to 9). Sec B: Q6&#10007; 92 arithmetic slip (d correct, computation error). Q7 &#10003; Q8 &#10003;. Q9 &#10003; (listed to get 69 &mdash; still avoiding formula). Q10&#10007; blank &mdash; two-conditions type 2a+36=54 not attempted. Sec C: ALL 5 ratio-change problems correct including Q12&#9733; ages &#10003; and Q15&#9733;&#9733; transfer &#10003;. Ratio Advanced 5/5 &mdash; complete turnaround from U17 Q15 blank.',
+    analysisLabel:   'Unit 19 analysis &mdash; Sequences Final / Angles',
+    analysisInsight: '<strong>Score: 11/15 (73%) &mdash; Sec A 5/5 &#127775;, Sec B 6/10.</strong> Sec A Sequences PERFECT: inequality rounding fixed (Q3 T14&#10003;, Q4 T18&#10003;), two-conditions solved by listing (Q5 T1=5,T15=75&#10003;). Sec B Angles: Q6 49&#176;&#10003; Q7 65&#176;&#10003; Q8 113&#176;&#10003; Q10 68&#176;&#10003; Q11 x=40&#10003; Q12 x=31&#10003;. Q9&#10007; blank &mdash; vertically opposite rule unknown (most basic type). Q13&#10007; blank &mdash; vert-opp algebra (same missing rule). Q14&#10007; started but blank &mdash; 4x+80=360 setup visible in working, did not finish. Q15&#10007; blank &mdash; drew triangle, labelled angles, no algebra attempted.',
 
     // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>Sec A Sequences 3/5 (Q4 jump-count err, Q5 off-by-one) &middot; Sec B Challenge 3/5 (Q6 92&#10007; Q10 blank) &middot; Sec C Ratio Advanced 5/5 &#127775; PERFECT.</strong>',
+    qSummary: '<strong>Sec A Sequences 5/5 &#127775; PERFECT &middot; Sec B Angles 6/10 (Q9 blank vert-opp, Q13 blank vert-opp algebra, Q14 started/blank quad, Q15 blank isosceles).</strong>',
 
     // ── Q-by-Q breakdown ─────────────────────────────────────────────
     qBreakdown: [
-      { q:'Q1',  topic:'Sequences &mdash; Tₙ from first term and d (formula)',                      lvl:'w', pass:true,  note:'&#10003; Formula applied correctly. Tₙ = a + (n&minus;1)d.' },
-      { q:'Q2',  topic:'Sequences &mdash; Tₙ from first term and d (medium)',                        lvl:'w', pass:true,  note:'&#10003; Correct. Formula used without listing.' },
-      { q:'Q3',  topic:'Sequences &mdash; Tₙ from first term and d (medium)',                        lvl:'w', pass:true,  note:'&#10003; Correct. Formula used without listing.' },
-      { q:'Q4',  topic:'Sequences &#9733; &mdash; Find d from two given terms (T&#8325;, T&#8329;)', lvl:'m', pass:false, note:'&#10007; Got 67 instead of 77. Jump-count error: divided gap by 5 (term position) instead of 4 (number of jumps). T&#8325;&rarr;T&#8329; = 4 jumps, d = gap&divide;4. Same error type as U17 in new form.' },
-      { q:'Q5',  topic:'Sequences &#9733; &mdash; Inequality rounding (first term below X)',         lvl:'m', pass:false, note:'&#10007; Answered T8 instead of T9. Set up inequality n&gt;8.5 correctly but rounded DOWN to 8. Rule: n&gt;8.5 means first whole number is 9. Always round UP.' },
-      { q:'Q6',  topic:'Sequences &#9733; &mdash; Find T&#8322;&#8320; by formula (large index)',    lvl:'h', pass:false, note:'&#10007; Got 92 instead of 82. Method correct (found d, found a). Arithmetic slip in final computation. Formula approach was used &mdash; improvement from listing, but computation error.' },
-      { q:'Q7',  topic:'Sequences &#9733; &mdash; Decreasing sequence, find term value',             lvl:'h', pass:true,  note:'&#10003; Correct. Negative d handled properly.' },
-      { q:'Q8',  topic:'Sequences &#9733; &mdash; Two conditions (T&#8323;+T&#8327;=40, d=4)',       lvl:'h', pass:true,  note:'&#10003; Correct. 2a+24=40 &rarr; a=8. Algebraic setup solid.' },
-      { q:'Q9',  topic:'Sequences &#9733; &mdash; Find term value (listed to get 69)',               lvl:'h', pass:true,  note:'&#10003; Correct answer (69). Achieved by listing &mdash; formula would have been faster. Correct result counts.' },
-      { q:'Q10', topic:'Sequences &#9733;&#9733; &mdash; Two conditions (T&#8324;+T&#8321;&#8320;=54, find a)', lvl:'h', pass:false, note:'&#10007; Left blank. Did not attempt. Setup: a+3d + a+9d=54 &rarr; 2a+12d=54. Bridges to SimEq (already strong). This is the key U19 target.' },
-      { q:'Q11', topic:'Ratio Changes &mdash; Add items, find new ratio',                           lvl:'w', pass:true,  note:'&#10003; k-method applied correctly.' },
-      { q:'Q12', topic:'Ratio Changes &#9733; &mdash; Ages variant (father:son, years later)',       lvl:'m', pass:true,  note:'&#10003; Ages ratio-change correct &mdash; complete turnaround from U17 Q15 blank.' },
-      { q:'Q13', topic:'Ratio Changes &#9733; &mdash; Give-and-equal variant',                      lvl:'m', pass:true,  note:'&#10003; k-method setup correct.' },
-      { q:'Q14', topic:'Ratio Changes &#9733; &mdash; Remove items variant',                        lvl:'h', pass:true,  note:'&#10003; Correct. Removed correctly and ratio confirmed.' },
-      { q:'Q15', topic:'Ratio Changes &#9733;&#9733; &mdash; Transfer variant (hardest type)',      lvl:'h', pass:true,  note:'&#10003; Transfer (give-and-take between two people) correctly solved. Ratio Advanced fully mastered.' }
+      { q:'Q1',  topic:'Sequences &mdash; Find T&#8321;&#8322; (a=7, d=4)',                          lvl:'w', pass:true,  note:'&#10003; T&#8321;&#8322;=7+11&times;4=51. Formula used correctly.' },
+      { q:'Q2',  topic:'Sequences &#9733; &mdash; Find d and T&#8321; (T&#8323;=17, T&#8327;=33)',   lvl:'m', pass:true,  note:'&#10003; Jumps=4, d=4, T&#8321;=9. Listed to verify &mdash; correct.' },
+      { q:'Q3',  topic:'Sequences &#9733; &mdash; Inequality, first term exceeding 80 (a=5, d=6)',   lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8324; correct. Inequality rounding fixed from U18.' },
+      { q:'Q4',  topic:'Sequences &#9733; &mdash; Inequality, last term above zero (120,113,106&hellip;)', lvl:'m', pass:true, note:'&#10003; T&#8321;&#8328; correct. Decreasing inequality handled well.' },
+      { q:'Q5',  topic:'Sequences &#9733;&#9733; &mdash; Two Conditions (T&#8323;+T&#8329;=60, d=5)', lvl:'h', pass:true, note:'&#10003; T&#8321;=5, T&#8321;&#8325;=75. Still listing (rows visible in working) &mdash; correct result. Formula not used under pressure but answer is right.' },
+      { q:'Q6',  topic:'Angles &mdash; Triangle (52&#176;, 79&#176;)',                               lvl:'w', pass:true,  note:'&#10003; 180&minus;52&minus;79=49&#176;. Clean method.' },
+      { q:'Q7',  topic:'Angles &mdash; Quadrilateral (88&#176;, 112&#176;, 95&#176;, x&#176;)',       lvl:'w', pass:true,  note:'&#10003; 360&minus;295=65&#176;.' },
+      { q:'Q8',  topic:'Angles &mdash; Straight Line (67&#176; and y&#176;)',                         lvl:'w', pass:true,  note:'&#10003; 180&minus;67=113&#176;.' },
+      { q:'Q9',  topic:'Angles &mdash; Vertically Opposite (one angle=48&#176;, all four)',           lvl:'w', pass:false, note:'&#10007; Left completely blank. Most basic vertically-opposite question &mdash; rule not automatic. No attempt made.' },
+      { q:'Q10', topic:'Angles &mdash; Isosceles Triangle (vertex=44&#176;, find base angles)',       lvl:'w', pass:true,  note:'&#10003; (180&minus;44)&#247;2=68&#176;. Division executed correctly.' },
+      { q:'Q11', topic:'Angles &#9733; &mdash; Algebra in Triangle (x, 2x, x+20)',                   lvl:'m', pass:true,  note:'&#10003; 4x+20=180&rarr;x=40. Set up correctly, all three angles written.' },
+      { q:'Q12', topic:'Angles &#9733; &mdash; Algebra on Straight Line (3x+15, 2x+10)',             lvl:'m', pass:true,  note:'&#10003; 5x+25=180&rarr;x=31. Angles 108&#176; and 72&#176;.' },
+      { q:'Q13', topic:'Angles &#9733; &mdash; Vertically Opposite + Algebra (4x&minus;6, 2x+20)',   lvl:'m', pass:false, note:'&#10007; Blank. Same missing rule as Q9: vertically opposite&rarr;equal. Did not connect rule to algebra setup.' },
+      { q:'Q14', topic:'Angles &#9733; &mdash; Quadrilateral + Algebra (x, x+10, 2x&minus;20, 90)',  lvl:'h', pass:false, note:'&#10007; Started &mdash; wrote x and started setup in working. Equation visible: 4x+80=360. Did not complete or write answer.' },
+      { q:'Q15', topic:'Angles &#9733;&#9733; &mdash; Isosceles + Algebra (BAC=2x+10, ABC=4x&minus;5)', lvl:'h', pass:false, note:'&#10007; Drew triangle ABC correctly labelled. Wrote expressions. No algebra attempted &mdash; isosceles+algebra combination not yet automatic.' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -98,11 +98,25 @@ var PREM_DATA = {
     { n:15, score:15, delta:+2,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:true  },
     { n:16, score:15, delta:0,    color:'linear-gradient(135deg,#FFD700,#FFA500)',  star:true  },
     { n:17, score:10, delta:-5,   color:'linear-gradient(135deg,#1565C0,#0D47A1)',  star:false },
-    { n:18, score:11, delta:+1,   color:'linear-gradient(135deg,#E65100,#F57C00)',  star:false }
+    { n:18, score:11, delta:+1,   color:'linear-gradient(135deg,#E65100,#F57C00)',  star:false },
+    { n:19, score:11, delta:0,    color:'linear-gradient(135deg,#E65100,#F57C00)',  star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 19,
+      badge: 'linear-gradient(135deg,#E65100,#F57C00)',
+      title: 'Sequences Final &middot; Angles',
+      tags: [
+        { t:'11/15 &#10145;', c:'torange' },
+        { t:'Sequences 5/5 &#127775;', c:'tgreen' },
+        { t:'Angles 6/10', c:'torange' },
+        { t:'Q9 Q13 Q14 Q15 blank &#10007;', s:'background:#fff5f5;color:#c53030' }
+      ],
+      note: 'Sec A Sequences 5/5 &#127775; PERFECT &mdash; all 3 U18 gaps closed (inequality rounding &#10003;, two-conditions &#10003;, jump-count &#10003;). Sec B Angles debut: Q6&ndash;Q8 &#10003;, Q10&ndash;Q12 &#10003;. Q9 blank (vert-opp basic &mdash; rule not firing). Q13 blank (vert-opp + algebra). Q14 started but abandoned (quad algebra, setup visible). Q15 blank (isosceles + algebra). U20: vert-opp drill + advanced angle algebra.',
+      status: 'done'
+    },
     {
       n: 18,
       badge: 'linear-gradient(135deg,#E65100,#F57C00)',
@@ -352,30 +366,38 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'Sequences: Inequality Rounding &amp; Two-Conditions &mdash; ACTIVE',
+      label:     'Vertically Opposite Angles &mdash; ACTIVE &mdash; basic rule not firing',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U18 Q5 &#10007;: solved n&gt;8.5 correctly but rounded DOWN to 8 (correct: 9). U18 Q10 blank: two-conditions setup 2a+12d=54 not attempted. U19 Lesson 1 targets both. Key rule: n&gt;8.5 means FIRST whole integer = 9 (round UP). Two-conditions bridges to SimEq &mdash; Prem already strong there.',
-      fillClass: 'g1', fillPct: 50
-    },
-    {
-      label:     'Sequences: Jump-Count Error (still persisting) &mdash; ACTIVE',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U17 Q5 &#10007; (divided by 2 not 3). U18 Q4 &#10007; (divided by 5 position not 4 gaps). Two consecutive units with same error type in different disguise. Key rule: Tₘ&rarr;Tₙ = (n&minus;m) jumps, NOT term-count. U19 test includes jump-count Qs to confirm lock.',
-      fillClass: 'g1', fillPct: 55
-    },
-    {
-      label:     'Geometry: Angles &mdash; UNTOUCHED &mdash; major ISA topic',
-      pill:      'p2', pillText: 'NEW &#128308;',
-      score:     'Zero angles exposure across 18 units. ISA Grade 5 regularly tests triangle (180&deg;), quadrilateral (360&deg;), straight line, vertically opposite, and finding unknowns algebraically. U19 Lesson 2 introduces all types. Strong algebra foundation means learning curve is gentle.',
+      score:     'U19 Q9 &#10007; blank (most basic vert-opp: one angle=48&#176;, find all four). Q13 &#10007; blank (vert-opp + algebra). Rule completely missing &mdash; never attempted either question. U20 Lesson 1 targets this with visual drill.',
       fillClass: 'g1', fillPct: 0
+    },
+    {
+      label:     'Advanced Angle Algebra &mdash; ACTIVE &mdash; Q14 started/Q15 blank',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U19 Q14 &#10007; (quad algebra: wrote 4x+80=360 in working but did not finish). Q15 &#10007; (isosceles+algebra: drew triangle correctly, no algebra attempted). Can solve triangle (Q11 &#10003;) and straight-line algebra (Q12 &#10003;) &mdash; needs to extend to quad and isosceles forms. U20 Lesson 2 targets both.',
+      fillClass: 'g1', fillPct: 20
+    },
+    {
+      label:     'Geometry: Angles &mdash; ACTIVE &mdash; debut strong but 4 blanks',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U19 Angles debut 6/10. Basic rules solid: triangle &#10003; Q6, quad &#10003; Q7, straight line &#10003; Q8, isosceles &#10003; Q10, algebra triangle &#10003; Q11, algebra line &#10003; Q12. Gaps: Q9 vert-opp blank, Q13 vert-opp algebra blank, Q14 quad algebra started/blank, Q15 isosceles algebra blank. U20 closes all 4.',
+      fillClass: 'g1', fillPct: 40
+    },
+    {
+      label:     'Sequences: All gaps &mdash; RESOLVED in U19',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U19 Sec A 5/5 &#127775; PERFECT. Inequality rounding &#10003; (Q3 T14, Q4 T18). Two-conditions &#10003; (Q5 T1=5 T15=75). Jump-count &#10003; (Q2 d=4). All 3 U18 sequence gaps fully closed.',
+      fillClass: 'gs', fillPct: 97
     },
     {
       label:     'Ratio Changes (before/after, ages) &mdash; RESOLVED in U18',
       pill:      'ps', pillText: 'Resolved &#10003;',
-      score:     'U18 Sec C 5/5 &#127775; PERFECT. All k-method types correct: add &#10003;, remove &#10003;, ages &#10003; (Q12), transfer &#10003; (Q15). Complete turnaround from U17 Q15 blank. Ratio Advanced fully mastered.',
+      score:     'U18 Sec C 5/5 &#127775; PERFECT. All k-method types correct: add &#10003;, remove &#10003;, ages &#10003; (Q12), transfer &#10003; (Q15). Complete turnaround from U17 Q15 blank.',
       fillClass: 'gs', fillPct: 97
     },
     {
+      label:     'SimEq Two-Variable Totals &mdash; RESOLVING &mdash; equation method solid',
+      pill:      'p2', pillText: 'Resolving &#128992;',
       label:     'SimEq Two-Variable Totals &mdash; RESOLVING &mdash; equation method now solid',
       pill:      'p2', pillText: 'Resolving &#128992;',
       score:     'U16 SimEq Two-Variable 5/5 &#10003;: equation method with bracket expansion applied independently across all 5 problems including Q10&#9733;&#9733;. Significant improvement from U13/U14 where Assume &amp; Adjust was used. Goal achieved: equation fluency confirmed.',
@@ -412,8 +434,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-
-  radarLegendUnit: 'U18'
+  radarLegendUnit: 'U19'
 
 };
 

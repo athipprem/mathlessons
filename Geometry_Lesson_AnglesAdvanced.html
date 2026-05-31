@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Angle Algebra — Unit 20 Lesson 2</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#EDE7F6;color:#1a1a2e;min-height:100vh}
+.topnav{display:flex;align-items:center;justify-content:space-between;background:#4527A0;color:#fff;padding:10px 18px;gap:8px}
+.topnav a.hub-btn{color:#fff;text-decoration:none;font-size:13px;background:rgba(255,255,255,0.15);padding:5px 10px;border-radius:6px}
+.topnav a.hub-btn:hover{background:rgba(255,255,255,0.28)}
+.topnav .nav-title{font-size:14px;font-weight:700;text-align:center;flex:1}
+.topnav .nav-pill{font-size:11px;background:rgba(255,255,255,0.18);padding:3px 8px;border-radius:10px}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{background:rgba(255,255,255,0.15);border:none;color:#fff;padding:5px 11px;border-radius:6px;cursor:pointer;font-size:13px}
+.nav-btn:hover{background:rgba(255,255,255,0.28)}
+.nav-btn:disabled{opacity:0.35;cursor:default}
+.screen{display:none;max-width:780px;margin:0 auto;padding:24px 16px 40px}
+.screen.active{display:block}
+.card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 12px rgba(69,39,160,0.09);margin-bottom:18px}
+h2{color:#4527A0;font-size:1.25rem;margin-bottom:14px}
+h3{color:#512DA8;font-size:1.05rem;margin-bottom:10px}
+.step-card{border-left:4px solid #4527A0;background:#EDE7F6;padding:14px 16px;border-radius:0 10px 10px 0;margin:12px 0}
+.step-num{font-size:11px;font-weight:700;color:#7E57C2;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.step-body{font-size:15px;color:#1a1a2e;line-height:1.6}
+.rule-box{background:linear-gradient(135deg,#4527A0,#6a1b9a);color:#fff;border-radius:12px;padding:18px;text-align:center;margin:14px 0}
+.rule-big{font-size:1.25rem;font-weight:700;margin-bottom:6px}
+.rule-sub{font-size:13px;opacity:0.85}
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+@media(max-width:520px){.type-grid{grid-template-columns:1fr}}
+.type-card{border-radius:10px;padding:16px}
+.tA{background:#E3F2FD;border-top:3px solid #1565C0}
+.tB{background:#F3E5F5;border-top:3px solid #7B1FA2}
+.type-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;color:#333}
+.type-body{font-size:14px;line-height:1.6}
+.worked{background:#F3F4FF;border-radius:10px;padding:16px;margin:14px 0;border:1px solid #D1C4E9}
+.worked-q{font-weight:700;color:#4527A0;margin-bottom:10px;font-size:15px}
+.ws{display:flex;align-items:flex-start;gap:10px;margin:6px 0}
+.ws-num{background:#4527A0;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px}
+.ws-text{font-size:14px;color:#1a1a2e;line-height:1.5}
+.ws-ans{background:#E8F5E9;border-radius:8px;padding:8px 12px;color:#1B5E20;font-weight:700;font-size:14px;margin-top:8px}
+.pq{background:#fff;border:2px solid #D1C4E9;border-radius:10px;padding:16px;margin:14px 0}
+.pq-text{font-size:15px;margin-bottom:10px;color:#1a1a2e;line-height:1.5}
+.pq-input{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pq-input input{border:2px solid #CE93D8;border-radius:8px;padding:8px 12px;font-size:15px;width:110px;outline:none}
+.pq-input input:focus{border-color:#4527A0}
+.pq-btn{background:#4527A0;color:#fff;border:none;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600}
+.pq-btn:hover{background:#6a1b9a}
+.pq-feedback{margin-top:8px;padding:9px 14px;border-radius:8px;font-size:14px;font-weight:600;display:none}
+.pq-feedback.correct{background:#E8F5E9;color:#1B5E20;display:block}
+.pq-feedback.wrong{background:#FFEBEE;color:#B71C1C;display:block}
+.mi-row{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}
+.mi-row label{font-size:13px;font-weight:700;color:#4527A0;min-width:80px}
+.mi-row input{border:2px solid #CE93D8;border-radius:8px;padding:7px 10px;font-size:14px;width:90px;outline:none}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:520px){.summary-grid{grid-template-columns:1fr}}
+.sg-card{background:#EDE7F6;border-radius:10px;padding:14px;border-top:3px solid #4527A0}
+.sg-title{font-size:12px;font-weight:700;color:#7E57C2;text-transform:uppercase;margin-bottom:6px}
+.sg-body{font-size:14px;color:#1a1a2e;line-height:1.5}
+.btn-hub{display:block;width:fit-content;margin:24px auto 0;background:linear-gradient(135deg,#4527A0,#6a1b9a);color:#fff;text-decoration:none;padding:13px 32px;border-radius:10px;font-size:15px;font-weight:700;text-align:center}
+.btn-hub:hover{opacity:0.9}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a href="index.html" class="hub-btn">← Hub</a>
+  <span class="nav-title">Advanced Angle Algebra</span>
+  <div class="nav-right">
+    <span class="nav-pill">Unit 20 · Lesson 2</span>
+    <button class="nav-btn" id="prevBtn" onclick="goScreen(-1)" disabled>← Prev</button>
+    <button class="nav-btn" id="nextBtn" onclick="goScreen(1)">Next →</button>
+  </div>
+</nav>
+
+<!-- SCREEN 1 — Two targets from U19 -->
+<div class="screen active" id="s0">
+  <div class="card">
+    <h2>Two gaps from U19 — fixed today 🎯</h2>
+    <div class="type-grid">
+      <div class="type-card tA">
+        <div class="type-title" style="color:#1565C0">❌ Q14 — Quad + Algebra</div>
+        <div class="type-body">You started writing 4x+80=360 in the working — then stopped. The setup was right! This lesson shows you how to finish.</div>
+      </div>
+      <div class="type-card tB">
+        <div class="type-title" style="color:#7B1FA2">❌ Q15 — Isosceles + Algebra</div>
+        <div class="type-body">You drew the triangle and labelled it correctly — strong instinct! Just needed one extra step: isosceles base angles are equal, so you can build the equation.</div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">The method is always the same</div>
+      <div class="step-body">Write the angle rule → collect terms → solve for x → check. Every type works the same way.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 2 — Angles at a point -->
+<div class="screen" id="s1">
+  <div class="card">
+    <h2>Angles at a point = 360° 🔵</h2>
+    <p style="font-size:14px;line-height:1.6;margin-bottom:14px">All angles meeting at a single point add up to <strong>360°</strong> — think of a full circle.</p>
+    <svg viewBox="0 0 280 220" style="display:block;margin:0 auto;max-width:260px;width:100%">
+      <circle cx="140" cy="110" r="90" fill="#EDE7F6" stroke="#4527A0" stroke-width="1.5" stroke-dasharray="5"/>
+      <line x1="140" y1="110" x2="50" y2="45" stroke="#4527A0" stroke-width="2.5"/>
+      <line x1="140" y1="110" x2="230" y2="45" stroke="#4527A0" stroke-width="2.5"/>
+      <line x1="140" y1="110" x2="235" y2="160" stroke="#4527A0" stroke-width="2.5"/>
+      <line x1="140" y1="110" x2="60" y2="185" stroke="#4527A0" stroke-width="2.5"/>
+      <text x="130" y="65" font-size="14" fill="#E64A19" font-weight="700" font-family="Arial">a°</text>
+      <text x="185" y="90" font-size="14" fill="#1565C0" font-weight="700" font-family="Arial">b°</text>
+      <text x="188" y="145" font-size="14" fill="#2E7D32" font-weight="700" font-family="Arial">c°</text>
+      <text x="70" y="170" font-size="14" fill="#7B1FA2" font-weight="700" font-family="Arial">d°</text>
+      <text x="108" y="116" font-size="10" fill="#4527A0" font-family="Arial">360°</text>
+    </svg>
+    <div class="rule-box">
+      <div class="rule-big">a° + b° + c° + d° = 360°</div>
+      <div class="rule-sub">Any number of angles around a single point always sum to 360°</div>
+    </div>
+    <div class="worked">
+      <div class="worked-q">Three angles meet at a point: 130°, 95°, and k°. Find k.</div>
+      <div class="ws"><div class="ws-num">1</div><div class="ws-text">130 + 95 + k = 360</div></div>
+      <div class="ws"><div class="ws-num">2</div><div class="ws-text">225 + k = 360 → k = 360 − 225 = <strong>135°</strong></div></div>
+      <div class="ws-ans">✅ k = 135°</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3 — Quadrilateral + algebra -->
+<div class="screen" id="s2">
+  <div class="card">
+    <h2>Quadrilateral + Algebra — finish what you started ⭐</h2>
+    <p style="font-size:14px;line-height:1.6;margin-bottom:14px">You already know: all 4 angles in a quadrilateral sum to <strong>360°</strong>. With algebra, just write that equation and solve.</p>
+    <div class="worked">
+      <div class="worked-q">A quadrilateral has angles x°, (2x − 5)°, (x + 15)°, and 90°. Find x and the largest angle.</div>
+      <svg viewBox="0 0 280 180" style="display:block;margin:10px auto;max-width:260px;width:100%">
+        <polygon points="40,140 240,140 220,40 60,40" fill="#EDE7F6" stroke="#4527A0" stroke-width="2.5"/>
+        <text x="28" y="135" font-size="13" fill="#E64A19" font-weight="700" font-family="Arial">x°</text>
+        <text x="218" y="135" font-size="13" fill="#1565C0" font-weight="700" font-family="Arial">(2x−5)°</text>
+        <text x="192" y="55" font-size="13" fill="#2E7D32" font-weight="700" font-family="Arial">(x+15)°</text>
+        <text x="36" y="55" font-size="13" fill="#7B1FA2" font-weight="700" font-family="Arial">90°</text>
+      </svg>
+      <div class="ws"><div class="ws-num">1</div><div class="ws-text">Write angle sum: x + (2x−5) + (x+15) + 90 = 360</div></div>
+      <div class="ws"><div class="ws-num">2</div><div class="ws-text">Collect: 4x + 100 = 360 → 4x = 260 → x = 65</div></div>
+      <div class="ws"><div class="ws-num">3</div><div class="ws-text">Angles: 65°, 125°, 80°, 90°. Largest = <strong>125°</strong></div></div>
+      <div class="ws"><div class="ws-num">4</div><div class="ws-text">Check: 65+125+80+90 = 360 ✓</div></div>
+      <div class="ws-ans">✅ x = 65°, largest = 125°</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 4 — Isosceles + algebra -->
+<div class="screen" id="s3">
+  <div class="card">
+    <h2>Isosceles triangle + algebra — the one extra step ⭐⭐</h2>
+    <p style="font-size:14px;line-height:1.6;margin-bottom:14px">You already know: isosceles → <strong>two base angles are equal</strong>. Use that fact first, then write the sum = 180° equation.</p>
+    <div class="worked">
+      <div class="worked-q">Triangle PQR has PQ = PR. Angle QPR = (2x + 10)°. Angle PQR = (3x + 5)°. Find x and all three angles.</div>
+      <svg viewBox="0 0 280 200" style="display:block;margin:10px auto;max-width:260px;width:100%">
+        <polygon points="140,20 40,170 240,170" fill="#EDE7F6" stroke="#4527A0" stroke-width="2.5"/>
+        <line x1="100" y1="95" x2="110" y2="85" stroke="#4527A0" stroke-width="2"/>
+        <line x1="180" y1="95" x2="170" y2="85" stroke="#4527A0" stroke-width="2"/>
+        <text x="126" y="48" font-size="13" fill="#E64A19" font-weight="700" font-family="Arial">(2x+10)°</text>
+        <text x="18" y="170" font-size="13" fill="#1565C0" font-weight="700" font-family="Arial">(3x+5)°</text>
+        <text x="200" y="170" font-size="13" fill="#1565C0" font-weight="700" font-family="Arial">(3x+5)°</text>
+        <text x="126" y="190" font-size="11" fill="#555" font-family="Arial">PQ = PR → base angles equal</text>
+      </svg>
+      <div class="ws"><div class="ws-num">1</div><div class="ws-text">PQ = PR → base angles equal → angle PRQ = (3x + 5)°</div></div>
+      <div class="ws"><div class="ws-num">2</div><div class="ws-text">Write sum: (2x+10) + (3x+5) + (3x+5) = 180</div></div>
+      <div class="ws"><div class="ws-num">3</div><div class="ws-text">Collect: 8x + 20 = 180 → 8x = 160 → x = 20</div></div>
+      <div class="ws"><div class="ws-num">4</div><div class="ws-text">Angles: QPR = 50°, PQR = PRQ = 65°. Check: 50+65+65 = 180 ✓</div></div>
+      <div class="ws-ans">✅ x = 20, angles: 50°, 65°, 65°</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">The isosceles shortcut</div>
+      <div class="step-body">Equal sides → write the BASE angle expression TWICE in the equation. Then solve normally.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 5 — Practice -->
+<div class="screen" id="s4">
+  <div class="card">
+    <h2>Practice — Quadrilateral + Isosceles algebra ⭐</h2>
+    <div class="pq">
+      <div class="pq-text"><strong>Q1.</strong> Four angles around a point: 90°, 110°, 75°, and k°. Find k.</div>
+      <div class="pq-input"><input type="number" inputmode="numeric" id="q1" placeholder="k = ?°"><button class="pq-btn" onclick="chk1('q1',85,'q1fb')">Check</button></div>
+      <div class="pq-feedback" id="q1fb"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-text"><strong>Q2 ⭐.</strong> A quadrilateral has angles x°, (2x−5)°, (x+15)°, and 90°. Find x and the largest angle.</div>
+      <div class="mi-row"><label>x =</label><input type="number" inputmode="numeric" id="q2x" placeholder="?"></div>
+      <div class="mi-row"><label>Largest =</label><input type="number" inputmode="numeric" id="q2l" placeholder="?°"></div>
+      <button class="pq-btn" onclick="chk2('q2x',65,'q2l',125,'q2fb')">Check</button>
+      <div class="pq-feedback" id="q2fb"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-text"><strong>Q3 ⭐⭐.</strong> Isosceles triangle, vertex = (2x+10)°, each base = (3x+5)°. Find x and all three angles.</div>
+      <div class="mi-row"><label>x =</label><input type="number" inputmode="numeric" id="q3x" placeholder="?"></div>
+      <div class="mi-row"><label>Vertex =</label><input type="number" inputmode="numeric" id="q3v" placeholder="?°"></div>
+      <div class="mi-row"><label>Each base =</label><input type="number" inputmode="numeric" id="q3b" placeholder="?°"></div>
+      <button class="pq-btn" onclick="chk3('q3x',20,'q3v',50,'q3b',65,'q3fb')">Check</button>
+      <div class="pq-feedback" id="q3fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 6 — Summary -->
+<div class="screen" id="s5">
+  <div class="card">
+    <h2>Summary — Advanced Angle Algebra 🚀</h2>
+    <div class="summary-grid">
+      <div class="sg-card">
+        <div class="sg-title">Angles at a point</div>
+        <div class="sg-body">All angles around one point = 360°. Missing angle = 360 − sum of others.</div>
+      </div>
+      <div class="sg-card">
+        <div class="sg-title">Quadrilateral + algebra</div>
+        <div class="sg-body">Sum of 4 angles = 360°. Write all 4 expressions, collect, solve. Always verify sum = 360.</div>
+      </div>
+      <div class="sg-card">
+        <div class="sg-title">Isosceles + algebra</div>
+        <div class="sg-body">Equal sides → write base angle TWICE. Sum of all 3 = 180°. Solve for x.</div>
+      </div>
+      <div class="sg-card">
+        <div class="sg-title">Always check!</div>
+        <div class="sg-body">Substitute x back into every angle. Verify the sum equals 180° or 360°.</div>
+      </div>
+    </div>
+    <div class="rule-box" style="margin-top:16px">
+      <div class="rule-big">Quad = 360° · Isosceles → base twice · Always check sum</div>
+    </div>
+    <a href="index.html" class="btn-hub">← Back to Hub</a>
+  </div>
+</div>
+
+<script>
+const screens=document.querySelectorAll('.screen');let cur=0;
+function goScreen(d){screens[cur].classList.remove('active');cur+=d;screens[cur].classList.add('active');document.getElementById('prevBtn').disabled=cur===0;document.getElementById('nextBtn').disabled=cur===screens.length-1;window.scrollTo(0,0);}
+function chk1(id,ans,fbId){const v=parseInt(document.getElementById(id).value);const fb=document.getElementById(fbId);if(isNaN(v)){fb.className='pq-feedback wrong';fb.textContent='Enter a number.';return;}if(v===ans){fb.className='pq-feedback correct';fb.textContent='✅ Correct!';}else{fb.className='pq-feedback wrong';fb.textContent='❌ Not quite — check your sum.';}}
+function chk2(id1,a1,id2,a2,fbId){const v1=parseInt(document.getElementById(id1).value);const v2=parseInt(document.getElementById(id2).value);const fb=document.getElementById(fbId);if(isNaN(v1)||isNaN(v2)){fb.className='pq-feedback wrong';fb.textContent='Fill both boxes.';return;}if(v1===a1&&v2===a2){fb.className='pq-feedback correct';fb.textContent='✅ Both correct!';}else if(v1!==a1){fb.className='pq-feedback wrong';fb.textContent='❌ x is wrong — write all 4 angles = 360 and collect.';}else{fb.className='pq-feedback wrong';fb.textContent='❌ x is right! Substitute to find the largest angle.';}}
+function chk3(i1,a1,i2,a2,i3,a3,fbId){const v1=parseInt(document.getElementById(i1).value);const v2=parseInt(document.getElementById(i2).value);const v3=parseInt(document.getElementById(i3).value);const fb=document.getElementById(fbId);if(isNaN(v1)||isNaN(v2)||isNaN(v3)){fb.className='pq-feedback wrong';fb.textContent='Fill all three boxes.';return;}if(v1===a1&&v2===a2&&v3===a3){fb.className='pq-feedback correct';fb.textContent='✅ All three correct!';}else if(v1!==a1){fb.className='pq-feedback wrong';fb.textContent='❌ x is wrong — write base angle twice and sum = 180.';}else{fb.className='pq-feedback wrong';fb.textContent='❌ x is right! Substitute back to find the angles.';}}
+</script>
+</body>
+</html>
