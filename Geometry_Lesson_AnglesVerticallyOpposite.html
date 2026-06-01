@@ -138,12 +138,20 @@ h3{color:#00695C;font-size:1.05rem;margin-bottom:10px}
     <div class="worked">
       <div class="worked-q">Two lines cross. One angle is 70°. Find all four angles.</div>
       <svg viewBox="0 0 300 200" style="display:block;margin:10px auto;max-width:280px;width:100%">
+        <!-- Crossing at (150,100). Right/Left = 70° (orange). Top/Bottom = 110° (blue). -->
+        <!-- Wedge fills first -->
+        <path d="M150,100 L192,74 A52,52 0 0,1 192,126 Z" fill="#E64A19" opacity="0.15"/>
+        <path d="M150,100 L108,126 A52,52 0 0,1 108,74 Z" fill="#E64A19" opacity="0.15"/>
+        <path d="M150,100 L108,74 A52,52 0 0,1 192,74 Z" fill="#1565C0" opacity="0.15"/>
+        <path d="M150,100 L192,126 A52,52 0 0,1 108,126 Z" fill="#1565C0" opacity="0.15"/>
+        <!-- Lines on top -->
         <line x1="20" y1="170" x2="280" y2="30" stroke="#004D40" stroke-width="2.5"/>
         <line x1="20" y1="30" x2="280" y2="170" stroke="#004D40" stroke-width="2.5"/>
-        <text x="168" y="93" font-size="15" fill="#E64A19" font-weight="700" font-family="Arial">70°</text>
-        <text x="108" y="120" font-size="15" fill="#E64A19" font-weight="700" font-family="Arial">70°</text>
-        <text x="150" y="78" font-size="15" fill="#1565C0" font-weight="700" font-family="Arial">110°</text>
-        <text x="130" y="138" font-size="15" fill="#1565C0" font-weight="700" font-family="Arial">110°</text>
+        <!-- Labels pushed clearly into each sector -->
+        <text x="218" y="104" font-size="16" fill="#E64A19" font-weight="700" font-family="Arial">70°</text>
+        <text x="54"  y="104" font-size="16" fill="#E64A19" font-weight="700" font-family="Arial">70°</text>
+        <text x="128" y="42"  font-size="16" fill="#1565C0" font-weight="700" font-family="Arial">110°</text>
+        <text x="120" y="172" font-size="16" fill="#1565C0" font-weight="700" font-family="Arial">110°</text>
       </svg>
       <div class="ws"><div class="ws-num">1</div><div class="ws-text">Vertically opposite → the angle directly across = <strong>70°</strong></div></div>
       <div class="ws"><div class="ws-num">2</div><div class="ws-text">Adjacent angle (on straight line) = 180 − 70 = <strong>110°</strong></div></div>
@@ -156,7 +164,57 @@ h3{color:#00695C;font-size:1.05rem;margin-bottom:10px}
   </div>
 </div>
 
-<!-- SCREEN 4 — Practice basic -->
+<!-- SCREEN 4 — Where do the labels go? Common mistake -->
+<div class="screen" id="s3b">
+  <div class="card">
+    <h2>Where exactly do the labels go? ⚠️</h2>
+    <p style="font-size:14px;line-height:1.6;margin-bottom:16px">
+      A common mistake is putting all the labels near the centre. Each label must go <strong>inside its own sector</strong> — clearly separated.
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0">
+      <!-- WRONG -->
+      <div style="background:#FFEBEE;border-radius:10px;padding:14px;border-top:3px solid #C62828">
+        <div style="font-size:11px;font-weight:700;color:#C62828;text-transform:uppercase;margin-bottom:8px">❌ Wrong — bunched together</div>
+        <svg viewBox="0 0 160 130" style="display:block;width:100%">
+          <line x1="10" y1="110" x2="150" y2="20" stroke="#555" stroke-width="2"/>
+          <line x1="10" y1="20" x2="150" y2="110" stroke="#555" stroke-width="2"/>
+          <text x="88" y="58" font-size="13" fill="#E64A19" font-weight="700" font-family="Arial">70°</text>
+          <text x="62" y="72" font-size="13" fill="#E64A19" font-weight="700" font-family="Arial">70°</text>
+          <text x="76" y="52" font-size="13" fill="#1565C0" font-weight="700" font-family="Arial">110°</text>
+          <text x="66" y="82" font-size="13" fill="#1565C0" font-weight="700" font-family="Arial">110°</text>
+        </svg>
+        <p style="font-size:12px;color:#C62828;margin-top:6px">Can't tell which angle is which!</p>
+      </div>
+      <!-- CORRECT -->
+      <div style="background:#E8F5E9;border-radius:10px;padding:14px;border-top:3px solid #2E7D32">
+        <div style="font-size:11px;font-weight:700;color:#2E7D32;text-transform:uppercase;margin-bottom:8px">✅ Correct — spread out</div>
+        <svg viewBox="0 0 160 130" style="display:block;width:100%">
+          <path d="M80,65 L103,51 A28,28 0 0,1 103,79 Z" fill="#E64A19" opacity="0.15"/>
+          <path d="M80,65 L57,79 A28,28 0 0,1 57,51 Z" fill="#E64A19" opacity="0.15"/>
+          <path d="M80,65 L57,51 A28,28 0 0,1 103,51 Z" fill="#1565C0" opacity="0.15"/>
+          <path d="M80,65 L103,79 A28,28 0 0,1 57,79 Z" fill="#1565C0" opacity="0.15"/>
+          <line x1="10" y1="110" x2="150" y2="20" stroke="#555" stroke-width="2"/>
+          <line x1="10" y1="20" x2="150" y2="110" stroke="#555" stroke-width="2"/>
+          <text x="115" y="68" font-size="13" fill="#E64A19" font-weight="700" font-family="Arial">70°</text>
+          <text x="18"  y="68" font-size="13" fill="#E64A19" font-weight="700" font-family="Arial">70°</text>
+          <text x="66"  y="22" font-size="13" fill="#1565C0" font-weight="700" font-family="Arial">110°</text>
+          <text x="56"  y="118" font-size="13" fill="#1565C0" font-weight="700" font-family="Arial">110°</text>
+        </svg>
+        <p style="font-size:12px;color:#2E7D32;margin-top:6px">Each label is in its own region.</p>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">The rule</div>
+      <div class="step-body">
+        <strong>RIGHT sector</strong> = one angle &nbsp;·&nbsp; <strong>LEFT sector</strong> = vertically opposite (same size)<br>
+        <strong>TOP sector</strong> = adjacent angle &nbsp;·&nbsp; <strong>BOTTOM sector</strong> = vertically opposite (same size)<br><br>
+        Think of the crossing as a compass: labels go NORTH, SOUTH, EAST, WEST — not all in one corner.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 5 — Practice basic -->
 <div class="screen" id="s3">
   <div class="card">
     <h2>Practice — Finding all four angles</h2>

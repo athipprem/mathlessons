@@ -143,18 +143,23 @@ h3{color:#00695C;font-size:1.05rem;margin-bottom:10px}
 
     <div class="tri-vis">
       <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
-        <!-- Triangle -->
+        <!-- Triangle fill -->
         <polygon points="60,170 280,170 170,30" fill="#E8F5E9" stroke="#004D40" stroke-width="2.5"/>
-        <!-- Angle arcs -->
-        <path d="M80,170 Q85,155 95,148" fill="none" stroke="#E64A19" stroke-width="2"/>
-        <path d="M260,170 Q255,155 248,148" fill="none" stroke="#1565C0" stroke-width="2"/>
-        <path d="M162,48 Q170,58 178,48" fill="none" stroke="#7B1FA2" stroke-width="2"/>
-        <!-- Labels -->
-        <text x="70" y="155" font-size="15" fill="#E64A19" font-weight="700">a°</text>
-        <text x="248" y="155" font-size="15" fill="#1565C0" font-weight="700">b°</text>
-        <text x="160" y="76" font-size="15" fill="#7B1FA2" font-weight="700">c°</text>
+        <!-- Coloured corner fills to show each angle clearly -->
+        <!-- Bottom-left corner (a°) — orange wedge inside triangle -->
+        <path d="M60,170 L84,170 A24,24 0 0,0 72,149 Z" fill="#E64A19" opacity="0.3"/>
+        <!-- Bottom-right corner (b°) — blue wedge inside triangle -->
+        <path d="M280,170 L256,170 A24,24 0 0,1 268,149 Z" fill="#1565C0" opacity="0.3"/>
+        <!-- Top corner (c°) — purple wedge inside triangle -->
+        <path d="M170,30 L159,51 A24,24 0 0,0 181,51 Z" fill="#7B1FA2" opacity="0.3"/>
+        <!-- Triangle border on top -->
+        <polygon points="60,170 280,170 170,30" fill="none" stroke="#004D40" stroke-width="2.5"/>
+        <!-- Labels placed clearly INSIDE triangle near each corner -->
+        <text x="88"  y="162" font-size="16" fill="#E64A19" font-weight="700" font-family="Arial">a°</text>
+        <text x="244" y="162" font-size="16" fill="#1565C0" font-weight="700" font-family="Arial">b°</text>
+        <text x="161" y="72"  font-size="16" fill="#7B1FA2" font-weight="700" font-family="Arial">c°</text>
         <!-- Sum -->
-        <text x="170" y="190" text-anchor="middle" font-size="14" fill="#004D40" font-weight="700">a + b + c = 180°</text>
+        <text x="170" y="192" text-anchor="middle" font-size="14" fill="#004D40" font-weight="700" font-family="Arial">a + b + c = 180°</text>
       </svg>
     </div>
 
@@ -238,14 +243,18 @@ h3{color:#00695C;font-size:1.05rem;margin-bottom:10px}
     <p style="font-size:14px;margin-bottom:10px;line-height:1.5">When two straight lines cross, the angles opposite each other are always equal.</p>
     <div class="card" style="background:#F1F8F6;box-shadow:none;padding:16px;margin-bottom:0">
       <svg viewBox="0 0 200 160" width="200" style="display:block;margin:0 auto">
+        <!-- Crossing at (100,80). Top/bottom = a° (orange). Left/right = b° (blue). -->
+        <!-- Wedge fills — lines go (10,20)→(190,140) and (190,20)→(10,140) -->
+        <path d="M100,80 L122,65 A28,28 0 0,1 122,95 Z" fill="#1565C0" opacity="0.18"/>
+        <path d="M100,80 L78,95 A28,28 0 0,1 78,65 Z" fill="#1565C0" opacity="0.18"/>
+        <path d="M100,80 L78,65 A28,28 0 0,1 122,65 Z" fill="#E64A19" opacity="0.18"/>
+        <path d="M100,80 L122,95 A28,28 0 0,1 78,95 Z" fill="#E64A19" opacity="0.18"/>
         <line x1="10" y1="20" x2="190" y2="140" stroke="#004D40" stroke-width="2.5"/>
         <line x1="190" y1="20" x2="10" y2="140" stroke="#004D40" stroke-width="2.5"/>
-        <ellipse cx="100" cy="80" rx="18" ry="12" fill="#E64A19" opacity="0.2"/>
-        <ellipse cx="100" cy="80" rx="18" ry="12" fill="#E64A19" opacity="0.2" transform="rotate(180 100 80)"/>
-        <text x="100" y="44" text-anchor="middle" font-size="13" fill="#E64A19" font-weight="700">a°</text>
-        <text x="100" y="118" text-anchor="middle" font-size="13" fill="#E64A19" font-weight="700">a°</text>
-        <text x="30" y="84" font-size="13" fill="#1565C0" font-weight="700">b°</text>
-        <text x="162" y="84" font-size="13" fill="#1565C0" font-weight="700">b°</text>
+        <text x="100" y="44" text-anchor="middle" font-size="14" fill="#E64A19" font-weight="700" font-family="Arial">a°</text>
+        <text x="100" y="122" text-anchor="middle" font-size="14" fill="#E64A19" font-weight="700" font-family="Arial">a°</text>
+        <text x="20"  y="84" font-size="14" fill="#1565C0" font-weight="700" font-family="Arial">b°</text>
+        <text x="166" y="84" font-size="14" fill="#1565C0" font-weight="700" font-family="Arial">b°</text>
       </svg>
     </div>
 
