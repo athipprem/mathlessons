@@ -26,36 +26,41 @@ var PREM_DATA = {
     testPending: false
   },
   lastUnit: {
-    n: 19, score: 11, outOf: 15, pct: 73, delta: 0, prevScore: 11,
+    n: 'M2', score: 12, outOf: 15, pct: 80, delta: +1, prevScore: 11,
 
     // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Unit 19 &mdash; 11/15 (73%) Sequences Final &middot; Angles',
-    patternInsight: '<strong>11/15 (73%) &mdash; Sec A 5/5 PERFECT &#127775;, Sec B 6/10.</strong> Sec A Sequences: all 5 correct &mdash; inequality rounding &#10003; (Q3/Q4), two-conditions &#10003; (Q5, listed to get answer), formula used correctly. Sec B Angles: Q6&#10003; Q7&#10003; Q8&#10003; Q10&#10003; Q11&#10003; Q12&#10003;. Q9&#10007; blank (vertically opposite &mdash; rule not applied at all). Q13&#10007; blank (vert-opp + algebra &mdash; same missing trigger). Q14&#10007; started but blank (quad algebra setup visible, did not complete). Q15&#10007; blank (drew isosceles triangle, no attempt at algebra). U20: vert-opp drill + advanced angle algebra.',
+    patternLabel:   'Milestone 02 &mdash; 12/15 ISA (80%) &middot; Kangaroo 4/5',
+    patternInsight: '<strong>12/15 ISA (80%) &mdash; Sec A 3/5, Sec B 9/10. Kangaroo 4/5 &#127775; BREAKTHROUGH.</strong> Q2 &#10007; Path &amp; Frame direction error (added border instead of subtracting). Q7 &#10007; SimEq blank (skipped). Q12 &#10007; Ratio Transfer blank. Sec B strong: Bar Model &#10003;, Sequences all 3 &#10003;, Angles Q13&ndash;Q15 &#10003;. Kangaroo 4/5: Applied Problems radar bumped to 72. U21: Equation Solving &mdash; Variables on Both Sides.',
 
     // ── Results panel analysis insight ───────────────────────────────
-    analysisLabel:   'Unit 19 analysis &mdash; Sequences Final / Angles',
-    analysisInsight: '<strong>Score: 11/15 (73%) &mdash; Sec A 5/5 &#127775;, Sec B 6/10.</strong> Sec A Sequences PERFECT: inequality rounding fixed (Q3 T14&#10003;, Q4 T18&#10003;), two-conditions solved by listing (Q5 T1=5,T15=75&#10003;). Sec B Angles: Q6 49&#176;&#10003; Q7 65&#176;&#10003; Q8 113&#176;&#10003; Q10 68&#176;&#10003; Q11 x=40&#10003; Q12 x=31&#10003;. Q9&#10007; blank &mdash; vertically opposite rule unknown (most basic type). Q13&#10007; blank &mdash; vert-opp algebra (same missing rule). Q14&#10007; started but blank &mdash; 4x+80=360 setup visible in working, did not finish. Q15&#10007; blank &mdash; drew triangle, labelled angles, no algebra attempted.',
+    analysisLabel:   'Milestone 02 &mdash; Cumulative Review Units 11&ndash;20',
+    analysisInsight: '<strong>12/15 ISA (80%) | Kangaroo 4/5.</strong> Strengths confirmed: HCF/LCM &#10003;, Sequences all formats &#10003;, Bar Model &#10003;, Angles basic/algebra &#10003;. Gaps: Path &amp; Frame direction (Q2 &#10007; re-emerged under test pressure), SimEq (Q7 blank &mdash; skipped), Ratio Transfer (Q12 blank &mdash; trigger not firing in removal-format). Kangaroo breakthrough: snail &#10003;, digit &#10003;, remainder &#10003;, triangles &#10003;. Q17 &#10007; handshakes used factorials not C(n,2). Applied Problems radar bumped significantly. U21: equation solving, variables both sides.',
 
     // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>Sec A Sequences 5/5 &#127775; PERFECT &middot; Sec B Angles 6/10 (Q9 blank vert-opp, Q13 blank vert-opp algebra, Q14 started/blank quad, Q15 blank isosceles).</strong>',
+    qSummary: '<strong>ISA 12/15 (80%) &#127775; &middot; Q2 &#10007; Path&amp;Frame direction &middot; Q7 &#10007; SimEq blank &middot; Q12 &#10007; Ratio Transfer blank. Kangaroo 4/5 &mdash; Q17 &#10007; handshakes (used factorials).</strong>',
 
     // ── Q-by-Q breakdown ─────────────────────────────────────────────
     qBreakdown: [
-      { q:'Q1',  topic:'Sequences &mdash; Find T&#8321;&#8322; (a=7, d=4)',                          lvl:'w', pass:true,  note:'&#10003; T&#8321;&#8322;=7+11&times;4=51. Formula used correctly.' },
-      { q:'Q2',  topic:'Sequences &#9733; &mdash; Find d and T&#8321; (T&#8323;=17, T&#8327;=33)',   lvl:'m', pass:true,  note:'&#10003; Jumps=4, d=4, T&#8321;=9. Listed to verify &mdash; correct.' },
-      { q:'Q3',  topic:'Sequences &#9733; &mdash; Inequality, first term exceeding 80 (a=5, d=6)',   lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8324; correct. Inequality rounding fixed from U18.' },
-      { q:'Q4',  topic:'Sequences &#9733; &mdash; Inequality, last term above zero (120,113,106&hellip;)', lvl:'m', pass:true, note:'&#10003; T&#8321;&#8328; correct. Decreasing inequality handled well.' },
-      { q:'Q5',  topic:'Sequences &#9733;&#9733; &mdash; Two Conditions (T&#8323;+T&#8329;=60, d=5)', lvl:'h', pass:true, note:'&#10003; T&#8321;=5, T&#8321;&#8325;=75. Still listing (rows visible in working) &mdash; correct result. Formula not used under pressure but answer is right.' },
-      { q:'Q6',  topic:'Angles &mdash; Triangle (52&#176;, 79&#176;)',                               lvl:'w', pass:true,  note:'&#10003; 180&minus;52&minus;79=49&#176;. Clean method.' },
-      { q:'Q7',  topic:'Angles &mdash; Quadrilateral (88&#176;, 112&#176;, 95&#176;, x&#176;)',       lvl:'w', pass:true,  note:'&#10003; 360&minus;295=65&#176;.' },
-      { q:'Q8',  topic:'Angles &mdash; Straight Line (67&#176; and y&#176;)',                         lvl:'w', pass:true,  note:'&#10003; 180&minus;67=113&#176;.' },
-      { q:'Q9',  topic:'Angles &mdash; Vertically Opposite (one angle=48&#176;, all four)',           lvl:'w', pass:false, note:'&#10007; Left completely blank. Most basic vertically-opposite question &mdash; rule not automatic. No attempt made.' },
-      { q:'Q10', topic:'Angles &mdash; Isosceles Triangle (vertex=44&#176;, find base angles)',       lvl:'w', pass:true,  note:'&#10003; (180&minus;44)&#247;2=68&#176;. Division executed correctly.' },
-      { q:'Q11', topic:'Angles &#9733; &mdash; Algebra in Triangle (x, 2x, x+20)',                   lvl:'m', pass:true,  note:'&#10003; 4x+20=180&rarr;x=40. Set up correctly, all three angles written.' },
-      { q:'Q12', topic:'Angles &#9733; &mdash; Algebra on Straight Line (3x+15, 2x+10)',             lvl:'m', pass:true,  note:'&#10003; 5x+25=180&rarr;x=31. Angles 108&#176; and 72&#176;.' },
-      { q:'Q13', topic:'Angles &#9733; &mdash; Vertically Opposite + Algebra (4x&minus;6, 2x+20)',   lvl:'m', pass:false, note:'&#10007; Blank. Same missing rule as Q9: vertically opposite&rarr;equal. Did not connect rule to algebra setup.' },
-      { q:'Q14', topic:'Angles &#9733; &mdash; Quadrilateral + Algebra (x, x+10, 2x&minus;20, 90)',  lvl:'h', pass:false, note:'&#10007; Started &mdash; wrote x and started setup in working. Equation visible: 4x+80=360. Did not complete or write answer.' },
-      { q:'Q15', topic:'Angles &#9733;&#9733; &mdash; Isosceles + Algebra (BAC=2x+10, ABC=4x&minus;5)', lvl:'h', pass:false, note:'&#10007; Drew triangle ABC correctly labelled. Wrote expressions. No algebra attempted &mdash; isosceles+algebra combination not yet automatic.' }
+      { q:'Q1',  topic:'Geometry &mdash; Rectangle (P+A)',               lvl:'w', pass:true,  note:'&#10003; P=50 cm, A=144 cm&sup2;. Both parts correct.' },
+      { q:'Q2',  topic:'Geometry &mdash; Path &amp; Frame',              lvl:'m', pass:false, note:'&#10007; 396 cm&sup2; (correct 324). Added border instead of subtracting &mdash; outer/inner direction reversed. Same error from U11&ndash;U14, resolved U15, re-emerged under test pressure.' },
+      { q:'Q3',  topic:'Number Theory &mdash; HCF Three-Item',           lvl:'m', pass:true,  note:'&#10003; HCF(48,72,96)=24 cm. Fully consolidated.' },
+      { q:'Q4',  topic:'Number Theory &mdash; LCM Scheduling',           lvl:'w', pass:true,  note:'&#10003; LCM(12,8)=24 min &rarr; 9:24 am.' },
+      { q:'Q5',  topic:'Patterns &mdash; Find T&#8328; (a=3, d=5)',      lvl:'w', pass:true,  note:'&#10003; 38. Listed all terms (3,8,13&hellip;38) &mdash; correct but formula not used.' },
+      { q:'Q6',  topic:'Algebra &mdash; Bar Model (Sophie/Mia/Tom)',     lvl:'w', pass:true,  note:'&#10003; Mia=16, Sophie=32, Tom=24. Clean bar diagram drawn.' },
+      { q:'Q7',  topic:'Algebra &#9733; &mdash; SimEq (apples/oranges)', lvl:'m', pass:false, note:'&#10007; Blank &mdash; likely skipped during pre-scan time budget. Not a conceptual regression (U16 = 5/5).' },
+      { q:'Q8',  topic:'Sequences &mdash; Find T&#8321;&#8321; (a=5,d=8)',lvl:'w', pass:true,  note:'&#10003; T&#8321;&#8321;=85.' },
+      { q:'Q9',  topic:'Sequences &#9733; &mdash; Find d and T&#8321;',  lvl:'m', pass:true,  note:'&#10003; d=4, T&#8321;=11. Listed T3&rarr;T7, back-tracked correctly.' },
+      { q:'Q10', topic:'Sequences &#9733; &mdash; First term exceeding 70', lvl:'m', pass:true, note:'&#10003; T&#8321;&#8323;.' },
+      { q:'Q11', topic:'Ratio &mdash; Sharing (2:3)',                    lvl:'w', pass:true,  note:'&#10003; Jake=36, Lily=54.' },
+      { q:'Q12', topic:'Ratio &#9733; &mdash; Transfer (5:3 &rarr; 1:1)', lvl:'m', pass:false, note:'&#10007; Blank. Trigger did not fire &mdash; no working in box. Solved perfectly in U18; removal-format not recognised here.' },
+      { q:'Q13', topic:'Geometry &mdash; Angles Triangle (65&#176;,48&#176;)', lvl:'w', pass:true, note:'&#10003; 67&#176;.' },
+      { q:'Q14', topic:'Geometry &#9733; &mdash; Quad Algebra (n+20, 2n&minus;10, n+30, 80)', lvl:'m', pass:true, note:'&#10003; n=60, angles 80,110,90,80. Set up 4n+120=360 correctly.' },
+      { q:'Q15', topic:'Geometry &#9733;&#9733; &mdash; Triangle Algebra (2n+10, n+5, n&minus;15)', lvl:'h', pass:true, note:'&#10003; n=45, angles 100,50,30. 4n=180 &rarr; n=45. All terms already one side &mdash; confident.' },
+      { q:'Q16', topic:'Kangaroo &mdash; Snail Climb (diagnostic)',      lvl:'m', pass:true,  note:'&#10003; Day 5. Listed day-by-day 1,2,3,4,5 cleanly.' },
+      { q:'Q17', topic:'Kangaroo &#9733; &mdash; Handshakes (diagnostic)',lvl:'h', pass:false, note:'&#10007; Blank. Working shows 4!=24, 5!=120 &mdash; used permutations. C(n,2) concept not yet in toolkit.' },
+      { q:'Q18', topic:'Kangaroo &mdash; Missing Digit div by 9 (diagnostic)', lvl:'m', pass:true, note:'&#10003; digit=6. Systematic trial: 9|3072, 9|3172, 9|3672 &rarr; found 6.' },
+      { q:'Q19', topic:'Kangaroo &#9733; &mdash; Remainder Puzzle (diagnostic)', lvl:'h', pass:true, note:'&#10003; 16. &#247;6=r4 &#10003;, &#247;7=r2 &#10003;.' },
+      { q:'Q20', topic:'Kangaroo &mdash; Triangle Counting (diagnostic)', lvl:'m', pass:true, note:'&#10003; 5 triangles. Drew figure and counted correctly.' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -69,11 +74,11 @@ var PREM_DATA = {
     { name: 'Geometry',          c: 70, t: 80 },
     { name: 'Counting',          c: 83, t: 85 },
     { name: 'Number Theory',     c: 83, t: 82 },
-    { name: 'Applied Problems',  c: 65, t: 80 }
+    { name: 'Applied Problems',  c: 72, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 70, 88, 96, 83, 83, 83, 65],
+  radarCurrent:  [87, 70, 88, 96, 83, 83, 83, 72],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -99,11 +104,51 @@ var PREM_DATA = {
     { n:16, score:15, delta:0,    color:'linear-gradient(135deg,#FFD700,#FFA500)',  star:true  },
     { n:17, score:10, delta:-5,   color:'linear-gradient(135deg,#1565C0,#0D47A1)',  star:false },
     { n:18, score:11, delta:+1,   color:'linear-gradient(135deg,#E65100,#F57C00)',  star:false },
-    { n:19, score:11, delta:0,    color:'linear-gradient(135deg,#E65100,#F57C00)',  star:false }
+    { n:19, score:11, delta:0,    color:'linear-gradient(135deg,#E65100,#F57C00)',  star:false },
+    { n:20, score:11, delta:0,    color:'linear-gradient(135deg,#1565C0,#0D47A1)',  star:false },
+    { n:'M2', label:'M2', score:12, delta:+1, color:'linear-gradient(135deg,#311B92,#512DA8)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 21,
+      badge: 'linear-gradient(135deg,#311B92,#512DA8)',
+      title: 'Equation Solving &middot; Variables on Both Sides',
+      tags: [
+        { t:'Upcoming &#128197;', c:'tpurple' },
+        { t:'L1: Balance Method', c:'tblue' },
+        { t:'L2: Both Sides', c:'tblue' }
+      ],
+      note: 'Core algebraic unlock: variables on both sides (e.g. 3n+12=5n&minus;4). Prerequisite for advanced angle algebra, SimEq extension, and ratio-change problems. Use n throughout (not x). Visual-first: balance scale concept in Lesson 1.',
+      status: 'pending'
+    },
+    {
+      n: 'M2',
+      badge: 'linear-gradient(135deg,#311B92,#512DA8)',
+      title: 'Milestone 02 &mdash; Cumulative Review Units 11&ndash;20',
+      tags: [
+        { t:'12/15 ISA &#127775;', c:'tgreen' },
+        { t:'Kangaroo 4/5 &#127775; BREAKTHROUGH', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Q2 Frame &#10007;', c:'torange' },
+        { t:'Q7 SimEq blank &#10007;', c:'torange' },
+        { t:'Q12 Ratio Transfer blank &#10007;', c:'torange' }
+      ],
+      note: 'Milestone 02 &mdash; Units 11&ndash;20. ISA 12/15 (80%): strengths HCF/LCM, Sequences, Bar Model, Angles. Gaps: Path&amp;Frame direction re-emerged (Q2), SimEq skipped (Q7), Ratio Transfer blank (Q12). Kangaroo 4/5 &#127775; &mdash; Applied Problems radar breakthrough: bumped to 72. Q17 handshakes &#10007; used factorials not C(n,2). Applied Problems: 4/5 threshold crossed. U21: equation solving both sides.',
+      status: 'done'
+    },
+    {
+      n: 20,
+      badge: 'linear-gradient(135deg,#1565C0,#0D47A1)',
+      title: 'Vertically Opposite Angles &middot; Advanced Angle Algebra',
+      tags: [
+        { t:'11/15 &#10145;', c:'torange' },
+        { t:'Basic Angles 10/10 &#10003;', c:'tgreen' },
+        { t:'Q13 Q14 Q15 blank &#10007;', s:'background:#fff5f5;color:#c53030' }
+      ],
+      note: 'Sec A 5/5: vert-opp rule firing (Q2 &#10003; 63/117 both pairs). Sec B: Q6&ndash;Q8 &#10003; Q10&ndash;Q11 &#10003;. Q9 &#10007; supplementary pair wrong (42&#176; not 132&#176;). Q12 &#10007; arithmetic slip (118&#176; not 108&#176;, working correct). Q13 Q14 Q15 blank &mdash; all require variables on both sides of equation. Core algebraic gap confirmed. U21: equation solving fundamentals.',
+      status: 'done'
+    },
     {
       n: 19,
       badge: 'linear-gradient(135deg,#E65100,#F57C00)',
