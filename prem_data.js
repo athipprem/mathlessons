@@ -540,26 +540,128 @@ PREM_DATA.renderAchievement = function(pctId, barId, labelId) {
   if (l) l.textContent  = 'vs Top 5% target · ' + pct + '% achieved';
 };
 
-// ── Render: score bar chart ───────────────────────────────────────────
+// ── Render: score line chart (SVG) ───────────────────────────────────
 PREM_DATA.renderScoreChart = function(containerId) {
   var el = document.getElementById(containerId);
   if (!el) return;
-  var outOf = this.outOf;
-  var html = '';
-  this.scores.forEach(function(s) {
-    var h  = Math.round(s.score / outOf * 100);
-    var dl = s.delta === null ? '' :
-             (s.delta > 0 ? '+' + s.delta + '&#11014;' : '&minus;' + Math.abs(s.delta) + '&#11015;');
-    var dlColor = s.delta === null ? '' :
-                  (s.delta > 0 ? 'color:#43e97b' : 'color:#f6993f');
-    html += '<div class="bc-unit">';
-    html += '<div class="bc-bar-wrap"><div class="bc-bar" style="height:' + h + '%;background:' + s.color + '"></div></div>';
-    html += '<div class="bc-score">' + s.score + (s.star ? '&#127775;' : '') + '</div>';
-    if (dl) html += '<div class="bc-delta" style="' + dlColor + '">' + dl + '</div>';
-    html += '<div class="bc-lbl">' + (s.label || ('U' + s.n)) + '</div>';
-    html += '</div>';
+  var scores = this.scores;
+  var outOf  = this.outOf;
+  var n = scores.length;
+
+  // ── Layout ──────────────────────────────────────────────────────────
+  var W=600, H=190, ml=26, mr=36, mt=16, mb=32;
+  var cw = W-ml-mr, ch = H-mt-mb;
+
+  function px(i)     { return ml + (i/(n-1))*cw; }
+  function py(score) { return mt + ch - (score/outOf)*ch; }
+
+  // ── Rolling 3-unit average ──────────────────────────────────────────
+  var avg = scores.map(function(_,i) {
+    var s2=Math.max(0,i-2), sum=0, cnt=0;
+    for(var j=s2;j<=i;j++){ sum+=scores[j].score; cnt++; }
+    return sum/cnt;
   });
-  el.innerHTML = html;
+
+  // ── SVG open ────────────────────────────────────────────────────────
+  var s = '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block;overflow:visible" xmlns="http://www.w3.org/2000/svg">';
+
+  // ── Grid lines + Y labels ───────────────────────────────────────────
+  [0,3,6,9,12,15].forEach(function(v) {
+    var y=py(v), isKey=(v===13||v===14);
+    s += '<line x1="'+ml+'" y1="'+y+'" x2="'+(W-mr)+'" y2="'+y+'" stroke="'+(isKey?'transparent':'#f0f0f0')+'" stroke-width="1"/>';
+    s += '<text x="'+(ml-4)+'" y="'+(y+3)+'" text-anchor="end" font-size="8" fill="#bbb">'+v+'</text>';
+  });
+
+  // ── Reference lines ─────────────────────────────────────────────────
+  // 87% mastery = 13/15
+  var y87=py(13);
+  s += '<line x1="'+ml+'" y1="'+y87+'" x2="'+(W-mr)+'" y2="'+y87+'" stroke="#f6993f" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.9"/>';
+  s += '<text x="'+(W-mr+3)+'" y="'+(y87+4)+'" font-size="8.5" fill="#f6993f" font-weight="700">87%</text>';
+  // 93% top-5% = ~14/15
+  var y93=py(14);
+  s += '<line x1="'+ml+'" y1="'+y93+'" x2="'+(W-mr)+'" y2="'+y93+'" stroke="#43e97b" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.9"/>';
+  s += '<text x="'+(W-mr+3)+'" y="'+(y93+4)+'" font-size="8.5" fill="#43e97b" font-weight="700">93%</text>';
+
+  // ── Fill under main line ─────────────────────────────────────────────
+  var fp = 'M'+px(0)+','+py(scores[0].score);
+  scores.forEach(function(sc,i){ fp += ' L'+px(i)+','+py(sc.score); });
+  fp += ' L'+px(n-1)+','+(mt+ch)+' L'+px(0)+','+(mt+ch)+' Z';
+  s += '<path d="'+fp+'" fill="rgba(102,126,234,0.07)"/>';
+
+  // ── Rolling average line ─────────────────────────────────────────────
+  var ap = avg.map(function(v,i){ return px(i)+','+py(v); }).join(' ');
+  s += '<polyline points="'+ap+'" fill="none" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="4,2" opacity="0.55"/>';
+
+  // ── Main line ────────────────────────────────────────────────────────
+  var lp = scores.map(function(sc,i){ return px(i)+','+py(sc.score); }).join(' ');
+  s += '<polyline points="'+lp+'" fill="none" stroke="#667eea" stroke-width="2.2"/>';
+
+  // ── Data points ──────────────────────────────────────────────────────
+  scores.forEach(function(sc, i) {
+    var x=px(i), y=py(sc.score);
+    var isM = sc.label && /^M/.test(sc.label);
+    var isP = sc.score === outOf;
+    var lbl = sc.label || ('U'+sc.n);
+    var dlTxt = sc.delta===null ? '—' : (sc.delta>0?'+'+sc.delta:String(sc.delta));
+    var tip   = lbl+'|'+sc.score+'/'+outOf+' ('+Math.round(sc.score/outOf*100)+'%)|'+dlTxt;
+
+    // Marker
+    if (isM) {
+      var d=5.5;
+      s += '<polygon points="'+x+','+(y-d)+' '+(x+d)+','+y+' '+x+','+(y+d)+' '+(x-d)+','+y+'" fill="#4527A0" stroke="white" stroke-width="1.5"/>';
+    } else if (isP) {
+      s += '<circle cx="'+x+'" cy="'+y+'" r="5.5" fill="#FFD700" stroke="white" stroke-width="1.5"/>';
+      s += '<text x="'+x+'" y="'+(y-9)+'" text-anchor="middle" font-size="9" fill="#c8a000">&#9733;</text>';
+    } else {
+      var fill = sc.score>=13 ? '#43e97b' : (sc.score>=11 ? '#667eea' : (sc.score>=9 ? '#f6993f' : '#fc4e4e'));
+      s += '<circle cx="'+x+'" cy="'+y+'" r="4" fill="'+fill+'" stroke="white" stroke-width="1.5"/>';
+    }
+
+    // X-axis label: show every 2nd, always milestones + perfect
+    if (isM || isP || i===0 || i===n-1 || i%3===0) {
+      s += '<text x="'+x+'" y="'+(mt+ch+13)+'" text-anchor="middle" font-size="7.5" fill="'+(isM?'#4527A0':'#718096')+'" font-weight="'+(isM||isP?'700':'400')+'">'+lbl+'</text>';
+    }
+
+    // Invisible hover target
+    s += '<circle cx="'+x+'" cy="'+y+'" r="11" fill="transparent" class="sc-pt" data-tip="'+tip+'" style="cursor:pointer"/>';
+  });
+
+  // ── Legend ───────────────────────────────────────────────────────────
+  var ly = H-4;
+  s += '<circle cx="'+(ml)+'" cy="'+ly+'" r="3.5" fill="#667eea"/>';
+  s += '<text x="'+(ml+7)+'" y="'+(ly+3)+'" font-size="7.5" fill="#718096">Unit</text>';
+  s += '<polygon points="'+(ml+42)+','+(ly-4)+' '+(ml+46)+','+ly+' '+(ml+42)+','+(ly+4)+' '+(ml+38)+','+ly+'" fill="#4527A0"/>';
+  s += '<text x="'+(ml+50)+'" y="'+(ly+3)+'" font-size="7.5" fill="#718096">Milestone</text>';
+  s += '<circle cx="'+(ml+100)+'" cy="'+ly+'" r="3.5" fill="#FFD700"/>';
+  s += '<text x="'+(ml+107)+'" y="'+(ly+3)+'" font-size="7.5" fill="#718096">Perfect</text>';
+  s += '<line x1="'+(ml+148)+'" y1="'+ly+'" x2="'+(ml+163)+'" y2="'+ly+'" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="4,2"/>';
+  s += '<text x="'+(ml+167)+'" y="'+(ly+3)+'" font-size="7.5" fill="#718096">3-unit avg</text>';
+
+  s += '</svg>';
+
+  // ── Tooltip ──────────────────────────────────────────────────────────
+  s += '<div id="sc-tip" style="display:none;position:absolute;background:#1a1a2e;color:#fff;padding:6px 11px;border-radius:8px;font-size:11px;pointer-events:none;z-index:99;white-space:nowrap;box-shadow:0 3px 12px rgba(0,0,0,0.25);line-height:1.6"></div>';
+
+  el.style.position = 'relative';
+  el.innerHTML = s;
+
+  // ── Hover events ─────────────────────────────────────────────────────
+  var tip = document.getElementById('sc-tip');
+  el.querySelectorAll('.sc-pt').forEach(function(dot) {
+    dot.addEventListener('mouseenter', function(e) {
+      var p = this.dataset.tip.split('|');
+      var dl = p[2];
+      var dlHtml = dl==='—' ? '' : ('&nbsp;&nbsp;<span style="color:'+(dl.charAt(0)==='+' ? '#43e97b':'#f6993f')+'">'+dl+'</span>');
+      tip.innerHTML = '<strong>'+p[0]+'</strong>&nbsp;&nbsp;'+p[1]+dlHtml;
+      var r = el.getBoundingClientRect();
+      var ex = e.clientX-r.left, ey = e.clientY-r.top;
+      var tw = 160;
+      tip.style.left = Math.min(Math.max(0,ex-tw/2), el.offsetWidth-tw-4)+'px';
+      tip.style.top  = Math.max(0, ey-42)+'px';
+      tip.style.display='block';
+    });
+    dot.addEventListener('mouseleave', function(){ tip.style.display='none'; });
+  });
 };
 
 // ── Render: session log ───────────────────────────────────────────────
