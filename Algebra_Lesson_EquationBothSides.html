@@ -19,45 +19,49 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#EDE7F6;color:#1a1a2e;mi
 .screen{display:none;max-width:780px;margin:0 auto;padding:24px 16px 40px}
 .screen.active{display:block}
 .card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 12px rgba(49,27,146,0.09);margin-bottom:18px}
-h2{color:#311B92;font-size:1.25rem;margin-bottom:14px}
-h3{color:#4527A0;font-size:1.05rem;margin-bottom:10px}
-.step-card{border-left:4px solid #311B92;background:#EDE7F6;padding:14px 16px;border-radius:0 10px 10px 0;margin:10px 0}
-.step-num{font-size:11px;font-weight:700;color:#512DA8;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.step-body{font-size:15px;color:#1a1a2e;line-height:1.6}
+h2{color:#311B92;font-size:1.22rem;margin-bottom:14px}
+p{font-size:15px;line-height:1.7;margin-bottom:12px}
 .rule-box{background:linear-gradient(135deg,#311B92,#512DA8);color:#fff;border-radius:12px;padding:18px;text-align:center;margin:14px 0}
-.rule-big{font-size:1.25rem;font-weight:700;margin-bottom:6px}
-.rule-sub{font-size:13px;opacity:0.85;line-height:1.7}
-.warn-box{background:#FFF9C4;border-left:4px solid #F9A825;border-radius:0 10px 10px 0;padding:14px 16px;margin:14px 0}
+.rule-big{font-size:1.15rem;font-weight:700;margin-bottom:8px}
+.rule-sub{font-size:13px;opacity:0.88;line-height:1.7;text-align:left}
+.warn-box{background:#FFF9C4;border-left:4px solid #F9A825;border-radius:0 10px 10px 0;padding:14px 16px;margin:14px 0;font-size:14px}
 .warn-title{font-weight:700;color:#F57F17;margin-bottom:6px;font-size:14px}
-.worked{background:#F3F0FF;border-radius:10px;padding:16px;margin:14px 0;border:1px solid #B39DDB}
-.worked-q{font-weight:700;color:#311B92;margin-bottom:10px;font-size:15px}
-.ws-ans{background:#EDE7F6;border-radius:8px;padding:8px 12px;color:#311B92;font-weight:700;font-size:14px;margin-top:8px}
-.pq{background:#fff;border:2px solid #B39DDB;border-radius:10px;padding:16px;margin:14px 0}
+.step-card{border-left:4px solid #311B92;background:#EDE7F6;padding:13px 16px;border-radius:0 10px 10px 0;margin:10px 0}
+.step-num{font-size:11px;font-weight:700;color:#512DA8;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.step-body{font-size:14px;color:#1a1a2e;line-height:1.6}
+.nn{color:#1565C0;font-weight:700}
+.nm{color:#BF360C;font-weight:700}
+.neq{color:#6A1B9A;font-weight:700}
+.stbl{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+.stbl th{background:#EDE7F6;color:#311B92;padding:8px 12px;text-align:left;font-size:12px;font-weight:700;letter-spacing:.5px;border-bottom:2px solid #C5CAE9}
+.stbl td{padding:9px 12px;border-bottom:1px solid #E8EAF6;vertical-align:middle}
+.stbl tr:last-child td{border-bottom:none;background:#F3F0FF;font-weight:700}
+.stbl .action{font-size:12px;color:#7E57C2;font-style:italic}
+/* Sort diagram */
+.sort-box{display:flex;align-items:center;gap:8px;margin:14px 0;flex-wrap:wrap}
+.sort-side{flex:1;min-width:120px;background:#E3F2FD;border:2px solid #1565C0;border-radius:10px;padding:12px;text-align:center}
+.sort-side.right-side{background:#FBE9E7;border-color:#BF360C}
+.sort-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.sort-lbl.blue{color:#1565C0}
+.sort-lbl.red{color:#BF360C}
+.sort-val{font-size:1.1rem;font-weight:700}
+.sort-eq{font-size:1.4rem;font-weight:700;color:#6A1B9A;flex-shrink:0}
+.pq{background:#fff;border:2px solid #B39DDB;border-radius:10px;padding:16px;margin:12px 0}
 .pq-text{font-size:15px;margin-bottom:10px;color:#1a1a2e;line-height:1.5}
 .pq-input{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .pq-input select{border:2px solid #9575CD;border-radius:8px;padding:8px 12px;font-size:15px;outline:none;background:#fff}
-.pq-input select:focus{border-color:#311B92}
 .pq-btn{background:#311B92;color:#fff;border:none;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600}
 .pq-btn:hover{background:#4527A0}
 .pq-feedback{margin-top:8px;padding:9px 14px;border-radius:8px;font-size:14px;font-weight:600;display:none}
-.pq-feedback.correct{background:#EDE7F6;color:#1B5E20;display:block}
+.pq-feedback.correct{background:#E8F5E9;color:#1B5E20;display:block}
 .pq-feedback.wrong{background:#FFEBEE;color:#B71C1C;display:block}
-.eq-box{background:#F3F0FF;border:2px solid #7E57C2;border-radius:10px;padding:14px 18px;font-size:1.3rem;font-weight:700;color:#311B92;text-align:center;margin:12px 0;letter-spacing:1px}
-.hl-blue{color:#1565C0;font-weight:700}
-.hl-red{color:#C62828;font-weight:700}
-.hl-grn{color:#2E7D32;font-weight:700}
-.hl-pur{color:#6A1B9A;font-weight:700}
-.move-row{display:flex;align-items:center;gap:8px;font-size:15px;margin:8px 0;flex-wrap:wrap}
-.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap}
-.badge-n{background:#C8E6C9;color:#1B5E20}
-.badge-num{background:#BBDEFB;color:#0D47A1}
-.badge-both{background:#EDE7F6;color:#311B92}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.flip-box{background:#F3F0FF;border:2px dashed #7E57C2;border-radius:10px;padding:14px;margin:12px 0;font-size:14px;line-height:1.8}
+.flip-title{font-weight:700;color:#311B92;margin-bottom:6px;font-size:14px}
+.btn-hub{display:block;width:fit-content;margin:24px auto 0;background:linear-gradient(135deg,#311B92,#512DA8);color:#fff;text-decoration:none;padding:13px 32px;border-radius:10px;font-size:15px;font-weight:700;text-align:center}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
 @media(max-width:520px){.two-col{grid-template-columns:1fr}}
 .col-card{background:#EDE7F6;border-radius:10px;padding:14px;border-top:3px solid #311B92}
 .col-title{font-size:12px;font-weight:700;color:#512DA8;text-transform:uppercase;margin-bottom:8px}
-.btn-hub{display:block;width:fit-content;margin:24px auto 0;background:linear-gradient(135deg,#311B92,#512DA8);color:#fff;text-decoration:none;padding:13px 32px;border-radius:10px;font-size:15px;font-weight:700;text-align:center}
-.btn-hub:hover{opacity:0.9}
 </style>
 </head>
 <body>
@@ -71,217 +75,196 @@ h3{color:#4527A0;font-size:1.05rem;margin-bottom:10px}
   </div>
 </nav>
 
-<!-- SCREEN 0 — The new challenge -->
+<!-- SCREEN 0 — The problem introduced -->
 <div class="screen active" id="s0">
   <div class="card">
-    <h2>A new challenge — n on BOTH sides! 🤔</h2>
-    <p style="font-size:15px;line-height:1.7;margin-bottom:14px">In Lesson 1, all the n's were on one side. Easy! But what happens when n appears on <strong>both sides</strong>?</p>
-    <div class="eq-box">3n + 12 = 5n − 4</div>
-    <p style="font-size:15px;line-height:1.7;margin:10px 0">We have <span class="hl-grn">3n</span> on the left AND <span class="hl-grn">5n</span> on the right. We can't solve it like this. We need to <strong>collect all the n's onto one side</strong> and <strong>all the numbers onto the other side</strong>.</p>
-    <svg viewBox="0 0 360 160" style="display:block;margin:0 auto;max-width:360px;width:100%">
-      <!-- Arrow pointing left for n's -->
-      <rect x="10" y="40" width="150" height="36" rx="8" fill="#C8E6C9"/>
-      <text x="85" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#1B5E20" font-family="Arial">n's → LEFT side</text>
-      <!-- Arrow pointing right for numbers -->
-      <rect x="200" y="40" width="150" height="36" rx="8" fill="#BBDEFB"/>
-      <text x="275" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#0D47A1" font-family="Arial">numbers → RIGHT side</text>
-      <!-- Middle divider -->
-      <line x1="180" y1="20" x2="180" y2="140" stroke="#9575CD" stroke-width="2" stroke-dasharray="5,4"/>
-      <text x="180" y="15" text-anchor="middle" font-size="12" fill="#7E57C2" font-family="Arial">= sign</text>
-      <!-- Bottom label -->
-      <text x="85" y="115" text-anchor="middle" font-size="13" fill="#311B92" font-family="Arial">Collect n's here</text>
-      <text x="275" y="115" text-anchor="middle" font-size="13" fill="#311B92" font-family="Arial">Collect numbers here</text>
-      <text x="85" y="135" text-anchor="middle" font-size="12" fill="#555" font-family="Arial">e.g. 5n − 3n = 2n</text>
-      <text x="275" y="135" text-anchor="middle" font-size="12" fill="#555" font-family="Arial">e.g. 12 + 4 = 16</text>
-    </svg>
-    <div class="warn-box" style="margin-top:4px">
-      <div class="warn-title">⚠️ The sign flip rule</div>
-      When a term <strong>crosses the = sign</strong>, its sign flips: + becomes − and − becomes +.<br>
-      Think of it as: you're subtracting it from both sides to move it across.
+    <h2>n on BOTH sides — a new problem 🤔</h2>
+    <p>In Lesson 1, all the <span class="nn">n's</span> were on the left. Now they appear on <strong>both sides</strong>:</p>
+    <div style="background:#F3F0FF;border:2px solid #7E57C2;border-radius:10px;padding:14px 18px;font-size:1.3rem;font-weight:700;text-align:center;margin:12px 0">
+      <span class="nn">6n</span> <span class="nm">+ 3</span> <span class="neq">=</span> <span class="nn">2n</span> <span class="nm">+ 35</span>
     </div>
+    <p>There are <span class="nn">n's</span> on the left AND on the right. You can't use the 3-step method directly because you have <strong>two separate n groups</strong>.</p>
+    <p>The solution: <strong>sort the equation first</strong>. Move all the <span class="nn">blue n's</span> to the LEFT and all the <span class="nm">red numbers</span> to the RIGHT. Then it becomes a normal equation you can solve.</p>
+
+    <div class="sort-box">
+      <div class="sort-side">
+        <div class="sort-lbl blue">← n's go here</div>
+        <div class="sort-val"><span class="nn">6n − 2n = 4n</span></div>
+      </div>
+      <div class="sort-eq">=</div>
+      <div class="sort-side right-side">
+        <div class="sort-lbl red">numbers go here →</div>
+        <div class="sort-val"><span class="nm">35 − 3 = 32</span></div>
+      </div>
+    </div>
+    <p>So <span class="nn">4n</span> = <span class="nm">32</span> → <strong>n = 8</strong>. Check: 6×8+3 = 51 = 2×8+35 = 51 ✓</p>
   </div>
 </div>
 
-<!-- SCREEN 1 — The two-move method -->
+<!-- SCREEN 1 — The sign flip rule -->
 <div class="screen" id="s1">
   <div class="card">
-    <h2>The Two-Move Method 🎯</h2>
-    <p style="font-size:15px;line-height:1.7;margin-bottom:14px">Every equation with n on both sides is solved with the same two moves:</p>
-    <div class="rule-box">
-      <div class="rule-big">Move 1: Collect all n's to the LEFT</div>
-      <div class="rule-sub">Subtract the smaller n group from both sides</div>
-    </div>
-    <div class="rule-box" style="background:linear-gradient(135deg,#0D47A1,#1565C0);margin-top:8px">
-      <div class="rule-big">Move 2: Collect all numbers to the RIGHT</div>
-      <div class="rule-sub">Add or subtract the number to move it across the = sign</div>
+    <h2>The sign flip rule 🔄</h2>
+    <p>When a term <strong>crosses the = sign</strong>, its sign flips: <span class="nn">+2n</span> becomes <span class="nn">−2n</span>, and <span class="nm">−4</span> becomes <span class="nm">+4</span>.</p>
+    <p>Why? Because you're <em>subtracting it from both sides</em>. Subtracting removes it from one side and "adds the opposite" to the other.</p>
+
+    <div class="flip-box">
+      <div class="flip-title">Crossing the = sign: sign FLIPS</div>
+      <span class="nn">6n</span> + <span class="nm">3</span> = <span class="nn">2n</span> + <span class="nm">35</span><br>
+      Subtract <span class="nn">2n</span> from both sides → <span class="nn">2n</span> crosses and becomes <span class="nn">−2n</span>:<br>
+      <span class="nn">6n − 2n</span> + <span class="nm">3</span> = <span class="nm">35</span><br>
+      Subtract <span class="nm">3</span> from both sides → <span class="nm">3</span> crosses and becomes <span class="nm">−3</span>:<br>
+      <span class="nn">4n</span> = <span class="nm">35 − 3</span> = <span class="nm">32</span><br>
+      <strong>n = 8</strong>
     </div>
 
-    <div class="worked" style="margin-top:16px">
-      <div class="worked-q">Example — Solve: 3n + 12 = 5n − 4</div>
-      <div class="step-card">
-        <div class="step-num">Move 1 — Get all n's to the LEFT</div>
-        <div class="step-body">Subtract <span class="hl-grn">3n</span> from both sides (it's the smaller group):<br>
-        3n + 12 <span class="hl-red">− 3n</span> = 5n − 4 <span class="hl-red">− 3n</span><br>
-        → &nbsp;<span class="hl-blue">12 = 2n − 4</span></div>
+    <div class="rule-box">
+      <div class="rule-big">The 4-Step Method</div>
+      <div class="rule-sub" style="margin-top:10px">
+        <strong>Step 1:</strong> Expand any brackets<br>
+        <strong>Step 2:</strong> Move all <span style="color:#90CAF9">n-terms</span> to the LEFT (subtract the smaller n group)<br>
+        <strong>Step 3:</strong> Move all <span style="color:#FFAB91">numbers</span> to the RIGHT (add/subtract to cross the =)<br>
+        <strong>Step 4:</strong> Divide both sides to find n<br>
+        <strong>Always check:</strong> substitute n back in — both sides must be equal
       </div>
-      <div class="step-card">
-        <div class="step-num">Move 2 — Get all numbers to the RIGHT</div>
-        <div class="step-body">Add <span class="hl-grn">4</span> to both sides:<br>
-        12 <span class="hl-red">+ 4</span> = 2n − 4 <span class="hl-red">+ 4</span><br>
-        → &nbsp;<span class="hl-blue">16 = 2n</span></div>
+    </div>
+
+    <div style="background:#E8F5E9;border:2px solid #43A047;border-radius:12px;padding:16px;margin-top:14px">
+      <div style="font-weight:700;color:#1B5E20;font-size:14px;margin-bottom:10px">✅ Decision Guide — ask yourself this for every term:</div>
+      <table style="width:100%;font-size:14px;border-collapse:collapse">
+        <tr>
+          <td style="padding:6px 10px;background:#E3F2FD;border-radius:6px;font-weight:700;color:#1565C0;width:40%">Is it an <span style="color:#1565C0">n-term</span>?</td>
+          <td style="padding:6px 10px;color:#1a1a2e">→ It belongs on the <strong>LEFT</strong>. If it's on the right, subtract it from both sides.</td>
+        </tr>
+        <tr><td colspan="2" style="padding:4px"></td></tr>
+        <tr>
+          <td style="padding:6px 10px;background:#FBE9E7;border-radius:6px;font-weight:700;color:#BF360C;width:40%">Is it a <span style="color:#BF360C">number</span>?</td>
+          <td style="padding:6px 10px;color:#1a1a2e">→ It belongs on the <strong>RIGHT</strong>. If it's on the left, subtract it from both sides.</td>
+        </tr>
+      </table>
+      <div style="margin-top:10px;font-size:13px;color:#2E7D32;line-height:1.7">
+        <strong>When you subtract a term and it crosses the = sign, its sign flips:</strong><br>
+        +3n on the right → subtract 3n → it becomes −3n on the left → n-terms combine<br>
+        +8 on the left → subtract 8 → it becomes −8 on the right → numbers combine
       </div>
-      <div class="step-card">
-        <div class="step-num">Finish — Divide by 2</div>
-        <div class="step-body">16 ÷ 2 = 2n ÷ 2 &nbsp;→&nbsp; <span class="hl-blue">n = 8</span></div>
-      </div>
-      <div class="ws-ans">✓  n = 8 &nbsp;|&nbsp; Check: 3×8+12 = 36 &nbsp;=&nbsp; 5×8−4 = 36 ✓</div>
     </div>
   </div>
 </div>
 
-<!-- SCREEN 2 — More examples -->
+<!-- SCREEN 2 — Fully worked examples with step tables -->
 <div class="screen" id="s2">
   <div class="card">
-    <h2>More examples 📖</h2>
+    <h2>Worked examples — step by step 📖</h2>
 
-    <div class="worked">
-      <div class="worked-q">Example 2 — Solve: 7n − 3 = 4n + 9</div>
-      <div class="step-card">
-        <div class="step-num">Move 1 — n's to the LEFT (subtract 4n)</div>
-        <div class="step-body">7n − 3 − 4n = 4n + 9 − 4n &nbsp;→&nbsp; <span class="hl-blue">3n − 3 = 9</span></div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">Move 2 — numbers to the RIGHT (add 3)</div>
-        <div class="step-body">3n = 9 + 3 &nbsp;→&nbsp; <span class="hl-blue">3n = 12</span></div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">Finish — divide by 3</div>
-        <div class="step-body"><span class="hl-blue">n = 4</span></div>
-      </div>
-      <div class="ws-ans">✓  n = 4 &nbsp;|&nbsp; Check: 7×4−3 = 25 &nbsp;=&nbsp; 4×4+9 = 25 ✓</div>
-    </div>
+    <p><strong>Example 1 — Solve: <span class="nn">8n</span> <span class="neq">=</span> <span class="nn">3n</span> <span class="nm">+ 35</span></strong></p>
+    <table class="stbl">
+      <tr><th>Step</th><th>Equation</th><th>Action</th></tr>
+      <tr><td>Start</td><td><span class="nn">8n</span> = <span class="nn">3n</span> + <span class="nm">35</span></td><td class="action">n on both sides</td></tr>
+      <tr><td>Step 2</td><td><span class="nn">8n − 3n</span> = <span class="nm">35</span></td><td class="action">Subtract 3n from both sides</td></tr>
+      <tr><td>Simplify</td><td><span class="nn">5n</span> = <span class="nm">35</span></td><td class="action">8n − 3n = 5n</td></tr>
+      <tr><td>Step 4</td><td>n = <span class="nm">35 ÷ 5</span></td><td class="action">Divide both sides by 5</td></tr>
+      <tr><td>Answer</td><td colspan="2">✅ <strong>n = 7</strong> &nbsp;|&nbsp; Check: 8×7 = 56, 3×7+35 = 56 ✓</td></tr>
+    </table>
 
-    <div class="worked">
-      <div class="worked-q">Example 3 — Solve: 6n + 5 = 2n + 25</div>
-      <div class="step-card">
-        <div class="step-num">Move 1 — subtract 2n from both sides</div>
-        <div class="step-body">4n + 5 = 25</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">Move 2 — subtract 5 from both sides</div>
-        <div class="step-body">4n = 20</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">Finish — divide by 4</div>
-        <div class="step-body"><span class="hl-blue">n = 5</span></div>
-      </div>
-      <div class="ws-ans">✓  n = 5 &nbsp;|&nbsp; Check: 6×5+5 = 35 &nbsp;=&nbsp; 2×5+25 = 35 ✓</div>
-    </div>
+    <p style="margin-top:4px"><strong>Example 2 — Solve: <span class="nn">6n</span> <span class="nm">+ 3</span> <span class="neq">=</span> <span class="nn">2n</span> <span class="nm">+ 35</span></strong></p>
+    <table class="stbl">
+      <tr><th>Step</th><th>Equation</th><th>Action</th></tr>
+      <tr><td>Start</td><td><span class="nn">6n</span> + <span class="nm">3</span> = <span class="nn">2n</span> + <span class="nm">35</span></td><td class="action">n on both sides</td></tr>
+      <tr><td>Step 2</td><td><span class="nn">6n − 2n</span> + <span class="nm">3</span> = <span class="nm">35</span></td><td class="action">Subtract 2n (smaller group)</td></tr>
+      <tr><td>Step 3</td><td><span class="nn">4n</span> = <span class="nm">35 − 3</span></td><td class="action">Subtract 3 from both sides</td></tr>
+      <tr><td>Simplify</td><td><span class="nn">4n</span> = <span class="nm">32</span></td><td class="action">35 − 3 = 32</td></tr>
+      <tr><td>Step 4</td><td>n = <span class="nm">32 ÷ 4</span></td><td class="action">Divide both sides by 4</td></tr>
+      <tr><td>Answer</td><td colspan="2">✅ <strong>n = 8</strong> &nbsp;|&nbsp; Check: 6×8+3 = 51, 2×8+35 = 51 ✓</td></tr>
+    </table>
 
-    <div class="warn-box">
-      <div class="warn-title">💡 Quick shortcut tip</div>
-      You can write it in one clean line:<br>
-      <strong>6n + 5 = 2n + 25 &nbsp;→&nbsp; 6n − 2n = 25 − 5 &nbsp;→&nbsp; 4n = 20 &nbsp;→&nbsp; n = 5</strong><br>
-      <span style="font-size:13px;margin-top:6px;display:block">n's move left (subtracted), numbers move right (subtracted). Signs flip when crossing =.</span>
-    </div>
+    <p style="margin-top:4px"><strong>Example 3 — Solve: <span class="nn">6n</span> <span class="nm">− 5</span> <span class="neq">=</span> <span class="nn">2n</span> <span class="nm">+ 23</span></strong></p>
+    <table class="stbl">
+      <tr><th>Step</th><th>Equation</th><th>Action</th></tr>
+      <tr><td>Start</td><td><span class="nn">6n</span> − <span class="nm">5</span> = <span class="nn">2n</span> + <span class="nm">23</span></td><td class="action">n on both sides</td></tr>
+      <tr><td>Step 2</td><td><span class="nn">6n − 2n</span> − <span class="nm">5</span> = <span class="nm">23</span></td><td class="action">Subtract 2n from both sides</td></tr>
+      <tr><td>Step 3</td><td><span class="nn">4n</span> = <span class="nm">23 + 5</span></td><td class="action">Add 5 to both sides (−5 → +5)</td></tr>
+      <tr><td>Simplify</td><td><span class="nn">4n</span> = <span class="nm">28</span></td><td class="action">23 + 5 = 28</td></tr>
+      <tr><td>Step 4</td><td>n = <span class="nm">28 ÷ 4</span></td><td class="action">Divide both sides by 4</td></tr>
+      <tr><td>Answer</td><td colspan="2">✅ <strong>n = 7</strong> &nbsp;|&nbsp; Check: 6×7−5 = 37, 2×7+23 = 37 ✓</td></tr>
+    </table>
   </div>
 </div>
 
 <!-- SCREEN 3 — Practice -->
 <div class="screen" id="s3">
   <div class="card">
-    <h2>Your turn — Practice 💪</h2>
-    <p style="font-size:14px;color:#555;margin-bottom:16px">Use the two-move method. Collect n's to the left, numbers to the right.</p>
-
-    <div class="pq" id="pq1">
-      <div class="pq-text"><strong>Q1.</strong> &nbsp; Solve: &nbsp;<strong>4n = 2n + 8</strong></div>
-      <div class="pq-input">
-        <span style="font-size:15px;font-weight:700">n =</span>
-        <select id="pq1sel">
-          <option value="">-- choose --</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        <button class="pq-btn" onclick="chk('pq1','4')">Check</button>
-      </div>
-      <div class="pq-feedback" id="pq1fb"></div>
+    <h2>Your turn 💪</h2>
+    <div style="background:#FFF9C4;border-left:4px solid #F9A825;border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:14px;font-size:13px">
+      <strong style="color:#F57F17">Before you select an answer — write the steps in your workbook:</strong><br>
+      Step 1: Which side for n? ✏️ &nbsp; Step 2: Which side for numbers? ✏️ &nbsp; Step 3: Divide ✏️<br>
+      Selecting without writing = guessing with extra steps. The method only sticks when you write it.
     </div>
 
-    <div class="pq" id="pq2">
-      <div class="pq-text"><strong>Q2.</strong> &nbsp; Solve: &nbsp;<strong>5n + 2 = 2n + 14</strong></div>
+    <div class="pq">
+      <div class="pq-text"><strong>Q1.</strong> &nbsp;Solve: &nbsp;<strong><span class="nn">5n</span> = <span class="nn">2n</span> + 15</strong></div>
       <div class="pq-input">
         <span style="font-size:15px;font-weight:700">n =</span>
-        <select id="pq2sel">
-          <option value="">-- choose --</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-        </select>
-        <button class="pq-btn" onclick="chk('pq2','4')">Check</button>
+        <select id="p1s"><option value="">choose</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select>
+        <button class="pq-btn" onclick="chk('p1','5')">Check</button>
       </div>
-      <div class="pq-feedback" id="pq2fb"></div>
+      <div class="pq-feedback" id="p1fb"></div>
     </div>
 
-    <div class="pq" id="pq3">
-      <div class="pq-text"><strong>Q3.</strong> &nbsp; Solve: &nbsp;<strong>7n − 3 = 4n + 9</strong></div>
+    <div class="pq">
+      <div class="pq-text"><strong>Q2.</strong> &nbsp;Solve: &nbsp;<strong><span class="nn">6n</span> + 3 = <span class="nn">3n</span> + 24</strong></div>
       <div class="pq-input">
         <span style="font-size:15px;font-weight:700">n =</span>
-        <select id="pq3sel">
-          <option value="">-- choose --</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-        </select>
-        <button class="pq-btn" onclick="chk('pq3','4')">Check</button>
+        <select id="p2s"><option value="">choose</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+        <button class="pq-btn" onclick="chk('p2','7')">Check</button>
       </div>
-      <div class="pq-feedback" id="pq3fb"></div>
+      <div class="pq-feedback" id="p2fb"></div>
     </div>
 
-    <div class="pq" id="pq4">
-      <div class="pq-text"><strong>Q4.</strong> &nbsp; Solve: &nbsp;<strong>6n + 5 = 2n + 25</strong></div>
+    <div class="pq">
+      <div class="pq-text"><strong>Q3.</strong> &nbsp;Solve: &nbsp;<strong><span class="nn">7n</span> − 8 = <span class="nn">3n</span> + 28</strong></div>
       <div class="pq-input">
         <span style="font-size:15px;font-weight:700">n =</span>
-        <select id="pq4sel">
-          <option value="">-- choose --</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-        </select>
-        <button class="pq-btn" onclick="chk('pq4','5')">Check</button>
+        <select id="p3s"><option value="">choose</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>
+        <button class="pq-btn" onclick="chk('p3','9')">Check</button>
       </div>
-      <div class="pq-feedback" id="pq4fb"></div>
+      <div class="pq-feedback" id="p3fb"></div>
+    </div>
+
+    <div class="pq">
+      <div class="pq-text"><strong>Q4.</strong> &nbsp;Solve: &nbsp;<strong><span class="nn">4n</span> + 2 = <span class="nn">n</span> + 38</strong></div>
+      <div class="pq-input">
+        <span style="font-size:15px;font-weight:700">n =</span>
+        <select id="p4s"><option value="">choose</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option></select>
+        <button class="pq-btn" onclick="chk('p4','12')">Check</button>
+      </div>
+      <div class="pq-feedback" id="p4fb"></div>
     </div>
   </div>
 </div>
 
-<!-- SCREEN 4 — Summary -->
+<!-- SCREEN 4 — Full summary -->
 <div class="screen" id="s4">
   <div class="card">
-    <h2>Lesson 2 Complete! 🏆</h2>
-    <p style="font-size:15px;line-height:1.7;margin-bottom:16px">You've mastered equations with variables on both sides. Here's the complete method:</p>
-    <div class="rule-box">
-      <div class="rule-big">The Full Equation Method</div>
-      <div style="text-align:left;margin-top:12px;font-size:14px;line-height:2.1">
-        <strong>Step 1:</strong> Expand any brackets first<br>
-        <strong>Step 2:</strong> Move all n's to the LEFT (subtract the smaller n group from both sides)<br>
-        <strong>Step 3:</strong> Move all numbers to the RIGHT (add/subtract to move them across =)<br>
-        <strong>Step 4:</strong> Divide both sides to find n<br>
-        <strong>Step 5:</strong> Check your answer by substituting n back in
-      </div>
-    </div>
+    <h2>Lesson 2 complete! 🏆</h2>
+    <p style="margin-bottom:14px">You now have the complete method for ALL equation types.</p>
+
+    <table class="stbl">
+      <tr><th>Equation type</th><th>Extra step needed</th></tr>
+      <tr><td>3n = 15</td><td>None — just divide</td></tr>
+      <tr><td>5n + 2 = 27</td><td>Move number right first</td></tr>
+      <tr><td>4(n + 2) = 28</td><td>Expand brackets first</td></tr>
+      <tr><td><span class="nn">6n</span> + 3 = <span class="nn">2n</span> + 35</td><td>Collect n's left, numbers right</td></tr>
+      <tr><td>3(n + 4) = n + 20</td><td>Expand brackets + collect n's</td></tr>
+    </table>
+
     <div class="two-col" style="margin-top:14px">
       <div class="col-card">
-        <div class="col-title">✅ Correct approach</div>
-        <div style="font-size:13px;line-height:1.8">3n + 12 = 5n − 4<br>→ 12 + 4 = 5n − 3n<br>→ 16 = 2n<br>→ n = 8</div>
+        <div class="col-title">✅ Always do this</div>
+        <div style="font-size:13px;line-height:1.8">Write every step on a new line<br>Show the subtraction / addition<br>Check your answer at the end</div>
       </div>
       <div class="col-card">
-        <div class="col-title">❌ Common mistake</div>
-        <div style="font-size:13px;line-height:1.8">Forgetting to flip the sign when crossing the = sign.<br>−4 becomes +4 when it moves to the left side.</div>
+        <div class="col-title">❌ Never do this</div>
+        <div style="font-size:13px;line-height:1.8">Guess-and-check<br>Skip steps in your head<br>Forget to flip the sign</div>
       </div>
     </div>
     <a href="index.html" class="btn-hub">← Back to Hub</a>
@@ -289,7 +272,7 @@ h3{color:#4527A0;font-size:1.05rem;margin-bottom:10px}
 </div>
 
 <script>
-var cur=0, total=5;
+var cur=0,total=5;
 function goScreen(d){
   document.getElementById('s'+cur).classList.remove('active');
   cur=Math.max(0,Math.min(total-1,cur+d));
@@ -299,15 +282,15 @@ function goScreen(d){
   window.scrollTo(0,0);
 }
 function chk(id,ans){
-  var sel=document.getElementById(id+'sel');
+  var sel=document.getElementById(id+'s');
   var fb=document.getElementById(id+'fb');
   if(!sel.value){fb.className='pq-feedback wrong';fb.textContent='Please select an answer first.';return;}
   if(sel.value===ans){
     fb.className='pq-feedback correct';
-    fb.textContent='✓ Correct! Well done.';
+    fb.textContent='✓ Correct! Did you use the step table?';
   } else {
     fb.className='pq-feedback wrong';
-    fb.textContent='✗ Not quite — try the two-move method again.';
+    fb.textContent='✗ Not quite. Show the steps: move n\'s left, numbers right, then divide.';
   }
 }
 </script>

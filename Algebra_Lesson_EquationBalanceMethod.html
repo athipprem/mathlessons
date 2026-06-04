@@ -19,42 +19,42 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#EDE7F6;color:#1a1a2e;mi
 .screen{display:none;max-width:780px;margin:0 auto;padding:24px 16px 40px}
 .screen.active{display:block}
 .card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 12px rgba(49,27,146,0.09);margin-bottom:18px}
-h2{color:#311B92;font-size:1.25rem;margin-bottom:14px}
-h3{color:#4527A0;font-size:1.05rem;margin-bottom:10px}
-.step-card{border-left:4px solid #311B92;background:#EDE7F6;padding:14px 16px;border-radius:0 10px 10px 0;margin:12px 0}
-.step-num{font-size:11px;font-weight:700;color:#512DA8;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.step-body{font-size:15px;color:#1a1a2e;line-height:1.6}
+h2{color:#311B92;font-size:1.22rem;margin-bottom:14px}
+h3{color:#4527A0;font-size:1.02rem;margin-bottom:10px}
+p{font-size:15px;line-height:1.7;margin-bottom:12px}
 .rule-box{background:linear-gradient(135deg,#311B92,#512DA8);color:#fff;border-radius:12px;padding:18px;text-align:center;margin:14px 0}
-.rule-big{font-size:1.3rem;font-weight:700;margin-bottom:6px}
-.rule-sub{font-size:13px;opacity:0.85}
+.rule-big{font-size:1.2rem;font-weight:700;margin-bottom:6px}
+.rule-sub{font-size:13px;opacity:0.88;line-height:1.6}
 .warn-box{background:#FFF9C4;border-left:4px solid #F9A825;border-radius:0 10px 10px 0;padding:14px 16px;margin:14px 0}
 .warn-title{font-weight:700;color:#F57F17;margin-bottom:6px;font-size:14px}
-.worked{background:#F3F0FF;border-radius:10px;padding:16px;margin:14px 0;border:1px solid #B39DDB}
-.worked-q{font-weight:700;color:#311B92;margin-bottom:10px;font-size:15px}
-.ws{display:flex;align-items:flex-start;gap:10px;margin:6px 0}
-.ws-num{background:#311B92;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px}
-.ws-text{font-size:14px;color:#1a1a2e;line-height:1.5}
-.ws-ans{background:#EDE7F6;border-radius:8px;padding:8px 12px;color:#311B92;font-weight:700;font-size:14px;margin-top:8px}
-.pq{background:#fff;border:2px solid #B39DDB;border-radius:10px;padding:16px;margin:14px 0}
+.step-card{border-left:4px solid #311B92;background:#EDE7F6;padding:14px 16px;border-radius:0 10px 10px 0;margin:10px 0}
+.step-num{font-size:11px;font-weight:700;color:#512DA8;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.step-body{font-size:15px;color:#1a1a2e;line-height:1.6}
+/* Color coding */
+.nn{color:#1565C0;font-weight:700}   /* n-terms: blue */
+.nm{color:#BF360C;font-weight:700}   /* number-terms: red */
+.neq{color:#6A1B9A;font-weight:700}  /* equals: purple */
+/* Step-tracker table */
+.stbl{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+.stbl th{background:#EDE7F6;color:#311B92;padding:8px 12px;text-align:left;font-size:12px;font-weight:700;letter-spacing:.5px;border-bottom:2px solid #C5CAE9}
+.stbl td{padding:9px 12px;border-bottom:1px solid #E8EAF6;vertical-align:middle}
+.stbl tr:last-child td{border-bottom:none;background:#F3F0FF;font-weight:700}
+.stbl .action{font-size:12px;color:#7E57C2;font-style:italic}
+/* Practice */
+.pq{background:#fff;border:2px solid #B39DDB;border-radius:10px;padding:16px;margin:12px 0}
 .pq-text{font-size:15px;margin-bottom:10px;color:#1a1a2e;line-height:1.5}
 .pq-input{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .pq-input select{border:2px solid #9575CD;border-radius:8px;padding:8px 12px;font-size:15px;outline:none;background:#fff}
-.pq-input select:focus{border-color:#311B92}
 .pq-btn{background:#311B92;color:#fff;border:none;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600}
 .pq-btn:hover{background:#4527A0}
 .pq-feedback{margin-top:8px;padding:9px 14px;border-radius:8px;font-size:14px;font-weight:600;display:none}
-.pq-feedback.correct{background:#EDE7F6;color:#1B5E20;display:block}
+.pq-feedback.correct{background:#E8F5E9;color:#1B5E20;display:block}
 .pq-feedback.wrong{background:#FFEBEE;color:#B71C1C;display:block}
-.eq-box{background:#F3F0FF;border:2px solid #7E57C2;border-radius:10px;padding:14px 18px;font-size:1.3rem;font-weight:700;color:#311B92;text-align:center;margin:12px 0;letter-spacing:1px}
-.arrow-step{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:15px}
-.arrow{color:#7E57C2;font-size:1.2rem;font-weight:700;min-width:24px;text-align:center}
-.hl-blue{color:#1565C0;font-weight:700}
-.hl-red{color:#C62828;font-weight:700}
-.hl-grn{color:#2E7D32;font-weight:700}
+.eq-display{background:#F3F0FF;border:2px solid #7E57C2;border-radius:10px;padding:12px 18px;font-size:1.25rem;font-weight:700;text-align:center;margin:12px 0;letter-spacing:1px}
 .btn-hub{display:block;width:fit-content;margin:24px auto 0;background:linear-gradient(135deg,#311B92,#512DA8);color:#fff;text-decoration:none;padding:13px 32px;border-radius:10px;font-size:15px;font-weight:700;text-align:center}
-.btn-hub:hover{opacity:0.9}
-.scale-lbl{font-size:12px;fill:#555;font-family:Arial}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.guess-fail{background:#FFEBEE;border:2px solid #EF9A9A;border-radius:10px;padding:14px 16px;margin:12px 0}
+.guess-title{font-weight:700;color:#B71C1C;margin-bottom:8px;font-size:14px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
 @media(max-width:520px){.two-col{grid-template-columns:1fr}}
 .col-card{background:#EDE7F6;border-radius:10px;padding:14px;border-top:3px solid #311B92}
 .col-title{font-size:12px;font-weight:700;color:#512DA8;text-transform:uppercase;margin-bottom:8px}
@@ -71,237 +71,198 @@ h3{color:#4527A0;font-size:1.05rem;margin-bottom:10px}
   </div>
 </nav>
 
-<!-- SCREEN 0 — What is an equation? -->
+<!-- SCREEN 0 — Why algebra beats guessing -->
 <div class="screen active" id="s0">
   <div class="card">
-    <h2>What is an equation? ⚖️</h2>
-    <p style="font-size:15px;line-height:1.7;margin-bottom:16px">An equation is like a <strong>balance scale</strong>. Both sides must weigh exactly the same. The equals sign <strong>=</strong> is the pivot in the middle.</p>
-    <svg viewBox="0 0 360 200" style="display:block;margin:0 auto;max-width:360px;width:100%">
-      <!-- Stand -->
-      <rect x="175" y="110" width="10" height="70" fill="#7E57C2" rx="3"/>
-      <rect x="140" y="176" width="80" height="10" fill="#512DA8" rx="4"/>
-      <!-- Beam -->
-      <rect x="60" y="105" width="240" height="8" fill="#311B92" rx="4"/>
-      <!-- Left pan strings -->
-      <line x1="90" y1="113" x2="75" y2="145" stroke="#9575CD" stroke-width="2"/>
-      <line x1="120" y1="113" x2="135" y2="145" stroke="#9575CD" stroke-width="2"/>
-      <!-- Right pan strings -->
-      <line x1="240" y1="113" x2="225" y2="145" stroke="#9575CD" stroke-width="2"/>
-      <line x1="270" y1="113" x2="285" y2="145" stroke="#9575CD" stroke-width="2"/>
-      <!-- Left pan -->
-      <rect x="65" y="145" width="80" height="12" fill="#9575CD" rx="4"/>
-      <!-- Right pan -->
-      <rect x="215" y="145" width="80" height="12" fill="#9575CD" rx="4"/>
-      <!-- Left side items: 3n + 4 -->
-      <rect x="72" y="118" width="32" height="26" fill="#C62828" rx="5"/>
-      <text x="88" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="white" font-family="Arial">3n+4</text>
-      <!-- Right side items: 19 -->
-      <rect x="232" y="118" width="30" height="26" fill="#1565C0" rx="5"/>
-      <text x="247" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="white" font-family="Arial">19</text>
-      <!-- Pivot circle -->
-      <circle cx="180" cy="109" r="8" fill="#512DA8"/>
-      <!-- Labels -->
-      <text x="105" y="170" text-anchor="middle" font-size="13" fill="#311B92" font-weight="700" font-family="Arial">LEFT SIDE</text>
-      <text x="255" y="170" text-anchor="middle" font-size="13" fill="#311B92" font-weight="700" font-family="Arial">RIGHT SIDE</text>
-      <text x="180" y="98" text-anchor="middle" font-size="11" fill="#7E57C2" font-family="Arial">balanced!</text>
-    </svg>
-    <div class="eq-box">3n + 4 = 19</div>
-    <p style="font-size:15px;line-height:1.7;margin-top:10px">Our job is to find the value of <span class="hl-blue">n</span> that makes both sides equal. To do that, we must <strong>keep the scale balanced</strong> — whatever we do to one side, we MUST do to the other side too.</p>
-  </div>
-  <div class="card">
-    <h3>🥇 The Golden Rule of Equations</h3>
-    <div class="rule-box">
-      <div class="rule-big">Whatever you do to one side — do it to the other side too!</div>
-      <div class="rule-sub">Add the same number to both sides. Subtract the same number from both sides. The scale stays balanced.</div>
+    <h2>Why you can't just guess 🚫</h2>
+    <p>Some students try <strong>guess-and-check</strong> — pick a number, substitute it in, see if it works, then try again. Let's see why that approach breaks down.</p>
+    <div class="guess-fail">
+      <div class="guess-title">❌ Guess-and-check on a hard equation:</div>
+      <p style="font-size:14px;line-height:1.8;margin:0">Solve: <strong>7n − 8 = 3n + 28</strong><br>
+      Try n = 5 → Left: 27, Right: 43 ✗<br>
+      Try n = 8 → Left: 48, Right: 52 ✗<br>
+      Try n = 9 → Left: 55, Right: 55 ✓ ... got lucky after 3 tries!<br><br>
+      Now try: <strong>5n + 6 = 2n + 60</strong><br>
+      Try n = 5 → Left: 31, Right: 70 ✗<br>
+      Try n = 10 → Left: 56, Right: 80 ✗<br>
+      Try n = 14 → Left: 76, Right: 88 ✗<br>
+      Try n = 16 → Left: 86, Right: 92 ✗<br>
+      Try n = 18 → Left: 96, Right: 96 ✓ ... took 5 tries!<br><br>
+      What if the answer was n = 47? You could be guessing all day.</p>
     </div>
-    <div class="warn-box">
-      <div class="warn-title">⚠️ Break this rule and the scale tips!</div>
-      If you subtract 4 from the left but not the right, they're no longer equal. Always treat both sides exactly the same.
+    <p>The <strong>algebraic method</strong> finds the answer in 3 steps every single time — no matter how large n is. That's why we learn it.</p>
+    <div class="rule-box">
+      <div class="rule-big">Algebra = guaranteed method. Guessing = luck.</div>
+      <div class="rule-sub">A 3-step process that always works, even when n = 47 or n = 200.</div>
     </div>
   </div>
 </div>
 
-<!-- SCREEN 1 — Solving simple equations -->
+<!-- SCREEN 1 — The balance rule + color coding -->
 <div class="screen" id="s1">
   <div class="card">
-    <h2>Solving simple equations 🔢</h2>
-    <p style="font-size:15px;line-height:1.7;margin-bottom:14px">When all the <span class="hl-blue">n</span>'s are on one side, solving is straightforward. We just undo what's been done to <span class="hl-blue">n</span>.</p>
-
-    <div class="worked">
-      <div class="worked-q">Example 1 — Solve: 4n = 20</div>
-      <div class="arrow-step"><span class="arrow">→</span><span>n is multiplied by 4. To undo it, divide both sides by 4.</span></div>
-      <div class="arrow-step"><span class="arrow">→</span><span class="hl-blue">4n ÷ 4 = 20 ÷ 4</span></div>
-      <div class="ws-ans">✓  n = 5</div>
+    <h2>Equations are balance scales ⚖️</h2>
+    <p>An equation means both sides are <strong>exactly equal</strong>. The = sign is the pivot. To keep the scale balanced, whatever you do to one side you <strong>must do to the other</strong>.</p>
+    <svg viewBox="0 0 360 180" style="display:block;margin:0 auto;max-width:340px;width:100%">
+      <rect x="175" y="95" width="10" height="65" fill="#7E57C2" rx="3"/>
+      <rect x="140" y="157" width="80" height="9" fill="#512DA8" rx="4"/>
+      <rect x="60" y="90" width="240" height="8" fill="#311B92" rx="4"/>
+      <line x1="90" y1="98" x2="75" y2="130" stroke="#9575CD" stroke-width="2"/>
+      <line x1="120" y1="98" x2="135" y2="130" stroke="#9575CD" stroke-width="2"/>
+      <line x1="240" y1="98" x2="225" y2="130" stroke="#9575CD" stroke-width="2"/>
+      <line x1="270" y1="98" x2="285" y2="130" stroke="#9575CD" stroke-width="2"/>
+      <rect x="65" y="130" width="80" height="10" fill="#9575CD" rx="4"/>
+      <rect x="215" y="130" width="80" height="10" fill="#9575CD" rx="4"/>
+      <rect x="72" y="103" width="34" height="26" fill="#1565C0" rx="5"/>
+      <text x="89" y="121" text-anchor="middle" font-size="12" font-weight="700" fill="white" font-family="Arial">3n+4</text>
+      <rect x="228" y="103" width="28" height="26" fill="#BF360C" rx="5"/>
+      <text x="242" y="121" text-anchor="middle" font-size="12" font-weight="700" fill="white" font-family="Arial">22</text>
+      <circle cx="180" cy="94" r="7" fill="#512DA8"/>
+      <text x="105" y="155" text-anchor="middle" font-size="12" fill="#311B92" font-weight="700" font-family="Arial">LEFT = 3n+4</text>
+      <text x="255" y="155" text-anchor="middle" font-size="12" fill="#311B92" font-weight="700" font-family="Arial">RIGHT = 22</text>
+      <text x="180" y="86" text-anchor="middle" font-size="10" fill="#7E57C2" font-family="Arial">balanced!</text>
+    </svg>
+    <p style="margin-top:10px">We use <strong>colour coding</strong> in every step:</p>
+    <div class="two-col">
+      <div class="col-card">
+        <div class="col-title">🔵 n-terms (blue)</div>
+        <div style="font-size:15px"><span class="nn">3n</span>, <span class="nn">5n</span>, <span class="nn">2n</span> — anything with n in it</div>
+      </div>
+      <div class="col-card">
+        <div class="col-title">🔴 number-terms (red)</div>
+        <div style="font-size:15px"><span class="nm">4</span>, <span class="nm">22</span>, <span class="nm">−5</span> — plain numbers</div>
+      </div>
     </div>
-
-    <div class="worked">
-      <div class="worked-q">Example 2 — Solve: 2n + 3 = 13</div>
-      <p style="font-size:14px;margin-bottom:10px">Two things have been done to n: multiplied by 2, then added 3. Undo them in <strong>reverse order</strong>.</p>
-      <div class="step-card">
-        <div class="step-num">Step 1 — Remove the number (+3)</div>
-        <div class="step-body">Subtract 3 from both sides: &nbsp;<span class="hl-red">2n + 3 − 3 = 13 − 3</span> &nbsp;→&nbsp; <span class="hl-blue">2n = 10</span></div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">Step 2 — Remove the multiplier (×2)</div>
-        <div class="step-body">Divide both sides by 2: &nbsp;<span class="hl-red">2n ÷ 2 = 10 ÷ 2</span> &nbsp;→&nbsp; <span class="hl-blue">n = 5</span></div>
-      </div>
-      <div class="ws-ans">✓  n = 5 &nbsp;|&nbsp; Check: 2×5 + 3 = 13 ✓</div>
-    </div>
-
-    <div class="worked">
-      <div class="worked-q">Example 3 — Solve: 3n − 1 = 17</div>
-      <div class="step-card">
-        <div class="step-num">Step 1 — Remove the −1</div>
-        <div class="step-body">Add 1 to both sides: &nbsp;<span class="hl-red">3n − 1 + 1 = 17 + 1</span> &nbsp;→&nbsp; <span class="hl-blue">3n = 18</span></div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">Step 2 — Remove the ×3</div>
-        <div class="step-body">Divide both sides by 3: &nbsp;<span class="hl-red">3n ÷ 3 = 18 ÷ 3</span> &nbsp;→&nbsp; <span class="hl-blue">n = 6</span></div>
-      </div>
-      <div class="ws-ans">✓  n = 6 &nbsp;|&nbsp; Check: 3×6 − 1 = 17 ✓</div>
+    <div class="rule-box" style="margin-top:12px">
+      <div class="rule-big">The Golden Rule</div>
+      <div class="rule-sub">Whatever you do to one side — do exactly the same to the other side.</div>
     </div>
   </div>
 </div>
 
-<!-- SCREEN 2 — Bracket equations -->
+<!-- SCREEN 2 — The solving ladder -->
 <div class="screen" id="s2">
   <div class="card">
-    <h2>Equations with brackets 🔣</h2>
-    <p style="font-size:15px;line-height:1.7;margin-bottom:14px">Sometimes an equation has brackets. Always <strong>expand the brackets first</strong>, then solve as normal.</p>
-
-    <div class="worked">
-      <div class="worked-q">Example — Solve: 5(n + 2) = 30</div>
-      <div class="step-card">
-        <div class="step-num">Step 1 — Expand brackets</div>
-        <div class="step-body">5 × n + 5 × 2 = 30 &nbsp;→&nbsp; <span class="hl-blue">5n + 10 = 30</span></div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">Step 2 — Remove the +10</div>
-        <div class="step-body">5n = 30 − 10 &nbsp;→&nbsp; <span class="hl-blue">5n = 20</span></div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">Step 3 — Divide by 5</div>
-        <div class="step-body"><span class="hl-blue">n = 4</span></div>
-      </div>
-      <div class="ws-ans">✓  n = 4 &nbsp;|&nbsp; Check: 5×(4+2) = 5×6 = 30 ✓</div>
+    <h2>The 3-step solving ladder 🪜</h2>
+    <p>Every simple equation (n on one side only) is solved with the same 3 steps. Follow the ladder, top to bottom.</p>
+    <div class="step-card">
+      <div class="step-num">Step 1 — Expand any brackets</div>
+      <div class="step-body">If there are brackets, multiply them out first.<br>e.g. 2(n + 3) → <span class="nn">2n</span> + <span class="nm">6</span></div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Step 2 — Move the <span style="color:#BF360C">red number</span> to the right</div>
+      <div class="step-body">If it's +, subtract it from both sides.<br>If it's −, add it to both sides.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Step 3 — Divide both sides to find n</div>
+      <div class="step-body">Divide both sides by the coefficient of n (the number in front of it).</div>
     </div>
 
-    <div class="rule-box" style="margin-top:16px">
-      <div class="rule-big">The two-step method</div>
-      <div class="rule-sub" style="margin-top:8px;text-align:left;line-height:1.8">
-        <strong>Step 1:</strong> Move the number to the right side (add or subtract)<br>
-        <strong>Step 2:</strong> Divide both sides to find n
-      </div>
-    </div>
+    <p style="margin-top:16px"><strong>Example — Solve: <span class="nn">5n</span> <span class="nm">+ 2</span> <span class="neq">=</span> <span class="nm">27</span></strong></p>
+    <table class="stbl">
+      <tr><th>Step</th><th>Equation</th><th>Action</th></tr>
+      <tr><td>Start</td><td><span class="nn">5n</span> + <span class="nm">2</span> = <span class="nm">27</span></td><td class="action">Write it out</td></tr>
+      <tr><td>Step 2</td><td><span class="nn">5n</span> = <span class="nm">27 − 2</span></td><td class="action">Subtract 2 from both sides</td></tr>
+      <tr><td>Simplify</td><td><span class="nn">5n</span> = <span class="nm">25</span></td><td class="action">27 − 2 = 25</td></tr>
+      <tr><td>Step 3</td><td>n = <span class="nm">25 ÷ 5</span></td><td class="action">Divide both sides by 5</td></tr>
+      <tr><td>Answer</td><td colspan="2">✅ <strong>n = 5</strong> &nbsp;|&nbsp; Check: 5×5 + 2 = 27 ✓</td></tr>
+    </table>
 
-    <div class="two-col" style="margin-top:14px">
-      <div class="col-card">
-        <div class="col-title">+ number → subtract it</div>
-        <div style="font-size:14px;line-height:1.7">3n <strong>+ 4</strong> = 19<br>→ 3n = 19 <strong>− 4</strong><br>→ 3n = 15 → n = 5</div>
-      </div>
-      <div class="col-card">
-        <div class="col-title">− number → add it</div>
-        <div style="font-size:14px;line-height:1.7">3n <strong>− 6</strong> = 9<br>→ 3n = 9 <strong>+ 6</strong><br>→ 3n = 15 → n = 5</div>
-      </div>
-    </div>
+    <p><strong>Example — Solve: <span class="nn">3n</span> <span class="nm">− 7</span> <span class="neq">=</span> <span class="nm">11</span></strong></p>
+    <table class="stbl">
+      <tr><th>Step</th><th>Equation</th><th>Action</th></tr>
+      <tr><td>Start</td><td><span class="nn">3n</span> − <span class="nm">7</span> = <span class="nm">11</span></td><td class="action">Write it out</td></tr>
+      <tr><td>Step 2</td><td><span class="nn">3n</span> = <span class="nm">11 + 7</span></td><td class="action">Add 7 to both sides (−7 → +7)</td></tr>
+      <tr><td>Simplify</td><td><span class="nn">3n</span> = <span class="nm">18</span></td><td class="action">11 + 7 = 18</td></tr>
+      <tr><td>Step 3</td><td>n = <span class="nm">18 ÷ 3</span></td><td class="action">Divide both sides by 3</td></tr>
+      <tr><td>Answer</td><td colspan="2">✅ <strong>n = 6</strong> &nbsp;|&nbsp; Check: 3×6 − 7 = 11 ✓</td></tr>
+    </table>
   </div>
 </div>
 
-<!-- SCREEN 3 — Practice -->
+<!-- SCREEN 3 — Brackets + Practice -->
 <div class="screen" id="s3">
   <div class="card">
-    <h2>Your turn — Practice 💪</h2>
-    <p style="font-size:14px;color:#555;margin-bottom:16px">Solve each equation. Select your answer then press Check.</p>
+    <h2>Brackets: expand first 🔣</h2>
+    <p>When you see brackets, <strong>always expand first</strong> before doing Steps 2 and 3.</p>
+    <p><strong>Example — Solve: <span class="nn">4(n + 2)</span> <span class="neq">=</span> <span class="nm">28</span></strong></p>
+    <table class="stbl">
+      <tr><th>Step</th><th>Equation</th><th>Action</th></tr>
+      <tr><td>Step 1</td><td><span class="nn">4n</span> + <span class="nm">8</span> = <span class="nm">28</span></td><td class="action">Expand: 4×n + 4×2</td></tr>
+      <tr><td>Step 2</td><td><span class="nn">4n</span> = <span class="nm">28 − 8</span></td><td class="action">Subtract 8 from both sides</td></tr>
+      <tr><td>Simplify</td><td><span class="nn">4n</span> = <span class="nm">20</span></td><td class="action">28 − 8 = 20</td></tr>
+      <tr><td>Step 3</td><td>n = <span class="nm">20 ÷ 4</span></td><td class="action">Divide both sides by 4</td></tr>
+      <tr><td>Answer</td><td colspan="2">✅ <strong>n = 5</strong> &nbsp;|&nbsp; Check: 4×(5+2) = 28 ✓</td></tr>
+    </table>
+  </div>
 
-    <div class="pq" id="pq1">
-      <div class="pq-text"><strong>Q1.</strong> &nbsp; Solve: &nbsp;<strong>4n = 20</strong></div>
-      <div class="pq-input">
-        <span style="font-size:15px;font-weight:700">n =</span>
-        <select id="pq1sel">
-          <option value="">-- choose --</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="8">8</option>
-        </select>
-        <button class="pq-btn" onclick="chk('pq1','5')">Check</button>
-      </div>
-      <div class="pq-feedback" id="pq1fb"></div>
+  <div class="card">
+    <h2>Your turn 💪</h2>
+    <div style="background:#FFF9C4;border-left:4px solid #F9A825;border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:14px;font-size:13px">
+      <strong style="color:#F57F17">Write the steps first, then select.</strong><br>
+      For every equation: Step 1 → move the <span style="color:#BF360C;font-weight:700">number</span> to the right (subtract from both sides). Step 2 → divide both sides to find n.
     </div>
-
-    <div class="pq" id="pq2">
-      <div class="pq-text"><strong>Q2.</strong> &nbsp; Solve: &nbsp;<strong>2n + 3 = 13</strong></div>
+    <div class="pq">
+      <div class="pq-text"><strong>Q1.</strong> &nbsp;Solve: &nbsp;<strong>8n = 64</strong></div>
       <div class="pq-input">
         <span style="font-size:15px;font-weight:700">n =</span>
-        <select id="pq2sel">
-          <option value="">-- choose --</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="8">8</option>
-        </select>
-        <button class="pq-btn" onclick="chk('pq2','5')">Check</button>
+        <select id="p1s"><option value="">choose</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+        <button class="pq-btn" onclick="chk('p1','8')">Check</button>
       </div>
-      <div class="pq-feedback" id="pq2fb"></div>
+      <div class="pq-feedback" id="p1fb"></div>
     </div>
-
-    <div class="pq" id="pq3">
-      <div class="pq-text"><strong>Q3.</strong> &nbsp; Solve: &nbsp;<strong>3n − 1 = 17</strong></div>
+    <div class="pq">
+      <div class="pq-text"><strong>Q2.</strong> &nbsp;Solve: &nbsp;<strong>4n + 3 = 27</strong></div>
       <div class="pq-input">
         <span style="font-size:15px;font-weight:700">n =</span>
-        <select id="pq3sel">
-          <option value="">-- choose --</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-        </select>
-        <button class="pq-btn" onclick="chk('pq3','6')">Check</button>
+        <select id="p2s"><option value="">choose</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select>
+        <button class="pq-btn" onclick="chk('p2','6')">Check</button>
       </div>
-      <div class="pq-feedback" id="pq3fb"></div>
+      <div class="pq-feedback" id="p2fb"></div>
     </div>
-
-    <div class="pq" id="pq4">
-      <div class="pq-text"><strong>Q4.</strong> &nbsp; Solve: &nbsp;<strong>5n + 4 = 24</strong></div>
+    <div class="pq">
+      <div class="pq-text"><strong>Q3.</strong> &nbsp;Solve: &nbsp;<strong>5n − 8 = 12</strong></div>
       <div class="pq-input">
         <span style="font-size:15px;font-weight:700">n =</span>
-        <select id="pq4sel">
-          <option value="">-- choose --</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-        </select>
-        <button class="pq-btn" onclick="chk('pq4','4')">Check</button>
+        <select id="p3s"><option value="">choose</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select>
+        <button class="pq-btn" onclick="chk('p3','4')">Check</button>
       </div>
-      <div class="pq-feedback" id="pq4fb"></div>
+      <div class="pq-feedback" id="p3fb"></div>
+    </div>
+    <div class="pq">
+      <div class="pq-text"><strong>Q4.</strong> &nbsp;Solve: &nbsp;<strong>3(n + 5) = 36</strong></div>
+      <div class="pq-input">
+        <span style="font-size:15px;font-weight:700">n =</span>
+        <select id="p4s"><option value="">choose</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select>
+        <button class="pq-btn" onclick="chk('p4','7')">Check</button>
+      </div>
+      <div class="pq-feedback" id="p4fb"></div>
     </div>
   </div>
 </div>
 
-<!-- SCREEN 4 — Summary + Back to Hub -->
+<!-- SCREEN 4 — Summary -->
 <div class="screen" id="s4">
   <div class="card">
-    <h2>Lesson 1 Complete! 🎉</h2>
-    <p style="font-size:15px;line-height:1.7;margin-bottom:16px">You've learned the balance method. Here's your cheat sheet:</p>
-    <div class="rule-box">
-      <div class="rule-big">The Two-Step Equation Method</div>
-      <div style="text-align:left;margin-top:12px;font-size:14px;line-height:2">
-        <strong>Step 1:</strong> Move numbers to the right &nbsp;(add if it's −, subtract if it's +)<br>
-        <strong>Step 2:</strong> Divide both sides to isolate n<br>
-        <strong>Always check:</strong> Substitute n back in to verify both sides are equal
-      </div>
-    </div>
+    <h2>Lesson 1 complete! ✅</h2>
+    <p style="margin-bottom:16px">You now have the 3-step method that works every time — no guessing needed.</p>
+    <table class="stbl">
+      <tr><th>Step</th><th>What to do</th><th>Sign rule</th></tr>
+      <tr><td><strong>1</strong></td><td>Expand brackets</td><td>Multiply each term inside</td></tr>
+      <tr><td><strong>2</strong></td><td>Move the <span class="nm">red number</span> right</td><td>+ becomes − · − becomes +</td></tr>
+      <tr><td><strong>3</strong></td><td>Divide by the <span class="nn">n coefficient</span></td><td>Both sides ÷ same number</td></tr>
+    </table>
     <div class="warn-box" style="margin-top:16px">
-      <div class="warn-title">🚀 Coming up in Lesson 2</div>
-      What if <strong>n appears on BOTH sides</strong> of the equation? Like 3n + 12 = 5n − 4? That's the real challenge — and you'll learn to handle it easily!
+      <div class="warn-title">🚀 Lesson 2 challenge</div>
+      What if there are <strong>n's on BOTH sides</strong>? Like <span class="nn">5n</span> + 4 = <span class="nn">2n</span> + 37?<br>
+      The 3 steps won't work directly — you need to collect all the n's first. That's what Lesson 2 teaches.
     </div>
     <a href="index.html" class="btn-hub">← Back to Hub</a>
   </div>
 </div>
 
 <script>
-var cur=0, total=5;
+var cur=0,total=5;
 function goScreen(d){
   document.getElementById('s'+cur).classList.remove('active');
   cur=Math.max(0,Math.min(total-1,cur+d));
@@ -311,15 +272,15 @@ function goScreen(d){
   window.scrollTo(0,0);
 }
 function chk(id,ans){
-  var sel=document.getElementById(id+'sel');
+  var sel=document.getElementById(id+'s');
   var fb=document.getElementById(id+'fb');
   if(!sel.value){fb.className='pq-feedback wrong';fb.textContent='Please select an answer first.';return;}
   if(sel.value===ans){
     fb.className='pq-feedback correct';
-    fb.textContent='✓ Correct! Well done.';
+    fb.textContent='✓ Correct! Did you use the 3-step method?';
   } else {
     fb.className='pq-feedback wrong';
-    fb.textContent='✗ Not quite — try checking your steps again.';
+    fb.textContent='✗ Not quite. Follow the ladder: expand → move number → divide.';
   }
 }
 </script>
