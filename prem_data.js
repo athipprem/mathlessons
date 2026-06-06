@@ -26,41 +26,36 @@ var PREM_DATA = {
     testPending: false
   },
   lastUnit: {
-    n: 'M2', score: 12, outOf: 15, pct: 80, delta: +1, prevScore: 11,
+    n: 21, score: 15, outOf: 15, pct: 100, delta: +3, prevScore: 12,
 
     // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Milestone 02 &mdash; 12/15 ISA (80%) &middot; Kangaroo 4/5',
-    patternInsight: '<strong>12/15 ISA (80%) &mdash; Sec A 3/5, Sec B 9/10. Kangaroo 4/5 &#127775; BREAKTHROUGH.</strong> Q2 &#10007; Path &amp; Frame direction error (added border instead of subtracting). Q7 &#10007; SimEq blank (skipped). Q12 &#10007; Ratio Transfer blank. Sec B strong: Bar Model &#10003;, Sequences all 3 &#10003;, Angles Q13&ndash;Q15 &#10003;. Kangaroo 4/5: Applied Problems radar bumped to 72. U21: Equation Solving &mdash; Variables on Both Sides.',
+    patternLabel:   'Unit 21 &mdash; 15/15 (100%) &#127775; PERFECT',
+    patternInsight: '<strong>15/15 &#127775; PERFECT &mdash; Sec A 5/5, Sec B 10/10.</strong> First perfect score on a fundamental gap unit. Full algebraic method shown in working: bracket expansion (Q4 &#10003;), collect terms (Q10&ndash;Q14 step tables &#10003;), bracket+both-sides (Q15 &#9733;&#9733; &#10003;). No guessing &mdash; n-terms moved left, numbers moved right on every question. Mastery standard: PASSED. U22: Sequences Formula Deep Drill.',
 
     // ── Results panel analysis insight ───────────────────────────────
-    analysisLabel:   'Milestone 02 &mdash; Cumulative Review Units 11&ndash;20',
-    analysisInsight: '<strong>12/15 ISA (80%) | Kangaroo 4/5.</strong> Strengths confirmed: HCF/LCM &#10003;, Sequences all formats &#10003;, Bar Model &#10003;, Angles basic/algebra &#10003;. Gaps: Path &amp; Frame direction (Q2 &#10007; re-emerged under test pressure), SimEq (Q7 blank &mdash; skipped), Ratio Transfer (Q12 blank &mdash; trigger not firing in removal-format). Kangaroo breakthrough: snail &#10003;, digit &#10003;, remainder &#10003;, triangles &#10003;. Q17 &#10007; handshakes used factorials not C(n,2). Applied Problems radar bumped significantly. U21: equation solving, variables both sides.',
+    analysisLabel:   'Unit 21 &mdash; Equation Solving: Variables on Both Sides',
+    analysisInsight: '<strong>15/15 &#127775; PERFECT | Sec A 5/5 | Sec B 10/10.</strong> Complete turnaround from first attempt (13/15 guessing) to genuine algebraic mastery. Bracket expansion shown in Q4 &#10003;. Variables-on-both-sides: collect n-terms left, numbers right, divide &mdash; correct on all 10 Sec B questions. Q15 &#9733;&#9733; (expand + both sides) fully solved. Mastery standard met: 13/15 + 5/5 Sec A. U22: Sequences Formula Deep Drill.',
 
     // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>ISA 12/15 (80%) &#127775; &middot; Q2 &#10007; Path&amp;Frame direction &middot; Q7 &#10007; SimEq blank &middot; Q12 &#10007; Ratio Transfer blank. Kangaroo 4/5 &mdash; Q17 &#10007; handshakes (used factorials).</strong>',
+    qSummary: '<strong>15/15 &#127775; PERFECT &middot; All 15 correct &middot; Full method shown in working &middot; Sec A 5/5 &middot; Sec B 10/10.</strong>',
 
     // ── Q-by-Q breakdown ─────────────────────────────────────────────
     qBreakdown: [
-      { q:'Q1',  topic:'Geometry &mdash; Rectangle (P+A)',               lvl:'w', pass:true,  note:'&#10003; P=50 cm, A=144 cm&sup2;. Both parts correct.' },
-      { q:'Q2',  topic:'Geometry &mdash; Path &amp; Frame',              lvl:'m', pass:false, note:'&#10007; 396 cm&sup2; (correct 324). Added border instead of subtracting &mdash; outer/inner direction reversed. Same error from U11&ndash;U14, resolved U15, re-emerged under test pressure.' },
-      { q:'Q3',  topic:'Number Theory &mdash; HCF Three-Item',           lvl:'m', pass:true,  note:'&#10003; HCF(48,72,96)=24 cm. Fully consolidated.' },
-      { q:'Q4',  topic:'Number Theory &mdash; LCM Scheduling',           lvl:'w', pass:true,  note:'&#10003; LCM(12,8)=24 min &rarr; 9:24 am.' },
-      { q:'Q5',  topic:'Patterns &mdash; Find T&#8328; (a=3, d=5)',      lvl:'w', pass:true,  note:'&#10003; 38. Listed all terms (3,8,13&hellip;38) &mdash; correct but formula not used.' },
-      { q:'Q6',  topic:'Algebra &mdash; Bar Model (Sophie/Mia/Tom)',     lvl:'w', pass:true,  note:'&#10003; Mia=16, Sophie=32, Tom=24. Clean bar diagram drawn.' },
-      { q:'Q7',  topic:'Algebra &#9733; &mdash; SimEq (apples/oranges)', lvl:'m', pass:false, note:'&#10007; Blank &mdash; likely skipped during pre-scan time budget. Not a conceptual regression (U16 = 5/5).' },
-      { q:'Q8',  topic:'Sequences &mdash; Find T&#8321;&#8321; (a=5,d=8)',lvl:'w', pass:true,  note:'&#10003; T&#8321;&#8321;=85.' },
-      { q:'Q9',  topic:'Sequences &#9733; &mdash; Find d and T&#8321;',  lvl:'m', pass:true,  note:'&#10003; d=4, T&#8321;=11. Listed T3&rarr;T7, back-tracked correctly.' },
-      { q:'Q10', topic:'Sequences &#9733; &mdash; First term exceeding 70', lvl:'m', pass:true, note:'&#10003; T&#8321;&#8323;.' },
-      { q:'Q11', topic:'Ratio &mdash; Sharing (2:3)',                    lvl:'w', pass:true,  note:'&#10003; Jake=36, Lily=54.' },
-      { q:'Q12', topic:'Ratio &#9733; &mdash; Transfer (5:3 &rarr; 1:1)', lvl:'m', pass:false, note:'&#10007; Blank. Trigger did not fire &mdash; no working in box. Solved perfectly in U18; removal-format not recognised here.' },
-      { q:'Q13', topic:'Geometry &mdash; Angles Triangle (65&#176;,48&#176;)', lvl:'w', pass:true, note:'&#10003; 67&#176;.' },
-      { q:'Q14', topic:'Geometry &#9733; &mdash; Quad Algebra (n+20, 2n&minus;10, n+30, 80)', lvl:'m', pass:true, note:'&#10003; n=60, angles 80,110,90,80. Set up 4n+120=360 correctly.' },
-      { q:'Q15', topic:'Geometry &#9733;&#9733; &mdash; Triangle Algebra (2n+10, n+5, n&minus;15)', lvl:'h', pass:true, note:'&#10003; n=45, angles 100,50,30. 4n=180 &rarr; n=45. All terms already one side &mdash; confident.' },
-      { q:'Q16', topic:'Kangaroo &mdash; Snail Climb (diagnostic)',      lvl:'m', pass:true,  note:'&#10003; Day 5. Listed day-by-day 1,2,3,4,5 cleanly.' },
-      { q:'Q17', topic:'Kangaroo &#9733; &mdash; Handshakes (diagnostic)',lvl:'h', pass:false, note:'&#10007; Blank. Working shows 4!=24, 5!=120 &mdash; used permutations. C(n,2) concept not yet in toolkit.' },
-      { q:'Q18', topic:'Kangaroo &mdash; Missing Digit div by 9 (diagnostic)', lvl:'m', pass:true, note:'&#10003; digit=6. Systematic trial: 9|3072, 9|3172, 9|3672 &rarr; found 6.' },
-      { q:'Q19', topic:'Kangaroo &#9733; &mdash; Remainder Puzzle (diagnostic)', lvl:'h', pass:true, note:'&#10003; 16. &#247;6=r4 &#10003;, &#247;7=r2 &#10003;.' },
-      { q:'Q20', topic:'Kangaroo &mdash; Triangle Counting (diagnostic)', lvl:'m', pass:true, note:'&#10003; 5 triangles. Drew figure and counted correctly.' }
+      { q:'Q1',  topic:'Equations &mdash; Basic (6n=54)',                     lvl:'w', pass:true,  note:'&#10003; n=9. Long division shown.' },
+      { q:'Q2',  topic:'Equations &mdash; Linear (3n+4=22)',                  lvl:'w', pass:true,  note:'&#10003; n=6.' },
+      { q:'Q3',  topic:'Equations &mdash; Linear (4n&minus;5=27)',            lvl:'w', pass:true,  note:'&#10003; n=8.' },
+      { q:'Q4',  topic:'Equations &#9733; &mdash; Brackets (2(n+6)=26)',      lvl:'m', pass:true,  note:'&#10003; n=7. Working: 2n+12=26 &rarr; 2n=14 &rarr; n=7. Bracket expansion correct.' },
+      { q:'Q5',  topic:'Equations &#9733; &mdash; Brackets (5(n&minus;1)=20)', lvl:'m', pass:true, note:'&#10003; n=5.' },
+      { q:'Q6',  topic:'Equations &mdash; Both Sides (4n=n+12)',              lvl:'w', pass:true,  note:'&#10003; n=4.' },
+      { q:'Q7',  topic:'Equations &mdash; Both Sides (7n=3n+40)',             lvl:'w', pass:true,  note:'&#10003; n=10.' },
+      { q:'Q8',  topic:'Equations &mdash; Both Sides (5n+4=2n+37)',           lvl:'w', pass:true,  note:'&#10003; n=11.' },
+      { q:'Q9',  topic:'Equations &#9733; &mdash; Both Sides (5n+8=2n+17)',   lvl:'m', pass:true,  note:'&#10003; n=3.' },
+      { q:'Q10', topic:'Equations &#9733; &mdash; Both Sides (4n&minus;6=n+30)', lvl:'m', pass:true, note:'&#10003; n=12. Working: 4n&minus;6=n+30 &rarr; 3n=36 &rarr; n=12.' },
+      { q:'Q11', topic:'Equations &#9733; &mdash; Both Sides (5n&minus;3=2n+42)', lvl:'m', pass:true, note:'&#10003; n=15. Working: 3n=45 &rarr; n=15.' },
+      { q:'Q12', topic:'Equations &#9733; &mdash; Both Sides (4n+5=n+44)',    lvl:'m', pass:true,  note:'&#10003; n=13. Working: 3n=39 &rarr; n=13.' },
+      { q:'Q13', topic:'Equations &#9733;&#9733; &mdash; Both Sides (3n+8=n+40)', lvl:'h', pass:true, note:'&#10003; n=16. Working: 2n=32 &rarr; n=16.' },
+      { q:'Q14', topic:'Equations &#9733;&#9733; &mdash; Both Sides (4n&minus;8=n+52)', lvl:'h', pass:true, note:'&#10003; n=20. Working: 3n=60 &rarr; n=20.' },
+      { q:'Q15', topic:'Equations &#9733;&#9733; &mdash; Expand+Both (5(n&minus;3)=3n+13)', lvl:'h', pass:true, note:'&#10003; n=14. Working: 5n&minus;15=3n+13 &rarr; 2n=28 &rarr; n=14. Perfect 4-step chain.' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -69,7 +64,7 @@ var PREM_DATA = {
   skills: [
     { name: 'Logic & Reasoning', c: 87, t: 90 },
     { name: 'Number Sense',      c: 88, t: 90 },
-    { name: 'Algebra',           c: 96, t: 85 },
+    { name: 'Algebra',           c: 98, t: 85 },
     { name: 'Arithmetic',        c: 83, t: 85 },
     { name: 'Geometry',          c: 70, t: 80 },
     { name: 'Counting',          c: 83, t: 85 },
@@ -78,7 +73,7 @@ var PREM_DATA = {
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 70, 88, 96, 83, 83, 83, 72],
+  radarCurrent:  [87, 70, 88, 98, 83, 83, 83, 72],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -106,22 +101,36 @@ var PREM_DATA = {
     { n:18, score:11, delta:+1,   color:'linear-gradient(135deg,#E65100,#F57C00)',  star:false },
     { n:19, score:11, delta:0,    color:'linear-gradient(135deg,#E65100,#F57C00)',  star:false },
     { n:20, score:11, delta:0,    color:'linear-gradient(135deg,#1565C0,#0D47A1)',  star:false },
-    { n:'M2', label:'M2', score:12, delta:+1, color:'linear-gradient(135deg,#311B92,#512DA8)', star:false }
+    { n:'M2', label:'M2', score:12, delta:+1, color:'linear-gradient(135deg,#311B92,#512DA8)', star:false },
+    { n:21, score:15, delta:+3,  color:'linear-gradient(135deg,#FFD700,#FFA500)',  star:true  }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 22,
+      badge: 'linear-gradient(135deg,#0D47A1,#1565C0)',
+      title: 'Sequences Formula &middot; Deep Drill',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'L1: Formula Intro', c:'tblue' },
+        { t:'L2: Find d &amp; T₁', c:'tblue' }
+      ],
+      note: 'U22: Formula Tₙ = a + (n−1)d deep drill. Mastery standard: 13/15 + formula visible in every working. Listing terms does not count as a pass even if answer is correct. Topics: direct substitution, find d and T₁, inequality (first exceeding / last above zero), two-terms sum.',
+      status: 'pending'
+    },
+    {
       n: 21,
-      badge: 'linear-gradient(135deg,#311B92,#512DA8)',
+      badge: 'linear-gradient(135deg,#FFD700,#FFA500)',
       title: 'Equation Solving &middot; Variables on Both Sides',
       tags: [
-        { t:'Upcoming &#128197;', c:'tpurple' },
-        { t:'L1: Balance Method', c:'tblue' },
-        { t:'L2: Both Sides', c:'tblue' }
+        { t:'15/15 &#127775; PERFECT', s:'background:#fffde7;color:#F57F17;font-weight:700' },
+        { t:'Sec A 5/5 &#10003;', c:'tgreen' },
+        { t:'Sec B 10/10 &#10003;', c:'tgreen' },
+        { t:'Full method shown &#10003;', c:'tgreen' }
       ],
-      note: 'Core algebraic unlock: variables on both sides (e.g. 3n+12=5n&minus;4). Prerequisite for advanced angle algebra, SimEq extension, and ratio-change problems. Use n throughout (not x). Visual-first: balance scale concept in Lesson 1.',
-      status: 'pending'
+      note: '15/15 &#127775; PERFECT &mdash; first perfect on a fundamental gap unit. Sec A 5/5: bracket expansion correct (Q4 2n+12=26 &#10003;, Q5 5(n&minus;1)=20 &#10003;). Sec B 10/10: all variables-on-both-sides solved with full working &mdash; n-terms left, numbers right, divide. Q15 &#9733;&#9733; (bracket+both-sides): 5n&minus;15=3n+13 &rarr; 2n=28 &#10003;. Genuine method, not guessing. Mastery standard: PASSED.',
+      status: 'done'
     },
     {
       n: 'M2',
