@@ -173,6 +173,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .owner { font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; white-space:nowrap; flex-shrink:0; }
 .op { background:#faf5ff; color:#6b46c1; } .oc { background:#ebf4ff; color:#2b6cb0; }
 .task-divider { border-top:1px dashed #e2e8f0; margin:6px 0 4px; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:#cbd5e0; padding-top:6px; }
+.ul-chip{background:#e2e8f0;color:#4a5568;border:none;border-radius:14px;padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;transition:background .2s,color .2s}
+.ul-chip:hover{background:#cbd5e0}
+.ul-chip-active{background:#1565c0;color:#fff}
 </style>
 </head>
 <body>
@@ -278,7 +281,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
             </div>
 
             <div class="card">
-              <div class="card-hd"><span class="dot"></span>Unit Log &mdash; newest first</div>
+              <div class="card-hd" style="margin-bottom:10px"><span class="dot"></span>Unit Log
+                <span id="ul-count" style="font-size:11px;color:#a0aec0;font-weight:400;margin-left:6px"></span>
+              </div>
+              <!-- Filter bar -->
+              <div id="ul-filter-bar" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
+                <button class="ul-chip ul-chip-active" onclick="ulFilter('recent')">Recent 5</button>
+                <button class="ul-chip" onclick="ulFilter('all')">All</button>
+                <button class="ul-chip" onclick="ulFilter('pending')">Pending</button>
+                <button class="ul-chip" onclick="ulFilter('done')">Done</button>
+                <button class="ul-chip" onclick="ulFilter('milestone')">Milestones</button>
+              </div>
               <div id="dash-session-log"></div>
             </div>
           </div>
@@ -532,7 +545,7 @@ function buildRadar() {
 
 // ── Render from prem_data.js ─────────────────────────────────────────
 PREM_DATA.renderScoreChart('dash-score-chart');
-PREM_DATA.renderSessionLog('dash-session-log');
+renderUnitLog();
 PREM_DATA.renderSkillBars('dash-skill-bars', true);
 PREM_DATA.renderSkillSummary('dash-skill-summary');
 PREM_DATA.renderAchievement('dash-road-pct', 'dash-road-bar', 'dash-road-lbl');
@@ -548,6 +561,36 @@ if (dhs) dhs.textContent = PREM_DATA.achievement() + '%';
 // Skill meta line
 var dsm = document.getElementById('dash-skill-meta');
 if (dsm) dsm.textContent = 'Current score / target score — ' + PREM_DATA.achievement() + '% overall';
+// Unit log filter
+var ulCurrentFilter = 'recent';
+function ulFilter(f) {
+  ulCurrentFilter = f;
+  // update chip styles
+  document.querySelectorAll('.ul-chip').forEach(function(b) {
+    b.classList.remove('ul-chip-active');
+    if (b.getAttribute('onclick') === "ulFilter('" + f + "')") b.classList.add('ul-chip-active');
+  });
+  renderUnitLog();
+}
+function renderUnitLog() {
+  var log = PREM_DATA.unitLog;
+  var f = ulCurrentFilter;
+  var filtered;
+  if (f === 'pending')   filtered = log.filter(function(u){ return u.status === 'pending'; });
+  else if (f === 'done') filtered = log.filter(function(u){ return u.status === 'done' && !/^M/.test(String(u.n)); });
+  else if (f === 'milestone') filtered = log.filter(function(u){ return /^M/.test(String(u.n)); });
+  else if (f === 'recent') filtered = log.slice(0, 5);
+  else filtered = log; // all
+  // count badge
+  var countEl = document.getElementById('ul-count');
+  if (countEl) countEl.textContent = 'Showing ' + filtered.length + ' of ' + log.length;
+  // swap in filtered list, render, then restore
+  var origLog = PREM_DATA.unitLog;
+  PREM_DATA.unitLog = filtered;
+  PREM_DATA.renderSessionLog('dash-session-log');
+  PREM_DATA.unitLog = origLog;
+}
+
 </script>
 </body>
 </html>
