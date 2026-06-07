@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 23 · L2 — Two-Term Algebra</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#E8F5E9;color:#1a1a2e;min-height:100vh}
+
+/* ── Topnav ─────────────────────────────────── */
+.lesson-topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;background:#1B5E20;padding:0 20px;height:44px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.ltn-hub{color:#a5d6a7;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.3px}
+.ltn-hub:hover{color:#fff}
+.ltn-title{color:#fff;font-size:14px;font-weight:700;letter-spacing:.2px}
+.ltn-pill{background:#2E7D32;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;letter-spacing:.3px}
+.ltn-nav-btn{background:#2E7D32;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;text-decoration:none;letter-spacing:.3px;opacity:.9}
+.ltn-nav-btn:hover{opacity:1}
+
+/* ── Screen / progress ───────────────────────── */
+.screen{display:none;max-width:780px;margin:0 auto;padding:28px 20px 40px}
+.screen.active{display:block}
+.progress-bar{height:5px;background:#A5D6A7;position:sticky;top:44px;z-index:99}
+.progress-fill{height:100%;background:#1B5E20;transition:width .4s ease}
+
+/* ── Cards ───────────────────────────────────── */
+.card{background:#fff;border-radius:14px;padding:22px 24px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+.card-title{font-size:18px;font-weight:800;color:#1B5E20;margin-bottom:12px}
+.card-sub{font-size:13px;color:#555;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:.4px}
+
+/* ── Color chips ─────────────────────────────── */
+.chip{display:inline-block;padding:3px 11px;border-radius:20px;font-size:14px;font-weight:800;margin:2px}
+.chip-a{background:#E8F5E9;color:#2E7D32;border:2px solid #2E7D32}
+.chip-d{background:#FFF3E0;color:#E65100;border:2px solid #E65100}
+.chip-n{background:#E3F2FD;color:#1565C0;border:2px solid #1565C0}
+.chip-t{background:#F3E5F5;color:#6A1B9A;border:2px solid #6A1B9A}
+.chip-sum{background:#FCE4EC;color:#C62828;border:2px solid #C62828}
+
+/* ── Two-term expand table ───────────────────── */
+.expand-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px}
+.expand-table td{padding:9px 14px;border:1px solid #C8E6C9;text-align:center}
+.expand-table .head{background:#1B5E20;color:#fff;font-weight:800}
+.expand-table .term{background:#F1F8E9;font-weight:700;color:#1B5E20}
+.expand-table .expanded{background:#fff;color:#1a1a2e}
+.expand-table .sumrow{background:#E8F5E9;font-weight:700;color:#C62828}
+
+/* ── Step table ───────────────────────────────── */
+.step-table{width:100%;border-collapse:collapse;margin:10px 0}
+.step-table td{padding:8px 14px;font-size:15px;border:1px solid #C8E6C9}
+.step-num{background:#1B5E20;color:#fff;font-weight:800;width:38px;text-align:center;border-radius:6px 0 0 6px}
+.step-label{background:#F1F8E9;color:#1B5E20;font-weight:700;width:130px}
+.step-do{background:#fff;color:#1a1a2e}
+.step-result{background:#E8F5E9;color:#2E7D32;font-weight:700;text-align:right;width:200px}
+
+/* ── Worked example ──────────────────────────── */
+.worked{background:#F1F8E9;border-left:5px solid #2E7D32;border-radius:0 10px 10px 0;padding:16px 18px;margin:12px 0}
+.worked-q{font-size:15px;font-weight:700;color:#1B5E20;margin-bottom:10px}
+.worked-step{font-size:14px;color:#1a1a2e;padding:4px 0;border-bottom:1px dashed #C8E6C9}
+.worked-step:last-child{border-bottom:none;color:#2E7D32;font-weight:700}
+
+/* ── Jump diagram ────────────────────────────── */
+.jump-box{display:flex;align-items:center;justify-content:center;gap:0;margin:14px 0;flex-wrap:wrap}
+.jb{background:#fff;border:2px solid #A5D6A7;border-radius:8px;padding:8px 12px;font-size:14px;font-weight:700;text-align:center;min-width:60px}
+.jb.anchor{border-color:#2E7D32;background:#E8F5E9;color:#1B5E20}
+.jarr{font-size:20px;color:#E65100;padding:0 2px;font-weight:800;position:relative}
+.jlabel{font-size:10px;color:#E65100;font-weight:700;text-align:center;display:block}
+
+/* ── Practice ────────────────────────────────── */
+.pq-card{background:#fff;border:2px solid #A5D6A7;border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.pq-title{font-size:14px;font-weight:800;color:#1B5E20;margin-bottom:8px}
+.pq-text{font-size:15px;color:#1a1a2e;margin-bottom:10px;line-height:1.5}
+.pq-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.pq-label{font-size:14px;font-weight:700;color:#1a1a2e;white-space:nowrap}
+select.inp{border:2px solid #A5D6A7;border-radius:8px;padding:6px 10px;font-size:15px;background:#fff;color:#1a1a2e;min-width:80px;cursor:pointer}
+select.inp:focus{outline:none;border-color:#1B5E20}
+.btn-check{background:#1B5E20;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:14px;font-weight:700;cursor:pointer}
+.btn-check:hover{background:#2E7D32}
+.pq-feedback{font-size:14px;font-weight:600;padding:6px 10px;border-radius:7px;margin-top:8px;display:none}
+.pq-feedback.show{display:block}
+.pq-feedback.correct{background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7}
+.pq-feedback.wrong{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+
+/* ── Navigation ──────────────────────────────── */
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:24px;gap:12px}
+.btn{border:none;border-radius:10px;padding:12px 28px;font-size:15px;font-weight:700;cursor:pointer;transition:transform .1s,opacity .1s}
+.btn:hover{opacity:.9;transform:translateY(-1px)}
+.btn-back{background:#E8F5E9;color:#1B5E20;border:2px solid #A5D6A7}
+.btn-next{background:linear-gradient(135deg,#1B5E20,#2E7D32);color:#fff}
+.screen-counter{font-size:12px;color:#81C784;font-weight:700}
+
+/* ── Rule / warn boxes ───────────────────────── */
+.rule-box{background:#1B5E20;color:#fff;border-radius:12px;padding:16px 20px;margin:14px 0;text-align:center;font-size:16px;font-weight:700;line-height:1.5}
+.rule-box span{color:#A5D6A7}
+.warn-box{background:#FFF8E1;border:2px solid #FFB300;border-radius:10px;padding:12px 16px;margin:12px 0;font-size:14px;color:#5D4037}
+.warn-box strong{color:#E65100}
+
+/* ── Summary decision table ──────────────────── */
+.dec-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+.dec-table th{background:#1B5E20;color:#fff;padding:8px 12px;text-align:left}
+.dec-table td{padding:8px 12px;border-bottom:1px solid #C8E6C9;vertical-align:top}
+.dec-table tr:nth-child(even) td{background:#F1F8E9}
+</style>
+</head>
+<body>
+
+<div class="lesson-topnav">
+  <a href="index.html" class="ltn-hub">&#8592; Hub</a>
+  <span class="ltn-title">Sequences — Two-Term Algebra</span>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="ltn-pill">Unit 23 &middot; Lesson 2</span>
+    <a href="Sequences_Lesson_ReverseFormula.html" class="ltn-nav-btn">&#8592; Prev: Finding n</a>
+  </div>
+</div>
+
+<div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN 0 — The two-term trap
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="screen active" id="s0">
+  <div class="card">
+    <div class="card-title">🪤 The Two-Term Trap</div>
+    <p style="font-size:15px;line-height:1.7;margin-bottom:14px">
+      Here's a question type that looks easy — but almost everyone gets it wrong the first time:
+    </p>
+    <div class="rule-box">
+      In a sequence with <span>d = 3</span>, the <span>2nd term</span> and the <span>6th term</span> add up to <strong style="color:#FFD54F">32</strong>.<br>Find the first term a.
+    </div>
+
+    <div class="card-sub" style="margin-top:16px">❌ The guess-and-try approach</div>
+    <p style="font-size:14px;color:#555;margin-bottom:10px">You might try: guess a = 5, list terms: 5, 8, 11, 14, 17, 20 → T₂+T₆ = 8+20 = 28. Too small. Try a = 6: T₂+T₆ = 9+23 = 32 ✓... but it took 2 guesses. What if the answer is a = 47? You'd guess forever.</p>
+
+    <div class="card-sub">✅ The algebra approach — always one step</div>
+    <p style="font-size:14px;color:#555">We express both terms using the formula, then add them and solve. No guessing needed — ever.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">💡 Also in this lesson: The Jump-Counting Fix</div>
+    <p style="font-size:15px;line-height:1.6;color:#1a1a2e">
+      Many students lose marks on questions like <em>"T₅=27, T₉=43, find T₁"</em> because they miscalculate T₁.<br>
+      In this lesson you'll learn the exact rule that prevents this mistake.
+    </p>
+  </div>
+
+  <div class="nav-row">
+    <span class="screen-counter">1 of 5</span>
+    <button class="btn btn-next" onclick="go(1)">Next: Express-and-Add Method &#8594;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN 1 — Express-and-add method
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s1">
+  <div class="card">
+    <div class="card-title">📐 The Express-and-Add Method</div>
+    <p style="font-size:14px;color:#555;margin-bottom:14px">When two terms add up to a known value, expand both using the formula, then add and solve.</p>
+
+    <div class="card-sub">Step 1 — Express each term</div>
+    <table class="expand-table">
+      <tr>
+        <td class="head">Term</td>
+        <td class="head">Using Tₙ = a + (n−1)×d</td>
+        <td class="head">With d = 3</td>
+      </tr>
+      <tr>
+        <td class="term">T₂</td>
+        <td class="expanded">a + (2−1) × 3</td>
+        <td class="expanded">= a + 3</td>
+      </tr>
+      <tr>
+        <td class="term">T₆</td>
+        <td class="expanded">a + (6−1) × 3</td>
+        <td class="expanded">= a + 15</td>
+      </tr>
+      <tr>
+        <td class="sumrow" colspan="2">T₂ + T₆ = (a + 3) + (a + 15)</td>
+        <td class="sumrow">= 2a + 18</td>
+      </tr>
+    </table>
+
+    <div class="card-sub">Step 2 — Set equal to the given sum and solve</div>
+    <table class="step-table">
+      <tr>
+        <td class="step-num">1</td>
+        <td class="step-label">Set up</td>
+        <td class="step-do">2a + 18 = 32</td>
+        <td class="step-result">(T₂+T₆ = 32)</td>
+      </tr>
+      <tr>
+        <td class="step-num">2</td>
+        <td class="step-label">Subtract</td>
+        <td class="step-do">2a = 32 − 18 = 14</td>
+        <td class="step-result">remove constant</td>
+      </tr>
+      <tr>
+        <td class="step-num">3</td>
+        <td class="step-label">Divide</td>
+        <td class="step-do">a = 14 ÷ 2 = <strong style="color:#C62828">7</strong></td>
+        <td class="step-result" style="color:#C62828">a = 7 ✓</td>
+      </tr>
+    </table>
+
+    <div class="warn-box">
+      <strong>Key pattern:</strong> When you add two terms, the n-parts add too.<br>
+      T₂ + T₆ = (a+3) + (a+15) = <strong>2a + 18</strong>. The "18" comes from 3+15 = sum of (n−1)×d for each term.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔢 The Jump-Counting Rule</div>
+    <p style="font-size:14px;color:#555;margin-bottom:12px">
+      When you know two terms and need to find d — or when working backwards to T₁ — count <strong>jumps</strong>, not term numbers.
+    </p>
+    <div class="rule-box">
+      Jumps from T<sub>m</sub> to T<sub>n</sub> = <span>n − m</span><br>
+      <span style="font-size:14px;font-weight:400">NOT n, NOT n−1 — it's always n minus m</span>
+    </div>
+    <div class="jump-box">
+      <div style="text-align:center"><div class="jb anchor">T₅ = 27</div></div>
+      <div style="text-align:center"><div class="jarr">→<div class="jlabel">+d</div></div></div>
+      <div style="text-align:center"><div class="jb">T₆</div></div>
+      <div style="text-align:center"><div class="jarr">→<div class="jlabel">+d</div></div></div>
+      <div style="text-align:center"><div class="jb">T₇</div></div>
+      <div style="text-align:center"><div class="jarr">→<div class="jlabel">+d</div></div></div>
+      <div style="text-align:center"><div class="jb">T₈</div></div>
+      <div style="text-align:center"><div class="jarr">→<div class="jlabel">+d</div></div></div>
+      <div style="text-align:center"><div class="jb anchor">T₉ = 43</div></div>
+    </div>
+    <p style="font-size:14px;color:#555;text-align:center;margin-bottom:8px">From T₅ to T₉: jumps = 9 − 5 = <strong>4</strong>. Not 5 (term numbers), not 3, not 8.</p>
+    <table class="step-table">
+      <tr>
+        <td class="step-num">1</td>
+        <td class="step-label">Jumps</td>
+        <td class="step-do">9 − 5 = 4 jumps</td>
+        <td class="step-result">always n − m</td>
+      </tr>
+      <tr>
+        <td class="step-num">2</td>
+        <td class="step-label">Find d</td>
+        <td class="step-do">(43 − 27) ÷ 4 = 4</td>
+        <td class="step-result">d = 4</td>
+      </tr>
+      <tr>
+        <td class="step-num">3</td>
+        <td class="step-label">Find T₁</td>
+        <td class="step-do">T₁ = T₅ − 4×d = 27 − 16 = <strong>11</strong></td>
+        <td class="step-result" style="color:#C62828">T₁ = 11 ✓</td>
+      </tr>
+    </table>
+    <div class="warn-box">
+      <strong>Common error (U22 Q6):</strong> Using T₅−5×d = 27−20 = 7. ❌<br>
+      Why wrong? Going from T₅ back to T₁ is <strong>4 jumps</strong> (5−1=4), not 5 jumps. Subtract 4×d, not 5×d.
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="go(0)">&#8592; Back</button>
+    <span class="screen-counter">2 of 5</span>
+    <button class="btn btn-next" onclick="go(2)">Next: Worked Examples &#8594;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN 2 — Worked examples
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <div class="card">
+    <div class="card-title">📝 Worked Example 1 — Two-Term Sum</div>
+    <div class="worked">
+      <div class="worked-q">In a sequence with d = 3, the 2nd term and the 6th term add up to 32. Find a.</div>
+      <div class="worked-step">T₂ = a + (2−1)×3 = a + 3</div>
+      <div class="worked-step">T₆ = a + (6−1)×3 = a + 15</div>
+      <div class="worked-step">T₂ + T₆ = (a+3) + (a+15) = 2a + 18 = 32</div>
+      <div class="worked-step">2a = 32 − 18 = 14</div>
+      <div class="worked-step"><strong>a = 7 ✓</strong> &nbsp; Check: T₂=10, T₆=22, sum=32 ✓</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Worked Example 2 — Find d, T₁, then Tₙ</div>
+    <div class="worked">
+      <div class="worked-q">In a sequence, T₅ = 27 and T₉ = 43. Find d and T₁.</div>
+      <div class="worked-step">Jumps from T₅ to T₉: 9 − 5 = 4 jumps</div>
+      <div class="worked-step">d = (43 − 27) ÷ 4 = 16 ÷ 4 = 4</div>
+      <div class="worked-step">Jumps from T₁ to T₅: 5 − 1 = 4 jumps</div>
+      <div class="worked-step">T₁ = T₅ − 4×d = 27 − 4×4 = 27 − 16 = <strong>11</strong></div>
+      <div class="worked-step"><strong>d = 4, T₁ = 11 ✓</strong> &nbsp; Check: T₅=11+4×4=27 ✓</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Worked Example 3 — Two-step: find a first, then solve inequality</div>
+    <div class="worked">
+      <div class="worked-q">In a sequence with d = 5, the 6th term is 48. Which term first exceeds 100?</div>
+      <div class="worked-step">Step 1 — find a: T₆ = a + (6−1)×5 = a + 25 = 48 → a = 23</div>
+      <div class="worked-step">Step 2 — set up inequality: 23 + (n−1)×5 > 100</div>
+      <div class="worked-step">(n−1)×5 > 77 → n−1 > 15.4 → n ≥ 17</div>
+      <div class="worked-step"><strong>Answer: T₁₇ ✓</strong> &nbsp; Check: T₁₇=23+80=103>100✓, T₁₆=23+75=98&lt;100✓</div>
+    </div>
+    <div class="warn-box"><strong>Two-step rule:</strong> When a is not given directly, always find a from the given term first. Then solve the inequality.</div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="go(1)">&#8592; Back</button>
+    <span class="screen-counter">3 of 5</span>
+    <button class="btn btn-next" onclick="go(3)">Next: Practice &#8594;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN 3 — Practice
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s3">
+  <div class="card" style="background:#F1F8E9;border:2px solid #A5D6A7">
+    <div class="card-title">✏️ Write steps first, then select your answer</div>
+    <p style="font-size:14px;color:#555">Expand both terms, add, then solve. Show all working in your notebook before selecting.</p>
+  </div>
+
+  <!-- P1 — two-term sum -->
+  <div class="pq-card">
+    <div class="pq-title">Practice 1 — Two-Term Sum</div>
+    <div class="pq-text">In a sequence with common difference <strong>d = 3</strong>, the <strong>1st term</strong> and the <strong>5th term</strong> add up to <strong>36</strong>. Find the first term a.</div>
+    <div class="pq-row">
+      <span class="pq-label">a =</span>
+      <select class="inp" id="p1">
+        <option value="">Choose…</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+      </select>
+      <button class="btn-check" onclick="chk('p1','12','fb1')">Check</button>
+    </div>
+    <div class="pq-feedback" id="fb1"></div>
+  </div>
+
+  <!-- P2 — two-term sum -->
+  <div class="pq-card">
+    <div class="pq-title">Practice 2 — Two-Term Sum ★</div>
+    <div class="pq-text">In a sequence with common difference <strong>d = 7</strong>, the <strong>2nd term</strong> and the <strong>6th term</strong> add up to <strong>60</strong>. Find the first term a.</div>
+    <div class="pq-row">
+      <span class="pq-label">a =</span>
+      <select class="inp" id="p2">
+        <option value="">Choose…</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+      <button class="btn-check" onclick="chk('p2','9','fb2')">Check</button>
+    </div>
+    <div class="pq-feedback" id="fb2"></div>
+  </div>
+
+  <!-- P3 — find d and T1 from two terms -->
+  <div class="pq-card">
+    <div class="pq-title">Practice 3 — Find d and T₁ ★</div>
+    <div class="pq-text">In a sequence, the <strong>2nd term is 14</strong> and the <strong>8th term is 44</strong>. Find d and T₁. Then find T₁₅.</div>
+    <div class="pq-row">
+      <span class="pq-label">d =</span>
+      <select class="inp" id="p3d">
+        <option value="">Choose…</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+      </select>
+    </div>
+    <div class="pq-row">
+      <span class="pq-label">T₁ =</span>
+      <select class="inp" id="p3t1">
+        <option value="">Choose…</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+      </select>
+    </div>
+    <div class="pq-row">
+      <span class="pq-label">T₁₅ =</span>
+      <select class="inp" id="p3t15">
+        <option value="">Choose…</option>
+        <option value="77">77</option>
+        <option value="78">78</option>
+        <option value="79">79</option>
+        <option value="80">80</option>
+      </select>
+      <button class="btn-check" onclick="chk3()">Check</button>
+    </div>
+    <div class="pq-feedback" id="fb3"></div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="go(2)">&#8592; Back</button>
+    <span class="screen-counter">4 of 5</span>
+    <button class="btn btn-next" onclick="go(4)">Next: Summary &#8594;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN 4 — Summary & decision guide
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s4">
+  <div class="card">
+    <div class="card-title">🏆 All 5 Question Types — Decision Guide</div>
+    <table class="dec-table">
+      <tr>
+        <th>Type</th>
+        <th>What's given</th>
+        <th>What to find</th>
+        <th>Method</th>
+      </tr>
+      <tr>
+        <td><strong>A</strong></td>
+        <td>a, d, n</td>
+        <td>Tₙ</td>
+        <td>Direct: Tₙ = a + (n−1)×d</td>
+      </tr>
+      <tr>
+        <td><strong>B</strong></td>
+        <td>Two terms (Tₘ, Tₙ)</td>
+        <td>d, T₁, and another term</td>
+        <td>Jumps = n−m → d → T₁ using jumps back</td>
+      </tr>
+      <tr>
+        <td><strong>C</strong></td>
+        <td>a, d</td>
+        <td>First exceeding / last above zero</td>
+        <td>Set up inequality → round correctly</td>
+      </tr>
+      <tr>
+        <td><strong>D</strong></td>
+        <td>a, d, Tₙ value</td>
+        <td>n (which term?)</td>
+        <td>Reverse: n = (Tₙ − a) ÷ d + 1</td>
+      </tr>
+      <tr>
+        <td><strong>E</strong></td>
+        <td>d, Tₘ + Tₙ = sum</td>
+        <td>a (first term)</td>
+        <td>Expand both → add → solve 2a + k = sum</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Jump-Counting Reminder</div>
+    <div class="rule-box">
+      Jumps from T<sub>m</sub> to T<sub>n</sub> = <span>n − m</span><br>
+      <span style="font-size:13px;font-weight:400">T₁ to T₅: 4 jumps &nbsp;|&nbsp; T₃ to T₉: 6 jumps &nbsp;|&nbsp; T₅ to T₁₂: 7 jumps</span>
+    </div>
+  </div>
+
+  <div class="card" style="background:#E8F5E9;border:2px solid #A5D6A7">
+    <div class="card-title">✅ You're ready for the Unit 23 Test!</div>
+    <p style="font-size:15px;color:#1a1a2e;line-height:1.6">
+      The test covers all 5 types. For every question: <strong>write the formula first</strong>, identify what you know and what you're finding, then solve step by step.
+    </p>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="go(3)">&#8592; Back</button>
+    <span class="screen-counter">5 of 5</span>
+  </div>
+  <div style="text-align:center;margin-top:16px">
+    <a href="index.html" style="text-decoration:none">
+      <button class="btn" style="background:linear-gradient(135deg,#1B5E20,#2E7D32);color:#fff;width:100%;max-width:320px">&#127968; Back to Hub</button>
+    </a>
+  </div>
+</div>
+
+<script>
+var total = 5;
+function go(n) {
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width = (n/(total-1)*100)+'%';
+  window.scrollTo(0,0);
+}
+function chk(selId, correct, fbId) {
+  var val = document.getElementById(selId).value;
+  var fb  = document.getElementById(fbId);
+  if (!val) { fb.className='pq-feedback show wrong'; fb.textContent='⚠ Choose an answer first.'; return; }
+  if (val === correct) {
+    fb.className='pq-feedback show correct';
+    fb.textContent='✅ Correct! Well done — algebra method works!';
+  } else {
+    fb.className='pq-feedback show wrong';
+    fb.textContent='❌ Not quite — try again. Expand both terms first, then add and solve.';
+  }
+}
+function chk3() {
+  var d   = document.getElementById('p3d').value;
+  var t1  = document.getElementById('p3t1').value;
+  var t15 = document.getElementById('p3t15').value;
+  var fb  = document.getElementById('fb3');
+  if (!d || !t1 || !t15) { fb.className='pq-feedback show wrong'; fb.textContent='⚠ Choose all three answers first.'; return; }
+  if (d === '5' && t1 === '9' && t15 === '79') {
+    fb.className='pq-feedback show correct';
+    fb.textContent='✅ Perfect! d=5, T₁=9, T₁₅=79. Jumps rule + formula = correct every time!';
+  } else {
+    var msg = '❌ Not quite. ';
+    if (d !== '5') msg += 'Check d: jumps from T₂ to T₈ = 8−2 = 6. ';
+    else if (t1 !== '9') msg += 'Check T₁: T₁ = T₂ − 1×d = 14 − 5 = 9. ';
+    else msg += 'Check T₁₅: T₁₅ = 9 + (15−1)×5 = 79. ';
+    fb.className='pq-feedback show wrong';
+    fb.textContent=msg;
+  }
+}
+</script>
+</body>
+</html>

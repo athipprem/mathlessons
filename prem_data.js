@@ -20,42 +20,30 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: {
-    n:           20,
-    status:      'Lessons In Progress',
-    testPending: false
-  },
+  currentUnit: { n:23, topic:'Sequences Formula — All Types' },
   lastUnit: {
-    n: 21, score: 15, outOf: 15, pct: 100, delta: +3, prevScore: 12,
-
-    // ── Overview pattern insight ──────────────────────────────────────
-    patternLabel:   'Unit 21 &mdash; 15/15 (100%) &#127775; PERFECT',
-    patternInsight: '<strong>15/15 &#127775; PERFECT &mdash; Sec A 5/5, Sec B 10/10.</strong> First perfect score on a fundamental gap unit. Full algebraic method shown in working: bracket expansion (Q4 &#10003;), collect terms (Q10&ndash;Q14 step tables &#10003;), bracket+both-sides (Q15 &#9733;&#9733; &#10003;). No guessing &mdash; n-terms moved left, numbers moved right on every question. Mastery standard: PASSED. U22: Sequences Formula Deep Drill.',
-
-    // ── Results panel analysis insight ───────────────────────────────
-    analysisLabel:   'Unit 21 &mdash; Equation Solving: Variables on Both Sides',
-    analysisInsight: '<strong>15/15 &#127775; PERFECT | Sec A 5/5 | Sec B 10/10.</strong> Complete turnaround from first attempt (13/15 guessing) to genuine algebraic mastery. Bracket expansion shown in Q4 &#10003;. Variables-on-both-sides: collect n-terms left, numbers right, divide &mdash; correct on all 10 Sec B questions. Q15 &#9733;&#9733; (expand + both sides) fully solved. Mastery standard met: 13/15 + 5/5 Sec A. U22: Sequences Formula Deep Drill.',
-
-    // ── Q breakdown summary bar ───────────────────────────────────────
-    qSummary: '<strong>15/15 &#127775; PERFECT &middot; All 15 correct &middot; Full method shown in working &middot; Sec A 5/5 &middot; Sec B 10/10.</strong>',
-
-    // ── Q-by-Q breakdown ─────────────────────────────────────────────
+    n:22, score:7, outOf:15, pct:47, delta:-8, prevScore:15,
+    patternLabel: 'U22 Gap Analysis',
+    patternInsight: '7/15 (47%) — Sec A perfect 5/5. Sec B exposed 3 new concept gaps: Find n (0/2 — blank), Two-term algebra (0/2 — listing fallback), Jump-counting precision (3 wrong T&#8321;/T&#8345; calculations). Direct formula and basic inequality solid. U23 targets all gaps.',
+    analysisLabel: 'Next: U23 Sequences Formula — All Types',
+    analysisInsight: 'Revisit U22 scope with 2 new lessons: Reverse Formula (find n) and Two-Term Algebra setup. Mastery standard: 12/15.',
+    qSummary: 'Sec A 5/5 &#10003; (direct formula solid) | Sec B 2/10: Q8 &#10003; Q9 &#10003; | Q6 Q7 Q13 T&#8321;/T&#8345; wrong | Q10 Q11 blank (find n unseen) | Q12 Q15 listing fallback | Q14 inequality from given term wrong',
     qBreakdown: [
-      { q:'Q1',  topic:'Equations &mdash; Basic (6n=54)',                     lvl:'w', pass:true,  note:'&#10003; n=9. Long division shown.' },
-      { q:'Q2',  topic:'Equations &mdash; Linear (3n+4=22)',                  lvl:'w', pass:true,  note:'&#10003; n=6.' },
-      { q:'Q3',  topic:'Equations &mdash; Linear (4n&minus;5=27)',            lvl:'w', pass:true,  note:'&#10003; n=8.' },
-      { q:'Q4',  topic:'Equations &#9733; &mdash; Brackets (2(n+6)=26)',      lvl:'m', pass:true,  note:'&#10003; n=7. Working: 2n+12=26 &rarr; 2n=14 &rarr; n=7. Bracket expansion correct.' },
-      { q:'Q5',  topic:'Equations &#9733; &mdash; Brackets (5(n&minus;1)=20)', lvl:'m', pass:true, note:'&#10003; n=5.' },
-      { q:'Q6',  topic:'Equations &mdash; Both Sides (4n=n+12)',              lvl:'w', pass:true,  note:'&#10003; n=4.' },
-      { q:'Q7',  topic:'Equations &mdash; Both Sides (7n=3n+40)',             lvl:'w', pass:true,  note:'&#10003; n=10.' },
-      { q:'Q8',  topic:'Equations &mdash; Both Sides (5n+4=2n+37)',           lvl:'w', pass:true,  note:'&#10003; n=11.' },
-      { q:'Q9',  topic:'Equations &#9733; &mdash; Both Sides (5n+8=2n+17)',   lvl:'m', pass:true,  note:'&#10003; n=3.' },
-      { q:'Q10', topic:'Equations &#9733; &mdash; Both Sides (4n&minus;6=n+30)', lvl:'m', pass:true, note:'&#10003; n=12. Working: 4n&minus;6=n+30 &rarr; 3n=36 &rarr; n=12.' },
-      { q:'Q11', topic:'Equations &#9733; &mdash; Both Sides (5n&minus;3=2n+42)', lvl:'m', pass:true, note:'&#10003; n=15. Working: 3n=45 &rarr; n=15.' },
-      { q:'Q12', topic:'Equations &#9733; &mdash; Both Sides (4n+5=n+44)',    lvl:'m', pass:true,  note:'&#10003; n=13. Working: 3n=39 &rarr; n=13.' },
-      { q:'Q13', topic:'Equations &#9733;&#9733; &mdash; Both Sides (3n+8=n+40)', lvl:'h', pass:true, note:'&#10003; n=16. Working: 2n=32 &rarr; n=16.' },
-      { q:'Q14', topic:'Equations &#9733;&#9733; &mdash; Both Sides (4n&minus;8=n+52)', lvl:'h', pass:true, note:'&#10003; n=20. Working: 3n=60 &rarr; n=20.' },
-      { q:'Q15', topic:'Equations &#9733;&#9733; &mdash; Expand+Both (5(n&minus;3)=3n+13)', lvl:'h', pass:true, note:'&#10003; n=14. Working: 5n&minus;15=3n+13 &rarr; 2n=28 &rarr; n=14. Perfect 4-step chain.' }
+      { q:'Q1',  topic:'Sequences &mdash; Direct (a=6,d=3,T&#8321;&#8322;)',    lvl:'w', pass:true,  note:'&#10003; 39.' },
+      { q:'Q2',  topic:'Sequences &mdash; Direct (a=8,d=6,T&#8321;&#8325;)',    lvl:'w', pass:true,  note:'&#10003; 92. Working shown: 14&times;6+8.' },
+      { q:'Q3',  topic:'Sequences &mdash; Decreasing (T&#8321;&#8322;)',        lvl:'w', pass:true,  note:'&#10003; 6. Negative d handled.' },
+      { q:'Q4',  topic:'Sequences &mdash; Large n (T&#8322;&#8320;)',           lvl:'w', pass:true,  note:'&#10003; 212.' },
+      { q:'Q5',  topic:'Sequences &mdash; From pattern (T&#8321;&#8328;)',      lvl:'w', pass:true,  note:'&#10003; 73. d=4 identified correctly.' },
+      { q:'Q6',  topic:'Sequences &#9733; &mdash; Find d and T&#8321;',         lvl:'m', pass:false, note:'&#10007; d=4 &#10003; T&#8321;=7 &#10007; (correct: 11). Error: subtracted 5&times;d not 4&times;d going back from T&#8325;.' },
+      { q:'Q7',  topic:'Sequences &#9733; &mdash; Find d,T&#8321;,T&#8321;&#8325;', lvl:'m', pass:false, note:'&#10007; T&#8321;=16 &#10003; T&#8321;&#8325;=70 &#10007; (correct: 100). Used (n&minus;1)=9 instead of 14.' },
+      { q:'Q8',  topic:'Sequences &#9733; &mdash; First exceeding 80',          lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8327;. Inequality correct.' },
+      { q:'Q9',  topic:'Sequences &#9733; &mdash; Last above zero',             lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8324;. Decreasing inequality correct.' },
+      { q:'Q10', topic:'Sequences &#9733; &mdash; Find n (T&#8345;=81)',         lvl:'m', pass:false, note:'&#10007; Blank. Wrote "what? what is nth?" — concept never seen.' },
+      { q:'Q11', topic:'Sequences &#9733; &mdash; Find n (T&#8345;=85)',         lvl:'m', pass:false, note:'&#10007; Blank. Wrote "NJH?" — same confusion as Q10.' },
+      { q:'Q12', topic:'Sequences &#9733; &mdash; Two terms sum (T&#8323;+T&#8325;=64)', lvl:'m', pass:false, note:'&#10007; Got 9 (correct: 14). Listed terms with guessed starting values. No algebra.' },
+      { q:'Q13', topic:'Sequences &#9733;&#9733; &mdash; Find d,T&#8321;,T&#8321;&#8325;', lvl:'h', pass:false, note:'&#10007; T&#8321;=18 &#10003; T&#8321;&#8325;=72 &#10007; (correct: 74). Added T&#8321;+T&#8321;&#8320; directly (18+54=72) instead of formula.' },
+      { q:'Q14', topic:'Sequences &#9733;&#9733; &mdash; Inequality from T&#8326;', lvl:'h', pass:false, note:'&#10007; T&#8321;&#8322; (correct: T&#8321;&#8327;). Did not derive a from T&#8326; first.' },
+      { q:'Q15', topic:'Sequences &#9733;&#9733; &mdash; Two terms sum + T&#8322;&#8320;', lvl:'h', pass:false, note:'&#10007; Blank. Listed from guessed a=17. No algebraic setup.' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -102,22 +90,36 @@ var PREM_DATA = {
     { n:19, score:11, delta:0,    color:'linear-gradient(135deg,#E65100,#F57C00)',  star:false },
     { n:20, score:11, delta:0,    color:'linear-gradient(135deg,#1565C0,#0D47A1)',  star:false },
     { n:'M2', label:'M2', score:12, delta:+1, color:'linear-gradient(135deg,#311B92,#512DA8)', star:false },
-    { n:21, score:15, delta:+3,  color:'linear-gradient(135deg,#FFD700,#FFA500)',  star:true  }
+    { n:21, score:15, delta:+3,  color:'linear-gradient(135deg,#FFD700,#FFA500)',  star:true  },
+    { n:22, score:7,  delta:-8,  color:'linear-gradient(135deg,#EF5350,#B71C1C)',  star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 22,
-      badge: 'linear-gradient(135deg,#0D47A1,#1565C0)',
-      title: 'Sequences Formula &middot; Deep Drill',
+      n: 23,
+      badge: 'linear-gradient(135deg,#1B5E20,#2E7D32)',
+      title: 'Sequences Formula &middot; All Question Types',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Formula Intro', c:'tblue' },
-        { t:'L2: Find d &amp; T₁', c:'tblue' }
+        { t:'L1: Finding n', c:'tgreen' },
+        { t:'L2: Two-Term Algebra', c:'tgreen' }
       ],
-      note: 'U22: Formula Tₙ = a + (n−1)d deep drill. Mastery standard: 13/15 + formula visible in every working. Listing terms does not count as a pass even if answer is correct. Topics: direct substitution, find d and T₁, inequality (first exceeding / last above zero), two-terms sum.',
+      note: 'U23: Revisit U22 scope with 2 new lessons covering the gaps: Reverse formula (find n) and Two-Term algebraic setup. Mastery standard: 12/15. All 5 question types covered.',
       status: 'pending'
+    },
+    {
+      n: 22,
+      badge: 'linear-gradient(135deg,#EF5350,#B71C1C)',
+      title: 'Sequences Formula &middot; Deep Drill',
+      tags: [
+        { t:'7/15 (47%) &#10007;', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Sec A 5/5 &#10003;', c:'tgreen' },
+        { t:'Find n blank &#10007;', c:'torange' },
+        { t:'Two-term listing &#10007;', c:'torange' }
+      ],
+      note: '7/15 (47%) — Sec A 5/5 direct formula solid. Sec B: Q8 Q9 inequality &#10003;. Q6 Q7 Q13 T&#8321; miscalc (jump-count error). Q10 Q11 blank — find n concept never seen. Q12 Q15 listing fallback — two-term algebra not known. Q14 inequality from given term wrong. U23 targets all gaps.',
+      status: 'done'
     },
     {
       n: 21,

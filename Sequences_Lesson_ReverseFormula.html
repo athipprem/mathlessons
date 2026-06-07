@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 23 · L1 — Finding n</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#E8F5E9;color:#1a1a2e;min-height:100vh}
+
+/* ── Topnav ─────────────────────────────────── */
+.lesson-topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;background:#1B5E20;padding:0 20px;height:44px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.ltn-hub{color:#a5d6a7;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.3px}
+.ltn-hub:hover{color:#fff}
+.ltn-title{color:#fff;font-size:14px;font-weight:700;letter-spacing:.2px}
+.ltn-pill{background:#2E7D32;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;letter-spacing:.3px}
+.ltn-nav-btn{background:#2E7D32;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;text-decoration:none;letter-spacing:.3px;opacity:.9}
+.ltn-nav-btn:hover{opacity:1}
+
+/* ── Screen layout ───────────────────────────── */
+.screen{display:none;max-width:780px;margin:0 auto;padding:28px 20px 40px}
+.screen.active{display:block}
+
+/* ── Progress bar ────────────────────────────── */
+.progress-bar{height:5px;background:#A5D6A7;position:sticky;top:44px;z-index:99}
+.progress-fill{height:100%;background:#1B5E20;transition:width .4s ease}
+
+/* ── Cards ───────────────────────────────────── */
+.card{background:#fff;border-radius:14px;padding:22px 24px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+.card-title{font-size:18px;font-weight:800;color:#1B5E20;margin-bottom:12px}
+.card-sub{font-size:13px;color:#555;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:.4px}
+
+/* ── Color chips ─────────────────────────────── */
+.chip{display:inline-block;padding:3px 11px;border-radius:20px;font-size:14px;font-weight:800;margin:2px}
+.chip-a{background:#E8F5E9;color:#2E7D32;border:2px solid #2E7D32}    /* a = green */
+.chip-d{background:#FFF3E0;color:#E65100;border:2px solid #E65100}    /* d = orange */
+.chip-n{background:#E3F2FD;color:#1565C0;border:2px solid #1565C0}    /* n = blue */
+.chip-t{background:#F3E5F5;color:#6A1B9A;border:2px solid #6A1B9A}    /* Tₙ = purple */
+.chip-sol{background:#FCE4EC;color:#C62828;border:2px solid #C62828}  /* solving = red */
+
+/* ── Formula display ─────────────────────────── */
+.formula-box{background:#fff;border:3px solid #1B5E20;border-radius:12px;padding:14px 20px;text-align:center;font-size:20px;font-weight:800;color:#1B5E20;margin:14px 0}
+.formula-known{color:#388E3C}
+.formula-unknown{color:#C62828;font-size:22px}
+
+/* ── Step table ───────────────────────────────── */
+.step-table{width:100%;border-collapse:collapse;margin:10px 0}
+.step-table td{padding:8px 14px;font-size:15px;border:1px solid #C8E6C9}
+.step-num{background:#1B5E20;color:#fff;font-weight:800;width:38px;text-align:center;border-radius:6px 0 0 6px}
+.step-label{background:#F1F8E9;color:#1B5E20;font-weight:700;width:130px}
+.step-do{background:#fff;color:#1a1a2e}
+.step-result{background:#E8F5E9;color:#2E7D32;font-weight:700;text-align:right;width:200px}
+
+/* ── Worked example ──────────────────────────── */
+.worked{background:#F1F8E9;border-left:5px solid #2E7D32;border-radius:0 10px 10px 0;padding:16px 18px;margin:12px 0}
+.worked-q{font-size:15px;font-weight:700;color:#1B5E20;margin-bottom:10px}
+.worked-step{font-size:14px;color:#1a1a2e;padding:4px 0;border-bottom:1px dashed #C8E6C9}
+.worked-step:last-child{border-bottom:none;color:#2E7D32;font-weight:700}
+
+/* ── Practice ────────────────────────────────── */
+.pq-card{background:#fff;border:2px solid #A5D6A7;border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.pq-title{font-size:14px;font-weight:800;color:#1B5E20;margin-bottom:8px}
+.pq-text{font-size:15px;color:#1a1a2e;margin-bottom:10px;line-height:1.5}
+.pq-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pq-label{font-size:14px;font-weight:700;color:#1a1a2e}
+select.inp{border:2px solid #A5D6A7;border-radius:8px;padding:6px 10px;font-size:15px;background:#fff;color:#1a1a2e;min-width:80px;cursor:pointer}
+select.inp:focus{outline:none;border-color:#1B5E20}
+.btn-check{background:#1B5E20;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:14px;font-weight:700;cursor:pointer}
+.btn-check:hover{background:#2E7D32}
+.pq-feedback{font-size:14px;font-weight:600;padding:6px 10px;border-radius:7px;margin-top:8px;display:none}
+.pq-feedback.show{display:block}
+.pq-feedback.correct{background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7}
+.pq-feedback.wrong{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+
+/* ── Navigation ──────────────────────────────── */
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:24px;gap:12px}
+.btn{border:none;border-radius:10px;padding:12px 28px;font-size:15px;font-weight:700;cursor:pointer;transition:transform .1s,opacity .1s}
+.btn:hover{opacity:.9;transform:translateY(-1px)}
+.btn-back{background:#E8F5E9;color:#1B5E20;border:2px solid #A5D6A7}
+.btn-next{background:linear-gradient(135deg,#1B5E20,#2E7D32);color:#fff}
+.screen-counter{font-size:12px;color:#81C784;font-weight:700}
+
+/* ── Diagram boxes ───────────────────────────── */
+.arrow-diagram{display:flex;align-items:center;justify-content:center;gap:0;margin:14px 0;flex-wrap:wrap}
+.abox{background:#fff;border:2px solid #A5D6A7;border-radius:8px;padding:8px 14px;font-size:15px;font-weight:700;text-align:center;min-width:70px}
+.abox.known{border-color:#2E7D32;background:#E8F5E9;color:#1B5E20}
+.abox.unknown{border-color:#C62828;background:#FCE4EC;color:#C62828}
+.abox.given-t{border-color:#6A1B9A;background:#F3E5F5;color:#6A1B9A}
+.arr{font-size:22px;color:#A5D6A7;padding:0 4px;font-weight:700}
+
+/* ── Key rule box ────────────────────────────── */
+.rule-box{background:#1B5E20;color:#fff;border-radius:12px;padding:16px 20px;margin:14px 0;text-align:center;font-size:16px;font-weight:700;line-height:1.5}
+.rule-box span{color:#A5D6A7}
+
+/* ── Summary table ───────────────────────────── */
+.sum-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+.sum-table th{background:#1B5E20;color:#fff;padding:8px 12px;text-align:left}
+.sum-table td{padding:8px 12px;border-bottom:1px solid #C8E6C9;vertical-align:top}
+.sum-table tr:nth-child(even) td{background:#F1F8E9}
+
+/* ── Warning box ─────────────────────────────── */
+.warn-box{background:#FFF8E1;border:2px solid #FFB300;border-radius:10px;padding:12px 16px;margin:12px 0;font-size:14px;color:#5D4037}
+.warn-box strong{color:#E65100}
+</style>
+</head>
+<body>
+
+<div class="lesson-topnav">
+  <a href="index.html" class="ltn-hub">&#8592; Hub</a>
+  <span class="ltn-title">Sequences — Finding n</span>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="ltn-pill">Unit 23 &middot; Lesson 1</span>
+    <a href="Sequences_Lesson_TwoTermAlgebra.html" class="ltn-nav-btn">Next: Two-Term Algebra &#8594;</a>
+  </div>
+</div>
+
+<div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN 0 — Why you can't find n without rearranging
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="screen active" id="s0">
+  <div class="card">
+    <div class="card-title">😕 You know the value — but not the position</div>
+    <p style="font-size:15px;line-height:1.7;color:#1a1a2e;margin-bottom:14px">
+      You already know how to go <strong>forward</strong>: given a, d, and n → find T<sub>n</sub>.<br>
+      But what happens when someone gives you <strong>T<sub>n</sub></strong> and asks: <em>which term number is it?</em>
+    </p>
+
+    <div class="rule-box">
+      A sequence has <span>a = 3</span> and <span>d = 5</span>.<br>
+      One of the terms equals <strong style="color:#FFD54F">78</strong>.&nbsp; Which term is it?
+    </div>
+
+    <div class="card-sub">❌ The listing approach — why it fails</div>
+    <div class="arrow-diagram" style="flex-wrap:wrap;gap:6px">
+      <div class="abox known">T₁ = 3</div><div class="arr">→</div>
+      <div class="abox known">T₂ = 8</div><div class="arr">→</div>
+      <div class="abox known">T₃ = 13</div><div class="arr">→</div>
+      <div class="abox known">T₄ = 18</div><div class="arr">→</div>
+      <div class="abox" style="border-color:#ccc;color:#aaa">T₅ = 23</div><div class="arr" style="color:#ddd">→</div>
+      <div class="abox" style="border-color:#ccc;color:#aaa">…</div>
+    </div>
+    <p style="font-size:13px;color:#999;margin:6px 0 14px 4px">You'd need to list all the way to T₁₆ = 78. That's 16 terms — fine for small n, but what if the answer is T₁₀₀ or T₅₀₀?</p>
+
+    <div class="card-sub">✅ The formula approach — one line</div>
+    <div class="formula-box">
+      T<sub>n</sub> = <span class="formula-known">a</span> + (<span class="formula-unknown">n</span> − 1) × <span class="formula-known">d</span>
+      &nbsp;&nbsp;→&nbsp;&nbsp;
+      <span class="formula-known">78</span> = <span class="formula-known">3</span> + (<span class="formula-unknown">n</span> − 1) × <span class="formula-known">5</span>
+    </div>
+    <p style="font-size:14px;color:#2E7D32;font-weight:700;text-align:center">Solve for n → answer in seconds, no listing needed.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔑 The key idea</div>
+    <div class="arrow-diagram">
+      <div class="abox known" style="text-align:center;min-width:90px">Know:<br><small>a, d, <span style="color:#6A1B9A">T<sub>n</sub></span></small></div>
+      <div class="arr">&#8680;</div>
+      <div class="abox unknown" style="text-align:center;min-width:90px">Find:<br><small style="color:#C62828">n</small></div>
+    </div>
+    <p style="font-size:15px;line-height:1.7;margin-top:10px">
+      The formula Tₙ = a + (n−1) × d already contains <strong style="color:#C62828">n</strong>.
+      When we know T<sub>n</sub>, a, and d — we just <strong>solve the equation for n</strong>, exactly like equation solving.
+    </p>
+  </div>
+
+  <div class="nav-row">
+    <span class="screen-counter">1 of 5</span>
+    <button class="btn btn-next" onclick="go(1)">Next: The 3-Step Method &#8594;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN 1 — The 3-step reverse method
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s1">
+  <div class="card">
+    <div class="card-title">🔢 The 3-Step Reverse Method</div>
+    <p style="font-size:14px;color:#555;margin-bottom:14px">To find <strong>n</strong> when you know Tₙ, a and d — follow these three steps every time.</p>
+
+    <table class="step-table">
+      <tr>
+        <td class="step-num">1</td>
+        <td class="step-label">Write formula</td>
+        <td class="step-do">Write: Tₙ = a + (n−1) × d</td>
+        <td class="step-result" style="color:#1B5E20">Always start here</td>
+      </tr>
+      <tr>
+        <td class="step-num">2</td>
+        <td class="step-label">Substitute</td>
+        <td class="step-do">Replace Tₙ, a, and d with their values</td>
+        <td class="step-result" style="color:#1B5E20">n is still unknown</td>
+      </tr>
+      <tr>
+        <td class="step-num">3</td>
+        <td class="step-label">Solve for n</td>
+        <td class="step-do">Subtract a → divide by d → add 1</td>
+        <td class="step-result" style="color:#C62828">Answer: n = ?</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔍 Step 3 in Detail</div>
+    <p style="font-size:14px;color:#555;margin-bottom:12px">Once you substitute, you get an equation like this:</p>
+    <div class="formula-box" style="font-size:17px">
+      <span class="formula-known">78</span> = <span class="formula-known">3</span> + (<span class="formula-unknown">n</span> − 1) × <span class="formula-known">5</span>
+    </div>
+    <p style="font-size:14px;color:#555;margin:8px 0 12px">Now solve step by step — treat (n−1) as the thing you're finding first:</p>
+    <table class="step-table">
+      <tr>
+        <td class="step-num">3a</td>
+        <td class="step-label">Subtract a</td>
+        <td class="step-do">78 − 3 = 75&nbsp;&nbsp; → (n−1) × 5 = 75</td>
+        <td class="step-result">move a to left side</td>
+      </tr>
+      <tr>
+        <td class="step-num">3b</td>
+        <td class="step-label">Divide by d</td>
+        <td class="step-do">75 ÷ 5 = 15&nbsp;&nbsp; → n−1 = 15</td>
+        <td class="step-result">remove the ×d</td>
+      </tr>
+      <tr>
+        <td class="step-num">3c</td>
+        <td class="step-label">Add 1</td>
+        <td class="step-do">n = 15 + 1 = <strong style="color:#C62828">16</strong></td>
+        <td class="step-result" style="color:#C62828">n = 16 ✓</td>
+      </tr>
+    </table>
+    <div class="warn-box">
+      <strong>Always do 3c!</strong> n = (T<sub>n</sub> − a) ÷ d <strong>then add 1</strong>. The +1 comes from the (n−1) in the formula. Missing it gives you the wrong term number.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🎨 What each colour means</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px">
+      <div><span class="chip chip-a">a</span> <span style="font-size:13px;color:#555">first term — <strong>known</strong></span></div>
+      <div><span class="chip chip-d">d</span> <span style="font-size:13px;color:#555">common difference — <strong>known</strong></span></div>
+      <div><span class="chip chip-t">Tₙ</span> <span style="font-size:13px;color:#555">term value — <strong>known (given)</strong></span></div>
+      <div><span class="chip chip-sol">n</span> <span style="font-size:13px;color:#555">term number — <strong>FIND THIS</strong></span></div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="go(0)">&#8592; Back</button>
+    <span class="screen-counter">2 of 5</span>
+    <button class="btn btn-next" onclick="go(2)">Next: Worked Examples &#8594;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN 2 — Worked examples
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <div class="card">
+    <div class="card-title">📝 Worked Example 1</div>
+    <div class="worked">
+      <div class="worked-q">A sequence has first term a = 3 and common difference d = 5. The nth term is 78. Find n.</div>
+      <div class="worked-step">Step 1: Write formula &nbsp;→&nbsp; T<sub>n</sub> = a + (n−1) × d</div>
+      <div class="worked-step">Step 2: Substitute &nbsp;→&nbsp; <span class="chip chip-t" style="font-size:12px">78</span> = <span class="chip chip-a" style="font-size:12px">3</span> + (<span class="chip chip-sol" style="font-size:12px">n</span>−1) × <span class="chip chip-d" style="font-size:12px">5</span></div>
+      <div class="worked-step">Step 3a: 78 − 3 = 75 &nbsp;→&nbsp; (n−1) × 5 = 75</div>
+      <div class="worked-step">Step 3b: 75 ÷ 5 = 15 &nbsp;→&nbsp; n−1 = 15</div>
+      <div class="worked-step">Step 3c: n = 15 + 1 = <strong>16</strong> &nbsp;✓&nbsp; Check: T₁₆ = 3 + 15×5 = 78 ✓</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Worked Example 2</div>
+    <div class="worked">
+      <div class="worked-q">A sequence has first term a = 10 and common difference d = 4. The nth term is 58. Find n.</div>
+      <div class="worked-step">Step 1: T<sub>n</sub> = a + (n−1) × d</div>
+      <div class="worked-step">Step 2: <span class="chip chip-t" style="font-size:12px">58</span> = <span class="chip chip-a" style="font-size:12px">10</span> + (<span class="chip chip-sol" style="font-size:12px">n</span>−1) × <span class="chip chip-d" style="font-size:12px">4</span></div>
+      <div class="worked-step">Step 3a: 58 − 10 = 48 &nbsp;→&nbsp; (n−1) × 4 = 48</div>
+      <div class="worked-step">Step 3b: 48 ÷ 4 = 12 &nbsp;→&nbsp; n−1 = 12</div>
+      <div class="worked-step">Step 3c: n = 12 + 1 = <strong>13</strong> &nbsp;✓&nbsp; Check: T₁₃ = 10 + 12×4 = 58 ✓</div>
+    </div>
+    <div class="rule-box" style="margin-top:14px">
+      Always verify: plug n back into T<sub>n</sub> = a + (n−1)×d.<br>
+      <span>If it equals the given T<sub>n</sub>, you're correct.</span>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="go(1)">&#8592; Back</button>
+    <span class="screen-counter">3 of 5</span>
+    <button class="btn btn-next" onclick="go(3)">Next: Practice &#8594;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN 3 — Practice questions
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s3">
+  <div class="card" style="background:#F1F8E9;border:2px solid #A5D6A7">
+    <div class="card-title">✏️ Write steps first, then select your answer</div>
+    <p style="font-size:14px;color:#555">For each question: write the 3 steps in your notebook, then choose your answer below.</p>
+  </div>
+
+  <!-- P1 -->
+  <div class="pq-card">
+    <div class="pq-title">Practice 1</div>
+    <div class="pq-text">A sequence has first term <strong>a = 2</strong> and common difference <strong>d = 6</strong>. The nth term is <strong>50</strong>. Find n.</div>
+    <div class="pq-row">
+      <span class="pq-label">n =</span>
+      <select class="inp" id="p1">
+        <option value="">Choose…</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+      </select>
+      <button class="btn-check" onclick="chk('p1','9','fb1')">Check</button>
+    </div>
+    <div class="pq-feedback" id="fb1"></div>
+  </div>
+
+  <!-- P2 -->
+  <div class="pq-card">
+    <div class="pq-title">Practice 2</div>
+    <div class="pq-text">A sequence has first term <strong>a = 10</strong> and common difference <strong>d = 5</strong>. The nth term is <strong>80</strong>. Find n.</div>
+    <div class="pq-row">
+      <span class="pq-label">n =</span>
+      <select class="inp" id="p2">
+        <option value="">Choose…</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+      </select>
+      <button class="btn-check" onclick="chk('p2','15','fb2')">Check</button>
+    </div>
+    <div class="pq-feedback" id="fb2"></div>
+  </div>
+
+  <!-- P3 -->
+  <div class="pq-card">
+    <div class="pq-title">Practice 3</div>
+    <div class="pq-text">A sequence has first term <strong>a = 4</strong> and common difference <strong>d = 9</strong>. The nth term is <strong>94</strong>. Find n.</div>
+    <div class="pq-row">
+      <span class="pq-label">n =</span>
+      <select class="inp" id="p3">
+        <option value="">Choose…</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+      <button class="btn-check" onclick="chk('p3','11','fb3')">Check</button>
+    </div>
+    <div class="pq-feedback" id="fb3"></div>
+  </div>
+
+  <!-- P4 -->
+  <div class="pq-card">
+    <div class="pq-title">Practice 4 ★</div>
+    <div class="pq-text">A sequence has first term <strong>a = 12</strong> and common difference <strong>d = 5</strong>. The nth term is <strong>77</strong>. Find n.</div>
+    <div class="pq-row">
+      <span class="pq-label">n =</span>
+      <select class="inp" id="p4">
+        <option value="">Choose…</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+      </select>
+      <button class="btn-check" onclick="chk('p4','14','fb4')">Check</button>
+    </div>
+    <div class="pq-feedback" id="fb4"></div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="go(2)">&#8592; Back</button>
+    <span class="screen-counter">4 of 5</span>
+    <button class="btn btn-next" onclick="go(4)">Next: Summary &#8594;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN 4 — Summary
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s4">
+  <div class="card">
+    <div class="card-title">🏆 Lesson Summary — Finding n</div>
+    <table class="sum-table">
+      <tr><th>Step</th><th>What to do</th><th>Example (a=3, d=5, Tₙ=78)</th></tr>
+      <tr><td><strong>1</strong></td><td>Write the formula</td><td>Tₙ = a + (n−1) × d</td></tr>
+      <tr><td><strong>2</strong></td><td>Substitute Tₙ, a, d</td><td>78 = 3 + (n−1) × 5</td></tr>
+      <tr><td><strong>3a</strong></td><td>Subtract a from both sides</td><td>75 = (n−1) × 5</td></tr>
+      <tr><td><strong>3b</strong></td><td>Divide both sides by d</td><td>15 = n−1</td></tr>
+      <tr><td><strong>3c</strong></td><td>Add 1 to get n</td><td>n = 16 ✓</td></tr>
+    </table>
+    <div class="warn-box" style="margin-top:14px">
+      <strong>The #1 mistake:</strong> forgetting to add 1 at the end.<br>
+      After dividing by d, you have (n−1). You must add 1 to get n.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Quick reference</div>
+    <div class="formula-box">n = (T<sub>n</sub> − a) ÷ d &nbsp;+&nbsp; 1</div>
+    <p style="font-size:13px;color:#555;text-align:center;margin-top:6px">This only works when (Tₙ − a) divides exactly by d — always check!</p>
+  </div>
+
+  <div class="card" style="background:#E8F5E9;border:2px solid #A5D6A7">
+    <div class="card-title">➡️ What's next</div>
+    <p style="font-size:15px;color:#1a1a2e;line-height:1.6">
+      In <strong>Lesson 2</strong> you'll learn how to set up algebra when two terms of a sequence add up to a known value — and fix the jump-counting mistake that costs marks on T₁ questions.
+    </p>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="go(3)">&#8592; Back</button>
+    <span class="screen-counter">5 of 5</span>
+    <a href="Sequences_Lesson_TwoTermAlgebra.html" style="text-decoration:none">
+      <button class="btn btn-next">Go to Lesson 2 &#8594;</button>
+    </a>
+  </div>
+  <div style="text-align:center;margin-top:16px">
+    <a href="index.html" style="text-decoration:none">
+      <button class="btn" style="background:linear-gradient(135deg,#1B5E20,#2E7D32);color:#fff">&#127968; Back to Hub</button>
+    </a>
+  </div>
+</div>
+
+<script>
+var total = 5;
+function go(n) {
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('s'+n).classList.add('active');
+  document.getElementById('prog').style.width = (n/(total-1)*100)+'%';
+  window.scrollTo(0,0);
+}
+function chk(selId, correct, fbId) {
+  var val = document.getElementById(selId).value;
+  var fb  = document.getElementById(fbId);
+  if (!val) { fb.className='pq-feedback show wrong'; fb.textContent='⚠ Choose an answer first.'; return; }
+  if (val === correct) {
+    fb.className='pq-feedback show correct';
+    fb.textContent='✅ Correct! n = ' + correct + '. Great — 3 steps worked!';
+  } else {
+    fb.className='pq-feedback show wrong';
+    fb.textContent='❌ Not quite — try again. Write: (Tₙ − a) ÷ d, then add 1.';
+  }
+}
+</script>
+</body>
+</html>
