@@ -20,7 +20,7 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:23, topic:'Sequences Formula — All Types' },
+  currentUnit: { n:23, topic:'Sequences Formula — All Types', status:'In Progress' },
   lastUnit: {
     n:22, score:7, outOf:15, pct:47, delta:-8, prevScore:15,
     patternLabel: 'U22 Gap Analysis',
@@ -422,75 +422,73 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'Vertically Opposite Angles &mdash; ACTIVE &mdash; basic rule not firing',
+      label:     'Sequences: Find n (Reverse Formula) — ACTIVE — never seen before U23',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U19 Q9 &#10007; blank (most basic vert-opp: one angle=48&#176;, find all four). Q13 &#10007; blank (vert-opp + algebra). Rule completely missing &mdash; never attempted either question. U20 Lesson 1 targets this with visual drill.',
+      score:     'U22 Q10 &#10007; blank, Q11 &#10007; blank — find n concept completely new (0/2). Neither question attempted. U23 L1 introduces the 3-step reverse formula: n = (Tₙ − a) ÷ d + 1.',
       fillClass: 'g1', fillPct: 0
     },
     {
-      label:     'Advanced Angle Algebra &mdash; ACTIVE &mdash; Q14 started/Q15 blank',
+      label:     'Sequences: Two-Term Algebraic Setup (Type E) — ACTIVE — listing fallback',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U19 Q14 &#10007; (quad algebra: wrote 4x+80=360 in working but did not finish). Q15 &#10007; (isosceles+algebra: drew triangle correctly, no algebra attempted). Can solve triangle (Q11 &#10003;) and straight-line algebra (Q12 &#10003;) &mdash; needs to extend to quad and isosceles forms. U20 Lesson 2 targets both.',
+      score:     'U22 Q12 &#10007; Q15 &#10007; — used listing instead of express-and-add algebra (0/2). Could not set up Tₘ + Tₙ = k equation. U23 L2 teaches express-and-add method + sum formula.',
+      fillClass: 'g1', fillPct: 5
+    },
+    {
+      label:     'Sequences: Jump-Count Precision — ACTIVE — off-by-one T₁ errors',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U22 Q6 &#10007; Q7 &#10007; Q13 &#10007; — T₁ miscalculated in all three. Root cause: used wrong number of jumps back from given term (e.g. 5×d instead of 4×d). Jump rule: jumps from Tₘ to Tₙ = n − m. U23 L2 includes jump diagram.',
       fillClass: 'g1', fillPct: 20
     },
     {
-      label:     'Geometry: Angles &mdash; ACTIVE &mdash; debut strong but 4 blanks',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U19 Angles debut 6/10. Basic rules solid: triangle &#10003; Q6, quad &#10003; Q7, straight line &#10003; Q8, isosceles &#10003; Q10, algebra triangle &#10003; Q11, algebra line &#10003; Q12. Gaps: Q9 vert-opp blank, Q13 vert-opp algebra blank, Q14 quad algebra started/blank, Q15 isosceles algebra blank. U20 closes all 4.',
-      fillClass: 'g1', fillPct: 40
-    },
-    {
-      label:     'Sequences: All gaps &mdash; RESOLVED in U19',
+      label:     'Geometry: Angles (Vert-Opp, Quad Algebra) — RESOLVED in U20',
       pill:      'ps', pillText: 'Resolved &#10003;',
-      score:     'U19 Sec A 5/5 &#127775; PERFECT. Inequality rounding &#10003; (Q3 T14, Q4 T18). Two-conditions &#10003; (Q5 T1=5 T15=75). Jump-count &#10003; (Q2 d=4). All 3 U18 sequence gaps fully closed.',
-      fillClass: 'gs', fillPct: 97
+      score:     'U19 gaps (Q9 Q13 vert-opp blank, Q14 Q15 quad/isosceles algebra blank) all targeted in U20. Angles scored well in U20/U21. Vert-opp rule and quad algebra now firing.',
+      fillClass: 'gs', fillPct: 90
     },
     {
-      label:     'Ratio Changes (before/after, ages) &mdash; RESOLVED in U18',
+      label:     'Ratio Changes (before/after, ages) — RESOLVED in U18',
       pill:      'ps', pillText: 'Resolved &#10003;',
       score:     'U18 Sec C 5/5 &#127775; PERFECT. All k-method types correct: add &#10003;, remove &#10003;, ages &#10003; (Q12), transfer &#10003; (Q15). Complete turnaround from U17 Q15 blank.',
       fillClass: 'gs', fillPct: 97
     },
     {
-      label:     'SimEq Two-Variable Totals &mdash; RESOLVING &mdash; equation method solid',
-      pill:      'p2', pillText: 'Resolving &#128992;',
-      label:     'SimEq Two-Variable Totals &mdash; RESOLVING &mdash; equation method now solid',
+      label:     'SimEq Two-Variable Totals — RESOLVING — equation method now solid',
       pill:      'p2', pillText: 'Resolving &#128992;',
       score:     'U16 SimEq Two-Variable 5/5 &#10003;: equation method with bracket expansion applied independently across all 5 problems including Q10&#9733;&#9733;. Significant improvement from U13/U14 where Assume &amp; Adjust was used. Goal achieved: equation fluency confirmed.',
       fillClass: 'g2', fillPct: 80
     },
     {
-      label:     'Geometry: frame outer/inner trap &mdash; RESOLVED in U15',
+      label:     'Geometry: frame outer/inner trap — RESOLVED in U15',
       pill:      'ps', pillText: 'Resolved &#10003;',
-      score:     'U15 Frame Trap 5/5 &#10003;: all five frame problems correct including Q5&#9733;&#9733; hardest variant. The frame-given-outer trap (added border outward instead of subtracting inward) that caused 4 consecutive misses in U11&ndash;U14 is now fully resolved. Visual lesson with CSS nested-div diagram + step-card worked examples locked the method.',
+      score:     'U15 Frame Trap 5/5 &#10003;: all five frame problems correct including Q5&#9733;&#9733; hardest variant. The frame-given-outer trap that caused 4 consecutive misses in U11–U14 is now fully resolved.',
       fillClass: 'gs', fillPct: 97
     },
     {
-      label:     'Applied Problems &mdash; Kangaroo instinct developing',
+      label:     'Applied Problems — Kangaroo instinct developing',
       pill:      'p2', pillText: 'Improving &#128992;',
-      score:     'U15 Kangaroo Count 5/5 &#10003;: units digit cycles (period-4 rule for all 6 bases), staircase paths (Fibonacci), consecutive integers all correct. M1 Kangaroo gaps Q18/Q19/Q20 directly addressed &mdash; Q19-type staircase now solid. Applied instinct is growing. Next: raise radar target from 62&rarr;65 as harder applied problems are introduced.',
+      score:     'U15 Kangaroo Count 5/5 &#10003;: units digit cycles (period-4 rule), staircase paths (Fibonacci), consecutive integers all correct. M1 Kangaroo gaps Q18/Q19/Q20 directly addressed. Applied instinct is growing.',
       fillClass: 'g2', fillPct: 62
     },
     {
-      label:     'Both-Ends &times;2 rule &mdash; RESOLVED in U11',
+      label:     'Both-Ends &times;2 rule — RESOLVED in U11',
       pill:      'ps', pillText: 'Solid &#10003;',
-      score:     'U11 Both-Ends 5/5 &#10003;: Q7 either-end 2&times;5!=240 &#10003; (exact M1 miss type &mdash; now locked). All three both-ends types are fully automatic.',
+      score:     'U11 Both-Ends 5/5 &#10003;: Q7 either-end 2&times;5!=240 &#10003; (exact M1 miss type — now locked). All three both-ends types are fully automatic.',
       fillClass: 'gs', fillPct: 98
     },
     {
-      label:     'Prime Fact trigger &mdash; RESOLVED &amp; holding',
+      label:     'Prime Fact trigger — RESOLVED &amp; holding',
       pill:      'ps', pillText: 'Solid &#10003;',
       score:     'M1 Sec A 5/5 &#10003;. Factor trees on every question. U10 5/5. U15 HCF 5/5 &#10003;. Trigger fully automatic across 5+ units.',
       fillClass: 'gs', fillPct: 97
     },
     {
-      label:     'Fraction direction two-step &mdash; RESOLVED &amp; holding',
+      label:     'Fraction direction two-step — RESOLVED &amp; holding',
       pill:      'ps', pillText: 'Solid &#10003;',
       score:     'M1 Q9 &#10003;, Q13 &#10003;, Q15&#9733; &#10003;. All fraction direction types solid. Bar model method consistent.',
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U19'
+  radarLegendUnit: 'U22'
 
 };
 
