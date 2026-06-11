@@ -64,6 +64,12 @@ ul{padding-left:20px;margin-top:6px}
 @media(max-width:520px){.two-col{grid-template-columns:1fr}}
 .btn-hub{display:block;text-align:center;background:var(--nav-dark);color:#fff;padding:13px 0;border-radius:10px;font-size:1.05rem;font-weight:700;text-decoration:none;margin-top:18px}
 .btn-hub:hover{background:#01579B}
+.move-badge{display:inline-block;font-size:.78rem;font-weight:700;padding:2px 10px;border-radius:10px;margin-bottom:8px}
+.mb-exp{background:#FFEBEE;color:#C62828;border:1.5px solid #EF9A9A}
+.mb-find{background:#E1F5FE;color:#0277BD;border:1.5px solid #4FC3F7}
+.map-strip{background:#E1F5FE;border:2px solid #4FC3F7;border-radius:10px;padding:12px 16px;margin-bottom:16px}
+.map-strip p{font-size:.93rem;color:#0277BD}
+.map-strip a{color:#0D47A1;font-weight:700}
 </style>
 </head>
 <body>
@@ -82,6 +88,10 @@ ul{padding-left:20px;margin-top:6px}
 <div class="card">
   <h2>The Secret of the (n&minus;1) Coefficient</h2>
   <p>When two terms add up to a known value, you need to <strong>expand each term as a formula</strong> first. The key rule is:</p>
+</div>
+
+<div class="map-strip">
+  <p>&#x1F5FA;&#xFE0F; <strong>Pocket Map check:</strong> this is the <span class="move-badge mb-exp" style="margin:0">&#x2795; Expand &amp; Add</span> move. Near the end you will also use <span class="move-badge mb-find" style="margin:0">&#x1F50E; Find a first</span>. Keep your <a href="Sequences_DecisionTree_PocketMap.html">Pocket Map</a> next to you.</p>
 </div>
 
 <div class="golden">
@@ -196,13 +206,13 @@ ul{padding-left:20px;margin-top:6px}
 
   <div style="height:1px;background:#BBDEFB;margin:16px 0"></div>
 
-  <h3 style="margin-bottom:6px">Example 3 &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">T&#x2084; + T&#x2087; = 90, d = 4. Find a.</span></h3>
+  <h3 style="margin-bottom:6px">Example 3 &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">T&#x2084; + T&#x2087; = 86, d = 6. Find a.</span></h3>
   <div class="eq-chain">
-    <div class="eq-row"><span class="eq-math">Expand: T&#x2084; = a + 3(4) = a + 12</span><span class="eq-why">&#8592; coefficient = 4&minus;1 = 3</span></div>
-    <div class="eq-row"><span class="eq-math">Expand: T&#x2087; = a + 6(4) = a + 24</span><span class="eq-why">&#8592; coefficient = 7&minus;1 = 6</span></div>
-    <div class="eq-row"><span class="eq-math">Sum: 2a + 36 = 90</span></div>
-    <div class="eq-row"><span class="eq-math">2a = 54 &rarr; a = 27</span></div>
-    <div class="eq-row"><span class="eq-math">&#10003; Check: T&#x2084; = 39, T&#x2087; = 51. Sum = 90 &#10003;</span></div>
+    <div class="eq-row"><span class="eq-math">Expand: T&#x2084; = a + 3(6) = a + 18</span><span class="eq-why">&#8592; coefficient = 4&minus;1 = 3</span></div>
+    <div class="eq-row"><span class="eq-math">Expand: T&#x2087; = a + 6(6) = a + 36</span><span class="eq-why">&#8592; coefficient = 7&minus;1 = 6</span></div>
+    <div class="eq-row"><span class="eq-math">Sum: 2a + 54 = 86</span></div>
+    <div class="eq-row"><span class="eq-math">2a = 32 &rarr; a = 16</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: T&#x2084; = 34, T&#x2087; = 52. Sum = 86 &#10003;</span></div>
   </div>
 </div>
 
@@ -267,27 +277,29 @@ ul{padding-left:20px;margin-top:6px}
 
   <!-- Q1 -->
   <div class="q-card" id="qc0">
-    <div class="q-text">Q1. &nbsp; T&#x2083; + T&#x2085; = 56, d = 4. Find a.</div>
+    <span class="move-badge mb-exp">&#x2795; Expand &amp; Add</span>
+    <div class="q-text">Q1. &nbsp; T&#x2083; + T&#x2085; = 72, d = 5. Find a.</div>
     <div class="options">
-      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; a = 10</label>
-      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; a = 14</label>
-      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; a = 16</label>
-      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; a = 18</label>
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; a = 18</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; a = 21</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; a = 23</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; a = 26</label>
     </div>
-    <button class="btn-check" onclick="chk(0,'C')">Check</button>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
     <div class="feedback" id="fb0"></div>
     <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
     <div class="steps-reveal" id="sr0">
       <div class="eq-chain">
-        <div class="eq-row"><span class="eq-math">T&#x2083; = a+2d = a+8 &nbsp; T&#x2085; = a+4d = a+16</span></div>
-        <div class="eq-row"><span class="eq-math">Sum: 2a + 24 = 56 &rarr; 2a = 32 &rarr; a = 16</span></div>
-        <div class="eq-row"><span class="eq-math">Check: T&#x2083;=24, T&#x2085;=32. 24+32=56 &#10003;</span></div>
+        <div class="eq-row"><span class="eq-math">T&#x2083; = a+2d = a+10 &nbsp; T&#x2085; = a+4d = a+20</span></div>
+        <div class="eq-row"><span class="eq-math">Sum: 2a + 30 = 72 &rarr; 2a = 42 &rarr; a = 21</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2083;=31, T&#x2085;=41. 31+41=72 &#10003;</span></div>
       </div>
     </div>
   </div>
 
   <!-- Q2 -->
   <div class="q-card" id="qc1">
+    <span class="move-badge mb-exp">&#x2795; Expand &amp; Add</span>
     <div class="q-text">Q2. &nbsp; T&#x2084; + T&#x2086; = 68, d = 5. Find a.</div>
     <div class="options">
       <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; a = 12</label>
@@ -309,43 +321,97 @@ ul{padding-left:20px;margin-top:6px}
 
   <!-- Q3 -->
   <div class="q-card" id="qc2">
-    <div class="q-text">Q3. &nbsp; T&#x2083; + T&#x2086; = 63, d = 3. Find a.</div>
+    <span class="move-badge mb-exp">&#x2795; Expand &amp; Add</span>
+    <div class="q-text">Q3. &nbsp; T&#x2083; + T&#x2086; = 69, d = 5. Find a.</div>
     <div class="options">
-      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; a = 18</label>
-      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; a = 21</label>
-      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; a = 23</label>
-      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; a = 25</label>
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; a = 15</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; a = 17</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; a = 19</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; a = 22</label>
     </div>
     <button class="btn-check" onclick="chk(2,'B')">Check</button>
     <div class="feedback" id="fb2"></div>
     <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
     <div class="steps-reveal" id="sr2">
       <div class="eq-chain">
-        <div class="eq-row"><span class="eq-math">T&#x2083; = a+2(3) = a+6 &nbsp; T&#x2086; = a+5(3) = a+15</span></div>
-        <div class="eq-row"><span class="eq-math">Sum: 2a + 21 = 63 &rarr; 2a = 42 &rarr; a = 21</span></div>
-        <div class="eq-row"><span class="eq-math">Check: T&#x2083;=27, T&#x2086;=36. 27+36=63 &#10003;</span></div>
+        <div class="eq-row"><span class="eq-math">T&#x2083; = a+2(5) = a+10 &nbsp; T&#x2086; = a+5(5) = a+25</span></div>
+        <div class="eq-row"><span class="eq-math">Sum: 2a + 35 = 69 &rarr; 2a = 34 &rarr; a = 17</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2083;=27, T&#x2086;=42. 27+42=69 &#10003;</span></div>
       </div>
     </div>
   </div>
 
   <!-- Q4 — Compound -->
   <div class="q-card" id="qc3">
-    <div class="q-text">Q4. &nbsp; T&#x2083; + T&#x2085; = 52, d = 3. Find a first. Then find T&#x2081;&#x2082;.</div>
+    <span class="move-badge mb-exp">&#x2795; Expand &amp; Add</span> <span class="move-badge" style="background:#E8F5E9;color:#2E7D32;border:1.5px solid #66BB6A">then &#x27A1;&#xFE0F; Forward</span>
+    <div class="q-text">Q4. &nbsp; T&#x2083; + T&#x2085; = 76, d = 4. Find a first. Then find T&#x2081;&#x2082;.</div>
     <div class="options">
-      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; a = 16, T&#x2081;&#x2082; = 49</label>
-      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; a = 18, T&#x2081;&#x2082; = 51</label>
-      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; a = 17, T&#x2081;&#x2082; = 50</label>
-      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; a = 20, T&#x2081;&#x2082; = 53</label>
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; a = 24, T&#x2081;&#x2082; = 68</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; a = 26, T&#x2081;&#x2082; = 70</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; a = 28, T&#x2081;&#x2082; = 72</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; a = 26, T&#x2081;&#x2082; = 74</label>
     </div>
-    <button class="btn-check" onclick="chk(3,'C')">Check</button>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
     <div class="feedback" id="fb3"></div>
     <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
     <div class="steps-reveal" id="sr3">
       <div class="eq-chain">
-        <div class="eq-row"><span class="eq-math">T&#x2083; = a+2(3)=a+6 &nbsp; T&#x2085; = a+4(3)=a+12</span></div>
-        <div class="eq-row"><span class="eq-math">2a + 18 = 52 &rarr; 2a = 34 &rarr; a = 17</span></div>
-        <div class="eq-row"><span class="eq-math">T&#x2081;&#x2082; = 17 + 11&times;3 = 17 + 33 = 50</span></div>
-        <div class="eq-row"><span class="eq-math">Check sum: T&#x2083;=23, T&#x2085;=29. 23+29=52 &#10003;</span></div>
+        <div class="eq-row"><span class="eq-math">T&#x2083; = a+2(4)=a+8 &nbsp; T&#x2085; = a+4(4)=a+16</span></div>
+        <div class="eq-row"><span class="eq-math">2a + 24 = 76 &rarr; 2a = 52 &rarr; a = 26</span></div>
+        <div class="eq-row"><span class="eq-math">T&#x2081;&#x2082; = 26 + 11&times;4 = 26 + 44 = 70</span></div>
+        <div class="eq-row"><span class="eq-math">Check sum: T&#x2083;=34, T&#x2085;=42. 34+42=76 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn-box" style="margin-bottom:14px">
+    <p>&#x1F501; <strong>Going backwards:</strong> if you know a middle term like T&#x2085;, then a = T&#x2085; &minus; <strong>4</strong>d &mdash; 4 jumps back, NOT 5. Same (n&minus;1) rule, just in reverse!</p>
+  </div>
+
+  <!-- Q5 — Back-calc T₁ -->
+  <div class="q-card" id="qc4">
+    <span class="move-badge mb-find">&#x1F50E; Find a first</span>
+    <div class="q-text">Q5. &nbsp; The 5th term of a sequence is 43 and d = 7. Find T&#x2081;.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q4" value="A"> A)&nbsp; T&#x2081; = 8</label>
+      <label class="opt"><input type="radio" name="q4" value="B"> B)&nbsp; T&#x2081; = 12</label>
+      <label class="opt"><input type="radio" name="q4" value="C"> C)&nbsp; T&#x2081; = 15</label>
+      <label class="opt"><input type="radio" name="q4" value="D"> D)&nbsp; T&#x2081; = 18</label>
+    </div>
+    <button class="btn-check" onclick="chk(4,'C')">Check</button>
+    <div class="feedback" id="fb4"></div>
+    <button class="btn-show-steps" id="ss4" onclick="showSteps('sr4',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr4">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">Write: T&#x2085; = a + (5&minus;1)&times;d = a + 4d</span><span class="eq-why">&#8592; coefficient = 5&minus;1 = 4, NOT 5</span></div>
+        <div class="eq-row"><span class="eq-math">a + 4&times;7 = 43 &rarr; a + 28 = 43 &rarr; a = 15</span></div>
+        <div class="eq-row"><span class="eq-math">Check: 15, 22, 29, 36, 43 &mdash; T&#x2085; = 43 &#10003;</span></div>
+        <div class="eq-row"><span class="eq-math">&#x26A0; Using a+5d gives a = 8 &mdash; the trap answer!</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 — Back-calc T₁ then forward -->
+  <div class="q-card" id="qc5">
+    <span class="move-badge mb-find">&#x1F50E; Find a first</span> <span class="move-badge" style="background:#E8F5E9;color:#2E7D32;border:1.5px solid #66BB6A">then &#x27A1;&#xFE0F; Forward</span>
+    <div class="q-text">Q6. &nbsp; T&#x2086; = 44 and d = 5. Find T&#x2081;, then find T&#x2081;&#x2083;.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q5" value="A"> A)&nbsp; T&#x2081; = 14, T&#x2081;&#x2083; = 74</label>
+      <label class="opt"><input type="radio" name="q5" value="B"> B)&nbsp; T&#x2081; = 19, T&#x2081;&#x2083; = 79</label>
+      <label class="opt"><input type="radio" name="q5" value="C"> C)&nbsp; T&#x2081; = 19, T&#x2081;&#x2083; = 84</label>
+      <label class="opt"><input type="radio" name="q5" value="D"> D)&nbsp; T&#x2081; = 24, T&#x2081;&#x2083; = 79</label>
+    </div>
+    <button class="btn-check" onclick="chk(5,'B')">Check</button>
+    <div class="feedback" id="fb5"></div>
+    <button class="btn-show-steps" id="ss5" onclick="showSteps('sr5',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr5">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math"><strong>Step 1: Find a</strong></span></div>
+        <div class="eq-row"><span class="eq-math">T&#x2086; = a + (6&minus;1)&times;d = a + 5d</span><span class="eq-why">&#8592; 5 jumps from T&#x2081; to T&#x2086;</span></div>
+        <div class="eq-row"><span class="eq-math">a + 5&times;5 = 44 &rarr; a + 25 = 44 &rarr; a = 19</span></div>
+        <div class="eq-row"><span class="eq-math"><strong>Step 2: Find T&#x2081;&#x2083;</strong></span></div>
+        <div class="eq-row"><span class="eq-math">T&#x2081;&#x2083; = 19 + (13&minus;1)&times;5 = 19 + 60 = 79</span><span class="eq-why">&#8592; coefficient = 13&minus;1 = 12</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2086; from a=19: 19+25 = 44 &#10003;</span></div>
       </div>
     </div>
   </div>
@@ -357,7 +423,9 @@ ul{padding-left:20px;margin-top:6px}
     <li>You always write T&#8346; = a+(p&minus;1)d (not a+pd) before adding</li>
     <li>You add coefficients correctly for T&#x2083;+T&#x2085;, T&#x2083;+T&#x2086;, T&#x2084;+T&#x2087;</li>
     <li>For compound questions: find a first, then use T&#8345; = a+(n&minus;1)d for the second part</li>
+    <li>Going backwards from T&#x2085; you subtract <strong>4</strong>d (not 5d) &mdash; the (n&minus;1) rule works in reverse too</li>
     <li>You always verify by substituting back into the original sum</li>
+    <li>On test morning: one last look at your <a href="Sequences_DecisionTree_PocketMap.html" style="color:#2E7D32;font-weight:700">&#x1F5FA;&#xFE0F; Pocket Map</a> &mdash; then solve from memory!</li>
   </ul>
 </div>
 

@@ -80,6 +80,12 @@ ul{padding-left:20px;margin-top:6px}
 .summ-icon{font-size:1.3rem;flex-shrink:0}
 .btn-hub{display:block;text-align:center;background:var(--nav-dark);color:#fff;padding:13px 0;border-radius:10px;font-size:1.05rem;font-weight:700;text-decoration:none;margin-top:18px}
 .btn-hub:hover{background:#01579B}
+.move-badge{display:inline-block;font-size:.78rem;font-weight:700;padding:2px 10px;border-radius:10px;margin-bottom:8px}
+.mb-back{background:#FFF3E0;color:#E65100;border:1.5px solid #FFB74D}
+.mb-bound{background:#F3E5F5;color:#6A1B9A;border:1.5px solid #BA68C8}
+.map-strip{background:#E1F5FE;border:2px solid #4FC3F7;border-radius:10px;padding:12px 16px;margin-bottom:16px}
+.map-strip p{font-size:.93rem;color:#0277BD}
+.map-strip a{color:#0D47A1;font-weight:700}
 </style>
 </head>
 <body>
@@ -98,6 +104,10 @@ ul{padding-left:20px;margin-top:6px}
 <div class="card">
   <h2>Why Do We Always Add +1?</h2>
   <p>You already know the Gap Method for finding <em>n</em>. But sometimes you forget the +1 at the end &mdash; and the answer is off by 1. Today we are going to <strong>lock this rule forever</strong> by understanding exactly <em>why</em> it is there.</p>
+</div>
+
+<div class="map-strip">
+  <p>&#x1F5FA;&#xFE0F; <strong>Pocket Map check:</strong> this lesson trains 2 of your 4 moves &mdash; <span class="move-badge mb-back" style="margin:0">&#x2B05;&#xFE0F; Backward</span> (find n) and <span class="move-badge mb-bound" style="margin:0">&#x1F6A7; Boundary</span> (first/last past a line). Keep your <a href="Sequences_DecisionTree_PocketMap.html">Pocket Map</a> next to you.</p>
 </div>
 
 <div class="card">
@@ -156,16 +166,16 @@ ul{padding-left:20px;margin-top:6px}
 <!-- ═══ Screen 2: Two Types of Questions ═══ -->
 <div class="screen" id="s1">
 <div class="card">
-  <h2>Two Types &mdash; Same +1 Rule</h2>
-  <p style="margin-bottom:14px">The +1 rule appears in <strong>two different question types</strong>. You must handle each one correctly.</p>
+  <h2>Two Moves &mdash; Same +1 Rule</h2>
+  <p style="margin-bottom:14px">The +1 rule appears in <strong>two of your Pocket Map moves</strong>. You must handle each one correctly.</p>
   <div class="two-col">
     <div class="type-card type-a">
-      <div class="type-title">&#x1F50D; Type A — Which term equals X?</div>
+      <div class="type-title">&#x2B05;&#xFE0F; Backward move — Which term equals X?</div>
       <p style="font-size:.93rem">You are given a, d, and a target value T&#8345;. You need to find which term number it is.</p>
       <p style="font-size:.93rem;margin-top:6px"><strong>Rule:</strong> n = Jumps + 1 (add 1 at the end)</p>
     </div>
     <div class="type-card type-b">
-      <div class="type-title">&#x1F7E0; Type B — Last term above zero?</div>
+      <div class="type-title">&#x1F6A7; Boundary move — Last term above zero?</div>
       <p style="font-size:.93rem">The sequence is decreasing. You need the <em>last</em> term that is still positive (above zero).</p>
       <p style="font-size:.93rem;margin-top:6px"><strong>Rule:</strong> Stop at the last POSITIVE term — check T and T+1</p>
     </div>
@@ -173,7 +183,7 @@ ul{padding-left:20px;margin-top:6px}
 </div>
 
 <div class="card">
-  <h3>Type A — Worked Example</h3>
+  <h3>&#x2B05;&#xFE0F; Backward Move — Worked Example</h3>
   <p style="margin-bottom:6px;font-size:.95rem;color:#555">a = 7, d = 4, T&#8345; = 67. Find n.</p>
   <div class="eq-chain">
     <div class="eq-row"><span class="eq-math">Write: T&#8345; = a + (n&minus;1)&times;d</span><span class="eq-why">&#8592; always write the formula first</span></div>
@@ -185,7 +195,7 @@ ul{padding-left:20px;margin-top:6px}
 </div>
 
 <div class="card">
-  <h3>Type B — Worked Example</h3>
+  <h3>&#x1F6A7; Boundary Move — Worked Example</h3>
   <p style="margin-bottom:6px;font-size:.95rem;color:#555">a = 70, d = &minus;8. Which is the <strong>last term above zero</strong>?</p>
   <div class="eq-chain">
     <div class="eq-row"><span class="eq-math">Write: T&#8345; = 70 + (n&minus;1)&times;(&minus;8)</span><span class="eq-why">&#8592; formula with negative d</span></div>
@@ -217,7 +227,7 @@ ul{padding-left:20px;margin-top:6px}
 </div>
 
 <div class="card" style="border-left:4px solid #C62828">
-  <h3 style="color:#C62828">&#x274C; Mistake 1 — Forgetting +1 in Type A</h3>
+  <h3 style="color:#C62828">&#x274C; Mistake 1 — Forgetting +1 in the Backward move</h3>
   <p style="margin-bottom:10px;font-size:.95rem">a = 5, d = 4, T&#8345; = 65. Find n.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
     <div style="background:#FFEBEE;border-radius:8px;padding:12px">
@@ -243,7 +253,7 @@ ul{padding-left:20px;margin-top:6px}
 </div>
 
 <div class="card" style="border-left:4px solid #E65100">
-  <h3 style="color:#E65100">&#x274C; Mistake 2 — Going one step too far in Type B</h3>
+  <h3 style="color:#E65100">&#x274C; Mistake 2 — Going one step too far in the Boundary move</h3>
   <p style="margin-bottom:10px;font-size:.95rem">a = 84, d = &minus;7. Last term above zero.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
     <div style="background:#FFEBEE;border-radius:8px;padding:12px">
@@ -251,9 +261,9 @@ ul{padding-left:20px;margin-top:6px}
       <div style="font-family:monospace;font-size:.88rem;line-height:1.8;color:#333">
         84&minus;7(n&minus;1) &gt; 0<br>
         n &lt; 13<br>
-        <strong style="color:#C62828">Answer: T&#x2081;&#x2082; &larr; wrong!</strong><br>
-        T&#x2081;&#x2082; = 84&minus;77 = 7 &#x2713;<br>
-        T&#x2081;&#x2083; = 84&minus;84 = 0 (not &gt; 0!)
+        <strong style="color:#C62828">Answer: T&#x2081;&#x2083; &larr; wrong!</strong><br>
+        T&#x2081;&#x2083; = 84&minus;84 = 0<br>
+        0 is NOT above 0 &mdash; went one step too far!
       </div>
     </div>
     <div style="background:#E8F5E9;border-radius:8px;padding:12px">
@@ -285,7 +295,8 @@ ul{padding-left:20px;margin-top:6px}
 
   <!-- Q1 -->
   <div class="q-card" id="qc0">
-    <div class="q-text">Q1. &nbsp; A sequence has a = 7 and d = 4. One of its terms equals 67. Which term number is that?</div>
+    <span class="move-badge mb-back">&#x2B05;&#xFE0F; Backward move</span>
+    <div class="q-text">Q1. &nbsp; A sequence has a = 9 and d = 5. One of its terms equals 84. Which term number is that?</div>
     <div class="options">
       <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; n = 14</label>
       <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; n = 15</label>
@@ -298,16 +309,17 @@ ul{padding-left:20px;margin-top:6px}
     <div class="steps-reveal" id="sr0">
       <div class="eq-chain">
         <div class="eq-row"><span class="eq-math">Write: T&#8345; = a + (n&minus;1)&times;d</span></div>
-        <div class="eq-row"><span class="eq-math">Step 1: Distance = 67 &minus; 7 = 60</span></div>
-        <div class="eq-row"><span class="eq-math">Step 2: Jumps = 60 &divide; 4 = 15</span></div>
+        <div class="eq-row"><span class="eq-math">Step 1: Distance = 84 &minus; 9 = 75</span></div>
+        <div class="eq-row"><span class="eq-math">Step 2: Jumps = 75 &divide; 5 = 15</span></div>
         <div class="eq-row"><span class="eq-math">Step 3: n = 15 + 1 = 16</span></div>
-        <div class="eq-row"><span class="eq-math">Check: T&#x2081;&#x2086; = 7 + 15&times;4 = 67 &#10003;</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2081;&#x2086; = 9 + 15&times;5 = 84 &#10003;</span></div>
       </div>
     </div>
   </div>
 
   <!-- Q2 -->
   <div class="q-card" id="qc1">
+    <span class="move-badge mb-back">&#x2B05;&#xFE0F; Backward move</span>
     <div class="q-text">Q2. &nbsp; A sequence has a = 6 and d = 8. One of its terms equals 102. Which term number is that?</div>
     <div class="options">
       <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; n = 12</label>
@@ -331,7 +343,8 @@ ul{padding-left:20px;margin-top:6px}
 
   <!-- Q3 -->
   <div class="q-card" id="qc2">
-    <div class="q-text">Q3. &nbsp; A sequence has a = 5 and d = 8. Which is the first term to exceed 100? (Hint: the answer is NOT T&#x2081;&#x2082;.)</div>
+    <span class="move-badge mb-bound">&#x1F6A7; Boundary move</span>
+    <div class="q-text">Q3. &nbsp; A sequence has a = 5 and d = 8. Which is the first term to exceed 100?</div>
     <div class="options">
       <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; T&#x2081;&#x2082;</label>
       <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; T&#x2081;&#x2083;</label>
@@ -354,23 +367,72 @@ ul{padding-left:20px;margin-top:6px}
 
   <!-- Q4 -->
   <div class="q-card" id="qc3">
-    <div class="q-text">Q4. &nbsp; A decreasing sequence has a = 70 and d = &minus;8. What is the last term that is still above zero?</div>
+    <span class="move-badge mb-bound">&#x1F6A7; Boundary move</span>
+    <div class="q-text">Q4. &nbsp; A decreasing sequence has a = 68 and d = &minus;6. What is the last term that is still above zero?</div>
     <div class="options">
-      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; T&#x2087;</label>
-      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; T&#x2088;</label>
-      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; T&#x2089;</label>
-      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; T&#x2081;&#x2080;</label>
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; T&#x2081;&#x2081;</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; T&#x2081;&#x2082;</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; T&#x2081;&#x2083;</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; T&#x2081;&#x2084;</label>
     </div>
-    <button class="btn-check" onclick="chk(3,'C')">Check</button>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
     <div class="feedback" id="fb3"></div>
     <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
     <div class="steps-reveal" id="sr3">
       <div class="eq-chain">
-        <div class="eq-row"><span class="eq-math">Write: 70 + (n&minus;1)&times;(&minus;8) &gt; 0</span></div>
-        <div class="eq-row"><span class="eq-math">70 &minus; 8(n&minus;1) &gt; 0 &rarr; 8(n&minus;1) &lt; 70 &rarr; n&minus;1 &lt; 8.75</span></div>
-        <div class="eq-row"><span class="eq-math">n &lt; 9.75 &rarr; largest whole number is n = 9</span></div>
-        <div class="eq-row"><span class="eq-math">Check T&#x2089; = 70 + 8&times;(&minus;8) = 70&minus;64 = 6 &gt; 0 &#10003;</span></div>
-        <div class="eq-row"><span class="eq-math">Check T&#x2081;&#x2080; = 70 + 9&times;(&minus;8) = 70&minus;72 = &minus;2 &lt; 0 &#10003; (confirms T&#x2089; is last positive)</span></div>
+        <div class="eq-row"><span class="eq-math">Write: 68 + (n&minus;1)&times;(&minus;6) &gt; 0</span></div>
+        <div class="eq-row"><span class="eq-math">68 &minus; 6(n&minus;1) &gt; 0 &rarr; 6(n&minus;1) &lt; 68 &rarr; n&minus;1 &lt; 11.33</span></div>
+        <div class="eq-row"><span class="eq-math">n &lt; 12.33 &rarr; largest whole number is n = 12</span></div>
+        <div class="eq-row"><span class="eq-math">Check T&#x2081;&#x2082; = 68 + 11&times;(&minus;6) = 68&minus;66 = 2 &gt; 0 &#10003;</span></div>
+        <div class="eq-row"><span class="eq-math">Check T&#x2081;&#x2083; = 68 + 12&times;(&minus;6) = 68&minus;72 = &minus;4 &lt; 0 &#10003; (confirms T&#x2081;&#x2082; is last positive)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="qc4">
+    <span class="move-badge mb-back">&#x2B05;&#xFE0F; Backward move</span>
+    <div class="q-text">Q5. &nbsp; A sequence has a = 4 and d = 12. One of its terms equals 148. Which term number is that?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q4" value="A"> A)&nbsp; n = 12</label>
+      <label class="opt"><input type="radio" name="q4" value="B"> B)&nbsp; n = 13</label>
+      <label class="opt"><input type="radio" name="q4" value="C"> C)&nbsp; n = 14</label>
+      <label class="opt"><input type="radio" name="q4" value="D"> D)&nbsp; n = 15</label>
+    </div>
+    <button class="btn-check" onclick="chk(4,'B')">Check</button>
+    <div class="feedback" id="fb4"></div>
+    <button class="btn-show-steps" id="ss4" onclick="showSteps('sr4',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr4">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">Write: T&#8345; = 4 + (n&minus;1)&times;12</span></div>
+        <div class="eq-row"><span class="eq-math">Step 1: Distance = 148 &minus; 4 = 144</span></div>
+        <div class="eq-row"><span class="eq-math">Step 2: Jumps = 144 &divide; 12 = 12</span></div>
+        <div class="eq-row"><span class="eq-math">Step 3: n = 12 + 1 = 13</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2081;&#x2083; = 4 + 12&times;12 = 148 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" id="qc5">
+    <span class="move-badge mb-bound">&#x1F6A7; Boundary move</span>
+    <div class="q-text">Q6. &nbsp; A sequence has a = 7 and d = 6. Which is the first term to <strong>exceed</strong> 91? Careful &mdash; one term lands exactly on 91!</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q5" value="A"> A)&nbsp; T&#x2081;&#x2084;</label>
+      <label class="opt"><input type="radio" name="q5" value="B"> B)&nbsp; T&#x2081;&#x2085;</label>
+      <label class="opt"><input type="radio" name="q5" value="C"> C)&nbsp; T&#x2081;&#x2086;</label>
+      <label class="opt"><input type="radio" name="q5" value="D"> D)&nbsp; T&#x2081;&#x2087;</label>
+    </div>
+    <button class="btn-check" onclick="chk(5,'C')">Check</button>
+    <div class="feedback" id="fb5"></div>
+    <button class="btn-show-steps" id="ss5" onclick="showSteps('sr5',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr5">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">Write: 7 + (n&minus;1)&times;6 &gt; 91</span></div>
+        <div class="eq-row"><span class="eq-math">6(n&minus;1) &gt; 84 &rarr; n&minus;1 &gt; 14 &rarr; n &gt; 15</span></div>
+        <div class="eq-row"><span class="eq-math">Smallest whole number: n = 16</span></div>
+        <div class="eq-row"><span class="eq-math">Check T&#x2081;&#x2085; = 7 + 14&times;6 = 91 &mdash; exactly 91 is NOT &gt; 91! &#10007;</span></div>
+        <div class="eq-row"><span class="eq-math">Check T&#x2081;&#x2086; = 7 + 15&times;6 = 97 &gt; 91 &#10003;</span><span class="eq-why">&#8592; &ldquo;exceed&rdquo; means strictly greater</span></div>
       </div>
     </div>
   </div>
@@ -389,11 +451,11 @@ ul{padding-left:20px;margin-top:6px}
   <div class="rule-grid">
     <span class="rule-key">Dots vs Gaps:</span>
     <span class="rule-val">There are always MORE dots than gaps. Dots = Jumps + 1.</span>
-    <span class="rule-key">Find n (Type A):</span>
+    <span class="rule-key">&#x2B05;&#xFE0F; Backward (find n):</span>
     <span class="rule-val">Distance &rarr; Jumps &rarr; n = Jumps + 1. Always add 1 at the end.</span>
-    <span class="rule-key">Last above zero (Type B):</span>
+    <span class="rule-key">&#x1F6A7; Boundary (last above zero):</span>
     <span class="rule-val">Solve T&#8345; &gt; 0 to get n &lt; something. Take the largest whole number. Check both T and T+1.</span>
-    <span class="rule-key">First exceeding X:</span>
+    <span class="rule-key">&#x1F6A7; Boundary (first exceeding X):</span>
     <span class="rule-val">Solve T&#8345; &gt; X. Take the smallest whole number n that satisfies it. Check both T and T&minus;1.</span>
     <span class="rule-key">Always verify:</span>
     <span class="rule-val">Plug n back into the formula. 5 seconds that catches all errors.</span>
@@ -406,6 +468,7 @@ ul{padding-left:20px;margin-top:6px}
     <li>You always write T&#8345; = a + (n&minus;1)&times;d before starting</li>
     <li>You never stop at Jumps &mdash; you always do n = Jumps + 1</li>
     <li>You always check both T&#8345; and the one next to it</li>
+    <li>On test morning: one last look at your <a href="Sequences_DecisionTree_PocketMap.html" style="color:#2E7D32;font-weight:700">&#x1F5FA;&#xFE0F; Pocket Map</a> &mdash; then solve from memory!</li>
   </ul>
 </div>
 
@@ -438,7 +501,7 @@ function chk(qi, correct) {
     ss.style.display='inline-block';
   } else {
     fb.className='feedback err';
-    fb.textContent='Not quite. Use Distance → Jumps → n = Jumps + 1 (for Type A) or check both T and T+1 (for Type B). Click Show Steps to see the full method.';
+    fb.textContent='Not quite. Backward move: Distance → Jumps → n = Jumps + 1. Boundary move: check both T and its neighbour. Click Show Steps to see the full method.';
     ss.style.display='inline-block';
   }
 }

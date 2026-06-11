@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sequences — Prem's Pocket Map</title>
+<style>
+:root{--nav:#1565C0;--nav-dark:#0D47A1;--bg:#E3F2FD;--ok:#2E7D32;--warn:#E65100;--purple:#6A1B9A;--red:#C62828}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);padding:16px;max-width:820px;margin:0 auto}
+.title{text-align:center;margin-bottom:14px}
+.title h1{color:var(--nav-dark);font-size:1.5rem}
+.title p{color:#555;font-size:.95rem;margin-top:4px}
+.card{background:#fff;border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:3px solid #FFD54F;border-radius:14px;padding:18px;margin-bottom:14px;text-align:center}
+.golden h2{color:var(--warn);font-size:1.25rem;margin-bottom:8px}
+.golden .big{font-size:1.4rem;font-weight:800;color:#0D47A1;margin:8px 0}
+.fence{display:flex;align-items:flex-end;justify-content:center;gap:0;margin:12px 0 4px}
+.post{width:14px;height:52px;background:#6D4C41;border-radius:3px;position:relative}
+.post::after{content:attr(data-n);position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:700;color:#1565C0}
+.rail{width:58px;height:10px;background:#FFB74D;border-radius:3px;margin-bottom:14px;position:relative}
+.rail::after{content:attr(data-j);position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;color:#E65100}
+.fence-cap{text-align:center;font-size:.92rem;color:#555;margin-top:22px}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:14px 18px;text-align:center;font-size:1.1rem;font-weight:700;margin:0 auto 4px;max-width:480px}
+.arrow-row{display:flex;justify-content:center;gap:60px;margin:2px 0}
+.arr{font-size:26px;color:var(--nav);font-weight:700}
+.branch-lbl{display:flex;justify-content:center;gap:80px;margin-bottom:6px}
+.branch-lbl span{font-weight:800;font-size:.95rem}
+.yes{color:var(--ok)} .no{color:var(--red)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.two-col{grid-template-columns:1fr}}
+.move{border-radius:12px;padding:14px;border:3px solid}
+.move h3{font-size:1rem;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.move .icon{font-size:1.3rem}
+.move p{font-size:.9rem;line-height:1.5}
+.move .formula{font-family:'Courier New',monospace;font-weight:700;background:rgba(255,255,255,.7);border-radius:6px;padding:6px 10px;margin:8px 0;font-size:.92rem;display:block}
+.move .ex{font-size:.84rem;color:#444;font-style:italic;margin-top:6px;line-height:1.5}
+.m-forward{background:#E8F5E9;border-color:#66BB6A}
+.m-forward h3{color:var(--ok)}
+.m-backward{background:#FFF3E0;border-color:#FFA726}
+.m-backward h3{color:var(--warn)}
+.m-boundary{background:#F3E5F5;border-color:#BA68C8}
+.m-boundary h3{color:var(--purple)}
+.m-expand{background:#FFEBEE;border-color:#EF9A9A}
+.m-expand h3{color:var(--red)}
+.findA{background:#E1F5FE;border:3px solid #4FC3F7;border-radius:12px;padding:14px;margin-bottom:12px}
+.findA h3{color:#0277BD;font-size:1rem;margin-bottom:6px}
+.findA p{font-size:.9rem;line-height:1.5}
+.findA .formula{font-family:'Courier New',monospace;font-weight:700;background:rgba(255,255,255,.8);border-radius:6px;padding:6px 10px;margin:6px 0;font-size:.92rem;display:block}
+.check-strip{background:var(--nav-dark);color:#fff;border-radius:12px;padding:14px 18px;text-align:center;margin-bottom:14px}
+.check-strip strong{font-size:1.02rem}
+.check-strip p{font-size:.9rem;margin-top:4px;opacity:.9}
+.btn-hub{display:block;text-align:center;background:var(--nav-dark);color:#fff;padding:13px 0;border-radius:10px;font-size:1.02rem;font-weight:700;text-decoration:none;margin-top:6px}
+@media print{body{background:#fff}.btn-hub{display:none}}
+</style>
+</head>
+<body>
+
+<div class="title">
+  <h1>&#x1F5FA;&#xFE0F; Prem's Sequences Pocket Map</h1>
+  <p>Every sequences question is just ONE of four moves. Find your move, follow the steps.</p>
+</div>
+
+<!-- THE ONE RULE -->
+<div class="golden">
+  <h2>&#x1F511; The One Rule Behind Everything</h2>
+  <div class="big">Jumps = n &minus; 1</div>
+  <div class="fence">
+    <div class="post" data-n="T&#x2081;"></div><div class="rail" data-j="jump 1"></div>
+    <div class="post" data-n="T&#x2082;"></div><div class="rail" data-j="jump 2"></div>
+    <div class="post" data-n="T&#x2083;"></div><div class="rail" data-j="jump 3"></div>
+    <div class="post" data-n="T&#x2084;"></div><div class="rail" data-j="jump 4"></div>
+    <div class="post" data-n="T&#x2085;"></div>
+  </div>
+  <p class="fence-cap">5 fence posts, only 4 rails. T&#x2085; is <strong>4 jumps</strong> from the start &mdash; never 5.<br>
+  Forgot the +1? Wrote a+4d for T&#x2084;? That's this rule. It's ALL this rule.</p>
+</div>
+
+<!-- DECISION TREE -->
+<div class="q-node">Question 1: Do I know <em>a</em> (the first term)?</div>
+<div class="branch-lbl"><span class="no">NO &#x2B07;</span><span class="yes">YES &#x2B07;</span></div>
+
+<div class="findA">
+  <h3>&#x1F50E; First: FIND <em>a</em> &mdash; then come back to Question 2</h3>
+  <p><strong>Given one middle term?</strong> Walk back its jumps:</p>
+  <span class="formula">a = T&#x2098; &minus; (m&minus;1)&times;d &nbsp;&nbsp;(T&#x2086; given? go back 5 jumps, not 6!)</span>
+  <p><strong>Given two terms?</strong> Gap Method: d = (difference of values) &divide; (jumps between them), then walk back.</p>
+  <p><strong>Given a two-term SUM?</strong> Use the Expand &amp; Add move below.</p>
+</div>
+
+<div class="q-node">Question 2: What does the question WANT?</div>
+<div class="arrow-row"><span class="arr">&#x2B07;</span><span class="arr">&#x2B07;</span></div>
+
+<div class="two-col">
+  <div class="move m-forward">
+    <h3><span class="icon">&#x27A1;&#xFE0F;</span> FORWARD &mdash; I know n, I want the value</h3>
+    <p>"What is T&#x2081;&#x2085;?" &rarr; take n&minus;1 jumps forward.</p>
+    <span class="formula">T&#8345; = a + (n&minus;1)&times;d</span>
+    <p class="ex">a=4, d=6, T&#x2081;&#x2085;? &rarr; 4 + 14&times;6 = 88</p>
+  </div>
+  <div class="move m-backward">
+    <h3><span class="icon">&#x2B05;&#xFE0F;</span> BACKWARD &mdash; I know the value, I want n</h3>
+    <p>"Which term equals 88?" &rarr; 3 steps, never skip Step 3:</p>
+    <span class="formula">1&#xFE0F;&#x20E3; Distance = value &minus; a<br>2&#xFE0F;&#x20E3; Jumps = Distance &divide; d<br>3&#xFE0F;&#x20E3; n = Jumps + 1 &#x2757;</span>
+    <p class="ex">a=4, d=6, value 88 &rarr; 84&divide;6=14 jumps &rarr; n=15</p>
+  </div>
+  <div class="move m-boundary">
+    <h3><span class="icon">&#x1F6A7;</span> BOUNDARY &mdash; first to pass / last above a line</h3>
+    <p>Do the Backward move with &gt; or &lt;, then <strong>check BOTH neighbours</strong>.</p>
+    <span class="formula">Check T&#8345; AND the term next to it.<br>Landing exactly ON the line doesn't count!</span>
+    <p class="ex">"Exceed 91", T&#x2081;&#x2085;=91 exactly? Not enough &rarr; answer T&#x2081;&#x2086;</p>
+  </div>
+  <div class="move m-expand">
+    <h3><span class="icon">&#x2795;</span> EXPAND &amp; ADD &mdash; two terms sum to a number</h3>
+    <p>"T&#x2083; + T&#x2086; = 57" &rarr; write each as algebra, then add:</p>
+    <span class="formula">T&#x2083; = a + 2d &nbsp;(3&minus;1=2)<br>T&#x2086; = a + 5d &nbsp;(6&minus;1=5)<br>&rarr; 2a + 7d = 57 &rarr; solve for a</span>
+    <p class="ex">d=5: 2a+35=57 &rarr; 2a=22 &rarr; a=11</p>
+  </div>
+</div>
+
+<div style="height:12px"></div>
+
+<div class="check-strip">
+  <strong>&#x1F3C1; Last move, every time: CHECK</strong>
+  <p>Plug your answer back in. 5 seconds. It catches the +1 mistake every single time.</p>
+</div>
+
+<a class="btn-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Back to Hub</a>
+
+</body>
+</html>
