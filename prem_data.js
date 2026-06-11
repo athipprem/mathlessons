@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '31 May 2026',
+  updated:        '11 Jun 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:23, topic:'Sequences Formula — All Types', status:'In Progress' },
+  currentUnit: { n:24, topic:'Sequences Formula — Finding n + Two-Term', status:'In Progress' },
   lastUnit: {
-    n:22, score:7, outOf:15, pct:47, delta:-8, prevScore:15,
-    patternLabel: 'U22 Gap Analysis',
-    patternInsight: '7/15 (47%) — Sec A perfect 5/5. Sec B exposed 3 new concept gaps: Find n (0/2 — blank), Two-term algebra (0/2 — listing fallback), Jump-counting precision (3 wrong T&#8321;/T&#8345; calculations). Direct formula and basic inequality solid. U23 targets all gaps.',
-    analysisLabel: 'Next: U23 Sequences Formula — All Types',
-    analysisInsight: 'Revisit U22 scope with 2 new lessons: Reverse Formula (find n) and Two-Term Algebra setup. Mastery standard: 12/15.',
-    qSummary: 'Sec A 5/5 &#10003; (direct formula solid) | Sec B 2/10: Q8 &#10003; Q9 &#10003; | Q6 Q7 Q13 T&#8321;/T&#8345; wrong | Q10 Q11 blank (find n unseen) | Q12 Q15 listing fallback | Q14 inequality from given term wrong',
+    n:23, score:8, outOf:15, pct:53, delta:+1, prevScore:7,
+    patternLabel: 'U23 Gap Analysis',
+    patternInsight: '8/15 (53%) &mdash; Sec A 4/5: Q4 counting error (wrote 123 not 113; d=7 correct). Sec B: Q6 Q7 Q8 Q9 &#10003; (gap-method types solid). Q10 Q11 blank (find n still not internalised; self-note: &ldquo;don&rsquo;t understand formula!!!&rdquo;). Q12 &#10007; wrong setup. Q13 Q14 Q15 blank. U24 introduces gap-thinking method (Distance&divide;d+1) bridging from what Prem already knows.',
+    analysisLabel: 'Next: U24 Sequences &mdash; Gap-Thinking Method',
+    analysisInsight: 'U23 confirmed: Prem uses counting, not formula. Gap method (Q6 Q7 &#10003;) is his strength &mdash; U24 L1 frames finding n as Distance&divide;d+1. U24 L2 uses jump diagram visual table for two-term setup. Mastery standard: 12/15.',
+    qSummary: 'Sec A 4/5 (Q4 &#10007; counting error: 123 not 113) | Sec B Q6 Q7 Q8 Q9 &#10003; | Q10 Q11 blank (find n) | Q12 &#10007; wrong setup | Q13 Q14 Q15 blank',
     qBreakdown: [
-      { q:'Q1',  topic:'Sequences &mdash; Direct (a=6,d=3,T&#8321;&#8322;)',    lvl:'w', pass:true,  note:'&#10003; 39.' },
-      { q:'Q2',  topic:'Sequences &mdash; Direct (a=8,d=6,T&#8321;&#8325;)',    lvl:'w', pass:true,  note:'&#10003; 92. Working shown: 14&times;6+8.' },
-      { q:'Q3',  topic:'Sequences &mdash; Decreasing (T&#8321;&#8322;)',        lvl:'w', pass:true,  note:'&#10003; 6. Negative d handled.' },
-      { q:'Q4',  topic:'Sequences &mdash; Large n (T&#8322;&#8320;)',           lvl:'w', pass:true,  note:'&#10003; 212.' },
-      { q:'Q5',  topic:'Sequences &mdash; From pattern (T&#8321;&#8328;)',      lvl:'w', pass:true,  note:'&#10003; 73. d=4 identified correctly.' },
-      { q:'Q6',  topic:'Sequences &#9733; &mdash; Find d and T&#8321;',         lvl:'m', pass:false, note:'&#10007; d=4 &#10003; T&#8321;=7 &#10007; (correct: 11). Error: subtracted 5&times;d not 4&times;d going back from T&#8325;.' },
-      { q:'Q7',  topic:'Sequences &#9733; &mdash; Find d,T&#8321;,T&#8321;&#8325;', lvl:'m', pass:false, note:'&#10007; T&#8321;=16 &#10003; T&#8321;&#8325;=70 &#10007; (correct: 100). Used (n&minus;1)=9 instead of 14.' },
-      { q:'Q8',  topic:'Sequences &#9733; &mdash; First exceeding 80',          lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8327;. Inequality correct.' },
-      { q:'Q9',  topic:'Sequences &#9733; &mdash; Last above zero',             lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8324;. Decreasing inequality correct.' },
-      { q:'Q10', topic:'Sequences &#9733; &mdash; Find n (T&#8345;=81)',         lvl:'m', pass:false, note:'&#10007; Blank. Wrote "what? what is nth?" — concept never seen.' },
-      { q:'Q11', topic:'Sequences &#9733; &mdash; Find n (T&#8345;=85)',         lvl:'m', pass:false, note:'&#10007; Blank. Wrote "NJH?" — same confusion as Q10.' },
-      { q:'Q12', topic:'Sequences &#9733; &mdash; Two terms sum (T&#8323;+T&#8325;=64)', lvl:'m', pass:false, note:'&#10007; Got 9 (correct: 14). Listed terms with guessed starting values. No algebra.' },
-      { q:'Q13', topic:'Sequences &#9733;&#9733; &mdash; Find d,T&#8321;,T&#8321;&#8325;', lvl:'h', pass:false, note:'&#10007; T&#8321;=18 &#10003; T&#8321;&#8325;=72 &#10007; (correct: 74). Added T&#8321;+T&#8321;&#8320; directly (18+54=72) instead of formula.' },
-      { q:'Q14', topic:'Sequences &#9733;&#9733; &mdash; Inequality from T&#8326;', lvl:'h', pass:false, note:'&#10007; T&#8321;&#8322; (correct: T&#8321;&#8327;). Did not derive a from T&#8326; first.' },
-      { q:'Q15', topic:'Sequences &#9733;&#9733; &mdash; Two terms sum + T&#8322;&#8320;', lvl:'h', pass:false, note:'&#10007; Blank. Listed from guessed a=17. No algebraic setup.' }
+      { q:'Q1',  topic:'Sequences &mdash; Direct (a=6,d=3,T&#8321;&#8322;)',              lvl:'w', pass:true,  note:'&#10003; 39.' },
+      { q:'Q2',  topic:'Sequences &mdash; Direct (a=11,d=7,T&#8321;&#8320;)',             lvl:'w', pass:true,  note:'&#10003; 74.' },
+      { q:'Q3',  topic:'Sequences &mdash; Decreasing (a=60,d=&minus;3,T&#8321;&#8325;)', lvl:'w', pass:true,  note:'&#10003; 18. Negative d handled.' },
+      { q:'Q4',  topic:'Sequences &mdash; Pattern (8,15,22,29,...,T&#8321;&#8326;)',      lvl:'w', pass:false, note:'&#10007; 123 (correct: 113). d=7 &#10003; but counted 16 steps not 15.' },
+      { q:'Q5',  topic:'Sequences &mdash; Large n (a=5,d=9,T&#8322;&#8325;)',            lvl:'w', pass:true,  note:'&#10003; 221.' },
+      { q:'Q6',  topic:'Sequences &#9733; &mdash; Find d,T&#8321; (T&#8324;=22,T&#8328;=38)',        lvl:'m', pass:true,  note:'&#10003; d=4, T&#8321;=10. Gap method correct.' },
+      { q:'Q7',  topic:'Sequences &#9733; &mdash; Find d,T&#8321;,T&#8321;&#8325; (T&#8322;=19,T&#8326;=43)', lvl:'m', pass:true, note:'&#10003; d=6, T&#8321;=13, T&#8321;&#8325;=97. Jump count correct.' },
+      { q:'Q8',  topic:'Sequences &#9733; &mdash; First exceeding 100 (a=7,d=6)',        lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8327; = 103. Inequality correct.' },
+      { q:'Q9',  topic:'Sequences &#9733; &mdash; Last above zero (90,82,74,66...)',     lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8322; = 2. Decreasing inequality correct.' },
+      { q:'Q10', topic:'Sequences &#9733; &mdash; Find n (a=5,d=7,T&#8345;=61)',         lvl:'m', pass:false, note:'&#10007; Blank. Self-note: &ldquo;Counted in my head&hellip; don&rsquo;t understand formula!!!&rdquo;' },
+      { q:'Q11', topic:'Sequences &#9733; &mdash; Find n (a=3,d=11,T&#8345;=146)',       lvl:'m', pass:false, note:'&#10007; Blank. Formula rearrangement not accessible.' },
+      { q:'Q12', topic:'Sequences &#9733; &mdash; Two-term sum (d=5,T&#8322;+T&#8324;=44)', lvl:'m', pass:false, note:'&#10007; Attempted wrong. Listed terms without algebraic setup.' },
+      { q:'Q13', topic:'Sequences &#9733; &mdash; Two-term sum (d=4,T&#8323;+T&#8327;=72)', lvl:'m', pass:false, note:'&#10007; Blank. Express-and-add not applied.' },
+      { q:'Q14', topic:'Sequences &#9733;&#9733; &mdash; Find d,T&#8321;,T&#8321;&#8322; (T&#8323;=25,T&#8327;=41)', lvl:'h', pass:false, note:'&#10007; Blank. Compound problem not attempted.' },
+      { q:'Q15', topic:'Sequences &#9733;&#9733; &mdash; Two-term+T&#8322;&#8320; (d=8,T&#8324;+T&#8326;=100)', lvl:'h', pass:false, note:'&#10007; Blank. Two-term hardest type skipped.' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -91,22 +91,36 @@ var PREM_DATA = {
     { n:20, score:11, delta:0,    color:'linear-gradient(135deg,#1565C0,#0D47A1)',  star:false },
     { n:'M2', label:'M2', score:12, delta:+1, color:'linear-gradient(135deg,#311B92,#512DA8)', star:false },
     { n:21, score:15, delta:+3,  color:'linear-gradient(135deg,#FFD700,#FFA500)',  star:true  },
-    { n:22, score:7,  delta:-8,  color:'linear-gradient(135deg,#EF5350,#B71C1C)',  star:false }
+    { n:22, score:7,  delta:-8,  color:'linear-gradient(135deg,#EF5350,#B71C1C)',  star:false },
+    { n:23, score:8,  delta:+1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 23,
-      badge: 'linear-gradient(135deg,#1B5E20,#2E7D32)',
-      title: 'Sequences Formula &middot; All Question Types',
+      n: 24,
+      badge: 'linear-gradient(135deg,#1565C0,#0D47A1)',
+      title: 'Sequences Formula &middot; Gap-Thinking Method',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Finding n', c:'tgreen' },
-        { t:'L2: Two-Term Algebra', c:'tgreen' }
+        { t:'L1: Finding n (Gap Method)', c:'tblue' },
+        { t:'L2: Two-Term (Visual-First)', c:'tblue' }
       ],
-      note: 'U23: Revisit U22 scope with 2 new lessons covering the gaps: Reverse formula (find n) and Two-Term algebraic setup. Mastery standard: 12/15. All 5 question types covered.',
+      note: 'U24: New approach &mdash; gap-thinking method (Distance&divide;d+1) instead of formula rearrangement. L1 bridges from gap method Prem already uses for finding d. L2 introduces jump diagram visual table before algebra. Mastery standard: 12/15.',
       status: 'pending'
+    },
+    {
+      n: 23,
+      badge: 'linear-gradient(135deg,#EF5350,#C62828)',
+      title: 'Sequences Formula &middot; All Question Types',
+      tags: [
+        { t:'8/15 (53%) &#10145;', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Sec A 4/5', c:'tgreen' },
+        { t:'Q10 Q11 blank &#10007;', c:'torange' },
+        { t:'Gap method &#10003;', c:'tgreen' }
+      ],
+      note: '8/15 (53%) &mdash; Sec A 4/5: Q4 counting error (123 not 113). Sec B: Q6 Q7 Q8 Q9 &#10003; (gap method types solid). Q10 Q11 blank (find n: &ldquo;don&rsquo;t understand formula!!!&rdquo; self-note). Q12 &#10007; wrong setup. Q13 Q14 Q15 blank. U24 uses gap-thinking approach (Distance&divide;d+1) bridging from Prem&rsquo;s strength.',
+      status: 'done'
     },
     {
       n: 22,
@@ -422,22 +436,22 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'Sequences: Find n (Reverse Formula) — ACTIVE — never seen before U23',
+      label:     'Sequences: Find n (Gap Method) — ACTIVE — blank in U22 & U23',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U22 Q10 &#10007; blank, Q11 &#10007; blank — find n concept completely new (0/2). Neither question attempted. U23 L1 introduces the 3-step reverse formula: n = (Tₙ − a) ÷ d + 1.',
+      score:     'U22 Q10 Q11 blank. U23 Q10 Q11 blank &mdash; self-note: &ldquo;don&rsquo;t understand formula!!!&rdquo; (0/4 across 2 units). U24 L1 introduces gap-thinking method: Distance&divide;d+1 (no formula rearrangement). Bridges from gap method Prem already uses for finding d.',
       fillClass: 'g1', fillPct: 0
     },
     {
       label:     'Sequences: Two-Term Algebraic Setup (Type E) — ACTIVE — listing fallback',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U22 Q12 &#10007; Q15 &#10007; — used listing instead of express-and-add algebra (0/2). Could not set up Tₘ + Tₙ = k equation. U23 L2 teaches express-and-add method + sum formula.',
-      fillClass: 'g1', fillPct: 5
+      score:     'U22 Q12 Q15 blank/listing. U23 Q12 attempted wrong, Q13 Q15 blank (1/6 across 2 units). Core issue: cannot write Tₙ = a+(n&minus;1)d expression. U24 L2 uses jump diagram visual table: term | jumps | expression.',
+      fillClass: 'g1', fillPct: 8
     },
     {
-      label:     'Sequences: Jump-Count Precision — ACTIVE — off-by-one T₁ errors',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U22 Q6 &#10007; Q7 &#10007; Q13 &#10007; — T₁ miscalculated in all three. Root cause: used wrong number of jumps back from given term (e.g. 5×d instead of 4×d). Jump rule: jumps from Tₘ to Tₙ = n − m. U23 L2 includes jump diagram.',
-      fillClass: 'g1', fillPct: 20
+      label:     'Sequences: Jump-Count Precision — IMPROVING — U23 Q6-Q9 all correct',
+      pill:      'p2', pillText: 'Improving &#128992;',
+      score:     'U22 Q6 Q7 Q13 wrong T&#8321;. U23 Q6 Q7 Q8 Q9 all &#10003; &mdash; d, T&#8321;, T&#8345; and inequality types correct. Gap method firing reliably now. Significant improvement from U22. Jump-count errors resolved when problem type is gap-method framed.',
+      fillClass: 'g2', fillPct: 65
     },
     {
       label:     'Geometry: Angles (Vert-Opp, Quad Algebra) — RESOLVED in U20',
@@ -488,7 +502,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U22'
+  radarLegendUnit: 'U23'
 
 };
 

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sequences — Finding n: The Gap Method</title>
+<style>
+:root{--nav:#1565C0;--nav-dark:#0D47A1;--bg:#E3F2FD;--card:#fff;--acc:#1565C0;--acc-light:#BBDEFB;--ok:#1B5E20;--err:#C62828}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.tnav-btns button:hover{background:rgba(255,255,255,.3)}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--nav-dark);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul{padding-left:20px;margin-top:6px}
+.nl-wrap{overflow-x:auto;padding:10px 0}
+.nl{display:flex;align-items:center;white-space:nowrap}
+.nl-dot{width:42px;height:42px;border-radius:50%;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.nl-dot.target{background:#E65100;width:46px;height:46px;font-size:14px}
+.nl-dot.dim{background:#BBDEFB;color:var(--nav-dark)}
+.nl-seg{display:flex;flex-direction:column;align-items:center;min-width:52px}
+.nl-arr{font-size:18px;color:var(--acc-light);line-height:1}
+.nl-lbl{font-size:11px;color:#666;margin-top:2px}
+.steps-box{background:#E3F2FD;border:2px solid var(--acc);border-radius:10px;padding:14px 18px;margin:12px 0}
+.step-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.step-row:last-child{margin-bottom:0}
+.step-num{width:28px;height:28px;background:var(--acc);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-text{font-size:.95rem;line-height:1.5}
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid var(--acc-light);padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:#1565C0}
+.q-card{background:#F8FAFF;border:1.5px solid #BBDEFB;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #BBDEFB;border-radius:8px;padding:7px 14px;font-size:.95rem;transition:all .2s}
+.opt:hover{border-color:var(--acc);background:#E3F2FD}
+.opt input{accent-color:var(--acc)}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.btn-check:hover{background:var(--nav-dark)}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:var(--ok);border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:var(--err);border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#F3F8FF;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.summ-box{background:linear-gradient(135deg,#E3F2FD,#BBDEFB);border-radius:10px;padding:16px;margin-bottom:14px;border:1px solid #90CAF9}
+.summ-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.97rem}
+.summ-icon{font-size:1.3rem;flex-shrink:0}
+.btn-hub{display:block;text-align:center;background:var(--nav-dark);color:#fff;padding:13px 0;border-radius:10px;font-size:1.05rem;font-weight:700;text-decoration:none;margin-top:18px}
+.btn-hub:hover{background:#01579B}
+.compare-tbl{width:100%;border-collapse:collapse;font-size:.93rem;margin-top:8px}
+.compare-tbl th{background:#E3F2FD;padding:8px 12px;text-align:left;color:var(--nav-dark)}
+.compare-tbl td{padding:8px 12px;border-bottom:1px solid #BBDEFB}
+.compare-tbl tr.hl td{background:#FFF3E0;font-weight:700;color:#E65100}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="../index.html">&#8592; Hub</a>
+  <span class="tnav-title">Sequences &mdash; Finding n: The Gap Method</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns">
+    <button onclick="nav(-1)">&#8592; Prev</button>
+    <button onclick="nav(1)">Next &#8594;</button>
+  </div>
+</nav>
+
+<!-- Screen 1: You Already Know This! -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>You Already Know This!</h2>
+  <p>You already use the <strong>gap method</strong> when you find <em>d</em>. Quick reminder:</p>
+  <div class="eq-chain" style="margin-top:12px">
+    <div class="eq-row"><span class="eq-math">T&#8324; = 22,&nbsp; T&#8328; = 38</span></div>
+    <div class="eq-row"><span class="eq-math">Gaps between T&#8324; and T&#8328; = 8 &minus; 4 = 4</span><span class="eq-why">&#8592; count the jumps between the two positions</span></div>
+    <div class="eq-row"><span class="eq-math">d = (38 &minus; 22) &divide; 4 = 4</span><span class="eq-why">&#8592; total distance &divide; number of jumps</span></div>
+  </div>
+  <p style="margin-top:4px">Today you use the <strong>same idea</strong> &mdash; but in reverse:</p>
+</div>
+
+<div class="card" style="border-left:4px solid #E65100">
+  <h3 style="color:#E65100">&#x1F504; The Reverse Puzzle</h3>
+  <table class="compare-tbl">
+    <tr><th>You know</th><th>You find</th><th>Method</th></tr>
+    <tr><td>a, d, and n</td><td>T&#8345;</td><td>T&#8345; = a + (n&minus;1) &times; d</td></tr>
+    <tr class="hl"><td>a, d, and T&#8345;</td><td>n &mdash; which term?</td><td>&#x1F449; Learning this today!</td></tr>
+  </table>
+</div>
+
+<div class="card" style="background:#FFF8E1;border:1px solid #FFD54F">
+  <h3 style="color:#E65100">&#x1F4A1; Think of it like a race</h3>
+  <p>You are at house <strong>3</strong>. You jump <strong>5 houses</strong> each step. You land on house <strong>78</strong>. What step number are you on?</p>
+  <div class="nl-wrap" style="margin-top:12px">
+    <div class="nl">
+      <div class="nl-dot">3</div>
+      <div class="nl-seg"><span class="nl-arr">&#8594;</span><span class="nl-lbl">+5</span></div>
+      <div class="nl-dot dim">8</div>
+      <div class="nl-seg"><span class="nl-arr">&#8594;</span><span class="nl-lbl">+5</span></div>
+      <div class="nl-dot dim">13</div>
+      <div class="nl-seg"><span class="nl-arr" style="letter-spacing:3px;color:#bbb">&#183;&#183;&#183;</span><span class="nl-lbl">15 jumps</span></div>
+      <div class="nl-dot target">78</div>
+    </div>
+    <p style="font-size:.85rem;color:#666;margin-top:8px;text-align:center">Distance = 78&minus;3 = 75. Each jump = 5. Jumps = 75&divide;5 = 15. Term = 15+1 = <strong>T&#x2081;&#x2086;</strong>.</p>
+  </div>
+</div>
+</div>
+
+<!-- Screen 2: The 3-Step Method -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>The 3-Step Rule</h2>
+  <p style="margin-bottom:12px">Use these three steps every time you need to find <strong>n</strong>:</p>
+  <div class="steps-box">
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Distance</strong> = T&#8345; &minus; a &nbsp;<span style="color:#666;font-size:.88rem">How far from start to target?</span></div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Jumps</strong> = Distance &divide; d &nbsp;<span style="color:#666;font-size:.88rem">How many steps to get there?</span></div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>n</strong> = Jumps + 1 &nbsp;<span style="color:#666;font-size:.88rem">Add 1 because T&#x2081; is step 1, not step 0</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="background:#FFF8E1;border:1px solid #FFD54F">
+  <h3 style="color:#E65100">&#x1F914; Why do we add +1?</h3>
+  <p style="margin-bottom:10px">If you took <strong>0 jumps</strong>, you are still at T&#x2081;. Not T&#x2080;. So the term number is always one more than the jumps.</p>
+  <div class="eq-chain" style="border-left-color:#FFD54F">
+    <div class="eq-row"><span class="eq-math">0 jumps &rarr; T&#x2081;</span><span class="eq-why">&#8592; already at term 1 before any jump</span></div>
+    <div class="eq-row"><span class="eq-math">1 jump &rarr; T&#x2082;</span><span class="eq-why">&#8592; one jump past the start</span></div>
+    <div class="eq-row"><span class="eq-math">15 jumps &rarr; T&#x2081;&#x2086;</span><span class="eq-why">&#8592; 15 + 1 = term 16</span></div>
+  </div>
+</div>
+
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F517; How the 3 steps connect to the formula</h3>
+  <p style="margin-bottom:10px">The formula T&#8345; = a + (n&minus;1)&times;d rearranges into exactly the 3 steps:</p>
+  <div class="eq-chain" style="border-left-color:#A5D6A7">
+    <div class="eq-row"><span class="eq-math">T&#8345; = a + (n&minus;1) &times; d</span><span class="eq-why">&#8592; standard formula</span></div>
+    <div class="eq-row"><span class="eq-math">T&#8345; &minus; a = (n&minus;1) &times; d</span><span class="eq-why">&#8592; Distance = Jumps &times; step size</span></div>
+    <div class="eq-row"><span class="eq-math">(T&#8345; &minus; a) &divide; d = n &minus; 1</span><span class="eq-why">&#8592; Jumps = Distance &divide; step size</span></div>
+    <div class="eq-row"><span class="eq-math">n = (T&#8345; &minus; a) &divide; d + 1</span><span class="eq-why">&#8592; n = Jumps + 1</span></div>
+  </div>
+  <p style="font-size:.88rem;color:#555">You do not need to memorise the rearranged form &mdash; just remember Distance &rarr; Jumps &rarr; n!</p>
+</div>
+</div>
+
+<!-- Screen 3: Worked Examples -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Worked Examples</h2>
+
+  <h3 style="margin-bottom:6px">Example 1 &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">a = 5, d = 6, T&#8345; = 47. Find n.</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Step 1: Distance = 47 &minus; 5 = 42</span><span class="eq-why">&#8592; T&#8345; minus a (how far from start to 47)</span></div>
+    <div class="eq-row"><span class="eq-math">Step 2: Jumps = 42 &divide; 6 = 7</span><span class="eq-why">&#8592; distance &divide; d (how many steps of size 6)</span></div>
+    <div class="eq-row"><span class="eq-math">Step 3: n = 7 + 1 = 8</span><span class="eq-why">&#8592; jumps + 1 (started counting from term 1)</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: T&#8328; = 5 + 7 &times; 6 = 5 + 42 = 47 &#10003;</span><span class="eq-why">&#8592; plug n back in to verify</span></div>
+  </div>
+
+  <div style="height:1px;background:#BBDEFB;margin:14px 0"></div>
+
+  <h3 style="margin-bottom:6px">Example 2 &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">a = 9, d = 5, T&#8345; = 79. Find n.</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Step 1: Distance = 79 &minus; 9 = 70</span><span class="eq-why">&#8592; T&#8345; minus a</span></div>
+    <div class="eq-row"><span class="eq-math">Step 2: Jumps = 70 &divide; 5 = 14</span><span class="eq-why">&#8592; distance &divide; d</span></div>
+    <div class="eq-row"><span class="eq-math">Step 3: n = 14 + 1 = 15</span><span class="eq-why">&#8592; jumps + 1</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: T&#x2081;&#x2085; = 9 + 14 &times; 5 = 9 + 70 = 79 &#10003;</span><span class="eq-why">&#8592; always check!</span></div>
+  </div>
+</div>
+
+<div class="card" style="background:#F3E8FF;border:1px solid #CE93D8">
+  <h3 style="color:#6A1B9A">&#x1F4CC; Two things to watch out for</h3>
+  <ul style="margin-top:8px">
+    <li>Distance &divide; d must be a <strong>whole number</strong>. If it is not, recheck your subtraction.</li>
+    <li>Always substitute n back into T&#8345; = a + (n&minus;1)&times;d to verify. This takes 5 seconds and catches mistakes.</li>
+  </ul>
+</div>
+</div>
+
+<!-- Screen 4: Practice -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Practice &mdash; Find n</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Apply the 3 steps: Distance &rarr; Jumps &rarr; n = Jumps + 1. Always check your answer.</p>
+
+  <div class="q-card" id="qc0">
+    <div class="q-text">Q1. A sequence has first term a = 4 and common difference d = 5. One of its terms equals 54. Which term number is that?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; n = 9</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; n = 10</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; n = 11</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; n = 12</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'C')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">Step 1: Distance = 54 &minus; 4 = 50</span></div>
+        <div class="eq-row"><span class="eq-math">Step 2: Jumps = 50 &divide; 5 = 10</span></div>
+        <div class="eq-row"><span class="eq-math">Step 3: n = 10 + 1 = 11</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2081;&#x2081; = 4 + 10&times;5 = 54 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" id="qc1">
+    <div class="q-text">Q2. A sequence has first term a = 7 and common difference d = 4. One of its terms equals 63. Which term number is that?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; n = 13</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; n = 14</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; n = 15</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; n = 16</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">Step 1: Distance = 63 &minus; 7 = 56</span></div>
+        <div class="eq-row"><span class="eq-math">Step 2: Jumps = 56 &divide; 4 = 14</span></div>
+        <div class="eq-row"><span class="eq-math">Step 3: n = 14 + 1 = 15</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2081;&#x2085; = 7 + 14&times;4 = 63 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" id="qc2">
+    <div class="q-text">Q3. A sequence has first term a = 8 and common difference d = 6. One of its terms equals 68. Which term number is that?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; n = 9</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; n = 10</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; n = 11</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; n = 12</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'C')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">Step 1: Distance = 68 &minus; 8 = 60</span></div>
+        <div class="eq-row"><span class="eq-math">Step 2: Jumps = 60 &divide; 6 = 10</span></div>
+        <div class="eq-row"><span class="eq-math">Step 3: n = 10 + 1 = 11</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2081;&#x2081; = 8 + 10&times;6 = 68 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" id="qc3">
+    <div class="q-text">Q4. A sequence has first term a = 2 and common difference d = 9. One of its terms equals 83. Which term number is that?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; n = 8</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; n = 9</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; n = 10</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; n = 11</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'C')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">Step 1: Distance = 83 &minus; 2 = 81</span></div>
+        <div class="eq-row"><span class="eq-math">Step 2: Jumps = 81 &divide; 9 = 9</span></div>
+        <div class="eq-row"><span class="eq-math">Step 3: n = 9 + 1 = 10</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2081;&#x2080; = 2 + 9&times;9 = 83 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Screen 5: Summary -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Lesson Summary</h2>
+  <div class="summ-box">
+    <div class="summ-row"><span class="summ-icon">&#127919;</span><span>You can now find <strong>which term number</strong> any value belongs to!</span></div>
+    <div class="summ-row"><span class="summ-icon">&#49;&#65039;&#8419;</span><span><strong>Distance</strong> = T&#8345; &minus; a</span></div>
+    <div class="summ-row"><span class="summ-icon">&#50;&#65039;&#8419;</span><span><strong>Jumps</strong> = Distance &divide; d</span></div>
+    <div class="summ-row"><span class="summ-icon">&#51;&#65039;&#8419;</span><span><strong>n</strong> = Jumps + 1</span></div>
+    <div class="summ-row"><span class="summ-icon">&#10003;</span><span>Always <strong>check</strong>: plug n back into T&#8345; = a + (n&minus;1)&times;d</span></div>
+  </div>
+  <div class="steps-box">
+    <p style="font-weight:700;color:var(--acc);margin-bottom:8px">Quick example: a = 3, d = 7, T&#8345; = 73</p>
+    <div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Step 1: Distance = 73 &minus; 3 = 70</span></div>
+      <div class="eq-row"><span class="eq-math">Step 2: Jumps = 70 &divide; 7 = 10</span></div>
+      <div class="eq-row"><span class="eq-math">Step 3: n = 10 + 1 = 11</span></div>
+      <div class="eq-row"><span class="eq-math">Check: T&#x2081;&#x2081; = 3 + 10&times;7 = 73 &#10003;</span></div>
+    </div>
+  </div>
+</div>
+<a href="../index.html" class="btn-hub">&#8592; Back to Hub</a>
+</div>
+
+<script>
+var cur=0;
+var screens=document.querySelectorAll('.screen');
+var total=screens.length;
+function updateNav(){
+  document.getElementById('pill').textContent=(cur+1)+' / '+total;
+  screens.forEach(function(s,i){s.classList.toggle('active',i===cur);});
+  window.scrollTo(0,0);
+}
+function nav(d){cur=Math.max(0,Math.min(total-1,cur+d));updateNav();}
+function chk(idx,correct){
+  var sel=document.querySelector('input[name="q'+idx+'"]:checked');
+  var fb=document.getElementById('fb'+idx);
+  var ss=document.getElementById('ss'+idx);
+  if(!sel){fb.style.display='block';fb.className='feedback err';fb.textContent='Please choose an answer first!';return;}
+  fb.style.display='block';
+  if(sel.value===correct){fb.className='feedback ok';fb.textContent='✅ Correct! Great work!';ss.style.display='none';}
+  else{fb.className='feedback err';fb.textContent='❌ Not quite. Try working through the 3 steps!';ss.style.display='block';}
+}
+function showSteps(id,btn){
+  var d=document.getElementById(id);
+  if(d.style.display==='block'){d.style.display='none';btn.textContent='Show Steps';}
+  else{d.style.display='block';btn.textContent='Hide Steps';}
+}
+</script>
+</body>
+</html>

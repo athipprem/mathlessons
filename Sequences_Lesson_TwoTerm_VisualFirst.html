@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sequences — Two-Term Problems: Visual First</title>
+<style>
+:root{--nav:#00695C;--nav-dark:#004D40;--bg:#E0F2F1;--card:#fff;--acc:#00695C;--acc-light:#B2DFDB;--ok:#1B5E20;--err:#C62828}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.tnav-btns button:hover{background:rgba(255,255,255,.3)}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--nav-dark);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul{padding-left:20px;margin-top:6px}
+/* Jump diagram */
+.jd{display:flex;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:10px 0;gap:0}
+.jd-term{display:flex;flex-direction:column;align-items:center;min-width:62px}
+.jd-dot{width:44px;height:44px;border-radius:50%;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.jd-dot.hi{background:#E65100}
+.jd-label{font-size:11px;color:#555;margin-top:4px;text-align:center}
+.jd-arrow{display:flex;flex-direction:column;align-items:center;min-width:40px}
+.jd-arr{font-size:20px;color:var(--acc-light)}
+.jd-d{font-size:11px;color:#555;margin-top:0}
+/* Expression table */
+.expr-tbl{width:100%;border-collapse:collapse;font-size:.92rem;margin:10px 0}
+.expr-tbl th{background:#E0F2F1;padding:7px 10px;text-align:left;color:var(--nav-dark);border:1px solid #B2DFDB}
+.expr-tbl td{padding:7px 10px;border:1px solid #B2DFDB}
+.expr-tbl tr:nth-child(even) td{background:#F1FFFE}
+.expr-tbl tr.hi td{background:#FFF3E0;font-weight:700;color:#E65100}
+/* Equation chain */
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid var(--acc-light);padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:var(--acc)}
+/* Steps box */
+.steps-box{background:#E0F2F1;border:2px solid var(--acc);border-radius:10px;padding:14px 18px;margin:12px 0}
+.step-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.step-row:last-child{margin-bottom:0}
+.step-num{width:28px;height:28px;background:var(--acc);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-text{font-size:.95rem;line-height:1.5}
+/* Practice */
+.q-card{background:#F0FDFB;border:1.5px solid #B2DFDB;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #B2DFDB;border-radius:8px;padding:7px 14px;font-size:.95rem;transition:all .2s}
+.opt:hover{border-color:var(--acc);background:#E0F2F1}
+.opt input{accent-color:var(--acc)}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.btn-check:hover{background:var(--nav-dark)}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:var(--ok);border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:var(--err);border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#F0FDFB;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+/* Summary */
+.summ-box{background:linear-gradient(135deg,#E0F2F1,#B2DFDB);border-radius:10px;padding:16px;margin-bottom:14px;border:1px solid #80CBC4}
+.summ-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.97rem}
+.summ-icon{font-size:1.3rem;flex-shrink:0}
+.btn-hub{display:block;text-align:center;background:var(--nav-dark);color:#fff;padding:13px 0;border-radius:10px;font-size:1.05rem;font-weight:700;text-decoration:none;margin-top:18px}
+.btn-hub:hover{background:#00251A}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="../index.html">&#8592; Hub</a>
+  <span class="tnav-title">Sequences &mdash; Two-Term Problems: Visual First</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns">
+    <button onclick="nav(-1)">&#8592; Prev</button>
+    <button onclick="nav(1)">Next &#8594;</button>
+  </div>
+</nav>
+
+<!-- Screen 1: Every term has an address -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>Every Term Has an &ldquo;Address&rdquo;</h2>
+  <p>Each term in a sequence is a fixed number of jumps away from T&#x2081;. The jump diagram shows this clearly:</p>
+  <div class="jd" style="margin-top:14px">
+    <div class="jd-term"><div class="jd-dot">T&#x2081;</div><div class="jd-label">start<br>(= a)</div></div>
+    <div class="jd-arrow"><span class="jd-arr">&#8594;</span><span class="jd-d">+d</span></div>
+    <div class="jd-term"><div class="jd-dot">T&#x2082;</div><div class="jd-label">1 jump<br>a+d</div></div>
+    <div class="jd-arrow"><span class="jd-arr">&#8594;</span><span class="jd-d">+d</span></div>
+    <div class="jd-term"><div class="jd-dot hi">T&#x2083;</div><div class="jd-label">2 jumps<br>a+2d</div></div>
+    <div class="jd-arrow"><span class="jd-arr">&#8594;</span><span class="jd-d">+d</span></div>
+    <div class="jd-term"><div class="jd-dot">T&#x2084;</div><div class="jd-label">3 jumps<br>a+3d</div></div>
+    <div class="jd-arrow"><span class="jd-arr">&#8594;</span><span class="jd-d">+d</span></div>
+    <div class="jd-term"><div class="jd-dot hi">T&#x2085;</div><div class="jd-label">4 jumps<br>a+4d</div></div>
+  </div>
+  <p style="margin-top:12px;font-size:.93rem;color:#555">T&#x2083; is <strong>2 jumps</strong> from T&#x2081;, so T&#x2083; = a + <strong>2</strong>d. T&#x2085; is 4 jumps from T&#x2081;, so T&#x2085; = a + <strong>4</strong>d.</p>
+</div>
+
+<div class="card" style="background:#FFF8E1;border:1px solid #FFD54F">
+  <h3 style="color:#E65100">&#x1F4A1; The key pattern</h3>
+  <p style="margin-bottom:8px">T&#8345; is always <strong>(n&minus;1) jumps</strong> from T&#x2081;. That is where the formula T&#8345; = a + (n&minus;1)&times;d comes from &mdash; it is literally just counting the jumps!</p>
+  <div class="eq-chain" style="border-left-color:#FFD54F">
+    <div class="eq-row"><span class="eq-math">T&#x2083; = a + (3&minus;1) &times; d = a + 2d</span><span class="eq-why">&#8592; 3rd term, so 2 jumps</span></div>
+    <div class="eq-row"><span class="eq-math">T&#x2086; = a + (6&minus;1) &times; d = a + 5d</span><span class="eq-why">&#8592; 6th term, so 5 jumps</span></div>
+    <div class="eq-row"><span class="eq-math">T&#x2081;&#x2080; = a + (10&minus;1) &times; d = a + 9d</span><span class="eq-why">&#8592; 10th term, so 9 jumps</span></div>
+  </div>
+</div>
+</div>
+
+<!-- Screen 2: Expression table -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>Writing the Expression for Any Term</h2>
+  <p style="margin-bottom:10px">Before you can solve a two-term problem, you must be able to <strong>write the expression</strong> for each term. Use the table below as your guide:</p>
+  <table class="expr-tbl">
+    <tr><th>Term</th><th>Jumps from T&#x2081;</th><th>Expression</th></tr>
+    <tr><td>T&#x2081;</td><td>0 jumps</td><td>a</td></tr>
+    <tr><td>T&#x2082;</td><td>1 jump</td><td>a + 1d = a + d</td></tr>
+    <tr class="hi"><td>T&#x2083;</td><td>2 jumps</td><td>a + 2d</td></tr>
+    <tr><td>T&#x2084;</td><td>3 jumps</td><td>a + 3d</td></tr>
+    <tr class="hi"><td>T&#x2085;</td><td>4 jumps</td><td>a + 4d</td></tr>
+  </table>
+  <p style="font-size:.88rem;color:#555;margin-top:8px">&#x1F4CC; The exponent of d is always <strong>one less</strong> than the term number. T&#x2083; has 2d, not 3d.</p>
+</div>
+
+<div class="card">
+  <h3>Two-term puzzle: what if T&#x2083; + T&#x2085; = 64 and d = 4?</h3>
+  <p style="margin-bottom:10px">Step 1: Write the expression for each term using the table above.</p>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">T&#x2083; = a + 2d = a + 2(4) = a + 8</span><span class="eq-why">&#8592; 3rd term = 2 jumps from start</span></div>
+    <div class="eq-row"><span class="eq-math">T&#x2085; = a + 4d = a + 4(4) = a + 16</span><span class="eq-why">&#8592; 5th term = 4 jumps from start</span></div>
+  </div>
+  <p style="margin-bottom:10px">Step 2: Add them together and solve.</p>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">(a + 8) + (a + 16) = 64</span><span class="eq-why">&#8592; the two expressions must add to 64</span></div>
+    <div class="eq-row"><span class="eq-math">2a + 24 = 64</span><span class="eq-why">&#8592; collect: a+a=2a, and 8+16=24</span></div>
+    <div class="eq-row"><span class="eq-math">2a = 40</span><span class="eq-why">&#8592; subtract 24 from both sides</span></div>
+    <div class="eq-row"><span class="eq-math">a = 20</span><span class="eq-why">&#8592; divide both sides by 2</span></div>
+  </div>
+</div>
+</div>
+
+<!-- Screen 3: Worked Examples -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Worked Examples &mdash; Express and Add</h2>
+
+  <h3 style="margin-bottom:6px">Example 1 &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">d = 5, T&#x2081; + T&#x2083; = 36. Find a.</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">T&#x2081; = a</span><span class="eq-why">&#8592; first term = 0 jumps = just a</span></div>
+    <div class="eq-row"><span class="eq-math">T&#x2083; = a + 2d = a + 2(5) = a + 10</span><span class="eq-why">&#8592; 3rd term = 2 jumps of size 5</span></div>
+    <div class="eq-row"><span class="eq-math">T&#x2081; + T&#x2083; = a + (a + 10) = 36</span><span class="eq-why">&#8592; add the two expressions, set equal to 36</span></div>
+    <div class="eq-row"><span class="eq-math">2a + 10 = 36</span><span class="eq-why">&#8592; collect: a+a=2a</span></div>
+    <div class="eq-row"><span class="eq-math">2a = 26</span><span class="eq-why">&#8592; subtract 10</span></div>
+    <div class="eq-row"><span class="eq-math">a = 13</span><span class="eq-why">&#8592; divide by 2</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: T&#x2081;=13, T&#x2083;=13+10=23. Sum=36 &#10003;</span><span class="eq-why">&#8592; always verify!</span></div>
+  </div>
+
+  <div style="height:1px;background:#B2DFDB;margin:14px 0"></div>
+
+  <h3 style="margin-bottom:6px">Example 2 &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">d = 3, T&#x2082; + T&#x2085; = 39. Find a.</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">T&#x2082; = a + 1d = a + 3</span><span class="eq-why">&#8592; 2nd term = 1 jump of size 3</span></div>
+    <div class="eq-row"><span class="eq-math">T&#x2085; = a + 4d = a + 12</span><span class="eq-why">&#8592; 5th term = 4 jumps of size 3</span></div>
+    <div class="eq-row"><span class="eq-math">(a + 3) + (a + 12) = 39</span><span class="eq-why">&#8592; add expressions</span></div>
+    <div class="eq-row"><span class="eq-math">2a + 15 = 39</span><span class="eq-why">&#8592; collect: 3+12=15</span></div>
+    <div class="eq-row"><span class="eq-math">2a = 24</span><span class="eq-why">&#8592; subtract 15</span></div>
+    <div class="eq-row"><span class="eq-math">a = 12</span><span class="eq-why">&#8592; divide by 2</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: T&#x2082;=15, T&#x2085;=24. Sum=39 &#10003;</span><span class="eq-why">&#8592; always verify!</span></div>
+  </div>
+</div>
+
+<div class="steps-box">
+  <p style="font-weight:700;color:var(--acc);margin-bottom:10px">&#x1F4CB; The Express-and-Add Method (4 steps)</p>
+  <div class="step-row"><div class="step-num">1</div><div class="step-text">Write the expression for each term (use jumps table)</div></div>
+  <div class="step-row"><div class="step-num">2</div><div class="step-text">Add the two expressions together</div></div>
+  <div class="step-row"><div class="step-num">3</div><div class="step-text">Collect like terms (2a + number)</div></div>
+  <div class="step-row"><div class="step-num">4</div><div class="step-text">Solve for a, then check your answer</div></div>
+</div>
+</div>
+
+<!-- Screen 4: Practice -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Practice &mdash; Find a (First Term)</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Write expressions for both terms, add them, collect, solve. Always check!</p>
+
+  <div class="q-card" id="qc0">
+    <div class="q-text">Q1. In an arithmetic sequence, d = 4. The second and fourth terms add up to 48.<br>That is, T&#x2082; + T&#x2084; = 48. Find the first term a.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; a = 14</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; a = 15</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; a = 16</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; a = 17</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'C')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">T&#x2082; = a + d = a + 4</span></div>
+        <div class="eq-row"><span class="eq-math">T&#x2084; = a + 3d = a + 12</span></div>
+        <div class="eq-row"><span class="eq-math">(a+4) + (a+12) = 48</span></div>
+        <div class="eq-row"><span class="eq-math">2a + 16 = 48</span></div>
+        <div class="eq-row"><span class="eq-math">2a = 32 &rarr; a = 16</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2082;=20, T&#x2084;=28. Sum=48 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" id="qc1">
+    <div class="q-text">Q2. In an arithmetic sequence, d = 3. The third and sixth terms add up to 45.<br>That is, T&#x2083; + T&#x2086; = 45. Find the first term a.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; a = 10</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; a = 11</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; a = 12</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; a = 13</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">T&#x2083; = a + 2d = a + 6</span></div>
+        <div class="eq-row"><span class="eq-math">T&#x2086; = a + 5d = a + 15</span></div>
+        <div class="eq-row"><span class="eq-math">(a+6) + (a+15) = 45</span></div>
+        <div class="eq-row"><span class="eq-math">2a + 21 = 45</span></div>
+        <div class="eq-row"><span class="eq-math">2a = 24 &rarr; a = 12</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2083;=18, T&#x2086;=27. Sum=45 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" id="qc2">
+    <div class="q-text">Q3. In an arithmetic sequence, d = 7. The second and fourth terms add up to 56.<br>That is, T&#x2082; + T&#x2084; = 56. Find the first term a.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; a = 12</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; a = 13</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; a = 14</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; a = 15</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'C')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">T&#x2082; = a + d = a + 7</span></div>
+        <div class="eq-row"><span class="eq-math">T&#x2084; = a + 3d = a + 21</span></div>
+        <div class="eq-row"><span class="eq-math">(a+7) + (a+21) = 56</span></div>
+        <div class="eq-row"><span class="eq-math">2a + 28 = 56</span></div>
+        <div class="eq-row"><span class="eq-math">2a = 28 &rarr; a = 14</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2082;=21, T&#x2084;=35. Sum=56 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Screen 5: Summary -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Lesson Summary</h2>
+  <div class="summ-box">
+    <div class="summ-row"><span class="summ-icon">&#127919;</span><span>You can now find <strong>a</strong> when two terms add up to a given total!</span></div>
+    <div class="summ-row"><span class="summ-icon">&#x1F4CC;</span><span>T&#8345; = a + (n&minus;1)d &nbsp;&mdash;&nbsp; the number of d&rsquo;s is <strong>one less</strong> than n</span></div>
+    <div class="summ-row"><span class="summ-icon">&#49;&#65039;&#8419;</span><span>Write the expression for each term (use the jumps table)</span></div>
+    <div class="summ-row"><span class="summ-icon">&#50;&#65039;&#8419;</span><span>Add the two expressions &rarr; collect like terms &rarr; solve for a</span></div>
+    <div class="summ-row"><span class="summ-icon">&#10003;</span><span>Always check: substitute a back in and verify the sum</span></div>
+  </div>
+  <div class="steps-box">
+    <p style="font-weight:700;color:var(--acc);margin-bottom:8px">Quick example: d = 6, T&#x2082; + T&#x2084; = 54 &rarr; find a</p>
+    <div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">T&#x2082; = a+6, &nbsp;T&#x2084; = a+18</span></div>
+      <div class="eq-row"><span class="eq-math">(a+6) + (a+18) = 54</span></div>
+      <div class="eq-row"><span class="eq-math">2a + 24 = 54 &rarr; 2a = 30 &rarr; a = 15</span></div>
+      <div class="eq-row"><span class="eq-math">Check: 21+33 = 54 &#10003;</span></div>
+    </div>
+  </div>
+</div>
+<a href="../index.html" class="btn-hub">&#8592; Back to Hub</a>
+</div>
+
+<script>
+var cur=0;
+var screens=document.querySelectorAll('.screen');
+var total=screens.length;
+function updateNav(){
+  document.getElementById('pill').textContent=(cur+1)+' / '+total;
+  screens.forEach(function(s,i){s.classList.toggle('active',i===cur);});
+  window.scrollTo(0,0);
+}
+function nav(d){cur=Math.max(0,Math.min(total-1,cur+d));updateNav();}
+function chk(idx,correct){
+  var sel=document.querySelector('input[name="q'+idx+'"]:checked');
+  var fb=document.getElementById('fb'+idx);
+  var ss=document.getElementById('ss'+idx);
+  if(!sel){fb.style.display='block';fb.className='feedback err';fb.textContent='Please choose an answer first!';return;}
+  fb.style.display='block';
+  if(sel.value===correct){fb.className='feedback ok';fb.textContent='✅ Correct! Great work!';ss.style.display='none';}
+  else{fb.className='feedback err';fb.textContent='❌ Not quite. Try writing the expressions for each term first!';ss.style.display='block';}
+}
+function showSteps(id,btn){
+  var d=document.getElementById(id);
+  if(d.style.display==='block'){d.style.display='none';btn.textContent='Show Steps';}
+  else{d.style.display='block';btn.textContent='Hide Steps';}
+}
+</script>
+</body>
+</html>
