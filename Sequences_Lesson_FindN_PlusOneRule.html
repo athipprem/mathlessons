@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sequences — The +1 Rule Lock</title>
+<style>
+:root{--nav:#1565C0;--nav-dark:#0D47A1;--bg:#E3F2FD;--card:#fff;--acc:#1565C0;--acc-light:#BBDEFB;--ok:#1B5E20;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.tnav-btns button:hover{background:rgba(255,255,255,.3)}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--nav-dark);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul{padding-left:20px;margin-top:6px}
+.dots-wrap{overflow-x:auto;padding:12px 0 6px}
+.dots-row{display:flex;align-items:center;gap:0;white-space:nowrap;min-width:max-content}
+.dot{width:48px;height:48px;border-radius:50%;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;position:relative;z-index:1}
+.dot.start{background:#2E7D32;width:54px;height:54px;font-size:14px}
+.dot.end{background:#C62828;width:54px;height:54px;font-size:14px}
+.dot.dim{background:#BBDEFB;color:var(--nav-dark)}
+.gap-seg{display:flex;flex-direction:column;align-items:center;min-width:56px;flex-shrink:0}
+.gap-arrow{font-size:20px;color:#90CAF9;line-height:1}
+.gap-lbl{font-size:11px;color:#555;margin-top:1px}
+.jump-label{font-size:11px;color:#E65100;font-weight:700;margin-top:2px}
+.dot-labels{display:flex;gap:0;white-space:nowrap;min-width:max-content;margin-top:4px}
+.dl-space{min-width:56px;flex-shrink:0}
+.dl-num{width:48px;text-align:center;font-size:12px;color:#1565C0;font-weight:700;flex-shrink:0}
+.dl-num.start{width:54px;color:#2E7D32;font-size:13px}
+.dl-num.end{width:54px;color:#C62828;font-size:13px}
+.steps-box{background:#E3F2FD;border:2px solid var(--acc);border-radius:10px;padding:14px 18px;margin:12px 0}
+.step-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.step-row:last-child{margin-bottom:0}
+.step-num{width:28px;height:28px;background:var(--acc);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-text{font-size:.95rem;line-height:1.5}
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid var(--acc-light);padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:#1565C0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:520px){.two-col{grid-template-columns:1fr}}
+.type-card{border-radius:10px;padding:14px 16px;border:2px solid transparent}
+.type-a{background:#E8F5E9;border-color:#A5D6A7}
+.type-b{background:#FFF3E0;border-color:#FFB74D}
+.type-title{font-weight:700;font-size:.97rem;margin-bottom:6px}
+.type-a .type-title{color:#2E7D32}
+.type-b .type-title{color:#E65100}
+.q-card{background:#F8FAFF;border:1.5px solid #BBDEFB;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #BBDEFB;border-radius:8px;padding:7px 14px;font-size:.95rem;transition:all .2s}
+.opt:hover{border-color:var(--acc);background:#E3F2FD}
+.opt input{accent-color:var(--acc)}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.btn-check:hover{background:var(--nav-dark)}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:var(--ok);border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:var(--err);border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#F3F8FF;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:#E65100;font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rule-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:8px}
+.rule-key{font-weight:700;color:#1565C0;font-size:.95rem;white-space:nowrap}
+.rule-val{font-size:.93rem;color:#333}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.93rem;color:#E65100}
+.summ-box{background:linear-gradient(135deg,#E3F2FD,#BBDEFB);border-radius:10px;padding:16px;margin-bottom:14px;border:1px solid #90CAF9}
+.summ-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.97rem}
+.summ-icon{font-size:1.3rem;flex-shrink:0}
+.btn-hub{display:block;text-align:center;background:var(--nav-dark);color:#fff;padding:13px 0;border-radius:10px;font-size:1.05rem;font-weight:700;text-decoration:none;margin-top:18px}
+.btn-hub:hover{background:#01579B}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Sequences &mdash; The +1 Rule Lock</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns">
+    <button onclick="nav(-1)">&#8592; Prev</button>
+    <button onclick="nav(1)">Next &#8594;</button>
+  </div>
+</nav>
+
+<!-- ═══ Screen 1: The Big Question ═══ -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>Why Do We Always Add +1?</h2>
+  <p>You already know the Gap Method for finding <em>n</em>. But sometimes you forget the +1 at the end &mdash; and the answer is off by 1. Today we are going to <strong>lock this rule forever</strong> by understanding exactly <em>why</em> it is there.</p>
+</div>
+
+<div class="card">
+  <h3>&#x1F4A1; Count the DOTS or the GAPS?</h3>
+  <p style="margin-bottom:14px">Look at this sequence and count carefully:</p>
+  <div class="dots-wrap">
+    <div class="dots-row">
+      <div class="dot start">T&#x2081;</div>
+      <div class="gap-seg"><span class="gap-arrow">&#8594;</span><span class="jump-label">Jump 1</span></div>
+      <div class="dot">T&#x2082;</div>
+      <div class="gap-seg"><span class="gap-arrow">&#8594;</span><span class="jump-label">Jump 2</span></div>
+      <div class="dot">T&#x2083;</div>
+      <div class="gap-seg"><span class="gap-arrow">&#8594;</span><span class="jump-label">Jump 3</span></div>
+      <div class="dot">T&#x2084;</div>
+      <div class="gap-seg"><span class="gap-arrow">&#8594;</span><span class="jump-label">Jump 4</span></div>
+      <div class="dot end">T&#x2085;</div>
+    </div>
+  </div>
+  <table style="width:100%;border-collapse:collapse;margin-top:14px;font-size:.93rem">
+    <tr style="background:#E3F2FD">
+      <th style="padding:8px 12px;text-align:left;color:#0D47A1">Count</th>
+      <th style="padding:8px 12px;text-align:center;color:#0D47A1">Number</th>
+      <th style="padding:8px 12px;text-align:left;color:#0D47A1">Why</th>
+    </tr>
+    <tr style="border-bottom:1px solid #BBDEFB">
+      <td style="padding:8px 12px">Dots (terms)</td>
+      <td style="padding:8px 12px;text-align:center;font-weight:700;color:#1565C0">5</td>
+      <td style="padding:8px 12px">T&#x2081;, T&#x2082;, T&#x2083;, T&#x2084;, T&#x2085;</td>
+    </tr>
+    <tr style="background:#FFF8E1">
+      <td style="padding:8px 12px;font-weight:700;color:#E65100">Jumps (gaps)</td>
+      <td style="padding:8px 12px;text-align:center;font-weight:700;color:#E65100">4</td>
+      <td style="padding:8px 12px;color:#E65100">Jump 1, Jump 2, Jump 3, Jump 4</td>
+    </tr>
+  </table>
+  <div class="warn-box" style="margin-top:12px">
+    <p><strong>Golden Rule:</strong> Dots = Jumps + 1. &nbsp;Always. &nbsp;T&#x2081; exists before any jump happens.</p>
+  </div>
+</div>
+
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x2705; So for Find n:</h3>
+  <div class="eq-chain" style="border-left-color:#A5D6A7;margin-top:8px">
+    <div class="eq-row"><span class="eq-math">Gap Method gives us: Jumps = (T&#8345; &minus; a) &divide; d</span></div>
+    <div class="eq-row"><span class="eq-math">But we want DOTS (term number), not GAPS (jumps)</span></div>
+    <div class="eq-row"><span class="eq-math">So: n = Jumps + 1</span><span class="eq-why">&#8592; because Dots = Jumps + 1, always</span></div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ Screen 2: Two Types of Questions ═══ -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>Two Types &mdash; Same +1 Rule</h2>
+  <p style="margin-bottom:14px">The +1 rule appears in <strong>two different question types</strong>. You must handle each one correctly.</p>
+  <div class="two-col">
+    <div class="type-card type-a">
+      <div class="type-title">&#x1F50D; Type A — Which term equals X?</div>
+      <p style="font-size:.93rem">You are given a, d, and a target value T&#8345;. You need to find which term number it is.</p>
+      <p style="font-size:.93rem;margin-top:6px"><strong>Rule:</strong> n = Jumps + 1 (add 1 at the end)</p>
+    </div>
+    <div class="type-card type-b">
+      <div class="type-title">&#x1F7E0; Type B — Last term above zero?</div>
+      <p style="font-size:.93rem">The sequence is decreasing. You need the <em>last</em> term that is still positive (above zero).</p>
+      <p style="font-size:.93rem;margin-top:6px"><strong>Rule:</strong> Stop at the last POSITIVE term — check T and T+1</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Type A — Worked Example</h3>
+  <p style="margin-bottom:6px;font-size:.95rem;color:#555">a = 7, d = 4, T&#8345; = 67. Find n.</p>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Write: T&#8345; = a + (n&minus;1)&times;d</span><span class="eq-why">&#8592; always write the formula first</span></div>
+    <div class="eq-row"><span class="eq-math">Step 1: Distance = 67 &minus; 7 = 60</span><span class="eq-why">&#8592; how far from a to T&#8345;</span></div>
+    <div class="eq-row"><span class="eq-math">Step 2: Jumps = 60 &divide; 4 = 15</span><span class="eq-why">&#8592; distance &divide; d</span></div>
+    <div class="eq-row"><span class="eq-math">Step 3: n = 15 + 1 = 16</span><span class="eq-why">&#8592; Jumps + 1 (dots &gt; gaps by 1)</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: T&#x2081;&#x2086; = 7 + 15&times;4 = 7 + 60 = 67 &#10003;</span><span class="eq-why">&#8592; always verify</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Type B — Worked Example</h3>
+  <p style="margin-bottom:6px;font-size:.95rem;color:#555">a = 70, d = &minus;8. Which is the <strong>last term above zero</strong>?</p>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Write: T&#8345; = 70 + (n&minus;1)&times;(&minus;8)</span><span class="eq-why">&#8592; formula with negative d</span></div>
+    <div class="eq-row"><span class="eq-math">Set T&#8345; &gt; 0:</span><span class="eq-why">&#8592; we want ABOVE zero, not at zero</span></div>
+    <div class="eq-row"><span class="eq-math">70 &minus; 8(n&minus;1) &gt; 0</span></div>
+    <div class="eq-row"><span class="eq-math">8(n&minus;1) &lt; 70</span></div>
+    <div class="eq-row"><span class="eq-math">n&minus;1 &lt; 8.75</span></div>
+    <div class="eq-row"><span class="eq-math">n &lt; 9.75</span><span class="eq-why">&#8592; n must be a whole number, so n can be at most 9</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check T&#x2089; = 70 + 8&times;(&minus;8) = 70 &minus; 64 = 6 &gt; 0 &#10003;</span></div>
+    <div class="eq-row"><span class="eq-math">&#10007; Check T&#x2081;&#x2080; = 70 + 9&times;(&minus;8) = 70 &minus; 72 = &minus;2 &lt; 0 &#10007;</span><span class="eq-why">&#8592; confirms T&#x2089; is the last positive term</span></div>
+    <div class="eq-row"><span class="eq-math"><strong>Answer: T&#x2089;</strong></span></div>
+  </div>
+  <div class="warn-box">
+    <p>&#x26A0; Always check <em>both</em> T&#8345; (should be positive) and T&#8345;&#x208A;&#x2081; (should be negative or zero). This proves you found the correct last term.</p>
+  </div>
+</div>
+</div>
+
+<!-- ═══ Screen 3: The Most Common Mistake ═══ -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>The Two Most Common Mistakes</h2>
+  <p>Knowing the mistake makes it much easier to avoid.</p>
+</div>
+
+<div class="card" style="border-left:4px solid #C62828">
+  <h3 style="color:#C62828">&#x274C; Mistake 1 — Forgetting +1 in Type A</h3>
+  <p style="margin-bottom:10px;font-size:.95rem">a = 5, d = 4, T&#8345; = 65. Find n.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div style="background:#FFEBEE;border-radius:8px;padding:12px">
+      <p style="font-size:.88rem;color:#C62828;font-weight:700;margin-bottom:6px">&#x274C; Wrong method</p>
+      <div style="font-family:monospace;font-size:.88rem;line-height:1.8;color:#333">
+        Distance = 65&minus;5 = 60<br>
+        Jumps = 60&divide;4 = 15<br>
+        <strong style="color:#C62828">n = 15 &larr; STOP! Forgot +1!</strong>
+      </div>
+    </div>
+    <div style="background:#E8F5E9;border-radius:8px;padding:12px">
+      <p style="font-size:.88rem;color:#2E7D32;font-weight:700;margin-bottom:6px">&#x2705; Correct method</p>
+      <div style="font-family:monospace;font-size:.88rem;line-height:1.8;color:#333">
+        Distance = 65&minus;5 = 60<br>
+        Jumps = 60&divide;4 = 15<br>
+        <strong style="color:#2E7D32">n = 15 + 1 = 16 &#10003;</strong>
+      </div>
+    </div>
+  </div>
+  <div class="warn-box" style="margin-top:12px">
+    <p>&#x1F4CC; The check reveals the error: T&#x2081;&#x2085; = 5 + 14&times;4 = 61 &#x2260; 65. That's why we always check!</p>
+  </div>
+</div>
+
+<div class="card" style="border-left:4px solid #E65100">
+  <h3 style="color:#E65100">&#x274C; Mistake 2 — Going one step too far in Type B</h3>
+  <p style="margin-bottom:10px;font-size:.95rem">a = 84, d = &minus;7. Last term above zero.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div style="background:#FFEBEE;border-radius:8px;padding:12px">
+      <p style="font-size:.88rem;color:#C62828;font-weight:700;margin-bottom:6px">&#x274C; Wrong: goes too far</p>
+      <div style="font-family:monospace;font-size:.88rem;line-height:1.8;color:#333">
+        84&minus;7(n&minus;1) &gt; 0<br>
+        n &lt; 13<br>
+        <strong style="color:#C62828">Answer: T&#x2081;&#x2082; &larr; wrong!</strong><br>
+        T&#x2081;&#x2082; = 84&minus;77 = 7 &#x2713;<br>
+        T&#x2081;&#x2083; = 84&minus;84 = 0 (not &gt; 0!)
+      </div>
+    </div>
+    <div style="background:#E8F5E9;border-radius:8px;padding:12px">
+      <p style="font-size:.88rem;color:#2E7D32;font-weight:700;margin-bottom:6px">&#x2705; Correct: check both</p>
+      <div style="font-family:monospace;font-size:.88rem;line-height:1.8;color:#333">
+        n &lt; 13 &rarr; n can be 12<br>
+        T&#x2081;&#x2082; = 7 &gt; 0 &#x2713;<br>
+        T&#x2081;&#x2083; = 0 (NOT &gt; 0) &#x2713;<br>
+        <strong style="color:#2E7D32">Answer: T&#x2081;&#x2082; &#10003;</strong>
+      </div>
+    </div>
+  </div>
+  <div class="warn-box" style="margin-top:12px">
+    <p>&#x26A0; If the question says &ldquo;above zero&rdquo;, zero itself does NOT count. Always check both T&#8345; and T&#8345;&#x208A;&#x2081;.</p>
+  </div>
+</div>
+</div>
+
+<!-- ═══ Screen 4: Practice ═══ -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Practice</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Write the formula T&#8345; = a + (n&minus;1)&times;d first, then apply the steps. Always verify your answer.</p>
+
+  <!-- Q1 -->
+  <div class="q-card" id="qc0">
+    <div class="q-text">Q1. &nbsp; A sequence has a = 7 and d = 4. One of its terms equals 67. Which term number is that?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; n = 14</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; n = 15</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; n = 16</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; n = 17</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'C')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">Write: T&#8345; = a + (n&minus;1)&times;d</span></div>
+        <div class="eq-row"><span class="eq-math">Step 1: Distance = 67 &minus; 7 = 60</span></div>
+        <div class="eq-row"><span class="eq-math">Step 2: Jumps = 60 &divide; 4 = 15</span></div>
+        <div class="eq-row"><span class="eq-math">Step 3: n = 15 + 1 = 16</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2081;&#x2086; = 7 + 15&times;4 = 67 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="qc1">
+    <div class="q-text">Q2. &nbsp; A sequence has a = 6 and d = 8. One of its terms equals 102. Which term number is that?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; n = 12</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; n = 13</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; n = 14</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; n = 15</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">Write: T&#8345; = 6 + (n&minus;1)&times;8</span></div>
+        <div class="eq-row"><span class="eq-math">Step 1: Distance = 102 &minus; 6 = 96</span></div>
+        <div class="eq-row"><span class="eq-math">Step 2: Jumps = 96 &divide; 8 = 12</span></div>
+        <div class="eq-row"><span class="eq-math">Step 3: n = 12 + 1 = 13</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2081;&#x2083; = 6 + 12&times;8 = 102 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="qc2">
+    <div class="q-text">Q3. &nbsp; A sequence has a = 5 and d = 8. Which is the first term to exceed 100? (Hint: the answer is NOT T&#x2081;&#x2082;.)</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; T&#x2081;&#x2082;</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; T&#x2081;&#x2083;</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; T&#x2081;&#x2084;</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; T&#x2081;&#x2085;</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">Write: 5 + (n&minus;1)&times;8 &gt; 100</span></div>
+        <div class="eq-row"><span class="eq-math">8(n&minus;1) &gt; 95</span></div>
+        <div class="eq-row"><span class="eq-math">n&minus;1 &gt; 11.875 &rarr; n &gt; 12.875 &rarr; n = 13</span></div>
+        <div class="eq-row"><span class="eq-math">Check T&#x2081;&#x2083; = 5 + 12&times;8 = 101 &gt; 100 &#10003;</span></div>
+        <div class="eq-row"><span class="eq-math">Check T&#x2081;&#x2082; = 5 + 11&times;8 = 93 &lt; 100 &#10003; (confirms T&#x2081;&#x2083; is first)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="qc3">
+    <div class="q-text">Q4. &nbsp; A decreasing sequence has a = 70 and d = &minus;8. What is the last term that is still above zero?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; T&#x2087;</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; T&#x2088;</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; T&#x2089;</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; T&#x2081;&#x2080;</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'C')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">Write: 70 + (n&minus;1)&times;(&minus;8) &gt; 0</span></div>
+        <div class="eq-row"><span class="eq-math">70 &minus; 8(n&minus;1) &gt; 0 &rarr; 8(n&minus;1) &lt; 70 &rarr; n&minus;1 &lt; 8.75</span></div>
+        <div class="eq-row"><span class="eq-math">n &lt; 9.75 &rarr; largest whole number is n = 9</span></div>
+        <div class="eq-row"><span class="eq-math">Check T&#x2089; = 70 + 8&times;(&minus;8) = 70&minus;64 = 6 &gt; 0 &#10003;</span></div>
+        <div class="eq-row"><span class="eq-math">Check T&#x2081;&#x2080; = 70 + 9&times;(&minus;8) = 70&minus;72 = &minus;2 &lt; 0 &#10003; (confirms T&#x2089; is last positive)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ Screen 5: Summary ═══ -->
+<div class="screen" id="s4">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; What You Learned Today</div>
+  <div class="rule-grid">
+    <span class="rule-key">Dots vs Gaps:</span>
+    <span class="rule-val">There are always MORE dots than gaps. Dots = Jumps + 1.</span>
+    <span class="rule-key">Find n (Type A):</span>
+    <span class="rule-val">Distance &rarr; Jumps &rarr; n = Jumps + 1. Always add 1 at the end.</span>
+    <span class="rule-key">Last above zero (Type B):</span>
+    <span class="rule-val">Solve T&#8345; &gt; 0 to get n &lt; something. Take the largest whole number. Check both T and T+1.</span>
+    <span class="rule-key">First exceeding X:</span>
+    <span class="rule-val">Solve T&#8345; &gt; X. Take the smallest whole number n that satisfies it. Check both T and T&minus;1.</span>
+    <span class="rule-key">Always verify:</span>
+    <span class="rule-val">Plug n back into the formula. 5 seconds that catches all errors.</span>
+  </div>
+</div>
+
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You are ready for the test when...</h3>
+  <ul style="margin-top:8px">
+    <li>You always write T&#8345; = a + (n&minus;1)&times;d before starting</li>
+    <li>You never stop at Jumps &mdash; you always do n = Jumps + 1</li>
+    <li>You always check both T&#8345; and the one next to it</li>
+  </ul>
+</div>
+
+<div style="display:flex;gap:10px;margin-top:18px">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E3F2FD;color:#1565C0;border:2px solid #1565C0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Hub</a>
+  <a href="Sequences_Lesson_TwoTerm_HarderVariants.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#1565C0;color:#fff;border:2px solid #1565C0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 2 &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens = document.querySelectorAll('.screen');
+var pill    = document.getElementById('pill');
+var cur     = 0;
+function nav(dir) {
+  screens[cur].classList.remove('active');
+  cur = Math.max(0, Math.min(screens.length-1, cur+dir));
+  screens[cur].classList.add('active');
+  pill.textContent = (cur+1) + ' / ' + screens.length;
+  window.scrollTo(0,0);
+}
+function chk(qi, correct) {
+  var sel = document.querySelector('input[name="q'+qi+'"]:checked');
+  var fb  = document.getElementById('fb'+qi);
+  var ss  = document.getElementById('ss'+qi);
+  fb.style.display = 'block';
+  if (!sel) { fb.className='feedback err'; fb.textContent='Please select an answer first.'; return; }
+  if (sel.value === correct) {
+    fb.className='feedback ok';
+    fb.textContent='✓ Correct! Well done — you got it.';
+    ss.style.display='inline-block';
+  } else {
+    fb.className='feedback err';
+    fb.textContent='Not quite. Use Distance → Jumps → n = Jumps + 1 (for Type A) or check both T and T+1 (for Type B). Click Show Steps to see the full method.';
+    ss.style.display='inline-block';
+  }
+}
+function showSteps(id, btn) {
+  var el = document.getElementById(id);
+  el.style.display = (el.style.display==='block') ? 'none' : 'block';
+  btn.textContent  = (el.style.display==='block') ? 'Hide Steps' : 'Show Steps';
+}
+</script>
+</body>
+</html>

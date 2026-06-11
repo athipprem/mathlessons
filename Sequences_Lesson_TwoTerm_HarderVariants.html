@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sequences — Two-Term Harder Variants</title>
+<style>
+:root{--nav:#1565C0;--nav-dark:#0D47A1;--bg:#E3F2FD;--card:#fff;--acc:#1565C0;--acc-light:#BBDEFB;--ok:#1B5E20;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.tnav-btns button:hover{background:rgba(255,255,255,.3)}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--nav-dark);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul{padding-left:20px;margin-top:6px}
+.coeff-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.94rem}
+.coeff-table th{background:#1565C0;color:#fff;padding:9px 12px;text-align:center}
+.coeff-table td{padding:9px 12px;text-align:center;border-bottom:1px solid #BBDEFB}
+.coeff-table tr:nth-child(even) td{background:#F0F7FF}
+.coeff-table tr.hl td{background:#FFF3E0;font-weight:700;color:#E65100;font-size:1rem}
+.coeff-table tr.hl2 td{background:#E8F5E9;font-weight:700;color:#2E7D32;font-size:1rem}
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid var(--acc-light);padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:#1565C0}
+.steps-box{background:#E3F2FD;border:2px solid var(--acc);border-radius:10px;padding:14px 18px;margin:12px 0}
+.step-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.step-row:last-child{margin-bottom:0}
+.step-num{width:28px;height:28px;background:var(--acc);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-text{font-size:.95rem;line-height:1.5}
+.q-card{background:#F8FAFF;border:1.5px solid #BBDEFB;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #BBDEFB;border-radius:8px;padding:7px 14px;font-size:.95rem;transition:all .2s}
+.opt:hover{border-color:var(--acc);background:#E3F2FD}
+.opt input{accent-color:var(--acc)}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.btn-check:hover{background:var(--nav-dark)}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:var(--ok);border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:var(--err);border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#F3F8FF;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:#E65100;font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rule-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:8px}
+.rule-key{font-weight:700;color:#1565C0;font-size:.95rem;white-space:nowrap}
+.rule-val{font-size:.93rem;color:#333}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.93rem;color:#E65100}
+.expand-box{background:#F3E8FF;border:1.5px solid #CE93D8;border-radius:10px;padding:14px;margin:12px 0}
+.expand-title{color:#6A1B9A;font-weight:700;font-size:.97rem;margin-bottom:8px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:520px){.two-col{grid-template-columns:1fr}}
+.btn-hub{display:block;text-align:center;background:var(--nav-dark);color:#fff;padding:13px 0;border-radius:10px;font-size:1.05rem;font-weight:700;text-decoration:none;margin-top:18px}
+.btn-hub:hover{background:#01579B}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Sequences &mdash; Two-Term Harder Variants</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns">
+    <button onclick="nav(-1)">&#8592; Prev</button>
+    <button onclick="nav(1)">Next &#8594;</button>
+  </div>
+</nav>
+
+<!-- ═══ Screen 1: The Coefficient Secret ═══ -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>The Secret of the (n&minus;1) Coefficient</h2>
+  <p>When two terms add up to a known value, you need to <strong>expand each term as a formula</strong> first. The key rule is:</p>
+</div>
+
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Golden Rule: Tₙ = a + (n&minus;1) &times; d</div>
+  <p style="font-size:.95rem">The coefficient of <em>d</em> is <strong>(n&minus;1)</strong> &mdash; always ONE LESS than the term number.</p>
+  <ul style="margin-top:8px;font-size:.94rem">
+    <li>T&#x2081; = a + <strong>0</strong>d &nbsp;&rarr;&nbsp; coefficient = 1&minus;1 = 0</li>
+    <li>T&#x2082; = a + <strong>1</strong>d &nbsp;&rarr;&nbsp; coefficient = 2&minus;1 = 1</li>
+    <li>T&#x2083; = a + <strong>2</strong>d &nbsp;&rarr;&nbsp; coefficient = 3&minus;1 = 2</li>
+    <li>T&#x2084; = a + <strong>3</strong>d &nbsp;&rarr;&nbsp; coefficient = 4&minus;1 = 3</li>
+  </ul>
+</div>
+
+<div class="card" style="border-left:4px solid #C62828">
+  <h3 style="color:#C62828">&#x274C; The Most Common Error</h3>
+  <p style="margin-bottom:10px">Students often write <strong>T&#x2083; = a + 3d</strong> instead of T&#x2083; = a + 2d. This is the same off-by-one error as forgetting +1 in Find n &mdash; they are connected!</p>
+  <div class="two-col">
+    <div style="background:#FFEBEE;border-radius:8px;padding:10px">
+      <p style="font-size:.88rem;color:#C62828;font-weight:700;margin-bottom:4px">&#x274C; Wrong</p>
+      <p style="font-family:monospace;font-size:.9rem">T&#x2083; = a + 3d<br>T&#x2086; = a + 6d</p>
+    </div>
+    <div style="background:#E8F5E9;border-radius:8px;padding:10px">
+      <p style="font-size:.88rem;color:#2E7D32;font-weight:700;margin-bottom:4px">&#x2705; Correct</p>
+      <p style="font-family:monospace;font-size:.9rem">T&#x2083; = a + 2d<br>T&#x2086; = a + 5d</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ Screen 2: The Coefficient Table ═══ -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>The Coefficient Reference Table</h2>
+  <p style="margin-bottom:12px">Memorise this table or rebuild it quickly: just do term number minus 1 every time.</p>
+  <table class="coeff-table">
+    <tr><th>Term</th><th>Expansion</th><th>d coefficient</th><th>How to get it</th></tr>
+    <tr><td>T&#x2081;</td><td>a + 0d</td><td style="font-weight:700">0</td><td>1&minus;1 = 0</td></tr>
+    <tr><td>T&#x2082;</td><td>a + 1d</td><td style="font-weight:700">1</td><td>2&minus;1 = 1</td></tr>
+    <tr class="hl"><td>T&#x2083;</td><td>a + 2d</td><td>2</td><td>3&minus;1 = 2</td></tr>
+    <tr><td>T&#x2084;</td><td>a + 3d</td><td style="font-weight:700">3</td><td>4&minus;1 = 3</td></tr>
+    <tr class="hl2"><td>T&#x2085;</td><td>a + 4d</td><td>4</td><td>5&minus;1 = 4</td></tr>
+    <tr class="hl"><td>T&#x2086;</td><td>a + 5d</td><td>5</td><td>6&minus;1 = 5</td></tr>
+    <tr><td>T&#x2087;</td><td>a + 6d</td><td style="font-weight:700">6</td><td>7&minus;1 = 6</td></tr>
+  </table>
+  <div class="warn-box" style="margin-top:14px">
+    <p>&#x26A0; Orange rows (T&#x2083;, T&#x2086;) and green rows (T&#x2085;) are the ones that appear most in harder questions. Learn their coefficients.</p>
+  </div>
+</div>
+
+<div class="card">
+  <h3>How to Find the Sum T&#x2083; + T&#x2086; Step by Step</h3>
+  <div class="steps-box">
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Expand each term</strong> using the table: T&#x2083; = a+2d, T&#x2086; = a+5d</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Add them</strong>: (a+2d) + (a+5d) = 2a + 7d</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Substitute d</strong> (it is usually given): 2a + 7 &times; d = total value</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">4</div>
+      <div class="step-text"><strong>Solve for a</strong>: 2a = total &minus; (7d), then a = result &divide; 2</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">5</div>
+      <div class="step-text"><strong>Verify</strong>: check T&#x2083; + T&#x2086; = given total</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ Screen 3: Worked Examples ═══ -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Worked Examples</h2>
+
+  <h3 style="margin-bottom:6px">Example 1 &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">T&#x2083; + T&#x2085; = 56, d = 4. Find a.</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Expand: T&#x2083; = a + 2d = a + 2(4) = a + 8</span><span class="eq-why">&#8592; coefficient = 3&minus;1 = 2</span></div>
+    <div class="eq-row"><span class="eq-math">Expand: T&#x2085; = a + 4d = a + 4(4) = a + 16</span><span class="eq-why">&#8592; coefficient = 5&minus;1 = 4</span></div>
+    <div class="eq-row"><span class="eq-math">Sum:  (a+8) + (a+16) = 56</span></div>
+    <div class="eq-row"><span class="eq-math">2a + 24 = 56</span></div>
+    <div class="eq-row"><span class="eq-math">2a = 32 &rarr; a = 16</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: T&#x2083; = 16+8 = 24, T&#x2085; = 16+16 = 32. Sum = 56 &#10003;</span></div>
+  </div>
+
+  <div style="height:1px;background:#BBDEFB;margin:16px 0"></div>
+
+  <h3 style="margin-bottom:6px">Example 2 &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">T&#x2083; + T&#x2086; = 63, d = 3. Find a.</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Expand: T&#x2083; = a + 2(3) = a + 6</span><span class="eq-why">&#8592; coefficient 2</span></div>
+    <div class="eq-row"><span class="eq-math">Expand: T&#x2086; = a + 5(3) = a + 15</span><span class="eq-why">&#8592; coefficient 5</span></div>
+    <div class="eq-row"><span class="eq-math">Sum: 2a + 21 = 63</span></div>
+    <div class="eq-row"><span class="eq-math">2a = 42 &rarr; a = 21</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: T&#x2083; = 27, T&#x2086; = 36. Sum = 63 &#10003;</span></div>
+  </div>
+
+  <div style="height:1px;background:#BBDEFB;margin:16px 0"></div>
+
+  <h3 style="margin-bottom:6px">Example 3 &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">T&#x2084; + T&#x2087; = 90, d = 4. Find a.</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Expand: T&#x2084; = a + 3(4) = a + 12</span><span class="eq-why">&#8592; coefficient = 4&minus;1 = 3</span></div>
+    <div class="eq-row"><span class="eq-math">Expand: T&#x2087; = a + 6(4) = a + 24</span><span class="eq-why">&#8592; coefficient = 7&minus;1 = 6</span></div>
+    <div class="eq-row"><span class="eq-math">Sum: 2a + 36 = 90</span></div>
+    <div class="eq-row"><span class="eq-math">2a = 54 &rarr; a = 27</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: T&#x2084; = 39, T&#x2087; = 51. Sum = 90 &#10003;</span></div>
+  </div>
+</div>
+
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F4CC; Pattern You Can Use</h3>
+  <p style="margin-bottom:8px">When you add T&#8346; + T&#8344;:</p>
+  <ul>
+    <li>Add the two d-coefficients: (p&minus;1) + (q&minus;1) = p + q &minus; 2</li>
+    <li>The sum always = 2a + (p+q&minus;2)d</li>
+  </ul>
+  <p style="margin-top:8px;font-size:.93rem;color:#555">E.g. T&#x2083; + T&#x2086;: coefficients 2+5 = 7. Sum = 2a + 7d.</p>
+</div>
+</div>
+
+<!-- ═══ Screen 4: Compound Type (find a then Tₙ) ═══ -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Compound Type: Find a, Then Find T&#8345;</h2>
+  <p style="margin-bottom:12px">Some questions ask you to find <em>a</em> first, then use it to find another term. This is two steps, but each step is something you already know.</p>
+</div>
+
+<div class="card">
+  <h3>Worked Example: Two Steps</h3>
+  <p style="margin-bottom:6px;font-size:.95rem;color:#555">T&#x2083; + T&#x2085; = 52, d = 3. Find a. Then find T&#x2081;&#x2082;.</p>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math"><strong>Step 1: Find a</strong></span></div>
+    <div class="eq-row"><span class="eq-math">T&#x2083; = a + 2(3) = a + 6</span></div>
+    <div class="eq-row"><span class="eq-math">T&#x2085; = a + 4(3) = a + 12</span></div>
+    <div class="eq-row"><span class="eq-math">2a + 18 = 52 &rarr; 2a = 34 &rarr; a = 17</span></div>
+    <div class="eq-row"><span class="eq-math" style="margin-top:4px"><strong>Step 2: Find T&#x2081;&#x2082; using the formula</strong></span></div>
+    <div class="eq-row"><span class="eq-math">T&#x2081;&#x2082; = a + (12&minus;1)d = 17 + 11&times;3 = 17 + 33 = 50</span><span class="eq-why">&#8592; coefficient = 12&minus;1 = 11</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: T&#x2083; = 23, T&#x2085; = 29. Sum = 52 &#10003;</span></div>
+  </div>
+</div>
+
+<div class="card" style="background:#FFF3E0;border:1px solid #FFB74D">
+  <h3 style="color:#E65100">&#x1F4A1; Test Strategy for Compound Questions</h3>
+  <ol style="margin-top:8px;padding-left:20px">
+    <li style="margin-bottom:6px">Label the two given terms. Write T&#8346; = a+(p&minus;1)d and T&#8344; = a+(q&minus;1)d.</li>
+    <li style="margin-bottom:6px">Add them → 2a + (sum of coefficients) = given total. Solve for a.</li>
+    <li style="margin-bottom:6px">Use T&#8345; = a + (n&minus;1)&times;d with your found a to compute the asked term.</li>
+    <li>Always verify by checking the original two-term sum.</li>
+  </ol>
+</div>
+</div>
+
+<!-- ═══ Screen 5: Practice ═══ -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Practice</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Expand both terms first using the coefficient table. Show each step.</p>
+
+  <!-- Q1 -->
+  <div class="q-card" id="qc0">
+    <div class="q-text">Q1. &nbsp; T&#x2083; + T&#x2085; = 56, d = 4. Find a.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; a = 10</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; a = 14</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; a = 16</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; a = 18</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'C')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">T&#x2083; = a+2d = a+8 &nbsp; T&#x2085; = a+4d = a+16</span></div>
+        <div class="eq-row"><span class="eq-math">Sum: 2a + 24 = 56 &rarr; 2a = 32 &rarr; a = 16</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2083;=24, T&#x2085;=32. 24+32=56 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="qc1">
+    <div class="q-text">Q2. &nbsp; T&#x2084; + T&#x2086; = 68, d = 5. Find a.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; a = 12</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; a = 14</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; a = 16</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; a = 20</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">T&#x2084; = a+3d = a+15 &nbsp; T&#x2086; = a+5d = a+25</span></div>
+        <div class="eq-row"><span class="eq-math">Sum: 2a + 40 = 68 &rarr; 2a = 28 &rarr; a = 14</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2084;=29, T&#x2086;=39. 29+39=68 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="qc2">
+    <div class="q-text">Q3. &nbsp; T&#x2083; + T&#x2086; = 63, d = 3. Find a.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; a = 18</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; a = 21</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; a = 23</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; a = 25</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">T&#x2083; = a+2(3) = a+6 &nbsp; T&#x2086; = a+5(3) = a+15</span></div>
+        <div class="eq-row"><span class="eq-math">Sum: 2a + 21 = 63 &rarr; 2a = 42 &rarr; a = 21</span></div>
+        <div class="eq-row"><span class="eq-math">Check: T&#x2083;=27, T&#x2086;=36. 27+36=63 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 — Compound -->
+  <div class="q-card" id="qc3">
+    <div class="q-text">Q4. &nbsp; T&#x2083; + T&#x2085; = 52, d = 3. Find a first. Then find T&#x2081;&#x2082;.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; a = 16, T&#x2081;&#x2082; = 49</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; a = 18, T&#x2081;&#x2082; = 51</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; a = 17, T&#x2081;&#x2082; = 50</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; a = 20, T&#x2081;&#x2082; = 53</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'C')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3">
+      <div class="eq-chain">
+        <div class="eq-row"><span class="eq-math">T&#x2083; = a+2(3)=a+6 &nbsp; T&#x2085; = a+4(3)=a+12</span></div>
+        <div class="eq-row"><span class="eq-math">2a + 18 = 52 &rarr; 2a = 34 &rarr; a = 17</span></div>
+        <div class="eq-row"><span class="eq-math">T&#x2081;&#x2082; = 17 + 11&times;3 = 17 + 33 = 50</span></div>
+        <div class="eq-row"><span class="eq-math">Check sum: T&#x2083;=23, T&#x2085;=29. 23+29=52 &#10003;</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You are ready for the test when...</h3>
+  <ul style="margin-top:8px">
+    <li>You always write T&#8346; = a+(p&minus;1)d (not a+pd) before adding</li>
+    <li>You add coefficients correctly for T&#x2083;+T&#x2085;, T&#x2083;+T&#x2086;, T&#x2084;+T&#x2087;</li>
+    <li>For compound questions: find a first, then use T&#8345; = a+(n&minus;1)d for the second part</li>
+    <li>You always verify by substituting back into the original sum</li>
+  </ul>
+</div>
+
+<div style="display:flex;gap:10px;margin-top:18px">
+  <a href="Sequences_Lesson_FindN_PlusOneRule.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E3F2FD;color:#1565C0;border:2px solid #1565C0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#1565C0;color:#fff;border:2px solid #1565C0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens = document.querySelectorAll('.screen');
+var pill    = document.getElementById('pill');
+var cur     = 0;
+function nav(dir) {
+  screens[cur].classList.remove('active');
+  cur = Math.max(0, Math.min(screens.length-1, cur+dir));
+  screens[cur].classList.add('active');
+  pill.textContent = (cur+1) + ' / ' + screens.length;
+  window.scrollTo(0,0);
+}
+function chk(qi, correct) {
+  var sel = document.querySelector('input[name="q'+qi+'"]:checked');
+  var fb  = document.getElementById('fb'+qi);
+  var ss  = document.getElementById('ss'+qi);
+  fb.style.display = 'block';
+  if (!sel) { fb.className='feedback err'; fb.textContent='Please select an answer first.'; return; }
+  if (sel.value === correct) {
+    fb.className='feedback ok';
+    fb.textContent='✓ Correct! Excellent work.';
+    ss.style.display='inline-block';
+  } else {
+    fb.className='feedback err';
+    fb.textContent='Not quite. Remember: expand each term using a+(n−1)d, then add. The coefficient is always one less than the term number. Click Show Steps to see the full method.';
+    ss.style.display='inline-block';
+  }
+}
+function showSteps(id, btn) {
+  var el = document.getElementById(id);
+  el.style.display = (el.style.display==='block') ? 'none' : 'block';
+  btn.textContent  = (el.style.display==='block') ? 'Hide Steps' : 'Show Steps';
+}
+</script>
+</body>
+</html>
