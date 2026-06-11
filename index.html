@@ -1308,7 +1308,7 @@ PREM_DATA.renderUnitBadge('idx-topbar-unit-badge');
   if (elV) elV.textContent = 'Unit ' + cu.n + ' ►';
   if (elS) elS.textContent = cu.status;
   var elD = document.getElementById('idx-hero-units-done');
-  if (elD) elD.textContent = PREM_DATA.scores.filter(function(s){ return s.score !== null && s.score !== undefined; }).length;
+  if (elD) elD.textContent = PREM_DATA.lastUnit.n;
 })();
 // Hero skill %
 var ihs = document.getElementById('idx-hero-skill');
