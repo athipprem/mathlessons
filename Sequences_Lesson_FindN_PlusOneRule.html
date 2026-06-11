@@ -86,28 +86,98 @@ ul{padding-left:20px;margin-top:6px}
 .map-strip{background:#E1F5FE;border:2px solid #4FC3F7;border-radius:10px;padding:12px 16px;margin-bottom:16px}
 .map-strip p{font-size:.93rem;color:#0277BD}
 .map-strip a{color:#0D47A1;font-weight:700}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;font-size:1.02rem;font-weight:700;margin:0 auto 8px;max-width:480px}
+.fence{display:flex;align-items:flex-end;justify-content:center;margin:10px 0 2px}
+.post{width:12px;height:44px;background:#6D4C41;border-radius:3px;position:relative}
+.post::after{content:attr(data-n);position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;color:#1565C0}
+.rail{width:46px;height:8px;background:#FFB74D;border-radius:3px;margin-bottom:12px;position:relative}
+.rail::after{content:attr(data-j);position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:#E65100}
+.mv{border-radius:12px;padding:12px;border:3px solid;position:relative}
+.mv h4{font-size:.95rem;margin-bottom:5px}
+.mv p{font-size:.86rem;line-height:1.45}
+.mv .formula{font-family:'Courier New',monospace;font-weight:700;background:rgba(255,255,255,.7);border-radius:6px;padding:5px 8px;margin:6px 0;font-size:.86rem;display:block}
+.mv-fwd{background:#E8F5E9;border-color:#66BB6A}.mv-fwd h4{color:#2E7D32}
+.mv-back{background:#FFF3E0;border-color:#FFA726}.mv-back h4{color:#E65100}
+.mv-bound{background:#F3E5F5;border-color:#BA68C8}.mv-bound h4{color:#6A1B9A}
+.mv-exp{background:#FFEBEE;border-color:#EF9A9A}.mv-exp h4{color:#C62828}
+.dim{opacity:.55}
+.today::before{content:'TODAY';position:absolute;top:-11px;right:10px;background:#FFD54F;color:#5D4037;font-size:.7rem;font-weight:800;padding:2px 9px;border-radius:8px}
+.findA-mini{background:#E1F5FE;border:3px solid #4FC3F7;border-radius:12px;padding:12px;margin-bottom:10px;position:relative}
+.findA-mini h4{color:#0277BD;font-size:.95rem;margin-bottom:5px}
+.findA-mini p{font-size:.86rem;line-height:1.45}
 </style>
 </head>
 <body>
 <nav class="topnav">
   <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
   <span class="tnav-title">Sequences &mdash; The +1 Rule Lock</span>
-  <span class="tnav-pill" id="pill">1 / 5</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
   <div class="tnav-btns">
     <button onclick="nav(-1)">&#8592; Prev</button>
     <button onclick="nav(1)">Next &#8594;</button>
   </div>
 </nav>
 
+<!-- ═══ Screen 0: Pocket Map (mandatory first stop) ═══ -->
+<div class="screen active" id="sMap">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; Step 1: Your Pocket Map</h2>
+  <p>Every sequences question is just <strong>one of four moves</strong>. Walk through the map first &mdash; this lesson trains the two moves marked <strong>TODAY</strong>. (Want it on paper? <a href="Sequences_DecisionTree_PocketMap.html" style="color:#0D47A1;font-weight:700">Printable Pocket Map</a>)</p>
+</div>
+
+<div class="golden">
+  <div class="golden-title" style="text-align:center">&#x1F511; The One Rule: Jumps = n &minus; 1</div>
+  <div class="fence">
+    <div class="post" data-n="T&#x2081;"></div><div class="rail" data-j="jump 1"></div>
+    <div class="post" data-n="T&#x2082;"></div><div class="rail" data-j="jump 2"></div>
+    <div class="post" data-n="T&#x2083;"></div><div class="rail" data-j="jump 3"></div>
+    <div class="post" data-n="T&#x2084;"></div><div class="rail" data-j="jump 4"></div>
+    <div class="post" data-n="T&#x2085;"></div>
+  </div>
+  <p style="text-align:center;font-size:.9rem;color:#555;margin-top:20px">5 fence posts, only 4 rails. T&#x2085; is <strong>4 jumps</strong> from the start &mdash; never 5.</p>
+</div>
+
+<div class="q-node">1&#xFE0F;&#x20E3; Do I know <em>a</em> (the first term)?</div>
+<div class="findA-mini">
+  <h4>&#x1F50E; NO &rarr; Find a first!</h4>
+  <p>Middle term given? Walk back its jumps: a = T&#x2098; &minus; (m&minus;1)&times;d &mdash; T&#x2086; given means go back <strong>5</strong> jumps, not 6. Then come back to question 2&#xFE0F;&#x20E3;.</p>
+</div>
+
+<div class="q-node">2&#xFE0F;&#x20E3; YES &rarr; What does the question WANT?</div>
+<div class="two-col">
+  <div class="mv mv-fwd dim">
+    <h4>&#x27A1;&#xFE0F; FORWARD &mdash; know n, want the value</h4>
+    <span class="formula">T&#8345; = a + (n&minus;1)&times;d</span>
+    <p>&#x2705; You can already do this one.</p>
+  </div>
+  <div class="mv mv-back today">
+    <h4>&#x2B05;&#xFE0F; BACKWARD &mdash; know the value, want n</h4>
+    <span class="formula">Distance = value &minus; a &rarr; Jumps = Distance &divide; d &rarr; n = Jumps + 1 &#x2757;</span>
+    <p>Trained in THIS lesson.</p>
+  </div>
+  <div class="mv mv-bound today">
+    <h4>&#x1F6A7; BOUNDARY &mdash; first/last past a line</h4>
+    <span class="formula">Backward move with &gt; or &lt;, then check BOTH neighbours</span>
+    <p>Trained in THIS lesson.</p>
+  </div>
+  <div class="mv mv-exp dim">
+    <h4>&#x2795; EXPAND &amp; ADD &mdash; two terms sum to a number</h4>
+    <span class="formula">T&#x2083;+T&#x2086; &rarr; (a+2d)+(a+5d) = 2a+7d</span>
+    <p>&#x27A1;&#xFE0F; Trained in Lesson 2.</p>
+  </div>
+</div>
+
+<div style="display:flex;gap:10px;margin-top:22px">
+  <button onclick="nav(-1)" style="flex:1;padding:12px 0;background:#E3F2FD;color:#1565C0;border:2px solid #1565C0;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer">&#8592; Prev</button>
+  <button onclick="nav(1)" style="flex:1;padding:12px 0;background:#1565C0;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer">Start the Lesson &#8594;</button>
+</div>
+</div>
+
 <!-- ═══ Screen 1: The Big Question ═══ -->
-<div class="screen active" id="s0">
+<div class="screen" id="s0">
 <div class="card">
   <h2>Why Do We Always Add +1?</h2>
   <p>You already know the Gap Method for finding <em>n</em>. But sometimes you forget the +1 at the end &mdash; and the answer is off by 1. Today we are going to <strong>lock this rule forever</strong> by understanding exactly <em>why</em> it is there.</p>
-</div>
-
-<div class="map-strip">
-  <p>&#x1F5FA;&#xFE0F; <strong>Pocket Map check:</strong> this lesson trains 2 of your 4 moves &mdash; <span class="move-badge mb-back" style="margin:0">&#x2B05;&#xFE0F; Backward</span> (find n) and <span class="move-badge mb-bound" style="margin:0">&#x1F6A7; Boundary</span> (first/last past a line). Keep your <a href="Sequences_DecisionTree_PocketMap.html">Pocket Map</a> next to you.</p>
 </div>
 
 <div class="card">
