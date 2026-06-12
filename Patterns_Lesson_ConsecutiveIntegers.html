@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consecutive Integers — The Middle Trick</title>
+<style>
+:root{--nav:#1565C0;--nav-dark:#0D47A1;--bg:#E8F1FB;--card:#fff;--acc:#0D47A1;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#1565C0;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul,ol{padding-left:20px;margin-top:6px}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;font-size:1.02rem;font-weight:700;margin:0 auto 10px;max-width:560px}
+.mv{border-radius:12px;padding:12px;border:3px solid;position:relative;margin-bottom:12px}
+.mv h4{font-size:.97rem;margin-bottom:5px}
+.mv p{font-size:.88rem;line-height:1.5}
+.mv-mid{background:#E3F2FD;border-color:#64B5F6}.mv-mid h4{color:#0D47A1}
+.mv-alg{background:#EDE7F6;border-color:#B39DDB}.mv-alg h4{color:#4A148C}
+.today::before{content:'TODAY';position:absolute;top:-11px;right:10px;background:#FFD54F;color:#5D4037;font-size:.7rem;font-weight:800;padding:2px 9px;border-radius:8px}
+.numline{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:16px 0}
+.bead{width:54px;height:54px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;border:2px solid #64B5F6;background:#E3F2FD;color:#0D47A1}
+.bead.mid{background:#FFD54F;border-color:#F9A825;color:#5D4037;transform:scale(1.12)}
+.bead-lbl{text-align:center;font-size:.8rem;color:#1565C0;font-weight:700;margin-top:-8px;margin-bottom:14px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:560px){.two-col{grid-template-columns:1fr}}
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid #90CAF9;padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:#1565C0}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.93rem;color:#E65100}
+.q-card{background:#F7FAFE;border:1.5px solid #90CAF9;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #90CAF9;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E3F2FD}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#F1F7FE;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E3F2FD;color:#0D47A1;border:2px solid #0D47A1;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#0D47A1;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.rule-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:8px}
+.rule-key{font-weight:700;color:#0D47A1;font-size:.95rem;white-space:nowrap}
+.rule-val{font-size:.93rem;color:#333}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Consecutive Integers &mdash; The Middle Trick</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: Pocket Map -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Consecutive-Numbers Map</h2>
+  <p><strong>Consecutive</strong> means "in a row" &mdash; each number is one step from the next. The questions almost always give you a <strong>sum</strong> and ask you to find the numbers. There are two routes, and you choose based on what the question gives you:</p>
+</div>
+
+<div class="q-node">&#x1F50D; How many numbers? And what step &mdash; +1, or +2?</div>
+
+<div class="mv mv-mid today">
+  <h4>&#x2B50; MIDDLE TRICK &mdash; for an ODD count (3 or 5 numbers)</h4>
+  <p><strong>The middle number is the average.</strong> middle = sum &divide; count. Then step outwards. Fastest route &mdash; trained today.</p>
+</div>
+<div class="mv mv-alg today">
+  <h4>&#x1F9EE; UNIT METHOD &mdash; for an EVEN count, or even/odd numbers</h4>
+  <p>Write them with <strong>n</strong>: n, n+1, n+2, &hellip; (or n, n+2, n+4 for even/odd). Add, set equal to the sum, solve. Trained today.</p>
+</div>
+
+<div class="card" style="background:#E3F2FD;border:1px solid #90CAF9">
+  <p style="font-size:.92rem;color:#0D47A1"><strong>Step size:</strong> ordinary numbers step by <strong>+1</strong> (7, 8, 9). Consecutive <strong>even</strong> or <strong>odd</strong> numbers step by <strong>+2</strong> (6, 8, 10 &nbsp;or&nbsp; 5, 7, 9).</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start the Lesson &#8594;</button></div>
+</div>
+
+<!-- Screen 2: Middle trick -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>The Middle Trick (odd count)</h2>
+  <p>Three numbers in a row are balanced around the middle one. The one below pulls down by the same amount the one above pushes up &mdash; so they cancel. That means:</p>
+  <div class="golden" style="margin-top:10px">
+    <div class="golden-title">&#x2B50; middle number = sum &divide; how many</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Example: three consecutive numbers add to 60.</h3>
+  <div class="numline">
+    <div class="bead">19</div><div class="bead mid">20</div><div class="bead">21</div>
+  </div>
+  <div class="bead-lbl">&minus;1 &nbsp;&nbsp;&nbsp;&nbsp; middle &nbsp;&nbsp;&nbsp;&nbsp; +1</div>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">middle = 60 &divide; 3 = 20</span><span class="eq-why">&#8592; the average</span></div>
+    <div class="eq-row"><span class="eq-math">step out: 19, 20, 21</span><span class="eq-why">&#8592; one below, one above</span></div>
+    <div class="eq-row"><span class="eq-math">check: 19+20+21 = 60 &#10003;</span></div>
+  </div>
+  <p style="font-size:.93rem">Five in a row works the same way: <strong>middle = sum &divide; 5</strong>, then two steps each side.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: Unit method -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>The Unit Method (even count &amp; even/odd)</h2>
+  <p>When there is <strong>no single middle</strong> (an even count like 2 or 4), or the numbers step by 2, the middle trick is awkward. Use <strong>n</strong> for the smallest and build up.</p>
+</div>
+
+<div class="two-col">
+  <div class="card" style="margin:0">
+    <h3>Four in a row, sum 90</h3>
+    <div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">n + (n+1) + (n+2) + (n+3)</span></div>
+      <div class="eq-row"><span class="eq-math">= 4n + 6 = 90</span></div>
+      <div class="eq-row"><span class="eq-math">4n = 84 &rarr; n = 21</span></div>
+      <div class="eq-row"><span class="eq-math">21, 22, 23, 24 &#10003;</span></div>
+    </div>
+  </div>
+  <div class="card" style="margin:0">
+    <h3>Three consecutive EVEN, sum 84</h3>
+    <div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">n + (n+2) + (n+4)</span><span class="eq-why">&#8592; step +2</span></div>
+      <div class="eq-row"><span class="eq-math">= 3n + 6 = 84</span></div>
+      <div class="eq-row"><span class="eq-math">3n = 78 &rarr; n = 26</span></div>
+      <div class="eq-row"><span class="eq-math">26, 28, 30 &#10003;</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="warn-box">
+  <p>&#x1F4A1; <strong>Shortcut check:</strong> the even-count answer also obeys the middle idea &mdash; for "four in a row, sum 90", 90&divide;4 = 22.5 sits exactly between 22 and 23, the two middle numbers. Use it to check your <strong>n</strong> answer.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: Compound worked -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Two-Step Questions</h2>
+  <p>Harder questions add a second step <em>after</em> you find the numbers. Find the numbers first, then answer what is actually asked &mdash; read the last line twice.</p>
+
+  <h3>Example A &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">Three consecutive integers add to 81. What is the sum of the smallest and largest?</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">middle = 81 &divide; 3 = 27 &rarr; 26, 27, 28</span></div>
+    <div class="eq-row"><span class="eq-math">smallest + largest = 26 + 28 = 54</span><span class="eq-why">&#8592; this is what they asked</span></div>
+  </div>
+
+  <h3>Example B &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">Five consecutive integers add to 90. If the largest is removed, what do the other four add to?</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">middle = 90 &divide; 5 = 18 &rarr; 16, 17, 18, 19, 20</span></div>
+    <div class="eq-row"><span class="eq-math">remove largest (20): 90 &minus; 20 = 70</span><span class="eq-why">&#8592; no need to re-add</span></div>
+  </div>
+
+  <h3>Example C &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">The sum of three consecutive integers is 9 more than 60. Find the largest.</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">first work out the sum: 60 + 9 = 69</span><span class="eq-why">&#8592; hidden sum</span></div>
+    <div class="eq-row"><span class="eq-math">middle = 69 &divide; 3 = 23 &rarr; 22, 23, 24</span></div>
+    <div class="eq-row"><span class="eq-math">largest = 24</span></div>
+  </div>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: Practice -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Practice</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Odd count &rarr; middle trick. Even count or even/odd &rarr; unit method. Then read the last line again.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; Three consecutive integers add up to 54. What is the largest one?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 17</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 18</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 19</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; 20</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'C')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">middle = 54 &divide; 3 = 18 &rarr; 17, 18, 19</span></div>
+      <div class="eq-row"><span class="eq-math">largest = 19</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; Five consecutive integers add up to 65. What is the smallest one?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 11</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 13</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; 15</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">middle = 65 &divide; 5 = 13 &rarr; 11, 12, 13, 14, 15</span></div>
+      <div class="eq-row"><span class="eq-math">smallest = 11</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; Three consecutive EVEN numbers add up to 90. What is the middle one?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 28</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 30</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 31</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; 32</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">middle = 90 &divide; 3 = 30 &rarr; 28, 30, 32</span></div>
+      <div class="eq-row"><span class="eq-math">all even &#10003; &nbsp; middle = 30</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; Four consecutive integers add up to 74. What is the largest one?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 18</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 19</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; 21</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'C')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">4n + 6 = 74 &rarr; 4n = 68 &rarr; n = 17</span></div>
+      <div class="eq-row"><span class="eq-math">17, 18, 19, 20 &rarr; largest = 20</span></div>
+    </div></div>
+  </div>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 6: Summary -->
+<div class="screen" id="s5">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; What You Learned Today</div>
+  <div class="rule-grid">
+    <span class="rule-key">Odd count:</span><span class="rule-val">middle = sum &divide; count, then step outwards.</span>
+    <span class="rule-key">Even count:</span><span class="rule-val">write n, n+1, n+2, n+3; add; solve for n.</span>
+    <span class="rule-key">Even / odd:</span><span class="rule-val">step by +2 &rarr; n, n+2, n+4.</span>
+    <span class="rule-key">Always check:</span><span class="rule-val">add your numbers back &mdash; do they hit the sum?</span>
+    <span class="rule-key">Last line:</span><span class="rule-val">smallest? largest? middle? a new total? Answer THAT.</span>
+  </div>
+</div>
+
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You are ready when...</h3>
+  <ul>
+    <li>You spot odd-count and go straight to sum &divide; count</li>
+    <li>You write n, n+1, n+2&hellip; without hesitating for even counts</li>
+    <li>You re-read the last line before writing your final answer</li>
+  </ul>
+</div>
+
+<div class="navrow">
+  <a href="Geometry_Lesson_PathFrame_InsideAndCost.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E3F2FD;color:#0D47A1;border:2px solid #0D47A1;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#0D47A1;color:#fff;border:2px solid #0D47A1;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Please select an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! Middle trick (or n-method) nailed it.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not quite. Odd count → sum ÷ count for the middle. Even count → n, n+1, n+2, n+3. Then re-read what they asked. Click Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

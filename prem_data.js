@@ -20,30 +20,30 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:26, topic:'Consolidation — Path & Frame · SimEq · Ratio Transfer', status:'In Progress' },
+  currentUnit: { n:27, topic:'Path & Frame Re-test · Consecutive Integers', status:'In Progress' },
   lastUnit: {
-    n:25, score:12, outOf:15, pct:80, delta:+3, prevScore:9,
-    patternLabel: 'U25 Breakthrough Analysis',
-    patternInsight: '12/15 (80%) &#127775; <strong>PASSED &mdash; biggest jump of the sequences arc (+3)</strong>. Sec B 5/5 PERFECT: Find n 3/3 with +1 rule applied, Q9 boundary trap avoided (T&#8321;&#8324;=100 excluded), Q10 last-above-zero &#10003;. Back-calc T&#8321; fixed (Q3 + Q14 both &#10003; with (n&minus;1)d). Zero term-listing on paper &mdash; first time ever. Misses: Q5, Q12, Q13 &mdash; all two-term sums with NOVEL position pairs.',
-    analysisLabel: 'Next: U26 Consolidation &mdash; Path & Frame · SimEq · Ratio Transfer',
-    analysisInsight: 'Sequences arc closed after 4 tests (7&rarr;8&rarr;9&rarr;12). Pocket Map (decision tree as lesson page 1) credited for the leap. Remaining narrow gap: two-term with novel pairs (T&#8322;+T&#8324;, T&#8323;+T&#8326;, T&#8324;+T&#8327; all &#10007;; trained T&#8323;+T&#8325; 2/2 &#10003; incl. compound) &mdash; daily coefficient drills + M3 re-check. U26 targets the M2 trio: Path&amp;Frame direction, SimEq recognition, Ratio Transfer trigger &mdash; all in unfamiliar contexts. Standard: 12/15 + 4/5 per section.',
-    qSummary: 'Sec A 4/5 (Q5 &#10007; no working) | <strong>Sec B 5/5 PERFECT &#127775;</strong> | Sec C 3/5: Q11 Q14 Q15 &#10003; | Q12 Q13 novel-pair &#10007;',
+    n:26, score:11, outOf:15, pct:73, delta:-1, prevScore:12,
+    patternLabel: 'U26 Consolidation Analysis',
+    patternInsight: '11/15 (73%) &mdash; <strong>NOT passed: Section A (Path &amp; Frame) 3/5, below the 4/5 per-section minimum</strong>. Sec B (SimEq) 4/5 &#10003; and Sec C (Ratio Transfer) 4/5 &#10003; both cleared. Every standard-form question correct; all four misses are the extra-step / direction-flip variant &mdash; Q4 border INSIDE (subtract), Q5 cost extension (two-step), Q10 multiply-first SimEq (apple left blank), Q14 addition ratio (blank). Two of the four were blanks: recognition/finishing, not arithmetic.',
+    analysisLabel: 'Next: U27 &mdash; Path &amp; Frame Re-test + Consecutive Integers',
+    analysisInsight: 'Big win: two of the three M2 carry-over gaps closed. SimEq context-transfer (M2 Q7 blank) &rarr; 4/5 across fresh contexts; Ratio Transfer recognition (M2 Q12 blank) &rarr; 4/5 incl. the hardest transfer (Q15). Path &amp; Frame direction is the lone holdout &mdash; failed at M2 Q2 and again at U26 Q4. Per rules, only the failed Section A re-tests: one focused Path &amp; Frame lesson (inside-direction + cost extension) then a fresh test. U27 folds the Path &amp; Frame re-test into Section A and introduces Consecutive Integers in B/C. Pass bar: 4/5 on Path &amp; Frame.',
+    qSummary: '<strong>Sec A 3/5 &#10007; (below 4/5 bar)</strong> | Sec B 4/5 &#10003; | Sec C 4/5 &#10003; &mdash; Total 11/15',
     qBreakdown: [
-      { q:'Q1',  topic:'Sequences &mdash; Direct (a=6,d=9,T&#8321;&#8324;)',                    lvl:'w', pass:true,  note:'&#10003; 123. 13&times;9 &mdash; (n&minus;1) multiplier correct.' },
-      { q:'Q2',  topic:'Sequences &mdash; Decreasing (a=48,d=&minus;3,T&#8321;&#8323;)',        lvl:'w', pass:true,  note:'&#10003; 12. Negative d clean.' },
-      { q:'Q3',  topic:'Sequences &mdash; Find d,T&#8321; (T&#8324;=19,T&#8328;=35)',          lvl:'w', pass:true,  note:'&#10003; d=4, T&#8321;=7. <strong>Used a+3d &mdash; the old n&times;d error is GONE.</strong>' },
-      { q:'Q4',  topic:'Sequences &mdash; Large n (a=5,d=7,T&#8322;&#8320;)',                  lvl:'w', pass:true,  note:'&#10003; 138.' },
-      { q:'Q5',  topic:'Sequences &mdash; Two-term simple (T&#8322;+T&#8324;=50,d=6)',          lvl:'w', pass:false, note:'&#10007; 8 (correct: 13). NO working shown &mdash; only blank-working question, only Sec A miss.' },
-      { q:'Q6',  topic:'Sequences &#9733; &mdash; Find n (a=4,d=5,=64)',                       lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8323;. 60&divide;5=12, +1 &#10003;' },
-      { q:'Q7',  topic:'Sequences &#9733; &mdash; Find n (a=8,d=6,=92)',                       lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8325;. 84&divide;6=14, +1 &#10003;' },
-      { q:'Q8',  topic:'Sequences &#9733; &mdash; Find n (a=3,d=11,=113)',                     lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8321;. <strong>Find n 3/3 &mdash; the U22&ndash;U23 wall is gone.</strong>' },
-      { q:'Q9',  topic:'Sequences &#9733; &mdash; First exceeding 100 (trap)',                  lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8325;. Avoided T&#8321;&#8324;=100 trap &mdash; exactly-on-boundary excluded.' },
-      { q:'Q10', topic:'Sequences &#9733; &mdash; Last above zero (a=84,d=&minus;9)',           lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8320;. U24&rsquo;s exact miss type &mdash; fixed.' },
-      { q:'Q11', topic:'Sequences &#9733;&#9733; &mdash; Two-term T&#8323;+T&#8325;=64',       lvl:'h', pass:true,  note:'&#10003; a=17. Trained pair solid.' },
-      { q:'Q12', topic:'Sequences &#9733;&#9733; &mdash; Two-term T&#8323;+T&#8326;=78',       lvl:'h', pass:false, note:'&#10007; 8 (correct: 18). Novel pair &mdash; coefficient setup broke.' },
-      { q:'Q13', topic:'Sequences &#9733;&#9733; &mdash; Two-term T&#8324;+T&#8327;=90',       lvl:'h', pass:false, note:'&#10007; 14 (correct: 27). Same novel-pair setup confusion.' },
-      { q:'Q14', topic:'Sequences &#9733;&#9733; &mdash; Back-calc T&#8321; (T&#8324;=31,d=4)', lvl:'h', pass:true,  note:'&#10003; T&#8321;=19, T&#8321;&#8322;=63. <strong>The three-test error, resolved.</strong>' },
-      { q:'Q15', topic:'Sequences &#9733;&#9733; &mdash; T&#8323;+T&#8325;=80, find a+T&#8321;&#8325;', lvl:'h', pass:true, note:'&#10003; a=22, T&#8321;&#8325;=106. Hardest question, full chain correct.' }
+      { q:'Q1',  topic:'Path &amp; Frame &mdash; Rectangle (28&times;16)',                 lvl:'w', pass:true,  note:'&#10003; P=88, A=448. Both formulas clean.' },
+      { q:'Q2',  topic:'Path &amp; Frame &mdash; Frame Outside (24&times;18, 3)',          lvl:'w', pass:true,  note:'&#10003; 288 cm&sup2;. Outer 30&times;24=720, &minus;432. Nested diagram correct.' },
+      { q:'Q3',  topic:'Path &amp; Frame &mdash; Path Outside (20&times;12, 2)',           lvl:'w', pass:true,  note:'&#10003; 144 m&sup2;. 24&times;16=384, &minus;240.' },
+      { q:'Q4',  topic:'Path &amp; Frame &mdash; Border INSIDE (36&times;30, 3)',          lvl:'w', pass:false, note:'&#10007; 432 (correct: 720). <strong>Direction error &mdash; inside = shrink. Same as M2 Q2.</strong>' },
+      { q:'Q5',  topic:'Path &amp; Frame &mdash; Cost Extension (30&times;18, 2, &times;150)', lvl:'w', pass:false, note:'&#10007; ฿28,700 (correct: ฿31,200). Two-step chain broke (outer dims / arithmetic).' },
+      { q:'Q6',  topic:'SimEq &#9733; &mdash; pencils/erasers',                            lvl:'m', pass:true,  note:'&#10003; $3 &amp; $5. Matching column spotted.' },
+      { q:'Q7',  topic:'SimEq &#9733; &mdash; burgers/juices',                             lvl:'m', pass:true,  note:'&#10003; $8 &amp; $5. Subtract to eliminate.' },
+      { q:'Q8',  topic:'SimEq &#9733; &mdash; books/box',                                  lvl:'m', pass:true,  note:'&#10003; 5 kg &amp; 6 kg. 3 books=15&rarr;5.' },
+      { q:'Q9',  topic:'SimEq &#9733; &mdash; stickers/cards',                             lvl:'m', pass:true,  note:'&#10003; $7 &amp; $3.' },
+      { q:'Q10', topic:'SimEq &#9733; &mdash; multiply-first (apples/mangoes)',            lvl:'m', pass:false, note:'&#10007; mango $6 &#10003; but <strong>apple left blank</strong>. Scaled correctly, didn&rsquo;t back-substitute.' },
+      { q:'Q11', topic:'Ratio &mdash; sharing (96 in 7:5)',                                lvl:'h', pass:true,  note:'&#10003; 56 &amp; 40.' },
+      { q:'Q12', topic:'Ratio &#9733;&#9733; &mdash; equalise (give away)',                lvl:'h', pass:true,  note:'&#10003; A=60, B=36. 5n&minus;12=3n+12. Strong setup.' },
+      { q:'Q13', topic:'Ratio &#9733;&#9733; &mdash; removal (4:3, remove 10)',            lvl:'h', pass:true,  note:'&#10003; 30 blue. 4n&minus;10=3n.' },
+      { q:'Q14', topic:'Ratio &#9733;&#9733; &mdash; addition (boys join, 3:2&rarr;6:5)',  lvl:'h', pass:false, note:'&#10007; blank (correct: 48). One side grows &mdash; setup didn&rsquo;t fire.' },
+      { q:'Q15', topic:'Ratio &#9733;&#9733; &mdash; both sides change (transfer)',        lvl:'h', pass:true,  note:'&#10003; Mai 63. Hardest ratio on the paper, correct.' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -94,23 +94,36 @@ var PREM_DATA = {
     { n:22, score:7,  delta:-8,  color:'linear-gradient(135deg,#EF5350,#B71C1C)',  star:false },
     { n:23, score:8,  delta:+1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
     { n:24, score:9,  delta:+1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
-    { n:25, score:12, delta:+3,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false }
+    { n:25, score:12, delta:+3,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false },
+    { n:26, score:11, delta:-1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 26,
-      badge: 'linear-gradient(135deg,#BF360C,#E65100)',
-      title: 'Consolidation &middot; Path &amp; Frame &middot; SimEq &middot; Ratio Transfer',
+      n: 27,
+      badge: 'linear-gradient(135deg,#BF360C,#1565C0)',
+      title: 'Path &amp; Frame Re-test &middot; Consecutive Integers',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Path &amp; Frame Direction', c:'tblue' },
-        { t:'L2: SimEq Match &amp; Cancel', c:'tblue' },
-        { t:'L3: Ratio Transfer Units Method', c:'tblue' }
+        { t:'L1: Path &amp; Frame &mdash; Inside &amp; Cost', c:'tblue' },
+        { t:'L2: Consecutive Integers &mdash; Middle Trick', c:'tblue' }
       ],
-      note: 'U26: the M2 trio in unfamiliar contexts &mdash; Path&amp;Frame direction (Q2 &#10007;), SimEq recognition (Q7 blank), Ratio Transfer trigger (Q12 blank). Word-Problem Pocket Map (3 moves: FRAME, MATCH &amp; CANCEL, UNITS SHIFT) as page 1 of every lesson &mdash; pattern that produced the U25 +3 jump. Standard: 12/15 overall + 4/5 per section.',
+      note: 'U27: Section A re-tests the failed U26 Path &amp; Frame topic (inside-direction + cost extension &mdash; the two misses); Sections B &amp; C introduce Consecutive Integers (middle trick for odd counts, n-method for even/even-odd, compound two-step). Two lessons (max-2 rule). Pass: Path &amp; Frame Section A &ge; 4/5; overall 12/15.',
       status: 'pending'
+    },
+    {
+      n: 26,
+      badge: 'linear-gradient(135deg,#EF5350,#C62828)',
+      title: 'Consolidation &middot; Path &amp; Frame &middot; SimEq &middot; Ratio Transfer',
+      tags: [
+        { t:'11/15 (73%) &#10145; NOT PASSED', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Sec A 3/5 &#10007; (below 4/5)', c:'torange' },
+        { t:'Sec B 4/5 &#10003;', c:'tgreen' },
+        { t:'Sec C 4/5 &#10003;', c:'tgreen' }
+      ],
+      note: 'U26: 11/15 &mdash; Section A (Path &amp; Frame) 3/5 fails the 4/5 per-section bar; B (SimEq) and C (Ratio Transfer) both 4/5 &#10003;. Every standard-form Q correct; the 4 misses are all extra-step / direction-flip variants: Q4 border INSIDE (subtract), Q5 cost extension, Q10 multiply-first SimEq (apple blank), Q14 addition ratio (blank). Big win: SimEq (M2 Q7 blank) &amp; Ratio Transfer (M2 Q12 blank) both closed &mdash; 4/5 each in fresh contexts. Path &amp; Frame direction is the lone holdout &rarr; U27 Section A re-test.',
+      status: 'done'
     },
     {
       n: 25,
@@ -467,6 +480,12 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
+      label:     'Path & Frame: INSIDE direction + Cost extension — ACTIVE — U27 Section A re-test',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U26 Sec A 3/5 (below 4/5 bar). Outside/area solid (Q1&ndash;Q3 &#10003;). Misses: Q4 border INSIDE &#10007; (wrote 432, correct 720 &mdash; forgot to shrink; same direction error as M2 Q2) and Q5 cost extension &#10007; (฿28,700 vs ฿31,200 &mdash; two-step chain broke). Recurs across M2 + U26. Fix: one focused lesson (inside = shrink, cost = area-then-&times;price) + fresh re-test. Pass &ge; 4/5.',
+      fillClass: 'g2', fillPct: 60
+    },
+    {
       label:     'Sequences: Two-Term NOVEL Pairs (T₂+T₄, T₃+T₆, T₄+T₇) — ACTIVE — last sequences gap',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
       score:     'U25: trained pair T&#8323;+T&#8325; 2/2 &#10003; (Q11 + Q15 compound &#9733;&#9733;). Novel pairs 0/3: Q5 &#10007; (no working), Q12 &#10007; T&#8323;+T&#8326;, Q13 &#10007; T&#8324;+T&#8327;. Template memorised, principle not yet general. Fix: daily 2-min oral coefficient drills on varied pairs. Re-check at M3.',
@@ -497,10 +516,10 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     },
     {
-      label:     'SimEq Two-Variable Totals — RESOLVING — equation method now solid',
-      pill:      'p2', pillText: 'Resolving &#128992;',
-      score:     'U16 SimEq Two-Variable 5/5 &#10003;: equation method with bracket expansion applied independently across all 5 problems including Q10&#9733;&#9733;. Significant improvement from U13/U14 where Assume &amp; Adjust was used. Goal achieved: equation fluency confirmed.',
-      fillClass: 'g2', fillPct: 80
+      label:     'SimEq Two-Variable / Ratio Transfer — RESOLVED in U26 (M2 blanks closed)',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'The two M2 blank gaps, both closed at U26. SimEq (M2 Q7 blank) &rarr; 4/5 across four fresh contexts (pencils, burgers, books, stickers); only the multiply-first type (Q10) left incomplete &mdash; scaled correctly, didn&rsquo;t back-substitute. Ratio Transfer (M2 Q12 blank) &rarr; 4/5 incl. the hardest conserved-total transfer (Q15 &#10003;); only the addition type (Q14) blank. Recognition now fires in unfamiliar contexts.',
+      fillClass: 'gs', fillPct: 88
     },
     {
       label:     'Geometry: frame outer/inner trap — RESOLVED in U15',
@@ -533,7 +552,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U24'
+  radarLegendUnit: 'U26'
 
 };
 
