@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ratio Transfer — The Units Method</title>
+<style>
+:root{--nav:#1565C0;--bg:#FFF8E1;--card:#fff;--acc:#E65100;--ok:#2E7D32;--err:#C62828}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#A33D00;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul,ol{padding-left:20px;margin-top:6px}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--acc);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;font-size:1.02rem;font-weight:700;margin:0 auto 10px;max-width:520px}
+.mv{border-radius:12px;padding:12px;border:3px solid;position:relative;margin-bottom:12px}
+.mv h4{font-size:.97rem;margin-bottom:5px}
+.mv p{font-size:.88rem;line-height:1.5}
+.mv-frame{background:#FFF3E8;border-color:#FF8A65}.mv-frame h4{color:#BF360C}
+.mv-match{background:#EDE7F6;border-color:#B39DDB}.mv-match h4{color:#4A148C}
+.mv-units{background:#FFF8E1;border-color:#FFD54F}.mv-units h4{color:#E65100}
+.dim{opacity:.55}
+.today::before{content:'TODAY';position:absolute;top:-11px;right:10px;background:#FFD54F;color:#5D4037;font-size:.7rem;font-weight:800;padding:2px 9px;border-radius:8px}
+.units-row{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.unit-blk{width:42px;height:30px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:#fff}
+.ub-a{background:#FB8C00}
+.ub-b{background:#1E88E5}
+.units-name{font-weight:700;font-size:.9rem;width:60px}
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid #FFE082;padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:#E65100}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.93rem;color:#E65100}
+.q-card{background:#FFFDF5;border:1.5px solid #FFE082;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #FFE082;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#FFF8E1}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#FFFBF0;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#FFF8E1;color:#E65100;border:2px solid #E65100;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#E65100;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.rule-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:8px}
+.rule-key{font-weight:700;color:#E65100;font-size:.95rem;white-space:nowrap}
+.rule-val{font-size:.93rem;color:#333}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Ratio Transfer &mdash; The Units Method</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: Word-Problem Pocket Map -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; Step 1: Your Word-Problem Map</h2>
+  <p>Last move of Unit 26. At M2 this question was left blank &mdash; not because the method is hard, but because the trigger didn't fire. After today, "a ratio that changes" will jump off the page at you.</p>
+</div>
+
+<div class="q-node">&#x1F50D; What is the question REALLY asking?</div>
+
+<div class="mv mv-frame dim">
+  <h4>&#x1F5BC;&#xFE0F; FRAME move &mdash; "a path / frame / border around something"</h4>
+  <p>&#x2B05;&#xFE0F; Trained in Lesson 1.</p>
+</div>
+<div class="mv mv-match dim">
+  <h4>&#x2696;&#xFE0F; MATCH &amp; CANCEL move &mdash; "two different shopping trips, two totals"</h4>
+  <p>&#x2B05;&#xFE0F; Trained in Lesson 2.</p>
+</div>
+<div class="mv mv-units today">
+  <h4>&#x1F504; UNITS SHIFT move &mdash; "a ratio that CHANGES after giving / removing / joining"</h4>
+  <p><strong>Trigger words:</strong> "in the ratio&hellip;", then "gives / removes / joins / adds", then a NEW situation (equal, or a new ratio).<br>
+  <strong>Method:</strong> write the ratio as UNITS of n (5:3 &rarr; 5n and 3n) &rarr; apply the change &rarr; build the equation.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start the Lesson &#8594;</button></div>
+</div>
+
+<!-- Screen 2: Units idea -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>A Ratio Is a Recipe of Equal Boxes</h2>
+  <p>"Anya and Boon have stickers in the ratio 5 : 3" means: Anya has 5 equal boxes, Boon has 3 of the SAME size boxes. We just don't know the box size yet — call it <strong>n</strong>.</p>
+  <div class="units-row"><span class="units-name">Anya</span>
+    <div class="unit-blk ub-a">n</div><div class="unit-blk ub-a">n</div><div class="unit-blk ub-a">n</div><div class="unit-blk ub-a">n</div><div class="unit-blk ub-a">n</div>
+    <span style="font-weight:700;color:#FB8C00">= 5n</span>
+  </div>
+  <div class="units-row"><span class="units-name">Boon</span>
+    <div class="unit-blk ub-b">n</div><div class="unit-blk ub-b">n</div><div class="unit-blk ub-b">n</div>
+    <span style="font-weight:700;color:#1E88E5">= 3n</span>
+  </div>
+  <p style="margin-top:8px">Find n, and you know EVERYTHING. That's the whole method.</p>
+</div>
+
+<div class="golden">
+  <div class="golden-title">&#x1F511; The Units Shift Chain</div>
+  <p><strong>1&#xFE0F;&#x20E3; Write units:</strong> ratio 5:3 &rarr; 5n and 3n<br>
+  <strong>2&#xFE0F;&#x20E3; Apply the change:</strong> gives 12 away &rarr; 5n&minus;12. Receives 12 &rarr; 3n+12. Someone joins &rarr; +. Removed &rarr; &minus;.<br>
+  <strong>3&#xFE0F;&#x20E3; Build the equation</strong> from the NEW situation: "equal" &rarr; =. "New ratio 6:5" &rarr; compare as fractions.<br>
+  <strong>4&#xFE0F;&#x20E3; Solve for n</strong> (you mastered this at U21!), then answer the ACTUAL question.<br>
+  <strong>5&#xFE0F;&#x20E3; Check</strong> the new situation with real numbers.</p>
+</div>
+
+<div class="warn-box"><p>&#x26A0; The question usually asks about the START. After solving, go back to 5n and 3n — not the after-change numbers!</p></div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: Worked examples -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Worked Examples &mdash; Three Change Types</h2>
+
+  <h3>Type 1: GIVE until equal &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">Ratio 7:3. First gives 16 to second &rarr; equal. Starting numbers?</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Units: 7n and 3n</span><span class="eq-why">&#8592; step 1, always</span></div>
+    <div class="eq-row"><span class="eq-math">Change: 7n&minus;16 and 3n+16</span><span class="eq-why">&#8592; one loses, other GAINS the same 16</span></div>
+    <div class="eq-row"><span class="eq-math">Equal: 7n&minus;16 = 3n+16</span></div>
+    <div class="eq-row"><span class="eq-math">4n = 32 &rarr; n = 8</span></div>
+    <div class="eq-row"><span class="eq-math">Start: 7&times;8 = 56 and 3&times;8 = 24</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: 56&minus;16 = 40, 24+16 = 40. Equal &#10003;</span></div>
+  </div>
+
+  <h3>Type 2: REMOVE until equal &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">Ratio 5:2. 12 removed from first &rarr; equal. How many in second?</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Units: 5n and 2n. Change: 5n&minus;12 (second unchanged!)</span><span class="eq-why">&#8592; removed = gone, nobody receives it</span></div>
+    <div class="eq-row"><span class="eq-math">5n&minus;12 = 2n &rarr; 3n = 12 &rarr; n = 4</span></div>
+    <div class="eq-row"><span class="eq-math">Second = 2&times;4 = 8</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: 20&minus;12 = 8 = 8 &#10003;</span></div>
+  </div>
+
+  <h3>Type 3: JOIN with a NEW ratio &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">Girls:boys = 4:3. 6 boys join &rarr; new ratio 8:7. How many girls?</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Units: G = 4n, B = 3n. Change: B becomes 3n+6</span></div>
+    <div class="eq-row"><span class="eq-math">New ratio: 4n / (3n+6) = 8 / 7</span><span class="eq-why">&#8592; write the new ratio as a fraction pair</span></div>
+    <div class="eq-row"><span class="eq-math">Cross-multiply: 7&times;4n = 8&times;(3n+6)</span></div>
+    <div class="eq-row"><span class="eq-math">28n = 24n + 48 &rarr; 4n = 48 &rarr; n = 12</span></div>
+    <div class="eq-row"><span class="eq-math">Girls = 4&times;12 = 48</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: boys 36+6 = 42. 48:42 = 8:7 &#10003;</span></div>
+  </div>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: Practice -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Practice</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Units &rarr; change &rarr; equation &rarr; solve n &rarr; answer the question asked &rarr; check.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; Mali and Nok share 88 baht in the ratio 6 : 5. How much does each get?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; ฿44 and ฿44</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; ฿54 and ฿34</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; ฿48 and ฿40</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; ฿42 and ฿46</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'C')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">6+5 = 11 units. 88 &divide; 11 = 8 per unit</span></div>
+      <div class="eq-row"><span class="eq-math">Mali = 48, Nok = 40. Check: 48+40 = 88 &#10003;</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; Tan and Win have marbles in the ratio 9 : 5. Tan gives 14 marbles to Win and now they have equal numbers. How many marbles did Tan START with?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 45</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 63</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 54</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; 72</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Units: 9n, 5n. Change: 9n&minus;14 = 5n+14</span></div>
+      <div class="eq-row"><span class="eq-math">4n = 28 &rarr; n = 7. Tan started with 9&times;7 = 63</span></div>
+      <div class="eq-row"><span class="eq-math">&#10003; Check: 63&minus;14 = 49, 35+14 = 49 &#10003;</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; A jar has orange and green sweets in the ratio 7 : 4. After 15 orange sweets are eaten, there are equal numbers. How many GREEN sweets are in the jar?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 35</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 28</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 15</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; 20</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'D')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Units: 7n, 4n. Eaten = removed: 7n&minus;15 = 4n</span><span class="eq-why">&#8592; green side unchanged</span></div>
+      <div class="eq-row"><span class="eq-math">3n = 15 &rarr; n = 5. Green = 4&times;5 = 20</span></div>
+      <div class="eq-row"><span class="eq-math">&#10003; Check: 35&minus;15 = 20 = 20 &#10003;</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; The ratio of girls to boys in art club is 5 : 4. After 6 more boys join, the ratio becomes 5 : 6. How many GIRLS are in the club?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 10</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 25</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; 15</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'D')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Units: G = 5n, B = 4n. Change: B &rarr; 4n+6</span></div>
+      <div class="eq-row"><span class="eq-math">New ratio: 5n / (4n+6) = 5 / 6</span></div>
+      <div class="eq-row"><span class="eq-math">Cross: 30n = 20n + 30 &rarr; 10n = 30 &rarr; n = 3</span></div>
+      <div class="eq-row"><span class="eq-math">Girls = 5&times;3 = 15. Check: boys 12+6 = 18. 15:18 = 5:6 &#10003;</span></div>
+    </div></div>
+  </div>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: Summary -->
+<div class="screen" id="s4">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; What You Learned Today</div>
+  <div class="rule-grid">
+    <span class="rule-key">The trigger:</span><span class="rule-val">A ratio + something moves (give/remove/join) + a new situation = UNITS SHIFT.</span>
+    <span class="rule-key">Step 1 always:</span><span class="rule-val">Ratio 5:3 &rarr; write 5n and 3n. The boxes are equal — that's the magic.</span>
+    <span class="rule-key">Give vs remove:</span><span class="rule-val">GIVE: one side &minus;, other side +. REMOVE/EATEN: only one side changes.</span>
+    <span class="rule-key">New ratio given:</span><span class="rule-val">Write as fractions and cross-multiply.</span>
+    <span class="rule-key">Answer the question:</span><span class="rule-val">Usually the START amount &rarr; go back to 5n, 3n.</span>
+  </div>
+</div>
+
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You are ready for the U26 test when...</h3>
+  <ul>
+    <li>You write the units (5n, 3n) before anything else</li>
+    <li>You know GIVE changes both sides but REMOVE changes one</li>
+    <li>You always check the new situation with real numbers</li>
+    <li>All three moves on the map make you say "I know which one this is!"</li>
+  </ul>
+</div>
+
+<div class="navrow">
+  <a href="SimEq_Lesson_MatchAndCancel.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#FFF8E1;color:#E65100;border:2px solid #E65100;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 2</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E65100;color:#fff;border:2px solid #E65100;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Please select an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! Units written, change applied, solved.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not quite. Write the units first (ratio 5:3 → 5n and 3n), apply the change to the right side(s), then build the equation. Click Show Steps for the full chain.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

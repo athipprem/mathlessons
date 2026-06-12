@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Path &amp; Frame — Direction Discipline</title>
+<style>
+:root{--nav:#1565C0;--nav-dark:#0D47A1;--bg:#FFF3E8;--card:#fff;--acc:#BF360C;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#8D2F0B;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul,ol{padding-left:20px;margin-top:6px}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;font-size:1.02rem;font-weight:700;margin:0 auto 10px;max-width:520px}
+.mv{border-radius:12px;padding:12px;border:3px solid;position:relative;margin-bottom:12px}
+.mv h4{font-size:.97rem;margin-bottom:5px}
+.mv p{font-size:.88rem;line-height:1.5}
+.mv-frame{background:#FFF3E8;border-color:#FF8A65}.mv-frame h4{color:#BF360C}
+.mv-match{background:#EDE7F6;border-color:#B39DDB}.mv-match h4{color:#4A148C}
+.mv-units{background:#FFF8E1;border-color:#FFD54F}.mv-units h4{color:#E65100}
+.dim{opacity:.55}
+.today::before{content:'TODAY';position:absolute;top:-11px;right:10px;background:#FFD54F;color:#5D4037;font-size:.7rem;font-weight:800;padding:2px 9px;border-radius:8px}
+.nest{position:relative;margin:14px auto;background:#FFB74D;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.nest-outer{width:300px;height:190px}
+.nest-inner{background:#81C784;border-radius:6px;width:220px;height:110px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#1B5E20;font-size:.9rem;text-align:center}
+.nest-lbl{position:absolute;top:6px;left:0;right:0;text-align:center;font-size:.82rem;font-weight:700;color:#7B3F00}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+@media(max-width:560px){.two-col{grid-template-columns:1fr}}
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid #FFCC80;padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:#BF360C}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.93rem;color:#E65100}
+.q-card{background:#FFFBF7;border:1.5px solid #FFCC80;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #FFCC80;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#FFF3E8}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#FFF8F2;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#FFF3E8;color:#BF360C;border:2px solid #BF360C;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#BF360C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.rule-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:8px}
+.rule-key{font-weight:700;color:#BF360C;font-size:.95rem;white-space:nowrap}
+.rule-val{font-size:.93rem;color:#333}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Path &amp; Frame &mdash; Direction Discipline</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: Word-Problem Pocket Map -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; Step 1: Your Word-Problem Map</h2>
+  <p>Unit 26 is about <strong>recognising which move a question wants</strong>. You already know all three methods &mdash; the M2 test showed the tricky part is spotting them in disguise. Read each trigger below. This lesson trains the move marked <strong>TODAY</strong>.</p>
+</div>
+
+<div class="q-node">&#x1F50D; What is the question REALLY asking?</div>
+
+<div class="mv mv-frame today">
+  <h4>&#x1F5BC;&#xFE0F; FRAME move &mdash; "a path / frame / border around something"</h4>
+  <p><strong>Trigger words:</strong> path around, frame, border, carpet leaving a gap.<br>
+  <strong>Method:</strong> draw TWO nested rectangles &rarr; decide OUTSIDE or INSIDE &rarr; big area &minus; small area.</p>
+</div>
+<div class="mv mv-match dim">
+  <h4>&#x2696;&#xFE0F; MATCH &amp; CANCEL move &mdash; "two different shopping trips, two totals"</h4>
+  <p><strong>Trigger:</strong> two unknown prices, two different combos with totals.<br>&#x27A1;&#xFE0F; Trained in Lesson 2.</p>
+</div>
+<div class="mv mv-units dim">
+  <h4>&#x1F504; UNITS SHIFT move &mdash; "a ratio that CHANGES after giving / removing / joining"</h4>
+  <p><strong>Trigger:</strong> ratio given, then something moves, new situation described.<br>&#x27A1;&#xFE0F; Trained in Lesson 3.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start the Lesson &#8594;</button></div>
+</div>
+
+<!-- Screen 2: The Direction Rule -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>The ONE Question That Decides Everything</h2>
+  <p>Every frame question has two rectangles, one inside the other. Before touching any numbers, ask: <strong>is the border OUTSIDE the shape, or INSIDE it?</strong></p>
+</div>
+
+<div class="two-col">
+  <div class="card" style="margin:0">
+    <h3>&#x2795; Border OUTSIDE (path around a pool)</h3>
+    <div class="nest nest-outer" style="width:100%;max-width:280px;height:170px">
+      <span class="nest-lbl">OUTER = pool + path</span>
+      <div class="nest-inner" style="width:65%;height:55%">POOL<br>(given size)</div>
+    </div>
+    <p style="font-size:.9rem"><strong>The GIVEN shape is the small one.</strong><br>Outer length = given + 2&times;width<br>Outer width &nbsp;= given + 2&times;width</p>
+  </div>
+  <div class="card" style="margin:0">
+    <h3>&#x2796; Border INSIDE (carpet in a room)</h3>
+    <div class="nest nest-outer" style="width:100%;max-width:280px;height:170px">
+      <span class="nest-lbl">ROOM = given size</span>
+      <div class="nest-inner" style="width:65%;height:55%">CARPET<br>(find this)</div>
+    </div>
+    <p style="font-size:.9rem"><strong>The GIVEN shape is the big one.</strong><br>Inner length = given &minus; 2&times;width<br>Inner width &nbsp;= given &minus; 2&times;width</p>
+  </div>
+</div>
+
+<div class="golden" style="margin-top:14px">
+  <div class="golden-title">&#x1F511; Why 2&times; and not 1&times;?</div>
+  <p>The border sits on <strong>BOTH sides</strong> of the shape &mdash; left AND right, top AND bottom. A 3 m border changes each dimension by <strong>6 m</strong>, never 3.</p>
+</div>
+
+<div class="warn-box">
+  <p>&#x274C; <strong>The M2 mistake:</strong> the question said the frame was around the OUTSIDE, but the working ADDED when it should have compared correctly &mdash; direction flipped. The nested diagram makes the direction impossible to flip: draw it first, every time.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: Worked Examples -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Worked Examples &mdash; All Three Flavours</h2>
+
+  <h3>Example 1 &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">Photo 20&times;14 cm, frame 2 cm wide around it. Frame area?</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Draw: photo INSIDE, frame OUTSIDE &rarr; ADD direction</span><span class="eq-why">&#8592; diagram first!</span></div>
+    <div class="eq-row"><span class="eq-math">Outer: (20+4) &times; (14+4) = 24 &times; 18 = 432</span><span class="eq-why">&#8592; +4 because 2 cm on BOTH sides</span></div>
+    <div class="eq-row"><span class="eq-math">Photo: 20 &times; 14 = 280</span></div>
+    <div class="eq-row"><span class="eq-math">Frame = 432 &minus; 280 = 152 cm&sup2;</span><span class="eq-why">&#8592; big minus small</span></div>
+  </div>
+
+  <h3>Example 2 &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">Room 32&times;26 m, carpet leaves a 2 m border inside. Carpet area?</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Draw: room is the BIG one, carpet INSIDE &rarr; SUBTRACT direction</span></div>
+    <div class="eq-row"><span class="eq-math">Carpet: (32&minus;4) &times; (26&minus;4) = 28 &times; 22 = 616 m&sup2;</span><span class="eq-why">&#8592; &minus;4 because 2 m on BOTH sides</span></div>
+  </div>
+
+  <h3>Example 3 &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">Garden 25&times;15 m, path 2 m around outside, ฿120 per m&sup2;. Cost?</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Outer: (25+4) &times; (15+4) = 29 &times; 19 = 551</span></div>
+    <div class="eq-row"><span class="eq-math">Garden: 25 &times; 15 = 375</span></div>
+    <div class="eq-row"><span class="eq-math">Path = 551 &minus; 375 = 176 m&sup2;</span></div>
+    <div class="eq-row"><span class="eq-math">Cost = 176 &times; 120 = ฿21,120</span><span class="eq-why">&#8592; area FIRST, money LAST</span></div>
+  </div>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: Practice -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Practice</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Draw the nested diagram FIRST. Decide: outside (+) or inside (&minus;)? Then big &minus; small.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; A picture is 16 cm &times; 10 cm. A frame 2 cm wide goes around the outside. What is the area of the frame only?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 92 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 120 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 160 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; 280 cm&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Outside &rarr; ADD: outer = (16+4)&times;(10+4) = 20&times;14 = 280</span></div>
+      <div class="eq-row"><span class="eq-math">Picture = 160. Frame = 280 &minus; 160 = 120 cm&sup2;</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; A pond is 18 m &times; 10 m. A path 3 m wide is built all the way around the outside. What is the area of the path?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 84 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 144 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 204 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; 384 m&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Outer = (18+6)&times;(10+6) = 24&times;16 = 384</span><span class="eq-why">&#8592; 3 m on both sides = +6</span></div>
+      <div class="eq-row"><span class="eq-math">Pond = 180. Path = 384 &minus; 180 = 204 m&sup2;</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; A hall floor is 30 m &times; 24 m. A mat covers the middle, leaving a bare border 2 m wide all around inside. What is the area of the mat?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 520 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 560 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 616 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; 720 m&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Border INSIDE &rarr; SUBTRACT: mat = (30&minus;4)&times;(24&minus;4)</span></div>
+      <div class="eq-row"><span class="eq-math">= 26 &times; 20 = 520 m&sup2;</span><span class="eq-why">&#8592; given shape was the BIG one</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; A vegetable patch is 22 m &times; 14 m. A gravel path 1 m wide goes around the outside. Gravel costs ฿200 per square metre. What does the path cost?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; ฿14,800</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; ฿15,200</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; ฿16,000</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; ฿76,800</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Outer = (22+2)&times;(14+2) = 24&times;16 = 384</span></div>
+      <div class="eq-row"><span class="eq-math">Patch = 308. Path = 384 &minus; 308 = 76 m&sup2;</span></div>
+      <div class="eq-row"><span class="eq-math">Cost = 76 &times; 200 = ฿15,200</span></div>
+    </div></div>
+  </div>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: Summary -->
+<div class="screen" id="s4">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; What You Learned Today</div>
+  <div class="rule-grid">
+    <span class="rule-key">Draw first:</span><span class="rule-val">Two nested rectangles, before any numbers. Always.</span>
+    <span class="rule-key">Outside border:</span><span class="rule-val">Given shape is SMALL &rarr; outer = given + 2&times;width each way.</span>
+    <span class="rule-key">Inside border:</span><span class="rule-val">Given shape is BIG &rarr; inner = given &minus; 2&times;width each way.</span>
+    <span class="rule-key">Always 2&times;:</span><span class="rule-val">The border is on BOTH sides of every dimension.</span>
+    <span class="rule-key">Frame area:</span><span class="rule-val">BIG area &minus; small area. Then cost = area &times; price.</span>
+  </div>
+</div>
+
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You are ready when...</h3>
+  <ul>
+    <li>You draw the nested diagram before calculating &mdash; every single time</li>
+    <li>You can say OUT LOUD whether the given shape is the big one or the small one</li>
+    <li>You never add or subtract just 1&times; the border width</li>
+  </ul>
+</div>
+
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#FFF3E8;color:#BF360C;border:2px solid #BF360C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Hub</a>
+  <a href="SimEq_Lesson_MatchAndCancel.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#BF360C;color:#fff;border:2px solid #BF360C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 2 &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Please select an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! Diagram discipline pays off.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not quite. Draw the nested rectangles: is the given shape the BIG one or the small one? Remember 2× the border width. Click Show Steps for the full method.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

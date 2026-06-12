@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SimEq — Match &amp; Cancel</title>
+<style>
+:root{--nav:#1565C0;--bg:#EDE7F6;--card:#fff;--acc:#4A148C;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#38106B;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul,ol{padding-left:20px;margin-top:6px}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;font-size:1.02rem;font-weight:700;margin:0 auto 10px;max-width:520px}
+.mv{border-radius:12px;padding:12px;border:3px solid;position:relative;margin-bottom:12px}
+.mv h4{font-size:.97rem;margin-bottom:5px}
+.mv p{font-size:.88rem;line-height:1.5}
+.mv-frame{background:#FFF3E8;border-color:#FF8A65}.mv-frame h4{color:#BF360C}
+.mv-match{background:#EDE7F6;border-color:#B39DDB}.mv-match h4{color:#4A148C}
+.mv-units{background:#FFF8E1;border-color:#FFD54F}.mv-units h4{color:#E65100}
+.dim{opacity:.55}
+.today::before{content:'TODAY';position:absolute;top:-11px;right:10px;background:#FFD54F;color:#5D4037;font-size:.7rem;font-weight:800;padding:2px 9px;border-radius:8px}
+.receipt{background:#FAF7FF;border:2px dashed #B39DDB;border-radius:10px;padding:12px 16px;margin-bottom:10px;font-family:'Courier New',monospace;font-size:.95rem}
+.receipt .rt{font-weight:700;color:#4A148C;border-bottom:1px dashed #B39DDB;padding-bottom:4px;margin-bottom:6px;font-family:'Segoe UI',Arial,sans-serif}
+.hl-same{background:#E8F5E9;border-radius:4px;padding:0 4px}
+.hl-diff{background:#FFEBEE;border-radius:4px;padding:0 4px}
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid #D1C4E9;padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:#4A148C}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.93rem;color:#E65100}
+.q-card{background:#FBFAFF;border:1.5px solid #D1C4E9;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #D1C4E9;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#EDE7F6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#F7F4FD;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#EDE7F6;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#4A148C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.rule-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:8px}
+.rule-key{font-weight:700;color:#4A148C;font-size:.95rem;white-space:nowrap}
+.rule-val{font-size:.93rem;color:#333}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">SimEq &mdash; Match &amp; Cancel</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: Word-Problem Pocket Map -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; Step 1: Your Word-Problem Map</h2>
+  <p>Same map as Lesson 1 &mdash; new TODAY move. At M2 you knew this method but skipped the question because you didn't <strong>recognise</strong> it. Today we fix the trigger.</p>
+</div>
+
+<div class="q-node">&#x1F50D; What is the question REALLY asking?</div>
+
+<div class="mv mv-frame dim">
+  <h4>&#x1F5BC;&#xFE0F; FRAME move &mdash; "a path / frame / border around something"</h4>
+  <p>&#x2B05;&#xFE0F; Trained in Lesson 1.</p>
+</div>
+<div class="mv mv-match today">
+  <h4>&#x2696;&#xFE0F; MATCH &amp; CANCEL move &mdash; "two different shopping trips, two totals"</h4>
+  <p><strong>Trigger words:</strong> two kinds of things with unknown prices/weights, bought in two different combos, two totals given.<br>
+  <strong>Method:</strong> write both lines up. Find the MATCHING part. Subtract &rarr; the matching part cancels &rarr; one unknown left.</p>
+</div>
+<div class="mv mv-units dim">
+  <h4>&#x1F504; UNITS SHIFT move &mdash; "a ratio that CHANGES after giving / removing / joining"</h4>
+  <p>&#x27A1;&#xFE0F; Trained in Lesson 3.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start the Lesson &#8594;</button></div>
+</div>
+
+<!-- Screen 2: The Idea -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>Two Receipts, One Trick</h2>
+  <p style="margin-bottom:12px">A shop sells pens and rulers but lost the price list. We only have two receipts:</p>
+  <div class="receipt"><div class="rt">&#x1F9FE; Receipt 1</div><span class="hl-same">2 pens</span> + <span class="hl-diff">1 ruler</span> &nbsp;= ฿11</div>
+  <div class="receipt"><div class="rt">&#x1F9FE; Receipt 2</div><span class="hl-same">2 pens</span> + <span class="hl-diff">3 rulers</span> = ฿21</div>
+  <p style="margin-top:10px">Look at the <span class="hl-same">green parts</span> — they MATCH. Both receipts have exactly 2 pens. So any difference in price must come from the <span class="hl-diff">red parts</span>!</p>
+</div>
+
+<div class="card">
+  <h3>Subtract the receipts</h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Receipt 2 &minus; Receipt 1:</span><span class="eq-why">&#8592; big one first</span></div>
+    <div class="eq-row"><span class="eq-math">(2 pens + 3 rulers) &minus; (2 pens + 1 ruler) = 21 &minus; 11</span></div>
+    <div class="eq-row"><span class="eq-math">2 pens cancel &rarr; 2 rulers = ฿10 &rarr; 1 ruler = ฿5</span><span class="eq-why">&#8592; the matching part vanishes!</span></div>
+    <div class="eq-row"><span class="eq-math">Back into Receipt 1: 2 pens + 5 = 11 &rarr; 2 pens = 6 &rarr; pen = ฿3</span><span class="eq-why">&#8592; substitute to find the other</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check Receipt 2: 6 + 15 = 21 &#10003;</span></div>
+  </div>
+</div>
+
+<div class="golden">
+  <div class="golden-title">&#x1F511; The Match &amp; Cancel Chain</div>
+  <p><strong>1&#xFE0F;&#x20E3; Line up</strong> the two facts &nbsp;<strong>2&#xFE0F;&#x20E3; Find the match</strong> &nbsp;<strong>3&#xFE0F;&#x20E3; Subtract</strong> (match cancels) &nbsp;<strong>4&#xFE0F;&#x20E3; Solve</strong> the one left &nbsp;<strong>5&#xFE0F;&#x20E3; Substitute</strong> back &nbsp;<strong>6&#xFE0F;&#x20E3; Check</strong> with the other receipt.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: When nothing matches -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>What If Nothing Matches? Make a Match!</h2>
+  <p style="margin-bottom:10px">3 pads + 2 pens = ฿24 &nbsp;&nbsp;and&nbsp;&nbsp; 6 pads + 5 pens = ฿51. No matching part&hellip; yet.</p>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">DOUBLE the first receipt: 6 pads + 4 pens = ฿48</span><span class="eq-why">&#8592; everything ×2, total too!</span></div>
+    <div class="eq-row"><span class="eq-math">Now pads match: (6 pads + 5 pens) &minus; (6 pads + 4 pens) = 51 &minus; 48</span></div>
+    <div class="eq-row"><span class="eq-math">1 pen = ฿3</span></div>
+    <div class="eq-row"><span class="eq-math">Back in: 3 pads + 6 = 24 &rarr; pad = ฿6</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: 6&times;6 + 5&times;3 = 36 + 15 = 51 &#10003;</span></div>
+  </div>
+  <div class="warn-box"><p>&#x26A0; When you multiply a receipt, multiply <strong>EVERYTHING</strong> — every item AND the total. Forgetting the total is the classic slip.</p></div>
+</div>
+
+<div class="card">
+  <h3>Second worked example (same-first-item type)</h3>
+  <p style="margin-bottom:6px;font-size:.92rem;color:#555">4 cookies + 2 milks = ฿26. &nbsp;1 cookie + 2 milks = ฿14.</p>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Milks match (2 = 2). Subtract: 3 cookies = 12 &rarr; cookie = ฿4</span></div>
+    <div class="eq-row"><span class="eq-math">1&times;4 + 2 milks = 14 &rarr; 2 milks = 10 &rarr; milk = ฿5</span></div>
+    <div class="eq-row"><span class="eq-math">&#10003; Check: 16 + 10 = 26 &#10003;</span></div>
+  </div>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: Practice -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Practice</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Line up &rarr; match &rarr; subtract &rarr; solve &rarr; substitute &rarr; check.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; 5 buns and 2 teas cost ฿31. 3 buns and 2 teas cost ฿21. Find the price of one bun and one tea.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; bun ฿4, tea ฿6</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; bun ฿5, tea ฿3</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; bun ฿6, tea ฿2</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; bun ฿3, tea ฿8</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Teas match. Subtract: 2 buns = 10 &rarr; bun = ฿5</span></div>
+      <div class="eq-row"><span class="eq-math">3&times;5 + 2 teas = 21 &rarr; 2 teas = 6 &rarr; tea = ฿3</span></div>
+      <div class="eq-row"><span class="eq-math">&#10003; Check: 25 + 6 = 31 &#10003;</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; A cap and 3 pairs of socks cost ฿19. The same cap and 5 pairs of socks cost ฿27. Find the price of one pair of socks and the cap.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; socks ฿4, cap ฿7</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; socks ฿3, cap ฿10</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; socks ฿5, cap ฿4</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; socks ฿4, cap ฿9</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Caps match. Subtract: 2 socks = 8 &rarr; socks = ฿4</span></div>
+      <div class="eq-row"><span class="eq-math">cap + 12 = 19 &rarr; cap = ฿7</span></div>
+      <div class="eq-row"><span class="eq-math">&#10003; Check: 7 + 20 = 27 &#10003;</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; A toy with 4 batteries costs ฿22. The same toy with 9 batteries costs ฿37. Find the price of one battery and the toy.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; battery ฿3, toy ฿10</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; battery ฿4, toy ฿6</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; battery ฿2, toy ฿14</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; battery ฿5, toy ฿2</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Toys match. Subtract: 5 batteries = 15 &rarr; battery = ฿3</span></div>
+      <div class="eq-row"><span class="eq-math">toy + 12 = 22 &rarr; toy = ฿10</span></div>
+      <div class="eq-row"><span class="eq-math">&#10003; Check: 10 + 27 = 37 &#10003;</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; 2 kiwis and 3 plums cost ฿18. 4 kiwis and 5 plums cost ฿34. Find the price of one kiwi and one plum. (Nothing matches — make a match first!)</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; kiwi ฿3, plum ฿4</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; kiwi ฿5, plum ฿3</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; kiwi ฿6, plum ฿2</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; kiwi ฿4, plum ฿3</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'C')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Double receipt 1: 4 kiwis + 6 plums = ฿36</span><span class="eq-why">&#8592; total doubles too!</span></div>
+      <div class="eq-row"><span class="eq-math">Subtract receipt 2: (4k+6p) &minus; (4k+5p) = 36 &minus; 34 &rarr; plum = ฿2</span></div>
+      <div class="eq-row"><span class="eq-math">2 kiwis + 6 = 18 &rarr; kiwi = ฿6</span></div>
+      <div class="eq-row"><span class="eq-math">&#10003; Check: 24 + 10 = 34 &#10003;</span></div>
+    </div></div>
+  </div>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: Summary -->
+<div class="screen" id="s4">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; What You Learned Today</div>
+  <div class="rule-grid">
+    <span class="rule-key">The trigger:</span><span class="rule-val">Two unknown prices + two different combos + two totals = MATCH &amp; CANCEL.</span>
+    <span class="rule-key">The chain:</span><span class="rule-val">Line up &rarr; match &rarr; subtract &rarr; solve &rarr; substitute &rarr; check.</span>
+    <span class="rule-key">No match?</span><span class="rule-val">Multiply one receipt (EVERYTHING, including the total) until something matches.</span>
+    <span class="rule-key">Always check:</span><span class="rule-val">Put both prices back into the OTHER receipt.</span>
+  </div>
+</div>
+
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You are ready when...</h3>
+  <ul>
+    <li>You can spot the matching part in 5 seconds</li>
+    <li>You remember the total when doubling a receipt</li>
+    <li>You always substitute back to find the second unknown</li>
+  </ul>
+</div>
+
+<div class="navrow">
+  <a href="PathFrame_Lesson_DirectionDiscipline.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#EDE7F6;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="RatioTransfer_Lesson_UnitsMethod.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#4A148C;color:#fff;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 3 &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Please select an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! Match found, cancelled, solved.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not quite. Find the part that MATCHES in both lines, subtract, and solve what is left. No match? Double one receipt first. Click Show Steps for the full chain.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

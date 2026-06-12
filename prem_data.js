@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '11 Jun 2026',
+  updated:        '12 Jun 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:25, topic:'Sequences — +1 Rule Lock · Two-Term Harder · Inequality Drill', status:'In Progress' },
+  currentUnit: { n:26, topic:'Consolidation — Path & Frame · SimEq · Ratio Transfer', status:'In Progress' },
   lastUnit: {
-    n:24, score:9, outOf:15, pct:60, delta:+1, prevScore:8,
-    patternLabel: 'U24 Gap Analysis',
-    patternInsight: '9/15 (60%) &mdash; Sec A 4/5: Q3 &#10007; decreasing arithmetic slip. <strong>Q10 &#10003; BREAKTHROUGH &mdash; first correct Find n ever</strong> (Gap Method Distance&divide;d+1 landed). Q11 off-by-one (forgot +1). Q12 &#10003; two-term simple. Q13 &#10007; T&#8323;+T&#8326; wrong coefficient. Q14 &#10007; back-calc T&#8321; used n&times;d not (n&minus;1)d. Q15 &#10007; compound. U25: lock +1 rule + harder two-term variants.',
-    analysisLabel: 'Next: U25 Sequences &mdash; +1 Rule Lock',
-    analysisInsight: 'U24 breakthrough: Q10 Find n correct for first time. Gap method landed. Remaining wall: +1 rule inconsistent (Q11 off-by-one), two-term harder variants failing (T&#8323;+T&#8326;, T&#8323;+T&#8325;), back-calc T&#8321; using n&times;d. U25 stays on sequences. L1: dots-vs-gaps visual to lock +1. L2: coefficient table for harder two-term. Mastery standard: 12/15 + formula in working.',
-    qSummary: 'Sec A 4/5 (Q3 &#10007; decreasing slip) | Q6 Q7 Q8 &#10003; | <strong>Q10 &#10003; BREAKTHROUGH Find n</strong> | Q9 Q11 off-by-one | Q12 &#10003; simple two-term | Q13 Q14 Q15 &#10007;',
+    n:25, score:12, outOf:15, pct:80, delta:+3, prevScore:9,
+    patternLabel: 'U25 Breakthrough Analysis',
+    patternInsight: '12/15 (80%) &#127775; <strong>PASSED &mdash; biggest jump of the sequences arc (+3)</strong>. Sec B 5/5 PERFECT: Find n 3/3 with +1 rule applied, Q9 boundary trap avoided (T&#8321;&#8324;=100 excluded), Q10 last-above-zero &#10003;. Back-calc T&#8321; fixed (Q3 + Q14 both &#10003; with (n&minus;1)d). Zero term-listing on paper &mdash; first time ever. Misses: Q5, Q12, Q13 &mdash; all two-term sums with NOVEL position pairs.',
+    analysisLabel: 'Next: U26 Consolidation &mdash; Path & Frame · SimEq · Ratio Transfer',
+    analysisInsight: 'Sequences arc closed after 4 tests (7&rarr;8&rarr;9&rarr;12). Pocket Map (decision tree as lesson page 1) credited for the leap. Remaining narrow gap: two-term with novel pairs (T&#8322;+T&#8324;, T&#8323;+T&#8326;, T&#8324;+T&#8327; all &#10007;; trained T&#8323;+T&#8325; 2/2 &#10003; incl. compound) &mdash; daily coefficient drills + M3 re-check. U26 targets the M2 trio: Path&amp;Frame direction, SimEq recognition, Ratio Transfer trigger &mdash; all in unfamiliar contexts. Standard: 12/15 + 4/5 per section.',
+    qSummary: 'Sec A 4/5 (Q5 &#10007; no working) | <strong>Sec B 5/5 PERFECT &#127775;</strong> | Sec C 3/5: Q11 Q14 Q15 &#10003; | Q12 Q13 novel-pair &#10007;',
     qBreakdown: [
-      { q:'Q1',  topic:'Sequences &mdash; Direct (a=2,d=7,T&#8321;&#8321;)',                    lvl:'w', pass:true,  note:'&#10003; 72.' },
-      { q:'Q2',  topic:'Sequences &mdash; Direct (a=9,d=5,T&#8321;&#8323;)',                    lvl:'w', pass:true,  note:'&#10003; 69.' },
-      { q:'Q3',  topic:'Sequences &mdash; Decreasing (a=80,d=&minus;4,T&#8321;&#8327;)',        lvl:'w', pass:false, note:'&#10007; 26 (correct: 16). Miscounted multiplier.' },
-      { q:'Q4',  topic:'Sequences &mdash; Pattern (5,11,17,...,T&#8321;&#8325;)',               lvl:'w', pass:true,  note:'&#10003; 89. d=6 correct.' },
-      { q:'Q5',  topic:'Sequences &mdash; Large n (a=3,d=8,T&#8323;&#8320;)',                  lvl:'w', pass:true,  note:'&#10003; 235.' },
-      { q:'Q6',  topic:'Sequences &#9733; &mdash; Find d,T&#8321; (T&#8323;=26,T&#8327;=46)',  lvl:'m', pass:true,  note:'&#10003; d=5, T&#8321;=16. Gap method correct.' },
-      { q:'Q7',  topic:'Sequences &#9733; &mdash; Find d,T&#8321;,T&#8321;&#8325;',           lvl:'m', pass:true,  note:'&#10003; d=5, T&#8321;=17, T&#8321;&#8325;=87. All correct.' },
-      { q:'Q8',  topic:'Sequences &#9733; &mdash; First exceeding 100',                         lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8324;. Inequality solid.' },
-      { q:'Q9',  topic:'Sequences &#9733; &mdash; Last above zero (75,68,61...)',               lvl:'m', pass:false, note:'&#10007; T&#8321;&#8322; (correct: T&#8321;&#8321;). Off-by-one in inequality direction.' },
-      { q:'Q10', topic:'Sequences &#9733; &mdash; Find n (a=3,d=6,T&#8345;=75)',               lvl:'m', pass:true,  note:'&#10003; <strong>BREAKTHROUGH!</strong> n=13. Gap method landed.' },
-      { q:'Q11', topic:'Sequences &#9733; &mdash; Find n (a=5,d=4,T&#8345;=69)',               lvl:'m', pass:false, note:'&#10007; Got 16 (correct: 17). Forgot +1.' },
-      { q:'Q12', topic:'Sequences &#9733; &mdash; Two-term sum (d=6,T&#8322;+T&#8324;=54)',    lvl:'m', pass:true,  note:'&#10003; a=15. Simple two-term correct.' },
-      { q:'Q13', topic:'Sequences &#9733; &mdash; Two-term sum (d=5,T&#8323;+T&#8326;=57)',    lvl:'m', pass:false, note:'&#10007; a=4 (correct: 11). Wrong coefficient &mdash; used n&times;d not (n&minus;1)d.' },
-      { q:'Q14', topic:'Sequences &#9733;&#9733; &mdash; Back-calc T&#8321; from T&#8324;=29', lvl:'h', pass:false, note:'&#10007; T&#8321;=5 (correct: 11). Used a+4d=29 instead of a+3d=29.' },
-      { q:'Q15', topic:'Sequences &#9733;&#9733; &mdash; T&#8323;+T&#8325;=70, find a+T&#8322;&#8320;', lvl:'h', pass:false, note:'&#10007; a=7 (correct: 17). Wrong setup cascade. Wrote &ldquo;Idk a??? why&rdquo;.' }
+      { q:'Q1',  topic:'Sequences &mdash; Direct (a=6,d=9,T&#8321;&#8324;)',                    lvl:'w', pass:true,  note:'&#10003; 123. 13&times;9 &mdash; (n&minus;1) multiplier correct.' },
+      { q:'Q2',  topic:'Sequences &mdash; Decreasing (a=48,d=&minus;3,T&#8321;&#8323;)',        lvl:'w', pass:true,  note:'&#10003; 12. Negative d clean.' },
+      { q:'Q3',  topic:'Sequences &mdash; Find d,T&#8321; (T&#8324;=19,T&#8328;=35)',          lvl:'w', pass:true,  note:'&#10003; d=4, T&#8321;=7. <strong>Used a+3d &mdash; the old n&times;d error is GONE.</strong>' },
+      { q:'Q4',  topic:'Sequences &mdash; Large n (a=5,d=7,T&#8322;&#8320;)',                  lvl:'w', pass:true,  note:'&#10003; 138.' },
+      { q:'Q5',  topic:'Sequences &mdash; Two-term simple (T&#8322;+T&#8324;=50,d=6)',          lvl:'w', pass:false, note:'&#10007; 8 (correct: 13). NO working shown &mdash; only blank-working question, only Sec A miss.' },
+      { q:'Q6',  topic:'Sequences &#9733; &mdash; Find n (a=4,d=5,=64)',                       lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8323;. 60&divide;5=12, +1 &#10003;' },
+      { q:'Q7',  topic:'Sequences &#9733; &mdash; Find n (a=8,d=6,=92)',                       lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8325;. 84&divide;6=14, +1 &#10003;' },
+      { q:'Q8',  topic:'Sequences &#9733; &mdash; Find n (a=3,d=11,=113)',                     lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8321;. <strong>Find n 3/3 &mdash; the U22&ndash;U23 wall is gone.</strong>' },
+      { q:'Q9',  topic:'Sequences &#9733; &mdash; First exceeding 100 (trap)',                  lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8325;. Avoided T&#8321;&#8324;=100 trap &mdash; exactly-on-boundary excluded.' },
+      { q:'Q10', topic:'Sequences &#9733; &mdash; Last above zero (a=84,d=&minus;9)',           lvl:'m', pass:true,  note:'&#10003; T&#8321;&#8320;. U24&rsquo;s exact miss type &mdash; fixed.' },
+      { q:'Q11', topic:'Sequences &#9733;&#9733; &mdash; Two-term T&#8323;+T&#8325;=64',       lvl:'h', pass:true,  note:'&#10003; a=17. Trained pair solid.' },
+      { q:'Q12', topic:'Sequences &#9733;&#9733; &mdash; Two-term T&#8323;+T&#8326;=78',       lvl:'h', pass:false, note:'&#10007; 8 (correct: 18). Novel pair &mdash; coefficient setup broke.' },
+      { q:'Q13', topic:'Sequences &#9733;&#9733; &mdash; Two-term T&#8324;+T&#8327;=90',       lvl:'h', pass:false, note:'&#10007; 14 (correct: 27). Same novel-pair setup confusion.' },
+      { q:'Q14', topic:'Sequences &#9733;&#9733; &mdash; Back-calc T&#8321; (T&#8324;=31,d=4)', lvl:'h', pass:true,  note:'&#10003; T&#8321;=19, T&#8321;&#8322;=63. <strong>The three-test error, resolved.</strong>' },
+      { q:'Q15', topic:'Sequences &#9733;&#9733; &mdash; T&#8323;+T&#8325;=80, find a+T&#8321;&#8325;', lvl:'h', pass:true, note:'&#10003; a=22, T&#8321;&#8325;=106. Hardest question, full chain correct.' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -93,22 +93,38 @@ var PREM_DATA = {
     { n:21, score:15, delta:+3,  color:'linear-gradient(135deg,#FFD700,#FFA500)',  star:true  },
     { n:22, score:7,  delta:-8,  color:'linear-gradient(135deg,#EF5350,#B71C1C)',  star:false },
     { n:23, score:8,  delta:+1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
-    { n:24, score:9,  delta:+1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false }
+    { n:24, score:9,  delta:+1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
+    { n:25, score:12, delta:+3,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 25,
-      badge: 'linear-gradient(135deg,#1565C0,#0D47A1)',
-      title: 'Sequences &middot; +1 Rule Lock &middot; Two-Term Harder',
+      n: 26,
+      badge: 'linear-gradient(135deg,#BF360C,#E65100)',
+      title: 'Consolidation &middot; Path &amp; Frame &middot; SimEq &middot; Ratio Transfer',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: +1 Rule Lock (Dots vs Gaps)', c:'tblue' },
-        { t:'L2: Two-Term Harder Variants', c:'tblue' }
+        { t:'L1: Path &amp; Frame Direction', c:'tblue' },
+        { t:'L2: SimEq Match &amp; Cancel', c:'tblue' },
+        { t:'L3: Ratio Transfer Units Method', c:'tblue' }
       ],
-      note: 'U25: Sequences stay. L1 locks the +1 rule with dots-vs-gaps visual &mdash; both Find n and last-above-zero. L2 introduces coefficient table (T&#8323;=a+2d, T&#8326;=a+5d) for harder two-term types. Also drills back-calc T&#8321; using (n&minus;1)d. Mastery: 12/15 + formula in working.',
+      note: 'U26: the M2 trio in unfamiliar contexts &mdash; Path&amp;Frame direction (Q2 &#10007;), SimEq recognition (Q7 blank), Ratio Transfer trigger (Q12 blank). Word-Problem Pocket Map (3 moves: FRAME, MATCH &amp; CANCEL, UNITS SHIFT) as page 1 of every lesson &mdash; pattern that produced the U25 +3 jump. Standard: 12/15 overall + 4/5 per section.',
       status: 'pending'
+    },
+    {
+      n: 25,
+      badge: 'linear-gradient(135deg,#43e97b,#38f9d7)',
+      title: 'Sequences &middot; +1 Rule Lock &middot; Two-Term Harder',
+      tags: [
+        { t:'12/15 (80%) &#11014; PASSED', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'<strong>Sec B 5/5 PERFECT</strong>', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Find n 3/3 &#10003;', c:'tgreen' },
+        { t:'Back-calc fixed &#10003;', c:'tgreen' },
+        { t:'Q12 Q13 novel pairs &#10007;', c:'torange' }
+      ],
+      note: '12/15 (80%) &#127775; PASSED &mdash; sequences arc closed (7&rarr;8&rarr;9&rarr;12). Sec B 5/5: Find n 3/3 with +1 rule, Q9 trap avoided, Q10 &#10003;. Back-calc T&#8321; fixed (Q3+Q14). Zero listing &mdash; first time ever. Misses: Q5 (no working), Q12/Q13 (novel two-term pairs T&#8323;+T&#8326;, T&#8324;+T&#8327;; trained T&#8323;+T&#8325; 2/2 &#10003;). Pocket Map credited. Daily coefficient drills + M3 re-check.',
+      status: 'done'
     },
     {
       n: 24,
@@ -451,22 +467,22 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'Sequences: Find n (+1 Rule) — IMPROVING — Q10 breakthrough; +1 still inconsistent',
-      pill:      'p2', pillText: 'Improving &#128992;',
-      score:     'U22 Q10 Q11 blank. U23 Q10 Q11 blank. U24: <strong>Q10 &#10003; BREAKTHROUGH</strong> (n=13 correct for first time). Q11 &#10007; forgot +1 (got 16 not 17). Q9 &#10007; inequality off-by-one. Gap method is landing &mdash; +1 step not yet automatic. U25 L1 locks with dots-vs-gaps visual.',
-      fillClass: 'g2', fillPct: 30
-    },
-    {
-      label:     'Sequences: Two-Term Harder Variants (T₃+T₆, T₃+T₅) — ACTIVE — coefficient errors',
+      label:     'Sequences: Two-Term NOVEL Pairs (T₂+T₄, T₃+T₆, T₄+T₇) — ACTIVE — last sequences gap',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U24 Q12 &#10003; simple type (T&#8322;+T&#8324;) correct. Q13 &#10007; T&#8323;+T&#8326; wrong coefficient (used n&times;d not (n&minus;1)d). Q15 &#10007; compound type. Core issue: Tₙ = a+(n&minus;1)d expansion. U25 L2 coefficient table: T&#8323;=a+2d, T&#8326;=a+5d, T&#8327;=a+6d.',
-      fillClass: 'g1', fillPct: 15
+      score:     'U25: trained pair T&#8323;+T&#8325; 2/2 &#10003; (Q11 + Q15 compound &#9733;&#9733;). Novel pairs 0/3: Q5 &#10007; (no working), Q12 &#10007; T&#8323;+T&#8326;, Q13 &#10007; T&#8324;+T&#8327;. Template memorised, principle not yet general. Fix: daily 2-min oral coefficient drills on varied pairs. Re-check at M3.',
+      fillClass: 'g2', fillPct: 55
     },
     {
-      label:     'Sequences: Jump-Count Precision — IMPROVING — U23 Q6-Q9 all correct',
-      pill:      'p2', pillText: 'Improving &#128992;',
-      score:     'U22 Q6 Q7 Q13 wrong T&#8321;. U23 Q6 Q7 Q8 Q9 all &#10003; &mdash; d, T&#8321;, T&#8345; and inequality types correct. Gap method firing reliably now. Significant improvement from U22. Jump-count errors resolved when problem type is gap-method framed.',
-      fillClass: 'g2', fillPct: 65
+      label:     'Sequences: Find n (+1 Rule) — RESOLVED in U25',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U25 Find n 3/3 &#10003; (Q6 Q7 Q8) with Distance&divide;d+1 chain written every time. Q9 boundary trap avoided (T&#8321;&#8324;=100 excluded). Q10 last-above-zero &#10003;. From &ldquo;WHAT IS N TH?&rdquo; (U22/U23) to perfect in two weeks. Pocket Map credited.',
+      fillClass: 'gs', fillPct: 95
+    },
+    {
+      label:     'Sequences: Back-calc T₁ ((n−1)d) — RESOLVED in U25',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'The n&times;d error that survived U22, U23 and U24: U25 Q3 &#10003; (a=19&minus;3&times;4=7) and Q14 &#9733;&#9733; &#10003; (T&#8321;=19, T&#8321;&#8322;=63). Both back-calcs correct with (n&minus;1) coefficient. Zero term-listing anywhere on the U25 paper &mdash; first time ever.',
+      fillClass: 'gs', fillPct: 95
     },
     {
       label:     'Geometry: Angles (Vert-Opp, Quad Algebra) — RESOLVED in U20',
@@ -605,16 +621,16 @@ PREM_DATA.renderScoreChart = function(containerId) {
 
   // ── Grid lines + Y labels ───────────────────────────────────────────
   [0,3,6,9,12,15].forEach(function(v) {
-    var y=py(v), isKey=(v===13||v===14);
+    var y=py(v), isKey=(v===12||v===14);
     s += '<line x1="'+ml+'" y1="'+y+'" x2="'+(W-mr)+'" y2="'+y+'" stroke="'+(isKey?'transparent':'#f0f0f0')+'" stroke-width="1"/>';
     s += '<text x="'+(ml-4)+'" y="'+(y+3)+'" text-anchor="end" font-size="8" fill="#bbb">'+v+'</text>';
   });
 
   // ── Reference lines ─────────────────────────────────────────────────
-  // 87% mastery = 13/15
-  var y87=py(13);
-  s += '<line x1="'+ml+'" y1="'+y87+'" x2="'+(W-mr)+'" y2="'+y87+'" stroke="#f6993f" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.9"/>';
-  s += '<text x="'+(W-mr+3)+'" y="'+(y87+4)+'" font-size="8.5" fill="#f6993f" font-weight="700">87%</text>';
+  // 80% mastery = 12/15 (revised 12 Jun 2026, was 87% = 13/15)
+  var y80=py(12);
+  s += '<line x1="'+ml+'" y1="'+y80+'" x2="'+(W-mr)+'" y2="'+y80+'" stroke="#f6993f" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.9"/>';
+  s += '<text x="'+(W-mr+3)+'" y="'+(y80+4)+'" font-size="8.5" fill="#f6993f" font-weight="700">80%</text>';
   // 93% top-5% = ~14/15
   var y93=py(14);
   s += '<line x1="'+ml+'" y1="'+y93+'" x2="'+(W-mr)+'" y2="'+y93+'" stroke="#43e97b" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.9"/>';
