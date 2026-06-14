@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '12 Jun 2026',
+  updated:        '14 Jun 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:27, topic:'Path & Frame Re-test · Consecutive Integers', status:'In Progress' },
+  currentUnit: { n:28, topic:'Path & Frame Final Re-test · Consecutive Even Counts', status:'In Progress' },
   lastUnit: {
-    n:26, score:11, outOf:15, pct:73, delta:-1, prevScore:12,
-    patternLabel: 'U26 Consolidation Analysis',
-    patternInsight: '11/15 (73%) &mdash; <strong>NOT passed: Section A (Path &amp; Frame) 3/5, below the 4/5 per-section minimum</strong>. Sec B (SimEq) 4/5 &#10003; and Sec C (Ratio Transfer) 4/5 &#10003; both cleared. Every standard-form question correct; all four misses are the extra-step / direction-flip variant &mdash; Q4 border INSIDE (subtract), Q5 cost extension (two-step), Q10 multiply-first SimEq (apple left blank), Q14 addition ratio (blank). Two of the four were blanks: recognition/finishing, not arithmetic.',
-    analysisLabel: 'Next: U27 &mdash; Path &amp; Frame Re-test + Consecutive Integers',
-    analysisInsight: 'Big win: two of the three M2 carry-over gaps closed. SimEq context-transfer (M2 Q7 blank) &rarr; 4/5 across fresh contexts; Ratio Transfer recognition (M2 Q12 blank) &rarr; 4/5 incl. the hardest transfer (Q15). Path &amp; Frame direction is the lone holdout &mdash; failed at M2 Q2 and again at U26 Q4. Per rules, only the failed Section A re-tests: one focused Path &amp; Frame lesson (inside-direction + cost extension) then a fresh test. U27 folds the Path &amp; Frame re-test into Section A and introduces Consecutive Integers in B/C. Pass bar: 4/5 on Path &amp; Frame.',
-    qSummary: '<strong>Sec A 3/5 &#10007; (below 4/5 bar)</strong> | Sec B 4/5 &#10003; | Sec C 4/5 &#10003; &mdash; Total 11/15',
+    n:27, score:11, outOf:15, pct:73, delta:0, prevScore:11,
+    patternLabel: 'U27 Re-test Analysis',
+    patternInsight: '11/15 (73%) &mdash; <strong>Section A (Path &amp; Frame) 3/5 again, gate still open</strong>. But the error profile changed completely. The DIRECTION concept is now FIXED &mdash; every shrink was correct and the hardest question (Q5 inside border + cost) was perfect. Section A failed on two narrower issues: Q3 reported the wrong piece (gave the border 372 when asked for the carpet 748 &mdash; computed it right, reported wrong), Q4 cost arithmetic (204&times;180 instead of 276&times;150). Consecutive Integers landed well: odd-count middle trick LOCKED 7/7; both misses (Q8, Q13) are the even-count four-number method.',
+    analysisLabel: 'Next: U28 &mdash; Path &amp; Frame Final Re-test + Consecutive Even Counts',
+    analysisInsight: 'Two sharp gaps remain. (1) Path &amp; Frame is no longer a direction problem &mdash; it is "which PIECE" (carpet/middle vs border/ring) + cost arithmetic. (2) NEW: consecutive EVEN-COUNT (four-number) n-method &mdash; 0/2; odd-count is reflexive but he has no procedure when there is no single middle. U28 gives one more focused Path &amp; Frame re-test (Lui agreed &mdash; lock the whole concept) + the even-count n-method. Two lessons. Pass: Path &amp; Frame Sec A &ge; 4/5.',
+    qSummary: '<strong>Sec A 3/5 &#10007; (direction FIXED; which-piece + cost)</strong> | Sec B 4/5 &#10003; | Sec C 4/5 &#10003; &mdash; Total 11/15',
     qBreakdown: [
-      { q:'Q1',  topic:'Path &amp; Frame &mdash; Rectangle (28&times;16)',                 lvl:'w', pass:true,  note:'&#10003; P=88, A=448. Both formulas clean.' },
-      { q:'Q2',  topic:'Path &amp; Frame &mdash; Frame Outside (24&times;18, 3)',          lvl:'w', pass:true,  note:'&#10003; 288 cm&sup2;. Outer 30&times;24=720, &minus;432. Nested diagram correct.' },
-      { q:'Q3',  topic:'Path &amp; Frame &mdash; Path Outside (20&times;12, 2)',           lvl:'w', pass:true,  note:'&#10003; 144 m&sup2;. 24&times;16=384, &minus;240.' },
-      { q:'Q4',  topic:'Path &amp; Frame &mdash; Border INSIDE (36&times;30, 3)',          lvl:'w', pass:false, note:'&#10007; 432 (correct: 720). <strong>Direction error &mdash; inside = shrink. Same as M2 Q2.</strong>' },
-      { q:'Q5',  topic:'Path &amp; Frame &mdash; Cost Extension (30&times;18, 2, &times;150)', lvl:'w', pass:false, note:'&#10007; ฿28,700 (correct: ฿31,200). Two-step chain broke (outer dims / arithmetic).' },
-      { q:'Q6',  topic:'SimEq &#9733; &mdash; pencils/erasers',                            lvl:'m', pass:true,  note:'&#10003; $3 &amp; $5. Matching column spotted.' },
-      { q:'Q7',  topic:'SimEq &#9733; &mdash; burgers/juices',                             lvl:'m', pass:true,  note:'&#10003; $8 &amp; $5. Subtract to eliminate.' },
-      { q:'Q8',  topic:'SimEq &#9733; &mdash; books/box',                                  lvl:'m', pass:true,  note:'&#10003; 5 kg &amp; 6 kg. 3 books=15&rarr;5.' },
-      { q:'Q9',  topic:'SimEq &#9733; &mdash; stickers/cards',                             lvl:'m', pass:true,  note:'&#10003; $7 &amp; $3.' },
-      { q:'Q10', topic:'SimEq &#9733; &mdash; multiply-first (apples/mangoes)',            lvl:'m', pass:false, note:'&#10007; mango $6 &#10003; but <strong>apple left blank</strong>. Scaled correctly, didn&rsquo;t back-substitute.' },
-      { q:'Q11', topic:'Ratio &mdash; sharing (96 in 7:5)',                                lvl:'h', pass:true,  note:'&#10003; 56 &amp; 40.' },
-      { q:'Q12', topic:'Ratio &#9733;&#9733; &mdash; equalise (give away)',                lvl:'h', pass:true,  note:'&#10003; A=60, B=36. 5n&minus;12=3n+12. Strong setup.' },
-      { q:'Q13', topic:'Ratio &#9733;&#9733; &mdash; removal (4:3, remove 10)',            lvl:'h', pass:true,  note:'&#10003; 30 blue. 4n&minus;10=3n.' },
-      { q:'Q14', topic:'Ratio &#9733;&#9733; &mdash; addition (boys join, 3:2&rarr;6:5)',  lvl:'h', pass:false, note:'&#10007; blank (correct: 48). One side grows &mdash; setup didn&rsquo;t fire.' },
-      { q:'Q15', topic:'Ratio &#9733;&#9733; &mdash; both sides change (transfer)',        lvl:'h', pass:true,  note:'&#10003; Mai 63. Hardest ratio on the paper, correct.' }
+      { q:'Q1',  topic:'Path &amp; Frame &mdash; Rectangle (35&times;22)',                  lvl:'w', pass:true,  note:'&#10003; P=114, A=770.' },
+      { q:'Q2',  topic:'Path &amp; Frame &mdash; Frame Outside (30&times;20, 4)',           lvl:'w', pass:true,  note:'&#10003; 464 cm&sup2;. Outer 38&times;28=1064, &minus;600.' },
+      { q:'Q3',  topic:'Path &amp; Frame &mdash; Carpet INSIDE (40&times;28, 3)',           lvl:'w', pass:false, note:'&#10007; 372 (correct: 748). <strong>Shrank correctly (34&times;22=748) then gave the BORDER, not the carpet. Wrong piece, not direction.</strong>' },
+      { q:'Q4',  topic:'Path &amp; Frame &mdash; Path + Cost (24&times;16, 3, &times;150)',  lvl:'w', pass:false, note:'&#10007; ฿36,720 (correct: ฿41,400). Used 204&times;180 &mdash; wrong outer area + wrong price.' },
+      { q:'Q5',  topic:'Path &amp; Frame &mdash; Inside Border Cost ★ (50&times;30, 2, &times;220)', lvl:'w', pass:true, note:'&#10003; ฿66,880. <strong>Perfect: shrank, ring 304, &times;220. Hardest question on the paper.</strong>' },
+      { q:'Q6',  topic:'Consecutive &mdash; Three (96)',                                    lvl:'m', pass:true,  note:'&#10003; 31,32,33. Middle trick.' },
+      { q:'Q7',  topic:'Consecutive &mdash; Five, smallest (85)',                           lvl:'m', pass:true,  note:'&#10003; 15.' },
+      { q:'Q8',  topic:'Consecutive &#9733; &mdash; Four, largest (78)',                    lvl:'m', pass:false, note:'&#10007; "I still don&rsquo;t know". <strong>Even count &mdash; no method.</strong>' },
+      { q:'Q9',  topic:'Consecutive EVEN &#9733; &mdash; largest (114)',                    lvl:'m', pass:true,  note:'&#10003; 40. Odd-count style (3 numbers) middle 38.' },
+      { q:'Q10', topic:'Consecutive ODD &#9733; &mdash; middle (99)',                       lvl:'m', pass:true,  note:'&#10003; 33.' },
+      { q:'Q11', topic:'Consecutive &#9733;&#9733; &mdash; Hidden sum (63)',                lvl:'h', pass:true,  note:'&#10003; 20.' },
+      { q:'Q12', topic:'Consecutive &#9733;&#9733; &mdash; Two numbers (47)',               lvl:'h', pass:true,  note:'&#10003; 23,24.' },
+      { q:'Q13', topic:'Consecutive EVEN &#9733;&#9733; &mdash; Four, largest (100)',       lvl:'h', pass:false, note:'&#10007; blank/listing. <strong>Even count again &mdash; listed 12,14,16,18&hellip; never reached 22,24,26,28.</strong>' },
+      { q:'Q14', topic:'Consecutive &#9733;&#9733; &mdash; Sum of ends (72)',               lvl:'h', pass:true,  note:'&#10003; 48. 23+25 shown.' },
+      { q:'Q15', topic:'Consecutive &#9733;&#9733; &mdash; Remove one (120)',               lvl:'h', pass:true,  note:'&#10003; 98. 120&minus;22.' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -95,22 +95,36 @@ var PREM_DATA = {
     { n:23, score:8,  delta:+1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
     { n:24, score:9,  delta:+1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
     { n:25, score:12, delta:+3,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false },
-    { n:26, score:11, delta:-1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false }
+    { n:26, score:11, delta:-1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
+    { n:27, score:11, delta:0,   color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 27,
-      badge: 'linear-gradient(135deg,#BF360C,#1565C0)',
-      title: 'Path &amp; Frame Re-test &middot; Consecutive Integers',
+      n: 28,
+      badge: 'linear-gradient(135deg,#BF360C,#0D47A1)',
+      title: 'Path &amp; Frame Final Re-test &middot; Consecutive Even Counts',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Path &amp; Frame &mdash; Inside &amp; Cost', c:'tblue' },
-        { t:'L2: Consecutive Integers &mdash; Middle Trick', c:'tblue' }
+        { t:'L1: Path &amp; Frame &mdash; Which Piece', c:'tblue' },
+        { t:'L2: Consecutive &mdash; Even-Count n-Method', c:'tblue' }
       ],
-      note: 'U27: Section A re-tests the failed U26 Path &amp; Frame topic (inside-direction + cost extension &mdash; the two misses); Sections B &amp; C introduce Consecutive Integers (middle trick for odd counts, n-method for even/even-odd, compound two-step). Two lessons (max-2 rule). Pass: Path &amp; Frame Section A &ge; 4/5; overall 12/15.',
+      note: 'U28: one more focused Path &amp; Frame re-test (Lui agreed &mdash; lock the whole concept). Direction is fixed; this targets the two U27 misses &mdash; which PIECE (carpet/middle vs border/ring) + clean cost. Plus the NEW gap: consecutive EVEN-COUNT (four-number) n-method (U27 Q8/Q13 0/2). Two lessons. Sec A Path &amp; Frame final re-test, Sec B even-count, Sec C mixed consolidation. Pass: Sec A &ge; 4/5; overall 12/15.',
       status: 'pending'
+    },
+    {
+      n: 27,
+      badge: 'linear-gradient(135deg,#EF5350,#C62828)',
+      title: 'Path &amp; Frame Re-test &middot; Consecutive Integers',
+      tags: [
+        { t:'11/15 (73%) &#10145; NOT PASSED', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Sec A 3/5 &#10007; (which-piece + cost)', c:'torange' },
+        { t:'Direction FIXED &#10003;', c:'tgreen' },
+        { t:'Odd-count middle trick 7/7 &#10003;', c:'tgreen' }
+      ],
+      note: 'U27: 11/15. Sec A Path &amp; Frame 3/5 &mdash; gate still open, BUT direction concept now fixed (every shrink correct; Q5 inside+cost perfect). The two A-misses changed: Q3 gave the border when asked for the carpet (right maths, wrong piece), Q4 cost arithmetic (204&times;180 not 276&times;150). Consecutive: odd-count middle trick LOCKED 7/7 incl. all compounds; both misses (Q8 "I still don&rsquo;t know", Q13 listing) are the even-count four-number method. &rarr; U28 closes which-piece + even-count.',
+      status: 'done'
     },
     {
       n: 26,
@@ -480,10 +494,16 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'Path & Frame: INSIDE direction + Cost extension — ACTIVE — U27 Section A re-test',
+      label:     'Path & Frame: which PIECE + cost arithmetic — ACTIVE — U28 final re-test',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U26 Sec A 3/5 (below 4/5 bar). Outside/area solid (Q1&ndash;Q3 &#10003;). Misses: Q4 border INSIDE &#10007; (wrote 432, correct 720 &mdash; forgot to shrink; same direction error as M2 Q2) and Q5 cost extension &#10007; (฿28,700 vs ฿31,200 &mdash; two-step chain broke). Recurs across M2 + U26. Fix: one focused lesson (inside = shrink, cost = area-then-&times;price) + fresh re-test. Pass &ge; 4/5.',
-      fillClass: 'g2', fillPct: 60
+      score:     'Direction is now FIXED (U27: every shrink correct; Q5 inside+cost perfect). Sec A still 3/5 on two narrower issues: Q3 reported the BORDER (372) when asked for the CARPET (748 &mdash; computed it right, wrong piece); Q4 cost arithmetic (204&times;180 not 276&times;150). Fix: "underline the piece" (middle = inner directly; ring = big&minus;small) + copy the exact price. U28 = final Path &amp; Frame re-test. Pass &ge; 4/5.',
+      fillClass: 'g2', fillPct: 70
+    },
+    {
+      label:     'Consecutive Integers: EVEN-COUNT (four-number) n-method — ACTIVE — U28 target',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U27: odd-count middle trick LOCKED 7/7 (incl. all compounds &mdash; hidden sum, sum of ends, remove-one). But even-count 0/2: Q8 "I still don&rsquo;t know", Q13 listed 12,14,16,18&hellip; with no answer. No procedure when there is no single middle. Fix: n-method (n,n+1,n+2,n+3 &rarr; 4n+6; even/odd &rarr; 4n+12). One focused lesson + U28 Section B.',
+      fillClass: 'g2', fillPct: 55
     },
     {
       label:     'Sequences: Two-Term NOVEL Pairs (T₂+T₄, T₃+T₆, T₄+T₇) — ACTIVE — last sequences gap',
@@ -552,7 +572,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U26'
+  radarLegendUnit: 'U27'
 
 };
 

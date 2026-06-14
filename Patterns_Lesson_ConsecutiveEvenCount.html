@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consecutive Integers — When There's No Middle</title>
+<style>
+:root{--nav:#1565C0;--nav-dark:#0D47A1;--bg:#E8F1FB;--card:#fff;--acc:#0D47A1;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#1565C0;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul,ol{padding-left:20px;margin-top:6px}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;font-size:1.02rem;font-weight:700;margin:0 auto 10px;max-width:560px}
+.mv{border-radius:12px;padding:12px;border:3px solid;position:relative;margin-bottom:12px}
+.mv h4{font-size:.97rem;margin-bottom:5px}
+.mv p{font-size:.88rem;line-height:1.5}
+.mv-odd{background:#E3F2FD;border-color:#64B5F6}.mv-odd h4{color:#0D47A1}
+.mv-even{background:#EDE7F6;border-color:#B39DDB}.mv-even h4{color:#4A148C}
+.today::before{content:'TODAY';position:absolute;top:-11px;right:10px;background:#FFD54F;color:#5D4037;font-size:.7rem;font-weight:800;padding:2px 9px;border-radius:8px}
+.blocks{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:14px 0}
+.blk{min-width:64px;padding:10px 6px;border-radius:8px;text-align:center;font-weight:700;border:2px solid #64B5F6;background:#E3F2FD;color:#0D47A1;font-size:.9rem}
+.blk small{display:block;font-size:.72rem;font-weight:600;color:#1565C0;margin-top:3px}
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid #90CAF9;padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:#1565C0}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.93rem;color:#E65100}
+.q-card{background:#F7FAFE;border:1.5px solid #90CAF9;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #90CAF9;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E3F2FD}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#F1F7FE;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E3F2FD;color:#0D47A1;border:2px solid #0D47A1;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#0D47A1;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.rule-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:8px}
+.rule-key{font-weight:700;color:#0D47A1;font-size:.95rem;white-space:nowrap}
+.rule-val{font-size:.93rem;color:#333}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Consecutive Integers &mdash; When There's No Middle</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1 -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F9E9; The Missing Half of the Topic</h2>
+  <p>You already <strong>own</strong> the middle trick &mdash; three or five numbers in a row, you go straight to <em>sum &divide; count</em>. But when there are <strong>two or four</strong> numbers, there is <strong>no single middle</strong> to land on. That's the part that tripped you up last time. Today you get the tool for it.</p>
+</div>
+
+<div class="q-node">&#x1F50D; Count the numbers. Is it ODD (3, 5) or EVEN (2, 4)?</div>
+
+<div class="mv mv-odd">
+  <h4>&#x2B50; ODD count (3 or 5) &mdash; you already nailed this</h4>
+  <p>middle = sum &divide; count, then step out. Reflex. No change.</p>
+</div>
+<div class="mv mv-even today">
+  <h4>&#x1F9EE; EVEN count (2 or 4) &mdash; use the n-method</h4>
+  <p>No single middle. Name the smallest <strong>n</strong>, build the others, add them up, solve. Trained today.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start the Lesson &#8594;</button></div>
+</div>
+
+<!-- Screen 2: four numbers -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>Four Numbers &mdash; Name the Smallest n</h2>
+  <p>Four numbers in a row, each one more than the last. Call the smallest <strong>n</strong>:</p>
+  <div class="blocks">
+    <div class="blk">n<small>smallest</small></div>
+    <div class="blk">n+1</div>
+    <div class="blk">n+2</div>
+    <div class="blk">n+3<small>largest</small></div>
+  </div>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">add them: n + (n+1) + (n+2) + (n+3) = 4n + 6</span><span class="eq-why">&#8592; four n's, and 1+2+3 = 6</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Example: four consecutive numbers add to 58.</h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">4n + 6 = 58</span></div>
+    <div class="eq-row"><span class="eq-math">4n = 52 &rarr; n = 13</span><span class="eq-why">&#8592; take 6 off, then &divide; 4</span></div>
+    <div class="eq-row"><span class="eq-math">13, 14, 15, 16</span><span class="eq-why">&#8592; check: 13+14+15+16 = 58 &#10003;</span></div>
+  </div>
+  <p style="font-size:.92rem"><strong>Two numbers</strong> work the same way: n + (n+1) = <strong>2n + 1</strong>.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: even/odd numbers -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Consecutive EVEN or ODD &mdash; Step by 2</h2>
+  <p>Even numbers (or odd numbers) in a row jump by <strong>2</strong>, not 1. So from the smallest n:</p>
+  <div class="blocks">
+    <div class="blk">n</div><div class="blk">n+2</div><div class="blk">n+4</div><div class="blk">n+6</div>
+  </div>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">add: n + (n+2) + (n+4) + (n+6) = 4n + 12</span><span class="eq-why">&#8592; 2+4+6 = 12</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Example: four consecutive EVEN numbers add to 84.</h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">4n + 12 = 84 &rarr; 4n = 72 &rarr; n = 18</span></div>
+    <div class="eq-row"><span class="eq-math">18, 20, 22, 24</span><span class="eq-why">&#8592; all even &#10003; &nbsp; 18+20+22+24 = 84 &#10003;</span></div>
+  </div>
+  <h3>Example: two consecutive numbers add to 37.</h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">2n + 1 = 37 &rarr; 2n = 36 &rarr; n = 18 &rarr; 18, 19</span></div>
+  </div>
+</div>
+
+<div class="warn-box">
+  <p>&#x1F4A1; <strong>Sanity check:</strong> n must match the type. For "even numbers", n has to come out <strong>even</strong>. If you get a fraction or the wrong parity, re-check whether the step is +1 or +2.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: compound -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Then Answer What They Asked</h2>
+  <p>Once you have the four numbers, read the last line again &mdash; smallest, largest, or a sum of some of them.</p>
+
+  <h3>Example A &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">Four consecutive numbers add to 50. Sum of the smallest and largest?</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">4n + 6 = 50 &rarr; n = 11 &rarr; 11, 12, 13, 14</span></div>
+    <div class="eq-row"><span class="eq-math">smallest + largest = 11 + 14 = 25</span></div>
+  </div>
+
+  <h3>Example B &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">Four consecutive EVEN numbers add to 44. Find the largest.</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">4n + 12 = 44 &rarr; n = 8 &rarr; 8, 10, 12, 14</span></div>
+    <div class="eq-row"><span class="eq-math">largest = 14</span></div>
+  </div>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: Practice -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Practice</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Even count &rarr; name the smallest n, build, add, solve. Step +1 for plain numbers, +2 for even/odd. Then read the last line.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; Four consecutive integers add up to 62. What is the smallest one?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 13</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 14</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 15</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; 16</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">4n + 6 = 62 &rarr; 4n = 56 &rarr; n = 14 &rarr; 14,15,16,17</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; Four consecutive EVEN numbers add up to 60. What is the largest one?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 16</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 18</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; 22</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">4n + 12 = 60 &rarr; 4n = 48 &rarr; n = 12 &rarr; 12,14,16,18</span></div>
+      <div class="eq-row"><span class="eq-math">largest = 18</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; Two consecutive integers add up to 39. What are the two numbers?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 18 and 19</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 19 and 20</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 19 and 21</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; 20 and 21</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">2n + 1 = 39 &rarr; 2n = 38 &rarr; n = 19 &rarr; 19, 20</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; Four consecutive ODD numbers add up to 64. What is the largest one?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 17</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 19</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 21</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; 23</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">4n + 12 = 64 &rarr; 4n = 52 &rarr; n = 13 &rarr; 13,15,17,19</span></div>
+      <div class="eq-row"><span class="eq-math">largest = 19</span></div>
+    </div></div>
+  </div>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 6: Summary -->
+<div class="screen" id="s5">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; The n-Method in Four Lines</div>
+  <div class="rule-grid">
+    <span class="rule-key">Two numbers:</span><span class="rule-val">n + (n+1) = 2n + 1 = sum.</span>
+    <span class="rule-key">Four numbers:</span><span class="rule-val">n + (n+1) + (n+2) + (n+3) = 4n + 6 = sum.</span>
+    <span class="rule-key">Even / odd four:</span><span class="rule-val">step +2 &rarr; 4n + 12 = sum.</span>
+    <span class="rule-key">Solve &amp; check:</span><span class="rule-val">take the number off, &divide; by the n-count, list, add back to confirm.</span>
+  </div>
+</div>
+
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You are ready when...</h3>
+  <ul>
+    <li>You see "four numbers" and write n, n+1, n+2, n+3 without pausing</li>
+    <li>You switch the step to +2 the moment it says even or odd</li>
+    <li>You never leave a four-number question blank again</li>
+  </ul>
+</div>
+
+<div class="navrow">
+  <a href="Geometry_Lesson_PathFrame_WhichPiece.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E3F2FD;color:#0D47A1;border:2px solid #0D47A1;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#0D47A1;color:#fff;border:2px solid #0D47A1;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Please select an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! The n-method works every time.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not quite. Name the smallest n, build the row (+1, or +2 for even/odd), add to make 4n+6 or 4n+12, solve. Then read the last line. Click Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

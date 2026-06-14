@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Path &amp; Frame — Which Piece Did They Ask For?</title>
+<style>
+:root{--nav:#1565C0;--nav-dark:#0D47A1;--bg:#FFF3E8;--card:#fff;--acc:#BF360C;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#8D2F0B;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul,ol{padding-left:20px;margin-top:6px}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;font-size:1.02rem;font-weight:700;margin:0 auto 10px;max-width:560px}
+.mv{border-radius:12px;padding:12px;border:3px solid;position:relative;margin-bottom:12px}
+.mv h4{font-size:.97rem;margin-bottom:5px}
+.mv p{font-size:.88rem;line-height:1.5}
+.mv-mid{background:#E8F5E9;border-color:#81C784}.mv-mid h4{color:#1B5E20}
+.mv-ring{background:#FFF3E8;border-color:#FF8A65}.mv-ring h4{color:#BF360C}
+.mv-cost{background:#FFF8E1;border-color:#FFD54F}.mv-cost h4{color:#E65100}
+.today::before{content:'TODAY';position:absolute;top:-11px;right:10px;background:#FFD54F;color:#5D4037;font-size:.7rem;font-weight:800;padding:2px 9px;border-radius:8px}
+.nest{position:relative;margin:14px auto;border-radius:8px;display:flex;align-items:center;justify-content:center;width:280px;height:175px;background:repeating-linear-gradient(45deg,#FFCC80,#FFCC80 8px,#FFB74D 8px,#FFB74D 16px)}
+.nest .ringlbl{position:absolute;top:5px;left:0;right:0;text-align:center;font-size:.78rem;font-weight:800;color:#7B3F00}
+.nest-inner{background:#81C784;border-radius:6px;width:62%;height:55%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#1B5E20;font-size:.85rem;text-align:center;border:2px dashed #1B5E20}
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid #FFCC80;padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:#BF360C}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.93rem;color:#E65100}
+.q-card{background:#FFFBF7;border:1.5px solid #FFCC80;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #FFCC80;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#FFF3E8}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#FFF8F2;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#FFF3E8;color:#BF360C;border:2px solid #BF360C;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#BF360C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.rule-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:8px}
+.rule-key{font-weight:700;color:#BF360C;font-size:.95rem;white-space:nowrap}
+.rule-val{font-size:.93rem;color:#333}
+.twobox{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0}
+.box{border:2px solid #BF360C;border-radius:8px;padding:10px 14px;font-size:.92rem;font-weight:600;color:#8D2F0B;background:#FFF8F2;text-align:center}
+.arrow{font-size:1.4rem;color:#BF360C;font-weight:800}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Path &amp; Frame &mdash; Which Piece Did They Ask For?</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: Pocket Map -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; One Last Thing to Lock In</h2>
+  <p>Your last test proved the hard part is done: you shrink for inside borders correctly, and you got the trickiest question (inside border + cost) <strong>perfect</strong>. Two small habits cost the marks. Fix these and Path &amp; Frame is yours for good.</p>
+</div>
+
+<div class="q-node">&#x1F50D; 1) Which PIECE do they want? &nbsp;&nbsp; 2) If cost: area FIRST, then &times; the price</div>
+
+<div class="mv mv-mid today">
+  <h4>&#x1F7E9; The MIDDLE piece &mdash; "carpet, rug, mat, tiles, lawn"</h4>
+  <p>This is the <strong>inner rectangle</strong>. Take it <strong>directly</strong>: (length &minus; 2&times;width) &times; (width &minus; 2&times;width). <strong>No subtracting from the room.</strong></p>
+</div>
+<div class="mv mv-ring today">
+  <h4>&#x1F7E7; The RING piece &mdash; "border, path, frame, strip"</h4>
+  <p>This is the <strong>big area &minus; small area</strong>. (Works for inside OR outside borders.)</p>
+</div>
+<div class="mv mv-cost today">
+  <h4>&#x1F4B0; COST &mdash; "costs ฿___ per square metre"</h4>
+  <p>Find the correct AREA first, then <strong>area &times; the price in the question</strong>. Check the price digits before you multiply.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start the Lesson &#8594;</button></div>
+</div>
+
+<!-- Screen 2: Which piece -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>The Same Picture, Two Different Answers</h2>
+  <p>Every frame question has the same two rectangles. The trap is grabbing the wrong one. <strong>Underline the piece-word in the question first.</strong></p>
+</div>
+
+<div class="card">
+  <div class="nest">
+    <span class="ringlbl">&#x1F7E7; RING = border / path</span>
+    <div class="nest-inner">&#x1F7E9; MIDDLE<br>carpet / rug</div>
+  </div>
+  <h3>Example: Room 38 m &times; 24 m, border 3 m wide inside.</h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">MIDDLE (carpet) = (38&minus;6)&times;(24&minus;6) = 32&times;18 = 576 m&sup2;</span><span class="eq-why">&#8592; take it directly</span></div>
+    <div class="eq-row"><span class="eq-math">RING (border) = 38&times;24 &minus; 576 = 912 &minus; 576 = 336 m&sup2;</span><span class="eq-why">&#8592; big &minus; small</span></div>
+  </div>
+  <p style="font-size:.93rem"><strong>Same diagram &mdash; two answers.</strong> "Find the carpet" &rarr; 576. "Find the border" &rarr; 336. Read which word they used.</p>
+</div>
+
+<div class="warn-box">
+  <p>&#x274C; <strong>Your last test, Q3:</strong> the question asked for the <strong>carpet</strong> (the middle). You worked out the carpet perfectly (34&times;22 = 748) &mdash; then subtracted it from the room and wrote the <strong>border</strong> (372). The maths was right; the piece was wrong. Underline the word: <em>carpet</em> = middle = take it directly.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: Clean cost -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Cost = Two Boxes, Done Slowly</h2>
+  <div class="twobox">
+    <div class="box">BOX 1<br>correct AREA<br>(middle or ring?)</div>
+    <div class="arrow">&#8594;</div>
+    <div class="box">BOX 2<br>AREA &times; the PRICE<br>in the question</div>
+  </div>
+  <p style="font-size:.92rem;color:#8D2F0B">Two checks before you write the answer: (1) did I use the <strong>right piece</strong> for the area? (2) am I multiplying by the <strong>exact price</strong> printed in the question?</p>
+</div>
+
+<div class="card">
+  <h3>Worked Example &nbsp;<span style="color:#555;font-weight:400;font-size:.9rem">Garden 30&times;18 m, path 2 m around OUTSIDE, ฿90 per m&sup2;. Cost?</span></h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">BOX 1: outer = (30+4)&times;(18+4) = 34&times;22 = 748</span></div>
+    <div class="eq-row"><span class="eq-math">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; garden = 540. path (RING) = 748 &minus; 540 = 208 m&sup2;</span></div>
+    <div class="eq-row"><span class="eq-math">BOX 2: 208 &times; 90 = ฿18,720</span><span class="eq-why">&#8592; price = 90, not anything else</span></div>
+  </div>
+  <div class="warn-box">
+    <p>&#x274C; <strong>Your last test, Q4:</strong> the answer should have been 276 &times; ฿150 = ฿41,400. The path area came out wrong and the price became 180 instead of 150. Slow the cost step down: write the area, then write &times; and copy the price straight from the question.</p>
+  </div>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: Practice -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Practice</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Underline the piece-word FIRST. Middle = inner rectangle directly. Ring = big &minus; small. Cost = area then &times; the printed price.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; A room is 34 m &times; 24 m. A carpet covers the middle, leaving a border 2 m wide all around inside. What is the area of the <u>carpet</u>?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 216 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 600 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 696 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; 816 m&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Carpet = MIDDLE = (34&minus;4)&times;(24&minus;4) = 30&times;20 = 600 m&sup2;</span><span class="eq-why">&#8592; take it directly</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; A photo is 16 cm &times; 12 cm. A frame 2 cm wide goes around the outside. What is the area of the <u>frame</u>?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 128 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 192 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 240 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; 320 cm&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Frame = RING. Outer = (16+4)&times;(12+4) = 20&times;16 = 320</span></div>
+      <div class="eq-row"><span class="eq-math">Photo = 192. Frame = 320 &minus; 192 = 128 cm&sup2;</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; A pond is 22 m &times; 14 m. A path 2 m wide runs around the outside, tiled at ฿120 per m&sup2;. What does the path cost?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; ฿15,600</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; ฿19,200</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; ฿36,960</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; ฿56,160</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Outer = (22+4)&times;(14+4) = 26&times;18 = 468. Pond = 308.</span></div>
+      <div class="eq-row"><span class="eq-math">Path = 160 m&sup2;. Cost = 160 &times; 120 = ฿19,200</span><span class="eq-why">&#8592; price = 120</span></div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; A hall is 36 m &times; 24 m. A rug covers the middle, leaving a border 3 m wide inside. The <u>border</u> is polished at ฿100 per m&sup2;. What does the polishing cost?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; ฿32,400</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; ฿54,000</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; ฿86,400</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; ฿8,640</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Rug (middle) = (36&minus;6)&times;(24&minus;6) = 30&times;18 = 540</span></div>
+      <div class="eq-row"><span class="eq-math">Border (RING) = 36&times;24 &minus; 540 = 864 &minus; 540 = 324</span><span class="eq-why">&#8592; they want the border</span></div>
+      <div class="eq-row"><span class="eq-math">Cost = 324 &times; 100 = ฿32,400</span></div>
+    </div></div>
+  </div>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: Summary -->
+<div class="screen" id="s4">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; The Whole Concept, In Five Lines</div>
+  <div class="rule-grid">
+    <span class="rule-key">Draw + underline:</span><span class="rule-val">Nested rectangles, then underline the piece-word.</span>
+    <span class="rule-key">Inside:</span><span class="rule-val">shrink &mdash; inner = given &minus; 2&times;width.</span>
+    <span class="rule-key">MIDDLE piece:</span><span class="rule-val">carpet/rug/mat/lawn &rarr; the inner rectangle, taken directly.</span>
+    <span class="rule-key">RING piece:</span><span class="rule-val">border/path/frame &rarr; big area &minus; small area.</span>
+    <span class="rule-key">Cost:</span><span class="rule-val">correct area &times; the exact price in the question.</span>
+  </div>
+</div>
+
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You are ready when...</h3>
+  <ul>
+    <li>You underline carpet / border before you calculate</li>
+    <li>You never subtract when they asked for the middle piece</li>
+    <li>You copy the price straight from the question for the cost step</li>
+  </ul>
+</div>
+
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#FFF3E8;color:#BF360C;border:2px solid #BF360C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Hub</a>
+  <a href="Patterns_Lesson_ConsecutiveEvenCount.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#BF360C;color:#fff;border:2px solid #BF360C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 2 &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Please select an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! Right piece, right price.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not quite. Underline the piece-word: middle (carpet) = inner rectangle directly; ring (border/path) = big − small. For cost, use the exact price. Click Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>
