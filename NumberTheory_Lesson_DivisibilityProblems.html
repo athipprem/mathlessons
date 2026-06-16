@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Divisibility in Problems — Missing Digits &amp; More</title>
+<style>
+:root{--nav:#00695C;--nav-dark:#004D40;--bg:#E0F2F1;--card:#fff;--acc:#00695C;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#00796B;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul,ol{padding-left:20px;margin-top:6px}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;font-size:1.02rem;font-weight:700;margin:0 auto 10px;max-width:560px}
+.mv{border-radius:12px;padding:12px;border:3px solid;position:relative;margin-bottom:12px}
+.mv h4{font-size:.97rem;margin-bottom:5px}
+.mv p{font-size:.88rem;line-height:1.5}
+.mv-a{background:#E1F5FE;border-color:#4FC3F7}.mv-a h4{color:#01579B}
+.mv-b{background:#F1F8E9;border-color:#AED581}.mv-b h4{color:#33691E}
+.mv-c{background:#FFF3E0;border-color:#FFB74D}.mv-c h4{color:#E65100}
+.today::before{content:'TODAY';position:absolute;top:-11px;right:10px;background:#FFD54F;color:#5D4037;font-size:.7rem;font-weight:800;padding:2px 9px;border-radius:8px}
+.numbig{display:flex;justify-content:center;gap:4px;margin:12px 0}
+.dgt{width:46px;height:56px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.5rem;border:2px solid #4DB6AC;background:#E0F2F1;color:#004D40}
+.dgt.blank{background:#FFF3E0;border:2px dashed #FB8C00;color:#E65100}
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid #80CBC4;padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:#00695C}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.93rem;color:#E65100}
+.q-card{background:#F4FBFA;border:1.5px solid #80CBC4;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E0F2F1}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#F1F8F7;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#00695C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.rule-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:8px}
+.rule-key{font-weight:700;color:#00695C;font-size:.95rem;white-space:nowrap}
+.rule-val{font-size:.93rem;color:#333}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Divisibility in Problems &mdash; Missing Digits &amp; More</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1 -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F9E9; Now Use the Rules Backwards</h2>
+  <p>You know the rules. Tests rarely just ask "is it divisible?" &mdash; they hide a <strong>missing digit</strong>, or ask for the <strong>largest/smallest</strong> number that fits, or test <strong>two divisors at once</strong>. Same rules, used as a tool.</p>
+</div>
+
+<div class="q-node">&#x1F50D; What is the question really asking?</div>
+
+<div class="mv mv-a today">
+  <h4>&#x2753; MISSING DIGIT &mdash; "&#9633; makes it divisible by ___"</h4>
+  <p>Use the rule as an equation. For 3 or 9: the digit sum (with the blank) must hit a multiple. For 2/5/10: only the last digit matters.</p>
+</div>
+<div class="mv mv-b today">
+  <h4>&#x1F53C; LARGEST / SMALLEST &mdash; "biggest number divisible by ___"</h4>
+  <p>Start near the limit and step by the divisor until a number passes the rule.</p>
+</div>
+<div class="mv mv-c today">
+  <h4>&#x1F517; TWO DIVISORS AT ONCE &mdash; "divisible by both ___ and ___"</h4>
+  <p>It must pass BOTH rules (e.g. by 4 and 6 &rarr; by 12).</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start the Lesson &#8594;</button></div>
+</div>
+
+<!-- Screen 2: missing digit 3/9 -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>Missing Digit &mdash; Digit-Sum Rules (3, 9)</h2>
+  <p>Add the digits you know, then ask: what does the blank need to be to make the total a multiple of 3 (or 9)?</p>
+  <h3>Example: what digit makes 3 &#9633; 9 divisible by 3?</h3>
+  <div class="numbig"><div class="dgt">3</div><div class="dgt blank">?</div><div class="dgt">9</div></div>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">known digits: 3 + 9 = 12 (already &divide; 3)</span></div>
+    <div class="eq-row"><span class="eq-math">blank must keep the total &divide; 3 &rarr; blank &isin; {0, 3, 6, 9}</span><span class="eq-why">&#8592; smallest is 0</span></div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; Asked for the <strong>smallest</strong>? Take the lowest digit that works. <strong>Largest?</strong> Take the highest. For 3 there are usually several answers; for 9 there is often just one.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: missing digit last-digit + 4 -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Missing Digit &mdash; End Rules (2, 5, 10, 4)</h2>
+  <p>For these, only the <strong>end</strong> matters &mdash; ignore the front of the number.</p>
+  <h3>Example: 4,1&#9633; is divisible by 4. What can the blank be?</h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">last two digits = 1&#9633; &rarr; 10,11,12&hellip;19</span></div>
+    <div class="eq-row"><span class="eq-math">which are &divide; 4? 12 and 16 &rarr; blank = 2 or 6</span></div>
+  </div>
+  <h3>Example: 2,8&#9633; is divisible by 5. What can the blank be?</h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">&divide;5 &rarr; ends in 0 or 5 &rarr; blank = 0 or 5</span></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: largest/smallest + two divisors -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Largest / Smallest &amp; Two Divisors</h2>
+  <h3>Example: largest 3-digit number divisible by 9.</h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">biggest 3-digit is 999. 9+9+9 = 27 &rarr; &divide;9 &#10003;</span><span class="eq-why">&#8592; 999 itself works</span></div>
+  </div>
+  <h3>Example: largest 3-digit number divisible by both 4 and 6.</h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">by 4 AND 6 &rarr; by 12</span></div>
+    <div class="eq-row"><span class="eq-math">999 &divide; 12 = 83 remainder 3 &rarr; 12 &times; 83 = 996</span><span class="eq-why">&#8592; step back to the multiple</span></div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; "Divisible by both A and B" usually means divisible by A&times;B when A and B share no factors (like 4 and 6 &rarr; 12, or 3 and 5 &rarr; 15). Then just find multiples of that.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: practice -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Practice</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Use the rule as a tool. Digit sum for 3/9, the end for 2/5/10/4, both rules for "by both".</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; What is the smallest digit for the blank so that 2&#9633;7 is divisible by 3?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 0</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 1</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; 3</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="eq-chain"><div class="eq-row"><span class="eq-math">2+&#9633;+7 = 9+&#9633;. Already &divide;3 &rarr; smallest blank = 0</span></div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; What digit makes 61&#9633; divisible by 9?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 0</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; 8</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="eq-chain"><div class="eq-row"><span class="eq-math">6+1+&#9633; = 7+&#9633; &rarr; needs 9 &rarr; blank = 2</span></div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; What is the largest number below 432 that is divisible by 5?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 425</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 428</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 430</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; 435</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'C')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="eq-chain"><div class="eq-row"><span class="eq-math">step down from 432: 430 ends in 0 &rarr; &divide;5 &#10003; (435 is above 432)</span></div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; Is 7,002 divisible by 6?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; Yes</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; No</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="eq-chain"><div class="eq-row"><span class="eq-math">&divide;2? ends in 2 &#10003;. &divide;3? 7+0+0+2=9 &#10003;. Both &rarr; Yes</span></div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 6: summary -->
+<div class="screen" id="s5">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Problem Types, One Card</div>
+  <div class="rule-grid">
+    <span class="rule-key">Missing digit (3/9):</span><span class="rule-val">add known digits, choose blank to reach a multiple.</span>
+    <span class="rule-key">Missing digit (2/5/10/4):</span><span class="rule-val">only the end matters.</span>
+    <span class="rule-key">Largest / smallest:</span><span class="rule-val">start near the limit, step by the divisor.</span>
+    <span class="rule-key">By both A and B:</span><span class="rule-val">pass both rules &rarr; use A&times;B (e.g. 4&amp;6 &rarr; 12).</span>
+    <span class="rule-key">Smallest vs largest:</span><span class="rule-val">read which one they asked for.</span>
+  </div>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You are ready when...</h3>
+  <ul>
+    <li>You turn a missing-digit question straight into a digit-sum check</li>
+    <li>You combine 4 &amp; 6 into 12 without hesitating</li>
+    <li>You re-read for "smallest" vs "largest" before answering</li>
+  </ul>
+</div>
+<div class="navrow">
+  <a href="NumberTheory_Lesson_DivisibilityRules.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#00695C;color:#fff;border:2px solid #00695C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Please select an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! Rule used as a tool.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not quite. Turn it into a digit-sum or end check; for "by both" combine the divisors. Click Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

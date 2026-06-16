@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '14 Jun 2026',
+  updated:        '16 Jun 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:28, topic:'Path & Frame Final Re-test · Consecutive Even Counts', status:'In Progress' },
+  currentUnit: { n:29, topic:'Divisibility Rules · Divisibility in Problems', status:'In Progress' },
   lastUnit: {
-    n:27, score:11, outOf:15, pct:73, delta:0, prevScore:11,
-    patternLabel: 'U27 Re-test Analysis',
-    patternInsight: '11/15 (73%) &mdash; <strong>Section A (Path &amp; Frame) 3/5 again, gate still open</strong>. But the error profile changed completely. The DIRECTION concept is now FIXED &mdash; every shrink was correct and the hardest question (Q5 inside border + cost) was perfect. Section A failed on two narrower issues: Q3 reported the wrong piece (gave the border 372 when asked for the carpet 748 &mdash; computed it right, reported wrong), Q4 cost arithmetic (204&times;180 instead of 276&times;150). Consecutive Integers landed well: odd-count middle trick LOCKED 7/7; both misses (Q8, Q13) are the even-count four-number method.',
-    analysisLabel: 'Next: U28 &mdash; Path &amp; Frame Final Re-test + Consecutive Even Counts',
-    analysisInsight: 'Two sharp gaps remain. (1) Path &amp; Frame is no longer a direction problem &mdash; it is "which PIECE" (carpet/middle vs border/ring) + cost arithmetic. (2) NEW: consecutive EVEN-COUNT (four-number) n-method &mdash; 0/2; odd-count is reflexive but he has no procedure when there is no single middle. U28 gives one more focused Path &amp; Frame re-test (Lui agreed &mdash; lock the whole concept) + the even-count n-method. Two lessons. Pass: Path &amp; Frame Sec A &ge; 4/5.',
-    qSummary: '<strong>Sec A 3/5 &#10007; (direction FIXED; which-piece + cost)</strong> | Sec B 4/5 &#10003; | Sec C 4/5 &#10003; &mdash; Total 11/15',
+    n:28, score:13, outOf:15, pct:87, delta:+2, prevScore:11,
+    patternLabel: 'U28 Analysis — PASSED',
+    patternInsight: '13/15 (87%) &#10003; <strong>PASSED &mdash; first pass since U25, and it closes both stubborn gaps</strong>. Section A (Path &amp; Frame) hit 4/5 &mdash; <strong>the gate cleared after three attempts; Path &amp; Frame is CLOSED</strong>. The which-piece fix worked: Q3 gave the ring correctly (the U27 failure mode), Q2 he took the middle directly. The brand-new even-count gap came back <strong>6/6</strong> (Sec B 5/5 + Q12). The two misses are careless arithmetic only: Q2 subtracted 6 instead of 4 (2&times;width slip), Q14 the cost &times;price multiply slipped.',
+    analysisLabel: 'Next: U29 &mdash; Divisibility Rules (new topic)',
+    analysisInsight: 'Path &amp; Frame and Consecutive Integers (odd + even) are both closed &mdash; move to new content. U29 = Divisibility Rules (roadmap, high ISA return): rules for 2,3,4,5,6,9,10; missing-digit and largest/smallest problems; "divisible by both". Section C keeps two &#9733;&#9733; maintenance questions (one Path &amp; Frame cost, one even-count) + a desk checklist to hold the careless cost/width slips. Two lessons. Cycle 3 position 9/10; M3 after U30.',
+    qSummary: '<strong>Sec A 4/5 &#10003; GATE CLEARED</strong> | <strong>Sec B 5/5 &#10003; PERFECT (even-count)</strong> | Sec C 4/5 &#10003; &mdash; Total 13/15 PASSED',
     qBreakdown: [
-      { q:'Q1',  topic:'Path &amp; Frame &mdash; Rectangle (35&times;22)',                  lvl:'w', pass:true,  note:'&#10003; P=114, A=770.' },
-      { q:'Q2',  topic:'Path &amp; Frame &mdash; Frame Outside (30&times;20, 4)',           lvl:'w', pass:true,  note:'&#10003; 464 cm&sup2;. Outer 38&times;28=1064, &minus;600.' },
-      { q:'Q3',  topic:'Path &amp; Frame &mdash; Carpet INSIDE (40&times;28, 3)',           lvl:'w', pass:false, note:'&#10007; 372 (correct: 748). <strong>Shrank correctly (34&times;22=748) then gave the BORDER, not the carpet. Wrong piece, not direction.</strong>' },
-      { q:'Q4',  topic:'Path &amp; Frame &mdash; Path + Cost (24&times;16, 3, &times;150)',  lvl:'w', pass:false, note:'&#10007; ฿36,720 (correct: ฿41,400). Used 204&times;180 &mdash; wrong outer area + wrong price.' },
-      { q:'Q5',  topic:'Path &amp; Frame &mdash; Inside Border Cost ★ (50&times;30, 2, &times;220)', lvl:'w', pass:true, note:'&#10003; ฿66,880. <strong>Perfect: shrank, ring 304, &times;220. Hardest question on the paper.</strong>' },
-      { q:'Q6',  topic:'Consecutive &mdash; Three (96)',                                    lvl:'m', pass:true,  note:'&#10003; 31,32,33. Middle trick.' },
-      { q:'Q7',  topic:'Consecutive &mdash; Five, smallest (85)',                           lvl:'m', pass:true,  note:'&#10003; 15.' },
-      { q:'Q8',  topic:'Consecutive &#9733; &mdash; Four, largest (78)',                    lvl:'m', pass:false, note:'&#10007; "I still don&rsquo;t know". <strong>Even count &mdash; no method.</strong>' },
-      { q:'Q9',  topic:'Consecutive EVEN &#9733; &mdash; largest (114)',                    lvl:'m', pass:true,  note:'&#10003; 40. Odd-count style (3 numbers) middle 38.' },
-      { q:'Q10', topic:'Consecutive ODD &#9733; &mdash; middle (99)',                       lvl:'m', pass:true,  note:'&#10003; 33.' },
-      { q:'Q11', topic:'Consecutive &#9733;&#9733; &mdash; Hidden sum (63)',                lvl:'h', pass:true,  note:'&#10003; 20.' },
-      { q:'Q12', topic:'Consecutive &#9733;&#9733; &mdash; Two numbers (47)',               lvl:'h', pass:true,  note:'&#10003; 23,24.' },
-      { q:'Q13', topic:'Consecutive EVEN &#9733;&#9733; &mdash; Four, largest (100)',       lvl:'h', pass:false, note:'&#10007; blank/listing. <strong>Even count again &mdash; listed 12,14,16,18&hellip; never reached 22,24,26,28.</strong>' },
-      { q:'Q14', topic:'Consecutive &#9733;&#9733; &mdash; Sum of ends (72)',               lvl:'h', pass:true,  note:'&#10003; 48. 23+25 shown.' },
-      { q:'Q15', topic:'Consecutive &#9733;&#9733; &mdash; Remove one (120)',               lvl:'h', pass:true,  note:'&#10003; 98. 120&minus;22.' }
+      { q:'Q1',  topic:'Path &amp; Frame &mdash; Rectangle (32&times;24)',                  lvl:'w', pass:true,  note:'&#10003; P=112, A=768.' },
+      { q:'Q2',  topic:'Path &amp; Frame &mdash; Carpet/MIDDLE (30&times;22, 2)',           lvl:'w', pass:false, note:'&#10007; 384 (correct: 468). <strong>Took the middle correctly (no longer the border!) but subtracted 6 not 4 &mdash; 2&times;width slip.</strong>' },
+      { q:'Q3',  topic:'Path &amp; Frame &mdash; Border/RING (28&times;16, 3)',             lvl:'w', pass:true,  note:'&#10003; 228. <strong>Gave the ring correctly &mdash; the U27 wrong-piece error is FIXED.</strong>' },
+      { q:'Q4',  topic:'Path &amp; Frame &mdash; Path + Cost (26&times;14, 2, &times;130)',  lvl:'w', pass:true,  note:'&#10003; ฿22,880. Cost clean (self-corrected first attempt).' },
+      { q:'Q5',  topic:'Path &amp; Frame &mdash; Inside Border Cost ★ (44&times;28, 2, &times;200)', lvl:'w', pass:true, note:'&#10003; ฿54,400. Shrank, ring 272, &times;200.' },
+      { q:'Q6',  topic:'Consecutive &mdash; Four (90)',                                     lvl:'m', pass:true,  note:'&#10003; 21,22,23,24. n-method written.' },
+      { q:'Q7',  topic:'Consecutive &#9733; &mdash; Four, smallest (70)',                   lvl:'m', pass:true,  note:'&#10003; 16. 4n+6=70.' },
+      { q:'Q8',  topic:'Consecutive &#9733; &mdash; Two (53)',                              lvl:'m', pass:true,  note:'&#10003; 26,27.' },
+      { q:'Q9',  topic:'Consecutive EVEN &#9733; &mdash; Four, largest (76)',               lvl:'m', pass:true,  note:'&#10003; 22. 4n+12=76. <strong>Even count &mdash; was 0/2 at U27.</strong>' },
+      { q:'Q10', topic:'Consecutive ODD &#9733; &mdash; Four, largest (80)',                lvl:'m', pass:true,  note:'&#10003; 23. 4n+12=80.' },
+      { q:'Q11', topic:'Path &amp; Frame &#9733;&#9733; &mdash; Frame only (26&times;16, 3)',lvl:'h', pass:true,  note:'&#10003; 288. Outer 704 &minus; 416.' },
+      { q:'Q12', topic:'Consecutive EVEN &#9733;&#9733; &mdash; Hidden sum (100)',          lvl:'h', pass:true,  note:'&#10003; 28. 4n+12=100. Even-count 6/6 overall.' },
+      { q:'Q13', topic:'Consecutive &#9733;&#9733; &mdash; Remove one (95)',                lvl:'h', pass:true,  note:'&#10003; 74. 95&minus;21.' },
+      { q:'Q14', topic:'Path &amp; Frame &#9733;&#9733; &mdash; Border cost (40&times;30, 2, &times;150)', lvl:'h', pass:false, note:'&#10007; ฿24,500 (correct: ฿39,600). Border area right (264), &times;150 multiply slipped.' },
+      { q:'Q15', topic:'Consecutive &#9733;&#9733; &mdash; Sum of ends (86)',               lvl:'h', pass:true,  note:'&#10003; 43. 20+23.' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -54,14 +54,14 @@ var PREM_DATA = {
     { name: 'Number Sense',      c: 88, t: 90 },
     { name: 'Algebra',           c: 98, t: 85 },
     { name: 'Arithmetic',        c: 83, t: 85 },
-    { name: 'Geometry',          c: 70, t: 80 },
+    { name: 'Geometry',          c: 74, t: 80 },
     { name: 'Counting',          c: 83, t: 85 },
     { name: 'Number Theory',     c: 83, t: 82 },
     { name: 'Applied Problems',  c: 72, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 70, 88, 98, 83, 83, 83, 72],
+  radarCurrent:  [87, 74, 88, 98, 83, 83, 83, 72],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -96,22 +96,36 @@ var PREM_DATA = {
     { n:24, score:9,  delta:+1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
     { n:25, score:12, delta:+3,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false },
     { n:26, score:11, delta:-1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
-    { n:27, score:11, delta:0,   color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false }
+    { n:27, score:11, delta:0,   color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
+    { n:28, score:13, delta:+2,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 28,
-      badge: 'linear-gradient(135deg,#BF360C,#0D47A1)',
-      title: 'Path &amp; Frame Final Re-test &middot; Consecutive Even Counts',
+      n: 29,
+      badge: 'linear-gradient(135deg,#00695C,#004D40)',
+      title: 'Divisibility Rules &middot; Divisibility in Problems',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Path &amp; Frame &mdash; Which Piece', c:'tblue' },
-        { t:'L2: Consecutive &mdash; Even-Count n-Method', c:'tblue' }
+        { t:'L1: Divisibility Rules (2&ndash;10)', c:'tblue' },
+        { t:'L2: Divisibility in Problems', c:'tblue' }
       ],
-      note: 'U28: one more focused Path &amp; Frame re-test (Lui agreed &mdash; lock the whole concept). Direction is fixed; this targets the two U27 misses &mdash; which PIECE (carpet/middle vs border/ring) + clean cost. Plus the NEW gap: consecutive EVEN-COUNT (four-number) n-method (U27 Q8/Q13 0/2). Two lessons. Sec A Path &amp; Frame final re-test, Sec B even-count, Sec C mixed consolidation. Pass: Sec A &ge; 4/5; overall 12/15.',
+      note: 'U29: new topic &mdash; Divisibility Rules (roadmap, high ISA return). Path &amp; Frame and Consecutive both CLOSED at U28, so move on. L1: rules for 2,3,4,5,6,9,10 (last digit / last two / digit sum / combine for 6). L2: missing-digit, largest/smallest, "divisible by both". Sec C keeps two &#9733;&#9733; maintenance Qs (Path &amp; Frame cost + even-count) to confirm the fixes hold, with a desk checklist for the cost/width slips. Two lessons. Pass: 12/15.',
       status: 'pending'
+    },
+    {
+      n: 28,
+      badge: 'linear-gradient(135deg,#43e97b,#38f9d7)',
+      title: 'Path &amp; Frame Final Re-test &middot; Consecutive Even Counts',
+      tags: [
+        { t:'13/15 (87%) &#11014; PASSED', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Sec A 4/5 &#10003; GATE CLEARED', c:'tgreen' },
+        { t:'<strong>Sec B 5/5 even-count</strong>', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Path &amp; Frame CLOSED &#10003;', c:'tgreen' }
+      ],
+      note: '13/15 (87%) &#10003; PASSED &mdash; first pass since U25. <strong>Path &amp; Frame CLOSED</strong>: Sec A 4/5, gate cleared on the 3rd attempt. Which-piece fixed (Q3 ring correct; Q2 took the middle). <strong>Even-count n-method MASTERED 6/6</strong> (Sec B 5/5 + Q12) &mdash; from 0/2 at U27 in one lesson. The two misses are careless only: Q2 subtracted 6 not 4 (2&times;width slip), Q14 cost &times;price multiply slipped. &rarr; U29 new topic (Divisibility) with light maintenance + desk checklist.',
+      status: 'done'
     },
     {
       n: 27,
@@ -494,16 +508,22 @@ var PREM_DATA = {
   // ── Priority gaps (rendered in Overview + Results) ────────────────
   priorityGaps: [
     {
-      label:     'Path & Frame: which PIECE + cost arithmetic — ACTIVE — U28 final re-test',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'Direction is now FIXED (U27: every shrink correct; Q5 inside+cost perfect). Sec A still 3/5 on two narrower issues: Q3 reported the BORDER (372) when asked for the CARPET (748 &mdash; computed it right, wrong piece); Q4 cost arithmetic (204&times;180 not 276&times;150). Fix: "underline the piece" (middle = inner directly; ring = big&minus;small) + copy the exact price. U28 = final Path &amp; Frame re-test. Pass &ge; 4/5.',
-      fillClass: 'g2', fillPct: 70
+      label:     'Path & Frame — RESOLVED in U28 (CLOSED after 3-test slump)',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U28 Sec A 4/5 &mdash; gate cleared. Direction fixed, which-piece fixed (Q3 ring &#10003;; Q2 took the middle), cost shown correct (Q4, Q5). The lone Sec A miss (Q2 384 vs 468) was a 2&times;width slip (subtracted 6 not 4), not conceptual. The three-test Path &amp; Frame wall (M2&rarr;U26&rarr;U27) is down.',
+      fillClass: 'gs', fillPct: 90
     },
     {
-      label:     'Consecutive Integers: EVEN-COUNT (four-number) n-method — ACTIVE — U28 target',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U27: odd-count middle trick LOCKED 7/7 (incl. all compounds &mdash; hidden sum, sum of ends, remove-one). But even-count 0/2: Q8 "I still don&rsquo;t know", Q13 listed 12,14,16,18&hellip; with no answer. No procedure when there is no single middle. Fix: n-method (n,n+1,n+2,n+3 &rarr; 4n+6; even/odd &rarr; 4n+12). One focused lesson + U28 Section B.',
-      fillClass: 'g2', fillPct: 55
+      label:     'Consecutive Integers — RESOLVED (odd + even both locked)',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'Odd-count middle trick LOCKED 7/7 (U27, all compounds). Even-count n-method MASTERED 6/6 (U28 Sec B 5/5 + Q12) &mdash; from 0/2 to perfect in one lesson. Whole topic closed.',
+      fillClass: 'gs', fillPct: 92
+    },
+    {
+      label:     'Cost-multiply / arithmetic care — MONITOR (careless, not conceptual)',
+      pill:      'p2', pillText: 'Monitor &#128992;',
+      score:     'Two U28 misses were careless steps inside correct methods: Q14 the &times;price multiply slipped (฿24,500 vs ฿39,600), Q2 the 2&times;width subtraction (&minus;6 not &minus;4). No concept gap. Fix = 60-second desk checklist (area &times; exact price; border width w &rarr; subtract 2w) + 1&ndash;2 maintenance Qs per test, not a lesson.',
+      fillClass: 'g2', fillPct: 75
     },
     {
       label:     'Sequences: Two-Term NOVEL Pairs (T₂+T₄, T₃+T₆, T₄+T₇) — ACTIVE — last sequences gap',
@@ -572,7 +592,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U27'
+  radarLegendUnit: 'U28'
 
 };
 

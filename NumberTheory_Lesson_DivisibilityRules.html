@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Divisibility Rules — The Quick Checks</title>
+<style>
+:root{--nav:#00695C;--nav-dark:#004D40;--bg:#E0F2F1;--card:#fff;--acc:#00695C;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#00796B;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul,ol{padding-left:20px;margin-top:6px}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;font-size:1.02rem;font-weight:700;margin:0 auto 10px;max-width:560px}
+.mv{border-radius:12px;padding:12px;border:3px solid;position:relative;margin-bottom:12px}
+.mv h4{font-size:.97rem;margin-bottom:5px}
+.mv p{font-size:.88rem;line-height:1.5}
+.mv-last{background:#E1F5FE;border-color:#4FC3F7}.mv-last h4{color:#01579B}
+.mv-sum{background:#F1F8E9;border-color:#AED581}.mv-sum h4{color:#33691E}
+.mv-combo{background:#FFF3E0;border-color:#FFB74D}.mv-combo h4{color:#E65100}
+.today::before{content:'TODAY';position:absolute;top:-11px;right:10px;background:#FFD54F;color:#5D4037;font-size:.7rem;font-weight:800;padding:2px 9px;border-radius:8px}
+.numbig{display:flex;justify-content:center;gap:4px;margin:12px 0}
+.dgt{width:46px;height:56px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.5rem;border:2px solid #4DB6AC;background:#E0F2F1;color:#004D40}
+.dgt.hot{background:#FFE0B2;border-color:#FB8C00;color:#E65100}
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid #80CBC4;padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:#00695C}
+.rules-tbl{width:100%;border-collapse:collapse;margin-top:8px}
+.rules-tbl td{border:1px solid #B2DFDB;padding:8px 10px;font-size:.92rem}
+.rules-tbl td:first-child{font-weight:800;color:#00695C;text-align:center;width:60px;font-size:1.1rem;background:#E0F2F1}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.93rem;color:#E65100}
+.q-card{background:#F4FBFA;border:1.5px solid #80CBC4;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E0F2F1}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#F1F8F7;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#00695C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.rule-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:8px}
+.rule-key{font-weight:700;color:#00695C;font-size:.95rem;white-space:nowrap}
+.rule-val{font-size:.93rem;color:#333}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Divisibility Rules &mdash; The Quick Checks</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1 -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F50D; Tell If It Divides &mdash; Without Dividing</h2>
+  <p>A number is <strong>divisible</strong> by another if it splits evenly with <strong>no remainder</strong>. Instead of doing the whole division, there are quick <strong>rules</strong> that tell you the answer in seconds. They all look at either the <strong>last digit(s)</strong> or the <strong>digit sum</strong>.</p>
+</div>
+
+<div class="q-node">&#x1F50D; Which divisor are you testing?</div>
+
+<div class="mv mv-last today">
+  <h4>&#x1F441;&#xFE0F; LOOK AT THE END &mdash; for 2, 5, 10 (and 4)</h4>
+  <p>2 &rarr; last digit even. 5 &rarr; last digit 0 or 5. 10 &rarr; last digit 0. 4 &rarr; last TWO digits make a number that &divide; 4.</p>
+</div>
+<div class="mv mv-sum today">
+  <h4>&#x2795; ADD THE DIGITS &mdash; for 3 and 9</h4>
+  <p>3 &rarr; digit sum &divide; 3. 9 &rarr; digit sum &divide; 9.</p>
+</div>
+<div class="mv mv-combo today">
+  <h4>&#x1F517; COMBINE TWO RULES &mdash; for 6</h4>
+  <p>6 = 2 &times; 3, so a number &divide; 6 only if it passes BOTH the &divide;2 and the &divide;3 checks.</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start the Lesson &#8594;</button></div>
+</div>
+
+<!-- Screen 2: last digit -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>Look at the End &mdash; 2, 5, 10</h2>
+  <p>For these three, you only need the <strong>very last digit</strong>. Ignore everything else.</p>
+  <table class="rules-tbl">
+    <tr><td>2</td><td>Last digit is even (0, 2, 4, 6, 8). &nbsp; <em>3,476 &rarr; ends in 6 &rarr; yes</em></td></tr>
+    <tr><td>5</td><td>Last digit is 0 or 5. &nbsp; <em>8,205 &rarr; ends in 5 &rarr; yes</em></td></tr>
+    <tr><td>10</td><td>Last digit is 0. &nbsp; <em>5,940 &rarr; ends in 0 &rarr; yes</em></td></tr>
+  </table>
+</div>
+<div class="card">
+  <h3>And 4 &mdash; look at the last TWO digits</h3>
+  <p>A number is &divide; 4 if the number made by its <strong>last two digits</strong> is &divide; 4.</p>
+  <div class="numbig"><div class="dgt">7</div><div class="dgt">6</div><div class="dgt hot">2</div><div class="dgt hot">8</div></div>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">7,628 &rarr; last two digits = 28 &rarr; 28 &divide; 4 = 7</span><span class="eq-why">&#8592; yes, divisible by 4</span></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: digit sum -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Add the Digits &mdash; 3 and 9</h2>
+  <p>Add up all the digits. If that <strong>digit sum</strong> is divisible by 3, so is the whole number. Same idea for 9.</p>
+  <h3>Example: is 5,124 divisible by 3?</h3>
+  <div class="numbig"><div class="dgt hot">5</div><div class="dgt hot">1</div><div class="dgt hot">2</div><div class="dgt hot">4</div></div>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">5 + 1 + 2 + 4 = 12</span><span class="eq-why">&#8592; the digit sum</span></div>
+    <div class="eq-row"><span class="eq-math">12 &divide; 3 = 4 &rarr; YES, 5,124 is divisible by 3</span></div>
+  </div>
+  <h3>Example: is 6,453 divisible by 9?</h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">6 + 4 + 5 + 3 = 18 &rarr; 18 &divide; 9 = 2 &rarr; YES</span></div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; If the digit sum is still big, add its digits again. 18 &rarr; 1+8 = 9. Anything whose digits eventually reach 9 is divisible by 9 (and 3).</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: combine -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Combine Two Rules &mdash; 6</h2>
+  <p><strong>6 = 2 &times; 3.</strong> So a number is divisible by 6 only if it passes <strong>both</strong> checks: even AND digit sum &divide; 3. Miss either one, and the answer is no.</p>
+  <h3>Example: is 5,418 divisible by 6?</h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">&divide;2? ends in 8 &rarr; even &#10003;</span></div>
+    <div class="eq-row"><span class="eq-math">&divide;3? 5+4+1+8 = 18 &rarr; &divide;3 &#10003;</span></div>
+    <div class="eq-row"><span class="eq-math">both pass &rarr; YES, divisible by 6</span></div>
+  </div>
+  <div class="warn-box"><p>&#x274C; <strong>Careful:</strong> 5,128 is even, but 5+1+2+8 = 16, and 16 is not &divide; 3. So 5,128 is <strong>not</strong> divisible by 6. You must pass BOTH.</p></div>
+</div>
+<div class="card" style="background:#E0F2F1;border:1px solid #80CBC4">
+  <p style="font-size:.92rem;color:#004D40"><strong>Same trick for 15:</strong> 15 = 3 &times; 5, so check &divide;3 (digit sum) AND &divide;5 (ends in 0 or 5).</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: practice -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Practice</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Last digit for 2/5/10, last two for 4, digit sum for 3/9, BOTH checks for 6.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; Which of these is divisible by 3?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 124</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 207</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 415</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; 530</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="eq-chain"><div class="eq-row"><span class="eq-math">2+0+7 = 9 &rarr; &divide;3 &#10003; (others: 1+2+4=7, 4+1+5=10, 5+3+0=8 &mdash; none &divide;3)</span></div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; Is 3,150 divisible by 9?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; Yes</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; No</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="eq-chain"><div class="eq-row"><span class="eq-math">3+1+5+0 = 9 &rarr; &divide;9 &#10003; &rarr; Yes</span></div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; Which of these is divisible by 4?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 318</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 526</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 732</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; 814</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'C')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="eq-chain"><div class="eq-row"><span class="eq-math">last two of 732 = 32 &rarr; 32&divide;4=8 &#10003; (18,26,14 are not &divide;4)</span></div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; Is 4,260 divisible by 6?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; Yes</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; No</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="eq-chain"><div class="eq-row"><span class="eq-math">&divide;2? ends in 0 &#10003;. &divide;3? 4+2+6+0=12 &#10003;. Both &rarr; Yes</span></div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 6: summary -->
+<div class="screen" id="s5">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; The Rules on One Card</div>
+  <div class="rule-grid">
+    <span class="rule-key">&divide; 2:</span><span class="rule-val">last digit even (0,2,4,6,8).</span>
+    <span class="rule-key">&divide; 5:</span><span class="rule-val">last digit 0 or 5.</span>
+    <span class="rule-key">&divide; 10:</span><span class="rule-val">last digit 0.</span>
+    <span class="rule-key">&divide; 4:</span><span class="rule-val">last TWO digits make a number &divide; 4.</span>
+    <span class="rule-key">&divide; 3:</span><span class="rule-val">digit sum &divide; 3.</span>
+    <span class="rule-key">&divide; 9:</span><span class="rule-val">digit sum &divide; 9.</span>
+    <span class="rule-key">&divide; 6:</span><span class="rule-val">passes &divide;2 AND &divide;3.</span>
+  </div>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You are ready when...</h3>
+  <ul>
+    <li>You glance at the last digit for 2, 5, 10 without thinking</li>
+    <li>You add the digits straight away for 3 and 9</li>
+    <li>You always run BOTH checks for 6</li>
+  </ul>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Hub</a>
+  <a href="NumberTheory_Lesson_DivisibilityProblems.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#00695C;color:#fff;border:2px solid #00695C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 2 &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Please select an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! Rule applied cleanly.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not quite. Last digit for 2/5/10, last two for 4, digit sum for 3/9, both checks for 6. Click Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>
