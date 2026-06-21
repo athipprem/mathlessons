@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Art of Counting — Multiply &amp; Choose</title>
+<style>
+:root{--nav:#6A1B9A;--nav-dark:#4A148C;--bg:#F5EEFB;--card:#fff;--acc:#6A1B9A;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#7B1FA2;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul,ol{padding-left:20px;margin-top:6px}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;font-size:1.02rem;font-weight:700;margin:0 auto 10px;max-width:580px}
+.mv{border-radius:12px;padding:12px;border:3px solid;position:relative;margin-bottom:12px}
+.mv h4{font-size:.97rem;margin-bottom:5px}
+.mv p{font-size:.88rem;line-height:1.5}
+.mv-mult{background:#EDE7F6;border-color:#B39DDB}.mv-mult h4{color:#4A148C}
+.mv-order{background:#E1F5FE;border-color:#4FC3F7}.mv-order h4{color:#01579B}
+.mv-choose{background:#F1F8E9;border-color:#AED581}.mv-choose h4{color:#33691E}
+.today::before{content:'TODAY';position:absolute;top:-11px;right:10px;background:#FFD54F;color:#5D4037;font-size:.7rem;font-weight:800;padding:2px 9px;border-radius:8px}
+.slots{display:flex;justify-content:center;gap:10px;margin:14px 0;flex-wrap:wrap}
+.slot{min-width:74px;padding:12px 8px;border-radius:10px;text-align:center;border:2px solid #B39DDB;background:#EDE7F6}
+.slot .big{font-size:1.5rem;font-weight:800;color:#4A148C}
+.slot .lbl{font-size:.72rem;color:#6A1B9A;font-weight:700;margin-top:4px}
+.times{font-size:1.5rem;font-weight:800;color:#6A1B9A;align-self:center}
+.hsdiag{display:flex;justify-content:center;margin:10px 0}
+.eq-chain{margin:10px 0 14px 0;border-left:3px solid #CE93D8;padding-left:12px}
+.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
+.eq-why{font-size:.86rem;font-style:italic;color:#6A1B9A}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.93rem;color:#E65100}
+.q-card{background:#FBF7FE;border:1.5px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#F5EEFB}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{background:#FAF5FF;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#F5EEFB;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#6A1B9A;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.rule-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:8px}
+.rule-key{font-weight:700;color:#6A1B9A;font-size:.95rem;white-space:nowrap}
+.rule-val{font-size:.93rem;color:#333}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Art of Counting &mdash; Multiply &amp; Choose</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1 -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F9EE; Count Without Listing Them All</h2>
+  <p>Competition questions often ask "how many ways&hellip;?" with numbers far too big to draw. The trick is to <strong>multiply the choices</strong>, and to know when order matters and when it does not. Three moves cover almost everything.</p>
+</div>
+
+<div class="q-node">&#x1F50D; Are you BUILDING with stages, or CHOOSING a group?</div>
+
+<div class="mv mv-mult today">
+  <h4>&#x2716;&#xFE0F; MULTIPLY &mdash; "one from each group / stage after stage"</h4>
+  <p>Number of ways = (choices at stage 1) &times; (choices at stage 2) &times; &hellip; &nbsp; <em>2 shirts &times; 3 shorts = 6 outfits.</em></p>
+</div>
+<div class="mv mv-order today">
+  <h4>&#x1F522; ARRANGE &mdash; "in a row / order matters / first &amp; second"</h4>
+  <p>Fill the first slot, then the next from what's left: 5 &times; 4 &times; 3&hellip; <em>Arrange 4 books = 4&times;3&times;2&times;1 = 24.</em></p>
+</div>
+<div class="mv mv-choose today">
+  <h4>&#x1F91D; CHOOSE 2 &mdash; "pairs / handshakes / games / lines"</h4>
+  <p>Order does NOT matter. Pairs from n people = <strong>n &times; (n&minus;1) &divide; 2</strong>. (Divide by 2 because A&ndash;B is the same pair as B&ndash;A.)</p>
+</div>
+
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start the Lesson &#8594;</button></div>
+</div>
+
+<!-- Screen 2: multiply -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>The Multiplication Rule</h2>
+  <p>If a choice happens in <strong>stages</strong>, multiply the number of options at each stage. One slot per stage.</p>
+  <h3>Example: 2 hats, 3 scarves. How many hat-and-scarf sets?</h3>
+  <div class="slots">
+    <div class="slot"><div class="big">2</div><div class="lbl">hats</div></div>
+    <div class="times">&times;</div>
+    <div class="slot"><div class="big">3</div><div class="lbl">scarves</div></div>
+    <div class="times">=</div>
+    <div class="slot" style="background:#E8F5E9;border-color:#A5D6A7"><div class="big" style="color:#1B5E20">6</div><div class="lbl">sets</div></div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; "Make a number / a code / an outfit, one part at a time" &rarr; multiply. If digits can repeat, each slot has the full set of choices (e.g. 4 digits, 2-digit number with repeats = 4 &times; 4 = 16).</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: arrange -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Arrange in Order</h2>
+  <p>When you place things <strong>in a row</strong> (or pick 1st, 2nd, 3rd&hellip;), each slot uses one up &mdash; so the choices count down.</p>
+  <h3>Example: pick a Captain and a Goalkeeper from 4 players.</h3>
+  <div class="slots">
+    <div class="slot"><div class="big">4</div><div class="lbl">captain</div></div>
+    <div class="times">&times;</div>
+    <div class="slot"><div class="big">3</div><div class="lbl">keeper (3 left)</div></div>
+    <div class="times">=</div>
+    <div class="slot" style="background:#E8F5E9;border-color:#A5D6A7"><div class="big" style="color:#1B5E20">12</div><div class="lbl">ways</div></div>
+  </div>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">Arrange ALL 4 in a row = 4 &times; 3 &times; 2 &times; 1 = 24</span><span class="eq-why">&#8592; this is "4!"</span></div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Captain-then-keeper, order MATTERS (Ann-captain is different from Ann-keeper) &rarr; multiply 4&times;3, do NOT divide by 2.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: choose 2 -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Choose 2 &mdash; Pairs &amp; Handshakes</h2>
+  <p>Now order does <strong>not</strong> matter: a handshake between A and B is the same as B and A. So we count the ordered ways and <strong>divide by 2</strong>.</p>
+  <h3>Example: 4 people each shake hands once. How many handshakes?</h3>
+  <div class="eq-chain">
+    <div class="eq-row"><span class="eq-math">ordered: each of 4 people shakes the other 3 &rarr; 4 &times; 3 = 12</span></div>
+    <div class="eq-row"><span class="eq-math">but A&ndash;B = B&ndash;A, so &divide; 2 &rarr; 12 &divide; 2 = 6 handshakes</span><span class="eq-why">&#8592; the formula!</span></div>
+  </div>
+  <div class="golden">
+    <div class="golden-title">&#x1F511; Pairs from n things = n &times; (n &minus; 1) &divide; 2</div>
+    <p style="font-size:.92rem;color:#5D4037">Handshakes, games where every pair plays once, lines through dots, choosing 2 from a group &mdash; all the same formula.</p>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; <strong>Diagonals of a shape:</strong> count all pairs of corners, then subtract the sides (a side joins corners but isn't a diagonal). Hexagon: 6&times;5&divide;2 = 15 pairs, &minus; 6 sides = <strong>9 diagonals</strong>.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: practice -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Practice</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Building in stages &rarr; multiply. In a row / 1st &amp; 2nd &rarr; count down. Pairs / handshakes &rarr; n&times;(n&minus;1)&divide;2.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; A set lunch has 5 mains and 2 desserts. How many different main-and-dessert lunches are possible?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 10</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; 25</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="eq-chain"><div class="eq-row"><span class="eq-math">stages &rarr; multiply: 5 &times; 2 = 10</span></div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; In how many ways can 3 different trophies be arranged in a row on a shelf?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; 12</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="eq-chain"><div class="eq-row"><span class="eq-math">in a row &rarr; 3 &times; 2 &times; 1 = 6</span></div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; 9 people are at a party and everyone shakes hands once with everyone else. How many handshakes happen?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 18</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 36</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 72</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; 81</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="eq-chain"><div class="eq-row"><span class="eq-math">pairs = 9 &times; 8 &divide; 2 = 72 &divide; 2 = 36</span></div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; From a club of 10 members, how many different pairs can be chosen to share a prize?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 45</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 90</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; 100</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="eq-chain"><div class="eq-row"><span class="eq-math">pairs = 10 &times; 9 &divide; 2 = 90 &divide; 2 = 45</span></div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 6: summary -->
+<div class="screen" id="s5">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Counting on One Card</div>
+  <div class="rule-grid">
+    <span class="rule-key">Stages / one each:</span><span class="rule-val">MULTIPLY the choices (2 &times; 3 = 6).</span>
+    <span class="rule-key">In a row / order:</span><span class="rule-val">count down: 5 &times; 4 &times; 3&hellip; (all of them = n!).</span>
+    <span class="rule-key">1st &amp; 2nd (order):</span><span class="rule-val">n &times; (n&minus;1), do NOT divide.</span>
+    <span class="rule-key">Pairs / handshakes:</span><span class="rule-val">n &times; (n&minus;1) &divide; 2 (order doesn't matter).</span>
+    <span class="rule-key">Diagonals:</span><span class="rule-val">all pairs of corners &minus; the sides.</span>
+  </div>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You are ready when...</h3>
+  <ul>
+    <li>You ask first: building in stages, or choosing a group?</li>
+    <li>You divide by 2 ONLY when order doesn't matter (pairs, handshakes)</li>
+    <li>You never divide for "1st and 2nd" / captain-and-keeper questions</li>
+  </ul>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#F5EEFB;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Hub</a>
+  <a href="Sequences_Lesson_NovelPairCoefficients.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#6A1B9A;color:#fff;border:2px solid #6A1B9A;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 2 &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Please select an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! Right move chosen.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not quite. Stages → multiply; in a row → count down; pairs/handshakes → n×(n−1)÷2. Click Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

@@ -204,21 +204,21 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <!-- JS-rendered last unit pattern box (reads from prem_data.js) -->
         <div id="idx-unit-pattern" style="margin-bottom:12px"></div>
         <div class="grid-3">
-          <!-- U29 Lesson 1: Divisibility Rules -->
-          <div class="lesson-card" data-unit="29" data-topic="numbertheory" style="border-top:3px solid #00695C">
-            <div class="lc-unit" style="color:#00695C">Number Theory &middot; Unit 29 &middot; Lesson 1</div>
-            <div class="lc-title">Divisibility Rules &mdash; The Quick Checks</div>
-            <div class="lc-desc">New topic. Tell if a number divides &mdash; without dividing. Last digit for 2/5/10, last two digits for 4, digit sum for 3/9, and combine both checks for 6. Visual digit cards. 4 practice questions.</div>
+          <!-- U30 Lesson 1: Art of Counting -->
+          <div class="lesson-card" data-unit="30" data-topic="counting" style="border-top:3px solid #6A1B9A">
+            <div class="lc-unit" style="color:#6A1B9A">Art of Counting &middot; Unit 30 &middot; Lesson 1</div>
+            <div class="lc-title">Art of Counting &mdash; Multiply &amp; Choose</div>
+            <div class="lc-desc">New topic. Count without listing: multiply choices across stages, count down for "in a row", and the pairs / handshakes rule n&times;(n&minus;1)&divide;2 (plus diagonals). 4 practice questions.</div>
             <div class="lc-badges"><span class="badge badge-new">&#9654; New</span></div>
-            <a class="btn-start" style="background:linear-gradient(135deg,#00695C,#00897B)" href="NumberTheory_Lesson_DivisibilityRules.html">Open Lesson</a>
+            <a class="btn-start" style="background:linear-gradient(135deg,#6A1B9A,#8E24AA)" href="Counting_Lesson_MultiplyAndChoose.html">Open Lesson</a>
           </div>
-          <!-- U29 Lesson 2: Divisibility in Problems -->
-          <div class="lesson-card" data-unit="29" data-topic="numbertheory" style="border-top:3px solid #00695C">
-            <div class="lc-unit" style="color:#00695C">Number Theory &middot; Unit 29 &middot; Lesson 2</div>
-            <div class="lc-title">Divisibility in Problems &mdash; Missing Digits &amp; More</div>
-            <div class="lc-desc">Use the rules backwards: find a missing digit, the largest/smallest number that fits, or test two divisors at once (by both 4 and 6 &rarr; by 12). 4 practice questions.</div>
-            <div class="lc-badges"><span class="badge badge-new">&#9654; New</span></div>
-            <a class="btn-start" style="background:linear-gradient(135deg,#00796B,#009688)" href="NumberTheory_Lesson_DivisibilityProblems.html">Open Lesson</a>
+          <!-- U30 Lesson 2: Sequences Novel-Pair Coefficients -->
+          <div class="lesson-card" data-unit="30" data-topic="patterns" style="border-top:3px solid #0D47A1">
+            <div class="lc-unit" style="color:#0D47A1">Patterns &middot; Unit 30 &middot; Lesson 2</div>
+            <div class="lc-title">Sequences &mdash; Two-Term Sums for ANY Pair</div>
+            <div class="lc-desc">Closes the last open gap. No memorising: build each term's d-count fresh as (position &minus; 1), so T&#8322;+T&#8327; is the same job as T&#8323;+T&#8325;. 4 practice questions.</div>
+            <div class="lc-badges"><span class="badge badge-new">&#9654; New</span><span class="badge" style="background:#e3f2fd;color:#0D47A1">Gap closer</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#0D47A1,#1565C0)" href="Sequences_Lesson_NovelPairCoefficients.html">Open Lesson</a>
           </div>
         </div>
       </div>
@@ -325,6 +325,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         </div>
         <div class="sec-div">Number Theory</div>
         <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card number-theory" data-unit="29" data-topic="number-theory" style="border-top:3px solid #43e97b">
+            <div class="lc-unit">Number Theory &middot; Unit 29 &middot; Lesson 1</div>
+            <div class="lc-title">Divisibility Rules &mdash; The Quick Checks</div>
+            <div class="lc-desc">Sec A 5/5 &#10003;. Rules for 2,3,4,5,6,9,10 (last digit / last two / digit sum / combine for 6). Divisibility 12/13 overall.</div>
+            <div class="lc-badges"><span class="badge badge-done">&#10003; Done</span><span class="badge badge-test-done">Sec A 5/5 &#10003;</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#00695C,#00897B)" href="NumberTheory_Lesson_DivisibilityRules.html">Review</a>
+          </div>
+          <div class="lesson-card number-theory" data-unit="29" data-topic="number-theory" style="border-top:3px solid #43e97b">
+            <div class="lc-unit">Number Theory &middot; Unit 29 &middot; Lesson 2</div>
+            <div class="lc-title">Divisibility in Problems &mdash; Missing Digits &amp; More</div>
+            <div class="lc-desc">Sec B 5/5 &#10003;. Missing digit, largest/smallest, "by both" (4 &amp; 6 &rarr; 12). Tidy-up: "list ALL" completeness.</div>
+            <div class="lc-badges"><span class="badge badge-done">&#10003; Done</span><span class="badge badge-test-done">Sec B 5/5 &#10003;</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#00796B,#009688)" href="NumberTheory_Lesson_DivisibilityProblems.html">Review</a>
+          </div>
           <div class="lesson-card number-theory" data-unit="15" data-topic="number-theory">
             <div class="lc-unit">Number Theory &middot; Unit 15</div>
             <div class="lc-title">HCF Three-Item Applied</div>
@@ -693,21 +707,38 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         </div>
         <!-- VIEW: BY UNIT -->
         <div id="done-by-unit" style="display:none">
-        <div class="sec-div">Unit 29 &mdash; In Progress &mdash; Divisibility Rules &middot; Divisibility in Problems</div>
+        <div class="sec-div">Unit 30 &mdash; In Progress &mdash; Art of Counting &middot; Sequences: Two-Term Novel Pairs</div>
         <div class="grid-3" style="margin-bottom:20px">
-          <div class="lesson-card" data-unit="29" style="border-top:3px solid #00695C">
+          <div class="lesson-card" data-unit="30" style="border-top:3px solid #6A1B9A">
+            <div class="lc-unit" style="color:#6A1B9A">Art of Counting &middot; Unit 30 &middot; Lesson 1</div>
+            <div class="lc-title">Art of Counting &mdash; Multiply &amp; Choose</div>
+            <div class="lc-desc">In progress. Multiply across stages, count down for a row, pairs/handshakes n&times;(n&minus;1)&divide;2. 4 practice questions.</div>
+            <div class="lc-badges"><span class="badge" style="background:#f3e8ff;color:#6A1B9A">&#9654; In Progress</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#6A1B9A,#8E24AA)" href="Counting_Lesson_MultiplyAndChoose.html">Open Lesson</a>
+          </div>
+          <div class="lesson-card" data-unit="30" style="border-top:3px solid #0D47A1">
+            <div class="lc-unit" style="color:#0D47A1">Patterns &middot; Unit 30 &middot; Lesson 2</div>
+            <div class="lc-title">Sequences &mdash; Two-Term Sums for ANY Pair</div>
+            <div class="lc-desc">In progress. Build each d-count fresh = (position &minus; 1). Closes the last sequences gap before M3. 4 practice questions.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e3f2fd;color:#0D47A1">&#9654; In Progress</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#0D47A1,#1565C0)" href="Sequences_Lesson_NovelPairCoefficients.html">Open Lesson</a>
+          </div>
+        </div>
+        <div class="sec-div">Unit 29 &mdash; 12/15 (80%) &#10003; PASSED &mdash; Divisibility Rules &middot; Divisibility in Problems</div>
+        <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card" data-unit="29" style="border-top:3px solid #43e97b">
             <div class="lc-unit" style="color:#00695C">Number Theory &middot; Unit 29 &middot; Lesson 1</div>
             <div class="lc-title">Divisibility Rules &mdash; The Quick Checks</div>
-            <div class="lc-desc">In progress. Last digit for 2/5/10, last two for 4, digit sum for 3/9, both checks for 6. 4 practice questions.</div>
-            <div class="lc-badges"><span class="badge" style="background:#e0f2f1;color:#00695C">&#9654; In Progress</span></div>
-            <a class="btn-start" style="background:linear-gradient(135deg,#00695C,#00897B)" href="NumberTheory_Lesson_DivisibilityRules.html">Open Lesson</a>
+            <div class="lc-desc">Done. <strong>Sec A 5/5</strong> &mdash; every rule (2,3,4,5,6,9,10) clean, incl. the both-checks ÷6.</div>
+            <div class="lc-badges"><span class="badge badge-done">&#10003; Done</span><span class="badge badge-test-done">Sec A 5/5 &#10003;</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#00695C,#00897B)" href="NumberTheory_Lesson_DivisibilityRules.html">Review</a>
           </div>
-          <div class="lesson-card" data-unit="29" style="border-top:3px solid #00695C">
+          <div class="lesson-card" data-unit="29" style="border-top:3px solid #43e97b">
             <div class="lc-unit" style="color:#00695C">Number Theory &middot; Unit 29 &middot; Lesson 2</div>
             <div class="lc-title">Divisibility in Problems &mdash; Missing Digits &amp; More</div>
-            <div class="lc-desc">In progress. Missing digit, largest/smallest, and "by both" (4 &amp; 6 &rarr; 12). 4 practice questions.</div>
-            <div class="lc-badges"><span class="badge" style="background:#e0f2f1;color:#00695C">&#9654; In Progress</span></div>
-            <a class="btn-start" style="background:linear-gradient(135deg,#00796B,#009688)" href="NumberTheory_Lesson_DivisibilityProblems.html">Open Lesson</a>
+            <div class="lc-desc">Done. <strong>Sec B 5/5</strong> &mdash; missing-digit, largest/smallest, "by both" all landed. Tidy-up: "list ALL" completeness (Q13).</div>
+            <div class="lc-badges"><span class="badge badge-done">&#10003; Done</span><span class="badge badge-test-done">Sec B 5/5 &#10003;</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#00796B,#009688)" href="NumberTheory_Lesson_DivisibilityProblems.html">Review</a>
           </div>
         </div>
         <div class="sec-div">Unit 28 &mdash; 13/15 (87%) &#11014; &#10003; PASSED &mdash; Path &amp; Frame Final Re-test &middot; Consecutive Even Counts</div>

@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '16 Jun 2026',
+  updated:        '21 Jun 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:29, topic:'Divisibility Rules · Divisibility in Problems', status:'In Progress' },
+  currentUnit: { n:30, topic:'Art of Counting · Sequences: Two-Term Novel Pairs', status:'In Progress' },
   lastUnit: {
-    n:28, score:13, outOf:15, pct:87, delta:+2, prevScore:11,
-    patternLabel: 'U28 Analysis — PASSED',
-    patternInsight: '13/15 (87%) &#10003; <strong>PASSED &mdash; first pass since U25, and it closes both stubborn gaps</strong>. Section A (Path &amp; Frame) hit 4/5 &mdash; <strong>the gate cleared after three attempts; Path &amp; Frame is CLOSED</strong>. The which-piece fix worked: Q3 gave the ring correctly (the U27 failure mode), Q2 he took the middle directly. The brand-new even-count gap came back <strong>6/6</strong> (Sec B 5/5 + Q12). The two misses are careless arithmetic only: Q2 subtracted 6 instead of 4 (2&times;width slip), Q14 the cost &times;price multiply slipped.',
-    analysisLabel: 'Next: U29 &mdash; Divisibility Rules (new topic)',
-    analysisInsight: 'Path &amp; Frame and Consecutive Integers (odd + even) are both closed &mdash; move to new content. U29 = Divisibility Rules (roadmap, high ISA return): rules for 2,3,4,5,6,9,10; missing-digit and largest/smallest problems; "divisible by both". Section C keeps two &#9733;&#9733; maintenance questions (one Path &amp; Frame cost, one even-count) + a desk checklist to hold the careless cost/width slips. Two lessons. Cycle 3 position 9/10; M3 after U30.',
-    qSummary: '<strong>Sec A 4/5 &#10003; GATE CLEARED</strong> | <strong>Sec B 5/5 &#10003; PERFECT (even-count)</strong> | Sec C 4/5 &#10003; &mdash; Total 13/15 PASSED',
+    n:29, score:12, outOf:15, pct:80, delta:-1, prevScore:13,
+    patternLabel: 'U29 Analysis — PASSED',
+    patternInsight: '12/15 (80%) &#10003; <strong>PASSED &mdash; and divisibility is a clean success</strong>. On pure divisibility he scored <strong>12 of 13</strong> (A 5/5, B 5/5, plus Q11 &amp; Q12). The new topic landed almost perfectly in one unit. <strong>The entire Section C drop is the two maintenance questions (Q14, Q15), which Prem left blank</strong> &mdash; he wrote "IS THIS THE right TOPIC?" beside Q14. That is a test-design issue, not a maths gap.',
+    analysisLabel: 'Next: U30 &mdash; Art of Counting + Sequences Novel Pairs (pre-M3)',
+    analysisInsight: 'Rule change (21 Jun, Lui): unit tests are now 100% on their own lessons &mdash; NO maintenance/review questions; retention is checked only at milestones. U30 is the last unit of cycle 3: Art of Counting (new, competition-heavy) + Sequences two-term NOVEL pairs (the one open gap, closed right before M3). Two lessons. Only real divisibility tidy-up = "list ALL" completeness (Q13). Then M3 (Units 21&ndash;30).',
+    qSummary: '<strong>Sec A 5/5 &#10003; PERFECT</strong> | <strong>Sec B 5/5 &#10003; PERFECT</strong> | Sec C 2/5 (Q14, Q15 = blank maintenance) &mdash; Total 12/15 PASSED',
     qBreakdown: [
-      { q:'Q1',  topic:'Path &amp; Frame &mdash; Rectangle (32&times;24)',                  lvl:'w', pass:true,  note:'&#10003; P=112, A=768.' },
-      { q:'Q2',  topic:'Path &amp; Frame &mdash; Carpet/MIDDLE (30&times;22, 2)',           lvl:'w', pass:false, note:'&#10007; 384 (correct: 468). <strong>Took the middle correctly (no longer the border!) but subtracted 6 not 4 &mdash; 2&times;width slip.</strong>' },
-      { q:'Q3',  topic:'Path &amp; Frame &mdash; Border/RING (28&times;16, 3)',             lvl:'w', pass:true,  note:'&#10003; 228. <strong>Gave the ring correctly &mdash; the U27 wrong-piece error is FIXED.</strong>' },
-      { q:'Q4',  topic:'Path &amp; Frame &mdash; Path + Cost (26&times;14, 2, &times;130)',  lvl:'w', pass:true,  note:'&#10003; ฿22,880. Cost clean (self-corrected first attempt).' },
-      { q:'Q5',  topic:'Path &amp; Frame &mdash; Inside Border Cost ★ (44&times;28, 2, &times;200)', lvl:'w', pass:true, note:'&#10003; ฿54,400. Shrank, ring 272, &times;200.' },
-      { q:'Q6',  topic:'Consecutive &mdash; Four (90)',                                     lvl:'m', pass:true,  note:'&#10003; 21,22,23,24. n-method written.' },
-      { q:'Q7',  topic:'Consecutive &#9733; &mdash; Four, smallest (70)',                   lvl:'m', pass:true,  note:'&#10003; 16. 4n+6=70.' },
-      { q:'Q8',  topic:'Consecutive &#9733; &mdash; Two (53)',                              lvl:'m', pass:true,  note:'&#10003; 26,27.' },
-      { q:'Q9',  topic:'Consecutive EVEN &#9733; &mdash; Four, largest (76)',               lvl:'m', pass:true,  note:'&#10003; 22. 4n+12=76. <strong>Even count &mdash; was 0/2 at U27.</strong>' },
-      { q:'Q10', topic:'Consecutive ODD &#9733; &mdash; Four, largest (80)',                lvl:'m', pass:true,  note:'&#10003; 23. 4n+12=80.' },
-      { q:'Q11', topic:'Path &amp; Frame &#9733;&#9733; &mdash; Frame only (26&times;16, 3)',lvl:'h', pass:true,  note:'&#10003; 288. Outer 704 &minus; 416.' },
-      { q:'Q12', topic:'Consecutive EVEN &#9733;&#9733; &mdash; Hidden sum (100)',          lvl:'h', pass:true,  note:'&#10003; 28. 4n+12=100. Even-count 6/6 overall.' },
-      { q:'Q13', topic:'Consecutive &#9733;&#9733; &mdash; Remove one (95)',                lvl:'h', pass:true,  note:'&#10003; 74. 95&minus;21.' },
-      { q:'Q14', topic:'Path &amp; Frame &#9733;&#9733; &mdash; Border cost (40&times;30, 2, &times;150)', lvl:'h', pass:false, note:'&#10007; ฿24,500 (correct: ฿39,600). Border area right (264), &times;150 multiply slipped.' },
-      { q:'Q15', topic:'Consecutive &#9733;&#9733; &mdash; Sum of ends (86)',               lvl:'h', pass:true,  note:'&#10003; 43. 20+23.' }
+      { q:'Q1',  topic:'Divisibility &mdash; by 2',                       lvl:'w', pass:true,  note:'&#10003; Yes. "3524 is even".' },
+      { q:'Q2',  topic:'Divisibility &mdash; by 10',                      lvl:'w', pass:true,  note:'&#10003; Yes. Ends in 0.' },
+      { q:'Q3',  topic:'Divisibility &mdash; by 9',                       lvl:'w', pass:true,  note:'&#10003; Yes. Digit sum 18 (wrote "18&divide;2=9" &mdash; muddled notation, conclusion right).' },
+      { q:'Q4',  topic:'Divisibility &mdash; by 4',                       lvl:'w', pass:true,  note:'&#10003; Yes. Last two 32, 32&divide;4=8.' },
+      { q:'Q5',  topic:'Divisibility &mdash; by 6',                       lvl:'w', pass:true,  note:'&#10003; No. Even &#10003; but 2+4+7+0=13 not &divide;3. Both checks shown.' },
+      { q:'Q6',  topic:'Missing Digit &#9733; &mdash; by 3 (smallest)',   lvl:'m', pass:true,  note:'&#10003; 2.' },
+      { q:'Q7',  topic:'Missing Digit &#9733; &mdash; by 9',              lvl:'m', pass:true,  note:'&#10003; 3.' },
+      { q:'Q8',  topic:'Divisibility &#9733; &mdash; by 6',               lvl:'m', pass:true,  note:'&#10003; Yes. Both checks.' },
+      { q:'Q9',  topic:'Missing Digit &#9733; &mdash; by 4 (largest)',    lvl:'m', pass:true,  note:'&#10003; 8.' },
+      { q:'Q10', topic:'Smallest 3-digit &#9733; &mdash; by 9',           lvl:'m', pass:true,  note:'&#10003; 108. (Wrote he "didn&rsquo;t know" &mdash; but got it right.)' },
+      { q:'Q11', topic:'Missing Digit &#9733;&#9733; &mdash; by 15',      lvl:'h', pass:true,  note:'&#10003; 0. &divide;5 and &divide;3 combined.' },
+      { q:'Q12', topic:'Largest 3-digit &#9733;&#9733; &mdash; by 4 and 6', lvl:'h', pass:true, note:'&#10003; 996. (Doubted himself &mdash; correct.)' },
+      { q:'Q13', topic:'List ALL digits &#9733;&#9733; &mdash; by 4',     lvl:'h', pass:false, note:'&#10007; gave 0,4,8; missed 2,6. <strong>Incomplete enumeration &mdash; the one real divisibility gap.</strong>' },
+      { q:'Q14', topic:'Path &amp; Frame cost &#9733;&#9733; (MAINTENANCE)', lvl:'h', pass:false, note:'&#10007; <strong>BLANK &mdash; "IS THIS THE right TOPIC?". Off-topic maintenance Q he didn&rsquo;t recognise.</strong>' },
+      { q:'Q15', topic:'Consecutive even &#9733;&#9733; (MAINTENANCE)',   lvl:'h', pass:false, note:'&#10007; <strong>BLANK. Same off-topic confusion. Can do it &mdash; 6/6 even-count at U28.</strong>' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -56,12 +56,12 @@ var PREM_DATA = {
     { name: 'Arithmetic',        c: 83, t: 85 },
     { name: 'Geometry',          c: 74, t: 80 },
     { name: 'Counting',          c: 83, t: 85 },
-    { name: 'Number Theory',     c: 83, t: 82 },
+    { name: 'Number Theory',     c: 85, t: 82 },
     { name: 'Applied Problems',  c: 72, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 74, 88, 98, 83, 83, 83, 72],
+  radarCurrent:  [87, 74, 88, 98, 83, 83, 85, 72],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -97,22 +97,36 @@ var PREM_DATA = {
     { n:25, score:12, delta:+3,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false },
     { n:26, score:11, delta:-1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
     { n:27, score:11, delta:0,   color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
-    { n:28, score:13, delta:+2,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false }
+    { n:28, score:13, delta:+2,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false },
+    { n:29, score:12, delta:-1,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 29,
-      badge: 'linear-gradient(135deg,#00695C,#004D40)',
-      title: 'Divisibility Rules &middot; Divisibility in Problems',
+      n: 30,
+      badge: 'linear-gradient(135deg,#6A1B9A,#1565C0)',
+      title: 'Art of Counting &middot; Sequences: Two-Term Novel Pairs',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Divisibility Rules (2&ndash;10)', c:'tblue' },
-        { t:'L2: Divisibility in Problems', c:'tblue' }
+        { t:'L1: Art of Counting (Multiply &amp; Choose)', c:'tblue' },
+        { t:'L2: Sequences Novel-Pair Coefficients', c:'tblue' }
       ],
-      note: 'U29: new topic &mdash; Divisibility Rules (roadmap, high ISA return). Path &amp; Frame and Consecutive both CLOSED at U28, so move on. L1: rules for 2,3,4,5,6,9,10 (last digit / last two / digit sum / combine for 6). L2: missing-digit, largest/smallest, "divisible by both". Sec C keeps two &#9733;&#9733; maintenance Qs (Path &amp; Frame cost + even-count) to confirm the fixes hold, with a desk checklist for the cost/width slips. Two lessons. Pass: 12/15.',
+      note: 'U30: last unit of cycle 3, pre-M3. Art of Counting (NEW, competition-heavy) &mdash; multiplication principle, arrange in a row, and choose-2 / handshakes n(n&minus;1)&divide;2 (the M2 handshakes gap). Plus Sequences two-term NOVEL pairs &mdash; the one open gap, derive each coefficient fresh (position&minus;1), closed right before M3 re-checks it. Sec A/B = counting, Sec C = sequences. On-topic only (new rule). Two lessons. Pass: 12/15. Then M3 (Units 21&ndash;30).',
       status: 'pending'
+    },
+    {
+      n: 29,
+      badge: 'linear-gradient(135deg,#43e97b,#38f9d7)',
+      title: 'Divisibility Rules &middot; Divisibility in Problems',
+      tags: [
+        { t:'12/15 (80%) &#10003; PASSED', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'<strong>Sec A 5/5 + Sec B 5/5</strong>', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Divisibility 12/13 &#10003;', c:'tgreen' },
+        { t:'Sec C: 2 blank maintenance Qs', c:'torange' }
+      ],
+      note: '12/15 (80%) &#10003; PASSED. <strong>Divisibility mastered in one unit</strong> &mdash; A 5/5, B 5/5, plus Q11 &amp; Q12 = 12/13 on pure divisibility. Both lessons worked. The Sec C drop is the two off-topic maintenance Qs (Q14 Path &amp; Frame, Q15 even-count): Prem left both BLANK and wrote "is this the right topic?" &mdash; he can do them, he just didn&rsquo;t think they belonged. <strong>Rule set (Lui): unit tests now 100% on their own lessons, no maintenance/review &mdash; retention only at milestones.</strong> Lone real gap: Q13 "list ALL" completeness (gave 0,4,8; missed 2,6).',
+      status: 'done'
     },
     {
       n: 28,
@@ -526,10 +540,16 @@ var PREM_DATA = {
       fillClass: 'g2', fillPct: 75
     },
     {
-      label:     'Sequences: Two-Term NOVEL Pairs (T₂+T₄, T₃+T₆, T₄+T₇) — ACTIVE — last sequences gap',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U25: trained pair T&#8323;+T&#8325; 2/2 &#10003; (Q11 + Q15 compound &#9733;&#9733;). Novel pairs 0/3: Q5 &#10007; (no working), Q12 &#10007; T&#8323;+T&#8326;, Q13 &#10007; T&#8324;+T&#8327;. Template memorised, principle not yet general. Fix: daily 2-min oral coefficient drills on varied pairs. Re-check at M3.',
-      fillClass: 'g2', fillPct: 55
+      label:     'Number Theory: Divisibility — STRONG (U29); tidy "list ALL" completeness',
+      pill:      'ps', pillText: 'Strong &#10003;',
+      score:     'U29: A 5/5, B 5/5, plus Q11 &amp; Q12 = 12/13 on pure divisibility. Rules (2,3,4,5,6,9,10), missing-digit, largest/smallest, "by both" all landed. Only tidy-up: Q13 "list ALL digits" &mdash; gave 0,4,8, missed 2,6 (enumerate every candidate systematically). 5-min drill, not a lesson.',
+      fillClass: 'gs', fillPct: 90
+    },
+    {
+      label:     'Sequences: Two-Term NOVEL Pairs (T₂+T₄, T₃+T₆, T₄+T₇) — being closed at U30, M3 re-check',
+      pill:      'p2', pillText: 'Closing &#128992;',
+      score:     'The last open gap. Trained pair T&#8323;+T&#8325; solid, but novel pairs broke (U25 Q12/Q13) because the coefficient was memorised, not derived. U30 Section C trains "build each d-count fresh = (position&minus;1)" across novel pairs (T&#8322;+T&#8325;, T&#8323;+T&#8327;, T&#8322;+T&#8326;, T&#8324;+T&#8328;, T&#8323;+T&#8326;). Verified at M3.',
+      fillClass: 'g2', fillPct: 70
     },
     {
       label:     'Sequences: Find n (+1 Rule) — RESOLVED in U25',
@@ -592,7 +612,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U28'
+  radarLegendUnit: 'U29'
 
 };
 
