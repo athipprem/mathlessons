@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '21 Jun 2026',
+  updated:        '22 Jun 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:30, topic:'Art of Counting · Sequences: Two-Term Novel Pairs', status:'In Progress' },
+  currentUnit: { n:'M3', topic:'Milestone Test — Units 21–30 (ISA + Kangaroo)', status:'In Progress' },
   lastUnit: {
-    n:29, score:12, outOf:15, pct:80, delta:-1, prevScore:13,
-    patternLabel: 'U29 Analysis — PASSED',
-    patternInsight: '12/15 (80%) &#10003; <strong>PASSED &mdash; and divisibility is a clean success</strong>. On pure divisibility he scored <strong>12 of 13</strong> (A 5/5, B 5/5, plus Q11 &amp; Q12). The new topic landed almost perfectly in one unit. <strong>The entire Section C drop is the two maintenance questions (Q14, Q15), which Prem left blank</strong> &mdash; he wrote "IS THIS THE right TOPIC?" beside Q14. That is a test-design issue, not a maths gap.',
-    analysisLabel: 'Next: U30 &mdash; Art of Counting + Sequences Novel Pairs (pre-M3)',
-    analysisInsight: 'Rule change (21 Jun, Lui): unit tests are now 100% on their own lessons &mdash; NO maintenance/review questions; retention is checked only at milestones. U30 is the last unit of cycle 3: Art of Counting (new, competition-heavy) + Sequences two-term NOVEL pairs (the one open gap, closed right before M3). Two lessons. Only real divisibility tidy-up = "list ALL" completeness (Q13). Then M3 (Units 21&ndash;30).',
-    qSummary: '<strong>Sec A 5/5 &#10003; PERFECT</strong> | <strong>Sec B 5/5 &#10003; PERFECT</strong> | Sec C 2/5 (Q14, Q15 = blank maintenance) &mdash; Total 12/15 PASSED',
+    n:30, score:11, outOf:15, pct:73, delta:-1, prevScore:12,
+    patternLabel: 'U30 Analysis — Sequences CLOSED',
+    patternInsight: '11/15 (73%) &mdash; below the bar, <strong>but the headline is a win: Section C closes the LAST open gap of the whole programme</strong> &mdash; sequences two-term NOVEL pairs, <strong>5/5</strong> (was 0/3 at U25). He derived each coefficient fresh with T<sub>p</sub>=a+(p&minus;1)d. Art of Counting (new topic) is shaky at 6/10 and pulled the total down. Failed topic = Counting; Sequences is done.',
+    analysisLabel: 'Next: Milestone M3 (Units 21–30) — Lui chose to proceed; Art of Counting continues in cycle 4 (U31+)',
+    analysisInsight: 'U30 did not pass (11/15). The only weak topic is Art of Counting: the "&divide;2 for pairs" is unstable when the pair is DISGUISED &mdash; he halved for "handshakes" (Q6) and "pair" (Q10) but not for "lines" (Q7: 20 not 10) or "games" (Q8: 56 not 28); diagonals (Q9) and repeats-multiply (Q2) also slipped. Lui&rsquo;s call: go straight to M3 and develop Art of Counting from U31 (cycle 4) rather than a pre-M3 re-test. M3 covers all of U21&ndash;30 (15 ISA + 5 Kangaroo).',
+    qSummary: 'Sec A 4/5 | <strong>Sec B 2/5</strong> (Counting choose-2) | <strong>Sec C 5/5 &#10003; sequences CLOSED</strong> &mdash; Total 11/15 (not passed)',
     qBreakdown: [
-      { q:'Q1',  topic:'Divisibility &mdash; by 2',                       lvl:'w', pass:true,  note:'&#10003; Yes. "3524 is even".' },
-      { q:'Q2',  topic:'Divisibility &mdash; by 10',                      lvl:'w', pass:true,  note:'&#10003; Yes. Ends in 0.' },
-      { q:'Q3',  topic:'Divisibility &mdash; by 9',                       lvl:'w', pass:true,  note:'&#10003; Yes. Digit sum 18 (wrote "18&divide;2=9" &mdash; muddled notation, conclusion right).' },
-      { q:'Q4',  topic:'Divisibility &mdash; by 4',                       lvl:'w', pass:true,  note:'&#10003; Yes. Last two 32, 32&divide;4=8.' },
-      { q:'Q5',  topic:'Divisibility &mdash; by 6',                       lvl:'w', pass:true,  note:'&#10003; No. Even &#10003; but 2+4+7+0=13 not &divide;3. Both checks shown.' },
-      { q:'Q6',  topic:'Missing Digit &#9733; &mdash; by 3 (smallest)',   lvl:'m', pass:true,  note:'&#10003; 2.' },
-      { q:'Q7',  topic:'Missing Digit &#9733; &mdash; by 9',              lvl:'m', pass:true,  note:'&#10003; 3.' },
-      { q:'Q8',  topic:'Divisibility &#9733; &mdash; by 6',               lvl:'m', pass:true,  note:'&#10003; Yes. Both checks.' },
-      { q:'Q9',  topic:'Missing Digit &#9733; &mdash; by 4 (largest)',    lvl:'m', pass:true,  note:'&#10003; 8.' },
-      { q:'Q10', topic:'Smallest 3-digit &#9733; &mdash; by 9',           lvl:'m', pass:true,  note:'&#10003; 108. (Wrote he "didn&rsquo;t know" &mdash; but got it right.)' },
-      { q:'Q11', topic:'Missing Digit &#9733;&#9733; &mdash; by 15',      lvl:'h', pass:true,  note:'&#10003; 0. &divide;5 and &divide;3 combined.' },
-      { q:'Q12', topic:'Largest 3-digit &#9733;&#9733; &mdash; by 4 and 6', lvl:'h', pass:true, note:'&#10003; 996. (Doubted himself &mdash; correct.)' },
-      { q:'Q13', topic:'List ALL digits &#9733;&#9733; &mdash; by 4',     lvl:'h', pass:false, note:'&#10007; gave 0,4,8; missed 2,6. <strong>Incomplete enumeration &mdash; the one real divisibility gap.</strong>' },
-      { q:'Q14', topic:'Path &amp; Frame cost &#9733;&#9733; (MAINTENANCE)', lvl:'h', pass:false, note:'&#10007; <strong>BLANK &mdash; "IS THIS THE right TOPIC?". Off-topic maintenance Q he didn&rsquo;t recognise.</strong>' },
-      { q:'Q15', topic:'Consecutive even &#9733;&#9733; (MAINTENANCE)',   lvl:'h', pass:false, note:'&#10007; <strong>BLANK. Same off-topic confusion. Can do it &mdash; 6/6 even-count at U28.</strong>' }
+      { q:'Q1',  topic:'Counting &mdash; Multiply (meals)',               lvl:'w', pass:true,  note:'&#10003; 12.' },
+      { q:'Q2',  topic:'Counting &mdash; Multiply with repeats',          lvl:'w', pass:false, note:'&#10007; 24 (correct 16). Muddled 4&times;4 (working showed 256, 64).' },
+      { q:'Q3',  topic:'Counting &mdash; Multiply (outfits)',             lvl:'w', pass:true,  note:'&#10003; 12.' },
+      { q:'Q4',  topic:'Counting &mdash; Arrange 4 in a row',             lvl:'w', pass:true,  note:'&#10003; 24.' },
+      { q:'Q5',  topic:'Counting &mdash; Order matters (Pres &amp; VP)',  lvl:'w', pass:true,  note:'&#10003; 20. Correctly did NOT &divide;2.' },
+      { q:'Q6',  topic:'Counting &#9733; &mdash; Handshakes (6)',         lvl:'m', pass:true,  note:'&#10003; 15. Halved correctly.' },
+      { q:'Q7',  topic:'Counting &#9733; &mdash; Lines through points',   lvl:'m', pass:false, note:'&#10007; 20 (correct 10). <strong>Set up 5&times;4 but forgot &divide;2 &mdash; pair in disguise.</strong>' },
+      { q:'Q8',  topic:'Counting &#9733; &mdash; League games',           lvl:'m', pass:false, note:'&#10007; 56 (correct 28). 8&times;7, forgot &divide;2.' },
+      { q:'Q9',  topic:'Counting &#9733; &mdash; Diagonals (hexagon)',    lvl:'m', pass:false, note:'&#10007; 4 (correct 9). "pairs &minus; sides" (15&minus;6) didn&rsquo;t fire.' },
+      { q:'Q10', topic:'Counting &#9733; &mdash; Choose a pair (7)',      lvl:'m', pass:true,  note:'&#10003; 21. 7&times;6&divide;2.' },
+      { q:'Q11', topic:'Sequences &#9733;&#9733; &mdash; T&#8322;+T&#8325; (novel)', lvl:'h', pass:true, note:'&#10003; a=17. T<sub>p</sub>=a+(p&minus;1)d, coeffs derived.' },
+      { q:'Q12', topic:'Sequences &#9733;&#9733; &mdash; T&#8323;+T&#8327; (novel)', lvl:'h', pass:true, note:'&#10003; a=15. 8d+2a.' },
+      { q:'Q13', topic:'Sequences &#9733;&#9733; &mdash; T&#8322;+T&#8326; (novel)', lvl:'h', pass:true, note:'&#10003; a=15. 6d+2a.' },
+      { q:'Q14', topic:'Sequences &#9733;&#9733; &mdash; T&#8324;+T&#8328; (novel)', lvl:'h', pass:true, note:'&#10003; a=18. 10d+2a.' },
+      { q:'Q15', topic:'Sequences &#9733;&#9733; &mdash; T&#8323;+T&#8326; then T&#8321;&#8320;', lvl:'h', pass:true, note:'&#10003; a=16, T&#8321;&#8320;=52. Full chain. <strong>Novel-pair gap CLOSED 5/5.</strong>' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -98,22 +98,35 @@ var PREM_DATA = {
     { n:26, score:11, delta:-1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
     { n:27, score:11, delta:0,   color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
     { n:28, score:13, delta:+2,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false },
-    { n:29, score:12, delta:-1,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false }
+    { n:29, score:12, delta:-1,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false },
+    { n:30, score:11, delta:-1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 'M3',
+      badge: 'linear-gradient(135deg,#4527A0,#7C3AED)',
+      title: 'Milestone 03 &middot; Units 21–30 (ISA + Kangaroo)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'20 Q: 15 ISA + 5 Kangaroo', c:'tblue' },
+        { t:'No lessons (milestone)', c:'tblue' }
+      ],
+      note: 'M3 covers all of cycle 3 (U21&ndash;30). Q1&ndash;15 ISA-style spread across the cycle&rsquo;s topics: equations both-sides, sequences (find term / find n / novel two-term), Path &amp; Frame (carpet + cost), SimEq, ratio (sharing + transfer), consecutive (middle + even-count), divisibility (rule + missing digit), Art of Counting (multiply + handshakes). Q16&ndash;20 Kangaroo diagnostic: snail climb, reverse handshakes, units-digit cycle, remainders, counting squares. Kangaroo scoring: 4&ndash;5/5 &rarr; Applied Problems radar bump. Mixed topics are allowed here (milestones do the retention check).',
+      status: 'pending'
+    },
+    {
       n: 30,
       badge: 'linear-gradient(135deg,#6A1B9A,#1565C0)',
       title: 'Art of Counting &middot; Sequences: Two-Term Novel Pairs',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Art of Counting (Multiply &amp; Choose)', c:'tblue' },
-        { t:'L2: Sequences Novel-Pair Coefficients', c:'tblue' }
+        { t:'11/15 (73%) &#10145; NOT PASSED', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'<strong>Sec C 5/5 &mdash; Sequences CLOSED</strong>', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Art of Counting 6/10', c:'torange' }
       ],
-      note: 'U30: last unit of cycle 3, pre-M3. Art of Counting (NEW, competition-heavy) &mdash; multiplication principle, arrange in a row, and choose-2 / handshakes n(n&minus;1)&divide;2 (the M2 handshakes gap). Plus Sequences two-term NOVEL pairs &mdash; the one open gap, derive each coefficient fresh (position&minus;1), closed right before M3 re-checks it. Sec A/B = counting, Sec C = sequences. On-topic only (new rule). Two lessons. Pass: 12/15. Then M3 (Units 21&ndash;30).',
-      status: 'pending'
+      note: '11/15 &mdash; below bar, but <strong>Section C closes the last arc gap: sequences two-term NOVEL pairs 5/5</strong> (was 0/3 at U25), each coefficient derived fresh with T<sub>p</sub>=a+(p&minus;1)d. Art of Counting (new) 6/10: the &divide;2-for-pairs is unstable in disguise &mdash; halved for "handshakes"/"pair" (Q6, Q10 &#10003;) but not "lines"/"games" (Q7, Q8 &#10007;); diagonals (Q9) and repeats-multiply (Q2) slipped. Lui: proceed to M3, develop Art of Counting in cycle 4 (U31+).',
+      status: 'done'
     },
     {
       n: 29,
@@ -546,10 +559,16 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 90
     },
     {
-      label:     'Sequences: Two-Term NOVEL Pairs (T₂+T₄, T₃+T₆, T₄+T₇) — being closed at U30, M3 re-check',
-      pill:      'p2', pillText: 'Closing &#128992;',
-      score:     'The last open gap. Trained pair T&#8323;+T&#8325; solid, but novel pairs broke (U25 Q12/Q13) because the coefficient was memorised, not derived. U30 Section C trains "build each d-count fresh = (position&minus;1)" across novel pairs (T&#8322;+T&#8325;, T&#8323;+T&#8327;, T&#8322;+T&#8326;, T&#8324;+T&#8328;, T&#8323;+T&#8326;). Verified at M3.',
-      fillClass: 'g2', fillPct: 70
+      label:     'Sequences: Two-Term NOVEL Pairs — RESOLVED at U30 (last arc gap closed)',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U30 Section C 5/5 across five all-novel pairs (T&#8322;+T&#8325;, T&#8323;+T&#8327;, T&#8322;+T&#8326;, T&#8324;+T&#8328;, T&#8323;+T&#8326;). Each coefficient derived fresh with T<sub>p</sub>=a+(p&minus;1)d &mdash; no memorised-chunk errors. The gap that opened the sequences arc (0/3 at U25) is closed. M3 confirms.',
+      fillClass: 'gs', fillPct: 92
+    },
+    {
+      label:     'Art of Counting: choose-2 ÷2 in disguise + diagonals + repeats — ACTIVE (cycle 4)',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U30 Art of Counting 6/10. Multiplication principle solid (Q1,3,4,5 &#10003;). But the &divide;2 for pairs is unstable when disguised: halved for "handshakes"/"pair" (Q6, Q10 &#10003;) but not "lines"/"games" (Q7 20 not 10, Q8 56 not 28). Diagonals "pairs &minus; sides" missed (Q9), and repeats-multiply muddled (Q2). New, competition-heavy topic &mdash; develop across U31+ (cycle 4): pairs-in-disguise recognition, always &divide;2, diagonals, repeats.',
+      fillClass: 'g2', fillPct: 55
     },
     {
       label:     'Sequences: Find n (+1 Rule) — RESOLVED in U25',
@@ -612,7 +631,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U29'
+  radarLegendUnit: 'U30'
 
 };
 
