@@ -22,16 +22,20 @@ h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid v
 h3{color:#1565C0;font-size:1.05rem;margin-bottom:10px}
 p,li{font-size:.98rem;line-height:1.6}
 ul,ol{padding-left:20px;margin-top:6px}
+ol li{margin-bottom:4px}
 .golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
 .golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
-.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;font-size:1.02rem;font-weight:700;margin:0 auto 10px;max-width:580px}
-.termrow{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:14px 0}
-.term{padding:8px 10px;border-radius:8px;border:2px solid #90CAF9;background:#E3F2FD;color:#0D47A1;font-weight:700;font-size:.86rem;text-align:center;font-family:'Courier New',monospace}
-.term.hot{background:#FFE0B2;border-color:#FB8C00;color:#E65100}
-.eq-chain{margin:10px 0 14px 0;border-left:3px solid #90CAF9;padding-left:12px}
-.eq-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
-.eq-math{font-size:.97rem;font-family:'Courier New',monospace;color:#1a1a2e}
-.eq-why{font-size:.86rem;font-style:italic;color:#1565C0}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:14px 16px;text-align:center;font-size:1.12rem;font-weight:700;margin:0 auto 10px;max-width:580px;font-family:'Courier New',monospace}
+.ruleband{background:#E3F2FD;border:2px solid #64B5F6;border-radius:10px;padding:10px 14px;text-align:center;font-family:'Courier New',monospace;font-weight:700;color:#0D47A1;font-size:1.05rem;margin-bottom:14px}
+.defbox{background:#FFF8E1;border:1.5px solid #FFD54F;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:.95rem;color:#5D4037}
+.steps{margin:10px 0 6px 0;background:#F1F7FE;border:1px solid #BBDEFB;border-radius:10px;padding:14px 16px}
+.steps .ln{font-family:'Courier New',monospace;font-size:1rem;color:#1a1a2e;padding:4px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.steps .ln .note{font-family:'Segoe UI',Arial,sans-serif;font-style:italic;font-size:.84rem;color:#1565C0}
+.steps .ln.big{font-weight:700}
+.steps .ln.ans{color:#1B5E20;font-weight:800}
+.steps .hd{font-weight:700;color:#0D47A1;font-size:.9rem;margin:8px 0 4px;font-family:'Segoe UI',Arial,sans-serif}
+.two-terms{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:8px 0}
+.tt{padding:8px 12px;border-radius:8px;border:2px solid #FB8C00;background:#FFE0B2;color:#E65100;font-weight:700;font-family:'Courier New',monospace;font-size:.92rem}
 .warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
 .warn-box p{font-size:.93rem;color:#E65100}
 .q-card{background:#F7FAFE;border:1.5px solid #90CAF9;border-radius:10px;padding:16px;margin-bottom:14px}
@@ -44,7 +48,7 @@ ul,ol{padding-left:20px;margin-top:6px}
 .feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
 .feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
 .btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
-.steps-reveal{background:#F1F7FE;border-left:3px solid var(--acc);border-radius:6px;padding:12px 14px;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
 .navrow{display:flex;gap:10px;margin-top:22px}
 .navrow .prev{flex:1;padding:12px 0;background:#E3F2FD;color:#0D47A1;border:2px solid #0D47A1;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
 .navrow .next{flex:1;padding:12px 0;background:#0D47A1;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
@@ -61,81 +65,147 @@ ul,ol{padding-left:20px;margin-top:6px}
   <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
 </nav>
 
-<!-- Screen 1 -->
+<!-- Screen 1: the rule + what p means -->
 <div class="screen active" id="s0">
 <div class="card">
-  <h2>&#x1F511; Build Each Coefficient Fresh</h2>
-  <p>You can already do T&#8323;+T&#8325;. The trap is treating it as a memorised chunk &mdash; then T&#8322;+T&#8326; or T&#8324;+T&#8327; throws you. Today there is <strong>no memorising</strong>: you build the coefficient of <em>d</em> for <strong>any</strong> term from one rule, so every pair works the same way.</p>
+  <h2>&#x1F511; First, the One Rule</h2>
+  <p>Every term in an arithmetic sequence is built from the same rule. We use the letter <strong>p</strong> for the <strong>position</strong> &mdash; that is, <em>which term</em> we want.</p>
 </div>
 
-<div class="q-node">&#x1F50D; One rule: T<sub>k</sub> = a + (k &minus; 1) &times; d</div>
+<div class="q-node">T<sub>p</sub> = a + (p &minus; 1) &times; d</div>
 
-<div class="card" style="background:#E3F2FD;border:1px solid #90CAF9">
-  <p style="font-size:.95rem;color:#0D47A1">The number of <strong>d</strong>'s in a term is always <strong>(position &minus; 1)</strong>. T&#8322; has 1&nbsp;d, T&#8325; has 4&nbsp;d, T&#8327; has 6&nbsp;d. Never guess &mdash; subtract 1 from the position, every time.</p>
+<div class="defbox">
+  <strong>What each letter means:</strong><br>
+  &bull; <strong>p</strong> = the <strong>position</strong> (which term). For T&#8322;, p = 2. For T&#8326;, p = 6. For T&#8327;, p = 7.<br>
+  &bull; <strong>a</strong> = the first term (T&#8321;).<br>
+  &bull; <strong>d</strong> = the common difference (the jump between terms).
+</div>
+
+<div class="card">
+  <h3>The important part: how many <em>d</em>'s?</h3>
+  <p>The number of <strong>d</strong>'s in a term is always <strong>(p &minus; 1)</strong> &mdash; the position minus 1.</p>
+  <div class="two-terms">
+    <div class="tt">T&#8322; &rarr; (2&minus;1) = 1 d</div>
+    <div class="tt">T&#8326; &rarr; (6&minus;1) = 5 d's</div>
+    <div class="tt">T&#8327; &rarr; (7&minus;1) = 6 d's</div>
+  </div>
+  <p style="font-size:.93rem">Never guess this number. Always do <strong>position &minus; 1</strong>.</p>
 </div>
 
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start the Lesson &#8594;</button></div>
 </div>
 
-<!-- Screen 2: the method -->
+<!-- Screen 2: the method, fully step by step -->
 <div class="screen" id="s1">
 <div class="card">
   <h2>The 3-Step Method (works for every pair)</h2>
+  <div class="ruleband">Remember the rule:&nbsp; T<sub>p</sub> = a + (p &minus; 1) &times; d</div>
   <ol>
-    <li><strong>Write each term</strong> as a + (position&minus;1)d.</li>
-    <li><strong>Add them:</strong> 2a + (the two d-counts added) &times; d = the given sum.</li>
-    <li><strong>Solve for a.</strong></li>
+    <li><strong>Write each term</strong> using the rule (work out its d-count = position &minus; 1).</li>
+    <li><strong>Add the two terms together</strong> and tidy up to get 2a + (some number)d = the given sum.</li>
+    <li><strong>Put in the value of d, then solve for a</strong> step by step.</li>
   </ol>
 </div>
+
 <div class="card">
-  <h3>Example: T&#8322; + T&#8326; = 70, with d = 4. Find a.</h3>
-  <div class="termrow">
-    <div class="term hot">T&#8322; = a + 1d</div>
-    <div class="term hot">T&#8326; = a + 5d</div>
-  </div>
-  <div class="eq-chain">
-    <div class="eq-row"><span class="eq-math">d-counts: (2&minus;1)=1 and (6&minus;1)=5</span><span class="eq-why">&#8592; build fresh, don't recall</span></div>
-    <div class="eq-row"><span class="eq-math">add: 2a + (1+5)d = 2a + 6d</span></div>
-    <div class="eq-row"><span class="eq-math">2a + 6&times;4 = 70 &rarr; 2a + 24 = 70</span></div>
-    <div class="eq-row"><span class="eq-math">2a = 46 &rarr; a = 23</span><span class="eq-why">&#8592; check: T&#8322;=27, T&#8326;=43, 27+43=70 &#10003;</span></div>
+  <h3>Worked Example: T&#8322; + T&#8326; = 70, and d = 4. Find a.</h3>
+  <div class="steps">
+    <div class="hd">Step 1 &mdash; write each term with the rule</div>
+    <div class="ln">T<sub>p</sub> = a + (p &minus; 1) &times; d <span class="note">&#8592; the rule</span></div>
+    <div class="ln">T&#8322; = a + (2 &minus; 1)d <span class="note">&#8592; put p = 2</span></div>
+    <div class="ln">T&#8322; = a + 1d</div>
+    <div class="ln">T&#8326; = a + (6 &minus; 1)d <span class="note">&#8592; put p = 6</span></div>
+    <div class="ln">T&#8326; = a + 5d</div>
+
+    <div class="hd">Step 2 &mdash; the question says T&#8322; + T&#8326; = 70, so add them</div>
+    <div class="ln">(a + 1d) + (a + 5d) = 70</div>
+    <div class="ln">(a + a) + (1d + 5d) = 70 <span class="note">&#8592; group the a's and the d's</span></div>
+    <div class="ln big">2a + 6d = 70</div>
+
+    <div class="hd">Step 3 &mdash; put in d = 4 and solve</div>
+    <div class="ln">2a + (6 &times; 4) = 70 <span class="note">&#8592; we know d = 4</span></div>
+    <div class="ln">2a + 24 = 70</div>
+    <div class="ln">2a = 70 &minus; 24 <span class="note">&#8592; take 24 off both sides</span></div>
+    <div class="ln">2a = 46</div>
+    <div class="ln">a = 46 &divide; 2 <span class="note">&#8592; halve both sides</span></div>
+    <div class="ln ans">a = 23</div>
+
+    <div class="hd">Check</div>
+    <div class="ln">T&#8322; = 23 + 1&times;4 = 27,&nbsp; T&#8326; = 23 + 5&times;4 = 43</div>
+    <div class="ln">27 + 43 = 70 &#10003; <span class="note">&#8592; matches the question</span></div>
   </div>
 </div>
+
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
 </div>
 
-<!-- Screen 3: more pairs -->
+<!-- Screen 3: two more pairs, fully step by step -->
 <div class="screen" id="s2">
 <div class="card">
   <h2>Same Method, Different Pairs</h2>
-  <p>The ONLY thing that changes is the two d-counts. Watch how the trained T&#8323;+T&#8325; and a "scary" T&#8324;+T&#8327; are the exact same job.</p>
-
-  <h3>T&#8323; + T&#8325; = 50, d = 6</h3>
-  <div class="eq-chain">
-    <div class="eq-row"><span class="eq-math">d-counts (3&minus;1)=2, (5&minus;1)=4 &rarr; 2a + 6d</span></div>
-    <div class="eq-row"><span class="eq-math">2a + 36 = 50 &rarr; 2a = 14 &rarr; a = 7</span></div>
-  </div>
-
-  <h3>T&#8324; + T&#8327; = 89, d = 7 <span style="color:#888;font-weight:400;font-size:.85rem">(a "novel" pair &mdash; same job)</span></h3>
-  <div class="eq-chain">
-    <div class="eq-row"><span class="eq-math">d-counts (4&minus;1)=3, (7&minus;1)=6 &rarr; 2a + 9d</span></div>
-    <div class="eq-row"><span class="eq-math">2a + 63 = 89 &rarr; 2a = 26 &rarr; a = 13</span></div>
-  </div>
-  <div class="warn-box"><p>&#x274C; <strong>The old slip:</strong> reusing "2a + 6d" (from T&#8323;+T&#8325;) on a different pair. The d-count is NOT fixed &mdash; it is (pos&minus;1)+(pos&minus;1) for the actual two positions. Re-derive it every single time.</p></div>
+  <div class="ruleband">Remember the rule:&nbsp; T<sub>p</sub> = a + (p &minus; 1) &times; d</div>
+  <p>The ONLY thing that changes from pair to pair is the two d-counts. Everything else is the same job.</p>
 </div>
+
+<div class="card">
+  <h3>Example A: T&#8323; + T&#8325; = 50, and d = 6. Find a.</h3>
+  <div class="steps">
+    <div class="ln">T&#8323; = a + (3 &minus; 1)d = a + 2d <span class="note">&#8592; p = 3</span></div>
+    <div class="ln">T&#8325; = a + (5 &minus; 1)d = a + 4d <span class="note">&#8592; p = 5</span></div>
+    <div class="ln">(a + 2d) + (a + 4d) = 50</div>
+    <div class="ln">(a + a) + (2d + 4d) = 50</div>
+    <div class="ln big">2a + 6d = 50</div>
+    <div class="ln">2a + (6 &times; 6) = 50 <span class="note">&#8592; d = 6</span></div>
+    <div class="ln">2a + 36 = 50</div>
+    <div class="ln">2a = 50 &minus; 36</div>
+    <div class="ln">2a = 14</div>
+    <div class="ln">a = 14 &divide; 2</div>
+    <div class="ln ans">a = 7</div>
+    <div class="ln">Check: T&#8323; = 7 + 2&times;6 = 19, T&#8325; = 7 + 4&times;6 = 31, 19 + 31 = 50 &#10003;</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Example B: T&#8324; + T&#8327; = 89, and d = 7. Find a. <span style="color:#888;font-weight:400;font-size:.85rem">(a "tricky" pair &mdash; same steps)</span></h3>
+  <div class="steps">
+    <div class="ln">T&#8324; = a + (4 &minus; 1)d = a + 3d <span class="note">&#8592; p = 4</span></div>
+    <div class="ln">T&#8327; = a + (7 &minus; 1)d = a + 6d <span class="note">&#8592; p = 7</span></div>
+    <div class="ln">(a + 3d) + (a + 6d) = 89</div>
+    <div class="ln">(a + a) + (3d + 6d) = 89</div>
+    <div class="ln big">2a + 9d = 89</div>
+    <div class="ln">2a + (9 &times; 7) = 89 <span class="note">&#8592; d = 7</span></div>
+    <div class="ln">2a + 63 = 89</div>
+    <div class="ln">2a = 89 &minus; 63</div>
+    <div class="ln">2a = 26</div>
+    <div class="ln">a = 26 &divide; 2</div>
+    <div class="ln ans">a = 13</div>
+  </div>
+  <div class="warn-box"><p>&#x274C; <strong>The old mistake:</strong> copying "2a + 6d" from Example A onto Example B. The d-count is NOT always 6 &mdash; here it is 3 + 6 = 9. Always re-do (position &minus; 1) for the two real positions.</p></div>
+</div>
+
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
 </div>
 
-<!-- Screen 4: compound -->
+<!-- Screen 4: compound, step by step -->
 <div class="screen" id="s3">
 <div class="card">
-  <h2>Then Go One Step Further</h2>
-  <p>Harder questions ask for another term after you find a. Find a first, then use T<sub>k</sub> = a + (k&minus;1)d again.</p>
-  <h3>Example: T&#8322; + T&#8326; = 70 (d = 4) gave a = 23. Find T&#8321;&#8320;.</h3>
-  <div class="eq-chain">
-    <div class="eq-row"><span class="eq-math">T&#8321;&#8320; = a + (10&minus;1)d = 23 + 9&times;4</span></div>
-    <div class="eq-row"><span class="eq-math">= 23 + 36 = 59</span></div>
+  <h2>One Step Further: Find Another Term</h2>
+  <div class="ruleband">Remember the rule:&nbsp; T<sub>p</sub> = a + (p &minus; 1) &times; d</div>
+  <p>Some questions ask for another term <em>after</em> you find a. Find a first, then use the same rule again with the new position.</p>
+</div>
+
+<div class="card">
+  <h3>Example: T&#8322; + T&#8326; = 70 (d = 4). We found a = 23. Now find T&#8321;&#8320;.</h3>
+  <div class="steps">
+    <div class="ln">T<sub>p</sub> = a + (p &minus; 1) &times; d <span class="note">&#8592; the same rule</span></div>
+    <div class="ln">T&#8321;&#8320; = a + (10 &minus; 1)d <span class="note">&#8592; put p = 10</span></div>
+    <div class="ln">T&#8321;&#8320; = 23 + 9d <span class="note">&#8592; put a = 23</span></div>
+    <div class="ln">T&#8321;&#8320; = 23 + (9 &times; 4) <span class="note">&#8592; put d = 4</span></div>
+    <div class="ln">T&#8321;&#8320; = 23 + 36</div>
+    <div class="ln ans">T&#8321;&#8320; = 59</div>
   </div>
 </div>
+
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
 </div>
 
@@ -143,7 +213,7 @@ ul,ol{padding-left:20px;margin-top:6px}
 <div class="screen" id="s4">
 <div class="card">
   <h2>Practice</h2>
-  <p style="color:#555;font-size:.9rem;margin-bottom:16px">For each term: d-count = position &minus; 1. Add the two counts, build 2a + (count)d = sum, solve for a.</p>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">For each term: d-count = position &minus; 1. Add the two terms, tidy to 2a + (number)d = sum, put in d, then solve for a.</p>
 
   <div class="q-card">
     <div class="q-text">Q1. &nbsp; T&#8322; + T&#8324; = 40 and d = 6. Find the first term a.</div>
@@ -156,7 +226,14 @@ ul,ol{padding-left:20px;margin-top:6px}
     <button class="btn-check" onclick="chk(0,'A')">Check</button>
     <div class="feedback" id="fb0"></div>
     <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
-    <div class="steps-reveal" id="sr0"><div class="eq-chain"><div class="eq-row"><span class="eq-math">counts (2&minus;1)=1,(4&minus;1)=3 &rarr; 2a+4d. 2a+24=40 &rarr; a=8</span></div></div></div>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">T&#8322; = a + (2&minus;1)d = a + 1d</div>
+      <div class="ln">T&#8324; = a + (4&minus;1)d = a + 3d</div>
+      <div class="ln">(a + 1d) + (a + 3d) = 40</div>
+      <div class="ln big">2a + 4d = 40</div>
+      <div class="ln">2a + (4&times;6) = 40 &rarr; 2a + 24 = 40</div>
+      <div class="ln">2a = 16 &rarr; a = 8</div>
+    </div></div>
   </div>
 
   <div class="q-card">
@@ -170,35 +247,56 @@ ul,ol{padding-left:20px;margin-top:6px}
     <button class="btn-check" onclick="chk(1,'C')">Check</button>
     <div class="feedback" id="fb1"></div>
     <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
-    <div class="steps-reveal" id="sr1"><div class="eq-chain"><div class="eq-row"><span class="eq-math">counts (3&minus;1)=2,(6&minus;1)=5 &rarr; 2a+7d. 2a+21=63 &rarr; a=21</span></div></div></div>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">T&#8323; = a + (3&minus;1)d = a + 2d</div>
+      <div class="ln">T&#8326; = a + (6&minus;1)d = a + 5d</div>
+      <div class="ln">(a + 2d) + (a + 5d) = 63</div>
+      <div class="ln big">2a + 7d = 63</div>
+      <div class="ln">2a + (7&times;3) = 63 &rarr; 2a + 21 = 63</div>
+      <div class="ln">2a = 42 &rarr; a = 21</div>
+    </div></div>
   </div>
 
   <div class="q-card">
-    <div class="q-text">Q3. &nbsp; T&#8324; + T&#8327; = 89 and d = 7. Find the first term a.</div>
+    <div class="q-text">Q3. &nbsp; T&#8322; + T&#8325; = 44 and d = 4. Find the first term a.</div>
     <div class="options">
-      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 11</label>
-      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 13</label>
-      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 15</label>
-      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; 17</label>
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 10</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 14</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; 16</label>
     </div>
     <button class="btn-check" onclick="chk(2,'B')">Check</button>
     <div class="feedback" id="fb2"></div>
     <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
-    <div class="steps-reveal" id="sr2"><div class="eq-chain"><div class="eq-row"><span class="eq-math">counts (4&minus;1)=3,(7&minus;1)=6 &rarr; 2a+9d. 2a+63=89 &rarr; a=13</span></div></div></div>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">T&#8322; = a + (2&minus;1)d = a + 1d</div>
+      <div class="ln">T&#8325; = a + (5&minus;1)d = a + 4d</div>
+      <div class="ln">(a + 1d) + (a + 4d) = 44</div>
+      <div class="ln big">2a + 5d = 44</div>
+      <div class="ln">2a + (5&times;4) = 44 &rarr; 2a + 20 = 44</div>
+      <div class="ln">2a = 24 &rarr; a = 12</div>
+    </div></div>
   </div>
 
   <div class="q-card">
-    <div class="q-text">Q4. &nbsp; T&#8322; + T&#8325; = 44 and d = 4. Find the first term a.</div>
+    <div class="q-text">Q4. &nbsp; T&#8323; + T&#8327; = 88 and d = 5. Find the first term a.</div>
     <div class="options">
-      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 10</label>
-      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 12</label>
-      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 14</label>
-      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; 16</label>
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 22</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 24</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; 26</label>
     </div>
-    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <button class="btn-check" onclick="chk(3,'C')">Check</button>
     <div class="feedback" id="fb3"></div>
     <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
-    <div class="steps-reveal" id="sr3"><div class="eq-chain"><div class="eq-row"><span class="eq-math">counts (2&minus;1)=1,(5&minus;1)=4 &rarr; 2a+5d. 2a+20=44 &rarr; a=12</span></div></div></div>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">T&#8323; = a + (3&minus;1)d = a + 2d</div>
+      <div class="ln">T&#8327; = a + (7&minus;1)d = a + 6d</div>
+      <div class="ln">(a + 2d) + (a + 6d) = 88</div>
+      <div class="ln big">2a + 8d = 88</div>
+      <div class="ln">2a + (8&times;5) = 88 &rarr; 2a + 40 = 88</div>
+      <div class="ln">2a = 48 &rarr; a = 24</div>
+    </div></div>
   </div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
@@ -207,20 +305,21 @@ ul,ol{padding-left:20px;margin-top:6px}
 <!-- Screen 6: summary -->
 <div class="screen" id="s5">
 <div class="golden">
-  <div class="golden-title">&#x1F4D6; Two-Term Sums &mdash; The Whole Method</div>
+  <div class="golden-title">&#x1F4D6; The Whole Method, In Order</div>
   <div class="rule-grid">
-    <span class="rule-key">d-count:</span><span class="rule-val">each term has (position &minus; 1) d's. Always subtract 1.</span>
+    <span class="rule-key">The rule:</span><span class="rule-val">T<sub>p</sub> = a + (p &minus; 1) &times; d &nbsp;(p = position).</span>
+    <span class="rule-key">d-count:</span><span class="rule-val">each term has (position &minus; 1) d's. Re-do it for every term.</span>
     <span class="rule-key">Add the pair:</span><span class="rule-val">2a + (count&#8321; + count&#8322;) &times; d = sum.</span>
-    <span class="rule-key">Solve:</span><span class="rule-val">take the d-part off, then &divide; 2 for a.</span>
-    <span class="rule-key">Never reuse:</span><span class="rule-val">re-derive the counts for the actual positions each time.</span>
-    <span class="rule-key">Then a term:</span><span class="rule-val">T&#8342; = a + (k&minus;1)d.</span>
+    <span class="rule-key">Put in d, solve:</span><span class="rule-val">subtract the d-part, then &divide; 2 to get a.</span>
+    <span class="rule-key">Then a term:</span><span class="rule-val">use T<sub>p</sub> = a + (p&minus;1)d again with the new position.</span>
+    <span class="rule-key">Always check:</span><span class="rule-val">work out the two terms and add &mdash; do they make the sum?</span>
   </div>
 </div>
 <div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
   <h3 style="color:#2E7D32">&#x1F3C6; You are ready when...</h3>
   <ul>
     <li>Any pair &mdash; T&#8322;+T&#8327;, T&#8323;+T&#8328; &mdash; feels the same as T&#8323;+T&#8325;</li>
-    <li>You write the (position&minus;1) count before adding</li>
+    <li>You write (position &minus; 1) for each term before adding</li>
     <li>You never paste an old "2a + 6d" onto a new pair</li>
   </ul>
 </div>
@@ -235,8 +334,8 @@ var screens=document.querySelectorAll('.screen'),pill=document.getElementById('p
 function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
 function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
 if(!sel){fb.className='feedback err';fb.textContent='Please select an answer first.';return;}
-if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! Coefficient built fresh.';ss.style.display='inline-block';}
-else{fb.className='feedback err';fb.textContent='Not quite. Each term has (position−1) d-s. Add the two counts, build 2a+(count)d=sum, solve. Click Show Steps.';ss.style.display='inline-block';}}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! Coefficient built fresh, step by step.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not quite. Each term has (position−1) d-s. Add the two terms, tidy to 2a+(number)d=sum, put in d, solve. Click Show Steps for the full working.';ss.style.display='inline-block';}}
 function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
 </script>
 </body>

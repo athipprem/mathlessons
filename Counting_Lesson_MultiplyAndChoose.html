@@ -171,7 +171,12 @@ ul,ol{padding-left:20px;margin-top:6px}
     <button class="btn-check" onclick="chk(0,'B')">Check</button>
     <div class="feedback" id="fb0"></div>
     <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
-    <div class="steps-reveal" id="sr0"><div class="eq-chain"><div class="eq-row"><span class="eq-math">stages &rarr; multiply: 5 &times; 2 = 10</span></div></div></div>
+    <div class="steps-reveal" id="sr0"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">This is "one from each group" &rarr; multiply.</span></div>
+      <div class="eq-row"><span class="eq-math">mains = 5, &nbsp; desserts = 2</span></div>
+      <div class="eq-row"><span class="eq-math">ways = 5 &times; 2</span></div>
+      <div class="eq-row"><span class="eq-math">ways = 10</span></div>
+    </div></div>
   </div>
 
   <div class="q-card">
@@ -185,7 +190,13 @@ ul,ol{padding-left:20px;margin-top:6px}
     <button class="btn-check" onclick="chk(1,'B')">Check</button>
     <div class="feedback" id="fb1"></div>
     <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
-    <div class="steps-reveal" id="sr1"><div class="eq-chain"><div class="eq-row"><span class="eq-math">in a row &rarr; 3 &times; 2 &times; 1 = 6</span></div></div></div>
+    <div class="steps-reveal" id="sr1"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">"In a row" &rarr; fill each spot, counting down.</span></div>
+      <div class="eq-row"><span class="eq-math">1st spot: 3 choices</span></div>
+      <div class="eq-row"><span class="eq-math">2nd spot: 2 left</span></div>
+      <div class="eq-row"><span class="eq-math">3rd spot: 1 left</span></div>
+      <div class="eq-row"><span class="eq-math">ways = 3 &times; 2 &times; 1 = 6</span></div>
+    </div></div>
   </div>
 
   <div class="q-card">
@@ -199,7 +210,12 @@ ul,ol{padding-left:20px;margin-top:6px}
     <button class="btn-check" onclick="chk(2,'B')">Check</button>
     <div class="feedback" id="fb2"></div>
     <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
-    <div class="steps-reveal" id="sr2"><div class="eq-chain"><div class="eq-row"><span class="eq-math">pairs = 9 &times; 8 &divide; 2 = 72 &divide; 2 = 36</span></div></div></div>
+    <div class="steps-reveal" id="sr2"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Handshakes = pairs, so use n &times; (n&minus;1) &divide; 2.</span></div>
+      <div class="eq-row"><span class="eq-math">n = 9 people</span></div>
+      <div class="eq-row"><span class="eq-math">9 &times; 8 = 72</span><span class="eq-why">&#8592; each shakes the other 8</span></div>
+      <div class="eq-row"><span class="eq-math">72 &divide; 2 = 36</span><span class="eq-why">&#8592; A&ndash;B is the same as B&ndash;A</span></div>
+    </div></div>
   </div>
 
   <div class="q-card">
@@ -213,7 +229,12 @@ ul,ol{padding-left:20px;margin-top:6px}
     <button class="btn-check" onclick="chk(3,'B')">Check</button>
     <div class="feedback" id="fb3"></div>
     <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
-    <div class="steps-reveal" id="sr3"><div class="eq-chain"><div class="eq-row"><span class="eq-math">pairs = 10 &times; 9 &divide; 2 = 90 &divide; 2 = 45</span></div></div></div>
+    <div class="steps-reveal" id="sr3"><div class="eq-chain">
+      <div class="eq-row"><span class="eq-math">Choosing a pair (order doesn't matter) &rarr; n &times; (n&minus;1) &divide; 2.</span></div>
+      <div class="eq-row"><span class="eq-math">n = 10 members</span></div>
+      <div class="eq-row"><span class="eq-math">10 &times; 9 = 90</span></div>
+      <div class="eq-row"><span class="eq-math">90 &divide; 2 = 45</span></div>
+    </div></div>
   </div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
