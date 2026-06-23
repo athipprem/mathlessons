@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Counting Figures — Squares, Paths &amp; More</title>
+<style>
+:root{--nav:#6A1B9A;--nav-dark:#4A148C;--bg:#F5EEFB;--card:#fff;--acc:#6A1B9A;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#7B1FA2;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:.98rem;line-height:1.6}
+ul,ol{padding-left:20px;margin-top:6px}
+.why{background:linear-gradient(135deg,#EDE7F6,#F3E5F5);border:2px solid #B39DDB;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#4A148C;font-weight:700;margin-bottom:6px}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.q-node{background:var(--nav);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;font-size:1.02rem;font-weight:700;margin:0 auto 10px;max-width:580px}
+.figrow{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;margin:12px 0}
+.steps{margin:10px 0 6px 0;background:#FAF5FF;border:1px solid #E1BEE7;border-radius:10px;padding:14px 16px}
+.steps .ln{font-family:'Courier New',monospace;font-size:1rem;color:#1a1a2e;padding:4px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.steps .ln .note{font-family:'Segoe UI',Arial,sans-serif;font-style:italic;font-size:.84rem;color:#6A1B9A}
+.steps .ln.ans{color:#1B5E20;font-weight:800}
+.steps .hd{font-weight:700;color:#4A148C;font-size:.9rem;margin:8px 0 4px;font-family:'Segoe UI',Arial,sans-serif}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.93rem;color:#E65100}
+.q-card{background:#FBF7FE;border:1.5px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:.98rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#F5EEFB}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.93rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#F5EEFB;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#6A1B9A;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.rule-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;margin-top:8px}
+.rule-key{font-weight:700;color:#6A1B9A;font-size:.95rem;white-space:nowrap}
+.rule-val{font-size:.93rem;color:#333}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Counting Figures &mdash; Squares, Paths &amp; More</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: Why -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3C6; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">Where figure-counting shows up:</div>
+    <p>"How many squares on a chessboard?" "How many triangles in this picture?" "How many ways can you walk to school turning only right or down?" These are classic competition questions &mdash; and tiling, design, and map routes use the same idea.</p>
+  </div>
+  <p><strong>Today's superpower:</strong> count shapes <em>without missing any and without counting the same one twice</em> &mdash; by being organised, not by eyeballing.</p>
+</div>
+<div class="q-node">&#x1F50D; The rule: count in an ORDER (by size, then position). Never just stare and guess.</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start the Lesson &#8594;</button></div>
+</div>
+
+<!-- Screen 2: squares by size -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>Squares in a Grid &mdash; Count by Size</h2>
+  <p>Don't just count the little squares! Bigger squares hide inside. Count each size separately, then add.</p>
+  <div class="figrow">
+    <svg width="150" height="150" viewBox="0 0 150 150">
+      <rect x="5" y="5" width="140" height="140" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="2"/>
+      <line x1="51.7" y1="5" x2="51.7" y2="145" stroke="#6A1B9A" stroke-width="1.5"/>
+      <line x1="98.3" y1="5" x2="98.3" y2="145" stroke="#6A1B9A" stroke-width="1.5"/>
+      <line x1="5" y1="51.7" x2="145" y2="51.7" stroke="#6A1B9A" stroke-width="1.5"/>
+      <line x1="5" y1="98.3" x2="145" y2="98.3" stroke="#6A1B9A" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <h3>How many squares on this 3 &times; 3 grid?</h3>
+  <div class="steps">
+    <div class="ln">1&times;1 squares: 3 across &times; 3 down = 9 <span class="note">&#8592; the little ones</span></div>
+    <div class="ln">2&times;2 squares: 2 across &times; 2 down = 4 <span class="note">&#8592; slide a 2-box around</span></div>
+    <div class="ln">3&times;3 squares: 1 across &times; 1 down = 1 <span class="note">&#8592; the whole thing</span></div>
+    <div class="ln">add them: 9 + 4 + 1 = 14</div>
+    <div class="ln ans">= 14 squares</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: bigger grid pattern -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>The Pattern for Any Square Grid</h2>
+  <p>On an <strong>n &times; n</strong> grid, the count is just the square numbers added up:</p>
+  <div class="steps">
+    <div class="ln">n&times;n grid = n&sup2; + (n&minus;1)&sup2; + &hellip; + 2&sup2; + 1&sup2;</div>
+  </div>
+  <h3>Example: a 4 &times; 4 grid</h3>
+  <div class="steps">
+    <div class="ln">1&times;1: 4&times;4 = 16</div>
+    <div class="ln">2&times;2: 3&times;3 = 9</div>
+    <div class="ln">3&times;3: 2&times;2 = 4</div>
+    <div class="ln">4&times;4: 1&times;1 = 1</div>
+    <div class="ln">16 + 9 + 4 + 1 = 30</div>
+    <div class="ln ans">= 30 squares</div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; Same idea for a chessboard (8&times;8): 64+49+36+25+16+9+4+1 = 204. The method scales &mdash; you never draw them all.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: lattice paths -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Counting Paths &mdash; Right or Down Only</h2>
+  <p>To count shortest routes on a grid (moving only right or down), write at each corner <strong>how many ways reach it</strong>. Each corner = the corner above it + the corner to its left.</p>
+  <div class="figrow">
+    <svg width="180" height="180" viewBox="0 0 180 180">
+      <g stroke="#B39DDB" stroke-width="2" fill="none">
+        <line x1="20" y1="20" x2="160" y2="20"/><line x1="20" y1="90" x2="160" y2="90"/><line x1="20" y1="160" x2="160" y2="160"/>
+        <line x1="20" y1="20" x2="20" y2="160"/><line x1="90" y1="20" x2="90" y2="160"/><line x1="160" y1="20" x2="160" y2="160"/>
+      </g>
+      <g font-family="Arial" font-size="15" font-weight="700" fill="#4A148C" text-anchor="middle">
+        <circle cx="20" cy="20" r="11" fill="#FFE0B2" stroke="#FB8C00"/><text x="20" y="25">1</text>
+        <text x="90" y="14">1</text><text x="160" y="14">1</text>
+        <text x="13" y="95">1</text><text x="90" y="85">2</text><text x="160" y="85">3</text>
+        <text x="13" y="165">1</text><text x="90" y="178">3</text>
+        <circle cx="160" cy="160" r="12" fill="#C8E6C9" stroke="#2E7D32"/><text x="160" y="165">6</text>
+      </g>
+    </svg>
+  </div>
+  <h3>Shortest paths from top-left to bottom-right of a 2 &times; 2 grid:</h3>
+  <div class="steps">
+    <div class="ln">start corner = 1</div>
+    <div class="ln">top row &amp; left column = 1 (only one way) <span class="note">&#8592; straight along</span></div>
+    <div class="ln">each inside corner = above + left: 1+1 = 2, then 2+1 = 3 &hellip;</div>
+    <div class="ln">bottom-right = 3 + 3 = 6</div>
+    <div class="ln ans">= 6 paths</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: practice -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Practice</h2>
+  <p style="color:#555;font-size:.9rem;margin-bottom:16px">Squares: add by size (n² + (n−1)² + …). Paths: add above + left at each corner.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; How many squares of all sizes are on a 3 &times; 3 grid of small squares?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 13</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 14</label>
+      <label class="opt"><input type="radio" name="q0" value="D"> D)&nbsp; 16</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'C')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">9 + 4 + 1 = 14</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; How many squares of all sizes are on a 5 &times; 5 grid of small squares?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 25</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 50</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 55</label>
+      <label class="opt"><input type="radio" name="q1" value="D"> D)&nbsp; 65</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">25 + 16 + 9 + 4 + 1 = 55</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; On a 1 &times; 3 grid (a single row of 3 boxes), how many shortest paths go from the top-left corner to the bottom-right corner, moving only right or down?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 4</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q2" value="D"> D)&nbsp; 8</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">top corners each = 1; the one down-step can happen after 0, 1, 2 or 3 rights</div>
+      <div class="ln">= 4 paths</div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; On a 3 &times; 3 grid, how many shortest paths go from the top-left corner to the bottom-right corner (right or down only)?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 16</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q3" value="D"> D)&nbsp; 24</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'C')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">fill corners (above + left): edges all 1</div>
+      <div class="ln">row: 1,2,3,4 &nbsp; next: 1,3,6,10 &nbsp; next: 1,4,10,20</div>
+      <div class="ln">bottom-right = 20</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 6: summary -->
+<div class="screen" id="s5">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Figure Counting on One Card</div>
+  <div class="rule-grid">
+    <span class="rule-key">Be organised:</span><span class="rule-val">count in an order, never eyeball.</span>
+    <span class="rule-key">Squares in grid:</span><span class="rule-val">add by size: n² + (n−1)² + … + 1.</span>
+    <span class="rule-key">Paths (right/down):</span><span class="rule-val">each corner = above + left; read off the end corner.</span>
+    <span class="rule-key">Triangles in a figure:</span><span class="rule-val">count smallest first, then 2-piece, then whole.</span>
+    <span class="rule-key">Always check:</span><span class="rule-val">did I miss a size, or count one twice?</span>
+  </div>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You are ready when...</h3>
+  <ul>
+    <li>You count squares by size and add, instead of counting the little ones only</li>
+    <li>You fill a path grid corner-by-corner (above + left)</li>
+    <li>You finish by checking you didn't miss or double-count a shape</li>
+  </ul>
+</div>
+<div class="navrow">
+  <a href="Counting_Lesson_PairsInDisguise.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#F5EEFB;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#6A1B9A;color:#fff;border:2px solid #6A1B9A;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Please select an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! Counted in order, nothing missed.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not quite. Squares: add by size. Paths: above + left at each corner. Click Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

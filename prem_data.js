@@ -15,35 +15,40 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '22 Jun 2026',
+  updated:        '23 Jun 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:'M3', topic:'Milestone Test — Units 21–30 (ISA + Kangaroo)', status:'In Progress' },
+  currentUnit: { n:31, topic:'Art of Counting II — Pairs, Disguises & Figures (ASMOPSS prep)', status:'In Progress' },
   lastUnit: {
-    n:30, score:11, outOf:15, pct:73, delta:-1, prevScore:12,
-    patternLabel: 'U30 Analysis — Sequences CLOSED',
-    patternInsight: '11/15 (73%) &mdash; below the bar, <strong>but the headline is a win: Section C closes the LAST open gap of the whole programme</strong> &mdash; sequences two-term NOVEL pairs, <strong>5/5</strong> (was 0/3 at U25). He derived each coefficient fresh with T<sub>p</sub>=a+(p&minus;1)d. Art of Counting (new topic) is shaky at 6/10 and pulled the total down. Failed topic = Counting; Sequences is done.',
-    analysisLabel: 'Next: Milestone M3 (Units 21–30) — Lui chose to proceed; Art of Counting continues in cycle 4 (U31+)',
-    analysisInsight: 'U30 did not pass (11/15). The only weak topic is Art of Counting: the "&divide;2 for pairs" is unstable when the pair is DISGUISED &mdash; he halved for "handshakes" (Q6) and "pair" (Q10) but not for "lines" (Q7: 20 not 10) or "games" (Q8: 56 not 28); diagonals (Q9) and repeats-multiply (Q2) also slipped. Lui&rsquo;s call: go straight to M3 and develop Art of Counting from U31 (cycle 4) rather than a pre-M3 re-test. M3 covers all of U21&ndash;30 (15 ISA + 5 Kangaroo).',
-    qSummary: 'Sec A 4/5 | <strong>Sec B 2/5</strong> (Counting choose-2) | <strong>Sec C 5/5 &#10003; sequences CLOSED</strong> &mdash; Total 11/15 (not passed)',
+    n:'M3', score:10, outOf:15, pct:67, delta:-1, prevScore:11,
+    patternLabel: 'Milestone M3 (Units 21–30)',
+    patternInsight: '<strong>14/20 — ISA 10/15, Kangaroo 4/5.</strong> The headline is the <strong>Kangaroo 4/5 → Applied-Problems strength confirmed</strong>: reverse handshakes (the old M2 gap), units-digit cycles, snail/rate and counting-squares all correct. ISA 10/15 dipped on careless + retention slips under a long mixed paper &mdash; not new concept failure. Two "answer-exactly-what&rsquo;s-asked" errors (Q12 gave 3 not smallest 0; Q19 gave 33 not smallest 13).',
+    analysisLabel: 'Next: U31 — Art of Counting II (ASMOPSS prep); pivot to ASMOPSS 2026 (9 Aug)',
+    analysisInsight: 'Cycle 3 done. Programme now in ASMOPSS-prep mode (ASMOPSS 2025 diagnostic = 13/25; aim Gold). U31 = on-topic Art of Counting II (close the U30 ÷2-in-disguise gap + figure counting), ASMOPSS-style. From U32: mixed ASMOPSS papers (on-topic rule relaxed for ASMOPSS units). M3 misses to carry as habits: which-piece (Q5 gave border), finish two-term (Q4 blank), ÷6 both checks (Q11), and the "read the EXACT ask" precision (Q12, Q19).',
+    qSummary: '<strong>ISA 10/15</strong> | <strong>Kangaroo 4/5 ✦ (Applied strength)</strong> &mdash; Total 14/20 (70%)',
     qBreakdown: [
-      { q:'Q1',  topic:'Counting &mdash; Multiply (meals)',               lvl:'w', pass:true,  note:'&#10003; 12.' },
-      { q:'Q2',  topic:'Counting &mdash; Multiply with repeats',          lvl:'w', pass:false, note:'&#10007; 24 (correct 16). Muddled 4&times;4 (working showed 256, 64).' },
-      { q:'Q3',  topic:'Counting &mdash; Multiply (outfits)',             lvl:'w', pass:true,  note:'&#10003; 12.' },
-      { q:'Q4',  topic:'Counting &mdash; Arrange 4 in a row',             lvl:'w', pass:true,  note:'&#10003; 24.' },
-      { q:'Q5',  topic:'Counting &mdash; Order matters (Pres &amp; VP)',  lvl:'w', pass:true,  note:'&#10003; 20. Correctly did NOT &divide;2.' },
-      { q:'Q6',  topic:'Counting &#9733; &mdash; Handshakes (6)',         lvl:'m', pass:true,  note:'&#10003; 15. Halved correctly.' },
-      { q:'Q7',  topic:'Counting &#9733; &mdash; Lines through points',   lvl:'m', pass:false, note:'&#10007; 20 (correct 10). <strong>Set up 5&times;4 but forgot &divide;2 &mdash; pair in disguise.</strong>' },
-      { q:'Q8',  topic:'Counting &#9733; &mdash; League games',           lvl:'m', pass:false, note:'&#10007; 56 (correct 28). 8&times;7, forgot &divide;2.' },
-      { q:'Q9',  topic:'Counting &#9733; &mdash; Diagonals (hexagon)',    lvl:'m', pass:false, note:'&#10007; 4 (correct 9). "pairs &minus; sides" (15&minus;6) didn&rsquo;t fire.' },
-      { q:'Q10', topic:'Counting &#9733; &mdash; Choose a pair (7)',      lvl:'m', pass:true,  note:'&#10003; 21. 7&times;6&divide;2.' },
-      { q:'Q11', topic:'Sequences &#9733;&#9733; &mdash; T&#8322;+T&#8325; (novel)', lvl:'h', pass:true, note:'&#10003; a=17. T<sub>p</sub>=a+(p&minus;1)d, coeffs derived.' },
-      { q:'Q12', topic:'Sequences &#9733;&#9733; &mdash; T&#8323;+T&#8327; (novel)', lvl:'h', pass:true, note:'&#10003; a=15. 8d+2a.' },
-      { q:'Q13', topic:'Sequences &#9733;&#9733; &mdash; T&#8322;+T&#8326; (novel)', lvl:'h', pass:true, note:'&#10003; a=15. 6d+2a.' },
-      { q:'Q14', topic:'Sequences &#9733;&#9733; &mdash; T&#8324;+T&#8328; (novel)', lvl:'h', pass:true, note:'&#10003; a=18. 10d+2a.' },
-      { q:'Q15', topic:'Sequences &#9733;&#9733; &mdash; T&#8323;+T&#8326; then T&#8321;&#8320;', lvl:'h', pass:true, note:'&#10003; a=16, T&#8321;&#8320;=52. Full chain. <strong>Novel-pair gap CLOSED 5/5.</strong>' }
+      { q:'Q1',  topic:'Equation both-sides (U21)',                    lvl:'w', pass:true,  note:'&#10003; n=11.' },
+      { q:'Q2',  topic:'Sequence — find term (U22)',                  lvl:'w', pass:true,  note:'&#10003; 69.' },
+      { q:'Q3',  topic:'Sequence — find n (U25)',                     lvl:'w', pass:true,  note:'&#10003; 13.' },
+      { q:'Q4',  topic:'Sequence — two-term (U30)',                   lvl:'w', pass:false, note:'&#10007; BLANK. Derived coeffs in working but didn&rsquo;t finish &mdash; retention wobble under pressure.' },
+      { q:'Q5',  topic:'Path & Frame — carpet inside (U27)',          lvl:'w', pass:false, note:'&#10007; 324 = the BORDER (864&minus;540). Gave wrong piece &mdash; which-piece error resurfaced.' },
+      { q:'Q6',  topic:'Path & Frame — path + cost (U28)',            lvl:'m', pass:false, note:'&#10007; ~45,360 (correct ฿25,920). Cost-multiply slip.' },
+      { q:'Q7',  topic:'SimEq (U26)',                                 lvl:'m', pass:true,  note:'&#10003; pen $4, book $11.' },
+      { q:'Q8',  topic:'Ratio — sharing (U26)',                       lvl:'m', pass:true,  note:'&#10003; 45 & 27.' },
+      { q:'Q9',  topic:'Consecutive — middle (U27)',                  lvl:'m', pass:true,  note:'&#10003; 27.' },
+      { q:'Q10', topic:'Consecutive — even count (U28)',              lvl:'m', pass:true,  note:'&#10003; 20.' },
+      { q:'Q11', topic:'Divisibility by 6 (U29)',                     lvl:'h', pass:false, note:'&#10007; said No (4,932 IS ÷6: even + digit sum 18). Careless.' },
+      { q:'Q12', topic:'Divisibility — smallest digit (U29)',         lvl:'h', pass:false, note:'&#10007; gave 3, not the SMALLEST (0). Read-the-exact-ask.' },
+      { q:'Q13', topic:'Counting — multiply (U30)',                   lvl:'h', pass:true,  note:'&#10003; 12.' },
+      { q:'Q14', topic:'Counting — handshakes (U30)',                 lvl:'h', pass:true,  note:'&#10003; 21. Halved correctly this time.' },
+      { q:'Q15', topic:'Ratio — transfer (U26)',                      lvl:'h', pass:true,  note:'&#10003; $63.' },
+      { q:'Q16', topic:'Kangaroo — snail climb',                      lvl:'k', pass:true,  note:'&#10003; Day 3.' },
+      { q:'Q17', topic:'Kangaroo — reverse handshakes',              lvl:'k', pass:true,  note:'&#10003; 8. <strong>The M2 gap — now solved.</strong>' },
+      { q:'Q18', topic:'Kangaroo — units-digit cycle (7⁶)',          lvl:'k', pass:true,  note:'&#10003; 9.' },
+      { q:'Q19', topic:'Kangaroo — remainders (smallest)',           lvl:'k', pass:false, note:'&#10007; 33 is valid but not the SMALLEST (13). Read-the-exact-ask.' },
+      { q:'Q20', topic:'Kangaroo — counting squares',                lvl:'k', pass:true,  note:'&#10003; 14. <strong>Kangaroo 4/5 → Applied strength.</strong>' }
     ]
   },
     // ── Skills ───────────────────────────────────────────────────────
@@ -57,11 +62,11 @@ var PREM_DATA = {
     { name: 'Geometry',          c: 74, t: 80 },
     { name: 'Counting',          c: 83, t: 85 },
     { name: 'Number Theory',     c: 85, t: 82 },
-    { name: 'Applied Problems',  c: 72, t: 80 }
+    { name: 'Applied Problems',  c: 76, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 74, 88, 98, 83, 83, 85, 72],
+  radarCurrent:  [87, 74, 88, 98, 83, 83, 85, 76],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -99,22 +104,36 @@ var PREM_DATA = {
     { n:27, score:11, delta:0,   color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
     { n:28, score:13, delta:+2,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false },
     { n:29, score:12, delta:-1,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false },
-    { n:30, score:11, delta:-1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false }
+    { n:30, score:11, delta:-1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
+    { n:'M3', label:'M3', score:10, delta:-1, color:'linear-gradient(135deg,#4527A0,#7C3AED)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 31,
+      badge: 'linear-gradient(135deg,#6A1B9A,#8E24AA)',
+      title: 'Art of Counting II &middot; Pairs, Disguises &amp; Figures (ASMOPSS prep)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'L1: Pairs in Disguise (÷2)', c:'tblue' },
+        { t:'L2: Figure Counting', c:'tblue' },
+        { t:'ASMOPSS-style', c:'torange' }
+      ],
+      note: 'U31: first ASMOPSS-prep unit (on-topic Art of Counting). L1 closes the U30 gap &mdash; choose-2 in DISGUISE (handshakes = lines = games → always ÷2), diagonals (pairs − sides), and when NOT to halve (order matters). L2: figure counting — squares-in-grid (add by size) + shortest paths (above+left). Sec C = ASMOPSS-style ★★ (squares grid, played-twice, postcards, even-no-repeat, lattice paths). Precision habit baked in: READ THE EXACT ASK (M3 Q12/Q19 fix). Then U32+ = mixed ASMOPSS papers. Pass: 12/15.',
+      status: 'pending'
+    },
+    {
       n: 'M3',
       badge: 'linear-gradient(135deg,#4527A0,#7C3AED)',
       title: 'Milestone 03 &middot; Units 21–30 (ISA + Kangaroo)',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'20 Q: 15 ISA + 5 Kangaroo', c:'tblue' },
-        { t:'No lessons (milestone)', c:'tblue' }
+        { t:'14/20 (70%)', s:'background:#f3e9ff;color:#4527A0;font-weight:700' },
+        { t:'ISA 10/15', c:'torange' },
+        { t:'<strong>Kangaroo 4/5 ✦ Applied strength</strong>', s:'background:#f0fff4;color:#276749;font-weight:700' }
       ],
-      note: 'M3 covers all of cycle 3 (U21&ndash;30). Q1&ndash;15 ISA-style spread across the cycle&rsquo;s topics: equations both-sides, sequences (find term / find n / novel two-term), Path &amp; Frame (carpet + cost), SimEq, ratio (sharing + transfer), consecutive (middle + even-count), divisibility (rule + missing digit), Art of Counting (multiply + handshakes). Q16&ndash;20 Kangaroo diagnostic: snail climb, reverse handshakes, units-digit cycle, remainders, counting squares. Kangaroo scoring: 4&ndash;5/5 &rarr; Applied Problems radar bump. Mixed topics are allowed here (milestones do the retention check).',
-      status: 'pending'
+      note: 'M3 = 14/20. <strong>Kangaroo 4/5 — applied reasoning is now a confirmed strength</strong>: reverse handshakes (old M2 gap solved), units-digit cycle, snail/rate, counting squares all ✓; only Q19 ✗ (gave 33, not the smallest 13). ISA 10/15 dipped on careless + retention slips under a long mixed paper: Q4 two-term blank, Q5 which-piece (gave border), Q6 cost arithmetic, Q11 ÷6 (said No), Q12 not-smallest. Concepts hold in units; precision/retention slip under mixed pressure — exactly what ASMOPSS timed practice hardens.',
+      status: 'done'
     },
     {
       n: 30,
@@ -565,10 +584,22 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 92
     },
     {
-      label:     'Art of Counting: choose-2 ÷2 in disguise + diagonals + repeats — ACTIVE (cycle 4)',
+      label:     'Art of Counting: choose-2 ÷2 in disguise + diagonals — being trained at U31 (ASMOPSS)',
+      pill:      'p2', pillText: 'Training &#128992;',
+      score:     'U30 6/10; M3 Q14 handshakes &#10003; (halved). The &divide;2 for pairs is unstable when DISGUISED (lines/games). U31 L1 trains "spot the pair in disguise" (handshakes = lines = games &rarr; always &divide;2), diagonals (pairs &minus; sides), when NOT to halve. Competition-central for ASMOPSS.',
+      fillClass: 'g2', fillPct: 62
+    },
+    {
+      label:     'Precision: "answer EXACTLY what is asked" (smallest / largest / which one)',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U30 Art of Counting 6/10. Multiplication principle solid (Q1,3,4,5 &#10003;). But the &divide;2 for pairs is unstable when disguised: halved for "handshakes"/"pair" (Q6, Q10 &#10003;) but not "lines"/"games" (Q7 20 not 10, Q8 56 not 28). Diagonals "pairs &minus; sides" missed (Q9), and repeats-multiply muddled (Q2). New, competition-heavy topic &mdash; develop across U31+ (cycle 4): pairs-in-disguise recognition, always &divide;2, diagonals, repeats.',
-      fillClass: 'g2', fillPct: 55
+      score:     'M3 Q12 (gave digit 3, not the SMALLEST 0) and Q19 (gave 33, not the SMALLEST 13) &mdash; same error: finds a correct set/value but returns the wrong specific one. Cheap lost marks; critical for competition. Fix: a standing "re-read the exact ask before writing" habit, baked into every ASMOPSS unit.',
+      fillClass: 'g2', fillPct: 60
+    },
+    {
+      label:     'Applied Problems / Kangaroo reasoning — STRENGTH (M2 4/5, M3 4/5)',
+      pill:      'ps', pillText: 'Strength &#10003;',
+      score:     'M3 Kangaroo 4/5: reverse handshakes (old M2 gap), units-digit cycles, snail/rate, counting squares all correct. Applied reasoning is now reliable &mdash; a real asset going into ASMOPSS. Keep feeding harder applied/contest problems.',
+      fillClass: 'gs', fillPct: 80
     },
     {
       label:     'Sequences: Find n (+1 Rule) — RESOLVED in U25',
@@ -631,7 +662,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U30'
+  radarLegendUnit: 'M3'
 
 };
 
