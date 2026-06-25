@@ -15,13 +15,38 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '23 Jun 2026',
+  updated:        '24 Jun 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:31, topic:'Art of Counting II — Pairs, Disguises & Figures (ASMOPSS prep)', status:'In Progress' },
+  currentUnit: { n:32, topic:'Counting — The Two Moves (Multiply & Pairs) · simplified re-do (ASMOPSS)', status:'In Progress' },
   lastUnit: {
+    n:31, score:13, outOf:15, pct:87, delta:0, prevScore:10,
+    patternLabel: 'U31 — open-book caveat (counting overload)',
+    patternInsight: '13/15 (87%) <strong>but with a big caveat: this was a 2nd attempt WITH lessons open</strong>. On the 1st (closed-book) round Prem was confused on both Section A and B and said "too many concepts to remember." So counting is NOT consolidated &mdash; the two lessons carried ~8 moves at once (multiply, arrange, choose-2, diagonals, when-not-to-halve, repeats, squares, paths) and overloaded him. Even open-book the 2 misses (Q4 60 not 30, Q14 36 not 32) were "wrong move chosen" &mdash; over-applying ÷2.',
+    analysisLabel: 'Next: U32 — Counting re-done SIMPLY (just 2 moves)',
+    analysisInsight: 'GROUND RULE (Lui, 24 Jun): every topic is brand-new — Prem has not seen it at school; teach from zero, ONE idea at a time, simple & clear. U32 collapses counting to ONE decision ("does order matter?") and the TWO core moves only: BUILD/ARRANGE → multiply; CHOOSE A PAIR → multiply ÷2. Diagonals/figures/repeats deferred until the core is automatic. Closed-book re-test. Then layer harder counting + Number Theory.',
+    qSummary: 'Sec A 4/5 | Sec B 5/5 | Sec C 4/5 — 13/15 <strong>(2nd round, OPEN-BOOK — not a clean measure)</strong>',
+    qBreakdown: [
+      { q:'Q1', topic:'Counting — multiply (café)',          lvl:'w', pass:true,  note:'&#10003; 24.' },
+      { q:'Q2', topic:'Counting — repeats',                  lvl:'w', pass:true,  note:'&#10003; 25.' },
+      { q:'Q3', topic:'Counting — arrange 5',                lvl:'w', pass:true,  note:'&#10003; 120.' },
+      { q:'Q4', topic:'Counting — 1st & 2nd (ordered)',      lvl:'w', pass:false, note:'&#10007; 60 (correct 30). Over-multiplied by 2 — wrong move.' },
+      { q:'Q5', topic:'Counting — outfits',                  lvl:'w', pass:true,  note:'&#10003; 24.' },
+      { q:'Q6', topic:'Pairs — handshakes (9)',              lvl:'m', pass:true,  note:'&#10003; 36.' },
+      { q:'Q7', topic:'Pairs — lines (11 pts)',              lvl:'m', pass:true,  note:'&#10003; 55. "I forgot ÷2" then self-corrected.' },
+      { q:'Q8', topic:'Pairs — league games (10)',           lvl:'m', pass:true,  note:'&#10003; 45. Halved — the U30 miss type, now right (open-book).' },
+      { q:'Q9', topic:'Pairs — diagonals (pentagon)',        lvl:'m', pass:true,  note:'&#10003; 5.' },
+      { q:'Q10',topic:'Pairs — choose 2 (12)',               lvl:'m', pass:true,  note:'&#10003; 66.' },
+      { q:'Q11',topic:'Figure — squares 4×4 ★★',             lvl:'h', pass:true,  note:'&#10003; 30.' },
+      { q:'Q12',topic:'Pairs ×2 — played twice ★★',          lvl:'h', pass:true,  note:'&#10003; 110. Correctly NOT halved.' },
+      { q:'Q13',topic:'Order matters — postcards ★★',        lvl:'h', pass:true,  note:'&#10003; 56. Correctly NOT halved.' },
+      { q:'Q14',topic:'Multiply with rule — even no-repeat ★★', lvl:'h', pass:false, note:'&#10007; 36 (correct 32). Used pairs ÷2 on a build problem — wrong move.' },
+      { q:'Q15',topic:'Figure — paths 2×2 ★★',               lvl:'h', pass:true,  note:'&#10003; 6.' }
+    ]
+  },
+  _M3archived: {
     n:'M3', score:10, outOf:15, pct:67, delta:-1, prevScore:11,
     patternLabel: 'Milestone M3 (Units 21–30)',
     patternInsight: '<strong>14/20 — ISA 10/15, Kangaroo 4/5.</strong> The headline is the <strong>Kangaroo 4/5 → Applied-Problems strength confirmed</strong>: reverse handshakes (the old M2 gap), units-digit cycles, snail/rate and counting-squares all correct. ISA 10/15 dipped on careless + retention slips under a long mixed paper &mdash; not new concept failure. Two "answer-exactly-what&rsquo;s-asked" errors (Q12 gave 3 not smallest 0; Q19 gave 33 not smallest 13).',
@@ -105,23 +130,36 @@ var PREM_DATA = {
     { n:28, score:13, delta:+2,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false },
     { n:29, score:12, delta:-1,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false },
     { n:30, score:11, delta:-1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
-    { n:'M3', label:'M3', score:10, delta:-1, color:'linear-gradient(135deg,#4527A0,#7C3AED)', star:false }
+    { n:'M3', label:'M3', score:10, delta:-1, color:'linear-gradient(135deg,#4527A0,#7C3AED)', star:false },
+    { n:31, score:13, delta:+3, color:'linear-gradient(135deg,#FBC02D,#F9A825)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 31,
+      n: 32,
       badge: 'linear-gradient(135deg,#6A1B9A,#8E24AA)',
-      title: 'Art of Counting II &middot; Pairs, Disguises &amp; Figures (ASMOPSS prep)',
+      title: 'Counting — The Two Moves (Multiply &amp; Pairs) · simplified re-do',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Pairs in Disguise (÷2)', c:'tblue' },
-        { t:'L2: Figure Counting', c:'tblue' },
-        { t:'ASMOPSS-style', c:'torange' }
+        { t:'L1: Multiply (build/arrange)', c:'tblue' },
+        { t:'L2: Pairs (÷2)', c:'tblue' },
+        { t:'1 concept each — from zero', c:'torange' }
       ],
-      note: 'U31: first ASMOPSS-prep unit (on-topic Art of Counting). L1 closes the U30 gap &mdash; choose-2 in DISGUISE (handshakes = lines = games → always ÷2), diagonals (pairs − sides), and when NOT to halve (order matters). L2: figure counting — squares-in-grid (add by size) + shortest paths (above+left). Sec C = ASMOPSS-style ★★ (squares grid, played-twice, postcards, even-no-repeat, lattice paths). Precision habit baked in: READ THE EXACT ASK (M3 Q12/Q19 fix). Then U32+ = mixed ASMOPSS papers. Pass: 12/15.',
+      note: 'U32: counting RE-DONE the simple way after U31 overload. Per the new ground rule (every topic brand-new → one idea at a time). Just ONE decision — "does the order matter?" — and the TWO core moves: BUILD/ARRANGE → multiply (Lesson 1); CHOOSE A PAIR → multiply ÷2 (Lesson 2). Each lesson teaches a single move from zero with concrete pictures. Sec C = "which move is it?" (decide between the two — fixes U31 Q4/Q14 wrong-move errors). Diagonals/figures/repeats deferred. Closed-book. Pass: 12/15.',
       status: 'pending'
+    },
+    {
+      n: 31,
+      badge: 'linear-gradient(135deg,#FBC02D,#F9A825)',
+      title: 'Art of Counting II &middot; Pairs, Disguises &amp; Figures (ASMOPSS prep)',
+      tags: [
+        { t:'13/15 — OPEN-BOOK (2nd round)', s:'background:#fff8e1;color:#8d6e00;font-weight:700' },
+        { t:'1st round: confused A&amp;B', c:'torange' },
+        { t:'"too many concepts"', c:'torange' }
+      ],
+      note: '13/15 but <strong>2nd attempt with lessons OPEN</strong> — not a clean measure. 1st (closed-book) round: confused on Sec A &amp; B; Prem said "too many concepts to remember." The 2 lessons carried ~8 moves at once → overload. Even open-book, 2 misses were wrong-move (Q4 60≠30 over-multiplied; Q14 36≠32 over-applied ÷2). Good news within it: lines/games/diagonals ÷2 came right (incl. self-correcting "I forgot ÷2"). Fix: U32 re-does counting with ONE decision + 2 moves only, from zero.',
+      status: 'done'
     },
     {
       n: 'M3',
@@ -584,10 +622,10 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 92
     },
     {
-      label:     'Art of Counting: choose-2 ÷2 in disguise + diagonals — being trained at U31 (ASMOPSS)',
-      pill:      'p2', pillText: 'Training &#128992;',
-      score:     'U30 6/10; M3 Q14 handshakes &#10003; (halved). The &divide;2 for pairs is unstable when DISGUISED (lines/games). U31 L1 trains "spot the pair in disguise" (handshakes = lines = games &rarr; always &divide;2), diagonals (pairs &minus; sides), when NOT to halve. Competition-central for ASMOPSS.',
-      fillClass: 'g2', fillPct: 62
+      label:     'Art of Counting — OVERLOADED at U31; re-doing simply (2 moves) at U32',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U31 packed ~8 counting moves into 2 lessons &mdash; Prem confused on the closed-book round, passed only open-book ("too many concepts"). Even open-book he picked the wrong move twice (Q4 over-multiply, Q14 over-÷2). Root cause = overload, not inability. U32 collapses to ONE decision ("does order matter?") + TWO core moves (BUILD→multiply, PAIR→÷2), one idea per lesson from zero. Diagonals/figures/repeats deferred until core is automatic. Closed-book re-test.',
+      fillClass: 'g2', fillPct: 50
     },
     {
       label:     'Precision: "answer EXACTLY what is asked" (smallest / largest / which one)',
@@ -662,7 +700,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'M3'
+  radarLegendUnit: 'U31'
 
 };
 

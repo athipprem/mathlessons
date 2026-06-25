@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Counting Move 2 — Halve When You Choose a Pair</title>
+<style>
+:root{--nav:#6A1B9A;--nav-dark:#4A148C;--bg:#F5EEFB;--card:#fff;--acc:#6A1B9A;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#7B1FA2;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#EDE7F6,#F3E5F5);border:2px solid #B39DDB;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#4A148C;font-weight:700;margin-bottom:6px}
+.big-rule{background:#EDE7F6;border:2px solid #8E24AA;border-radius:12px;padding:16px;text-align:center;font-size:1.12rem;font-weight:800;color:#4A148C;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.draw{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
+.combo{background:#F1F8E9;border:1.5px solid #AED581;border-radius:8px;padding:6px 10px;font-size:.92rem;color:#33691E;font-weight:700}
+.steps{margin:10px 0 6px 0;background:#FAF5FF;border:1px solid #E1BEE7;border-radius:10px;padding:14px 16px}
+.steps .ln{font-family:'Courier New',monospace;font-size:1.02rem;color:#1a1a2e;padding:4px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.steps .ln .note{font-family:'Segoe UI',Arial,sans-serif;font-style:italic;font-size:.85rem;color:#6A1B9A}
+.steps .ln.ans{color:#1B5E20;font-weight:800}
+.decide{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:520px){.decide{grid-template-columns:1fr}}
+.dbox{border-radius:12px;padding:14px;border:2px solid}
+.dbox.m{background:#EDE7F6;border-color:#B39DDB}.dbox.m h4{color:#4A148C}
+.dbox.p{background:#F1F8E9;border-color:#AED581}.dbox.p h4{color:#33691E}
+.dbox h4{font-size:1rem;margin-bottom:6px}.dbox p{font-size:.9rem}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#FBF7FE;border:1.5px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#F5EEFB}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#F5EEFB;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#6A1B9A;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Counting Move 2 &mdash; Halve When You Choose a Pair</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1 -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F91D; The Only Other Move</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>"How many handshakes at a party?" "How many ways to pick 2 friends?" These are everywhere in puzzles and contests. They feel like multiplying &mdash; but there's a tiny twist.</p>
+  </div>
+  <p>In Lesson 1 you learned: <strong>build / arrange &rarr; multiply</strong>. Today is the only other move:</p>
+  <div class="big-rule">When you just CHOOSE A PAIR &rarr;<br>multiply, <span style="color:#8E24AA">then &divide; 2</span></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Show me &#8594;</button></div>
+</div>
+
+<!-- Screen 2 -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>See It First &mdash; 4 People Shake Hands</h2>
+  <p>Four friends &mdash; A, B, C, D &mdash; each shake hands once with each other. Let's list every handshake:</p>
+  <div class="draw">
+    <span class="combo">A&ndash;B</span><span class="combo">A&ndash;C</span><span class="combo">A&ndash;D</span>
+    <span class="combo">B&ndash;C</span><span class="combo">B&ndash;D</span><span class="combo">C&ndash;D</span>
+  </div>
+  <p>That's <strong>6</strong> handshakes.</p>
+  <p>Now why isn't it just 4 &times; 3 = 12? Because <strong>A shaking B is the SAME handshake as B shaking A</strong>. If we multiply, we count every handshake <strong>twice</strong>. So we divide by 2:</p>
+  <div class="steps">
+    <div class="ln">4 &times; 3 = 12 <span class="note">&#8592; this counts each handshake twice</span></div>
+    <div class="ln">12 &divide; 2 = 6 <span class="note">&#8592; A&ndash;B and B&ndash;A are the same, so halve</span></div>
+    <div class="ln ans">= 6 handshakes</div>
+  </div>
+  <div class="golden"><div class="golden-title">&#x1F511; The idea</div><p>Choosing a PAIR (where swapping the two changes nothing) &rarr; <strong>multiply, then &divide; 2</strong>.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3 -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Same Move, More Examples</h2>
+  <p>Handshakes, picking 2 friends, games where each pair plays once &mdash; all "choose a pair", all &divide; 2.</p>
+  <div class="steps">
+    <div class="ln">5 people shake hands: 5 &times; 4 = 20, &divide; 2 = 10</div>
+    <div class="ln">choose 2 friends from 6: 6 &times; 5 = 30, &divide; 2 = 15</div>
+  </div>
+</div>
+<div class="card">
+  <h2>&#x1F50D; The Whole Topic &mdash; Just One Question</h2>
+  <p>Before you count, ask yourself <strong>one</strong> thing:</p>
+  <div class="decide">
+    <div class="dbox m"><h4>&#x2716;&#xFE0F; Building / arranging?<br>(order matters)</h4><p>1st &amp; 2nd, a row, outfits, codes &rarr; <strong>MULTIPLY</strong> (Lesson 1).</p></div>
+    <div class="dbox p"><h4>&#x1F91D; Just a pair / a group?<br>(order doesn't matter)</h4><p>handshakes, pick 2 friends &rarr; <strong>multiply, &divide; 2</strong>.</p></div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; Quick test: "if I swap the two, is it the same thing?" &nbsp;Same &rarr; halve (pair). &nbsp;Different (1st vs 2nd) &rarr; don't halve, just multiply.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: practice -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Your Turn</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">All pairs today: multiply, then &divide; 2.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; 6 people at a party each shake hands once with everyone else. How many handshakes?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 15</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 30</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 36</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">6 &times; 5 = 30, &divide; 2 = 15</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; From 5 friends, how many ways can you choose a pair of 2 to share a desk?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 10</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 25</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">5 &times; 4 = 20, &divide; 2 = 10</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; 10 people each shake hands once with every other person. How many handshakes?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 45</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 90</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 100</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">10 &times; 9 = 90, &divide; 2 = 45</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; 4 teams each play every other team once. How many games are played?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 16</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">each game = a pair of teams: 4 &times; 3 = 12, &divide; 2 = 6</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: summary -->
+<div class="screen" id="s4">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; The Whole of Counting &mdash; Two Moves</div>
+  <div class="decide" style="margin-top:6px">
+    <div class="dbox m"><h4>BUILD / ARRANGE</h4><p>order matters &rarr; <strong>MULTIPLY</strong></p></div>
+    <div class="dbox p"><h4>CHOOSE A PAIR</h4><p>order doesn't &rarr; <strong>multiply, &divide; 2</strong></p></div>
+  </div>
+  <p style="margin-top:10px;font-size:1rem;text-align:center"><strong>Ask: does the order matter?</strong> That one question tells you which move.</p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when...</h3>
+  <ul>
+    <li>You ask "does the order matter?" before counting</li>
+    <li>Handshakes / pick-2 &rarr; you multiply then &divide; 2</li>
+    <li>1st &amp; 2nd / a row &rarr; you just multiply (no halving)</li>
+  </ul>
+</div>
+<div class="navrow">
+  <a href="Counting_Lesson_MultiplyBasics.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#F5EEFB;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#6A1B9A;color:#fff;border:2px solid #6A1B9A;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Yes! Multiply, then ÷ 2 for the pair.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. It’s a pair, so multiply then ÷ 2 (each pair was counted twice). Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

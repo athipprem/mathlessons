@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Counting Move 1 — Multiply When You Build</title>
+<style>
+:root{--nav:#6A1B9A;--nav-dark:#4A148C;--bg:#F5EEFB;--card:#fff;--acc:#6A1B9A;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#7B1FA2;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#EDE7F6,#F3E5F5);border:2px solid #B39DDB;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#4A148C;font-weight:700;margin-bottom:6px}
+.big-rule{background:#EDE7F6;border:2px solid #8E24AA;border-radius:12px;padding:16px;text-align:center;font-size:1.15rem;font-weight:800;color:#4A148C;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.draw{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
+.combo{background:#F1F8E9;border:1.5px solid #AED581;border-radius:8px;padding:6px 10px;font-size:.9rem;color:#33691E;font-weight:600}
+.slots{display:flex;justify-content:center;align-items:center;gap:10px;margin:14px 0;flex-wrap:wrap}
+.slot{min-width:78px;padding:12px 8px;border-radius:10px;text-align:center;border:2px solid #B39DDB;background:#EDE7F6}
+.slot .big{font-size:1.6rem;font-weight:800;color:#4A148C}
+.slot .lbl{font-size:.72rem;color:#6A1B9A;font-weight:700;margin-top:4px}
+.times{font-size:1.5rem;font-weight:800;color:#6A1B9A;align-self:center}
+.steps{margin:10px 0 6px 0;background:#FAF5FF;border:1px solid #E1BEE7;border-radius:10px;padding:14px 16px}
+.steps .ln{font-family:'Courier New',monospace;font-size:1.02rem;color:#1a1a2e;padding:4px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.steps .ln .note{font-family:'Segoe UI',Arial,sans-serif;font-style:italic;font-size:.85rem;color:#6A1B9A}
+.steps .ln.ans{color:#1B5E20;font-weight:800}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#FBF7FE;border:1.5px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#F5EEFB}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#F5EEFB;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#6A1B9A;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Counting Move 1 &mdash; Multiply When You Build</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: Why + the one idea -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F44B; Brand New &mdash; Let's Start Simple</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>Sometimes we want to know "how many different ways can I make this?" &mdash; how many outfits, how many meals, how many lock codes. The answers get big fast, so we want a quick way instead of drawing them all.</p>
+  </div>
+  <p>There are only <strong>two</strong> counting moves you ever need. We'll learn just <strong>ONE today</strong>, slowly, until it's easy. (The other one is the next lesson.)</p>
+  <div class="big-rule">Today's ONE idea:<br>when you BUILD or ARRANGE something &rarr; <span style="color:#8E24AA">MULTIPLY</span></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Show me &#8594;</button></div>
+</div>
+
+<!-- Screen 2: from zero -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>See It First &mdash; 2 Hats and 3 Scarves</h2>
+  <p>You have <strong>2 hats</strong> (red, blue) and <strong>3 scarves</strong> (green, yellow, pink). How many different hat-and-scarf sets can you wear?</p>
+  <p>Let's just list them all:</p>
+  <div class="draw">
+    <span class="combo">red + green</span><span class="combo">red + yellow</span><span class="combo">red + pink</span>
+    <span class="combo">blue + green</span><span class="combo">blue + yellow</span><span class="combo">blue + pink</span>
+  </div>
+  <p>That's <strong>6</strong> sets. Now look: each hat went with 3 scarves &rarr; 3 + 3 = 6. That is the same as <strong>2 &times; 3</strong>.</p>
+  <div class="slots">
+    <div class="slot"><div class="big">2</div><div class="lbl">hats</div></div>
+    <div class="times">&times;</div>
+    <div class="slot"><div class="big">3</div><div class="lbl">scarves</div></div>
+    <div class="times">=</div>
+    <div class="slot" style="background:#E8F5E9;border-color:#A5D6A7"><div class="big" style="color:#1B5E20">6</div><div class="lbl">sets</div></div>
+  </div>
+  <div class="golden"><div class="golden-title">&#x1F511; The idea</div><p>When you pick one from each group to build something, you <strong>multiply</strong> the sizes of the groups. No drawing needed.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: more slots + arrange -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>More Groups, and "In a Row"</h2>
+  <h3>More than two groups? Keep multiplying.</h3>
+  <p>2 shirts, 3 shorts, 2 hats &rarr; outfits =</p>
+  <div class="steps">
+    <div class="ln">2 &times; 3 &times; 2 <span class="note">&#8592; one slot per group</span></div>
+    <div class="ln">= 6 &times; 2 = 12 outfits</div>
+  </div>
+  <h3>Putting things in a ROW (this is still building &rarr; multiply)</h3>
+  <p>How many ways to line up 4 different books on a shelf? Fill the first spot, then the next, counting down what's left:</p>
+  <div class="steps">
+    <div class="ln">1st spot: 4 choices</div>
+    <div class="ln">2nd spot: 3 left</div>
+    <div class="ln">3rd spot: 2 left</div>
+    <div class="ln">4th spot: 1 left</div>
+    <div class="ln">4 &times; 3 &times; 2 &times; 1 = 24 ways</div>
+  </div>
+  <h3>"1st and 2nd place" is the same kind &mdash; just two spots</h3>
+  <p>1st and 2nd medal from 5 runners:</p>
+  <div class="steps">
+    <div class="ln">1st: 5 choices, 2nd: 4 left</div>
+    <div class="ln">5 &times; 4 = 20 <span class="note">&#8592; just multiply, nothing else</span></div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; Building, outfits, lining up, 1st &amp; 2nd &mdash; all the SAME move: <strong>multiply</strong>. Don't add. Don't divide.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: practice -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Your Turn</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Every one of these is "multiply". Take your time.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; A shop has 5 sandwiches and 2 drinks. How many different sandwich-and-drink lunches are there?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 10</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 12</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">build → multiply: 5 &times; 2 = 10</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; In how many ways can 4 different toy cars be lined up in a row?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 16</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 24</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">in a row → 4 &times; 3 &times; 2 &times; 1 = 24</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; Prem has 2 caps, 3 t-shirts and 2 pairs of shoes. How many cap-shirt-shoes outfits can he make?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 14</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">2 &times; 3 &times; 2 = 12</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; From 5 children, in how many ways can a 1st-place and a 2nd-place prize be given?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 10</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 25</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">two spots → 5 &times; 4 = 20</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: summary -->
+<div class="screen" id="s4">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Move 1 &mdash; in one line</div>
+  <p style="font-size:1.05rem"><strong>If you are BUILDING or ARRANGING &rarr; MULTIPLY the choices.</strong></p>
+  <p style="font-size:.95rem;margin-top:6px">Outfits, meals, codes, lining up, 1st &amp; 2nd &mdash; all multiply. Nothing is added or divided.</p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when...</h3>
+  <ul>
+    <li>You see "outfits / meals / line up / 1st &amp; 2nd" and just multiply</li>
+    <li>For a row, you count down: 4 &times; 3 &times; 2 &times; 1</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">Next lesson: the <strong>only other move</strong> &mdash; for when you just choose a pair.</p>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#F5EEFB;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Hub</a>
+  <a href="Counting_Lesson_PairsBasics.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#6A1B9A;color:#fff;border:2px solid #6A1B9A;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 2 &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Yes! You multiplied — that’s the move.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. This one is building/arranging, so MULTIPLY the choices. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>
