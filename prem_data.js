@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '24 Jun 2026',
+  updated:        '25 Jun 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:32, topic:'Counting — The Two Moves (Multiply & Pairs) · simplified re-do (ASMOPSS)', status:'In Progress' },
+  currentUnit: { n:33, topic:'Number Theory — Factorials & The Last Digit Trick (ASMOPSS)', status:'In Progress' },
   lastUnit: {
-    n:31, score:13, outOf:15, pct:87, delta:0, prevScore:10,
-    patternLabel: 'U31 — open-book caveat (counting overload)',
-    patternInsight: '13/15 (87%) <strong>but with a big caveat: this was a 2nd attempt WITH lessons open</strong>. On the 1st (closed-book) round Prem was confused on both Section A and B and said "too many concepts to remember." So counting is NOT consolidated &mdash; the two lessons carried ~8 moves at once (multiply, arrange, choose-2, diagonals, when-not-to-halve, repeats, squares, paths) and overloaded him. Even open-book the 2 misses (Q4 60 not 30, Q14 36 not 32) were "wrong move chosen" &mdash; over-applying ÷2.',
-    analysisLabel: 'Next: U32 — Counting re-done SIMPLY (just 2 moves)',
-    analysisInsight: 'GROUND RULE (Lui, 24 Jun): every topic is brand-new — Prem has not seen it at school; teach from zero, ONE idea at a time, simple & clear. U32 collapses counting to ONE decision ("does order matter?") and the TWO core moves only: BUILD/ARRANGE → multiply; CHOOSE A PAIR → multiply ÷2. Diagonals/figures/repeats deferred until the core is automatic. Closed-book re-test. Then layer harder counting + Number Theory.',
-    qSummary: 'Sec A 4/5 | Sec B 5/5 | Sec C 4/5 — 13/15 <strong>(2nd round, OPEN-BOOK — not a clean measure)</strong>',
+    n:32, score:14, outOf:15, pct:93, delta:+1, prevScore:13,
+    patternLabel: 'U32 — counting re-done simply, PASSED CLOSED-BOOK',
+    patternInsight: '14/15 (93%) <strong>PASSED, and CLOSED-BOOK</strong> &mdash; a real jump from the open-book U31. Collapsing counting to ONE decision ("does order matter?") + two core moves (BUILD→multiply, PAIR→÷2) fixed the overload. Sec A 5/5 (incl. Q4 "1st & 2nd = 12", the type he over-multiplied before), Sec B 5/5 (all pairs halved right). The "fresh / one-idea-at-a-time" ground rule is validated.',
+    analysisLabel: 'Next: U33 — Number Theory (factorials + last digits), taught simply',
+    analysisInsight: 'Counting core is now his. Highest-return ASMOPSS cluster next = Number Theory (factorials, last-digits — biggest 2025-paper gap). U33 teaches it the same simple way (one idea per lesson, from zero). One tiny carry-over reminder (not a lesson): "1st & 2nd / a row → multiply, never halve" (U32 Q11: worked out 30, then wrongly halved to 15). Deferred: diagonals/figure-counting (later simple unit).',
+    qSummary: '<strong>Sec A 5/5 | Sec B 5/5 | Sec C 4/5</strong> — 14/15 PASSED (closed-book)',
     qBreakdown: [
-      { q:'Q1', topic:'Counting — multiply (café)',          lvl:'w', pass:true,  note:'&#10003; 24.' },
-      { q:'Q2', topic:'Counting — repeats',                  lvl:'w', pass:true,  note:'&#10003; 25.' },
-      { q:'Q3', topic:'Counting — arrange 5',                lvl:'w', pass:true,  note:'&#10003; 120.' },
-      { q:'Q4', topic:'Counting — 1st & 2nd (ordered)',      lvl:'w', pass:false, note:'&#10007; 60 (correct 30). Over-multiplied by 2 — wrong move.' },
-      { q:'Q5', topic:'Counting — outfits',                  lvl:'w', pass:true,  note:'&#10003; 24.' },
-      { q:'Q6', topic:'Pairs — handshakes (9)',              lvl:'m', pass:true,  note:'&#10003; 36.' },
-      { q:'Q7', topic:'Pairs — lines (11 pts)',              lvl:'m', pass:true,  note:'&#10003; 55. "I forgot ÷2" then self-corrected.' },
-      { q:'Q8', topic:'Pairs — league games (10)',           lvl:'m', pass:true,  note:'&#10003; 45. Halved — the U30 miss type, now right (open-book).' },
-      { q:'Q9', topic:'Pairs — diagonals (pentagon)',        lvl:'m', pass:true,  note:'&#10003; 5.' },
-      { q:'Q10',topic:'Pairs — choose 2 (12)',               lvl:'m', pass:true,  note:'&#10003; 66.' },
-      { q:'Q11',topic:'Figure — squares 4×4 ★★',             lvl:'h', pass:true,  note:'&#10003; 30.' },
-      { q:'Q12',topic:'Pairs ×2 — played twice ★★',          lvl:'h', pass:true,  note:'&#10003; 110. Correctly NOT halved.' },
-      { q:'Q13',topic:'Order matters — postcards ★★',        lvl:'h', pass:true,  note:'&#10003; 56. Correctly NOT halved.' },
-      { q:'Q14',topic:'Multiply with rule — even no-repeat ★★', lvl:'h', pass:false, note:'&#10007; 36 (correct 32). Used pairs ÷2 on a build problem — wrong move.' },
-      { q:'Q15',topic:'Figure — paths 2×2 ★★',               lvl:'h', pass:true,  note:'&#10003; 6.' }
+      { q:'Q1', topic:'Multiply — lunches',          lvl:'w', pass:true,  note:'&#10003; 8.' },
+      { q:'Q2', topic:'Multiply — meals',            lvl:'w', pass:true,  note:'&#10003; 15.' },
+      { q:'Q3', topic:'Arrange — 3 in a row',        lvl:'w', pass:true,  note:'&#10003; 6.' },
+      { q:'Q4', topic:'Arrange — 1st & 2nd (of 4)',  lvl:'w', pass:true,  note:'&#10003; 12. <strong>The type he over-multiplied to 60 before — now right.</strong>' },
+      { q:'Q5', topic:'Multiply — outfits',          lvl:'w', pass:true,  note:'&#10003; 12.' },
+      { q:'Q6', topic:'Pair — handshakes (5)',       lvl:'m', pass:true,  note:'&#10003; 10. ÷2 right.' },
+      { q:'Q7', topic:'Pair — choose 2 (6)',         lvl:'m', pass:true,  note:'&#10003; 15.' },
+      { q:'Q8', topic:'Pair — league games (4)',     lvl:'m', pass:true,  note:'&#10003; 6.' },
+      { q:'Q9', topic:'Pair — handshakes (7)',       lvl:'m', pass:true,  note:'&#10003; 21.' },
+      { q:'Q10',topic:'Pair — choose 2 (8)',         lvl:'m', pass:true,  note:'&#10003; 28.' },
+      { q:'Q11',topic:'Which move? — 1st & 2nd (of 6)', lvl:'h', pass:false, note:'&#10007; 15 (correct 30). Worked out 30 right, then wrongly HALVED — treated 1st&2nd as a pair. Quick reminder needed.' },
+      { q:'Q12',topic:'Which move? — handshakes (6)', lvl:'h', pass:true,  note:'&#10003; 15.' },
+      { q:'Q13',topic:'Which move? — outfits',       lvl:'h', pass:true,  note:'&#10003; 12.' },
+      { q:'Q14',topic:'Which move? — choose 2 (9)',  lvl:'h', pass:true,  note:'&#10003; 36.' },
+      { q:'Q15',topic:'Which move? — 4 in a row',    lvl:'h', pass:true,  note:'&#10003; 24.' }
     ]
   },
   _M3archived: {
@@ -85,13 +85,13 @@ var PREM_DATA = {
     { name: 'Algebra',           c: 98, t: 85 },
     { name: 'Arithmetic',        c: 83, t: 85 },
     { name: 'Geometry',          c: 74, t: 80 },
-    { name: 'Counting',          c: 83, t: 85 },
+    { name: 'Counting',          c: 86, t: 85 },
     { name: 'Number Theory',     c: 85, t: 82 },
     { name: 'Applied Problems',  c: 76, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 74, 88, 98, 83, 83, 85, 76],
+  radarCurrent:  [87, 74, 88, 98, 86, 83, 85, 76],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -131,23 +131,36 @@ var PREM_DATA = {
     { n:29, score:12, delta:-1,  color:'linear-gradient(135deg,#43e97b,#38f9d7)',  star:false },
     { n:30, score:11, delta:-1,  color:'linear-gradient(135deg,#EF5350,#C62828)',  star:false },
     { n:'M3', label:'M3', score:10, delta:-1, color:'linear-gradient(135deg,#4527A0,#7C3AED)', star:false },
-    { n:31, score:13, delta:+3, color:'linear-gradient(135deg,#FBC02D,#F9A825)', star:false }
+    { n:31, score:13, delta:+3, color:'linear-gradient(135deg,#FBC02D,#F9A825)', star:false },
+    { n:32, score:14, delta:+1, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 32,
-      badge: 'linear-gradient(135deg,#6A1B9A,#8E24AA)',
-      title: 'Counting — The Two Moves (Multiply &amp; Pairs) · simplified re-do',
+      n: 33,
+      badge: 'linear-gradient(135deg,#00695C,#00897B)',
+      title: 'Number Theory — Factorials &amp; The Last Digit Trick',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Multiply (build/arrange)', c:'tblue' },
-        { t:'L2: Pairs (÷2)', c:'tblue' },
-        { t:'1 concept each — from zero', c:'torange' }
+        { t:'L1: Factorials (n!)', c:'tblue' },
+        { t:'L2: Last Digit Trick', c:'tblue' },
+        { t:'ASMOPSS — biggest gap', c:'torange' }
       ],
-      note: 'U32: counting RE-DONE the simple way after U31 overload. Per the new ground rule (every topic brand-new → one idea at a time). Just ONE decision — "does the order matter?" — and the TWO core moves: BUILD/ARRANGE → multiply (Lesson 1); CHOOSE A PAIR → multiply ÷2 (Lesson 2). Each lesson teaches a single move from zero with concrete pictures. Sec C = "which move is it?" (decide between the two — fixes U31 Q4/Q14 wrong-move errors). Diagonals/figures/repeats deferred. Closed-book. Pass: 12/15.',
+      note: 'U33: highest-return ASMOPSS cluster (number theory — biggest gap on the 2025 paper). Taught simply, one idea per lesson, from zero. L1: factorials — n! = multiply down to 1 (bridges from "arrange in a row"); +/− factorials. L2: last-digit trick — only the last digits matter; the repeating pattern for powers (7→7,9,3,1). Sec A factorials, Sec B last-digit products, Sec C ★★ mix (powers + factorials). Carry tiny reminder: "1st & 2nd → multiply, never halve" (U32 Q11). Pass: 12/15.',
       status: 'pending'
+    },
+    {
+      n: 32,
+      badge: 'linear-gradient(135deg,#43e97b,#38f9d7)',
+      title: 'Counting — The Two Moves (Multiply &amp; Pairs) · simplified re-do',
+      tags: [
+        { t:'14/15 (93%) &#10003; PASSED — CLOSED-BOOK', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Sec A 5/5 + Sec B 5/5', c:'tgreen' },
+        { t:'Overload fixed', c:'tgreen' }
+      ],
+      note: '14/15 &#10003; <strong>PASSED CLOSED-BOOK</strong> — big jump from the open-book U31. The simplified "one decision (does order matter?) + 2 moves" approach fixed the overload, validating the fresh/one-idea-at-a-time ground rule. Sec A 5/5 (incl. Q4 1st&2nd=12, the over-multiply type), Sec B 5/5 (pairs halved right). Only miss: Q11 (1st&2nd of 6 — worked out 30, then wrongly halved to 15). One tiny reminder fixes it. Counting core = his.',
+      status: 'done'
     },
     {
       n: 31,
@@ -622,10 +635,16 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 92
     },
     {
-      label:     'Art of Counting — OVERLOADED at U31; re-doing simply (2 moves) at U32',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U31 packed ~8 counting moves into 2 lessons &mdash; Prem confused on the closed-book round, passed only open-book ("too many concepts"). Even open-book he picked the wrong move twice (Q4 over-multiply, Q14 over-÷2). Root cause = overload, not inability. U32 collapses to ONE decision ("does order matter?") + TWO core moves (BUILD→multiply, PAIR→÷2), one idea per lesson from zero. Diagonals/figures/repeats deferred until core is automatic. Closed-book re-test.',
-      fillClass: 'g2', fillPct: 50
+      label:     'Counting core (multiply + pairs ÷2) — RESOLVED at U32 (closed-book)',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U32 14/15 PASSED closed-book after the simplified 2-move re-do (was open-book/overloaded at U31). Multiply 5/5, pairs ÷2 5/5. Lone miss Q11: "1st & 2nd of 6" — worked out 30 then wrongly halved to 15. Tiny standing reminder: "1st & 2nd / a row → multiply, never halve". Deferred (later simple unit): diagonals, figure-counting, repeats.',
+      fillClass: 'gs', fillPct: 88
+    },
+    {
+      label:     'Number Theory for competitions (factorials, last-digits, remainders) — training U33+',
+      pill:      'p2', pillText: 'Training &#128992;',
+      score:     'Biggest gap on the ASMOPSS 2025 paper (factorials Q22, last-digits Q11, remainders Q21). U33 teaches factorials (n!) + the last-digit trick simply, from zero. Remainders / digit problems to follow (U34). Highest-return cluster for the gold push.',
+      fillClass: 'g2', fillPct: 45
     },
     {
       label:     'Precision: "answer EXACTLY what is asked" (smallest / largest / which one)',
@@ -700,7 +719,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U31'
+  radarLegendUnit: 'U32'
 
 };
 

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factorials — the "!" Button</title>
+<style>
+:root{--nav:#00695C;--nav-dark:#004D40;--bg:#E0F2F1;--card:#fff;--acc:#00695C;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#00796B;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E0F2F1,#E0F7FA);border:2px solid #4DB6AC;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#004D40;font-weight:700;margin-bottom:6px}
+.big-rule{background:#E0F2F1;border:2px solid #00897B;border-radius:12px;padding:16px;text-align:center;font-size:1.1rem;font-weight:800;color:#004D40;margin:14px 0;font-family:'Courier New',monospace}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F1F8F7;border:1px solid #B2DFDB;border-radius:10px;padding:14px 16px}
+.steps .ln{font-family:'Courier New',monospace;font-size:1.02rem;color:#1a1a2e;padding:4px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.steps .ln .note{font-family:'Segoe UI',Arial,sans-serif;font-style:italic;font-size:.85rem;color:#00695C}
+.steps .ln.ans{color:#1B5E20;font-weight:800}
+.ftable{width:100%;border-collapse:collapse;margin-top:8px}
+.ftable td{border:1px solid #B2DFDB;padding:8px 10px;font-size:.98rem;font-family:'Courier New',monospace}
+.ftable td:first-child{font-weight:800;color:#00695C;text-align:center;background:#E0F2F1;width:70px}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F4FBFA;border:1.5px solid #80CBC4;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E0F2F1}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#00695C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Factorials &mdash; the "!" Button</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1 -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F195; A Brand-New Symbol: the "!"</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>You already know how to count "ways to line things up in a row" (4 books = 4&times;3&times;2&times;1). Mathematicians gave that a short name &mdash; the <strong>factorial</strong>, written with an exclamation mark. Contests use it all the time, so let's make it easy.</p>
+  </div>
+  <div class="big-rule">n! &nbsp;means&nbsp; n &times; (n&minus;1) &times; &hellip; &times; 2 &times; 1</div>
+  <p>Read "4!" as <strong>"four factorial"</strong>. It just means: start at the number and multiply your way down to 1.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Show me &#8594;</button></div>
+</div>
+
+<!-- Screen 2 -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>It's Just Counting Down and Multiplying</h2>
+  <p>You've actually done this already &mdash; lining up 4 books in a row was 4! Let's work out a few:</p>
+  <div class="steps">
+    <div class="ln">3! = 3 &times; 2 &times; 1 = 6</div>
+    <div class="ln">4! = 4 &times; 3 &times; 2 &times; 1 = 24</div>
+    <div class="ln">5! = 5 &times; 4 &times; 3 &times; 2 &times; 1 = 120</div>
+    <div class="ln">6! = 6 &times; 5 &times; 4 &times; 3 &times; 2 &times; 1 = 720</div>
+  </div>
+  <p style="font-size:.93rem">Tip: each one is just the one before, &times; the new number. 4! = 3! &times; 4. 5! = 4! &times; 5. So they grow fast!</p>
+  <div class="golden"><div class="golden-title">&#x1F511; Worth remembering</div>
+    <table class="ftable">
+      <tr><td>3!</td><td>6</td></tr><tr><td>4!</td><td>24</td></tr><tr><td>5!</td><td>120</td></tr><tr><td>6!</td><td>720</td></tr>
+    </table>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3 -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Adding or Subtracting Factorials</h2>
+  <p>If a question says 6! &minus; 5!, just work out each factorial first, then subtract. Take it one step at a time.</p>
+  <h3>Example: 6! &minus; 5!</h3>
+  <div class="steps">
+    <div class="ln">6! = 720 <span class="note">&#8592; work out each one first</span></div>
+    <div class="ln">5! = 120</div>
+    <div class="ln">720 &minus; 120 = 600</div>
+    <div class="ln ans">= 600</div>
+  </div>
+  <h3>Example: 4! + 3!</h3>
+  <div class="steps">
+    <div class="ln">4! = 24, &nbsp; 3! = 6</div>
+    <div class="ln">24 + 6 = 30</div>
+    <div class="ln ans">= 30</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; 6! &minus; 5! is NOT 1! &mdash; you can't just subtract the small numbers. Always work out each factorial first, then do the + or &minus;.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: practice -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Your Turn</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Work out each factorial first, then add or subtract.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1. &nbsp; What is 3! ?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 9</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">3 &times; 2 &times; 1 = 6</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2. &nbsp; What is 5! &minus; 2! ?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 118</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 120</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">5! = 120, 2! = 2</div><div class="ln">120 &minus; 2 = 118</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3. &nbsp; What is 4! + 2! ?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 26</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 28</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 30</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">4! = 24, 2! = 2</div><div class="ln">24 + 2 = 26</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4. &nbsp; What is 2! + 3! ?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 12</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">2! = 2, 3! = 6</div><div class="ln">2 + 6 = 8</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5 -->
+<div class="screen" id="s4">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Factorials &mdash; in one line</div>
+  <p style="font-size:1.05rem"><strong>n! = multiply n all the way down to 1.</strong></p>
+  <p style="font-size:.95rem;margin-top:6px">3! = 6, &nbsp;4! = 24, &nbsp;5! = 120, &nbsp;6! = 720. For + or &minus;, work out each factorial first.</p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when...</h3>
+  <ul>
+    <li>You read "5!" as "multiply 5 down to 1" and get 120</li>
+    <li>For 6! &minus; 4! you work out 720 and 24 first, then subtract</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">Next: a neat trick &mdash; finding the LAST digit of a huge multiplication.</p>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Hub</a>
+  <a href="NumberTheory_Lesson_LastDigit.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#00695C;color:#fff;border:2px solid #00695C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 2 &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Yes! Multiply down to 1.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Work out each factorial fully (down to 1), then add or subtract. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>
