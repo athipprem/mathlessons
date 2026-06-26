@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digit Problems — Adding the Digits</title>
+<style>
+:root{--nav:#00695C;--nav-dark:#004D40;--bg:#E0F2F1;--card:#fff;--acc:#00695C;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#00796B;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E0F2F1,#E0F7FA);border:2px solid #4DB6AC;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#004D40;font-weight:700;margin-bottom:6px}
+.big-rule{background:#E0F2F1;border:2px solid #00897B;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#004D40;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F1F8F7;border:1px solid #B2DFDB;border-radius:10px;padding:14px 16px}
+.steps .ln{font-family:'Courier New',monospace;font-size:1.02rem;color:#1a1a2e;padding:4px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.steps .ln .note{font-family:'Segoe UI',Arial,sans-serif;font-style:italic;font-size:.85rem;color:#00695C}
+.steps .ln.ans{color:#1B5E20;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#00695C;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.dtable{width:100%;border-collapse:collapse;margin-top:8px}
+.dtable td,.dtable th{border:1px solid #B2DFDB;padding:7px 10px;font-size:.96rem;text-align:center}
+.dtable th{background:#E0F2F1;color:#00695C;font-weight:700}
+.dtable td:first-child{font-weight:800;color:#00695C;background:#F1F8F7}
+.digbox{display:inline-block;border:2px solid #00897B;border-radius:8px;padding:6px 12px;margin:3px;font-family:'Courier New',monospace;font-size:1.1rem;font-weight:800;color:#004D40;background:#E0F2F1}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F4FBFA;border:1.5px solid #80CBC4;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E0F2F1}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#00695C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Digit Problems &mdash; Adding the Digits</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F522; The Secret Inside a Number</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>Every number is made of <strong>digits</strong> &mdash; the number 47 is the digits 4 and 7. If you <strong>add the digits</strong> (4 + 7 = 11) you get a secret clue about the number. This "digit sum" is how you quickly check if something divides by 3 or 9, how puzzle-makers hide numbers, and how barcodes catch mistakes. Contests ask things like <em>"how many numbers have a digit sum of 5?"</em> &mdash; and once you know the trick, you just list them in order, no guessing.</p>
+  </div>
+  <div class="big-rule">digit sum = ADD all the digits of the number</div>
+  <p>For 47: &nbsp;<span class="digbox">4</span> + <span class="digbox">7</span> = <strong>11</strong>. That's it &mdash; the digit sum of 47 is 11.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Show me &#8594;</button></div>
+</div>
+
+<!-- Screen 2: digit sum practice idea -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>Finding a Digit Sum</h2>
+  <p>Just split the number into its digits and add. Take it one digit at a time:</p>
+  <div class="steps">
+    <div class="ln">53 &rarr; 5 + 3 = 8</div>
+    <div class="ln">90 &rarr; 9 + 0 = 9 <span class="note">&#8592; a 0 adds nothing, but don't forget it</span></div>
+    <div class="ln">264 &rarr; 2 + 6 + 4 = 12 <span class="note">&#8592; three digits? add all three</span></div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; A digit sum is NOT the number times something. 90 is not "9". You ADD the digits: 9 + 0 = 9. For 264 you must add all three: 2 + 6 + 4.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: the counting decision tree -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; Counting Numbers by Digit Sum</h2>
+  <p>Question: <em>"How many 2-digit numbers have a digit sum of 5?"</em> Don't guess &mdash; go in order with this map:</p>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Go through each <strong>tens digit</strong> in order: 1, 2, 3, &hellip;</div>
+    <div class="node"><span class="step-n">2</span>For each one, the <strong>ones digit</strong> must make the total 5. So ones = 5 &minus; tens.</div>
+    <div class="node"><span class="step-n">3</span>If that ones digit is <strong>0&ndash;9, it works</strong> &mdash; write the number. Then count them all.</div>
+  </div>
+  <p style="font-size:.93rem;color:#00695C"><strong>Remember:</strong> a 2-digit number can't start with 0, so the tens digit begins at 1.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See it work &#8594;</button></div>
+</div>
+
+<!-- Screen 4: worked example -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Worked Example</h2>
+  <p><strong>How many 2-digit numbers have a digit sum of 5?</strong> Go tens digit by tens digit:</p>
+  <table class="dtable">
+    <tr><th>Tens</th><th>Ones (= 5 &minus; tens)</th><th>Number</th></tr>
+    <tr><td>1</td><td>4</td><td>14 &#10003;</td></tr>
+    <tr><td>2</td><td>3</td><td>23 &#10003;</td></tr>
+    <tr><td>3</td><td>2</td><td>32 &#10003;</td></tr>
+    <tr><td>4</td><td>1</td><td>41 &#10003;</td></tr>
+    <tr><td>5</td><td>0</td><td>50 &#10003;</td></tr>
+    <tr><td>6</td><td>&minus;1 &#10007;</td><td>stop &mdash; ones can't be negative</td></tr>
+  </table>
+  <div class="steps"><div class="ln ans">Count them: 14, 23, 32, 41, 50 = 5 numbers</div></div>
+  <p style="font-size:.93rem">Once the ones digit would go below 0, you've found them all. Neat and complete &mdash; no guessing.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">My turn &#8594;</button></div>
+</div>
+
+<!-- Screen 5: practice -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Your Turn</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">For digit sums, add the digits. For counting, go tens-digit by tens-digit in order.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1.&nbsp; What is the digit sum of 58?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 13</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 14</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">5 + 8 = 13</div><div class="ln ans">= 13</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2.&nbsp; What is the digit sum of 234?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 10</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">2 + 3 + 4 = 9 <span class="note">&#8592; add all three digits</span></div><div class="ln ans">= 9</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3.&nbsp; How many 2-digit numbers have a digit sum of 4?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 4</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 5</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">13, 22, 31, 40</div><div class="ln ans">= 4 numbers</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4.&nbsp; How many 2-digit numbers have a digit sum of 10?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 10</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">19, 28, 37, 46, 55, 64, 73, 82, 91</div><div class="ln ans">= 9 numbers</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 6: recap -->
+<div class="screen" id="s5">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Digit Problems &mdash; in one line</div>
+  <p style="font-size:1.05rem"><strong>Digit sum = add all the digits. To count by digit sum, go tens-digit by tens-digit in order and list them.</strong></p>
+  <p style="font-size:.95rem;margin-top:6px">Listing in order means you never miss one and never count twice.</p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You find the digit sum of 264 by adding 2 + 6 + 4 = 12</li>
+    <li>You count "digit sum = 6" by going 1&rarr;5, 2&rarr;4, 3&rarr;3&hellip; in order</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">You now have BOTH number-detective tricks: remainders and digit sums. Ready for the test!</p>
+</div>
+<div class="navrow">
+  <a href="NumberTheory_Lesson_Remainders.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#00695C;color:#fff;border:2px solid #00695C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Yes! Add the digits, list in order.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Add the digits carefully (don\'t forget any), or list tens-by-tens in order. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>
