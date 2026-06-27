@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logic Grids — Crack It by Crossing Out</title>
+<style>
+:root{--nav:#4527A0;--nav-dark:#311B92;--bg:#EDE7F6;--card:#fff;--acc:#4527A0;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#5E35B1;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#EDE7F6,#E8EAF6);border:2px solid #9575CD;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#311B92;font-weight:700;margin-bottom:6px}
+.big-rule{background:#EDE7F6;border:2px solid #7E57C2;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#311B92;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F3F1FA;border:1px solid #D1C4E9;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#5E35B1}
+.steps .ln.ans{color:#311B92;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#4527A0;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.grid{border-collapse:collapse;margin:12px auto;font-size:1rem}
+.grid th,.grid td{border:1.5px solid #B39DDB;width:64px;height:44px;text-align:center;font-weight:700}
+.grid th{background:#EDE7F6;color:#4527A0;font-size:.9rem}
+.grid td.no{color:#C62828;background:#FFEBEE}
+.grid td.yes{color:#2E7D32;background:#E8F5E9;font-size:1.2rem}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F7F5FC;border:1.5px solid #B39DDB;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#EDE7F6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#EDE7F6;color:#311B92;border:2px solid #311B92;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#4527A0;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Logic Grids &mdash; Crack It by Crossing Out</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F575;&#xFE0F; Be a Detective</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>A good detective doesn't guess &mdash; they use clues to <strong>cross out what can't be true</strong> until only one answer is left. That's exactly how you crack a code, solve an escape-room puzzle, or work out "who owns which pet" from a few hints. Contests love these &mdash; and the trick is always the same: <strong>make a table and eliminate.</strong> No more "I don't know" &mdash; you'll always have a first move.</p>
+  </div>
+  <div class="big-rule">Use each clue to CROSS OUT what's impossible.<br>When only one box is left in a row, that's the answer.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Show me &#8594;</button></div>
+</div>
+
+<!-- Screen 2: the grid tool -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>The Tool: a Yes/No Grid</h2>
+  <p>Put the people down the side and the things across the top. Each clue lets you write <span style="color:#C62828;font-weight:700">&#10007;</span> (can't be) or <span style="color:#2E7D32;font-weight:700">&#10003;</span> (yes, it is) in a box.</p>
+  <table class="grid">
+    <tr><th></th><th>cat</th><th>dog</th><th>fish</th></tr>
+    <tr><th>Ann</th><td class="no">&#10007;</td><td class="no">&#10007;</td><td class="yes">&#10003;</td></tr>
+    <tr><th>Ben</th><td></td><td class="yes">&#10003;</td><td></td></tr>
+    <tr><th>Cara</th><td></td><td></td><td></td></tr>
+  </table>
+  <div class="big-rule" style="font-size:1rem">Golden move: once a box is <span style="color:#2E7D32">&#10003;</span>, the WHOLE row and WHOLE column get <span style="color:#C62828">&#10007;</span> (each person has just one pet, each pet has just one owner).</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: decision tree -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Detective's Plan</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Draw the grid: people down the side, things across the top.</div>
+    <div class="node"><span class="step-n">2</span>Take each clue and mark <span style="color:#C62828;font-weight:700">&#10007;</span> for "can't be" and <span style="color:#2E7D32;font-weight:700">&#10003;</span> for "is".</div>
+    <div class="node"><span class="step-n">3</span>After each <span style="color:#2E7D32;font-weight:700">&#10003;</span>, cross out the rest of that row AND column.</div>
+    <div class="node"><span class="step-n">4</span>When a row has only ONE empty box left, that box is a <span style="color:#2E7D32;font-weight:700">&#10003;</span>.</div>
+  </div>
+  <p style="font-size:.93rem;color:#4527A0"><strong>Tip:</strong> start with the clue that tells you the MOST (an "is" clue, or a person with two crosses).</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See it work &#8594;</button></div>
+</div>
+
+<!-- Screen 4: worked example -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Worked Example</h2>
+  <p><strong>Ann, Ben and Cara each have one pet: a cat, a dog or a fish.</strong><br>Clue 1: Ann has neither the cat nor the dog. &nbsp; Clue 2: Ben has the dog.</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Clue 1 &mdash; Ann: cross out cat and dog &rarr; only fish is left &rarr; Ann = fish &#10003;</span></div>
+    <div class="ln"><span class="note">Now cross out "fish" for Ben and Cara (Ann took it).</span></div>
+    <div class="ln"><span class="note">Clue 2 &mdash; Ben = dog &#10003;. Cross out "dog" for Cara.</span></div>
+    <div class="ln"><span class="note">Cara has only "cat" left &rarr; Cara = cat &#10003;</span></div>
+  </div>
+  <table class="grid">
+    <tr><th></th><th>cat</th><th>dog</th><th>fish</th></tr>
+    <tr><th>Ann</th><td class="no">&#10007;</td><td class="no">&#10007;</td><td class="yes">&#10003;</td></tr>
+    <tr><th>Ben</th><td class="no">&#10007;</td><td class="yes">&#10003;</td><td class="no">&#10007;</td></tr>
+    <tr><th>Cara</th><td class="yes">&#10003;</td><td class="no">&#10007;</td><td class="no">&#10007;</td></tr>
+  </table>
+  <div class="steps"><div class="ln ans">Ann = fish, Ben = dog, Cara = cat. Solved &mdash; no guessing!</div></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">My turn &#8594;</button></div>
+</div>
+
+<!-- Screen 5: practice -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Your Turn</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Cross out what can't be true, then see what's left. Make a little grid if it helps.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1.&nbsp; Mia, Leo and Zoe each pick a different fruit: apple, banana or cherry. Mia does NOT pick apple or banana. Which fruit does Mia pick?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; apple</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; banana</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; cherry</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'C')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">Cross out apple and banana for Mia &rarr; only cherry left.</div><div class="ln ans">Mia = cherry</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2.&nbsp; In a race, Lee finished ahead of Kim, and Kim finished ahead of Sam. Who finished LAST?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; Lee</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; Kim</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; Sam</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">Order: Lee &rarr; Kim &rarr; Sam.</div><div class="ln ans">Sam is last.</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3.&nbsp; Anna, Bob and Cy wear a red, a blue and a green hat. Anna's hat is NOT red and NOT green. Bob's hat is green. What colour is Cy's hat?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; red</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; blue</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; green</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">Anna: not red, not green &rarr; Anna = blue.</div><div class="ln">Bob = green. So Cy gets what's left = red.</div><div class="ln ans">Cy = red</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4.&nbsp; Pam, Rex and Sid each play one instrument: piano, guitar or drums. Pam plays drums. Rex does NOT play guitar. What does Sid play?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; piano</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; guitar</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; drums</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">Pam = drums. Rex &ne; guitar and &ne; drums &rarr; Rex = piano.</div><div class="ln">Only guitar is left for Sid.</div><div class="ln ans">Sid = guitar</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 6: recap -->
+<div class="screen" id="s5">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Logic Grids &mdash; in one line</div>
+  <p style="font-size:1.05rem"><strong>Make a table, use each clue to cross out what's impossible, and a &#10003; crosses out its whole row and column.</strong></p>
+  <p style="font-size:.95rem;margin-top:6px">When only one box is left in a row, that's your answer. You never have to guess.</p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You turn "Ann isn't the cat or dog" into two crosses &rarr; fish is left</li>
+    <li>After a &#10003;, you cross out the rest of that row and column automatically</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">Next: a different kind of clue &mdash; <strong>balance scales</strong> (comparing weights).</p>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#EDE7F6;color:#311B92;border:2px solid #311B92;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Hub</a>
+  <a href="Logic_Lesson_BalanceScales.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#4527A0;color:#fff;border:2px solid #4527A0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 2 &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Nice detective work!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Cross out what each clue says is impossible, then see what is left. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Balance Scales — Compare and Order</title>
+<style>
+:root{--nav:#4527A0;--nav-dark:#311B92;--bg:#EDE7F6;--card:#fff;--acc:#4527A0;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#5E35B1;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#EDE7F6,#E8EAF6);border:2px solid #9575CD;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#311B92;font-weight:700;margin-bottom:6px}
+.big-rule{background:#EDE7F6;border:2px solid #7E57C2;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#311B92;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F3F1FA;border:1px solid #D1C4E9;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#5E35B1}
+.steps .ln.ans{color:#311B92;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#4527A0;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.scale{display:flex;justify-content:center;align-items:flex-end;gap:6px;margin:14px 0;font-size:.95rem}
+.pan{border:2px solid #7E57C2;border-radius:8px;padding:10px 14px;background:#F3F1FA;font-weight:700;color:#311B92;min-width:74px;text-align:center}
+.pan.down{transform:translateY(10px);background:#EDE7F6;border-color:#4527A0}
+.pan.up{transform:translateY(-10px)}
+.fulcrum{font-size:1.6rem;color:#7E57C2;padding:0 6px}
+.order{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0;font-weight:700}
+.chip{border:1.5px solid #B39DDB;border-radius:8px;padding:8px 12px;background:#fff;color:#311B92}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F7F5FC;border:1.5px solid #B39DDB;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#EDE7F6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#EDE7F6;color:#311B92;border:2px solid #311B92;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#4527A0;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Balance Scales &mdash; Compare and Order</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x2696;&#xFE0F; Which Side Wins?</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>A see-saw or a kitchen balance tells you something instantly: <strong>the heavier side goes DOWN</strong>. If two things make it level, they weigh the same. From just a few weighings you can put everything in order &mdash; heaviest to lightest &mdash; or even trade one thing for another. Contests use balance puzzles all the time, and they're easy once you read the scale right.</p>
+  </div>
+  <div class="big-rule">Heavier side goes DOWN.&nbsp; Level = SAME weight.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Show me &#8594;</button></div>
+</div>
+
+<!-- Screen 2: reading + chaining -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>Chain the Comparisons</h2>
+  <p>Each weighing gives you one fact. Line the facts up like a row of dominoes:</p>
+  <div class="scale">
+    <div class="pan down">apple</div><span class="fulcrum">&#9650;</span><div class="pan up">banana</div>
+  </div>
+  <p style="text-align:center;font-size:.9rem;color:#5E35B1">apple is heavier than banana</p>
+  <div class="scale">
+    <div class="pan down">banana</div><span class="fulcrum">&#9650;</span><div class="pan up">cherry</div>
+  </div>
+  <p style="text-align:center;font-size:.9rem;color:#5E35B1">banana is heavier than cherry</p>
+  <p>Put them in a line, heaviest first:</p>
+  <div class="order"><span class="chip">apple</span><span>&gt;</span><span class="chip">banana</span><span>&gt;</span><span class="chip">cherry</span></div>
+  <div class="big-rule" style="font-size:1rem">apple &gt; banana &gt; cherry &rarr; heaviest = apple, lightest = cherry</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: decision tree + trading -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Plan (and a Trading Trick)</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Read each scale: heavier side is DOWN; level means equal.</div>
+    <div class="node"><span class="step-n">2</span>Write each fact as A &gt; B (or A = B).</div>
+    <div class="node"><span class="step-n">3</span>Chain them into one line: heaviest &rarr; lightest.</div>
+    <div class="node"><span class="step-n">4</span><strong>Trading:</strong> if 1 melon = 3 apples, you can swap "1 melon" for "3 apples" anywhere.</div>
+  </div>
+  <p style="font-size:.95rem">Trading example: if <strong>1 box balances 4 cans</strong>, then <strong>2 boxes balance 8 cans</strong> (just double both sides).</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See it work &#8594;</button></div>
+</div>
+
+<!-- Screen 4: worked example -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Worked Example</h2>
+  <p><strong>2 apples balance 1 melon. 1 melon balances 6 grapes. How many grapes balance 2 apples?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Fact 1:</span> 2 apples = 1 melon</div>
+    <div class="ln"><span class="note">Fact 2:</span> 1 melon = 6 grapes</div>
+    <div class="ln"><span class="note">Trade: the melon is the link. Swap "1 melon" for "6 grapes".</span></div>
+    <div class="ln">2 apples = 1 melon = 6 grapes</div>
+    <div class="ln ans">So 2 apples balance 6 grapes.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Read the question's exact amount. It asked about <strong>2 apples</strong>, not 1. If it had asked about 1 apple, you'd halve everything: 1 apple = 3 grapes.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">My turn &#8594;</button></div>
+</div>
+
+<!-- Screen 5: practice -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Your Turn</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Heavier side goes down; level = equal. Chain the facts, and trade using the matching item.</p>
+
+  <div class="q-card">
+    <div class="q-text">Q1.&nbsp; Box A is heavier than Box B. Box B is heavier than Box C. Which box is the HEAVIEST?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; Box A</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; Box B</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; Box C</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">A &gt; B &gt; C.</div><div class="ln ans">Heaviest = Box A</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q2.&nbsp; The red ball is lighter than the blue ball. The blue ball is lighter than the green ball. Which ball is the LIGHTEST?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; red</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; blue</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; green</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">green &gt; blue &gt; red (red is lightest end).</div><div class="ln ans">Lightest = red</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q3.&nbsp; 1 brick balances 3 books. How many books balance 2 bricks?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 9</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">1 brick = 3 books. Double both sides:</div><div class="ln">2 bricks = 6 books.</div><div class="ln ans">6 books</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Q4.&nbsp; 3 apples balance 1 melon. 1 melon balances 9 cherries. How many cherries balance 1 apple?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 9</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">3 apples = 1 melon = 9 cherries.</div><div class="ln">So 3 apples = 9 cherries &rarr; 1 apple = 9 &divide; 3.</div><div class="ln ans">3 cherries</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 6: recap -->
+<div class="screen" id="s5">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Balance Scales &mdash; in one line</div>
+  <p style="font-size:1.05rem"><strong>Heavier side goes down; level = equal. Chain the facts into one order, and trade equal things to swap them.</strong></p>
+  <p style="font-size:.95rem;margin-top:6px">Always read the exact amount the question asks for (1 apple or 2 apples?).</p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>From "A &gt; B" and "B &gt; C" you can name the heaviest and the lightest</li>
+    <li>From "1 melon = 6 grapes" you can trade a melon for 6 grapes</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">You now have both detective tools: logic grids and balance scales. Ready for the test!</p>
+</div>
+<div class="navrow">
+  <a href="Logic_Lesson_LogicGrids.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#EDE7F6;color:#311B92;border:2px solid #311B92;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#4527A0;color:#fff;border:2px solid #4527A0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Yes! You read the scale right.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Heavier side goes down; chain the facts in order, and trade using the matching item. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

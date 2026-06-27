@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '26 Jun 2026',
+  updated:        '27 Jun 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:34, topic:'Number Theory — Remainders & Digit Problems (ASMOPSS)', status:'In Progress' },
+  currentUnit: { n:35, topic:'Logic & Deduction — Grids & Balance Scales (ASMOPSS)', status:'In Progress' },
   lastUnit: {
-    n:33, score:15, outOf:15, pct:100, delta:+1, prevScore:14,
-    patternLabel: 'U33 — Number Theory (factorials + last digits), PERFECT CLOSED-BOOK',
-    patternInsight: '15/15 (100%) <strong>PERFECT, and CLOSED-BOOK</strong> &mdash; the first perfect of the ASMOPSS arc, and the highest-return gap is now CLOSED. <strong>Section A used 7! and 8!, which were never taught</strong> (lessons stopped at 6!) &mdash; he computed them from the rule (8! = 8&times;5040 = 40320), proving he learned the METHOD, not a memorised table. Sec A 5/5, Sec B 5/5 (incl. the &times;0&rarr;0 trap and 9&sup3;), Sec C 5/5 (power-cycles for 2 and 4, three-term 6!+5!&minus;4!).',
-    analysisLabel: 'Next: U34 — Number Theory: Remainders & Digit Problems (finish the cluster)',
-    analysisInsight: 'Factorials + last-digits are now a STRENGTH. U34 finishes the number-theory cluster: remainder puzzles ("÷A leaves remainder r", by systematic listing — 2025 Q21) and digit problems (digit sums, counting by digit sum, last-three-digits). One thing to watch, lightly: he self-corrected THREE +/− wobbles in multi-term factorials (Q5 4920→5160, Q12 added-in-scratch→4320, Q14 1296/576→816) — final answers all right, but reading the exact + or − in a multi-step problem is the standing habit to drill. Then U35 = Logic & Deduction.',
-    qSummary: '<strong>Sec A 5/5 | Sec B 5/5 | Sec C 5/5</strong> — 15/15 PERFECT (closed-book)',
+    n:34, score:14, outOf:15, pct:93, delta:-1, prevScore:15,
+    patternLabel: 'U34 — Number Theory: Remainders & Digit Problems, PASSED CLOSED-BOOK',
+    patternInsight: '14/15 (93%) <strong>PASSED, and CLOSED-BOOK</strong> &mdash; and with it the number-theory cluster is closed across two units (U33 15/15 + U34 14/15). <strong>Remainders came back 7/7 across the whole test</strong> (Sec A 5/5 + Q11 + Q15), every two-clue puzzle solved by the systematic-list method &mdash; exactly the 2025-paper gap (Q21: he had 64, answer 16). Digit sums 5/5. The single miss is a completeness edge, not a method failure.',
+    analysisLabel: 'Next: U35 — Logic & Deduction (the two 2025 "IDK" freezes)',
+    analysisInsight: 'Number theory is now a strength. U35 pivots to the next-biggest 2025-paper gap: code-breaking / logic grids (Q13) and balance-scale weighing (Q18) — both froze with "IDK". Taught as "make a table, eliminate with each clue" and "heavier side goes down, chain the order". Standing habits to drill: (a) check the FULL range — count single-digit numbers when a range starts below 10 (U34 Q13 miss); (b) never write IDK — always a structured first move; (c) read the exact ask.',
+    qSummary: '<strong>Sec A 5/5 | Sec B 5/5 | Sec C 4/5</strong> — 14/15 PASSED (closed-book)',
     qBreakdown: [
-      { q:'Q1', topic:'Factorial — 7!',              lvl:'w', pass:true,  note:'&#10003; 5040 (never taught — computed from the rule).' },
-      { q:'Q2', topic:'Factorial — 8!',              lvl:'w', pass:true,  note:'&#10003; 40320 (8&times;5040 — method extends past the table).' },
-      { q:'Q3', topic:'Factorial — 7! + 6!',         lvl:'w', pass:true,  note:'&#10003; 5760.' },
-      { q:'Q4', topic:'Factorial — 8! − 7!',         lvl:'w', pass:true,  note:'&#10003; 35280.' },
-      { q:'Q5', topic:'Factorial — 7! + 5!',         lvl:'w', pass:true,  note:'&#10003; 5160. Wrote 4920 first, self-corrected.' },
-      { q:'Q6', topic:'Last digit — 34×56',          lvl:'m', pass:true,  note:'&#10003; 4 (4×6=24).' },
-      { q:'Q7', topic:'Last digit — 27×83',          lvl:'m', pass:true,  note:'&#10003; 1 (7×3=21).' },
-      { q:'Q8', topic:'Last digit — 48×48',          lvl:'m', pass:true,  note:'&#10003; 4 (8×8=64).' },
-      { q:'Q9', topic:'Last digit — 215×640',        lvl:'m', pass:true,  note:'&#10003; 0 (the ×0→0 trap, spotted).' },
-      { q:'Q10',topic:'Last digit — 9×9×9',          lvl:'m', pass:true,  note:'&#10003; 9 (81→×9→9).' },
-      { q:'Q11',topic:'Last digit — 4⁵  ★★',         lvl:'h', pass:true,  note:'&#10003; 4 (cycle 4,6).' },
-      { q:'Q12',topic:'Factorial — 7! − 6!  ★★',     lvl:'h', pass:true,  note:'&#10003; 4320. Added in scratch first, self-corrected.' },
-      { q:'Q13',topic:'Last digit — 2¹⁰  ★★',        lvl:'h', pass:true,  note:'&#10003; 4 (cycle 2,4,8,6 → 10th = 4).' },
-      { q:'Q14',topic:'Factorial — 6!+5!−4!  ★★',    lvl:'h', pass:true,  note:'&#10003; 816. Tried 1296/576 first, self-corrected — the +/− watch-point.' },
-      { q:'Q15',topic:'Last digit — 3×5×7×9  ★★',    lvl:'h', pass:true,  note:'&#10003; 5.' }
+      { q:'Q1', topic:'Remainder — smallest 2-digit',  lvl:'w', pass:true,  note:'&#10003; 13.' },
+      { q:'Q2', topic:'Remainder — smallest >20',      lvl:'w', pass:true,  note:'&#10003; 21.' },
+      { q:'Q3', topic:'Remainder — two clues',         lvl:'w', pass:true,  note:'&#10003; 7 (÷6 r1 list, test ÷4 r3).' },
+      { q:'Q4', topic:'Remainder — two clues',         lvl:'w', pass:true,  note:'&#10003; 9.' },
+      { q:'Q5', topic:'Remainder — two clues',         lvl:'w', pass:true,  note:'&#10003; 18.' },
+      { q:'Q6', topic:'Digit sum — 76',                lvl:'m', pass:true,  note:'&#10003; 13.' },
+      { q:'Q7', topic:'Digit sum — 408',               lvl:'m', pass:true,  note:'&#10003; 12 (incl. the 0).' },
+      { q:'Q8', topic:'Digit sum — 555',               lvl:'m', pass:true,  note:'&#10003; 15.' },
+      { q:'Q9', topic:'Count — digit sum 6',           lvl:'m', pass:true,  note:'&#10003; 6 (tens-by-tens).' },
+      { q:'Q10',topic:'Count — digit sum 3',           lvl:'m', pass:true,  note:'&#10003; 3.' },
+      { q:'Q11',topic:'Remainder — two clues  ★★',     lvl:'h', pass:true,  note:'&#10003; 31.' },
+      { q:'Q12',topic:'Count — digit sum 8  ★★',       lvl:'h', pass:true,  note:'&#10003; 8.' },
+      { q:'Q13',topic:'Count — 1–50 digit sum 7  ★★',  lvl:'h', pass:false, note:'&#10007; gave 4 (16,25,34,43) — MISSED the single-digit 7. Range/completeness slip: range starts below 10. Correct = 5.' },
+      { q:'Q14',topic:'Count — digit sum ≥17  ★★',     lvl:'h', pass:true,  note:'&#10003; 3 (89,98,99).' },
+      { q:'Q15',topic:'Remainder — two clues  ★★',     lvl:'h', pass:true,  note:'&#10003; 32.' }
     ]
   },
   _M3archived: {
@@ -86,12 +86,12 @@ var PREM_DATA = {
     { name: 'Arithmetic',        c: 83, t: 85 },
     { name: 'Geometry',          c: 74, t: 80 },
     { name: 'Counting',          c: 86, t: 85 },
-    { name: 'Number Theory',     c: 88, t: 82 },
+    { name: 'Number Theory',     c: 89, t: 82 },
     { name: 'Applied Problems',  c: 76, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 74, 88, 98, 86, 83, 88, 76],
+  radarCurrent:  [87, 74, 88, 98, 86, 83, 89, 76],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -133,23 +133,37 @@ var PREM_DATA = {
     { n:'M3', label:'M3', score:10, delta:-1, color:'linear-gradient(135deg,#4527A0,#7C3AED)', star:false },
     { n:31, score:13, delta:+3, color:'linear-gradient(135deg,#FBC02D,#F9A825)', star:false },
     { n:32, score:14, delta:+1, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
-    { n:33, score:15, delta:+1, color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true }
+    { n:33, score:15, delta:+1, color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true },
+    { n:34, score:14, delta:-1, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 35,
+      badge: 'linear-gradient(135deg,#4527A0,#7E57C2)',
+      title: 'Logic &amp; Deduction — Grids &amp; Balance Scales',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'L1: Logic Grids (eliminate)', c:'tblue' },
+        { t:'L2: Balance Scales', c:'tblue' },
+        { t:'ASMOPSS — the 2 "IDK" freezes', c:'torange' }
+      ],
+      note: 'U35: pivots to Logic &amp; Deduction — the two questions Prem froze on ("IDK") in the 2025 paper: code-breaking / logic grids (Q13) and balance-scale weighing (Q18). Taught simply, one idea per lesson, from zero. L1: logic grids — make a table, use each clue to cross out the impossible; a ✓ clears its row and column. L2: balance scales — heavier side goes down, level = equal; chain facts into one order, and trade equal items. Sec A grids/elimination, Sec B balance/compare, Sec C ★★ mix. Standing habits on the test: never write IDK (make a structured first move); read the EXACT ask. Pass: 12/15.',
+      status: 'pending'
+    },
+    {
       n: 34,
       badge: 'linear-gradient(135deg,#00695C,#00897B)',
       title: 'Number Theory — Remainders &amp; Digit Problems',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Remainders (find the number)', c:'tblue' },
-        { t:'L2: Digit Problems', c:'tblue' },
-        { t:'ASMOPSS — finish NT cluster', c:'torange' }
+        { t:'14/15 (93%) &#10003; PASSED — CLOSED-BOOK', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Remainders 7/7 across the test', c:'tgreen' },
+        { t:'NT cluster CLOSED (U33+U34)', c:'tgreen' },
+        { t:'Q13: range/completeness slip', c:'torange' }
       ],
-      note: 'U34: finishes the number-theory cluster after the U33 perfect. Taught simply, one idea per lesson, from zero. L1: remainders — a number with "÷A remainder r" is on the list r, r+A, r+A+A, … (start at r, keep adding); with two clues, list the first and test the second (2025 Q21 type). L2: digit problems — digit sum = add all the digits; count by digit sum by going tens-digit by tens-digit in order. Sec A remainders, Sec B digit sums + counting, Sec C ★★ mix. Carry tiny reminder: "in a multi-term factorial, read each + and − before combining" (U33 self-corrected wobbles). Pass: 12/15.',
-      status: 'pending'
+      note: '14/15 &#10003; <strong>PASSED CLOSED-BOOK</strong> — number-theory cluster now closed across two units (U33 15/15 + U34 14/15). <strong>Remainders 7/7 across the whole test</strong> (Sec A 5/5 + Q11 + Q15), every two-clue puzzle by systematic listing — the exact 2025 Q21 gap (he had 64, answer 16) closed. Digit sums 5/5. Only miss Q13 "how many from 1–50 have digit sum 7?": gave 4 (16,25,34,43), <strong>missed the single-digit 7</strong> — a range/completeness slip (method was perfect for the 2-digit ones; he started at the tens). Same family as U29 Q13 "list ALL" and the M3 precision misses. One-line habit: "check the FULL range — count single-digit numbers when it starts below 10."',
+      status: 'done'
     },
     {
       n: 33,
@@ -661,10 +675,16 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 92
     },
     {
-      label:     'Number Theory: remainders + digit problems — training U34',
+      label:     'Number Theory: remainders + digit problems — RESOLVED at U34',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U34 14/15 closed-book. <strong>Remainders 7/7 across the test</strong> (the 2025 Q21 gap — he had 64, answer 16 — closed) by the systematic-list method; digit sums 5/5. The number-theory cluster is now closed across two units (U33 15/15 + U34 14/15). Lone slip Q13 (1–50 digit sum 7 → gave 4, missed the single-digit 7): a range/completeness habit, not a method gap.',
+      fillClass: 'gs', fillPct: 90
+    },
+    {
+      label:     'Logic &amp; Deduction (code-breaking grids, balance scales) — training U35',
       pill:      'p2', pillText: 'Training &#128992;',
-      score:     'The rest of the ASMOPSS number-theory cluster: remainder puzzles ("÷A leaves remainder r", by systematic listing — 2025 Q21, he had 64 vs 16) and digit problems (digit sums, counting by digit sum, last-three-digits). U34 teaches both simply, from zero. Finishing this makes number theory a full strength for the gold push; then U35 = Logic &amp; Deduction.',
-      fillClass: 'g2', fillPct: 45
+      score:     'The next-biggest ASMOPSS 2025 gap: the two questions Prem froze on with "IDK" — code-breaking / logic grids (Q13) and balance-scale weighing (Q18). U35 teaches both from zero: "make a table, eliminate with each clue" and "heavier side down, chain the order, trade equals". High-frequency olympiad types, very learnable. Pairs with the standing "never write IDK — make a structured first move" habit.',
+      fillClass: 'g2', fillPct: 40
     },
     {
       label:     'Precision: "answer EXACTLY what is asked" (smallest / largest / which one)',
@@ -739,7 +759,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U33'
+  radarLegendUnit: 'U34'
 
 };
 
