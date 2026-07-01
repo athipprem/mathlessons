@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Systematic Listing — Count Without Missing or Repeating</title>
+<style>
+:root{--nav:#00796B;--nav-dark:#004D40;--bg:#E0F2F1;--card:#fff;--acc:#00796B;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#00695C;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E0F2F1,#E0F7FA);border:2px solid #4DB6AC;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#004D40;font-weight:700;margin-bottom:6px}
+.big-rule{background:#E0F2F1;border:2px solid #26A69A;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#004D40;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F1F8F7;border:1px solid #B2DFDB;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#00695C}
+.steps .ln.ans{color:#004D40;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#00796B;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.listrow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.chip{border:1.5px solid #80CBC4;border-radius:8px;padding:7px 12px;background:#fff;color:#004D40;font-weight:700}
+.ltable{border-collapse:collapse;margin:12px auto;font-size:.96rem}
+.ltable th,.ltable td{border:1px solid #80CBC4;padding:6px 12px;text-align:center}
+.ltable th{background:#E0F2F1;color:#004D40}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F1F8F7;border:1.5px solid #80CBC4;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E0F2F1}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#00796B;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Systematic Listing &mdash; No Missing, No Repeating</span>
+  <span class="tnav-pill" id="pill">1 / 7</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F4DD; Count Every One &mdash; Miss None</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>"How many ways can I pay 10 baht?" "How many different outfits from these shirts and shorts?" "How many 2-digit numbers add up to 7?" When you answer by jumping around randomly, you <strong>forget some and count others twice</strong>. The fix is simple: <strong>go in a fixed order and write a tidy list</strong>. Then you can be sure you got them all &mdash; which is exactly what wins contest marks.</p>
+  </div>
+  <div class="big-rule">Go in ORDER. Write a list or table. Then nothing is missed and nothing repeats.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Show me &#8594;</button></div>
+</div>
+
+<!-- Screen 2: ordered list -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>List in a Fixed Order</h2>
+  <p><strong>How many 2-digit numbers have digits that add up to 4?</strong></p>
+  <p>Go through the <strong>tens digit in order</strong>: 1, then 2, then 3, then 4. For each, the units digit is whatever is left to reach 4.</p>
+  <table class="ltable">
+    <tr><th>Tens</th><th>Units (to make 4)</th><th>Number</th></tr>
+    <tr><td>1</td><td>3</td><td>13</td></tr>
+    <tr><td>2</td><td>2</td><td>22</td></tr>
+    <tr><td>3</td><td>1</td><td>31</td></tr>
+    <tr><td>4</td><td>0</td><td>40</td></tr>
+  </table>
+  <div class="big-rule" style="font-size:1rem">Going in order &rarr; <span style="color:#00796B">4 numbers</span>: 13, 22, 31, 40</div>
+  <p style="font-size:.95rem">Because we marched the tens digit up one at a time, we know we did not skip any and did not write the same one twice.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: count by cases / table -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Fix One Thing, Vary the Rest</h2>
+  <p>When there are many choices, <strong>fix one thing first</strong> and list the rest. Example: <strong>ways to pay 6&cent; using 1&cent; and 2&cent; coins.</strong></p>
+  <p>Fix the number of <strong>2&cent; coins</strong>, from most to fewest. The 1&cent; coins just fill the gap:</p>
+  <table class="ltable">
+    <tr><th>2&cent; coins</th><th>1&cent; coins</th><th>Total</th></tr>
+    <tr><td>3</td><td>0</td><td>6&cent;</td></tr>
+    <tr><td>2</td><td>2</td><td>6&cent;</td></tr>
+    <tr><td>1</td><td>4</td><td>6&cent;</td></tr>
+    <tr><td>0</td><td>6</td><td>6&cent;</td></tr>
+  </table>
+  <div class="big-rule" style="font-size:1rem"><span style="color:#00796B">4 ways</span> &mdash; because we stepped the 2&cent; coins down in order</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: decision tree -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Plan</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span><strong>Pick something to go in order</strong> &mdash; the tens digit, the number of big coins, the first letter&hellip;</div>
+    <div class="node"><span class="step-n">2</span><strong>March it up (or down) one step at a time.</strong> For each step, write what fits.</div>
+    <div class="node"><span class="step-n">3</span><strong>Write a tidy list or table</strong> so you can see you have them all.</div>
+    <div class="node"><span class="step-n">4</span><strong>Check the FULL range.</strong> If it says "from 1", do not forget the single-digit answers (like 5) or a 0. Count to the very end too.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The most common mistake: forgetting the <strong>single-digit</strong> case when the range starts at 1. "Numbers from 1 to 30 with digit sum 5" &mdash; the number <strong>5</strong> itself counts!</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See it work &#8594;</button></div>
+</div>
+
+<!-- Screen 5: worked example -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Worked Example</h2>
+  <p><strong>How many whole numbers from 1 to 25 have a digit sum of 4?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Check the full range first: it starts at 1, so single-digit numbers can count.</span></div>
+    <div class="ln"><span class="note">Single-digit:</span> 4 (digit sum 4) &#10003;</div>
+    <div class="ln"><span class="note">Now go through the tens in order, units makes 4:</span></div>
+    <div class="ln">tens 1 &rarr; 13 (1+3=4) &#10003;</div>
+    <div class="ln">tens 2 &rarr; 22 (2+2=4) &#10003;</div>
+    <div class="ln"><span class="note">Stop at 25 &mdash; the next, 31, is past 25.</span></div>
+    <div class="ln">List: 4, 13, 22</div>
+    <div class="ln ans">3 numbers</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; If you forgot the single-digit <strong>4</strong>, you would answer 2 &mdash; the classic slip. Always sweep from the very start of the range.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">My turn &#8594;</button></div>
+</div>
+
+<!-- Screen 6: practice -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>Your Turn</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Go in order, write the list, and sweep the FULL range. Don't forget single-digit cases!</p>
+
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; How many 2-digit numbers have digits that add up to 3?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 4</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">Tens in order: 1&rarr;12, 2&rarr;21, 3&rarr;30.</div><div class="ln">List: 12, 21, 30.</div><div class="ln ans">3 numbers</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; How many 2-digit numbers can you make using only the digits 1, 2 and 3 (you may repeat a digit)?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 3</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">Fix the tens digit, list the units 1,2,3:</div><div class="ln">11,12,13 / 21,22,23 / 31,32,33.</div><div class="ln">3 rows &times; 3 = 9.</div><div class="ln ans">9 numbers</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; How many ways can you pay 7&cent; using only 1&cent; and 5&cent; coins?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 1</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">Fix the number of 5&cent; coins:</div><div class="ln">one 5&cent; + two 1&cent; = 7&cent; &#10003;</div><div class="ln">zero 5&cent; + seven 1&cent; = 7&cent; &#10003;</div><div class="ln ans">2 ways</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; How many whole numbers from 1 to 20 have a digit sum of 4?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 1</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 3</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln"><span class="note">Range starts at 1 &rarr; check single digits.</span></div><div class="ln">Single-digit: 4 &#10003;</div><div class="ln">Two-digit up to 20: 13 (1+3=4) &#10003;. 22 is past 20.</div><div class="ln">List: 4, 13.</div><div class="ln ans">2 numbers</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 7: recap -->
+<div class="screen" id="s6">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Systematic Listing &mdash; in one line</div>
+  <p style="font-size:1.05rem"><strong>Pick something to go in order, march it step by step, write a tidy list, and sweep the FULL range.</strong></p>
+  <p style="font-size:.95rem;margin-top:6px">Biggest trap: forgetting the single-digit number when the range starts at 1.</p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You always choose an order (tens digit, number of big coins, first letter) instead of guessing</li>
+    <li>You write the list/table so you can see none are missed or repeated</li>
+    <li>You remember the single-digit and end-of-range cases</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">You now have both counting tools: figure counting and systematic listing. Ready for the test!</p>
+</div>
+<div class="navrow">
+  <a href="Counting_Lesson_FigureCountingGrids.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#00796B;color:#fff;border:2px solid #00796B;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Yes! You listed it in order.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Go in order, write the list, and sweep the full range. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '27 Jun 2026',
+  updated:        '1 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:35, topic:'Logic & Deduction — Grids & Balance Scales (ASMOPSS)', status:'In Progress' },
+  currentUnit: { n:36, topic:'Figure Counting & Systematic Listing (ASMOPSS)', status:'In Progress' },
   lastUnit: {
-    n:34, score:14, outOf:15, pct:93, delta:-1, prevScore:15,
-    patternLabel: 'U34 — Number Theory: Remainders & Digit Problems, PASSED CLOSED-BOOK',
-    patternInsight: '14/15 (93%) <strong>PASSED, and CLOSED-BOOK</strong> &mdash; and with it the number-theory cluster is closed across two units (U33 15/15 + U34 14/15). <strong>Remainders came back 7/7 across the whole test</strong> (Sec A 5/5 + Q11 + Q15), every two-clue puzzle solved by the systematic-list method &mdash; exactly the 2025-paper gap (Q21: he had 64, answer 16). Digit sums 5/5. The single miss is a completeness edge, not a method failure.',
-    analysisLabel: 'Next: U35 — Logic & Deduction (the two 2025 "IDK" freezes)',
-    analysisInsight: 'Number theory is now a strength. U35 pivots to the next-biggest 2025-paper gap: code-breaking / logic grids (Q13) and balance-scale weighing (Q18) — both froze with "IDK". Taught as "make a table, eliminate with each clue" and "heavier side goes down, chain the order". Standing habits to drill: (a) check the FULL range — count single-digit numbers when a range starts below 10 (U34 Q13 miss); (b) never write IDK — always a structured first move; (c) read the exact ask.',
-    qSummary: '<strong>Sec A 5/5 | Sec B 5/5 | Sec C 4/5</strong> — 14/15 PASSED (closed-book)',
+    n:35, score:13, outOf:15, pct:87, delta:-1, prevScore:14,
+    patternLabel: 'U35 — Logic & Deduction: Grids & Balance Scales, PASSED CLOSED-BOOK',
+    patternInsight: '13/15 (87%) <strong>PASSED, and CLOSED-BOOK</strong> &mdash; and the 2025-paper "IDK" freeze is CLOSED. This was the unit built for the two questions Prem froze on (Mastermind grid Q13, balance-scale Q18): on U35 he made a <strong>structured first move on every single question</strong> — grids, order columns, balance chains, trade diagrams, see-saw sketches — and wrote <strong>zero "IDK"s</strong>. Balance scales came back a strength (Sec B 5/5 ✦ + Q13). Both misses are old habits, not logic: Q1 a careless first-question slip, Q15 an articulation slip.',
+    analysisLabel: 'Next: U36 — Figure &amp; Spatial Counting + Systematic Listing',
+    analysisInsight: 'Logic &amp; deduction is now solid (freeze closed) and number theory is a strength (U33 15/15, U34 14/15). The last open ASMOPSS 2025 gap is figure/spatial counting (Q14, "how many more quadrilaterals than triangles"). U36 teaches figure counting in grids (squares by size; rectangles by choosing 2 lines each way) + systematic listing (count without missing/repeating, sweep the full range). Standing habits to drill: (a) don&rsquo;t rush Q1 — re-read the easy opener (U35 Q1); (b) name the answer by what makes it special ("the one NOT on the scale", not "the middle") (U35 Q15); (c) keep the now-solid never-IDK habit; (d) read the exact ask.',
+    qSummary: '<strong>Sec A 4/5 | Sec B 5/5 ✦ | Sec C 4/5</strong> — 13/15 PASSED (closed-book)',
     qBreakdown: [
-      { q:'Q1', topic:'Remainder — smallest 2-digit',  lvl:'w', pass:true,  note:'&#10003; 13.' },
-      { q:'Q2', topic:'Remainder — smallest >20',      lvl:'w', pass:true,  note:'&#10003; 21.' },
-      { q:'Q3', topic:'Remainder — two clues',         lvl:'w', pass:true,  note:'&#10003; 7 (÷6 r1 list, test ÷4 r3).' },
-      { q:'Q4', topic:'Remainder — two clues',         lvl:'w', pass:true,  note:'&#10003; 9.' },
-      { q:'Q5', topic:'Remainder — two clues',         lvl:'w', pass:true,  note:'&#10003; 18.' },
-      { q:'Q6', topic:'Digit sum — 76',                lvl:'m', pass:true,  note:'&#10003; 13.' },
-      { q:'Q7', topic:'Digit sum — 408',               lvl:'m', pass:true,  note:'&#10003; 12 (incl. the 0).' },
-      { q:'Q8', topic:'Digit sum — 555',               lvl:'m', pass:true,  note:'&#10003; 15.' },
-      { q:'Q9', topic:'Count — digit sum 6',           lvl:'m', pass:true,  note:'&#10003; 6 (tens-by-tens).' },
-      { q:'Q10',topic:'Count — digit sum 3',           lvl:'m', pass:true,  note:'&#10003; 3.' },
-      { q:'Q11',topic:'Remainder — two clues  ★★',     lvl:'h', pass:true,  note:'&#10003; 31.' },
-      { q:'Q12',topic:'Count — digit sum 8  ★★',       lvl:'h', pass:true,  note:'&#10003; 8.' },
-      { q:'Q13',topic:'Count — 1–50 digit sum 7  ★★',  lvl:'h', pass:false, note:'&#10007; gave 4 (16,25,34,43) — MISSED the single-digit 7. Range/completeness slip: range starts below 10. Correct = 5.' },
-      { q:'Q14',topic:'Count — digit sum ≥17  ★★',     lvl:'h', pass:true,  note:'&#10003; 3 (89,98,99).' },
-      { q:'Q15',topic:'Remainder — two clues  ★★',     lvl:'h', pass:true,  note:'&#10003; 32.' }
+      { q:'Q1', topic:'Logic grid — match',            lvl:'w', pass:false, note:'&#10007; gave Yo-Yo; correct = Ball (Uma≠ball → yo-yo, so Vic=ball). Careless slip on the EASIEST grid — nailed the harder Q11.' },
+      { q:'Q2', topic:'Order — lowest',                lvl:'w', pass:true,  note:'&#10003; Tara.' },
+      { q:'Q3', topic:'Elimination — which cup',       lvl:'w', pass:true,  note:'&#10003; Cup 2.' },
+      { q:'Q4', topic:'Logic grid — colours',          lvl:'w', pass:true,  note:'&#10003; Red.' },
+      { q:'Q5', topic:'Order — shortest',              lvl:'w', pass:true,  note:'&#10003; Max.' },
+      { q:'Q6', topic:'Balance — heaviest',            lvl:'m', pass:true,  note:'&#10003; Melon.' },
+      { q:'Q7', topic:'Balance — lightest',            lvl:'m', pass:true,  note:'&#10003; Pen.' },
+      { q:'Q8', topic:'Balance — trade',               lvl:'m', pass:true,  note:'&#10003; 12 cans.' },
+      { q:'Q9', topic:'Balance — trade (chain)',       lvl:'m', pass:true,  note:'&#10003; 10 cups.' },
+      { q:'Q10',topic:'Balance — see-saw compare',     lvl:'m', pass:true,  note:'&#10003; Lily (Sam=Tom, Sam>Lily → Lily lighter).' },
+      { q:'Q11',topic:'Logic grid — double-negative  ★★', lvl:'h', pass:true, note:'&#10003; Coe (Ben≠watch,≠ring→phone; Ada≠watch→ring; Coe=watch). The hard grid — solved cleanly.' },
+      { q:'Q12',topic:'Order — before-chains  ★★',     lvl:'h', pass:true,  note:'&#10003; Sam.' },
+      { q:'Q13',topic:'Balance — multi-trade  ★★',     lvl:'h', pass:true,  note:'&#10003; 3 plums (1 melon = 12 plums = 4 apples).' },
+      { q:'Q14',topic:'Elimination — positions  ★★',   lvl:'h', pass:true,  note:'&#10003; 2nd.' },
+      { q:'Q15',topic:'Balance — reason (5 balls)  ★★',lvl:'h', pass:false, note:'&#10007; answered "the middle"; accepted answer "the 5th / the one left off the scale". Had the concept (unweighed ball is heavier) — articulation slip, not reasoning.' }
     ]
   },
   _M3archived: {
@@ -80,7 +80,7 @@ var PREM_DATA = {
   // Display order used for skill-bar tables in both pages.
   // achievement % = sum(c) / sum(t) × 100  →  560 / 677 = 83%
   skills: [
-    { name: 'Logic & Reasoning', c: 87, t: 90 },
+    { name: 'Logic & Reasoning', c: 88, t: 90 },
     { name: 'Number Sense',      c: 88, t: 90 },
     { name: 'Algebra',           c: 98, t: 85 },
     { name: 'Arithmetic',        c: 83, t: 85 },
@@ -91,7 +91,7 @@ var PREM_DATA = {
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [87, 74, 88, 98, 86, 83, 89, 76],
+  radarCurrent:  [88, 74, 88, 98, 86, 83, 89, 76],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -134,23 +134,37 @@ var PREM_DATA = {
     { n:31, score:13, delta:+3, color:'linear-gradient(135deg,#FBC02D,#F9A825)', star:false },
     { n:32, score:14, delta:+1, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:33, score:15, delta:+1, color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true },
-    { n:34, score:14, delta:-1, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
+    { n:34, score:14, delta:-1, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
+    { n:35, score:13, delta:-1, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 36,
+      badge: 'linear-gradient(135deg,#00796B,#26A69A)',
+      title: 'Figure Counting &amp; Systematic Listing',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'L1: Figure Counting (grids)', c:'tblue' },
+        { t:'L2: Systematic Listing', c:'tblue' },
+        { t:'ASMOPSS — last open gap (figures)', c:'torange' }
+      ],
+      note: 'U36: the last open ASMOPSS 2025 gap — figure/spatial counting (Q14). Taught one idea at a time. L1 figure counting in grids: SQUARES → count by size (1×1, 2×2, …) and add; RECTANGLES → pick 2 up-down lines × 2 across lines, then multiply (reuses the pairs ÷2 skill). L2 systematic listing: go in order, write the list, sweep the FULL range — closes the completeness slip (U34 Q13). Sec A figure counting, Sec B listing, Sec C ★★ mix (incl. rectangles-that-are-not-squares). Standing habits on the test: don&rsquo;t rush Q1; name the answer by what makes it special; keep never-IDK; read the EXACT ask. Pass: 12/15.',
+      status: 'pending'
+    },
+    {
       n: 35,
       badge: 'linear-gradient(135deg,#4527A0,#7E57C2)',
       title: 'Logic &amp; Deduction — Grids &amp; Balance Scales',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Logic Grids (eliminate)', c:'tblue' },
-        { t:'L2: Balance Scales', c:'tblue' },
-        { t:'ASMOPSS — the 2 "IDK" freezes', c:'torange' }
+        { t:'13/15 (87%) &#10003; PASSED — CLOSED-BOOK', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'"IDK" freeze CLOSED — 0 freezes', c:'tgreen' },
+        { t:'Balance scales 5/5 ✦ strength', c:'tgreen' },
+        { t:'Q1 careless · Q15 wording', c:'torange' }
       ],
-      note: 'U35: pivots to Logic &amp; Deduction — the two questions Prem froze on ("IDK") in the 2025 paper: code-breaking / logic grids (Q13) and balance-scale weighing (Q18). Taught simply, one idea per lesson, from zero. L1: logic grids — make a table, use each clue to cross out the impossible; a ✓ clears its row and column. L2: balance scales — heavier side goes down, level = equal; chain facts into one order, and trade equal items. Sec A grids/elimination, Sec B balance/compare, Sec C ★★ mix. Standing habits on the test: never write IDK (make a structured first move); read the EXACT ask. Pass: 12/15.',
-      status: 'pending'
+      note: '13/15 &#10003; <strong>PASSED CLOSED-BOOK</strong> — the 2025-paper "IDK" freeze is CLOSED. Built for the two questions Prem froze on (Mastermind grid Q13, balance-scale Q18); on U35 he made a <strong>structured first move on every question</strong> (grids, order columns, balance chains, trade diagrams, see-saw sketches) and wrote <strong>zero "IDK"s</strong>. Balance scales a strength: Sec B 5/5 ✦ + Q13 (transitivity, multi-step trades, see-saw compare). The hard double-negative grid Q11 solved cleanly. Two misses, both old habits not logic: Q1 (easiest grid — gave Yo-Yo not Ball, a rushed first-question slip) and Q15 (5 balls — right concept "the unweighed ball is heavier" but answered "the middle" instead of "the one left off the scale"). → U36 figure counting + systematic listing.',
+      status: 'done'
     },
     {
       n: 34,
@@ -681,16 +695,22 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 90
     },
     {
-      label:     'Logic &amp; Deduction (code-breaking grids, balance scales) — training U35',
+      label:     'Logic &amp; Deduction (grids, balance scales) — RESOLVED at U35 (the "IDK" freeze is CLOSED)',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U35 13/15 closed-book. The two 2025 freezes (Mastermind grid Q13, balance-scale Q18) are gone: Prem made a <strong>structured first move on every question</strong> and wrote <strong>zero "IDK"s</strong>. Balance scales a strength (Sec B 5/5 ✦ + Q13). Hard double-negative grid Q11 solved cleanly. The 2 misses were old habits, not logic: Q1 rushed-first-question slip, Q15 wording ("the middle" vs "the one off the scale").',
+      fillClass: 'gs', fillPct: 88
+    },
+    {
+      label:     'Figure &amp; spatial counting + systematic listing — training U36',
       pill:      'p2', pillText: 'Training &#128992;',
-      score:     'The next-biggest ASMOPSS 2025 gap: the two questions Prem froze on with "IDK" — code-breaking / logic grids (Q13) and balance-scale weighing (Q18). U35 teaches both from zero: "make a table, eliminate with each clue" and "heavier side down, chain the order, trade equals". High-frequency olympiad types, very learnable. Pairs with the standing "never write IDK — make a structured first move" habit.',
+      score:     'The last open ASMOPSS 2025 gap: figure/spatial counting (Q14, "how many more quadrilaterals than triangles"). U36 teaches figure counting in grids (SQUARES → count by size and add; RECTANGLES → pick 2 up-down lines × 2 across lines, then multiply — reuses the pairs ÷2 skill), plus systematic listing (go in order, write the list, sweep the FULL range) which also targets the U34 Q13 completeness slip.',
       fillClass: 'g2', fillPct: 40
     },
     {
-      label:     'Precision: "answer EXACTLY what is asked" (smallest / largest / which one)',
+      label:     'Precision: answer EXACTLY &amp; clearly what is asked (smallest / which / name it right)',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'M3 Q12 (gave digit 3, not the SMALLEST 0) and Q19 (gave 33, not the SMALLEST 13) &mdash; same error: finds a correct set/value but returns the wrong specific one. Cheap lost marks; critical for competition. Fix: a standing "re-read the exact ask before writing" habit, baked into every ASMOPSS unit.',
-      fillClass: 'g2', fillPct: 60
+      score:     'M3 Q12 (gave 3, not the SMALLEST 0) and Q19 (gave 33, not smallest 13); and U35 Q15 (had the right ball but wrote "the middle" instead of "the one off the scale", not accepted). Same family: finds the right idea but returns the wrong specific one, or names it vaguely. Cheap lost marks; critical for competition. Fix: standing "re-read the exact ask, then name the answer by what makes it special" habit, baked into every ASMOPSS unit.',
+      fillClass: 'g2', fillPct: 62
     },
     {
       label:     'Applied Problems / Kangaroo reasoning — STRENGTH (M2 4/5, M3 4/5)',
@@ -759,7 +779,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U34'
+  radarLegendUnit: 'U35'
 
 };
 
