@@ -37,6 +37,12 @@ p,li{font-size:1rem;line-height:1.65}
 .ltable th,.ltable td{border:1px solid #80CBC4;padding:6px 12px;text-align:center}
 .ltable th{background:#E0F2F1;color:#004D40}
 .ltable td.circled{background:#E8F5E9;font-weight:800;color:#1B5E20}
+.size-btn{border:1.5px solid #80CBC4;border-radius:8px;padding:9px 14px;background:#fff;color:#004D40;font-weight:700;font-size:.92rem;cursor:pointer;font-family:inherit}
+.size-btn:hover{border-color:var(--acc);background:#E0F2F1}
+.size-btn.active{background:#00796B;color:#fff;border-color:#00796B}
+.size-btn.done:not(.active)::after{content:'\2713';color:#2E7D32;font-weight:900;margin-left:5px}
+.size-btn.active.done::after{content:'\2713';color:#B2FFDA;font-weight:900;margin-left:5px}
+.sizerow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
 .warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
 .warn-box p{font-size:.95rem;color:#E65100}
 .q-card{background:#F1F8F7;border:1.5px solid #80CBC4;border-radius:10px;padding:16px;margin-bottom:14px}
@@ -81,19 +87,26 @@ p,li{font-size:1rem;line-height:1.65}
 <div class="card">
   <h2>Trap #1 &mdash; Count the List, Don't Copy It</h2>
   <p><strong>How many 2-digit numbers have digits that add up to 6?</strong></p>
-  <p>March the tens digit up in order. For each tens digit, the units digit is whatever is left to reach 6:</p>
-  <table class="ltable">
-    <tr><th>Tens</th><th>Units (to make 6)</th><th>Number</th></tr>
-    <tr><td>1</td><td>5</td><td>15</td></tr>
-    <tr><td>2</td><td>4</td><td>24</td></tr>
-    <tr><td>3</td><td>3</td><td>33</td></tr>
-    <tr><td>4</td><td>2</td><td>42</td></tr>
-    <tr><td>5</td><td>1</td><td>51</td></tr>
-    <tr><td>6</td><td>0</td><td>60</td></tr>
+  <p>Tap each tens digit IN ORDER below. Watch the list grow one row at a time &mdash; and watch what the "last number" does as you go.</p>
+
+  <div class="sizerow" id="list-choices">
+    <button class="size-btn" onclick="pickTens(0)">Tens=1</button>
+    <button class="size-btn" onclick="pickTens(1)">Tens=2</button>
+    <button class="size-btn" onclick="pickTens(2)">Tens=3</button>
+    <button class="size-btn" onclick="pickTens(3)">Tens=4</button>
+    <button class="size-btn" onclick="pickTens(4)">Tens=5</button>
+    <button class="size-btn" onclick="pickTens(5)">Tens=6</button>
+  </div>
+
+  <table class="ltable" id="list-table" style="width:100%;max-width:360px">
+    <tr><th>Row #</th><th>Tens</th><th>Units (to make 6)</th><th>Number</th></tr>
   </table>
-  <p>The list is: 15, 24, 33, 42, 51, 60. That is <strong>every single one correct</strong>.</p>
-  <div class="warn-box"><p>&#x26A0;&#xFE0F; The trap: writing <strong>"60"</strong> as the answer, because it was the last number written down. But the question asked <strong>"how many numbers"</strong> &mdash; that means <strong>count the rows in the list</strong>.</p></div>
-  <div class="big-rule" style="font-size:1rem">Count the rows: 1, 2, 3, 4, 5, 6 &rarr; <span style="color:#00796B">6 numbers</span> is the real answer &mdash; NOT 60.</div>
+
+  <div class="big-rule" id="list-readout" style="font-size:1rem">&#9757; Tap "Tens=1" to start building the list</div>
+
+  <div class="warn-box" id="list-confirm" style="display:none;background:#FFF3E0">
+    <p>&#x26A0;&#xFE0F; The LAST number you wrote was <strong id="list-lastval" style="color:#C62828"></strong> &mdash; that is NOT the answer! Count the ROWS in the table instead: <strong id="list-rowcount" style="color:#2E7D32"></strong> rows &mdash; <strong>that</strong> is the real answer.</p>
+  </div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
 </div>
@@ -103,11 +116,23 @@ p,li{font-size:1rem;line-height:1.65}
 <div class="card">
   <h2>Trap #2 &mdash; Does ORDER Matter?</h2>
   <p>Before you multiply anything, ask one question: <strong>does the order/job of each person or item matter?</strong></p>
-  <div class="sizerow" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:10px 0">
+  <div class="sizerow">
     <span class="sizechip" style="border:1.5px solid #80CBC4;border-radius:8px;padding:8px 12px;background:#E8F5E9;color:#1B5E20;font-weight:700">Order does NOT matter (just a pair/team) &rarr; multiply, then &divide; 2</span>
     <span class="sizechip" style="border:1.5px solid #80CBC4;border-radius:8px;padding:8px 12px;background:#FFF3E0;color:#E65100;font-weight:700">Order DOES matter (1st &amp; 2nd, arranging in a row) &rarr; multiply, do NOT halve</span>
   </div>
-  <p style="margin-top:10px"><strong>Example A &mdash; "Choose 2 players from a team of 6 to be on the doubles pair"</strong> &mdash; a pair has no "1st" or "2nd", it's just a team. Order does NOT matter.</p>
+
+  <h3 style="margin-top:16px">See It &mdash; 6 People, Every Possible Pick</h3>
+  <p style="font-size:.92rem;color:#00695C">Every cell below is "1st pick &rarr; 2nd pick". Tap a mode and watch what happens to matching picks.</p>
+  <div class="sizerow" id="order-choices">
+    <button class="size-btn" onclick="pickOrderMode('team')">Team Pair (order doesn't matter)</button>
+    <button class="size-btn" onclick="pickOrderMode('rank')">1st &amp; 2nd Place (order matters)</button>
+  </div>
+  <div style="overflow-x:auto">
+    <table class="ltable" id="order-grid" style="margin:12px auto"></table>
+  </div>
+  <div class="big-rule" id="order-readout" style="font-size:.98rem">&#9757; Tap a mode above</div>
+
+  <p style="margin-top:16px"><strong>Example A &mdash; "Choose 2 players from a team of 6 to be on the doubles pair"</strong> &mdash; a pair has no "1st" or "2nd", it's just a team. Order does NOT matter.</p>
   <div class="steps"><div class="ln">6 &times; 5 = 30 (pick a 1st player, then a 2nd)</div><div class="ln">But each pair got counted twice (A-then-B is the same team as B-then-A)</div><div class="ln">30 &divide; 2 = 15</div><div class="ln ans">15 pairs</div></div>
   <p style="margin-top:10px"><strong>Example B &mdash; "Choose a 1st place and 2nd place winner from 6 runners"</strong> &mdash; 1st and 2nd are different JOBS. Order DOES matter.</p>
   <div class="steps"><div class="ln">6 choices for 1st place</div><div class="ln">5 choices left for 2nd place</div><div class="ln">6 &times; 5 = 30</div><div class="ln ans">30 ways (do NOT halve — Alex-1st/Bo-2nd is different from Bo-1st/Alex-2nd)</div></div>
@@ -241,6 +266,77 @@ if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';retu
 if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Yes! You counted the list, not the last value.';ss.style.display='inline-block';}
 else{fb.className='feedback err';fb.textContent='Not yet. Count the rows in your list, and check if order matters. Tap Show Steps.';ss.style.display='inline-block';}}
 function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ── Interactive 1: build-the-list, watch last-value vs row-count (pg2) ──
+var TENS_LIST=[1,2,3,4,5,6];
+function pickTens(idx){
+  document.querySelectorAll('#list-choices .size-btn').forEach(function(b,i){
+    b.classList.toggle('active', i===idx);
+    b.classList.toggle('done', i<=idx);
+  });
+  var table = document.getElementById('list-table');
+  table.innerHTML = '<tr><th>Row #</th><th>Tens</th><th>Units (to make 6)</th><th>Number</th></tr>';
+  for(var i=0;i<=idx;i++){
+    var tens = TENS_LIST[i];
+    var units = 6-tens;
+    var num = tens*10+units;
+    var tr = document.createElement('tr');
+    if(i===idx) tr.style.background='#FFF9C4';
+    tr.innerHTML = '<td>'+(i+1)+'</td><td>'+tens+'</td><td>'+units+'</td><td><strong>'+num+'</strong></td>';
+    table.appendChild(tr);
+  }
+  var lastNum = TENS_LIST[idx]*10 + (6-TENS_LIST[idx]);
+  document.getElementById('list-readout').innerHTML =
+    'Rows so far: <span style="color:#00796B">'+(idx+1)+'</span> &nbsp;|&nbsp; Last number written: <span style="color:#C62828">'+lastNum+'</span>';
+  var confirm = document.getElementById('list-confirm');
+  if(idx === TENS_LIST.length-1){
+    confirm.style.display='block';
+    document.getElementById('list-lastval').textContent = lastNum;
+    document.getElementById('list-rowcount').textContent = TENS_LIST.length;
+  } else {
+    confirm.style.display='none';
+  }
+}
+
+// ── Interactive 2: 6-person pick grid, order-matters vs order-doesn't (pg3) ──
+var PEOPLE=['A','B','C','D','E','F'];
+var PALETTE2=['#E65100','#1565C0','#6A1B9A','#00838F','#AD1457','#2E7D32','#5D4037','#00695C'];
+function buildOrderGrid(mode){
+  var table = document.getElementById('order-grid');
+  table.innerHTML='';
+  var header = document.createElement('tr');
+  var hHtml = '<th></th>';
+  PEOPLE.forEach(function(p){ hHtml += '<th>'+p+'</th>'; });
+  header.innerHTML = hHtml;
+  table.appendChild(header);
+  var pairId = {}; var nextId=0;
+  PEOPLE.forEach(function(r,ri){
+    var tr = document.createElement('tr');
+    var rowHtml = '<th>'+r+'</th>';
+    PEOPLE.forEach(function(c,ci){
+      if(ri===ci){ rowHtml += '<td style="background:#eee;color:#bbb">&mdash;</td>'; return; }
+      var key = (mode==='team') ? (Math.min(ri,ci)+'-'+Math.max(ri,ci)) : (ri+'-'+ci);
+      if(!(key in pairId)){ pairId[key] = ++nextId; }
+      var id = pairId[key];
+      var color = PALETTE2[(id-1)%PALETTE2.length];
+      rowHtml += '<td style="background:'+color+'22;color:'+color+';font-weight:700">'+id+'</td>';
+    });
+    tr.innerHTML = rowHtml;
+    table.appendChild(tr);
+  });
+  var total = (mode==='team') ? 15 : 30;
+  var label = (mode==='team')
+    ? 'Team pairs &mdash; matching numbers are the SAME pair, just picked in a different order, so they share ONE number.'
+    : '1st &amp; 2nd place &mdash; every cell is a DIFFERENT outcome, so every cell gets its OWN number.';
+  document.getElementById('order-readout').innerHTML = label + ' &nbsp; Total: <span style="color:#00796B">'+total+'</span>';
+}
+function pickOrderMode(mode){
+  document.querySelectorAll('#order-choices .size-btn').forEach(function(b,i){
+    b.classList.toggle('active', (mode==='team' && i===0) || (mode==='rank' && i===1));
+    b.classList.add('done');
+  });
+  buildOrderGrid(mode);
+}
 </script>
 </body>
 </html>
