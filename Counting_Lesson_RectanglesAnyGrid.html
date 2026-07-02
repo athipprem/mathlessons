@@ -37,6 +37,11 @@ p,li{font-size:1rem;line-height:1.65}
 .cap{text-align:center;font-size:.9rem;color:#00695C;margin-top:-6px;margin-bottom:8px}
 .sizerow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
 .sizechip{border:1.5px solid #80CBC4;border-radius:8px;padding:6px 10px;background:#fff;color:#004D40;font-weight:700;font-size:.92rem}
+.size-btn{border:1.5px solid #80CBC4;border-radius:8px;padding:9px 14px;background:#fff;color:#004D40;font-weight:700;font-size:.95rem;cursor:pointer;font-family:inherit;position:relative}
+.size-btn:hover{border-color:var(--acc);background:#E0F2F1}
+.size-btn.active{background:#00796B;color:#fff;border-color:#00796B}
+.size-btn.done:not(.active)::after{content:'\2713';color:#2E7D32;font-weight:900;margin-left:5px}
+.size-btn.active.done::after{content:'\2713';color:#B2FFDA;font-weight:900;margin-left:5px}
 .warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
 .warn-box p{font-size:.95rem;color:#E65100}
 .q-card{background:#F1F8F7;border:1.5px solid #80CBC4;border-radius:10px;padding:16px;margin-bottom:14px}
@@ -60,7 +65,7 @@ p,li{font-size:1rem;line-height:1.65}
 <nav class="topnav">
   <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
   <span class="tnav-title">Rectangles in ANY Grid &mdash; Not Just Squares</span>
-  <span class="tnav-pill" id="pill">1 / 7</span>
+  <span class="tnav-pill" id="pill">1 / 8</span>
   <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
 </nav>
 
@@ -92,31 +97,84 @@ p,li{font-size:1rem;line-height:1.65}
 <!-- Screen 3: worked example on an asymmetric grid, written out fully -->
 <div class="screen" id="s2">
 <div class="card">
-  <h2>Worked Example &mdash; An Asymmetric Grid</h2>
-  <p><strong>How many rectangles of all sizes are in a 2&times;3 grid (2 boxes tall, 3 boxes wide)?</strong></p>
+  <h2>Worked Example, Part 1 &mdash; Draw &amp; Count</h2>
+  <p><strong>How many rectangles of all sizes hide in a 2&times;3 grid (2 boxes tall, 3 boxes wide)?</strong></p>
+  <p>Let's go really slowly. First, the one big idea &mdash; what a rectangle actually <em>is</em>:</p>
+  <div class="big-rule" style="font-size:.98rem">Every rectangle needs 4 lines:<br>a LEFT wall and a RIGHT wall (2 up-down lines),<br>and a TOP and a BOTTOM (2 across lines).</div>
+
   <div class="figbox">
-    <svg width="150" height="110" viewBox="0 0 150 110" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="10" width="130" height="80" fill="#E0F7FA" stroke="#00796B" stroke-width="2"/>
-      <line x1="53.3" y1="10" x2="53.3" y2="90" stroke="#00796B" stroke-width="2"/>
-      <line x1="96.7" y1="10" x2="96.7" y2="90" stroke="#00796B" stroke-width="2"/>
-      <line x1="10" y1="50" x2="140" y2="50" stroke="#00796B" stroke-width="2"/>
+    <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="55" y="30" width="210" height="120" fill="#E0F7FA" stroke="#00796B" stroke-width="2"/>
+      <line x1="125" y1="30" x2="125" y2="150" stroke="#00796B" stroke-width="2"/>
+      <line x1="195" y1="30" x2="195" y2="150" stroke="#00796B" stroke-width="2"/>
+      <line x1="55" y1="90" x2="265" y2="90" stroke="#00796B" stroke-width="2"/>
+      <rect x="125" y="30" width="140" height="120" fill="#FFA726" fill-opacity="0.25" stroke="#E65100" stroke-width="3.5"/>
+      <text x="55"  y="168" text-anchor="middle" font-size="13" font-weight="700" fill="#00695C">1</text>
+      <text x="125" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="#00695C">2</text>
+      <text x="195" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="#00695C">3</text>
+      <text x="265" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="#00695C">4</text>
+      <text x="40" y="35"  text-anchor="middle" font-size="13" font-weight="700" fill="#00695C">A</text>
+      <text x="40" y="95"  text-anchor="middle" font-size="13" font-weight="700" fill="#00695C">B</text>
+      <text x="40" y="155" text-anchor="middle" font-size="13" font-weight="700" fill="#00695C">C</text>
     </svg>
   </div>
-  <div class="cap">2 boxes tall &times; 3 boxes wide</div>
+  <div class="cap">Up-down lines: 1&nbsp;2&nbsp;3&nbsp;4 &nbsp;&middot;&nbsp; Across lines: A&nbsp;B&nbsp;C. The orange box is one rectangle: its walls are lines <strong>2</strong> &amp; <strong>4</strong>, its top &amp; bottom are <strong>A</strong> &amp; <strong>C</strong>.</div>
+
+  <p>See it? Pick any 2 up-down lines for the walls, and any 2 across lines for the top and bottom, and you have drawn <strong>exactly one</strong> rectangle. So the whole job is just two little "pick&nbsp;2" jobs.</p>
+
   <div class="steps">
-    <div class="ln"><span class="note">Step 1 &mdash; height h = 2 boxes tall:</span></div>
-    <div class="ln">across lines = h + 1 = 2 + 1 = 3</div>
-    <div class="ln"><span class="note">Step 2 &mdash; width w = 3 boxes wide:</span></div>
-    <div class="ln">up-down lines = w + 1 = 3 + 1 = 4</div>
-    <div class="ln"><span class="note">Step 3 &mdash; choose 2 of the 3 across lines (the pairs move):</span></div>
-    <div class="ln">3 &times; 2 &divide; 2 = 3 ways</div>
-    <div class="ln"><span class="note">Step 4 &mdash; choose 2 of the 4 up-down lines:</span></div>
-    <div class="ln">4 &times; 3 &divide; 2 = 6 ways</div>
-    <div class="ln"><span class="note">Step 5 &mdash; multiply the two choices:</span></div>
-    <div class="ln">3 &times; 6 = 18</div>
-    <div class="ln ans">18 rectangles</div>
+    <div class="ln"><span class="note">First, count the lines. (This is the step Prem must NEVER skip.)</span></div>
+    <div class="ln">3 boxes wide &rarr; up-down lines = 3 + 1 = <strong>4</strong> &nbsp;(lines 1, 2, 3, 4)</div>
+    <div class="ln">2 boxes tall &rarr; across lines = 2 + 1 = <strong>3</strong> &nbsp;(lines A, B, C)</div>
+    <div class="ln"><span class="note">4 and 3 are different numbers &mdash; that's normal, the grid isn't square. Keep them apart.</span></div>
   </div>
-  <div class="warn-box"><p>&#x26A0;&#xFE0F; Notice the across-count (3) and the up-down-count (6) came out <strong>different</strong> &mdash; because the grid is not square. Always write both line-counts down before multiplying. Never skip this and just guess.</p></div>
+
+  <h3 style="margin-top:16px">Now the two "pick 2" jobs &mdash; listed out</h3>
+  <div class="big-rule" style="font-size:1rem">SHORTCUT FORMULA:&nbsp; (n &times; (n &minus; 1)) &divide; 2 &nbsp;&mdash;&nbsp; where <strong>n = the number of lines</strong> you are choosing 2 from.</div>
+  <p style="font-size:.92rem;color:#00695C;text-align:center;margin-top:-8px">Always work out the bracket ( ) FIRST, then divide by 2. That way you multiply before you divide &mdash; and never get confused about which to do first.</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Pick 2 of the 3 across lines (A, B, C). Just list every pair:</span></div>
+    <div class="ln">A&amp;B , &nbsp; A&amp;C , &nbsp; B&amp;C &nbsp;&rarr;&nbsp; <strong>3 ways</strong></div>
+    <div class="ln"><span class="note">Shortcut: (n &times; (n&minus;1)) &divide; 2, where n = 3 lines. Bracket first:</span></div>
+    <div class="ln">(3 &times; 2) &divide; 2 &nbsp;=&nbsp; 6 &divide; 2 &nbsp;=&nbsp; <strong>3</strong></div>
+    <div class="ln"><span class="note">Pick 2 of the 4 up-down lines (1, 2, 3, 4). List every pair:</span></div>
+    <div class="ln">1&amp;2 , &nbsp; 1&amp;3 , &nbsp; 1&amp;4 , &nbsp; 2&amp;3 , &nbsp; 2&amp;4 , &nbsp; 3&amp;4 &nbsp;&rarr;&nbsp; <strong>6 ways</strong></div>
+    <div class="ln"><span class="note">Shortcut: (n &times; (n&minus;1)) &divide; 2, where n = 4 lines. Bracket first:</span></div>
+    <div class="ln">(4 &times; 3) &divide; 2 &nbsp;=&nbsp; 12 &divide; 2 &nbsp;=&nbsp; <strong>6</strong> &nbsp;<span class="note">&mdash; the SAME "pick 2" move as counting handshakes, each pair once.</span></div>
+    <div class="ln"><span class="note">Every top-&amp;-bottom pair can team up with every left-&amp;-right pair, so we multiply:</span></div>
+    <div class="ln ans">3 &times; 6 = 18 rectangles</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Check it &#8594;</button></div>
+</div>
+
+<!-- Screen 3b: verify the same answer a second way (interactive, by size) -->
+<div class="screen" id="s2b">
+<div class="card">
+  <h2>Worked Example, Part 2 &mdash; Explore Every Size</h2>
+  <p>Smart mathematicians <strong>check</strong> their answer. Let's count the very same rectangles a totally different way &mdash; <strong>by size</strong> &mdash; and see if we also land on 18.</p>
+  <p style="font-size:.96rem">Tap a size below. Watch WHERE it can fit in the 3&times;2 grid, then read off <strong>spots it fits</strong> and <strong>how many</strong>.</p>
+
+  <div class="sizerow" id="size-choices" style="margin-bottom:10px">
+    <button class="size-btn" onclick="pickSize(0)">1&times;1</button>
+    <button class="size-btn" onclick="pickSize(1)">2&times;1</button>
+    <button class="size-btn" onclick="pickSize(2)">3&times;1</button>
+    <button class="size-btn" onclick="pickSize(3)">1&times;2</button>
+    <button class="size-btn" onclick="pickSize(4)">2&times;2</button>
+    <button class="size-btn" onclick="pickSize(5)">3&times;2</button>
+  </div>
+
+  <div class="figbox">
+    <svg id="size-svg" width="230" height="170" viewBox="0 0 190 140" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+
+  <div class="big-rule" id="size-readout" style="font-size:1rem">&#9757; Tap a size above to begin</div>
+
+  <p id="size-tally" style="text-align:center;font-size:.9rem;color:#00695C;margin-top:10px">Explored: 1&times;1=? &nbsp;+&nbsp; 2&times;1=? &nbsp;+&nbsp; 3&times;1=? &nbsp;+&nbsp; 1&times;2=? &nbsp;+&nbsp; 2&times;2=? &nbsp;+&nbsp; 3&times;2=?</p>
+
+  <div class="warn-box" id="size-confirm" style="display:none;background:#E8F5E9;border-color:#A5D6A7"><p style="color:#1B5E20">&#9989; You've checked every size! 6 + 4 + 2 + 3 + 2 + 1 = <strong>18</strong> &mdash; the SAME answer as Part 1!</p></div>
+
+  <div class="warn-box" style="margin-top:12px"><p>&#x26A0;&#xFE0F; The across-count and the up-down-count are different because the grid is <strong>not square</strong>. Always write BOTH counts down before you multiply &mdash; never reuse one number for both.</p></div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
 </div>
@@ -128,7 +186,7 @@ p,li{font-size:1rem;line-height:1.65}
   <div class="tree">
     <div class="node"><span class="step-n">1</span><strong>Write down w (width in boxes) and h (height in boxes) separately.</strong> A 1-row strip has h = 1.</div>
     <div class="node"><span class="step-n">2</span><strong>Across lines = h + 1. Up-down lines = w + 1.</strong> Write both numbers down &mdash; do not do this in your head.</div>
-    <div class="node"><span class="step-n">3</span><strong>Choose 2 of the across lines</strong> (pairs move: multiply then &divide;2). <strong>Choose 2 of the up-down lines</strong> the same way.</div>
+    <div class="node"><span class="step-n">3</span><strong>Choose 2 of the across lines</strong> using (n &times; (n&minus;1)) &divide; 2, where <strong>n = the number of lines</strong> (bracket first, then &divide;2). <strong>Choose 2 of the up-down lines</strong> the same way.</div>
     <div class="node"><span class="step-n">4</span><strong>Multiply the two results.</strong> That is the total number of rectangles.</div>
     <div class="node"><span class="step-n">5</span><strong>Read the exact ask.</strong> If it wants rectangles that are <strong>NOT squares</strong>: also find the total SQUARES (count by size 1&times;1, 2&times;2, &hellip; and add), then subtract: rectangles &minus; squares.</div>
   </div>
@@ -145,10 +203,26 @@ p,li{font-size:1rem;line-height:1.65}
   <div class="steps">
     <div class="ln"><span class="note">Step 1 &mdash; total rectangles, using the 5-step plan:</span></div>
     <div class="ln">w = 3, h = 3 &rarr; up-down lines = 4, across lines = 4</div>
-    <div class="ln">choose 2 of 4 (up-down): 4 &times; 3 &divide; 2 = 6</div>
-    <div class="ln">choose 2 of 4 (across): 4 &times; 3 &divide; 2 = 6</div>
+    <div class="ln">choose 2 of 4 (up-down): n=4 &rarr; (4 &times; 3) &divide; 2 = 6</div>
+    <div class="ln">choose 2 of 4 (across): n=4 &rarr; (4 &times; 3) &divide; 2 = 6</div>
     <div class="ln">total rectangles = 6 &times; 6 = 36</div>
-    <div class="ln"><span class="note">Step 2 &mdash; total squares, count by SIZE and add:</span></div>
+  </div>
+
+  <h3 style="margin-top:16px">Step 2 &mdash; Total Squares: Tap Each Size to SEE Where It Fits</h3>
+  <p style="font-size:.92rem;color:#00695C">A square is just a rectangle where both sides match. Watch how fewer and fewer spots are left as the square gets bigger.</p>
+  <div class="sizerow" id="square-choices" style="margin:10px 0">
+    <button class="size-btn" onclick="pickSquare(0)">1&times;1</button>
+    <button class="size-btn" onclick="pickSquare(1)">2&times;2</button>
+    <button class="size-btn" onclick="pickSquare(2)">3&times;3</button>
+  </div>
+  <div class="figbox">
+    <svg id="square-svg" width="170" height="170" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+  <div class="big-rule" id="square-readout" style="font-size:1rem">&#9757; Tap a square size above</div>
+  <p id="square-tally" style="text-align:center;font-size:.9rem;color:#00695C;margin-top:8px">Explored: 1&times;1=? &nbsp;+&nbsp; 2&times;2=? &nbsp;+&nbsp; 3&times;3=?</p>
+  <div class="warn-box" id="square-confirm" style="display:none;background:#E8F5E9;border-color:#A5D6A7"><p style="color:#1B5E20">&#9989; 9 + 4 + 1 = <strong>14</strong> total squares &mdash; that's the number Step 3 subtracts below!</p></div>
+
+  <div class="steps" style="margin-top:14px">
     <div class="ln">1&times;1 squares = 9</div>
     <div class="ln">2&times;2 squares = 4</div>
     <div class="ln">3&times;3 squares = 1</div>
@@ -178,7 +252,7 @@ p,li{font-size:1rem;line-height:1.65}
     <button class="btn-check" onclick="chk(0,'B')">Check</button>
     <div class="feedback" id="fb0"></div>
     <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
-    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">w=3, h=1 &rarr; up-down lines=4, across lines=2.</div><div class="ln">Choose 2 of 4: 4&times;3&divide;2=6. Choose 2 of 2: 1.</div><div class="ln">6 &times; 1 = 6.</div><div class="ln ans">6 rectangles</div></div></div>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">w=3, h=1 &rarr; up-down lines=4, across lines=2.</div><div class="ln">Choose 2 of 4: (4&times;3)&divide;2=6. Choose 2 of 2: (2&times;1)&divide;2=1.</div><div class="ln">6 &times; 1 = 6.</div><div class="ln ans">6 rectangles</div></div></div>
   </div>
 
   <div class="q-card">
@@ -191,7 +265,7 @@ p,li{font-size:1rem;line-height:1.65}
     <button class="btn-check" onclick="chk(1,'B')">Check</button>
     <div class="feedback" id="fb1"></div>
     <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
-    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">w=2, h=2 &rarr; up-down lines=3, across lines=3.</div><div class="ln">Choose 2 of 3: 3&times;2&divide;2=3. Same both ways.</div><div class="ln">3 &times; 3 = 9.</div><div class="ln ans">9 rectangles</div></div></div>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">w=2, h=2 &rarr; up-down lines=3, across lines=3.</div><div class="ln">Choose 2 of 3: (3&times;2)&divide;2=3. Same both ways.</div><div class="ln">3 &times; 3 = 9.</div><div class="ln ans">9 rectangles</div></div></div>
   </div>
 
   <div class="q-card">
@@ -204,7 +278,7 @@ p,li{font-size:1rem;line-height:1.65}
     <button class="btn-check" onclick="chk(2,'B')">Check</button>
     <div class="feedback" id="fb2"></div>
     <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
-    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">This is the worked example from Screen 3.</div><div class="ln">w=3,h=2 &rarr; up-down=4, across=3.</div><div class="ln">3&times;6=18.</div><div class="ln ans">18 rectangles</div></div></div>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">w=3, h=2 &rarr; up-down lines=4, across lines=3.</div><div class="ln">Choose 2 of 4: (4&times;3)&divide;2=6. Choose 2 of 3: (3&times;2)&divide;2=3.</div><div class="ln">6 &times; 3 = 18. (Check by size: 6+4+2+3+2+1 = 18.)</div><div class="ln ans">18 rectangles</div></div></div>
   </div>
 
   <div class="q-card">
@@ -217,18 +291,18 @@ p,li{font-size:1rem;line-height:1.65}
     <button class="btn-check" onclick="chk(3,'B')">Check</button>
     <div class="feedback" id="fb3"></div>
     <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
-    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">This is the worked example from Screen 5.</div><div class="ln">Total rectangles=36. Total squares=9+4+1=14.</div><div class="ln">36&minus;14=22.</div><div class="ln ans">22 rectangles</div></div></div>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">Total rectangles: 4 up-down lines, 4 across &rarr; 6 &times; 6 = 36.</div><div class="ln">Total squares by size: 9 + 4 + 1 = 14.</div><div class="ln">36 &minus; 14 = 22.</div><div class="ln ans">22 rectangles that are NOT squares</div></div></div>
   </div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
 </div>
 
-<!-- Screen 7: recap -->
+<!-- Screen 8: recap -->
 <div class="screen" id="s6">
 <div class="golden">
   <div class="golden-title">&#x1F4D6; Rectangles in Any Grid &mdash; in one line</div>
   <p style="font-size:1.05rem"><strong>Write w and h separately. Across lines = h+1, up-down lines = w+1. Choose 2 of each, multiply. "NOT squares" = rectangles &minus; squares.</strong></p>
-  <p style="font-size:.95rem;margin-top:6px">Never eyeball it &mdash; always write the two line-counts before multiplying, on every single question.</p>
+  <p style="font-size:.95rem;margin-top:6px">Never eyeball it &mdash; always write the two line-counts before multiplying, on every single question. And when unsure, check by counting sizes.</p>
 </div>
 <div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
   <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
@@ -237,11 +311,11 @@ p,li{font-size:1rem;line-height:1.65}
     <li>You never use the same line-count for both directions unless w = h</li>
     <li>You can turn "NOT squares" into two calculations you already know, then subtract</li>
   </ul>
-  <p style="margin-top:10px;font-size:.95rem">Next: fix the two habits that cost marks on the LISTING questions &mdash; counting the list correctly, and knowing when to halve.</p>
+  <p style="margin-top:10px;font-size:.95rem">You now have the full rectangle toolkit &mdash; any grid, any size, and even "not squares".</p>
 </div>
 <div class="navrow">
-  <a href="Counting_Lesson_ListingExtraction.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#00796B;color:#fff;border:2px solid #00796B;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 2 &#8594;</a>
-  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub</a>
+  <a href="Counting_Lesson_FigureCountingGrids.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Figure Counting</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#00796B;color:#fff;border:2px solid #00796B;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
 </div>
 </div>
 
@@ -253,6 +327,108 @@ if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';retu
 if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Yes! You wrote w and h separately.';ss.style.display='inline-block';}
 else{fb.className='feedback err';fb.textContent='Not yet. Write w and h, then across=h+1, up-down=w+1. Tap Show Steps.';ss.style.display='inline-block';}}
 function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ── Interactive grid explorers (pg4 rectangles + pg6 squares) ───────────
+var PALETTE=['#E65100','#1565C0','#6A1B9A','#00838F','#AD1457','#2E7D32'];
+function svgEl(tag){ return document.createElementNS('http://www.w3.org/2000/svg', tag); }
+
+function makeGridExplorer(cfg){
+  var visited = {};
+  function drawBase(){
+    var svg = document.getElementById(cfg.svgId);
+    while(svg.firstChild){ svg.removeChild(svg.firstChild); }
+    var w = cfg.gw*cfg.cell, h = cfg.gh*cfg.cell;
+    var outer = svgEl('rect');
+    outer.setAttribute('x',cfg.margin); outer.setAttribute('y',cfg.margin);
+    outer.setAttribute('width',w); outer.setAttribute('height',h);
+    outer.setAttribute('fill','#F1F8F7'); outer.setAttribute('stroke','#00796B'); outer.setAttribute('stroke-width','2');
+    svg.appendChild(outer);
+    for(var c=1;c<cfg.gw;c++){
+      var l=svgEl('line');
+      l.setAttribute('x1',cfg.margin+c*cfg.cell); l.setAttribute('y1',cfg.margin);
+      l.setAttribute('x2',cfg.margin+c*cfg.cell); l.setAttribute('y2',cfg.margin+h);
+      l.setAttribute('stroke','#80CBC4'); l.setAttribute('stroke-width','1.5');
+      svg.appendChild(l);
+    }
+    for(var r=1;r<cfg.gh;r++){
+      var l2=svgEl('line');
+      l2.setAttribute('x1',cfg.margin); l2.setAttribute('y1',cfg.margin+r*cfg.cell);
+      l2.setAttribute('x2',cfg.margin+w); l2.setAttribute('y2',cfg.margin+r*cfg.cell);
+      l2.setAttribute('stroke','#80CBC4'); l2.setAttribute('stroke-width','1.5');
+      svg.appendChild(l2);
+    }
+    return svg;
+  }
+  function label(s){ return cfg.labelFn ? cfg.labelFn(s) : (s.a+'&times;'+s.b); }
+  function pick(idx){
+    document.querySelectorAll('#'+cfg.btnGroup+' .size-btn').forEach(function(b,i){ b.classList.toggle('active', i===idx); });
+    var sz = cfg.sizes[idx];
+    var across = cfg.gw - sz.a + 1;
+    var down   = cfg.gh - sz.b + 1;
+    var total  = across*down;
+    var svg = drawBase();
+    var n=0;
+    for(var row=0; row<down; row++){
+      for(var col=0; col<across; col++){
+        var color = PALETTE[n%PALETTE.length];
+        var rect = svgEl('rect');
+        rect.setAttribute('x', cfg.margin+col*cfg.cell+3);
+        rect.setAttribute('y', cfg.margin+row*cfg.cell+3);
+        rect.setAttribute('width', sz.a*cfg.cell-6);
+        rect.setAttribute('height', sz.b*cfg.cell-6);
+        rect.setAttribute('fill', color);
+        rect.setAttribute('fill-opacity','0.22');
+        rect.setAttribute('stroke', color);
+        rect.setAttribute('stroke-width','2.5');
+        rect.setAttribute('rx','4');
+        svg.appendChild(rect);
+        var txt = svgEl('text');
+        txt.setAttribute('x', cfg.margin+col*cfg.cell+sz.a*cfg.cell/2);
+        txt.setAttribute('y', cfg.margin+row*cfg.cell+sz.b*cfg.cell/2+5);
+        txt.setAttribute('text-anchor','middle');
+        txt.setAttribute('font-size','13');
+        txt.setAttribute('font-weight','700');
+        txt.setAttribute('fill', color);
+        txt.textContent = (n+1);
+        svg.appendChild(txt);
+        n++;
+      }
+    }
+    document.getElementById(cfg.readoutId).innerHTML =
+      label(sz)+' &mdash; Spots it fits: <span style="color:#00796B">'+across+' across &times; '+down+' down</span> &nbsp;=&nbsp; How many: <span style="color:#00796B">'+total+'</span>';
+    visited[idx]=total;
+    updateTally();
+  }
+  function updateTally(){
+    var labels = cfg.sizes.map(function(s,i){
+      var done = visited.hasOwnProperty(i);
+      return label(s)+'='+(done ? ('<strong>'+visited[i]+'</strong>') : '?');
+    });
+    document.getElementById(cfg.tallyId).innerHTML = 'Explored: ' + labels.join(' &nbsp;+&nbsp; ');
+    document.querySelectorAll('#'+cfg.btnGroup+' .size-btn').forEach(function(b,i){ b.classList.toggle('done', visited.hasOwnProperty(i)); });
+    if(cfg.confirmId && Object.keys(visited).length === cfg.sizes.length){
+      document.getElementById(cfg.confirmId).style.display='block';
+    }
+  }
+  return { pick: pick };
+}
+
+// pg4 — rectangles in a 3-wide × 2-tall grid
+var rectExplorer = makeGridExplorer({
+  svgId:'size-svg', gw:3, gh:2, cell:44, margin:17,
+  sizes:[{a:1,b:1},{a:2,b:1},{a:3,b:1},{a:1,b:2},{a:2,b:2},{a:3,b:2}],
+  readoutId:'size-readout', tallyId:'size-tally', confirmId:'size-confirm', btnGroup:'size-choices'
+});
+function pickSize(idx){ rectExplorer.pick(idx); }
+
+// pg6 — squares in a 3×3 grid (Step 2 of the NOT-squares example)
+var squareExplorer = makeGridExplorer({
+  svgId:'square-svg', gw:3, gh:3, cell:38, margin:14,
+  sizes:[{a:1,b:1},{a:2,b:2},{a:3,b:3}],
+  readoutId:'square-readout', tallyId:'square-tally', confirmId:'square-confirm', btnGroup:'square-choices',
+  labelFn:function(s){ return s.a+'&times;'+s.a; }
+});
+function pickSquare(idx){ squareExplorer.pick(idx); }
 </script>
 </body>
 </html>
