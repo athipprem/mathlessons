@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Listing With THREE Things To Track</title>
+<style>
+:root{--nav:#00796B;--nav-dark:#004D40;--bg:#E0F2F1;--card:#fff;--acc:#00796B;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#00695C;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E0F2F1,#E0F7FA);border:2px solid #4DB6AC;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#004D40;font-weight:700;margin-bottom:6px}
+.big-rule{background:#E0F2F1;border:2px solid #26A69A;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#004D40;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F1F8F7;border:1px solid #B2DFDB;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#00695C}
+.steps .ln.ans{color:#004D40;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#00796B;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.ltable{border-collapse:collapse;margin:12px auto;font-size:.95rem}
+.ltable th,.ltable td{border:1px solid #80CBC4;padding:6px 12px;text-align:center}
+.ltable th{background:#E0F2F1;color:#004D40}
+.sizerow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.size-btn{border:1.5px solid #80CBC4;border-radius:8px;padding:9px 14px;background:#fff;color:#004D40;font-weight:700;font-size:.92rem;cursor:pointer;font-family:inherit;position:relative}
+.size-btn:hover{border-color:var(--acc);background:#E0F2F1}
+.size-btn.active{background:#00796B;color:#fff;border-color:#00796B}
+.size-btn.done:not(.active)::after{content:'\2713';color:#2E7D32;font-weight:900;margin-left:5px}
+.size-btn.active.done::after{content:'\2713';color:#B2FFDA;font-weight:900;margin-left:5px}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F1F8F7;border:1.5px solid #80CBC4;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E0F2F1}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#00796B;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Listing With THREE Things To Track</span>
+  <span class="tnav-pill" id="pill">1 / 9</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1FA99; Two Coins Was Easy. Three Coins Got Messy.</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>You already know how to list coin ways with TWO coin values &mdash; sweep the bigger coin down from its max, and the smaller coin fills the rest. But on the last test, a question used <strong>THREE</strong> coin values (1&cent;, 2&cent;, 5&cent;) at once, and the list fell apart &mdash; too many things to hold in your head at the same time. The fix isn't a new idea, it's an ORGANISED table: one column per coin, and you sweep <strong>one variable at a time</strong>, just like you always have &mdash; just twice instead of once.</p>
+  </div>
+  <div class="big-rule">Three things to track is not harder maths &mdash; it just needs a bigger table and a calmer sweep.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Show me &#8594;</button></div>
+</div>
+
+<!-- Screen 2: big idea -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>The Big Idea &mdash; One Column Per Coin, Sweep the Biggest First</h2>
+  <p>With 2 coins, you swept ONE variable (the bigger coin) and the smaller coin was decided automatically. With 3 coins, you sweep the BIGGEST coin first &mdash; and for every value you pick, you get a smaller, familiar 2-coin problem left over.</p>
+  <div class="big-rule" style="font-size:1rem">Fix the biggest coin's count &rarr; solve the leftover with the OTHER two coins (a job you already know) &rarr; move to the next biggest-coin count &rarr; repeat.</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; NEVER free-list all three at once from memory. Always build a table with one column per coin, block by block. The block-by-block table is what stops rows from getting missed or repeated.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: worked example part 1, written -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Worked Example, Part 1 &mdash; Pay 6 Cents</h2>
+  <p><strong>How many different ways can you pay 6 cents using only 1-cent, 2-cent, and 5-cent coins?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; sweep the BIGGEST coin (5&cent;) from its max down to 0. Max 5&cent; coins here = 1 (since 2&times;5=10 &gt; 6).</span></div>
+    <div class="ln"><span class="note">Block: 5&cent; coins = 0 &rarr; leftover = 6. Now it's a familiar 2-coin job (1&cent; and 2&cent;):</span></div>
+    <div class="ln">2&cent; coins = 0,1,2,3 &nbsp;&rarr;&nbsp; 1&cent; coins = 6,4,2,0 &nbsp;&rarr;&nbsp; <strong>4 rows</strong></div>
+    <div class="ln"><span class="note">Block: 5&cent; coins = 1 &rarr; leftover = 6&minus;5 = 1. 2-coin job again:</span></div>
+    <div class="ln">2&cent; coins = 0 &nbsp;&rarr;&nbsp; 1&cent; coins = 1 &nbsp;&rarr;&nbsp; <strong>1 row</strong></div>
+    <div class="ln"><span class="note">Step 2 &mdash; add up EVERY block's rows, not just the last block:</span></div>
+    <div class="ln">4 + 1 = 5</div>
+    <div class="ln ans">5 ways</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Check it &#8594;</button></div>
+</div>
+
+<!-- Screen 3b: interactive block table -->
+<div class="screen" id="s2b">
+<div class="card">
+  <h2>Worked Example, Part 1 &mdash; Build the Table Block by Block</h2>
+  <p style="font-size:.96rem">Tap "5&cent; coins = 0" first, then "5&cent; coins = 1". Watch the table grow one block at a time &mdash; every block is added, not replaced.</p>
+
+  <div class="sizerow" id="coin1-choices">
+    <button class="size-btn" onclick="pickCoin1(0)">5&cent; coins = 0</button>
+    <button class="size-btn" onclick="pickCoin1(1)">5&cent; coins = 1</button>
+  </div>
+
+  <div style="overflow-x:auto">
+    <table class="ltable" id="coin1-table" style="width:100%;max-width:420px">
+      <tr><th>5&cent; coins</th><th>2&cent; coins</th><th>1&cent; coins</th><th>Row Total</th></tr>
+    </table>
+  </div>
+
+  <div class="big-rule" id="coin1-readout" style="font-size:1rem">&#9757; Tap "5&cent; coins = 0" to start</div>
+  <div class="warn-box" id="coin1-confirm" style="display:none;background:#E8F5E9;border-color:#A5D6A7"><p style="color:#1B5E20" id="coin1-confirm-text"></p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: worked example part 2, written -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Worked Example, Part 2 &mdash; A Bigger Target, More Blocks</h2>
+  <p><strong>How many different ways can you pay 17 cents using only 1-cent, 2-cent, and 5-cent coins?</strong></p>
+  <p>Same method &mdash; just more blocks, because 5&cent; coins can now be 0, 1, 2, or 3.</p>
+  <div class="steps">
+    <div class="ln">5&cent;=0 &rarr; leftover=17 &rarr; 2&cent;=0..8 &rarr; <strong>9 rows</strong></div>
+    <div class="ln">5&cent;=1 &rarr; leftover=12 &rarr; 2&cent;=0..6 &rarr; <strong>7 rows</strong></div>
+    <div class="ln">5&cent;=2 &rarr; leftover=7 &rarr; 2&cent;=0..3 &rarr; <strong>4 rows</strong></div>
+    <div class="ln">5&cent;=3 &rarr; leftover=2 &rarr; 2&cent;=0..1 &rarr; <strong>2 rows</strong></div>
+    <div class="ln"><span class="note">Add up EVERY block:</span></div>
+    <div class="ln">9 + 7 + 4 + 2 = 22</div>
+    <div class="ln ans">22 ways</div>
+  </div>
+  <div class="big-rule" style="font-size:1rem">More blocks just means more ADDING at the end &mdash; the method inside each block never changes.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Check it &#8594;</button></div>
+</div>
+
+<!-- Screen 4b: interactive block table 2 -->
+<div class="screen" id="s3b">
+<div class="card">
+  <h2>Worked Example, Part 2 &mdash; Build All 4 Blocks</h2>
+  <p style="font-size:.96rem">Tap the buttons in order: 0, 1, 2, then 3. Watch the table &mdash; and the running row-count &mdash; grow.</p>
+
+  <div class="sizerow" id="coin2-choices">
+    <button class="size-btn" onclick="pickCoin2(0)">5&cent; coins = 0</button>
+    <button class="size-btn" onclick="pickCoin2(1)">5&cent; coins = 1</button>
+    <button class="size-btn" onclick="pickCoin2(2)">5&cent; coins = 2</button>
+    <button class="size-btn" onclick="pickCoin2(3)">5&cent; coins = 3</button>
+  </div>
+
+  <div style="overflow-x:auto;max-height:260px;overflow-y:auto">
+    <table class="ltable" id="coin2-table" style="width:100%;max-width:420px">
+      <tr><th>5&cent; coins</th><th>2&cent; coins</th><th>1&cent; coins</th><th>Row Total</th></tr>
+    </table>
+  </div>
+
+  <div class="big-rule" id="coin2-readout" style="font-size:1rem">&#9757; Tap "5&cent; coins = 0" to start</div>
+  <div class="warn-box" id="coin2-confirm" style="display:none;background:#E8F5E9;border-color:#A5D6A7"><p style="color:#1B5E20" id="coin2-confirm-text"></p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: decision tree -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Plan</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span><strong>Find the biggest value's maximum</strong> (how many of the biggest coin/item could possibly fit).</div>
+    <div class="node"><span class="step-n">2</span><strong>Build a table</strong> with one column for every value, plus a Row Total column.</div>
+    <div class="node"><span class="step-n">3</span><strong>Sweep the biggest value from 0 up to its max, one block at a time.</strong> For each block, solve the leftover using the other two values &mdash; the familiar 2-variable method.</div>
+    <div class="node"><span class="step-n">4</span><strong>Write down each block's row-count</strong> before moving to the next block &mdash; don't just remember it in your head.</div>
+    <div class="node"><span class="step-n">5</span><strong>Add up ALL the blocks' row-counts</strong> at the end &mdash; that total is your answer, never just the last block's count.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The listing rule from before still applies: the answer is the COUNT of rows, never the last row's numbers.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">My turn &#8594;</button></div>
+</div>
+
+<!-- Screen 6: practice -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>Your Turn</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Sweep the biggest value block by block. Solve each leftover with the other two values. Add up every block's row-count at the end.</p>
+
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; How many different ways can you pay 9 cents using only 1-cent, 2-cent, and 5-cent coins?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 5</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">5&cent;=0 &rarr; leftover=9 &rarr; 2&cent;=0..4 &rarr; 5 rows.</div><div class="ln">5&cent;=1 &rarr; leftover=4 &rarr; 2&cent;=0..2 &rarr; 3 rows.</div><div class="ln">5 + 3 = 8.</div><div class="ln ans">8 ways</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; How many different ways can you pay 8 cents using only 1-cent, 2-cent, and 5-cent coins?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 5</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">5&cent;=0 &rarr; leftover=8 &rarr; 2&cent;=0..4 &rarr; 5 rows.</div><div class="ln">5&cent;=1 &rarr; leftover=3 &rarr; 2&cent;=0..1 &rarr; 2 rows.</div><div class="ln">5 + 2 = 7.</div><div class="ln ans">7 ways</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; How many different ways can you pay 8 cents using only 1-cent, 3-cent, and 5-cent coins?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 5</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'C')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">5&cent;=0 &rarr; leftover=8 &rarr; 3&cent;=0,1,2 (0,3,6) &rarr; 3 rows.</div><div class="ln">5&cent;=1 &rarr; leftover=3 &rarr; 3&cent;=0,1 (0,3) &rarr; 2 rows.</div><div class="ln">3 + 2 = 5.</div><div class="ln ans">5 ways</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; How many different ways can you pay 10 cents using only 2-cent, 3-cent, and 5-cent coins?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 4</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 10</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 6</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">5&cent;=0 &rarr; leftover=10 &rarr; 2&cent;+3&cent;=10: (5,0)(2,2) &rarr; 2 rows.</div><div class="ln">5&cent;=1 &rarr; leftover=5 &rarr; (1,1) &rarr; 1 row.</div><div class="ln">5&cent;=2 &rarr; leftover=0 &rarr; (0,0) &rarr; 1 row.</div><div class="ln">2 + 1 + 1 = 4.</div><div class="ln ans">4 ways</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 7: recap -->
+<div class="screen" id="s6">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Listing With Three Things &mdash; in one line</div>
+  <p style="font-size:1.05rem"><strong>Sweep the biggest value block by block. Solve each leftover with a familiar 2-variable table. Add up EVERY block's row-count.</strong></p>
+  <p style="font-size:.95rem;margin-top:6px">Three things to track just means one extra sweep, done calmly, one block at a time.</p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You always build a table with one column per value, before listing anything</li>
+    <li>You sweep the BIGGEST value first, block by block</li>
+    <li>You add up every block's count at the end — never just report the last block</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">You now have both U38 tools: sharing identical items, and listing with three things to track. Ready for the test!</p>
+</div>
+<div class="navrow">
+  <a href="Counting_Lesson_DistributingItems.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#00796B;color:#fff;border:2px solid #00796B;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Yes! You swept the biggest value block by block.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Sweep the biggest value first, solve each leftover with the other two, then add every block. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ── Interactive coin-block table widget (pg s2b + s3b) ──────────────────
+function makeCoinBlockWidget(cfg){
+  var visitedMax = -1;
+  function build(upTo){
+    var table = document.getElementById(cfg.tableId);
+    table.innerHTML = '<tr><th>5&cent; coins</th><th>2&cent; coins</th><th>1&cent; coins</th><th>Row Total</th></tr>';
+    var rowNum = 0;
+    for(var c=0;c<=upTo;c++){
+      var remaining = cfg.target - 5*c;
+      for(var b=0; 2*b<=remaining; b++){
+        var a = remaining - 2*b;
+        rowNum++;
+        var tr = document.createElement('tr');
+        if(c===upTo) tr.style.background='#FFF9C4';
+        tr.innerHTML = '<td>'+c+'</td><td>'+b+'</td><td>'+a+'</td><td><strong>'+(5*c+2*b+a)+'</strong></td>';
+        table.appendChild(tr);
+      }
+    }
+    return rowNum;
+  }
+  function pick(cVal){
+    visitedMax = Math.max(visitedMax, cVal);
+    document.querySelectorAll('#'+cfg.btnGroup+' .size-btn').forEach(function(b,i){
+      b.classList.toggle('active', i===cVal);
+      b.classList.toggle('done', i<=visitedMax);
+    });
+    var rows = build(visitedMax);
+    document.getElementById(cfg.readoutId).innerHTML = 'Rows so far: <span style="color:#00796B">'+rows+'</span> (block "5&cent;='+visitedMax+'" just added)';
+    if(visitedMax === cfg.cMax){
+      var box = document.getElementById(cfg.confirmId);
+      box.style.display = 'block';
+      document.getElementById(cfg.confirmTextId).innerHTML = '&#9989; Every block added! Total rows = <strong>'+rows+'</strong> &mdash; that is the final answer.';
+    }
+  }
+  return { pick: pick };
+}
+
+var coinWidget1 = makeCoinBlockWidget({ target:6, cMax:1, btnGroup:'coin1-choices', tableId:'coin1-table', readoutId:'coin1-readout', confirmId:'coin1-confirm', confirmTextId:'coin1-confirm-text' });
+function pickCoin1(c){ coinWidget1.pick(c); }
+
+var coinWidget2 = makeCoinBlockWidget({ target:17, cMax:3, btnGroup:'coin2-choices', tableId:'coin2-table', readoutId:'coin2-readout', confirmId:'coin2-confirm', confirmTextId:'coin2-confirm-text' });
+function pickCoin2(c){ coinWidget2.pick(c); }
+</script>
+</body>
+</html>

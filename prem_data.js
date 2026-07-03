@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '2 Jul 2026',
+  updated:        '3 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:37, topic:'Rectangle Counting Retest & Listing: Answer Extraction (ASMOPSS)', status:'In Progress' },
+  currentUnit: { n:38, topic:'Distributing Identical Items & Listing: Three Coins (ASMOPSS)', status:'In Progress' },
   lastUnit: {
-    n:36, score:10, outOf:15, pct:67, delta:-3, prevScore:13,
-    patternLabel: 'U36 — Figure Counting & Systematic Listing, NOT PASSED',
-    patternInsight: '10/15 (67%) <strong>NOT PASSED</strong> &mdash; first fail since U31, and the steepest drop of the ASMOPSS arc (15&rarr;14&rarr;13&rarr;10). Not a concept collapse: <strong>squares are solid</strong> (Q1, Q3 both correct) but <strong>rectangles break down on asymmetric/composite grids</strong> (Q4 2×3 grid, Q5 a longer strip, Q15 "NOT squares" all wrong) &mdash; every Section A working column was left BLANK, so he was eyeballing instead of writing the line-choosing method. Separately, two Section B misses were <strong>answer-extraction slips</strong>: Q6 listed the digit-sum-5 numbers perfectly (14,23,32,41,50) then wrote the LAST list value (50) instead of the COUNT (5); Q9 treated "choose 2 of 5" as a full arrangement (5!=120) instead of the pairs method (10) &mdash; a skill already locked back at U32. Section C (hardest ★★ mix) was his best section, 4/5 &mdash; so this is narrow, not fatigue.',
-    analysisLabel: 'Next: U37 — Targeted Retest (Rectangle-Counting Any Grid + Listing Answer-Extraction)',
-    analysisInsight: 'Per the not-passed rule: no full unit repeat. U37 is a short top-up + fresh test on exactly the two gaps: (1) generalising the rectangle line-choosing rule to non-square/asymmetric grids and the "total &minus; squares" composite trick, with MANDATORY shown working every time; (2) the listing "final answer" habit &mdash; count the list (never copy the last value), and decide order-matters vs choose-2 before multiplying. Squares (already solid) are not re-tested. Only 6 of the 10 units since M3 are done (U31&ndash;U36), so Milestone M4 is not due yet &mdash; it still lands after U40.',
-    qSummary: '<strong>Sec A 3/5 | Sec B 3/5 | Sec C 4/5</strong> — 10/15 NOT PASSED',
+    n:37, score:12, outOf:15, pct:80, delta:+2, prevScore:10,
+    patternLabel: 'U37 — Rectangle Counting Retest & Listing: Answer Extraction, PASSED',
+    patternInsight: '12/15 (80%) <strong>PASSED</strong> &mdash; the U36 fail is resolved, and interactive-visual lessons are the reason why. Both U36 gaps were retested cold: rectangle-counting is now solid across four different grid shapes (Q1, Q3, Q4, Q5, Q11 all correct), and listing came back a <strong>perfect 5/5</strong> in Section B. The two points still lost were narrower and NEW, not repeats: Q2 had fully correct working (3×10=30) but the wrong number was written on the answer line &mdash; a pure transcription slip; Q13 (paying with THREE coin values for the first time) and Q15 (tallying squares across MORE sizes than before) are both a genuine step up in difficulty, not a return of the old gap.',
+    analysisLabel: 'Next: U38 — Distributing Identical Items (Stars and Bars) & Listing With Three Values',
+    analysisInsight: 'U37 passed (12/15 &ge; 12), so no further retest is needed. The two new-and-narrow slips point straight at U38’s focus: Q13 (3-coin listing) is a direct preview of the "listing with three things to track" lesson, and both align with what the ASMOPSS 2024 past-paper diagnostic (analysed the same day) flagged as the highest-return next topic &mdash; distributing identical items ("stars and bars"), which several ASMOPSS papers have tested and Prem had not yet seen. Milestone M4 still lands after U40 &mdash; 7 of the 10 units since M3 are now done (U31&ndash;U37).',
+    qSummary: '<strong>Sec A 4/5 | Sec B 5/5 | Sec C 3/5</strong> — 12/15 PASSED',
     qBreakdown: [
-      { q:'Q1', topic:'Squares — 2×2 grid',              lvl:'w', pass:true,  note:'&#10003; 5.' },
-      { q:'Q2', topic:'Rectangles — 1×3 strip',          lvl:'w', pass:true,  note:'&#10003; 6.' },
-      { q:'Q3', topic:'Squares — 4×4 grid',              lvl:'w', pass:true,  note:'&#10003; 30.' },
-      { q:'Q4', topic:'Rectangles — 2×3 grid',           lvl:'w', pass:false, note:'&#10007; gave 19; correct 18 (choose 2 of 3 up-down × choose 2 of 4 across). Working column left BLANK.' },
-      { q:'Q5', topic:'Rectangles — 1×5 strip',          lvl:'w', pass:false, note:'&#10007; gave 13; correct 15 (1+2+3+4+5). Working column left BLANK.' },
-      { q:'Q6', topic:'Listing — digit sum = 5',         lvl:'m', pass:false, note:'&#10007; listed 14,23,32,41,50 correctly (5 numbers) then wrote the LAST value (50) as the answer instead of the COUNT (5).' },
-      { q:'Q7', topic:'Listing — permutations of 1,2,3', lvl:'m', pass:true,  note:'&#10003; 6.' },
-      { q:'Q8', topic:'Listing — pay 10¢ (5¢/1¢)',       lvl:'m', pass:true,  note:'&#10003; 3.' },
-      { q:'Q9', topic:'Listing — choose 2 of 5',         lvl:'m', pass:false, note:'&#10007; computed 5×4×3×2×1=120 (full arrangement) instead of the pairs method 5×4÷2=10. Same "choose-2" skill was locked at U32.' },
-      { q:'Q10',topic:'Listing — 1–30, digit sum 6',     lvl:'m', pass:true,  note:'&#10003; 3.' },
-      { q:'Q11',topic:'Rectangles — 3×3 grid  ★★',       lvl:'h', pass:true,  note:'&#10003; 36 &mdash; the symmetric-grid formula works; the gap is asymmetric grids specifically.' },
-      { q:'Q12',topic:'Listing — digit sum 8 AND even  ★★', lvl:'h', pass:true, note:'&#10003; 4.' },
-      { q:'Q13',topic:'Listing — pay 8¢ (1¢/2¢/5¢)  ★★', lvl:'h', pass:true,  note:'&#10003; 7.' },
-      { q:'Q14',topic:'Listing — 1–40, digit sum 5  ★★', lvl:'h', pass:true,  note:'&#10003; 4.' },
-      { q:'Q15',topic:'Rectangles NOT squares — 4×4 grid  ★★', lvl:'h', pass:false, note:'&#10007; gave 48 (tallied only a few strip shapes, re-added a crossed-out line); correct 70 (100 total &minus; 30 squares) &mdash; didn&rsquo;t reuse the total-minus-squares method already shown to work (Q3, Q11).' }
+      { q:'Q1', topic:'Rectangles — 1×4 strip',          lvl:'w', pass:true,  note:'&#10003; 10.' },
+      { q:'Q2', topic:'Rectangles — 2×4 grid',           lvl:'w', pass:false, note:'&#10007; working shows 3×10=30 correctly, but wrote 19 on the answer line &mdash; a pure transcription slip, not a method error.' },
+      { q:'Q3', topic:'Rectangles — 1×6 strip',          lvl:'w', pass:true,  note:'&#10003; 21.' },
+      { q:'Q4', topic:'Rectangles — 3×4 grid',           lvl:'w', pass:true,  note:'&#10003; 60.' },
+      { q:'Q5', topic:'Rectangles — 2×5 grid',           lvl:'w', pass:true,  note:'&#10003; 45 (messy correction scratch, landed right).' },
+      { q:'Q6', topic:'Listing — digit sum = 7',         lvl:'m', pass:true,  note:'&#10003; 7.' },
+      { q:'Q7', topic:'Listing — arrangements of 2,4,6', lvl:'m', pass:true,  note:'&#10003; 6.' },
+      { q:'Q8', topic:'Listing — pay 20¢ (5¢/1¢)',       lvl:'m', pass:true,  note:'&#10003; 5.' },
+      { q:'Q9', topic:'Listing — choose 2 of 6',         lvl:'m', pass:true,  note:'&#10003; 15.' },
+      { q:'Q10',topic:'Listing — 1–40, digit sum 8',     lvl:'m', pass:true,  note:'&#10003; 4.' },
+      { q:'Q11',topic:'Rectangles — 3×5 grid  ★★',       lvl:'h', pass:true,  note:'&#10003; 90.' },
+      { q:'Q12',topic:'Listing — digit sum 9 AND odd  ★★', lvl:'h', pass:true, note:'&#10003; 4.' },
+      { q:'Q13',topic:'Listing — pay 9¢ (1¢/2¢/5¢)  ★★', lvl:'h', pass:false, note:'&#10007; gave 9; correct 8. Wrote "I’m gonna list but can u teach me method?" &mdash; three-coin listing is a genuinely new difficulty, not a repeat of a known gap.' },
+      { q:'Q14',topic:'Listing — 1–45, digit sum 6  ★★', lvl:'h', pass:true,  note:'&#10003; 5.' },
+      { q:'Q15',topic:'Rectangles NOT squares — 4×5 grid  ★★', lvl:'h', pass:false, note:'&#10007; gave 111; correct 110. Used the right method (total &minus; squares = 150 &minus; squares) but miscounted the squares tally as 39 instead of 40.' }
     ]
   },
   _M3archived: {
@@ -85,13 +85,13 @@ var PREM_DATA = {
     { name: 'Algebra',           c: 98, t: 85 },
     { name: 'Arithmetic',        c: 83, t: 85 },
     { name: 'Geometry',          c: 74, t: 80 },
-    { name: 'Counting',          c: 79, t: 85 },
+    { name: 'Counting',          c: 83, t: 85 },
     { name: 'Number Theory',     c: 89, t: 82 },
     { name: 'Applied Problems',  c: 76, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [88, 74, 88, 98, 79, 83, 89, 76],
+  radarCurrent:  [88, 74, 88, 98, 83, 83, 89, 76],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -136,23 +136,37 @@ var PREM_DATA = {
     { n:33, score:15, delta:+1, color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true },
     { n:34, score:14, delta:-1, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:35, score:13, delta:-1, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
-    { n:36, score:10, delta:-3, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false }
+    { n:36, score:10, delta:-3, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false },
+    { n:37, score:12, delta:+2, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 37,
+      n: 38,
       badge: 'linear-gradient(135deg,#00796B,#26A69A)',
-      title: 'Rectangle Counting Retest &amp; Listing: Answer Extraction',
+      title: 'Distributing Identical Items (Stars and Bars) &amp; Listing: Three Coins',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Rectangles in Any Grid', c:'tblue' },
-        { t:'L2: Listing Answer-Extraction', c:'tblue' },
-        { t:'Targeted retest — not a new topic', c:'torange' }
+        { t:'L1: Sharing Out Identical Items', c:'tblue' },
+        { t:'L2: Listing With Three Things To Track', c:'tblue' },
+        { t:'New topic — flagged by ASMOPSS 2024 diagnostic', c:'torange' }
       ],
-      note: 'U37: targeted retest after U36 (10/15, NOT PASSED), per the not-passed rule — no full unit repeat. L1 generalises rectangle-counting to asymmetric grids (write w and h separately; choose 2 lines each way; multiply) and the "total &minus; squares" composite trick, with mandatory shown working. L2 fixes the listing "final answer" habit: count the list (never copy the last value), and decide order-matters vs choose-2 before multiplying/halving. Sec A rectangles, Sec B listing, Sec C ★★ mix of both. Squares (already solid at U36) are not re-tested. Pass: 12/15.',
+      note: 'U38: new Art of Counting topic, prioritised by both the U37 Q13 slip (3-coin listing) and the ASMOPSS 2024 past-paper diagnostic (done the same day). L1 teaches distributing identical items so every group gets at least 1, via the "stars and gaps" picture: gaps=n&minus;1, 2 groups → answer=gaps, 3 groups → choose 2 of the gaps (reusing the choose-2 skill from Art of Counting). L2 extends listing to THREE values at once (e.g. 1¢/2¢/5¢ coins): sweep the biggest value block by block, solve each leftover with the familiar 2-value method, and add every block\'s count. Sec A distribute, Sec B 3-value listing, Sec C ★★ mix of both.',
       status: 'pending'
+    },
+    {
+      n: 37,
+      badge: 'linear-gradient(135deg,#43e97b,#38f9d7)',
+      title: 'Rectangle Counting Retest &amp; Listing: Answer Extraction',
+      tags: [
+        { t:'12/15 (80%) &#10003; PASSED', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Interactive-visual redesign WORKED', c:'tgreen' },
+        { t:'Listing Sec B 5/5 &#10003;', c:'tgreen' },
+        { t:'New: 3-coin listing + squares tally', c:'torange' }
+      ],
+      note: '12/15 &#10003; <strong>PASSED</strong> &mdash; targeted retest cleared after U36\'s 10/15 fail. Both lessons were rebuilt with click-to-explore interactive visuals (tap a rectangle size to see every spot it fits; live-rebuilding listing tables; toggle grids for order-matters vs not) &mdash; this is the direct before/after evidence for the new coaching rule (see Interactive-Visual Blueprint). Rectangle-counting solid across 4 grid shapes (Q1, Q3, Q4, Q5, Q11); Listing Section B came back a perfect 5/5. Two new, narrower slips: Q2 correct working (3×10=30) but wrote 19 on the line (transcription only); Q13 (first-ever 3-coin listing, he asked to be taught the method) and Q15 (squares-tally miscounted by one category) are both a step harder than anything U36 tested, not repeats of the old gap.',
+      status: 'done'
     },
     {
       n: 36,
@@ -715,16 +729,28 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 88
     },
     {
-      label:     'Figure counting: squares — RESOLVED at U36; rectangles + listing-extraction still open',
-      pill:      'p2', pillText: 'Partial &#128992;',
-      score:     'U36 10/15 NOT PASSED. Squares are solid (Q1, Q3 both correct) but rectangle-counting breaks down on asymmetric grids and composite "NOT squares" problems (Q4, Q5, Q15) — every Section A working column was left blank, so the line-choosing method wasn&rsquo;t being written out. Separately, two listing questions (Q6, Q9) had a correct process but the wrong FINAL value extracted from it. See U37 below for the targeted fix.',
-      fillClass: 'g2', fillPct: 55
+      label:     'Rectangle-counting (any grid) + Listing answer-extraction — RESOLVED at U37',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U37 12/15 PASSED — the U36 fail is closed. Rectangle-counting solid across 4 different grid shapes (Q1, Q3, Q4, Q5, Q11); listing Section B came back a perfect 5/5. Interactive-visual lessons (tap-to-explore widgets) are credited for the jump — now the standing blueprint for teaching any brand-new concept. Lone repeat-family slip: Q2 had correct working but the wrong number was copied to the answer line (transcription only).',
+      fillClass: 'gs', fillPct: 90
     },
     {
-      label:     'Rectangle-counting (any grid) + Listing answer-extraction — training U37',
+      label:     'Three-value listing (e.g. 3 coin denominations) — training U38',
       pill:      'p2', pillText: 'Training &#128992;',
-      score:     'Targeted retest per the not-passed rule (no full unit repeat). L1: generalise the line-choosing rule to asymmetric grids (write w, h separately; across=h+1, up-down=w+1; choose 2 each, multiply) and reuse it for "total &minus; squares" composite problems, with working shown every time. L2: after listing, COUNT the list (never copy the last value); decide order-matters vs choose-2 before multiplying/halving.',
+      score:     'New, harder-than-U36 gap surfaced at U37 Q13: with 2 coin values he is flawless, but a 3rd value broke the method and he asked to be taught it directly. U38 L2 teaches the organised block-by-block table (sweep the biggest value, solve the leftover with the familiar 2-value method, add every block).',
       fillClass: 'g2', fillPct: 35
+    },
+    {
+      label:     'Counting multiple sizes precisely (e.g. squares-by-size tally) — MONITOR',
+      pill:      'p2', pillText: 'Monitor &#128992;',
+      score:     'U37 Q15: correctly reused the "total &minus; squares" strategy but under-counted the squares tally by one category (39 instead of 40) on a bigger grid with more sizes to track. Not a method gap — a precision habit (tally each size in its own row before adding). Light watch-point, not a full lesson.',
+      fillClass: 'g2', fillPct: 65
+    },
+    {
+      label:     'Distributing identical items ("stars and bars") — training U38, new topic',
+      pill:      'p2', pillText: 'New Topic &#128992;',
+      score:     'Flagged independently by the ASMOPSS 2024 past-paper diagnostic (Q25: 8 sweets to 6 friends, he scored 224 vs correct 21 — a completely different, wrong method, consistent with never having seen this problem type). U38 L1 teaches it via "stars and gaps," restricted to 2–3 groups so it reuses the already-mastered choose-2 move rather than introducing a second new skill at once.',
+      fillClass: 'g2', fillPct: 20
     },
     {
       label:     'Precision: answer EXACTLY &amp; clearly what is asked (smallest / which / name it right)',
