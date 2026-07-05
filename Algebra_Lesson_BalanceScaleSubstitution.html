@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Balance Scales — Two Clues, Substitution</title>
+<style>
+:root{--nav:#4527A0;--nav-dark:#311B92;--bg:#EDE7F6;--card:#fff;--acc:#4527A0;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#5E35B1;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#EDE7F6,#E8EAF6);border:2px solid #9575CD;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#311B92;font-weight:700;margin-bottom:6px}
+.big-rule{background:#EDE7F6;border:2px solid #7E57C2;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#311B92;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F3F1FA;border:1px solid #D1C4E9;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#5E35B1}
+.steps .ln.ans{color:#311B92;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#4527A0;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.clue-box{background:#F3F1FA;border:1.5px solid #B39DDB;border-radius:10px;padding:12px 16px;margin:10px 0;font-weight:700;color:#311B92;text-align:center}
+.sizerow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.size-btn{border:1.5px solid #B39DDB;border-radius:8px;padding:9px 14px;background:#fff;color:#311B92;font-weight:700;font-size:.92rem;cursor:pointer;font-family:inherit}
+.size-btn:hover:not(:disabled){border-color:var(--acc);background:#EDE7F6}
+.size-btn:disabled{opacity:.35;cursor:not-allowed}
+.reveal-line{font-size:1rem;padding:6px 0;color:#1a1a2e;display:none}
+.reveal-line.shown{display:block}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F7F5FC;border:1.5px solid #B39DDB;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#EDE7F6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#EDE7F6;color:#311B92;border:2px solid #311B92;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#4527A0;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Balance Scales &mdash; Two Clues, Substitution</span>
+  <span class="tnav-pill" id="pill">1 / 9</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F50D; One Clue Isn't Always Enough</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>In Lesson 1, cancelling turned ONE mixed scale into a clean ratio like "1 apple = 2 bananas." But some puzzles give you a ratio clue AND a separate clue about a TOTAL weight &mdash; and the total weight clue still has BOTH items mixed in it, with nothing to cancel. The fix: use the first clue to REPLACE one item with the other everywhere it appears, so the second clue turns into a same-item problem you already know how to solve.</p>
+  </div>
+  <div class="big-rule">Two clues, one link between them &mdash; swap one item for the other, then solve.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Show me &#8594;</button></div>
+</div>
+
+<!-- Screen 2: big idea -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>The Big Idea &mdash; Substitution</h2>
+  <p>If Clue 1 tells you "1 apple = 2 bananas," then ANYWHERE you see "1 apple" in Clue 2, you can cross it out and write "2 bananas" instead &mdash; the weight doesn't change, only how you describe it.</p>
+  <div class="big-rule" style="font-size:1rem">Substitute using Clue 1 &rarr; combine everything into ONE item &rarr; divide the total weight by the count &rarr; multiply back if you need the OTHER item's weight.</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Substitute EVERY copy of the item, not just one. If Clue 2 has "2 apples," that becomes 2 &times; (Clue 1's banana amount), not just 1 copy.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: worked example 1, written -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Worked Example 1</h2>
+  <p><strong>Clue 1: 1 apple = 2 bananas. Clue 2: 1 apple + 3 bananas = 20 grams. How much does 1 apple weigh?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; substitute Clue 1 into Clue 2. Replace "1 apple" with "2 bananas":</span></div>
+    <div class="ln">1 apple + 3 bananas &rarr; 2 bananas + 3 bananas</div>
+    <div class="ln"><span class="note">Step 2 &mdash; combine the bananas into one count:</span></div>
+    <div class="ln">2 bananas + 3 bananas = 5 bananas</div>
+    <div class="ln"><span class="note">Step 3 &mdash; the 5 bananas weigh 20 grams together. Divide to find ONE banana:</span></div>
+    <div class="ln">20 &divide; 5 = 4 grams &nbsp;&rarr;&nbsp; 1 banana = 4 grams</div>
+    <div class="ln"><span class="note">Step 4 &mdash; use Clue 1 to find 1 apple (multiply back):</span></div>
+    <div class="ln">1 apple = 2 bananas = 2 &times; 4 = 8 grams</div>
+    <div class="ln ans">1 apple = 8 grams</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- Screen 3b: interactive substitution widget -->
+<div class="screen" id="s2b">
+<div class="card">
+  <h2>Worked Example 1 &mdash; Reveal Step by Step</h2>
+  <p style="font-size:.96rem">Tap each button in order. Watch Clue 2 transform into a solvable one-item equation.</p>
+
+  <div class="clue-box">Clue 1: 1 apple = 2 bananas</div>
+  <div class="clue-box">Clue 2: 1 apple + 3 bananas = 20 grams</div>
+
+  <div class="sizerow">
+    <button class="size-btn" id="w1-btn1" onclick="w1Step(1)">1. Substitute</button>
+    <button class="size-btn" id="w1-btn2" onclick="w1Step(2)" disabled>2. Combine</button>
+    <button class="size-btn" id="w1-btn3" onclick="w1Step(3)" disabled>3. Divide</button>
+    <button class="size-btn" id="w1-btn4" onclick="w1Step(4)" disabled>4. Multiply back</button>
+  </div>
+
+  <div class="reveal-line" id="w1-line1">&#9989; 1 apple + 3 bananas &rarr; 2 bananas + 3 bananas</div>
+  <div class="reveal-line" id="w1-line2">&#9989; 2 bananas + 3 bananas = 5 bananas = 20 grams</div>
+  <div class="reveal-line" id="w1-line3">&#9989; 20 &divide; 5 = 4 grams &rarr; 1 banana = 4 grams</div>
+  <div class="reveal-line" id="w1-line4">&#9989; 1 apple = 2 &times; 4 = <strong>8 grams</strong></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: worked example 2, written (derive clue1 first) -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Worked Example 2 &mdash; When Clue 1 Isn't Given Directly</h2>
+  <p><strong>On a balance scale, the left pan holds 2 oranges + 1 grape. The right pan holds 1 orange + 4 grapes. The scale balances. Also: 2 oranges + 1 grape = 21 grams. How much does 1 orange weigh?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; Clue 1 isn't given directly this time. Use Lesson 1's cancel trick on the balance first:</span></div>
+    <div class="ln">Cancel 1 orange from both sides: Left &rarr; 1 orange+1 grape. Right &rarr; 4 grapes.</div>
+    <div class="ln">Cancel 1 grape from both sides: Left &rarr; 1 orange. Right &rarr; 3 grapes.</div>
+    <div class="ln">Clue 1 found: 1 orange = 3 grapes</div>
+    <div class="ln"><span class="note">Step 2 &mdash; substitute into the weight clue. Replace "2 oranges" with "2 &times; 3 grapes":</span></div>
+    <div class="ln">2 oranges + 1 grape &rarr; 6 grapes + 1 grape</div>
+    <div class="ln"><span class="note">Step 3 &mdash; combine:</span></div>
+    <div class="ln">6 grapes + 1 grape = 7 grapes = 21 grams</div>
+    <div class="ln"><span class="note">Step 4 &mdash; divide to find 1 grape:</span></div>
+    <div class="ln">21 &divide; 7 = 3 grams &nbsp;&rarr;&nbsp; 1 grape = 3 grams</div>
+    <div class="ln"><span class="note">Step 5 &mdash; multiply back using Clue 1 to find 1 orange:</span></div>
+    <div class="ln">1 orange = 3 grapes = 3 &times; 3 = 9 grams</div>
+    <div class="ln ans">1 orange = 9 grams</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- Screen 4b: interactive widget 2 -->
+<div class="screen" id="s3b">
+<div class="card">
+  <h2>Worked Example 2 &mdash; Reveal Step by Step</h2>
+  <p style="font-size:.96rem">This one has 5 steps &mdash; cancel first to FIND Clue 1, then substitute like before. Tap each button in order.</p>
+
+  <div class="clue-box">Balance: 2 oranges+1 grape &nbsp;=&nbsp; 1 orange+4 grapes</div>
+  <div class="clue-box">Weight clue: 2 oranges + 1 grape = 21 grams</div>
+
+  <div class="sizerow">
+    <button class="size-btn" id="w2-btn1" onclick="w2Step(1)">1. Cancel to find Clue 1</button>
+    <button class="size-btn" id="w2-btn2" onclick="w2Step(2)" disabled>2. Substitute</button>
+    <button class="size-btn" id="w2-btn3" onclick="w2Step(3)" disabled>3. Combine</button>
+    <button class="size-btn" id="w2-btn4" onclick="w2Step(4)" disabled>4. Divide</button>
+    <button class="size-btn" id="w2-btn5" onclick="w2Step(5)" disabled>5. Multiply back</button>
+  </div>
+
+  <div class="reveal-line" id="w2-line1">&#9989; Cancel 1 orange, then 1 grape &rarr; Clue 1: 1 orange = 3 grapes</div>
+  <div class="reveal-line" id="w2-line2">&#9989; 2 oranges + 1 grape &rarr; (2&times;3 grapes) + 1 grape = 6 grapes + 1 grape</div>
+  <div class="reveal-line" id="w2-line3">&#9989; 6 grapes + 1 grape = 7 grapes = 21 grams</div>
+  <div class="reveal-line" id="w2-line4">&#9989; 21 &divide; 7 = 3 grams &rarr; 1 grape = 3 grams</div>
+  <div class="reveal-line" id="w2-line5">&#9989; 1 orange = 3 grapes = 3 &times; 3 = <strong>9 grams</strong></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: decision tree -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Plan</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>If Clue 1 (the ratio) isn't given directly, find it first using Lesson 1's cancel trick on a raw balance picture.</div>
+    <div class="node"><span class="step-n">2</span>Look at Clue 2. Find every place the FIRST item appears in it.</div>
+    <div class="node"><span class="step-n">3</span>SUBSTITUTE: replace every copy of that item with its equivalent from Clue 1.</div>
+    <div class="node"><span class="step-n">4</span>Combine everything into ONE running count of the second item.</div>
+    <div class="node"><span class="step-n">5</span>Divide the total weight by that count &rarr; weight of ONE of the second item.</div>
+    <div class="node"><span class="step-n">6</span>Multiply back using Clue 1's ratio &rarr; weight of ONE of the first item.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Substitute the FULL amount every time the item appears &mdash; if it appears twice, that's 2 &times; the swap, not 1 &times;.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">My turn &#8594;</button></div>
+</div>
+
+<!-- Screen 6: practice -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>Your Turn</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">If needed, cancel first to find Clue 1. Then substitute, combine, divide, and multiply back.</p>
+
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; Clue 1: 1 apple = 3 grapes. Clue 2: 1 apple + 2 grapes = 25 grams. How much does 1 apple weigh?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 10g</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 15g</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 20g</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">Sub: 1apple+2grapes &rarr; 3grapes+2grapes=5grapes=25g.</div><div class="ln">25&divide;5=5g per grape. 1apple=3&times;5=15g.</div><div class="ln ans">15 grams</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; Left pan: 2 strawberries + 2 peaches. Right pan: 1 strawberry + 4 peaches. Balanced. Also: 2 strawberries + 1 peach = 30 grams. How much does 1 strawberry weigh?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 6g</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 12g</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 18g</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">Cancel 1 strawberry: Left&rarr;1straw+2peach. Right&rarr;4peach.</div><div class="ln">Cancel 2 peaches: Left&rarr;1straw. Right&rarr;2peach. Clue 1: 1 strawberry = 2 peaches.</div><div class="ln">Sub into 2straw+1peach=30: (2&times;2peach)+1peach=4peach+1peach=5peach=30 &rarr; 1peach=6g.</div><div class="ln ans">1 strawberry=2&times;6=12 grams</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; Left pan: 2 kiwis + 2 cherries. Right pan: 1 kiwi + 6 cherries. Balanced. Also: 1 kiwi + 2 cherries = 30 grams. How much does 1 kiwi weigh?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 10g</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 15g</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 20g</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'C')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">Cancel 1 kiwi: Left&rarr;1kiwi+2cherries. Right&rarr;6cherries.</div><div class="ln">Cancel 2 cherries: Left&rarr;1kiwi. Right&rarr;4cherries. Clue 1: 1 kiwi = 4 cherries.</div><div class="ln">Sub into 1kiwi+2cherries=30: 4cherries+2cherries=6cherries=30 &rarr; 1cherry=5g.</div><div class="ln ans">1 kiwi=4&times;5=20 grams</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; Clue 1: 1 pear = 4 lemons. Clue 2: 1 pear + 4 lemons = 40 grams. How much does 1 pear weigh?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 5g</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 15g</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 20g</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'C')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">Sub: 1pear+4lemons &rarr; 4lemons+4lemons=8lemons=40g.</div><div class="ln">40&divide;8=5g per lemon. 1pear=4&times;5=20g.</div><div class="ln ans">20 grams</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 7: recap -->
+<div class="screen" id="s6">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Substitution Chains &mdash; in one line</div>
+  <p style="font-size:1.05rem"><strong>Find Clue 1 (cancel if needed) &rarr; substitute it into Clue 2 &rarr; combine &rarr; divide &rarr; multiply back.</strong></p>
+  <p style="font-size:.95rem;margin-top:6px">Two clues are just one extra swap away from a problem you already know how to solve.</p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You can spot which item to substitute, and swap EVERY copy of it</li>
+    <li>You divide the total by the combined count to get ONE item's weight</li>
+    <li>You remember to multiply back if the question asks about the OTHER item</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">You now have both balance-scale tools: cancelling and substitution. Ready for the test!</p>
+</div>
+<div class="navrow">
+  <a href="Algebra_Lesson_BalanceScaleCancelling.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#EDE7F6;color:#311B92;border:2px solid #311B92;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#4527A0;color:#fff;border:2px solid #4527A0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Yes! You substituted, combined, divided, and multiplied back correctly.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Substitute Clue 1 into Clue 2, combine, divide, then multiply back. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ── Interactive reveal widgets (pg s2b + s3b) ────────────────────────
+function w1Step(n){
+  document.getElementById('w1-line'+n).classList.add('shown');
+  document.getElementById('w1-btn'+n).disabled = true;
+  if(n<4) document.getElementById('w1-btn'+(n+1)).disabled = false;
+}
+function w2Step(n){
+  document.getElementById('w2-line'+n).classList.add('shown');
+  document.getElementById('w2-btn'+n).disabled = true;
+  if(n<5) document.getElementById('w2-btn'+(n+1)).disabled = false;
+}
+</script>
+</body>
+</html>

@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '3 Jul 2026',
+  updated:        '5 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:38, topic:'Distributing Identical Items & Listing: Three Coins (ASMOPSS)', status:'In Progress' },
+  currentUnit: { n:39, topic:'Balance Scales: Ratios & Substitution Chains (Algebraic Thinking)', status:'In Progress' },
   lastUnit: {
-    n:37, score:12, outOf:15, pct:80, delta:+2, prevScore:10,
-    patternLabel: 'U37 — Rectangle Counting Retest & Listing: Answer Extraction, PASSED',
-    patternInsight: '12/15 (80%) <strong>PASSED</strong> &mdash; the U36 fail is resolved, and interactive-visual lessons are the reason why. Both U36 gaps were retested cold: rectangle-counting is now solid across four different grid shapes (Q1, Q3, Q4, Q5, Q11 all correct), and listing came back a <strong>perfect 5/5</strong> in Section B. The two points still lost were narrower and NEW, not repeats: Q2 had fully correct working (3×10=30) but the wrong number was written on the answer line &mdash; a pure transcription slip; Q13 (paying with THREE coin values for the first time) and Q15 (tallying squares across MORE sizes than before) are both a genuine step up in difficulty, not a return of the old gap.',
-    analysisLabel: 'Next: U38 — Distributing Identical Items (Stars and Bars) & Listing With Three Values',
-    analysisInsight: 'U37 passed (12/15 &ge; 12), so no further retest is needed. The two new-and-narrow slips point straight at U38’s focus: Q13 (3-coin listing) is a direct preview of the "listing with three things to track" lesson, and both align with what the ASMOPSS 2024 past-paper diagnostic (analysed the same day) flagged as the highest-return next topic &mdash; distributing identical items ("stars and bars"), which several ASMOPSS papers have tested and Prem had not yet seen. Milestone M4 still lands after U40 &mdash; 7 of the 10 units since M3 are now done (U31&ndash;U37).',
-    qSummary: '<strong>Sec A 4/5 | Sec B 5/5 | Sec C 3/5</strong> — 12/15 PASSED',
+    n:38, score:14, outOf:15, pct:93, delta:+2, prevScore:12,
+    patternLabel: 'U38 — Distributing Identical Items (Stars and Bars) & Listing: Three Coins, PASSED',
+    patternInsight: '14/15 (93%) <strong>PASSED</strong> &mdash; the strongest score of the current run, and both topics were BRAND NEW (not a retest). Every distributing question (Q1, Q3, Q4, Q5, Q11, Q15) and every 3-variable listing question (Q6&ndash;Q10, Q13, Q14) came back correct, including harder Section C numbers (n=20&rarr;171) and a coin-set never seen in the lessons (2¢/3¢/5¢, Q14). This is the second confirming case for the interactive-visual blueprint &mdash; first for a retest (U37), now for genuinely new material. The single miss (Q12) was a narrow "which formula" mix-up, not a gap in either method: he applied the 3-group "choose 2 gaps" combination to a plain 2-group problem (15 sweets, 2 jars), getting 91 instead of 14.',
+    analysisLabel: 'Next: U39 — Balance Scales: Ratios & Substitution Chains (Algebraic Thinking)',
+    analysisInsight: 'U38 passed comfortably (14/15 &ge; 12), so no retest is needed. With both new topics landing this well, U39 returns to the general topic rotation, competition-weighted per the ASMOPSS timeline (~5 weeks out): Algebraic Thinking, via a new balance-scale skill (cancelling mixed-item pans to find a ratio, then substituting one clue into a second to solve for real weights) &mdash; extends what Prem already knows from U35&rsquo;s balance-scale logic (heavier/lighter, simple trading) into full two-clue algebra. Standing reminder carried forward (not a lesson): "count the groups first &mdash; 2 groups only ever needs gaps itself, never the choose-2 step." Milestone M4 still lands after U40 &mdash; 8 of the 10 units since M3 are now done (U31&ndash;U38).',
+    qSummary: '<strong>Sec A 5/5 | Sec B 5/5 | Sec C 4/5</strong> — 14/15 PASSED',
     qBreakdown: [
-      { q:'Q1', topic:'Rectangles — 1×4 strip',          lvl:'w', pass:true,  note:'&#10003; 10.' },
-      { q:'Q2', topic:'Rectangles — 2×4 grid',           lvl:'w', pass:false, note:'&#10007; working shows 3×10=30 correctly, but wrote 19 on the answer line &mdash; a pure transcription slip, not a method error.' },
-      { q:'Q3', topic:'Rectangles — 1×6 strip',          lvl:'w', pass:true,  note:'&#10003; 21.' },
-      { q:'Q4', topic:'Rectangles — 3×4 grid',           lvl:'w', pass:true,  note:'&#10003; 60.' },
-      { q:'Q5', topic:'Rectangles — 2×5 grid',           lvl:'w', pass:true,  note:'&#10003; 45 (messy correction scratch, landed right).' },
-      { q:'Q6', topic:'Listing — digit sum = 7',         lvl:'m', pass:true,  note:'&#10003; 7.' },
-      { q:'Q7', topic:'Listing — arrangements of 2,4,6', lvl:'m', pass:true,  note:'&#10003; 6.' },
-      { q:'Q8', topic:'Listing — pay 20¢ (5¢/1¢)',       lvl:'m', pass:true,  note:'&#10003; 5.' },
-      { q:'Q9', topic:'Listing — choose 2 of 6',         lvl:'m', pass:true,  note:'&#10003; 15.' },
-      { q:'Q10',topic:'Listing — 1–40, digit sum 8',     lvl:'m', pass:true,  note:'&#10003; 4.' },
-      { q:'Q11',topic:'Rectangles — 3×5 grid  ★★',       lvl:'h', pass:true,  note:'&#10003; 90.' },
-      { q:'Q12',topic:'Listing — digit sum 9 AND odd  ★★', lvl:'h', pass:true, note:'&#10003; 4.' },
-      { q:'Q13',topic:'Listing — pay 9¢ (1¢/2¢/5¢)  ★★', lvl:'h', pass:false, note:'&#10007; gave 9; correct 8. Wrote "I’m gonna list but can u teach me method?" &mdash; three-coin listing is a genuinely new difficulty, not a repeat of a known gap.' },
-      { q:'Q14',topic:'Listing — 1–45, digit sum 6  ★★', lvl:'h', pass:true,  note:'&#10003; 5.' },
-      { q:'Q15',topic:'Rectangles NOT squares — 4×5 grid  ★★', lvl:'h', pass:false, note:'&#10007; gave 111; correct 110. Used the right method (total &minus; squares = 150 &minus; squares) but miscounted the squares tally as 39 instead of 40.' }
+      { q:'Q1', topic:'Distribute — 2 groups, n=5',            lvl:'w', pass:true,  note:'&#10003; 4.' },
+      { q:'Q2', topic:'Distribute — 2 groups, n=7',            lvl:'w', pass:true,  note:'&#10003; 6.' },
+      { q:'Q3', topic:'Distribute — 3 groups, n=6',            lvl:'w', pass:true,  note:'&#10003; 10.' },
+      { q:'Q4', topic:'Distribute — 3 groups, n=8',            lvl:'w', pass:true,  note:'&#10003; 21.' },
+      { q:'Q5', topic:'Distribute — 3 groups, n=10',           lvl:'w', pass:true,  note:'&#10003; 36.' },
+      { q:'Q6', topic:'Listing — coin ways, 12¢ (1/2/5)',      lvl:'m', pass:true,  note:'&#10003; 13.' },
+      { q:'Q7', topic:'Listing — coin ways, 7¢',               lvl:'m', pass:true,  note:'&#10003; 6.' },
+      { q:'Q8', topic:'Listing — coin ways, 15¢',              lvl:'m', pass:true,  note:'&#10003; 18.' },
+      { q:'Q9', topic:'Listing — coin ways, 13¢',              lvl:'m', pass:true,  note:'&#10003; 14.' },
+      { q:'Q10',topic:'Listing — coin ways, 4¢',               lvl:'m', pass:true,  note:'&#10003; 3.' },
+      { q:'Q11',topic:'Distribute — 3 groups, n=9  ★★',        lvl:'h', pass:true,  note:'&#10003; 28.' },
+      { q:'Q12',topic:'Distribute — 2 groups, n=15  ★★',       lvl:'h', pass:false, note:'&#10007; gave 91; correct 14. Applied the 3-group "choose 2 gaps" formula ((14&times;13)&divide;2) to a 2-group problem, which only needs gaps=14 directly &mdash; a formula-discrimination slip, not a method gap (Q1/Q2/Q11 all correct with the right formula each time).' },
+      { q:'Q13',topic:'Listing — coin ways, 10¢ (1/3/5)  ★★',  lvl:'h', pass:true,  note:'&#10003; 7.' },
+      { q:'Q14',topic:'Listing — coin ways, 12¢ (2/3/5)  ★★',  lvl:'h', pass:true,  note:'&#10003; 5 &mdash; a coin-set never seen in the lessons; clean transfer.' },
+      { q:'Q15',topic:'Distribute — 3 groups, n=20  ★★',       lvl:'h', pass:true,  note:'&#10003; 171.' }
     ]
   },
   _M3archived: {
@@ -85,13 +85,13 @@ var PREM_DATA = {
     { name: 'Algebra',           c: 98, t: 85 },
     { name: 'Arithmetic',        c: 83, t: 85 },
     { name: 'Geometry',          c: 74, t: 80 },
-    { name: 'Counting',          c: 83, t: 85 },
+    { name: 'Counting',          c: 87, t: 85 },
     { name: 'Number Theory',     c: 89, t: 82 },
     { name: 'Applied Problems',  c: 76, t: 80 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [88, 74, 88, 98, 83, 83, 89, 76],
+  radarCurrent:  [88, 74, 88, 98, 87, 83, 89, 76],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -137,23 +137,37 @@ var PREM_DATA = {
     { n:34, score:14, delta:-1, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:35, score:13, delta:-1, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:36, score:10, delta:-3, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false },
-    { n:37, score:12, delta:+2, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
+    { n:37, score:12, delta:+2, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
+    { n:38, score:14, delta:+2, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 38,
-      badge: 'linear-gradient(135deg,#00796B,#26A69A)',
-      title: 'Distributing Identical Items (Stars and Bars) &amp; Listing: Three Coins',
+      n: 39,
+      badge: 'linear-gradient(135deg,#4527A0,#7E57C2)',
+      title: 'Balance Scales: Ratios &amp; Substitution Chains (Algebraic Thinking)',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Sharing Out Identical Items', c:'tblue' },
-        { t:'L2: Listing With Three Things To Track', c:'tblue' },
-        { t:'New topic — flagged by ASMOPSS 2024 diagnostic', c:'torange' }
+        { t:'L1: The Cancel Trick', c:'tblue' },
+        { t:'L2: Two Clues, Substitution', c:'tblue' },
+        { t:'Return to rotation — Algebraic Thinking', c:'torange' }
       ],
-      note: 'U38: new Art of Counting topic, prioritised by both the U37 Q13 slip (3-coin listing) and the ASMOPSS 2024 past-paper diagnostic (done the same day). L1 teaches distributing identical items so every group gets at least 1, via the "stars and gaps" picture: gaps=n&minus;1, 2 groups → answer=gaps, 3 groups → choose 2 of the gaps (reusing the choose-2 skill from Art of Counting). L2 extends listing to THREE values at once (e.g. 1¢/2¢/5¢ coins): sweep the biggest value block by block, solve each leftover with the familiar 2-value method, and add every block\'s count. Sec A distribute, Sec B 3-value listing, Sec C ★★ mix of both.',
+      note: 'U39: back to the general topic rotation, competition-weighted (Algebraic Thinking) now that both U38 topics landed at 93% first try. Extends U35&rsquo;s balance-scale logic (heavier/lighter, simple trading) into full two-item algebra. L1 teaches the "cancel trick": when the same item sits on both pans of a mixed-item balance, cancel it from both sides until only one item type is left, reading off a ratio like "1 apple = 2 bananas." L2 teaches substitution: when a second clue (another balance, or a total weight) still has both items mixed in, substitute the Clue-1 ratio into it, combine, divide to find one item\'s weight, then multiply back for the other. Sec A ratio-only, Sec B ratio→real weight, Sec C ★★ two-clue substitution chains.',
       status: 'pending'
+    },
+    {
+      n: 38,
+      badge: 'linear-gradient(135deg,#43e97b,#38f9d7)',
+      title: 'Distributing Identical Items (Stars and Bars) &amp; Listing: Three Coins',
+      tags: [
+        { t:'14/15 (93%) &#10003; PASSED', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Both NEW topics — near-perfect first try', c:'tgreen' },
+        { t:'Distribute 6/7 + Listing 7/7', c:'tgreen' },
+        { t:'Q12: 2-vs-3-group mix-up', c:'torange' }
+      ],
+      note: '14/15 &#10003; <strong>PASSED</strong> &mdash; strongest score of the current run, and BOTH topics were brand new (not a retest). Every distributing question (Q1, Q3, Q4, Q5, Q11, Q15) and every 3-variable listing question (Q6&ndash;Q10, Q13, Q14) came back correct, including a coin-set never seen in the lessons (2¢/3¢/5¢, Q14) and the hardest Section C numbers (n=20&rarr;171). Second confirming case for the interactive-visual blueprint (first for a retest at U37, now for genuinely new material). Lone miss Q12: applied the 3-group "choose 2 gaps" formula to a plain 2-group problem (15 sweets, 2 jars), getting 91 instead of 14 &mdash; a "count the groups first" formula-discrimination slip, not a gap in either method.',
+      status: 'done'
     },
     {
       n: 37,
@@ -735,10 +749,10 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 90
     },
     {
-      label:     'Three-value listing (e.g. 3 coin denominations) — training U38',
-      pill:      'p2', pillText: 'Training &#128992;',
-      score:     'New, harder-than-U36 gap surfaced at U37 Q13: with 2 coin values he is flawless, but a 3rd value broke the method and he asked to be taught it directly. U38 L2 teaches the organised block-by-block table (sweep the biggest value, solve the leftover with the familiar 2-value method, add every block).',
-      fillClass: 'g2', fillPct: 35
+      label:     'Three-value listing (e.g. 3 coin denominations) — RESOLVED at U38 (7/7)',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U38 Section B + the two Section C listing Qs: 7/7 on 3-variable coin-ways listing, including a coin-set (2¢/3¢/5¢, Q14) never shown in the lessons. The block-by-block table method (sweep the biggest value, solve the leftover with the familiar 2-value method, add every block) fully generalised on first real exposure — the U37 Q13 gap is closed.',
+      fillClass: 'gs', fillPct: 92
     },
     {
       label:     'Counting multiple sizes precisely (e.g. squares-by-size tally) — MONITOR',
@@ -747,10 +761,16 @@ var PREM_DATA = {
       fillClass: 'g2', fillPct: 65
     },
     {
-      label:     'Distributing identical items ("stars and bars") — training U38, new topic',
-      pill:      'p2', pillText: 'New Topic &#128992;',
-      score:     'Flagged independently by the ASMOPSS 2024 past-paper diagnostic (Q25: 8 sweets to 6 friends, he scored 224 vs correct 21 — a completely different, wrong method, consistent with never having seen this problem type). U38 L1 teaches it via "stars and gaps," restricted to 2–3 groups so it reuses the already-mastered choose-2 move rather than introducing a second new skill at once.',
-      fillClass: 'g2', fillPct: 20
+      label:     'Distributing identical items ("stars and bars") — RESOLVED at U38 (6/7)',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'Flagged independently by the ASMOPSS 2024 past-paper diagnostic (Q25: 8 sweets to 6 friends, scored 224 vs correct 21 — a completely different method, consistent with never having seen the topic). U38 L1\'s "stars and gaps" picture (restricted to 2&ndash;3 groups, reusing the choose-2 move) landed 6/7 on first real exposure — Q1, Q2, Q3, Q4, Q5, Q11, Q15 all correct. The one miss (Q12) was a formula-discrimination slip, not a gap in the method — see the new "count the groups first" entry below.',
+      fillClass: 'gs', fillPct: 88
+    },
+    {
+      label:     '"Count the groups first" — 2-group vs 3-group formula mix-up — MONITOR (new, U38)',
+      pill:      'p2', pillText: 'Monitor &#128992;',
+      score:     'U38 Q12: a plain 2-group distribute (15 sweets, 2 jars &rarr; answer is just gaps=14) got the fancier 3-group "choose 2 of the gaps" formula applied instead ((14&times;13)&divide;2=91) &mdash; the same move he correctly used one question earlier on the harder-flagged Q11. Both easier 2-group Qs (Q1, Q2) were fine, suggesting the ★★ "harder" framing pulled him toward the more complex-looking tool without re-checking the group count. Quick habit fix, not a re-teach: state "2 groups → gaps. 3 groups → choose 2 of the gaps" before computing.',
+      fillClass: 'g2', fillPct: 55
     },
     {
       label:     'Precision: answer EXACTLY &amp; clearly what is asked (smallest / which / name it right)',
@@ -825,7 +845,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U35'
+  radarLegendUnit: 'U38'
 
 };
 

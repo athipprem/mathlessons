@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Balance Scales — The Cancel Trick</title>
+<style>
+:root{--nav:#4527A0;--nav-dark:#311B92;--bg:#EDE7F6;--card:#fff;--acc:#4527A0;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#5E35B1;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#EDE7F6,#E8EAF6);border:2px solid #9575CD;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#311B92;font-weight:700;margin-bottom:6px}
+.big-rule{background:#EDE7F6;border:2px solid #7E57C2;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#311B92;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F3F1FA;border:1px solid #D1C4E9;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#5E35B1}
+.steps .ln.ans{color:#311B92;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#4527A0;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.scale{display:flex;justify-content:center;align-items:flex-end;gap:6px;margin:14px 0;font-size:.95rem}
+.pan{border:2px solid #7E57C2;border-radius:8px;padding:10px 14px;background:#F3F1FA;font-weight:700;color:#311B92;min-width:120px;text-align:center}
+.fulcrum{font-size:1.6rem;color:#7E57C2;padding:0 6px}
+.pan .item-line{margin:2px 0}
+.pan .cancelled{text-decoration:line-through;opacity:.35}
+.sizerow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.size-btn{border:1.5px solid #B39DDB;border-radius:8px;padding:9px 14px;background:#fff;color:#311B92;font-weight:700;font-size:.92rem;cursor:pointer;font-family:inherit}
+.size-btn:hover:not(:disabled){border-color:var(--acc);background:#EDE7F6}
+.size-btn:disabled{opacity:.35;cursor:not-allowed}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F7F5FC;border:1.5px solid #B39DDB;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#EDE7F6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#EDE7F6;color:#311B92;border:2px solid #311B92;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#4527A0;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Balance Scales &mdash; The Cancel Trick</span>
+  <span class="tnav-pill" id="pill">1 / 9</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- Screen 1: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x2696;&#xFE0F; What If BOTH Pans Have a Mix?</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>You already know balance-scale basics: heavier side goes down, level means equal, and you can trade "1 melon" for "6 grapes" if that's what one scale told you. But what happens when EACH pan has a MIX of two different fruits at once &mdash; like 2 apples + 1 banana on one side, and 1 apple + 3 bananas on the other? You can't just read off one item's weight directly anymore. You need a new trick: <strong>cancelling</strong> the parts that match, so only ONE item is left on each side. This exact skill shows up constantly in competition puzzles.</p>
+  </div>
+  <div class="big-rule">If the SAME item sits on BOTH pans, remove one from each side &mdash; the scale STAYS balanced.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Show me &#8594;</button></div>
+</div>
+
+<!-- Screen 2: big idea -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>The Big Idea &mdash; Cancel the Matching Items</h2>
+  <p>Picture two people holding equally heavy bags in each hand. If you take ONE identical item away from BOTH of their left hands, their hands are still equally heavy &mdash; you just removed the same thing from both sides. A balance scale works exactly the same way.</p>
+  <div class="big-rule" style="font-size:1rem">Find an item on BOTH pans &rarr; remove ONE from each side &rarr; repeat &rarr; stop once one pan has only ONE type of item left.</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; You must remove the SAME item, ONE at a time, from BOTH sides together. Never remove from just one side &mdash; that would break the balance.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 3: worked example 1, written -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Worked Example 1</h2>
+  <p><strong>Left pan: 2 apples + 1 banana. Right pan: 1 apple + 3 bananas. The scale balances. How many bananas weigh the same as 1 apple?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; find an item on BOTH pans. "Apple" is on both (left has 2, right has 1). Cancel 1 apple from each side:</span></div>
+    <div class="ln">Left: 2 apples &minus; 1 = 1 apple left, plus the 1 banana &rarr; <strong>1 apple + 1 banana</strong></div>
+    <div class="ln">Right: 1 apple &minus; 1 = 0 apples left, plus the 3 bananas &rarr; <strong>3 bananas</strong></div>
+    <div class="ln"><span class="note">Step 2 &mdash; "banana" is now on BOTH pans too (left has 1, right has 3). Cancel 1 banana from each side:</span></div>
+    <div class="ln">Left: 1 banana &minus; 1 = 0 bananas left, plus the 1 apple &rarr; <strong>1 apple</strong></div>
+    <div class="ln">Right: 3 bananas &minus; 1 = <strong>2 bananas</strong></div>
+    <div class="ln"><span class="note">Step 3 &mdash; only ONE item type left on each side. Read off the ratio:</span></div>
+    <div class="ln ans">1 apple = 2 bananas</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- Screen 3b: interactive cancel widget -->
+<div class="screen" id="s2b">
+<div class="card">
+  <h2>Worked Example 1 &mdash; Cancel It Yourself</h2>
+  <p style="font-size:.96rem">Tap "Cancel 1 Apple" and "Cancel 1 Banana" to remove matching items from both pans, one at a time. Watch the scale shrink down to a clean ratio.</p>
+
+  <div class="scale">
+    <div class="pan" id="c1-left">2 apple<br>1 banana</div>
+    <span class="fulcrum">&#9878;&#xFE0F;</span>
+    <div class="pan" id="c1-right">1 apple<br>3 banana</div>
+  </div>
+
+  <div class="sizerow">
+    <button class="size-btn" id="c1-btn-apple" onclick="cancel1('apple')">Cancel 1 Apple</button>
+    <button class="size-btn" id="c1-btn-banana" onclick="cancel1('banana')">Cancel 1 Banana</button>
+  </div>
+
+  <div class="big-rule" id="c1-readout" style="font-size:1rem">&#9757; Start by cancelling the item found on BOTH pans</div>
+  <div class="warn-box" id="c1-confirm" style="display:none;background:#E8F5E9;border-color:#A5D6A7"><p style="color:#1B5E20" id="c1-confirm-text"></p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 4: worked example 2, written -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Worked Example 2 &mdash; A Bigger Start</h2>
+  <p><strong>Left pan: 3 apples + 2 bananas. Right pan: 2 apples + 5 bananas. The scale balances. How many bananas weigh the same as 1 apple?</strong></p>
+  <p>Same method &mdash; there's just more to cancel before we get to one item on each side.</p>
+  <div class="steps">
+    <div class="ln">Cancel 2 apples from both sides (both have &ge;2): Left &rarr; 1 apple+2 bananas. Right &rarr; 5 bananas.</div>
+    <div class="ln">Cancel 2 bananas from both sides (both have &ge;2): Left &rarr; 1 apple. Right &rarr; 3 bananas.</div>
+    <div class="ln ans">1 apple = 3 bananas</div>
+  </div>
+  <div class="big-rule" style="font-size:1rem">It doesn't matter which matching item you cancel first &mdash; keep going until only ONE type is left on each side.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- Screen 4b: interactive cancel widget 2 -->
+<div class="screen" id="s3b">
+<div class="card">
+  <h2>Worked Example 2 &mdash; Cancel It Yourself</h2>
+  <p style="font-size:.96rem">This one needs more cancels before it's done. Keep tapping until each pan has just one item type left.</p>
+
+  <div class="scale">
+    <div class="pan" id="c2-left">3 apple<br>2 banana</div>
+    <span class="fulcrum">&#9878;&#xFE0F;</span>
+    <div class="pan" id="c2-right">2 apple<br>5 banana</div>
+  </div>
+
+  <div class="sizerow">
+    <button class="size-btn" id="c2-btn-apple" onclick="cancel2('apple')">Cancel 1 Apple</button>
+    <button class="size-btn" id="c2-btn-banana" onclick="cancel2('banana')">Cancel 1 Banana</button>
+  </div>
+
+  <div class="big-rule" id="c2-readout" style="font-size:1rem">&#9757; Start cancelling &mdash; either item first works</div>
+  <div class="warn-box" id="c2-confirm" style="display:none;background:#E8F5E9;border-color:#A5D6A7"><p style="color:#1B5E20" id="c2-confirm-text"></p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 5: decision tree -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Plan</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Look at both pans. Find an item that appears on BOTH sides.</div>
+    <div class="node"><span class="step-n">2</span>Cancel ONE of that item from EACH side. The scale stays balanced.</div>
+    <div class="node"><span class="step-n">3</span>Repeat for every item that's still on both sides &mdash; one at a time, both sides together.</div>
+    <div class="node"><span class="step-n">4</span>Stop once ONE pan has only a single item type left (0 of anything else).</div>
+    <div class="node"><span class="step-n">5</span>Read off the ratio: "1 [item on the small side] = n [item on the other side]."</div>
+    <div class="node"><span class="step-n">6</span><strong>Bonus:</strong> if you're told the real weight of one item, multiply to find the other's real weight.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Only cancel items that appear on BOTH pans. Never touch an item that's on just one side.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">My turn &#8594;</button></div>
+</div>
+
+<!-- Screen 6: practice -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>Your Turn</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Cancel matching items from both pans, one at a time, until only one item type is left on each side.</p>
+
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; Left pan: 2 apples + 2 oranges. Right pan: 1 apple + 5 oranges. The scale balances. How many oranges weigh the same as 1 apple?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 4</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">Cancel 1 apple: Left&rarr;1 apple+2 oranges. Right&rarr;5 oranges.</div><div class="ln">Cancel 2 oranges: Left&rarr;1 apple. Right&rarr;3 oranges.</div><div class="ln ans">1 apple = 3 oranges</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; Left pan: 3 bananas + 1 grape. Right pan: 2 bananas + 3 grapes. The scale balances. How many grapes weigh the same as 1 banana?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 1</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 3</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">Cancel 2 bananas: Left&rarr;1 banana+1 grape. Right&rarr;3 grapes.</div><div class="ln">Cancel 1 grape: Left&rarr;1 banana. Right&rarr;2 grapes.</div><div class="ln ans">1 banana = 2 grapes</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; Left pan: 2 apples + 1 banana. Right pan: 1 apple + 5 bananas. The scale balances, and 1 banana weighs 3 grams. How much does 1 apple weigh?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 9g</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 12g</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 16g</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">Cancel 1 apple: Left&rarr;1 apple+1 banana. Right&rarr;5 bananas.</div><div class="ln">Cancel 1 banana: Left&rarr;1 apple. Right&rarr;4 bananas.</div><div class="ln">1 apple = 4 bananas. 1 banana=3g &rarr; 1 apple=4&times;3=12g.</div><div class="ln ans">12 grams</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; Left pan: 3 oranges + 2 grapes. Right pan: 2 oranges + 5 grapes. The scale balances. How many grapes weigh the same as 1 orange?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 4</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">Cancel 2 oranges: Left&rarr;1 orange+2 grapes. Right&rarr;5 grapes.</div><div class="ln">Cancel 2 grapes: Left&rarr;1 orange. Right&rarr;3 grapes.</div><div class="ln ans">1 orange = 3 grapes</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- Screen 7: recap -->
+<div class="screen" id="s6">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; The Cancel Trick &mdash; in one line</div>
+  <p style="font-size:1.05rem"><strong>Find an item on BOTH pans, cancel one from each side, repeat &mdash; until one pan has only ONE item type left.</strong></p>
+  <p style="font-size:.95rem;margin-top:6px">This turns a mixed, confusing scale into a simple "1 item = n item" fact you can use.</p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You spot the item on BOTH pans before touching anything</li>
+    <li>You cancel one at a time, from both sides together, never just one side</li>
+    <li>You stop exactly when one pan has a single item type left</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">Next up: what if ONE clue isn't enough? Lesson 2 shows you how to combine TWO clues together.</p>
+</div>
+<div class="navrow">
+  <a href="Algebra_Lesson_BalanceScaleSubstitution.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#4527A0;color:#fff;border:2px solid #4527A0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 2 &#8594;</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#EDE7F6;color:#311B92;border:2px solid #311B92;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Yes! You cancelled matching items until one was left.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Find the item on both pans, cancel one from each side, repeat. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ── Interactive cancel widget (pg s2b + s3b) ─────────────────────────
+function makeCancelWidget(cfg){
+  var state = { left:{apple:cfg.leftApple, banana:cfg.leftBanana}, right:{apple:cfg.rightApple, banana:cfg.rightBanana} };
+  function render(){
+    var lp = document.getElementById(cfg.leftId), rp = document.getElementById(cfg.rightId);
+    lp.innerHTML = renderPan(state.left);
+    rp.innerHTML = renderPan(state.right);
+    var btnA = document.getElementById(cfg.btnApple), btnB = document.getElementById(cfg.btnBanana);
+    btnA.disabled = !(state.left.apple>=1 && state.right.apple>=1);
+    btnB.disabled = !(state.left.banana>=1 && state.right.banana>=1);
+    var done = btnA.disabled && btnB.disabled;
+    var ro = document.getElementById(cfg.readoutId);
+    if(!done){
+      ro.innerHTML = 'Left: ' + state.left.apple + ' apple, ' + state.left.banana + ' banana &nbsp;|&nbsp; Right: ' + state.right.apple + ' apple, ' + state.right.banana + ' banana';
+    } else {
+      var ratioText;
+      if(state.left.apple>0){ ratioText = '1 apple = ' + (state.right.banana) + ' banana' + (state.right.banana===1?'':'s'); }
+      else { ratioText = '1 banana = ' + (state.right.apple||state.left.apple) + ' apple' ; }
+      // determine which side ended with 1
+      var leftTotal = state.left.apple+state.left.banana, rightTotal = state.right.apple+state.right.banana;
+      var finalText;
+      if(leftTotal===1 && state.left.apple===1){ finalText = '1 apple = ' + rightTotal + ' banana' + (rightTotal===1?'':'s'); }
+      else if(leftTotal===1 && state.left.banana===1){ finalText = '1 banana = ' + rightTotal + ' apple' + (rightTotal===1?'':'s'); }
+      else if(rightTotal===1 && state.right.apple===1){ finalText = '1 apple = ' + leftTotal + ' banana' + (leftTotal===1?'':'s'); }
+      else { finalText = '1 banana = ' + leftTotal + ' apple' + (leftTotal===1?'':'s'); }
+      ro.innerHTML = finalText;
+      var box = document.getElementById(cfg.confirmId);
+      box.style.display = 'block';
+      document.getElementById(cfg.confirmTextId).innerHTML = '&#9989; All matching items cancelled! Final ratio: <strong>' + finalText + '</strong>';
+    }
+  }
+  function renderPan(side){
+    var parts = [];
+    if(side.apple>0) parts.push(side.apple + ' apple' + (side.apple===1?'':'s'));
+    if(side.banana>0) parts.push(side.banana + ' banana' + (side.banana===1?'':'s'));
+    if(parts.length===0) parts.push('0');
+    return parts.join('<br>');
+  }
+  function cancel(item){
+    if(item==='apple' && state.left.apple>=1 && state.right.apple>=1){ state.left.apple--; state.right.apple--; }
+    if(item==='banana' && state.left.banana>=1 && state.right.banana>=1){ state.left.banana--; state.right.banana--; }
+    render();
+  }
+  render();
+  return { cancel: cancel };
+}
+
+var widget1 = makeCancelWidget({ leftApple:2, leftBanana:1, rightApple:1, rightBanana:3, leftId:'c1-left', rightId:'c1-right', btnApple:'c1-btn-apple', btnBanana:'c1-btn-banana', readoutId:'c1-readout', confirmId:'c1-confirm', confirmTextId:'c1-confirm-text' });
+function cancel1(item){ widget1.cancel(item); }
+
+var widget2 = makeCancelWidget({ leftApple:3, leftBanana:2, rightApple:2, rightBanana:5, leftId:'c2-left', rightId:'c2-right', btnApple:'c2-btn-apple', btnBanana:'c2-btn-banana', readoutId:'c2-readout', confirmId:'c2-confirm', confirmTextId:'c2-confirm-text' });
+function cancel2(item){ widget2.cancel(item); }
+</script>
+</body>
+</html>
