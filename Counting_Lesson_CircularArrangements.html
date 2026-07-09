@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arranging Things In A Circle</title>
+<style>
+:root{--nav:#00796B;--nav-dark:#004D40;--bg:#E0F2F1;--card:#fff;--acc:#00796B;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#00695C;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E0F2F1,#E0F7FA);border:2px solid #4DB6AC;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#004D40;font-weight:700;margin-bottom:6px}
+.big-rule{background:#E0F2F1;border:2px solid #26A69A;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#004D40;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F1F8F7;border:1px solid #B2DFDB;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#00695C}
+.steps .ln.ans{color:#004D40;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#00796B;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.circlewrap{display:flex;justify-content:center;margin:16px 0}
+.circlestage{position:relative;width:220px;height:220px}
+.table{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:110px;height:110px;border-radius:50%;background:#B2DFDB;border:2px solid #26A69A;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:#004D40;font-weight:700;text-align:center}
+.seat{position:absolute;width:56px;height:38px;border-radius:8px;background:#00796B;color:#fff;font-size:.82rem;font-weight:700;display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);text-align:center;line-height:1.1}
+.sizerow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.size-btn{border:1.5px solid #80CBC4;border-radius:8px;padding:9px 14px;background:#fff;color:#004D40;font-weight:700;font-size:.92rem;cursor:pointer;font-family:inherit}
+.size-btn:hover:not(:disabled){border-color:var(--acc);background:#E0F2F1}
+.size-btn:disabled{opacity:.4;cursor:not-allowed}
+.size-btn.on{background:#00796B;color:#fff}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F1F8F7;border:1.5px solid #80CBC4;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E0F2F1}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#00796B;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E0;color:#E65100;border:1.5px solid #FFB74D;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.ptable{border-collapse:collapse;margin:12px auto;font-size:.92rem}
+.ptable th,.ptable td{border:1px solid #80CBC4;padding:6px 12px;text-align:center}
+.ptable th{background:#E0F2F1;color:#004D40}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Arranging Things In A Circle</span>
+  <span class="tnav-pill" id="pill">1 / 9</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F504; When The Line Bends Into A Circle</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>Lining people up in a row is one thing &mdash; but what about seating friends around a ROUND table, hanging charms on a bracelet, or arranging keys on a keyring? These are all CIRCULAR arrangements, and they behave differently from straight-line arrangements. If everyone at a round table shifts one seat to the right, it LOOKS like a different lineup written down &mdash; but it's really the exact same circle of neighbours. Competition problems love this twist, so we need a rule that doesn't over-count rotations.</p>
+  </div>
+  <div class="big-rule">In a circle, rotating everyone by one seat does NOT create a new arrangement &mdash; the neighbours are all still the same.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Show me &#8594;</button></div>
+</div>
+
+<!-- s1: big idea -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>The Big Idea &mdash; Fix One Seat</h2>
+  <p>For n people in a straight LINE, there are n! orderings. But in a CIRCLE, every rotation of the same seating counts as "the same" &mdash; and there are exactly n rotations of any circle (shift by 1 seat, 2 seats, 3 seats... all the way around). So we take n! and divide by n to remove those n look-alike rotations.</p>
+  <div class="big-rule" style="font-size:1rem">n! &divide; n = (n&minus;1)!  &mdash;  or think of it as: FIX one person in one seat (they can't rotate away), then arrange everyone else around them in a line.</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Flipping the circle over (mirror image, clockwise vs counter-clockwise) is usually counted as a DIFFERENT arrangement unless a question says otherwise &mdash; only ROTATIONS are treated as "the same."</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- s2: worked example 1 -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Worked Example 1 &mdash; 4 Friends, Round Table</h2>
+  <p><strong>Alice, Ben, Cy, and Dee sit around a round table. How many DIFFERENT circular seatings are possible?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; count people:</span> n = 4</div>
+    <div class="ln"><span class="note">Step 2 &mdash; fix ONE person's seat so rotations can't sneak in as "new" arrangements:</span> sit Alice down first &mdash; her seat is now fixed.</div>
+    <div class="ln"><span class="note">Step 3 &mdash; arrange the REMAINING (n&minus;1) people in the remaining seats, like a line:</span> Ben, Cy, Dee can go in the 3 remaining seats in (n&minus;1)! = 3! ways</div>
+    <div class="ln">3! = 3 &times; 2 &times; 1 = 6</div>
+    <div class="ln ans">6 different circular seatings</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See it happen &#8594;</button></div>
+</div>
+
+<!-- s2b: interactive circle rotate widget -->
+<div class="screen" id="s2b">
+<div class="card">
+  <h2>Watch Rotations Stay "The Same" Circle</h2>
+  <p style="font-size:.96rem">Tap "Rotate" to shift everyone one seat around. Notice: Alice, Ben, Cy, Dee always sit in the SAME order around the circle &mdash; only the "starting point" changes.</p>
+  <div class="circlewrap">
+    <div class="circlestage" id="ring1"><div class="table">Round<br>Table</div></div>
+  </div>
+  <div class="sizerow"><button class="size-btn" onclick="rotateRing()">&#8635; Rotate One Seat</button></div>
+  <div class="big-rule" id="ring1-readout" style="font-size:.95rem">Rotation 1 of 4 &mdash; this is our starting seating</div>
+  <div style="margin-top:14px"></div>
+  <p style="font-size:.92rem;color:#555">Now see all <strong>6</strong> truly DIFFERENT circles (Alice's seat fixed, Ben/Cy/Dee arranged around her):</p>
+  <div class="sizerow"><button class="size-btn" onclick="showAllCircles()">Show All 6 Unique Circles</button></div>
+  <div id="allcircles" style="margin-top:10px;font-size:.92rem;line-height:1.8"></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- s3: worked example 2 -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Worked Example 2 &mdash; 5 Friends, Round Table</h2>
+  <p><strong>5 friends sit around a round table. How many different circular seatings?</strong></p>
+  <div class="steps">
+    <div class="ln">n = 5. Fix 1 person's seat, arrange the other (n&minus;1) = 4 around them.</div>
+    <div class="ln">(n&minus;1)! = 4! = 4 &times; 3 &times; 2 &times; 1 = 24</div>
+    <div class="ln ans">24 different circular seatings</div>
+  </div>
+  <div class="big-rule" style="font-size:1rem">Same rule every time: circular arrangements of n items = (n&minus;1)!</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See the pattern &#8594;</button></div>
+</div>
+
+<!-- s3b: pattern table widget -->
+<div class="screen" id="s3b">
+<div class="card">
+  <h2>Spot The Pattern</h2>
+  <p style="font-size:.96rem">Tap each n to reveal (n&minus;1)! &mdash; watch how fast it grows.</p>
+  <div class="sizerow" id="patbtns"></div>
+  <table class="ptable" id="pattable">
+    <tr><th>n (people)</th><th>Formula</th><th>Circular arrangements</th></tr>
+  </table>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- s4: decision tree -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Plan</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Is the arrangement in a CIRCLE (round table, ring, bracelet, keyring)? If it's a straight line instead, just use n!.</div>
+    <div class="node"><span class="step-n">2</span>Count the people/items &rarr; that's n.</div>
+    <div class="node"><span class="step-n">3</span>Fix ONE item's position (it can't rotate away) &rarr; arrange the rest in a line: (n&minus;1)!</div>
+    <div class="node"><span class="step-n">4</span>Are any of the items IDENTICAL (like twins)? If yes, ALSO divide by r! for each repeated item &mdash; just like Lesson 1!</div>
+    <div class="node"><span class="step-n">5</span>Full combined formula: <strong>(n&minus;1)! &divide; (r&#8321;! &times; r&#8322;! &times; ...)</strong></div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Always check circle vs line FIRST, then check for repeats SECOND. Missing either check gives the wrong answer.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">One big example &#8594;</button></div>
+</div>
+
+<!-- s5: CAPSTONE combined example -->
+<div class="screen" id="s5">
+<div class="card">
+  <span class="badge-cap">&#11088; Capstone &mdash; Combining Both Ideas</span>
+  <h2>6 Friends, Round Table, 2 Are Identical Twins</h2>
+  <p><strong>6 friends sit around a round table. Two of them are identical twins (impossible to tell apart once seated). How many DIFFERENT-looking circular seatings are there?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; it's a circle, so start with (n&minus;1)!:</span> n = 6 &rarr; (6&minus;1)! = 5! = 120</div>
+    <div class="ln"><span class="note">Step 2 &mdash; check for repeats:</span> the 2 twins are identical &rarr; r = 2, so also divide by 2!</div>
+    <div class="ln">120 &divide; 2! = 120 &divide; 2 = 60</div>
+    <div class="ln ans">60 different-looking circular seatings</div>
+  </div>
+  <div class="big-rule" style="font-size:1rem">Circle rule AND repeats rule together: (n&minus;1)! &divide; (r&#8321;! &times; r&#8322;! &times; ...)</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Do the circle step first ((n&minus;1)!), THEN divide for repeats &mdash; not the other way around.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">My turn &#8594;</button></div>
+</div>
+
+<!-- s6: practice -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>Your Turn</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Circle first: (n&minus;1)!. Then repeats: divide by r! for each identical group.</p>
+
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 4 friends sit around a round table. 2 of them are identical twins. How many different-looking seatings?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 12</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">n=4 &rarr; (4-1)!=3!=6. Twins: r=2 &rarr; divide by 2!</div><div class="ln">6 &divide; 2 = 3</div><div class="ln ans">3</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; 5 keys are arranged on a circular keyring. 2 of the keys look identical. How many different-looking arrangements?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 24</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">n=5 &rarr; (5-1)!=4!=24. 2 identical: r=2 &rarr; divide by 2!</div><div class="ln">24 &divide; 2 = 12</div><div class="ln ans">12</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; 6 charms hang around a circular bracelet. 3 of the charms are identical stars. How many different-looking arrangements?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 40</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 60</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">n=6 &rarr; (6-1)!=5!=120. 3 identical: r=3 &rarr; divide by 3!=6</div><div class="ln">120 &divide; 6 = 20</div><div class="ln ans">20</div></div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; 8 lanterns hang around a circular frame. 2 of the lanterns are identical (same colour, same size). How many different-looking arrangements?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 1260</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 2520</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 5040</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">n=8 &rarr; (8-1)!=7!=5040. 2 identical: r=2 &rarr; divide by 2!</div><div class="ln">5040 &divide; 2 = 2520</div><div class="ln ans">2520</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- s7: recap -->
+<div class="screen" id="s7">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Circular Arrangements &mdash; in one line</div>
+  <p style="font-size:1.05rem"><strong>(n&minus;1)! &divide; (r&#8321;! &times; r&#8322;! &times; ...)</strong> &mdash; fix one seat to kill the rotations, then divide out any identical items just like Lesson 1.</p>
+  <p style="font-size:.95rem;margin-top:6px">Two skills, one formula: circle first, repeats second.</p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You spot circle vs straight line BEFORE choosing a formula</li>
+    <li>You remember to subtract 1 from n for the circle step</li>
+    <li>You still check for identical items and divide by r! afterward</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">Ready for Unit 40's test? It combines everything from both lessons.</p>
+</div>
+<div class="navrow">
+  <a href="Counting_Lesson_PermutationsWithRepeats.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#00796B;color:#fff;border:2px solid #00796B;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Yes! Circle step then repeats step.';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Do (n-1)! first, then divide by r! for repeats. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ── Circle rotate widget ─────────────────────────
+var ringNames=['Alice','Ben','Cy','Dee'];
+var ringRot=0;
+function layoutRing(){
+  var stage=document.getElementById('ring1');
+  var old=stage.querySelectorAll('.seat'); old.forEach(function(s){s.remove();});
+  var n=ringNames.length, R=95, cx=110, cy=110;
+  for(var i=0;i<n;i++){
+    var angle=(Math.PI*2*i/n) - Math.PI/2;
+    var x=cx+R*Math.cos(angle), y=cy+R*Math.sin(angle);
+    var seat=document.createElement('div');
+    seat.className='seat';
+    seat.style.left=x+'px'; seat.style.top=y+'px';
+    seat.textContent=ringNames[(i+ringRot)%n];
+    stage.appendChild(seat);
+  }
+}
+function rotateRing(){
+  ringRot=(ringRot+1)%ringNames.length;
+  layoutRing();
+  var ro=document.getElementById('ring1-readout');
+  var display=ringRot+1;
+  if(ringRot===0){ ro.innerHTML='Back to the start! Same order all along &mdash; that\'s why we only count <strong>1</strong> of these 4 rotations.'; }
+  else { ro.innerHTML='Rotation '+display+' of 4 &mdash; same neighbours, same circle, just a different "starting seat"'; }
+}
+layoutRing();
+
+function showAllCircles(){
+  function permute(arr){ if(arr.length<=1) return [arr.slice()]; var out=[]; for(var i=0;i<arr.length;i++){ var rest=arr.slice(0,i).concat(arr.slice(i+1)); var subs=permute(rest); for(var j=0;j<subs.length;j++){ out.push([arr[i]].concat(subs[j])); } } return out; }
+  var rest=permute(['Ben','Cy','Dee']);
+  var div=document.getElementById('allcircles');
+  var html='';
+  rest.forEach(function(p,idx){ html += (idx+1)+') Alice &rarr; '+p.join(' &rarr; ')+' &rarr; back to Alice<br>'; });
+  div.innerHTML=html;
+}
+
+// ── Pattern table widget ─────────────────────────
+var patNs=[3,4,5,6,7,8];
+var patBtns=document.getElementById('patbtns');
+patNs.forEach(function(n){
+  var b=document.createElement('button');
+  b.className='size-btn'; b.textContent='n = '+n;
+  b.onclick=function(){ addPatRow(n); b.classList.add('on'); b.disabled=true; };
+  patBtns.appendChild(b);
+});
+function fact(k){ var r=1; for(var i=2;i<=k;i++) r*=i; return r; }
+function addPatRow(n){
+  var tbl=document.getElementById('pattable');
+  var row=document.createElement('tr');
+  row.innerHTML='<td>'+n+'</td><td>('+n+'&minus;1)! = '+(n-1)+'!</td><td><strong>'+fact(n-1)+'</strong></td>';
+  tbl.appendChild(row);
+}
+</script>
+</body>
+</html>

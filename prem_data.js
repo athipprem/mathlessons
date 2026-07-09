@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '5 Jul 2026',
+  updated:        '9 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:39, topic:'Balance Scales: Ratios & Substitution Chains (Algebraic Thinking)', status:'In Progress' },
+  currentUnit: { n:40, topic:'Permutations with Repeats & Circular Arrangements (Art of Counting)', status:'In Progress' },
   lastUnit: {
-    n:38, score:14, outOf:15, pct:93, delta:+2, prevScore:12,
-    patternLabel: 'U38 — Distributing Identical Items (Stars and Bars) & Listing: Three Coins, PASSED',
-    patternInsight: '14/15 (93%) <strong>PASSED</strong> &mdash; the strongest score of the current run, and both topics were BRAND NEW (not a retest). Every distributing question (Q1, Q3, Q4, Q5, Q11, Q15) and every 3-variable listing question (Q6&ndash;Q10, Q13, Q14) came back correct, including harder Section C numbers (n=20&rarr;171) and a coin-set never seen in the lessons (2¢/3¢/5¢, Q14). This is the second confirming case for the interactive-visual blueprint &mdash; first for a retest (U37), now for genuinely new material. The single miss (Q12) was a narrow "which formula" mix-up, not a gap in either method: he applied the 3-group "choose 2 gaps" combination to a plain 2-group problem (15 sweets, 2 jars), getting 91 instead of 14.',
-    analysisLabel: 'Next: U39 — Balance Scales: Ratios & Substitution Chains (Algebraic Thinking)',
-    analysisInsight: 'U38 passed comfortably (14/15 &ge; 12), so no retest is needed. With both new topics landing this well, U39 returns to the general topic rotation, competition-weighted per the ASMOPSS timeline (~5 weeks out): Algebraic Thinking, via a new balance-scale skill (cancelling mixed-item pans to find a ratio, then substituting one clue into a second to solve for real weights) &mdash; extends what Prem already knows from U35&rsquo;s balance-scale logic (heavier/lighter, simple trading) into full two-clue algebra. Standing reminder carried forward (not a lesson): "count the groups first &mdash; 2 groups only ever needs gaps itself, never the choose-2 step." Milestone M4 still lands after U40 &mdash; 8 of the 10 units since M3 are now done (U31&ndash;U38).',
-    qSummary: '<strong>Sec A 5/5 | Sec B 5/5 | Sec C 4/5</strong> — 14/15 PASSED',
+    n:39, score:12, outOf:15, pct:80, delta:-2, prevScore:14,
+    patternLabel: 'U39 — Balance Scales: Ratios & Substitution Chains, PASSED',
+    patternInsight: '12/15 (80%) <strong>PASSED</strong> &mdash; Sections A and B are a clean 10/10 across ten different fruit/item pairs: cancelling a mixed-pan balance down to a ratio (Sec A), then turning that ratio into a real weight (Sec B). Section C splits cleanly in two: Q11 &amp; Q12, where Clue 1 is handed to him outright and he only has to substitute, are both correct &mdash; Q12&rsquo;s scratch work shows genuine multi-line algebra (1 ring=5 chips &rarr; 6 chips=42g &rarr; 1 chip=7g). Q13&ndash;Q15, which require DERIVING Clue 1 by cancelling first and THEN substituting it into a second mixed clue, all came back illegible or incomplete (correct answers 15g, 16g, 18g) &mdash; not a wrong method, but the two-step CHAIN breaking down under the old fixed 2-row working space. This is the first real test of combining two separately-mastered skills in one question, and it didn&rsquo;t hold. Light watch-point: Q1 was solved with raw algebra (4a+1m=3a+4m) instead of the taught pan-by-pan cancel &mdash; correct and a healthy sign of abstraction, but worth confirming he can still explain the physical cancel logic in words, since it&rsquo;s exactly what Q13&ndash;15&rsquo;s derivation step rests on.',
+    analysisLabel: 'Next: U40 — Permutations with Repeats & Circular Arrangements (Art of Counting)',
+    analysisInsight: 'U39 passed comfortably (12/15 &ge; 12), so no retest is needed. U40 folds in a short "chain it in one question" warm-up (2&ndash;3 worked examples doing cancel&rarr;substitute back to back, same micro-step granularity as Lesson 2 Example 2) before its main new content, continuing the competition-weighted rotation into Art of Counting: permutations of items with repeats (n!&divide;r&#8321;!r&#8322;!...) and circular arrangements ((n&minus;1)!), capped with a lesson capstone that combines both BEFORE the test asks it &mdash; directly applying the U39 lesson learned about testing combined skills cold. U40 is also the FIRST test to use the new 3-empty-rows spacing rule, a direct response to U39&rsquo;s illegible Section C working. Milestone M4 lands after U40 &mdash; all 10 units since M3 (U31&ndash;U40) will then be complete.',
+    qSummary: '<strong>Sec A 5/5 | Sec B 5/5 | Sec C 2/5</strong> — 12/15 PASSED',
     qBreakdown: [
-      { q:'Q1', topic:'Distribute — 2 groups, n=5',            lvl:'w', pass:true,  note:'&#10003; 4.' },
-      { q:'Q2', topic:'Distribute — 2 groups, n=7',            lvl:'w', pass:true,  note:'&#10003; 6.' },
-      { q:'Q3', topic:'Distribute — 3 groups, n=6',            lvl:'w', pass:true,  note:'&#10003; 10.' },
-      { q:'Q4', topic:'Distribute — 3 groups, n=8',            lvl:'w', pass:true,  note:'&#10003; 21.' },
-      { q:'Q5', topic:'Distribute — 3 groups, n=10',           lvl:'w', pass:true,  note:'&#10003; 36.' },
-      { q:'Q6', topic:'Listing — coin ways, 12¢ (1/2/5)',      lvl:'m', pass:true,  note:'&#10003; 13.' },
-      { q:'Q7', topic:'Listing — coin ways, 7¢',               lvl:'m', pass:true,  note:'&#10003; 6.' },
-      { q:'Q8', topic:'Listing — coin ways, 15¢',              lvl:'m', pass:true,  note:'&#10003; 18.' },
-      { q:'Q9', topic:'Listing — coin ways, 13¢',              lvl:'m', pass:true,  note:'&#10003; 14.' },
-      { q:'Q10',topic:'Listing — coin ways, 4¢',               lvl:'m', pass:true,  note:'&#10003; 3.' },
-      { q:'Q11',topic:'Distribute — 3 groups, n=9  ★★',        lvl:'h', pass:true,  note:'&#10003; 28.' },
-      { q:'Q12',topic:'Distribute — 2 groups, n=15  ★★',       lvl:'h', pass:false, note:'&#10007; gave 91; correct 14. Applied the 3-group "choose 2 gaps" formula ((14&times;13)&divide;2) to a 2-group problem, which only needs gaps=14 directly &mdash; a formula-discrimination slip, not a method gap (Q1/Q2/Q11 all correct with the right formula each time).' },
-      { q:'Q13',topic:'Listing — coin ways, 10¢ (1/3/5)  ★★',  lvl:'h', pass:true,  note:'&#10003; 7.' },
-      { q:'Q14',topic:'Listing — coin ways, 12¢ (2/3/5)  ★★',  lvl:'h', pass:true,  note:'&#10003; 5 &mdash; a coin-set never seen in the lessons; clean transfer.' },
-      { q:'Q15',topic:'Distribute — 3 groups, n=20  ★★',       lvl:'h', pass:true,  note:'&#10003; 171.' }
+      { q:'Q1', topic:'Cancel & Ratio — apples/mangoes',        lvl:'w', pass:true,  note:'&#10003; 3. Solved via raw algebra (4a+1m=3a+4m) instead of the taught pan-cancel &mdash; valid alternate route, worth a light verbal check.' },
+      { q:'Q2', topic:'Cancel & Ratio — pears/plums',           lvl:'w', pass:true,  note:'&#10003; 2.' },
+      { q:'Q3', topic:'Cancel & Ratio — melons/kiwis',          lvl:'w', pass:true,  note:'&#10003; 4.' },
+      { q:'Q4', topic:'Cancel & Ratio — papayas/limes',         lvl:'w', pass:true,  note:'&#10003; 2.' },
+      { q:'Q5', topic:'Cancel & Ratio — guavas/figs',           lvl:'w', pass:true,  note:'&#10003; 4.' },
+      { q:'Q6', topic:'Ratio → Weight — coconuts/lemons',       lvl:'m', pass:true,  note:'&#10003; 8g.' },
+      { q:'Q7', topic:'Ratio → Weight — pumpkins/onions',       lvl:'m', pass:true,  note:'&#10003; 9g.' },
+      { q:'Q8', topic:'Ratio → Weight — watermelons/tomatoes',  lvl:'m', pass:true,  note:'&#10003; 15g.' },
+      { q:'Q9', topic:'Ratio → Weight — durians/rambutans',     lvl:'m', pass:true,  note:'&#10003; 24g.' },
+      { q:'Q10',topic:'Ratio → Weight — pineapples/strawberries', lvl:'m', pass:true, note:'&#10003; 10g.' },
+      { q:'Q11',topic:'Substitution ★★ — Clue 1 given (gems/coins)', lvl:'h', pass:true, note:'&#10003; 10g.' },
+      { q:'Q12',topic:'Substitution ★★ — Clue 1 given (rings/chips)', lvl:'h', pass:true, note:'&#10003; 7g &mdash; clean multi-line algebra shown (1 ring=5 chips &rarr; 6 chips=42g &rarr; chip=7g).' },
+      { q:'Q13',topic:'Substitution ★★ — derive Clue 1 THEN chain (cubes/blocks)', lvl:'h', pass:false, note:'&#10007; correct 15g; working shows drawn boxes, no completed numeric chain.' },
+      { q:'Q14',topic:'Substitution ★★ — derive Clue 1 THEN chain (tiles/discs)',  lvl:'h', pass:false, note:'&#10007; correct 16g; question text annotated/underlined but answer area just scribbles.' },
+      { q:'Q15',topic:'Substitution ★★ — derive Clue 1 THEN chain (counters/weights)', lvl:'h', pass:false, note:'&#10007; correct 18g; no organised working visible.' }
     ]
   },
   _M3archived: {
@@ -82,7 +82,7 @@ var PREM_DATA = {
   skills: [
     { name: 'Logic & Reasoning', c: 88, t: 90 },
     { name: 'Number Sense',      c: 88, t: 90 },
-    { name: 'Algebra',           c: 98, t: 85 },
+    { name: 'Algebra',           c: 99, t: 85 },
     { name: 'Arithmetic',        c: 83, t: 85 },
     { name: 'Geometry',          c: 74, t: 80 },
     { name: 'Counting',          c: 87, t: 85 },
@@ -91,7 +91,7 @@ var PREM_DATA = {
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [88, 74, 88, 98, 87, 83, 89, 76],
+  radarCurrent:  [88, 74, 88, 99, 87, 83, 89, 76],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
 
@@ -138,23 +138,37 @@ var PREM_DATA = {
     { n:35, score:13, delta:-1, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:36, score:10, delta:-3, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false },
     { n:37, score:12, delta:+2, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
-    { n:38, score:14, delta:+2, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
+    { n:38, score:14, delta:+2, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
+    { n:39, score:12, delta:-2, color:'linear-gradient(135deg,#7E57C2,#4527A0)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 40,
+      badge: 'linear-gradient(135deg,#00796B,#00695C)',
+      title: 'Permutations with Repeats &amp; Circular Arrangements (Art of Counting)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'L1: Repeats + chain warm-up', c:'tblue' },
+        { t:'L2: Circular + combined capstone', c:'tblue' },
+        { t:'Last unit before Milestone M4', c:'torange' }
+      ],
+      note: 'U40: continues the competition-weighted rotation into Art of Counting. L1 opens with a short "chain it in one question" warm-up (cancel&rarr;substitute back to back, addressing U39\'s Section C gap) before its main content: arranging letters/items with repeats (n! &divide; r&#8321;!r&#8322;!...). L2 teaches circular arrangements ((n&minus;1)!) then a CAPSTONE worked example combining circle + repeats together BEFORE the test asks it &mdash; applying the lesson learned from U39 (never test a combined skill cold). Sec A repeats-only, Sec B circular-only, Sec C ★★ combined. First test to use the new 3-empty-row spacing rule. Last unit before Milestone M4.',
+      status: 'pending'
+    },
+    {
       n: 39,
       badge: 'linear-gradient(135deg,#4527A0,#7E57C2)',
       title: 'Balance Scales: Ratios &amp; Substitution Chains (Algebraic Thinking)',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: The Cancel Trick', c:'tblue' },
-        { t:'L2: Two Clues, Substitution', c:'tblue' },
-        { t:'Return to rotation — Algebraic Thinking', c:'torange' }
+        { t:'12/15 (80%) &#10003; PASSED', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Sec A 5/5 + Sec B 5/5', c:'tgreen' },
+        { t:'Sec C 2/5 — chain breaks under pressure', c:'tred' },
+        { t:'Q13-15: illegible/incomplete working', c:'torange' }
       ],
-      note: 'U39: back to the general topic rotation, competition-weighted (Algebraic Thinking) now that both U38 topics landed at 93% first try. Extends U35&rsquo;s balance-scale logic (heavier/lighter, simple trading) into full two-item algebra. L1 teaches the "cancel trick": when the same item sits on both pans of a mixed-item balance, cancel it from both sides until only one item type is left, reading off a ratio like "1 apple = 2 bananas." L2 teaches substitution: when a second clue (another balance, or a total weight) still has both items mixed in, substitute the Clue-1 ratio into it, combine, divide to find one item\'s weight, then multiply back for the other. Sec A ratio-only, Sec B ratio→real weight, Sec C ★★ two-clue substitution chains.',
-      status: 'pending'
+      note: '12/15 &#10003; <strong>PASSED</strong> &mdash; Sections A and B a clean 10/10 (cancelling to a ratio, then ratio&rarr;real weight, across ten fruit pairs). Section C splits in two: Q11 &amp; Q12 (Clue 1 given outright, just substitute) both correct, incl. genuine multi-line algebra on Q12. Q13&ndash;Q15 (derive Clue 1 by cancelling FIRST, then chain into a second clue) all came back illegible or incomplete &mdash; the first real test of combining two mastered skills in one question, and it broke down under the old fixed 2-row working space. Directly drove two new standing rules: the U40 chain warm-up, and the 3-empty-row spacing rule.',
+      status: 'done'
     },
     {
       n: 38,
@@ -767,6 +781,12 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 88
     },
     {
+      label:     'Chaining two mastered skills in ONE question — ACTIVE (new, U39)',
+      pill:      'p2', pillText: 'Monitor &#128992;',
+      score:     'U39 Section C: when Clue 1 is handed over outright (Q11, Q12), substitution is solid, incl. real multi-line algebra. But when Clue 1 must first be DERIVED by cancelling, then chained into a second mixed clue (Q13, Q14, Q15), all three came back illegible or incomplete &mdash; 0/3. Both component skills (U39 L1 cancel, U39 L2 substitute) are individually mastered; it&rsquo;s the FIRST time they were combined in one question, and it broke down under the old fixed 2-row working space, not a concept gap. U40 responds with a short chain warm-up plus the new 3-empty-row spacing rule, and models any new combined-skill question with a lesson capstone before testing it cold.',
+      fillClass: 'g2', fillPct: 58
+    },
+    {
       label:     '"Count the groups first" — 2-group vs 3-group formula mix-up — MONITOR (new, U38)',
       pill:      'p2', pillText: 'Monitor &#128992;',
       score:     'U38 Q12: a plain 2-group distribute (15 sweets, 2 jars &rarr; answer is just gaps=14) got the fancier 3-group "choose 2 of the gaps" formula applied instead ((14&times;13)&divide;2=91) &mdash; the same move he correctly used one question earlier on the harder-flagged Q11. Both easier 2-group Qs (Q1, Q2) were fine, suggesting the ★★ "harder" framing pulled him toward the more complex-looking tool without re-checking the group count. Quick habit fix, not a re-teach: state "2 groups → gaps. 3 groups → choose 2 of the gaps" before computing.',
@@ -845,7 +865,7 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 97
     }
   ],
-  radarLegendUnit: 'U38'
+  radarLegendUnit: 'U39'
 
 };
 
