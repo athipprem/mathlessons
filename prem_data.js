@@ -20,13 +20,13 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:40, topic:'Permutations with Repeats & Circular Arrangements (Art of Counting)', status:'In Progress' },
+  currentUnit: { n:40, topic:'Chaining Two Clues (Algebraic Thinking) & Arrangements: Repeats/Circles (Art of Counting)', status:'In Progress' },
   lastUnit: {
     n:39, score:12, outOf:15, pct:80, delta:-2, prevScore:14,
     patternLabel: 'U39 — Balance Scales: Ratios & Substitution Chains, PASSED',
     patternInsight: '12/15 (80%) <strong>PASSED</strong> &mdash; Sections A and B are a clean 10/10 across ten different fruit/item pairs: cancelling a mixed-pan balance down to a ratio (Sec A), then turning that ratio into a real weight (Sec B). Section C splits cleanly in two: Q11 &amp; Q12, where Clue 1 is handed to him outright and he only has to substitute, are both correct &mdash; Q12&rsquo;s scratch work shows genuine multi-line algebra (1 ring=5 chips &rarr; 6 chips=42g &rarr; 1 chip=7g). Q13&ndash;Q15, which require DERIVING Clue 1 by cancelling first and THEN substituting it into a second mixed clue, all came back illegible or incomplete (correct answers 15g, 16g, 18g) &mdash; not a wrong method, but the two-step CHAIN breaking down under the old fixed 2-row working space. This is the first real test of combining two separately-mastered skills in one question, and it didn&rsquo;t hold. Light watch-point: Q1 was solved with raw algebra (4a+1m=3a+4m) instead of the taught pan-by-pan cancel &mdash; correct and a healthy sign of abstraction, but worth confirming he can still explain the physical cancel logic in words, since it&rsquo;s exactly what Q13&ndash;15&rsquo;s derivation step rests on.',
-    analysisLabel: 'Next: U40 — Permutations with Repeats & Circular Arrangements (Art of Counting)',
-    analysisInsight: 'U39 passed comfortably (12/15 &ge; 12), so no retest is needed. U40 folds in a short "chain it in one question" warm-up (2&ndash;3 worked examples doing cancel&rarr;substitute back to back, same micro-step granularity as Lesson 2 Example 2) before its main new content, continuing the competition-weighted rotation into Art of Counting: permutations of items with repeats (n!&divide;r&#8321;!r&#8322;!...) and circular arrangements ((n&minus;1)!), capped with a lesson capstone that combines both BEFORE the test asks it &mdash; directly applying the U39 lesson learned about testing combined skills cold. U40 is also the FIRST test to use the new 3-empty-rows spacing rule, a direct response to U39&rsquo;s illegible Section C working. Milestone M4 lands after U40 &mdash; all 10 units since M3 (U31&ndash;U40) will then be complete.',
+    analysisLabel: 'Next: U40 — Chaining Two Clues (Algebra) & Arrangements: Repeats/Circles (Art of Counting)',
+    analysisInsight: 'U39 passed comfortably (12/15 &ge; 12), so no retest is needed, BUT scoring 0/3 on Q13&ndash;15 (the derive-then-chain questions) is too significant to fold into a quick warm-up &mdash; revised 9 Jul 2026 to give it a full standalone lesson instead. U40 Lesson 1 rebuilds the chaining skill from scratch using the Unit 21 equation method (letters on both sides, already at 15/15 PERFECT): sort Clue 1 into a ratio, substitute it into Clue 2, multiply back. To stay within the 2-lessons-per-unit rule, the two Art of Counting topics (permutations with repeats, n!&divide;r&#8321;!r&#8322;!...; and circular arrangements, (n&minus;1)!) are combined into a single Lesson 2, capped with a capstone that combines both BEFORE the test asks it &mdash; directly applying the U39 lesson learned about testing combined skills cold. The test now mirrors this: Section A = Chaining, Section B = Repeats, Section C = Circular (incl. combined). U40 is also the FIRST test to use the new 3-empty-rows-first spacing rule (fell back to 2 rows once rendered, per the standing rule). Milestone M4 lands after U40 &mdash; all 10 units since M3 (U31&ndash;U40) will then be complete.',
     qSummary: '<strong>Sec A 5/5 | Sec B 5/5 | Sec C 2/5</strong> — 12/15 PASSED',
     qBreakdown: [
       { q:'Q1', topic:'Cancel & Ratio — apples/mangoes',        lvl:'w', pass:true,  note:'&#10003; 3. Solved via raw algebra (4a+1m=3a+4m) instead of the taught pan-cancel &mdash; valid alternate route, worth a light verbal check.' },
@@ -146,15 +146,15 @@ var PREM_DATA = {
   unitLog: [
     {
       n: 40,
-      badge: 'linear-gradient(135deg,#00796B,#00695C)',
-      title: 'Permutations with Repeats &amp; Circular Arrangements (Art of Counting)',
+      badge: 'linear-gradient(135deg,#4527A0,#00796B)',
+      title: 'Chaining Two Clues (Algebra) &amp; Arrangements: Repeats &amp; Circles (Art of Counting)',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Repeats + chain warm-up', c:'tblue' },
-        { t:'L2: Circular + combined capstone', c:'tblue' },
+        { t:'L1: Chaining Two Clues (full lesson)', c:'tblue' },
+        { t:'L2: Repeats + Circles combined', c:'tblue' },
         { t:'Last unit before Milestone M4', c:'torange' }
       ],
-      note: 'U40: continues the competition-weighted rotation into Art of Counting. L1 opens with a short "chain it in one question" warm-up (cancel&rarr;substitute back to back, addressing U39\'s Section C gap) before its main content: arranging letters/items with repeats (n! &divide; r&#8321;!r&#8322;!...). L2 teaches circular arrangements ((n&minus;1)!) then a CAPSTONE worked example combining circle + repeats together BEFORE the test asks it &mdash; applying the lesson learned from U39 (never test a combined skill cold). Sec A repeats-only, Sec B circular-only, Sec C ★★ combined. First test to use the new 3-empty-row spacing rule. Last unit before Milestone M4.',
+      note: 'U40, revised 9 Jul 2026: U39\'s Q13&ndash;15 zero score (0/3 on deriving-then-chaining) was too significant for a quick warm-up, so it becomes a full standalone Lesson 1 &mdash; Chaining Two Clues &mdash; rebuilt around the Unit 21 equation method (sort matching letters to one side, subtract the smaller group, substitute, multiply back), replacing the earlier pan-cancelling framing. To stay within the 2-lessons-per-unit rule, the two Art of Counting topics (permutations with repeats, n! &divide; r&#8321;!r&#8322;!...; and circular arrangements, (n&minus;1)!) are combined into one Lesson 2, capped with a capstone combining both BEFORE the test asks it. Test mirrors this: Sec A Chaining, Sec B Repeats, Sec C Circular (incl. combined ★★). First test to use the new 3-empty-row spacing rule (fell back to 2 rows once rendered). Last unit before Milestone M4.',
       status: 'pending'
     },
     {
@@ -783,7 +783,7 @@ var PREM_DATA = {
     {
       label:     'Chaining two mastered skills in ONE question — ACTIVE (new, U39)',
       pill:      'p2', pillText: 'Monitor &#128992;',
-      score:     'U39 Section C: when Clue 1 is handed over outright (Q11, Q12), substitution is solid, incl. real multi-line algebra. But when Clue 1 must first be DERIVED by cancelling, then chained into a second mixed clue (Q13, Q14, Q15), all three came back illegible or incomplete &mdash; 0/3. Both component skills (U39 L1 cancel, U39 L2 substitute) are individually mastered; it&rsquo;s the FIRST time they were combined in one question, and it broke down under the old fixed 2-row working space, not a concept gap. U40 responds with a short chain warm-up plus the new 3-empty-row spacing rule, and models any new combined-skill question with a lesson capstone before testing it cold.',
+      score:     'U39 Section C: when Clue 1 is handed over outright (Q11, Q12), substitution is solid, incl. real multi-line algebra. But when Clue 1 must first be DERIVED by cancelling, then chained into a second mixed clue (Q13, Q14, Q15), all three came back illegible or incomplete &mdash; 0/3. Both component skills (U39 L1 cancel, U39 L2 substitute) are individually mastered; it&rsquo;s the FIRST time they were combined in one question, and it broke down under the old fixed 2-row working space, not a concept gap. Revised 9 Jul 2026: 0/3 was too significant for a quick warm-up, so U40 gives it a full standalone lesson (Chaining Two Clues) rebuilt around the already-mastered Unit 21 equation method, plus the new 3-empty-row spacing rule. Standing practice going forward: model any new combined-skill question with a lesson capstone before testing it cold.',
       fillClass: 'g2', fillPct: 58
     },
     {
