@@ -15,35 +15,35 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '9 Jul 2026',
+  updated:        '10 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:40, topic:'Chaining Two Clues (Algebraic Thinking) & Arrangements: Repeats/Circles (Art of Counting)', status:'In Progress' },
+  currentUnit: { n:41, topic:'Permutations with Repeats — Targeted Retest (Art of Counting)', status:'In Progress' },
   lastUnit: {
-    n:39, score:12, outOf:15, pct:80, delta:-2, prevScore:14,
-    patternLabel: 'U39 — Balance Scales: Ratios & Substitution Chains, PASSED',
-    patternInsight: '12/15 (80%) <strong>PASSED</strong> &mdash; Sections A and B are a clean 10/10 across ten different fruit/item pairs: cancelling a mixed-pan balance down to a ratio (Sec A), then turning that ratio into a real weight (Sec B). Section C splits cleanly in two: Q11 &amp; Q12, where Clue 1 is handed to him outright and he only has to substitute, are both correct &mdash; Q12&rsquo;s scratch work shows genuine multi-line algebra (1 ring=5 chips &rarr; 6 chips=42g &rarr; 1 chip=7g). Q13&ndash;Q15, which require DERIVING Clue 1 by cancelling first and THEN substituting it into a second mixed clue, all came back illegible or incomplete (correct answers 15g, 16g, 18g) &mdash; not a wrong method, but the two-step CHAIN breaking down under the old fixed 2-row working space. This is the first real test of combining two separately-mastered skills in one question, and it didn&rsquo;t hold. Light watch-point: Q1 was solved with raw algebra (4a+1m=3a+4m) instead of the taught pan-by-pan cancel &mdash; correct and a healthy sign of abstraction, but worth confirming he can still explain the physical cancel logic in words, since it&rsquo;s exactly what Q13&ndash;15&rsquo;s derivation step rests on.',
-    analysisLabel: 'Next: U40 — Chaining Two Clues (Algebra) & Arrangements: Repeats/Circles (Art of Counting)',
-    analysisInsight: 'U39 passed comfortably (12/15 &ge; 12), so no retest is needed, BUT scoring 0/3 on Q13&ndash;15 (the derive-then-chain questions) is too significant to fold into a quick warm-up &mdash; revised 9 Jul 2026 to give it a full standalone lesson instead. U40 Lesson 1 rebuilds the chaining skill from scratch using the Unit 21 equation method (letters on both sides, already at 15/15 PERFECT): sort Clue 1 into a ratio, substitute it into Clue 2, multiply back. To stay within the 2-lessons-per-unit rule, the two Art of Counting topics (permutations with repeats, n!&divide;r&#8321;!r&#8322;!...; and circular arrangements, (n&minus;1)!) are combined into a single Lesson 2, capped with a capstone that combines both BEFORE the test asks it &mdash; directly applying the U39 lesson learned about testing combined skills cold. The test now mirrors this: Section A = Chaining, Section B = Repeats, Section C = Circular (incl. combined). U40 is also the FIRST test to use the new 3-empty-rows-first spacing rule (fell back to 2 rows once rendered, per the standing rule). Milestone M4 lands after U40 &mdash; all 10 units since M3 (U31&ndash;U40) will then be complete.',
-    qSummary: '<strong>Sec A 5/5 | Sec B 5/5 | Sec C 2/5</strong> — 12/15 PASSED',
+    n:40, score:8, outOf:15, pct:53, delta:-4, prevScore:12,
+    patternLabel: 'U40 — Chaining Two Clues & Arrangements: Repeats/Circles, NOT PASSED',
+    patternInsight: '8/15 (53%) <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 0/5, Sec C 4/5. The rebuilt Chaining lesson (equation method, replacing the confusing "cancel trick" warm-up) worked: Q1, Q2, Q4, Q5 all clean, including the hardest chain question. The lone Sec A miss (Q3) isn&rsquo;t a chaining failure &mdash; the full derivation was correct, he just reported the SHELL&rsquo;s weight when the question asked for the PEBBLE&rsquo;s &mdash; the same pre-existing "answer exactly what&rsquo;s asked" gap as M3/U35. Circular arrangements, brand new on first exposure, landed well at 4/5 (Q15&rsquo;s miss was a divisor-setup slip: divided by 8 instead of 3!&times;2!=12, not a break in the (n&minus;1)! structure). Section B (Permutations with Repeats) is the real story: Q7, Q8, Q9 each show the PRECEDING question&rsquo;s correct value, with working that literally computes the previous word&rsquo;s factorial &mdash; correctly, every time. The formula itself (n!&divide;r&#8321;!r&#8322;!...) was applied right three times in a row; it was just recorded one question late. Q6 (no working, "3" looks like a unique-letter count instead of an arrangement count) may be what triggered the misalignment; Q10 breaks the pattern at the end with confused working.',
+    analysisLabel: 'Next: U41 — Permutations with Repeats, Targeted Retest (Art of Counting)',
+    analysisInsight: 'Per the multi-topic retest rule (only the failed section needs re-testing, not a full unit repeat): Sec A (4/5) and Sec C (4/5) both cleared the 4/5 bar and do not need retesting. Sec B (0/5) did not, so U41 is a short, focused 15-question retest on Permutations with Repeats only. A new top-up lesson (Counting_Lesson_RepeatsPrecisionRetest.html) targets the two specific issues found: the "arrangements &ne; unique letters" trap (an interactive contrast widget using DEEP: 3 unique letters vs 12 arrangements), and a "check before you write" habit &mdash; say the question number before AND after solving, via a matching-game widget and a 7-step checklist. The retest itself carries a new orange precision banner reinforcing both points, on top of the usual formula banner. Milestone M4 is deferred until U41 passes &mdash; U40 does not count as a clean close of the U31&ndash;U40 cycle.',
+    qSummary: '<strong>Sec A 4/5 | Sec B 0/5 | Sec C 4/5</strong> — 8/15 NOT PASSED',
     qBreakdown: [
-      { q:'Q1', topic:'Cancel & Ratio — apples/mangoes',        lvl:'w', pass:true,  note:'&#10003; 3. Solved via raw algebra (4a+1m=3a+4m) instead of the taught pan-cancel &mdash; valid alternate route, worth a light verbal check.' },
-      { q:'Q2', topic:'Cancel & Ratio — pears/plums',           lvl:'w', pass:true,  note:'&#10003; 2.' },
-      { q:'Q3', topic:'Cancel & Ratio — melons/kiwis',          lvl:'w', pass:true,  note:'&#10003; 4.' },
-      { q:'Q4', topic:'Cancel & Ratio — papayas/limes',         lvl:'w', pass:true,  note:'&#10003; 2.' },
-      { q:'Q5', topic:'Cancel & Ratio — guavas/figs',           lvl:'w', pass:true,  note:'&#10003; 4.' },
-      { q:'Q6', topic:'Ratio → Weight — coconuts/lemons',       lvl:'m', pass:true,  note:'&#10003; 8g.' },
-      { q:'Q7', topic:'Ratio → Weight — pumpkins/onions',       lvl:'m', pass:true,  note:'&#10003; 9g.' },
-      { q:'Q8', topic:'Ratio → Weight — watermelons/tomatoes',  lvl:'m', pass:true,  note:'&#10003; 15g.' },
-      { q:'Q9', topic:'Ratio → Weight — durians/rambutans',     lvl:'m', pass:true,  note:'&#10003; 24g.' },
-      { q:'Q10',topic:'Ratio → Weight — pineapples/strawberries', lvl:'m', pass:true, note:'&#10003; 10g.' },
-      { q:'Q11',topic:'Substitution ★★ — Clue 1 given (gems/coins)', lvl:'h', pass:true, note:'&#10003; 10g.' },
-      { q:'Q12',topic:'Substitution ★★ — Clue 1 given (rings/chips)', lvl:'h', pass:true, note:'&#10003; 7g &mdash; clean multi-line algebra shown (1 ring=5 chips &rarr; 6 chips=42g &rarr; chip=7g).' },
-      { q:'Q13',topic:'Substitution ★★ — derive Clue 1 THEN chain (cubes/blocks)', lvl:'h', pass:false, note:'&#10007; correct 15g; working shows drawn boxes, no completed numeric chain.' },
-      { q:'Q14',topic:'Substitution ★★ — derive Clue 1 THEN chain (tiles/discs)',  lvl:'h', pass:false, note:'&#10007; correct 16g; question text annotated/underlined but answer area just scribbles.' },
-      { q:'Q15',topic:'Substitution ★★ — derive Clue 1 THEN chain (counters/weights)', lvl:'h', pass:false, note:'&#10007; correct 18g; no organised working visible.' }
+      { q:'Q1', topic:'Chaining — ratio only, marbles/buttons',        lvl:'w', pass:true,  note:'&#10003; 2.' },
+      { q:'Q2', topic:'Chaining — ratio only, crayons/stickers',       lvl:'w', pass:true,  note:'&#10003; 2.' },
+      { q:'Q3', topic:'Chaining — full chain, shells/pebbles',         lvl:'w', pass:false, note:'&#10007; wrote 15g (the SHELL&rsquo;s weight); correct 5g (the PEBBLE&rsquo;s weight, as asked). Full equation-sort + substitution was correct &mdash; wrong variable reported, not a chaining failure.' },
+      { q:'Q4', topic:'Chaining — chain + multiply back ★, ribbons/beads', lvl:'w', pass:true, note:'&#10003; 15g &mdash; clean multi-step working.' },
+      { q:'Q5', topic:'Chaining — hardest chain ★★, magnets/clips',    lvl:'w', pass:true,  note:'&#10003; 9g.' },
+      { q:'Q6', topic:'Repeats — FEET',                                lvl:'m', pass:false, note:'&#10007; wrote 3, no working; correct 12. Looks like unique-letter count (F,E,T) instead of arrangements &mdash; possibly what triggered the Section B misalignment.' },
+      { q:'Q7', topic:'Repeats — APPLE',                               lvl:'m', pass:false, note:'&#10007; wrote 12, no working; correct 60. 12 is exactly Q6&rsquo;s (FEET) correct answer.' },
+      { q:'Q8', topic:'Repeats — SUMMER',                              lvl:'m', pass:false, note:'&#10007; wrote 60; correct 360. Working shown is 5!&divide;2=60 &mdash; APPLE&rsquo;s (Q7) computation, correct method, written one question late.' },
+      { q:'Q9', topic:'Repeats — TEACHER',                             lvl:'m', pass:false, note:'&#10007; wrote 360; correct 2520. Working shown is 6!&divide;2=360 &mdash; SUMMER&rsquo;s (Q8) computation, same one-behind pattern.' },
+      { q:'Q10',topic:'Repeats — GIGGLE',                              lvl:'m', pass:false, note:'&#10007; wrote 20; correct 120. Confused working, doesn&rsquo;t fit the shift pattern &mdash; looks like a rushed finish once things had gone off track.' },
+      { q:'Q11',topic:'Circular — plain, n=5',                         lvl:'h', pass:true,  note:'&#10003; 24.' },
+      { q:'Q12',topic:'Circular — plain, n=9',                         lvl:'h', pass:true,  note:'&#10003; 40320 (8! shown correctly).' },
+      { q:'Q13',topic:'Circular — combined ★★, n=7 r3',                lvl:'h', pass:true,  note:'&#10003; 120 (6!=720 &divide; 6 = 120).' },
+      { q:'Q14',topic:'Circular — combined ★★, n=8 r2+2',              lvl:'h', pass:true,  note:'&#10003; 1260 &mdash; 7!=5040, divided by 2 twice for the two repeat pairs, correct structure.' },
+      { q:'Q15',topic:'Circular — combined ★★, n=10 r3+2',             lvl:'h', pass:false, note:'&#10007; wrote 45360; correct 30240. The (n&minus;1)! circular step was right (9!=362880), but divided by 8 instead of 3!&times;2!=12 &mdash; a divisor-setup slip, not a method break.' }
     ]
   },
   _M3archived: {
@@ -139,23 +139,37 @@ var PREM_DATA = {
     { n:36, score:10, delta:-3, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false },
     { n:37, score:12, delta:+2, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:38, score:14, delta:+2, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
-    { n:39, score:12, delta:-2, color:'linear-gradient(135deg,#7E57C2,#4527A0)', star:false }
+    { n:39, score:12, delta:-2, color:'linear-gradient(135deg,#7E57C2,#4527A0)', star:false },
+    { n:40, score:8,  delta:-4, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 41,
+      badge: 'linear-gradient(135deg,#00796B,#004D40)',
+      title: 'Permutations with Repeats — Targeted Retest (Art of Counting)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'Targeted retest — Section B only', c:'tblue' },
+        { t:'Top-up lesson: precision, not concept', c:'tblue' },
+        { t:'Milestone M4 deferred until this passes', c:'torange' }
+      ],
+      note: 'U41, built 10 Jul 2026 after U40 scored 8/15 (Sec A 4/5, Sec B 0/5, Sec C 4/5). Per the multi-topic retest rule, only Section B (Permutations with Repeats) needs re-testing &mdash; Sec A and Sec C both cleared the 4/5 bar. U40&rsquo;s Section B working showed the n!&divide;r&#8321;!r&#8322;!... formula applied CORRECTLY three questions running (Q7, Q8, Q9) &mdash; just recorded one question late each time, plus an early "counted unique letters instead of arrangements" slip (Q6). This is a precision top-up, not a re-teach: a new lesson (Counting_Lesson_RepeatsPrecisionRetest.html) targets the "arrangements &ne; unique letters" trap with an interactive contrast widget, and the "check before you write" habit with a matching game + 7-step checklist. The retest itself is single-topic (all 15 Q on Repeats, escalating difficulty), with a new precision banner alongside the usual formula banner. Milestone M4 is deferred until this passes.',
+      status: 'pending'
+    },
+    {
       n: 40,
       badge: 'linear-gradient(135deg,#4527A0,#00796B)',
       title: 'Chaining Two Clues (Algebra) &amp; Arrangements: Repeats &amp; Circles (Art of Counting)',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Chaining Two Clues (full lesson)', c:'tblue' },
-        { t:'L2: Repeats + Circles combined', c:'tblue' },
-        { t:'Last unit before Milestone M4', c:'torange' }
+        { t:'8/15 (53%) &#10007; NOT PASSED', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Sec A 4/5 + Sec C 4/5 — both pass', c:'tgreen' },
+        { t:'Sec B 0/5 — one-question-behind pattern', c:'tred' },
+        { t:'&rarr; U41 targeted retest, Sec B only', c:'torange' }
       ],
-      note: 'U40, revised 9 Jul 2026: U39\'s Q13&ndash;15 zero score (0/3 on deriving-then-chaining) was too significant for a quick warm-up, so it becomes a full standalone Lesson 1 &mdash; Chaining Two Clues &mdash; rebuilt around the Unit 21 equation method (sort matching letters to one side, subtract the smaller group, substitute, multiply back), replacing the earlier pan-cancelling framing. To stay within the 2-lessons-per-unit rule, the two Art of Counting topics (permutations with repeats, n! &divide; r&#8321;!r&#8322;!...; and circular arrangements, (n&minus;1)!) are combined into one Lesson 2, capped with a capstone combining both BEFORE the test asks it. Test mirrors this: Sec A Chaining, Sec B Repeats, Sec C Circular (incl. combined ★★). First test to use the new 3-empty-row spacing rule (fell back to 2 rows once rendered). Last unit before Milestone M4.',
-      status: 'pending'
+      note: '8/15 &#10007; <strong>NOT PASSED</strong> &mdash; the rebuilt Chaining lesson (Unit 21 equation method) worked: Sec A 4/5, with the lone miss (Q3) a "wrong variable reported" precision slip, not a chaining failure. Circular arrangements landed well first-exposure at 4/5. Section B (Repeats) is the story: Q7&ndash;Q9 each show the PRECEDING question&rsquo;s correct answer with matching correct working &mdash; the formula was applied right, just recorded one question late, three times running. Q6 (unique-letter count instead of arrangements) may be what triggered it. Drove U41: a targeted Section-B-only retest with a precision-focused top-up lesson, not a full re-teach.',
+      status: 'done'
     },
     {
       n: 39,
@@ -781,10 +795,16 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 88
     },
     {
-      label:     'Chaining two mastered skills in ONE question — ACTIVE (new, U39)',
-      pill:      'p2', pillText: 'Monitor &#128992;',
-      score:     'U39 Section C: when Clue 1 is handed over outright (Q11, Q12), substitution is solid, incl. real multi-line algebra. But when Clue 1 must first be DERIVED by cancelling, then chained into a second mixed clue (Q13, Q14, Q15), all three came back illegible or incomplete &mdash; 0/3. Both component skills (U39 L1 cancel, U39 L2 substitute) are individually mastered; it&rsquo;s the FIRST time they were combined in one question, and it broke down under the old fixed 2-row working space, not a concept gap. Revised 9 Jul 2026: 0/3 was too significant for a quick warm-up, so U40 gives it a full standalone lesson (Chaining Two Clues) rebuilt around the already-mastered Unit 21 equation method, plus the new 3-empty-row spacing rule. Standing practice going forward: model any new combined-skill question with a lesson capstone before testing it cold.',
-      fillClass: 'g2', fillPct: 58
+      label:     'Chaining two mastered skills in ONE question — RESOLVED at U40 (Sec A 4/5)',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U39 Section C had scored 0/3 on deriving-then-chaining. U40 rebuilt the skill as a full standalone lesson around the Unit 21 equation method (sort matching letters to one side, substitute, multiply back) &mdash; Sec A came back 4/5, with Q1, Q2, Q4 (multiply-back), Q5 (hardest chain) all clean. The lone miss (Q3) was a "wrong variable reported" precision slip with fully correct working, not a chaining breakdown. The equation-method rebuild is credited and the chaining gap is closed.',
+      fillClass: 'gs', fillPct: 85
+    },
+    {
+      label:     'Permutations with Repeats — "one question behind" tracking slip — ACTIVE (new, U40)',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U40 Section B: 0/5, but Q7, Q8, Q9 each show the PRECEDING question&rsquo;s correct value, with working that literally computes the previous word&rsquo;s factorial &mdash; correctly, every time. The n!&divide;r&#8321;!r&#8322;!... formula was applied right three questions running; it was recorded one question late, every time. Q6 (no working, answer "3" looks like a unique-letter count instead of an arrangement count) may be what triggered the misalignment; Q10 breaks the pattern at the end with confused working. Not a concept gap &mdash; U41 is a targeted retest with a precision-focused top-up lesson (arrangements &ne; unique letters, plus a "say the question number before and after solving" checking habit), not a re-teach of the formula.',
+      fillClass: 'g2', fillPct: 45
     },
     {
       label:     '"Count the groups first" — 2-group vs 3-group formula mix-up — MONITOR (new, U38)',
@@ -795,7 +815,7 @@ var PREM_DATA = {
     {
       label:     'Precision: answer EXACTLY &amp; clearly what is asked (smallest / which / name it right)',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'M3 Q12 (gave 3, not the SMALLEST 0) and Q19 (gave 33, not smallest 13); and U35 Q15 (had the right ball but wrote "the middle" instead of "the one off the scale", not accepted). Same family: finds the right idea but returns the wrong specific one, or names it vaguely. Cheap lost marks; critical for competition. Fix: standing "re-read the exact ask, then name the answer by what makes it special" habit, baked into every ASMOPSS unit.',
+      score:     'M3 Q12 (gave 3, not the SMALLEST 0) and Q19 (gave 33, not smallest 13); U35 Q15 (had the right ball but wrote "the middle" instead of "the one off the scale", not accepted); and U40 Q3 (fully correct chain derivation, but reported the SHELL&rsquo;s weight when the question asked for the PEBBLE&rsquo;s). Same family: finds the right idea but returns the wrong specific one, or names it vaguely. Cheap lost marks; critical for competition. Fix: standing "re-read the exact ask, then name the answer by what makes it special" habit, baked into every ASMOPSS unit.',
       fillClass: 'g2', fillPct: 62
     },
     {
