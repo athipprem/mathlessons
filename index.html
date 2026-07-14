@@ -171,7 +171,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <span id="topbar-sub">&nbsp;&mdash;&nbsp;Grade 4 &nbsp;|&nbsp; ISA 2027 Training &nbsp;|&nbsp; Coach: Chusaki</span>
       </div>
       <div class="topbar-right">
-        <span class="tb-badge tb-green" id="idx-topbar-unit-badge">Unit 41 — In Progress</span>
+        <span class="tb-badge tb-green" id="idx-topbar-unit-badge">Unit 42 — In Progress</span>
         <span class="tb-badge tb-orange">&#8987; <span id="topbar-days">...</span> days to ISA 2027</span>
       </div>
     </div>
@@ -208,13 +208,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <!-- JS-rendered last unit pattern box (reads from prem_data.js) -->
         <div id="idx-unit-pattern" style="margin-bottom:12px"></div>
         <div class="grid-3">
-          <!-- U41 Lesson: Permutations with Repeats — Precision Retest (built 10 Jul 2026) -->
-          <div class="lesson-card" data-unit="41" data-topic="counting" style="border-top:3px solid #00796B">
-            <div class="lc-unit" style="color:#00796B">Art of Counting &middot; Unit 41 &middot; Targeted Retest</div>
-            <div class="lc-title">Repeats &mdash; Precision Retest</div>
-            <div class="lc-desc">U40 Section B scored 0/5, but the working showed the n!&divide;r! formula applied correctly, just recorded one question late. This top-up lesson targets the "arrangements &ne; unique letters" trap and a "check before you write" habit &mdash; not a re-teach. 4 questions.</div>
+          <div class="lesson-card counting" data-unit="42" data-topic="counting" style="border-top:3px solid #00796B">
+            <div class="lc-unit" style="color:#00796B">Art of Counting &middot; Unit 42 &middot; Lesson 1</div>
+            <div class="lc-title">Circular Order &amp; High Repeats</div>
+            <div class="lc-desc">Fixes the NEW M4 finding that (n&minus;1)! gets skipped for circular arrangements under mixed-review pressure, and finishes the r=4 divisor gap flagged at U41 and confirmed still open at M4 (Q22) with a dedicated worked example.</div>
             <div class="lc-badges"><span class="badge badge-new">&#9654; New</span><span class="badge" style="background:#fff3e0;color:#E65100">ASMOPSS</span></div>
-            <a class="btn-start" style="background:linear-gradient(135deg,#00796B,#26A69A)" href="Counting_Lesson_RepeatsPrecisionRetest.html">Open Lesson</a>
+            <a class="btn-start" style="background:linear-gradient(135deg,#00796B,#004D40)" href="Counting_Lesson_CircularOrderAndHighRepeats.html">Start Lesson</a>
+          </div>
+          <div class="lesson-card" data-unit="42" data-topic="problemsolving" style="border-top:3px solid #3949AB">
+            <div class="lc-unit" style="color:#3949AB">Problem Solving &middot; Unit 42 &middot; Lesson 2</div>
+            <div class="lc-title">Fencepost Spacing &mdash; Don't Forget The Ends</div>
+            <div class="lc-desc">Brand-new topic. Straight line spacing (+1), closed loops (no +1), and 2D grids &mdash; addresses the ASMOPSS 2023 diagnostic finding (Q17, blank) that turned out to be the SAME "boundary adjustment" habit as the circular gap, in a different topic.</div>
+            <div class="lc-badges"><span class="badge badge-new">&#9654; New</span><span class="badge" style="background:#fff3e0;color:#E65100">ASMOPSS</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#3949AB,#1A237E)" href="ProblemSolving_Lesson_FencepostSpacing.html">Start Lesson</a>
           </div>
         </div>
       </div>
@@ -300,9 +306,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
           <div class="lesson-card counting" data-unit="41" data-topic="counting" style="border-top:3px solid #004D40">
             <div class="lc-unit" style="color:#004D40">Art of Counting &middot; Unit 41 &middot; Targeted Retest</div>
             <div class="lc-title">Repeats &mdash; Precision Retest</div>
-            <div class="lc-desc">Precision top-up, not a re-teach: "arrangements &ne; unique letters" trap plus a "check before you write" checking habit, via an interactive contrast widget and a matching game.</div>
-            <div class="lc-badges"><span class="badge badge-new">&#9654; New</span><span class="badge" style="background:#fff3e0;color:#E65100">ASMOPSS</span></div>
-            <a class="btn-start" style="background:linear-gradient(135deg,#00796B,#004D40)" href="Counting_Lesson_RepeatsPrecisionRetest.html">Open Lesson</a>
+            <div class="lc-desc">PASSED. Sec B came back a perfect 5/5 &mdash; the one-question-behind pattern and unique-letter confusion are both fully closed. Sec C 3/5 revealed a new, narrow gap: dividing by r instead of r! at r=4.</div>
+            <div class="lc-badges"><span class="badge badge-done">&#10003; Done</span><span class="badge badge-test-done">13/15 &#10003;</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#00796B,#004D40)" href="Counting_Lesson_RepeatsPrecisionRetest.html">Review</a>
           </div>
           <div class="lesson-card counting" data-unit="32" data-topic="counting" style="border-top:3px solid #43e97b">
             <div class="lc-unit">Counting &middot; Unit 32 &middot; Lesson 1</div>
@@ -867,14 +873,41 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         </div>
         <!-- VIEW: BY UNIT -->
         <div id="done-by-unit" style="display:none">
-        <div class="sec-div">Unit 41 &mdash; In Progress &mdash; Permutations with Repeats, Targeted Retest (Art of Counting) (ASMOPSS)</div>
+        <div class="sec-div">Unit 42 &mdash; In Progress &mdash; Circular Order &amp; High Repeats &middot; Fencepost Spacing (ASMOPSS)</div>
+        <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card counting" data-unit="42" style="border-top:3px solid #00796B">
+            <div class="lc-unit" style="color:#00796B">Art of Counting &middot; Unit 42 &middot; Lesson 1</div>
+            <div class="lc-title">Circular Order &amp; High Repeats</div>
+            <div class="lc-desc">Fixes M4's NEW circular (n&minus;1)! gap and finishes the r=4 divisor gap with a dedicated worked example.</div>
+            <div class="lc-badges"><span class="badge" style="background:#E3F2FD;color:#0D47A1">&#9654; In Progress</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#00796B,#004D40)" href="Counting_Lesson_CircularOrderAndHighRepeats.html">Start</a>
+          </div>
+          <div class="lesson-card" data-unit="42" style="border-top:3px solid #3949AB">
+            <div class="lc-unit" style="color:#3949AB">Problem Solving &middot; Unit 42 &middot; Lesson 2</div>
+            <div class="lc-title">Fencepost Spacing &mdash; Don't Forget The Ends</div>
+            <div class="lc-desc">New topic: straight-line (+1), closed loop (no +1), 2D grid &mdash; addresses the ASMOPSS 2023 Q17 finding, the same "boundary adjustment" habit as the circular gap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#E3F2FD;color:#0D47A1">&#9654; In Progress</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#3949AB,#1A237E)" href="ProblemSolving_Lesson_FencepostSpacing.html">Start</a>
+          </div>
+        </div>
+        <div class="sec-div">Milestone M4 &mdash; 57.5/100 (diagnostic) &mdash; ASMOPSS-Style Cumulative Review (Units 31&ndash;41)</div>
+        <div class="grid-3" style="margin-bottom:20px">
+          <div class="lesson-card" data-unit="M4" style="border-top:3px solid #0D47A1">
+            <div class="lc-unit" style="color:#0D47A1">Milestone &middot; M4 &middot; Units 31&ndash;41</div>
+            <div class="lc-title">&#127942; ASMOPSS-Style Cumulative Review</div>
+            <div class="lc-desc">57.5/100 (diagnostic benchmark). Rounds 1&ndash;2 held up well (15/20). Round 3 revealed a NEW gap (circular (n&minus;1)! slipping, Q7/Q13) and confirmed the r=4 divisor gap is still open (Q22). Cross-checked against ASMOPSS 2023 (12/25) the same day.</div>
+            <div class="lc-badges"><span class="badge badge-done">&#10003; Done</span><span class="badge" style="background:#fff8e1;color:#8d6e00">57.5/100</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#0D47A1,#4A148C)" href="https://athipprem.github.io/mathlessons/index.html">Revise the Hub</a>
+          </div>
+        </div>
+        <div class="sec-div">Unit 41 &mdash; 13/15 (87%) &#10003; PASSED &mdash; Permutations with Repeats, Targeted Retest (Art of Counting) (ASMOPSS)</div>
         <div class="grid-3" style="margin-bottom:20px">
           <div class="lesson-card" data-unit="41" style="border-top:3px solid #00796B">
             <div class="lc-unit" style="color:#00796B">Art of Counting &middot; Unit 41 &middot; Targeted Retest</div>
             <div class="lc-title">Repeats &mdash; Precision Retest</div>
-            <div class="lc-desc">In progress. Section-B-only retest after U40 (8/15). Top-up lesson targets "arrangements &ne; unique letters" and a "check before you write" habit — precision, not a re-teach. 4 practice questions.</div>
-            <div class="lc-badges"><span class="badge" style="background:#E0F2F1;color:#00796B">&#9654; In Progress</span></div>
-            <a class="btn-start" style="background:linear-gradient(135deg,#00796B,#004D40)" href="Counting_Lesson_RepeatsPrecisionRetest.html">Open Lesson</a>
+            <div class="lc-desc">Sec A 5/5, Sec B 5/5 ✦ PERFECT (one-question-behind pattern CLOSED), Sec C 3/5 (new r=4 divisor gap — method intact, one substituted value wrong).</div>
+            <div class="lc-badges"><span class="badge badge-done">&#10003; Done</span><span class="badge badge-test-done">13/15 &#10003;</span></div>
+            <a class="btn-start" style="background:linear-gradient(135deg,#00796B,#004D40)" href="Counting_Lesson_RepeatsPrecisionRetest.html">Review</a>
           </div>
         </div>
         <div class="sec-div">Unit 40 &mdash; 8/15 (53%) &#10007; NOT PASSED &mdash; Chaining Two Clues (Algebra) &amp; Arrangements: Repeats &amp; Circles (Art of Counting) (ASMOPSS)</div>

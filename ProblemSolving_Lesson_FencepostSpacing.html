@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fencepost Problems — Don't Forget The Ends</title>
+<style>
+:root{--nav:#3949AB;--nav-dark:#1A237E;--bg:#E8EAF6;--card:#fff;--acc:#3949AB;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#283593;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#E3F2FD);border:2px solid #7986CB;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#1A237E;font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid #5C6BC0;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#1A237E;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F1F3FB;border:1px solid #C5CAE9;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#283593}
+.steps .ln.ans{color:#1A237E;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #9FA8DA;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#3949AB;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.sizerow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.size-btn{border:1.5px solid #9FA8DA;border-radius:8px;padding:9px 14px;background:#fff;color:#1A237E;font-weight:700;font-size:.92rem;cursor:pointer;font-family:inherit}
+.size-btn:hover:not(:disabled){border-color:var(--acc);background:#E8EAF6}
+.size-btn:disabled{opacity:.4;cursor:not-allowed}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F1F3FB;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #9FA8DA;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E8EAF6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:#1A237E;border:2px solid #1A237E;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#3949AB;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E0;color:#E65100;border:1.5px solid #FFB74D;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.rulebar{background:#E8EAF6;border:1.5px solid #5C6BC0;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#1A237E;text-align:center;margin-bottom:12px}
+.lineWrap{background:#F1F3FB;border:1.5px solid #C5CAE9;border-radius:10px;padding:20px 16px;margin:12px 0}
+.lineTrack{position:relative;height:6px;background:#9FA8DA;border-radius:3px;margin:24px 10px}
+.post{position:absolute;top:-9px;width:20px;height:20px;border-radius:50%;background:#3949AB;color:#fff;font-size:.7rem;display:flex;align-items:center;justify-content:center;font-weight:700;transform:translateX(-50%)}
+.gaplabel{position:absolute;top:14px;font-size:.72rem;color:#5C6BC0;font-weight:700;transform:translateX(-50%)}
+.loopWrap{display:flex;justify-content:center;margin:16px 0}
+.readout{text-align:center;font-weight:800;color:#1A237E;margin-top:14px;font-size:1rem}
+.gridDemo{display:grid;gap:6px;justify-content:center;margin:14px 0}
+.gdot{width:22px;height:22px;border-radius:50%;background:#3949AB}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Fencepost Problems</span>
+  <span class="tnav-pill" id="pill">1 / 10</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F333; Why This Matters</h2>
+  <div class="why">
+    <div class="why-title">Real life is full of "spacing" problems</div>
+    <p>Planting trees along a road, putting up streetlights, placing bus stops, hammering in fence posts, hanging party lights around a garden &mdash; all of these ask the SAME hidden question: "if I know the total distance and the gap between each item, how many items do I need?" Get one small detail wrong &mdash; whether the ends are open or joined into a loop &mdash; and your count is off.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">The famous trap</div>
+    <p>Imagine a 20-metre fence with a post every 5 metres. It's tempting to say "20 &divide; 5 = 4 posts." But picture it: post&mdash;gap&mdash;post&mdash;gap&mdash;post&mdash;gap&mdash;post&mdash;gap&mdash;post. That's <strong>5 posts</strong>, not 4! There's always ONE MORE post than there are gaps, on a straight line. This is called a <strong>"fencepost" problem</strong>, and today you'll learn exactly when to add that extra +1 &mdash; and when NOT to.</p>
+  </div>
+  <div class="big-rule">Straight line with two open ends &rarr; posts = gaps + 1. Closed loop &rarr; no +1 needed!</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: concrete interactive opening -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>See It For Yourself</h2>
+  <p><strong>Tap "Add a gap" a few times and watch what happens to the post count.</strong></p>
+  <div class="lineWrap">
+    <div class="lineTrack" id="track"></div>
+    <div class="readout" id="line-readout">Gaps: 0 &nbsp;|&nbsp; Posts: 1</div>
+  </div>
+  <div class="sizerow">
+    <button class="size-btn" id="addGap">&#10133; Add a gap</button>
+    <button class="size-btn" id="resetGap">&#8634; Reset</button>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Notice: every time you add ONE gap, you add ONE post &mdash; but you started with 1 post already there before any gaps existed. That's where the "+1" comes from.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- s2: formula straight line -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>The Formula — Straight, Open-Ended Line</h2>
+  <div class="rulebar">posts = (total length &divide; spacing) + 1</div>
+  <p><strong>A straight path is 24 metres long. A lamp post is placed every 4 metres, starting at one end and ending at the other end. How many lamp posts are needed?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; find the number of GAPS:</span> 24 &divide; 4 = 6 gaps</div>
+    <div class="ln"><span class="note">Step 2 &mdash; add 1 for the starting post:</span> 6 + 1 = 7</div>
+    <div class="ln ans">7 lamp posts</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This +1 rule only applies when BOTH ends are open and BOTH ends get a post (like a straight fence, a row of trees along a road, or lamp posts on a path).</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The twist &#8594;</button></div>
+</div>
+
+<!-- s3: circular twist, ties to lesson 1 -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F504; The Twist — Closed Loops Don't Need +1</h2>
+  <p style="margin-bottom:8px;font-size:.92rem;color:#555">Remember from the last lesson: a circle doesn't have a fixed "start" or "end" &mdash; it just loops around. The exact same idea applies here!</p>
+  <div class="rulebar">Closed loop: items = total distance &divide; spacing &nbsp;(NO +1)</div>
+  <p><strong>A circular pond has a circumference (distance all the way around) of 24 metres. Lily pad decorations are placed every 4 metres around the edge. How many lily pads are needed?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; find the number of gaps:</span> 24 &divide; 4 = 6 gaps</div>
+    <div class="ln"><span class="note">Step 2 &mdash; it's a LOOP, so the last gap connects straight back to the first lily pad</span> &mdash; there's no extra "end" that needs its own decoration.</div>
+    <div class="ln ans">6 lily pads (NOT 7)</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Same 24 metres, same 4-metre spacing as the lamp post example &mdash; but the loop answer is ONE LESS than the straight-line answer. That missing +1 is the whole trick.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Compare them &#8594;</button></div>
+</div>
+
+<!-- s4: side by side toggle -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Straight vs. Loop — Same Numbers, Different Answer</h2>
+  <p><strong>24 metres total, spacing every 4 metres. Tap each shape to see how many items are needed.</strong></p>
+  <div class="sizerow">
+    <button class="size-btn" id="btn-straight">&#8213; Straight Line</button>
+    <button class="size-btn" id="btn-loop">&#11093; Closed Loop</button>
+  </div>
+  <div class="readout" id="compare-readout" style="margin-top:14px">&#9757; Tap a shape above</div>
+  <div class="big-rule" style="font-size:.98rem">Always ask first: "does this line have two separate ends, or does it loop back on itself?"</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- s5: max count twist -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>The "Maximum Count" Twist</h2>
+  <p><strong>Sarah wants to plant flowers along a straight 28-metre path. Each flower needs at least 7 metres of space from the next one. Including both ends of the path, what is the MAXIMUM number of flowers she can plant?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; "at least 7 metres apart" means use EXACTLY 7 metres to fit the most flowers:</span> 28 &divide; 7 = 4 gaps</div>
+    <div class="ln"><span class="note">Step 2 &mdash; straight path, both ends included &rarr; add 1:</span> 4 + 1 = 5</div>
+    <div class="ln ans">5 flowers</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; "Maximum number" with a "minimum spacing" rule just means: use the SMALLEST legal spacing to fit the MOST items. The +1 rule for straight lines still applies exactly the same way.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">2D grids &#8594;</button></div>
+</div>
+
+<!-- s6: 2D grid -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>&#x1F33F; Going 2D — Rows AND Columns</h2>
+  <p><strong>A rectangular garden is 18 metres wide and 24 metres long. Trees will be planted in a full grid pattern, at least 6 metres apart in each direction, including all edges. What is the maximum number of trees that can be planted?</strong></p>
+  <div class="rulebar">Do EACH direction separately with the straight-line rule, then multiply</div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; rows across the width:</span> 18 &divide; 6 + 1 = 3 + 1 = 4 rows</div>
+    <div class="ln"><span class="note">Step 2 &mdash; columns across the length:</span> 24 &divide; 6 + 1 = 4 + 1 = 5 columns</div>
+    <div class="ln"><span class="note">Step 3 &mdash; total trees in the grid:</span> 4 &times; 5 = 20</div>
+    <div class="ln ans">20 trees</div>
+  </div>
+  <div class="gridDemo" id="gridDemo" style="grid-template-columns:repeat(5,22px)"></div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Each direction of a rectangle is its own straight line &mdash; both edges get a tree, so both directions use the +1 rule before you multiply them together.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Checklist &#8594;</button></div>
+</div>
+
+<!-- s7: decision tree recap -->
+<div class="screen" id="s7">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Fencepost Decision Tree</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Find the number of GAPS first: total distance &divide; spacing.</div>
+    <div class="node"><span class="step-n">2</span>Is it a STRAIGHT LINE with two separate, open ends? &rarr; ADD 1 to the gap count.</div>
+    <div class="node"><span class="step-n">3</span>Is it a CLOSED LOOP (circle, round track, round pond)? &rarr; do NOT add 1. Gaps = items.</div>
+    <div class="node"><span class="step-n">4</span>Is it a RECTANGLE / 2D grid? &rarr; apply Steps 1&ndash;2 separately to width and length, then MULTIPLY the two counts.</div>
+    <div class="node"><span class="step-n">5</span>"Maximum items, minimum spacing"? &rarr; use the smallest legal spacing value, then apply Steps 1&ndash;4 as normal.</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s8: practice -->
+<div class="screen" id="s8">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Use The Decision Tree</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">For each one: straight line, loop, or grid? Does it need the +1?</p>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A straight fence is 36 metres long. A post is placed every 6 metres, including both ends. How many posts are needed?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 8</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">Straight, both ends: 36&divide;6=6 gaps, +1 = 7</div><div class="ln ans">7</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A circular running track has a distance of 36 metres around it. Flags are placed every 6 metres around the loop. How many flags are needed?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 6</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">Loop, no +1: 36&divide;6=6 gaps = 6 flags</div><div class="ln ans">6</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; A straight garden bed is 50 metres long. Each plant needs at least 10 metres of space. Including both ends, what is the maximum number of plants?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 4</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">Straight, both ends: 50&divide;10=5 gaps, +1 = 6</div><div class="ln ans">6</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; A rectangular field is 12 metres wide and 20 metres long. Trees are planted in a full grid, at least 4 metres apart in each direction, including all edges. What is the maximum number of trees?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 15</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 24</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'C')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">Rows: 12&divide;4+1=4. Cols: 20&divide;4+1=6.</div><div class="ln">4 &times; 6 = 24</div><div class="ln ans">24</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- s9: recap -->
+<div class="screen" id="s9">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Rule</div>
+  <p style="font-size:1.05rem"><strong>Straight line, both ends open &rarr; gaps + 1. Closed loop &rarr; no +1. Rectangle &rarr; do each side separately, then multiply.</strong></p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You always ask "does this loop, or does it have two separate ends?" before doing any dividing</li>
+    <li>You never forget the +1 on a straight line question</li>
+    <li>You never ADD a +1 on a closed-loop question</li>
+    <li>For a rectangle, you handle width and length separately before multiplying</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">This is the exact same "boundary" thinking from Lesson 1's circles &mdash; you now have it working across TWO different topics!</p>
+</div>
+<div class="navrow">
+  <a href="Counting_Lesson_CircularOrderAndHighRepeats.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E8EAF6;color:#1A237E;border:2px solid #1A237E;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; Lesson 1</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#3949AB;color:#fff;border:2px solid #3949AB;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ── s1: interactive gap/post builder ─────────────────────────
+var gapCount=0;
+var track=document.getElementById('track');
+function renderLine(){
+  track.innerHTML='';
+  var posts=gapCount+1;
+  for(var i=0;i<posts;i++){
+    var pct=(posts===1)?0:(i/(posts-1))*100;
+    var p=document.createElement('div');
+    p.className='post'; p.style.left=pct+'%'; p.textContent=(i+1);
+    track.appendChild(p);
+  }
+  document.getElementById('line-readout').textContent='Gaps: '+gapCount+' | Posts: '+posts;
+}
+renderLine();
+document.getElementById('addGap').onclick=function(){ if(gapCount<10){ gapCount++; renderLine(); } };
+document.getElementById('resetGap').onclick=function(){ gapCount=0; renderLine(); };
+
+// ── s4: straight vs loop compare ─────────────────────────
+document.getElementById('btn-straight').onclick=function(){
+  document.getElementById('compare-readout').innerHTML='Straight line: 24 &divide; 4 = 6 gaps, + 1 = <strong>7 items</strong>';
+};
+document.getElementById('btn-loop').onclick=function(){
+  document.getElementById('compare-readout').innerHTML='Closed loop: 24 &divide; 4 = <strong>6 items</strong> (no +1)';
+};
+
+// ── s6: grid dots demo (4 rows x 5 cols) ─────────────────────────
+var gd=document.getElementById('gridDemo');
+for(var i=0;i<20;i++){ var dot=document.createElement('div'); dot.className='gdot'; gd.appendChild(dot); }
+</script>
+</body>
+</html>

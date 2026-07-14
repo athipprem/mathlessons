@@ -15,35 +15,45 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '10 Jul 2026',
+  updated:        '14 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:41, topic:'Permutations with Repeats — Targeted Retest (Art of Counting)', status:'In Progress' },
+  currentUnit: { n:42, topic:'Circular Order & High Repeats · Fencepost Spacing (Boundary Adjustment)', status:'In Progress' },
   lastUnit: {
-    n:40, score:8, outOf:15, pct:53, delta:-4, prevScore:12,
-    patternLabel: 'U40 — Chaining Two Clues & Arrangements: Repeats/Circles, NOT PASSED',
-    patternInsight: '8/15 (53%) <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 0/5, Sec C 4/5. The rebuilt Chaining lesson (equation method, replacing the confusing "cancel trick" warm-up) worked: Q1, Q2, Q4, Q5 all clean, including the hardest chain question. The lone Sec A miss (Q3) isn&rsquo;t a chaining failure &mdash; the full derivation was correct, he just reported the SHELL&rsquo;s weight when the question asked for the PEBBLE&rsquo;s &mdash; the same pre-existing "answer exactly what&rsquo;s asked" gap as M3/U35. Circular arrangements, brand new on first exposure, landed well at 4/5 (Q15&rsquo;s miss was a divisor-setup slip: divided by 8 instead of 3!&times;2!=12, not a break in the (n&minus;1)! structure). Section B (Permutations with Repeats) is the real story: Q7, Q8, Q9 each show the PRECEDING question&rsquo;s correct value, with working that literally computes the previous word&rsquo;s factorial &mdash; correctly, every time. The formula itself (n!&divide;r&#8321;!r&#8322;!...) was applied right three times in a row; it was just recorded one question late. Q6 (no working, "3" looks like a unique-letter count instead of an arrangement count) may be what triggered the misalignment; Q10 breaks the pattern at the end with confused working.',
-    analysisLabel: 'Next: U41 — Permutations with Repeats, Targeted Retest (Art of Counting)',
-    analysisInsight: 'Per the multi-topic retest rule (only the failed section needs re-testing, not a full unit repeat): Sec A (4/5) and Sec C (4/5) both cleared the 4/5 bar and do not need retesting. Sec B (0/5) did not, so U41 is a short, focused 15-question retest on Permutations with Repeats only. A new top-up lesson (Counting_Lesson_RepeatsPrecisionRetest.html) targets the two specific issues found: the "arrangements &ne; unique letters" trap (an interactive contrast widget using DEEP: 3 unique letters vs 12 arrangements), and a "check before you write" habit &mdash; say the question number before AND after solving, via a matching-game widget and a 7-step checklist. The retest itself carries a new orange precision banner reinforcing both points, on top of the usual formula banner. Milestone M4 is deferred until U41 passes &mdash; U40 does not count as a clean close of the U31&ndash;U40 cycle.',
-    qSummary: '<strong>Sec A 4/5 | Sec B 0/5 | Sec C 4/5</strong> — 8/15 NOT PASSED',
+    n:'M4', score:57.5, outOf:100, pct:58, delta:null, prevScore:13, prevOutOf:15, prevLabel:'U41',
+    patternLabel: 'Milestone M4 — ASMOPSS-Style Cumulative Review (Units 31–41)',
+    patternInsight: '<strong>57.5 / 100</strong> (Round 1 8/10 &rarr; 20/25 marks &middot; Round 2 7/10 &rarr; 31.5/45 marks &middot; Round 3 1/5 &rarr; 6/30 marks). First milestone in the new ASMOPSS-style format &mdash; reported as a diagnostic benchmark, not pass/fail. Rounds 1&ndash;2 held up well (15/20) across 11 units of cumulative review with zero re-teaching. Round 3 (hardest tier) is where the signal is: <strong>NEW finding</strong> &mdash; Q7 &amp; Q13 both used n! instead of (n&minus;1)! for circular arrangements, the "subtract 1 first" rule slipping for the first time (U40&rsquo;s plain-circular Qs were both correct). And the r=4 divisor gap flagged at U41 is confirmed still open: Q22 was a direct stress-test and Prem abandoned it after an arithmetic slip rather than guess. <em>Note on Q21:</em> the page shows a circled "0" for Round 3, but Q21&rsquo;s working and final answer independently check out against the key &mdash; counted correct here (51.5/100 if it should count wrong; diagnosis unaffected either way).',
+    analysisLabel: 'Next: Unit 42 — Boundary & Edge-Case Adjustment (first unit of cycle 5)',
+    analysisInsight: 'M4&rsquo;s findings were cross-checked against the ASMOPSS 2023 past paper (12/25, analysed the same day): Q17 (a "fencepost" spacing problem, left blank) turned out to be the SAME root habit as M4&rsquo;s circular (n&minus;1)! slip &mdash; a general "boundary adjustment" blind spot, not a circular-arrangements quirk specifically. U42 addresses both together (circular order + fencepost spacing) plus finishes the r=4 divisor gap with a dedicated worked example. Full U42&ndash;U50 gap-closing plan (covering both M4 and ASMOPSS 2023 findings: word-problem clue extraction, reverse averages, irregular 3D visualisation, algebra substitution fluency, composite area, multi-step arithmetic precision) is in the Executive Summary &mdash; the whole sequence stays in ASMOPSS-prep mode until the real 9 Aug 2026 test date passes.',
+    qSummary: '<strong>Round 1 (2.5pt) 8/10 | Round 2 (4.5pt) 7/10 | Round 3 (6pt) 1/5</strong> &mdash; 57.5/100',
     qBreakdown: [
-      { q:'Q1', topic:'Chaining — ratio only, marbles/buttons',        lvl:'w', pass:true,  note:'&#10003; 2.' },
-      { q:'Q2', topic:'Chaining — ratio only, crayons/stickers',       lvl:'w', pass:true,  note:'&#10003; 2.' },
-      { q:'Q3', topic:'Chaining — full chain, shells/pebbles',         lvl:'w', pass:false, note:'&#10007; wrote 15g (the SHELL&rsquo;s weight); correct 5g (the PEBBLE&rsquo;s weight, as asked). Full equation-sort + substitution was correct &mdash; wrong variable reported, not a chaining failure.' },
-      { q:'Q4', topic:'Chaining — chain + multiply back ★, ribbons/beads', lvl:'w', pass:true, note:'&#10003; 15g &mdash; clean multi-step working.' },
-      { q:'Q5', topic:'Chaining — hardest chain ★★, magnets/clips',    lvl:'w', pass:true,  note:'&#10003; 9g.' },
-      { q:'Q6', topic:'Repeats — FEET',                                lvl:'m', pass:false, note:'&#10007; wrote 3, no working; correct 12. Looks like unique-letter count (F,E,T) instead of arrangements &mdash; possibly what triggered the Section B misalignment.' },
-      { q:'Q7', topic:'Repeats — APPLE',                               lvl:'m', pass:false, note:'&#10007; wrote 12, no working; correct 60. 12 is exactly Q6&rsquo;s (FEET) correct answer.' },
-      { q:'Q8', topic:'Repeats — SUMMER',                              lvl:'m', pass:false, note:'&#10007; wrote 60; correct 360. Working shown is 5!&divide;2=60 &mdash; APPLE&rsquo;s (Q7) computation, correct method, written one question late.' },
-      { q:'Q9', topic:'Repeats — TEACHER',                             lvl:'m', pass:false, note:'&#10007; wrote 360; correct 2520. Working shown is 6!&divide;2=360 &mdash; SUMMER&rsquo;s (Q8) computation, same one-behind pattern.' },
-      { q:'Q10',topic:'Repeats — GIGGLE',                              lvl:'m', pass:false, note:'&#10007; wrote 20; correct 120. Confused working, doesn&rsquo;t fit the shift pattern &mdash; looks like a rushed finish once things had gone off track.' },
-      { q:'Q11',topic:'Circular — plain, n=5',                         lvl:'h', pass:true,  note:'&#10003; 24.' },
-      { q:'Q12',topic:'Circular — plain, n=9',                         lvl:'h', pass:true,  note:'&#10003; 40320 (8! shown correctly).' },
-      { q:'Q13',topic:'Circular — combined ★★, n=7 r3',                lvl:'h', pass:true,  note:'&#10003; 120 (6!=720 &divide; 6 = 120).' },
-      { q:'Q14',topic:'Circular — combined ★★, n=8 r2+2',              lvl:'h', pass:true,  note:'&#10003; 1260 &mdash; 7!=5040, divided by 2 twice for the two repeat pairs, correct structure.' },
-      { q:'Q15',topic:'Circular — combined ★★, n=10 r3+2',             lvl:'h', pass:false, note:'&#10007; wrote 45360; correct 30240. The (n&minus;1)! circular step was right (9!=362880), but divided by 8 instead of 3!&times;2!=12 &mdash; a divisor-setup slip, not a method break.' }
+      { q:'Q1', topic:'Arithmetic (order of ops)',            lvl:'w', pass:false, note:'&#10007; 184; correct 192. Sum (288) right, then 288&minus;96 subtracted wrong.' },
+      { q:'Q2', topic:'Factorial ratio',                      lvl:'w', pass:true,  note:'&#10003; 30.' },
+      { q:'Q3', topic:'Remainder',                            lvl:'w', pass:true,  note:'&#10003; 7.' },
+      { q:'Q4', topic:'Divisibility',                         lvl:'w', pass:true,  note:'&#10003; 9.' },
+      { q:'Q5', topic:'Sequences',                            lvl:'w', pass:true,  note:'&#10003; 107.' },
+      { q:'Q6', topic:'Repeats (single pair)',                lvl:'w', pass:true,  note:'&#10003; 60.' },
+      { q:'Q7', topic:'Circular (plain)',                     lvl:'w', pass:false, note:'&#10007; 720; correct 120. Used 6! instead of (6&minus;1)!=5! &mdash; NEW gap.' },
+      { q:'Q8', topic:'Equation both sides',                  lvl:'w', pass:true,  note:'&#10003; 7 &mdash; annotated "forgot the method, guess &amp; check"; recovered via testing n=5,6,7.' },
+      { q:'Q9', topic:'Chaining (ratio only)',                lvl:'w', pass:true,  note:'&#10003; 2.' },
+      { q:'Q10',topic:'Perimeter',                            lvl:'w', pass:true,  note:'&#10003; 58.' },
+      { q:'Q11',topic:'Chaining (ratio only)',                lvl:'m', pass:true,  note:'&#10003; 3.' },
+      { q:'Q12',topic:'Repeats (2 groups)',                   lvl:'m', pass:true,  note:'&#10003; 180.' },
+      { q:'Q13',topic:'Circular + repeats',                   lvl:'m', pass:false, note:'&#10007; 2520; correct 360. Same error as Q7 &mdash; used 7! instead of (7&minus;1)!=6!.' },
+      { q:'Q14',topic:'Factorial multi-term',                 lvl:'m', pass:true,  note:'&#10003; 816.' },
+      { q:'Q15',topic:'Logic — transitivity',                 lvl:'m', pass:true,  note:'&#10003; 43.' },
+      { q:'Q16',topic:'Path &amp; frame + cost',               lvl:'m', pass:false, note:'&#10007; ~8500 (scribbled); correct 7200. Inner-rectangle setup + arithmetic both broke down.' },
+      { q:'Q17',topic:'Divisibility',                         lvl:'m', pass:true,  note:'&#10003; 9.' },
+      { q:'Q18',topic:'Sequences — two-term (backward)',      lvl:'m', pass:false, note:'&#10007; blank; correct 26.' },
+      { q:'Q19',topic:'Distributing identical items',         lvl:'m', pass:true,  note:'&#10003; 15.' },
+      { q:'Q20',topic:'Listing (3 coins)',                    lvl:'m', pass:true,  note:'&#10003; 11 &mdash; clean case-by-case working (5=0/1/2 &rarr; 6+4+1=11).' },
+      { q:'Q21',topic:'Full chain (derive+substitute) ★★',    lvl:'h', pass:true,  note:'&#10003; 12g &mdash; full correct chain shown; page shows a circled "0" for this round, but the working matches the key exactly. See marking note above.' },
+      { q:'Q22',topic:'Repeats r=4 (stress-test) ★★',         lvl:'h', pass:false, note:'&#10007; blank; correct 420. Attempted 8!, arithmetic slipped, abandoned &mdash; r=4 gap still open.' },
+      { q:'Q23',topic:'Circular + 3 repeat groups ★★',        lvl:'h', pass:false, note:'&#10007; 15425; correct 1680. Working tangled with Q22, no clean (n&minus;1)! start.' },
+      { q:'Q24',topic:'Compound remainder puzzle ★★',         lvl:'h', pass:false, note:'&#10007; 367; correct 147. Extensive trial division, didn&rsquo;t converge (367 isn&rsquo;t even &divide;7).' },
+      { q:'Q25',topic:'Capstone (counting + algebra) ★★',     lvl:'h', pass:false, note:'&#10007; blank; correct 180. No attempt beyond restating the two given equations.' }
     ]
   },
   _M3archived: {
@@ -140,23 +150,51 @@ var PREM_DATA = {
     { n:37, score:12, delta:+2, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:38, score:14, delta:+2, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:39, score:12, delta:-2, color:'linear-gradient(135deg,#7E57C2,#4527A0)', star:false },
-    { n:40, score:8,  delta:-4, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false }
+    { n:40, score:8,  delta:-4, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
+    { n:41, score:13, delta:+5, color:'linear-gradient(135deg,#00796B,#004D40)', star:false },
+    { n:'M4', label:'M4', score:9, delta:-4, color:'linear-gradient(135deg,#0D47A1,#4A148C)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 42,
+      badge: 'linear-gradient(135deg,#00796B,#3949AB)',
+      title: 'Circular Order &amp; High Repeats · Fencepost Spacing (Boundary Adjustment)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'Closes M4 circular (n−1)! gap', c:'torange' },
+        { t:'Finishes r=4 divisor gap', c:'torange' },
+        { t:'NEW: Fencepost spacing (ASMOPSS 2023 Q17)', c:'tblue' }
+      ],
+      note: 'U42, first unit of cycle 5, built 14 Jul 2026. Two lessons: (1) Circular Order &amp; High Repeats &mdash; fixes the NEW M4 finding that (n&minus;1)! is being skipped for circular arrangements under mixed-review pressure, and finishes the r=4 divisor gap flagged at U41 and confirmed still open at M4 (Q22) with a dedicated worked example. (2) Fencepost Spacing &mdash; a brand-new topic addressing the ASMOPSS 2023 diagnostic finding (Q17, left blank) that turned out to be the SAME "boundary adjustment" habit as the circular gap, just in a different topic (straight-line spacing vs. closed loops vs. 2D grids). Test: 15Q, Sec A single-skill review, Sec B combined circular+repeats (r=2/3/4), Sec C fencepost family + a capstone combining both lessons. First unit of the U42&ndash;U50 gap-closing plan (see Executive Summary) — stays in ASMOPSS-prep mode for the whole sequence, per Lui, until the real 9 Aug 2026 test date passes.',
+      status: 'pending'
+    },
+    {
+      n: 'M4',
+      badge: 'linear-gradient(135deg,#0D47A1,#4A148C)',
+      title: 'ASMOPSS-Style Cumulative Review (Units 31–41)',
+      tags: [
+        { t:'57.5/100 &mdash; Diagnostic benchmark', s:'background:#fff8e1;color:#8d6e00;font-weight:700' },
+        { t:'Rounds 1&ndash;2: 15/20 solid', c:'tgreen' },
+        { t:'NEW: circular (n−1)! slipping', c:'tred' },
+        { t:'r=4 divisor gap CONFIRMED still open', c:'torange' }
+      ],
+      note: '57.5/100 (Round 1 8/10 &middot; Round 2 7/10 &middot; Round 3 1/5) &mdash; first milestone in the new ASMOPSS-style format. Rounds 1&ndash;2 held up well across 11 units of cumulative review with zero re-teaching. Round 3 is where the signal is: NEW finding &mdash; Q7 &amp; Q13 both used n! instead of (n&minus;1)! for circular arrangements (U40&rsquo;s plain-circular Qs were both correct three days earlier). The r=4 divisor gap from U41 is confirmed still open: Q22 directly stress-tested it and Prem abandoned it after an arithmetic slip. Q21&rsquo;s marking is flagged as ambiguous (page shows a circled "0" but the working matches the key exactly — counted correct here; 51.5/100 either way doesn&rsquo;t change the diagnosis). Cross-checked the same day against the ASMOPSS 2023 past paper (12/25) &mdash; the circular gap and the paper&rsquo;s Q17 fencepost miss turned out to be the same root "boundary adjustment" habit. &rarr; U42.',
+      status: 'done'
+    },
+    {
       n: 41,
       badge: 'linear-gradient(135deg,#00796B,#004D40)',
       title: 'Permutations with Repeats — Targeted Retest (Art of Counting)',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'Targeted retest — Section B only', c:'tblue' },
-        { t:'Top-up lesson: precision, not concept', c:'tblue' },
-        { t:'Milestone M4 deferred until this passes', c:'torange' }
+        { t:'13/15 (87%) &#10003; PASSED', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Sec A 5/5 + Sec B 5/5 ✦ PERFECT', c:'tgreen' },
+        { t:'Sec C 3/5 — new r=4 divisor gap', c:'torange' },
+        { t:'One-question-behind pattern CLOSED', c:'tgreen' }
       ],
-      note: 'U41, built 10 Jul 2026 after U40 scored 8/15 (Sec A 4/5, Sec B 0/5, Sec C 4/5). Per the multi-topic retest rule, only Section B (Permutations with Repeats) needs re-testing &mdash; Sec A and Sec C both cleared the 4/5 bar. U40&rsquo;s Section B working showed the n!&divide;r&#8321;!r&#8322;!... formula applied CORRECTLY three questions running (Q7, Q8, Q9) &mdash; just recorded one question late each time, plus an early "counted unique letters instead of arrangements" slip (Q6). This is a precision top-up, not a re-teach: a new lesson (Counting_Lesson_RepeatsPrecisionRetest.html) targets the "arrangements &ne; unique letters" trap with an interactive contrast widget, and the "check before you write" habit with a matching game + 7-step checklist. The retest itself is single-topic (all 15 Q on Repeats, escalating difficulty), with a new precision banner alongside the usual formula banner. Milestone M4 is deferred until this passes.',
-      status: 'pending'
+      note: '13/15 &#10003; <strong>PASSED</strong>. Sec B (the exact skill that scored 0/5 on U40) came back a perfect 5/5 &mdash; the precision top-up lesson (arrangements &ne; unique letters, check-before-you-write habit) fully resolved the one-question-behind answer-shifting pattern. Sec C 3/5: Q14 (TENNESSEE, E&times;4) and Q15 (3-group beads) both missed for the same new reason &mdash; divided by the repeat COUNT instead of its FACTORIAL (r=4 had never been drilled in either lesson). Method and structure were correct throughout; only one substituted value was wrong. &rarr; Milestone M4, with a light stress-test of the r=4 gap folded in.',
+      status: 'done'
     },
     {
       n: 40,
@@ -801,10 +839,28 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 85
     },
     {
-      label:     'Permutations with Repeats — "one question behind" tracking slip — ACTIVE (new, U40)',
+      label:     'Permutations with Repeats — "one question behind" tracking slip — RESOLVED at U41 (Sec B 5/5 ✦)',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U40 Section B scored 0/5 with a clear pattern: Q7, Q8, Q9 each showed the PRECEDING question&rsquo;s correct value, with working that computed the previous word&rsquo;s factorial correctly, just recorded one question late. A precision top-up lesson (Counting_Lesson_RepeatsPrecisionRetest.html) targeted exactly this via a matching-game habit drill and an interactive "arrangements &ne; unique letters" contrast widget. U41 Section B came back a PERFECT 5/5 &mdash; zero instances of the shift pattern, zero unique-letter confusion. Fully closed.',
+      fillClass: 'gs', fillPct: 92
+    },
+    {
+      label:     'Permutations with Repeats — dividing by r instead of r! at r=4 — ACTIVE (confirmed still open at M4; U42 targets it)',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U40 Section B: 0/5, but Q7, Q8, Q9 each show the PRECEDING question&rsquo;s correct value, with working that literally computes the previous word&rsquo;s factorial &mdash; correctly, every time. The n!&divide;r&#8321;!r&#8322;!... formula was applied right three questions running; it was recorded one question late, every time. Q6 (no working, answer "3" looks like a unique-letter count instead of an arrangement count) may be what triggered the misalignment; Q10 breaks the pattern at the end with confused working. Not a concept gap &mdash; U41 is a targeted retest with a precision-focused top-up lesson (arrangements &ne; unique letters, plus a "say the question number before and after solving" checking habit), not a re-teach of the formula.',
-      fillClass: 'g2', fillPct: 45
+      score:     'First flagged at U41 (Q14 TENNESSEE, Q15 9-beads) &mdash; both missed by dividing by the raw repeat COUNT instead of its FACTORIAL (4 instead of 4!=24). M4 Q22 directly stress-tested it again: Prem abandoned the question after an arithmetic slip rather than guess, confirming the gap has NOT closed through informal exposure alone. Every repeat group handled before U41 was r=2 or r=3 (both drilled and memorised); r=4 has never had a dedicated worked example. U42 Lesson 1 fixes this directly with a full r=4 deep-dive (building 4!=24 explicitly next to 2!=2, 3!=6) plus a combined circular+r=4 capstone.',
+      fillClass: 'g2', fillPct: 60
+    },
+    {
+      label:     'Circular arrangements — "subtract 1 first" slipping — NEW (M4, confirmed cross-topic via ASMOPSS 2023)',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'M4 Q7 &amp; Q13 both used n! instead of (n&minus;1)! for circular arrangements under mixed-review pressure &mdash; the first time this specific slip appeared (U40&rsquo;s two plain-circular Qs, Q11/Q12, were both correct just three days earlier). Likely cause: circular arrangements hadn&rsquo;t been directly practiced since U40 (U41&rsquo;s retest was Repeats-only). Cross-checked the same day against the ASMOPSS 2023 past paper: Q17 (a "fencepost" spacing problem, left blank) is the SAME root habit &mdash; forgetting a boundary/edge adjustment &mdash; just in a different topic. This elevates it from a circular-arrangements quirk to a general "boundary adjustment" habit. U42 addresses both together: Lesson 1 (circular order) + Lesson 2 (fencepost spacing, brand new topic).',
+      fillClass: 'g2', fillPct: 55
+    },
+    {
+      label:     'ASMOPSS 2023 diagnostic (12/25) — new gaps queued for U43+: word-problem clue extraction, reverse averages, irregular 3D visualisation, algebra substitution',
+      pill:      'p2', pillText: 'Queued &#128197;',
+      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U43. Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; U45. Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; U46. Algebra substitution (Q22) pairs with M4&rsquo;s Q8 equation-method lapse &rarr; U47. Full 9-unit plan (U42&ndash;U50) is in the Executive Summary.',
+      fillClass: 'g2', fillPct: 40
     },
     {
       label:     '"Count the groups first" — 2-group vs 3-group formula mix-up — MONITOR (new, U38)',
@@ -1115,21 +1171,32 @@ PREM_DATA.renderHero = function() {
   var u = this.lastUnit;
   var c = this.currentUnit;
   var pct = this.achievement();
-  var deltaColor = (u.delta <= 0) ? '#f6993f' : '#43e97b';
-  var deltaSign  = (u.delta < 0)  ? '−'  : '+';
-  var deltaArr   = (u.delta < 0)  ? '⬇'  : '⬆';
+  var hasDelta = (u.delta !== null && u.delta !== undefined);
+  var deltaColor = (hasDelta && u.delta <= 0) ? '#f6993f' : '#43e97b';
+  var deltaSign  = (hasDelta && u.delta < 0)  ? '−'  : '+';
+  var deltaArr   = (hasDelta && u.delta < 0)  ? '⬇'  : '⬆';
+  var unitWord   = (typeof u.n === 'string' && u.n.charAt(0) === 'M') ? 'Milestone ' : 'Unit ';
+  var prevLbl    = u.prevLabel || ('Unit ' + (u.n - 1));
 
   // Box 1 — skill % sub text
   var b1s = document.getElementById('dash-hero-skill-sub');
-  if (b1s) b1s.textContent = 'Stable after U' + u.n + ' — ' + pct + '%';
+  if (b1s) b1s.textContent = 'Stable after ' + unitWord + u.n + ' — ' + pct + '%';
 
   // Box 2 — last unit score
   var b2v = document.getElementById('dash-hero-score-val');
   var b2l = document.getElementById('dash-hero-score-lbl');
   var b2s = document.getElementById('dash-hero-score-sub');
   if (b2v) { b2v.textContent = u.score + ' / ' + u.outOf; b2v.style.color = deltaColor; }
-  if (b2l) b2l.textContent = 'Last unit score (Unit ' + u.n + ')';
-  if (b2s) { b2s.textContent = deltaArr + ' ' + deltaSign + Math.abs(u.delta) + ' from Unit ' + (u.n - 1) + ' (' + u.prevScore + '/15)'; b2s.style.color = deltaColor; }
+  if (b2l) b2l.textContent = 'Last ' + unitWord.toLowerCase() + 'score (' + unitWord + u.n + ')';
+  if (b2s) {
+    if (hasDelta) {
+      b2s.textContent = deltaArr + ' ' + deltaSign + Math.abs(u.delta) + ' from ' + prevLbl + ' (' + u.prevScore + '/' + (u.prevOutOf || 15) + ')';
+      b2s.style.color = deltaColor;
+    } else {
+      b2s.textContent = 'vs ' + prevLbl + ': ' + u.prevScore + '/' + (u.prevOutOf || 15) + ' (different scale — not directly comparable)';
+      b2s.style.color = '#a0aec0';
+    }
+  }
 
   // Box 3 — units completed
   var b3v = document.getElementById('dash-hero-units-val');
@@ -1177,7 +1244,8 @@ PREM_DATA.renderQBreakdown = function(containerId) {
   var lvlText  = { w:'Warm', m:'Med', h:'Hard' };
   var html = '';
   // Card header
-  html += '<div class="card-hd"><span class="dot" style="background:#f6993f"></span>Unit ' + u.n + ' &mdash; Question Breakdown (' + u.score + '/' + u.outOf + ' &middot; ' + u.pct + '%)</div>';
+  var unitWord = (typeof u.n === 'string' && u.n.charAt(0) === 'M') ? 'Milestone ' : 'Unit ';
+  html += '<div class="card-hd"><span class="dot" style="background:#f6993f"></span>' + unitWord + u.n + ' &mdash; Question Breakdown (' + u.score + '/' + u.outOf + ' &middot; ' + u.pct + '%)</div>';
   // Summary bar
   if (u.qSummary) {
     html += '<div style="background:#fff8e1;border:1px solid #fbd38d;border-radius:8px;padding:9px 12px;margin-bottom:12px;font-size:11px;color:#744210">' + u.qSummary + '</div>';
