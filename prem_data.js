@@ -15,13 +15,38 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '14 Jul 2026',
+  updated:        '16 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:42, topic:'Circular Order & High Repeats · Fencepost Spacing (Boundary Adjustment)', status:'In Progress' },
+  currentUnit: { n:43, topic:'Circular + Repeats — Targeted Retest (Efficient Factorial Building)', status:'In Progress' },
   lastUnit: {
+    n:42, score:7, outOf:15, pct:47, delta:-2, prevScore:9, prevOutOf:15, prevLabel:'M4',
+    patternLabel: 'U42 — Circular Order & High Repeats · Fencepost Spacing, NOT PASSED',
+    patternInsight: '7/15 (47%) <strong>NOT PASSED</strong> &mdash; Sec A 3/5, Sec B <strong>1/5</strong>, Sec C 3/5. The big problem is arithmetic scale, not concept: Section C (a brand-new topic built from zero this unit) actually landed best, and three of Section B\'s five questions are literal question marks on the page &mdash; all three needed (n&minus;1)! for n=9, i.e. computing 8!=40,320 by hand, and the margin shows a tangled, abandoned multiplication attempt. The one Section B question with a smaller base (n=7&rarr;6!=720) was solved cleanly. Q4 is a separate, narrower slip: the long division for 5040&divide;6 is fully correct on the page, but the final digit was mis-transcribed onto the answer line (840&rarr;860).',
+    analysisLabel: 'Next: Unit 43 — Circular + Repeats Targeted Retest (Efficient Factorial Building)',
+    analysisInsight: 'Per the standing rule, only the collapsed section needs re-testing &mdash; but the retest needed a computation-execution fix built in, not just more of the same content. U43 teaches "build UP from the last factorial, never restart from scratch" (the exact technique that worked at U33 but didn\'t transfer here under pressure) and a "trust your own working" check for the Q4-style transcription slip, then retests circular+repeats at the same concept difficulty but paced so only ONE question needs an 8!-scale computation instead of three in a row. Section A and C are not retested (their misses are minor, monitor only). This bumps the original U43 plan (Word Problem Decoding) to U44, shifting the rest of the U42&ndash;U50 roadmap down one slot through U51.',
+    qSummary: '<strong>Sec A 3/5 | Sec B 1/5 | Sec C 3/5</strong> — 7/15 NOT PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Circular (no repeats), n=8',            lvl:'w', pass:true,  note:'&#10003; 5040.' },
+      { q:'Q2', topic:'Repeats r=2 (SPOON)',                   lvl:'w', pass:true,  note:'&#10003; 60.' },
+      { q:'Q3', topic:'Circular (no repeats), n=6',            lvl:'w', pass:true,  note:'&#10003; 120.' },
+      { q:'Q4', topic:'Repeats r=3, n=7',                      lvl:'w', pass:false, note:'&#10007; wrote 860; correct 840. Long division (5040÷6) fully correct on the page, but the middle digit was mis-transcribed onto the answer line.' },
+      { q:'Q5', topic:'Repeats r=4+r=3, n=7',                  lvl:'w', pass:false, note:'&#10007; wrote 5; correct 35. No working shown — likely where the arithmetic load first became too much.' },
+      { q:'Q6', topic:'Circular+Repeats r=2, n=5',             lvl:'m', pass:false, note:'&#10007; wrote 2; correct 12. No working shown.' },
+      { q:'Q7', topic:'Circular+Repeats r=3, n=9',             lvl:'m', pass:false, note:'&#10007; literal "?" — correct 6720. Margin shows a tangled, abandoned 6!/7!/8!/9! attempt.' },
+      { q:'Q8', topic:'Circular+Repeats r=4, n=9',             lvl:'m', pass:false, note:'&#10007; literal "?" — correct 1680. Same abandoned working as Q7.' },
+      { q:'Q9', topic:'Circular+Repeats r=2, n=7',             lvl:'m', pass:true,  note:'&#10003; 360 — the one Section B question with a smaller base (6!=720), solved cleanly.' },
+      { q:'Q10',topic:'Circular+Repeats, 2 groups, n=9',       lvl:'m', pass:false, note:'&#10007; literal "?" — correct 3360.' },
+      { q:'Q11',topic:'Fencepost — straight line',             lvl:'h', pass:true,  note:'&#10003; 13.' },
+      { q:'Q12',topic:'Fencepost — circular loop',             lvl:'h', pass:false, note:'&#10007; wrote 16; correct 15. Added +1 to a closed loop by mistake — the inverse of M4\'s circular gap, same family.' },
+      { q:'Q13',topic:'Fencepost — maximum count',             lvl:'h', pass:true,  note:'&#10003; 11.' },
+      { q:'Q14',topic:'Fencepost — 2D grid',                   lvl:'h', pass:true,  note:'&#10003; 48.' },
+      { q:'Q15',topic:'Capstone — fencepost + circular repeats', lvl:'h', pass:false, note:'&#10007; wrote 20200; correct 20160. Drew 9 dots around a loop to correctly find n=9 (great strategy), but the final big multiplication/division was off by 40.' }
+    ]
+  },
+  _M4archived: {
     n:'M4', score:57.5, outOf:100, pct:58, delta:null, prevScore:13, prevOutOf:15, prevLabel:'U41',
     patternLabel: 'Milestone M4 — ASMOPSS-Style Cumulative Review (Units 31–41)',
     patternInsight: '<strong>57.5 / 100</strong> (Round 1 8/10 &rarr; 20/25 marks &middot; Round 2 7/10 &rarr; 31.5/45 marks &middot; Round 3 1/5 &rarr; 6/30 marks). First milestone in the new ASMOPSS-style format &mdash; reported as a diagnostic benchmark, not pass/fail. Rounds 1&ndash;2 held up well (15/20) across 11 units of cumulative review with zero re-teaching. Round 3 (hardest tier) is where the signal is: <strong>NEW finding</strong> &mdash; Q7 &amp; Q13 both used n! instead of (n&minus;1)! for circular arrangements, the "subtract 1 first" rule slipping for the first time (U40&rsquo;s plain-circular Qs were both correct). And the r=4 divisor gap flagged at U41 is confirmed still open: Q22 was a direct stress-test and Prem abandoned it after an arithmetic slip rather than guess. <em>Note on Q21:</em> the page shows a circled "0" for Round 3, but Q21&rsquo;s working and final answer independently check out against the key &mdash; counted correct here (51.5/100 if it should count wrong; diagnosis unaffected either way).',
@@ -152,23 +177,37 @@ var PREM_DATA = {
     { n:39, score:12, delta:-2, color:'linear-gradient(135deg,#7E57C2,#4527A0)', star:false },
     { n:40, score:8,  delta:-4, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
     { n:41, score:13, delta:+5, color:'linear-gradient(135deg,#00796B,#004D40)', star:false },
-    { n:'M4', label:'M4', score:9, delta:-4, color:'linear-gradient(135deg,#0D47A1,#4A148C)', star:false }
+    { n:'M4', label:'M4', score:9, delta:-4, color:'linear-gradient(135deg,#0D47A1,#4A148C)', star:false },
+    { n:42, score:7, delta:-2, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 42,
-      badge: 'linear-gradient(135deg,#00796B,#3949AB)',
-      title: 'Circular Order &amp; High Repeats · Fencepost Spacing (Boundary Adjustment)',
+      n: 43,
+      badge: 'linear-gradient(135deg,#00796B,#FFB300)',
+      title: 'Circular + Repeats — Targeted Retest (Efficient Factorial Building)',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'Closes M4 circular (n−1)! gap', c:'torange' },
-        { t:'Finishes r=4 divisor gap', c:'torange' },
-        { t:'NEW: Fencepost spacing (ASMOPSS 2023 Q17)', c:'tblue' }
+        { t:'Fixes U42 Sec B collapse (1/5)', c:'tred' },
+        { t:'NEW: build-up factorial technique', c:'tblue' },
+        { t:'Sec A/C not retested — monitor only', c:'torange' }
       ],
-      note: 'U42, first unit of cycle 5, built 14 Jul 2026. Two lessons: (1) Circular Order &amp; High Repeats &mdash; fixes the NEW M4 finding that (n&minus;1)! is being skipped for circular arrangements under mixed-review pressure, and finishes the r=4 divisor gap flagged at U41 and confirmed still open at M4 (Q22) with a dedicated worked example. (2) Fencepost Spacing &mdash; a brand-new topic addressing the ASMOPSS 2023 diagnostic finding (Q17, left blank) that turned out to be the SAME "boundary adjustment" habit as the circular gap, just in a different topic (straight-line spacing vs. closed loops vs. 2D grids). Test: 15Q, Sec A single-skill review, Sec B combined circular+repeats (r=2/3/4), Sec C fencepost family + a capstone combining both lessons. First unit of the U42&ndash;U50 gap-closing plan (see Executive Summary) — stays in ASMOPSS-prep mode for the whole sequence, per Lui, until the real 9 Aug 2026 test date passes.',
+      note: 'U43, built 16 Jul 2026. Section-B-only targeted retest, per the standing rule (multi-topic test, only the collapsed section needs re-testing) — but redesigned to fix a computation-execution problem, not just repeat the same content. U42\'s Section B collapsed to 1/5 because three of five questions needed (n&minus;1)! for n=9 (8!=40,320) back to back; the margin showed a tangled, abandoned hand-multiplication attempt, while the one question with a smaller base (n=7) was solved cleanly. New lesson (Counting_Lesson_EfficientFactorialBuilding.html) teaches "build UP from the last factorial, never restart from scratch" (5!&rarr;6!&rarr;7!&rarr;8!&rarr;9!, the exact technique that worked at U33 but didn\'t transfer here under pressure) plus a "trust your own working" fix for Q4\'s transcription slip. Test: 15Q, same circular+repeats concept, but paced so only Q15 (the capstone) needs an 8!-scale computation instead of three in a row. Section A and C from U42 are not retested — their misses (arithmetic slips, near-misses on the brand-new fencepost topic) are lower-priority monitors.',
       status: 'pending'
+    },
+    {
+      n: 42,
+      badge: 'linear-gradient(135deg,#EF5350,#B71C1C)',
+      title: 'Circular Order &amp; High Repeats · Fencepost Spacing (Boundary Adjustment)',
+      tags: [
+        { t:'7/15 (47%) &#10007; NOT PASSED', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Sec C (new topic) BEST: 3/5', c:'tgreen' },
+        { t:'Sec B collapsed: 1/5 — big numbers, not concept', c:'tred' },
+        { t:'&rarr; U43 targeted retest, Sec B only', c:'torange' }
+      ],
+      note: '7/15 &#10007; <strong>NOT PASSED</strong> &mdash; Sec A 3/5, Sec B 1/5, Sec C 3/5. The real story: Section C, a brand-new topic taught from zero this unit, actually did BEST — the boundary-adjustment habit U42 was built to instil is genuinely landing (Q15 shows Prem drawing 9 dots around a loop to correctly work out a statue count before attempting the harder arrangement math). Section B is what collapsed, and it\'s a computation-scale problem, not a conceptual one: three of its five questions (Q7, Q8, Q10) needed 8!=40,320 computed by hand and were abandoned outright with a literal "?" on the page, while the one question with a smaller base (n=7&rarr;6!=720) was solved cleanly. Q4 is a separate, narrower slip: fully correct long division shown, but the wrong digit was transcribed onto the answer line. &rarr; U43 fixes the arithmetic-execution gap directly, then retests Section B only.',
+      status: 'done'
     },
     {
       n: 'M4',
@@ -849,6 +888,18 @@ var PREM_DATA = {
       pill:      'p2', pillText: 'ACTIVE &#128308;',
       score:     'First flagged at U41 (Q14 TENNESSEE, Q15 9-beads) &mdash; both missed by dividing by the raw repeat COUNT instead of its FACTORIAL (4 instead of 4!=24). M4 Q22 directly stress-tested it again: Prem abandoned the question after an arithmetic slip rather than guess, confirming the gap has NOT closed through informal exposure alone. Every repeat group handled before U41 was r=2 or r=3 (both drilled and memorised); r=4 has never had a dedicated worked example. U42 Lesson 1 fixes this directly with a full r=4 deep-dive (building 4!=24 explicitly next to 2!=2, 3!=6) plus a combined circular+r=4 capstone.',
       fillClass: 'g2', fillPct: 60
+    },
+    {
+      label:     'Hand-computing large factorials (8!, 9!) under pressure — NEW (U42), ACTIVE',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U42 Section B collapsed to 1/5 — but three of the five misses (Q7, Q8, Q10) are literal question marks, not wrong answers, all needing (n&minus;1)! for n=9 (8!=40,320). The margin shows a tangled, abandoned multiplication attempt. The one Section B question with a smaller base (n=7&rarr;6!=720, Q9) was solved cleanly, and Section C (a brand-new topic, same unit) landed 3/5 — so this is specifically about the SCALE of repeated hand-computed factorials, not the circular+repeats concept, which is holding up fine elsewhere. U43 teaches the "build UP the staircase" technique (the exact method that worked at U33) and re-paces the retest so only one question needs 8!-scale arithmetic.',
+      fillClass: 'g2', fillPct: 45
+    },
+    {
+      label:     '"Trust your own working" — answer line doesn\'t match own correct working — MONITOR (new, U42)',
+      pill:      'p2', pillText: 'Monitor &#128992;',
+      score:     'U42 Q4: the long division for 5040÷6 is completely correct on the page (48, remainder 24, 24÷6=4, remainder 0) but the final answer written was 860, not 840 &mdash; a transcription slip, not a division error. Same family as U37 Q2. U43 folds in an explicit "copy your last working line onto the answer line" checklist step.',
+      fillClass: 'g2', fillPct: 65
     },
     {
       label:     'Circular arrangements — "subtract 1 first" slipping — NEW (M4, confirmed cross-topic via ASMOPSS 2023)',
