@@ -15,13 +15,38 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '16 Jul 2026',
+  updated:        '18 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:43, topic:'Circular + Repeats — Targeted Retest (Efficient Factorial Building)', status:'In Progress' },
+  currentUnit: { n:44, topic:'Word Problem Decoding — Clue Extraction, Tables & Multi-Step Profit', status:'In Progress' },
   lastUnit: {
+    n:43, score:15, outOf:15, pct:100, delta:+8, prevScore:7, prevOutOf:15, prevLabel:'U42',
+    patternLabel: 'U43 — Circular + Repeats Targeted Retest, PERFECT (independently verified)',
+    patternInsight: 'Marked 14/15 (93%) &mdash; Sec A 4/5 (marked), Sec B <strong>5/5 PERFECT</strong>, Sec C <strong>5/5 PERFECT</strong>. <strong>Independent regrade against the answer key finds 15/15</strong>: Q5 (answer 20, mathematically correct) is missing its checkmark on the marked sheet, which reads as a grading oversight rather than a Prem error &mdash; same category of discrepancy as the ASMOPSS 2023 header count. Both of U42\'s problems are fully closed: Section B, which collapsed to 1/5 with three literal "?" marks, came back flawless, and Section C\'s hardest question (Q15, the n=9/8!-scale capstone) was solved cleanly with a full staircase build.',
+    analysisLabel: 'Next: Unit 44 — Word Problem Decoding (Clue Extraction, Tables & Multi-Step Profit)',
+    analysisInsight: 'The staircase technique ("build UP from the last factorial, never restart from scratch") transferred completely &mdash; every question needing 7! or 8! (Q7, Q12, Q13, Q14, Q15) shows the build-up written out, and Prem started reusing his own earlier staircase values across questions (Q13/Q14 both reuse the 5,040 first computed for Q12; Q15 reuses it again to reach 40,320), going beyond what the lesson explicitly drilled. The pacing fix (only 1 of 15 questions at full n=9 scale, vs. U42\'s 3-in-a-row) meant the hardest computation never had to repeat back-to-back. With U42\'s gap fully closed, the plan resumes its original rotation at U44: Word Problem Decoding, closing ASMOPSS 2023\'s weakest topic (Q6, Q9, Q10 &mdash; 2/6 correct), teaching "write every given fact on its own line before combining" across three sub-skills (multi-clue problems, table reading, discount &amp; profit).',
+    qSummary: '<strong>Sec A 4/5 (marked) | Sec B 5/5 PERFECT | Sec C 5/5 PERFECT</strong> — marked 14/15, independently verified 15/15',
+    qBreakdown: [
+      { q:'Q1', topic:'Circular+Repeats r=2, n=4',              lvl:'w', pass:true,  note:'&#10003; 3.' },
+      { q:'Q2', topic:'Circular+Repeats r=3, n=5',              lvl:'w', pass:true,  note:'&#10003; 4.' },
+      { q:'Q3', topic:'Circular+Repeats r=2, n=6',              lvl:'w', pass:true,  note:'&#10003; 60.' },
+      { q:'Q4', topic:'Circular+Repeats r=2, n=5',              lvl:'w', pass:true,  note:'&#10003; 12.' },
+      { q:'Q5', topic:'Circular+Repeats r=3, n=6',              lvl:'w', pass:true,  note:'&#10003; 20 — correct, but marked without a checkmark on the sheet; independently verified against the key as right.' },
+      { q:'Q6', topic:'Circular+Repeats r=4, n=6',              lvl:'m', pass:true,  note:'&#10003; 5.' },
+      { q:'Q7', topic:'Circular+Repeats r=2, n=7',              lvl:'m', pass:true,  note:'&#10003; 360 — this exact question type produced a literal "?" on U42. Clean, correct working shown.' },
+      { q:'Q8', topic:'Circular+Repeats r=3, n=7',              lvl:'m', pass:true,  note:'&#10003; 120.' },
+      { q:'Q9', topic:'Circular+Repeats, 2 groups, n=6',        lvl:'m', pass:true,  note:'&#10003; 30.' },
+      { q:'Q10',topic:'Circular+Repeats, 2 groups, n=6',        lvl:'m', pass:true,  note:'&#10003; 10 — working shows a self-caught correction (crossed out an initial attempt before writing the final answer).' },
+      { q:'Q11',topic:'Circular+Repeats, 2 groups, n=7',        lvl:'h', pass:true,  note:'&#10003; 180.' },
+      { q:'Q12',topic:'Circular+Repeats r=2, n=8',              lvl:'h', pass:true,  note:'&#10003; 2520 — staircase shown 6!=720&rarr;7!=720&times;7=5,040&rarr;&divide;2=2,520.' },
+      { q:'Q13',topic:'Circular+Repeats r=4, n=8',              lvl:'h', pass:true,  note:'&#10003; 210 — full long division 5,040&divide;24=210 shown.' },
+      { q:'Q14',topic:'Circular+Repeats r=3, n=8',              lvl:'h', pass:true,  note:'&#10003; 840 — full long division 5,040&divide;6=840 shown.' },
+      { q:'Q15',topic:'Capstone — full staircase, n=9, 2 groups', lvl:'h', pass:true,  note:'&#10003; 10080 — complete staircase to 8!=40,320 (reusing the 5,040 already built for Q12&ndash;14), then two clean &divide;2 steps to 10,080.' }
+    ]
+  },
+  _U42archived: {
     n:42, score:7, outOf:15, pct:47, delta:-2, prevScore:9, prevOutOf:15, prevLabel:'M4',
     patternLabel: 'U42 — Circular Order & High Repeats · Fencepost Spacing, NOT PASSED',
     patternInsight: '7/15 (47%) <strong>NOT PASSED</strong> &mdash; Sec A 3/5, Sec B <strong>1/5</strong>, Sec C 3/5. The big problem is arithmetic scale, not concept: Section C (a brand-new topic built from zero this unit) actually landed best, and three of Section B\'s five questions are literal question marks on the page &mdash; all three needed (n&minus;1)! for n=9, i.e. computing 8!=40,320 by hand, and the margin shows a tangled, abandoned multiplication attempt. The one Section B question with a smaller base (n=7&rarr;6!=720) was solved cleanly. Q4 is a separate, narrower slip: the long division for 5040&divide;6 is fully correct on the page, but the final digit was mis-transcribed onto the answer line (840&rarr;860).',
@@ -178,23 +203,37 @@ var PREM_DATA = {
     { n:40, score:8,  delta:-4, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
     { n:41, score:13, delta:+5, color:'linear-gradient(135deg,#00796B,#004D40)', star:false },
     { n:'M4', label:'M4', score:9, delta:-4, color:'linear-gradient(135deg,#0D47A1,#4A148C)', star:false },
-    { n:42, score:7, delta:-2, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false }
+    { n:42, score:7, delta:-2, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
+    { n:43, score:15, delta:+8, color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 43,
-      badge: 'linear-gradient(135deg,#00796B,#FFB300)',
-      title: 'Circular + Repeats — Targeted Retest (Efficient Factorial Building)',
+      n: 44,
+      badge: 'linear-gradient(135deg,#3949AB,#1A237E)',
+      title: 'Word Problem Decoding — Clue Extraction, Tables &amp; Multi-Step Profit',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'Fixes U42 Sec B collapse (1/5)', c:'tred' },
-        { t:'NEW: build-up factorial technique', c:'tblue' },
-        { t:'Sec A/C not retested — monitor only', c:'torange' }
+        { t:'Closes ASMOPSS 2023 Q6, Q9, Q10 (2/6)', c:'tred' },
+        { t:'NEW: Clue Board method', c:'tblue' },
+        { t:'3 sub-skills: multi-clue, tables, profit', c:'torange' }
       ],
-      note: 'U43, built 16 Jul 2026. Section-B-only targeted retest, per the standing rule (multi-topic test, only the collapsed section needs re-testing) — but redesigned to fix a computation-execution problem, not just repeat the same content. U42\'s Section B collapsed to 1/5 because three of five questions needed (n&minus;1)! for n=9 (8!=40,320) back to back; the margin showed a tangled, abandoned hand-multiplication attempt, while the one question with a smaller base (n=7) was solved cleanly. New lesson (Counting_Lesson_EfficientFactorialBuilding.html) teaches "build UP from the last factorial, never restart from scratch" (5!&rarr;6!&rarr;7!&rarr;8!&rarr;9!, the exact technique that worked at U33 but didn\'t transfer here under pressure) plus a "trust your own working" fix for Q4\'s transcription slip. Test: 15Q, same circular+repeats concept, but paced so only Q15 (the capstone) needs an 8!-scale computation instead of three in a row. Section A and C from U42 are not retested — their misses (arithmetic slips, near-misses on the brand-new fencepost topic) are lower-priority monitors.',
+      note: 'U44, built 18 Jul 2026. Resumes the original U42&ndash;U50 rotation (this slot was deferred one unit for U43\'s Section-B retest). Closes the single weakest topic on the ASMOPSS 2023 paper (Problem Solving &amp; Word Problems, 2/6 correct): Q6 (table-reading + optimization, abandoned), Q9 (age-chain word problem, wrong answer), and Q10 (discount/profit word problem, wrong answer) all trace to the same root cause — trying to hold several given facts in memory at once instead of writing them down first. New lesson (ProblemSolving_Lesson_ClueExtractionTablesProfit.html) teaches the "Clue Board" method (every given fact on its own line before combining) across three sub-skills: multi-clue word problems (reusing the Unit 21 equation-both-sides method, 15/15 mastered), table reading (locate the right row/column, compute two totals, compare), and discount &amp; profit (three formulas: sale price, profit, markup). Test: 15Q across the same three sections, difficulty progressing from plain to &#9733;&#9733;, capstone Q15 chains markup+discount+profit+multiply in one question.',
       status: 'pending'
+    },
+    {
+      n: 43,
+      badge: 'linear-gradient(135deg,#FFD700,#FFA500)',
+      title: 'Circular + Repeats — Targeted Retest (Efficient Factorial Building)',
+      tags: [
+        { t:'15/15 &#127775; PERFECT (verified)', s:'background:#fffde7;color:#F57F17;font-weight:700' },
+        { t:'Sec B 5/5 — U42 collapse CLOSED', c:'tgreen' },
+        { t:'Sec C 5/5 — full staircase to 8! solid', c:'tgreen' },
+        { t:'Marked 14/15 — Q5 tick likely missed', c:'torange' }
+      ],
+      note: 'Marked 14/15 (93%), <strong>independently verified 15/15 &#127775; PERFECT</strong> — Q5 (answer 20, correct per the key) is missing its checkmark on the marked sheet, reading as a grading oversight rather than a Prem error. Both of U42\'s findings are fully closed: Section B (which collapsed to 1/5 with three literal "?" marks) came back flawless, including the two hardest questions (Q7=360, Q8=120) computed cleanly with no abandonment. Section C (the full staircase to 8!=40,320) also 5/5 — Q15\'s capstone shows a complete, correct staircase reusing values already built for Q12&ndash;14, plus a self-caught correction on Q10 (crossed out an initial attempt before writing the final answer). The staircase technique fully transferred and even generalised beyond what was explicitly drilled. &rarr; U44, resuming the original rotation.',
+      status: 'done'
     },
     {
       n: 42,
@@ -890,28 +929,28 @@ var PREM_DATA = {
       fillClass: 'g2', fillPct: 60
     },
     {
-      label:     'Hand-computing large factorials (8!, 9!) under pressure — NEW (U42), ACTIVE',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U42 Section B collapsed to 1/5 — but three of the five misses (Q7, Q8, Q10) are literal question marks, not wrong answers, all needing (n&minus;1)! for n=9 (8!=40,320). The margin shows a tangled, abandoned multiplication attempt. The one Section B question with a smaller base (n=7&rarr;6!=720, Q9) was solved cleanly, and Section C (a brand-new topic, same unit) landed 3/5 — so this is specifically about the SCALE of repeated hand-computed factorials, not the circular+repeats concept, which is holding up fine elsewhere. U43 teaches the "build UP the staircase" technique (the exact method that worked at U33) and re-paces the retest so only one question needs 8!-scale arithmetic.',
+      label:     'Hand-computing large factorials (8!, 9!) under pressure — RESOLVED at U43',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U42 Section B collapsed to 1/5 on this exact issue (Q7, Q8, Q10 all literal "?" marks, needing 8!=40,320 by hand). U43\'s staircase lesson ("build UP from the last factorial, never restart from scratch") plus a paced retest (only 1 of 15 questions at n=9/8!-scale) fixed it completely: Sec B and Sec C both came back 5/5, including every 7!/8!-scale question (Q7, Q12, Q13, Q14, Q15). Prem even reused his own staircase values across questions (Q12&rsquo;s 5,040 reused in Q13, Q14, Q15) &mdash; the technique generalised beyond what was explicitly drilled.',
+      fillClass: 'gs', fillPct: 92
+    },
+    {
+      label:     '"Trust your own working" — answer line doesn\'t match own correct working — RESOLVED at U43',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U42 Q4: the long division for 5040÷6 is completely correct on the page (48, remainder 24, 24÷6=4, remainder 0) but the final answer written was 860, not 840 &mdash; a transcription slip, not a division error. U43 folded in an explicit "copy your last working line onto the answer line" checklist step. Q10\'s working shows the habit taking hold and then some &mdash; a self-caught correction (crossed out an initial attempt before writing the final, correct answer) rather than just a passive copy-check.',
+      fillClass: 'gs', fillPct: 90
+    },
+    {
+      label:     'Circular arrangements — "subtract 1 first" slipping — RESOLVED at U43',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'M4 Q7 &amp; Q13 both used n! instead of (n&minus;1)! for circular arrangements under mixed-review pressure, and the ASMOPSS 2023 paper showed the same root "boundary adjustment" habit in a different topic (Q17, fencepost). U42\'s Lesson 1 addressed it directly, and U43\'s full 15/15 (independently verified) confirms it held under a dedicated retest &mdash; every one of the 15 questions correctly applied (n&minus;1)! before dividing by repeats, with zero n!-instead-of-(n&minus;1)! slips anywhere.',
+      fillClass: 'gs', fillPct: 92
+    },
+    {
+      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction IN PROGRESS (U44); reverse averages, irregular 3D visualisation, algebra substitution still queued',
+      pill:      'p2', pillText: 'In Progress &#9654;',
+      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (built 18 Jul 2026, in progress). Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; U46. Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; U47. Algebra substitution (Q22) pairs with M4&rsquo;s Q8 equation-method lapse &rarr; U48. Full plan (U42&ndash;U51, shifted one slot after U43&rsquo;s retest was inserted) is in the Executive Summary.',
       fillClass: 'g2', fillPct: 45
-    },
-    {
-      label:     '"Trust your own working" — answer line doesn\'t match own correct working — MONITOR (new, U42)',
-      pill:      'p2', pillText: 'Monitor &#128992;',
-      score:     'U42 Q4: the long division for 5040÷6 is completely correct on the page (48, remainder 24, 24÷6=4, remainder 0) but the final answer written was 860, not 840 &mdash; a transcription slip, not a division error. Same family as U37 Q2. U43 folds in an explicit "copy your last working line onto the answer line" checklist step.',
-      fillClass: 'g2', fillPct: 65
-    },
-    {
-      label:     'Circular arrangements — "subtract 1 first" slipping — NEW (M4, confirmed cross-topic via ASMOPSS 2023)',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'M4 Q7 &amp; Q13 both used n! instead of (n&minus;1)! for circular arrangements under mixed-review pressure &mdash; the first time this specific slip appeared (U40&rsquo;s two plain-circular Qs, Q11/Q12, were both correct just three days earlier). Likely cause: circular arrangements hadn&rsquo;t been directly practiced since U40 (U41&rsquo;s retest was Repeats-only). Cross-checked the same day against the ASMOPSS 2023 past paper: Q17 (a "fencepost" spacing problem, left blank) is the SAME root habit &mdash; forgetting a boundary/edge adjustment &mdash; just in a different topic. This elevates it from a circular-arrangements quirk to a general "boundary adjustment" habit. U42 addresses both together: Lesson 1 (circular order) + Lesson 2 (fencepost spacing, brand new topic).',
-      fillClass: 'g2', fillPct: 55
-    },
-    {
-      label:     'ASMOPSS 2023 diagnostic (12/25) — new gaps queued for U43+: word-problem clue extraction, reverse averages, irregular 3D visualisation, algebra substitution',
-      pill:      'p2', pillText: 'Queued &#128197;',
-      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U43. Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; U45. Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; U46. Algebra substitution (Q22) pairs with M4&rsquo;s Q8 equation-method lapse &rarr; U47. Full 9-unit plan (U42&ndash;U50) is in the Executive Summary.',
-      fillClass: 'g2', fillPct: 40
     },
     {
       label:     '"Count the groups first" — 2-group vs 3-group formula mix-up — MONITOR (new, U38)',

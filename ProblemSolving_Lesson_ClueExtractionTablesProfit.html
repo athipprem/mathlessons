@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Word Problem Decoding — Clue Extraction, Tables &amp; Profit</title>
+<style>
+:root{--nav:#3949AB;--nav-dark:#1A237E;--bg:#E8EAF6;--card:#fff;--acc:#3949AB;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#283593;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#E3F2FD);border:2px solid #7986CB;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#1A237E;font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid #5C6BC0;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#1A237E;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F1F3FB;border:1px solid #C5CAE9;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#283593}
+.steps .ln.ans{color:#1A237E;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #9FA8DA;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#3949AB;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F1F3FB;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #9FA8DA;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E8EAF6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:#1A237E;border:2px solid #1A237E;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#3949AB;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E0;color:#E65100;border:1.5px solid #FFB74D;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.rulebar{background:#E8EAF6;border:1.5px solid #5C6BC0;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#1A237E;text-align:center;margin-bottom:12px}
+.clueboard{background:#F1F3FB;border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin:12px 0}
+.clue-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px dashed #C5CAE9;font-size:.98rem}
+.clue-row:last-child{border-bottom:none}
+.clue-tag{background:#3949AB;color:#fff;border-radius:6px;padding:2px 9px;font-size:.78rem;font-weight:700;white-space:nowrap;margin-top:2px}
+.mtable{width:100%;border-collapse:collapse;margin:12px 0;font-size:.94rem}
+.mtable th{background:#3949AB;color:#fff;padding:8px 10px;text-align:left;font-size:.88rem}
+.mtable td{padding:8px 10px;border-bottom:1px solid #C5CAE9;background:#fff}
+.mtable tr:nth-child(even) td{background:#F1F3FB}
+.formula-box{background:#FFF8E1;border:2px solid #FFD54F;border-radius:10px;padding:14px 16px;margin:12px 0;text-align:center;font-weight:800;color:#8d6e00;font-size:1rem}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Word Problem Decoding</span>
+  <span class="tnav-pill" id="pill">1 / 10</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; Why This Matters</h2>
+  <div class="why">
+    <div class="why-title">Where you actually use this</div>
+    <p>Every time you compare prices at a shop, check a bus or train timetable, or work out how much something costs after a discount, you're doing exactly this kind of problem. On a competition paper, these are usually the LONGEST questions — lots of words, lots of numbers, several facts to juggle at once.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Why these questions trip people up</div>
+    <p>It's almost never that the maths itself is hard. It's that there are 2, 3, sometimes 4 separate facts packed into a paragraph, and trying to hold them all in your head at once while also calculating is where mistakes creep in — or where you freeze and skip the question entirely.</p>
+  </div>
+  <div class="big-rule">The fix isn't harder maths. It's writing every fact down BEFORE you try to combine them.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: THE CLUE BOARD METHOD -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F4CB; The Clue Board Method</h2>
+  <p style="margin-bottom:10px"><strong>Before you calculate anything, build a Clue Board: one line per fact, written in your own simple words or symbols.</strong></p>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">CLUE 1</span><span>Write down the first fact, exactly as given.</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 2</span><span>Write down the second fact on its own new line — don't combine yet.</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 3</span><span>Keep going until every fact in the question has its own line.</span></div>
+    <div class="clue-row"><span class="clue-tag">GOAL</span><span>Write down exactly what the question is asking you to find.</span></div>
+  </div>
+  <p>Only once every clue is written down do you start combining them. This is the same idea as the "balance scale" equations from Unit 21 — you already know how to turn a sentence into a written line. The new part is doing it for EVERY fact before touching any of them.</p>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Read the whole question once, all the way through.</div>
+    <div class="node"><span class="step-n">2</span>Is it a TABLE question (prices, times, sizes listed out)? &rarr; go to Table Reading.</div>
+    <div class="node"><span class="step-n">3</span>Is it a DISCOUNT or PROFIT question (marked price, sale, cost, sold for)? &rarr; go to Discount &amp; Profit.</div>
+    <div class="node"><span class="step-n">4</span>Otherwise &rarr; it's a Multi-Clue question. Build the Clue Board first.</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Multi-Clue &#8594;</button></div>
+</div>
+
+<!-- s2: SUBSKILL 1 - MULTI-CLUE WORKED EXAMPLE -->
+<div class="screen" id="s2">
+<div class="card">
+  <span class="badge-cap">Skill 1 of 3</span>
+  <h2>Multi-Clue Word Problems</h2>
+  <p><strong>Maya is 5 years older than her cousin Alex. Together, their ages add up to 27. How old is Alex?</strong></p>
+  <div class="rulebar">Clue Board FIRST, then combine</div>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">CLUE 1</span><span>Maya = Alex + 5</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 2</span><span>Maya + Alex = 27</span></div>
+    <div class="clue-row"><span class="clue-tag">GOAL</span><span>Find Alex's age</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; substitute Clue 1 into Clue 2:</span> (Alex + 5) + Alex = 27</div>
+    <div class="ln"><span class="note">Step 2 &mdash; combine the Alex terms:</span> 2 &times; Alex + 5 = 27</div>
+    <div class="ln"><span class="note">Step 3 &mdash; subtract 5 from both sides:</span> 2 &times; Alex = 22</div>
+    <div class="ln"><span class="note">Step 4 &mdash; divide both sides by 2:</span> Alex = 11</div>
+    <div class="ln ans">Alex is 11 years old (Maya is 16)</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Notice: this is the EXACT same "variables on both sides" method from Unit 21 — nothing new here except writing the clues down first instead of trying to remember them.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s3: PRACTICE SUBSKILL 1 -->
+<div class="screen" id="s3">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Multi-Clue Problems</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Build your own Clue Board on paper before picking an answer.</p>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; Liam has 6 more marbles than his friend Noah. Together they have 20 marbles. How many marbles does Noah have?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 13</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">Clue 1: Liam = Noah + 6. Clue 2: Liam + Noah = 20</div><div class="ln">Noah + (Noah+6) = 20 &rarr; 2&times;Noah = 14 &rarr; Noah = 7</div><div class="ln ans">7</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733; A box of crayons costs &#3647;15 less than a box of markers. Together they cost &#3647;55. How much does the box of markers cost?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; &#3647;20</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; &#3647;40</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; &#3647;35</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">Clue 1: Crayons = Markers &minus; 15. Clue 2: Crayons + Markers = 55</div><div class="ln">(Markers&minus;15) + Markers = 55 &rarr; 2&times;Markers = 70 &rarr; Markers = 35</div><div class="ln ans">&#3647;35</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Table Reading &#8594;</button></div>
+</div>
+
+<!-- s4: SUBSKILL 2 - TABLE READING WORKED EXAMPLE -->
+<div class="screen" id="s4">
+<div class="card">
+  <span class="badge-cap">Skill 2 of 3</span>
+  <h2>Table Reading — Find the Right Row, Compare, Combine</h2>
+  <p><strong>Zoe wants to buy 1 muffin and 1 croissant from this bakery. How much does she SAVE by buying the Bundle instead of buying them separately?</strong></p>
+  <table class="mtable">
+    <tr><th>Item</th><th>Price</th></tr>
+    <tr><td>Muffin</td><td>&#3647;35</td></tr>
+    <tr><td>Croissant</td><td>&#3647;45</td></tr>
+    <tr><td>Bundle (1 muffin + 1 croissant)</td><td>&#3647;70</td></tr>
+  </table>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">CLUE 1</span><span>Buying separately: muffin &#3647;35 + croissant &#3647;45</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 2</span><span>Buying the bundle: &#3647;70</span></div>
+    <div class="clue-row"><span class="clue-tag">GOAL</span><span>How much LESS does the bundle cost?</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; work out the separate total:</span> 35 + 45 = 80</div>
+    <div class="ln"><span class="note">Step 2 &mdash; compare to the bundle price:</span> 80 &minus; 70 = 10</div>
+    <div class="ln ans">Zoe saves &#3647;10 by buying the bundle</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Table questions almost always need TWO totals worked out before you can answer — read every row you need first, THEN compute.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s5: PRACTICE SUBSKILL 2 -->
+<div class="screen" id="s5">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Table Reading</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; Toy Store — Small toy &#3647;50, Medium toy &#3647;80, Large toy &#3647;120.<br>Kim has &#3647;150. She wants to buy exactly 2 toys (they can be different sizes) without going over &#3647;150. What is the MOST she can spend on 2 toys?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; &#3647;100</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; &#3647;130</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; &#3647;160</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">Check every 2-toy combo: 50+50=100, 50+80=130, 50+120=170(over), 80+80=160(over)</div><div class="ln">Largest that stays &le;150 is 130 (small+medium)</div><div class="ln ans">&#3647;130</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733; Zoo entry — Adult &#3647;100, Child &#3647;50, Family ticket (2 adults + 3 children) &#3647;320.<br>A family of 2 adults and 3 children visits. How much do they SAVE by buying the Family ticket instead of separate tickets?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; &#3647;20</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; &#3647;30</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; &#3647;50</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">Separate: 2&times;100 + 3&times;50 = 200+150 = 350</div><div class="ln">Family ticket: 320. Savings: 350&minus;320 = 30</div><div class="ln ans">&#3647;30</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Discount &amp; Profit &#8594;</button></div>
+</div>
+
+<!-- s6: SUBSKILL 3 - DISCOUNT & PROFIT -->
+<div class="screen" id="s6">
+<div class="card">
+  <span class="badge-cap">Skill 3 of 3</span>
+  <h2>Discount &amp; Profit — The Three Formulas</h2>
+  <div class="formula-box">Sale Price = Marked Price &minus; Discount<br>Discount = Marked Price &times; Discount%</div>
+  <div class="formula-box">Profit = Selling Price &minus; Cost Price</div>
+  <div class="formula-box">Selling Price (with markup) = Cost Price + (Cost Price &times; Markup%)</div>
+  <p><strong>A bicycle is marked at &#3647;2,400. During a sale, it is discounted by 15%. The shop bought the bicycle for &#3647;1,800. After selling it at the sale price, what is the shop's profit?</strong></p>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">CLUE 1</span><span>Marked price = &#3647;2,400</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 2</span><span>Discount = 15% off the marked price</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 3</span><span>Cost price (what the shop paid) = &#3647;1,800</span></div>
+    <div class="clue-row"><span class="clue-tag">GOAL</span><span>Profit = Sale Price &minus; Cost Price</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; find the discount amount:</span> 2,400 &times; 15% = 2,400 &times; 0.15 = 360</div>
+    <div class="ln"><span class="note">Step 2 &mdash; find the sale price:</span> 2,400 &minus; 360 = 2,040</div>
+    <div class="ln"><span class="note">Step 3 &mdash; find the profit:</span> 2,040 &minus; 1,800 = 240</div>
+    <div class="ln ans">The shop's profit is &#3647;240</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The two most common mix-ups: (1) forgetting the discount is a PERCENT OF the marked price, not a flat number to subtract straight away, and (2) mixing up marked price, sale price, and cost price — they're three DIFFERENT numbers. Label each one on your Clue Board.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s7: PRACTICE SUBSKILL 3 -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Discount &amp; Profit</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A backpack marked at &#3647;600 is discounted by 10%. What is the sale price?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q4" value="A"> A)&nbsp; &#3647;540</label>
+      <label class="opt"><input type="radio" name="q4" value="B"> B)&nbsp; &#3647;590</label>
+      <label class="opt"><input type="radio" name="q4" value="C"> C)&nbsp; &#3647;500</label>
+    </div>
+    <button class="btn-check" onclick="chk(4,'A')">Check</button>
+    <div class="feedback" id="fb4"></div>
+    <button class="btn-show-steps" id="ss4" onclick="showSteps('sr4',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr4"><div class="steps"><div class="ln">Discount = 600 &times; 0.10 = 60</div><div class="ln">Sale price = 600 &minus; 60 = 540</div><div class="ln ans">&#3647;540</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733; A shopkeeper buys a watch for &#3647;480 and sells it at a 20% markup. What is the selling price?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q5" value="A"> A)&nbsp; &#3647;500</label>
+      <label class="opt"><input type="radio" name="q5" value="B"> B)&nbsp; &#3647;576</label>
+      <label class="opt"><input type="radio" name="q5" value="C"> C)&nbsp; &#3647;96</label>
+    </div>
+    <button class="btn-check" onclick="chk(5,'B')">Check</button>
+    <div class="feedback" id="fb5"></div>
+    <button class="btn-show-steps" id="ss5" onclick="showSteps('sr5',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr5"><div class="steps"><div class="ln">Markup amount = 480 &times; 0.20 = 96</div><div class="ln">Selling price = 480 + 96 = 576</div><div class="ln ans">&#3647;576</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Full Checklist &#8594;</button></div>
+</div>
+
+<!-- s8: FULL CHECKLIST -->
+<div class="screen" id="s8">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Full Checklist</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Read the whole question once, all the way through, before writing anything.</div>
+    <div class="node"><span class="step-n">2</span>Sort it: Multi-Clue? Table? Discount/Profit? (It can also mix two of these.)</div>
+    <div class="node"><span class="step-n">3</span>Build the Clue Board — every given fact on its own line, in your own words or symbols.</div>
+    <div class="node"><span class="step-n">4</span>Write down exactly what the GOAL is — what number is the question actually asking for?</div>
+    <div class="node"><span class="step-n">5</span>Table question? Find every row/column you need before calculating anything.</div>
+    <div class="node"><span class="step-n">6</span>Discount/Profit question? Label marked price, sale price, cost price, and selling price separately — never assume two of them are the same number.</div>
+    <div class="node"><span class="step-n">7</span>Only now start combining the clues, one step at a time.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; If a question feels like "too much to hold in your head," that's exactly the signal to slow down and build the Clue Board — it's not a sign you can't do the maths.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap &#8594;</button></div>
+</div>
+
+<!-- s9: RECAP -->
+<div class="screen" id="s9">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>Build the Clue Board first: every given fact on its own line, and the exact GOAL written down, before you combine anything. Multi-Clue, Table Reading, and Discount &amp; Profit are all the same skill wearing three different outfits.</strong></p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You write down every fact BEFORE trying to calculate anything, every single time</li>
+    <li>You can tell marked price, sale price, cost price, and selling price apart without mixing them up</li>
+    <li>For a table question, you check every row/column you might need before you start adding or comparing</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">This is the exact skill that decides the longest, wordiest questions on any competition paper. Slow, careful, written-down beats fast and guessed every time.</p>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#3949AB;color:#fff;border:2px solid #3949AB;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>
