@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finish The Job &amp; Compare Before You Choose</title>
+<style>
+:root{--nav:#3949AB;--nav-dark:#1A237E;--bg:#E8EAF6;--card:#fff;--acc:#3949AB;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#283593;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#E3F2FD);border:2px solid #7986CB;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#1A237E;font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid #5C6BC0;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#1A237E;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F1F3FB;border:1px solid #C5CAE9;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#283593}
+.steps .ln.ans{color:#1A237E;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #9FA8DA;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#3949AB;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F1F3FB;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #9FA8DA;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E8EAF6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:#1A237E;border:2px solid #1A237E;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#3949AB;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E0;color:#E65100;border:1.5px solid #FFB74D;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.rulebar{background:#E8EAF6;border:1.5px solid #5C6BC0;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#1A237E;text-align:center;margin-bottom:12px}
+.checklist{background:#F1F3FB;border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin:12px 0}
+.check-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px dashed #C5CAE9;font-size:.98rem}
+.check-row:last-child{border-bottom:none}
+.check-box{background:#3949AB;color:#fff;border-radius:6px;padding:2px 9px;font-size:.78rem;font-weight:700;white-space:nowrap;margin-top:2px}
+.mtable{width:100%;border-collapse:collapse;margin:12px 0;font-size:.94rem}
+.mtable th{background:#3949AB;color:#fff;padding:8px 10px;text-align:left;font-size:.88rem}
+.mtable td{padding:8px 10px;border-bottom:1px solid #C5CAE9;background:#fff}
+.mtable tr:nth-child(even) td{background:#F1F3FB}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Finish The Job &amp; Compare Before You Choose</span>
+  <span class="tnav-pill" id="pill">1 / 9</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; Why This Matters</h2>
+  <div class="why">
+    <div class="why-title">What actually happened last time</div>
+    <p>On the last test, one question asked you to find a shop's total bill AND say whether it still made a profit. The working showed the FIRST part done perfectly &mdash; the sale price of one item, calculated exactly right. But the question also asked for the total for several items, and whether there was still a profit. Neither of those got answered. The maths that was shown was correct; the job just wasn't finished.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Why this matters in real life</div>
+    <p>If a shop worker calculates a sale price perfectly but forgets to multiply by how many the customer is buying, the till is wrong and the shop loses money. If you compare prices but only check ONE option instead of a few, you might pay more than you needed to. Both of today's skills are about not stopping too early.</p>
+  </div>
+  <div class="big-rule">Getting the method right is only half the job. Finishing it — and checking you answered everything asked — is the other half.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: FINISH LINE CHECK METHOD -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F3C1; The Finish Line Check</h2>
+  <p style="margin-bottom:10px"><strong>Before you write your final answer, stop and do this check:</strong></p>
+  <div class="checklist">
+    <div class="check-row"><span class="check-box">STEP 1</span><span>Re-read the question ONE more time, after you've finished calculating.</span></div>
+    <div class="check-row"><span class="check-box">STEP 2</span><span>Count how many things it actually asked for. (A total? A yes/no? A "how much more"? Sometimes it's TWO things in one question.)</span></div>
+    <div class="check-row"><span class="check-box">STEP 3</span><span>Check each one off. Did you multiply by the quantity if it asked for more than one? Did you answer the yes/no or comparison part, not just the number part?</span></div>
+    <div class="check-row"><span class="check-box">STEP 4</span><span>Only then write your final answer — for ALL parts asked.</span></div>
+  </div>
+  <p>This is the same "read the exact ask" habit from way back (M3, U35) — just applied to questions with MORE THAN ONE part to answer, and to answers that need one extra step (like multiplying by a quantity) after the main calculation.</p>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Does the question ask for a total for MORE THAN ONE item? &rarr; multiply your per-item answer by the quantity.</div>
+    <div class="node"><span class="step-n">2</span>Does the question ask "does X still happen" (like "still make a profit")? &rarr; that needs its own separate answer, not just a number.</div>
+    <div class="node"><span class="step-n">3</span>Does the question ask "which is cheaper AND by how much"? &rarr; that's two answers: the name/choice, AND the number.</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Worked Example &#8594;</button></div>
+</div>
+
+<!-- s2: WORKED EXAMPLE - multi-part discount/profit -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Worked Example — Using The Finish Line Check</h2>
+  <p><strong>A toy shop buys action figures for &#3647;90 each. It marks each one up by 50% to set the selling price, then offers a 20% discount off that marked price during a sale. If a customer buys 4 action figures during the sale, how much do they pay in total, and does the shop still make a profit per figure?</strong></p>
+  <div class="rulebar">First: what is this question actually asking for? TWO things.</div>
+  <div class="checklist">
+    <div class="check-row"><span class="check-box">ASK 1</span><span>The TOTAL cost for 4 action figures</span></div>
+    <div class="check-row"><span class="check-box">ASK 2</span><span>Whether the shop still makes a profit per figure</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; marked price:</span> 90 &times; 1.5 = 135</div>
+    <div class="ln"><span class="note">Step 2 &mdash; sale price (one figure):</span> 135 &times; 0.8 = 108</div>
+    <div class="ln"><span class="note">Step 3 &mdash; ASK 1: multiply by 4 (don't stop at one figure!):</span> 108 &times; 4 = 432</div>
+    <div class="ln"><span class="note">Step 4 &mdash; ASK 2: compare sale price to cost price:</span> 108 &minus; 90 = 18 &rarr; YES, still a profit</div>
+    <div class="ln ans">&#3647;432 total; yes, &#3647;18 profit per figure</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Notice: BOTH asks got answered. If you'd stopped after Step 2, you'd have the right method but a wrong, incomplete answer — exactly what happened last time.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s3: PRACTICE finish the job -->
+<div class="screen" id="s3">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Finish The Job</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Before picking an answer, count how many things the question is asking for.</p>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A backpack shop buys backpacks for &#3647;250 each. It marks each one up by 20% to set the selling price, then offers a 10% discount during a sale. If a customer buys 2 backpacks, how much do they pay in total?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; &#3647;270</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; &#3647;540</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; &#3647;300</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">Marked: 250&times;1.2=300. Sale (one): 300&times;0.9=270. ASK: total for 2 &rarr; 270&times;2=540</div><div class="ln ans">&#3647;540</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733; A shoe store buys sneakers for &#3647;400 each. It marks each pair up by 25% to set the selling price, then offers a 20% discount during a sale. If a customer buys 3 pairs during the sale, how much do they pay in total, and does the store still make a profit per pair?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; &#3647;1,200; yes, &#3647;100 profit</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; &#3647;1,500; yes, &#3647;100 profit</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; &#3647;1,200; no profit (breaks even)</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">Marked: 400&times;1.25=500. Sale (one): 500&times;0.8=400. ASK 1: total for 3 &rarr; 400&times;3=1,200. ASK 2: 400&minus;400=0 &rarr; NO profit, breaks even exactly</div><div class="ln ans">&#3647;1,200; no profit (breaks even)</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Compare Before You Choose &#8594;</button></div>
+</div>
+
+<!-- s4: COMPARE BEFORE YOU CHOOSE -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F50D; Compare Before You Choose</h2>
+  <p>Some table questions ask for the CHEAPEST way to buy something using a combination of pack sizes. The trap: picking the very FIRST combination that works, without checking if a different combination is even cheaper.</p>
+  <div class="big-rule">Try at least 2&ndash;3 different combinations. Write down each total. THEN pick the smallest.</div>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Work out the price-per-item for each pack size (price &divide; quantity). The BEST rate is usually your biggest pack.</div>
+    <div class="node"><span class="step-n">2</span>Try the combination using mostly the best-rate pack first.</div>
+    <div class="node"><span class="step-n">3</span>Try at least one more combination (e.g. using a smaller pack size) as a comparison.</div>
+    <div class="node"><span class="step-n">4</span>Compare your totals. The smallest one is your answer — write down ALL the combinations you tried, not just the winner.</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Worked Example &#8594;</button></div>
+</div>
+
+<!-- s5: WORKED EXAMPLE optimization -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>Worked Example — Comparing Combinations</h2>
+  <p><strong>Balloon packs: 6-pack &#3647;36, 12-pack &#3647;66, 24-pack &#3647;120. A party planner needs exactly 48 balloons, spending as little as possible. What is the LOWEST total cost?</strong></p>
+  <table class="mtable">
+    <tr><th>Pack</th><th>Price</th><th>Price per balloon</th></tr>
+    <tr><td>6-pack</td><td>&#3647;36</td><td>&#3647;6.00</td></tr>
+    <tr><td>12-pack</td><td>&#3647;66</td><td>&#3647;5.50</td></tr>
+    <tr><td>24-pack</td><td>&#3647;120</td><td>&#3647;5.00 &larr; best rate</td></tr>
+  </table>
+  <div class="steps">
+    <div class="ln"><span class="note">Combination 1 &mdash; mostly 24-packs:</span> 2 &times; 24-pack = 48 balloons &rarr; 2 &times; 120 = 240</div>
+    <div class="ln"><span class="note">Combination 2 &mdash; compare with 12-packs:</span> 4 &times; 12-pack = 48 balloons &rarr; 4 &times; 66 = 264</div>
+    <div class="ln"><span class="note">Combination 3 &mdash; compare with 6-packs:</span> 8 &times; 6-pack = 48 balloons &rarr; 8 &times; 36 = 288</div>
+    <div class="ln"><span class="note">Compare all three:</span> 240 &lt; 264 &lt; 288</div>
+    <div class="ln ans">Cheapest: &#3647;240 (using two 24-packs)</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The best-rate pack (24-pack) divided EVENLY into 48, so it won. If it hadn't divided evenly, you might need to MIX pack sizes — always check.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s6: PRACTICE optimization -->
+<div class="screen" id="s6">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Compare Before You Choose</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; Sticker sheets: 3-sheet pack &#3647;15, 6-sheet pack &#3647;27, 12-sheet pack &#3647;48. A teacher needs exactly 24 sheets, spending as little as possible. What is the LOWEST total cost?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; &#3647;120</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; &#3647;108</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; &#3647;96</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'C')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">Rates: 3pack=5.00/sheet, 6pack=4.50/sheet, 12pack=4.00/sheet (best)</div><div class="ln">2&times;12pack=24 sheets&rarr;96. Compare: 4&times;6pack=108. 8&times;3pack=120.</div><div class="ln ans">&#3647;96</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733; Juice bottles: Small &#3647;20 (500 mL), Medium &#3647;35 (1 L), Large &#3647;60 (2 L). A cafe needs at least 4 litres, spending as little as possible using any combination. What is the LOWEST total cost?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; &#3647;120</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; &#3647;140</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; &#3647;130</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">Rates: Small=40/L, Medium=35/L, Large=30/L (best)</div><div class="ln">2&times;Large=4L&rarr;120. Compare: 4&times;Medium=140. 1Large+2Medium=4L&rarr;130.</div><div class="ln ans">&#3647;120</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Full Checklist &#8594;</button></div>
+</div>
+
+<!-- s7: FULL CHECKLIST -->
+<div class="screen" id="s7">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Full Checklist</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Build your Clue Board first — every given fact on its own line, and write down the GOAL(s). Count how many things are being asked.</div>
+    <div class="node"><span class="step-n">2</span>Work through your steps, writing each one down — especially on the harder, multi-part questions where it matters most.</div>
+    <div class="node"><span class="step-n">3</span>If it asks for a total for more than one item: multiply by the quantity. Don't stop at "one item's price."</div>
+    <div class="node"><span class="step-n">4</span>If it asks "does X still happen" or "which is cheaper": answer that part directly, in words if needed, not just a number.</div>
+    <div class="node"><span class="step-n">5</span>If it's a "cheapest combination" question: try at least 2&ndash;3 combinations and compare, don't stop at the first one that works.</div>
+    <div class="node"><span class="step-n">6</span>Finish Line Check: re-read the question one last time before writing your final answer. Did you answer EVERYTHING it asked?</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; A perfectly correct calculation that only answers HALF the question is still an incomplete answer. Always do the Finish Line Check.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap &#8594;</button></div>
+</div>
+
+<!-- s8: RECAP -->
+<div class="screen" id="s8">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Two Fixes</div>
+  <p style="font-size:1.05rem"><strong>1) Finish the job — count how many things are asked, and answer every one of them, especially multiplying by quantity and answering yes/no parts. 2) Compare before you choose — try 2&ndash;3 combinations on "cheapest" questions before deciding.</strong></p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You re-read every question one last time before writing your final answer</li>
+    <li>Your final answer always matches the FULL question — quantities multiplied, yes/no parts answered</li>
+    <li>On "cheapest combination" questions, you've written down at least 2 combinations before picking one</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">Your methods are already correct — Q15 last time proved that. This is entirely about carrying every method all the way to the finish line. Ready for the retest!</p>
+</div>
+<div class="navrow">
+  <a href="ProblemSolving_Lesson_ClueExtractionTablesProfit.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E8EAF6;color:#1A237E;border:2px solid #1A237E;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; U44 Lesson</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#3949AB;color:#fff;border:2px solid #3949AB;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

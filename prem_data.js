@@ -15,13 +15,38 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '18 Jul 2026',
+  updated:        '20 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:44, topic:'Word Problem Decoding — Clue Extraction, Tables & Multi-Step Profit', status:'In Progress' },
+  currentUnit: { n:45, topic:'Targeted Retest — Table Reading & Discount/Profit (Word Problem Decoding)', status:'In Progress' },
   lastUnit: {
+    n:44, score:9.5, outOf:15, pct:63, delta:-5.5, prevScore:15, prevOutOf:15, prevLabel:'U43',
+    patternLabel: 'U44 — Word Problem Decoding: Clue Extraction, Tables &amp; Multi-Step Profit, NOT PASSED',
+    patternInsight: '9.5/15 (63%) <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 3.5/5, Sec C 2/5. The Clue Board\'s fact/option-identification half is landing well: Section A held at 4/5 (Q3\'s miss honestly flagged as unsolved rather than guessed), and Section B\'s Q7 &amp; Q9 both name the CORRECT cheaper option (Train; Plan B) even when the final number is off. The real signal is Q15: working shows the exact two-step markup-then-discount chain executed perfectly for ONE book (180&times;1.4=252, 252&times;0.75=189, matching the expected sub-calculation exactly), then simply stops &mdash; no &times;3 for the three books, no answer to the profit-check question. A finishing/completeness gap, not a formula gap. Q8 is a narrower, separate miss: didn\'t compare combinations before picking one in a table-optimization question. Working was mostly skipped across Sections B and C (only Q15 shows real working), which likely compounded both issues.',
+    analysisLabel: 'Next: Unit 45 — Targeted Retest, Sections B &amp; C (Table Reading &amp; Discount/Profit)',
+    analysisInsight: 'Section A passed clean (4/5) and is not retested. Sections B and C both fell below the 4/5 bar, so per the standing multi-topic rule U45 retests both together, with two specific fixes folded in: a "Finish Line Check" habit (after reaching an answer, re-read the question and answer every part it asked for, before writing the final line) directly targeting Q15\'s unfinished chain, and a "Compare Before You Choose" habit (try 2&ndash;3 different combinations before picking the cheapest) directly targeting Q8\'s table-optimization miss. This bumps the original U45 topic (Systematic Listing &amp; Constrained Counting) to U46, shifting the rest of the U42&ndash;U51 roadmap down one more slot through U52.',
+    qSummary: '<strong>Sec A 4/5 | Sec B 3.5/5 | Sec C 2/5</strong> — 9.5/15 (63%) NOT PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Multi-Clue — Tom/Mia (sum 22, diff 4)',        lvl:'w', pass:true,  note:'&#10003; 13.' },
+      { q:'Q2', topic:'Multi-Clue — rope (84, diff 18)',              lvl:'w', pass:true,  note:'&#10003; 33.' },
+      { q:'Q3', topic:'Multi-Clue — fruit basket, 3 quantities',      lvl:'m', pass:false, note:'&#10007; wrote "?"; correct 9. Attempted algebra in the margin (wrote "AAAA", "BB", trying to represent apples/bananas symbolically) but couldn\'t resolve it &mdash; honestly flagged as unsolved rather than guessed.' },
+      { q:'Q4', topic:'Multi-Clue — Sarah/Ken (twice+6yr)',           lvl:'m', pass:true,  note:'&#10003; 11.' },
+      { q:'Q5', topic:'Multi-Clue — pencils/erasers',                 lvl:'m', pass:true,  note:'&#10003; 40.' },
+      { q:'Q6', topic:'Table Reading — cinema family pack',           lvl:'w', pass:true,  note:'&#10003; 60.' },
+      { q:'Q7', topic:'Table Reading — transport filter+cheapest',    lvl:'m', pass:true,  note:'&#10003; Train &mdash; correctly filtered out Bus on time and picked Train over Taxi on price, but didn\'t write the numeric price (&#3647;45) the question also asked for.' },
+      { q:'Q8', topic:'Table Reading — notebook packs, optimization', lvl:'h', pass:false, note:'&#10007; wrote 420; correct 380. Used 4&times;10-packs (105&times;4=420) instead of checking the better per-unit rate on 20-packs (2&times;190=380) &mdash; didn\'t compare combinations before settling on one.' },
+      { q:'Q9', topic:'Table Reading — phone plans',                  lvl:'m', pass:false, note:'&#189; credit &mdash; correctly identified Plan B as cheaper (matches the key), but the difference amount is wrong (190 instead of 10), a computation slip after the right comparison was made.' },
+      { q:'Q10',topic:'Table Reading — parking, rounding+cap',        lvl:'h', pass:true,  note:'&#10003; 200.' },
+      { q:'Q11',topic:'Discount &amp; Profit — simple discount',      lvl:'w', pass:true,  note:'&#10003; 360.' },
+      { q:'Q12',topic:'Discount &amp; Profit — profit+percentage',    lvl:'w', pass:true,  note:'&#10003; 25% &mdash; legible and correct; the profit-amount portion is obscured by heavy scribbling/rewriting and can\'t be independently verified from the page.' },
+      { q:'Q13',topic:'Discount &amp; Profit — discount then profit', lvl:'m', pass:false, note:'&#10007; wrote 270; correct 130. No working shown, so the exact mix-up can\'t be confirmed.' },
+      { q:'Q14',topic:'Discount &amp; Profit — markup &times;8',      lvl:'m', pass:false, note:'&#10007; wrote 200; correct 120. No working shown.' },
+      { q:'Q15',topic:'Capstone — markup+discount+&times;3+profit check', lvl:'h', pass:false, note:'&#10007; wrote 189; correct 567 (profit &#3647;9/book). Working shown is fully correct for ONE book (180&times;1.4=252, 252&times;0.75=189) &mdash; never multiplied by the 3 books asked for, and never answered the profit-check part. The chain itself was executed perfectly; it just wasn\'t carried to the finish or fully read.' }
+    ]
+  },
+  _U43archived: {
     n:43, score:15, outOf:15, pct:100, delta:+8, prevScore:7, prevOutOf:15, prevLabel:'U42',
     patternLabel: 'U43 — Circular + Repeats Targeted Retest, PERFECT (independently verified)',
     patternInsight: 'Marked 14/15 (93%) &mdash; Sec A 4/5 (marked), Sec B <strong>5/5 PERFECT</strong>, Sec C <strong>5/5 PERFECT</strong>. <strong>Independent regrade against the answer key finds 15/15</strong>: Q5 (answer 20, mathematically correct) is missing its checkmark on the marked sheet, which reads as a grading oversight rather than a Prem error &mdash; same category of discrepancy as the ASMOPSS 2023 header count. Both of U42\'s problems are fully closed: Section B, which collapsed to 1/5 with three literal "?" marks, came back flawless, and Section C\'s hardest question (Q15, the n=9/8!-scale capstone) was solved cleanly with a full staircase build.',
@@ -44,31 +69,6 @@ var PREM_DATA = {
       { q:'Q13',topic:'Circular+Repeats r=4, n=8',              lvl:'h', pass:true,  note:'&#10003; 210 — full long division 5,040&divide;24=210 shown.' },
       { q:'Q14',topic:'Circular+Repeats r=3, n=8',              lvl:'h', pass:true,  note:'&#10003; 840 — full long division 5,040&divide;6=840 shown.' },
       { q:'Q15',topic:'Capstone — full staircase, n=9, 2 groups', lvl:'h', pass:true,  note:'&#10003; 10080 — complete staircase to 8!=40,320 (reusing the 5,040 already built for Q12&ndash;14), then two clean &divide;2 steps to 10,080.' }
-    ]
-  },
-  _U42archived: {
-    n:42, score:7, outOf:15, pct:47, delta:-2, prevScore:9, prevOutOf:15, prevLabel:'M4',
-    patternLabel: 'U42 — Circular Order & High Repeats · Fencepost Spacing, NOT PASSED',
-    patternInsight: '7/15 (47%) <strong>NOT PASSED</strong> &mdash; Sec A 3/5, Sec B <strong>1/5</strong>, Sec C 3/5. The big problem is arithmetic scale, not concept: Section C (a brand-new topic built from zero this unit) actually landed best, and three of Section B\'s five questions are literal question marks on the page &mdash; all three needed (n&minus;1)! for n=9, i.e. computing 8!=40,320 by hand, and the margin shows a tangled, abandoned multiplication attempt. The one Section B question with a smaller base (n=7&rarr;6!=720) was solved cleanly. Q4 is a separate, narrower slip: the long division for 5040&divide;6 is fully correct on the page, but the final digit was mis-transcribed onto the answer line (840&rarr;860).',
-    analysisLabel: 'Next: Unit 43 — Circular + Repeats Targeted Retest (Efficient Factorial Building)',
-    analysisInsight: 'Per the standing rule, only the collapsed section needs re-testing &mdash; but the retest needed a computation-execution fix built in, not just more of the same content. U43 teaches "build UP from the last factorial, never restart from scratch" (the exact technique that worked at U33 but didn\'t transfer here under pressure) and a "trust your own working" check for the Q4-style transcription slip, then retests circular+repeats at the same concept difficulty but paced so only ONE question needs an 8!-scale computation instead of three in a row. Section A and C are not retested (their misses are minor, monitor only). This bumps the original U43 plan (Word Problem Decoding) to U44, shifting the rest of the U42&ndash;U50 roadmap down one slot through U51.',
-    qSummary: '<strong>Sec A 3/5 | Sec B 1/5 | Sec C 3/5</strong> — 7/15 NOT PASSED',
-    qBreakdown: [
-      { q:'Q1', topic:'Circular (no repeats), n=8',            lvl:'w', pass:true,  note:'&#10003; 5040.' },
-      { q:'Q2', topic:'Repeats r=2 (SPOON)',                   lvl:'w', pass:true,  note:'&#10003; 60.' },
-      { q:'Q3', topic:'Circular (no repeats), n=6',            lvl:'w', pass:true,  note:'&#10003; 120.' },
-      { q:'Q4', topic:'Repeats r=3, n=7',                      lvl:'w', pass:false, note:'&#10007; wrote 860; correct 840. Long division (5040÷6) fully correct on the page, but the middle digit was mis-transcribed onto the answer line.' },
-      { q:'Q5', topic:'Repeats r=4+r=3, n=7',                  lvl:'w', pass:false, note:'&#10007; wrote 5; correct 35. No working shown — likely where the arithmetic load first became too much.' },
-      { q:'Q6', topic:'Circular+Repeats r=2, n=5',             lvl:'m', pass:false, note:'&#10007; wrote 2; correct 12. No working shown.' },
-      { q:'Q7', topic:'Circular+Repeats r=3, n=9',             lvl:'m', pass:false, note:'&#10007; literal "?" — correct 6720. Margin shows a tangled, abandoned 6!/7!/8!/9! attempt.' },
-      { q:'Q8', topic:'Circular+Repeats r=4, n=9',             lvl:'m', pass:false, note:'&#10007; literal "?" — correct 1680. Same abandoned working as Q7.' },
-      { q:'Q9', topic:'Circular+Repeats r=2, n=7',             lvl:'m', pass:true,  note:'&#10003; 360 — the one Section B question with a smaller base (6!=720), solved cleanly.' },
-      { q:'Q10',topic:'Circular+Repeats, 2 groups, n=9',       lvl:'m', pass:false, note:'&#10007; literal "?" — correct 3360.' },
-      { q:'Q11',topic:'Fencepost — straight line',             lvl:'h', pass:true,  note:'&#10003; 13.' },
-      { q:'Q12',topic:'Fencepost — circular loop',             lvl:'h', pass:false, note:'&#10007; wrote 16; correct 15. Added +1 to a closed loop by mistake — the inverse of M4\'s circular gap, same family.' },
-      { q:'Q13',topic:'Fencepost — maximum count',             lvl:'h', pass:true,  note:'&#10003; 11.' },
-      { q:'Q14',topic:'Fencepost — 2D grid',                   lvl:'h', pass:true,  note:'&#10003; 48.' },
-      { q:'Q15',topic:'Capstone — fencepost + circular repeats', lvl:'h', pass:false, note:'&#10007; wrote 20200; correct 20160. Drew 9 dots around a loop to correctly find n=9 (great strategy), but the final big multiplication/division was off by 40.' }
     ]
   },
   _M4archived: {
@@ -204,23 +204,37 @@ var PREM_DATA = {
     { n:41, score:13, delta:+5, color:'linear-gradient(135deg,#00796B,#004D40)', star:false },
     { n:'M4', label:'M4', score:9, delta:-4, color:'linear-gradient(135deg,#0D47A1,#4A148C)', star:false },
     { n:42, score:7, delta:-2, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
-    { n:43, score:15, delta:+8, color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true }
+    { n:43, score:15, delta:+8, color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true },
+    { n:44, score:9.5, delta:-5.5, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 44,
+      n: 45,
       badge: 'linear-gradient(135deg,#3949AB,#1A237E)',
-      title: 'Word Problem Decoding — Clue Extraction, Tables &amp; Multi-Step Profit',
+      title: 'Targeted Retest — Table Reading &amp; Discount/Profit (Word Problem Decoding)',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'Closes ASMOPSS 2023 Q6, Q9, Q10 (2/6)', c:'tred' },
-        { t:'NEW: Clue Board method', c:'tblue' },
-        { t:'3 sub-skills: multi-clue, tables, profit', c:'torange' }
+        { t:'Retests Sec B+C only — Sec A passed 4/5', c:'tblue' },
+        { t:'NEW: Finish Line Check method', c:'torange' },
+        { t:'NEW: Compare Before You Choose method', c:'torange' }
       ],
-      note: 'U44, built 18 Jul 2026. Resumes the original U42&ndash;U50 rotation (this slot was deferred one unit for U43\'s Section-B retest). Closes the single weakest topic on the ASMOPSS 2023 paper (Problem Solving &amp; Word Problems, 2/6 correct): Q6 (table-reading + optimization, abandoned), Q9 (age-chain word problem, wrong answer), and Q10 (discount/profit word problem, wrong answer) all trace to the same root cause — trying to hold several given facts in memory at once instead of writing them down first. New lesson (ProblemSolving_Lesson_ClueExtractionTablesProfit.html) teaches the "Clue Board" method (every given fact on its own line before combining) across three sub-skills: multi-clue word problems (reusing the Unit 21 equation-both-sides method, 15/15 mastered), table reading (locate the right row/column, compute two totals, compare), and discount &amp; profit (three formulas: sale price, profit, markup). Test: 15Q across the same three sections, difficulty progressing from plain to &#9733;&#9733;, capstone Q15 chains markup+discount+profit+multiply in one question.',
+      note: 'U45, built 20 Jul 2026. Targeted retest of U44\'s Sections B (Table Reading) and C (Discount &amp; Profit), which both fell below the 4/5 bar (3.5/5 and 2/5) &mdash; Section A passed clean at 4/5 and is not retested. New lesson (ProblemSolving_Lesson_FinishTheJobCompareChoices.html) teaches two habits: "Finish Line Check" (after reaching an answer, re-read the question and answer every part it asked for) directly targeting U44\'s Q15, where the full markup-then-discount chain was executed perfectly for one book but never carried through to the final &times;3-books-and-profit-check answer; and "Compare Before You Choose" (try 2&ndash;3 combinations before picking the cheapest) targeting Q8\'s table-optimization miss. Test: 15Q &mdash; Sec A (Q1&ndash;7) Table Reading Retest, Sec B (Q8&ndash;15) Discount &amp; Profit Retest. This bumps the original U45 topic (Systematic Listing &amp; Constrained Counting) to U46, shifting the rest of the roadmap down one more slot through U52.',
       status: 'pending'
+    },
+    {
+      n: 44,
+      badge: 'linear-gradient(135deg,#EF5350,#B71C1C)',
+      title: 'Word Problem Decoding — Clue Extraction, Tables &amp; Multi-Step Profit',
+      tags: [
+        { t:'9.5/15 (63%) &#10007; NOT PASSED', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Sec A 4/5 — clue identification landing', c:'tgreen' },
+        { t:'Sec B 3.5/5 + Sec C 2/5 — chains not finished', c:'tred' },
+        { t:'&rarr; U45 targeted retest, Sec B+C', c:'torange' }
+      ],
+      note: '9.5/15 &#10007; <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 3.5/5, Sec C 2/5. The Clue Board\'s fact/option-identification half is landing well: Section A held at 4/5 (Q3\'s miss honestly flagged as unsolved, not guessed), and Section B\'s Q7 &amp; Q9 both name the CORRECT cheaper option even when the final number is off. The real signal is Q15: working shows the exact two-step markup-then-discount chain executed perfectly for one book (180&times;1.4=252, 252&times;0.75=189, matching the expected sub-calculation exactly), then simply stops &mdash; no &times;3 for the three books, no profit-check answer. A finishing/completeness gap, not a formula gap. Q8 is a narrower, separate miss: didn\'t compare combinations before picking one in a table-optimization question. Working was mostly skipped in Sections B/C, which likely compounded both. &rarr; U45, targeted retest of Sec B+C with two new habits built in.',
+      status: 'done'
     },
     {
       n: 43,
@@ -947,10 +961,22 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 92
     },
     {
-      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction IN PROGRESS (U44); reverse averages, irregular 3D visualisation, algebra substitution still queued',
+      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction PARTIALLY ADDRESSED (U44, retest pending U45); reverse averages, irregular 3D visualisation, algebra substitution still queued',
       pill:      'p2', pillText: 'In Progress &#9654;',
-      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (built 18 Jul 2026, in progress). Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; U46. Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; U47. Algebra substitution (Q22) pairs with M4&rsquo;s Q8 equation-method lapse &rarr; U48. Full plan (U42&ndash;U51, shifted one slot after U43&rsquo;s retest was inserted) is in the Executive Summary.',
-      fillClass: 'g2', fillPct: 45
+      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (9.5/15, 63%, NOT PASSED &mdash; fact/option identification is landing but chain-finishing broke down; see new gaps below) &rarr; U45 targeted retest of Sec B+C. Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; now U46. Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; now U47. Algebra substitution (Q22) pairs with M4&rsquo;s Q8 equation-method lapse &rarr; now U48. Full plan (U42&ndash;U52, shifted one more slot after U45&rsquo;s retest was inserted) is in the Executive Summary.',
+      fillClass: 'g2', fillPct: 50
+    },
+    {
+      label:     '"Finish the chain, answer every part" — multi-step completion & multi-part questions — ACTIVE (new, U44; U45 targets it)',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U44 Q15 is the clearest evidence: working shows the exact two-step markup-then-discount chain executed perfectly for one book (180&times;1.4=252, 252&times;0.75=189, matching the expected sub-calculation exactly), then simply stops &mdash; no &times;3 for the three books, no answer to the "does the shop still make a profit" part. Same family as Q9\'s right-comparison-wrong-final-number miss. Not a formula gap &mdash; a "keep going until every part of the question is answered" gap. U45\'s "Finish Line Check" habit (re-read the question, check off every part asked for, before writing the final line) targets this directly.',
+      fillClass: 'g2', fillPct: 55
+    },
+    {
+      label:     'Table optimization — compare combinations before choosing — ACTIVE (new, U44; U45 targets it)',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U44 Q8: used 4&times;10-packs (105&times;4=420) instead of checking the better per-unit rate on 20-packs (2&times;190=380) &mdash; the first valid combination found was taken as the answer without comparing it to alternatives. Narrower and more isolated than the chain-finishing gap (only one question affected), but the same underlying habit of stopping at the first answer that "works" rather than checking if it\'s the best one. U45\'s "Compare Before You Choose" habit (try 2&ndash;3 combinations before picking) targets this directly.',
+      fillClass: 'g2', fillPct: 55
     },
     {
       label:     '"Count the groups first" — 2-group vs 3-group formula mix-up — MONITOR (new, U38)',
