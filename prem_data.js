@@ -15,13 +15,38 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '20 Jul 2026',
+  updated:        '23 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:45, topic:'Targeted Retest — Table Reading & Discount/Profit (Word Problem Decoding)', status:'In Progress' },
+  currentUnit: { n:46, topic:'Constrained Listing & Divisibility Arrangements (Art of Counting)', status:'In Progress' },
   lastUnit: {
+    n:45, score:13, outOf:15, pct:87, delta:+3.5, prevScore:9.5, prevOutOf:15, prevLabel:'U44',
+    patternLabel: 'U45 — Targeted Retest: Table Reading &amp; Discount/Profit, PASSED',
+    patternInsight: '13/15 (87%) <strong>PASSED</strong> &mdash; Sec A (Table Reading) 5/7, Sec B (Discount &amp; Profit) 8/8. Both new habits show real progress: "Finish Line Check" fixed the exact U44 Q15 failure &mdash; both multi-item capstones this time (Q14 &times;5, Q15 &times;4) were correctly carried through to the final total. "Compare Before You Choose" also landed clean &mdash; both pack-optimization questions (Q4, Q5) used the best per-unit rate. A narrower piece is still partial: on three "state X, and by how much" questions (Q9, Q12, Q15), the right number was computed &mdash; visible in the working, sometimes circled &mdash; but not always carried onto the actual Answer line. Only Q13 assembled the complete two-part answer. Section A\'s two misses (Q1, Q6) were computation slips inside a correctly-applied method, not comparison failures.',
+    analysisLabel: 'Next: Unit 46 — Constrained Listing &amp; Divisibility Arrangements (Art of Counting)',
+    analysisInsight: 'U45\'s pass closes the word-problem decoding cluster from the ASMOPSS 2023 diagnostic entirely (Q6, Q9, Q10) &mdash; no further retest needed. The programme resumes its rotation at U46: Systematic Listing &amp; Constrained Counting, the topic bumped twice now by two consecutive retests (U43, U45). Two light monitor-only items carry forward (not lessons): assembling every required part onto the Answer line (Q9/Q12/Q15 pattern), and arithmetic care on larger additions (Q6\'s 1614-vs-1014 slip). With ASMOPSS 2026 now 17 days away, U46 proceeds as planned, then the balance shifts toward timed mixed past-paper practice.',
+    qSummary: '<strong>Sec A 5/7 | Sec B 8/8</strong> — 13/15 (87%) PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Table Reading — sandwich combo savings',        lvl:'w', pass:false, note:'&#10007; wrote 10; correct 5. No working shown; 45+25&minus;65=5, not 10.' },
+      { q:'Q2', topic:'Table Reading — parking, flat vs. tiered',      lvl:'m', pass:true,  note:'&#10003; Mall B, &#3647;10.' },
+      { q:'Q3', topic:'Table Reading — gym plans',                    lvl:'m', pass:true,  note:'&#10003; Plan Y, &#3647;50.' },
+      { q:'Q4', topic:'Table Reading — marker packs, optimization',   lvl:'m', pass:true,  note:'&#10003; &#3647;128 &mdash; correctly used the best per-unit rate (16-pack) rather than the first valid combination.' },
+      { q:'Q5', topic:'Table Reading — pencil packs, optimization',   lvl:'h', pass:true,  note:'&#10003; &#3647;90 &mdash; same best-rate reasoning applied a second time, harder numbers.' },
+      { q:'Q6', topic:'Table Reading — streaming services compare',   lvl:'m', pass:false, note:'&#10007; wrote Service A; correct Service B, &#3647;180. Working shows Service A totalled ~1198 (correct 1194, small slip) and Service B totalled 1614 (correct 1014, larger addition error) &mdash; the COMPARE step itself was followed correctly (picked the smaller of his own two totals); the error is purely computational.' },
+      { q:'Q7', topic:'Table Reading — bike rental, tiered+capped',   lvl:'h', pass:true,  note:'&#10003; &#3647;140.' },
+      { q:'Q8', topic:'Discount &amp; Profit — simple discount',       lvl:'w', pass:true,  note:'&#10003; &#3647;510.' },
+      { q:'Q9', topic:'Discount &amp; Profit — profit + percentage',   lvl:'w', pass:true,  note:'&#10003; (marked correct) 20% &mdash; working shows profit=&#3647;70 correctly computed and circled, then 70&divide;350&times;100=20% via long division. The Answer line itself only reads "20%" &mdash; correct but incomplete on the line.' },
+      { q:'Q10',topic:'Discount &amp; Profit — discount + profit',     lvl:'m', pass:true,  note:'&#10003; &#3647;110.' },
+      { q:'Q11',topic:'Discount &amp; Profit — markup &times;6',       lvl:'w', pass:true,  note:'&#10003; &#3647;324.' },
+      { q:'Q12',topic:'Discount &amp; Profit — discount + profit-check', lvl:'m', pass:true,  note:'&#10003; (marked correct) Yes, &#3647;54 &mdash; &#3647;54 is the correct sale price and "Yes" the correct profit direction, but the profit AMOUNT (&#3647;14) is missing from the answer line.' },
+      { q:'Q13',topic:'Discount &amp; Profit — markup+discount+profit-check', lvl:'h', pass:true,  note:'&#10003; Yes, &#3647;6 &mdash; fully complete two-part answer, matching the key exactly.' },
+      { q:'Q14',topic:'Discount &amp; Profit — markup+discount &times;5', lvl:'h', pass:true,  note:'&#10003; &#3647;990 &mdash; working shows the full chain (markup, discount, &times;5) carried through correctly.' },
+      { q:'Q15',topic:'Capstone — markup+discount+&times;4+profit-check', lvl:'h', pass:true,  note:'&#10003; (marked correct) &#3647;1440, Yes &mdash; the &times;4 total is exactly right, fixing U44\'s Q15 miss where the multiply-through never happened. The profit-per-pair amount (&#3647;40) is missing from the final answer line, same pattern as Q9/Q12.' }
+    ]
+  },
+  _U44archived: {
     n:44, score:9.5, outOf:15, pct:63, delta:-5.5, prevScore:15, prevOutOf:15, prevLabel:'U43',
     patternLabel: 'U44 — Word Problem Decoding: Clue Extraction, Tables &amp; Multi-Step Profit, NOT PASSED',
     patternInsight: '9.5/15 (63%) <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 3.5/5, Sec C 2/5. The Clue Board\'s fact/option-identification half is landing well: Section A held at 4/5 (Q3\'s miss honestly flagged as unsolved rather than guessed), and Section B\'s Q7 &amp; Q9 both name the CORRECT cheaper option (Train; Plan B) even when the final number is off. The real signal is Q15: working shows the exact two-step markup-then-discount chain executed perfectly for ONE book (180&times;1.4=252, 252&times;0.75=189, matching the expected sub-calculation exactly), then simply stops &mdash; no &times;3 for the three books, no answer to the profit-check question. A finishing/completeness gap, not a formula gap. Q8 is a narrower, separate miss: didn\'t compare combinations before picking one in a table-optimization question. Working was mostly skipped across Sections B and C (only Q15 shows real working), which likely compounded both issues.',
@@ -44,31 +69,6 @@ var PREM_DATA = {
       { q:'Q13',topic:'Discount &amp; Profit — discount then profit', lvl:'m', pass:false, note:'&#10007; wrote 270; correct 130. No working shown, so the exact mix-up can\'t be confirmed.' },
       { q:'Q14',topic:'Discount &amp; Profit — markup &times;8',      lvl:'m', pass:false, note:'&#10007; wrote 200; correct 120. No working shown.' },
       { q:'Q15',topic:'Capstone — markup+discount+&times;3+profit check', lvl:'h', pass:false, note:'&#10007; wrote 189; correct 567 (profit &#3647;9/book). Working shown is fully correct for ONE book (180&times;1.4=252, 252&times;0.75=189) &mdash; never multiplied by the 3 books asked for, and never answered the profit-check part. The chain itself was executed perfectly; it just wasn\'t carried to the finish or fully read.' }
-    ]
-  },
-  _U43archived: {
-    n:43, score:15, outOf:15, pct:100, delta:+8, prevScore:7, prevOutOf:15, prevLabel:'U42',
-    patternLabel: 'U43 — Circular + Repeats Targeted Retest, PERFECT (independently verified)',
-    patternInsight: 'Marked 14/15 (93%) &mdash; Sec A 4/5 (marked), Sec B <strong>5/5 PERFECT</strong>, Sec C <strong>5/5 PERFECT</strong>. <strong>Independent regrade against the answer key finds 15/15</strong>: Q5 (answer 20, mathematically correct) is missing its checkmark on the marked sheet, which reads as a grading oversight rather than a Prem error &mdash; same category of discrepancy as the ASMOPSS 2023 header count. Both of U42\'s problems are fully closed: Section B, which collapsed to 1/5 with three literal "?" marks, came back flawless, and Section C\'s hardest question (Q15, the n=9/8!-scale capstone) was solved cleanly with a full staircase build.',
-    analysisLabel: 'Next: Unit 44 — Word Problem Decoding (Clue Extraction, Tables & Multi-Step Profit)',
-    analysisInsight: 'The staircase technique ("build UP from the last factorial, never restart from scratch") transferred completely &mdash; every question needing 7! or 8! (Q7, Q12, Q13, Q14, Q15) shows the build-up written out, and Prem started reusing his own earlier staircase values across questions (Q13/Q14 both reuse the 5,040 first computed for Q12; Q15 reuses it again to reach 40,320), going beyond what the lesson explicitly drilled. The pacing fix (only 1 of 15 questions at full n=9 scale, vs. U42\'s 3-in-a-row) meant the hardest computation never had to repeat back-to-back. With U42\'s gap fully closed, the plan resumes its original rotation at U44: Word Problem Decoding, closing ASMOPSS 2023\'s weakest topic (Q6, Q9, Q10 &mdash; 2/6 correct), teaching "write every given fact on its own line before combining" across three sub-skills (multi-clue problems, table reading, discount &amp; profit).',
-    qSummary: '<strong>Sec A 4/5 (marked) | Sec B 5/5 PERFECT | Sec C 5/5 PERFECT</strong> — marked 14/15, independently verified 15/15',
-    qBreakdown: [
-      { q:'Q1', topic:'Circular+Repeats r=2, n=4',              lvl:'w', pass:true,  note:'&#10003; 3.' },
-      { q:'Q2', topic:'Circular+Repeats r=3, n=5',              lvl:'w', pass:true,  note:'&#10003; 4.' },
-      { q:'Q3', topic:'Circular+Repeats r=2, n=6',              lvl:'w', pass:true,  note:'&#10003; 60.' },
-      { q:'Q4', topic:'Circular+Repeats r=2, n=5',              lvl:'w', pass:true,  note:'&#10003; 12.' },
-      { q:'Q5', topic:'Circular+Repeats r=3, n=6',              lvl:'w', pass:true,  note:'&#10003; 20 — correct, but marked without a checkmark on the sheet; independently verified against the key as right.' },
-      { q:'Q6', topic:'Circular+Repeats r=4, n=6',              lvl:'m', pass:true,  note:'&#10003; 5.' },
-      { q:'Q7', topic:'Circular+Repeats r=2, n=7',              lvl:'m', pass:true,  note:'&#10003; 360 — this exact question type produced a literal "?" on U42. Clean, correct working shown.' },
-      { q:'Q8', topic:'Circular+Repeats r=3, n=7',              lvl:'m', pass:true,  note:'&#10003; 120.' },
-      { q:'Q9', topic:'Circular+Repeats, 2 groups, n=6',        lvl:'m', pass:true,  note:'&#10003; 30.' },
-      { q:'Q10',topic:'Circular+Repeats, 2 groups, n=6',        lvl:'m', pass:true,  note:'&#10003; 10 — working shows a self-caught correction (crossed out an initial attempt before writing the final answer).' },
-      { q:'Q11',topic:'Circular+Repeats, 2 groups, n=7',        lvl:'h', pass:true,  note:'&#10003; 180.' },
-      { q:'Q12',topic:'Circular+Repeats r=2, n=8',              lvl:'h', pass:true,  note:'&#10003; 2520 — staircase shown 6!=720&rarr;7!=720&times;7=5,040&rarr;&divide;2=2,520.' },
-      { q:'Q13',topic:'Circular+Repeats r=4, n=8',              lvl:'h', pass:true,  note:'&#10003; 210 — full long division 5,040&divide;24=210 shown.' },
-      { q:'Q14',topic:'Circular+Repeats r=3, n=8',              lvl:'h', pass:true,  note:'&#10003; 840 — full long division 5,040&divide;6=840 shown.' },
-      { q:'Q15',topic:'Capstone — full staircase, n=9, 2 groups', lvl:'h', pass:true,  note:'&#10003; 10080 — complete staircase to 8!=40,320 (reusing the 5,040 already built for Q12&ndash;14), then two clean &divide;2 steps to 10,080.' }
     ]
   },
   _M4archived: {
@@ -205,23 +205,37 @@ var PREM_DATA = {
     { n:'M4', label:'M4', score:9, delta:-4, color:'linear-gradient(135deg,#0D47A1,#4A148C)', star:false },
     { n:42, score:7, delta:-2, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
     { n:43, score:15, delta:+8, color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true },
-    { n:44, score:9.5, delta:-5.5, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false }
+    { n:44, score:9.5, delta:-5.5, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
+    { n:45, score:13, delta:+3.5, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 46,
+      badge: 'linear-gradient(135deg,#00796B,#004D40)',
+      title: 'Constrained Listing &amp; Divisibility Arrangements (Art of Counting)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'Closes ASMOPSS 2023 Q19, Q25', c:'tred' },
+        { t:'NEW: list-then-check-the-rule habit', c:'tblue' },
+        { t:'NEW: fix-the-last-digit-first method', c:'torange' }
+      ],
+      note: 'U46, built 23 Jul 2026. Resumes the original rotation &mdash; this slot was bumped twice by two consecutive retests (U43, U45). Closes the Art of Counting gap confirmed on the ASMOPSS 2023 paper: Q19 (constrained coin-combination listing, overcounted 9 vs. correct 5 &mdash; didn\'t filter invalid combinations) and Q25 (permutations with a divisibility constraint, left blank &mdash; "how do I list this?"). New lesson (Counting_Lesson_ConstrainedListingDivisibility.html) teaches two compound skills built on already-mastered foundations: constrained coin-combination listing (reusing the U38 block-by-block sweep method, now with an extra rule to check on every candidate) and divisibility arrangements (reusing arrangement-counting plus the U29 divisibility rules, fixing the last digit FIRST rather than listing everything). Test: 15Q &mdash; Sec A (Q1&ndash;7) Constrained Listing, Sec B (Q8&ndash;15) Divisibility Arrangements, capstone Q15 tests recognising when the answer is 0.',
+      status: 'pending'
+    },
+    {
       n: 45,
       badge: 'linear-gradient(135deg,#3949AB,#1A237E)',
       title: 'Targeted Retest — Table Reading &amp; Discount/Profit (Word Problem Decoding)',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'Retests Sec B+C only — Sec A passed 4/5', c:'tblue' },
-        { t:'NEW: Finish Line Check method', c:'torange' },
-        { t:'NEW: Compare Before You Choose method', c:'torange' }
+        { t:'13/15 (87%) &#10003; PASSED', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Sec B 8/8 PERFECT', c:'tgreen' },
+        { t:'Sec A 5/7 — 2 arithmetic slips', c:'torange' },
+        { t:'Word-problem cluster CLOSED', c:'tgreen' }
       ],
-      note: 'U45, built 20 Jul 2026. Targeted retest of U44\'s Sections B (Table Reading) and C (Discount &amp; Profit), which both fell below the 4/5 bar (3.5/5 and 2/5) &mdash; Section A passed clean at 4/5 and is not retested. New lesson (ProblemSolving_Lesson_FinishTheJobCompareChoices.html) teaches two habits: "Finish Line Check" (after reaching an answer, re-read the question and answer every part it asked for) directly targeting U44\'s Q15, where the full markup-then-discount chain was executed perfectly for one book but never carried through to the final &times;3-books-and-profit-check answer; and "Compare Before You Choose" (try 2&ndash;3 combinations before picking the cheapest) targeting Q8\'s table-optimization miss. Test: 15Q &mdash; Sec A (Q1&ndash;7) Table Reading Retest, Sec B (Q8&ndash;15) Discount &amp; Profit Retest. This bumps the original U45 topic (Systematic Listing &amp; Constrained Counting) to U46, shifting the rest of the roadmap down one more slot through U52.',
-      status: 'pending'
+      note: '13/15 &#10003; <strong>PASSED</strong> &mdash; Sec A 5/7, Sec B 8/8. Both new habits show real progress: "Finish Line Check" fixed the exact U44 Q15 failure (both multi-item capstones this time, Q14 &times;5 and Q15 &times;4, were correctly carried through to the final total); "Compare Before You Choose" also landed clean (both pack-optimization questions used the best per-unit rate). A narrower piece stayed partial: on three "state X, and by how much" questions (Q9, Q12, Q15), the right number was computed &mdash; visible in the working, sometimes circled &mdash; but not always carried onto the Answer line; only Q13 gave the complete two-part answer. Section A\'s two misses (Q1, Q6) were computation slips inside a correctly-applied method, not comparison failures. &rarr; The word-problem decoding cluster from the ASMOPSS 2023 diagnostic is now fully closed. &rarr; U46, resuming the original rotation.',
+      status: 'done'
     },
     {
       n: 44,
@@ -961,22 +975,34 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 92
     },
     {
-      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction PARTIALLY ADDRESSED (U44, retest pending U45); reverse averages, irregular 3D visualisation, algebra substitution still queued',
+      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction RESOLVED (U44/U45); systematic listing IN PROGRESS (U46); reverse averages/3D/algebra queued after',
       pill:      'p2', pillText: 'In Progress &#9654;',
-      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (9.5/15, 63%, NOT PASSED &mdash; fact/option identification is landing but chain-finishing broke down; see new gaps below) &rarr; U45 targeted retest of Sec B+C. Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; now U46. Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; now U47. Algebra substitution (Q22) pairs with M4&rsquo;s Q8 equation-method lapse &rarr; now U48. Full plan (U42&ndash;U52, shifted one more slot after U45&rsquo;s retest was inserted) is in the Executive Summary.',
-      fillClass: 'g2', fillPct: 50
+      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (9.5/15, 63%, NOT PASSED) &rarr; U45 targeted retest of Sec B+C (13/15, 87%, PASSED) &mdash; cluster CLOSED. Systematic listing &amp; constrained counting (ASMOPSS Q19, Q25) &rarr; U46 (built 23 Jul 2026, in progress). Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; now U47. Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; now U48. Algebra substitution (Q22) pairs with M4&rsquo;s Q8 equation-method lapse &rarr; now U49. Full plan (U42&ndash;U52) is in the Executive Summary.',
+      fillClass: 'g2', fillPct: 60
     },
     {
-      label:     '"Finish the chain, answer every part" — multi-step completion & multi-part questions — ACTIVE (new, U44; U45 targets it)',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U44 Q15 is the clearest evidence: working shows the exact two-step markup-then-discount chain executed perfectly for one book (180&times;1.4=252, 252&times;0.75=189, matching the expected sub-calculation exactly), then simply stops &mdash; no &times;3 for the three books, no answer to the "does the shop still make a profit" part. Same family as Q9\'s right-comparison-wrong-final-number miss. Not a formula gap &mdash; a "keep going until every part of the question is answered" gap. U45\'s "Finish Line Check" habit (re-read the question, check off every part asked for, before writing the final line) targets this directly.',
-      fillClass: 'g2', fillPct: 55
+      label:     '"Finish the chain, answer every part" — multi-step completion & multi-part questions — RESOLVED at U45 (multiply-through fixed); narrower sub-issue carries forward as monitor',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U44 Q15 showed the exact two-step markup-then-discount chain executed perfectly for one book, then simply stopping &mdash; no &times;3, no profit-check. U45\'s "Finish Line Check" habit fixed exactly this: both multi-item capstones (Q14 &times;5, Q15 &times;4) were correctly carried through to the final total. The core "keep computing until the chain is finished" gap is closed &mdash; see the narrower "assemble every part onto the Answer line" entry below for what\'s still open.',
+      fillClass: 'gs', fillPct: 85
     },
     {
-      label:     'Table optimization — compare combinations before choosing — ACTIVE (new, U44; U45 targets it)',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U44 Q8: used 4&times;10-packs (105&times;4=420) instead of checking the better per-unit rate on 20-packs (2&times;190=380) &mdash; the first valid combination found was taken as the answer without comparing it to alternatives. Narrower and more isolated than the chain-finishing gap (only one question affected), but the same underlying habit of stopping at the first answer that "works" rather than checking if it\'s the best one. U45\'s "Compare Before You Choose" habit (try 2&ndash;3 combinations before picking) targets this directly.',
-      fillClass: 'g2', fillPct: 55
+      label:     'Assemble EVERY required part onto the Answer line (not just in the working) — MONITOR (new, U45)',
+      pill:      'p2', pillText: 'Monitor &#128992;',
+      score:     'U45 Q9, Q12, Q15: the correct number was computed &mdash; visible in the working, sometimes even circled &mdash; but the Answer line itself only carried PART of what was asked (e.g. Q9 wrote just "20%", missing the &#3647;70 profit figure also computed correctly in the working). Only Q13 assembled the full two-part answer. Narrower than the U44 chain-finishing gap: the math is done correctly, it just doesn\'t all make it onto the answer line. Light habit reminder before the next multi-part question set, not a dedicated lesson.',
+      fillClass: 'g2', fillPct: 60
+    },
+    {
+      label:     'Table optimization — compare combinations before choosing — RESOLVED at U45',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U44 Q8 used the first valid combination (4&times;10-packs) instead of checking the better per-unit rate (2&times;20-packs). U45\'s "Compare Before You Choose" habit fixed it directly: both pack-optimization questions (Q4 marker packs, Q5 pencil packs) used the best-per-unit-rate approach correctly, including on Q5\'s harder 3-pack-size numbers. Fully closed.',
+      fillClass: 'gs', fillPct: 88
+    },
+    {
+      label:     'Arithmetic care on larger 3-digit additions/comparisons — MONITOR (new, U45)',
+      pill:      'p2', pillText: 'Monitor &#128992;',
+      score:     'U45 Q6: correctly set up and compared two service totals, but a large addition error (Service B totalled as 1614 instead of 1014) flipped which option looked cheaper &mdash; the COMPARE method itself ("pick the smaller total") was followed correctly on his own (wrong) numbers. Q1 (no working shown) may be the same family. Not a method gap; a 1&ndash;2 maintenance question next time this shape appears, not a dedicated lesson.',
+      fillClass: 'g2', fillPct: 65
     },
     {
       label:     '"Count the groups first" — 2-group vs 3-group formula mix-up — MONITOR (new, U38)',

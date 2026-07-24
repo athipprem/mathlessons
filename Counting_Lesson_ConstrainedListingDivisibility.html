@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Constrained Listing &amp; Divisibility Arrangements</title>
+<style>
+:root{--nav:#00796B;--nav-dark:#004D40;--bg:#E0F2F1;--card:#fff;--acc:#00796B;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#00695C;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E0F2F1,#E0F7FA);border:2px solid #4DB6AC;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#004D40;font-weight:700;margin-bottom:6px}
+.big-rule{background:#E0F2F1;border:2px solid #26A69A;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#004D40;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F1F8F7;border:1px solid #B2DFDB;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#00695C}
+.steps .ln.ans{color:#004D40;font-weight:800}
+.steps .ln.cross{color:#C62828;text-decoration:line-through;opacity:.7}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#00796B;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F1F8F7;border:1.5px solid #80CBC4;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #80CBC4;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E0F2F1}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#00796B;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E0;color:#E65100;border:1.5px solid #FFB74D;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.rulebar{background:#E0F2F1;border:1.5px solid #26A69A;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#004D40;text-align:center;margin-bottom:12px}
+.tablewrap{overflow-x:auto;margin:10px 0}
+table.datatab{border-collapse:collapse;width:100%;font-size:.92rem}
+table.datatab th,table.datatab td{border:1px solid #B2DFDB;padding:6px 10px;text-align:center}
+table.datatab th{background:#B2DFDB;color:#004D40}
+table.datatab td.bad{background:#FFEBEE;color:#C62828;text-decoration:line-through}
+table.datatab td.good{background:#E8F5E9;color:#1B5E20;font-weight:700}
+.listrow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.numchip{border:1.5px solid #80CBC4;border-radius:8px;padding:8px 12px;background:#fff;font-weight:700;font-size:.95rem;cursor:pointer;transition:.15s}
+.numchip.tapped-good{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.numchip.tapped-bad{background:#FFEBEE;border-color:#EF5350;color:#C62828;text-decoration:line-through}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Constrained Listing &amp; Divisibility Arrangements</span>
+  <span class="tnav-pill" id="pill">1 / 10</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1FA99; List It, Then Check It</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>You already know how to LIST every possible combination of coins that add up to a target amount. You also already know how to ARRANGE a set of digits into different numbers, and you already know the divisibility rules (÷2, ÷5, and more). This unit combines those two skills with one new twist: sometimes a listing question comes with an extra RULE attached &mdash; "at least one of each," "no more than 3," or "must be divisible by 5." Miss the rule, and you'll count combinations that don't actually count, or arrangements that don't actually work.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Where this shows up</div>
+    <p>Competition papers love this combo: "How many ways can you make ฿X using these two coins, if you must use at least one of each?" or "How many 4-digit numbers can you make from these digits that are divisible by 2?" Both are really the SAME idea &mdash; list your candidates, then cross out any that break the rule.</p>
+  </div>
+  <div class="big-rule">List every candidate. Check EVERY one against the rule. Only count the survivors.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: big idea / decision tree overview -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; Two Skills, One Big Idea</h2>
+  <p style="margin-bottom:10px">Today has two parts. Both use the SAME big idea &mdash; list first, then filter by the rule &mdash; just on different kinds of questions.</p>
+  <div class="tree">
+    <div class="node"><span class="step-n">A</span><strong>Constrained coin listing:</strong> given coin values and a target amount, list every combination that adds up correctly &mdash; then cross out any that break an extra rule (like "at least one of each" or "no more than 3").</div>
+    <div class="node"><span class="step-n">B</span><strong>Divisibility arrangements:</strong> given a set of digits, count how many arrangements form a number that satisfies a divisibility rule &mdash; using the rule to work out WHICH digit can go last, before you even start listing.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; In both parts, the rule isn't a trap &mdash; it's a tool. Once you know the rule, it actually makes the list SHORTER and the question EASIER, not harder.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Part A: Coins &#8594;</button></div>
+</div>
+
+<!-- s2: Sub-skill A worked example -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Part A &mdash; Worked Example</h2>
+  <p><strong>A donation box collects ฿50 using only ฿5 and ฿10 coins, with at least one of each coin. How many different combinations of coins could be inside?</strong></p>
+  <div class="rulebar">Sweep the BIGGER coin from 1 upward. For each amount, check the leftover divides evenly.</div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; sweep the ฿10 coin, starting at 1 (the rule says at least one):</span></div>
+    <div class="ln">1 &times; ฿10 = ฿10 &rarr; leftover ฿40 &divide; ฿5 = 8 &#10003; &rarr; (8 fives, 1 ten)</div>
+    <div class="ln">2 &times; ฿10 = ฿20 &rarr; leftover ฿30 &divide; ฿5 = 6 &#10003; &rarr; (6 fives, 2 tens)</div>
+    <div class="ln">3 &times; ฿10 = ฿30 &rarr; leftover ฿20 &divide; ฿5 = 4 &#10003; &rarr; (4 fives, 3 tens)</div>
+    <div class="ln">4 &times; ฿10 = ฿40 &rarr; leftover ฿10 &divide; ฿5 = 2 &#10003; &rarr; (2 fives, 4 tens)</div>
+    <div class="ln cross">5 &times; ฿10 = ฿50 &rarr; leftover ฿0 &divide; ฿5 = 0 &#10007; &mdash; that's ZERO ฿5 coins, breaks "at least one of each"!</div>
+    <div class="ln"><span class="note">Step 2 &mdash; count only the survivors:</span></div>
+    <div class="ln ans">4 different combinations</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Without checking the rule, it looks like there are 5 combinations. The rule removes exactly one of them &mdash; the one using ZERO ฿5 coins. Always check EVERY row, not just count the rows.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s2b: interactive tap-to-check widget -->
+<div class="screen" id="s2b">
+<div class="card">
+  <h2>&#x1F4CB; Tap Each Row &mdash; Does It Break The Rule?</h2>
+  <p style="margin-bottom:10px"><strong>A shop collects ฿36 using only ฿3 and ฿9 coins, with at least one of each coin. Tap each row to check it against the rule.</strong></p>
+  <div class="tablewrap"><table class="datatab" id="checkTable">
+    <tr><th>฿9 coins used</th><th>Leftover</th><th>฿3 coins needed</th><th>Tap to check</th></tr>
+  </table></div>
+  <div class="warn-box" id="checkResult" style="display:none"><p id="checkResultText"></p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s3: Sub-skill A practice -->
+<div class="screen" id="s3">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Part A</span>
+  <h2>Practice &mdash; Constrained Coin Listing</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Sweep the bigger coin, check every leftover, then cross out any row that breaks the rule.</p>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A jar collects ฿40 using only ฿4 and ฿8 coins, with at least one of each coin. How many different combinations are possible?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 4</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 3</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">b=1: ฿8&rarr;leftover ฿32&divide;4=8 &#10003;</div>
+      <div class="ln">b=2: ฿16&rarr;leftover ฿24&divide;4=6 &#10003;</div>
+      <div class="ln">b=3: ฿24&rarr;leftover ฿16&divide;4=4 &#10003;</div>
+      <div class="ln">b=4: ฿32&rarr;leftover ฿8&divide;4=2 &#10003;</div>
+      <div class="ln cross">b=5: ฿40&rarr;leftover ฿0&divide;4=0 &#10007; zero ฿4 coins, breaks the rule</div>
+      <div class="ln ans">4 combinations</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A vending machine collects ฿70 using only ฿5 and ฿10 coins, with at least TWO of each coin. How many different combinations are possible?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 5</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">b=2: ฿20&rarr;leftover ฿50&divide;5=10 &#10003; (10&ge;2)</div>
+      <div class="ln">b=3: ฿30&rarr;leftover ฿40&divide;5=8 &#10003;</div>
+      <div class="ln">b=4: ฿40&rarr;leftover ฿30&divide;5=6 &#10003;</div>
+      <div class="ln">b=5: ฿50&rarr;leftover ฿20&divide;5=4 &#10003;</div>
+      <div class="ln">b=6: ฿60&rarr;leftover ฿10&divide;5=2 &#10003; (2&ge;2, just barely!)</div>
+      <div class="ln cross">b=7: ฿70&rarr;leftover ฿0&divide;5=0 &#10007; only 0 fives, breaks "at least two"</div>
+      <div class="ln ans">5 combinations</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Part B: Digits &#8594;</button></div>
+</div>
+
+<!-- s4: Sub-skill B tiny intro -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Part B &mdash; Start Small: List Then Circle</h2>
+  <p><strong>Using the digits 2, 3, 4 (each exactly once), list every 3-digit number you can make. Then circle the ones divisible by 2.</strong></p>
+  <p style="margin:10px 0;font-size:.92rem;color:#555">Tap each number below to check it.</p>
+  <div class="listrow" id="tinyList"></div>
+  <div class="warn-box" id="tinyResult" style="display:none"><p id="tinyResultText"></p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The shortcut &#8594;</button></div>
+</div>
+
+<!-- s4b: Sub-skill B shortcut method -->
+<div class="screen" id="s4b">
+<div class="card">
+  <h2>&#x1F4A1; The Shortcut &mdash; Fix The Last Digit FIRST</h2>
+  <p style="margin-bottom:10px">Listing all 6 and checking each one works &mdash; but with 5 or 6 digits, that list gets huge fast (5 digits = 120 arrangements!). Here's the shortcut: <strong>use the rule to figure out which digit(s) are ALLOWED to go last, before you list anything.</strong></p>
+  <p><strong>Using the digits 1, 2, 3, 4, 5 (each exactly once), how many different 5-digit numbers can be formed that are divisible by 5?</strong></p>
+  <div class="rulebar">Divisible by 5 &rarr; last digit must be 0 or 5</div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; which digits are allowed last?</span> Only 5 (no 0 in this digit set). Just ONE choice.</div>
+    <div class="ln"><span class="note">Step 2 &mdash; fix 5 in the last spot. What's left?</span> 1, 2, 3, 4 &mdash; four digits, to arrange in the first four spots.</div>
+    <div class="ln"><span class="note">Step 3 &mdash; count the arrangements of what's left:</span> 4! = 4&times;3&times;2&times;1 = 24</div>
+    <div class="ln ans">24 different numbers</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; You didn't need to write out all 120 arrangements and check each one &mdash; fixing the last digit FIRST shrinks a huge listing job into one factorial.</p></div>
+  <div class="big-rule" style="font-size:1rem">1) Find which digit(s) can legally go last. 2) Fix one there. 3) Count arrangements of the rest with a factorial. 4) If more than one digit could go last, do this for EACH one and ADD the totals.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s5: Sub-skill B practice -->
+<div class="screen" id="s5">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Part B</span>
+  <h2>Practice &mdash; Divisibility Arrangements</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Find which digit(s) can legally go last FIRST. Then fix-and-count.</p>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; Using the digits 1, 3, 5, 7 (each exactly once), how many different 4-digit numbers can be formed that are divisible by 5?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 24</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 3</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">Only 5 can go last (no 0 available) &mdash; 1 choice.</div>
+      <div class="ln">Left to arrange: 1, 3, 7 &rarr; 3! = 6</div>
+      <div class="ln ans">6 different numbers</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; Using the digits 1, 2, 4, 6, 9 (each exactly once), how many different 5-digit numbers can be formed that are divisible by 2?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 24</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 48</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 72</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'C')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">Even digits that can go last: 2, 4, or 6 &mdash; THREE choices, not one!</div>
+      <div class="ln">For EACH choice, the other 4 digits arrange: 4! = 24</div>
+      <div class="ln">Do this for each of the 3 choices, then ADD: 24 + 24 + 24 = 72</div>
+      <div class="ln ans">72 different numbers</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Full checklist &#8594;</button></div>
+</div>
+
+<!-- s6: full checklist -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Full Checklist</h2>
+  <h3>Part A &mdash; Constrained Coin Listing</h3>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Sweep the BIGGER coin from its lowest allowed count upward.</div>
+    <div class="node"><span class="step-n">2</span>For each amount, check: does the leftover divide EVENLY by the smaller coin?</div>
+    <div class="node"><span class="step-n">3</span>If yes &mdash; check the EXTRA rule too (at least how many? no more than how many?). Cross it out if it breaks the rule.</div>
+    <div class="node"><span class="step-n">4</span>Count only the survivors.</div>
+  </div>
+  <h3 style="margin-top:16px">Part B &mdash; Divisibility Arrangements</h3>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>What's the rule asking for &mdash; ÷2 (last digit even) or ÷5 (last digit 0 or 5)?</div>
+    <div class="node"><span class="step-n">2</span>List EVERY digit in your set that's allowed to go last. Is there 0? 1? Several?</div>
+    <div class="node"><span class="step-n">3</span>If NONE of your digits work &mdash; the answer is 0. Don't try to list arrangements that can't exist!</div>
+    <div class="node"><span class="step-n">4</span>For each allowed last digit, fix it and count the arrangements of the rest with a factorial.</div>
+    <div class="node"><span class="step-n">5</span>If more than one digit is allowed last, ADD the totals together.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Step 3 of Part B matters a lot: always check FIRST whether a valid last digit even exists, before you start counting anything.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap &#8594;</button></div>
+</div>
+
+<!-- s7: recap -->
+<div class="screen" id="s7">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>List every candidate, then check EVERY one against the rule &mdash; whether the rule is "at least one of each" or a divisibility rule. Cross out anything that breaks it. Only count the survivors.</strong></p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You sweep the bigger coin methodically, checking every leftover for even division</li>
+    <li>You never forget the EXTRA rule &mdash; it's not optional, it's part of the question</li>
+    <li>Before counting digit arrangements, you first work out which digits are even ALLOWED to go last</li>
+    <li>If no digit works for the rule, you confidently write 0 instead of guessing</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">Both parts use the exact same habit: list carefully, check every candidate against the rule, count only what survives. That habit works on almost any counting question you'll ever see.</p>
+</div>
+<div class="navrow">
+  <a href="ProblemSolving_Lesson_FinishTheJobCompareChoices.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E0F2F1;color:#004D40;border:2px solid #004D40;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; U45 Lesson</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#00796B;color:#fff;border:2px solid #00796B;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ── s2b: interactive coin check table ──────────────────
+var coinRows=[
+  {b:1, leftover:27, div:9, ok:true},
+  {b:2, leftover:18, div:6, ok:true},
+  {b:3, leftover:9,  div:3, ok:true},
+  {b:4, leftover:0,  div:0, ok:false}
+];
+var tbl=document.getElementById('checkTable');
+coinRows.forEach(function(row,idx){
+  var tr=document.createElement('tr');
+  var tdB=document.createElement('td'); tdB.textContent=row.b;
+  var tdL=document.createElement('td'); tdL.textContent='฿'+row.leftover;
+  var tdD=document.createElement('td'); tdD.textContent=row.ok? row.div : (row.div+' (but 0 ฿3-coins!)');
+  var tdT=document.createElement('td');
+  var btn=document.createElement('button');
+  btn.className='btn-check'; btn.style.padding='4px 12px'; btn.style.fontSize='.82rem'; btn.textContent='Check';
+  btn.onclick=function(){
+    tdD.className = row.ok ? 'good' : 'bad';
+    btn.textContent = row.ok ? '✓ Valid' : '✗ Breaks rule';
+    btn.disabled=true;
+    checkAllTapped();
+  };
+  tdT.appendChild(btn);
+  tr.appendChild(tdB);tr.appendChild(tdL);tr.appendChild(tdD);tr.appendChild(tdT);
+  tbl.appendChild(tr);
+});
+function checkAllTapped(){
+  var buttons=tbl.querySelectorAll('button');
+  var allDone=true;
+  buttons.forEach(function(b){ if(!b.disabled) allDone=false; });
+  if(allDone){
+    document.getElementById('checkResult').style.display='block';
+    document.getElementById('checkResultText').textContent='4 rows looked possible, but 1 breaks the "at least one of each" rule (0 threes). The answer is 3 valid combinations.';
+  }
+}
+
+// ── s4: tiny listing widget ──────────────────────────────
+var tinyNums=[234,243,324,342,423,432];
+var tinyList=document.getElementById('tinyList');
+var tinyTapped=0;
+tinyNums.forEach(function(n){
+  var div=document.createElement('div');
+  div.className='numchip';
+  div.textContent=n;
+  div.onclick=function(){
+    if(div.classList.contains('tapped-good')||div.classList.contains('tapped-bad')) return;
+    var lastDigit = n % 10;
+    var isEven = (lastDigit % 2 === 0);
+    div.classList.add(isEven ? 'tapped-good' : 'tapped-bad');
+    tinyTapped++;
+    if(tinyTapped===tinyNums.length){
+      document.getElementById('tinyResult').style.display='block';
+      document.getElementById('tinyResultText').textContent='4 of the 6 numbers are divisible by 2 (234, 324, 342, 432) — every one that ends in an even digit (2 or 4). The other 2 end in the odd digit 3.';
+    }
+  };
+  tinyList.appendChild(div);
+});
+</script>
+</body>
+</html>
