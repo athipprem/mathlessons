@@ -15,13 +15,38 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '23 Jul 2026',
+  updated:        '24 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:46, topic:'Constrained Listing & Divisibility Arrangements (Art of Counting)', status:'In Progress' },
+  currentUnit: { n:47, topic:'Reverse Averages & Missing-Value Arithmetic (Arithmetic)', status:'In Progress' },
   lastUnit: {
+    n:46, score:13, outOf:15, pct:87, delta:0, prevScore:13, prevOutOf:15, prevLabel:'U45',
+    patternLabel: 'U46 — Constrained Coin-Combination Listing &amp; Divisibility Arrangements, PASSED',
+    patternInsight: '13/15 (87%) <strong>PASSED</strong> &mdash; Sec A (Constrained Listing) 5/7, Sec B (Divisibility Arrangements) 8/8 PERFECT. Section B is the headline: a clean sweep on genuinely new material, including both harder 6-digit questions and the capstone trick question (Q15, correctly reasoned to 0 &mdash; no valid last digit exists). "Find the last digit first" transferred completely on first exposure. Section A held at 5/7 &mdash; both misses were untested variants, not a method breakdown: Q6 was the first-ever 3-coin-type listing question (lesson only taught 2 coin types), and Q4 was the first upper-bound-only rule with no "at least one of each" anchor phrase (left blank rather than miscalculated).',
+    analysisLabel: 'Next: Unit 47 — Reverse Averages &amp; Missing-Value Arithmetic (Arithmetic)',
+    analysisInsight: 'U46\'s pass closes both Art of Counting gaps from the ASMOPSS 2023 diagnostic (Q19 constrained listing, Q25 divisibility permutations) &mdash; no retest needed. The programme resumes its rotation at U47: Reverse Averages &amp; Missing-Value Arithmetic, closing ASMOPSS 2023\'s Q12 (a clean untaught-content gap: average &times; count = total, then work backward). Two light monitor-only items carry forward (not lessons): a 3-coin-type constrained listing check, and an upper-bound-only-rule check, whenever Art of Counting next reappears. With ASMOPSS 2026 now 16 days away, U47 stays focused before shifting toward timed mixed past-paper practice.',
+    qSummary: '<strong>Sec A 5/7 | Sec B 8/8</strong> — 13/15 (87%) PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Constrained Listing — &#3647;6/&#3647;9 coins, &#3647;63, at least one each', lvl:'w', pass:true,  note:'&#10003; 3.' },
+      { q:'Q2', topic:'Constrained Listing — &#3647;3/&#3647;6 coins, &#3647;33, at least one each', lvl:'w', pass:true,  note:'&#10003; 5.' },
+      { q:'Q3', topic:'Constrained Listing — &#3647;3/&#3647;12 coins, two lower bounds', lvl:'m', pass:true,  note:'&#10003; 6 &mdash; two different lower bounds on two coins, handled correctly.' },
+      { q:'Q4', topic:'Constrained Listing — &#3647;3/&#3647;11 coins, upper-bound only, no lower bound', lvl:'m', pass:false, note:'&#10007; blank; correct 2. First question with an upper-bound-only rule and no "at least one of each" anchor &mdash; no answer or working attempted, suggesting uncertainty about how to start rather than a wrong calculation.' },
+      { q:'Q5', topic:'Constrained Listing — &#3647;4/&#3647;12 coins, &#3647;112, at least one each', lvl:'h', pass:true,  note:'&#10003; 9 &mdash; largest Section A target, correct despite working showing only 8 of 9 checks explicitly written.' },
+      { q:'Q6', topic:'Constrained Listing — THREE coin types (&#3647;2/&#3647;6/&#3647;12), &#3647;32', lvl:'h', pass:false, note:'&#10007; wrote 2; correct 4. First 3-coin-type question in this skill (lesson\'s Part A only taught/practised 2 coin types) &mdash; working doesn\'t resemble the systematic sweep used correctly on Q1&ndash;Q5.' },
+      { q:'Q7', topic:'Capstone — &#3647;6/&#3647;7 coins, combined lower+upper bound',  lvl:'h', pass:true,  note:'&#10003; 1 &mdash; correctly checked all four &#3647;7-counts and crossed out the three that failed.' },
+      { q:'Q8', topic:'Divisibility Arrangement — digits 2,6,8,9 &divide;2', lvl:'w', pass:true,  note:'&#10003; 18.' },
+      { q:'Q9', topic:'Divisibility Arrangement — digits 5,6,7,8 &divide;2', lvl:'w', pass:true,  note:'&#10003; 12.' },
+      { q:'Q10',topic:'Divisibility Arrangement — digits 5,6,7,8,9 &divide;5', lvl:'m', pass:true,  note:'&#10003; 24.' },
+      { q:'Q11',topic:'Divisibility Arrangement — digits 6,6,7,8,9 (repeat) &divide;2', lvl:'m', pass:true,  note:'&#10003; 36.' },
+      { q:'Q12',topic:'Divisibility Arrangement — digits 5,6,7,8,9 &divide;2', lvl:'h', pass:true,  note:'&#10003; 48.' },
+      { q:'Q13',topic:'Divisibility Arrangement — digits 4,5,6,7,8,9 &divide;5', lvl:'h', pass:true,  note:'&#10003; 120.' },
+      { q:'Q14',topic:'Divisibility Arrangement — digits 4,5,6,7,8,9 &divide;2', lvl:'h', pass:true,  note:'&#10003; 360.' },
+      { q:'Q15',topic:'Capstone (trick) — digits 2,4,6,7,8,9 &divide;5, no 0/5 in set', lvl:'h', pass:true,  note:'&#10003; 0 &mdash; correctly recognised no valid last digit exists rather than guessing or leaving it blank.' }
+    ]
+  },
+  _U45archived: {
     n:45, score:13, outOf:15, pct:87, delta:+3.5, prevScore:9.5, prevOutOf:15, prevLabel:'U44',
     patternLabel: 'U45 — Targeted Retest: Table Reading &amp; Discount/Profit, PASSED',
     patternInsight: '13/15 (87%) <strong>PASSED</strong> &mdash; Sec A (Table Reading) 5/7, Sec B (Discount &amp; Profit) 8/8. Both new habits show real progress: "Finish Line Check" fixed the exact U44 Q15 failure &mdash; both multi-item capstones this time (Q14 &times;5, Q15 &times;4) were correctly carried through to the final total. "Compare Before You Choose" also landed clean &mdash; both pack-optimization questions (Q4, Q5) used the best per-unit rate. A narrower piece is still partial: on three "state X, and by how much" questions (Q9, Q12, Q15), the right number was computed &mdash; visible in the working, sometimes circled &mdash; but not always carried onto the actual Answer line. Only Q13 assembled the complete two-part answer. Section A\'s two misses (Q1, Q6) were computation slips inside a correctly-applied method, not comparison failures.',
@@ -44,31 +69,6 @@ var PREM_DATA = {
       { q:'Q13',topic:'Discount &amp; Profit — markup+discount+profit-check', lvl:'h', pass:true,  note:'&#10003; Yes, &#3647;6 &mdash; fully complete two-part answer, matching the key exactly.' },
       { q:'Q14',topic:'Discount &amp; Profit — markup+discount &times;5', lvl:'h', pass:true,  note:'&#10003; &#3647;990 &mdash; working shows the full chain (markup, discount, &times;5) carried through correctly.' },
       { q:'Q15',topic:'Capstone — markup+discount+&times;4+profit-check', lvl:'h', pass:true,  note:'&#10003; (marked correct) &#3647;1440, Yes &mdash; the &times;4 total is exactly right, fixing U44\'s Q15 miss where the multiply-through never happened. The profit-per-pair amount (&#3647;40) is missing from the final answer line, same pattern as Q9/Q12.' }
-    ]
-  },
-  _U44archived: {
-    n:44, score:9.5, outOf:15, pct:63, delta:-5.5, prevScore:15, prevOutOf:15, prevLabel:'U43',
-    patternLabel: 'U44 — Word Problem Decoding: Clue Extraction, Tables &amp; Multi-Step Profit, NOT PASSED',
-    patternInsight: '9.5/15 (63%) <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 3.5/5, Sec C 2/5. The Clue Board\'s fact/option-identification half is landing well: Section A held at 4/5 (Q3\'s miss honestly flagged as unsolved rather than guessed), and Section B\'s Q7 &amp; Q9 both name the CORRECT cheaper option (Train; Plan B) even when the final number is off. The real signal is Q15: working shows the exact two-step markup-then-discount chain executed perfectly for ONE book (180&times;1.4=252, 252&times;0.75=189, matching the expected sub-calculation exactly), then simply stops &mdash; no &times;3 for the three books, no answer to the profit-check question. A finishing/completeness gap, not a formula gap. Q8 is a narrower, separate miss: didn\'t compare combinations before picking one in a table-optimization question. Working was mostly skipped across Sections B and C (only Q15 shows real working), which likely compounded both issues.',
-    analysisLabel: 'Next: Unit 45 — Targeted Retest, Sections B &amp; C (Table Reading &amp; Discount/Profit)',
-    analysisInsight: 'Section A passed clean (4/5) and is not retested. Sections B and C both fell below the 4/5 bar, so per the standing multi-topic rule U45 retests both together, with two specific fixes folded in: a "Finish Line Check" habit (after reaching an answer, re-read the question and answer every part it asked for, before writing the final line) directly targeting Q15\'s unfinished chain, and a "Compare Before You Choose" habit (try 2&ndash;3 different combinations before picking the cheapest) directly targeting Q8\'s table-optimization miss. This bumps the original U45 topic (Systematic Listing &amp; Constrained Counting) to U46, shifting the rest of the U42&ndash;U51 roadmap down one more slot through U52.',
-    qSummary: '<strong>Sec A 4/5 | Sec B 3.5/5 | Sec C 2/5</strong> — 9.5/15 (63%) NOT PASSED',
-    qBreakdown: [
-      { q:'Q1', topic:'Multi-Clue — Tom/Mia (sum 22, diff 4)',        lvl:'w', pass:true,  note:'&#10003; 13.' },
-      { q:'Q2', topic:'Multi-Clue — rope (84, diff 18)',              lvl:'w', pass:true,  note:'&#10003; 33.' },
-      { q:'Q3', topic:'Multi-Clue — fruit basket, 3 quantities',      lvl:'m', pass:false, note:'&#10007; wrote "?"; correct 9. Attempted algebra in the margin (wrote "AAAA", "BB", trying to represent apples/bananas symbolically) but couldn\'t resolve it &mdash; honestly flagged as unsolved rather than guessed.' },
-      { q:'Q4', topic:'Multi-Clue — Sarah/Ken (twice+6yr)',           lvl:'m', pass:true,  note:'&#10003; 11.' },
-      { q:'Q5', topic:'Multi-Clue — pencils/erasers',                 lvl:'m', pass:true,  note:'&#10003; 40.' },
-      { q:'Q6', topic:'Table Reading — cinema family pack',           lvl:'w', pass:true,  note:'&#10003; 60.' },
-      { q:'Q7', topic:'Table Reading — transport filter+cheapest',    lvl:'m', pass:true,  note:'&#10003; Train &mdash; correctly filtered out Bus on time and picked Train over Taxi on price, but didn\'t write the numeric price (&#3647;45) the question also asked for.' },
-      { q:'Q8', topic:'Table Reading — notebook packs, optimization', lvl:'h', pass:false, note:'&#10007; wrote 420; correct 380. Used 4&times;10-packs (105&times;4=420) instead of checking the better per-unit rate on 20-packs (2&times;190=380) &mdash; didn\'t compare combinations before settling on one.' },
-      { q:'Q9', topic:'Table Reading — phone plans',                  lvl:'m', pass:false, note:'&#189; credit &mdash; correctly identified Plan B as cheaper (matches the key), but the difference amount is wrong (190 instead of 10), a computation slip after the right comparison was made.' },
-      { q:'Q10',topic:'Table Reading — parking, rounding+cap',        lvl:'h', pass:true,  note:'&#10003; 200.' },
-      { q:'Q11',topic:'Discount &amp; Profit — simple discount',      lvl:'w', pass:true,  note:'&#10003; 360.' },
-      { q:'Q12',topic:'Discount &amp; Profit — profit+percentage',    lvl:'w', pass:true,  note:'&#10003; 25% &mdash; legible and correct; the profit-amount portion is obscured by heavy scribbling/rewriting and can\'t be independently verified from the page.' },
-      { q:'Q13',topic:'Discount &amp; Profit — discount then profit', lvl:'m', pass:false, note:'&#10007; wrote 270; correct 130. No working shown, so the exact mix-up can\'t be confirmed.' },
-      { q:'Q14',topic:'Discount &amp; Profit — markup &times;8',      lvl:'m', pass:false, note:'&#10007; wrote 200; correct 120. No working shown.' },
-      { q:'Q15',topic:'Capstone — markup+discount+&times;3+profit check', lvl:'h', pass:false, note:'&#10007; wrote 189; correct 567 (profit &#3647;9/book). Working shown is fully correct for ONE book (180&times;1.4=252, 252&times;0.75=189) &mdash; never multiplied by the 3 books asked for, and never answered the profit-check part. The chain itself was executed perfectly; it just wasn\'t carried to the finish or fully read.' }
     ]
   },
   _M4archived: {
@@ -206,23 +206,37 @@ var PREM_DATA = {
     { n:42, score:7, delta:-2, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
     { n:43, score:15, delta:+8, color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true },
     { n:44, score:9.5, delta:-5.5, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
-    { n:45, score:13, delta:+3.5, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
+    { n:45, score:13, delta:+3.5, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
+    { n:46, score:13, delta:0,    color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 47,
+      badge: 'linear-gradient(135deg,#EF6C00,#E65100)',
+      title: 'Reverse Averages &amp; Missing-Value Arithmetic (Arithmetic)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'Closes ASMOPSS 2023 Q12', c:'tred' },
+        { t:'NEW: average = total ÷ count, reversed', c:'tblue' },
+        { t:'NEW: before/after total, when it changes', c:'torange' }
+      ],
+      note: 'U47, built 24 Jul 2026. Resumes the original rotation &mdash; this slot was bumped twice by two consecutive retests (U43, U45). Closes a clean untaught-content gap confirmed on the ASMOPSS 2023 paper: Q12 (reverse-engineer an average &mdash; removing the youngest of four students raises the average by 1 year, find the removed age &mdash; left blank). New lesson (Arithmetic_Lesson_ReverseAveragesMissingValues.html) builds from zero across four linked moves: finding an average (total &divide; count), reversing it to find a total (average &times; count), finding one missing value in a list, and finding what changed when someone joins or leaves a group. Test: 15Q &mdash; Sec A (Q1&ndash;5) Averages &amp; Reversing Them, Sec B (Q6&ndash;10) Finding A Missing Value, Sec C (Q11&ndash;15) When The Average Changes, capstone Q15 mirrors the exact ASMOPSS Q12 pattern.',
+      status: 'pending'
+    },
+    {
       n: 46,
       badge: 'linear-gradient(135deg,#00796B,#004D40)',
       title: 'Constrained Listing &amp; Divisibility Arrangements (Art of Counting)',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'Closes ASMOPSS 2023 Q19, Q25', c:'tred' },
-        { t:'NEW: list-then-check-the-rule habit', c:'tblue' },
-        { t:'NEW: fix-the-last-digit-first method', c:'torange' }
+        { t:'13/15 (87%) &#10003; PASSED', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Sec B 8/8 PERFECT', c:'tgreen' },
+        { t:'Sec A 5/7 — 2 untested variants', c:'torange' },
+        { t:'Both ASMOPSS 2023 gaps closed', c:'tgreen' }
       ],
-      note: 'U46, built 23 Jul 2026. Resumes the original rotation &mdash; this slot was bumped twice by two consecutive retests (U43, U45). Closes the Art of Counting gap confirmed on the ASMOPSS 2023 paper: Q19 (constrained coin-combination listing, overcounted 9 vs. correct 5 &mdash; didn\'t filter invalid combinations) and Q25 (permutations with a divisibility constraint, left blank &mdash; "how do I list this?"). New lesson (Counting_Lesson_ConstrainedListingDivisibility.html) teaches two compound skills built on already-mastered foundations: constrained coin-combination listing (reusing the U38 block-by-block sweep method, now with an extra rule to check on every candidate) and divisibility arrangements (reusing arrangement-counting plus the U29 divisibility rules, fixing the last digit FIRST rather than listing everything). Test: 15Q &mdash; Sec A (Q1&ndash;7) Constrained Listing, Sec B (Q8&ndash;15) Divisibility Arrangements, capstone Q15 tests recognising when the answer is 0.',
-      status: 'pending'
+      note: '13/15 &#10003; <strong>PASSED</strong> &mdash; Sec A 5/7, Sec B 8/8 PERFECT. Divisibility Arrangements (Sec B) is fully mastered on first real exposure, including the trick capstone (Q15, correctly reasoned to 0). Constrained Listing (Sec A) held at 5/7 &mdash; both misses were untested variants, not a method breakdown: Q6 was the first 3-coin-type listing question (lesson only taught 2 coin types), Q4 was the first upper-bound-only rule with no "at least one of each" anchor (left blank). &rarr; Both Art of Counting gaps from the ASMOPSS 2023 diagnostic (Q19, Q25) now closed or substantially improved &mdash; no retest needed. &rarr; U47, resuming the original rotation.',
+      status: 'done'
     },
     {
       n: 45,
@@ -975,10 +989,10 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 92
     },
     {
-      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction RESOLVED (U44/U45); systematic listing IN PROGRESS (U46); reverse averages/3D/algebra queued after',
+      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction &amp; systematic listing RESOLVED (U44/U45, U46); reverse averages IN PROGRESS (U47); 3D/algebra queued after',
       pill:      'p2', pillText: 'In Progress &#9654;',
-      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (9.5/15, 63%, NOT PASSED) &rarr; U45 targeted retest of Sec B+C (13/15, 87%, PASSED) &mdash; cluster CLOSED. Systematic listing &amp; constrained counting (ASMOPSS Q19, Q25) &rarr; U46 (built 23 Jul 2026, in progress). Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; now U47. Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; now U48. Algebra substitution (Q22) pairs with M4&rsquo;s Q8 equation-method lapse &rarr; now U49. Full plan (U42&ndash;U52) is in the Executive Summary.',
-      fillClass: 'g2', fillPct: 60
+      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (9.5/15, 63%, NOT PASSED) &rarr; U45 targeted retest of Sec B+C (13/15, 87%, PASSED) &mdash; cluster CLOSED. Systematic listing &amp; constrained counting (ASMOPSS Q19, Q25) &rarr; U46 (13/15, 87%, PASSED, built 23 Jul 2026) &mdash; both misses were untested variants, not a method gap; CLOSED. Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; U47 (built 24 Jul 2026, in progress). Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; now U48. Algebra substitution (Q22) pairs with M4&rsquo;s Q8 equation-method lapse &rarr; now U49. Full plan (U42&ndash;U52) is in the Executive Summary.',
+      fillClass: 'g2', fillPct: 68
     },
     {
       label:     '"Finish the chain, answer every part" — multi-step completion & multi-part questions — RESOLVED at U45 (multiply-through fixed); narrower sub-issue carries forward as monitor',

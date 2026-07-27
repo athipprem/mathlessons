@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reverse Averages &amp; Missing-Value Arithmetic</title>
+<style>
+:root{--nav:#EF6C00;--nav-dark:#E65100;--bg:#FFF3E0;--card:#fff;--acc:#EF6C00;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#D84315;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#FFF3E0,#FFF8E1);border:2px solid #FFB74D;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#E65100;font-weight:700;margin-bottom:6px}
+.big-rule{background:#FFF3E0;border:2px solid #FB8C00;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#E65100;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#FFF3E0;border:1.5px solid #FB8C00;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#E65100;text-align:center;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#FFF8F0;border:1px solid #FFCC80;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#D84315}
+.steps .ln.ans{color:#E65100;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #FFCC80;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#EF6C00;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.tree .today{display:inline-block;background:#FFECB3;color:#E65100;border-radius:6px;padding:1px 8px;font-size:.72rem;font-weight:700;margin-left:6px}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#FFF8F0;border:1.5px solid #FFCC80;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #FFCC80;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#FFF3E0}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#FFF3E0;color:#E65100;border:2px solid #E65100;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#EF6C00;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E0;color:#E65100;border:1.5px solid #FFB74D;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.chiprow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.numchip{border:1.5px solid #FFCC80;border-radius:8px;padding:10px 16px;background:#fff;font-weight:700;font-size:1rem;cursor:pointer;transition:.15s}
+.numchip.tapped{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20;cursor:default}
+.numchip.disabled{opacity:.4;cursor:default}
+.totaldisp{background:#FFF3E0;border:2px solid #FB8C00;border-radius:10px;padding:12px 16px;text-align:center;font-size:1.15rem;font-weight:800;color:#E65100;margin:12px 0}
+.btn-divide{background:#EF6C00;color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:.95rem;font-weight:700;margin-top:6px}
+.btn-divide:disabled{background:#ccc;cursor:not-allowed}
+.reveal-btn{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin:6px 6px 6px 0}
+.reveal-line{display:none;background:#FFF8F0;border:1px solid #FFCC80;border-radius:8px;padding:10px 14px;margin:6px 0;font-size:.98rem;font-weight:700;color:#E65100}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Reverse Averages &amp; Missing-Value Arithmetic</span>
+  <span class="tnav-pill" id="pill">1 / 16</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x2696;&#xFE0F; One Number That Fairly Represents A Whole Group</h2>
+  <div class="why">
+    <div class="why-title">Why learn this?</div>
+    <p>An AVERAGE is one number that stands in for a whole group of numbers &mdash; a batting average in cricket, an average test score, the average temperature this week. It's a shortcut that saves you from listing every single value. Today you'll learn how averages are built (so you can compute them), and &mdash; the more powerful skill &mdash; how to work BACKWARDS from an average to find something that's missing or hidden.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Where this shows up</div>
+    <p>Competition papers love the "reverse" version: "Four students' average age is 10. The youngest leaves, and the average of the rest rises to 11 &mdash; how old was the one who left?" You can't just read that answer off a list &mdash; you have to work backwards through the average. That's exactly the superpower this lesson builds.</p>
+  </div>
+  <div class="big-rule">AVERAGE = TOTAL &divide; COUNT &mdash; and everything today is just this ONE rule, used forwards and backwards.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: Pocket Map -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Pocket Map &mdash; Four Moves, One Rule</h2>
+  <p style="margin-bottom:10px">Every question today is built from the SAME rule: <strong>Average = Total &divide; Count</strong>. The only thing that changes is which piece is missing. Here's your map for the whole lesson:</p>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span><strong>You know the numbers, need the AVERAGE:</strong> add them all up, divide by how many there are. <span class="today">TODAY</span></div>
+    <div class="node"><span class="step-n">2</span><strong>You know the AVERAGE and COUNT, need the TOTAL:</strong> multiply them. This is the rule turned around. <span class="today">TODAY</span></div>
+    <div class="node"><span class="step-n">3</span><strong>You know the average of a list, but ONE number is missing:</strong> find the total first (Move 2), then subtract the numbers you DO know. <span class="today">TODAY</span></div>
+    <div class="node"><span class="step-n">4</span><strong>Someone joins or leaves the group and the average CHANGES:</strong> find the total before, find the total after, then subtract to find what changed. <span class="today">TODAY</span></div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Notice Moves 2, 3, and 4 are really the SAME rule read backwards. If you know Average = Total &divide; Count, you already know Total = Average &times; Count &mdash; it's just the same fact, flipped.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Move 1: Averages &#8594;</button></div>
+</div>
+
+<!-- s2: Worked Example 1 -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Move 1 &mdash; What Is An Average?</h2>
+  <div class="rulebar">AVERAGE = TOTAL &divide; COUNT</div>
+  <p><strong>Ben has 4 bags of marbles. Bag A has 5 marbles, Bag B has 7, Bag C has 9, and Bag D has 11. What is the AVERAGE number of marbles per bag?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; add up ALL the marbles (find the TOTAL):</span></div>
+    <div class="ln">5 + 7 + 9 + 11 = 32</div>
+    <div class="ln"><span class="note">Step 2 &mdash; count how many bags there are (the COUNT):</span></div>
+    <div class="ln">4 bags</div>
+    <div class="ln"><span class="note">Step 3 &mdash; divide the TOTAL by the COUNT:</span></div>
+    <div class="ln">32 &divide; 4 = 8</div>
+    <div class="ln ans">Average = 8 marbles per bag</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The average doesn't have to be one of the actual bag counts (it wasn't 5, 7, 9, or 11 here) &mdash; it's a NEW number that represents them all fairly.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s3: Interactive 1 -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F4CB; Build The Average Yourself</h2>
+  <p style="margin-bottom:10px"><strong>Nam counted the push-ups he did each day this week: 16, 18, 14, and 20. Tap each number to add it to the running total. Then tap DIVIDE to find his average.</strong></p>
+  <div class="chiprow" id="pushupChips"></div>
+  <div class="totaldisp" id="pushupTotal">Total so far: 0</div>
+  <button class="btn-divide" id="pushupDivideBtn" disabled onclick="pushupDivide()">&divide; 4 = ?</button>
+  <div class="warn-box" id="pushupResult" style="display:none"><p id="pushupResultText"></p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s4: Practice 1 -->
+<div class="screen" id="s4">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Move 1</span>
+  <h2>Practice &mdash; Finding An Average</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Add up the numbers, then divide by how many there are.</p>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A gardener counted 6, 10, and 17 flowers in three vases. What's the average number of flowers per vase?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 11</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 33</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 17</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">Total: 6 + 10 + 17 = 33</div>
+      <div class="ln">Count: 3 vases</div>
+      <div class="ln ans">33 &divide; 3 = 11</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A weather station recorded 3, 5, 9, 4, and 14 mm of rainfall over 5 days. What's the average rainfall per day?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 35</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 5</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">Total: 3 + 5 + 9 + 4 + 14 = 35</div>
+      <div class="ln">Count: 5 days</div>
+      <div class="ln ans">35 &divide; 5 = 7</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Move 2: Reverse It &#8594;</button></div>
+</div>
+
+<!-- s5: Worked Example 2 -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>Move 2 &mdash; Reverse It: Find The Total</h2>
+  <div class="rulebar">TOTAL = AVERAGE &times; COUNT &nbsp; (the same rule, flipped around)</div>
+  <p><strong>The average number of customers at a food stall is 12 per hour. If the stall was open for 5 hours, how many customers visited in total?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; write down what you know:</span></div>
+    <div class="ln">average = 12 customers per hour, count = 5 hours</div>
+    <div class="ln"><span class="note">Step 2 &mdash; multiply the average by the count:</span></div>
+    <div class="ln">12 &times; 5 = 60</div>
+    <div class="ln ans">Total = 60 customers</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This is the exact opposite of Move 1. Move 1: total &divide; count = average. Move 2: average &times; count = total. Same three numbers, just asking for a different one.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s6: Interactive 2 -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>&#x1F4CB; Build The Total Yourself</h2>
+  <p style="margin-bottom:10px"><strong>6 friends each save an average of &#3647;15 per week. Tap ADD 6 times &mdash; once for each friend &mdash; to build up the total.</strong></p>
+  <div class="totaldisp" id="saveTotal">Total: &#3647;0 &nbsp; (0 of 6 friends added)</div>
+  <button class="btn-divide" id="saveAddBtn" onclick="saveAdd()">+ &#3647;15 (Add one friend)</button>
+  <div class="warn-box" id="saveResult" style="display:none"><p id="saveResultText"></p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s7: Practice 2 -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Move 2</span>
+  <h2>Practice &mdash; Reversing To Find The Total</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Multiply the average by the count.</p>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; The average temperature over 7 days was 25&deg;C. What was the SUM of all 7 days' temperatures?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 175</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 32</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 18</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">average = 25&deg;C, count = 7 days</div>
+      <div class="ln ans">25 &times; 7 = 175</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A charity's average donation was &#3647;40 from 9 donors. What was the TOTAL amount donated?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 360</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 49</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 31</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">average = &#3647;40, count = 9 donors</div>
+      <div class="ln ans">40 &times; 9 = 360</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Move 3: Missing Value &#8594;</button></div>
+</div>
+
+<!-- s8: Worked Example 3 -->
+<div class="screen" id="s8">
+<div class="card">
+  <h2>Move 3 &mdash; Find A Missing Value</h2>
+  <div class="rulebar">1) TOTAL = AVERAGE &times; COUNT &nbsp; 2) MISSING = TOTAL &minus; (numbers you know, added up)</div>
+  <p><strong>Four numbers have an average of 15. Three of them are 10, 16, and 20. What is the fourth number?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; find the TOTAL of all four numbers:</span></div>
+    <div class="ln">15 &times; 4 = 60</div>
+    <div class="ln"><span class="note">Step 2 &mdash; add up the three numbers you already know:</span></div>
+    <div class="ln">10 + 16 + 20 = 46</div>
+    <div class="ln"><span class="note">Step 3 &mdash; subtract to find the missing number:</span></div>
+    <div class="ln">60 &minus; 46 = 14</div>
+    <div class="ln ans">The fourth number is 14</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; You can't find a missing value straight from the average alone &mdash; you always need to find the TOTAL first (Move 2), THEN subtract what you know.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s9: Interactive 3 -->
+<div class="screen" id="s9">
+<div class="card">
+  <h2>&#x1F4CB; Reveal The Steps Yourself</h2>
+  <p style="margin-bottom:10px"><strong>4 lunch orders average &#3647;45 each. Three of the orders cost &#3647;38, &#3647;52, and &#3647;41. What did the 4th order cost? Tap each button in order.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r3a')">Step 1: Find the TOTAL</button>
+  <div class="reveal-line" id="r3a">TOTAL = 45 &times; 4 = &#3647;180</div>
+  <button class="reveal-btn" onclick="revealLine('r3b')">Step 2: Add the KNOWN orders</button>
+  <div class="reveal-line" id="r3b">KNOWN sum = 38 + 52 + 41 = &#3647;131</div>
+  <button class="reveal-btn" onclick="revealLine('r3c')">Step 3: Subtract to find the missing order</button>
+  <div class="reveal-line" id="r3c">MISSING = 180 &minus; 131 = &#3647;49</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s10: Practice 3 -->
+<div class="screen" id="s10">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Move 3</span>
+  <h2>Practice &mdash; Finding A Missing Value</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Find the total first, then subtract the numbers you know.</p>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 4 kids' heights average 130 cm. Three of them measure 125, 128, and 135 cm. What is the 4th kid's height?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q4" value="A"> A)&nbsp; 132</label>
+      <label class="opt"><input type="radio" name="q4" value="B"> B)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q4" value="C"> C)&nbsp; 392</label>
+    </div>
+    <button class="btn-check" onclick="chk(4,'A')">Check</button>
+    <div class="feedback" id="fb4"></div>
+    <button class="btn-show-steps" id="ss4" onclick="showSteps('sr4',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr4"><div class="steps">
+      <div class="ln">Total: 130 &times; 4 = 520 cm</div>
+      <div class="ln">Known: 125 + 128 + 135 = 388 cm</div>
+      <div class="ln ans">520 &minus; 388 = 132 cm</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; 5 baskets average 18 apples each. Four baskets have 15, 20, 16, and 22 apples. How many apples are in the 5th basket?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q5" value="A"> A)&nbsp; 17</label>
+      <label class="opt"><input type="radio" name="q5" value="B"> B)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q5" value="C"> C)&nbsp; 73</label>
+    </div>
+    <button class="btn-check" onclick="chk(5,'A')">Check</button>
+    <div class="feedback" id="fb5"></div>
+    <button class="btn-show-steps" id="ss5" onclick="showSteps('sr5',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr5"><div class="steps">
+      <div class="ln">Total: 18 &times; 5 = 90 apples</div>
+      <div class="ln">Known: 15 + 20 + 16 + 22 = 73 apples</div>
+      <div class="ln ans">90 &minus; 73 = 17 apples</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Move 4: When It Changes &#8594;</button></div>
+</div>
+
+<!-- s11: Worked Example 4 -->
+<div class="screen" id="s11">
+<div class="card">
+  <h2>Move 4 &mdash; When The Average Changes</h2>
+  <div class="rulebar">BEFORE total = before average &times; before count &nbsp;&middot;&nbsp; AFTER total = after average &times; after count</div>
+  <h3>A &mdash; Someone LEAVES</h3>
+  <p><strong>5 kids have an average weight of 30 kg. One kid leaves the group. The remaining 4 kids now have an average weight of 32 kg. How heavy was the kid who left?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; find the BEFORE total (all 5 kids):</span></div>
+    <div class="ln">30 &times; 5 = 150 kg</div>
+    <div class="ln"><span class="note">Step 2 &mdash; find the AFTER total (remaining 4 kids):</span></div>
+    <div class="ln">32 &times; 4 = 128 kg</div>
+    <div class="ln"><span class="note">Step 3 &mdash; subtract to find who left (BEFORE &minus; AFTER):</span></div>
+    <div class="ln">150 &minus; 128 = 22</div>
+    <div class="ln ans">The kid who left weighed 22 kg</div>
+  </div>
+  <h3 style="margin-top:16px">B &mdash; Someone JOINS</h3>
+  <p><strong>3 cyclists have an average speed of 20 km/h. A 4th cyclist joins them. The new average speed of all 4 cyclists is 22 km/h. How fast was the 4th cyclist?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; find the BEFORE total (3 cyclists):</span></div>
+    <div class="ln">20 &times; 3 = 60 km/h</div>
+    <div class="ln"><span class="note">Step 2 &mdash; find the AFTER total (4 cyclists):</span></div>
+    <div class="ln">22 &times; 4 = 88 km/h</div>
+    <div class="ln"><span class="note">Step 3 &mdash; subtract to find the new cyclist's speed (AFTER &minus; BEFORE):</span></div>
+    <div class="ln">88 &minus; 60 = 28</div>
+    <div class="ln ans">The 4th cyclist's speed was 28 km/h</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Same 3 steps every time &mdash; BEFORE total, AFTER total, then subtract. The only thing that changes is WHICH WAY you subtract: someone LEAVING &rarr; BEFORE minus AFTER. Someone JOINING &rarr; AFTER minus BEFORE. Easy check: the BIGGER total minus the SMALLER total always gives a sensible positive answer.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s12: Interactive 4 -->
+<div class="screen" id="s12">
+<div class="card">
+  <h2>&#x1F4CB; Reveal The Steps Yourself</h2>
+  <p style="margin-bottom:10px"><strong>4 students' project scores averaged 25 marks. A 5th student joins the group, and the new average of all 5 students is 27 marks. Tap each button in order to find the 5th student's score.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r4a')">Step 1: Find the BEFORE total</button>
+  <div class="reveal-line" id="r4a">BEFORE total = 25 &times; 4 = 100 marks</div>
+  <button class="reveal-btn" onclick="revealLine('r4b')">Step 2: Find the AFTER total</button>
+  <div class="reveal-line" id="r4b">AFTER total = 27 &times; 5 = 135 marks</div>
+  <button class="reveal-btn" onclick="revealLine('r4c')">Step 3: Subtract (AFTER &minus; BEFORE, since someone JOINED)</button>
+  <div class="reveal-line" id="r4c">5th student's score = 135 &minus; 100 = 35 marks</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s13: Practice 4 -->
+<div class="screen" id="s13">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Move 4</span>
+  <h2>Practice &mdash; When The Average Changes</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Find the BEFORE total, find the AFTER total, then subtract the smaller from the bigger.</p>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 7 volunteers picked an average of 40 kg of oranges each at a farm. The one who picked the least left early, and the remaining 6 volunteers' average rose to 42 kg. How many kg did the volunteer who left pick?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q6" value="A"> A)&nbsp; 28</label>
+      <label class="opt"><input type="radio" name="q6" value="B"> B)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q6" value="C"> C)&nbsp; 82</label>
+    </div>
+    <button class="btn-check" onclick="chk(6,'A')">Check</button>
+    <div class="feedback" id="fb6"></div>
+    <button class="btn-show-steps" id="ss6" onclick="showSteps('sr6',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr6"><div class="steps">
+      <div class="ln">BEFORE total: 40 &times; 7 = 280 kg</div>
+      <div class="ln">AFTER total: 42 &times; 6 = 252 kg</div>
+      <div class="ln ans">Left early (BEFORE &minus; AFTER): 280 &minus; 252 = 28 kg</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; 3 taxi drivers gave an average of 18 rides each in a day. A 4th driver joined the shift, and the new average across all 4 drivers rose to 21 rides. How many rides did the 4th driver give?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q7" value="A"> A)&nbsp; 30</label>
+      <label class="opt"><input type="radio" name="q7" value="B"> B)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q7" value="C"> C)&nbsp; 84</label>
+    </div>
+    <button class="btn-check" onclick="chk(7,'A')">Check</button>
+    <div class="feedback" id="fb7"></div>
+    <button class="btn-show-steps" id="ss7" onclick="showSteps('sr7',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr7"><div class="steps">
+      <div class="ln">BEFORE total: 18 &times; 3 = 54 rides</div>
+      <div class="ln">AFTER total: 21 &times; 4 = 84 rides</div>
+      <div class="ln ans">Joined (AFTER &minus; BEFORE): 84 &minus; 54 = 30 rides</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Full checklist &#8594;</button></div>
+</div>
+
+<!-- s14: Full checklist -->
+<div class="screen" id="s14">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Full Checklist</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span><strong>Find an average:</strong> TOTAL &divide; COUNT.</div>
+    <div class="node"><span class="step-n">2</span><strong>Find a total from an average:</strong> AVERAGE &times; COUNT.</div>
+    <div class="node"><span class="step-n">3</span><strong>Find a missing value:</strong> find the TOTAL (Move 2), then subtract the numbers you already know.</div>
+    <div class="node"><span class="step-n">4</span><strong>Find what changed (someone joined/left):</strong> BEFORE total, AFTER total, then subtract the smaller from the bigger.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Before you calculate anything, ask yourself: "Do I have the average and need the numbers, or do I have the numbers and need the average?" That tells you which direction to use the rule.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap &#8594;</button></div>
+</div>
+
+<!-- s15: recap -->
+<div class="screen" id="s15">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>Average = Total &divide; Count is ONE rule with three numbers. Whichever number is missing &mdash; average, total, or one item in the list &mdash; you can always find it, as long as you know the other two.</strong></p>
+</div>
+<div class="card" style="background:#FFF3E0;border:1px solid #FFCC80">
+  <h3 style="color:#E65100">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You can find an average by adding up and dividing by the count</li>
+    <li>You remember Total = Average &times; Count is the SAME rule, just flipped</li>
+    <li>For a missing value, you find the total FIRST, then subtract what you know</li>
+    <li>When the average changes, you find BOTH totals (before and after) before subtracting</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">All four moves use the exact same rule. Once you trust Average = Total &divide; Count, you can solve any of them.</p>
+</div>
+<div class="navrow">
+  <a href="Counting_Lesson_ConstrainedListingDivisibility.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#FFF3E0;color:#E65100;border:2px solid #E65100;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; U46 Lesson</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#EF6C00;color:#fff;border:2px solid #EF6C00;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+function revealLine(id){document.getElementById(id).style.display='block';}
+
+// ── s3: push-up sum-then-divide widget ─────────────────────────
+var pushupVals=[16,18,14,20], pushupTotal=0, pushupTappedCount=0;
+var pushupChipsEl=document.getElementById('pushupChips');
+pushupVals.forEach(function(v,idx){
+  var chip=document.createElement('div');
+  chip.className='numchip'; chip.textContent=v;
+  chip.onclick=function(){
+    if(chip.classList.contains('tapped')) return;
+    chip.classList.add('tapped');
+    pushupTotal+=v; pushupTappedCount++;
+    document.getElementById('pushupTotal').textContent='Total so far: '+pushupTotal;
+    if(pushupTappedCount===pushupVals.length){
+      document.getElementById('pushupDivideBtn').disabled=false;
+    }
+  };
+  pushupChipsEl.appendChild(chip);
+});
+function pushupDivide(){
+  var avg=pushupTotal/pushupVals.length;
+  document.getElementById('pushupResult').style.display='block';
+  document.getElementById('pushupResultText').textContent='Total = '+pushupTotal+', Count = '+pushupVals.length+'. '+pushupTotal+' ÷ '+pushupVals.length+' = '+avg+'. His average was '+avg+' push-ups per day.';
+  document.getElementById('pushupDivideBtn').disabled=true;
+}
+
+// ── s6: savings tap-to-add widget ──────────────────────────────
+var savePerFriend=15, saveTarget=6, saveCount=0, saveTotal=0;
+function saveAdd(){
+  if(saveCount>=saveTarget) return;
+  saveCount++; saveTotal+=savePerFriend;
+  document.getElementById('saveTotal').textContent='Total: ฿'+saveTotal+' (' + saveCount + ' of '+saveTarget+' friends added)';
+  if(saveCount===saveTarget){
+    document.getElementById('saveAddBtn').disabled=true;
+    document.getElementById('saveResult').style.display='block';
+    document.getElementById('saveResultText').textContent='Average ฿'+savePerFriend+' × '+saveTarget+' friends = ฿'+saveTotal+' total saved. That\'s Total = Average × Count in action!';
+  }
+}
+</script>
+</body>
+</html>
