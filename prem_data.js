@@ -15,13 +15,38 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '24 Jul 2026',
+  updated:        '27 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:47, topic:'Reverse Averages & Missing-Value Arithmetic (Arithmetic)', status:'In Progress' },
+  currentUnit: { n:48, topic:'Targeted Retest — When The Average Changes (Arithmetic)', status:'In Progress' },
   lastUnit: {
+    n:47, score:11, outOf:15, pct:73, delta:-2, prevScore:13, prevOutOf:15, prevLabel:'U46',
+    patternLabel: 'U47 — Reverse Averages &amp; Missing-Value Arithmetic, NOT PASSED',
+    patternInsight: '11/15 (73%) <strong>NOT PASSED</strong> &mdash; Sec A (Averages &amp; Reversing Them) 4/5, Sec B (Finding A Missing Value) 4/5, Sec C (When The Average Changes) 3/5. Sections A and B both individually clear the 4/5 pass bar, and every miss in them is a clean arithmetic slip inside correctly-applied working, not a method breakdown: Q4 (wrote 235, correct 225) and Q9 (wrote 82, correct 102). Section C is where the real gap sits, and it fails the section bar (3/5): Q12 computed both the BEFORE and AFTER totals correctly but then subtracted them wrong (wrote 14, correct 16) &mdash; a setup/labelling slip, not a totals error; Q13 went wrong a step earlier, computing the AFTER total itself incorrectly (wrote 13, correct 27) &mdash; a procedural error, not just a subtraction slip. Q11, Q14, and the capstone Q15 (which mirrors the exact ASMOPSS 2023 Q12 pattern) were all correct.',
+    analysisLabel: 'Next: Unit 48 — Targeted Retest: When The Average Changes (Arithmetic)',
+    analysisInsight: 'Per the standing retest rule, Sections A and B both passed individually (4/5 each) so only Section C needs retesting &mdash; no full unit repeat. U48 is a compact top-up lesson (Arithmetic_Lesson_BeforeAfterTotalPrecision.html) targeting the two specific habits behind Q12 and Q13: labelling BEFORE/AFTER totals as separate lines before subtracting, and checking a subtraction by adding the answer back to the smaller total. A fresh 15Q test, all on "When The Average Changes" (mixed add/remove), follows. This bumps the originally-planned U48 topic (irregular 3D visualisation) to U49, and everything after shifts down one slot. With ASMOPSS 2026 now 10 days away, U48 stays tightly scoped before shifting toward timed mixed past-paper practice.',
+    qSummary: '<strong>Sec A 4/5 | Sec B 4/5 | Sec C 3/5</strong> — 11/15 (73%) NOT PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Averages — basic (total &divide; count)', lvl:'w', pass:true,  note:'&#10003; 18.' },
+      { q:'Q2', topic:'Averages — basic', lvl:'w', pass:true,  note:'&#10003; 45.' },
+      { q:'Q3', topic:'Averages — medium', lvl:'m', pass:true,  note:'&#10003; 108.' },
+      { q:'Q4', topic:'Averages — reverse to total (average &times; count)', lvl:'m', pass:false, note:'&#10007; wrote 235; correct 225. Sec A\'s hardest question &mdash; a small arithmetic slip inside otherwise correctly-applied working.' },
+      { q:'Q5', topic:'Averages — reverse, harder', lvl:'h', pass:true,  note:'&#10003; 12.' },
+      { q:'Q6', topic:'Missing Value — basic', lvl:'w', pass:true,  note:'&#10003; 26.' },
+      { q:'Q7', topic:'Missing Value — basic', lvl:'w', pass:true,  note:'&#10003; 65.' },
+      { q:'Q8', topic:'Missing Value — medium', lvl:'m', pass:true,  note:'&#10003; 155.' },
+      { q:'Q9', topic:'Missing Value — medium', lvl:'m', pass:false, note:'&#10007; wrote 82; correct 102. Method looks right in the working &mdash; the final subtraction step slipped.' },
+      { q:'Q10',topic:'Missing Value — harder', lvl:'h', pass:true,  note:'&#10003; 78.' },
+      { q:'Q11',topic:'When The Average Changes — add/remove, basic', lvl:'m', pass:true,  note:'&#10003; 14.' },
+      { q:'Q12',topic:'When The Average Changes — medium', lvl:'m', pass:false, note:'&#10007; wrote 14; correct 16. Both the BEFORE and AFTER totals were computed correctly &mdash; the final subtraction between them was wrong. A setup/labelling issue, not a totals error.' },
+      { q:'Q13',topic:'When The Average Changes — medium', lvl:'m', pass:false, note:'&#10007; wrote 13; correct 27. The AFTER total itself was computed incorrectly &mdash; a procedural error one step earlier than Q12\'s, not just a subtraction slip.' },
+      { q:'Q14',topic:'When The Average Changes — harder', lvl:'h', pass:true,  note:'&#10003; 47.' },
+      { q:'Q15',topic:'Capstone — mirrors the exact ASMOPSS 2023 Q12 pattern', lvl:'h', pass:true,  note:'&#10003; 63 &mdash; the reverse-average-change pattern flagged by the ASMOPSS 2023 diagnostic, correctly solved.' }
+    ]
+  },
+  _U46archived: {
     n:46, score:13, outOf:15, pct:87, delta:0, prevScore:13, prevOutOf:15, prevLabel:'U45',
     patternLabel: 'U46 — Constrained Coin-Combination Listing &amp; Divisibility Arrangements, PASSED',
     patternInsight: '13/15 (87%) <strong>PASSED</strong> &mdash; Sec A (Constrained Listing) 5/7, Sec B (Divisibility Arrangements) 8/8 PERFECT. Section B is the headline: a clean sweep on genuinely new material, including both harder 6-digit questions and the capstone trick question (Q15, correctly reasoned to 0 &mdash; no valid last digit exists). "Find the last digit first" transferred completely on first exposure. Section A held at 5/7 &mdash; both misses were untested variants, not a method breakdown: Q6 was the first-ever 3-coin-type listing question (lesson only taught 2 coin types), and Q4 was the first upper-bound-only rule with no "at least one of each" anchor phrase (left blank rather than miscalculated).',
@@ -44,31 +69,6 @@ var PREM_DATA = {
       { q:'Q13',topic:'Divisibility Arrangement — digits 4,5,6,7,8,9 &divide;5', lvl:'h', pass:true,  note:'&#10003; 120.' },
       { q:'Q14',topic:'Divisibility Arrangement — digits 4,5,6,7,8,9 &divide;2', lvl:'h', pass:true,  note:'&#10003; 360.' },
       { q:'Q15',topic:'Capstone (trick) — digits 2,4,6,7,8,9 &divide;5, no 0/5 in set', lvl:'h', pass:true,  note:'&#10003; 0 &mdash; correctly recognised no valid last digit exists rather than guessing or leaving it blank.' }
-    ]
-  },
-  _U45archived: {
-    n:45, score:13, outOf:15, pct:87, delta:+3.5, prevScore:9.5, prevOutOf:15, prevLabel:'U44',
-    patternLabel: 'U45 — Targeted Retest: Table Reading &amp; Discount/Profit, PASSED',
-    patternInsight: '13/15 (87%) <strong>PASSED</strong> &mdash; Sec A (Table Reading) 5/7, Sec B (Discount &amp; Profit) 8/8. Both new habits show real progress: "Finish Line Check" fixed the exact U44 Q15 failure &mdash; both multi-item capstones this time (Q14 &times;5, Q15 &times;4) were correctly carried through to the final total. "Compare Before You Choose" also landed clean &mdash; both pack-optimization questions (Q4, Q5) used the best per-unit rate. A narrower piece is still partial: on three "state X, and by how much" questions (Q9, Q12, Q15), the right number was computed &mdash; visible in the working, sometimes circled &mdash; but not always carried onto the actual Answer line. Only Q13 assembled the complete two-part answer. Section A\'s two misses (Q1, Q6) were computation slips inside a correctly-applied method, not comparison failures.',
-    analysisLabel: 'Next: Unit 46 — Constrained Listing &amp; Divisibility Arrangements (Art of Counting)',
-    analysisInsight: 'U45\'s pass closes the word-problem decoding cluster from the ASMOPSS 2023 diagnostic entirely (Q6, Q9, Q10) &mdash; no further retest needed. The programme resumes its rotation at U46: Systematic Listing &amp; Constrained Counting, the topic bumped twice now by two consecutive retests (U43, U45). Two light monitor-only items carry forward (not lessons): assembling every required part onto the Answer line (Q9/Q12/Q15 pattern), and arithmetic care on larger additions (Q6\'s 1614-vs-1014 slip). With ASMOPSS 2026 now 17 days away, U46 proceeds as planned, then the balance shifts toward timed mixed past-paper practice.',
-    qSummary: '<strong>Sec A 5/7 | Sec B 8/8</strong> — 13/15 (87%) PASSED',
-    qBreakdown: [
-      { q:'Q1', topic:'Table Reading — sandwich combo savings',        lvl:'w', pass:false, note:'&#10007; wrote 10; correct 5. No working shown; 45+25&minus;65=5, not 10.' },
-      { q:'Q2', topic:'Table Reading — parking, flat vs. tiered',      lvl:'m', pass:true,  note:'&#10003; Mall B, &#3647;10.' },
-      { q:'Q3', topic:'Table Reading — gym plans',                    lvl:'m', pass:true,  note:'&#10003; Plan Y, &#3647;50.' },
-      { q:'Q4', topic:'Table Reading — marker packs, optimization',   lvl:'m', pass:true,  note:'&#10003; &#3647;128 &mdash; correctly used the best per-unit rate (16-pack) rather than the first valid combination.' },
-      { q:'Q5', topic:'Table Reading — pencil packs, optimization',   lvl:'h', pass:true,  note:'&#10003; &#3647;90 &mdash; same best-rate reasoning applied a second time, harder numbers.' },
-      { q:'Q6', topic:'Table Reading — streaming services compare',   lvl:'m', pass:false, note:'&#10007; wrote Service A; correct Service B, &#3647;180. Working shows Service A totalled ~1198 (correct 1194, small slip) and Service B totalled 1614 (correct 1014, larger addition error) &mdash; the COMPARE step itself was followed correctly (picked the smaller of his own two totals); the error is purely computational.' },
-      { q:'Q7', topic:'Table Reading — bike rental, tiered+capped',   lvl:'h', pass:true,  note:'&#10003; &#3647;140.' },
-      { q:'Q8', topic:'Discount &amp; Profit — simple discount',       lvl:'w', pass:true,  note:'&#10003; &#3647;510.' },
-      { q:'Q9', topic:'Discount &amp; Profit — profit + percentage',   lvl:'w', pass:true,  note:'&#10003; (marked correct) 20% &mdash; working shows profit=&#3647;70 correctly computed and circled, then 70&divide;350&times;100=20% via long division. The Answer line itself only reads "20%" &mdash; correct but incomplete on the line.' },
-      { q:'Q10',topic:'Discount &amp; Profit — discount + profit',     lvl:'m', pass:true,  note:'&#10003; &#3647;110.' },
-      { q:'Q11',topic:'Discount &amp; Profit — markup &times;6',       lvl:'w', pass:true,  note:'&#10003; &#3647;324.' },
-      { q:'Q12',topic:'Discount &amp; Profit — discount + profit-check', lvl:'m', pass:true,  note:'&#10003; (marked correct) Yes, &#3647;54 &mdash; &#3647;54 is the correct sale price and "Yes" the correct profit direction, but the profit AMOUNT (&#3647;14) is missing from the answer line.' },
-      { q:'Q13',topic:'Discount &amp; Profit — markup+discount+profit-check', lvl:'h', pass:true,  note:'&#10003; Yes, &#3647;6 &mdash; fully complete two-part answer, matching the key exactly.' },
-      { q:'Q14',topic:'Discount &amp; Profit — markup+discount &times;5', lvl:'h', pass:true,  note:'&#10003; &#3647;990 &mdash; working shows the full chain (markup, discount, &times;5) carried through correctly.' },
-      { q:'Q15',topic:'Capstone — markup+discount+&times;4+profit-check', lvl:'h', pass:true,  note:'&#10003; (marked correct) &#3647;1440, Yes &mdash; the &times;4 total is exactly right, fixing U44\'s Q15 miss where the multiply-through never happened. The profit-per-pair amount (&#3647;40) is missing from the final answer line, same pattern as Q9/Q12.' }
     ]
   },
   _M4archived: {
@@ -207,23 +207,37 @@ var PREM_DATA = {
     { n:43, score:15, delta:+8, color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true },
     { n:44, score:9.5, delta:-5.5, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
     { n:45, score:13, delta:+3.5, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
-    { n:46, score:13, delta:0,    color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
+    { n:46, score:13, delta:0,    color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
+    { n:47, score:11, delta:-2,   color:'linear-gradient(135deg,#EF5350,#C62828)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 48,
+      badge: 'linear-gradient(135deg,#EF6C00,#E65100)',
+      title: 'Targeted Retest — When The Average Changes (Arithmetic)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'Retest of U47 Sec C only', c:'tred' },
+        { t:'Fix: label BEFORE/AFTER totals', c:'tblue' },
+        { t:'Fix: check subtraction by adding back', c:'torange' }
+      ],
+      note: 'U48, built 27 Jul 2026. Targeted retest of U47 Section C only ("When The Average Changes") &mdash; Sections A and B both individually passed (4/5 each) so no full unit repeat, per the standing retest rule. Compact top-up lesson (Arithmetic_Lesson_BeforeAfterTotalPrecision.html) targets the two specific habits behind U47\'s Q12 and Q13 misses: labelling BEFORE/AFTER totals as separate lines before subtracting, and checking a subtraction by adding the answer back to the smaller total. Test: fresh 15Q, all on "When The Average Changes" (mixed add/remove), 3 sections by difficulty. Bumps the originally-planned U48 topic (irregular 3D visualisation) to U49.',
+      status: 'pending'
+    },
+    {
       n: 47,
       badge: 'linear-gradient(135deg,#EF6C00,#E65100)',
       title: 'Reverse Averages &amp; Missing-Value Arithmetic (Arithmetic)',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'Closes ASMOPSS 2023 Q12', c:'tred' },
-        { t:'NEW: average = total ÷ count, reversed', c:'tblue' },
-        { t:'NEW: before/after total, when it changes', c:'torange' }
+        { t:'11/15 (73%) &#10007; NOT PASSED', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Sec A 4/5 + Sec B 4/5 — both pass', c:'tgreen' },
+        { t:'Sec C 3/5 — before/after totals gap', c:'tred' },
+        { t:'&rarr; U48 targeted retest, Sec C only', c:'torange' }
       ],
-      note: 'U47, built 24 Jul 2026. Resumes the original rotation &mdash; this slot was bumped twice by two consecutive retests (U43, U45). Closes a clean untaught-content gap confirmed on the ASMOPSS 2023 paper: Q12 (reverse-engineer an average &mdash; removing the youngest of four students raises the average by 1 year, find the removed age &mdash; left blank). New lesson (Arithmetic_Lesson_ReverseAveragesMissingValues.html) builds from zero across four linked moves: finding an average (total &divide; count), reversing it to find a total (average &times; count), finding one missing value in a list, and finding what changed when someone joins or leaves a group. Test: 15Q &mdash; Sec A (Q1&ndash;5) Averages &amp; Reversing Them, Sec B (Q6&ndash;10) Finding A Missing Value, Sec C (Q11&ndash;15) When The Average Changes, capstone Q15 mirrors the exact ASMOPSS Q12 pattern.',
-      status: 'pending'
+      note: '11/15 &#10007; <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 4/5, Sec C 3/5. Sections A and B both individually clear the pass bar, and every miss in them is a clean arithmetic slip inside correctly-applied working (Q4: wrote 235, correct 225; Q9: wrote 82, correct 102). Section C is the real gap: Q12 computed both BEFORE and AFTER totals correctly but subtracted them wrong (wrote 14, correct 16) &mdash; a setup/labelling slip; Q13 went wrong a step earlier, computing the AFTER total itself incorrectly (wrote 13, correct 27) &mdash; a procedural error. The capstone Q15, mirroring the exact ASMOPSS 2023 Q12 pattern, was correct. &rarr; U48, a targeted retest of Section C only.',
+      status: 'done'
     },
     {
       n: 46,
@@ -989,10 +1003,28 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 92
     },
     {
-      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction &amp; systematic listing RESOLVED (U44/U45, U46); reverse averages IN PROGRESS (U47); 3D/algebra queued after',
+      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction &amp; systematic listing RESOLVED (U44/U45, U46); reverse averages PARTIAL (U47) with retest IN PROGRESS (U48); 3D/algebra queued after',
       pill:      'p2', pillText: 'In Progress &#9654;',
-      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (9.5/15, 63%, NOT PASSED) &rarr; U45 targeted retest of Sec B+C (13/15, 87%, PASSED) &mdash; cluster CLOSED. Systematic listing &amp; constrained counting (ASMOPSS Q19, Q25) &rarr; U46 (13/15, 87%, PASSED, built 23 Jul 2026) &mdash; both misses were untested variants, not a method gap; CLOSED. Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; U47 (built 24 Jul 2026, in progress). Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; now U48. Algebra substitution (Q22) pairs with M4&rsquo;s Q8 equation-method lapse &rarr; now U49. Full plan (U42&ndash;U52) is in the Executive Summary.',
+      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (9.5/15, 63%, NOT PASSED) &rarr; U45 targeted retest of Sec B+C (13/15, 87%, PASSED) &mdash; cluster CLOSED. Systematic listing &amp; constrained counting (ASMOPSS Q19, Q25) &rarr; U46 (13/15, 87%, PASSED, built 23 Jul 2026) &mdash; both misses were untested variants, not a method gap; CLOSED. Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; U47 (built 24 Jul 2026, 11/15, 73%, NOT PASSED) &mdash; the core averaging &amp; missing-value methods (Sec A, Sec B) both passed individually; only "When The Average Changes" (Sec C) fell short &rarr; U48 targeted retest of Sec C only (built 27 Jul 2026, in progress). Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; now U49. Algebra substitution (Q22) pairs with M4&rsquo;s Q8 equation-method lapse &rarr; now U50. Full plan (U42&ndash;U53) is in the Executive Summary.',
       fillClass: 'g2', fillPct: 68
+    },
+    {
+      label:     'Averages & missing-value arithmetic — Sec A/B core methods RESOLVED at U47 (4/5 + 4/5)',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U47 Sec A (averages, reversing to a total) and Sec B (finding one missing value) both individually cleared the 4/5 pass bar on genuinely new content. Every miss in either section (Q4, Q9) was a clean arithmetic slip inside correctly-applied working, not a method gap. Core reverse-averages skill is landing on first real exposure.',
+      fillClass: 'gs', fillPct: 85
+    },
+    {
+      label:     'Labelling BEFORE/AFTER totals — ACTIVE (new, U47; U48 targets it directly)',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U47 Q12: both the BEFORE total and the AFTER total were computed correctly in the working, but the final subtraction between them was wrong — the two totals were never clearly separated/labelled before subtracting, so the wrong pair of numbers likely got subtracted. U48\'s top-up lesson drills writing BEFORE and AFTER as two explicit labelled lines before any subtraction is attempted.',
+      fillClass: 'g2', fillPct: 55
+    },
+    {
+      label:     'Computing the AFTER total when the average changes — ACTIVE (new, U47; U48 targets it directly)',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U47 Q13: the AFTER total itself was computed incorrectly (wrote 13, correct 27) — one step earlier than the Q12 labelling slip, and a procedural error rather than a simple subtraction mistake. U48\'s top-up lesson rebuilds the new-average × new-count step explicitly, plus a check-by-adding-back habit to catch it before the answer line.',
+      fillClass: 'g2', fillPct: 50
     },
     {
       label:     '"Finish the chain, answer every part" — multi-step completion & multi-part questions — RESOLVED at U45 (multiply-through fixed); narrower sub-issue carries forward as monitor',

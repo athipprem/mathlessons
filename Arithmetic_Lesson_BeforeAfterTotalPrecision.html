@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Totals, Clearly Labelled — Average Changes Precision</title>
+<style>
+:root{--nav:#EF6C00;--nav-dark:#E65100;--bg:#FFF3E0;--card:#fff;--acc:#EF6C00;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#D84315;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#FFF3E0,#FFF8E1);border:2px solid #FFB74D;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#E65100;font-weight:700;margin-bottom:6px}
+.big-rule{background:#FFF3E0;border:2px solid #FB8C00;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#E65100;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#FFF3E0;border:1.5px solid #FB8C00;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#E65100;text-align:center;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#FFF8F0;border:1px solid #FFCC80;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#D84315}
+.steps .ln.ans{color:#E65100;font-weight:800}
+.steps .ln.check{color:#2E7D32;font-weight:700}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #FFCC80;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#EF6C00;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.tree .today{display:inline-block;background:#FFECB3;color:#E65100;border-radius:6px;padding:1px 8px;font-size:.72rem;font-weight:700;margin-left:6px}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#FFF8F0;border:1.5px solid #FFCC80;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #FFCC80;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#FFF3E0}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#FFF3E0;color:#E65100;border:2px solid #E65100;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#EF6C00;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E0;color:#E65100;border:1.5px solid #FFB74D;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.reveal-btn{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin:6px 6px 6px 0}
+.reveal-btn.checkbtn{color:#2E7D32;border-color:#2E7D32}
+.reveal-line{display:none;background:#FFF8F0;border:1px solid #FFCC80;border-radius:8px;padding:10px 14px;margin:6px 0;font-size:.98rem;font-weight:700;color:#E65100}
+.reveal-line.checkline{background:#E8F5E9;border-color:#A5D6A7;color:#1B5E20}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Two Totals, Clearly Labelled (Retest Top-Up)</span>
+  <span class="tnav-pill" id="pill">1 / 12</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; The Same Skill — With One Extra Bit Of Care</h2>
+  <div class="why">
+    <div class="why-title">Why this top-up?</div>
+    <p>You already know the "someone joins or leaves" average skill from your last lesson &mdash; find the BEFORE total, find the AFTER total, then subtract. On the test, that method worked perfectly on the easier questions. On the harder ones &mdash; where you have to hold TWO totals in your head at once &mdash; two small things went wrong: sometimes the AFTER total got mixed up while you were working, and sometimes the final subtraction itself had a slip even though both totals were right.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">What today fixes</div>
+    <p>Two small habits, not a new method: (1) WRITE both totals down with clear labels &mdash; "BEFORE total" and "AFTER total" &mdash; before you subtract anything, so you never lose track of which number is which. (2) CHECK your subtraction by adding the answer back &mdash; if it takes you back to the BEFORE total, you know it's right.</p>
+  </div>
+  <div class="big-rule">Same rule as before: BEFORE total, AFTER total, then subtract. Today just makes it impossible to get lost along the way.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: recap decision tree -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; Quick Recap — The Rule You Already Know</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span><strong>BEFORE total</strong> = before average &times; before count.</div>
+    <div class="node"><span class="step-n">2</span><strong>AFTER total</strong> = after average &times; after count.</div>
+    <div class="node"><span class="step-n">3</span><strong>Subtract</strong> the smaller total from the bigger total &mdash; that's your answer.</div>
+    <div class="node"><span class="step-n">4</span><strong>NEW today:</strong> write Steps 1 and 2 as clearly LABELLED lines before you subtract anything. <span class="today">TODAY</span></div>
+    <div class="node"><span class="step-n">5</span><strong>NEW today:</strong> after Step 3, add your answer back to the smaller total &mdash; it should rebuild the bigger total. <span class="today">TODAY</span></div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Nothing new to learn here &mdash; just two habits that make the exact same method impossible to lose track of.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Fix 1: Label It &#8594;</button></div>
+</div>
+
+<!-- s2: FIX 1 worked example -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Fix 1 &mdash; Label BEFORE And AFTER Before You Subtract</h2>
+  <div class="rulebar">Write "BEFORE total = ..." and "AFTER total = ..." as their own lines FIRST.</div>
+  <p><strong>4 conference staff packed an average of 18 gift bags each. A 5th staff member joined the shift, and the new average across all 5 staff was 23 gift bags. How many gift bags did the 5th staff member pack?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; write the BEFORE total as its own labelled line:</span></div>
+    <div class="ln">BEFORE total (4 staff) = 18 &times; 4 = 72</div>
+    <div class="ln"><span class="note">Step 2 &mdash; write the AFTER total as its own labelled line:</span></div>
+    <div class="ln">AFTER total (5 staff) = 23 &times; 5 = 115</div>
+    <div class="ln"><span class="note">Step 3 &mdash; NOW subtract (someone JOINED, so AFTER &minus; BEFORE):</span></div>
+    <div class="ln">115 &minus; 72 = 43</div>
+    <div class="ln ans">The 5th staff member packed 43 gift bags</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Writing "BEFORE total (4 staff) = 72" and "AFTER total (5 staff) = 115" as two separate labelled lines means you can NEVER accidentally subtract the wrong pair of numbers, even if you get interrupted or your working gets messy.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s3: Interactive 1 -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F4CB; Label Both Totals Yourself</h2>
+  <p style="margin-bottom:10px"><strong>3 painters finished an average of 16 canvases each this month. A 4th painter joined the studio, and the new average across all 4 painters was 21 canvases. How many canvases had the 4th painter already finished? Tap each button in order.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r1a')">Step 1: Label the BEFORE total</button>
+  <div class="reveal-line" id="r1a">BEFORE total (3 painters) = 16 &times; 3 = 48</div>
+  <button class="reveal-btn" onclick="revealLine('r1b')">Step 2: Label the AFTER total</button>
+  <div class="reveal-line" id="r1b">AFTER total (4 painters) = 21 &times; 4 = 84</div>
+  <button class="reveal-btn" onclick="revealLine('r1c')">Step 3: Subtract (joined &rarr; AFTER &minus; BEFORE)</button>
+  <div class="reveal-line" id="r1c">84 &minus; 48 = 36 canvases</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s4: Practice 1 -->
+<div class="screen" id="s4">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Fix 1: Label It</span>
+  <h2>Practice &mdash; Labelling BEFORE and AFTER</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Write both totals as their own labelled lines before you subtract.</p>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 4 potters shaped an average of 30 bowls each. A 5th potter joined the workshop, and the new average across all 5 potters was 35 bowls. How many bowls had the 5th potter shaped?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 55</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 175</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">BEFORE total (4 potters) = 30 &times; 4 = 120</div>
+      <div class="ln">AFTER total (5 potters) = 35 &times; 5 = 175</div>
+      <div class="ln ans">175 &minus; 120 = 55 bowls</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; 5 tour guides led an average of 22 tourists each on their tours today. A 6th guide joined, and the new average across all 6 guides was 27 tourists. How many tourists did the 6th guide lead?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 52</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 162</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">BEFORE total (5 guides) = 22 &times; 5 = 110</div>
+      <div class="ln">AFTER total (6 guides) = 27 &times; 6 = 162</div>
+      <div class="ln ans">162 &minus; 110 = 52 tourists</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Fix 2: Check It &#8594;</button></div>
+</div>
+
+<!-- s5: FIX 2 worked example -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>Fix 2 &mdash; Check Your Subtraction By Adding Back</h2>
+  <div class="rulebar">Answer + smaller total = bigger total? If yes, your subtraction is correct.</div>
+  <p><strong>6 hikers carried an average of 35 kg in their backpacks. One hiker turned back early, and the average weight carried by the remaining 5 hikers rose to 37 kg. How many kg had the hiker who turned back been carrying?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; BEFORE total (6 hikers):</span></div>
+    <div class="ln">35 &times; 6 = 210</div>
+    <div class="ln"><span class="note">Step 2 &mdash; AFTER total (5 hikers):</span></div>
+    <div class="ln">37 &times; 5 = 185</div>
+    <div class="ln"><span class="note">Step 3 &mdash; subtract (someone LEFT, so BEFORE &minus; AFTER):</span></div>
+    <div class="ln">210 &minus; 185 = 25</div>
+    <div class="ln ans">The hiker who turned back was carrying 25 kg</div>
+    <div class="ln"><span class="note">Step 4 &mdash; CHECK IT: add your answer back to the AFTER total:</span></div>
+    <div class="ln check">185 + 25 = 210 &mdash; matches the BEFORE total! &#10003; Correct.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This check catches subtraction slips instantly. If adding back does NOT rebuild the BEFORE total, you know to redo the subtraction before moving on &mdash; you don't have to wait until the test is marked to find out.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s6: Interactive 2 -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>&#x1F4CB; Check Your Own Subtraction</h2>
+  <p style="margin-bottom:10px"><strong>5 recycling bins held an average of 42 kg of paper each. One bin was emptied and removed from the count, and the average among the remaining 4 bins rose to 45 kg. How many kg had been in the bin that was removed? Tap each button in order.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r2a')">Step 1: Label the BEFORE total</button>
+  <div class="reveal-line" id="r2a">BEFORE total (5 bins) = 42 &times; 5 = 210</div>
+  <button class="reveal-btn" onclick="revealLine('r2b')">Step 2: Label the AFTER total</button>
+  <div class="reveal-line" id="r2b">AFTER total (4 bins) = 45 &times; 4 = 180</div>
+  <button class="reveal-btn" onclick="revealLine('r2c')">Step 3: Subtract (left &rarr; BEFORE &minus; AFTER)</button>
+  <div class="reveal-line" id="r2c">210 &minus; 180 = 30 kg</div>
+  <button class="reveal-btn checkbtn" onclick="revealLine('r2d')">Step 4: Check it &mdash; add back to AFTER total</button>
+  <div class="reveal-line checkline" id="r2d">180 + 30 = 210 &mdash; matches the BEFORE total! &#10003; Correct.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s7: Practice 2 -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Fix 2: Check It</span>
+  <h2>Practice &mdash; Checking Your Subtraction</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Find both totals, subtract, then check by adding your answer back.</p>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 6 suitcases weighed an average of 48 kg each at the airport check-in. One suitcase was checked in first and set aside, and the average weight of the remaining 5 suitcases rose to 50 kg. How many kg did the suitcase set aside weigh?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 38</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 538</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">BEFORE total (6 suitcases) = 48 &times; 6 = 288</div>
+      <div class="ln">AFTER total (5 suitcases) = 50 &times; 5 = 250</div>
+      <div class="ln">288 &minus; 250 = 38 kg</div>
+      <div class="ln check">Check: 250 + 38 = 288 &#10003;</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; 7 fruit crates held an average of 33 oranges each. One crate was sold, and the average among the remaining 6 crates rose to 35 oranges. How many oranges had been in the crate that was sold?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 21</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 231</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">BEFORE total (7 crates) = 33 &times; 7 = 231</div>
+      <div class="ln">AFTER total (6 crates) = 35 &times; 6 = 210</div>
+      <div class="ln">231 &minus; 210 = 21 oranges</div>
+      <div class="ln check">Check: 210 + 21 = 231 &#10003;</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Both Fixes Together &#8594;</button></div>
+</div>
+
+<!-- s8: combined worked example -->
+<div class="screen" id="s8">
+<div class="card">
+  <h2>Both Fixes Together &mdash; A Harder One</h2>
+  <div class="rulebar">Label BOTH totals first. Subtract. Then check by adding back.</div>
+  <p><strong>7 volunteers collected an average of 53 cans each for a food drive. The volunteer who collected the MOST left early, and the average among the remaining 6 volunteers dropped to 49 cans. How many cans had the volunteer who left collected?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; BEFORE total (7 volunteers), labelled:</span></div>
+    <div class="ln">BEFORE total = 53 &times; 7 = 371</div>
+    <div class="ln"><span class="note">Step 2 &mdash; AFTER total (6 volunteers), labelled:</span></div>
+    <div class="ln">AFTER total = 49 &times; 6 = 294</div>
+    <div class="ln"><span class="note">Step 3 &mdash; the average DROPPED, which makes sense here: the volunteer who left had the MOST cans (above the average), so removing them pulls the average down. Subtract (BEFORE &minus; AFTER):</span></div>
+    <div class="ln">371 &minus; 294 = 77</div>
+    <div class="ln ans">The volunteer who left collected 77 cans</div>
+    <div class="ln"><span class="note">Step 4 &mdash; check it:</span></div>
+    <div class="ln check">294 + 77 = 371 &mdash; matches the BEFORE total! &#10003; Correct. (And 77 is well above the original average of 53 &mdash; matches "collected the MOST".)</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Notice this one's average DROPPED, not rose &mdash; because the person who left was ABOVE average, not below. Whichever direction the average moves, the same 4 steps still work: label BEFORE, label AFTER, subtract, check.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s9: Practice 3 -->
+<div class="screen" id="s9">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Both Fixes</span>
+  <h2>Practice &mdash; Mixed Add &amp; Remove</h2>
+  <p style="color:#555;font-size:.92rem;margin-bottom:16px">Label both totals, subtract, then check your answer by adding back.</p>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 4 robotics club members built an average of 27 models each this semester. A 5th member joined the team, and the new average across all 5 members was 31 models. How many models did the 5th member build?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q4" value="A"> A)&nbsp; 47</label>
+      <label class="opt"><input type="radio" name="q4" value="B"> B)&nbsp; 4</label>
+      <label class="opt"><input type="radio" name="q4" value="C"> C)&nbsp; 263</label>
+    </div>
+    <button class="btn-check" onclick="chk(4,'A')">Check</button>
+    <div class="feedback" id="fb4"></div>
+    <button class="btn-show-steps" id="ss4" onclick="showSteps('sr4',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr4"><div class="steps">
+      <div class="ln">BEFORE total (4 members) = 27 &times; 4 = 108</div>
+      <div class="ln">AFTER total (5 members) = 31 &times; 5 = 155</div>
+      <div class="ln">155 &minus; 108 = 47 models</div>
+      <div class="ln check">Check: 108 + 47 = 155 &#10003;</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; 8 water tanks stored an average of 55 litres each. One tank was drained for repairs, and the average among the remaining 7 tanks rose to 57 litres. How many litres had been in the tank that was drained?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q5" value="A"> A)&nbsp; 41</label>
+      <label class="opt"><input type="radio" name="q5" value="B"> B)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q5" value="C"> C)&nbsp; 399</label>
+    </div>
+    <button class="btn-check" onclick="chk(5,'A')">Check</button>
+    <div class="feedback" id="fb5"></div>
+    <button class="btn-show-steps" id="ss5" onclick="showSteps('sr5',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr5"><div class="steps">
+      <div class="ln">BEFORE total (8 tanks) = 55 &times; 8 = 440</div>
+      <div class="ln">AFTER total (7 tanks) = 57 &times; 7 = 399</div>
+      <div class="ln">440 &minus; 399 = 41 litres</div>
+      <div class="ln check">Check: 399 + 41 = 440 &#10003;</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Full checklist &#8594;</button></div>
+</div>
+
+<!-- s10: Full checklist -->
+<div class="screen" id="s10">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Full Checklist</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Write <strong>"BEFORE total (___ people/things) = ___"</strong> as its own labelled line.</div>
+    <div class="node"><span class="step-n">2</span>Write <strong>"AFTER total (___ people/things) = ___"</strong> as its own labelled line.</div>
+    <div class="node"><span class="step-n">3</span>Subtract the smaller total from the bigger total.</div>
+    <div class="node"><span class="step-n">4</span><strong>Check it:</strong> add your answer back to the smaller total &mdash; it should rebuild the bigger total.</div>
+    <div class="node"><span class="step-n">5</span>If the check doesn't match, redo Step 3 before writing your final answer.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This is the exact same method from your last lesson &mdash; these two habits just make it impossible to lose track of which total is which, or to hand in an unchecked subtraction.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap &#8594;</button></div>
+</div>
+
+<!-- s11: recap -->
+<div class="screen" id="s11">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>Label BEFORE and AFTER before you subtract. Check your answer by adding it back. Same method, zero room to get lost.</strong></p>
+</div>
+<div class="card" style="background:#FFF3E0;border:1px solid #FFCC80">
+  <h3 style="color:#E65100">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You write "BEFORE total = ..." and "AFTER total = ..." as two separate labelled lines, every time</li>
+    <li>You subtract the smaller total from the bigger total, whichever direction the average moved</li>
+    <li>You always check your answer by adding it back to the smaller total</li>
+    <li>If the check doesn't rebuild the bigger total, you redo the subtraction before finishing</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">You already know the method &mdash; these two habits just make sure it holds up under harder numbers.</p>
+</div>
+<div class="navrow">
+  <a href="Arithmetic_Lesson_ReverseAveragesMissingValues.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#FFF3E0;color:#E65100;border:2px solid #E65100;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; U47 Lesson</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#EF6C00;color:#fff;border:2px solid #EF6C00;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+function revealLine(id){document.getElementById(id).style.display='block';}
+</script>
+</body>
+</html>
