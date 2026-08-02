@@ -15,13 +15,38 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '27 Jul 2026',
+  updated:        '31 Jul 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:48, topic:'Targeted Retest — When The Average Changes (Arithmetic)', status:'In Progress' },
+  currentUnit: { n:49, topic:'3D Visualization — Cube Counting, Filling & Painting (Spatial Reasoning)', status:'In Progress' },
   lastUnit: {
+    n:48, score:14, outOf:15, pct:93, delta:+3, prevScore:11, prevOutOf:15, prevLabel:'U47',
+    patternLabel: 'U48 — Targeted Retest: When The Average Changes, PASSED',
+    patternInsight: '14/15 (93%) <strong>PASSED</strong> &mdash; Sec A (Basics) 5/5, Sec B (Medium) 5/5, Sec C (Harder) 4/5. Both top-up habits fully transferred: every question shows clearly labelled BEFORE/AFTER total lines before any subtraction, and U47\'s exact failure modes (Q12 subtraction slip, Q13 tangled AFTER total) do not recur anywhere on this paper. The lone miss (Q11) is a new, narrower slip: the totals were labelled correctly, but 48&times;7 was hand-multiplied as 326 instead of 336 &mdash; a one-off multiplication error, not a recurrence of the tracking problem. Independently regraded: 14/15, exactly matching the marked score.',
+    analysisLabel: 'Next: Unit 49 — 3D Visualization (Spatial Reasoning)',
+    analysisInsight: 'U48\'s pass fully closes the reverse-averages/average-changes arc (U47+U48) &mdash; no further retest needed. The programme resumes its original rotation at U49: 3D Visualization (Cube Counting, Filling &amp; Painting), closing the ASMOPSS 2023 diagnostic\'s Q14 gap (occluded/irregular stacked solids). This topic was specifically prioritised after reviewing 2023-2025 real ASMOPSS papers: 3D cube problems (painting, filling, counting) appeared in both 2023 and 2024. One light monitor-only item carries forward: multiplication accuracy on 2-digit &times; 1-digit products under pressure (Q11). With ASMOPSS 2026 now 9 days away, the final stretch covers 5 prediction-driven units (U49&ndash;U53) plus one full ASMOPSS-style mock test before the real exam.',
+    qSummary: '<strong>Sec A 5/5 | Sec B 5/5 | Sec C 4/5</strong> — 14/15 (93%) PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Remove (delivery riders, 20&rarr;22)', lvl:'w', pass:true,  note:'&#10003; 14.' },
+      { q:'Q2', topic:'Add (knitting club, 12&rarr;14)', lvl:'w', pass:true,  note:'&#10003; 20 &mdash; scribbled first attempt crossed out before the correct labelled totals.' },
+      { q:'Q3', topic:'Remove (school buses, 28&rarr;31)', lvl:'w', pass:true,  note:'&#10003; 16.' },
+      { q:'Q4', topic:'Add (bakers, 25&rarr;27)', lvl:'w', pass:true,  note:'&#10003; 35.' },
+      { q:'Q5', topic:'Remove (fish tanks, 18&rarr;20)', lvl:'w', pass:true,  note:'&#10003; 8.' },
+      { q:'Q6', topic:'Add (farmers, 40&rarr;44)', lvl:'m', pass:true,  note:'&#10003; 56.' },
+      { q:'Q7', topic:'Remove (chess tournament, 50&rarr;52)', lvl:'m', pass:true,  note:'&#10003; 40 &mdash; working heavily reworked but both labelled totals and the final answer correct.' },
+      { q:'Q8', topic:'Add (gardeners, 28&rarr;31)', lvl:'m', pass:true,  note:'&#10003; 46.' },
+      { q:'Q9', topic:'Remove (factory machines, 60&rarr;63)', lvl:'m', pass:true,  note:'&#10003; 42.' },
+      { q:'Q10',topic:'Add (choir, 35&rarr;38) — Capstone', lvl:'m', pass:true,  note:'&#10003; 50.' },
+      { q:'Q11',topic:'Remove (cargo ships, 45&rarr;48)', lvl:'h', pass:false, note:'&#10007; wrote 34; correct 24. Totals correctly labelled (360, 326) but the AFTER total itself was wrong &mdash; 48&times;7 hand-multiplied as 326 instead of 336. The subtraction on the wrong number (360&minus;326=34) was performed correctly.' },
+      { q:'Q12',topic:'Add (swimmers, 52&rarr;55)', lvl:'h', pass:true,  note:'&#10003; 70.' },
+      { q:'Q13',topic:'Remove (classrooms, 64&rarr;68)', lvl:'h', pass:true,  note:'&#10003; 32 &mdash; full clean chain shown.' },
+      { q:'Q14',topic:'Add (photographers, 58&rarr;61)', lvl:'h', pass:true,  note:'&#10003; 79.' },
+      { q:'Q15',topic:'Remove ("FEWEST", warehouse shelves, 72&rarr;75) — Capstone', lvl:'h', pass:true,  note:'&#10003; 45 &mdash; full clean chain shown.' }
+    ]
+  },
+  _U47archived: {
     n:47, score:11, outOf:15, pct:73, delta:-2, prevScore:13, prevOutOf:15, prevLabel:'U46',
     patternLabel: 'U47 — Reverse Averages &amp; Missing-Value Arithmetic, NOT PASSED',
     patternInsight: '11/15 (73%) <strong>NOT PASSED</strong> &mdash; Sec A (Averages &amp; Reversing Them) 4/5, Sec B (Finding A Missing Value) 4/5, Sec C (When The Average Changes) 3/5. Sections A and B both individually clear the 4/5 pass bar, and every miss in them is a clean arithmetic slip inside correctly-applied working, not a method breakdown: Q4 (wrote 235, correct 225) and Q9 (wrote 82, correct 102). Section C is where the real gap sits, and it fails the section bar (3/5): Q12 computed both the BEFORE and AFTER totals correctly but then subtracted them wrong (wrote 14, correct 16) &mdash; a setup/labelling slip, not a totals error; Q13 went wrong a step earlier, computing the AFTER total itself incorrectly (wrote 13, correct 27) &mdash; a procedural error, not just a subtraction slip. Q11, Q14, and the capstone Q15 (which mirrors the exact ASMOPSS 2023 Q12 pattern) were all correct.',
@@ -44,31 +69,6 @@ var PREM_DATA = {
       { q:'Q13',topic:'When The Average Changes — medium', lvl:'m', pass:false, note:'&#10007; wrote 13; correct 27. The AFTER total itself was computed incorrectly &mdash; a procedural error one step earlier than Q12\'s, not just a subtraction slip.' },
       { q:'Q14',topic:'When The Average Changes — harder', lvl:'h', pass:true,  note:'&#10003; 47.' },
       { q:'Q15',topic:'Capstone — mirrors the exact ASMOPSS 2023 Q12 pattern', lvl:'h', pass:true,  note:'&#10003; 63 &mdash; the reverse-average-change pattern flagged by the ASMOPSS 2023 diagnostic, correctly solved.' }
-    ]
-  },
-  _U46archived: {
-    n:46, score:13, outOf:15, pct:87, delta:0, prevScore:13, prevOutOf:15, prevLabel:'U45',
-    patternLabel: 'U46 — Constrained Coin-Combination Listing &amp; Divisibility Arrangements, PASSED',
-    patternInsight: '13/15 (87%) <strong>PASSED</strong> &mdash; Sec A (Constrained Listing) 5/7, Sec B (Divisibility Arrangements) 8/8 PERFECT. Section B is the headline: a clean sweep on genuinely new material, including both harder 6-digit questions and the capstone trick question (Q15, correctly reasoned to 0 &mdash; no valid last digit exists). "Find the last digit first" transferred completely on first exposure. Section A held at 5/7 &mdash; both misses were untested variants, not a method breakdown: Q6 was the first-ever 3-coin-type listing question (lesson only taught 2 coin types), and Q4 was the first upper-bound-only rule with no "at least one of each" anchor phrase (left blank rather than miscalculated).',
-    analysisLabel: 'Next: Unit 47 — Reverse Averages &amp; Missing-Value Arithmetic (Arithmetic)',
-    analysisInsight: 'U46\'s pass closes both Art of Counting gaps from the ASMOPSS 2023 diagnostic (Q19 constrained listing, Q25 divisibility permutations) &mdash; no retest needed. The programme resumes its rotation at U47: Reverse Averages &amp; Missing-Value Arithmetic, closing ASMOPSS 2023\'s Q12 (a clean untaught-content gap: average &times; count = total, then work backward). Two light monitor-only items carry forward (not lessons): a 3-coin-type constrained listing check, and an upper-bound-only-rule check, whenever Art of Counting next reappears. With ASMOPSS 2026 now 16 days away, U47 stays focused before shifting toward timed mixed past-paper practice.',
-    qSummary: '<strong>Sec A 5/7 | Sec B 8/8</strong> — 13/15 (87%) PASSED',
-    qBreakdown: [
-      { q:'Q1', topic:'Constrained Listing — &#3647;6/&#3647;9 coins, &#3647;63, at least one each', lvl:'w', pass:true,  note:'&#10003; 3.' },
-      { q:'Q2', topic:'Constrained Listing — &#3647;3/&#3647;6 coins, &#3647;33, at least one each', lvl:'w', pass:true,  note:'&#10003; 5.' },
-      { q:'Q3', topic:'Constrained Listing — &#3647;3/&#3647;12 coins, two lower bounds', lvl:'m', pass:true,  note:'&#10003; 6 &mdash; two different lower bounds on two coins, handled correctly.' },
-      { q:'Q4', topic:'Constrained Listing — &#3647;3/&#3647;11 coins, upper-bound only, no lower bound', lvl:'m', pass:false, note:'&#10007; blank; correct 2. First question with an upper-bound-only rule and no "at least one of each" anchor &mdash; no answer or working attempted, suggesting uncertainty about how to start rather than a wrong calculation.' },
-      { q:'Q5', topic:'Constrained Listing — &#3647;4/&#3647;12 coins, &#3647;112, at least one each', lvl:'h', pass:true,  note:'&#10003; 9 &mdash; largest Section A target, correct despite working showing only 8 of 9 checks explicitly written.' },
-      { q:'Q6', topic:'Constrained Listing — THREE coin types (&#3647;2/&#3647;6/&#3647;12), &#3647;32', lvl:'h', pass:false, note:'&#10007; wrote 2; correct 4. First 3-coin-type question in this skill (lesson\'s Part A only taught/practised 2 coin types) &mdash; working doesn\'t resemble the systematic sweep used correctly on Q1&ndash;Q5.' },
-      { q:'Q7', topic:'Capstone — &#3647;6/&#3647;7 coins, combined lower+upper bound',  lvl:'h', pass:true,  note:'&#10003; 1 &mdash; correctly checked all four &#3647;7-counts and crossed out the three that failed.' },
-      { q:'Q8', topic:'Divisibility Arrangement — digits 2,6,8,9 &divide;2', lvl:'w', pass:true,  note:'&#10003; 18.' },
-      { q:'Q9', topic:'Divisibility Arrangement — digits 5,6,7,8 &divide;2', lvl:'w', pass:true,  note:'&#10003; 12.' },
-      { q:'Q10',topic:'Divisibility Arrangement — digits 5,6,7,8,9 &divide;5', lvl:'m', pass:true,  note:'&#10003; 24.' },
-      { q:'Q11',topic:'Divisibility Arrangement — digits 6,6,7,8,9 (repeat) &divide;2', lvl:'m', pass:true,  note:'&#10003; 36.' },
-      { q:'Q12',topic:'Divisibility Arrangement — digits 5,6,7,8,9 &divide;2', lvl:'h', pass:true,  note:'&#10003; 48.' },
-      { q:'Q13',topic:'Divisibility Arrangement — digits 4,5,6,7,8,9 &divide;5', lvl:'h', pass:true,  note:'&#10003; 120.' },
-      { q:'Q14',topic:'Divisibility Arrangement — digits 4,5,6,7,8,9 &divide;2', lvl:'h', pass:true,  note:'&#10003; 360.' },
-      { q:'Q15',topic:'Capstone (trick) — digits 2,4,6,7,8,9 &divide;5, no 0/5 in set', lvl:'h', pass:true,  note:'&#10003; 0 &mdash; correctly recognised no valid last digit exists rather than guessing or leaving it blank.' }
     ]
   },
   _M4archived: {
@@ -208,23 +208,37 @@ var PREM_DATA = {
     { n:44, score:9.5, delta:-5.5, color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
     { n:45, score:13, delta:+3.5, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:46, score:13, delta:0,    color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
-    { n:47, score:11, delta:-2,   color:'linear-gradient(135deg,#EF5350,#C62828)', star:false }
+    { n:47, score:11, delta:-2,   color:'linear-gradient(135deg,#EF5350,#C62828)', star:false },
+    { n:48, score:14, delta:+3,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 49,
+      badge: 'linear-gradient(135deg,#0277BD,#01579B)',
+      title: '3D Visualization — Cube Counting, Filling &amp; Painting (Spatial Reasoning)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'Closes ASMOPSS 2023 Q14', c:'tred' },
+        { t:'Prediction-driven: seen 2023 + 2024', c:'tblue' },
+        { t:'NEW: solid blocks, filling, painted cubes', c:'torange' }
+      ],
+      note: 'U49, built 31 Jul 2026. First of 5 prediction-driven final-week units, chosen after reviewing all 3 real ASMOPSS G4 Set-B papers (2023&ndash;2025): 3D cube problems (painting, filling, counting) appeared in BOTH 2023 (Q14, Q23) and 2024 (Q23) &mdash; a confirmed recurring pattern. Closes the ASMOPSS 2023 diagnostic\'s Q14 gap (occluded/irregular stacked solids weak vs. simple cube-filling fine). New lesson (Spatial_Lesson_CubeCountingPaintingFilling.html) builds from zero across four moves: solid-block counting (l&times;w&times;h), uneven-stack/footprint counting (sum every column), "how many more to finish" (full total minus what\'s there), and painted-cube classification (corner/edge/face/hidden by direction). Test: 15Q &mdash; Sec A (Q1&ndash;5) Basics, Sec B (Q6&ndash;10) Footprints &amp; Filling, Sec C (Q11&ndash;15) Painted Cubes.',
+      status: 'pending'
+    },
+    {
       n: 48,
       badge: 'linear-gradient(135deg,#EF6C00,#E65100)',
       title: 'Targeted Retest — When The Average Changes (Arithmetic)',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'Retest of U47 Sec C only', c:'tred' },
-        { t:'Fix: label BEFORE/AFTER totals', c:'tblue' },
-        { t:'Fix: check subtraction by adding back', c:'torange' }
+        { t:'14/15 (93%) &#10003; PASSED', s:'background:#f0fff4;color:#276749;font-weight:700' },
+        { t:'Sec A 5/5 + Sec B 5/5 — both perfect', c:'tgreen' },
+        { t:'Sec C 4/5 — one multiplication slip', c:'torange' },
+        { t:'Average-changes arc CLOSED', c:'tgreen' }
       ],
-      note: 'U48, built 27 Jul 2026. Targeted retest of U47 Section C only ("When The Average Changes") &mdash; Sections A and B both individually passed (4/5 each) so no full unit repeat, per the standing retest rule. Compact top-up lesson (Arithmetic_Lesson_BeforeAfterTotalPrecision.html) targets the two specific habits behind U47\'s Q12 and Q13 misses: labelling BEFORE/AFTER totals as separate lines before subtracting, and checking a subtraction by adding the answer back to the smaller total. Test: fresh 15Q, all on "When The Average Changes" (mixed add/remove), 3 sections by difficulty. Bumps the originally-planned U48 topic (irregular 3D visualisation) to U49.',
-      status: 'pending'
+      note: '14/15 &#10003; <strong>PASSED</strong> &mdash; Sec A 5/5, Sec B 5/5, Sec C 4/5. Both top-up habits fully transferred: every question shows labelled BEFORE/AFTER totals before subtracting, and U47\'s exact failure modes (Q12 subtraction slip, Q13 tangled AFTER total) do not recur anywhere. The lone miss (Q11) is new and narrower: totals were labelled correctly, but 48&times;7 was hand-multiplied as 326 instead of 336 &mdash; a one-off multiplication slip, not a tracking-habit failure. &rarr; U49, resuming the original rotation with a prediction-driven final stretch (U49&ndash;U53 + 1 mock test) before the 9 Aug exam.',
+      status: 'done'
     },
     {
       n: 47,
@@ -1003,10 +1017,16 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 92
     },
     {
-      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction &amp; systematic listing RESOLVED (U44/U45, U46); reverse averages PARTIAL (U47) with retest IN PROGRESS (U48); 3D/algebra queued after',
+      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction &amp; systematic listing RESOLVED (U44/U45, U46); reverse averages RESOLVED (U47+U48); 3D visualization IN PROGRESS (U49)',
       pill:      'p2', pillText: 'In Progress &#9654;',
-      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (9.5/15, 63%, NOT PASSED) &rarr; U45 targeted retest of Sec B+C (13/15, 87%, PASSED) &mdash; cluster CLOSED. Systematic listing &amp; constrained counting (ASMOPSS Q19, Q25) &rarr; U46 (13/15, 87%, PASSED, built 23 Jul 2026) &mdash; both misses were untested variants, not a method gap; CLOSED. Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; U47 (built 24 Jul 2026, 11/15, 73%, NOT PASSED) &mdash; the core averaging &amp; missing-value methods (Sec A, Sec B) both passed individually; only "When The Average Changes" (Sec C) fell short &rarr; U48 targeted retest of Sec C only (built 27 Jul 2026, in progress). Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; now U49. Algebra substitution (Q22) pairs with M4&rsquo;s Q8 equation-method lapse &rarr; now U50. Full plan (U42&ndash;U53) is in the Executive Summary.',
-      fillClass: 'g2', fillPct: 68
+      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (9.5/15, 63%, NOT PASSED) &rarr; U45 targeted retest of Sec B+C (13/15, 87%, PASSED) &mdash; cluster CLOSED. Systematic listing &amp; constrained counting (ASMOPSS Q19, Q25) &rarr; U46 (13/15, 87%, PASSED) &mdash; CLOSED. Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; U47 (11/15, 73%, NOT PASSED, Sec C only) &rarr; U48 targeted retest of Sec C (14/15, 93%, PASSED) &mdash; arc CLOSED. Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; U49 (built 31 Jul 2026, in progress) &mdash; also independently confirmed as a real 2026 exam risk: cube problems appeared in BOTH the 2023 and 2024 real ASMOPSS papers.',
+      fillClass: 'g2', fillPct: 72
+    },
+    {
+      label:     '2026 exam prediction — final-week plan built from 2023–2025 real ASMOPSS papers (U49–U53 + 1 mock test)',
+      pill:      'p2', pillText: 'In Progress &#9654;',
+      score:     'Analysed 31 Jul 2026, with 9 days to the 9 Aug exam. Read all three real ASMOPSS G4 Set-B papers (2023, 2024, 2025 &mdash; the exact exam format Prem sits) and catalogued all 75 questions by topic. Two recurring, never-before-taught patterns stood out: digit/symbol puzzles (cryptarithms, letter-codes) appeared in EVERY year, 2&ndash;3 times each; pictogram-with-clues puzzles (hidden data reconstructed from 2&ndash;3 textual clues) landed at Q20 in all three years, always worth 6 marks. Final plan: U49 3D Visualization (confirmed 2yr recurrence), U50 Digit &amp; Symbol Puzzles (new, every-year), U51 Pictogram Clue-Puzzles (new, 3/3-year Q20 fixture), U52 Composite/Overlapping Area (2/3 years, extends Path &amp; Frame strength), U53 Mixed Precision Drill (Number Theory + Art of Counting rapid-fire, targets the recurring arithmetic-care slip). Full ASMOPSS-style mock test (25Q, real tiered marks, mixed question order) scheduled after all 5 units, before the exam.',
+      fillClass: 'g2', fillPct: 40
     },
     {
       label:     'Averages & missing-value arithmetic — Sec A/B core methods RESOLVED at U47 (4/5 + 4/5)',

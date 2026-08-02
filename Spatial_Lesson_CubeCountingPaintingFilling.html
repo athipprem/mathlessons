@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cube Counting, Filling &amp; Painting — 3D Visualization</title>
+<style>
+:root{--nav:#0277BD;--nav-dark:#01579B;--bg:#E1F5FE;--card:#fff;--acc:#0277BD;--ok:#2E7D32;--err:#C62828;--warn:#01579B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#01579B;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E1F5FE,#E3F2FD);border:2px solid #4FC3F7;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#01579B;font-weight:700;margin-bottom:6px}
+.big-rule{background:#E1F5FE;border:2px solid #0288D1;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#01579B;margin:14px 0}
+.golden{background:linear-gradient(135deg,#E1F5FE,#F1F8FF);border:2px solid #4FC3F7;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E1F5FE;border:1.5px solid #0288D1;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#01579B;text-align:center;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F9FF;border:1px solid #81D4FA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#0277BD}
+.steps .ln.ans{color:#01579B;font-weight:800}
+.tree{background:#FAFDFF;border:2px dashed #4FC3F7;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #81D4FA;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#0277BD;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.warn-box{background:#E1F5FE;border:1.5px solid #4FC3F7;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#01579B}
+.q-card{background:#F0F9FF;border:1.5px solid #81D4FA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #81D4FA;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E1F5FE}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E1F5FE;color:#01579B;border:2px solid #01579B;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#0277BD;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E1F5FE;color:#01579B;border:1.5px solid #4FC3F7;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.reveal-btn{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin:6px 6px 6px 0}
+.reveal-line{display:none;background:#F0F9FF;border:1px solid #81D4FA;border-radius:8px;padding:10px 14px;margin:6px 0;font-size:.98rem;font-weight:700;color:#01579B}
+/* grid visual */
+.hgrid{display:inline-grid;gap:4px;margin:12px auto;justify-content:center}
+.hcell{width:46px;height:46px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.05rem;color:#01579B;border:2px solid #0288D1}
+.hcell.h1{background:#E1F5FE}
+.hcell.h2{background:#B3E5FC}
+.hcell.h3{background:#81D4FA}
+.hcell.h4{background:#4FC3F7}
+.hcell.h5{background:#29B6F6}
+.hcell.h6{background:#039BE5;color:#fff}
+.hcell.target{background:#fff;border:2.5px dashed #0288D1;color:#0288D1}
+.gridcap{text-align:center;font-size:.85rem;color:#546E7A;margin-top:-6px;margin-bottom:10px}
+.facegrid{display:inline-grid;gap:3px;margin:10px auto}
+.fcell{width:34px;height:34px;border-radius:4px;font-size:.72rem;display:flex;align-items:center;justify-content:center;font-weight:700;border:1.5px solid #0288D1}
+.f3{background:#01579B;color:#fff}
+.f2{background:#0288D1;color:#fff}
+.f1{background:#81D4FA;color:#01579B}
+.f0{background:#fff;color:#B0BEC5;border-style:dashed}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Cube Counting, Filling &amp; Painting</span>
+  <span class="tnav-pill" id="pill">1 / 19</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F9CA; Why This Matters</h2>
+  <div class="why">
+    <div class="why-title">Where this shows up</div>
+    <p>Every time you stack building blocks, pack boxes into a shipping container, or build in Minecraft, you're solving a 3D counting problem: how many unit pieces make up a shape, and what's hidden inside it that you can't directly see? Architects use exactly this thinking to work out how many bricks a wall needs; warehouse packers use it to fit boxes into a truck.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Why it's an ASMOPSS favourite</div>
+    <p>Competition papers love 3D cube problems because they test something you can't just memorise: can you picture a 3D shape from a flat description, and count it systematically without losing track? This topic has appeared on the real exam multiple years running &mdash; it's one of the most reliable "if it's on the paper, you should be ready" topics.</p>
+  </div>
+  <div class="big-rule">Today's 3 moves: (1) Count cubes in a solid block or stack. (2) Work out how many MORE cubes are needed to complete a shape. (3) Work out how many faces get painted on each cube after the outside of a block is dipped in paint.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: decision tree -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Big Picture</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span><strong>Solid rectangular block?</strong> Multiply length &times; width &times; height. Done.</div>
+    <div class="node"><span class="step-n">2</span><strong>Uneven stack (staircase, footprint of columns)?</strong> Add up every column's height. That total IS the cube count.</div>
+    <div class="node"><span class="step-n">3</span><strong>"How many MORE to finish it" question?</strong> Work out the FULL finished shape's total, then subtract what's already there.</div>
+    <div class="node"><span class="step-n">4</span><strong>Painted-cube question?</strong> Every unit cube is a CORNER (3 faces), an EDGE (2 faces), a FACE-centre (1 face), or fully INSIDE (0 faces) &mdash; depending on how many of its 3 directions touch the outside of the block.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; All four moves share one habit: never try to "just picture it" and guess a number. Build the count systematically, column by column or layer by layer, the same way you already do for listing and counting problems.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Move 1: Solid Blocks &#8594;</button></div>
+</div>
+
+<!-- s2: Move 1 worked example -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Move 1 &mdash; Counting Cubes In A Solid Block</h2>
+  <div class="rulebar">Total cubes = length &times; width &times; height</div>
+  <p><strong>A rectangular block is built from unit cubes: 3 cubes long, 2 cubes wide, and 4 cubes tall. How many unit cubes make up the whole block?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Think of it as 4 identical flat layers stacked up, each layer 3&times;2:</span></div>
+    <div class="ln">One layer = 3 &times; 2 = 6 cubes</div>
+    <div class="ln"><span class="note">There are 4 layers (the height), so multiply by 4:</span></div>
+    <div class="ln">6 &times; 4 = 24</div>
+    <div class="ln ans">The block is made of 24 unit cubes</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; It doesn't matter which two dimensions you call the "layer" &mdash; 3&times;2&times;4 gives the same answer as 2&times;4&times;3. Multiply all three numbers together, in any order.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s3: Interactive 1 -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F4CB; Build The Block Yourself</h2>
+  <p style="margin-bottom:10px"><strong>A block is 5 cubes long, 4 cubes wide, and 2 cubes tall. Tap each button in order.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r1a')">Step 1: one layer</button>
+  <div class="reveal-line" id="r1a">One layer = 5 &times; 4 = 20 cubes</div>
+  <button class="reveal-btn" onclick="revealLine('r1b')">Step 2: how many layers?</button>
+  <div class="reveal-line" id="r1b">Height = 2, so there are 2 layers</div>
+  <button class="reveal-btn" onclick="revealLine('r1c')">Step 3: multiply</button>
+  <div class="reveal-line" id="r1c">20 &times; 2 = 40 unit cubes total</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s4: Practice 1 -->
+<div class="screen" id="s4">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Move 1: Solid Blocks</span>
+  <h2>Practice &mdash; Length &times; Width &times; Height</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A block is 6 cubes long, 3 cubes wide, and 3 cubes tall. How many unit cubes in total?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 54</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 36</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">One layer = 6 &times; 3 = 18. Height = 3 layers.</div>
+      <div class="ln ans">18 &times; 3 = 54 unit cubes</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A block is 4 cubes long, 4 cubes wide, and 5 cubes tall. How many unit cubes in total?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 80</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 13</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 40</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">One layer = 4 &times; 4 = 16. Height = 5 layers.</div>
+      <div class="ln ans">16 &times; 5 = 80 unit cubes</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Move 2: Uneven Stacks &#8594;</button></div>
+</div>
+
+<!-- s5: Move 2 worked example -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>Move 2 &mdash; Counting Cubes In An Uneven Stack</h2>
+  <div class="rulebar">Total cubes = the sum of every column's height</div>
+  <p><strong>Unit cubes are stacked in a row of 4 columns to make a staircase. From left to right, the columns are 1, 2, 3, and 4 cubes tall. How many unit cubes make up the whole staircase?</strong></p>
+  <div class="hgrid" style="grid-template-columns:repeat(4,1fr)">
+    <div class="hcell h1">1</div><div class="hcell h2">2</div><div class="hcell h3">3</div><div class="hcell h4">4</div>
+  </div>
+  <div class="gridcap">Each number is that column's height in cubes</div>
+  <div class="steps">
+    <div class="ln"><span class="note">Every column is its own separate mini-tower. Add every column's height:</span></div>
+    <div class="ln">1 + 2 + 3 + 4 = 10</div>
+    <div class="ln ans">The staircase is made of 10 unit cubes</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This is different from Move 1 because the columns are NOT all the same height &mdash; you can't just multiply. When heights are uneven, always fall back to adding every column separately.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">A 2D Footprint &#8594;</button></div>
+</div>
+
+<!-- s6: Move 2 harder example (2D footprint) -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>Move 2 (Harder) &mdash; A Full Footprint, Not Just A Row</h2>
+  <div class="rulebar">Same rule: add up EVERY column's height, row by row</div>
+  <p><strong>A structure has a 3&times;3 footprint. Row 1 (front): heights 2, 3, 1. Row 2 (middle): heights 3, 4, 2. Row 3 (back): heights 1, 2, 3. How many unit cubes make up the whole structure?</strong></p>
+  <div class="hgrid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="hcell h2">2</div><div class="hcell h3">3</div><div class="hcell h1">1</div>
+    <div class="hcell h3">3</div><div class="hcell h4">4</div><div class="hcell h2">2</div>
+    <div class="hcell h1">1</div><div class="hcell h2">2</div><div class="hcell h3">3</div>
+  </div>
+  <div class="gridcap">Looking straight down at the structure &mdash; each number is that spot's column height</div>
+  <div class="steps">
+    <div class="ln"><span class="note">Add row by row, then add the row totals:</span></div>
+    <div class="ln">Row 1: 2+3+1 = 6</div>
+    <div class="ln">Row 2: 3+4+2 = 9</div>
+    <div class="ln">Row 3: 1+2+3 = 6</div>
+    <div class="ln">6 + 9 + 6 = 21</div>
+    <div class="ln ans">The structure is made of 21 unit cubes</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Adding row-by-row (instead of all 9 numbers in one long line) makes it much harder to accidentally skip a column or count one twice &mdash; the exact same "systematic sweep" habit you already use for listing problems.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s7: Interactive 2 -->
+<div class="screen" id="s7">
+<div class="card">
+  <h2>&#x1F4CB; Add Up Your Own Footprint</h2>
+  <p style="margin-bottom:10px"><strong>A 2&times;3 footprint has heights: Row 1: 3, 5. Row 2: 4, 2. Row 3: 1, 6. Tap each button in order.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r2a')">Step 1: Row 1</button>
+  <div class="reveal-line" id="r2a">3 + 5 = 8</div>
+  <button class="reveal-btn" onclick="revealLine('r2b')">Step 2: Row 2</button>
+  <div class="reveal-line" id="r2b">4 + 2 = 6</div>
+  <button class="reveal-btn" onclick="revealLine('r2c')">Step 3: Row 3</button>
+  <div class="reveal-line" id="r2c">1 + 6 = 7</div>
+  <button class="reveal-btn" onclick="revealLine('r2d')">Step 4: Add the row totals</button>
+  <div class="reveal-line" id="r2d">8 + 6 + 7 = 21 unit cubes total</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s8: Practice 2 -->
+<div class="screen" id="s8">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Move 2: Uneven Stacks</span>
+  <h2>Practice &mdash; Add Every Column</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A row of 5 columns has heights 2, 5, 3, 6, 4. How many unit cubes in total?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 720</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln ans">2+5+3+6+4 = 20 unit cubes</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A 2&times;2 footprint has heights: Row 1: 4, 2. Row 2: 3, 5. How many unit cubes in total?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 14</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 4</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 120</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">Row 1: 4+2=6. Row 2: 3+5=8.</div>
+      <div class="ln ans">6+8 = 14 unit cubes</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Move 3: Filling &#8594;</button></div>
+</div>
+
+<!-- s9: Move 3 worked example -->
+<div class="screen" id="s9">
+<div class="card">
+  <h2>Move 3 &mdash; How Many MORE Cubes To Finish It?</h2>
+  <div class="rulebar">Cubes still needed = FULL finished total &minus; cubes already there</div>
+  <p><strong>Mia is building a 3&times;3&times;3 cube (3 long, 3 wide, 3 tall). So far, the 9 columns (3&times;3 footprint) have these heights &mdash; Row 1: 1, 2, 1. Row 2: 2, 3, 2. Row 3: 1, 2, 1. How many more unit cubes does Mia need to completely fill the 3&times;3&times;3 cube?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; work out the FULL finished total (Move 1: a solid 3&times;3&times;3 block):</span></div>
+    <div class="ln">3 &times; 3 &times; 3 = 27</div>
+    <div class="ln"><span class="note">Step 2 &mdash; work out how many cubes are already there (Move 2: add every column):</span></div>
+    <div class="ln">Row 1: 1+2+1=4. Row 2: 2+3+2=7. Row 3: 1+2+1=4. Total = 4+7+4 = 15</div>
+    <div class="ln"><span class="note">Step 3 &mdash; subtract:</span></div>
+    <div class="ln">27 &minus; 15 = 12</div>
+    <div class="ln ans">Mia needs 12 more unit cubes</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This move is really just Move 1 and Move 2 used TOGETHER, then a subtraction &mdash; nothing new to learn, just combine the two skills you already have.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s10: Interactive 3 -->
+<div class="screen" id="s10">
+<div class="card">
+  <h2>&#x1F4CB; Work Out How Many More</h2>
+  <p style="margin-bottom:10px"><strong>A finished block will be 2&times;3&times;4 (2 long, 3 wide, 4 tall). So far the 6 columns (2&times;3 footprint) have heights: Row 1: 2, 3, 1. Row 2: 4, 2, 3. Tap each button in order.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r3a')">Step 1: full finished total</button>
+  <div class="reveal-line" id="r3a">2 &times; 3 &times; 4 = 24</div>
+  <button class="reveal-btn" onclick="revealLine('r3b')">Step 2: cubes already there</button>
+  <div class="reveal-line" id="r3b">Row 1: 2+3+1=6. Row 2: 4+2+3=9. Total = 6+9 = 15</div>
+  <button class="reveal-btn" onclick="revealLine('r3c')">Step 3: subtract</button>
+  <div class="reveal-line" id="r3c">24 &minus; 15 = 9 more unit cubes needed</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s11: Practice 3 -->
+<div class="screen" id="s11">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Move 3: Filling</span>
+  <h2>Practice &mdash; Full Total Minus What's There</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A finished block will be 2&times;2&times;5. So far the 4 columns have heights: Row 1: 3, 2. Row 2: 4, 3. How many more unit cubes are needed?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q4" value="A"> A)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q4" value="B"> B)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q4" value="C"> C)&nbsp; 20</label>
+    </div>
+    <button class="btn-check" onclick="chk(4,'A')">Check</button>
+    <div class="feedback" id="fb4"></div>
+    <button class="btn-show-steps" id="ss4" onclick="showSteps('sr4',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr4"><div class="steps">
+      <div class="ln">Full total: 2&times;2&times;5=20. There now: 3+2+4+3=12.</div>
+      <div class="ln ans">20 &minus; 12 = 8 more cubes</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A finished block will be 3&times;2&times;4. So far the 6 columns have heights: Row 1: 2, 3. Row 2: 4, 1. Row 3: 3, 2. How many more unit cubes are needed?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q5" value="A"> A)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q5" value="B"> B)&nbsp; 15</label>
+      <label class="opt"><input type="radio" name="q5" value="C"> C)&nbsp; 24</label>
+    </div>
+    <button class="btn-check" onclick="chk(5,'A')">Check</button>
+    <div class="feedback" id="fb5"></div>
+    <button class="btn-show-steps" id="ss5" onclick="showSteps('sr5',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr5"><div class="steps">
+      <div class="ln">Full total: 3&times;2&times;4=24. There now: 2+3+4+1+3+2=15.</div>
+      <div class="ln ans">24 &minus; 15 = 9 more cubes</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Move 4: Painted Cubes &#8594;</button></div>
+</div>
+
+<!-- s12: Move 4 intro/build the rule -->
+<div class="screen" id="s12">
+<div class="card">
+  <h2>Move 4 &mdash; Painted Cube Puzzles</h2>
+  <div class="why">
+    <div class="why-title">The setup</div>
+    <p>A solid rectangular block of unit cubes gets its WHOLE outside dipped in paint &mdash; every face you can see from outside, including the bottom. Then the block is taken apart into its separate unit cubes. Some cubes will have paint on several faces; some might have none at all!</p>
+  </div>
+  <div class="rulebar">Every cube's painted-face count depends on how many of its 3 directions (length, width, height) touch the OUTSIDE of the block</div>
+  <div class="tree">
+    <div class="node"><span class="step-n">3</span><strong>CORNER cube</strong> &mdash; touches the outside in all 3 directions &rarr; 3 faces painted. There are always exactly 8 corners (if every side is 2 or more cubes).</div>
+    <div class="node"><span class="step-n">2</span><strong>EDGE cube</strong> &mdash; touches the outside in 2 directions, sits between two corners &rarr; 2 faces painted.</div>
+    <div class="node"><span class="step-n">1</span><strong>FACE cube</strong> &mdash; touches the outside in only 1 direction, sits in the middle of a flat face &rarr; 1 face painted.</div>
+    <div class="node"><span class="step-n">0</span><strong>INSIDE cube</strong> &mdash; touches the outside in 0 directions, fully buried inside the block &rarr; 0 faces painted (only exists if every side is 3 or more cubes).</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See It On A Small Block &#8594;</button></div>
+</div>
+
+<!-- s13: Move 4 worked example -->
+<div class="screen" id="s13">
+<div class="card">
+  <h2>Move 4 &mdash; Worked Example</h2>
+  <p><strong>A block is built 2 cubes long, 2 cubes wide, and 2 cubes tall. The whole outside (including the bottom) is dipped in paint, then the block is taken apart. How many unit cubes have paint on EXACTLY 3 faces?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">In a 2&times;2&times;2 block, every single position is at an END in every direction (there's no "middle" position when a side is only 2 long) &mdash; so EVERY cube is a corner cube.</span></div>
+    <div class="ln">Total cubes in the block: 2 &times; 2 &times; 2 = 8</div>
+    <div class="ln ans">All 8 cubes have exactly 3 faces painted</div>
+  </div>
+  <p style="margin-top:14px"><strong>Now a bigger block: 4 cubes long, 3 cubes wide, 2 cubes tall. This time, how many cubes have EXACTLY 1 face painted (a "face" cube)?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">A face cube needs to be in the MIDDLE (not at either end) in exactly ONE direction, and at an end in the other two. The height is only 2, so there's no "middle" for height &mdash; every cube touches top or bottom. So face cubes can only come from being in the middle of the LENGTH or the middle of the WIDTH:</span></div>
+    <div class="ln">Middle-of-length positions: 4&minus;2 = 2 &nbsp;|&nbsp; Middle-of-width positions: 3&minus;2 = 1</div>
+    <div class="ln">Face cubes from the two long flat faces (top &amp; bottom, each 4&times;3): the middle strip is 2 long &times; 1 wide = 2 cubes, &times; 2 faces (top+bottom) = 4</div>
+    <div class="ln ans">4 unit cubes have exactly 1 face painted</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Don't panic if this feels tricky &mdash; on the test, you'll mostly need CORNER counts (always 8, if every side &ge;2) and INSIDE counts (the easiest to calculate &mdash; see the next page). Edge and face counts follow the same "middle vs end, in each direction" logic.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Easy One: Fully Hidden &#8594;</button></div>
+</div>
+
+<!-- s14: Move 4 the easy formula (interior) -->
+<div class="screen" id="s14">
+<div class="card">
+  <h2>Move 4 &mdash; The Easiest One: Fully Hidden Cubes</h2>
+  <div class="rulebar">Hidden (0-face) cubes = (length &minus; 2) &times; (width &minus; 2) &times; (height &minus; 2)</div>
+  <p><strong>Why:</strong> a cube is fully hidden only if it's in the middle in ALL 3 directions &mdash; not touching either end of the length, the width, OR the height. "Shave off" one layer from each end of each direction, and count what's left.</p>
+  <p style="margin-top:10px"><strong>Worked example:</strong> a block 5 long, 4 wide, 3 tall &mdash; how many cubes have NO paint at all?</p>
+  <div class="steps">
+    <div class="ln">(5&minus;2) &times; (4&minus;2) &times; (3&minus;2) = 3 &times; 2 &times; 1</div>
+    <div class="ln ans">= 6 unit cubes are fully hidden (0 faces painted)</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; If ANY side is 1 or 2 cubes, there's no room for a fully hidden middle in that direction &mdash; the hidden count is 0. That's exactly what happened with the 2&times;2&times;2 block on the last page.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s15: Interactive 4 -->
+<div class="screen" id="s15">
+<div class="card">
+  <h2>&#x1F4CB; Find The Hidden Cubes Yourself</h2>
+  <p style="margin-bottom:10px"><strong>A block is 6 long, 5 wide, 4 tall, fully painted on the outside. Tap each button in order to find the fully-hidden (0-face) cubes.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r4a')">Step 1: shave the length</button>
+  <div class="reveal-line" id="r4a">6 &minus; 2 = 4</div>
+  <button class="reveal-btn" onclick="revealLine('r4b')">Step 2: shave the width</button>
+  <div class="reveal-line" id="r4b">5 &minus; 2 = 3</div>
+  <button class="reveal-btn" onclick="revealLine('r4c')">Step 3: shave the height</button>
+  <div class="reveal-line" id="r4c">4 &minus; 2 = 2</div>
+  <button class="reveal-btn" onclick="revealLine('r4d')">Step 4: multiply</button>
+  <div class="reveal-line" id="r4d">4 &times; 3 &times; 2 = 24 fully hidden unit cubes</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s16: Practice 4 -->
+<div class="screen" id="s16">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Move 4: Painted Cubes</span>
+  <h2>Practice &mdash; Corners &amp; Hidden Cubes</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A block 3 long, 3 wide, 3 tall is fully painted (incl. bottom), then separated. How many unit cubes have exactly 3 faces painted?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q6" value="A"> A)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q6" value="B"> B)&nbsp; 27</label>
+      <label class="opt"><input type="radio" name="q6" value="C"> C)&nbsp; 6</label>
+    </div>
+    <button class="btn-check" onclick="chk(6,'A')">Check</button>
+    <div class="feedback" id="fb6"></div>
+    <button class="btn-show-steps" id="ss6" onclick="showSteps('sr6',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr6"><div class="steps">
+      <div class="ln ans">Every block has exactly 8 corners (as long as every side &ge; 2) = 8</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A block 6 long, 4 wide, 3 tall is fully painted (incl. bottom), then separated. How many unit cubes have NO paint at all?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q7" value="A"> A)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q7" value="B"> B)&nbsp; 72</label>
+      <label class="opt"><input type="radio" name="q7" value="C"> C)&nbsp; 4</label>
+    </div>
+    <button class="btn-check" onclick="chk(7,'A')">Check</button>
+    <div class="feedback" id="fb7"></div>
+    <button class="btn-show-steps" id="ss7" onclick="showSteps('sr7',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr7"><div class="steps">
+      <div class="ln">(6&minus;2) &times; (4&minus;2) &times; (3&minus;2) = 4 &times; 2 &times; 1</div>
+      <div class="ln ans">= 8 fully hidden cubes</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Full Checklist &#8594;</button></div>
+</div>
+
+<!-- s17 (index 17, screen 18): Full checklist -->
+<div class="screen" id="s17">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Full Checklist</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span><strong>Solid block:</strong> length &times; width &times; height.</div>
+    <div class="node"><span class="step-n">2</span><strong>Uneven stack / footprint:</strong> add up every column's height, row by row.</div>
+    <div class="node"><span class="step-n">3</span><strong>"How many more to finish":</strong> full finished total (Move 1) minus what's already there (Move 2).</div>
+    <div class="node"><span class="step-n">4</span><strong>Painted cubes:</strong> corners = 3 faces (always 8, if every side &ge;2). Fully hidden = 0 faces = (l&minus;2)&times;(w&minus;2)&times;(h&minus;2). Edge = 2 faces, face-centre = 1 face &mdash; found by checking "middle vs end" in each direction.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Every one of these moves uses the SAME systematic-counting habit you already trust from Art of Counting: never guess a total from a picture &mdash; build it up piece by piece, direction by direction.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap &#8594;</button></div>
+</div>
+
+<!-- s18: recap -->
+<div class="screen" id="s18">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>3D shapes are just 2D counting stacked up. Multiply for solid blocks, add columns for uneven stacks, subtract for "how many more," and check middle-vs-end in each direction for painted cubes.</strong></p>
+</div>
+<div class="card" style="background:#E1F5FE;border:1px solid #81D4FA">
+  <h3 style="color:#01579B">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You multiply length &times; width &times; height for a solid block, without needing to draw every cube</li>
+    <li>You add every column's height, row by row, for an uneven stack or footprint</li>
+    <li>You find "how many more cubes needed" by finding the full total first, then subtracting what's there</li>
+    <li>You know corners are always 8 (if every side &ge; 2), and hidden cubes = (l&minus;2)&times;(w&minus;2)&times;(h&minus;2)</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">This topic has shown up on real ASMOPSS papers again and again &mdash; you're ready for it now.</p>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#0277BD;color:#fff;border:2px solid #0277BD;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+function revealLine(id){document.getElementById(id).style.display='block';}
+</script>
+</body>
+</html>
