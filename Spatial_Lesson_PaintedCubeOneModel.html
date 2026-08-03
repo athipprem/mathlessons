@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One Box, Four Parts — Painted Cube Puzzles</title>
+<style>
+:root{--nav:#0277BD;--nav-dark:#01579B;--bg:#E1F5FE;--card:#fff;--acc:#0277BD;--ok:#2E7D32;--err:#C62828;--warn:#01579B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#01579B;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E1F5FE,#E3F2FD);border:2px solid #4FC3F7;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#01579B;font-weight:700;margin-bottom:6px}
+.big-rule{background:#E1F5FE;border:2px solid #0288D1;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#01579B;margin:14px 0}
+.golden{background:linear-gradient(135deg,#E1F5FE,#F1F8FF);border:2px solid #4FC3F7;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E1F5FE;border:1.5px solid #0288D1;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#01579B;text-align:center;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F9FF;border:1px solid #81D4FA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#0277BD}
+.steps .ln.ans{color:#01579B;font-weight:800}
+.tree{background:#FAFDFF;border:2px dashed #4FC3F7;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #81D4FA;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#0277BD;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.tree .today{display:inline-block;background:#FFECB3;color:#E65100;border-radius:6px;padding:1px 8px;font-size:.72rem;font-weight:700;margin-left:6px}
+.warn-box{background:#E1F5FE;border:1.5px solid #4FC3F7;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#01579B}
+.q-card{background:#F0F9FF;border:1.5px solid #81D4FA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #81D4FA;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E1F5FE}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E1F5FE;color:#01579B;border:2px solid #01579B;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#0277BD;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E1F5FE;color:#01579B;border:1.5px solid #4FC3F7;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.reveal-btn{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin:6px 6px 6px 0}
+.reveal-line{display:none;background:#F0F9FF;border:1px solid #81D4FA;border-radius:8px;padding:10px 14px;margin:6px 0;font-size:.98rem;font-weight:700;color:#01579B}
+.parts4{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.part{border-radius:10px;padding:12px;border:2px solid #0288D1;text-align:center}
+.part .n{font-size:1.6rem;font-weight:900}
+.part .t{font-size:.85rem;font-weight:700;margin-top:2px}
+.part .d{font-size:.8rem;color:#455A64;margin-top:6px;line-height:1.4}
+.p3{background:#E1F5FE}
+.p2{background:#B3E5FC}
+.p1{background:#81D4FA}
+.p0{background:#FAFDFF;border-style:dashed}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">One Box, Four Parts (Retest Top-Up)</span>
+  <span class="tnav-pill" id="pill">1 / 16</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; Same Puzzle, ONE Idea Instead Of Four</h2>
+  <div class="why">
+    <div class="why-title">What happened last time</div>
+    <p>On the last test, you got the two painted-cube questions with a simple one-line answer right &mdash; corners (always 8) and fully-hidden cubes. But on the other three, you wrote "forgot how 2 do." You told your dad exactly why: <strong>too many solving methods to remember.</strong> You were completely right &mdash; there WERE too many separate recipes.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Today's fix</div>
+    <p>There is only ONE idea in this whole lesson: <strong>every rectangular block made of unit cubes has exactly 4 kinds of parts &mdash; corners, edges, faces, and an inside.</strong> Every single unit cube belongs to ONE of these 4 parts. Once you can name which part a cube is in, you already know how many faces of it are painted.</p>
+  </div>
+  <div class="big-rule">One classification. Applied four times. Not four different tricks.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: The 4 parts of a box -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F4E6; Every Box Has These 4 Parts</h2>
+  <p>Think of any box &mdash; a tissue box, a shoebox, a dice. It always has:</p>
+  <div class="parts4">
+    <div class="part p3"><div class="n">8</div><div class="t">CORNERS</div><div class="d">Always 8, on any box. Touches 3 outer faces &rarr; 3 faces painted.</div></div>
+    <div class="part p2"><div class="n">12</div><div class="t">EDGES</div><div class="d">The 12 straight lines where 2 faces meet. Cubes here touch 2 outer faces &rarr; 2 faces painted.</div></div>
+    <div class="part p1"><div class="n">6</div><div class="t">FACES</div><div class="d">The 6 flat outer sides. Cubes in the MIDDLE of a face touch 1 outer face &rarr; 1 face painted.</div></div>
+    <div class="part p0"><div class="n">1</div><div class="t">INSIDE</div><div class="d">Fully buried, touches nothing outside &rarr; 0 faces painted.</div></div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; These aren't 4 different topics &mdash; they're the 4 physical parts of the SAME box. You already know a box has 8 corners, 12 edges, and 6 faces (you've seen dice and tissue boxes your whole life). We're just counting how many unit cubes live in each part.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Corners &amp; Inside (Recap) &#8594;</button></div>
+</div>
+
+<!-- s2: quick recap corners+hidden -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Quick Recap &mdash; Corners &amp; Inside (You Already Know These)</h2>
+  <div class="rulebar">CORNERS: always 8, on any block where every side is 2 or more. &nbsp; INSIDE: (length&minus;2) &times; (width&minus;2) &times; (height&minus;2)</div>
+  <p><strong>Example: a block 5 long, 4 wide, 3 tall, fully painted on the outside (including the bottom).</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Corners &mdash; no calculation needed, it's always 8:</span></div>
+    <div class="ln ans">8 cubes have exactly 3 faces painted</div>
+    <div class="ln"><span class="note">Inside &mdash; shave 1 layer off each end, in each direction:</span></div>
+    <div class="ln">(5&minus;2) &times; (4&minus;2) &times; (3&minus;2) = 3 &times; 2 &times; 1</div>
+    <div class="ln ans">6 cubes have 0 faces painted (fully hidden)</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; These two you already had solid on the last test &mdash; this page is just a reminder before we build the two new ones the same way.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Quick Check &#8594;</button></div>
+</div>
+
+<!-- s3: interactive quick check corners+hidden -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F4CB; Quick Check</h2>
+  <p style="margin-bottom:10px"><strong>A block is 6 long, 4 wide, 4 tall, fully painted (incl. bottom). Tap each button.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r0a')">Corners (3 faces painted)</button>
+  <div class="reveal-line" id="r0a">Always 8 &mdash; every side is 2 or more, so 8 corners</div>
+  <button class="reveal-btn" onclick="revealLine('r0b')">Inside (0 faces painted)</button>
+  <div class="reveal-line" id="r0b">(6&minus;2) &times; (4&minus;2) &times; (4&minus;2) = 4&times;2&times;2 = 16 hidden cubes</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">NEW: Edges &#8594;</button></div>
+</div>
+
+<!-- s4: Edges explained -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F4D0; Edges &mdash; The 12 Lines Where 2 Faces Meet</h2>
+  <div class="why">
+    <div class="why-title">The one idea</div>
+    <p>Every box has 12 edges. Group them by which direction they run: <strong>4 edges run along the LENGTH, 4 run along the WIDTH, 4 run along the HEIGHT.</strong> A cube sitting ON an edge (but not right at a corner) touches exactly 2 outer faces &rarr; 2 faces painted.</p>
+  </div>
+  <div class="rulebar">Cubes per edge = that direction's size &minus; 2 (the 2 corner cubes at the ends don't count as "just edge")</div>
+  <div class="steps">
+    <div class="ln"><span class="note">So for the whole box:</span></div>
+    <div class="ln">4 &times; (length&minus;2) &nbsp;+&nbsp; 4 &times; (width&minus;2) &nbsp;+&nbsp; 4 &times; (height&minus;2)</div>
+    <div class="ln ans">= total edge cubes (2 faces painted)</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Notice this is the SAME "shave 2 off, then multiply" idea from the inside formula &mdash; just applied to one direction at a time instead of all three at once, then added up across the 3 groups of 4 edges.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Edges Worked Example &#8594;</button></div>
+</div>
+
+<!-- s5: edges worked example -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>Edges &mdash; Worked Example</h2>
+  <p><strong>A block is 6 long, 4 wide, 3 tall, fully painted (incl. bottom). How many unit cubes have EXACTLY 2 faces painted?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">4 length-edges, each with (6&minus;2)=4 cubes:</span></div>
+    <div class="ln">4 &times; 4 = 16</div>
+    <div class="ln"><span class="note">4 width-edges, each with (4&minus;2)=2 cubes:</span></div>
+    <div class="ln">4 &times; 2 = 8</div>
+    <div class="ln"><span class="note">4 height-edges, each with (3&minus;2)=1 cube:</span></div>
+    <div class="ln">4 &times; 1 = 4</div>
+    <div class="ln"><span class="note">Add all three groups:</span></div>
+    <div class="ln">16 + 8 + 4 = 28</div>
+    <div class="ln ans">28 unit cubes have exactly 2 faces painted</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s6: interactive edges -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>&#x1F4CB; Build The Edge Count Yourself</h2>
+  <p style="margin-bottom:10px"><strong>A block is 5 long, 4 wide, 4 tall, fully painted. Tap each button in order.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r1a')">Length-edges: 4 &times; (5&minus;2)</button>
+  <div class="reveal-line" id="r1a">4 &times; 3 = 12</div>
+  <button class="reveal-btn" onclick="revealLine('r1b')">Width-edges: 4 &times; (4&minus;2)</button>
+  <div class="reveal-line" id="r1b">4 &times; 2 = 8</div>
+  <button class="reveal-btn" onclick="revealLine('r1c')">Height-edges: 4 &times; (4&minus;2)</button>
+  <div class="reveal-line" id="r1c">4 &times; 2 = 8</div>
+  <button class="reveal-btn" onclick="revealLine('r1d')">Add all three groups</button>
+  <div class="reveal-line" id="r1d">12 + 8 + 8 = 28 cubes with exactly 2 faces painted</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice: Edges &#8594;</button></div>
+</div>
+
+<!-- s7: practice edges -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Edges</span>
+  <h2>Practice &mdash; Exactly 2 Faces Painted</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A block is 4 long, 3 wide, 3 tall, fully painted (incl. bottom). How many unit cubes have exactly 2 faces painted?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 16</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 36</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">4&times;(4&minus;2)=8. 4&times;(3&minus;2)=4. 4&times;(3&minus;2)=4.</div>
+      <div class="ln ans">8+4+4 = 16 cubes</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A block is 6 long, 4 wide, 3 tall, fully painted (incl. bottom). How many unit cubes have exactly 2 faces painted?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 28</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 42</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">4&times;(6&minus;2)=16. 4&times;(4&minus;2)=8. 4&times;(3&minus;2)=4.</div>
+      <div class="ln ans">16+8+4 = 28 cubes</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">NEW: Faces &#8594;</button></div>
+</div>
+
+<!-- s8: Faces explained -->
+<div class="screen" id="s8">
+<div class="card">
+  <h2>&#x25A6; Faces &mdash; The 6 Flat Outer Sides</h2>
+  <div class="why">
+    <div class="why-title">The one idea</div>
+    <p>Every box has 6 flat faces, grouped into <strong>3 opposite PAIRS</strong>: top+bottom, front+back, left+right. A cube sitting in the MIDDLE of a face (not on any edge) touches exactly 1 outer face &rarr; 1 face painted.</p>
+  </div>
+  <div class="rulebar">Middle-of-face cubes on ONE face = (the other 2 dimensions, each &minus;2) multiplied together. Each PAIR has 2 identical faces, so &times;2.</div>
+  <div class="steps">
+    <div class="ln"><span class="note">So for the whole box:</span></div>
+    <div class="ln">2&times;(length&minus;2)&times;(width&minus;2) &nbsp;+&nbsp; 2&times;(length&minus;2)&times;(height&minus;2) &nbsp;+&nbsp; 2&times;(width&minus;2)&times;(height&minus;2)</div>
+    <div class="ln ans">= total face-centre cubes (1 face painted)</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Same pattern again: pick 2 of the 3 dimensions, shave 2 off each, multiply &mdash; then &times;2 because every pair has 2 matching faces. Add up the 3 pairs.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Faces Worked Example &#8594;</button></div>
+</div>
+
+<!-- s9: faces worked example -->
+<div class="screen" id="s9">
+<div class="card">
+  <h2>Faces &mdash; Worked Example</h2>
+  <p><strong>A block is 6 long, 4 wide, 3 tall, fully painted (incl. bottom). How many unit cubes have EXACTLY 1 face painted?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Top+bottom pair (uses length &amp; width): 2 &times; (6&minus;2) &times; (4&minus;2):</span></div>
+    <div class="ln">2 &times; 4 &times; 2 = 16</div>
+    <div class="ln"><span class="note">Front+back pair (uses length &amp; height): 2 &times; (6&minus;2) &times; (3&minus;2):</span></div>
+    <div class="ln">2 &times; 4 &times; 1 = 8</div>
+    <div class="ln"><span class="note">Left+right pair (uses width &amp; height): 2 &times; (4&minus;2) &times; (3&minus;2):</span></div>
+    <div class="ln">2 &times; 2 &times; 1 = 4</div>
+    <div class="ln"><span class="note">Add all three pairs:</span></div>
+    <div class="ln">16 + 8 + 4 = 28</div>
+    <div class="ln ans">28 unit cubes have exactly 1 face painted</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s10: interactive faces -->
+<div class="screen" id="s10">
+<div class="card">
+  <h2>&#x1F4CB; Build The Face Count Yourself</h2>
+  <p style="margin-bottom:10px"><strong>A block is 5 long, 4 wide, 4 tall, fully painted. Tap each button in order.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r2a')">Top+bottom pair: 2&times;(5&minus;2)&times;(4&minus;2)</button>
+  <div class="reveal-line" id="r2a">2 &times; 3 &times; 2 = 12</div>
+  <button class="reveal-btn" onclick="revealLine('r2b')">Front+back pair: 2&times;(5&minus;2)&times;(4&minus;2)</button>
+  <div class="reveal-line" id="r2b">2 &times; 3 &times; 2 = 12</div>
+  <button class="reveal-btn" onclick="revealLine('r2c')">Left+right pair: 2&times;(4&minus;2)&times;(4&minus;2)</button>
+  <div class="reveal-line" id="r2c">2 &times; 2 &times; 2 = 8</div>
+  <button class="reveal-btn" onclick="revealLine('r2d')">Add all three pairs</button>
+  <div class="reveal-line" id="r2d">12 + 12 + 8 = 32 cubes with exactly 1 face painted</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice: Faces &#8594;</button></div>
+</div>
+
+<!-- s11: practice faces -->
+<div class="screen" id="s11">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn &mdash; Faces</span>
+  <h2>Practice &mdash; Exactly 1 Face Painted</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A block is 5 long, 3 wide, 2 tall, fully painted (incl. bottom). How many unit cubes have exactly 1 face painted?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 16</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 30</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">Top+bottom: 2&times;(5&minus;2)&times;(3&minus;2)=2&times;3&times;1=6.</div>
+      <div class="ln">Front+back: 2&times;(5&minus;2)&times;(2&minus;2)=2&times;3&times;0=0.</div>
+      <div class="ln">Left+right: 2&times;(3&minus;2)&times;(2&minus;2)=2&times;1&times;0=0.</div>
+      <div class="ln ans">6+0+0 = 6 cubes</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A block is 6 long, 5 wide, 3 tall, fully painted (incl. bottom). How many unit cubes have exactly 1 face painted?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 38</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 24</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 90</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">Top+bottom: 2&times;(6&minus;2)&times;(5&minus;2)=2&times;4&times;3=24.</div>
+      <div class="ln">Front+back: 2&times;(6&minus;2)&times;(3&minus;2)=2&times;4&times;1=8.</div>
+      <div class="ln">Left+right: 2&times;(5&minus;2)&times;(3&minus;2)=2&times;3&times;1=6.</div>
+      <div class="ln ans">24+8+6 = 38 cubes</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Put All 4 Together &#8594;</button></div>
+</div>
+
+<!-- s12: combined capstone worked example -->
+<div class="screen" id="s12">
+<div class="card">
+  <h2>All 4 Parts Together &mdash; The Full Checklist In Action</h2>
+  <p><strong>A block is 5 long, 4 wide, 3 tall, fully painted (incl. bottom). Find ALL FOUR counts, and check they add up to the total number of cubes.</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Corners (always 8):</span></div>
+    <div class="ln ans">8</div>
+    <div class="ln"><span class="note">Edges: 4(5&minus;2)+4(4&minus;2)+4(3&minus;2) = 12+8+4:</span></div>
+    <div class="ln ans">24</div>
+    <div class="ln"><span class="note">Faces: 2(5&minus;2)(4&minus;2)+2(5&minus;2)(3&minus;2)+2(4&minus;2)(3&minus;2) = 12+6+4:</span></div>
+    <div class="ln ans">22</div>
+    <div class="ln"><span class="note">Inside: (5&minus;2)(4&minus;2)(3&minus;2) = 3&times;2&times;1:</span></div>
+    <div class="ln ans">6</div>
+    <div class="ln"><span class="note">Check &mdash; total cubes should be 5&times;4&times;3 = 60:</span></div>
+    <div class="ln check">8 + 24 + 22 + 6 = 60 &#10003; matches! Every cube accounted for.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This add-up-to-the-total check is a great way to catch a mistake in ANY of the 4 counts before you submit an answer.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it yourself &#8594;</button></div>
+</div>
+
+<!-- s13: interactive combined -->
+<div class="screen" id="s13">
+<div class="card">
+  <h2>&#x1F4CB; Classify A Whole Block Yourself</h2>
+  <p style="margin-bottom:10px"><strong>A block is 4 long, 4 wide, 3 tall, fully painted (incl. bottom). Tap each button in order.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r3a')">Corners</button>
+  <div class="reveal-line" id="r3a">Always 8</div>
+  <button class="reveal-btn" onclick="revealLine('r3b')">Edges: 4(4&minus;2)+4(4&minus;2)+4(3&minus;2)</button>
+  <div class="reveal-line" id="r3b">8+8+4 = 20</div>
+  <button class="reveal-btn" onclick="revealLine('r3c')">Faces: 2(4&minus;2)(4&minus;2)+2(4&minus;2)(3&minus;2)+2(4&minus;2)(3&minus;2)</button>
+  <div class="reveal-line" id="r3c">8+4+4 = 16</div>
+  <button class="reveal-btn" onclick="revealLine('r3d')">Inside: (4&minus;2)(4&minus;2)(3&minus;2)</button>
+  <div class="reveal-line" id="r3d">2&times;2&times;1 = 4</div>
+  <button class="reveal-btn checkbtn" onclick="revealLine('r3e')">Check: total = 4&times;4&times;3 = 48?</button>
+  <div class="reveal-line" id="r3e">8+20+16+4 = 48 &#10003; matches!</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Full Checklist &#8594;</button></div>
+</div>
+
+<!-- s14: Full checklist -->
+<div class="screen" id="s14">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Full Checklist &mdash; One Model, Four Parts</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">3</span><strong>Corners (3 faces):</strong> always 8, if every side is 2 or more.</div>
+    <div class="node"><span class="step-n">2</span><strong>Edges (2 faces):</strong> 4(l&minus;2) + 4(w&minus;2) + 4(h&minus;2).</div>
+    <div class="node"><span class="step-n">1</span><strong>Faces (1 face):</strong> 2(l&minus;2)(w&minus;2) + 2(l&minus;2)(h&minus;2) + 2(w&minus;2)(h&minus;2).</div>
+    <div class="node"><span class="step-n">0</span><strong>Inside (0 faces):</strong> (l&minus;2)(w&minus;2)(h&minus;2).</div>
+    <div class="node"><span class="step-n">&#10003;</span><strong>Always check:</strong> the 4 counts should add up to l&times;w&times;h.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; It's the SAME idea every time: "shave 2 off the sides that matter, multiply, and for edges/faces there are always groups of 4 or pairs of 2 to add up." One classification, four parts of the same box.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap &#8594;</button></div>
+</div>
+
+<!-- s15: recap -->
+<div class="screen" id="s15">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>A box has 4 parts: corners, edges, faces, inside. Every unit cube belongs to exactly one. Name the part, and you already know the painted-face count.</strong></p>
+</div>
+<div class="card" style="background:#E1F5FE;border:1px solid #81D4FA">
+  <h3 style="color:#01579B">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You know corners = always 8 and inside = (l&minus;2)(w&minus;2)(h&minus;2), without hesitating</li>
+    <li>You can find edges by adding 3 groups of 4, and faces by adding 3 pairs of 2</li>
+    <li>You check your 4 counts add up to the total cube count</li>
+    <li>You think "which of the 4 parts is this?" instead of trying to remember 4 separate tricks</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">Same maths as before &mdash; now it's one idea, not four.</p>
+</div>
+<div class="navrow">
+  <a href="Spatial_Lesson_CubeCountingPaintingFilling.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E1F5FE;color:#01579B;border:2px solid #01579B;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; U49 Lesson</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#0277BD;color:#fff;border:2px solid #0277BD;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+function revealLine(id){document.getElementById(id).style.display='block';}
+</script>
+</body>
+</html>

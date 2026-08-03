@@ -15,13 +15,38 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '31 Jul 2026',
+  updated:        '3 Aug 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:49, topic:'3D Visualization — Cube Counting, Filling & Painting (Spatial Reasoning)', status:'In Progress' },
+  currentUnit: { n:50, topic:'Painted Cube Puzzles — Targeted Retest (Spatial Reasoning)', status:'In Progress' },
   lastUnit: {
+    n:49, score:11, outOf:15, pct:73, delta:-3, prevScore:14, prevOutOf:15, prevLabel:'U48',
+    patternLabel: 'U49 — 3D Visualization: Cube Counting, Filling &amp; Painting, NOT PASSED',
+    patternInsight: '11/15 (73%) <strong>NOT PASSED</strong> &mdash; Sec A (Basics) 4/5, Sec B (Footprints &amp; Filling) 5/5 PERFECT, Sec C (Painted Cubes) 2/5. Solid-block and footprint/filling reasoning are landing well: Sec B was a clean sweep across all 5 questions, including the harder capstone. Sec A\'s lone miss (Q4) was a "forgot to double the second layer" slip inside otherwise correct working, not a method gap. Sec C is where the real gap sits, and it fails the section bar badly (2/5): corners (Q11) and hidden/0-faces (Q14) were both correct with a one-line answer, but Q12 (edges), Q13 (faces), and the capstone Q15 (edges+corners) were all left "forgot how 2 do." Lui\'s direct feedback pinpointed the cause: too many separate solving methods to remember for the edge/face counts &mdash; 4 unrelated recipes instead of one model.',
+    analysisLabel: 'Next: Unit 50 — Targeted Retest: Painted Cube Puzzles (Spatial Reasoning)',
+    analysisInsight: 'Per the standing retest rule, Sec A and Sec B both cleared the pass bar individually, so only Section C needs retesting &mdash; no full unit repeat. U50 is a compact top-up lesson (Spatial_Lesson_PaintedCubeOneModel.html) that replaces the 4 separate formulas with ONE unifying model: every box has 8 corners, 12 edges (3 groups of 4), 6 faces (3 pairs of 2), and 1 inside region &mdash; classify which of the 4 parts a cube belongs to, applied 4 times, not 4 unrelated tricks &mdash; plus a sum-check habit (the 4 counts must add up to l&times;w&times;h) to self-catch errors. A fresh 15Q test, all on Painted Cube Puzzles, follows. This inserts a retest slot into the final-week plan: Digit &amp; Symbol Puzzles bumps to U51, Pictogram Clue-Puzzles to U52, Composite/Overlapping Area to U53, and the standalone Mixed Precision Drill unit folds into mock-review day so the full ASMOPSS-style mock test still lands before the 9 Aug exam, now 6 days away.',
+    qSummary: '<strong>Sec A 4/5 | Sec B 5/5 PERFECT | Sec C 2/5</strong> — 11/15 (73%) NOT PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Solid Block (3&times;2&times;4)', lvl:'w', pass:true,  note:'&#10003; 24.' },
+      { q:'Q2', topic:'Solid Block (5&times;3&times;2)', lvl:'w', pass:true,  note:'&#10003; 30.' },
+      { q:'Q3', topic:'Uneven Stack (staircase 1,2,3,4)', lvl:'w', pass:true,  note:'&#10003; 10.' },
+      { q:'Q4', topic:'Solid Block — two stacked layers (5&times;4, &times;2)', lvl:'w', pass:false, note:'&#10007; wrote 20; correct 40. Computed one layer correctly (5&times;4=20) but forgot to double it for the 2 stacked layers.' },
+      { q:'Q5', topic:'Uneven Stack (staircase 2,4,6,3)', lvl:'w', pass:true,  note:'&#10003; 15.' },
+      { q:'Q6', topic:'Uneven Stack — footprint + centred layer  &#9733;', lvl:'m', pass:true,  note:'&#10003; 16.' },
+      { q:'Q7', topic:'Uneven Stack — 3&times;3 footprint  &#9733;', lvl:'m', pass:true,  note:'&#10003; 21.' },
+      { q:'Q8', topic:'Uneven Stack — stepped pyramid  &#9733;', lvl:'m', pass:true,  note:'&#10003; 35.' },
+      { q:'Q9', topic:'Filling — how many more  &#9733;', lvl:'m', pass:true,  note:'&#10003; 12.' },
+      { q:'Q10',topic:'Filling — how many more, Capstone  &#9733;', lvl:'m', pass:true,  note:'&#10003; 23 &mdash; Sec B clean sweep, 5/5.' },
+      { q:'Q11',topic:'Painted — 3 Faces (Corners)  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 8.' },
+      { q:'Q12',topic:'Painted — 2 Faces (Edges)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote "forgot how 2 do"; correct 20. Could not recall the edge-cube method under the old 4-separate-formulas approach.' },
+      { q:'Q13',topic:'Painted — 1 Face (Faces)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote "forgot how 2 do"; correct 18. Same recall breakdown as Q12 — too many separate methods to remember, per Prem\'s own direct feedback.' },
+      { q:'Q14',topic:'Painted — 0 Faces (Hidden)  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 6.' },
+      { q:'Q15',topic:'Painted — At Least 2 Faces, Capstone  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote "forgot how 2 do"; correct 36 (corners 8 + edges 28). Same recall breakdown &mdash; drove the U50 unifying-model redesign.' }
+    ]
+  },
+  _U48archived: {
     n:48, score:14, outOf:15, pct:93, delta:+3, prevScore:11, prevOutOf:15, prevLabel:'U47',
     patternLabel: 'U48 — Targeted Retest: When The Average Changes, PASSED',
     patternInsight: '14/15 (93%) <strong>PASSED</strong> &mdash; Sec A (Basics) 5/5, Sec B (Medium) 5/5, Sec C (Harder) 4/5. Both top-up habits fully transferred: every question shows clearly labelled BEFORE/AFTER total lines before any subtraction, and U47\'s exact failure modes (Q12 subtraction slip, Q13 tangled AFTER total) do not recur anywhere on this paper. The lone miss (Q11) is a new, narrower slip: the totals were labelled correctly, but 48&times;7 was hand-multiplied as 326 instead of 336 &mdash; a one-off multiplication error, not a recurrence of the tracking problem. Independently regraded: 14/15, exactly matching the marked score.',
@@ -44,31 +69,6 @@ var PREM_DATA = {
       { q:'Q13',topic:'Remove (classrooms, 64&rarr;68)', lvl:'h', pass:true,  note:'&#10003; 32 &mdash; full clean chain shown.' },
       { q:'Q14',topic:'Add (photographers, 58&rarr;61)', lvl:'h', pass:true,  note:'&#10003; 79.' },
       { q:'Q15',topic:'Remove ("FEWEST", warehouse shelves, 72&rarr;75) — Capstone', lvl:'h', pass:true,  note:'&#10003; 45 &mdash; full clean chain shown.' }
-    ]
-  },
-  _U47archived: {
-    n:47, score:11, outOf:15, pct:73, delta:-2, prevScore:13, prevOutOf:15, prevLabel:'U46',
-    patternLabel: 'U47 — Reverse Averages &amp; Missing-Value Arithmetic, NOT PASSED',
-    patternInsight: '11/15 (73%) <strong>NOT PASSED</strong> &mdash; Sec A (Averages &amp; Reversing Them) 4/5, Sec B (Finding A Missing Value) 4/5, Sec C (When The Average Changes) 3/5. Sections A and B both individually clear the 4/5 pass bar, and every miss in them is a clean arithmetic slip inside correctly-applied working, not a method breakdown: Q4 (wrote 235, correct 225) and Q9 (wrote 82, correct 102). Section C is where the real gap sits, and it fails the section bar (3/5): Q12 computed both the BEFORE and AFTER totals correctly but then subtracted them wrong (wrote 14, correct 16) &mdash; a setup/labelling slip, not a totals error; Q13 went wrong a step earlier, computing the AFTER total itself incorrectly (wrote 13, correct 27) &mdash; a procedural error, not just a subtraction slip. Q11, Q14, and the capstone Q15 (which mirrors the exact ASMOPSS 2023 Q12 pattern) were all correct.',
-    analysisLabel: 'Next: Unit 48 — Targeted Retest: When The Average Changes (Arithmetic)',
-    analysisInsight: 'Per the standing retest rule, Sections A and B both passed individually (4/5 each) so only Section C needs retesting &mdash; no full unit repeat. U48 is a compact top-up lesson (Arithmetic_Lesson_BeforeAfterTotalPrecision.html) targeting the two specific habits behind Q12 and Q13: labelling BEFORE/AFTER totals as separate lines before subtracting, and checking a subtraction by adding the answer back to the smaller total. A fresh 15Q test, all on "When The Average Changes" (mixed add/remove), follows. This bumps the originally-planned U48 topic (irregular 3D visualisation) to U49, and everything after shifts down one slot. With ASMOPSS 2026 now 10 days away, U48 stays tightly scoped before shifting toward timed mixed past-paper practice.',
-    qSummary: '<strong>Sec A 4/5 | Sec B 4/5 | Sec C 3/5</strong> — 11/15 (73%) NOT PASSED',
-    qBreakdown: [
-      { q:'Q1', topic:'Averages — basic (total &divide; count)', lvl:'w', pass:true,  note:'&#10003; 18.' },
-      { q:'Q2', topic:'Averages — basic', lvl:'w', pass:true,  note:'&#10003; 45.' },
-      { q:'Q3', topic:'Averages — medium', lvl:'m', pass:true,  note:'&#10003; 108.' },
-      { q:'Q4', topic:'Averages — reverse to total (average &times; count)', lvl:'m', pass:false, note:'&#10007; wrote 235; correct 225. Sec A\'s hardest question &mdash; a small arithmetic slip inside otherwise correctly-applied working.' },
-      { q:'Q5', topic:'Averages — reverse, harder', lvl:'h', pass:true,  note:'&#10003; 12.' },
-      { q:'Q6', topic:'Missing Value — basic', lvl:'w', pass:true,  note:'&#10003; 26.' },
-      { q:'Q7', topic:'Missing Value — basic', lvl:'w', pass:true,  note:'&#10003; 65.' },
-      { q:'Q8', topic:'Missing Value — medium', lvl:'m', pass:true,  note:'&#10003; 155.' },
-      { q:'Q9', topic:'Missing Value — medium', lvl:'m', pass:false, note:'&#10007; wrote 82; correct 102. Method looks right in the working &mdash; the final subtraction step slipped.' },
-      { q:'Q10',topic:'Missing Value — harder', lvl:'h', pass:true,  note:'&#10003; 78.' },
-      { q:'Q11',topic:'When The Average Changes — add/remove, basic', lvl:'m', pass:true,  note:'&#10003; 14.' },
-      { q:'Q12',topic:'When The Average Changes — medium', lvl:'m', pass:false, note:'&#10007; wrote 14; correct 16. Both the BEFORE and AFTER totals were computed correctly &mdash; the final subtraction between them was wrong. A setup/labelling issue, not a totals error.' },
-      { q:'Q13',topic:'When The Average Changes — medium', lvl:'m', pass:false, note:'&#10007; wrote 13; correct 27. The AFTER total itself was computed incorrectly &mdash; a procedural error one step earlier than Q12\'s, not just a subtraction slip.' },
-      { q:'Q14',topic:'When The Average Changes — harder', lvl:'h', pass:true,  note:'&#10003; 47.' },
-      { q:'Q15',topic:'Capstone — mirrors the exact ASMOPSS 2023 Q12 pattern', lvl:'h', pass:true,  note:'&#10003; 63 &mdash; the reverse-average-change pattern flagged by the ASMOPSS 2023 diagnostic, correctly solved.' }
     ]
   },
   _M4archived: {
@@ -209,23 +209,37 @@ var PREM_DATA = {
     { n:45, score:13, delta:+3.5, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:46, score:13, delta:0,    color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:47, score:11, delta:-2,   color:'linear-gradient(135deg,#EF5350,#C62828)', star:false },
-    { n:48, score:14, delta:+3,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
+    { n:48, score:14, delta:+3,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
+    { n:49, score:11, delta:-3,   color:'linear-gradient(135deg,#0277BD,#01579B)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 50,
+      badge: 'linear-gradient(135deg,#0277BD,#01579B)',
+      title: 'Targeted Retest — Painted Cube Puzzles (Spatial Reasoning)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'Sec A 4/5 + Sec B 5/5 — no retest needed', c:'tgreen' },
+        { t:'Sec C 2/5 — ONE unifying model this time', c:'tred' },
+        { t:'"Too many methods" feedback directly addressed', c:'torange' }
+      ],
+      note: 'U50, built 2 Aug 2026. Targeted retest of Section C only (Painted Cube Puzzles) per the standing retest rule — Sec A (4/5) and Sec B (5/5 PERFECT) both cleared the pass bar. New top-up lesson (Spatial_Lesson_PaintedCubeOneModel.html) directly answers Prem\'s own feedback ("too many solving methods to remember") by replacing the 4 separate corner/edge/face/hidden formulas with ONE classification: every box has 8 corners, 12 edges (3 groups of 4), 6 faces (3 pairs of 2), 1 inside &mdash; name which part a cube belongs to, plus a sum-check habit (4 counts add up to l&times;w&times;h). Test: 15Q, all on Painted Cube Puzzles, fresh dimensions vs. both U49\'s lesson and test. Inserting this retest bumps Digit &amp; Symbol Puzzles to U51, Pictogram Clue-Puzzles to U52, Composite Area to U53, and folds Precision Drill into mock-review day.',
+      status: 'pending'
+    },
+    {
       n: 49,
       badge: 'linear-gradient(135deg,#0277BD,#01579B)',
       title: '3D Visualization — Cube Counting, Filling &amp; Painting (Spatial Reasoning)',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'Closes ASMOPSS 2023 Q14', c:'tred' },
-        { t:'Prediction-driven: seen 2023 + 2024', c:'tblue' },
-        { t:'NEW: solid blocks, filling, painted cubes', c:'torange' }
+        { t:'11/15 (73%) &#10007; NOT PASSED', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Sec B 5/5 PERFECT — footprints &amp; filling', c:'tgreen' },
+        { t:'Sec C 2/5 — "too many methods to remember"', c:'tred' },
+        { t:'&rarr; U50 targeted retest, Sec C only', c:'torange' }
       ],
-      note: 'U49, built 31 Jul 2026. First of 5 prediction-driven final-week units, chosen after reviewing all 3 real ASMOPSS G4 Set-B papers (2023&ndash;2025): 3D cube problems (painting, filling, counting) appeared in BOTH 2023 (Q14, Q23) and 2024 (Q23) &mdash; a confirmed recurring pattern. Closes the ASMOPSS 2023 diagnostic\'s Q14 gap (occluded/irregular stacked solids weak vs. simple cube-filling fine). New lesson (Spatial_Lesson_CubeCountingPaintingFilling.html) builds from zero across four moves: solid-block counting (l&times;w&times;h), uneven-stack/footprint counting (sum every column), "how many more to finish" (full total minus what\'s there), and painted-cube classification (corner/edge/face/hidden by direction). Test: 15Q &mdash; Sec A (Q1&ndash;5) Basics, Sec B (Q6&ndash;10) Footprints &amp; Filling, Sec C (Q11&ndash;15) Painted Cubes.',
-      status: 'pending'
+      note: '11/15 &#10007; <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 5/5 PERFECT, Sec C 2/5. Solid blocks and footprint/filling reasoning landed well, including the harder Sec B capstone. Sec A\'s lone miss (Q4) was a "forgot to double the second layer" slip inside otherwise correct working. Sec C is the real gap: corners (Q11) and hidden/0-faces (Q14) were both correct, but Q12 (edges), Q13 (faces), and the capstone Q15 were all left "forgot how 2 do." Prem told Lui directly why: too many separate solving methods to remember for the edge/face counts. &rarr; U50, a targeted retest of Section C re-taught with ONE unifying model instead of 4 separate formulas.',
+      status: 'done'
     },
     {
       n: 48,
@@ -1017,16 +1031,22 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 92
     },
     {
-      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction &amp; systematic listing RESOLVED (U44/U45, U46); reverse averages RESOLVED (U47+U48); 3D visualization IN PROGRESS (U49)',
+      label:     'ASMOPSS 2023 diagnostic (12/25) — word-problem clue extraction &amp; systematic listing RESOLVED (U44/U45, U46); reverse averages RESOLVED (U47+U48); 3D visualization IN PROGRESS (U49 NOT PASSED &rarr; U50 targeted retest)',
       pill:      'p2', pillText: 'In Progress &#9654;',
-      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (9.5/15, 63%, NOT PASSED) &rarr; U45 targeted retest of Sec B+C (13/15, 87%, PASSED) &mdash; cluster CLOSED. Systematic listing &amp; constrained counting (ASMOPSS Q19, Q25) &rarr; U46 (13/15, 87%, PASSED) &mdash; CLOSED. Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; U47 (11/15, 73%, NOT PASSED, Sec C only) &rarr; U48 targeted retest of Sec C (14/15, 93%, PASSED) &mdash; arc CLOSED. Spatial reasoning is inconsistent in a useful way: cube-filling is fine (Q23 &#10003;) but irregular/occluded stacked solids are not (Q14) &rarr; U49 (built 31 Jul 2026, in progress) &mdash; also independently confirmed as a real 2026 exam risk: cube problems appeared in BOTH the 2023 and 2024 real ASMOPSS papers.',
-      fillClass: 'g2', fillPct: 72
+      score:     'Analysed 14 Jul 2026 alongside M4. Weakest cluster: word-problem clue extraction (Q6, Q9, Q10 &mdash; table-reading, age-chain, discount/profit, 2/6 correct) &rarr; U44 (9.5/15, 63%, NOT PASSED) &rarr; U45 targeted retest of Sec B+C (13/15, 87%, PASSED) &mdash; cluster CLOSED. Systematic listing &amp; constrained counting (ASMOPSS Q19, Q25) &rarr; U46 (13/15, 87%, PASSED) &mdash; CLOSED. Clean untaught content gap: reverse-engineering an average (Q12, blank) &rarr; U47 (11/15, 73%, NOT PASSED, Sec C only) &rarr; U48 targeted retest of Sec C (14/15, 93%, PASSED) &mdash; arc CLOSED. Spatial reasoning is inconsistent in a useful way: cube-filling/footprints are fine but painted-cube classification (edges/faces) broke down &rarr; U49 (11/15, 73%, NOT PASSED: Sec A 4/5, Sec B 5/5 PERFECT, Sec C 2/5) &mdash; Prem directly flagged the cause: "too many solving methods to remember" for the edge/face counts &rarr; U50 targeted retest of Section C only, re-taught with ONE unifying model (corner/edge/face/inside as the 4 physical parts of a box) instead of 4 separate formulas.',
+      fillClass: 'g2', fillPct: 74
     },
     {
-      label:     '2026 exam prediction — final-week plan built from 2023–2025 real ASMOPSS papers (U49–U53 + 1 mock test)',
+      label:     '2026 exam prediction — final-week plan built from 2023–2025 real ASMOPSS papers (U49–U53 + 1 mock test); rescheduled after U50 retest insert',
       pill:      'p2', pillText: 'In Progress &#9654;',
-      score:     'Analysed 31 Jul 2026, with 9 days to the 9 Aug exam. Read all three real ASMOPSS G4 Set-B papers (2023, 2024, 2025 &mdash; the exact exam format Prem sits) and catalogued all 75 questions by topic. Two recurring, never-before-taught patterns stood out: digit/symbol puzzles (cryptarithms, letter-codes) appeared in EVERY year, 2&ndash;3 times each; pictogram-with-clues puzzles (hidden data reconstructed from 2&ndash;3 textual clues) landed at Q20 in all three years, always worth 6 marks. Final plan: U49 3D Visualization (confirmed 2yr recurrence), U50 Digit &amp; Symbol Puzzles (new, every-year), U51 Pictogram Clue-Puzzles (new, 3/3-year Q20 fixture), U52 Composite/Overlapping Area (2/3 years, extends Path &amp; Frame strength), U53 Mixed Precision Drill (Number Theory + Art of Counting rapid-fire, targets the recurring arithmetic-care slip). Full ASMOPSS-style mock test (25Q, real tiered marks, mixed question order) scheduled after all 5 units, before the exam.',
-      fillClass: 'g2', fillPct: 40
+      score:     'Analysed 31 Jul 2026, with 9 days to the 9 Aug exam. Read all three real ASMOPSS G4 Set-B papers (2023, 2024, 2025 &mdash; the exact exam format Prem sits) and catalogued all 75 questions by topic. Two recurring, never-before-taught patterns stood out: digit/symbol puzzles (cryptarithms, letter-codes) appeared in EVERY year, 2&ndash;3 times each; pictogram-with-clues puzzles (hidden data reconstructed from 2&ndash;3 textual clues) landed at Q20 in all three years, always worth 6 marks. Original plan: U49 3D Visualization, U50 Digit &amp; Symbol Puzzles, U51 Pictogram Clue-Puzzles, U52 Composite/Overlapping Area, U53 Mixed Precision Drill, then 1 mock test. <strong>Revised 2 Aug 2026</strong> after U49 Sec C (Painted Cubes) came back NOT PASSED: U50 is now a targeted retest of Painted Cube Puzzles (one unifying model), bumping Digit &amp; Symbol Puzzles &rarr; U51, Pictogram Clue-Puzzles &rarr; U52, Composite/Overlapping Area &rarr; U53, and folding the standalone Mixed Precision Drill unit into mock-review day so the full ASMOPSS-style mock test (25Q, real tiered marks, mixed question order) still lands before the 9 Aug exam.',
+      fillClass: 'g2', fillPct: 42
+    },
+    {
+      label:     'Painted-cube edge/face recall — ACTIVE (new, U49; U50 targets it directly with ONE unifying model)',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U49 Sec C: corners (Q11, always 8) and hidden/0-faces (Q14) were both correct, but Q12 (edges), Q13 (faces), and Q15 (edges+corners capstone) were all left with "forgot how 2 do" &mdash; Prem told Lui directly there were too many separate solving methods to remember (4 unrelated recipes for corner/edge/face/hidden). U50\'s top-up lesson (Spatial_Lesson_PaintedCubeOneModel.html) reframes all 4 as ONE classification &mdash; "every box has 8 corners, 12 edges (3 groups of 4), 6 faces (3 pairs of 2), 1 inside &mdash; which part is this cube in?" &mdash; with a sum-check habit (4 counts add up to l&times;w&times;h) so a wrong count self-flags before the answer line.',
+      fillClass: 'g2', fillPct: 45
     },
     {
       label:     'Averages & missing-value arithmetic — Sec A/B core methods RESOLVED at U47 (4/5 + 4/5)',
@@ -1035,16 +1055,16 @@ var PREM_DATA = {
       fillClass: 'gs', fillPct: 85
     },
     {
-      label:     'Labelling BEFORE/AFTER totals — ACTIVE (new, U47; U48 targets it directly)',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U47 Q12: both the BEFORE total and the AFTER total were computed correctly in the working, but the final subtraction between them was wrong — the two totals were never clearly separated/labelled before subtracting, so the wrong pair of numbers likely got subtracted. U48\'s top-up lesson drills writing BEFORE and AFTER as two explicit labelled lines before any subtraction is attempted.',
-      fillClass: 'g2', fillPct: 55
+      label:     'Labelling BEFORE/AFTER totals — RESOLVED at U48',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U47 Q12: both the BEFORE total and the AFTER total were computed correctly in the working, but the final subtraction between them was wrong — the two totals were never clearly separated/labelled before subtracting. U48\'s top-up lesson drilled writing BEFORE and AFTER as two explicit labelled lines before any subtraction, and it fully transferred: U48 Sec C 4/5, with every question showing clearly labelled BEFORE/AFTER lines and zero recurrence of this habit.',
+      fillClass: 'gs', fillPct: 88
     },
     {
-      label:     'Computing the AFTER total when the average changes — ACTIVE (new, U47; U48 targets it directly)',
-      pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U47 Q13: the AFTER total itself was computed incorrectly (wrote 13, correct 27) — one step earlier than the Q12 labelling slip, and a procedural error rather than a simple subtraction mistake. U48\'s top-up lesson rebuilds the new-average × new-count step explicitly, plus a check-by-adding-back habit to catch it before the answer line.',
-      fillClass: 'g2', fillPct: 50
+      label:     'Computing the AFTER total when the average changes — RESOLVED at U48',
+      pill:      'ps', pillText: 'Resolved &#10003;',
+      score:     'U47 Q13: the AFTER total itself was computed incorrectly (wrote 13, correct 27) — one step earlier than the Q12 labelling slip, and a procedural error rather than a simple subtraction mistake. U48\'s top-up lesson rebuilt the new-average × new-count step explicitly, plus a check-by-adding-back habit — U48\'s lone miss (Q11) was a one-off 48×7 multiplication slip, not a recurrence of this AFTER-total procedure. Arc CLOSED.',
+      fillClass: 'gs', fillPct: 90
     },
     {
       label:     '"Finish the chain, answer every part" — multi-step completion & multi-part questions — RESOLVED at U45 (multiply-through fixed); narrower sub-issue carries forward as monitor',
