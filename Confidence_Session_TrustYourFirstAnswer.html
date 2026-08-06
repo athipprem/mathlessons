@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trust Your First Answer — with Chusaki</title>
+<style>
+:root{--nav:#00897B;--nav-dark:#00695C;--bg:#E0F2F1;--card:#fff;--acc:#00897B;--ok:#2E7D32;--warm:#F57F17}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:780px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.3rem;margin-bottom:14px}
+h3{color:var(--nav-dark);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1.05rem;line-height:1.7}
+.warm{background:linear-gradient(135deg,#E0F2F1,#E8F5E9);border:2px solid #4DB6AC;border-radius:12px;padding:18px;margin-bottom:14px}
+.warm-title{color:var(--nav-dark);font-weight:700;margin-bottom:8px;font-size:1.05rem}
+.rule-box{background:#FFF8E1;border:2.5px solid #F9A825;border-radius:12px;padding:18px;margin:14px 0;text-align:center}
+.rule-box .big{font-size:1.15rem;font-weight:800;color:#8D6E00}
+.steps{margin:12px 0;background:#F1F8F6;border:1px solid #80CBC4;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln.ans{color:var(--nav-dark);font-weight:800}
+.input-row{display:flex;align-items:center;gap:10px;margin:14px 0}
+.input-row input{font-size:1.3rem;padding:10px 16px;border:2px solid #80CBC4;border-radius:8px;width:120px;text-align:center}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:600}
+.feedback{margin-top:12px;padding:14px 16px;border-radius:10px;font-size:1.02rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:2px solid #81C784}
+.feedback.warm{background:#E0F2F1;color:#00695C;border:2px solid #4DB6AC}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:13px 0;background:#E0F2F1;color:var(--nav-dark);border:2px solid var(--nav-dark);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:13px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.q-mini{background:#F1F8F6;border:1.5px solid #80CBC4;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1.02rem;margin-bottom:10px;font-weight:600}
+.scenario{border:2px solid #80CBC4;border-radius:10px;padding:14px 16px;margin-bottom:12px;cursor:pointer;background:#fff}
+.scenario:hover{background:#F1F8F6}
+.scenario.picked-right{background:#E8F5E9;border-color:#66BB6A}
+.scenario.picked-wrong{background:#FFF3E0;border-color:#FFB74D}
+.mantra{background:linear-gradient(135deg,#00897B,#00695C);color:#fff;border-radius:14px;padding:24px;text-align:center;font-size:1.2rem;font-weight:700;line-height:1.6}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Trust Your First Answer</span>
+  <span class="tnav-pill" id="pill">1 / 10</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: intro -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F31F; Hey Prem &mdash; this one's different.</h2>
+  <div class="warm">
+    <p>This is <strong>not a test.</strong> No score box, no red pen, nothing to pass or fail. There's just one thing we're going to practise today, and it's not a new formula.</p>
+  </div>
+  <p>On Tuesday's test, something interesting happened. On two questions, your <strong>working</strong> &mdash; the actual maths you wrote &mdash; was completely correct. Then you crossed out your own correct answer and wrote something else instead.</p>
+  <p>That tells me something important: <strong>you already know how to do this.</strong> The maths in your head is right. The only thing that let you down was trusting it.</p>
+  <p>So today, we're going to practise ONE skill: writing your answer once, and trusting your own correct working instead of guessing again.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Show me &#8594;</button></div>
+</div>
+
+<!-- s1: the evidence -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>Here's the proof, in your own handwriting</h2>
+  <p><strong>Question 6</strong> asked: a block 4 long, 4 wide, 3 tall, painted all over. How many unit cubes have exactly 2 faces painted?</p>
+  <div class="steps">
+    <div class="ln">Your working: <strong>8 + 8 + 4 = 20</strong></div>
+    <div class="ln ans">That's exactly right. 20 is the correct answer.</div>
+  </div>
+  <p>But the answer you finally wrote down wasn't 20 &mdash; you'd crossed it out and changed it.</p>
+  <p style="margin-top:14px"><strong>Question 8</strong> asked the same kind of thing for a 5&times;2&times;2 block.</p>
+  <div class="steps">
+    <div class="ln">Your working: <strong>12 + 0 + 0 = 12</strong></div>
+    <div class="ln ans">Also exactly right.</div>
+  </div>
+  <p>Same thing happened. Correct working, then a change of heart.</p>
+  <div class="warm">
+    <div class="warm-title">This is really good news, actually.</div>
+    <p>It means the "edges" method IS in your head. You don't need to learn it again. You need to learn to <strong>believe it</strong> when you've already got it right.</p>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Let's try it again &#8594;</button></div>
+</div>
+
+<!-- s2: redo Q6 -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Try it again &mdash; same question as Q6</h2>
+  <p>A block is 4 long, 4 wide, 3 tall, painted all over (including the bottom). How many unit cubes have EXACTLY 2 faces painted?</p>
+  <p style="color:#00695C;font-weight:700">Write your answer. Once you write it, don't touch it &mdash; just press Check.</p>
+  <div class="input-row">
+    <input type="number" id="q6in" placeholder="?">
+    <button class="btn-check" onclick="checkQ('q6in','q6fb',20)">Check</button>
+  </div>
+  <div class="feedback" id="q6fb"></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next &#8594;</button></div>
+</div>
+
+<!-- s3: redo Q8 -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>One more &mdash; same question as Q8</h2>
+  <p>A block is 5 long, 2 wide, 2 tall, painted all over (including the bottom). How many unit cubes have EXACTLY 2 faces painted?</p>
+  <p style="color:#00695C;font-weight:700">Same rule: write it once, don't touch it, press Check.</p>
+  <div class="input-row">
+    <input type="number" id="q8in" placeholder="?">
+    <button class="btn-check" onclick="checkQ('q8in','q8fb',12)">Check</button>
+  </div>
+  <div class="feedback" id="q8fb"></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The one rule &#8594;</button></div>
+</div>
+
+<!-- s4: the one rule -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F511; The ONE rule for exam day</h2>
+  <p>You're allowed to check your answer. Checking is smart. But there's a right way and a wrong way to check.</p>
+  <div class="rule-box">
+    <div class="big">Only change your answer if you can point to ONE exact number that's wrong.</div>
+  </div>
+  <p><strong>Right reason to change an answer:</strong> "Wait &mdash; I wrote 4&times;4, but it should have been 4&times;3. Let me fix that number."</p>
+  <p><strong>Wrong reason to change an answer:</strong> "Hmm, that doesn't feel right." / "That seems too easy." / "I'm not sure, let me just try something else."</p>
+  <div class="warm">
+    <div class="warm-title">A feeling is not a reason. A wrong number is a reason.</div>
+    <p>If your working is there and the arithmetic is correct, the answer is correct &mdash; even if it feels surprising. Trust the numbers on the page, not the worry in your head.</p>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Quick confidence round &#8594;</button></div>
+</div>
+
+<!-- s5: confidence round 1 -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x26A1; Quick Wins &mdash; things you already know cold</h2>
+  <p>No tricks here. Just fast, easy questions from stuff you're already strong at. Write your answer once and trust it.</p>
+  <div class="q-mini">
+    <div class="q-text">1. A block is 6 long, 5 wide, 4 tall, painted all over. How many corners have exactly 3 faces painted?</div>
+    <div class="input-row"><input type="number" id="c1in" placeholder="?"><button class="btn-check" onclick="checkQ('c1in','c1fb',8)">Check</button></div>
+    <div class="feedback" id="c1fb"></div>
+  </div>
+  <div class="q-mini">
+    <div class="q-text">2. Is 84 divisible by 6?</div>
+    <div style="display:flex;gap:10px;margin:10px 0">
+      <button class="btn-check" onclick="checkYesNo(true,'c2fb')">Yes</button>
+      <button class="btn-check" style="background:#78909C" onclick="checkYesNo(false,'c2fb')">No</button>
+    </div>
+    <div class="feedback" id="c2fb"></div>
+  </div>
+  <div class="q-mini">
+    <div class="q-text">3. Three consecutive numbers add up to 36. What is the middle number?</div>
+    <div class="input-row"><input type="number" id="c3in" placeholder="?"><button class="btn-check" onclick="checkQ('c3in','c3fb',12)">Check</button></div>
+    <div class="feedback" id="c3fb"></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Spot the difference &#8594;</button></div>
+</div>
+
+<!-- s6: spot the scenario -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>&#x1F50D; Spot the Difference</h2>
+  <p>Here are two students' working. One of them has a real, fixable mistake &mdash; change it. The other one is correct &mdash; leave it alone. Tap each to reveal what to do.</p>
+  <div class="scenario" onclick="revealScenario(this,'sc1fb')">
+    <strong>Student A</strong> writes: 4&times;(5&minus;2) = 4&times;2 = 8
+    <div class="feedback" id="sc1fb"></div>
+  </div>
+  <div class="scenario" onclick="revealScenario(this,'sc2fb')">
+    <strong>Student B</strong> writes: 4&times;(5&minus;2) = 4&times;3 = 12
+    <div class="feedback" id="sc2fb"></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Last round &#8594;</button></div>
+</div>
+
+<!-- s7: confidence round 2 -->
+<div class="screen" id="s7">
+<div class="card">
+  <h2>&#x26A1; One More Round</h2>
+  <div class="q-mini">
+    <div class="q-text">4. A block is 6 long, 5 wide, 2 tall, painted all over. How many unit cubes have exactly 2 faces painted? (This is exactly Q11 from Tuesday &mdash; the one you got completely right, no hesitation.)</div>
+    <div class="input-row"><input type="number" id="c4in" placeholder="?"><button class="btn-check" onclick="checkQ('c4in','c4fb',28)">Check</button></div>
+    <div class="feedback" id="c4fb"></div>
+  </div>
+  <div class="q-mini">
+    <div class="q-text">5. 15 sweets are shared between 2 jars, at least one sweet per jar. How many ways can this be done?</div>
+    <div class="input-row"><input type="number" id="c5in" placeholder="?"><button class="btn-check" onclick="checkQ('c5in','c5fb',14)">Check</button></div>
+    <div class="feedback" id="c5fb"></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Before the exam &#8594;</button></div>
+</div>
+
+<!-- s8: mantra -->
+<div class="screen" id="s8">
+<div class="card">
+  <h2>&#x1F3AF; Before you walk in on exam day</h2>
+  <div class="mantra">
+    "Write it once.<br>Check it against my OWN working.<br>Only change it if I find a wrong number.<br>Not because of a feeling."
+  </div>
+  <p style="margin-top:16px">You already showed today that when you trust your first working, you get it right &mdash; 20, 12, 8, and everything else in the quick rounds. That's not luck. That's you knowing the maths.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Last page &#8594;</button></div>
+</div>
+
+<!-- s9: closing -->
+<div class="screen" id="s9">
+<div class="warm" style="text-align:center">
+  <div class="warm-title" style="font-size:1.2rem">From Chusaki, before Sunday</div>
+  <p style="font-size:1.1rem">You are ready for more of this exam than Tuesday's score shows. The gap wasn't in your head &mdash; it was between your hand and your confidence. Today you practised closing that gap, and it worked every single time.</p>
+  <p style="font-size:1.1rem;margin-top:10px"><strong>Good luck on Sunday. Write it once, and trust yourself.</strong></p>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:var(--acc);color:#fff;border:2px solid var(--acc);border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function checkQ(inputId,fbId,correct){
+  var val = document.getElementById(inputId).value;
+  var fb = document.getElementById(fbId);
+  fb.style.display='block';
+  if(val===''){fb.className='feedback warm';fb.textContent='Write a number first — then trust it.';return;}
+  if(parseInt(val)===correct){fb.className='feedback ok';fb.textContent='✓ Yes — '+correct+' is exactly right. You wrote it once and it was correct. That\'s the whole lesson today.';}
+  else{fb.className='feedback warm';fb.textContent='The answer is '+correct+'. That\'s okay — the point today isn\'t a perfect score, it\'s writing an answer and trusting your own working. Take a breath and move to the next one.';}
+}
+function checkYesNo(ans,fbId){
+  var fb=document.getElementById(fbId);
+  fb.style.display='block';
+  if(ans===true){fb.className='feedback ok';fb.textContent='✓ Yes — 84 is even AND its digits (8+4=12) divide by 3, so it divides by 6. Nicely done.';}
+  else{fb.className='feedback warm';fb.textContent='Actually yes, it does — 84 is even and 8+4=12 divides by 3, so it passes both checks for 6. You know this rule well; no need to second-guess it next time.';}
+}
+function revealScenario(el,fbId){
+  var fb=document.getElementById(fbId);
+  fb.style.display='block';
+  if(fbId==='sc1fb'){el.classList.add('picked-wrong');fb.className='feedback warm';fb.textContent='Real mistake: 5−2=3, not 2. The NUMBER is wrong (2 should be 3), so this SHOULD be corrected to 4×3=12.';}
+  else{el.classList.add('picked-right');fb.className='feedback ok';fb.textContent='This one is correct: 5−2=3, 4×3=12. Nothing to fix — leave it exactly as it is.';}
+}
+</script>
+</body>
+</html>
