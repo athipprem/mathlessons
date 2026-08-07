@@ -15,13 +15,38 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '6 Aug 2026',
+  updated:        '7 Aug 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:51, topic:'Pictogram/Table Clue-Puzzles &amp; Digit/Symbol Puzzles (Problem Solving &middot; Number Theory)', status:'In Progress' },
+  currentUnit: { n:52, topic:'Two-Skill Capstones — Chain What You Already Know (Reasoning)', status:'In Progress' },
   lastUnit: {
+    n:51, score:7, outOf:15, pct:47, delta:0, prevScore:7, prevOutOf:15, prevLabel:'M5 (normalized)',
+    patternLabel: 'U51 — Pictogram/Table Clue-Puzzles & Digit/Symbol Puzzles, NOT PASSED',
+    patternInsight: '7/15 (47%) <strong>NOT PASSED</strong> &mdash; Sec A (Pictogram) 3/5, Sec B (Digit Puzzles) 3/5, Sec C (Harder + Capstones) 1/5. Pictogram clue-puzzles landed reasonably for a first exposure (Q3, Q5 both correct, including a 3-clue chain). Digit puzzles split cleanly: "one symbol" and "sum & difference" (Q6, Q7, Q10) solid; column-addition and repeated-digit codes (Q8, Q9) not landing. <strong>Two direct, unprompted notes from Prem:</strong> Q8 &mdash; "Btw, I don&rsquo;t understand UR solution for this" (calm, specific method feedback); Q9 &mdash; "don&rsquo;t use stars looks like this!!!" written across the page margin next to a nonsensical answer and heavy, pressed-hard scribbling &mdash; a visible frustration reaction to the &#9733;&#9733; notation itself. Section C then collapsed: Q11 clean and correct, Q12 solved to the second-to-last step then answered the wrong variable (wrote P=44 instead of finishing to Q=132), and Q13&ndash;Q15 all abandoned completely blank under heavy scratch marks. Reads as a frustration cascade triggered at Q9, distinct from U50&rsquo;s quiet self-doubt (no erased-correct-answers here) and distinct from M5&rsquo;s healthy "IDK" pattern.',
+    analysisLabel: 'Next: Unit 52 — Two-Skill Capstones (Reasoning) — built 7 Aug 2026 at Lui\'s request',
+    analysisInsight: 'Flagged to Lui rather than auto-retested (see U51 write-up) &mdash; every section fell below the pass bar, which would normally mean a full re-teach, but 2 days remained and there was a live frustration signal to weigh first. Lui chose to proceed with U52 anyway: a single lesson targeting the hardest-tier "capstone" pattern that has been the consistent miss across M4 Round 3 (1/5) and M5 Round 3 (0/5) &mdash; questions that chain two already-mastered skills in one problem (circular+repeats, averages+removal, counting+remainder, handshake formula solved backward via algebra). The lesson teaches ONE new meta-skill (\"solve Skill 1 to a clean number, pass it into Skill 2\") using only content Prem has already passed a real test on, deliberately avoiding both the star-symbol notation (U51\'s trigger) and painted-cube edges/faces (the still-open content gap).',
+    qSummary: '<strong>Sec A 3/5 | Sec B 3/5 | Sec C 1/5</strong> — 7/15 (47%) NOT PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Total Minus Known', lvl:'w', pass:false, note:'&#10007; wrote 5; correct 15. No working shown.' },
+      { q:'Q2', topic:'Difference Clue', lvl:'w', pass:true,  note:'&#10003; 24.' },
+      { q:'Q3', topic:'Ratio + Total', lvl:'w', pass:true,  note:'&#10003; 6.' },
+      { q:'Q4', topic:'Chained Clues', lvl:'w', pass:false, note:'&#10007; wrote 7; correct 26. No working shown.' },
+      { q:'Q5', topic:'Chained Clues', lvl:'w', pass:true,  note:'&#10003; 49.' },
+      { q:'Q6', topic:'One Symbol', lvl:'m', pass:true,  note:'&#10003; 7.' },
+      { q:'Q7', topic:'Sum & Difference', lvl:'m', pass:true,  note:'&#10003; 9.' },
+      { q:'Q8', topic:'Column Addition  &#9733;', lvl:'m', pass:false, note:'&#10007; blank, "Btw &mdash; I don\'t understand UR solution for this"; correct 4. Direct, calm feedback that the method didn\'t land.' },
+      { q:'Q9', topic:'Repeated Digit  &#9733;', lvl:'m', pass:false, note:'&#10007; "ANSWER 33" amid heavy scribbling; correct 3. Margin note "don\'t use stars looks like this!!!" &mdash; a visible frustration reaction to the notation.' },
+      { q:'Q10',topic:'Two Unknowns  &#9733;', lvl:'m', pass:true,  note:'&#10003; 5.' },
+      { q:'Q11',topic:'5-Category Chain  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 42 &mdash; the one clean, confident answer in Section C.' },
+      { q:'Q12',topic:'Ratio + Difference  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote 44; correct 132. Solved to the second-to-last step (P=44) then answered the wrong variable instead of finishing to Q=3&times;44=132.' },
+      { q:'Q13',topic:'2-Digit &times;3 Pattern  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; blank; correct 150. No attempt, heavy scribble over the line.' },
+      { q:'Q14',topic:'Subtraction  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; blank; correct 2. No attempt, heavy scribble over the line.' },
+      { q:'Q15',topic:'Capstone (4-Chain)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; blank; correct 30. No attempt, heavy scribble over the line.' }
+    ]
+  },
+  _M5archived: {
     n:'M5', score:47, outOf:100, pct:47, delta:-10.5, prevScore:57.5, prevOutOf:100, prevLabel:'M4',
     patternLabel: 'Milestone M5 — ASMOPSS-Style Cumulative Review (Units 42–50), Diagnostic Benchmark',
     patternInsight: '<strong>47/100</strong> (Round 1 8/10 &rarr; 20/25 marks &middot; Round 2 6/10 &rarr; 27/45 marks &middot; Round 3 0/5 &rarr; 0/30 marks). Built at Lui&rsquo;s request as a final cumulative check, 3 days before the real exam. <strong>The headline is genuinely good news: the U50 problem did not repeat</strong> &mdash; nowhere on this 25-question paper is there a crossed-out CORRECT answer replaced with a wrong one. Q17 (painted-cube corners) was answered "ALWAYS 8" with a confident drawing, no hesitation. On questions he couldn&rsquo;t solve, Prem wrote an honest "IDK" (Q12, Q18, Q19, Q21) instead of guessing or erasing &mdash; a real, visible behaviour change in exactly the direction the confidence session aimed for. Underneath that good news: a genuine <strong>regression in circular arrangements</strong> (the "subtract 1 first" rule, previously resolved at U43, slipped twice &mdash; Q9, Q22), and honest blanks on previously-resolved reverse-average content (Q18, Q19) that read as fatigue on a long, new-format paper rather than a re-opened gap.',
@@ -222,23 +247,37 @@ var PREM_DATA = {
     { n:48, score:14, delta:+3,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:49, score:11, delta:-3,   color:'linear-gradient(135deg,#0277BD,#01579B)', star:false },
     { n:50, score:8,  delta:-3,   color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
-    { n:'M5', label:'M5', score:7, delta:-1, color:'linear-gradient(135deg,#0D47A1,#4A148C)', star:false }
+    { n:'M5', label:'M5', score:7, delta:-1, color:'linear-gradient(135deg,#0D47A1,#4A148C)', star:false },
+    { n:51, score:7,  delta:0,    color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 52,
+      badge: 'linear-gradient(135deg,#AD1457,#880E4F)',
+      title: 'Two-Skill Capstones — Chain What You Already Know (Reasoning)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'1 lesson, meta-skill only — no new content', c:'torange' },
+        { t:'Targets M4/M5 Round 3 (1/5, 0/5)', c:'tgreen' },
+        { t:'Built 2 days before the exam', c:'torange' }
+      ],
+      note: 'U52, built 7 Aug 2026 at Lui\'s request, directly off U51\'s result and the standing M4/M5 finding that every Round-3 (hardest tier) miss was a "capstone" question chaining two already-mastered skills. One lesson (Reasoning_Lesson_TwoSkillCapstones.html) teaches the "baton-pass" meta-skill &mdash; solve Skill 1 completely to one clean number, then feed it into Skill 2 &mdash; using four pairings built entirely from content Prem has already passed a real test on: circular arrangements+repeats, averages+removal, counting+remainder, and handshake formula solved backward via algebra. No new content, only the combining move. Test: 15Q across the same four pairings, isolated rather than buried in a long mixed paper. Deliberately avoids both the &#9733;&#9733; notation (U51\'s frustration trigger) and painted-cube edges/faces (the still-open content gap).',
+      status: 'pending'
+    },
+    {
       n: 51,
       badge: 'linear-gradient(135deg,#6A1B9A,#4A148C)',
       title: 'Pictogram/Table Clue-Puzzles &amp; Digit/Symbol Puzzles (Problem Solving &middot; Number Theory)',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'2 lessons, brand-new content', c:'torange' },
-        { t:'100% appearance rate — real ASMOPSS Q20', c:'tgreen' },
-        { t:'Final exam-prep unit before 9 Aug', c:'torange' }
+        { t:'7/15 (47%) &#10007; NOT PASSED', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Sec A 3/5 — pictogram landed OK first exposure', c:'tgreen' },
+        { t:'NEW: frustration reaction to ★★ notation (Q9)', c:'tred' },
+        { t:'&rarr; U52 Two-Skill Capstones (no retest built)', c:'torange' }
       ],
-      note: 'U51, built 6 Aug 2026 at Lui\'s explicit request, 3 days before the exam. Covers the two highest-leverage untaught patterns identified from the real 2023&ndash;2025 ASMOPSS papers: pictogram/table clue-puzzles (100% appearance rate at Q20, always the hardest 6-mark tier, every year) and digit/symbol puzzles &mdash; cryptarithms (2&ndash;3 times every year). Two from-zero lessons: ProblemSolving_Lesson_PictogramClueTables.html (the "Data Detective" method &mdash; turn every clue into a fact, solve in order, use the TOTAL clue last) and NumberTheory_Lesson_DigitSymbolPuzzles.html (the "Code-Breaker" method &mdash; expand 2-digit codes as 10&times;tens+units, solve like a familiar equation, check the digit is 0&ndash;9). Test: 15Q, Sec A Pictogram (Q1&ndash;5), Sec B Digit Puzzles (Q6&ndash;10), Sec C harder + capstones (Q11&ndash;15). Deliberately does not touch painted-cube edges/faces or circular arrangements again this close to the exam &mdash; those get a light verbal reminder only, per M5\'s recommendation.',
-      status: 'pending'
+      note: '7/15 &#10007; <strong>NOT PASSED</strong> &mdash; Sec A 3/5, Sec B 3/5, Sec C 1/5. Pictogram clue-puzzles landed reasonably on first exposure. Digit puzzles split: symbol/sum-difference solid, column-addition/repeated-digit not landing, with direct written feedback ("I don\'t understand UR solution for this," Q8). Q9 shows a visible frustration reaction to the &#9733;&#9733; notation ("don\'t use stars looks like this!!!", heavy scribbling) &mdash; distinct from U50\'s quiet self-doubt and M5\'s healthy "IDK" pattern. Section C then collapsed: Q11 clean, Q12 solved to the wrong final variable, Q13&ndash;15 all abandoned blank. Flagged to Lui rather than auto-retested (every section failed the bar, but 2 days remained and a frustration signal needed weighing first). Lui chose to proceed to U52 anyway.',
+      status: 'done'
     },
     {
       n: 'M5',
@@ -1075,15 +1114,33 @@ var PREM_DATA = {
       fillClass: 'g2', fillPct: 74
     },
     {
-      label:     '2026 exam prediction — final-week plan built from 2023–2025 real ASMOPSS papers; twice revised as results came in, now closing with U51',
+      label:     '2026 exam prediction — final-week plan built from 2023–2025 real ASMOPSS papers; revised three times as results came in, now U52 with 2 days left',
       pill:      'p2', pillText: 'In Progress &#9654;',
-      score:     'Analysed 31 Jul 2026. Read all three real ASMOPSS G4 Set-B papers (2023, 2024, 2025) and catalogued all 75 questions by topic. Two recurring, never-before-taught patterns stood out: digit/symbol puzzles (cryptarithms) appeared in EVERY year, 2&ndash;3 times each; pictogram-with-clues puzzles landed at Q20 in all three years, always the 6-mark tier. Original plan: U49 3D Visualization, U50 Digit &amp; Symbol Puzzles, U51 Pictogram Clue-Puzzles, U52 Composite Area, U53 Precision Drill, +1 mock test. <strong>Revised 2 Aug</strong> after U49 Sec C NOT PASSED: U50 became a targeted Painted Cube retest, bumping the two puzzle topics to U51/U52. <strong>Revised again 6 Aug</strong> after U50\'s retest also came back NOT PASSED (plus a new confidence issue) and Lui requested a diagnostic Milestone M5 instead of continuing the unit sequence: with M5 done and only 3 days left, U51 now combines BOTH remaining predicted topics (pictogram clue-puzzles + digit/symbol puzzles) into one final exam-prep unit, and Composite Area/Precision Drill/mock-test are dropped from the pre-exam plan given the timeline.',
-      fillClass: 'g2', fillPct: 78
+      score:     'Analysed 31 Jul 2026. Read all three real ASMOPSS G4 Set-B papers (2023, 2024, 2025) and catalogued all 75 questions by topic. Original plan: U49 3D Visualization, U50 Digit &amp; Symbol Puzzles, U51 Pictogram Clue-Puzzles, U52 Composite Area, U53 Precision Drill, +1 mock test. <strong>Revised 2 Aug</strong> after U49 Sec C NOT PASSED: U50 became a targeted Painted Cube retest. <strong>Revised 6 Aug</strong> after U50\'s retest also NOT PASSED (plus a confidence issue) and Lui requested diagnostic Milestone M5: U51 combined both remaining puzzle topics into one final exam-prep unit, with nothing planned after it. <strong>Revised again 7 Aug</strong> after U51 also came back NOT PASSED (7/15, plus a new frustration signal at Q9): Lui explicitly chose to proceed with one more unit anyway, U52, built off M4/M5\'s consistent Round-3 finding (two-skill capstone questions) rather than any of the originally-predicted content topics &mdash; a meta-skill lesson using zero new content, built with 2 days left before the exam.',
+      fillClass: 'g2', fillPct: 85
     },
     {
       label:     'Painted-cube edge/face recall — ACTIVE, still open (U49 2/5 &rarr; U50 retest 1/5, worse); confidence-erosion side-effect surfaced and resolved separately',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
       score:     'U49 Sec C 2/5 &rarr; U50\'s dedicated retest (ONE unifying model, replacing 4 separate formulas) came back Sec B 2/5 + Sec C 1/5 &mdash; WORSE, not better. Prem wrote "confusing method" directly next to the faces question; the redesign has not resolved his confusion with that formula specifically. <strong>Deliberately not touched again before the 9 Aug exam</strong> &mdash; a third lesson-and-retest cycle would not fit the remaining time, and evidence pointed to a confidence problem compounding the content one (see below). Accepted as an open gap for this cycle; will be revisited after the exam.',
+      fillClass: 'g2', fillPct: 35
+    },
+    {
+      label:     'Two-skill "capstone" questions — the consistent hardest-tier miss (M4 Round 3 1/5, M5 Round 3 0/5) — ACTIVE, U52 targets it directly',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'Every Round-3 miss on both milestones was a question chaining two already-mastered skills in one problem (M4: derive+substitute, circular+repeats, listing+divisibility, counting+algebra; M5: averages+removal, circular+repeats, listing+divisibility, counting+algebra). None of the underlying individual skills are weak &mdash; this is specifically about recognizing and sequencing two tools in one question, never explicitly taught. U52 (Reasoning_Lesson_TwoSkillCapstones.html) teaches exactly this as a single meta-skill ("solve Skill 1 to one clean number, pass it into Skill 2"), built entirely from content already passed at 80%+, deliberately built 7 Aug 2026 despite only 2 days remaining before the exam &mdash; Lui\'s explicit call after weighing U51\'s frustration signal.',
+      fillClass: 'g2', fillPct: 40
+    },
+    {
+      label:     'Visible frustration reaction to notation/symbols under test pressure — NEW (U51, Q9) — distinct from U50\'s self-doubt and M5\'s healthy "IDK"',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U51 Q9: margin note "don\'t use stars looks like this!!!" written across the page, next to a nonsensical "ANSWER 33" and heavy, pressed-hard scribbling &mdash; the &#9733;&#9733; symbol notation itself appears to have triggered real in-the-moment distress. Section C (Q13&ndash;15) was then abandoned completely, blank under scratch marks, immediately after this question &mdash; reads as a frustration cascade, not a confidence/self-doubt pattern (no correct answers were erased, unlike U50) and not a healthy non-attempt (unlike M5\'s calm "IDK"s). U52 deliberately avoids reusing the &#9733;&#9733; notation. Needs a direct, gentle conversation with Prem (the star complaint was fair — notation, not maths) rather than a lesson fix.',
+      fillClass: 'g2', fillPct: 30
+    },
+    {
+      label:     'Digit-puzzle column-addition & repeated-digit codes — ACTIVE (new content, U51 Sec B split: symbol/sum-difference solid, this half not landing)',
+      pill:      'p2', pillText: 'ACTIVE &#128308;',
+      score:     'U51 Q6, Q7, Q10 (single symbol; sum & difference; two unknowns) all correct on first exposure. Q8 (column addition, expand-as-10&times;tens+units) left blank with direct feedback: "Btw, I don\'t understand UR solution for this." Q9 (repeated-digit codes) triggered the notation-frustration reaction above. Genuinely narrower than the whole digit-puzzle topic &mdash; the algebraic "solve for the unknown" half of the skill works; the "decode a 2-digit template" half doesn\'t yet. Not touched again before the exam given time constraints; a candidate for a very short, calm re-explanation after Sunday if it resurfaces.',
       fillClass: 'g2', fillPct: 35
     },
     {

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two-Skill Capstones — Chain What You Already Know</title>
+<style>
+:root{--nav:#AD1457;--nav-dark:#880E4F;--bg:#FCE4EC;--card:#fff;--acc:#AD1457;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#880E4F;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#FCE4EC,#F8BBD0);border:2px solid #EC407A;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#880E4F;font-weight:700;margin-bottom:6px}
+.big-rule{background:#FCE4EC;border:2px solid #AD1457;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#880E4F;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#FDEEF3;border:1px solid #F48FB1;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#AD1457}
+.steps .ln.ans{color:#880E4F;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #F48FB1;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#AD1457;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#FDEEF3;border:1.5px solid #F48FB1;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #F48FB1;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#FCE4EC}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#FCE4EC;color:#880E4F;border:2px solid #880E4F;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#AD1457;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E0;color:#E65100;border:1.5px solid #FFB74D;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.rulebar{background:#FCE4EC;border:1.5px solid #AD1457;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#880E4F;text-align:center;margin-bottom:12px}
+.clueboard{background:#FDEEF3;border:2px solid #F48FB1;border-radius:10px;padding:14px 16px;margin:12px 0}
+.clue-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px dashed #F8C6D8;font-size:.98rem}
+.clue-row:last-child{border-bottom:none}
+.clue-tag{background:#AD1457;color:#fff;border-radius:6px;padding:2px 9px;font-size:.78rem;font-weight:700;white-space:nowrap;margin-top:2px}
+.skillbox{display:inline-block;background:#880E4F;color:#fff;border-radius:8px;padding:4px 12px;font-weight:700;font-size:.9rem;margin:2px}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Two-Skill Capstones</span>
+  <span class="tnav-pill" id="pill">1 / 12</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F517; Why This Matters</h2>
+  <div class="why">
+    <div class="why-title">The pattern in your hardest questions</div>
+    <p>Look back at M4 and M5's hardest tier (Round 3): every single miss was a "capstone" question &mdash; one that used TWO of your skills back to back, not one. Circular arrangements + repeats. Averages + removal. Listing + algebra. You know EVERY one of those skills separately, cold. What's new isn't the maths &mdash; it's recognizing that a question is asking for two moves, not one.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">The good news</div>
+    <p>You don't need to learn anything new today. Every worked example in this lesson uses skills you've already passed a real test on. The only new move is: solve skill 1 all the way to a clean number, then use that number to start skill 2 &mdash; like handing a baton from one runner to the next.</p>
+  </div>
+  <div class="big-rule">Two skills, one question. Solve the FIRST one completely. Then feed that number into the SECOND one, like it's its own fresh question.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: METHOD -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F9E9; The Baton-Pass Method</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Read the WHOLE question first. Spot: is there really ONE ask here, or does solving it need two completely different tools?</div>
+    <div class="node"><span class="step-n">2</span>Name the two skills out loud (even just in your head) &mdash; e.g. "this is circular arrangements, THEN repeats."</div>
+    <div class="node"><span class="step-n">3</span>Solve Skill 1 on its own, exactly like it's a normal stand-alone question, until you have ONE clean number.</div>
+    <div class="node"><span class="step-n">4</span>Take that number and plug it straight into Skill 2 &mdash; solve Skill 2 exactly like ITS own stand-alone question too.</div>
+    <div class="node"><span class="step-n">5</span>Check: does your final answer only use ONE new number (the baton) passed from step 1 into step 2? If you needed information from nowhere, you skipped a clue.</div>
+  </div>
+  <p>That's the whole method. Four different skill-pairs are shown in this lesson so you can see the SAME baton-pass pattern working no matter which two skills are involved.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Pair 1 &#8594;</button></div>
+</div>
+
+<!-- s2: PAIR 1 WORKED EXAMPLE - Circular + Repeats -->
+<div class="screen" id="s2">
+<div class="card">
+  <span class="badge-cap">Pair 1 of 4</span>
+  <span class="skillbox">Circular Arrangements</span><span class="skillbox">+ Repeats</span>
+  <h2>Circular Arrangements + Repeats</h2>
+  <p><strong>7 friends sit around a circular table. Among them, 2 are wearing identical yellow hats (impossible to tell apart). The rest are all different. How many different arrangements are possible?</strong></p>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">SKILL 1</span><span>Circular arrangements of 7 people: (7&minus;1)! = 6!</span></div>
+    <div class="clue-row"><span class="clue-tag">SKILL 2</span><span>2 of them are identical &rarr; divide by 2!</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 (Skill 1 alone) &mdash; circular arrangements of 7:</span> (7&minus;1)! = 6! = 720</div>
+    <div class="ln"><span class="note">Step 2 (pass the baton: 720 &rarr; Skill 2) &mdash; divide by the repeat:</span> 720 &divide; 2! = 720 &divide; 2 = 360</div>
+    <div class="ln ans">360 different arrangements</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Notice: Step 1 is the EXACT same circular-arrangements move from U42/U43. Step 2 is the EXACT same repeats-division move from U40/U41. Nothing new except doing them back to back.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s3: PRACTICE PAIR 1 -->
+<div class="screen" id="s3">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Circular + Repeats</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 5 kids sit around a circular table. 2 of them are wearing identical green scarves (rest all different). How many different arrangements are possible?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 24</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 6</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">Skill 1: (5&minus;1)! = 4! = 24</div><div class="ln">Skill 2: 24 &divide; 2! = 24 &divide; 2 = 12</div><div class="ln ans">12</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Pair 2 &#8594;</button></div>
+</div>
+
+<!-- s4: PAIR 2 WORKED EXAMPLE - Averages + Removal -->
+<div class="screen" id="s4">
+<div class="card">
+  <span class="badge-cap">Pair 2 of 4</span>
+  <span class="skillbox">Averages</span><span class="skillbox">+ Removal</span>
+  <h2>Averages + Removal</h2>
+  <p><strong>The average score across 4 games is 22 points. If a game scoring 10 points is removed, what is the new average of the remaining 3 games?</strong></p>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">SKILL 1</span><span>Find the TOTAL from the average: 4 &times; 22</span></div>
+    <div class="clue-row"><span class="clue-tag">SKILL 2</span><span>Remove 10, then find the new average of 3 games</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 (Skill 1 alone) &mdash; total of all 4 games:</span> 4 &times; 22 = 88</div>
+    <div class="ln"><span class="note">Step 2 (pass the baton: 88 &rarr; Skill 2) &mdash; remove 10, divide by the new count:</span> (88 &minus; 10) &divide; 3 = 78 &divide; 3 = 26</div>
+    <div class="ln ans">The new average is 26</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Step 1 is the "total = average &times; count" move from U47. Step 2 is the "remove, then re-average" move from U47/U48. The baton is just the TOTAL number.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s5: PRACTICE PAIR 2 -->
+<div class="screen" id="s5">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Averages + Removal</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; The average of 6 tests is 25. If a test scoring 15 is removed, what is the new average of the remaining 5 tests?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 25</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 27</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 29</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">Skill 1: total = 6 &times; 25 = 150</div><div class="ln">Skill 2: (150&minus;15) &divide; 5 = 135 &divide; 5 = 27</div><div class="ln ans">27</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Pair 3 &#8594;</button></div>
+</div>
+
+<!-- s6: PAIR 3 WORKED EXAMPLE - Counting + Remainder -->
+<div class="screen" id="s6">
+<div class="card">
+  <span class="badge-cap">Pair 3 of 4</span>
+  <span class="skillbox">Counting</span><span class="skillbox">+ Remainder</span>
+  <h2>Counting/Listing + Remainder</h2>
+  <p><strong>Using the digits 2, 3, 5, 8, 9 (each digit used at most once), how many different 2-digit numbers can be formed? If that count is divided into groups of 7, how many are left over (the remainder)?</strong></p>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">SKILL 1</span><span>Count 2-digit numbers from 5 digits, no repeats (box method): 5 &times; 4</span></div>
+    <div class="clue-row"><span class="clue-tag">SKILL 2</span><span>Divide that count by 7, find the remainder</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 (Skill 1 alone) &mdash; first digit 5 choices, second digit 4 choices left:</span> 5 &times; 4 = 20</div>
+    <div class="ln"><span class="note">Step 2 (pass the baton: 20 &rarr; Skill 2) &mdash; divide by 7:</span> 20 &divide; 7 = 2 remainder 6 &nbsp;(7&times;2=14, 20&minus;14=6)</div>
+    <div class="ln ans">The remainder is 6</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Step 1 is the box-method counting move from U4/U32. Step 2 is the systematic-remainder move from U34. The baton is the COUNT (20), used as the new "total" to divide.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s7: PRACTICE PAIR 3 -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Counting + Remainder</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; Using the digits 1, 4, 6, 8, 9 (each used at most once), how many different 2-digit numbers can be formed? If that count is divided into groups of 9, what is the remainder?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 1</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 3</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">Skill 1: 5 &times; 4 = 20</div><div class="ln">Skill 2: 20 &divide; 9 = 2 remainder 2 (9&times;2=18, 20&minus;18=2)</div><div class="ln ans">2</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Pair 4 &#8594;</button></div>
+</div>
+
+<!-- s8: PAIR 4 WORKED EXAMPLE - Handshake + Algebra -->
+<div class="screen" id="s8">
+<div class="card">
+  <span class="badge-cap">Pair 4 of 4</span>
+  <span class="skillbox">Counting (Pairs)</span><span class="skillbox">+ Algebra</span>
+  <h2>Counting Formula + Solve-Backward Algebra</h2>
+  <p><strong>At a party, every pair of guests shakes hands exactly once. There are 15 handshakes in total. How many guests are at the party?</strong></p>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">SKILL 1</span><span>Handshakes formula: n &times; (n&minus;1) &divide; 2 = 15</span></div>
+    <div class="clue-row"><span class="clue-tag">SKILL 2</span><span>Solve for n by testing consecutive numbers (like Unit 21's equation method)</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 (Skill 1 alone) &mdash; write the formula as an equation:</span> n &times; (n&minus;1) = 15 &times; 2 = 30</div>
+    <div class="ln"><span class="note">Step 2 (pass the baton: 30 &rarr; Skill 2) &mdash; find two consecutive numbers that multiply to 30:</span> 6 &times; 5 = 30 &#10003;</div>
+    <div class="ln ans">There are 6 guests</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This pair runs BACKWARD compared to the others &mdash; you're given the handshake TOTAL and have to work out n, instead of being given n and finding a total. The formula is the same one from U31; only the direction flips.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s9: PRACTICE PAIR 4 -->
+<div class="screen" id="s9">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Handshake Formula, Solve Backward</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; At a club meeting, every pair of members shakes hands exactly once. There are 28 handshakes in total. How many members are there?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 9</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">n &times; (n&minus;1) = 28 &times; 2 = 56</div><div class="ln">8 &times; 7 = 56 &#10003;</div><div class="ln ans">8</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Checklist &#8594;</button></div>
+</div>
+
+<!-- s10: CHECKLIST -->
+<div class="screen" id="s10">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Baton-Pass Checklist</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Read the whole question. Does it need TWO different tools, not one?</div>
+    <div class="node"><span class="step-n">2</span>Name both skills before you calculate anything.</div>
+    <div class="node"><span class="step-n">3</span>Solve Skill 1 completely, as if it were its own question, down to ONE clean number.</div>
+    <div class="node"><span class="step-n">4</span>Pass that ONE number into Skill 2. Solve Skill 2 exactly like a normal stand-alone question.</div>
+    <div class="node"><span class="step-n">5</span>Never try to do both skills in one messy step &mdash; that's when errors creep in.</div>
+    <div class="node"><span class="step-n">6</span>Some pairs run backward (you're given the END result and solve for the start) &mdash; check which direction the question is asking before you begin.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; If a question feels "too big to hold in your head," that's the signal it's a two-skill question &mdash; slow down and find the baton-pass point, don't try to rush both skills at once.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap &#8594;</button></div>
+</div>
+
+<!-- s11: RECAP -->
+<div class="screen" id="s11">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>A "capstone" question isn't harder maths &mdash; it's two skills you already have, back to back. Solve Skill 1 completely to get ONE clean number, then pass that number into Skill 2 like it's a brand-new question.</strong></p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You can name BOTH skills in a question before calculating anything</li>
+    <li>You finish Skill 1 completely before touching Skill 2</li>
+    <li>You never try to blend two formulas into one messy step</li>
+    <li>You notice when a pair runs backward and adjust</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">This is exactly the skill that decided Round 3 on both M4 and M5. Every miss there was a two-skill question &mdash; and you already have every one of the skills involved.</p>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#AD1457;color:#fff;border:2px solid #AD1457;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>
