@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Double the Total First — Quick Fix</title>
+<style>
+:root{--nav:#F9A825;--nav-dark:#F57F17;--bg:#FFF8E1;--card:#fff;--acc:#F57F17;--ok:#2E7D32;--err:#C62828}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.25);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.5);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+p,li{font-size:1rem;line-height:1.65}
+.rulebig{background:linear-gradient(135deg,#FFF8E1,#FFECB3);border:3px solid #F9A825;border-radius:14px;padding:22px;text-align:center;font-size:1.15rem;font-weight:800;color:#8d5a00;margin:14px 0}
+.steps{margin:10px 0 6px 0;background:#FFF8E1;border:1px solid #FFD54F;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#8d5a00}
+.steps .ln.ans{color:#8d5a00;font-weight:800}
+.mistake{background:#FFEBEE;border:2px solid #EF9A9A;border-radius:10px;padding:14px 16px;margin:12px 0}
+.mistake-title{color:#C62828;font-weight:700;margin-bottom:6px}
+.good{background:#E8F5E9;border:2px solid #A5D6A7;border-radius:10px;padding:14px 16px;margin:12px 0}
+.good-title{color:#2E7D32;font-weight:700;margin-bottom:6px}
+.q-card{background:#FFF8E1;border:1.5px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #FFD54F;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#FFF8E1}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#FFF8E1;color:#8d5a00;border:2px solid #8d5a00;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#F57F17;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Double the Total First</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: THE RULE -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x26A1; The One Rule</h2>
+  <p>You already know how to solve "choose 2 from n people" going forward: n &times; (n&minus;1) &divide; 2. This is the reverse trick &mdash; when you're given the TOTAL number of handshakes/pairs/matches and asked to find n.</p>
+  <div class="rulebig">Double the total first. Then find two consecutive numbers that multiply to it. The bigger one is n.</div>
+  <p>That's the whole move. One extra step &mdash; doubling &mdash; bolted onto a "choose 2" question you can already do backward in your head.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See it work &#8594;</button></div>
+</div>
+
+<!-- s1: WORKED EXAMPLE -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F440; Quick Example</h2>
+  <p><strong>Every player in a chess club played every other player exactly once. There were 45 games in total. How many players were in the club?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; double the total:</span> 45 &times; 2 = 90</div>
+    <div class="ln"><span class="note">Step 2 &mdash; find two consecutive numbers that multiply to 90:</span> 9 &times; 10 = 90 &#10003;</div>
+    <div class="ln"><span class="note">Step 3 &mdash; take the BIGGER number:</span> n = 10</div>
+    <div class="ln ans">10 players</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The mistake to avoid &#8594;</button></div>
+</div>
+
+<!-- s2: MISTAKE TO AVOID -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x26A0;&#xFE0F; The One Mistake This Fixes</h2>
+  <div class="mistake">
+    <div class="mistake-title">&#10007; Forgetting to double</div>
+    <p>Trying to find two consecutive numbers that multiply to 45 directly (there aren't any nice ones) &mdash; or guessing n = 45. The total given is HALF of n&times;(n&minus;1), not the full product.</p>
+  </div>
+  <div class="good">
+    <div class="good-title">&#10003; Double first, then search</div>
+    <p>45 &times; 2 = 90, then 9 &times; 10 = 90, so n = 10. Doubling turns it back into the exact "choose 2" shape you already know.</p>
+  </div>
+  <p style="margin-top:10px"><strong>Before you search for consecutive numbers, always double the total first.</strong></p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it &#8594;</button></div>
+</div>
+
+<!-- s3: PRACTICE -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#11088; Your Turn</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; Every team in a mini-league played every other team exactly once. There were 36 matches in total. How many teams were in the league?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 18</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">36 &times; 2 = 72</div><div class="ln">8 &times; 9 = 72, bigger number = 9</div><div class="ln ans">9 teams</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733; Every student in a small class shook hands with every other student exactly once. There were 55 handshakes in total. How many students were in the class?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 10</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 11</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 12</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">55 &times; 2 = 110</div><div class="ln">10 &times; 11 = 110, bigger number = 11</div><div class="ln ans">11 students</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Done &#8594;</button></div>
+</div>
+
+<!-- s4: RECAP -->
+<div class="screen" id="s4">
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h2 style="color:#2E7D32;border-color:#2E7D32">&#x1F3C6; Locked In</h2>
+  <div class="rulebig" style="background:#fff;border-color:#2E7D32;color:#1B5E20">Double the total. Find two consecutive numbers that multiply to it. n is the bigger one.</div>
+  <p style="margin-top:10px">That's the whole fix. Everything else is the "choose 2" thinking you already have.</p>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#F57F17;color:#fff;border:2px solid #F57F17;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

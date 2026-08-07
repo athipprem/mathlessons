@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Both Groups, Every Time — Quick Fix</title>
+<style>
+:root{--nav:#F9A825;--nav-dark:#F57F17;--bg:#FFF8E1;--card:#fff;--acc:#F57F17;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.25);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.5);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+p,li{font-size:1rem;line-height:1.65}
+.rulebig{background:linear-gradient(135deg,#FFF8E1,#FFECB3);border:3px solid #F9A825;border-radius:14px;padding:22px;text-align:center;font-size:1.15rem;font-weight:800;color:#8d5a00;margin:14px 0}
+.steps{margin:10px 0 6px 0;background:#FFF8E1;border:1px solid #FFD54F;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#8d5a00}
+.steps .ln.ans{color:#8d5a00;font-weight:800}
+.mistake{background:#FFEBEE;border:2px solid #EF9A9A;border-radius:10px;padding:14px 16px;margin:12px 0}
+.mistake-title{color:#C62828;font-weight:700;margin-bottom:6px}
+.good{background:#E8F5E9;border:2px solid #A5D6A7;border-radius:10px;padding:14px 16px;margin:12px 0}
+.good-title{color:#2E7D32;font-weight:700;margin-bottom:6px}
+.q-card{background:#FFF8E1;border:1.5px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #FFD54F;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#FFF8E1}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#FFF8E1;color:#8d5a00;border:2px solid #8d5a00;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#F57F17;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Both Groups, Every Time</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: THE RULE -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x26A1; The One Rule</h2>
+  <p>You already know circular arrangements cold. This is a 2-minute add-on for ONE specific situation: when there are <strong>TWO (or more) different identical groups</strong> at the table.</p>
+  <div class="rulebig">If there's more than ONE repeat group &mdash; divide by EACH group's factorial, one after another. Never just one.</div>
+  <p>That's it. Same circular method you already know (subtract 1, then factorial). The only new step: if you count 2 groups, you divide TWICE.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See it work &#8594;</button></div>
+</div>
+
+<!-- s1: WORKED EXAMPLE -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F440; Quick Example</h2>
+  <p><strong>10 people sit around a circular table. Among them, 4 are wearing identical black caps, and 3 are wearing identical white caps (the rest are all different). How many different arrangements are possible?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; circular arrangements, like always:</span> (10&minus;1)! = 9! = 362,880</div>
+    <div class="ln"><span class="note">Step 2 &mdash; how many repeat groups? Count them: 2 groups (black, white).</span></div>
+    <div class="ln"><span class="note">Step 3 &mdash; divide by the FIRST group's factorial:</span> 362,880 &divide; 4! = 362,880 &divide; 24 = 15,120</div>
+    <div class="ln"><span class="note">Step 4 &mdash; divide by the SECOND group's factorial too:</span> 15,120 &divide; 3! = 15,120 &divide; 6 = 2,520</div>
+    <div class="ln ans">2,520 different arrangements</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The mistake to avoid &#8594;</button></div>
+</div>
+
+<!-- s2: MISTAKE TO AVOID -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x26A0;&#xFE0F; The One Mistake This Fixes</h2>
+  <div class="mistake">
+    <div class="mistake-title">&#10007; Stopping after ONE group</div>
+    <p>362,880 &divide; 4! = 15,120 &mdash; then stopping. This forgets the white-cap group entirely. 15,120 is too big and wrong.</p>
+  </div>
+  <div class="good">
+    <div class="good-title">&#10003; Dividing by BOTH groups</div>
+    <p>362,880 &divide; 4! &divide; 3! = 2,520 &mdash; correct. Every repeat group gets its own division, no skipping.</p>
+  </div>
+  <p style="margin-top:10px"><strong>Before you write your final answer, always ask: "How many groups did I count? Did I divide that many times?"</strong></p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try it &#8594;</button></div>
+</div>
+
+<!-- s3: PRACTICE -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#11088; Your Turn</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 9 people sit around a circular table. 3 are wearing identical purple shirts and 2 are wearing identical orange shirts (rest all different). How many different arrangements are possible?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 6,720</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 3,360</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 1,680</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">(9&minus;1)! = 8! = 40,320</div><div class="ln">40,320 &divide; 3! = 6,720. Then &divide; 2! = 3,360</div><div class="ln ans">3,360</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733; 11 people sit around a circular table. 4 are wearing identical yellow badges and 3 are wearing identical green badges (rest all different). How many different arrangements are possible?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 151,200</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 604,800</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 25,200</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">(11&minus;1)! = 10! = 3,628,800</div><div class="ln">3,628,800 &divide; 4! = 151,200. Then &divide; 3! = 25,200</div><div class="ln ans">25,200</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Done &#8594;</button></div>
+</div>
+
+<!-- s4: RECAP -->
+<div class="screen" id="s4">
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h2 style="color:#2E7D32;border-color:#2E7D32">&#x1F3C6; Locked In</h2>
+  <div class="rulebig" style="background:#fff;border-color:#2E7D32;color:#1B5E20">Count the repeat groups. Divide by EACH one's factorial. Never stop after just one.</div>
+  <p style="margin-top:10px">That's the whole fix. Everything else about circular arrangements is exactly what you already know.</p>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#F57F17;color:#fff;border:2px solid #F57F17;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

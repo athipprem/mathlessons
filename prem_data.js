@@ -20,8 +20,33 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:52, topic:'Two-Skill Capstones — Chain What You Already Know (Reasoning)', status:'In Progress' },
+  currentUnit: { n:53, topic:'Quick-Win Add-Ons — Circular Double-Repeats & Backward Combinations (Art of Counting)', status:'In Progress' },
   lastUnit: {
+    n:52, score:9, outOf:15, pct:60, delta:+2, prevScore:7, prevOutOf:15, prevLabel:'U51',
+    patternLabel: 'U52 — Two-Skill Capstones, Chain What You Already Know, NOT PASSED (improved)',
+    patternInsight: '9/15 (60%) <strong>NOT PASSED</strong> &mdash; Sec A (Warm-Up Pairs) 5/5 PERFECT, Sec B (Medium Pairs) 3/5, Sec C (Harder Pairs &amp; Capstone) 1/5. Section A is the headline: a clean sweep across all four baton-pass pairings (circular+repeats, averages+removal, counting+remainder, handshake+algebra) plus an averages-addition variant &mdash; the meta-skill landed on first real exposure. Section B held near the pass line with one diagnosable slip: Q7 reused Q3&rsquo;s stale digit-count (20) instead of recomputing fresh for three digits (wrote 7, correct 8), and Q10 (a brand-new "distributing+remainder" pairing) was left blank. Section C is where it broke down: Q11 and Q12 were both left with a self-marked "?" and an ambiguous final answer (reconciled as both wrong against the score-box total of 9); Q13 wrote 13 instead of 3, likely a copied question-number slip; Q14 wrote 33 instead of 12 &mdash; looks like 66&divide;2 was computed directly instead of solving n(n&minus;1)=132 for n. Q15, the hardest question on the paper (a true 3-skill capstone), was fully correct with clean long-division working shown &mdash; proof the baton-pass method itself still works under maximum pressure, just not consistently yet at the &#9733;&#9733; tier.',
+    analysisLabel: 'Next: Unit 53 — Quick-Win Add-Ons: Both Groups, Every Time &amp; Double the Total First (final exam-prep unit, built 7 Aug 2026)',
+    analysisInsight: 'Flagged to Lui, who then surfaced two critical pieces of context: Prem had the lesson pages open during both U51 and U52 (open-book), and separately told Lui the U51&ndash;U52 procedures felt "too long." Together these reframe Section A&rsquo;s clean sweep &mdash; it shows he can follow a reference under pressure, not necessarily that the method is fully internalized, and length itself was a real barrier regardless. With 1&ndash;2 days left before the 9 Aug exam, U53 is built around both signals: two short, single-rule "quick win" add-ons (not full multi-step procedures) bolted onto skills Prem already has fast and cold &mdash; circular arrangements (add: divide by EACH repeat group, not just one) and combinations (add: double the total first, then find two consecutive factors) &mdash; chosen directly from U52&rsquo;s diagnosable Section C misses (Q11 only-one-repeat-group, Q14 wrong-shortcut-applied). Recommended: run U53&rsquo;s test closed-book for a truer final signal before Sunday.',
+    qSummary: '<strong>Sec A 5/5 PERFECT | Sec B 3/5 | Sec C 1/5</strong> — 9/15 (60%) NOT PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Circular + Repeats', lvl:'w', pass:true,  note:'&#10003; 60.' },
+      { q:'Q2', topic:'Averages + Removal', lvl:'w', pass:true,  note:'&#10003; 23.' },
+      { q:'Q3', topic:'Counting + Remainder', lvl:'w', pass:true,  note:'&#10003; 9.' },
+      { q:'Q4', topic:'Handshake + Algebra', lvl:'w', pass:true,  note:'&#10003; 7.' },
+      { q:'Q5', topic:'Averages + Addition', lvl:'w', pass:true,  note:'&#10003; 28.' },
+      { q:'Q6', topic:'Circular + Repeats  &#9733;', lvl:'m', pass:true,  note:'&#10003; 420.' },
+      { q:'Q7', topic:'Counting + Remainder  &#9733;', lvl:'m', pass:false, note:'&#10007; wrote 7; correct 8. Reused Q3&rsquo;s stale 2-digit count (20) instead of recomputing fresh for 3 digits.' },
+      { q:'Q8', topic:'Averages + Removal  &#9733;', lvl:'m', pass:true,  note:'&#10003; 34.' },
+      { q:'Q9', topic:'Handshake + Algebra  &#9733;', lvl:'m', pass:true,  note:'&#10003; 10.' },
+      { q:'Q10',topic:'Distributing + Remainder  &#9733;', lvl:'m', pass:false, note:'&#10007; blank; correct 4. No attempt on this brand-new pairing.' },
+      { q:'Q11',topic:'Circular + Repeats  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; self-marked "?", ambiguous; correct 840. Divided by 24 instead of 48 (only one repeat group, not both).' },
+      { q:'Q12',topic:'Averages 2-Step  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; self-marked "?", ambiguous; correct 2. Illegible working, reconciled as wrong via the score-box total.' },
+      { q:'Q13',topic:'Counting + Remainder  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote 13; correct 3. Likely copied the question number instead of computing the remainder.' },
+      { q:'Q14',topic:'Combinations + Algebra  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote 33; correct 12. Looks like 66&divide;2 computed directly instead of solving n(n&minus;1)=132.' },
+      { q:'Q15',topic:'Capstone (3-Skill Chain)  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 80 &mdash; full correct long-division working shown. The hardest question on the paper, done cleanly.' }
+    ]
+  },
+  _U51archived: {
     n:51, score:7, outOf:15, pct:47, delta:0, prevScore:7, prevOutOf:15, prevLabel:'M5 (normalized)',
     patternLabel: 'U51 — Pictogram/Table Clue-Puzzles & Digit/Symbol Puzzles, NOT PASSED',
     patternInsight: '7/15 (47%) <strong>NOT PASSED</strong> &mdash; Sec A (Pictogram) 3/5, Sec B (Digit Puzzles) 3/5, Sec C (Harder + Capstones) 1/5. Pictogram clue-puzzles landed reasonably for a first exposure (Q3, Q5 both correct, including a 3-clue chain). Digit puzzles split cleanly: "one symbol" and "sum & difference" (Q6, Q7, Q10) solid; column-addition and repeated-digit codes (Q8, Q9) not landing. <strong>Two direct, unprompted notes from Prem:</strong> Q8 &mdash; "Btw, I don&rsquo;t understand UR solution for this" (calm, specific method feedback); Q9 &mdash; "don&rsquo;t use stars looks like this!!!" written across the page margin next to a nonsensical answer and heavy, pressed-hard scribbling &mdash; a visible frustration reaction to the &#9733;&#9733; notation itself. Section C then collapsed: Q11 clean and correct, Q12 solved to the second-to-last step then answered the wrong variable (wrote P=44 instead of finishing to Q=132), and Q13&ndash;Q15 all abandoned completely blank under heavy scratch marks. Reads as a frustration cascade triggered at Q9, distinct from U50&rsquo;s quiet self-doubt (no erased-correct-answers here) and distinct from M5&rsquo;s healthy "IDK" pattern.',
@@ -79,31 +104,6 @@ var PREM_DATA = {
       { q:'Q23',topic:'Spatial — Painted (Edges)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; "IDK"; correct 44. Expected at this tier &mdash; edges/faces is still the live, known gap from U50.' },
       { q:'Q24',topic:'Capstone — Listing + Divisibility  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; blank; correct 48. No attempt.' },
       { q:'Q25',topic:'Capstone — Counting + Algebra  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; incomplete ("3S=1L" miswritten); correct 1512. Misread the balance relationship; no final answer reached.' }
-    ]
-  },
-  _U50archived: {
-    n:50, score:8, outOf:15, pct:53, delta:-3, prevScore:11, prevOutOf:15, prevLabel:'U49',
-    patternLabel: 'U50 — Targeted Retest: Painted Cube Puzzles, One Unifying Model, NOT PASSED',
-    patternInsight: '8/15 (53%) <strong>NOT PASSED</strong> &mdash; Sec A (Corners &amp; Inside) 5/5, Sec B (Edges &amp; Faces) 2/5, Sec C (Full Classification) 1/5. Two separate problems, not one. <strong>Content:</strong> the edges/faces skill U50 was built to fix is still not landing &mdash; only 3/10 correct across Sec B+C, and Sec C actually got WORSE than U49 (1/5 vs 2/5) despite a dedicated re-teach with a single unifying model; Prem wrote "confusing method" directly next to Q7, and Q12/Q14 share an identical wrong answer (16) with no working, suggesting guessing under pressure. <strong>New finding, more concerning:</strong> on Q6 and Q8, the working shows the FULLY CORRECT calculation (8+8+4=20; 12+0+0=12) &mdash; then Prem crossed out his own correct answer and wrote something else. A self-doubt/confidence pattern under test conditions, not a knowledge gap, and new this cycle.',
-    analysisLabel: 'Next: Confidence-Focused Session (non-scored) &rarr; Milestone M5',
-    analysisInsight: 'Flagged to Lui rather than auto-retested, given two different problems (a persisting faces-formula gap, and a new self-doubt pattern) with only 3 days to the exam. Lui chose a confidence-focused session over a third retest attempt, a light review day, or accepting the gap. Built Confidence_Session_TrustYourFirstAnswer.html: a non-scored, no-red-pen intervention that shows Prem his own Q6/Q8 evidence, has him redo those exact 2 questions, teaches "the one rule" (only change an answer for a wrong NUMBER, never a feeling), and closes with quick confidence wins on already-mastered content. Validated at Milestone M5 (6 Aug): zero instances of the overwriting pattern recurred across 25 questions. Painted-cube edges/faces remains open and deliberately untouched this close to the exam &mdash; protecting Prem\'s state took priority over closing the last content gap.',
-    qSummary: '<strong>Sec A 5/5 | Sec B 2/5 | Sec C 1/5</strong> — 8/15 (53%) NOT PASSED',
-    qBreakdown: [
-      { q:'Q1', topic:'Corners (3&times;2&times;2)', lvl:'w', pass:true,  note:'&#10003; 8.' },
-      { q:'Q2', topic:'Inside (3&times;3&times;3)', lvl:'w', pass:true,  note:'&#10003; 1.' },
-      { q:'Q3', topic:'Inside (4&times;3&times;3)', lvl:'w', pass:true,  note:'&#10003; 2.' },
-      { q:'Q4', topic:'At Least 1 Face (3&times;3&times;2)', lvl:'w', pass:true,  note:'&#10003; 18.' },
-      { q:'Q5', topic:'At Least 1 Face (4&times;2&times;2)', lvl:'w', pass:true,  note:'&#10003; 16.' },
-      { q:'Q6', topic:'Edges (4&times;4&times;3)  &#9733;', lvl:'m', pass:true,  note:'Marked &#10003; &mdash; working shows 8+8+4=20 fully correct, but the final answer was then crossed out and replaced with an illegible one. Credited for the working; flagged as the first instance of the overwriting pattern.' },
-      { q:'Q7', topic:'Faces (4&times;4&times;4)  &#9733;', lvl:'m', pass:false, note:'&#10007; wrote 12; correct 24. Margin note in Prem\'s own writing: "confusing method."' },
-      { q:'Q8', topic:'Edges (5&times;2&times;2)  &#9733;', lvl:'m', pass:true,  note:'Marked &#10003; &mdash; working shows 12+0+0=12 fully correct, then crossed out and replaced with an illegible answer. Same overwriting pattern as Q6.' },
-      { q:'Q9', topic:'Faces (5&times;4&times;4)  &#9733;', lvl:'m', pass:false, note:'&#10007; wrote 14; correct 32. No working shown.' },
-      { q:'Q10',topic:'At Least 2 Faces, Capstone  &#9733;', lvl:'m', pass:false, note:'&#10007; wrote ~43 (messy); correct 36. Edges miscalculated as 18 instead of 28.' },
-      { q:'Q11',topic:'Edges (6&times;5&times;2)  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 28 &mdash; the one clean, confident, correctly-worked answer across Sections B+C.' },
-      { q:'Q12',topic:'Faces (5&times;5&times;4)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote 16; correct 42. No working shown.' },
-      { q:'Q13',topic:'At Most 1 Face (5&times;5&times;5)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote 54; correct 81. Added the inside count (27) to itself instead of faces (54) + inside (27).' },
-      { q:'Q14',topic:'Faces (6&times;4&times;4)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote 16; correct 40. No working &mdash; identical wrong answer to Q12, a possible sign of guessing.' },
-      { q:'Q15',topic:'At Least 2 Faces, Capstone  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote 78; correct 44. Edges miscalculated as 18 instead of 36.' }
     ]
   },
   _M4archived: {
@@ -248,23 +248,37 @@ var PREM_DATA = {
     { n:49, score:11, delta:-3,   color:'linear-gradient(135deg,#0277BD,#01579B)', star:false },
     { n:50, score:8,  delta:-3,   color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
     { n:'M5', label:'M5', score:7, delta:-1, color:'linear-gradient(135deg,#0D47A1,#4A148C)', star:false },
-    { n:51, score:7,  delta:0,    color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false }
+    { n:51, score:7,  delta:0,    color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
+    { n:52, score:9,  delta:+2,   color:'linear-gradient(135deg,#AD1457,#880E4F)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 53,
+      badge: 'linear-gradient(135deg,#F9A825,#F57F17)',
+      title: 'Quick-Win Add-Ons — Circular Double-Repeats & Backward Combinations (Art of Counting)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'2 SHORT lessons — single-rule add-ons only', c:'tgreen' },
+        { t:'Closed-book test recommended', c:'torange' },
+        { t:'Built 1 day before the exam', c:'torange' }
+      ],
+      note: 'U53, built 7 Aug 2026 directly off two pieces of critical feedback: Prem found U51&ndash;U52\'s procedures "too long," and Lui revealed those tests were open-book (lessons open during testing), meaning Section A\'s clean U52 sweep may reflect reference-following more than internalized recall. U53 redesigns around both signals &mdash; two dramatically short (5-screen) "quick win" lessons, each bolting ONE rule onto a skill Prem already has fast: Counting_Lesson_BothGroupsEveryTime.html (divide by EACH repeat group at a circular table, not just one) and ArtOfCounting_Lesson_DoubleTheTotalFirst.html (double the total first, then find two consecutive factors, to solve combinations backward). Both target skills come directly from U52\'s diagnosable Section C misses (Q11 only-one-repeat-group, Q14 wrong-shortcut-applied). Test: 15Q, Sec A circular double-repeat, Sec B combinations backward, Sec C harder + a true capstone question. Recommended closed-book for a truer final signal before Sunday.',
+      status: 'pending'
+    },
+    {
       n: 52,
       badge: 'linear-gradient(135deg,#AD1457,#880E4F)',
       title: 'Two-Skill Capstones — Chain What You Already Know (Reasoning)',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'1 lesson, meta-skill only — no new content', c:'torange' },
-        { t:'Targets M4/M5 Round 3 (1/5, 0/5)', c:'tgreen' },
-        { t:'Built 2 days before the exam', c:'torange' }
+        { t:'9/15 (60%) &#10007; NOT PASSED', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Sec A 5/5 PERFECT — baton-pass method landed', c:'tgreen' },
+        { t:'Sec C 1/5 — hardest tier still breaking down', c:'tred' },
+        { t:'&rarr; U53 short quick-win add-ons (open-book caveat)', c:'torange' }
       ],
-      note: 'U52, built 7 Aug 2026 at Lui\'s request, directly off U51\'s result and the standing M4/M5 finding that every Round-3 (hardest tier) miss was a "capstone" question chaining two already-mastered skills. One lesson (Reasoning_Lesson_TwoSkillCapstones.html) teaches the "baton-pass" meta-skill &mdash; solve Skill 1 completely to one clean number, then feed it into Skill 2 &mdash; using four pairings built entirely from content Prem has already passed a real test on: circular arrangements+repeats, averages+removal, counting+remainder, and handshake formula solved backward via algebra. No new content, only the combining move. Test: 15Q across the same four pairings, isolated rather than buried in a long mixed paper. Deliberately avoids both the &#9733;&#9733; notation (U51\'s frustration trigger) and painted-cube edges/faces (the still-open content gap).',
-      status: 'pending'
+      note: '9/15 &#10007; <strong>NOT PASSED</strong> (improved from U51\'s 7/15) &mdash; Sec A 5/5 PERFECT, Sec B 3/5, Sec C 1/5. Section A was a clean sweep across all four baton-pass pairings plus an averages-addition variant. Section B held near the pass line, with one diagnosable slip (Q7 reused a stale digit-count) and one blank on a brand-new pairing (Q10). Section C broke down: Q11/Q12 ambiguous "?" marks (both reconciled as wrong), Q13 likely a copied question-number, Q14 used the wrong shortcut (66&divide;2 instead of solving n(n&minus;1)=132) &mdash; but Q15, the hardest question on the paper, was fully correct with clean working. Lui then revealed the test was open-book (lessons open during testing) and that Prem found the procedures too long &mdash; reframing Section A\'s sweep as reference-following under pressure, not necessarily full internalization. &rarr; U53, redesigned as short single-rule add-ons, recommended closed-book.',
+      status: 'done'
     },
     {
       n: 51,
@@ -1114,10 +1128,10 @@ var PREM_DATA = {
       fillClass: 'g2', fillPct: 74
     },
     {
-      label:     '2026 exam prediction — final-week plan built from 2023–2025 real ASMOPSS papers; revised three times as results came in, now U52 with 2 days left',
+      label:     '2026 exam prediction — final-week plan built from 2023–2025 real ASMOPSS papers; revised four times as results came in, now U53 with 1–2 days left',
       pill:      'p2', pillText: 'In Progress &#9654;',
-      score:     'Analysed 31 Jul 2026. Read all three real ASMOPSS G4 Set-B papers (2023, 2024, 2025) and catalogued all 75 questions by topic. Original plan: U49 3D Visualization, U50 Digit &amp; Symbol Puzzles, U51 Pictogram Clue-Puzzles, U52 Composite Area, U53 Precision Drill, +1 mock test. <strong>Revised 2 Aug</strong> after U49 Sec C NOT PASSED: U50 became a targeted Painted Cube retest. <strong>Revised 6 Aug</strong> after U50\'s retest also NOT PASSED (plus a confidence issue) and Lui requested diagnostic Milestone M5: U51 combined both remaining puzzle topics into one final exam-prep unit, with nothing planned after it. <strong>Revised again 7 Aug</strong> after U51 also came back NOT PASSED (7/15, plus a new frustration signal at Q9): Lui explicitly chose to proceed with one more unit anyway, U52, built off M4/M5\'s consistent Round-3 finding (two-skill capstone questions) rather than any of the originally-predicted content topics &mdash; a meta-skill lesson using zero new content, built with 2 days left before the exam.',
-      fillClass: 'g2', fillPct: 85
+      score:     'Analysed 31 Jul 2026. Read all three real ASMOPSS G4 Set-B papers (2023, 2024, 2025) and catalogued all 75 questions by topic. Original plan: U49 3D Visualization, U50 Digit &amp; Symbol Puzzles, U51 Pictogram Clue-Puzzles, U52 Composite Area, U53 Precision Drill, +1 mock test. <strong>Revised 2 Aug</strong> after U49 Sec C NOT PASSED: U50 became a targeted Painted Cube retest. <strong>Revised 6 Aug</strong> after U50\'s retest also NOT PASSED (plus a confidence issue) and Lui requested diagnostic Milestone M5: U51 combined both remaining puzzle topics into one final exam-prep unit, with nothing planned after it. <strong>Revised again 7 Aug</strong> after U51 also came back NOT PASSED (7/15, plus a new frustration signal at Q9): Lui chose to proceed with U52 anyway, a meta-skill lesson (two-skill capstones) built off M4/M5\'s Round-3 finding. <strong>Revised a fourth time, still 7 Aug</strong>, after U52 (9/15, improved but NOT PASSED) and after Lui revealed U51&ndash;U52 were both open-book and that Prem found the procedures too long: U53 abandons the "full new procedure" format entirely in favour of two short single-rule add-ons bolted onto already-fast skills, targeting U52\'s two diagnosable Section C misses, recommended closed-book.',
+      fillClass: 'g2', fillPct: 88
     },
     {
       label:     'Painted-cube edge/face recall — ACTIVE, still open (U49 2/5 &rarr; U50 retest 1/5, worse); confidence-erosion side-effect surfaced and resolved separately',
@@ -1126,10 +1140,22 @@ var PREM_DATA = {
       fillClass: 'g2', fillPct: 35
     },
     {
-      label:     'Two-skill "capstone" questions — the consistent hardest-tier miss (M4 Round 3 1/5, M5 Round 3 0/5) — ACTIVE, U52 targets it directly',
+      label:     'Two-skill "capstone" questions — hardest-tier miss (M4 Round 3 1/5, M5 Round 3 0/5) — IMPROVED at U52 (Sec A 5/5 PERFECT) but Sec C still 1/5; open-book caveat applies',
+      pill:      'p2', pillText: 'In Progress &#9654;',
+      score:     'Every Round-3 miss on both milestones was a question chaining two already-mastered skills in one problem. U52 (Reasoning_Lesson_TwoSkillCapstones.html) taught the "baton-pass" meta-skill and Section A came back a PERFECT 5/5 across all four pairings &mdash; genuine first-exposure progress. But the &#9733;&#9733; tier (Sec C) still scored only 1/5, and Lui subsequently revealed the test was open-book, which tempers how much of Section A\'s sweep to credit as independent recall versus successful reference-following. Not re-taught at U53 (painted-cube-style third attempt risk); instead carried forward as a verbal-reminder watch-item for exam day.',
+      fillClass: 'g2', fillPct: 55
+    },
+    {
+      label:     'Circular double-repeat (dividing by only ONE group) &amp; combinations solve-backward (wrong shortcut) — ACTIVE, U53 targets both directly',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'Every Round-3 miss on both milestones was a question chaining two already-mastered skills in one problem (M4: derive+substitute, circular+repeats, listing+divisibility, counting+algebra; M5: averages+removal, circular+repeats, listing+divisibility, counting+algebra). None of the underlying individual skills are weak &mdash; this is specifically about recognizing and sequencing two tools in one question, never explicitly taught. U52 (Reasoning_Lesson_TwoSkillCapstones.html) teaches exactly this as a single meta-skill ("solve Skill 1 to one clean number, pass it into Skill 2"), built entirely from content already passed at 80%+, deliberately built 7 Aug 2026 despite only 2 days remaining before the exam &mdash; Lui\'s explicit call after weighing U51\'s frustration signal.',
-      fillClass: 'g2', fillPct: 40
+      score:     'Both drawn directly from U52\'s two clearest diagnosable Section C misses: Q11 divided by only one repeat group\'s factorial instead of both (840 vs the correct answer after dividing by both), and Q14 applied a direct shortcut (66&divide;2=33) instead of solving n(n&minus;1)=132 for n (correct 12). U53 fixes each with a single bolted-on rule to an already-fast skill rather than a new procedure: "count every repeat group, divide by EACH one\'s factorial" and "double the total first, then find two consecutive factors." Built short (5 screens each) per Prem\'s direct "too long" feedback on U51&ndash;U52.',
+      fillClass: 'g2', fillPct: 45
+    },
+    {
+      label:     'Open-book testing on U51–U52 — coaching-process note, not a Prem gap',
+      pill:      'p2', pillText: 'Monitor &#128992;',
+      score:     'Lui allowed Prem to have the lesson pages open during both the U51 and U52 unit tests. This is not how the real ASMOPSS exam works (closed-book), so U51/U52 results &mdash; especially U52\'s Section A 5/5 sweep &mdash; likely overstate independent, unaided recall to some degree. U53\'s test is recommended closed-book for a truer final read before Sunday. Flagged here so this context isn\'t lost when comparing U51&ndash;U52 scores against earlier closed-book units.',
+      fillClass: 'g2', fillPct: 50
     },
     {
       label:     'Visible frustration reaction to notation/symbols under test pressure — NEW (U51, Q9) — distinct from U50\'s self-doubt and M5\'s healthy "IDK"',
