@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digit &amp; Symbol Puzzles — Be the Code-Breaker</title>
+<style>
+:root{--nav:#6A1B9A;--nav-dark:#4A148C;--bg:#F3E5F5;--card:#fff;--acc:#6A1B9A;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#4A148C;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#F3E5F5,#EDE7F6);border:2px solid #AB47BC;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#4A148C;font-weight:700;margin-bottom:6px}
+.big-rule{background:#F3E5F5;border:2px solid #8E24AA;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#4A148C;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F5EEF8;border:1px solid #CE93D8;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#6A1B9A}
+.steps .ln.ans{color:#4A148C;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#6A1B9A;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F5EEF8;border:1.5px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#F3E5F5}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#F3E5F5;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#6A1B9A;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E0;color:#E65100;border:1.5px solid #FFB74D;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.rulebar{background:#F3E5F5;border:1.5px solid #8E24AA;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#4A148C;text-align:center;margin-bottom:12px}
+.clueboard{background:#F5EEF8;border:2px solid #CE93D8;border-radius:10px;padding:14px 16px;margin:12px 0}
+.clue-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px dashed #D9B8E0;font-size:.98rem}
+.clue-row:last-child{border-bottom:none}
+.clue-tag{background:#6A1B9A;color:#fff;border-radius:6px;padding:2px 9px;font-size:.78rem;font-weight:700;white-space:nowrap;margin-top:2px}
+.colgrid{display:flex;justify-content:center;gap:0;margin:14px 0;font-family:'Courier New',monospace;font-size:1.3rem;font-weight:800;color:#4A148C}
+.colgrid .digit-box{border:2px solid #8E24AA;border-radius:6px;width:44px;height:48px;display:flex;align-items:center;justify-content:center;margin:0 2px;background:#F5EEF8}
+.symbolbox{display:inline-block;background:#6A1B9A;color:#fff;border-radius:6px;padding:2px 10px;font-weight:800;font-family:'Courier New',monospace}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Digit &amp; Symbol Puzzles</span>
+  <span class="tnav-pill" id="pill">1 / 11</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F511; Why This Matters</h2>
+  <div class="why">
+    <div class="why-title">What these puzzles actually are</div>
+    <p>A symbol or letter takes the place of a digit (0&ndash;9). Wherever that same symbol appears, it's always the SAME digit. Your job is to crack the code and work out which digit it's hiding. It's basically a secret code, and you're the code-breaker.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Why it's worth mastering right now</div>
+    <p>This exact puzzle type shows up 2&ndash;3 times on the ASMOPSS paper every single year, always in the harder sections. It rewards one specific habit: working in the RIGHT ORDER, not guessing randomly. That's the whole secret &mdash; and it's very learnable.</p>
+  </div>
+  <div class="big-rule">A symbol is just a digit wearing a disguise. Find the ONE column or fact that pins it down first.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: METHOD -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F9E9; The Code-Breaker's Method</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Is it ONE symbol in a simple equation (like 4 &times; &#9679; = 28)? &rarr; Solve it directly, just like a missing-number sum.</div>
+    <div class="node"><span class="step-n">2</span>Is it TWO different symbols with a sum AND a difference given? &rarr; Use the "sum &amp; difference" shortcut.</div>
+    <div class="node"><span class="step-n">3</span>Is it a COLUMN ADDITION or SUBTRACTION with a repeated symbol (like B7 + 2B = 60)? &rarr; Turn each 2-digit number into (tens &times; 10 + units), then solve like an equation.</div>
+    <div class="node"><span class="step-n">4</span>Whatever type it is: the digit MUST be 0&ndash;9. If your answer isn't in that range, you made an arithmetic slip &mdash; check your work.</div>
+  </div>
+  <p>The "sum &amp; difference" shortcut for two symbols &#9679; and &#9650;: if &#9679;+&#9650; = S and &#9679;&minus;&#9650; = D, then &#9679; = (S+D)&divide;2 and &#9650; = (S&minus;D)&divide;2. You'll see exactly why this works in Skill 2.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Skill 1 &#8594;</button></div>
+</div>
+
+<!-- s2: SKILL 1 WORKED EXAMPLE - single symbol -->
+<div class="screen" id="s2">
+<div class="card">
+  <span class="badge-cap">Skill 1 of 4</span>
+  <h2>One Symbol — A Missing-Number Sum in Disguise</h2>
+  <p><strong>4 &times; <span class="symbolbox">&#9679;</span> = 28. What digit does &#9679; stand for?</strong></p>
+  <div class="rulebar">One unknown symbol, one equation &rarr; just undo the operation</div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; the equation says "4 times what number gives 28":</span> &#9679; = 28 &divide; 4</div>
+    <div class="ln"><span class="note">Step 2 &mdash; calculate:</span> 28 &divide; 4 = 7</div>
+    <div class="ln ans">&#9679; = 7</div>
+  </div>
+  <p>Check it: 4 &times; 7 = 28. &#10003; And 7 is a valid single digit (0&ndash;9), so we're done.</p>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Always check your answer is a single digit, 0 through 9. If you get 14 or &minus;3, you've made a mistake somewhere &mdash; a symbol can never be two digits or negative.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s3: PRACTICE SKILL 1 -->
+<div class="screen" id="s3">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — One Symbol</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 5 &times; <span class="symbolbox">&#9650;</span> = 30. What digit does &#9650; stand for?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 7</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">&#9650; = 30 &divide; 5 = 6</div><div class="ln ans">6</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733; <span class="symbolbox">&#9650;</span> &times; <span class="symbolbox">&#9650;</span> = 49 (the SAME symbol multiplied by itself). What digit does &#9650; stand for?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 8</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">What number times itself gives 49? 7 &times; 7 = 49</div><div class="ln ans">7</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Skill 2 &#8594;</button></div>
+</div>
+
+<!-- s4: SKILL 2 WORKED EXAMPLE - sum & difference -->
+<div class="screen" id="s4">
+<div class="card">
+  <span class="badge-cap">Skill 2 of 4</span>
+  <h2>Two Symbols — The Sum &amp; Difference Shortcut</h2>
+  <p><strong><span class="symbolbox">&#9650;</span> + <span class="symbolbox">&#9632;</span> = 12 and <span class="symbolbox">&#9650;</span> &minus; <span class="symbolbox">&#9632;</span> = 4. What digit does &#9650; stand for?</strong></p>
+  <div class="rulebar">Add the two equations together &mdash; the &#9632; cancels out!</div>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">CLUE 1</span><span>&#9650; + &#9632; = 12</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 2</span><span>&#9650; &minus; &#9632; = 4</span></div>
+    <div class="clue-row"><span class="clue-tag">GOAL</span><span>Find &#9650;</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; add Clue 1 and Clue 2 together, line by line:</span> (&#9650;+&#9632;) + (&#9650;&minus;&#9632;) = 12 + 4</div>
+    <div class="ln"><span class="note">Step 2 &mdash; the &#9632; cancels (+&#9632; and &minus;&#9632; add to zero):</span> 2 &times; &#9650; = 16</div>
+    <div class="ln"><span class="note">Step 3 &mdash; divide by 2:</span> &#9650; = 8</div>
+    <div class="ln ans">&#9650; = 8 (and &#9632; = 12&minus;8 = 4)</div>
+  </div>
+  <p>Check it: 8+4=12 &#10003; and 8&minus;4=4 &#10003;. Both digits are 0&ndash;9. &#10003;</p>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The shortcut in one line: &#9650; = (sum + difference) &divide; 2. Once you know &#9650;, just subtract it from the sum to get &#9632;.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s5: PRACTICE SKILL 2 -->
+<div class="screen" id="s5">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Sum &amp; Difference</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; <span class="symbolbox">&#9670;</span> + <span class="symbolbox">&#9679;</span> = 10 and <span class="symbolbox">&#9670;</span> &minus; <span class="symbolbox">&#9679;</span> = 2. Find &#9670;.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 7</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">&#9670; = (10+2) &divide; 2 = 6</div><div class="ln ans">6</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733; <span class="symbolbox">&#9670;</span> + <span class="symbolbox">&#9679;</span> = 13 and <span class="symbolbox">&#9679;</span> &minus; <span class="symbolbox">&#9670;</span> = 3 (notice: this time it's &#9679; minus &#9670;). Find &#9679;.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 7</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 9</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">Here &#9679; is the BIGGER one (since &#9679;&minus;&#9670;=3 is positive)</div><div class="ln">&#9679; = (13+3) &divide; 2 = 8</div><div class="ln ans">8</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Skill 3 &#8594;</button></div>
+</div>
+
+<!-- s6: SKILL 3 WORKED EXAMPLE - column addition repeated digit -->
+<div class="screen" id="s6">
+<div class="card">
+  <span class="badge-cap">Skill 3 of 4</span>
+  <h2>Column Addition — A Repeated Digit</h2>
+  <p><strong>B7 + 2B = 60, where B stands for the SAME digit in both numbers (B7 means a 2-digit number with tens-digit B and units-digit 7; 2B means tens-digit 2 and units-digit B). What digit does B represent?</strong></p>
+  <div class="colgrid"><div class="digit-box">B</div><div class="digit-box">7</div></div>
+  <div class="rulebar" style="margin-top:-6px">+</div>
+  <div class="colgrid" style="margin-top:-6px"><div class="digit-box">2</div><div class="digit-box">B</div></div>
+  <div class="rulebar">Turn each 2-digit number into (tens &times; 10 + units) — this is Expanded Form from Number Theory</div>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">CLUE 1</span><span>B7 means 10&times;B + 7</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 2</span><span>2B means 20 + B</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 3</span><span>(10B + 7) + (20 + B) = 60</span></div>
+    <div class="clue-row"><span class="clue-tag">GOAL</span><span>Find B</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; combine the B terms and the plain numbers:</span> 11B + 27 = 60</div>
+    <div class="ln"><span class="note">Step 2 &mdash; subtract 27 from both sides:</span> 11B = 33</div>
+    <div class="ln"><span class="note">Step 3 &mdash; divide by 11:</span> B = 3</div>
+    <div class="ln ans">B = 3</div>
+  </div>
+  <p>Check it: B7 = 37, 2B = 23. 37 + 23 = 60. &#10003; And 3 is a valid digit. &#10003;</p>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The trick is always the same: rewrite every 2-digit code as (10 &times; tens-digit) + (units-digit), then solve like a normal balance-scale equation.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s7: PRACTICE SKILL 3 -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Column Addition</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; C4 + 1C = 36, where C is the same digit both times (C4 = tens-digit C, units-digit 4; 1C = tens-digit 1, units-digit C). Find C.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q4" value="A"> A)&nbsp; 1</label>
+      <label class="opt"><input type="radio" name="q4" value="B"> B)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q4" value="C"> C)&nbsp; 3</label>
+    </div>
+    <button class="btn-check" onclick="chk(4,'B')">Check</button>
+    <div class="feedback" id="fb4"></div>
+    <button class="btn-show-steps" id="ss4" onclick="showSteps('sr4',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr4"><div class="steps"><div class="ln">(10C+4) + (10+C) = 36 &rarr; 11C + 14 = 36 &rarr; 11C = 22 &rarr; C = 2</div><div class="ln">Check: 24 + 12 = 36 &#10003;</div><div class="ln ans">2</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733;&#9733; D6 + 4D = 79, where D is the same digit both times. Find D.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q5" value="A"> A)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q5" value="B"> B)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q5" value="C"> C)&nbsp; 4</label>
+    </div>
+    <button class="btn-check" onclick="chk(5,'B')">Check</button>
+    <div class="feedback" id="fb5"></div>
+    <button class="btn-show-steps" id="ss5" onclick="showSteps('sr5',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr5"><div class="steps"><div class="ln">(10D+6) + (40+D) = 79 &rarr; 11D + 46 = 79 &rarr; 11D = 33 &rarr; D = 3</div><div class="ln">Check: 36 + 43 = 79 &#10003;</div><div class="ln ans">3</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Skill 4 &#8594;</button></div>
+</div>
+
+<!-- s8: SKILL 4 WORKED EXAMPLE - subtraction w/ borrowing + repeated digit product -->
+<div class="screen" id="s8">
+<div class="card">
+  <span class="badge-cap">Skill 4 of 4 &mdash; Hardest</span>
+  <h2>Trickier Codes — Subtraction and Repeated-Digit Multiplication</h2>
+  <p><strong>8C &minus; D3 = 27, where C and D are digits (8C means tens-digit 8, units-digit C; D3 means tens-digit D, units-digit 3). What digit does C represent?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; expand both 2-digit codes:</span> 8C = 80 + C, &nbsp; D3 = 10D + 3</div>
+    <div class="ln"><span class="note">Step 2 &mdash; write the subtraction as an equation:</span> (80 + C) &minus; (10D + 3) = 27</div>
+    <div class="ln"><span class="note">Step 3 &mdash; simplify:</span> 77 + C &minus; 10D = 27, so C &minus; 10D = &minus;50</div>
+    <div class="ln"><span class="note">Step 4 &mdash; C must be 0&ndash;9, so try D values until C lands in range:</span> if D=5, then C = 10(5) &minus; 50 = 0 &#10003;</div>
+    <div class="ln ans">C = 0 (check: 8C = 80, D3 = 53, and 80 &minus; 53 = 27 &#10003;)</div>
+  </div>
+  <p style="margin-top:8px"><strong>A second flavor: repeated-digit multiplication.</strong> &#9679;&#9679; (a 2-digit number where BOTH digits are the same symbol, like 33 or 77) &times; 5 = 220. What digit does &#9679; represent?</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; a repeated-digit number like &#9679;&#9679; always equals 11 &times; &#9679;:</span> (because 10&times;&#9679; + &#9679; = 11&times;&#9679;)</div>
+    <div class="ln"><span class="note">Step 2 &mdash; so the equation becomes:</span> 11 &times; &#9679; &times; 5 = 220, which is 55 &times; &#9679; = 220</div>
+    <div class="ln"><span class="note">Step 3 &mdash; divide both sides by 55:</span> &#9679; = 4</div>
+    <div class="ln ans">&#9679; = 4 (check: 44 &times; 5 = 220 &#10003;)</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Whenever you see a 2-digit number with BOTH digits the same symbol, remember the shortcut: it always equals 11 &times; that digit. This turns a scary-looking puzzle into a simple division.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Checklist &#8594;</button></div>
+</div>
+
+<!-- s9: CHECKLIST -->
+<div class="screen" id="s9">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Code-Breaker's Full Checklist</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Count the symbols: 1 symbol, 2 symbols, or a repeated symbol across 2-digit codes?</div>
+    <div class="node"><span class="step-n">2</span>1 symbol, 1 equation? &rarr; Undo the operation directly.</div>
+    <div class="node"><span class="step-n">3</span>2 symbols with a sum AND a difference? &rarr; Add the equations, the second symbol cancels.</div>
+    <div class="node"><span class="step-n">4</span>2-digit codes (like B7, 2B)? &rarr; Expand each as (10 &times; tens-digit + units-digit), then solve.</div>
+    <div class="node"><span class="step-n">5</span>Repeated-digit number like &#9679;&#9679;? &rarr; Remember it always equals 11 &times; &#9679;.</div>
+    <div class="node"><span class="step-n">6</span>Always check your final digit is between 0 and 9 &mdash; and plug it back in to verify.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Every one of these puzzles turns into an equation you already know how to solve &mdash; the only new skill is expanding the code (like B7) into a real number first.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap &#8594;</button></div>
+</div>
+
+<!-- s10: RECAP -->
+<div class="screen" id="s10">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>Every symbol is a digit in disguise. Expand any 2-digit code into (10 &times; tens-digit + units-digit), turn the puzzle into an equation you already know, and always check your digit is 0&ndash;9.</strong></p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You can tell whether a puzzle has 1 symbol, 2 symbols, or a repeated-digit code before you start</li>
+    <li>You expand 2-digit codes into (10&times;tens + units) automatically</li>
+    <li>You always check your final digit is between 0 and 9</li>
+    <li>You plug your answer back into the original puzzle to verify it</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">This exact puzzle type appears 2&ndash;3 times on the ASMOPSS paper every year, always in the harder sections. You're ready for it now.</p>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#6A1B9A;color:#fff;border:2px solid #6A1B9A;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pictogram &amp; Table Clue-Puzzles — Be the Data Detective</title>
+<style>
+:root{--nav:#6A1B9A;--nav-dark:#4A148C;--bg:#F3E5F5;--card:#fff;--acc:#6A1B9A;--ok:#2E7D32;--err:#C62828;--warn:#E65100}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:760px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#4A148C;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#F3E5F5,#EDE7F6);border:2px solid #AB47BC;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#4A148C;font-weight:700;margin-bottom:6px}
+.big-rule{background:#F3E5F5;border:2px solid #8E24AA;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#4A148C;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.steps{margin:10px 0 6px 0;background:#F5EEF8;border:1px solid #CE93D8;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#6A1B9A}
+.steps .ln.ans{color:#4A148C;font-weight:800}
+.tree{background:#FFFDF5;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#6A1B9A;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#E65100}
+.q-card{background:#F5EEF8;border:1.5px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#F3E5F5}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#F3E5F5;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#6A1B9A;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E0;color:#E65100;border:1.5px solid #FFB74D;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.rulebar{background:#F3E5F5;border:1.5px solid #8E24AA;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#4A148C;text-align:center;margin-bottom:12px}
+.clueboard{background:#F5EEF8;border:2px solid #CE93D8;border-radius:10px;padding:14px 16px;margin:12px 0}
+.clue-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px dashed #D9B8E0;font-size:.98rem}
+.clue-row:last-child{border-bottom:none}
+.clue-tag{background:#6A1B9A;color:#fff;border-radius:6px;padding:2px 9px;font-size:.78rem;font-weight:700;white-space:nowrap;margin-top:2px}
+.mtable{width:100%;border-collapse:collapse;margin:12px 0;font-size:.94rem}
+.mtable th{background:#6A1B9A;color:#fff;padding:8px 10px;text-align:left;font-size:.88rem}
+.mtable td{padding:8px 10px;border-bottom:1px solid #D9B8E0;background:#fff}
+.mtable tr:nth-child(even) td{background:#F5EEF8}
+.pict-row{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:.95rem}
+.pict-icons{letter-spacing:2px;color:#8E24AA;font-size:1.1rem}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Pictogram &amp; Table Clue-Puzzles</span>
+  <span class="tnav-pill" id="pill">1 / 12</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F50D; Why This Matters</h2>
+  <div class="why">
+    <div class="why-title">Where you actually see this</div>
+    <p>Newspapers, sports stats, weather charts, class attendance sheets — almost every real chart or table you see has SOME numbers filled in and others missing. Someone worked out the missing ones using clues, exactly like a detective. That's the skill in this lesson.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Why it's worth mastering right now</div>
+    <p>On the ASMOPSS competition, a puzzle exactly like this shows up in the hardest section almost every single year — a table or pictogram with some numbers hidden, and 2 or 3 sentences of clues to work them out. It's not hard maths. It's a NEW way of reading clues that you haven't practiced yet.</p>
+  </div>
+  <div class="big-rule">You are a Data Detective. The chart has holes in it. The clues are your evidence. Your job: fill in the holes, one at a time.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: METHOD / DECISION TREE -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F9ED; The Data Detective's Method</h2>
+  <p style="margin-bottom:10px"><strong>Every one of these puzzles is solved the exact same way, no matter what the clues say:</strong></p>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Draw or picture the table. Put a "?" where a number is missing.</div>
+    <div class="node"><span class="step-n">2</span>Turn EVERY clue sentence into a short math fact — one line per clue. Don't skip any.</div>
+    <div class="node"><span class="step-n">3</span>Find the ONE clue that lets you solve for a number straightaway (often the TOTAL clue, once you know all the other rows).</div>
+    <div class="node"><span class="step-n">4</span>Use that number to unlock the next one, and the next — like a chain.</div>
+    <div class="node"><span class="step-n">5</span>Check: do all your filled-in numbers add up to match the total clue?</div>
+  </div>
+  <p>You already know how to turn a sentence into a math fact — you did this in Word Problem Decoding (Clue Board). The new part here is that the clues are usually about ROWS IN A TABLE, and you almost always finish by using a TOTAL to find the last missing piece.</p>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The 3 clue types that show up again and again: <strong>"altogether / in total"</strong> (a sum), <strong>"more than / fewer than"</strong> (a difference), and <strong>"times as many"</strong> (a ratio). Spot which type each clue is before you try to use it.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Skill 1 &#8594;</button></div>
+</div>
+
+<!-- s2: SKILL 1 WORKED EXAMPLE - total minus known -->
+<div class="screen" id="s2">
+<div class="card">
+  <span class="badge-cap">Skill 1 of 4</span>
+  <h2>Total Minus Known — The Simplest Clue</h2>
+  <p><strong>A pictogram shows the number of toy cars owned by 4 kids. Tom owns 7, Mia owns 10, Jay owns an unknown amount, and Sue owns 9. Altogether, the 4 kids own 40 toy cars. How many toy cars does Jay own?</strong></p>
+  <div class="pict-row"><span style="width:50px">Tom</span><span class="pict-icons">&#128663;&#128663;&#128663;&#128663;&#128663;&#128663;&#128663;</span><span>7</span></div>
+  <div class="pict-row"><span style="width:50px">Mia</span><span class="pict-icons">&#128663;&#128663;&#128663;&#128663;&#128663;&#128663;&#128663;&#128663;&#128663;&#128663;</span><span>10</span></div>
+  <div class="pict-row"><span style="width:50px">Jay</span><span class="pict-icons">?</span><span>?</span></div>
+  <div class="pict-row"><span style="width:50px">Sue</span><span class="pict-icons">&#128663;&#128663;&#128663;&#128663;&#128663;&#128663;&#128663;&#128663;&#128663;</span><span>9</span></div>
+  <div class="rulebar">Total &minus; (all the numbers you DO know) = the missing number</div>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">CLUE 1</span><span>Tom = 7, Mia = 10, Sue = 9 (given directly)</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 2</span><span>Tom + Mia + Jay + Sue = 40</span></div>
+    <div class="clue-row"><span class="clue-tag">GOAL</span><span>Find Jay</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; add up everyone you know:</span> 7 + 10 + 9 = 26</div>
+    <div class="ln"><span class="note">Step 2 &mdash; subtract that from the total:</span> 40 &minus; 26 = 14</div>
+    <div class="ln ans">Jay owns 14 toy cars</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Always add the KNOWN numbers first, then subtract from the total. Don't try to guess-and-check &mdash; it's slower and riskier.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s3: PRACTICE SKILL 1 -->
+<div class="screen" id="s3">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Total Minus Known</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A table shows bottles recycled by 4 friends: Ana = 6, Ben = ?, Cy = 8, Dee = 5. Altogether they recycled 29 bottles. How many did Ben recycle?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 10</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 12</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln">Known: 6+8+5 = 19</div><div class="ln">Ben = 29 &minus; 19 = 10</div><div class="ln ans">10</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733; A pictogram shows books on 5 shelves: 14, 9, ?, 11, 8. Altogether there are 60 books. How many books are on the missing shelf?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 16</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 18</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 20</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln">Known: 14+9+11+8 = 42</div><div class="ln">Missing shelf = 60 &minus; 42 = 18</div><div class="ln ans">18</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Skill 2 &#8594;</button></div>
+</div>
+
+<!-- s4: SKILL 2 WORKED EXAMPLE - difference clue -->
+<div class="screen" id="s4">
+<div class="card">
+  <span class="badge-cap">Skill 2 of 4</span>
+  <h2>"More Than / Fewer Than" — The Difference Clue</h2>
+  <p><strong>Plant A is 25 cm tall. Plant B is 8 cm taller than Plant A. How tall is Plant B?</strong></p>
+  <div class="rulebar">"more than" &rarr; ADD &nbsp;&nbsp;|&nbsp;&nbsp; "fewer than / less than" &rarr; SUBTRACT</div>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">CLUE 1</span><span>Plant A = 25 cm</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 2</span><span>Plant B = Plant A + 8</span></div>
+    <div class="clue-row"><span class="clue-tag">GOAL</span><span>Find Plant B</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; write the difference clue as an equation:</span> Plant B = 25 + 8</div>
+    <div class="ln"><span class="note">Step 2 &mdash; calculate:</span> 25 + 8 = 33</div>
+    <div class="ln ans">Plant B is 33 cm tall</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The trap: "B is 8 taller than A" means B = A + 8, NOT A = B + 8. Always ask "who is the BIGGER one?" &mdash; the word "taller/more" points at them.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s5: PRACTICE SKILL 2 -->
+<div class="screen" id="s5">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Difference Clues</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; Box A holds 30 marbles. Box B holds 12 more marbles than Box A. How many marbles does Box B hold?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 38</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 40</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 42</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'C')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln">Box B = 30 + 12 = 42</div><div class="ln ans">42</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733; Team X scored 45 points. Team Y scored 17 fewer points than Team X. How many points did Team Y score?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 26</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 28</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 30</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln">Team Y = 45 &minus; 17 = 28</div><div class="ln ans">28</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Skill 3 &#8594;</button></div>
+</div>
+
+<!-- s6: SKILL 3 WORKED EXAMPLE - ratio + total -->
+<div class="screen" id="s6">
+<div class="card">
+  <span class="badge-cap">Skill 3 of 4</span>
+  <h2>"Times As Many" — The Ratio Clue</h2>
+  <p><strong>A pictogram shows fish caught by 3 friends. Ben caught an unknown number of fish. Cal caught twice as many fish as Ben. Dee caught 6 fish. Altogether they caught 30 fish. How many fish did Ben catch?</strong></p>
+  <div class="rulebar">"twice as many as Ben" = 2 &times; Ben &nbsp;&nbsp;|&nbsp;&nbsp; write the UNKNOWN as a box, everything else in terms of it</div>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">CLUE 1</span><span>Ben = unknown (call it B)</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 2</span><span>Cal = 2 &times; B</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 3</span><span>Dee = 6</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 4</span><span>Ben + Cal + Dee = 30</span></div>
+    <div class="clue-row"><span class="clue-tag">GOAL</span><span>Find Ben</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; substitute everything into the total clue:</span> B + 2B + 6 = 30</div>
+    <div class="ln"><span class="note">Step 2 &mdash; combine the B terms:</span> 3B + 6 = 30</div>
+    <div class="ln"><span class="note">Step 3 &mdash; subtract 6 from both sides:</span> 3B = 24</div>
+    <div class="ln"><span class="note">Step 4 &mdash; divide by 3:</span> B = 8</div>
+    <div class="ln ans">Ben caught 8 fish (Cal caught 16, Dee caught 6, total 30 &#10003;)</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This is the same "balance scale" method from Algebraic Thinking &mdash; call the unknown a letter, write every OTHER row in terms of that letter, then use the total to solve.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s7: PRACTICE SKILL 3 -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Ratio + Total</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 3 boxes of buttons: Box P has an unknown amount, Box Q has 3 times as many as Box P, Box R has 5 buttons. Altogether there are 49 buttons. How many does Box P have?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q4" value="A"> A)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q4" value="B"> B)&nbsp; 10</label>
+      <label class="opt"><input type="radio" name="q4" value="C"> C)&nbsp; 11</label>
+    </div>
+    <button class="btn-check" onclick="chk(4,'C')">Check</button>
+    <div class="feedback" id="fb4"></div>
+    <button class="btn-show-steps" id="ss4" onclick="showSteps('sr4',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr4"><div class="steps"><div class="ln">P + 3P + 5 = 49 &rarr; 4P = 44 &rarr; P = 11</div><div class="ln ans">11</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733; 3 jars of candy: Jar A has an unknown amount, Jar B has twice as many as Jar A, Jar C has 4 more than Jar A. Altogether there are 40 candies. How many are in Jar A?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q5" value="A"> A)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q5" value="B"> B)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q5" value="C"> C)&nbsp; 10</label>
+    </div>
+    <button class="btn-check" onclick="chk(5,'B')">Check</button>
+    <div class="feedback" id="fb5"></div>
+    <button class="btn-show-steps" id="ss5" onclick="showSteps('sr5',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr5"><div class="steps"><div class="ln">A + 2A + (A+4) = 40 &rarr; 4A + 4 = 40 &rarr; 4A = 36 &rarr; A = 9</div><div class="ln ans">9</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Skill 4 &#8594;</button></div>
+</div>
+
+<!-- s8: SKILL 4 WORKED EXAMPLE - chained clues -->
+<div class="screen" id="s8">
+<div class="card">
+  <span class="badge-cap">Skill 4 of 4 &mdash; Hardest</span>
+  <h2>Chained Clues — The Full Detective Puzzle</h2>
+  <p><strong>A pictogram shows laps run by 4 athletes. Runner 1 ran 12 laps. Runner 2 ran 3 more laps than Runner 1. Runner 3 ran 5 fewer laps than Runner 2. Runner 4 ran an unknown number of laps. Altogether the 4 runners ran 60 laps. How many laps did Runner 4 run?</strong></p>
+  <div class="rulebar">Solve the clues in ORDER &mdash; each one unlocks the next, like stepping stones</div>
+  <div class="clueboard">
+    <div class="clue-row"><span class="clue-tag">CLUE 1</span><span>Runner 1 = 12</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 2</span><span>Runner 2 = Runner 1 + 3</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 3</span><span>Runner 3 = Runner 2 &minus; 5</span></div>
+    <div class="clue-row"><span class="clue-tag">CLUE 4</span><span>Runner 1 + Runner 2 + Runner 3 + Runner 4 = 60</span></div>
+    <div class="clue-row"><span class="clue-tag">GOAL</span><span>Find Runner 4</span></div>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; Runner 2, using Clue 2:</span> 12 + 3 = 15</div>
+    <div class="ln"><span class="note">Step 2 &mdash; Runner 3, using Clue 3:</span> 15 &minus; 5 = 10</div>
+    <div class="ln"><span class="note">Step 3 &mdash; add up the 3 you now know:</span> 12 + 15 + 10 = 37</div>
+    <div class="ln"><span class="note">Step 4 &mdash; subtract from the total:</span> 60 &minus; 37 = 23</div>
+    <div class="ln ans">Runner 4 ran 23 laps</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Never jump straight to the total. Walk the chain one clue at a time, in the order they unlock &mdash; usually the order they're written in.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s9: PRACTICE SKILL 4 -->
+<div class="screen" id="s9">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Chained Clues</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 4 stalls sold buns: Stall 1 = 10, Stall 2 = Stall 1 + 4, Stall 3 = Stall 2 &minus; 2, Stall 4 = unknown. Altogether they sold 58 buns. How many did Stall 4 sell?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q6" value="A"> A)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q6" value="B"> B)&nbsp; 22</label>
+      <label class="opt"><input type="radio" name="q6" value="C"> C)&nbsp; 24</label>
+    </div>
+    <button class="btn-check" onclick="chk(6,'B')">Check</button>
+    <div class="feedback" id="fb6"></div>
+    <button class="btn-show-steps" id="ss6" onclick="showSteps('sr6',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr6"><div class="steps"><div class="ln">Stall 2 = 10+4 = 14. Stall 3 = 14&minus;2 = 12</div><div class="ln">Known sum = 10+14+12 = 36. Stall 4 = 58&minus;36 = 22</div><div class="ln ans">22</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; &#9733;&#9733; 4 workshops: Workshop 1 = unknown (W), Workshop 2 = W + 7, Workshop 3 = 2 &times; Workshop 2, Workshop 4 = Workshop 3 &minus; 10. Altogether 145 people attended. How many attended Workshop 3?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q7" value="A"> A)&nbsp; 50</label>
+      <label class="opt"><input type="radio" name="q7" value="B"> B)&nbsp; 54</label>
+      <label class="opt"><input type="radio" name="q7" value="C"> C)&nbsp; 58</label>
+    </div>
+    <button class="btn-check" onclick="chk(7,'B')">Check</button>
+    <div class="feedback" id="fb7"></div>
+    <button class="btn-show-steps" id="ss7" onclick="showSteps('sr7',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr7"><div class="steps"><div class="ln">W + (W+7) + 2(W+7) + (2(W+7)&minus;10) = 145</div><div class="ln">W + W+7 + 2W+14 + 2W+4 = 145 &rarr; 6W + 25 = 145 &rarr; 6W = 120 &rarr; W = 20</div><div class="ln">Workshop 3 = 2 &times; (20+7) = 2 &times; 27 = 54</div><div class="ln ans">54</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Checklist &#8594;</button></div>
+</div>
+
+<!-- s10: FULL CHECKLIST -->
+<div class="screen" id="s10">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; The Data Detective's Full Checklist</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Draw the table. Mark every missing value with a "?".</div>
+    <div class="node"><span class="step-n">2</span>Turn every clue into a math fact, one at a time. Don't skip any, don't combine two at once.</div>
+    <div class="node"><span class="step-n">3</span>Spot the clue type: TOTAL (sum), MORE/FEWER (difference), or TIMES AS MANY (ratio).</div>
+    <div class="node"><span class="step-n">4</span>Solve the clues in the order they unlock &mdash; usually top to bottom.</div>
+    <div class="node"><span class="step-n">5</span>Use the TOTAL clue last, to find whichever value is still missing.</div>
+    <div class="node"><span class="step-n">6</span>Check: do ALL your numbers (given + solved) add up to the stated total?</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; If a puzzle has 3 or 4 clues, that's not harder maths &mdash; it's just more stepping stones. Walk them one at a time and you'll always get there.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap &#8594;</button></div>
+</div>
+
+<!-- s11: RECAP -->
+<div class="screen" id="s11">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>Every table/pictogram clue-puzzle is solved the same way: turn each clue into a math fact, solve them in order, and save the TOTAL clue to catch the very last missing number. It's detective work, not new maths.</strong></p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#2E7D32">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You write EVERY clue down before trying to solve anything</li>
+    <li>You can tell apart a total clue, a difference clue, and a ratio clue at a glance</li>
+    <li>You solve clues in the order they unlock &mdash; not randomly guessing</li>
+    <li>You always check your answers add up to the stated total</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">This exact puzzle type appears in the hardest section of the ASMOPSS paper almost every year. You're ready for it now.</p>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#6A1B9A;color:#fff;border:2px solid #6A1B9A;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>
