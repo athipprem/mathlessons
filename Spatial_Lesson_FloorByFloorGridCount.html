@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Floor by Floor — Painted Cubes as Grids You Already Know</title>
+<style>
+:root{--nav:#2E7D32;--nav-dark:#1B5E20;--bg:#E8F5E9;--card:#fff;--acc:#2E7D32;--ok:#2E7D32;--err:#C62828;--warn:#1B5E20}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#1B5E20;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:2px solid #81C784;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#1B5E20;font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8F5E9;border:2px solid #388E3C;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#1B5E20;margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8F5E9,#F1F8FF);border:2px solid #81C784;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8F5E9;border:1.5px solid #388E3C;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#1B5E20;text-align:center;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F1F8E9;border:1px solid #A5D6A7;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#2E7D32}
+.steps .ln.ans{color:#1B5E20;font-weight:800}
+.tree{background:#FAFDF9;border:2px dashed #81C784;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #A5D6A7;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#2E7D32;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.warn-box{background:#E8F5E9;border:1.5px solid #81C784;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#1B5E20}
+.q-card{background:#F1F8E9;border:1.5px solid #A5D6A7;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #A5D6A7;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E8F5E9}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8F5E9;color:#1B5E20;border:2px solid #1B5E20;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#2E7D32;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8F5E9;color:#1B5E20;border:1.5px solid #81C784;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.reveal-btn{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin:6px 6px 6px 0}
+.reveal-line{display:none;background:#F1F8E9;border:1px solid #A5D6A7;border-radius:8px;padding:10px 14px;margin:6px 0;font-size:.98rem;font-weight:700;color:#1B5E20}
+/* grid floor visuals */
+.floor-wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin:14px 0}
+.floor{text-align:center}
+.floor-label{font-weight:700;color:#1B5E20;margin-bottom:6px;font-size:.9rem}
+.grid4x3{display:grid;grid-template-columns:repeat(4,40px);grid-template-rows:repeat(3,40px);gap:3px;background:#1B5E20;padding:4px;border-radius:6px}
+.cell{border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:#fff}
+.c-corner{background:#1B5E20}
+.c-edge{background:#43A047}
+.c-center{background:#A5D6A7;color:#1B5E20}
+.legend{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px;font-size:.82rem}
+.leg-sw{display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:4px;vertical-align:middle}
+.clickgrid .cell{cursor:pointer;border:2px solid transparent}
+.clickgrid .cell.picked{border-color:#FFD54F}
+.stack{display:flex;flex-direction:column;align-items:center;gap:4px}
+.stack .floor-plate{width:170px;height:34px;background:#66BB6A;border:2px solid #1B5E20;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.85rem}
+.stack .floor-plate.top{background:#2E7D32}
+.stack .floor-plate.bottom{background:#2E7D32}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Floor by Floor — Painted Cubes as Grids You Already Know</span>
+  <span class="tnav-pill" id="pill">1 / 12</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; A Totally Different Way In</h2>
+  <div class="why">
+    <div class="why-title">What happened the last two times</div>
+    <p>Painted-cube boxes have tripped you up twice now — first with 4 separate formulas to remember, then with "one classification, four parts," which was still 4 different calculations underneath. Both times you said the same true thing: <strong>too many methods, too easy to mix up.</strong></p>
+  </div>
+  <div class="why">
+    <div class="why-title">Today we're not re-explaining the same idea a third time — we're using a skill you ALREADY have</div>
+    <p>You are already really good at one specific thing: <strong>counting corner/edge/middle cells in a flat grid</strong> (you've done this with rectangles and squares before, and you're solid at it). Today's whole trick is: <strong>a 3D painted box is just a stack of flat grids ("floors") — the exact grid-counting you already know, done floor by floor.</strong> No new formulas to memorise. Just your existing grid skill, used one extra time per floor.</p>
+  </div>
+  <div class="big-rule">3D box = a stack of 2D grids. You already know how to count a 2D grid.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: Big idea - stack of floors -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F3E2; A Box Is A Stack Of Floors</h2>
+  <p>Picture a box built from little unit cubes — like a block of sugar cubes, or a small Lego tower. If it's <strong>4 long, 3 wide, 3 tall</strong>, imagine slicing it into <strong>3 flat floors</strong>, stacked on top of each other. Each floor is a flat <strong>4 &times; 3 grid</strong> — 12 little squares, viewed from above.</p>
+  <div class="stack">
+    <div class="floor-plate top">Floor 3 (TOP)</div>
+    <div class="floor-plate">Floor 2 (MIDDLE)</div>
+    <div class="floor-plate bottom">Floor 1 (BOTTOM)</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Real life check: a box of 36 sugar cubes, 4&times;3 on the bottom, stacked 3 high, really does split perfectly into 3 flat layers of 12 cubes each. That's all "4 long, 3 wide, 3 tall" means.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap: Grids You Know &#8594;</button></div>
+</div>
+
+<!-- s2: Recap 2D grid classification -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F4D0; Recap — Classifying Cells In A Flat Grid (You've Got This)</h2>
+  <p>Look at ONE floor by itself — just a flat 4 &times; 3 grid. Every cell touches some of the OUTER WALLS of that floor. There are only 3 kinds of cell:</p>
+  <div class="floor-wrap">
+    <div class="floor">
+      <div class="floor-label">One floor, 4 long &times; 3 wide</div>
+      <div class="grid4x3">
+        <div class="cell c-corner">C</div><div class="cell c-edge">E</div><div class="cell c-edge">E</div><div class="cell c-corner">C</div>
+        <div class="cell c-edge">E</div><div class="cell c-center">&middot;</div><div class="cell c-center">&middot;</div><div class="cell c-edge">E</div>
+        <div class="cell c-corner">C</div><div class="cell c-edge">E</div><div class="cell c-edge">E</div><div class="cell c-corner">C</div>
+      </div>
+    </div>
+  </div>
+  <div class="legend">
+    <span><span class="leg-sw" style="background:#1B5E20"></span>Corner cell — touches 2 outer walls</span>
+    <span><span class="leg-sw" style="background:#43A047"></span>Edge cell — touches 1 outer wall</span>
+    <span><span class="leg-sw" style="background:#A5D6A7"></span>Centre cell — touches 0 outer walls</span>
+  </div>
+  <div class="rulebar">A rectangle grid ALWAYS has exactly 4 corner cells — no matter the size.</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; You just count these straight off the picture: corners are the 4 corner squares, edges are everything else on the outside rim, centre is everything not touching any wall. No formula needed to SEE it — the formula (if you ever want a shortcut) is just "count what you see."</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Quick Check &#8594;</button></div>
+</div>
+
+<!-- s3: interactive quick check on 2D grid -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F4CB; Quick Check — Count This Floor</h2>
+  <p style="margin-bottom:10px"><strong>This floor is 4 long, 3 wide (12 cells). Tap each button to reveal the count.</strong></p>
+  <div class="floor-wrap">
+    <div class="floor">
+      <div class="grid4x3">
+        <div class="cell c-corner">?</div><div class="cell c-edge">?</div><div class="cell c-edge">?</div><div class="cell c-corner">?</div>
+        <div class="cell c-edge">?</div><div class="cell c-center">?</div><div class="cell c-center">?</div><div class="cell c-edge">?</div>
+        <div class="cell c-corner">?</div><div class="cell c-edge">?</div><div class="cell c-edge">?</div><div class="cell c-corner">?</div>
+      </div>
+    </div>
+  </div>
+  <button class="reveal-btn" onclick="revealLine('r0a')">How many corner cells?</button>
+  <div class="reveal-line" id="r0a">Always 4, on any flat rectangle grid.</div>
+  <button class="reveal-btn" onclick="revealLine('r0b')">How many centre cells?</button>
+  <div class="reveal-line" id="r0b">2 — the two in the very middle, touching no outer wall.</div>
+  <button class="reveal-btn" onclick="revealLine('r0c')">How many edge cells?</button>
+  <div class="reveal-line" id="r0c">12 total &minus; 4 corners &minus; 2 centre = 6 edge cells.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Adding The 3rd Dimension &#8594;</button></div>
+</div>
+
+<!-- s4: Add 3rd dimension: top/bottom/middle -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x2B06;&#xFE0F; Adding The 3rd Dimension — Which Floor Are You On?</h2>
+  <div class="why">
+    <div class="why-title">The one new idea</div>
+    <p>A flat grid only tells you about SIDE walls. But a box also has a TOP and a BOTTOM. So every cube also asks one more question: <strong>"Am I on the very top floor, the very bottom floor, or a middle floor?"</strong></p>
+  </div>
+  <div class="rulebar">TOP floor or BOTTOM floor &rarr; touches 1 extra painted face (the top or bottom of the box). &nbsp; MIDDLE floor &rarr; touches 0 extra.</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; That's the whole 3rd dimension — just one yes/no question, same as "am I on an outer wall" was for the flat grid. Top and bottom floors work exactly the same as each other.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Full Rule &#8594;</button></div>
+</div>
+
+<!-- s5: Combine rule -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x1F9E9; Put It Together — The ONE Rule</h2>
+  <div class="big-rule">Painted faces on a cube &nbsp;=&nbsp; (wall-touches from its floor's grid: 0, 1, or 2) &nbsp;+&nbsp; (1 if top/bottom floor, else 0)</div>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Look at the cube's FLOOR. Is its grid-cell a corner (2), edge (1), or centre (0)?</div>
+    <div class="node"><span class="step-n">2</span>Is the cube's FLOOR the top, the bottom, or a middle floor? (+1 if top/bottom, +0 if middle)</div>
+    <div class="node"><span class="step-n">3</span>Add the two numbers. That's the total painted faces for that cube &mdash; maximum ever is 3.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; That's it. One rule, two yes/no-ish questions, always the same two questions for every single cube in any box.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Worked Example &#8594;</button></div>
+</div>
+
+<!-- s6: worked example, all 3 floors of 4x3x3 -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>Worked Example — 4 Long, 3 Wide, 3 Tall, Fully Painted</h2>
+  <p><strong>Let's count every category using the 3 floor pictures.</strong></p>
+  <div class="floor-wrap">
+    <div class="floor">
+      <div class="floor-label">Floor 3 — TOP (+1)</div>
+      <div class="grid4x3">
+        <div class="cell c-corner">3</div><div class="cell c-edge">2</div><div class="cell c-edge">2</div><div class="cell c-corner">3</div>
+        <div class="cell c-edge">2</div><div class="cell c-center">1</div><div class="cell c-center">1</div><div class="cell c-edge">2</div>
+        <div class="cell c-corner">3</div><div class="cell c-edge">2</div><div class="cell c-edge">2</div><div class="cell c-corner">3</div>
+      </div>
+    </div>
+    <div class="floor">
+      <div class="floor-label">Floor 2 — MIDDLE (+0)</div>
+      <div class="grid4x3">
+        <div class="cell c-corner">2</div><div class="cell c-edge">1</div><div class="cell c-edge">1</div><div class="cell c-corner">2</div>
+        <div class="cell c-edge">1</div><div class="cell c-center">0</div><div class="cell c-center">0</div><div class="cell c-edge">1</div>
+        <div class="cell c-corner">2</div><div class="cell c-edge">1</div><div class="cell c-edge">1</div><div class="cell c-corner">2</div>
+      </div>
+    </div>
+    <div class="floor">
+      <div class="floor-label">Floor 1 — BOTTOM (+1)</div>
+      <div class="grid4x3">
+        <div class="cell c-corner">3</div><div class="cell c-edge">2</div><div class="cell c-edge">2</div><div class="cell c-corner">3</div>
+        <div class="cell c-edge">2</div><div class="cell c-center">1</div><div class="cell c-center">1</div><div class="cell c-edge">2</div>
+        <div class="cell c-corner">3</div><div class="cell c-edge">2</div><div class="cell c-edge">2</div><div class="cell c-corner">3</div>
+      </div>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:.85rem;color:#1B5E20;margin-top:-6px">(Each number = that cube's TOTAL painted faces: grid-touch + floor-touch)</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Now just COUNT how many cubes show each number, across all 3 floors:</span></div>
+    <div class="ln">Number "3" (corners): 4 (top) + 4 (bottom) = 8</div>
+    <div class="ln">Number "2" (edges): 6 (top) + 4 (middle) + 6 (bottom) = 16</div>
+    <div class="ln">Number "1" (faces): 2 (top) + 6 (middle) + 2 (bottom) = 10</div>
+    <div class="ln">Number "0" (hidden): 0 (top) + 2 (middle) + 0 (bottom) = 2</div>
+    <div class="ln"><span class="note">Check — do they add up to the total block size, 4&times;3&times;3 = 36?</span></div>
+    <div class="ln ans">8 + 16 + 10 + 2 = 36 &#10003; matches!</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try It Yourself &#8594;</button></div>
+</div>
+
+<!-- s7: interactive build -->
+<div class="screen" id="s7">
+<div class="card">
+  <h2>&#x1F4CB; Build The Count Yourself</h2>
+  <p style="margin-bottom:10px"><strong>A box is 3 long, 3 wide, 2 tall, fully painted (incl. bottom) — so there are only 2 floors, both "top or bottom" floors (no middle floor at all). Tap each button in order.</strong></p>
+  <button class="reveal-btn" onclick="revealLine('r1a')">Each floor is 3&times;3 (9 cells). Corner cells per floor?</button>
+  <div class="reveal-line" id="r1a">Always 4 per floor.</div>
+  <button class="reveal-btn" onclick="revealLine('r1b')">Both floors count as top/bottom (+1 each) — how many "3-face" corner cubes in total?</button>
+  <div class="reveal-line" id="r1b">4 + 4 = 8 (still always 8 — corners never change!)</div>
+  <button class="reveal-btn" onclick="revealLine('r1c')">Edge cells per floor, and centre cells per floor?</button>
+  <div class="reveal-line" id="r1c">9 &minus; 4 corners = 5 left. The very middle cell touches 0 outer walls, so it's the 1 centre cell &mdash; leaving 4 edge cells per floor.</div>
+  <button class="reveal-btn" onclick="revealLine('r1d')">Both floors are top/bottom (+1) — total "2-face" cubes (edge cells, +1)?</button>
+  <div class="reveal-line" id="r1d">4 + 4 = 8</div>
+  <button class="reveal-btn" onclick="revealLine('r1e')">Total "1-face" cubes (the centre cell, +1, on each floor)?</button>
+  <div class="reveal-line" id="r1e">1 + 1 = 2</div>
+  <button class="reveal-btn" onclick="revealLine('r1f')">Any fully hidden ("0-face") cubes at all?</button>
+  <div class="reveal-line" id="r1f">No middle floor exists here, so 0 hidden cubes.</div>
+  <button class="reveal-btn checkbtn" onclick="revealLine('r1g')">Check: does it add up to 3&times;3&times;2=18?</button>
+  <div class="reveal-line" id="r1g">8 + 8 + 2 + 0 = 18 &#10003; matches!</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s8: practice -->
+<div class="screen" id="s8">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Floor By Floor</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A box is 4 long, 4 wide, 2 tall, fully painted (incl. bottom) — 2 floors, both top/bottom. Each floor is a 4&times;4 grid (4 corners, 8 edge cells, 4 centre cells). How many unit cubes have exactly 2 faces painted (the edge cells, on either floor)?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 16</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 24</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">8 edge cells per floor, both floors are top/bottom (+1 each).</div>
+      <div class="ln ans">8 (top floor) + 8 (bottom floor) = 16 cubes</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A box is 5 long, 4 wide, 3 tall, fully painted (incl. bottom) — 3 floors, each a 5&times;4 grid (4 corners, 10 edge cells, 6 centre cells per floor). How many unit cubes are fully hidden (0 faces painted)?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 0</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">Only the MIDDLE floor (floor 2) can have 0-face cubes — top/bottom floors always get +1.</div>
+      <div class="ln">Middle floor's centre cells = 6 (all of them stay at 0, since +0 for a middle floor).</div>
+      <div class="ln ans">6 fully hidden cubes</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Optional Shortcut &#8594;</button></div>
+</div>
+
+<!-- s9: optional shortcut formulas tied to the picture -->
+<div class="screen" id="s9">
+<div class="card">
+  <h2>&#x26A1; Optional Shortcut — For When Drawing Every Floor Is Too Slow</h2>
+  <p>You never HAVE to use this — counting from the picture always works. But once the picture-counting feels easy, here's a shortcut for big boxes where drawing every floor would take forever. It's the exact same picture, just described in numbers instead of drawn:</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Corner cells per floor (any floor):</span></div>
+    <div class="ln ans">always 4</div>
+    <div class="ln"><span class="note">Edge cells per floor (a floor is length &times; width):</span></div>
+    <div class="ln ans">2&times;(length&minus;2) + 2&times;(width&minus;2)</div>
+    <div class="ln"><span class="note">Centre cells per floor:</span></div>
+    <div class="ln ans">(length&minus;2) &times; (width&minus;2)</div>
+  </div>
+  <div class="rulebar">Then: multiply by 2 for the top+bottom floors (they're identical), and by (height&minus;2) for how many middle floors there are &mdash; then add top/bottom's own numbers using the +1 rule and middle's using the +0 rule.</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Notice this is just "count the picture," written as maths instead of drawn as a grid &mdash; same 2 questions (which grid-cell type, which floor-type), just faster for huge boxes. If it ever feels confusing, go straight back to drawing the floor and counting — that always works and is never wrong.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Full Capstone &#8594;</button></div>
+</div>
+
+<!-- s10: full capstone worked example -->
+<div class="screen" id="s10">
+<div class="card">
+  <h2>&#x1F5FA;&#xFE0F; Full Capstone — 5 Long, 3 Wide, 3 Tall</h2>
+  <p><strong>Fully painted, incl. bottom. Find all 4 counts and check the total.</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Each floor is 5&times;3. Corners per floor (always 4), on 2 top/bottom floors:</span></div>
+    <div class="ln ans">4 + 4 = 8</div>
+    <div class="ln"><span class="note">Edge cells per floor: 2(5&minus;2)+2(3&minus;2) = 6+2 = 8. Top+bottom floors (+1 each) give 8+8=16; the 1 middle floor's corner cells (4, but +0 since middle) become "2-face" too:</span></div>
+    <div class="ln ans">16 + 4 = 20</div>
+    <div class="ln"><span class="note">Centre cells per floor: (5&minus;2)(3&minus;2)=3. Top+bottom (+1 each): 3+3=6; middle floor's edge cells (8, +0) also land here:</span></div>
+    <div class="ln ans">6 + 8 = 14</div>
+    <div class="ln"><span class="note">Middle floor's own centre cells (+0) are the only fully-hidden cubes:</span></div>
+    <div class="ln ans">3</div>
+    <div class="ln"><span class="note">Check &mdash; total should be 5&times;3&times;3 = 45:</span></div>
+    <div class="ln check">8 + 20 + 14 + 3 = 45 &#10003; matches!</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This is the trickiest part: a MIDDLE floor's corner cells become 2-face cubes (not 3), and its edge cells become 1-face cubes (not 2) &mdash; because the floor itself gets +0, not +1. Always ask "which floor am I on?" before you decide the final number.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Mastery Checklist &#8594;</button></div>
+</div>
+
+<!-- s11: recap -->
+<div class="screen" id="s11">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>A box is a stack of flat grids ("floors"). Count each floor the way you already count a grid (corner/edge/centre), then add +1 if that floor is the top or bottom, +0 if it's a middle floor. Add the two numbers to get a cube's painted-face count.</strong></p>
+</div>
+<div class="card" style="background:#E8F5E9;border:1px solid #A5D6A7">
+  <h3 style="color:#1B5E20">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You can draw a box as a stack of flat floors without help</li>
+    <li>You can classify a floor's cells as corner/edge/centre by looking at the picture (a skill you already had)</li>
+    <li>You remember: top/bottom floor = +1, middle floor = +0</li>
+    <li>You check your 4 counts add up to the total number of cubes, every time</li>
+    <li>On a middle floor, you remember corner cells become 2-face and edge cells become 1-face (not 3 and 2)</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">Same underlying maths as before &mdash; but now it's a picture you already know how to count, not a new set of formulas.</p>
+</div>
+<div class="navrow">
+  <a href="Spatial_Lesson_PaintedCubeOneModel.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#E8F5E9;color:#1B5E20;border:2px solid #1B5E20;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">&#8592; U50 Lesson</a>
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#2E7D32;color:#fff;border:2px solid #2E7D32;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+function revealLine(id){document.getElementById(id).style.display='block';}
+</script>
+</body>
+</html>

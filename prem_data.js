@@ -15,13 +15,38 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '7 Aug 2026',
+  updated:        '10 Aug 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:53, topic:'Quick-Win Add-Ons — Circular Double-Repeats & Backward Combinations (Art of Counting)', status:'In Progress' },
+  currentUnit: { n:54, topic:'3D Spatial Reasoning — Painted Cubes, Floor by Floor (new method)', status:'Test Pending' },
   lastUnit: {
+    n:53, score:11, outOf:15, pct:73, delta:+2, prevScore:9, prevOutOf:15, prevLabel:'U52',
+    patternLabel: 'U53 — Quick-Win Add-Ons: Both Groups Every Time &amp; Double the Total First, NOT PASSED (best since U49)',
+    patternInsight: '11/15 (73%) <strong>NOT PASSED</strong>, but the best score since U49 and a clear upward trend (8&rarr;7&rarr;9&rarr;11). Sec A (Circular Double-Repeat) 4/5 &middot; Sec B (Combinations Backward) 5/5 PERFECT &middot; Sec C (Harder &amp; Capstone) 2/5. <strong>Combinations Backward is fully secure &mdash; 7/7 correct everywhere it appeared, including at the &#9733;&#9733; tier.</strong> The circular double/triple-repeat rule is more interesting than the raw score suggests: most misses trace to arithmetic-scale slips or abandoned big-number attempts on a correctly-identified method, not confusion about the rule itself &mdash; including Q13, where Prem correctly extended the 2-group rule to a never-taught 3-group variant, only losing the final answer to one arithmetic slip.',
+    analysisLabel: 'Next: Real ASMOPSS 2026 exam (sat 9 Aug 2026, scored 50/100) — see Competitions/ASMOPSS/ for full breakdown, answer key &amp; tier/strand dashboard',
+    analysisInsight: 'U53 was the final ASMOPSS-prep unit before the real exam. The real exam confirmed almost question-for-question the gap map this programme had been tracking: every miss traced to harder-tier combinatorics, painted-cube/3D spatial reasoning, or "finish the full question," while every hit landed in the areas called strengths. A full coaching-process review (10 Aug 2026) followed, comparing unit-test vs. real-exam performance &mdash; see coaching-rules memory for the standing rules now in effect (spiral maintenance, standing finish-the-question grading, tier-density practice, Statistics &amp; Probability added to rotation). Programme resumes standard ISA 2027 cadence from U54, targeting 3D spatial reasoning with a genuinely new method (floor-by-floor grid counting, building on Prem&rsquo;s already-proven 2D grid-counting skill instead of the corner/edge/face/inside formulas that failed twice at U49&ndash;U50).',
+    qSummary: '<strong>Sec A 4/5 | Sec B 5/5 PERFECT | Sec C 2/5</strong> — 11/15 (73%) NOT PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Circular Double-Repeat', lvl:'w', pass:false, note:'&#10007; wrote 360; correct 180. Divided by only ONE repeat group (720&divide;2) instead of both (720&divide;2&divide;2) &mdash; the exact mistake the lesson warned about. First question on the paper.' },
+      { q:'Q2', topic:'Circular Double-Repeat', lvl:'w', pass:true,  note:'&#10003; 10080.' },
+      { q:'Q3', topic:'Circular Double-Repeat', lvl:'w', pass:true,  note:'&#10003; 7560, full long division shown.' },
+      { q:'Q4', topic:'Circular Double-Repeat', lvl:'w', pass:true,  note:'&#10003; 100800.' },
+      { q:'Q5', topic:'Circular Double-Repeat', lvl:'w', pass:true,  note:'&#10003; 105 &mdash; recovers immediately after Q1.' },
+      { q:'Q6', topic:'Combinations Backward', lvl:'m', pass:true,  note:'&#10003; 5.' },
+      { q:'Q7', topic:'Combinations Backward', lvl:'m', pass:true,  note:'&#10003; 6.' },
+      { q:'Q8', topic:'Combinations Backward  &#9733;', lvl:'m', pass:true,  note:'&#10003; 13, working shown 78&times;2=156.' },
+      { q:'Q9', topic:'Combinations Backward  &#9733;', lvl:'m', pass:true,  note:'&#10003; 14, working shown 91&times;2=182.' },
+      { q:'Q10',topic:'Combinations Backward  &#9733;', lvl:'m', pass:true,  note:'&#10003; 15 &mdash; Section B PERFECT, 5/5.' },
+      { q:'Q11',topic:'Circular Double-Repeat  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; blank, self-marked "?"; correct 277200. Attempted 11! by hand, got tangled in the arithmetic, abandoned before dividing.' },
+      { q:'Q12',topic:'Combinations Backward  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 16, working shown 120&times;2=240 then 15&times;16=240.' },
+      { q:'Q13',topic:'Circular Triple-Repeat  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote 30360; correct 45360. Conceptually correct and genuinely novel &mdash; never taught a 3-group case, correctly extended the rule (9!, &divide;2 three times), lost only to one arithmetic slip mid-division.' },
+      { q:'Q14',topic:'Combinations Backward  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 17, working shown 136&times;2=272 then verified 16&times;17=272.' },
+      { q:'Q15',topic:'Capstone (Backward + Circular)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; blank, self-marked "?"; correct 3326400. The "double the total" half was completed correctly (n=12, right there in the working); the circular half broke down into abandoned scratch multiplication.' }
+    ]
+  },
+  _U52archived: {
     n:52, score:9, outOf:15, pct:60, delta:+2, prevScore:7, prevOutOf:15, prevLabel:'U51',
     patternLabel: 'U52 — Two-Skill Capstones, Chain What You Already Know, NOT PASSED (improved)',
     patternInsight: '9/15 (60%) <strong>NOT PASSED</strong> &mdash; Sec A (Warm-Up Pairs) 5/5 PERFECT, Sec B (Medium Pairs) 3/5, Sec C (Harder Pairs &amp; Capstone) 1/5. Section A is the headline: a clean sweep across all four baton-pass pairings (circular+repeats, averages+removal, counting+remainder, handshake+algebra) plus an averages-addition variant &mdash; the meta-skill landed on first real exposure. Section B held near the pass line with one diagnosable slip: Q7 reused Q3&rsquo;s stale digit-count (20) instead of recomputing fresh for three digits (wrote 7, correct 8), and Q10 (a brand-new "distributing+remainder" pairing) was left blank. Section C is where it broke down: Q11 and Q12 were both left with a self-marked "?" and an ambiguous final answer (reconciled as both wrong against the score-box total of 9); Q13 wrote 13 instead of 3, likely a copied question-number slip; Q14 wrote 33 instead of 12 &mdash; looks like 66&divide;2 was computed directly instead of solving n(n&minus;1)=132 for n. Q15, the hardest question on the paper (a true 3-skill capstone), was fully correct with clean long-division working shown &mdash; proof the baton-pass method itself still works under maximum pressure, just not consistently yet at the &#9733;&#9733; tier.',
@@ -249,23 +274,37 @@ var PREM_DATA = {
     { n:50, score:8,  delta:-3,   color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
     { n:'M5', label:'M5', score:7, delta:-1, color:'linear-gradient(135deg,#0D47A1,#4A148C)', star:false },
     { n:51, score:7,  delta:0,    color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
-    { n:52, score:9,  delta:+2,   color:'linear-gradient(135deg,#AD1457,#880E4F)', star:false }
+    { n:52, score:9,  delta:+2,   color:'linear-gradient(135deg,#AD1457,#880E4F)', star:false },
+    { n:53, score:11, delta:+2,   color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 54,
+      badge: 'linear-gradient(135deg,#2E7D32,#1B5E20)',
+      title: '3D Spatial Reasoning — Painted Cubes, Floor by Floor (new method)',
+      tags: [
+        { t:'Pending &#128197;', c:'tpurple' },
+        { t:'Genuinely new method — not a 3rd repeat', c:'tgreen' },
+        { t:'+ spiral maintenance warm-up (Remainders)', c:'tgreen' },
+        { t:'Post-ASMOPSS, standard ISA cadence resumes', c:'torange' }
+      ],
+      note: 'U54, built 10 Aug 2026, resuming standard ISA 2027 cadence now that ASMOPSS 2026 is done (sat 9 Aug, scored 50/100 — see Competitions/ASMOPSS/). Targets the single highest-leverage open gap per the real-exam analysis: painted-cube/3D spatial reasoning, which has now failed at U49, gotten worse at U50, and missed again on the real exam (Q23). Two same-framing re-teaches (corner/edge/face/inside formulas) already failed, so this is a genuinely different method, not a third repeat: Spatial_Lesson_FloorByFloorGridCount.html reframes a painted box as a stack of flat 2D grids ("floors") and counts painted faces using Prem\'s already-proven grid/rectangle-counting skill (corner/edge/centre cell classification) instead of 4 abstract algebraic formulas. Test: 15Q (Sec A basic single-category, Sec B intermediate two-step, Sec C hard &amp; capstone) plus a 1-question ungraded spiral-maintenance warm-up on Remainders (closed since U34, untouched 6+ weeks) and a standing "finish the exact question" instruction line — both per the new Math-Specific Coaching Protocol added to the create-new-test-pack skill (10 Aug 2026) after a full coaching-process review.',
+      status: 'pending'
+    },
+    {
       n: 53,
       badge: 'linear-gradient(135deg,#F9A825,#F57F17)',
       title: 'Quick-Win Add-Ons — Circular Double-Repeats & Backward Combinations (Art of Counting)',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'2 SHORT lessons — single-rule add-ons only', c:'tgreen' },
-        { t:'Closed-book test recommended', c:'torange' },
-        { t:'Built 1 day before the exam', c:'torange' }
+        { t:'11/15 (73%) &#10007; NOT PASSED', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Best score since U49 — clear upward trend', c:'tgreen' },
+        { t:'Sec B 5/5 PERFECT — Combinations Backward locked', c:'tgreen' },
+        { t:'&rarr; Real ASMOPSS 2026 exam, sat 9 Aug (50/100)', c:'torange' }
       ],
-      note: 'U53, built 7 Aug 2026 directly off two pieces of critical feedback: Prem found U51&ndash;U52\'s procedures "too long," and Lui revealed those tests were open-book (lessons open during testing), meaning Section A\'s clean U52 sweep may reflect reference-following more than internalized recall. U53 redesigns around both signals &mdash; two dramatically short (5-screen) "quick win" lessons, each bolting ONE rule onto a skill Prem already has fast: Counting_Lesson_BothGroupsEveryTime.html (divide by EACH repeat group at a circular table, not just one) and ArtOfCounting_Lesson_DoubleTheTotalFirst.html (double the total first, then find two consecutive factors, to solve combinations backward). Both target skills come directly from U52\'s diagnosable Section C misses (Q11 only-one-repeat-group, Q14 wrong-shortcut-applied). Test: 15Q, Sec A circular double-repeat, Sec B combinations backward, Sec C harder + a true capstone question. Recommended closed-book for a truer final signal before Sunday.',
-      status: 'pending'
+      note: '11/15 &#10007; <strong>NOT PASSED</strong>, but the best score since U49 (8&rarr;7&rarr;9&rarr;11 trend) &mdash; Sec A 4/5, Sec B 5/5 PERFECT, Sec C 2/5. Combinations Backward is fully secure: every appearance on the paper (7 questions across all 3 tiers) was correct, doubling step shown every time. Circular Double/Triple-Repeat is more solid than the score suggests &mdash; most misses were arithmetic-scale slips or abandoned big-number attempts on a correctly-identified method, not rule confusion, including Q13 where Prem correctly extended the 2-group rule to a never-taught 3-group case and only lost the answer to one mid-division slip. This was the final ASMOPSS-prep unit; the real exam followed the next day (9 Aug), scoring 50/100 &mdash; see Competitions/ASMOPSS/ for the full breakdown, answer key, and tier/strand dashboard. A full coaching-process review followed (10 Aug 2026); see coaching-rules memory and the U54 entry above.',
+      status: 'done'
     },
     {
       n: 52,
@@ -1134,9 +1173,9 @@ var PREM_DATA = {
       fillClass: 'g2', fillPct: 88
     },
     {
-      label:     'Painted-cube edge/face recall — ACTIVE, still open (U49 2/5 &rarr; U50 retest 1/5, worse); confidence-erosion side-effect surfaced and resolved separately',
+      label:     'Painted-cube 3D spatial reasoning — ACTIVE, U54 attempts a genuinely NEW method (U49 2/5 &rarr; U50 retest 1/5, worse &rarr; real ASMOPSS 2026 Q23 also wrong)',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U49 Sec C 2/5 &rarr; U50\'s dedicated retest (ONE unifying model, replacing 4 separate formulas) came back Sec B 2/5 + Sec C 1/5 &mdash; WORSE, not better. Prem wrote "confusing method" directly next to the faces question; the redesign has not resolved his confusion with that formula specifically. <strong>Deliberately not touched again before the 9 Aug exam</strong> &mdash; a third lesson-and-retest cycle would not fit the remaining time, and evidence pointed to a confidence problem compounding the content one (see below). Accepted as an open gap for this cycle; will be revisited after the exam.',
+      score:     'U49 Sec C 2/5 &rarr; U50\'s retest (ONE unifying model, still 4 separate formulas underneath) came back WORSE (Sec C 1/5) &mdash; Prem wrote "confusing method" directly next to the question. Deliberately left untouched before the 9 Aug exam; the real exam confirmed the gap (Q23 wrong, 5-cube figure miscounted as 9). Two same-framing attempts have now failed, so U54 uses a genuinely different method instead of a third repeat: Spatial_Lesson_FloorByFloorGridCount.html reframes the box as a stack of 2D grids and counts painted faces via Prem\'s already-proven grid/rectangle-counting skill (a method he has never struggled with), rather than any new or restated algebraic formula.',
       fillClass: 'g2', fillPct: 35
     },
     {
