@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chance As A Fraction — Your First Probability Lesson</title>
+<style>
+:root{--nav:#6A1B9A;--nav-dark:#4A148C;--bg:#F3E5F5;--card:#fff;--acc:#6A1B9A;--ok:#2E7D32;--err:#C62828;--warn:#4A148C}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#4A148C;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#F3E5F5,#F8EEFB);border:2px solid #CE93D8;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#4A148C;font-weight:700;margin-bottom:6px}
+.big-rule{background:#F3E5F5;border:2px solid #8E24AA;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#4A148C;margin:14px 0}
+.golden{background:linear-gradient(135deg,#F3E5F5,#EDE7F6);border:2px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#F3E5F5;border:1.5px solid #8E24AA;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#4A148C;text-align:center;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F8EEFB;border:1px solid #CE93D8;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#6A1B9A}
+.steps .ln.ans{color:#4A148C;font-weight:800}
+.tree{background:#FDFBFE;border:2px dashed #CE93D8;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#6A1B9A;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.warn-box{background:#F3E5F5;border:1.5px solid #CE93D8;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#4A148C}
+.q-card{background:#F8EEFB;border:1.5px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#F3E5F5}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#F3E5F5;color:#4A148C;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#6A1B9A;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#F3E5F5;color:#4A148C;border:1.5px solid #CE93D8;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.reveal-btn{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin:6px 6px 6px 0}
+.reveal-line{display:none;background:#F8EEFB;border:1px solid #CE93D8;border-radius:8px;padding:10px 14px;margin:6px 0;font-size:.98rem;font-weight:700;color:#4A148C}
+/* probability-specific visuals */
+.scale{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,#EF5350,#FFA726,#FFEE58,#9CCC65,#42A5F5);border-radius:30px;padding:16px 8px;margin:16px 0;gap:4px}
+.scale-pt{background:#fff;border-radius:8px;padding:6px 6px;font-size:.68rem;font-weight:700;text-align:center;color:#333;box-shadow:0 1px 3px rgba(0,0,0,.2);flex:1}
+.counter-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0}
+.counter{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.72rem;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.legend2{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:10px;font-size:.85rem}
+.leg-sw2{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.spinner{width:150px;height:150px;border-radius:50%;margin:14px auto;border:3px solid #4A148C;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Chance As A Fraction — Your First Probability Lesson</span>
+  <span class="tnav-pill" id="pill">1 / 12</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">You already do this every day, without a name for it</div>
+    <p>"Will it rain today?" "Will I roll a six?" "Is my team likely to win?" Every one of these is really asking: <strong>how likely is this to happen?</strong> Weather forecasters, doctors, sports commentators, and game designers all use ONE tool to answer questions like that precisely, instead of just guessing — it's called <strong>probability</strong>.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Your new superpower</div>
+    <p>By the end of this lesson, you'll be able to turn "how likely is this?" into an exact <strong>number</strong> — a fraction — for any game, bag of marbles, spinner, or raffle. No more guessing "probably" or "maybe" — you'll be able to say exactly how likely, every time.</p>
+  </div>
+  <div class="big-rule">Probability = turning "how likely?" into an exact fraction.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: likelihood scale -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F4CF; The Likelihood Scale</h2>
+  <p>Before any numbers, let's get the FEEL of it. Every event sits somewhere on a scale from "definitely won't happen" to "definitely will happen":</p>
+  <div class="scale">
+    <div class="scale-pt">IMPOSSIBLE<br>(never)</div>
+    <div class="scale-pt">UNLIKELY<br>(rare)</div>
+    <div class="scale-pt">EVEN CHANCE<br>(50/50)</div>
+    <div class="scale-pt">LIKELY<br>(common)</div>
+    <div class="scale-pt">CERTAIN<br>(always)</div>
+  </div>
+  <p><strong>Examples:</strong> "The sun will rise tomorrow" — CERTAIN. "You'll flip a fair coin and get heads" — EVEN CHANCE. "You'll roll a 6 on a single die" — UNLIKELY (possible, just not often). "A cat will grow wings" — IMPOSSIBLE.</p>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This scale is just words for now — the whole rest of this lesson is about turning these words into an EXACT number, so "unlikely" becomes something precise like "1 out of 6," not just a feeling.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Probability As A Fraction &#8594;</button></div>
+</div>
+
+<!-- s2: core rule -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F9EE; Probability As A Fraction — The Core Rule</h2>
+  <div class="why">
+    <div class="why-title">The one new idea</div>
+    <p>To turn "how likely?" into a number, you always ask TWO counting questions: <strong>how many outcomes do I want (favourable)?</strong> and <strong>how many outcomes are possible in total?</strong> Then you write favourable OVER total, as a fraction.</p>
+  </div>
+  <div class="big-rule">Probability of an event &nbsp;=&nbsp; (favourable outcomes) &divide; (total possible outcomes)</div>
+  <p><strong>Example:</strong> A bag has 9 marbles: 4 green and 5 orange.</p>
+  <div class="counter-row">
+    <div class="counter" style="background:#43A047">G</div><div class="counter" style="background:#43A047">G</div><div class="counter" style="background:#43A047">G</div><div class="counter" style="background:#43A047">G</div>
+    <div class="counter" style="background:#FB8C00">O</div><div class="counter" style="background:#FB8C00">O</div><div class="counter" style="background:#FB8C00">O</div><div class="counter" style="background:#FB8C00">O</div><div class="counter" style="background:#FB8C00">O</div>
+  </div>
+  <div class="legend2"><span><span class="leg-sw2" style="background:#43A047"></span>Green (4)</span><span><span class="leg-sw2" style="background:#FB8C00"></span>Orange (5)</span></div>
+  <div class="steps">
+    <div class="ln"><span class="note">You reach in without looking and pull one marble. What's the probability it's GREEN?</span></div>
+    <div class="ln">Favourable outcomes (green marbles) = 4</div>
+    <div class="ln">Total possible outcomes (all marbles) = 9</div>
+    <div class="ln ans">P(green) = 4 &divide; 9 = 4/9</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; That's it — probability is just a counting fraction. TOP = what you want. BOTTOM = everything that could happen.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Quick Check &#8594;</button></div>
+</div>
+
+<!-- s3: interactive quick check -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F4CB; Quick Check — Count It Yourself</h2>
+  <p style="margin-bottom:10px"><strong>A jar has 7 stickers: 2 star-shaped and 5 heart-shaped. You pick one without looking. Tap each button in order.</strong></p>
+  <div class="counter-row">
+    <div class="counter" style="background:#8E24AA">&#9733;</div><div class="counter" style="background:#8E24AA">&#9733;</div>
+    <div class="counter" style="background:#EC407A">&#9829;</div><div class="counter" style="background:#EC407A">&#9829;</div><div class="counter" style="background:#EC407A">&#9829;</div><div class="counter" style="background:#EC407A">&#9829;</div><div class="counter" style="background:#EC407A">&#9829;</div>
+  </div>
+  <button class="reveal-btn" onclick="revealLine('r0a')">How many stickers are there in TOTAL?</button>
+  <div class="reveal-line" id="r0a">7 — that's your bottom number, always.</div>
+  <button class="reveal-btn" onclick="revealLine('r0b')">How many are star-shaped (favourable)?</button>
+  <div class="reveal-line" id="r0b">2 — that's your top number.</div>
+  <button class="reveal-btn" onclick="revealLine('r0c')">So what is P(star)?</button>
+  <div class="reveal-line" id="r0c">P(star) = 2/7 (favourable &divide; total)</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Equally Likely Outcomes &#8594;</button></div>
+</div>
+
+<!-- s4: equally likely outcomes -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x2696;&#xFE0F; Equally Likely Outcomes</h2>
+  <div class="why">
+    <div class="why-title">The one new idea</div>
+    <p>The favourable-over-total rule only works cleanly when every single outcome has the SAME chance of happening — we call this <strong>equally likely</strong>. A fair die, a fair coin, a spinner with equal-sized sections, and a bag where you can't feel the difference between marbles — all equally likely. Nothing is "sneaky" or weighted to happen more.</p>
+  </div>
+  <div class="rulebar">Fair die, fair coin, equal-sized spinner sections, a well-mixed bag &rarr; all outcomes equally likely.</div>
+  <p><strong>Example:</strong> Rolling a fair 6-sided die — each of the 6 faces (1, 2, 3, 4, 5, 6) has exactly the same chance of landing face-up. That's why we can say "probability of rolling a 4" = 1/6 — there are 6 equally likely outcomes, and only 1 of them is a "4."</p>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Every probability question in this lesson (and the test) uses fair, equally-likely setups — dice, spinners with equal sections, and well-mixed bags. You never need to worry about one outcome being "more likely" than another unless a question tells you the bag/spinner is unfair.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Full Rule &#8594;</button></div>
+</div>
+
+<!-- s5: rule box / decision tree -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x1F9ED; Put It Together — The ONE Rule</h2>
+  <div class="big-rule">P(event) &nbsp;=&nbsp; favourable outcomes &divide; total outcomes</div>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Count the TOTAL number of possible outcomes (everything that could happen).</div>
+    <div class="node"><span class="step-n">2</span>Count the FAVOURABLE outcomes (the ones that match what the question asks for).</div>
+    <div class="node"><span class="step-n">3</span>Write favourable &divide; total as a fraction.</div>
+    <div class="node"><span class="step-n">4</span>Check: can the fraction be SIMPLIFIED? If yes, simplify it (next screen shows how).</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Same 4 steps every single time, no matter what the question is about — marbles, spinners, dice, raffle tickets, anything.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Worked Example &#8594;</button></div>
+</div>
+
+<!-- s6: worked example spinner -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>Worked Example — A Spinner With 8 Equal Sections</h2>
+  <p>A spinner is divided into <strong>8 equal-sized sections</strong>. <strong>3 of the sections are purple</strong>, the rest are grey. You spin once. What is P(purple)?</p>
+  <div class="spinner" style="background:conic-gradient(#8E24AA 0% 37.5%, #E0E0E0 37.5% 100%)"></div>
+  <div class="legend2"><span><span class="leg-sw2" style="background:#8E24AA"></span>Purple (3 sections)</span><span><span class="leg-sw2" style="background:#E0E0E0"></span>Grey (5 sections)</span></div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The picture groups the 3 purple sections together just to make drawing easier — on a real spinner they could be scattered anywhere around the circle. It never matters WHERE the sections sit, only HOW MANY there are.</p></div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — total outcomes (all equal sections):</span></div>
+    <div class="ln">8</div>
+    <div class="ln"><span class="note">Step 2 — favourable outcomes (purple sections):</span></div>
+    <div class="ln">3</div>
+    <div class="ln"><span class="note">Step 3 — write as a fraction:</span></div>
+    <div class="ln">3/8</div>
+    <div class="ln"><span class="note">Step 4 — can 3/8 be simplified? 3 and 8 share no common factor except 1, so it's already simplest:</span></div>
+    <div class="ln ans">P(purple) = 3/8</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Simplifying &#8594;</button></div>
+</div>
+
+<!-- s7: simplifying -->
+<div class="screen" id="s7">
+<div class="card">
+  <h2>&#x2702;&#xFE0F; Simplifying Probability Fractions</h2>
+  <div class="why">
+    <div class="why-title">The one new idea</div>
+    <p>Sometimes favourable &divide; total gives a fraction that ISN'T in simplest form yet. You already know how to simplify fractions (divide top and bottom by the same number) — probability fractions follow that exact same rule. A probability answer is only finished once it's fully simplified.</p>
+  </div>
+  <p><strong>Example:</strong> A box has 12 pencils: 8 blue and 4 red. What is P(red)?</p>
+  <div class="counter-row">
+    <div class="counter" style="background:#1E88E5">B</div><div class="counter" style="background:#1E88E5">B</div><div class="counter" style="background:#1E88E5">B</div><div class="counter" style="background:#1E88E5">B</div>
+    <div class="counter" style="background:#1E88E5">B</div><div class="counter" style="background:#1E88E5">B</div><div class="counter" style="background:#1E88E5">B</div><div class="counter" style="background:#1E88E5">B</div>
+    <div class="counter" style="background:#E53935">R</div><div class="counter" style="background:#E53935">R</div><div class="counter" style="background:#E53935">R</div><div class="counter" style="background:#E53935">R</div>
+  </div>
+  <div class="steps">
+    <div class="ln">Favourable (red) = 4. Total = 12.</div>
+    <div class="ln">P(red) = 4/12</div>
+    <div class="ln"><span class="note">Is 4/12 simplest? 4 and 12 are both divisible by 4:</span></div>
+    <div class="ln">4 &divide; 4 = 1, &nbsp; 12 &divide; 4 = 3</div>
+    <div class="ln ans">P(red) = 4/12 = 1/3</div>
+  </div>
+  <div class="rulebar">Always check: can top and bottom both be divided by the same number? If yes — keep dividing until you can't anymore.</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; "1/3" and "4/12" mean the exact same chance — but when a question says "simplest form," only the fully-simplified fraction counts as the finished answer.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The "NOT" Rule &#8594;</button></div>
+</div>
+
+<!-- s8: complement / NOT rule -->
+<div class="screen" id="s8">
+<div class="card">
+  <h2>&#x1F6AB; The "NOT" Rule</h2>
+  <div class="why">
+    <div class="why-title">The one new idea</div>
+    <p>Sometimes a question asks for the probability that something does <strong>NOT</strong> happen. You already have everything you need — just count how many outcomes DON'T match, and put that over the same total.</p>
+  </div>
+  <p><strong>Example:</strong> A jar has 16 buttons. 6 of them are broken. What is P(NOT broken)?</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — total outcomes:</span></div>
+    <div class="ln">16</div>
+    <div class="ln"><span class="note">Step 2 — favourable outcomes ("not broken" = the good ones):</span></div>
+    <div class="ln">16 &minus; 6 = 10 good buttons</div>
+    <div class="ln"><span class="note">Step 3 — write as a fraction:</span></div>
+    <div class="ln">10/16</div>
+    <div class="ln"><span class="note">Step 4 — simplify (both divisible by 2):</span></div>
+    <div class="ln ans">P(not broken) = 10/16 = 5/8</div>
+  </div>
+  <div class="rulebar">"NOT" an event &rarr; favourable = total &minus; (the thing you're avoiding). Same 4 steps as always.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Build It Yourself &#8594;</button></div>
+</div>
+
+<!-- s9: interactive build it yourself -->
+<div class="screen" id="s9">
+<div class="card">
+  <h2>&#x1F4CB; Build It Yourself — Jellybean Jar</h2>
+  <p style="margin-bottom:10px"><strong>A jar has 21 jellybeans: 5 red, 7 green, 9 yellow. Tap each button in order to work out four different probabilities.</strong></p>
+  <div class="counter-row">
+    <div class="counter" style="background:#E53935">R</div><div class="counter" style="background:#E53935">R</div><div class="counter" style="background:#E53935">R</div><div class="counter" style="background:#E53935">R</div><div class="counter" style="background:#E53935">R</div>
+    <div class="counter" style="background:#43A047">G</div><div class="counter" style="background:#43A047">G</div><div class="counter" style="background:#43A047">G</div><div class="counter" style="background:#43A047">G</div><div class="counter" style="background:#43A047">G</div><div class="counter" style="background:#43A047">G</div><div class="counter" style="background:#43A047">G</div>
+    <div class="counter" style="background:#FDD835;color:#4A148C">Y</div><div class="counter" style="background:#FDD835;color:#4A148C">Y</div><div class="counter" style="background:#FDD835;color:#4A148C">Y</div><div class="counter" style="background:#FDD835;color:#4A148C">Y</div><div class="counter" style="background:#FDD835;color:#4A148C">Y</div><div class="counter" style="background:#FDD835;color:#4A148C">Y</div><div class="counter" style="background:#FDD835;color:#4A148C">Y</div><div class="counter" style="background:#FDD835;color:#4A148C">Y</div><div class="counter" style="background:#FDD835;color:#4A148C">Y</div>
+  </div>
+  <button class="reveal-btn" onclick="revealLine('r1a')">P(red) = ?</button>
+  <div class="reveal-line" id="r1a">5/21 — already simplest (5 and 21 share no common factor).</div>
+  <button class="reveal-btn" onclick="revealLine('r1b')">P(green) = ?</button>
+  <div class="reveal-line" id="r1b">7/21 &divide; both by 7 = 1/3</div>
+  <button class="reveal-btn" onclick="revealLine('r1c')">P(yellow) = ?</button>
+  <div class="reveal-line" id="r1c">9/21 &divide; both by 3 = 3/7</div>
+  <button class="reveal-btn checkbtn" onclick="revealLine('r1d')">P(NOT yellow) = ?</button>
+  <div class="reveal-line" id="r1d">Not-yellow = 21 &minus; 9 = 12. 12/21 &divide; both by 3 = 4/7</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s10: practice -->
+<div class="screen" id="s10">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Chance As A Fraction</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A bag has 14 balls: 4 white and 10 black. What is P(white), in SIMPLEST form?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 4/14</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 2/7</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 1/4</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">Favourable = 4, total = 14. P(white) = 4/14.</div>
+      <div class="ln ans">4/14 &divide; both by 2 = 2/7 (simplest form)</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A raffle has 27 tickets. 3 of them are winners. What is P(NOT winning), in SIMPLEST form?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 3/27</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 8/9</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 24/27</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">Not-winning = 27 &minus; 3 = 24. P(not winning) = 24/27.</div>
+      <div class="ln ans">24/27 &divide; both by 3 = 8/9 (simplest form)</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Mastery Checklist &#8594;</button></div>
+</div>
+
+<!-- s11: recap -->
+<div class="screen" id="s11">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>Probability = favourable outcomes &divide; total outcomes, for any equally-likely situation. Always simplify your fraction, and remember "NOT an event" = total minus the thing you're avoiding.</strong></p>
+</div>
+<div class="card" style="background:#F3E5F5;border:1px solid #CE93D8">
+  <h3 style="color:#4A148C">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You can count favourable and total outcomes from a picture or a word problem</li>
+    <li>You write probability as favourable &divide; total, every time</li>
+    <li>You always check if the fraction can be simplified — and simplify it fully</li>
+    <li>You can find P(NOT an event) using total minus the thing you're avoiding</li>
+    <li>You know "equally likely" means every outcome has the same chance</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem">This is your FIRST probability lesson — a brand-new skill on your radar. You'll build on this soon with charts, averages, and combined events.</p>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#6A1B9A;color:#fff;border:2px solid #6A1B9A;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+function revealLine(id){document.getElementById(id).style.display='block';}
+</script>
+</body>
+</html>

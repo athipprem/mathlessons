@@ -15,13 +15,38 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '10 Aug 2026',
+  updated:        '12 Aug 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:54, topic:'3D Spatial Reasoning — Painted Cubes, Floor by Floor (new method)', status:'Test Pending' },
+  currentUnit: { n:55, topic:'Statistics &amp; Probability I — Chance As A Fraction (Basic, new radar skill)', status:'Test Pending' },
   lastUnit: {
+    n:54, score:11, outOf:15, pct:73, delta:0, prevScore:11, prevOutOf:15, prevLabel:'U53',
+    patternLabel: 'U54 — 3D Spatial Reasoning, Floor by Floor (new method), NOT PASSED — but the method itself is WORKING',
+    patternInsight: '11/15 (73%) <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 4/5, Sec C 3/5. The genuinely new floor-by-floor method (reframing a painted box as a stack of 2D grids, counted via Prem&rsquo;s already-proven grid-counting skill) held up well: <strong>11 of the 12 questions testing pure floor-by-floor mechanics were correct</strong>, including both hardest capstones (Q11&rsquo;s four-way count 8/12/6/1, Q15&rsquo;s reverse problem) &mdash; a real turnaround from U49/U50&rsquo;s across-the-board formula failures. The 4 misses split into two different types. Q5 (4&times;4&times;4) is a coverage gap, not a method failure: the first-ever box in the unit with TWO middle floors, never demonstrated in the lesson &mdash; Prem applied the "+0 for middle floor" rule correctly to only one of the two. Q6, Q12, and Q14 are three separate instances of the exact "finish the exact question" pattern the 10 Aug coaching review flagged as the root cause behind ASMOPSS 2026&rsquo;s Intermediate-tier collapse &mdash; already recurring one test later, even with the new standing infrastructure in place: Q6 abandoned blank despite solving a near-identical companion question (Q9) correctly minutes later (confidence dip); Q12 computed the correct raw count (34) but never converted it to the simplified fraction the question explicitly asked for; Q14 derived both correct intermediate values in the working (16, 48) then multiplied instead of added them in the final step.',
+    analysisLabel: 'Next: Unit 55 — Statistics &amp; Probability I, Basic (brand-new topic, launches the 9th radar skill, built 12 Aug 2026)',
+    analysisInsight: 'This was the first test built under the new post-ASMOPSS coaching protocol (spiral maintenance warm-up + standing finish-the-question grading + tier-awareness). The warm-up (Remainders, closed since U34, untouched 6+ weeks) was answered correctly &mdash; no decay. The finish-the-question infrastructure did NOT yet close the precision gap it was built for; watch whether repetition across U55&ndash;U57 brings it down. No re-teach or retest recommended for the spatial method itself &mdash; it is working. A single 1-question top-up on a 2+-middle-floor box (e.g. 5&times;5&times;5) before spatial content resurfaces (U57+) would close the Q5 coverage gap cheaply. Per the roadmap, U55 proceeds as planned: Statistics &amp; Probability was entirely missing from the original 8-skill rotation and confirmed the weakest ASMOPSS strand both years &mdash; U55 covers chance/likelihood, probability as a favourable&divide;total fraction, equally-likely outcomes, simplifying, and the "NOT" complement rule, plus 2 spiral-maintenance warm-ups (Vertically Opposite Angles, closed U20/~10 weeks stale; HCF, closed U15/~11 weeks stale).',
+    qSummary: '<strong>Sec A 4/5 | Sec B 4/5 | Sec C 3/5</strong> — 11/15 (73%) NOT PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Spatial — Painted Cubes', lvl:'w', pass:true,  note:'&#10003; 8 (corners, 3&times;3&times;3).' },
+      { q:'Q2', topic:'Spatial — Painted Cubes', lvl:'w', pass:true,  note:'&#10003; 0 (fully hidden, 3&times;3&times;2 — no middle floor).' },
+      { q:'Q3', topic:'Spatial — Painted Cubes', lvl:'w', pass:true,  note:'&#10003; 4 (1-face, 4&times;3&times;2).' },
+      { q:'Q4', topic:'Spatial — Painted Cubes', lvl:'w', pass:true,  note:'&#10003; 20 (2-face/edges, 5&times;3&times;3).' },
+      { q:'Q5', topic:'Spatial — Painted Cubes', lvl:'w', pass:false, note:'&#10007; wrote 4; correct 8 (fully hidden, 4&times;4&times;4). First-ever box with TWO middle floors &mdash; never demonstrated in the lesson. Applied the "+0 for middle floor" rule to only one of the two middle floors, not both. Coverage gap, not a method failure.' },
+      { q:'Q6', topic:'Spatial — Painted Cubes', lvl:'m', pass:false, note:'&#10007; blank; correct 2 (1-face minus 2-face, 7&times;4&times;3). Abandoned mid-question &mdash; but Q9, a near-identical difference-of-two-counts question, was solved correctly minutes later. Confidence dip, not a skill gap.' },
+      { q:'Q7', topic:'Spatial — Painted Cubes', lvl:'m', pass:true,  note:'&#10003; 28 (at-least-2-faces, 5&times;4&times;2).' },
+      { q:'Q8', topic:'Spatial — Painted Cubes  &#9733;', lvl:'m', pass:true,  note:'&#10003; 8 (at-most-1-face, 6&times;3&times;2).' },
+      { q:'Q9', topic:'Spatial — Painted Cubes  &#9733;', lvl:'m', pass:true,  note:'&#10003; 19, working shown "28&minus;9=19" (2-face minus hidden, 5&times;5&times;3).' },
+      { q:'Q10',topic:'Spatial — Painted Cubes  &#9733;', lvl:'m', pass:true,  note:'&#10003; 1/5, written as a properly-formatted stacked fraction (hidden fraction, 6&times;5&times;4).' },
+      { q:'Q11',topic:'Spatial — Painted Cubes  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; all four counts 8, 12, 6, 1 &mdash; correctly sum to 27 (3&times;3&times;3 capstone).' },
+      { q:'Q12',topic:'Spatial — Painted Cubes  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote 34; correct 17/42 (1-face fraction, 7&times;4&times;3). The raw count (34) was correct but never converted into the SIMPLEST-FORM FRACTION the question explicitly asked for &mdash; a finish-the-exact-question precision miss, not a content gap.' },
+      { q:'Q13',topic:'Spatial — Painted Cubes  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 36 (2-face/edges, 8&times;4&times;3).' },
+      { q:'Q14',topic:'Spatial — Painted Cubes  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote 768; correct 64 (hidden+1-face sum, 6&times;6&times;3). Both intermediate values (16, 48) correctly derived in the working, then multiplied instead of added in the final step.' },
+      { q:'Q15',topic:'Spatial — Painted Cubes (Capstone)  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; (a) 60 (b) 4 &mdash; reverse capstone, exact match.' }
+    ]
+  },
+  _U53archived: {
     n:53, score:11, outOf:15, pct:73, delta:+2, prevScore:9, prevOutOf:15, prevLabel:'U52',
     patternLabel: 'U53 — Quick-Win Add-Ons: Both Groups Every Time &amp; Double the Total First, NOT PASSED (best since U49)',
     patternInsight: '11/15 (73%) <strong>NOT PASSED</strong>, but the best score since U49 and a clear upward trend (8&rarr;7&rarr;9&rarr;11). Sec A (Circular Double-Repeat) 4/5 &middot; Sec B (Combinations Backward) 5/5 PERFECT &middot; Sec C (Harder &amp; Capstone) 2/5. <strong>Combinations Backward is fully secure &mdash; 7/7 correct everywhere it appeared, including at the &#9733;&#9733; tier.</strong> The circular double/triple-repeat rule is more interesting than the raw score suggests: most misses trace to arithmetic-scale slips or abandoned big-number attempts on a correctly-identified method, not confusion about the rule itself &mdash; including Q13, where Prem correctly extended the 2-group rule to a never-taught 3-group variant, only losing the final answer to one arithmetic slip.',
@@ -275,23 +300,37 @@ var PREM_DATA = {
     { n:'M5', label:'M5', score:7, delta:-1, color:'linear-gradient(135deg,#0D47A1,#4A148C)', star:false },
     { n:51, score:7,  delta:0,    color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
     { n:52, score:9,  delta:+2,   color:'linear-gradient(135deg,#AD1457,#880E4F)', star:false },
-    { n:53, score:11, delta:+2,   color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false }
+    { n:53, score:11, delta:+2,   color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false },
+    { n:54, score:11, delta:0,    color:'linear-gradient(135deg,#EF5350,#C62828)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 54,
-      badge: 'linear-gradient(135deg,#2E7D32,#1B5E20)',
-      title: '3D Spatial Reasoning — Painted Cubes, Floor by Floor (new method)',
+      n: 55,
+      badge: 'linear-gradient(135deg,#6A1B9A,#4A148C)',
+      title: 'Statistics &amp; Probability I — Chance As A Fraction (Basic)',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'Genuinely new method — not a 3rd repeat', c:'tgreen' },
-        { t:'+ spiral maintenance warm-up (Remainders)', c:'tgreen' },
-        { t:'Post-ASMOPSS, standard ISA cadence resumes', c:'torange' }
+        { t:'Brand-new topic — 9th radar skill launches', c:'tgreen' },
+        { t:'+ 2 spiral warm-ups (Angles, HCF — both 10+ wks stale)', c:'tgreen' },
+        { t:'Cycle 6, unit 5 of 10 (M6 lands after U60)', c:'torange' }
       ],
-      note: 'U54, built 10 Aug 2026, resuming standard ISA 2027 cadence now that ASMOPSS 2026 is done (sat 9 Aug, scored 50/100 — see Competitions/ASMOPSS/). Targets the single highest-leverage open gap per the real-exam analysis: painted-cube/3D spatial reasoning, which has now failed at U49, gotten worse at U50, and missed again on the real exam (Q23). Two same-framing re-teaches (corner/edge/face/inside formulas) already failed, so this is a genuinely different method, not a third repeat: Spatial_Lesson_FloorByFloorGridCount.html reframes a painted box as a stack of flat 2D grids ("floors") and counts painted faces using Prem\'s already-proven grid/rectangle-counting skill (corner/edge/centre cell classification) instead of 4 abstract algebraic formulas. Test: 15Q (Sec A basic single-category, Sec B intermediate two-step, Sec C hard &amp; capstone) plus a 1-question ungraded spiral-maintenance warm-up on Remainders (closed since U34, untouched 6+ weeks) and a standing "finish the exact question" instruction line — both per the new Math-Specific Coaching Protocol added to the create-new-test-pack skill (10 Aug 2026) after a full coaching-process review.',
+      note: 'U55, built 12 Aug 2026 &mdash; the first of 3 dedicated Statistics &amp; Probability units (U55/U57/U59), closing the gap that this strand was never in the original 8-skill rotation and was confirmed the weakest ASMOPSS strand both years (2025 report 13.16%, real 2026 exam ~9%). Probability_Lesson_ChanceAsAFraction.html builds from zero: the likelihood scale, probability as favourable&divide;total, equally-likely outcomes, simplifying probability fractions (reusing Prem&rsquo;s already-mastered fraction-simplifying skill), and the "NOT" complement rule. Test: 15Q (Sec A basic single-step, Sec B intermediate two-step, Sec C hard &amp; capstone, including reverse-probability word problems) plus 2 ungraded spiral-maintenance warm-ups &mdash; Vertically Opposite Angles (closed U20, ~10 weeks untouched) and HCF (closed U15, ~11 weeks untouched), both flagged stale by the 10 Aug coaching-process review&rsquo;s decay-risk criteria. Continues the standing finish-the-question infrastructure, with particular emphasis on "does your answer&rsquo;s form match what was asked" (count vs. simplified fraction) given U54&rsquo;s Q12 finding.',
       status: 'pending'
+    },
+    {
+      n: 54,
+      badge: 'linear-gradient(135deg,#EF5350,#C62828)',
+      title: '3D Spatial Reasoning — Painted Cubes, Floor by Floor (new method)',
+      tags: [
+        { t:'11/15 (73%) &#10007; NOT PASSED', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Method WORKS — 11/12 pure-mechanics Qs correct', c:'tgreen' },
+        { t:'4 misses: 1 coverage gap + 3 precision slips', c:'torange' },
+        { t:'&rarr; U55 Statistics &amp; Probability I (new radar skill)', c:'torange' }
+      ],
+      note: '11/15 &#10007; <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 4/5, Sec C 3/5. The genuinely new floor-by-floor method held up well: 11 of the 12 questions testing pure floor-by-floor mechanics were correct, including both hardest capstones (Q11&rsquo;s four-way count, Q15&rsquo;s reverse problem) &mdash; a real turnaround from U49/U50&rsquo;s across-the-board formula failures. Q5 (4&times;4&times;4, the first-ever two-middle-floor box, never demonstrated in the lesson) is a narrow coverage gap, not a method failure. Q6, Q12, and Q14 are three separate instances of the "finish the exact question" pattern the 10 Aug coaching review flagged as the root cause behind ASMOPSS 2026&rsquo;s Intermediate-tier collapse &mdash; recurring one test later even with the new standing infrastructure in place: Q6 abandoned blank despite solving a near-identical companion question (Q9) correctly minutes later; Q12 computed the correct raw count (34) but never converted it to the simplified fraction asked for; Q14 derived both correct intermediate values then multiplied instead of added them. The spiral-maintenance warm-up (Remainders, 6+ weeks stale) was answered correctly — no decay. Full breakdown in the Executive Summary.',
+      status: 'done'
     },
     {
       n: 53,
@@ -1173,10 +1212,16 @@ var PREM_DATA = {
       fillClass: 'g2', fillPct: 88
     },
     {
-      label:     'Painted-cube 3D spatial reasoning — ACTIVE, U54 attempts a genuinely NEW method (U49 2/5 &rarr; U50 retest 1/5, worse &rarr; real ASMOPSS 2026 Q23 also wrong)',
+      label:     'Painted-cube 3D spatial reasoning — floor-by-floor method WORKS (U54 11/12 pure-mechanics Qs correct); remaining gap is precision, not method',
+      pill:      'p2', pillText: 'In Progress &#9654;',
+      score:     'U49 Sec C 2/5 &rarr; U50 retest WORSE (Sec C 1/5, "confusing method") &rarr; real exam Q23 also wrong &mdash; two same-framing formula attempts had failed. U54\'s genuinely different method (Spatial_Lesson_FloorByFloorGridCount.html, reframing a box as a stack of 2D grids counted via Prem\'s already-proven grid-counting skill) landed: 11 of 12 pure floor-by-floor mechanics questions correct, including both hardest capstones (Q11 all-four-counts, Q15 reverse problem). U54 scored 11/15 (73%) NOT PASSED, but the 4 misses are a different, better profile &mdash; see the "finish the exact question" entry below for 3 of them (Q6, Q12, Q14); Q5 (4&times;4&times;4, the first-ever TWO-middle-floor box) is a narrow lesson-coverage gap, not a method failure &mdash; a single top-up question before U57\'s spatial-adjacent content should close it.',
+      fillClass: 'g2', fillPct: 68
+    },
+    {
+      label:     '"Finish the exact question" — recurring precision gap, now confirmed a 3rd+ time (U54 Q6/Q12/Q14) — standing scored infrastructure since 10 Aug coaching review',
       pill:      'p2', pillText: 'ACTIVE &#128308;',
-      score:     'U49 Sec C 2/5 &rarr; U50\'s retest (ONE unifying model, still 4 separate formulas underneath) came back WORSE (Sec C 1/5) &mdash; Prem wrote "confusing method" directly next to the question. Deliberately left untouched before the 9 Aug exam; the real exam confirmed the gap (Q23 wrong, 5-cube figure miscounted as 9). Two same-framing attempts have now failed, so U54 uses a genuinely different method instead of a third repeat: Spatial_Lesson_FloorByFloorGridCount.html reframes the box as a stack of 2D grids and counts painted faces via Prem\'s already-proven grid/rectangle-counting skill (a method he has never struggled with), rather than any new or restated algebraic formula.',
-      fillClass: 'g2', fillPct: 35
+      score:     'U54, the first test built under the new standing "finish the question" protocol, still produced 3 precision misses out of 4 total: Q6 abandoned blank on a two-count-then-subtract question despite solving a near-identical companion question (Q9) correctly minutes later (confidence dip, not a skill gap); Q12 computed the correct raw count (34) but never converted it into the SIMPLEST-FORM FRACTION the question explicitly asked for; Q14 derived both correct intermediate values (16, 48) in the working, then combined them with &times; instead of + in the final step. Confirms the 10 Aug coaching-process review\'s root-cause finding is still live even with the new infrastructure in place from unit one &mdash; the instruction line alone isn\'t sufficient, watch closely whether repetition across U55&ndash;U57 closes it.',
+      fillClass: 'g2', fillPct: 55
     },
     {
       label:     'Two-skill "capstone" questions — hardest-tier miss (M4 Round 3 1/5, M5 Round 3 0/5) — IMPROVED at U52 (Sec A 5/5 PERFECT) but Sec C still 1/5; open-book caveat applies',
