@@ -20,8 +20,33 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:55, topic:'Statistics &amp; Probability I — Chance As A Fraction (Basic, new radar skill)', status:'Test Pending' },
+  currentUnit: { n:56, topic:'Art of Counting — Choose 3 &amp; Multi-Constraint Counting (Harder Tier)', status:'Test Pending' },
   lastUnit: {
+    n:55, score:14, outOf:15, pct:93, delta:+3, prevScore:11, prevOutOf:15, prevLabel:'U54',
+    patternLabel: 'U55 — Statistics &amp; Probability I, Chance As A Fraction (Basic), PASSED — strongest score of the U54–U60 arc',
+    patternInsight: '14/15 (93%) <strong>PASSED</strong> &mdash; Sec A 5/5 PERFECT, Sec B 5/5 PERFECT, Sec C 4/5. A clean debut for Statistics &amp; Probability, launched from absolute zero just two days earlier: favourable&divide;total, equally-likely outcomes, simplifying, and the "NOT" complement rule were all applied correctly across 13 of 15 questions on the very first probability test Prem has ever sat, including every intermediate-tier question and 4 of 5 hard/capstone questions. The single miss, Q12, is a precise mirror of U54&rsquo;s own Q12 finish-the-question slip &mdash; but in the OPPOSITE direction: U54&rsquo;s Q12 computed a correct count (34) but never converted it to the fraction asked for; U55&rsquo;s Q12 computed a correct fraction (3/10) when the question asked for a whole-number COUNT (3). Two data points now confirm this is a specific, nameable pattern (probability-fraction vs. count confusion), not a one-off. The warm-up split as expected under the spiral-maintenance protocol: W1 (Vertically Opposite Angles, closed U20, ~10 weeks stale) was wrong &mdash; wrote 122&deg; instead of 58&deg;, confusing the vertically-opposite angle with the adjacent/supplementary one &mdash; a clean, low-stakes confirmation that untouched skills decay exactly as predicted, caught on an ungraded warm-up rather than costing real marks. W2 (HCF, closed U15, ~11 weeks stale) was correct.',
+    analysisLabel: 'Next: Unit 56 — Art of Counting, Harder Tier: Choose 3 &amp; Multi-Constraint Counting (built 14 Aug 2026)',
+    analysisInsight: 'No retest needed &mdash; U55 comfortably passed. Two actions taken directly off this result: (1) the standing finish-the-question infrastructure now names a specific "probability (fraction) vs. count (whole number) — which did the question ask for?" check from U56 onward, since U54 Q12 and U55 Q12 form a confirmed 2-for-2 pattern rather than two unrelated slips; (2) Statistics &amp; Probability is added as the 9th radar skill (skills[], radarCurrent/radarTarget/radarBaseline), seeded from this 14/15 result &mdash; a strong opening baseline, kept conservative below the raw 93% since only 1 of the 3 planned S&amp;P units (U55/U57/U59) is done. Vertically Opposite Angles returns to the spiral-maintenance rotation for a future warm-up &mdash; not urgent (ungraded, caught early), but now confirmed live-decayed rather than merely old. U56 proceeds as planned per the roadmap: Art of Counting at harder tier (Choose-3 combinations extending the mastered choose-2 method, plus Total-Minus-Bad multi-constraint counting bridging directly to U55&rsquo;s freshly-taught P(NOT) rule).',
+    qSummary: '<strong>Sec A 5/5 PERFECT | Sec B 5/5 PERFECT | Sec C 4/5</strong> — 14/15 (93%) PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Probability — Fraction', lvl:'w', pass:true,  note:'&#10003; 2/5 (5 marbles, 3 red/2 blue, P(blue)).' },
+      { q:'Q2', topic:'Probability — Fraction', lvl:'w', pass:true,  note:'&#10003; 1/6 (6-section spinner, P(land on 4)).' },
+      { q:'Q3', topic:'Probability — Simplifying', lvl:'w', pass:true,  note:'&#10003; 2/5 (10 sweets, 4 yellow/6 green, P(yellow) in simplest form).' },
+      { q:'Q4', topic:'Probability — Fraction', lvl:'w', pass:true,  note:'&#10003; 1/2 (die, P(even)).' },
+      { q:'Q5', topic:'Probability — NOT Complement', lvl:'w', pass:true,  note:'&#10003; 3/8 (8 balls, 5 blue, P(not blue)).' },
+      { q:'Q6', topic:'Probability — Simplifying', lvl:'m', pass:true,  note:'&#10003; 5/12 (12 candies, P(orange) in simplest form).' },
+      { q:'Q7', topic:'Probability — Fraction', lvl:'m', pass:true,  note:'&#10003; 3/10 (10 cards, P(greater than 7)).' },
+      { q:'Q8', topic:'Probability — Comparing', lvl:'m', pass:true,  note:'&#10003; 1/5 (20 marbles, P(blue) minus P(red)).' },
+      { q:'Q9', topic:'Probability — NOT Complement', lvl:'m', pass:true,  note:'&#10003; 14/15 (15 tickets, P(not winning)).' },
+      { q:'Q10',topic:'Probability — Fraction', lvl:'m', pass:true,  note:'&#10003; 1/3 (die, P(multiple of 3)).' },
+      { q:'Q11',topic:'Probability — Reverse (find count)  &#9733;', lvl:'h', pass:true,  note:'&#10003; 8 (24 marbles, P(red)=1/3, find the red count).' },
+      { q:'Q12',topic:'Probability — Reverse (find count)  &#9733;', lvl:'h', pass:false, note:'&#10007; wrote 3/10; correct 3 (10 pens, P(black)=2/5, P(blue)=3/10, find the red COUNT). Computed a correct fraction when the question asked for a whole-number count &mdash; the exact mirror of U54 Q12 (which gave a count when a fraction was asked). Confirms a specific, nameable "fraction vs. count" precision pattern, now 2-for-2.' },
+      { q:'Q13',topic:'Probability — Reverse (find count)  &#9733;', lvl:'h', pass:true,  note:'&#10003; 8 (18 sweets, P(lemon)=5/9, find the strawberry count).' },
+      { q:'Q14',topic:'Probability — Combined Events  &#9733;', lvl:'h', pass:true,  note:'&#10003; 2/5 (numbers 1&ndash;20, P(multiple of 4 OR 5) in simplest form).' },
+      { q:'Q15',topic:'Probability — Capstone (Reverse)  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; (a) 12 (b) 2/5 (30 marbles, find green count then P(green)) &mdash; exact match on both parts.' }
+    ]
+  },
+  _U54archived: {
     n:54, score:11, outOf:15, pct:73, delta:0, prevScore:11, prevOutOf:15, prevLabel:'U53',
     patternLabel: 'U54 — 3D Spatial Reasoning, Floor by Floor (new method), NOT PASSED — but the method itself is WORKING',
     patternInsight: '11/15 (73%) <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 4/5, Sec C 3/5. The genuinely new floor-by-floor method (reframing a painted box as a stack of 2D grids, counted via Prem&rsquo;s already-proven grid-counting skill) held up well: <strong>11 of the 12 questions testing pure floor-by-floor mechanics were correct</strong>, including both hardest capstones (Q11&rsquo;s four-way count 8/12/6/1, Q15&rsquo;s reverse problem) &mdash; a real turnaround from U49/U50&rsquo;s across-the-board formula failures. The 4 misses split into two different types. Q5 (4&times;4&times;4) is a coverage gap, not a method failure: the first-ever box in the unit with TWO middle floors, never demonstrated in the lesson &mdash; Prem applied the "+0 for middle floor" rule correctly to only one of the two. Q6, Q12, and Q14 are three separate instances of the exact "finish the exact question" pattern the 10 Aug coaching review flagged as the root cause behind ASMOPSS 2026&rsquo;s Intermediate-tier collapse &mdash; already recurring one test later, even with the new standing infrastructure in place: Q6 abandoned blank despite solving a near-identical companion question (Q9) correctly minutes later (confidence dip); Q12 computed the correct raw count (34) but never converted it to the simplified fraction the question explicitly asked for; Q14 derived both correct intermediate values in the working (16, 48) then multiplied instead of added them in the final step.',
@@ -223,7 +248,13 @@ var PREM_DATA = {
   },
     // ── Skills ───────────────────────────────────────────────────────
   // Display order used for skill-bar tables in both pages.
-  // achievement % = sum(c) / sum(t) × 100  →  560 / 677 = 83%
+  // achievement % = sum(c) / sum(t) × 100  →  764 / 762 ≈ 100%
+  // Statistics & Probability added 14 Aug 2026 (building U56) — 9th skill,
+  // was missing from the original rotation. Seeded from U55's real result
+  // (14/15, 93%, Basic tier only) but current set conservatively below the
+  // raw test % since only 1 of 3 planned units (U55/U57/U59) is done —
+  // baseline/current/target will be refined as Applied-tier data (U57,
+  // U59) comes in. See coaching-rules memory.
   skills: [
     { name: 'Logic & Reasoning', c: 88, t: 90 },
     { name: 'Number Sense',      c: 88, t: 90 },
@@ -232,13 +263,15 @@ var PREM_DATA = {
     { name: 'Geometry',          c: 74, t: 80 },
     { name: 'Counting',          c: 87, t: 85 },
     { name: 'Number Theory',     c: 89, t: 82 },
-    { name: 'Applied Problems',  c: 76, t: 80 }
+    { name: 'Applied Problems',  c: 76, t: 80 },
+    { name: 'Statistics & Probability', c: 80, t: 85 }
   ],
 
-  // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied
-  radarCurrent:  [88, 74, 88, 99, 87, 83, 89, 76],
-  radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80],
-  radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15],
+  // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied, Statistics & Probability
+  // NOTE: dashboard's buildRadar() has its own hardcoded `labels` array that must stay in sync with this order — see Prems_Math_Coach_Dashboard.html.
+  radarCurrent:  [88, 74, 88, 99, 87, 83, 89, 76, 80],
+  radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80, 85],
+  radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15, 20],
 
   // ── Score history ─────────────────────────────────────────────────
   outOf: 15,
@@ -301,23 +334,38 @@ var PREM_DATA = {
     { n:51, score:7,  delta:0,    color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false },
     { n:52, score:9,  delta:+2,   color:'linear-gradient(135deg,#AD1457,#880E4F)', star:false },
     { n:53, score:11, delta:+2,   color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false },
-    { n:54, score:11, delta:0,    color:'linear-gradient(135deg,#EF5350,#C62828)', star:false }
+    { n:54, score:11, delta:0,    color:'linear-gradient(135deg,#EF5350,#C62828)', star:false },
+    { n:55, score:14, delta:+3,   color:'linear-gradient(135deg,#6A1B9A,#4A148C)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 55,
-      badge: 'linear-gradient(135deg,#6A1B9A,#4A148C)',
-      title: 'Statistics &amp; Probability I — Chance As A Fraction (Basic)',
+      n: 56,
+      badge: 'linear-gradient(135deg,#7B1FA2,#4A148C)',
+      title: 'Art of Counting — Choose 3 &amp; Multi-Constraint Counting (Harder Tier)',
       tags: [
         { t:'Pending &#128197;', c:'tpurple' },
-        { t:'Brand-new topic — 9th radar skill launches', c:'tgreen' },
-        { t:'+ 2 spiral warm-ups (Angles, HCF — both 10+ wks stale)', c:'tgreen' },
-        { t:'Cycle 6, unit 5 of 10 (M6 lands after U60)', c:'torange' }
+        { t:'Extends mastered choose-2 &amp; repeats skills to choose-3', c:'tgreen' },
+        { t:'Bridges to U55\'s P(NOT) rule — "Total Minus Bad"', c:'tgreen' },
+        { t:'+ 2 spiral warm-ups (Ratio, Path &amp; Frame — both 8+ wks stale)', c:'tgreen' },
+        { t:'Cycle 6, unit 6 of 10 (M6 lands after U60)', c:'torange' }
       ],
-      note: 'U55, built 12 Aug 2026 &mdash; the first of 3 dedicated Statistics &amp; Probability units (U55/U57/U59), closing the gap that this strand was never in the original 8-skill rotation and was confirmed the weakest ASMOPSS strand both years (2025 report 13.16%, real 2026 exam ~9%). Probability_Lesson_ChanceAsAFraction.html builds from zero: the likelihood scale, probability as favourable&divide;total, equally-likely outcomes, simplifying probability fractions (reusing Prem&rsquo;s already-mastered fraction-simplifying skill), and the "NOT" complement rule. Test: 15Q (Sec A basic single-step, Sec B intermediate two-step, Sec C hard &amp; capstone, including reverse-probability word problems) plus 2 ungraded spiral-maintenance warm-ups &mdash; Vertically Opposite Angles (closed U20, ~10 weeks untouched) and HCF (closed U15, ~11 weeks untouched), both flagged stale by the 10 Aug coaching-process review&rsquo;s decay-risk criteria. Continues the standing finish-the-question infrastructure, with particular emphasis on "does your answer&rsquo;s form match what was asked" (count vs. simplified fraction) given U54&rsquo;s Q12 finding.',
+      note: 'U56, built 14 Aug 2026 &mdash; Art of Counting returns at harder tier, built on top of two already-mastered skills rather than new metaphors. Lesson 1 (Counting_Lesson_ChooseThree.html) extends the mastered choose-2 pairing method (U53, PERFECT 7/7) and the mastered "divide by r!" repeats logic (U41&ndash;43) to choose-3 combinations (C(n,3) = n&times;(n&minus;1)&times;(n&minus;2)&divide;6), with a triangle/points-on-a-circle framing throughout. Lesson 2 (Counting_Lesson_MultiConstraint.html) teaches "Total Minus Bad" for at-least-1/not-all-same/excluding constraints, explicitly bridged to U55&rsquo;s freshly-taught P(NOT)=1&minus;P rule as a "you already know this pattern" callback, and reuses Lesson 1&rsquo;s points-on-a-circle framing for a second worked example. Test: 15Q at real-exam density (Sec A basic choose-3, Sec B intermediate total-minus-bad, Sec C hard/capstone including a multi-case same-colour exclusion and two reverse-solve questions) plus 2 ungraded spiral-maintenance warm-ups &mdash; Ratio (closed U18, ~11 weeks untouched) and Path &amp; Frame Geometry (closed U28, ~8 weeks untouched). Continues the standing finish-the-question infrastructure, now naming the "probability (fraction) vs. count (whole number)" check directly per U55&rsquo;s Q12 finding. Statistics &amp; Probability formally added as the 9th radar skill this build (skills[], radarCurrent/radarTarget/radarBaseline), seeded from U55&rsquo;s 14/15 (93%) result.',
       status: 'pending'
+    },
+    {
+      n: 55,
+      badge: 'linear-gradient(135deg,#2E7D32,#1B5E20)',
+      title: 'Statistics &amp; Probability I — Chance As A Fraction (Basic)',
+      tags: [
+        { t:'14/15 (93%) &#10003; PASSED', s:'background:#f0fff4;color:#2f855a;font-weight:700' },
+        { t:'Sec A 5/5 PERFECT &middot; Sec B 5/5 PERFECT &middot; Sec C 4/5', c:'tgreen' },
+        { t:'1 miss: fraction-vs-count precision (mirrors U54 Q12)', c:'torange' },
+        { t:'&rarr; U56 Art of Counting, harder tier', c:'torange' }
+      ],
+      note: '14/15 &#10003; <strong>PASSED</strong> &mdash; Sec A 5/5 PERFECT, Sec B 5/5 PERFECT, Sec C 4/5. Strongest score of the entire U54&ndash;U60 arc so far, and a clean debut for Statistics &amp; Probability &mdash; a topic launched from absolute zero just two days earlier. Favourable&divide;total, equally-likely outcomes, simplifying, and the "NOT" complement rule were all applied correctly across 13 of 15 questions on the very first probability test Prem has ever sat, including every intermediate-tier question and 4 of 5 hard/capstone questions. The single miss (Q12) is a precise mirror of U54&rsquo;s own Q12 slip, but in the opposite direction: U54 gave a count when a fraction was asked; U55 gave a fraction (3/10) when a whole-number count (3) was asked &mdash; now a confirmed 2-for-2 "fraction vs. count" precision pattern, not a one-off. The warm-up split as predicted: W1 (Vertically Opposite Angles, ~10 weeks stale) was wrong (122&deg; instead of 58&deg;, confusing vertically-opposite with adjacent/supplementary) &mdash; a clean, low-stakes confirmation the spiral-maintenance protocol is surfacing real decay before it costs real marks. W2 (HCF, ~11 weeks stale) was correct. No retest needed. Full breakdown in the Executive Summary.',
+      status: 'done'
     },
     {
       n: 54,
