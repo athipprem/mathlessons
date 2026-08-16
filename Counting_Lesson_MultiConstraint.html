@@ -15,15 +15,16 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100
 .tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
 .tnav-btns{display:flex;gap:6px}
 .tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
-.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen{display:none;flex:1;padding:16px;max-width:820px;margin:0 auto;width:100%}
 .screen.active{display:block}
 .card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
 h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
 h3{color:#38096B;font-size:1.05rem;margin-bottom:10px}
 p,li{font-size:1rem;line-height:1.65}
+li{margin-bottom:4px}
 .why{background:linear-gradient(135deg,#F3E8FF,#F8F1FF);border:2px solid #CE93D8;border-radius:10px;padding:14px 16px;margin-bottom:14px}
 .why-title{color:#38096B;font-weight:700;margin-bottom:6px}
-.big-rule{background:#F3E8FF;border:2px solid #7B1FA2;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#38096B;margin:14px 0}
+.big-rule{background:#F3E8FF;border:2px solid #7B1FA2;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#38096B;margin:14px 0;line-height:1.5}
 .golden{background:linear-gradient(135deg,#F3E8FF,#EDE7F6);border:2px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
 .golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
 .rulebar{background:#F3E8FF;border:1.5px solid #7B1FA2;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#38096B;text-align:center;margin-bottom:12px}
@@ -31,11 +32,14 @@ p,li{font-size:1rem;line-height:1.65}
 .steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
 .steps .ln .note{font-style:italic;font-size:.85rem;color:#7B1FA2}
 .steps .ln.ans{color:#38096B;font-weight:800}
+.steps .ln.bad{color:#C62828;font-weight:700}
 .tree{background:#FDFBFF;border:2px dashed #CE93D8;border-radius:12px;padding:16px;margin:12px 0}
 .tree .node{background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
 .tree .step-n{display:inline-block;background:#4A148C;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
 .warn-box{background:#F3E8FF;border:1.5px solid #CE93D8;border-radius:8px;padding:12px 16px;margin-top:12px}
 .warn-box p{font-size:.95rem;color:#38096B}
+.finish-line{background:#FFF8E1;border:2px solid #F9A825;border-radius:10px;padding:12px 16px;margin:14px 0}
+.finish-line p{font-size:.95rem;color:#7B4B00;font-weight:600}
 .q-card{background:#F8F1FF;border:1.5px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
 .q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
 .options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
@@ -50,15 +54,52 @@ p,li{font-size:1rem;line-height:1.65}
 .navrow{display:flex;gap:10px;margin-top:22px}
 .navrow .prev{flex:1;padding:12px 0;background:#F3E8FF;color:#38096B;border:2px solid #38096B;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
 .navrow .next{flex:1;padding:12px 0;background:#4A148C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow a.linkbtn{flex:1;display:block;text-align:center;padding:13px 0;background:#4A148C;color:#fff;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.navrow a.linkbtn.alt{background:#F3E8FF;color:#38096B;border-color:#38096B}
 .badge-cap{display:inline-block;background:#F3E8FF;color:#38096B;border:1.5px solid #CE93D8;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
 .reveal-btn{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin:6px 6px 6px 0}
 .reveal-line{display:none;background:#F8F1FF;border:1px solid #CE93D8;border-radius:8px;padding:10px 14px;margin:6px 0;font-size:.98rem;font-weight:700;color:#38096B}
-.venn-lite{display:flex;justify-content:center;gap:0;margin:14px 0}
+
+/* subtraction picture */
+.venn-lite{display:flex;justify-content:center;align-items:stretch;gap:0;margin:14px 0;flex-wrap:wrap}
 .venn-box{width:150px;text-align:center;padding:14px 10px;border-radius:10px;font-size:.9rem;font-weight:700}
 .venn-total{background:#F3E8FF;border:2px solid #7B1FA2;color:#38096B}
-.venn-arrow{display:flex;align-items:center;font-size:1.3rem;color:#7B1FA2;padding:0 8px}
+.venn-arrow{display:flex;align-items:center;font-size:1.5rem;color:#7B1FA2;padding:0 10px;font-weight:800}
 .venn-bad{background:#FFEBEE;border:2px solid #C62828;color:#C62828}
 .venn-good{background:#E8F5E9;border:2px solid #2E7D32;color:#1B5E20}
+
+/* bar picture */
+.barwrap{margin:14px 0}
+.barlab{font-size:.88rem;font-weight:700;color:#38096B;margin-bottom:3px}
+.bar{height:34px;border-radius:6px;display:flex;overflow:hidden;border:1.5px solid #7B1FA2;margin-bottom:10px}
+.bar .seg{display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden}
+.seg-good{background:#2E7D32}
+.seg-bad{background:#C62828}
+
+/* labs */
+.lab{background:#FDFBFF;border:2px dashed #7B1FA2;border-radius:12px;padding:16px;margin:12px 0}
+.lab-title{font-weight:800;color:#4A148C;font-size:1rem;margin-bottom:4px}
+.lab-hint{font-size:.88rem;color:#7B1FA2;font-style:italic;margin-bottom:10px}
+.stepper{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1.5px solid #CE93D8;border-radius:10px;padding:8px 12px;margin-bottom:8px;gap:10px}
+.stepper .nm{font-weight:700;font-size:.95rem;flex:1}
+.stepper .val{font-weight:800;font-size:1.1rem;min-width:28px;text-align:center;color:#38096B}
+.stepper button{width:34px;height:34px;border-radius:8px;border:1.5px solid #7B1FA2;background:#F3E8FF;color:#38096B;font-size:1.15rem;font-weight:800;cursor:pointer;line-height:1}
+.dot{display:inline-block;width:16px;height:16px;border-radius:50%;margin:2px;border:1.5px solid rgba(0,0,0,.25);vertical-align:middle}
+.dotrow{margin:6px 0;min-height:22px}
+.outbox{background:#fff;border:1.5px solid #CE93D8;border-radius:10px;padding:12px 14px;margin-top:10px;font-size:.97rem}
+.outbox .row{padding:3px 0;display:flex;justify-content:space-between;gap:10px}
+.outbox .row.tot{border-top:2px solid #CE93D8;margin-top:6px;padding-top:8px;font-weight:800;color:#1B5E20}
+.outbox .row .zero{color:#C62828;font-weight:800}
+.chip{background:#fff;border:1.5px solid #CE93D8;border-radius:20px;padding:5px 14px;font-size:.9rem;font-weight:700;color:#38096B;display:inline-block;margin:3px}
+
+/* people */
+.pplbox{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
+.p{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;color:#fff}
+.pb{background:#1565C0}
+.pg{background:#AD1457}
+
+.svgwrap{text-align:center;margin:12px 0}
+svg{max-width:100%;height:auto;background:#fff;border:1.5px solid #CE93D8;border-radius:10px}
 </style>
 </head>
 <body>
@@ -69,42 +110,45 @@ p,li{font-size:1rem;line-height:1.65}
   <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
 </nav>
 
-<!-- s0: WHY -->
+<!-- ============ s0 WHY ============ -->
 <div class="screen active" id="s0">
 <div class="card">
   <h2>&#x1F3AF; Why Learn This?</h2>
   <div class="why">
     <div class="why-title">Real counting questions almost always have a catch</div>
-    <p>"Choose a team of 3 with at least 1 girl." "Pick 3 marbles that are NOT all the same colour." "Choose 3 points that don't lie on a straight line." Real competition questions rarely ask for a plain, unrestricted group — they add ONE extra condition that makes direct counting painful. Today you learn the trick that turns these into easy problems: instead of counting the hard way (the groups you WANT), count the EASY way (the total, minus the groups you DON'T want).</p>
+    <p>&ldquo;Choose a team of 3 with <strong>at least 1 girl</strong>.&rdquo;<br>&ldquo;Pick 3 marbles that are <strong>not all the same colour</strong>.&rdquo;<br>&ldquo;Choose 3 points, <strong>but not</strong> ones that sit on a straight line.&rdquo;</p>
+    <p style="margin-top:8px">Counting the groups you WANT can be really painful. Counting the ones you DON&rsquo;T want is often easy. So today you learn the lazy-but-clever way:</p>
   </div>
-  <div class="big-rule">GOOD groups = ALL possible groups &minus; BAD groups</div>
+  <div class="big-rule">GOOD groups &nbsp;=&nbsp; ALL groups &nbsp;&minus;&nbsp; BAD groups</div>
+  <div class="warn-box"><p>&#x1F4A1; You will use yesterday&rsquo;s Move TEAM (multiply 3, divide by 6) twice in every question &mdash; once for ALL, once for BAD. Nothing else is new except the subtraction.</p></div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
 </div>
 
-<!-- s1: recap P(NOT) bridge -->
+<!-- ============ s1 YOU ALREADY KNOW THIS ============ -->
 <div class="screen" id="s1">
 <div class="card">
-  <h2>&#x1F91D; You Already Know This Pattern</h2>
-  <p>In your last unit (Probability), you learned: <strong>P(NOT happening) = 1 &minus; P(happening)</strong>. Instead of working out the hard outcome directly, you found the easy opposite and subtracted. Today's idea is the exact same trick, just for COUNTING instead of probability:</p>
+  <h2>&#x1F91D; You Already Know This Trick</h2>
+  <p>In Unit 55 (Probability) you learned the NOT rule &mdash; and you got it right on the test. Instead of working out the messy thing directly, you found the easy opposite and took it away:</p>
   <div class="steps">
     <div class="ln"><span class="note">What you already know (Probability):</span></div>
     <div class="ln">P(NOT rain) = 1 &minus; P(rain)</div>
-    <div class="ln"><span class="note">Today's new version (Counting):</span></div>
+    <div class="ln"><span class="note">Today&rsquo;s new version (Counting):</span></div>
     <div class="ln ans">Count(GOOD) = Count(ALL) &minus; Count(BAD)</div>
   </div>
-  <div class="warn-box"><p>&#x26A0;&#xFE0F; The only difference: probability divides to get a fraction between 0 and 1. Counting just subtracts to get a whole number of groups. Same "find the opposite" thinking, different final step.</p></div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Only one difference. In probability the whole thing was <strong>1</strong> (one whole). In counting the whole thing is <strong>the total number of groups</strong>. Same thinking, different starting number.</p></div>
 </div>
-<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">When To Use It &#8594;</button></div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Spotting The Signal &#8594;</button></div>
 </div>
 
-<!-- s2: when to use it -->
+<!-- ============ s2 SIGNAL WORDS ============ -->
 <div class="screen" id="s2">
 <div class="card">
   <h2>&#x1F50D; Spotting The Signal</h2>
   <div class="why">
-    <div class="why-title">Watch for these key words</div>
-    <p>Use "Total minus Bad" whenever a question includes a phrase like: <strong>"at least 1&hellip;"</strong>, <strong>"not all the same&hellip;"</strong>, <strong>"excluding&hellip;"</strong>, or <strong>"but NOT&hellip;"</strong>. These all describe a GOOD group as "everything except some annoying, hard-to-directly-count exception."</p>
+    <div class="why-title">Watch for these words in the question</div>
+    <p><strong>&ldquo;at least 1&hellip;&rdquo;</strong> &middot; <strong>&ldquo;not all the same&hellip;&rdquo;</strong> &middot; <strong>&ldquo;excluding&hellip;&rdquo;</strong> &middot; <strong>&ldquo;but NOT&hellip;&rdquo;</strong></p>
+    <p style="margin-top:8px">Each one describes the good groups as &ldquo;everything <em>except</em> some annoying exception.&rdquo; That is your signal to flip it around.</p>
   </div>
   <div class="venn-lite">
     <div class="venn-box venn-total">ALL groups</div>
@@ -113,86 +157,229 @@ p,li{font-size:1rem;line-height:1.65}
     <div class="venn-arrow">=</div>
     <div class="venn-box venn-good">GOOD groups<br>(the answer)</div>
   </div>
-  <div class="warn-box"><p>&#x26A0;&#xFE0F; The trick only saves time when "BAD" is EASIER to count directly than "GOOD" is. "At least 1 girl" is hard to count directly (could be 1, 2, or 3 girls) — but "0 girls" (all boys) is one easy calculation. That's the signal to flip to Total Minus Bad.</p></div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; <strong>Why bother?</strong> &ldquo;At least 1 girl&rdquo; means 1 girl OR 2 girls OR 3 girls &mdash; three separate counts, slow and easy to mess up. But &ldquo;<strong>0</strong> girls&rdquo; is just ONE quick count. Flipping turns three jobs into one.</p></div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Worked Example &#8594;</button></div>
 </div>
 
-<!-- s3: worked example 1 -->
+<!-- ============ s3 WORKED EX 1 ============ -->
 <div class="screen" id="s3">
 <div class="card">
-  <h2>Worked Example — At Least 1 Girl</h2>
-  <p><strong>A class has 4 boys and 3 girls (7 students total). A group of 3 is chosen to present a project. How many different groups have AT LEAST 1 girl?</strong></p>
+  <h2>Worked Example 1 &mdash; At Least 1 Girl</h2>
+  <p><strong>A class has 4 boys and 3 girls (7 students in total). A group of 3 students is chosen to present a project. How many different groups contain AT LEAST 1 girl?</strong></p>
+  <div class="pplbox">
+    <div class="p pb">B</div><div class="p pb">B</div><div class="p pb">B</div><div class="p pb">B</div>
+    <div class="p pg">G</div><div class="p pg">G</div><div class="p pg">G</div>
+  </div>
   <div class="steps">
-    <div class="ln"><span class="note">Step 1 — Total groups of 3 from all 7 students:</span></div>
-    <div class="ln">7 &times; 6 &times; 5 &divide; 6 = 35</div>
-    <div class="ln"><span class="note">Step 2 — "BAD" here means 0 girls, i.e. all 3 are boys. Count groups of 3 boys from the 4 boys:</span></div>
-    <div class="ln">4 &times; 3 &times; 2 &divide; 6 = 4</div>
-    <div class="ln"><span class="note">Step 3 — GOOD = ALL &minus; BAD:</span></div>
+    <div class="ln"><span class="note">Step 1 &mdash; count ALL groups of 3, ignoring the extra rule completely. Choose 3 from all 7:</span></div>
+    <div class="ln">7 &times; 6 = 42</div>
+    <div class="ln">42 &times; 5 = 210</div>
+    <div class="ln">210 &divide; 6 = 35 groups altogether</div>
+    <div class="ln"><span class="note">Step 2 &mdash; what does BAD mean? &ldquo;At least 1 girl&rdquo; is broken only by having ZERO girls &mdash; that is, all 3 are boys. Choose 3 from the 4 boys:</span></div>
+    <div class="ln">4 &times; 3 = 12</div>
+    <div class="ln">12 &times; 2 = 24</div>
+    <div class="ln bad">24 &divide; 6 = 4 bad groups</div>
+    <div class="ln"><span class="note">Step 3 &mdash; take the bad ones away:</span></div>
     <div class="ln ans">35 &minus; 4 = 31 groups with at least 1 girl</div>
   </div>
-  <div class="warn-box"><p>&#x26A0;&#xFE0F; Notice: "at least 1 girl" is the OPPOSITE of "0 girls," not the opposite of "all girls." Always ask: what is the ONE simple case that breaks the "at least 1" rule? Here, that's exactly 0 girls.</p></div>
+  <div class="barwrap">
+    <div class="barlab">All 35 groups, split into good and bad:</div>
+    <div class="bar"><div class="seg seg-good" style="width:88.6%">31 GOOD (at least 1 girl)</div><div class="seg seg-bad" style="width:11.4%">4 BAD</div></div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The classic mistake: thinking the opposite of &ldquo;at least 1 girl&rdquo; is &ldquo;all girls.&rdquo; It is not. Always ask: <strong>what is the ONE situation that breaks the rule?</strong> Here it is having no girls at all.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Play With It &#8594;</button></div>
+</div>
+
+<!-- ============ s4 LAB 1 ============ -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F9EA; Lab 1 &mdash; The &ldquo;At Least 1&rdquo; Machine</h2>
+  <p>Change the class size and watch ALL, BAD and GOOD move. Try to notice: <em>when does BAD become 0?</em></p>
+  <div class="lab">
+    <div class="lab-title">Build your own class</div>
+    <div class="lab-hint">A group of 3 is chosen. GOOD = at least 1 girl. BAD = no girls at all (3 boys).</div>
+    <div class="stepper">
+      <span class="nm">&#x1F535; Boys</span>
+      <button onclick="bump('b',-1)">&minus;</button><span class="val" id="vB">4</span><button onclick="bump('b',1)">+</button>
+    </div>
+    <div class="dotrow" id="dotsB"></div>
+    <div class="stepper">
+      <span class="nm">&#x1F534; Girls</span>
+      <button onclick="bump('g',-1)">&minus;</button><span class="val" id="vG">3</span><button onclick="bump('g',1)">+</button>
+    </div>
+    <div class="dotrow" id="dotsG"></div>
+    <div class="outbox">
+      <div class="row"><span>ALL groups of 3 (from <span id="oTot">7</span> students)</span><strong id="oAll">35</strong></div>
+      <div class="row"><span>BAD &mdash; 3 boys, no girls (from <span id="oB">4</span> boys)</span><strong id="oBad">4</strong></div>
+      <div class="row tot"><span>GOOD &mdash; at least 1 girl</span><strong id="oGood">31</strong></div>
+    </div>
+    <div class="barwrap" style="margin-top:12px">
+      <div class="bar" id="labBar"></div>
+    </div>
+    <div class="warn-box" id="labNote"><p>&nbsp;</p></div>
+  </div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Second Example &#8594;</button></div>
 </div>
 
-<!-- s4: worked example 2, reusing points framing -->
-<div class="screen" id="s4">
+<!-- ============ s5 WORKED EX 2 ============ -->
+<div class="screen" id="s5">
 <div class="card">
-  <h2>Worked Example — Excluding A Bad Case</h2>
-  <p><strong>9 points are marked on a circle. Exactly 3 of these 9 points happen to lie on a straight line (so those 3 do NOT form a triangle). How many different triangles can be formed using any 3 of the 9 points?</strong></p>
+  <h2>Worked Example 2 &mdash; Cutting Out A Bad Case</h2>
+  <p><strong>9 points are marked on a page. Exactly 3 of them lie on one straight line (shown in red). No other 3 points are in a straight line. How many different triangles can be made by joining 3 of the 9 points?</strong></p>
+  <div class="svgwrap">
+    <svg viewBox="0 0 220 190" width="320" height="276" role="img" aria-label="Nine points, three of them on a red straight line">
+      <line x1="28" y1="152" x2="152" y2="152" stroke="#C62828" stroke-width="3"/>
+      <circle cx="40" cy="152" r="6" fill="#C62828"/><circle cx="90" cy="152" r="6" fill="#C62828"/><circle cx="140" cy="152" r="6" fill="#C62828"/>
+      <circle cx="32" cy="42" r="6" fill="#4A148C"/><circle cx="86" cy="28" r="6" fill="#4A148C"/><circle cx="146" cy="48" r="6" fill="#4A148C"/>
+      <circle cx="192" cy="86" r="6" fill="#4A148C"/><circle cx="58" cy="96" r="6" fill="#4A148C"/><circle cx="176" cy="128" r="6" fill="#4A148C"/>
+      <text x="90" y="178" text-anchor="middle" font-size="12" fill="#C62828" font-family="Segoe UI, Arial">these 3 are flat on one line</text>
+    </svg>
+  </div>
   <div class="steps">
-    <div class="ln"><span class="note">Step 1 — Total ways to choose any 3 of the 9 points:</span></div>
-    <div class="ln">9 &times; 8 &times; 7 &divide; 6 = 84</div>
-    <div class="ln"><span class="note">Step 2 — "BAD" here is the ONE group that fails to make a triangle: the 3 collinear points chosen together. Only 1 such group exists (it's the same 3 specific points every time):</span></div>
-    <div class="ln">1 bad group</div>
-    <div class="ln"><span class="note">Step 3 — GOOD = ALL &minus; BAD:</span></div>
+    <div class="ln"><span class="note">Step 1 &mdash; ALL: choose any 3 of the 9 points, ignoring the straight-line problem:</span></div>
+    <div class="ln">9 &times; 8 = 72</div>
+    <div class="ln">72 &times; 7 = 504</div>
+    <div class="ln">504 &divide; 6 = 84 groups of 3 points</div>
+    <div class="ln"><span class="note">Step 2 &mdash; BAD: a group fails only if all 3 chosen points are the 3 red ones (a flat line is not a triangle). How many ways to choose those 3 red points? There is only one way &mdash; take all 3 of them:</span></div>
+    <div class="ln bad">1 bad group</div>
+    <div class="ln"><span class="note">Step 3 &mdash; subtract:</span></div>
     <div class="ln ans">84 &minus; 1 = 83 different triangles</div>
   </div>
-  <div class="warn-box"><p>&#x26A0;&#xFE0F; This is the SAME points-on-a-circle idea from Lesson 1 — but now with one exception carved out. Same total-counting method, one extra subtraction step for the exception.</p></div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Check it with the rule if you like: choosing 3 from 3 is 3 &times; 2 &times; 1 &divide; 6 = 6 &divide; 6 = <strong>1</strong>. It agrees &mdash; there really is only one way to pick all 3 of them.</p></div>
 </div>
-<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Decision Tree &#8594;</button></div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">When BAD Comes In Pieces &#8594;</button></div>
 </div>
 
-<!-- s5: decision tree -->
-<div class="screen" id="s5">
+<!-- ============ s6 MULTI-BAD ============ -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>&#x1F9E9; When BAD Comes In More Than One Piece</h2>
+  <p>So far, BAD was one single count. Sometimes the rule can be broken in <strong>several different ways</strong>. Then you count each way, and <strong>add them up</strong> before subtracting.</p>
+  <div class="big-rule">GOOD = ALL &minus; (bad way 1 + bad way 2 + bad way 3 + &hellip;)</div>
+  <h3 style="margin-top:16px">Worked Example 3 &mdash; Not All The Same Colour</h3>
+  <p><strong>A bag holds 4 red, 4 blue and 2 yellow counters (10 in total). Three counters are taken out. How many different groups are NOT all the same colour?</strong></p>
+  <div class="dotrow" style="text-align:center">
+    <span class="dot" style="background:#D32F2F"></span><span class="dot" style="background:#D32F2F"></span><span class="dot" style="background:#D32F2F"></span><span class="dot" style="background:#D32F2F"></span>
+    <span class="dot" style="background:#1565C0"></span><span class="dot" style="background:#1565C0"></span><span class="dot" style="background:#1565C0"></span><span class="dot" style="background:#1565C0"></span>
+    <span class="dot" style="background:#F9A825"></span><span class="dot" style="background:#F9A825"></span>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; ALL groups of 3 from the 10 counters:</span></div>
+    <div class="ln">10 &times; 9 = 90, then 90 &times; 8 = 720</div>
+    <div class="ln">720 &divide; 6 = 120 groups altogether</div>
+    <div class="ln"><span class="note">Step 2 &mdash; list EVERY way to be bad. &ldquo;All the same colour&rdquo; can happen 3 different ways &mdash; all red, all blue, or all yellow. Count each one on its own:</span></div>
+    <div class="ln bad">All red: choose 3 from 4 &rarr; 4 &times; 3 &times; 2 &divide; 6 = 4</div>
+    <div class="ln bad">All blue: choose 3 from 4 &rarr; 4 &times; 3 &times; 2 &divide; 6 = 4</div>
+    <div class="ln bad">All yellow: choose 3 from 2 &rarr; there are only 2 yellow counters, so this is IMPOSSIBLE &rarr; 0</div>
+    <div class="ln"><span class="note">Step 3 &mdash; add the bad ways together:</span></div>
+    <div class="ln bad">4 + 4 + 0 = 8 bad groups</div>
+    <div class="ln"><span class="note">Step 4 &mdash; subtract:</span></div>
+    <div class="ln ans">120 &minus; 8 = 112 groups that are not all the same colour</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; <strong>Pretend every counter is different.</strong> Even though the 4 red ones look identical, treat them as if each has a tiny secret number on it (red-1, red-2, red-3, red-4). That is what makes &ldquo;choose 3 from 4 reds = 4 ways&rdquo; correct.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Zero Case &#8594;</button></div>
+</div>
+
+<!-- ============ s7 ZERO CASE ============ -->
+<div class="screen" id="s7">
+<div class="card">
+  <h2>0&#xFE0F;&#x20E3; The Zero Case &mdash; Don&rsquo;t Be Fooled</h2>
+  <p>That yellow line above is worth its own page, because it looks strange the first time.</p>
+  <div class="svgwrap">
+    <svg viewBox="0 0 260 110" width="300" height="127" role="img" aria-label="Two yellow counters and one empty slot">
+      <circle cx="55" cy="55" r="24" fill="#F9A825" stroke="#795548" stroke-width="2"/>
+      <circle cx="115" cy="55" r="24" fill="#F9A825" stroke="#795548" stroke-width="2"/>
+      <circle cx="175" cy="55" r="24" fill="none" stroke="#C62828" stroke-width="3" stroke-dasharray="6 5"/>
+      <text x="175" y="62" text-anchor="middle" font-size="26" fill="#C62828" font-family="Segoe UI, Arial" font-weight="bold">?</text>
+      <text x="130" y="100" text-anchor="middle" font-size="13" fill="#C62828" font-family="Segoe UI, Arial">you need 3 &mdash; but only 2 exist</text>
+    </svg>
+  </div>
+  <div class="big-rule">If there are fewer than 3 to choose from,<br>the number of groups of 3 is <strong>0</strong> &mdash; not 1, not &ldquo;impossible&rdquo;.</div>
+  <p>Writing <strong>0</strong> is important: you still <em>list</em> that bad case in your working, you just record it as zero. That way you never forget to check it, and you never accidentally subtract something that was never there.</p>
+  <div class="steps">
+    <div class="ln"><span class="note">The rule agrees. Choose 3 from 2:</span></div>
+    <div class="ln">2 &times; 1 &times; 0 = 0</div>
+    <div class="ln ans">0 &divide; 6 = 0 ways</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Notice the third number in &ldquo;2 &times; 1 &times; 0&rdquo;. You count DOWN three numbers from 2, so you land on 0 &mdash; and anything times 0 is 0. The maths is telling you &ldquo;you ran out of counters.&rdquo;</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Play With It &#8594;</button></div>
+</div>
+
+<!-- ============ s8 LAB 2 ============ -->
+<div class="screen" id="s8">
+<div class="card">
+  <h2>&#x1F9EA; Lab 2 &mdash; The Bad-Case Machine</h2>
+  <p>Set up your own bag of marbles. The machine counts every &ldquo;all the same colour&rdquo; bad case for you. Watch a colour drop to <strong>0</strong> the moment it has fewer than 3 marbles.</p>
+  <div class="lab">
+    <div class="lab-title">Your bag of marbles</div>
+    <div class="lab-hint">Three marbles are drawn. GOOD = not all the same colour.</div>
+    <div class="stepper"><span class="nm">&#x1F534; Red</span><button onclick="bump2(0,-1)">&minus;</button><span class="val" id="m0">4</span><button onclick="bump2(0,1)">+</button></div>
+    <div class="stepper"><span class="nm">&#x1F535; Blue</span><button onclick="bump2(1,-1)">&minus;</button><span class="val" id="m1">3</span><button onclick="bump2(1,1)">+</button></div>
+    <div class="stepper"><span class="nm">&#x1F7E2; Green</span><button onclick="bump2(2,-1)">&minus;</button><span class="val" id="m2">2</span><button onclick="bump2(2,1)">+</button></div>
+    <div class="dotrow" id="marbles" style="text-align:center"></div>
+    <div class="outbox">
+      <div class="row"><span>ALL groups of 3 (from <span id="m_tot">9</span> marbles)</span><strong id="m_all">84</strong></div>
+      <div class="row"><span>BAD &mdash; all 3 red</span><strong id="m_b0">4</strong></div>
+      <div class="row"><span>BAD &mdash; all 3 blue</span><strong id="m_b1">1</strong></div>
+      <div class="row"><span>BAD &mdash; all 3 green</span><strong id="m_b2">0</strong></div>
+      <div class="row"><span>BAD altogether (add them up)</span><strong id="m_bad">5</strong></div>
+      <div class="row tot"><span>GOOD &mdash; not all the same colour</span><strong id="m_good">79</strong></div>
+    </div>
+    <div class="warn-box" id="m_note"><p>&nbsp;</p></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Roadmap &#8594;</button></div>
+</div>
+
+<!-- ============ s9 ROADMAP ============ -->
+<div class="screen" id="s9">
 <div class="card">
   <h2>&#x1F9ED; The Total Minus Bad Roadmap</h2>
   <div class="tree">
-    <div class="node"><span class="step-n">1</span>Spot the signal words: "at least 1," "not all the same," "excluding," "but not."</div>
-    <div class="node"><span class="step-n">2</span>Work out Count(ALL) — choose r from the whole pool, ignoring the extra rule completely.</div>
-    <div class="node"><span class="step-n">3</span>Identify exactly what "BAD" means — the ONE simple, easy-to-count exception (usually the opposite extreme, like "0 of the special type").</div>
-    <div class="node"><span class="step-n">4</span>Work out Count(BAD) using the same choose method, on just the leftover/excluded pool.</div>
-    <div class="node"><span class="step-n">5</span>Subtract: GOOD = ALL &minus; BAD. That's your answer.</div>
+    <div class="node"><span class="step-n">1</span><strong>Spot the signal words:</strong> &ldquo;at least 1&rdquo;, &ldquo;not all the same&rdquo;, &ldquo;excluding&rdquo;, &ldquo;but not&rdquo;.</div>
+    <div class="node"><span class="step-n">2</span><strong>Count ALL</strong> &mdash; choose 3 from the whole pool, ignoring the extra rule completely.</div>
+    <div class="node"><span class="step-n">3</span><strong>List EVERY way to be bad.</strong> Sometimes there is one; sometimes there are two or three. Write them all down before you count anything.</div>
+    <div class="node"><span class="step-n">4</span><strong>Count each bad way</strong> with the same choose-3 method. If a colour or group has fewer than 3 members, write <strong>0</strong> &mdash; do not skip it.</div>
+    <div class="node"><span class="step-n">5</span><strong>Add the bad counts together</strong>, then <strong>subtract from ALL</strong>.</div>
+    <div class="node"><span class="step-n">6</span><strong>Check you answered the exact question</strong> &mdash; it wants the GOOD number, not the ALL number and not the BAD number.</div>
   </div>
+  <div class="rulebar">GOOD = ALL &minus; (bad 1 + bad 2 + bad 3 + &hellip;)</div>
 </div>
-<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try It Yourself &#8594;</button></div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Build It Yourself &#8594;</button></div>
 </div>
 
-<!-- s6: interactive build -->
-<div class="screen" id="s6">
+<!-- ============ s10 BUILD ============ -->
+<div class="screen" id="s10">
 <div class="card">
   <h2>&#x1F4CB; Build The Count Yourself</h2>
-  <p style="margin-bottom:10px"><strong>A bag has 5 red counters and 4 blue counters (9 total). You draw 3 counters. How many different groups of 3 have AT LEAST 1 blue counter? Tap each button in order.</strong></p>
-  <button class="reveal-btn" onclick="revealLine('r1a')">Step 1 — Count(ALL): choose 3 from all 9</button>
-  <div class="reveal-line" id="r1a">9 &times; 8 &times; 7 &divide; 6 = 84</div>
-  <button class="reveal-btn" onclick="revealLine('r1b')">Step 2 — What does BAD mean here?</button>
-  <div class="reveal-line" id="r1b">BAD = 0 blue counters = all 3 are red.</div>
-  <button class="reveal-btn" onclick="revealLine('r1c')">Step 3 — Count(BAD): choose 3 from the 5 red counters</button>
-  <div class="reveal-line" id="r1c">5 &times; 4 &times; 3 &divide; 6 = 10</div>
-  <button class="reveal-btn" onclick="revealLine('r1d')">Step 4 — GOOD = ALL &minus; BAD</button>
-  <div class="reveal-line" id="r1d">84 &minus; 10 = 74 groups with at least 1 blue counter.</div>
+  <p style="margin-bottom:10px"><strong>A bag has 5 red counters and 4 blue counters (9 in total). Three counters are drawn. How many different groups of 3 contain AT LEAST 1 blue counter?</strong></p>
+  <p style="margin-bottom:10px">Do each step yourself first, then tap to check.</p>
+  <button class="reveal-btn" onclick="revealLine('r1a')">Step 1 &mdash; count ALL: choose 3 from all 9</button>
+  <div class="reveal-line" id="r1a">9 &times; 8 = 72, then 72 &times; 7 = 504, then 504 &divide; 6 = <strong>84</strong></div>
+  <button class="reveal-btn" onclick="revealLine('r1b')">Step 2 &mdash; list every way to be BAD</button>
+  <div class="reveal-line" id="r1b">There is only one way to break &ldquo;at least 1 blue&rdquo;: get <strong>0 blue</strong>, meaning all 3 are red.</div>
+  <button class="reveal-btn" onclick="revealLine('r1c')">Step 3 &mdash; count that bad way: choose 3 from the 5 red</button>
+  <div class="reveal-line" id="r1c">5 &times; 4 = 20, then 20 &times; 3 = 60, then 60 &divide; 6 = <strong>10</strong></div>
+  <button class="reveal-btn" onclick="revealLine('r1d')">Step 4 &mdash; subtract, and answer the exact question</button>
+  <div class="reveal-line" id="r1d">84 &minus; 10 = <strong>74 groups with at least 1 blue counter</strong>. (The question asked for GOOD &mdash; not 84, not 10.)</div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
 </div>
 
-<!-- s7: practice -->
-<div class="screen" id="s7">
+<!-- ============ s11 PRACTICE ============ -->
+<div class="screen" id="s11">
 <div class="card">
   <span class="badge-cap">&#11088; Your Turn</span>
-  <h2>Practice — Total Minus Bad</h2>
+  <h2>Practice &mdash; 4 Questions</h2>
+  <div class="finish-line"><p>&#x1F6A6; For every question: write ALL first, then list EVERY bad way (some are 0), add them, subtract. Then check you wrote the GOOD number.</p></div>
+
   <div class="q-card">
-    <div class="q-text">P1.&nbsp; A fruit basket has 8 red apples and 3 green apples (11 total). You pick 3 fruits. How many different groups have AT LEAST 1 green apple?</div>
+    <div class="q-text">P1.&nbsp; A basket has 8 red apples and 3 green apples (11 in total). Three apples are picked. How many different groups contain AT LEAST 1 green apple?</div>
     <div class="options">
       <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 165</label>
       <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 56</label>
@@ -202,63 +389,179 @@ p,li{font-size:1rem;line-height:1.65}
     <div class="feedback" id="fb0"></div>
     <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
     <div class="steps-reveal" id="sr0"><div class="steps">
-      <div class="ln">Total: 11 &times; 10 &times; 9 &divide; 6 = 165</div>
-      <div class="ln">BAD (all red): 8 &times; 7 &times; 6 &divide; 6 = 56</div>
-      <div class="ln ans">165 &minus; 56 = 109</div>
+      <div class="ln">ALL: 11 &times; 10 &times; 9 = 990, then 990 &divide; 6 = 165</div>
+      <div class="ln bad">BAD (0 green = all 3 red): 8 &times; 7 &times; 6 = 336, then 336 &divide; 6 = 56</div>
+      <div class="ln ans">165 &minus; 56 = 109 groups with at least 1 green apple</div>
+      <div class="ln"><span class="note">A) 165 is ALL and B) 56 is BAD &mdash; both are half-finished answers.</span></div>
     </div></div>
   </div>
+
   <div class="q-card">
-    <div class="q-text">P2.&nbsp; A jar has 2 black, 3 white, and 4 grey marbles (9 total). You draw 3 marbles. How many different groups are NOT all the same colour?</div>
+    <div class="q-text">P2.&nbsp; A club has 6 boys and 4 girls (10 members). Three members are chosen for a quiz team. How many different teams contain AT LEAST 1 boy?</div>
     <div class="options">
-      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 79</label>
-      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 84</label>
-      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 116</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 120</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 20</label>
     </div>
     <button class="btn-check" onclick="chk(1,'A')">Check</button>
     <div class="feedback" id="fb1"></div>
     <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
     <div class="steps-reveal" id="sr1"><div class="steps">
-      <div class="ln">Total: 9 &times; 8 &times; 7 &divide; 6 = 84</div>
-      <div class="ln">BAD (all same colour) — can't pick 3 black (only 2 exist, 0 ways); all white: 3&times;2&times;1&divide;6=1; all grey: 4&times;3&times;2&divide;6=4</div>
-      <div class="ln">BAD total: 0 + 1 + 4 = 5</div>
-      <div class="ln ans">84 &minus; 5 = 79</div>
+      <div class="ln">ALL: 10 &times; 9 &times; 8 = 720, then 720 &divide; 6 = 120</div>
+      <div class="ln bad">BAD (0 boys = all 3 girls, from 4 girls): 4 &times; 3 &times; 2 = 24, then 24 &divide; 6 = 4</div>
+      <div class="ln ans">120 &minus; 4 = 116 teams with at least 1 boy</div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; A jar has 2 black, 3 white and 4 grey marbles (9 in total). Three marbles are drawn. How many different groups are NOT all the same colour?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 79</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 84</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 5</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">ALL: 9 &times; 8 &times; 7 = 504, then 504 &divide; 6 = 84</div>
+      <div class="ln"><span class="note">Three ways to be bad &mdash; count each one:</span></div>
+      <div class="ln bad">All black: only 2 black exist, and you need 3 &rarr; 0</div>
+      <div class="ln bad">All white: 3 &times; 2 &times; 1 = 6, then 6 &divide; 6 = 1</div>
+      <div class="ln bad">All grey: 4 &times; 3 &times; 2 = 24, then 24 &divide; 6 = 4</div>
+      <div class="ln bad">BAD altogether: 0 + 1 + 4 = 5</div>
+      <div class="ln ans">84 &minus; 5 = 79 groups that are not all the same colour</div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; 12 points are marked on a page. Exactly 4 of them lie on one straight line. No other 3 points are in a straight line. How many different triangles can be made by joining 3 of the 12 points?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 219</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 216</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 220</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">ALL: 12 &times; 11 &times; 10 = 1320, then 1320 &divide; 6 = 220</div>
+      <div class="ln"><span class="note">BAD = any 3 chosen from the 4 points sitting on the line &mdash; they make a flat line, not a triangle. Careful: this time it is NOT just 1 bad group, because there are 4 points to choose 3 from.</span></div>
+      <div class="ln bad">4 &times; 3 &times; 2 = 24, then 24 &divide; 6 = 4 bad groups</div>
+      <div class="ln ans">220 &minus; 4 = 216 different triangles</div>
+      <div class="ln"><span class="note">C) 220 forgets to subtract. A) 219 assumes only 1 bad group, like the 3-point example &mdash; but with 4 points on the line there are 4 ways to pick 3 of them.</span></div>
     </div></div>
   </div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Mastery Checklist &#8594;</button></div>
 </div>
 
-<!-- s8: recap -->
-<div class="screen" id="s8">
+<!-- ============ s12 RECAP ============ -->
+<div class="screen" id="s12">
 <div class="golden">
-  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
-  <p style="font-size:1.05rem"><strong>When a counting question says "at least 1," "not all the same," or "excluding" — don't count the hard case directly. Count ALL, count the easy BAD exception, and subtract.</strong></p>
+  <div class="golden-title">&#x1F4D6; Today&rsquo;s Big Idea</div>
+  <p style="font-size:1.05rem"><strong>When the question says &ldquo;at least 1&rdquo;, &ldquo;not all the same&rdquo; or &ldquo;excluding&rdquo; &mdash; don&rsquo;t chase the hard case. Count ALL, list every BAD way (writing 0 where a case is impossible), add the bad ones up, and subtract.</strong></p>
+</div>
+<div class="card">
+  <div class="rulebar">GOOD = ALL &minus; (bad 1 + bad 2 + bad 3 + &hellip;)</div>
+  <div class="finish-line"><p>&#x1F6A6; <strong>Finish-Line Check</strong> &mdash; the last number you worked out is usually NOT the answer. The answer is the GOOD number, after subtracting. Read the question one more time before you write it down.</p></div>
 </div>
 <div class="card" style="background:#F3E8FF;border:1px solid #CE93D8">
-  <h3 style="color:#38096B">&#x1F3C6; You've got it when&hellip;</h3>
+  <h3 style="color:#38096B">&#x1F3C6; You&rsquo;ve got it when&hellip;</h3>
   <ul>
-    <li>You can spot the signal words that mean "use Total Minus Bad"</li>
-    <li>You correctly identify what "BAD" means for each question (usually the opposite extreme)</li>
-    <li>You use the choose-r method from Lesson 1 for BOTH the total and the bad count</li>
-    <li>You remember to add up MULTIPLE bad cases when there's more than one (like 3 same-colour groups)</li>
+    <li>You spot the signal words and flip to Total Minus Bad without being told</li>
+    <li>You know the opposite of &ldquo;at least 1 girl&rdquo; is &ldquo;0 girls&rdquo; &mdash; not &ldquo;all girls&rdquo;</li>
+    <li>You always LIST the bad ways before counting any of them</li>
+    <li>You write <strong>0</strong> for an impossible bad case instead of skipping it</li>
+    <li>You subtract at the end, and hand in the GOOD number</li>
   </ul>
-  <p style="margin-top:10px;font-size:.95rem">You've now completed both Art of Counting lessons for this unit. Time for the test!</p>
+  <p style="margin-top:10px;font-size:.95rem">You&rsquo;ve now finished both Art of Counting lessons for this unit. Time for the test!</p>
 </div>
 <div class="navrow">
-  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#4A148C;color:#fff;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+  <button class="prev" onclick="nav(-1)">&#8592; Prev</button>
+  <a class="linkbtn alt" href="Counting_Lesson_ChooseThree.html">&#8592; Lesson 1: Choose 3</a>
+</div>
+<div class="navrow">
+  <a class="linkbtn" href="https://athipprem.github.io/mathlessons/index.html">Back to Hub</a>
 </div>
 </div>
 
 <script>
+/* ---------- nav ---------- */
 var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
 pill.textContent='1 / '+screens.length;
 function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+
+/* ---------- practice ---------- */
 function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
 if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
 if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
 else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
 function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
 function revealLine(id){document.getElementById(id).style.display='block';}
+
+/* ---------- shared: choose 3 ---------- */
+function c3(n){ if(n<3) return 0; return n*(n-1)*(n-2)/6; }
+function dots(n,col){var s='',i;for(i=0;i<n;i++)s+='<span class="dot" style="background:'+col+'"></span>';return s||'<span style="font-size:.85rem;color:#999">(none)</span>';}
+
+/* ---------- LAB 1 ---------- */
+var B=4,G=3;
+function bump(w,d){
+  if(w==='b'){B=Math.max(0,Math.min(9,B+d));}else{G=Math.max(0,Math.min(9,G+d));}
+  render1();
+}
+function render1(){
+  document.getElementById('vB').textContent=B;
+  document.getElementById('vG').textContent=G;
+  document.getElementById('dotsB').innerHTML=dots(B,'#1565C0');
+  document.getElementById('dotsG').innerHTML=dots(G,'#AD1457');
+  var tot=B+G,all=c3(tot),bad=c3(B),good=all-bad;
+  document.getElementById('oTot').textContent=tot;
+  document.getElementById('oB').textContent=B;
+  document.getElementById('oAll').textContent=all;
+  document.getElementById('oBad').textContent=bad;
+  document.getElementById('oGood').textContent=good;
+  var bar=document.getElementById('labBar');
+  if(all===0){bar.innerHTML='<div class="seg" style="width:100%;background:#bbb">no groups of 3 possible &mdash; fewer than 3 students</div>';}
+  else{
+    var pg=Math.round(good/all*1000)/10,pb=100-pg;
+    bar.innerHTML='<div class="seg seg-good" style="width:'+pg+'%">'+(pg>14?good+' GOOD':'')+'</div><div class="seg seg-bad" style="width:'+pb+'%">'+(pb>14?bad+' BAD':'')+'</div>';
+  }
+  var note=document.getElementById('labNote');
+  if(tot<3){note.innerHTML='<p>&#x26A0;&#xFE0F; You cannot even make one group of 3 &mdash; there are only '+tot+' student'+(tot===1?'':'s')+'. Everything is 0.</p>';}
+  else if(B<3){note.innerHTML='<p>&#x26A0;&#xFE0F; With only '+B+' boy'+(B===1?'':'s')+', you cannot fill a team with 3 boys &mdash; so BAD = <strong>0</strong>, and EVERY group already has at least 1 girl. GOOD = ALL.</p>';}
+  else if(G===0){note.innerHTML='<p>&#x26A0;&#xFE0F; With no girls at all, every group is bad &mdash; BAD = ALL and GOOD = <strong>0</strong>.</p>';}
+  else{note.innerHTML='<p>&#x1F4A1; Try lowering the boys to 2. What happens to BAD, and why does that make sense?</p>';}
+}
+render1();
+
+/* ---------- LAB 2 ---------- */
+var M=[4,3,2],MC=['#D32F2F','#1565C0','#2E7D32'],MN=['red','blue','green'];
+function bump2(i,d){M[i]=Math.max(0,Math.min(9,M[i]+d));render2();}
+function render2(){
+  var i,tot=0,badTot=0,html='';
+  for(i=0;i<3;i++){document.getElementById('m'+i).textContent=M[i];tot+=M[i];html+=dots(M[i],MC[i]).replace('<span style="font-size:.85rem;color:#999">(none)</span>','');}
+  document.getElementById('marbles').innerHTML=html||'<span style="font-size:.85rem;color:#999">(empty bag)</span>';
+  var all=c3(tot);
+  document.getElementById('m_tot').textContent=tot;
+  document.getElementById('m_all').textContent=all;
+  var zeros=0;
+  for(i=0;i<3;i++){
+    var b=c3(M[i]);badTot+=b;
+    var el=document.getElementById('m_b'+i);
+    el.textContent=b;
+    el.className=(b===0?'zero':'');
+    if(b===0)zeros++;
+  }
+  document.getElementById('m_bad').textContent=badTot;
+  document.getElementById('m_good').textContent=all-badTot;
+  var note=document.getElementById('m_note');
+  if(tot<3){note.innerHTML='<p>&#x26A0;&#xFE0F; Fewer than 3 marbles in the bag &mdash; you cannot draw 3, so everything is 0.</p>';}
+  else if(zeros===3){note.innerHTML='<p>&#x1F4A1; Every colour has fewer than 3 marbles, so BAD = 0 + 0 + 0 = <strong>0</strong>. No group can be all one colour, so GOOD = ALL.</p>';}
+  else if(zeros>0){note.innerHTML='<p>&#x1F4A1; '+zeros+' colour'+(zeros===1?' has':'s have')+' fewer than 3 marbles, so '+(zeros===1?'its':'their')+' bad count is <strong>0</strong>. Still write the 0 in your working &mdash; that is how you prove you checked it.</p>';}
+  else{note.innerHTML='<p>&#x1F4A1; Try dropping a colour down to 2 marbles and watch its bad count fall to 0.</p>';}
+}
+render2();
 </script>
 </body>
 </html>

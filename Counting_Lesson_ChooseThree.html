@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Choose 3 — Extending Your Pairing Skill</title>
+<title>Choose 3 — Teams, Triangles and When NOT to Divide</title>
 <style>
 :root{--nav:#4A148C;--nav-dark:#38096B;--bg:#F3E8FF;--card:#fff;--acc:#4A148C;--ok:#2E7D32;--err:#C62828;--warn:#38096B}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -15,15 +15,16 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100
 .tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
 .tnav-btns{display:flex;gap:6px}
 .tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
-.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen{display:none;flex:1;padding:16px;max-width:820px;margin:0 auto;width:100%}
 .screen.active{display:block}
 .card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
 h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
 h3{color:#38096B;font-size:1.05rem;margin-bottom:10px}
 p,li{font-size:1rem;line-height:1.65}
+li{margin-bottom:4px}
 .why{background:linear-gradient(135deg,#F3E8FF,#F8F1FF);border:2px solid #CE93D8;border-radius:10px;padding:14px 16px;margin-bottom:14px}
 .why-title{color:#38096B;font-weight:700;margin-bottom:6px}
-.big-rule{background:#F3E8FF;border:2px solid #7B1FA2;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#38096B;margin:14px 0}
+.big-rule{background:#F3E8FF;border:2px solid #7B1FA2;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#38096B;margin:14px 0;line-height:1.5}
 .golden{background:linear-gradient(135deg,#F3E8FF,#EDE7F6);border:2px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
 .golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
 .rulebar{background:#F3E8FF;border:1.5px solid #7B1FA2;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#38096B;text-align:center;margin-bottom:12px}
@@ -33,9 +34,13 @@ p,li{font-size:1rem;line-height:1.65}
 .steps .ln.ans{color:#38096B;font-weight:800}
 .tree{background:#FDFBFF;border:2px dashed #CE93D8;border-radius:12px;padding:16px;margin:12px 0}
 .tree .node{background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .node.today{border-color:#4A148C;border-width:2.5px;background:#F8F1FF}
 .tree .step-n{display:inline-block;background:#4A148C;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.tag-today{display:inline-block;background:#4A148C;color:#fff;border-radius:10px;padding:1px 8px;font-size:.72rem;font-weight:700;margin-left:6px;vertical-align:middle}
 .warn-box{background:#F3E8FF;border:1.5px solid #CE93D8;border-radius:8px;padding:12px 16px;margin-top:12px}
 .warn-box p{font-size:.95rem;color:#38096B}
+.finish-line{background:#FFF8E1;border:2px solid #F9A825;border-radius:10px;padding:12px 16px;margin:14px 0}
+.finish-line p{font-size:.95rem;color:#7B4B00;font-weight:600}
 .q-card{background:#F8F1FF;border:1.5px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
 .q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
 .options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
@@ -50,142 +55,268 @@ p,li{font-size:1rem;line-height:1.65}
 .navrow{display:flex;gap:10px;margin-top:22px}
 .navrow .prev{flex:1;padding:12px 0;background:#F3E8FF;color:#38096B;border:2px solid #38096B;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
 .navrow .next{flex:1;padding:12px 0;background:#4A148C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow a.linkbtn{flex:1;display:block;text-align:center;padding:13px 0;background:#4A148C;color:#fff;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.navrow a.linkbtn.alt{background:#F3E8FF;color:#38096B;border-color:#38096B}
 .badge-cap{display:inline-block;background:#F3E8FF;color:#38096B;border:1.5px solid #CE93D8;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
 .reveal-btn{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin:6px 6px 6px 0}
 .reveal-line{display:none;background:#F8F1FF;border:1px solid #CE93D8;border-radius:8px;padding:10px 14px;margin:6px 0;font-size:.98rem;font-weight:700;color:#38096B}
-.people-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0}
-.person{width:38px;height:38px;border-radius:50%;background:#7B1FA2;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;box-shadow:0 1px 3px rgba(0,0,0,.2)}
-.trio-list{background:#fff;border:1px solid #CE93D8;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:.92rem}
-.trio-list .same{color:#7B1FA2;font-weight:700}
-.trio-list .cross{text-decoration:line-through;color:#aaa}
+
+/* ---- interactive: pick-3 explorer ---- */
+.lab{background:#FDFBFF;border:2px dashed #7B1FA2;border-radius:12px;padding:16px;margin:12px 0}
+.lab-title{font-weight:800;color:#4A148C;font-size:1rem;margin-bottom:4px}
+.lab-hint{font-size:.88rem;color:#7B1FA2;font-style:italic;margin-bottom:10px}
+.people-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:14px 0}
+.person{width:56px;height:56px;border-radius:50%;background:#EDE7F6;color:#4A148C;border:3px solid #CE93D8;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;cursor:pointer;user-select:none;transition:.15s}
+.person:hover{border-color:#7B1FA2}
+.person.on{background:#7B1FA2;color:#fff;border-color:#38096B;transform:scale(1.08)}
+.counter{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.chip{background:#fff;border:1.5px solid #CE93D8;border-radius:20px;padding:5px 14px;font-size:.9rem;font-weight:700;color:#38096B}
+.chip.good{background:#E8F5E9;border-color:#A5D6A7;color:#1B5E20}
+.orders{background:#fff;border:1.5px solid #CE93D8;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:.93rem}
+.orders .o{display:inline-block;background:#F3E8FF;border:1px solid #CE93D8;border-radius:6px;padding:2px 8px;margin:3px;font-weight:700;color:#38096B;font-family:'Courier New',monospace}
+.found-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.found-card{background:#E8F5E9;border:2px solid #66BB6A;border-radius:8px;padding:6px 12px;font-weight:800;color:#1B5E20;font-size:.92rem}
+.found-card.empty{background:#F5F5F5;border:2px dashed #bbb;color:#999;font-weight:600}
+.lab-msg{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.95rem;font-weight:700;display:none}
+.lab-msg.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.lab-msg.info{background:#F3E8FF;color:#38096B;border:1px solid #CE93D8}
+
+/* ---- interactive: sorter ---- */
+.sort-card{background:#fff;border:2px solid #7B1FA2;border-radius:10px;padding:16px;text-align:center;font-size:1.05rem;font-weight:700;color:#1a1a2e;margin-bottom:12px;min-height:70px;display:flex;align-items:center;justify-content:center}
+.sort-btns{display:flex;gap:10px;flex-wrap:wrap}
+.sort-btns button{flex:1;min-width:150px;padding:14px 8px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:2px solid}
+.btn-group{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.btn-line{background:#FFF3E0;border-color:#EF6C00;color:#E65100}
+.sort-fb{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.95rem;display:none;line-height:1.5}
+.sort-fb.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.sort-fb.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+
+/* ---- svg ---- */
+.svgwrap{text-align:center;margin:12px 0}
+svg{max-width:100%;height:auto;background:#fff;border:1.5px solid #CE93D8;border-radius:10px}
+.two-col{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+.two-col>div{flex:1;min-width:220px;border-radius:10px;padding:14px}
+.col-group{background:#E8F5E9;border:2px solid #2E7D32}
+.col-line{background:#FFF3E0;border:2px solid #EF6C00}
+.col-group h3{color:#1B5E20}
+.col-line h3{color:#E65100}
+.col-group p,.col-line p{font-size:.95rem}
 </style>
 </head>
 <body>
 <nav class="topnav">
   <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
-  <span class="tnav-title">Choose 3 — Extending Your Pairing Skill</span>
-  <span class="tnav-pill" id="pill">1 / 12</span>
+  <span class="tnav-title">Choose 3 — Teams, Triangles and When NOT to Divide</span>
+  <span class="tnav-pill" id="pill">1 / 11</span>
   <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
 </nav>
 
-<!-- s0: WHY -->
+<!-- ================= s0: WHY ================= -->
 <div class="screen active" id="s0">
 <div class="card">
   <h2>&#x1F3AF; Why Learn This?</h2>
   <div class="why">
-    <div class="why-title">You already know how to choose 2 — now go one bigger</div>
-    <p>Any 3 dots on a page make a triangle. Picking 3 toppings for a pizza, choosing 3 students for a team, taking 3 books on a trip — these all ask the same question: <strong>"how many different GROUPS of 3 can I make, when the order I pick them in doesn't matter?"</strong> You already solved this exact puzzle for groups of 2 (pairs, handshakes). Today you stretch that same idea one step further.</p>
+    <div class="why-title">You already know how to choose 2 &mdash; today you go one bigger</div>
+    <p>Picking 3 toppings for a pizza. Choosing 3 friends for a team. Taking 3 books on a trip. Joining any 3 dots to make a triangle. All of these ask the <strong>same</strong> question:</p>
+    <p style="margin-top:8px"><strong>&ldquo;How many different GROUPS of 3 can I make, when the order I pick them in doesn&rsquo;t matter?&rdquo;</strong></p>
   </div>
-  <div class="big-rule">Choosing 3 is just like choosing 2 — one extra person, one extra "un-ordering" step.</div>
+  <div class="big-rule">Your superpower today:<br>count thousands of teams without writing a single list.</div>
+  <div class="warn-box"><p>&#x1F4A1; There is also a second, sneaky half to today&rsquo;s lesson: learning when you must <strong>NOT</strong> divide. That one trips up more people than the counting itself.</p></div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
 </div>
 
-<!-- s1: Recap choose-2 -->
+<!-- ================= s1: POCKET MAP ================= -->
 <div class="screen" id="s1">
 <div class="card">
-  <h2>&#x1F91D; Recap — Choosing 2 (You've Got This)</h2>
-  <p>You already mastered this: to choose 2 people from a group of n, you multiply <strong>n &times; (n&minus;1)</strong> to count every ORDERED pair, then divide by <strong>2</strong> because every pair got counted twice (Alex-then-Bo AND Bo-then-Alex are the SAME pair).</p>
-  <div class="steps">
-    <div class="ln"><span class="note">Example: choose 2 people from 4 (Alex, Bo, Cara, Dan)</span></div>
-    <div class="ln">Ordered pairs: 4 &times; 3 = 12</div>
-    <div class="ln">Each pair counted twice &rarr; &divide; 2</div>
-    <div class="ln ans">12 &divide; 2 = 6 different pairs</div>
+  <h2>&#x1F5FA;&#xFE0F; Your Counting Pocket Map</h2>
+  <p>Every &ldquo;how many ways?&rdquo; question starts with <strong>ONE question you ask yourself</strong>:</p>
+  <div class="big-rule">Does the ORDER matter?</div>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span><strong>ORDER MATTERS</strong> (1st, 2nd, 3rd &middot; gold, silver, bronze &middot; a row of seats)<br>&rarr; Move <strong>LINE-UP</strong>: just multiply. <em>Never divide.</em></div>
+    <div class="node"><span class="step-n">2</span><strong>ORDER DOESN&rsquo;T MATTER, picking 2</strong> (pairs, handshakes, one line between 2 dots)<br>&rarr; Move <strong>PAIR</strong>: multiply 2 numbers, then &divide; 2.</div>
+    <div class="node today"><span class="step-n">3</span><strong>ORDER DOESN&rsquo;T MATTER, picking 3</strong> (teams, pizzas, triangles)<br>&rarr; Move <strong>TEAM</strong>: multiply 3 numbers, then &divide; 6. <span class="tag-today">TODAY</span></div>
   </div>
-  <div class="rulebar">Choose 2 from n &nbsp;=&nbsp; n &times; (n&minus;1) &divide; 2</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Keep this map in your head. Almost every counting mistake is choosing the wrong move &mdash; not doing the arithmetic wrong.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap Choose 2 &#8594;</button></div>
+</div>
+
+<!-- ================= s2: RECAP CHOOSE 2 ================= -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F91D; Recap &mdash; Move PAIR (You&rsquo;ve Got This)</h2>
+  <p><strong>Question:</strong> Alex, Bo, Cara and Dan are in a club. Two of them will be chosen to be partners. How many different pairs are possible?</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; count the ORDERED ways (pretend order matters for a moment):</span></div>
+    <div class="ln">1st person: 4 choices</div>
+    <div class="ln">2nd person: 3 choices left</div>
+    <div class="ln">4 &times; 3 = 12 ordered ways</div>
+    <div class="ln"><span class="note">Step 2 &mdash; but Alex-then-Bo and Bo-then-Alex are the SAME pair. Every pair was counted 2 times:</span></div>
+    <div class="ln">12 &divide; 2</div>
+    <div class="ln ans">= 6 different pairs</div>
+  </div>
+  <div class="rulebar">Move PAIR &nbsp;=&nbsp; multiply 2 numbers counting down &nbsp;&divide;&nbsp; 2</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The &divide; 2 is there for ONE reason only: <strong>each pair got counted twice.</strong> Remember that reason &mdash; you are about to need it again with a different number.</p></div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">One More Person &#8594;</button></div>
 </div>
 
-<!-- s2: the new idea -->
-<div class="screen" id="s2">
-<div class="card">
-  <h2>&#x2795; The One New Idea — One More Person, One More "Un-Order" Step</h2>
-  <div class="why">
-    <div class="why-title">What changes when you choose 3 instead of 2</div>
-    <p>Choosing 3 people has the exact same "counted more than once" problem — just bigger. If you pick 3 people, there are <strong>3! = 3 &times; 2 &times; 1 = 6</strong> different orders you could have picked them in (you already know this from arrangements!), and all 6 orders are really the SAME group of 3. So: multiply out the ordered count, then divide by 6.</p>
-  </div>
-  <div class="big-rule">Choose 3 from n &nbsp;=&nbsp; n &times; (n&minus;1) &times; (n&minus;2) &nbsp;&divide;&nbsp; 3! (which is 6)</div>
-  <div class="warn-box"><p>&#x26A0;&#xFE0F; Notice the pattern: choosing 2 people &rarr; divide by 2! (=2). Choosing 3 people &rarr; divide by 3! (=6). However many you choose, multiply that many numbers counting down from n, then divide by that many factorial.</p></div>
-</div>
-<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See It For Yourself &#8594;</button></div>
-</div>
-
-<!-- s3: interactive listing demo -->
+<!-- ================= s3: THE NEW IDEA ================= -->
 <div class="screen" id="s3">
 <div class="card">
-  <h2>&#x1F4CB; See It For Yourself — Choose 3 From 4 People</h2>
-  <p style="margin-bottom:8px"><strong>Alex (A), Bo (B), Cara (C), Dan (D). Tap to reveal every ORDERED way to pick 3 of them, then watch which ones are really the same group.</strong></p>
-  <div class="people-row">
-    <div class="person">A</div><div class="person">B</div><div class="person">C</div><div class="person">D</div>
+  <h2>&#x2795; The One New Idea</h2>
+  <p>Now the club must choose <strong>3</strong> people instead of 2. Everything works the same way &mdash; only the divide number changes. Here is why.</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Ask: if I pick 3 people, how many different ORDERS could I have picked them in?</span></div>
+    <div class="ln">1st slot: 3 choices</div>
+    <div class="ln">2nd slot: 2 choices left</div>
+    <div class="ln">3rd slot: 1 choice left</div>
+    <div class="ln">3 &times; 2 &times; 1 = 6 orders</div>
+    <div class="ln ans">So every team of 3 gets counted 6 times &rarr; divide by 6</div>
   </div>
-  <button class="reveal-btn" onclick="revealLine('r0a')">How many ORDERED ways to pick 3 of the 4?</button>
-  <div class="reveal-line" id="r0a">4 &times; 3 &times; 2 = 24 ordered ways.</div>
-  <button class="reveal-btn" onclick="revealLine('r0b')">Look at just the group {A, B, C} — how many of those 24 orders are really this SAME group?</button>
-  <div class="reveal-line" id="r0b">
-    ABC, ACB, BAC, BCA, CAB, CBA — all 6 orders are the same 3 people.
-  </div>
-  <button class="reveal-btn checkbtn" onclick="revealLine('r0c')">So how many TRUE different groups of 3 are there?</button>
-  <div class="reveal-line" id="r0c">24 &divide; 6 = 4 different groups: {A,B,C}, {A,B,D}, {A,C,D}, {B,C,D}.</div>
+  <div class="big-rule">Choosing 2 &rarr; each group counted <strong>2</strong> times &rarr; &divide; 2<br>Choosing 3 &rarr; each group counted <strong>6</strong> times &rarr; &divide; 6</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; You have met that 6 before: it is <strong>3! = 3 &times; 2 &times; 1 = 6</strong>, the factorial you mastered in Unit 33. Nothing new &mdash; just the number of ways to shuffle 3 things.</p></div>
 </div>
-<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Full Rule &#8594;</button></div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Now See It Happen &#8594;</button></div>
 </div>
 
-<!-- s4: decision tree -->
+<!-- ================= s4: INTERACTIVE — pick 3 of 4 ================= -->
 <div class="screen" id="s4">
 <div class="card">
-  <h2>&#x1F9ED; The ONE Rule</h2>
-  <div class="tree">
-    <div class="node"><span class="step-n">1</span>How many are you choosing? Call it <strong>r</strong> (here, r = 3).</div>
-    <div class="node"><span class="step-n">2</span>Multiply <strong>r</strong> numbers counting DOWN from n: n &times; (n&minus;1) &times; (n&minus;2) &hellip;</div>
-    <div class="node"><span class="step-n">3</span>Divide by <strong>r!</strong> (for r=3, that's 3! = 6).</div>
-    <div class="node"><span class="step-n">4</span>That's your answer — the number of different GROUPS, order doesn't matter.</div>
+  <h2>&#x1F9EA; Lab 1 &mdash; Watch The 24 Collapse Into 4</h2>
+  <p><strong>Alex (A), Bo (B), Cara (C), Dan (D). There are 4 &times; 3 &times; 2 = 24 ordered ways to pick 3 of them. But how many really different TEAMS are there?</strong></p>
+  <div class="lab">
+    <div class="lab-title">Tap 3 circles to build a team</div>
+    <div class="lab-hint">Each team you find swallows up 6 of the 24 ordered ways. Find all the teams and watch the 24 disappear.</div>
+    <div class="people-row" id="pplRow">
+      <div class="person" data-l="A" onclick="tog(this)">A</div>
+      <div class="person" data-l="B" onclick="tog(this)">B</div>
+      <div class="person" data-l="C" onclick="tog(this)">C</div>
+      <div class="person" data-l="D" onclick="tog(this)">D</div>
+    </div>
+    <div class="counter">
+      <span class="chip" id="chSel">Selected: 0 of 3</span>
+      <span class="chip" id="chLeft">Ordered ways left: 24</span>
+      <span class="chip" id="chFound">Teams found: 0</span>
+    </div>
+    <div class="orders" id="ordBox" style="display:none"></div>
+    <div class="found-grid" id="foundGrid"></div>
+    <div class="lab-msg" id="labMsg"></div>
   </div>
-  <div class="rulebar">Choose r from n &nbsp;=&nbsp; (n &times; (n&minus;1) &times; &hellip; for r numbers) &divide; r!</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This is the whole idea in one picture: <strong>24 ordered ways &divide; 6 orders per team = 4 teams.</strong> The dividing is not a trick to memorise &mdash; it is just removing copies.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Sneaky Half &#8594;</button></div>
+</div>
+
+<!-- ================= s5: WHEN NOT TO DIVIDE ================= -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x1F6D1; The Sneaky Half &mdash; When You Must NOT Divide</h2>
+  <p>You now know two dividing numbers (&divide;2 and &divide;6). That means the <strong>real</strong> skill is knowing which one to use &mdash; or whether to divide at all.</p>
+  <div class="two-col">
+    <div class="col-group">
+      <h3>&#x1F465; GROUP &mdash; order doesn&rsquo;t matter</h3>
+      <p>Everyone chosen gets the <strong>same thing</strong>.<br><br>&ldquo;Choose 3 for the team.&rdquo;<br>&ldquo;Pick 3 toppings.&rdquo;<br>&ldquo;Join 3 dots into a triangle.&rdquo;</p>
+      <p style="margin-top:8px;font-weight:800">&rarr; multiply, then &divide; 6</p>
+    </div>
+    <div class="col-line">
+      <h3>&#x1F3C5; LINE-UP &mdash; order matters</h3>
+      <p>Everyone chosen gets a <strong>different job or place</strong>.<br><br>&ldquo;Gold, silver, bronze.&rdquo;<br>&ldquo;1st, 2nd, 3rd.&rdquo;<br>&ldquo;President, Secretary, Treasurer.&rdquo;</p>
+      <p style="margin-top:8px;font-weight:800">&rarr; multiply only. NEVER divide.</p>
+    </div>
+  </div>
+  <div class="big-rule">The test: <strong>swap two of the chosen people around.</strong><br>Did anything change? &rarr; LINE-UP (don&rsquo;t divide)<br>Nothing changed? &rarr; GROUP (divide)</div>
+  <div class="lab">
+    <div class="lab-title">Lab 2 &mdash; Sort them yourself</div>
+    <div class="lab-hint">Read the situation. Decide: is it a GROUP or a LINE-UP?</div>
+    <div class="sort-card" id="sortCard">&mdash;</div>
+    <div class="sort-btns">
+      <button class="btn-group" onclick="sortAns('G')">&#x1F465; GROUP &mdash; divide</button>
+      <button class="btn-line" onclick="sortAns('L')">&#x1F3C5; LINE-UP &mdash; don&rsquo;t divide</button>
+    </div>
+    <div class="sort-fb" id="sortFb"></div>
+    <div class="counter" style="margin-top:12px"><span class="chip" id="sortScore">Correct: 0 of 0</span><span class="chip" id="sortPos">Card 1 of 6</span></div>
+    <button class="reveal-btn" id="sortNext" onclick="sortNext()" style="display:none">Next card &#8594;</button>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Rule &#8594;</button></div>
+</div>
+
+<!-- ================= s6: THE RULE ================= -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>&#x1F9ED; Move TEAM &mdash; The Whole Rule On One Page</h2>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span><strong>Check the map first:</strong> is it a GROUP (order doesn&rsquo;t matter)? If it is a LINE-UP, stop &mdash; just multiply.</div>
+    <div class="node"><span class="step-n">2</span><strong>Multiply 3 numbers, counting DOWN</strong> from how many you can pick from.<br>From 8: 8 &times; 7 &times; 6. From 12: 12 &times; 11 &times; 10.</div>
+    <div class="node"><span class="step-n">3</span><strong>Divide by 6</strong> (because each team of 3 got counted 6 times).</div>
+    <div class="node"><span class="step-n">4</span><strong>Write the answer as a NUMBER of groups</strong> &mdash; not a list.</div>
+  </div>
+  <div class="rulebar">Choose 3 from n &nbsp;=&nbsp; n &times; (n&minus;1) &times; (n&minus;2) &nbsp;&divide;&nbsp; 6</div>
+  <div class="warn-box"><p>&#x1F4A1; Handy shortcut for the arithmetic: divide <em>before</em> you multiply everything out when you can. For 9 &times; 8 &times; 7 &divide; 6, notice 9 &divide; 3 = 3 and 8 &divide; 2 = 4, so it becomes 3 &times; 4 &times; 7 = 84. Same answer, much smaller numbers.</p></div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Worked Example &#8594;</button></div>
 </div>
 
-<!-- s5: worked example 1 -->
-<div class="screen" id="s5">
+<!-- ================= s7: WORKED EXAMPLE — circle ================= -->
+<div class="screen" id="s7">
 <div class="card">
-  <h2>Worked Example — Choose 3 From 8 Points On A Circle</h2>
-  <p><strong>8 points are marked on a circle (no 3 in a straight line). Any 3 of them can be joined to make a triangle. How many different triangles are possible?</strong></p>
-  <div class="steps">
-    <div class="ln"><span class="note">Step 1 — how many are we choosing?</span></div>
-    <div class="ln">r = 3</div>
-    <div class="ln"><span class="note">Step 2 — multiply 3 numbers counting down from 8:</span></div>
-    <div class="ln">8 &times; 7 &times; 6 = 336</div>
-    <div class="ln"><span class="note">Step 3 — divide by 3! = 6:</span></div>
-    <div class="ln ans">336 &divide; 6 = 56 different triangles</div>
+  <h2>Worked Example &mdash; Triangles From 8 Points</h2>
+  <p><strong>8 points are marked on a circle. No 3 of them lie on a straight line. Any 3 points can be joined to make a triangle. How many different triangles are possible?</strong></p>
+  <div class="svgwrap">
+    <svg id="circSvg" viewBox="0 0 220 220" width="300" height="300" role="img" aria-label="8 points on a circle with one triangle drawn">
+      <circle cx="110" cy="110" r="80" fill="none" stroke="#CE93D8" stroke-width="2"/>
+      <polygon id="triShape" points="190,110 110,30 46.4,166.6" fill="#F3E8FF" stroke="#4A148C" stroke-width="2.5"/>
+      <g id="dots"></g>
+    </svg>
   </div>
-  <div class="warn-box"><p>&#x26A0;&#xFE0F; "Choose 3 points" and "make a triangle" mean the same thing here — any 3 points (not in a line) make exactly one triangle, and the order you pick the 3 points in doesn't change the triangle.</p></div>
+  <div style="text-align:center">
+    <button class="reveal-btn" onclick="randTri()">&#x1F3B2; Draw another triangle</button>
+    <span class="chip" id="triCount">Different triangles seen: 1</span>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 &mdash; GROUP or LINE-UP? Swap two of the 3 corner points around. Is it a different triangle?</span></div>
+    <div class="ln">No &mdash; same triangle. So it is a GROUP. Use Move TEAM.</div>
+    <div class="ln"><span class="note">Step 2 &mdash; multiply 3 numbers counting down from 8:</span></div>
+    <div class="ln">8 &times; 7 = 56</div>
+    <div class="ln">56 &times; 6 = 336</div>
+    <div class="ln"><span class="note">Step 3 &mdash; divide by 6, because each triangle was counted 6 times:</span></div>
+    <div class="ln">336 &divide; 6</div>
+    <div class="ln ans">= 56 different triangles</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; &ldquo;Choose 3 points&rdquo; and &ldquo;make a triangle&rdquo; are the same job. Every set of 3 points (as long as they are not in a straight line) makes exactly <strong>one</strong> triangle.</p></div>
 </div>
-<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try It Yourself &#8594;</button></div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Your Turn To Build &#8594;</button></div>
 </div>
 
-<!-- s6: interactive build 2 -->
-<div class="screen" id="s6">
+<!-- ================= s8: BUILD IT ================= -->
+<div class="screen" id="s8">
 <div class="card">
   <h2>&#x1F4CB; Build The Count Yourself</h2>
-  <p style="margin-bottom:10px"><strong>A shelf has 9 different books. You want to choose 3 to take on a trip. Tap each button in order.</strong></p>
-  <button class="reveal-btn" onclick="revealLine('r1a')">How many are we choosing (r)?</button>
-  <div class="reveal-line" id="r1a">r = 3</div>
-  <button class="reveal-btn" onclick="revealLine('r1b')">Multiply 3 numbers counting down from 9:</button>
-  <div class="reveal-line" id="r1b">9 &times; 8 &times; 7 = 504</div>
-  <button class="reveal-btn" onclick="revealLine('r1c')">Divide by 3! = 6:</button>
-  <div class="reveal-line" id="r1c">504 &divide; 6 = 84 different groups of 3 books.</div>
+  <p style="margin-bottom:10px"><strong>A shelf has 9 different books. You will choose 3 of them to take on a trip. How many different groups of 3 books are possible?</strong></p>
+  <p style="margin-bottom:10px">Work each step out in your head or on paper <em>first</em>, then tap to check.</p>
+  <button class="reveal-btn" onclick="revealLine('r1a')">Step 1 &mdash; GROUP or LINE-UP?</button>
+  <div class="reveal-line" id="r1a">GROUP. Swapping two books around gives the same 3 books in the bag &mdash; nothing changed. So we will divide.</div>
+  <button class="reveal-btn" onclick="revealLine('r1b')">Step 2 &mdash; multiply 3 numbers counting down from 9</button>
+  <div class="reveal-line" id="r1b">9 &times; 8 = 72, then 72 &times; 7 = 504</div>
+  <button class="reveal-btn" onclick="revealLine('r1c')">Step 3 &mdash; divide by 6</button>
+  <div class="reveal-line" id="r1c">504 &divide; 6 = 84</div>
+  <button class="reveal-btn" onclick="revealLine('r1d')">Step 4 &mdash; write the answer to the EXACT question asked</button>
+  <div class="reveal-line" id="r1d">The question asked HOW MANY groups &mdash; so the answer is <strong>84 different groups of 3 books</strong>.</div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
 </div>
 
-<!-- s7: practice -->
-<div class="screen" id="s7">
+<!-- ================= s9: PRACTICE ================= -->
+<div class="screen" id="s9">
 <div class="card">
   <span class="badge-cap">&#11088; Your Turn</span>
-  <h2>Practice — Choose 3</h2>
+  <h2>Practice &mdash; 4 Questions</h2>
+  <div class="finish-line"><p>&#x1F6A6; Before every answer: check the Pocket Map first (GROUP or LINE-UP?), then check you answered the EXACT question asked.</p></div>
+
   <div class="q-card">
-    <div class="q-text">P1.&nbsp; A DJ has 11 songs and wants to choose 3 to play first. How many different groups of 3 songs are possible?</div>
+    <div class="q-text">P1.&nbsp; A DJ has 11 songs. She will choose 3 of them to play at a party (all 3 just get played, in no special order). How many different groups of 3 songs can she choose?</div>
     <div class="options">
       <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 990</label>
       <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 165</label>
@@ -195,12 +326,16 @@ p,li{font-size:1rem;line-height:1.65}
     <div class="feedback" id="fb0"></div>
     <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
     <div class="steps-reveal" id="sr0"><div class="steps">
-      <div class="ln">11 &times; 10 &times; 9 = 990 ordered ways.</div>
-      <div class="ln ans">990 &divide; 6 = 165 different groups</div>
+      <div class="ln"><span class="note">GROUP or LINE-UP? All 3 songs get the same treatment &rarr; GROUP.</span></div>
+      <div class="ln">11 &times; 10 = 110</div>
+      <div class="ln">110 &times; 9 = 990</div>
+      <div class="ln">990 &divide; 6</div>
+      <div class="ln ans">= 165 different groups of 3 songs</div>
     </div></div>
   </div>
+
   <div class="q-card">
-    <div class="q-text">P2.&nbsp; 13 points are marked on a circle (no 3 in a straight line). How many different triangles can be made by joining any 3 of them?</div>
+    <div class="q-text">P2.&nbsp; 13 points are marked on a circle, and no 3 of them lie on a straight line. How many different triangles can be made by joining any 3 of the points?</div>
     <div class="options">
       <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 286</label>
       <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 1716</label>
@@ -210,45 +345,191 @@ p,li{font-size:1rem;line-height:1.65}
     <div class="feedback" id="fb1"></div>
     <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
     <div class="steps-reveal" id="sr1"><div class="steps">
-      <div class="ln">13 &times; 12 &times; 11 = 1716 ordered ways.</div>
-      <div class="ln ans">1716 &divide; 6 = 286 different triangles</div>
+      <div class="ln"><span class="note">Swap two corners &rarr; same triangle &rarr; GROUP.</span></div>
+      <div class="ln">13 &times; 12 = 156</div>
+      <div class="ln">156 &times; 11 = 1716</div>
+      <div class="ln">1716 &divide; 6</div>
+      <div class="ln ans">= 286 different triangles</div>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; A pizza shop offers 7 different toppings. You may put 3 different toppings on your pizza. How many different 3-topping pizzas can be made?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 210</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 35</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 21</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln"><span class="note">Swap two toppings around on the pizza &rarr; it is the same pizza &rarr; GROUP.</span></div>
+      <div class="ln">7 &times; 6 = 42</div>
+      <div class="ln">42 &times; 5 = 210</div>
+      <div class="ln">210 &divide; 6</div>
+      <div class="ln ans">= 35 different pizzas</div>
+    </div></div>
+  </div>
+
+  <div class="q-card" style="border-color:#EF6C00;border-width:2.5px">
+    <div class="q-text">P4.&nbsp; &#x1F3C5; <strong>Careful &mdash; read this one twice.</strong> 7 runners are in a race. Medals are given for 1st place (gold), 2nd place (silver) and 3rd place (bronze). How many different ways can the 3 medals be handed out?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 35</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 210</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 21</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln"><span class="note">Swap the gold and silver runners around. Is that the same result? NO &mdash; a different person is champion. So this is a LINE-UP.</span></div>
+      <div class="ln">7 &times; 6 = 42</div>
+      <div class="ln">42 &times; 5 = 210</div>
+      <div class="ln ans">= 210 ways &mdash; and we do NOT divide by 6</div>
+      <div class="ln"><span class="note">Compare with P3: exactly the same 7 &times; 6 &times; 5, but P3 divided and P4 did not. The words decided it, not the numbers.</span></div>
     </div></div>
   </div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Mastery Checklist &#8594;</button></div>
 </div>
 
-<!-- s8: recap -->
-<div class="screen" id="s8">
+<!-- ================= s10: RECAP ================= -->
+<div class="screen" id="s10">
 <div class="golden">
-  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
-  <p style="font-size:1.05rem"><strong>Choosing 3 works exactly like choosing 2 — multiply that many numbers counting down from n, then divide by that many factorial (3! = 6). Same idea, one bigger step.</strong></p>
+  <div class="golden-title">&#x1F4D6; Today&rsquo;s Big Idea</div>
+  <p style="font-size:1.05rem"><strong>Ask &ldquo;does order matter?&rdquo; FIRST. If it doesn&rsquo;t and you are picking 3 &mdash; multiply 3 numbers counting down, then divide by 6, because each team got counted 6 times. If order DOES matter, just multiply and never divide.</strong></p>
+</div>
+<div class="card">
+  <div class="rulebar">GROUP of 3 &rarr; n &times; (n&minus;1) &times; (n&minus;2) &divide; 6 &nbsp;&nbsp;|&nbsp;&nbsp; LINE-UP of 3 &rarr; n &times; (n&minus;1) &times; (n&minus;2)</div>
+  <div class="finish-line"><p>&#x1F6A6; <strong>Finish-Line Check</strong> &mdash; before you write your answer down: did you answer the EXACT question asked? A count of groups is a NUMBER, not a list. And did you check GROUP vs LINE-UP before dividing?</p></div>
 </div>
 <div class="card" style="background:#F3E8FF;border:1px solid #CE93D8">
-  <h3 style="color:#38096B">&#x1F3C6; You've got it when&hellip;</h3>
+  <h3 style="color:#38096B">&#x1F3C6; You&rsquo;ve got it when&hellip;</h3>
   <ul>
-    <li>You can multiply the right number of counting-down terms for how many you're choosing</li>
-    <li>You remember to divide by r! (3! = 6 for choosing 3), not just 2</li>
-    <li>You recognise "any 3 points make a triangle" as a choose-3 question</li>
-    <li>You can explain WHY you divide — because every group got counted in every possible order</li>
+    <li>You ask &ldquo;does order matter?&rdquo; <em>before</em> you touch any numbers</li>
+    <li>You can explain WHY you divide by 6 &mdash; each team gets counted in all 6 of its orders</li>
+    <li>You spot &ldquo;any 3 points make a triangle&rdquo; as a choose-3 question</li>
+    <li>You do NOT divide when the 3 chosen people get different jobs or places</li>
+    <li>You can do 9 &times; 8 &times; 7 &divide; 6 without a calculator</li>
   </ul>
-  <p style="margin-top:10px;font-size:.95rem">Next: what happens when a question asks for groups with an EXTRA rule attached, like "at least one girl" or "not all the same colour."</p>
+  <p style="margin-top:10px;font-size:.95rem">Next lesson: what happens when the question adds an extra rule &mdash; like &ldquo;at least 1 girl&rdquo; or &ldquo;not all the same colour.&rdquo;</p>
 </div>
 <div class="navrow">
-  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#4A148C;color:#fff;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+  <button class="prev" onclick="nav(-1)">&#8592; Prev</button>
+  <a class="linkbtn" href="Counting_Lesson_MultiConstraint.html">Lesson 2: Total Minus Bad &#8594;</a>
+</div>
+<div class="navrow">
+  <a class="linkbtn alt" href="https://athipprem.github.io/mathlessons/index.html">Back to Hub</a>
 </div>
 </div>
 
 <script>
+/* ---------- screen nav ---------- */
 var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
 pill.textContent='1 / '+screens.length;
 function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+
+/* ---------- practice ---------- */
 function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
 if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
 if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
 else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
 function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
 function revealLine(id){document.getElementById(id).style.display='block';}
+
+/* ---------- LAB 1: pick 3 of 4 ---------- */
+var found=[];
+function perms3(a){var r=[],i,j,k;for(i=0;i<3;i++)for(j=0;j<3;j++)for(k=0;k<3;k++){if(i!==j&&j!==k&&i!==k)r.push(a[i]+a[j]+a[k]);}return r;}
+function tog(el){
+  var on=document.querySelectorAll('.person.on');
+  if(!el.classList.contains('on')&&on.length>=3){return;}
+  el.classList.toggle('on');
+  render1();
+}
+function render1(){
+  var on=document.querySelectorAll('.person.on'),n=on.length,i;
+  document.getElementById('chSel').textContent='Selected: '+n+' of 3';
+  var ord=document.getElementById('ordBox'),msg=document.getElementById('labMsg');
+  if(n===3){
+    var letters=[];for(i=0;i<3;i++)letters.push(on[i].getAttribute('data-l'));
+    letters.sort();
+    var key=letters.join('');
+    var ps=perms3(letters),h='<strong>Team {'+letters.join(', ')+'} &mdash; these 6 ordered ways are all the SAME team:</strong><br>';
+    for(i=0;i<ps.length;i++)h+='<span class="o">'+ps[i]+'</span>';
+    ord.innerHTML=h;ord.style.display='block';
+    if(found.indexOf(key)<0){found.push(key);found.sort();}
+    msg.style.display='none';
+  } else {
+    ord.style.display='none';
+    if(n<3){msg.className='lab-msg info';msg.style.display='block';msg.textContent='Tap '+(3-n)+' more circle'+((3-n)===1?'':'s')+' to make a team of 3.';}
+  }
+  var grid=document.getElementById('foundGrid'),g='';
+  for(i=0;i<found.length;i++)g+='<div class="found-card">{'+found[i].split('').join(', ')+'} &mdash; 6 orders</div>';
+  for(i=found.length;i<4;i++)g+='<div class="found-card empty">team not found yet</div>';
+  grid.innerHTML=g;
+  document.getElementById('chFound').textContent='Teams found: '+found.length;
+  var left=24-6*found.length;
+  var chL=document.getElementById('chLeft');
+  chL.textContent='Ordered ways left: '+left;
+  chL.className=left===0?'chip good':'chip';
+  if(found.length===4){
+    var m=document.getElementById('labMsg');
+    m.className='lab-msg ok';m.style.display='block';
+    m.innerHTML='✓ All 4 teams found, and all 24 ordered ways are used up. 24 ÷ 6 = 4. That ÷ 6 is not magic — it is just 6 copies of every team being thrown away.';
+  }
+}
+render1();
+
+/* ---------- LAB 2: sorter ---------- */
+var sortItems=[
+ {t:'Choose 3 students from the class to be on the tidying team.',a:'G',why:'All 3 do the same job. Swapping two of them changes nothing — GROUP, so divide by 6.'},
+ {t:'Choose 3 runners from the class to come 1st, 2nd and 3rd in a race.',a:'L',why:'1st and 2nd are different prizes. Swapping two runners changes who wins — LINE-UP, so do NOT divide.'},
+ {t:'Pick 3 different toppings to put on one pizza.',a:'G',why:'Cheese-then-ham-then-corn is the same pizza as corn-then-cheese-then-ham — GROUP, so divide by 6.'},
+ {t:'Choose 3 people from the club to be President, Secretary and Treasurer.',a:'L',why:'Each person gets a different job. Swapping two changes who is President — LINE-UP, so do NOT divide.'},
+ {t:'Choose 3 dots from a page and join them to make a triangle.',a:'G',why:'The triangle is the same whichever corner you draw first — GROUP, so divide by 6.'},
+ {t:'Choose 3 different flags and hang them on a pole: top, middle and bottom.',a:'L',why:'Top and bottom are different positions. Swapping two flags gives a different-looking pole — LINE-UP, so do NOT divide.'}
+];
+var sIdx=0,sScore=0,sDone=0;
+function showSort(){
+  document.getElementById('sortCard').textContent=sortItems[sIdx].t;
+  document.getElementById('sortFb').style.display='none';
+  document.getElementById('sortNext').style.display='none';
+  document.getElementById('sortPos').textContent='Card '+(sIdx+1)+' of '+sortItems.length;
+}
+function sortAns(v){
+  var fb=document.getElementById('sortFb'),it=sortItems[sIdx];
+  if(fb.style.display==='block')return;
+  sDone++;
+  fb.style.display='block';
+  if(v===it.a){sScore++;fb.className='sort-fb ok';fb.innerHTML='✓ Correct. '+it.why;}
+  else{fb.className='sort-fb err';fb.innerHTML='✗ Not this one. '+it.why;}
+  document.getElementById('sortScore').textContent='Correct: '+sScore+' of '+sDone;
+  if(sIdx<sortItems.length-1)document.getElementById('sortNext').style.display='inline-block';
+  else{document.getElementById('sortNext').style.display='inline-block';document.getElementById('sortNext').textContent='Start again ↻';}
+}
+function sortNext(){sIdx=(sIdx+1)%sortItems.length;if(sIdx===0){document.getElementById('sortNext').textContent='Next card →';}showSort();}
+showSort();
+
+/* ---------- circle diagram ---------- */
+var pts=[],cx=110,cy=110,rr=80;
+for(var a=0;a<8;a++){var th=(a*45-90)*Math.PI/180;pts.push([+(cx+rr*Math.cos(th)).toFixed(1),+(cy+rr*Math.sin(th)).toFixed(1)]);}
+(function(){var g=document.getElementById('dots'),h='';
+ for(var i=0;i<8;i++){h+='<circle cx="'+pts[i][0]+'" cy="'+pts[i][1]+'" r="6" fill="#4A148C"/>';}
+ g.innerHTML=h;})();
+var seen={},seenN=0;
+function setTri(a,b,c){
+ document.getElementById('triShape').setAttribute('points',pts[a].join(',')+' '+pts[b].join(',')+' '+pts[c].join(','));
+ var k=[a,b,c].sort().join('-');
+ if(!seen[k]){seen[k]=1;seenN++;}
+ document.getElementById('triCount').textContent='Different triangles seen: '+seenN+' of 56';
+}
+setTri(0,3,5);
+function randTri(){
+ var idx=[0,1,2,3,4,5,6,7],p=[];
+ for(var i=0;i<3;i++){p.push(idx.splice(Math.floor(Math.random()*idx.length),1)[0]);}
+ setTri(p[0],p[1],p[2]);
+}
 </script>
 </body>
 </html>
