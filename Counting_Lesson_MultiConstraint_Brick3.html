@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Total Minus Bad — Brick 3: Points, Triangles &amp; Working Backwards</title>
+<style>
+:root{--nav:#4A148C;--nav-dark:#38096B;--bg:#F3E8FF;--card:#fff;--acc:#4A148C;--ok:#2E7D32;--err:#C62828;--warn:#38096B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:820px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#38096B;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+li{margin-bottom:4px}
+.why{background:linear-gradient(135deg,#F3E8FF,#F8F1FF);border:2px solid #CE93D8;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#38096B;font-weight:700;margin-bottom:6px}
+.big-rule{background:#F3E8FF;border:2px solid #7B1FA2;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#38096B;margin:14px 0;line-height:1.5}
+.golden{background:linear-gradient(135deg,#F3E8FF,#EDE7F6);border:2px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#F3E8FF;border:1.5px solid #7B1FA2;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#38096B;text-align:center;margin-bottom:12px}
+.step-line{display:flex;gap:10px;align-items:flex-start;background:#F8F1FF;border:1px solid #CE93D8;border-radius:10px;padding:10px 14px;margin:8px 0}
+.step-num{background:#4A148C;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;line-height:24px;text-align:center;font-weight:800;font-size:.82rem}
+.step-body{flex:1}
+.step-math{font-size:1.15rem;font-weight:800;color:#1a1a2e}
+.step-why{font-size:.88rem;color:#7B1FA2;margin-top:2px}
+.step-result{font-size:1.05rem;font-weight:800;color:#1B5E20;margin-top:4px}
+.step-result.bad{color:#C62828}
+.blockhead{background:#F3E8FF;border:1.5px solid #7B1FA2;border-radius:8px;padding:8px 14px;font-weight:800;color:#38096B;margin:14px 0 6px 0;font-size:.95rem}
+.warn-box{background:#F3E8FF;border:1.5px solid #CE93D8;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#38096B}
+.finish-line{background:#FFF8E1;border:2px solid #F9A825;border-radius:10px;padding:12px 16px;margin:14px 0}
+.finish-line p{font-size:.95rem;color:#7B4B00;font-weight:600}
+.q-card{background:#F8F1FF;border:1.5px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#F3E8FF}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#F3E8FF;color:#38096B;border:2px solid #38096B;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#4A148C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow a.linkbtn{flex:1;display:block;text-align:center;padding:13px 0;background:#4A148C;color:#fff;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.navrow a.linkbtn.alt{background:#F3E8FF;color:#38096B;border-color:#38096B}
+.badge-cap{display:inline-block;background:#F3E8FF;color:#38096B;border:1.5px solid #CE93D8;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.badge-brick{display:inline-block;background:#4A148C;color:#fff;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px;margin-left:6px}
+.compare-wrap{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+.compare-box{flex:1;min-width:240px;border-radius:10px;padding:14px 16px;border:2px solid}
+.compare-a{background:#FFF8E1;border-color:#F9A825}
+.compare-b{background:#E8F5E9;border-color:#2E7D32}
+.compare-tag{font-weight:800;font-size:.85rem;margin-bottom:6px}
+.svgwrap{text-align:center;margin:12px 0;background:#FDFBFF;border:2px dashed #CE93D8;border-radius:12px;padding:10px}
+.lab{background:#FDFBFF;border:2px dashed #7B1FA2;border-radius:12px;padding:16px;margin:12px 0}
+.lab-title{font-weight:800;color:#4A148C;font-size:1rem;margin-bottom:4px}
+.lab-hint{font-size:.88rem;color:#7B1FA2;font-style:italic;margin-bottom:10px}
+.stepper{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1.5px solid #CE93D8;border-radius:10px;padding:8px 12px;margin-bottom:8px;gap:10px}
+.stepper .nm{font-weight:700;font-size:.95rem;flex:1}
+.stepper .val{font-weight:800;font-size:1.1rem;min-width:28px;text-align:center;color:#38096B}
+.stepper button{width:34px;height:34px;border-radius:8px;border:1.5px solid #7B1FA2;background:#F3E8FF;color:#38096B;font-size:1.15rem;font-weight:800;cursor:pointer;line-height:1}
+.outbox{background:#fff;border:1.5px solid #CE93D8;border-radius:10px;padding:12px 14px;margin-top:10px;font-size:.95rem}
+.outbox .row{padding:5px 0;display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed #E0D0F0}
+.outbox .row .why{font-size:.78rem;color:#7B1FA2;font-weight:400;display:block}
+.outbox .row.tot{border-top:2px solid #CE93D8;border-bottom:none;margin-top:4px;padding-top:8px;font-weight:800;color:#1B5E20}
+.reftable{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92rem}
+.reftable th,.reftable td{border:1px solid #CE93D8;padding:6px 10px;text-align:center}
+.reftable th{background:#F3E8FF;color:#38096B}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Total Minus Bad — Brick 3</span>
+  <span class="tnav-pill" id="pill">1 / 8</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- ============ s0 WHY ============ -->
+<div class="screen active" id="s0">
+<div class="card">
+  <span class="badge-brick">Brick 3 of 3</span>
+  <h2>&#x1F3AF; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">Same skill, brand-new picture</div>
+    <p>Competitions love asking about <strong>points and triangles</strong>: "here are some dots &mdash; how many triangles can you make by joining any 3 of them?" It looks totally different from boys/girls or coloured counters, but it uses the EXACT same Total Minus Bad skill you already own.</p>
+  </div>
+  <p>This is the last brick. You'll also learn something new: working <strong>BACKWARDS</strong> &mdash; when you're TOLD the answer and have to find a missing number instead.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- ============ s1 RECALL CHOOSE-3 IN NEW CONTEXT ============ -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F501; Choose-3, New Picture — Points Make Triangles</h2>
+  <p>Any 3 points that are NOT all on one straight line can be joined to make exactly ONE triangle. So "how many triangles?" is really just asking "how many groups of 3 points?" &mdash; your Choose-3 rule again.</p>
+  <div class="svgwrap">
+    <svg width="300" height="220" viewBox="0 0 300 220">
+      <circle cx="40" cy="180" r="6" fill="#4A148C"/><circle cx="90" cy="60" r="6" fill="#4A148C"/><circle cx="150" cy="40" r="6" fill="#4A148C"/><circle cx="210" cy="70" r="6" fill="#4A148C"/><circle cx="260" cy="150" r="6" fill="#4A148C"/><circle cx="180" cy="190" r="6" fill="#4A148C"/>
+      <text x="150" y="210" text-anchor="middle" font-size="13" fill="#38096B" font-weight="700">6 points, no 3 in a straight line</text>
+    </svg>
+  </div>
+  <p><strong>6 points are drawn, no 3 of them in a straight line. How many different triangles can be made by joining any 3?</strong></p>
+  <div class="step-line">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-math">6 &times; 5 &times; 4 &divide; 6</div>
+      <div class="step-why"><strong>6</strong> is the total number of points (n=6). <strong>5</strong>,<strong>4</strong> count down (n&minus;1, n&minus;2) &mdash; exactly your Choose-3 rule. Divide by <strong>6</strong> to remove repeat-orders, since triangle "A,B,C" is the same triangle as "C,B,A".</div>
+      <div class="step-result">6&times;5=30, 30&times;4=120, 120&divide;6=<strong>20 triangles</strong></div>
+    </div>
+  </div>
+  <div class="rulebar">Triangles from n points (none collinear) = Choose 3 from n = n&times;(n&minus;1)&times;(n&minus;2)&divide;6</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The New Idea &#8594;</button></div>
+</div>
+
+<!-- ============ s2 NEW IDEA: single collinear ============ -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F4A1; The New Idea — Straight Lines Are NOT Triangles</h2>
+  <div class="svgwrap">
+    <svg width="300" height="220" viewBox="0 0 300 220">
+      <line x1="30" y1="140" x2="230" y2="140" stroke="#C62828" stroke-width="2" stroke-dasharray="4 3"/>
+      <circle cx="40" cy="140" r="6" fill="#C62828"/><circle cx="100" cy="140" r="6" fill="#C62828"/><circle cx="160" cy="140" r="6" fill="#C62828"/><circle cx="220" cy="140" r="6" fill="#C62828"/>
+      <circle cx="70" cy="50" r="6" fill="#4A148C"/><circle cx="270" cy="70" r="6" fill="#4A148C"/><circle cx="260" cy="190" r="6" fill="#4A148C"/><circle cx="30" cy="200" r="6" fill="#4A148C"/>
+      <text x="150" y="15" text-anchor="middle" font-size="13" fill="#38096B" font-weight="700">8 points total &mdash; 4 of them (red) lie on ONE straight line</text>
+    </svg>
+  </div>
+  <p><strong>8 points are drawn. 4 of them happen to lie on one straight line (red, dashed). How many triangles can be made from any 3 of the 8 points?</strong></p>
+  <div class="why">
+    <div class="why-title">Why some groups of 3 DON'T count</div>
+    <p>If you pick 3 points that are ALL on that same red line, they don't make a triangle &mdash; they just make a straight line. Those groups are "BAD" &mdash; you must count them and subtract.</p>
+  </div>
+  <div class="blockhead">Step 1 &mdash; ALL (every possible group of 3, ignoring the straight line for now)</div>
+  <div class="step-line">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-math">8 &times; 7 &times; 6 &divide; 6</div>
+      <div class="step-why"><strong>8</strong> is all the points (n=8). <strong>7</strong>,<strong>6</strong> count down. Divide by <strong>6</strong>, same reason as always.</div>
+      <div class="step-result">8&times;7=56, 56&times;6=336, 336&divide;6=<strong>56 (this is ALL)</strong></div>
+    </div>
+  </div>
+  <div class="blockhead">Step 2 &mdash; BAD (groups of 3 that are all on the red line)</div>
+  <div class="step-line">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="step-math">4 &times; 3 &times; 2 &divide; 6</div>
+      <div class="step-why"><strong>4</strong> is how many points sit on that one straight line (n=4 &mdash; we switch pools to just the collinear points). <strong>3</strong>,<strong>2</strong> count down. Divide by <strong>6</strong>.</div>
+      <div class="step-result bad">4&times;3=12, 12&times;2=24, 24&divide;6=<strong>4 straight-line "bad" groups</strong></div>
+    </div>
+  </div>
+  <div class="blockhead">Step 3 &mdash; Subtract</div>
+  <div class="step-line">
+    <div class="step-num">&#10003;</div>
+    <div class="step-body">
+      <div class="step-math">56 &minus; 4</div>
+      <div class="step-why">ALL groups of 3 minus the straight-line groups leaves only the groups that actually form a triangle.</div>
+      <div class="step-result"><strong>56 &minus; 4 = 52 triangles</strong></div>
+    </div>
+  </div>
+  <div class="big-rule">Points on a straight line = a BAD case (Choose 3 from JUST that line), exactly like Choose 3 from JUST the boys, or JUST one colour.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Two Lines At Once &#8594;</button></div>
+</div>
+
+<!-- ============ s3 MULTI-COLLINEAR (reinforce Brick 2) ============ -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F517; Two Straight Lines At Once — Your Brick 2 Skill Returns</h2>
+  <div class="svgwrap">
+    <svg width="300" height="220" viewBox="0 0 300 220">
+      <line x1="30" y1="60" x2="260" y2="60" stroke="#1565C0" stroke-width="2" stroke-dasharray="4 3"/>
+      <line x1="50" y1="190" x2="250" y2="190" stroke="#2E7D32" stroke-width="2" stroke-dasharray="4 3"/>
+      <circle cx="40" cy="60" r="6" fill="#1565C0"/><circle cx="110" cy="60" r="6" fill="#1565C0"/><circle cx="180" cy="60" r="6" fill="#1565C0"/><circle cx="250" cy="60" r="6" fill="#1565C0"/>
+      <circle cx="60" cy="190" r="6" fill="#2E7D32"/><circle cx="150" cy="190" r="6" fill="#2E7D32"/><circle cx="240" cy="190" r="6" fill="#2E7D32"/>
+      <circle cx="20" cy="125" r="6" fill="#4A148C"/><circle cx="280" cy="125" r="6" fill="#4A148C"/>
+      <text x="150" y="15" text-anchor="middle" font-size="12" fill="#38096B" font-weight="700">9 points: 4 on the blue line + 3 on the green line + 2 free points</text>
+    </svg>
+  </div>
+  <p><strong>9 points in total: 4 lie on one straight line (blue), a different 3 lie on another straight line (green), and 2 points aren't on either line. How many triangles can be made?</strong></p>
+  <p style="margin:8px 0">This is exactly Brick 2's "more than one bad case" idea, just with straight lines instead of colours.</p>
+  <div class="blockhead">Step 1 &mdash; ALL</div>
+  <div class="step-line">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-math">9 &times; 8 &times; 7 &divide; 6</div>
+      <div class="step-why"><strong>9</strong> is all the points (n=9). <strong>8</strong>,<strong>7</strong> count down. Divide by <strong>6</strong>.</div>
+      <div class="step-result">9&times;8=72, 72&times;7=504, 504&divide;6=<strong>84 (this is ALL)</strong></div>
+    </div>
+  </div>
+  <div class="blockhead">Step 2 &mdash; BAD, one line at a time</div>
+  <div class="step-line">
+    <div class="step-num">a</div>
+    <div class="step-body">
+      <div class="step-math">4 &times; 3 &times; 2 &divide; 6</div>
+      <div class="step-why">Blue line: <strong>4</strong> points sit on it (n=4). <strong>3</strong>,<strong>2</strong> count down. Divide by <strong>6</strong>.</div>
+      <div class="step-result bad">4&times;3=12, 12&times;2=24, 24&divide;6=<strong>4 bad groups on the blue line</strong></div>
+    </div>
+  </div>
+  <div class="step-line">
+    <div class="step-num">b</div>
+    <div class="step-body">
+      <div class="step-math">3 &times; 2 &times; 1 &divide; 6</div>
+      <div class="step-why">Green line: <strong>3</strong> points sit on it (n=3, so there's only ONE way to pick all 3). <strong>2</strong>,<strong>1</strong> count down. Divide by <strong>6</strong>.</div>
+      <div class="step-result bad">3&times;2=6, 6&times;1=6, 6&divide;6=<strong>1 bad group on the green line</strong></div>
+    </div>
+  </div>
+  <div class="blockhead">Step 3 &mdash; ADD the bad lines together, THEN subtract</div>
+  <div class="step-line">
+    <div class="step-num">&#10003;</div>
+    <div class="step-body">
+      <div class="step-math">(4 + 1) then 84 &minus; 5</div>
+      <div class="step-why">Add the two bad lines: 4+1=5. The 2 free points never appear in a bad group, so they don't add anything to BAD &mdash; they only ever help make real triangles.</div>
+      <div class="step-result"><strong>84 &minus; 5 = 79 triangles</strong></div>
+    </div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Play With It &#8594;</button></div>
+</div>
+
+<!-- ============ s4 LAB ============ -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F9EA; Try It Yourself — The Triangle Machine</h2>
+  <p>Change the total number of points and the size of ONE collinear line. Watch ALL, BAD and GOOD (triangles) update live.</p>
+  <div class="lab">
+    <div class="lab-title">Build your own set of points</div>
+    <div class="lab-hint">GOOD = real triangles. BAD = groups of 3 that all sit on the one straight line.</div>
+    <div class="stepper">
+      <span class="nm">&#x25CF; Total points</span>
+      <button onclick="bump('n',-1)">&minus;</button><span class="val" id="vN">9</span><button onclick="bump('n',1)">+</button>
+    </div>
+    <div class="stepper">
+      <span class="nm">&#x2501; Points on the line</span>
+      <button onclick="bump('k',-1)">&minus;</button><span class="val" id="vK">4</span><button onclick="bump('k',1)">+</button>
+    </div>
+    <div class="outbox">
+      <div class="row"><span>ALL groups of 3 (from <span id="oTot">9</span> points)<span class="why">choose 3 from ALL the points</span></span><strong id="oAll">84</strong></div>
+      <div class="row"><span>BAD &mdash; on the line (from <span id="oK">4</span> line-points)<span class="why">choose 3 from ONLY the line</span></span><strong id="oBad">4</strong></div>
+      <div class="row tot"><span>GOOD &mdash; real triangles<span class="why">ALL &minus; BAD</span></span><strong id="oGood">80</strong></div>
+    </div>
+    <div class="warn-box" id="labNote"><p>&nbsp;</p></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Working Backwards &#8594;</button></div>
+</div>
+
+<!-- ============ s5 REVERSE CAPSTONE ============ -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x21BA; Working Backwards — Find the Missing Number</h2>
+  <p>So far you've always been TOLD how many points are on the line, and asked to find the triangle count. Now flip it: you're TOLD the triangle count, and must find how many points were on the line.</p>
+  <p style="margin:8px 0"><strong>9 points are drawn. Some of them, call it k, lie on one straight line. There are 74 possible triangles. How many points (k) are on that line?</strong></p>
+  <div class="blockhead">Step 1 &mdash; Find ALL first (this doesn't depend on k)</div>
+  <div class="step-line">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-math">9 &times; 8 &times; 7 &divide; 6</div>
+      <div class="step-why">Same as always &mdash; ALL only needs the total point count (9), not k.</div>
+      <div class="step-result">9&times;8=72, 72&times;7=504, 504&divide;6=<strong>84 (this is ALL)</strong></div>
+    </div>
+  </div>
+  <div class="blockhead">Step 2 &mdash; Since GOOD = ALL &minus; BAD, work out BAD by REARRANGING</div>
+  <div class="step-line">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="step-math">84 &minus; 74</div>
+      <div class="step-why">You know ALL (84) and you know GOOD (74, given in the question). If GOOD = ALL &minus; BAD, then BAD = ALL &minus; GOOD &mdash; just move the numbers around.</div>
+      <div class="step-result bad">84 &minus; 74 = <strong>10 (this is BAD)</strong></div>
+    </div>
+  </div>
+  <div class="blockhead">Step 3 &mdash; Match BAD to a Choose-3 value using a reference table</div>
+  <p style="margin:6px 0 8px 0">BAD is always Choose-3 from k points. So find which k gives Choose-3 = 10:</p>
+  <table class="reftable">
+    <tr><th>k (points on the line)</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr>
+    <tr><th>Choose 3 from k</th><td>1</td><td>4</td><td style="background:#E8F5E9;font-weight:800">10</td><td>20</td><td>35</td></tr>
+  </table>
+  <div class="step-line">
+    <div class="step-num">&#10003;</div>
+    <div class="step-body">
+      <div class="step-math">BAD = 10 &nbsp;matches&nbsp; k = 5</div>
+      <div class="step-why">10 only appears under k=5 in the table. So the straight line must have had <strong>5</strong> points on it.</div>
+      <div class="step-result"><strong>k = 5 points were on the line</strong></div>
+    </div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; <strong>The 3-step reverse recipe:</strong> (1) find ALL from the total points, (2) find BAD by doing ALL &minus; GOOD, (3) look up which k gives that Choose-3 value using the small reference table (3&rarr;1, 4&rarr;4, 5&rarr;10, 6&rarr;20, 7&rarr;35, 8&rarr;56).</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- ============ s6 PRACTICE ============ -->
+<div class="screen" id="s6">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice &mdash; 4 Questions</h2>
+  <div class="finish-line"><p>&#x1F6A6; Check: is this a forward question (find the triangles) or a backward question (find k)? Use the right recipe.</p></div>
+
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 7 points are drawn. 3 of them lie on one straight line. How many triangles can be made from any 3 of the 7 points?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 35</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 1</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 34</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'C')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps" style="background:#F8F1FF;border:1px solid #CE93D8;border-radius:10px;padding:12px 14px">
+      <p style="font-size:.92rem">ALL: choose 3 from 7 &rarr; 7&times;6&times;5=210, 210&divide;6=35.<br>BAD (3 collinear): C(3,3)=1.<br><strong>GOOD: 35&minus;1=34</strong> triangles.<br><em>A) 35 is ALL, B) 1 is BAD &mdash; both half-finished.</em></p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; 10 points are drawn. 4 lie on one straight line, and a different 3 lie on another straight line. How many triangles can be made?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 120</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 115</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps" style="background:#F8F1FF;border:1px solid #CE93D8;border-radius:10px;padding:12px 14px">
+      <p style="font-size:.92rem">ALL: choose 3 from 10 &rarr; 10&times;9&times;8=720, 720&divide;6=120.<br>BAD: line 1 C(4,3)=4, line 2 C(3,3)=1 &rarr; 4+1=5.<br><strong>GOOD: 120&minus;5=115</strong> triangles.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; 8 points are drawn, and NO 3 of them lie on the same straight line. How many triangles can be made?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 56</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 336</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 50</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps" style="background:#F8F1FF;border:1px solid #CE93D8;border-radius:10px;padding:12px 14px">
+      <p style="font-size:.92rem">No 3 points are collinear, so there is NOTHING to subtract &mdash; BAD=0.<br>ALL: 8&times;7&times;6=336, 336&divide;6=<strong>56</strong>. GOOD=ALL=56.<br><em>C) 50 wrongly subtracts something anyway &mdash; don't invent a bad case that isn't there.</em></p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; 8 points are drawn. Some of them, k, lie on one straight line. There are 52 possible triangles. How many points (k) are on that line?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 4</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 5</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps" style="background:#F8F1FF;border:1px solid #CE93D8;border-radius:10px;padding:12px 14px">
+      <p style="font-size:.92rem">ALL: choose 3 from 8 &rarr; 8&times;7&times;6=336, 336&divide;6=56.<br>BAD = ALL&minus;GOOD = 56&minus;52=4.<br>Table: Choose 3 from k=4 gives 4. <strong>k=4</strong>.</p>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap &#8594;</button></div>
+</div>
+
+<!-- ============ s7 RECAP ============ -->
+<div class="screen" id="s7">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Brick 3's Big Idea — and All of Total Minus Bad</div>
+  <p style="font-size:1.05rem"><strong>Points on a straight line are just another "bad case" &mdash; Choose 3 from that line, same as Choose 3 from boys, or Choose 3 from one colour. To work BACKWARDS: find ALL, do ALL&minus;GOOD to get BAD, then match BAD to a k using the reference table.</strong></p>
+</div>
+<div class="card">
+  <div class="rulebar">GOOD = ALL &minus; BAD &nbsp;&nbsp;|&nbsp;&nbsp; BAD = ALL &minus; GOOD (working backwards)</div>
+  <div class="finish-line"><p>&#x1F6A6; <strong>Finish-Line Check</strong> &mdash; a 2-part question may ask you to find k FIRST (backwards), then use that k to find a NEW triangle count (forwards). Do them in order, one at a time.</p></div>
+</div>
+<div class="card" style="background:#F3E8FF;border:1px solid #CE93D8">
+  <h3 style="color:#38096B">&#x1F3C6; You've completed all 3 bricks when&hellip;</h3>
+  <ul>
+    <li>You spot when a rule has ONE bad case (Brick 1) vs MANY bad cases (Brick 2)</li>
+    <li>You know a group smaller than 3 gives a bad case of 0, not a skipped term</li>
+    <li>You can apply Total Minus Bad to a brand-new picture (points/triangles), not just people or colours</li>
+    <li>You can work backwards: given GOOD, find BAD, then find the missing group size</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem"><strong>Next up:</strong> the Unit 57 test, covering everything from all 3 bricks.</p>
+</div>
+<div class="navrow">
+  <button class="prev" onclick="nav(-1)">&#8592; Prev</button>
+  <a class="linkbtn alt" href="Counting_Lesson_MultiConstraint_Brick2.html">&#8592; Brick 2</a>
+</div>
+<div class="navrow">
+  <a class="linkbtn" href="https://athipprem.github.io/mathlessons/index.html">Back to Hub</a>
+</div>
+</div>
+
+<script>
+/* ---------- nav ---------- */
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+
+/* ---------- practice ---------- */
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+/* ---------- shared: choose 3 ---------- */
+function c3(n){ if(n<3) return 0; return n*(n-1)*(n-2)/6; }
+
+/* ---------- LAB ---------- */
+var N=9,K=4;
+function bump(w,d){
+  if(w==='n'){N=Math.max(3,Math.min(15,N+d)); if(K>N)K=N;}else{K=Math.max(0,Math.min(N,K+d));}
+  render1();
+}
+function render1(){
+  document.getElementById('vN').textContent=N;
+  document.getElementById('vK').textContent=K;
+  var all=c3(N),bad=c3(K),good=all-bad;
+  document.getElementById('oTot').textContent=N;
+  document.getElementById('oK').textContent=K;
+  document.getElementById('oAll').textContent=all;
+  document.getElementById('oBad').textContent=bad;
+  document.getElementById('oGood').textContent=good;
+  var note=document.getElementById('labNote');
+  if(K<3){note.innerHTML='<p>&#x26A0;&#xFE0F; Only '+K+' point'+(K===1?'':'s')+' on the line &mdash; fewer than 3, so BAD = <strong>0</strong>. Every group of 3 makes a real triangle.</p>';}
+  else if(K===N){note.innerHTML='<p>&#x26A0;&#xFE0F; ALL the points are on the line now &mdash; every group of 3 is bad, so GOOD = <strong>0</strong>. No triangles at all!</p>';}
+  else{note.innerHTML='<p>&#x1F4A1; Try making the line bigger. Watch BAD grow faster than ALL grows &mdash; more points wasted on one line means fewer real triangles.</p>';}
+}
+render1();
+</script>
+</body>
+</html>

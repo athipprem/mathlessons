@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Total Minus Bad — Brick 2: More Than One Way To Be Bad</title>
+<style>
+:root{--nav:#4A148C;--nav-dark:#38096B;--bg:#F3E8FF;--card:#fff;--acc:#4A148C;--ok:#2E7D32;--err:#C62828;--warn:#38096B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:820px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#38096B;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+li{margin-bottom:4px}
+.why{background:linear-gradient(135deg,#F3E8FF,#F8F1FF);border:2px solid #CE93D8;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#38096B;font-weight:700;margin-bottom:6px}
+.big-rule{background:#F3E8FF;border:2px solid #7B1FA2;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#38096B;margin:14px 0;line-height:1.5}
+.golden{background:linear-gradient(135deg,#F3E8FF,#EDE7F6);border:2px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#F3E8FF;border:1.5px solid #7B1FA2;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#38096B;text-align:center;margin-bottom:12px}
+.step-line{display:flex;gap:10px;align-items:flex-start;background:#F8F1FF;border:1px solid #CE93D8;border-radius:10px;padding:10px 14px;margin:8px 0}
+.step-num{background:#4A148C;color:#fff;border-radius:50%;width:24px;height:24px;min-width:24px;line-height:24px;text-align:center;font-weight:800;font-size:.82rem}
+.step-body{flex:1}
+.step-math{font-size:1.15rem;font-weight:800;color:#1a1a2e}
+.step-why{font-size:.88rem;color:#7B1FA2;margin-top:2px}
+.step-result{font-size:1.05rem;font-weight:800;color:#1B5E20;margin-top:4px}
+.step-result.bad{color:#C62828}
+.blockhead{background:#F3E8FF;border:1.5px solid #7B1FA2;border-radius:8px;padding:8px 14px;font-weight:800;color:#38096B;margin:14px 0 6px 0;font-size:.95rem}
+.warn-box{background:#F3E8FF;border:1.5px solid #CE93D8;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#38096B}
+.finish-line{background:#FFF8E1;border:2px solid #F9A825;border-radius:10px;padding:12px 16px;margin:14px 0}
+.finish-line p{font-size:.95rem;color:#7B4B00;font-weight:600}
+.q-card{background:#F8F1FF;border:1.5px solid #CE93D8;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #CE93D8;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#F3E8FF}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#F3E8FF;color:#38096B;border:2px solid #38096B;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#4A148C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow a.linkbtn{flex:1;display:block;text-align:center;padding:13px 0;background:#4A148C;color:#fff;border:2px solid #4A148C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.navrow a.linkbtn.alt{background:#F3E8FF;color:#38096B;border-color:#38096B}
+.badge-cap{display:inline-block;background:#F3E8FF;color:#38096B;border:1.5px solid #CE93D8;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.badge-brick{display:inline-block;background:#4A148C;color:#fff;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px;margin-left:6px}
+.compare-wrap{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+.compare-box{flex:1;min-width:240px;border-radius:10px;padding:14px 16px;border:2px solid}
+.compare-a{background:#FFF8E1;border-color:#F9A825}
+.compare-b{background:#E8F5E9;border-color:#2E7D32}
+.compare-tag{font-weight:800;font-size:.85rem;margin-bottom:6px}
+.lab{background:#FDFBFF;border:2px dashed #7B1FA2;border-radius:12px;padding:16px;margin:12px 0}
+.lab-title{font-weight:800;color:#4A148C;font-size:1rem;margin-bottom:4px}
+.lab-hint{font-size:.88rem;color:#7B1FA2;font-style:italic;margin-bottom:10px}
+.stepper{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1.5px solid #CE93D8;border-radius:10px;padding:8px 12px;margin-bottom:8px;gap:10px}
+.stepper .nm{font-weight:700;font-size:.95rem;flex:1}
+.stepper .val{font-weight:800;font-size:1.1rem;min-width:28px;text-align:center;color:#38096B}
+.stepper button{width:34px;height:34px;border-radius:8px;border:1.5px solid #7B1FA2;background:#F3E8FF;color:#38096B;font-size:1.15rem;font-weight:800;cursor:pointer;line-height:1}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;margin:2px;border:1.5px solid rgba(0,0,0,.25);vertical-align:middle}
+.dotrow{margin:6px 0;min-height:20px}
+.outbox{background:#fff;border:1.5px solid #CE93D8;border-radius:10px;padding:12px 14px;margin-top:10px;font-size:.95rem}
+.outbox .row{padding:5px 0;display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed #E0D0F0}
+.outbox .row .why{font-size:.78rem;color:#7B1FA2;font-weight:400;display:block}
+.outbox .row.tot{border-top:2px solid #CE93D8;border-bottom:none;margin-top:4px;padding-top:8px;font-weight:800;color:#1B5E20}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Total Minus Bad — Brick 2</span>
+  <span class="tnav-pill" id="pill">1 / 8</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- ============ s0 WHY ============ -->
+<div class="screen active" id="s0">
+<div class="card">
+  <span class="badge-brick">Brick 2 of 3</span>
+  <h2>&#x1F3AF; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">Sometimes there's more than one way to break the rule</div>
+    <p>In Brick 1, "at least 1 girl" was broken exactly ONE way &mdash; zero girls. But what about a rule like &ldquo;<strong>not all the same colour</strong>&rdquo;? If there are 3 colours, there are 3 different ways to be ALL the same colour &mdash; all red, all blue, OR all green. That's THREE bad cases, not one.</p>
+  </div>
+  <p>This is Brick 2 of 3. Today you learn what to do when BAD has more than one part &mdash; and a sneaky edge case where one of those parts is actually impossible.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- ============ s1 RECALL BRICK 1 (new context) ============ -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F501; First, Let&rsquo;s Remind Ourselves — Total Minus Bad</h2>
+  <p>Quick recap of Brick 1's rule, this time with a fresh example: fruit, not people. Say WHY each number is there as you read.</p>
+  <p style="margin-top:8px"><strong>A basket has 9 pieces of fruit: 6 apples and 3 oranges. A bag of 3 pieces of fruit is chosen. How many different bags have AT LEAST 1 orange?</strong></p>
+  <div class="blockhead">Step 1 &mdash; ALL (ignore the rule)</div>
+  <div class="step-line">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-math">9 &times; 8 &times; 7 &divide; 6</div>
+      <div class="step-why"><strong>9</strong> is the whole basket (n=9). <strong>8</strong> and <strong>7</strong> count down (n&minus;1, n&minus;2). Divide by <strong>6</strong> to remove repeat-orders, same as always.</div>
+      <div class="step-result">9&times;8=72, 72&times;7=504, 504&divide;6=<strong>84 (this is ALL)</strong></div>
+    </div>
+  </div>
+  <div class="blockhead">Step 2 &mdash; BAD (the ONE way to break "at least 1 orange" = zero oranges = all apples)</div>
+  <div class="step-line">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="step-math">6 &times; 5 &times; 4 &divide; 6</div>
+      <div class="step-why"><strong>6</strong> is now the apples-only total (we switched pools &mdash; only apples count as bad). <strong>5</strong> and <strong>4</strong> count down. Divide by <strong>6</strong> again to remove repeat-orders.</div>
+      <div class="step-result bad">6&times;5=30, 30&times;4=120, 120&divide;6=<strong>20 (this is BAD)</strong></div>
+    </div>
+  </div>
+  <div class="blockhead">Step 3 &mdash; Subtract</div>
+  <div class="step-line">
+    <div class="step-num">&#10003;</div>
+    <div class="step-body">
+      <div class="step-math">84 &minus; 20</div>
+      <div class="step-why">ALL minus BAD leaves GOOD &mdash; exactly Brick 1's rule.</div>
+      <div class="step-result"><strong>64 bags with at least 1 orange</strong></div>
+    </div>
+  </div>
+  <div class="rulebar">GOOD = ALL &minus; BAD &nbsp;(Brick 1's rule &mdash; still true, still your starting point)</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The New Idea &#8594;</button></div>
+</div>
+
+<!-- ============ s2 NEW IDEA: multi-bad ============ -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F4A1; The New Idea — Add Up EVERY Bad Case</h2>
+  <p><strong>A jar has 12 counters: 5 red, 4 blue, 3 green (12 in total). A handful of 3 counters is picked. How many different handfuls are NOT ALL THE SAME COLOUR?</strong></p>
+  <div class="why">
+    <div class="why-title">What does "not all the same colour" break?</div>
+    <p>It's broken by picking 3 of the SAME colour. But now there are <strong>3 different colours</strong> &mdash; so there are <strong>3 separate ways</strong> to be bad: all 3 red, OR all 3 blue, OR all 3 green. You must find EACH one, then ADD them together.</p>
+  </div>
+  <div class="blockhead">Step 1 &mdash; ALL (ignore the rule)</div>
+  <div class="step-line">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-math">12 &times; 11 &times; 10 &divide; 6</div>
+      <div class="step-why"><strong>12</strong> is the whole jar (n=12, all colours together). <strong>11</strong> and <strong>10</strong> count down. Divide by <strong>6</strong> to remove repeat-orders.</div>
+      <div class="step-result">12&times;11=132, 132&times;10=1320, 1320&divide;6=<strong>220 (this is ALL)</strong></div>
+    </div>
+  </div>
+  <div class="blockhead">Step 2 &mdash; BAD, case by case</div>
+  <div class="step-line">
+    <div class="step-num">a</div>
+    <div class="step-body">
+      <div class="step-math">5 &times; 4 &times; 3 &divide; 6</div>
+      <div class="step-why">All-red bad case: <strong>5</strong> is the red-only total (n=5, we switch pools to just red). <strong>4</strong>,<strong>3</strong> count down. Divide by <strong>6</strong>, same reason as always.</div>
+      <div class="step-result bad">5&times;4=20, 20&times;3=60, 60&divide;6=<strong>10 all-red handfuls</strong></div>
+    </div>
+  </div>
+  <div class="step-line">
+    <div class="step-num">b</div>
+    <div class="step-body">
+      <div class="step-math">4 &times; 3 &times; 2 &divide; 6</div>
+      <div class="step-why">All-blue bad case: <strong>4</strong> is the blue-only total (n=4). <strong>3</strong>,<strong>2</strong> count down. Divide by <strong>6</strong>.</div>
+      <div class="step-result bad">4&times;3=12, 12&times;2=24, 24&divide;6=<strong>4 all-blue handfuls</strong></div>
+    </div>
+  </div>
+  <div class="step-line">
+    <div class="step-num">c</div>
+    <div class="step-body">
+      <div class="step-math">3 &times; 2 &times; 1 &divide; 6</div>
+      <div class="step-why">All-green bad case: <strong>3</strong> is the green-only total (n=3 &mdash; there are exactly 3 green, so there's only ONE way to pick all 3 of them). <strong>2</strong>,<strong>1</strong> count down. Divide by <strong>6</strong>.</div>
+      <div class="step-result bad">3&times;2=6, 6&times;1=6, 6&divide;6=<strong>1 all-green handful</strong></div>
+    </div>
+  </div>
+  <div class="blockhead">Step 3 &mdash; ADD every bad case together, THEN subtract</div>
+  <div class="step-line">
+    <div class="step-num">&#10003;</div>
+    <div class="step-body">
+      <div class="step-math">(10 + 4 + 1) then 220 &minus; 15</div>
+      <div class="step-why">First add all 3 bad cases: 10 (red) + 4 (blue) + 1 (green) = 15 total bad handfuls. THEN subtract that one combined BAD number from ALL &mdash; you only subtract once, using the sum.</div>
+      <div class="step-result"><strong>220 &minus; 15 = 205 handfuls that are NOT all the same colour</strong></div>
+    </div>
+  </div>
+  <div class="big-rule">More than one way to be bad? &nbsp;Find EACH bad case &nbsp;&rarr;&nbsp; ADD them &nbsp;&rarr;&nbsp; THEN subtract the total from ALL.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">A Sneaky Trap &#8594;</button></div>
+</div>
+
+<!-- ============ s3 ZERO EDGE CASE ============ -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x26A0;&#xFE0F; A Sneaky Trap — When a Bad Case is IMPOSSIBLE</h2>
+  <p><strong>A jar has 11 counters: 2 red, 5 blue, 4 green (11 in total). A handful of 3 is picked. How many different handfuls are NOT ALL THE SAME COLOUR?</strong></p>
+  <div class="why">
+    <div class="why-title">Look closely at the red count</div>
+    <p>There are only <strong>2</strong> red counters. You cannot pick 3 red counters if only 2 exist! The "all-red" bad case is <strong>impossible</strong> &mdash; so its count is <strong>0</strong>, not skipped, not left out. You still write it down as 0 and add it in.</p>
+  </div>
+  <div class="blockhead">Step 1 &mdash; ALL</div>
+  <div class="step-line">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-math">11 &times; 10 &times; 9 &divide; 6</div>
+      <div class="step-why"><strong>11</strong> is the whole jar (n=11). <strong>10</strong>,<strong>9</strong> count down. Divide by <strong>6</strong>.</div>
+      <div class="step-result">11&times;10=110, 110&times;9=990, 990&divide;6=<strong>165 (this is ALL)</strong></div>
+    </div>
+  </div>
+  <div class="blockhead">Step 2 &mdash; BAD, case by case (watch the red one!)</div>
+  <div class="step-line">
+    <div class="step-num">a</div>
+    <div class="step-body">
+      <div class="step-math">0 &nbsp;(cannot choose 3 from only 2)</div>
+      <div class="step-why">All-red bad case: there are only <strong>2</strong> red counters, and you need 3. Whenever the group size is SMALLER than 3, the bad count for that group is always <strong>0</strong> &mdash; write it down, don't skip it.</div>
+      <div class="step-result bad">All-red = <strong>0 handfuls</strong> (impossible)</div>
+    </div>
+  </div>
+  <div class="step-line">
+    <div class="step-num">b</div>
+    <div class="step-body">
+      <div class="step-math">5 &times; 4 &times; 3 &divide; 6</div>
+      <div class="step-why">All-blue bad case: <strong>5</strong> is the blue-only total (n=5). <strong>4</strong>,<strong>3</strong> count down. Divide by <strong>6</strong>.</div>
+      <div class="step-result bad">5&times;4=20, 20&times;3=60, 60&divide;6=<strong>10 all-blue handfuls</strong></div>
+    </div>
+  </div>
+  <div class="step-line">
+    <div class="step-num">c</div>
+    <div class="step-body">
+      <div class="step-math">4 &times; 3 &times; 2 &divide; 6</div>
+      <div class="step-why">All-green bad case: <strong>4</strong> is the green-only total (n=4). <strong>3</strong>,<strong>2</strong> count down. Divide by <strong>6</strong>.</div>
+      <div class="step-result bad">4&times;3=12, 12&times;2=24, 24&divide;6=<strong>4 all-green handfuls</strong></div>
+    </div>
+  </div>
+  <div class="blockhead">Step 3 &mdash; ADD (including the 0!), THEN subtract</div>
+  <div class="step-line">
+    <div class="step-num">&#10003;</div>
+    <div class="step-body">
+      <div class="step-math">(0 + 10 + 4) then 165 &minus; 14</div>
+      <div class="step-why">0 (red) + 10 (blue) + 4 (green) = 14 total bad. The 0 still counts as a term in the sum &mdash; leaving it out would give the wrong total.</div>
+      <div class="step-result"><strong>165 &minus; 14 = 151 handfuls that are NOT all the same colour</strong></div>
+    </div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; <strong>The rule:</strong> if a colour (or group) has FEWER than 3 members, its bad case is 0 &mdash; you literally cannot choose 3 from fewer than 3. Write the 0 down and keep adding.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Play With It &#8594;</button></div>
+</div>
+
+<!-- ============ s4 LAB ============ -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F9EA; Try It Yourself — The "Not All The Same" Machine</h2>
+  <p>Change the number of red, blue and green counters below. Watch ALL, each BAD case, and GOOD update live. Try dropping a colour below 3 and see what happens to its bad count.</p>
+  <div class="lab">
+    <div class="lab-title">Build your own jar</div>
+    <div class="lab-hint">A handful of 3 is picked. GOOD = NOT all the same colour. BAD = all-red + all-blue + all-green.</div>
+    <div class="stepper">
+      <span class="nm">&#x1F534; Red</span>
+      <button onclick="bump('r',-1)">&minus;</button><span class="val" id="vR">5</span><button onclick="bump('r',1)">+</button>
+    </div>
+    <div class="dotrow" id="dotsR"></div>
+    <div class="stepper">
+      <span class="nm">&#x1F535; Blue</span>
+      <button onclick="bump('b',-1)">&minus;</button><span class="val" id="vB">4</span><button onclick="bump('b',1)">+</button>
+    </div>
+    <div class="dotrow" id="dotsB"></div>
+    <div class="stepper">
+      <span class="nm">&#x1F7E2; Green</span>
+      <button onclick="bump('g',-1)">&minus;</button><span class="val" id="vG">3</span><button onclick="bump('g',1)">+</button>
+    </div>
+    <div class="dotrow" id="dotsG"></div>
+    <div class="outbox">
+      <div class="row"><span>ALL handfuls (from <span id="oTot">12</span> counters)<span class="why">choose 3 from the WHOLE jar</span></span><strong id="oAll">220</strong></div>
+      <div class="row"><span>BAD &mdash; all-red<span class="why">choose 3 from ONLY red</span></span><strong id="oBadR">10</strong></div>
+      <div class="row"><span>BAD &mdash; all-blue<span class="why">choose 3 from ONLY blue</span></span><strong id="oBadB">4</strong></div>
+      <div class="row"><span>BAD &mdash; all-green<span class="why">choose 3 from ONLY green</span></span><strong id="oBadG">1</strong></div>
+      <div class="row tot"><span>GOOD &mdash; not all the same colour<span class="why">ALL &minus; (sum of all 3 BAD cases)</span></span><strong id="oGood">205</strong></div>
+    </div>
+    <div class="warn-box" id="labNote"><p>&nbsp;</p></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Watch Out &#8594;</button></div>
+</div>
+
+<!-- ============ s5 DISCRIMINATION ============ -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x1F50D; Watch Out — "Not All Same" vs "At Least 1"</h2>
+  <p>These two rules LOOK similar but need different BAD counts. Same jar, two different questions:</p>
+  <p style="margin:8px 0"><strong>A jar has 20 buttons: 9 red, 6 blue, 5 green. A handful of 3 is picked.</strong></p>
+  <div class="compare-wrap">
+    <div class="compare-box compare-a">
+      <div class="compare-tag" style="color:#7B4B00">Question A &mdash; "NOT ALL THE SAME colour"</div>
+      <p style="font-size:.95rem">Broken by all-red OR all-blue OR all-green &mdash; <strong>3 bad cases, add them.</strong></p>
+      <p style="font-size:.9rem;margin-top:8px;font-weight:700;color:#7B4B00">BAD = C(9,3)+C(6,3)+C(5,3) = 84+20+10 = 114<br>GOOD = 1140 &minus; 114 = <strong>1026</strong></p>
+    </div>
+    <div class="compare-box compare-b">
+      <div class="compare-tag" style="color:#1B5E20">Question B &mdash; "AT LEAST 1 blue"</div>
+      <p style="font-size:.95rem">Broken only by ZERO blue &mdash; <strong>1 bad case</strong> (choose 3 from the 14 non-blue buttons).</p>
+      <p style="font-size:.9rem;margin-top:8px;font-weight:700;color:#1B5E20">BAD = C(14,3) = 364<br>GOOD = 1140 &minus; 364 = <strong>776</strong></p>
+    </div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; <strong>The test:</strong> "at least 1 [group]" &rarr; only ONE bad case (zero of that one group). "Not all the same" &rarr; ONE bad case PER group (all-red, all-blue, all-green&hellip;), added together. Read the question slowly and ask: how many DIFFERENT ways can this rule be broken?</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- ============ s6 PRACTICE ============ -->
+<div class="screen" id="s6">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice &mdash; 4 Questions</h2>
+  <div class="finish-line"><p>&#x1F6A6; For each question, first count HOW MANY separate bad cases there are, before you calculate anything.</p></div>
+
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A bag has 10 marbles: 4 red, 3 blue, 3 green. A handful of 3 is picked. How many handfuls are NOT ALL THE SAME COLOUR?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 120</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 114</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'C')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps" style="background:#F8F1FF;border:1px solid #CE93D8;border-radius:10px;padding:12px 14px">
+      <p style="font-size:.92rem">ALL: choose 3 from 10 &rarr; 10&times;9&times;8=720, 720&divide;6=120.<br>BAD: all-red C(4,3)=4, all-blue C(3,3)=1, all-green C(3,3)=1 &rarr; 4+1+1=6.<br><strong>GOOD: 120&minus;6=114</strong> handfuls.<br><em>A) 120 is ALL, B) 6 is BAD &mdash; both half-finished.</em></p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A drawer has 13 keys: 2 gold, 6 silver, 5 bronze. A handful of 3 is picked. How many handfuls are NOT ALL THE SAME COLOUR?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 286</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 30</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 256</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps" style="background:#F8F1FF;border:1px solid #CE93D8;border-radius:10px;padding:12px 14px">
+      <p style="font-size:.92rem">ALL: choose 3 from 13 &rarr; 13&times;12&times;11=1716, 1716&divide;6=286.<br>BAD: all-gold &mdash; only 2 gold keys exist, so C(2,3)=<strong>0</strong> (write it down!). all-silver C(6,3)=20. all-bronze C(5,3)=10. Sum: 0+20+10=30.<br><strong>GOOD: 286&minus;30=256</strong> handfuls.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; The SAME drawer as P2 (2 gold, 6 silver, 5 bronze, 13 in total) is picked again, but this time the rule is AT LEAST 1 GOLD. How many handfuls of 3 have at least 1 gold key?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 256</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 165</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 121</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'C')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps" style="background:#F8F1FF;border:1px solid #CE93D8;border-radius:10px;padding:12px 14px">
+      <p style="font-size:.92rem">"At least 1 gold" is Brick 1's shape &mdash; only ONE bad case (zero gold = all from the 11 non-gold keys).<br>ALL=286. BAD=C(11,3)=11&times;10&times;9&divide;6=165.<br><strong>GOOD: 286&minus;165=121</strong>.<br><em>A) 256 is the answer to a DIFFERENT question (P2's "not all same") &mdash; don't mix them up.</em></p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; A pencil case has 15 pens: 6 blue, 5 black, 4 red. A handful of 3 is picked. How many handfuls are NOT ALL THE SAME COLOUR?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 455</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 34</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 421</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'C')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps" style="background:#F8F1FF;border:1px solid #CE93D8;border-radius:10px;padding:12px 14px">
+      <p style="font-size:.92rem">ALL: choose 3 from 15 &rarr; 15&times;14&times;13=2730, 2730&divide;6=455.<br>BAD: all-blue C(6,3)=20, all-black C(5,3)=10, all-red C(4,3)=4 &rarr; 20+10+4=34.<br><strong>GOOD: 455&minus;34=421</strong> handfuls.</p>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Recap &#8594;</button></div>
+</div>
+
+<!-- ============ s7 RECAP ============ -->
+<div class="screen" id="s7">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Brick 2's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>When a rule can be broken in MORE than one way, find EACH bad case separately, ADD them all together (even a 0!), then subtract that ONE combined number from ALL.</strong></p>
+</div>
+<div class="card">
+  <div class="rulebar">GOOD = ALL &minus; (BAD case 1 + BAD case 2 + BAD case 3 + &hellip;)</div>
+  <div class="finish-line"><p>&#x1F6A6; <strong>Finish-Line Check</strong> &mdash; count how many separate bad cases the question describes BEFORE you calculate. If a group has fewer than 3 members, its bad case is 0 &mdash; write it down, don't skip it.</p></div>
+</div>
+<div class="card" style="background:#F3E8FF;border:1px solid #CE93D8">
+  <h3 style="color:#38096B">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You can spot how many separate bad cases a "not all the same" rule creates</li>
+    <li>You find each bad case with its own Choose-3 calculation, then ADD them</li>
+    <li>You know a group smaller than 3 gives a bad case of 0 &mdash; and you still write it down</li>
+    <li>You can tell "not all the same" (many bad cases) apart from "at least 1" (one bad case)</li>
+  </ul>
+  <p style="margin-top:10px;font-size:.95rem"><strong>Coming next (Brick 3):</strong> a brand-new picture &mdash; points on a circle forming triangles &mdash; plus working BACKWARDS when you're given the answer and need to find a missing number.</p>
+</div>
+<div class="navrow">
+  <button class="prev" onclick="nav(-1)">&#8592; Prev</button>
+  <a class="linkbtn" href="Counting_Lesson_MultiConstraint_Brick3.html">Brick 3: Points, Triangles &amp; Backwards &#8594;</a>
+</div>
+<div class="navrow">
+  <a class="linkbtn alt" href="Counting_Lesson_MultiConstraint.html">&#8592; Brick 1</a>
+  <a class="linkbtn alt" href="https://athipprem.github.io/mathlessons/index.html">Back to Hub</a>
+</div>
+</div>
+
+<script>
+/* ---------- nav ---------- */
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+
+/* ---------- practice ---------- */
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+/* ---------- shared: choose 3 ---------- */
+function c3(n){ if(n<3) return 0; return n*(n-1)*(n-2)/6; }
+function dots(n,col){var s='',i;for(i=0;i<n;i++)s+='<span class="dot" style="background:'+col+'"></span>';return s||'<span style="font-size:.85rem;color:#999">(none)</span>';}
+
+/* ---------- LAB ---------- */
+var R=5,B=4,G=3;
+function bump(w,d){
+  if(w==='r'){R=Math.max(0,Math.min(9,R+d));}else if(w==='b'){B=Math.max(0,Math.min(9,B+d));}else{G=Math.max(0,Math.min(9,G+d));}
+  render1();
+}
+function render1(){
+  document.getElementById('vR').textContent=R;
+  document.getElementById('vB').textContent=B;
+  document.getElementById('vG').textContent=G;
+  document.getElementById('dotsR').innerHTML=dots(R,'#C62828');
+  document.getElementById('dotsB').innerHTML=dots(B,'#1565C0');
+  document.getElementById('dotsG').innerHTML=dots(G,'#2E7D32');
+  var tot=R+B+G,all=c3(tot),badR=c3(R),badB=c3(B),badG=c3(G),bad=badR+badB+badG,good=all-bad;
+  document.getElementById('oTot').textContent=tot;
+  document.getElementById('oAll').textContent=all;
+  document.getElementById('oBadR').textContent=badR;
+  document.getElementById('oBadB').textContent=badB;
+  document.getElementById('oBadG').textContent=badG;
+  document.getElementById('oGood').textContent=good;
+  var note=document.getElementById('labNote');
+  if(tot<3){note.innerHTML='<p>&#x26A0;&#xFE0F; You cannot even make one handful of 3 &mdash; there are only '+tot+' counter'+(tot===1?'':'s')+' in total. Everything is 0.</p>';}
+  else if(R>0&&R<3){note.innerHTML='<p>&#x26A0;&#xFE0F; Red has only '+R+' counter'+(R===1?'':'s')+' &mdash; fewer than 3, so the all-red BAD case is <strong>0</strong>. It still gets added into the sum as a zero.</p>';}
+  else if(B>0&&B<3){note.innerHTML='<p>&#x26A0;&#xFE0F; Blue has only '+B+' counter'+(B===1?'':'s')+' &mdash; fewer than 3, so the all-blue BAD case is <strong>0</strong>. It still gets added into the sum as a zero.</p>';}
+  else if(G>0&&G<3){note.innerHTML='<p>&#x26A0;&#xFE0F; Green has only '+G+' counter'+(G===1?'':'s')+' &mdash; fewer than 3, so the all-green BAD case is <strong>0</strong>. It still gets added into the sum as a zero.</p>';}
+  else{note.innerHTML='<p>&#x1F4A1; Try dropping one colour to 1 or 2. Watch its BAD number become 0 &mdash; while GOOD gets bigger, because there's one less way to be bad.</p>';}
+}
+render1();
+</script>
+</body>
+</html>

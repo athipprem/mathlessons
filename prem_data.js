@@ -20,8 +20,33 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:56, topic:'Art of Counting — Choose 3 &amp; Multi-Constraint Counting (Harder Tier)', status:'Lesson 2 Rebuilt — Brick 1 of 3 (Retest Pending)' },
+  currentUnit: { n:57, topic:'Art of Counting — Total Minus Bad: Multi-Case &amp; New Contexts (Bricks 2&ndash;3 + Retest)', status:'Bricks 2 &amp; 3 Built, Test Ready (Attempt Pending)' },
   lastUnit: {
+    n:56, score:10, outOf:15, pct:67, delta:-4, prevScore:14, prevOutOf:15, prevLabel:'U55',
+    patternLabel: 'U56 — Choose 3 &amp; Total Minus Bad, 3rd attempt (post Brick 1), NOT PASSED but a big jump — Brick 1 validated',
+    patternInsight: '10/15 (67%) <strong>NOT PASSED</strong>, but a big jump &mdash; Sec A 4/5, Sec B 4/5, Sec C 2/5. Trajectory across three attempts: <strong>7 &rarr; 6 &rarr; 10.</strong> This is Prem&rsquo;s third attempt, taken after Lesson 2 was rebuilt as Brick 1 of 3 (single bad-case only, one context, every worked-example number given its own inline reason). Total Minus Bad went from 0/8 correct (every question left blank on the 2nd attempt) to 4/8 correct this time &mdash; and the split is exactly clean: <strong>every single-bad-case, people-context question Brick 1 taught was answered correctly</strong> (Q7, Q8, Q9, and Q11 &mdash; a bigger-pool version of the same shape), 4 for 4. Every question needing content Brick 1 never taught was left <strong>blank, not guessed at</strong>: Q10 &amp; Q12 need the points-on-a-circle framing (Brick 3), Q13 needs multi-case bad with more than one way to break the rule (Brick 2), and Q15 needs the reverse-capstone structure (Brick 3). Prem correctly recognised unfamiliar territory and left it blank rather than misapplying the method &mdash; the disciplined behaviour the programme has been building since the Confidence Session. New, isolated miss: Q4 (11 hikers, choose 3) wrote 115 instead of 165, no working shown &mdash; given every other Lesson-1-style question (Q1,2,3,5,6, and the hardest, reverse-solved Q14) was correct, this reads as an isolated arithmetic slip, not a method regression.',
+    analysisLabel: 'Next: Unit 57 &mdash; Bricks 2 &amp; 3 built (20 Aug 2026), test rebuilt, remediation continues under the next sequential unit number',
+    analysisInsight: 'This is about as clean a validation as a lesson redesign can get. Following project precedent (remediation always takes the next sequential unit number &mdash; U40&rarr;U41, U49&rarr;U50, U47&rarr;U48, U44&rarr;U45), the remaining Total-Minus-Bad remediation is tracked as <strong>Unit 57</strong> rather than a 4th U56 attempt. Brick 2 (multi-case bad + the "fewer than needed = write 0" edge case) targets Q13. Brick 3 (points/triangles context + reverse-solve/capstone) targets Q10, Q12, and Q15. Both bricks are built and the U57 test is ready, covering only Brick 2/3 content with entirely fresh numbers (none reusing Q4/Q10/Q12/Q13/Q15&rsquo;s seen values) plus 2 spiral-maintenance warm-ups. No further work needed on Lesson 1 or Brick 1 &mdash; both are holding up under real test conditions; Q4&rsquo;s slip is a "show your working, even on easy ones" reminder, not a re-teach trigger.',
+    qSummary: '<strong>Sec A 4/5 | Sec B 4/5 | Sec C 2/5</strong> — 10/15 (67%) NOT PASSED (3rd attempt, up from 6/15)',
+    qBreakdown: [
+      { q:'Q1', topic:'Choose 3 (Lesson 1)', lvl:'w', pass:true,  note:'&#10003; 20.' },
+      { q:'Q2', topic:'Choose 3 (Lesson 1)', lvl:'w', pass:true,  note:'&#10003; 56 (crossed out an earlier attempt first, then correct).' },
+      { q:'Q3', topic:'Choose 3 (Lesson 1)', lvl:'w', pass:true,  note:'&#10003; 120.' },
+      { q:'Q4', topic:'Choose 3 (Lesson 1)', lvl:'w', pass:false, note:'&#10007; wrote 115; correct 165 (11 hikers, choose 3). No working shown &mdash; isolated arithmetic slip, not a method regression given every other Lesson-1 question on the paper was correct.' },
+      { q:'Q5', topic:'Choose 3 (Lesson 1, subset)', lvl:'w', pass:true,  note:'&#10003; 35.' },
+      { q:'Q6', topic:'Choose 3 (Lesson 1)', lvl:'m', pass:true,  note:'&#10003; 84 (self-corrected en route).' },
+      { q:'Q7', topic:'Total Minus Bad, single case (Brick 1)', lvl:'m', pass:true, note:'&#10003; 64.' },
+      { q:'Q8', topic:'Total Minus Bad, single case (Brick 1)  &#9733;', lvl:'m', pass:true, note:'&#10003; 25.' },
+      { q:'Q9', topic:'Total Minus Bad, single case (Brick 1)  &#9733;', lvl:'m', pass:true, note:'&#10003; 49.' },
+      { q:'Q10',topic:'Total Minus Bad, points-on-circle (Brick 3, not yet taught)  &#9733;', lvl:'m', pass:false, note:'&#10007; blank; correct 164. Left blank, not guessed &mdash; content not yet taught.' },
+      { q:'Q11',topic:'Total Minus Bad, single case, bigger pool (Brick 1)  &#9733;&#9733;', lvl:'h', pass:true, note:'&#10003; 185.' },
+      { q:'Q12',topic:'Total Minus Bad, points-on-circle, 2 bad (Brick 3, not yet taught)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; blank; correct 284. Left blank, not guessed &mdash; content not yet taught.' },
+      { q:'Q13',topic:'Total Minus Bad, multi-case colours (Brick 2, not yet taught)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; blank; correct 261. Left blank, not guessed &mdash; content not yet taught.' },
+      { q:'Q14',topic:'Reverse Choose 3 (Lesson 1)  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 8 (reverse-solved C(n,3)=56 &rarr; n=8).' },
+      { q:'Q15',topic:'Capstone — Reverse Total Minus Bad (Brick 3, not yet taught)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; blank; correct (a) 20 (b) 6. Left blank, not guessed &mdash; content not yet taught.' }
+    ]
+  },
+  _U56archived_2ndAttempt: {
     n:56, score:6, outOf:15, pct:40, delta:-8, prevScore:14, prevOutOf:15, prevLabel:'U55',
     patternLabel: 'U56 — Choose 3 &amp; Total Minus Bad, 2nd attempt, NOT PASSED — a lesson-design failure, not a content gap',
     patternInsight: '6/15 (40%) <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 1/5, Sec C 1/5. This is Prem&rsquo;s SECOND attempt at U56 &mdash; the first scored 7/15, and a separate model ("Opus") then rewrote both lessons for "more detail" in between, expecting that to help. <strong>It made things measurably worse: 7 &rarr; 6.</strong> The cleanest lesson-vs-lesson split seen yet: every question drawing on Lesson 1 (Choose 3) was attempted and correct or a transcription slip (Q1,2,3,5,6,14 all correct; Q4&rsquo;s working shows 504&divide;6=84 correctly worked, then 86 written on the answer line &mdash; a copying slip, not a method failure). Every question drawing on Lesson 2 (Total Minus Bad, in any form) was left <strong>completely blank</strong> &mdash; Q7&ndash;Q13 and Q15, seven questions in a row, zero attempts, zero scratch working. Root cause: the "Opus" revision, meant to fix 7 real lesson-review findings, added 2 interactive labs + an SVG + a 2nd worked example + a multi-bad-case extension, growing the lesson from 9 to 13 screens &mdash; while its worked examples broke arithmetic into bare, unlabeled lines (e.g. "7&times;6=42, 42&times;5=210, 210&divide;6=35") without explaining WHY each number is there, beyond the very first example. Prem: "too many steps to understand and remember." Lui, reading it cold: couldn&rsquo;t follow it either.',
@@ -361,23 +386,36 @@ var PREM_DATA = {
     { n:53, score:11, delta:+2,   color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false },
     { n:54, score:11, delta:0,    color:'linear-gradient(135deg,#EF5350,#C62828)', star:false },
     { n:55, score:14, delta:+3,   color:'linear-gradient(135deg,#6A1B9A,#4A148C)', star:false },
-    { n:56, score:6,  delta:-8,   color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false }
+    { n:56, score:10, delta:-4,   color:'linear-gradient(135deg,#EF5350,#C62828)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 57,
+      badge: 'linear-gradient(135deg,#4A148C,#38096B)',
+      title: 'Art of Counting — Total Minus Bad: Multi-Case &amp; New Contexts (Bricks 2&ndash;3 + Retest)',
+      tags: [
+        { t:'Bricks 2 &amp; 3 built, test ready — attempt pending', s:'background:#F3E8FF;color:#4A148C;font-weight:700' },
+        { t:'Targets 3rd-attempt U56 gaps: Q10, Q12, Q13, Q15', c:'torange' },
+        { t:'Takes next sequential unit number (project precedent)', c:'torange' },
+        { t:'15 fresh Qs, none reusing U56 3rd-attempt numbers', c:'tgreen' }
+      ],
+      note: 'Remediation unit, numbered U57 rather than a 4th U56 attempt, following project precedent (U40&rarr;U41, U49&rarr;U50, U47&rarr;U48, U44&rarr;U45). Brick 2 (multi-case bad &mdash; sum several bad cases together + the "fewer than needed = write 0" edge case, Counting_Lesson_MultiConstraint_Brick2.html) targets U56 3rd-attempt Q13 (marbles, not-all-same-colour). Brick 3 (new context &mdash; points on a circle forming triangles, collinear points as bad cases, plus working BACKWARDS from a given triangle count to find a missing group size, Counting_Lesson_MultiConstraint_Brick3.html) targets Q10, Q12, and Q15. Both built 20 Aug 2026 with the same brick discipline validated by Brick 1: 8 screens each, every worked-example number gets its own inline reason every time it appears, a real interactive widget, an SVG for the geometry framing, a discrimination screen, and 4 practice questions. The test was rebuilt with 15 entirely fresh questions covering only Brick 2/3 content (per the on-topic rule &mdash; already-secure Lesson 1/Brick 1 content isn&rsquo;t re-tested), none reusing U56 3rd-attempt&rsquo;s Q4/Q10/Q12/Q13/Q15 numbers, plus 2 spiral-maintenance warm-ups (Balance Scales/Ratio Substitution, ~6.5 weeks stale; Rectangle Counting Any Grid, ~7 weeks stale). Awaiting Prem&rsquo;s attempt.',
+      status: 'pending'
+    },
+    {
       n: 56,
-      badge: 'linear-gradient(135deg,#EF5350,#B71C1C)',
+      badge: 'linear-gradient(135deg,#EF5350,#C62828)',
       title: 'Art of Counting — Choose 3 &amp; Multi-Constraint Counting (Harder Tier)',
       tags: [
-        { t:'6/15 (40%) &#10007; NOT PASSED (2nd attempt)', s:'background:#fff5f5;color:#c53030;font-weight:700' },
-        { t:'Lesson 1 (Choose 3) secure — 6/6 attempted correct', c:'tgreen' },
-        { t:'Lesson 2 (Total Minus Bad) — 0/8 attempted, all blank', s:'background:#fff5f5;color:#c53030' },
-        { t:'Root cause: lesson too long &amp; under-explained, not a content gap', c:'torange' },
-        { t:'&rarr; Lesson 2 rebuilt as Brick 1 of 3 (17 Aug 2026)', c:'torange' }
+        { t:'10/15 (67%) &#10007; NOT PASSED (3rd attempt, up from 6/15)', s:'background:#fff5f5;color:#c53030;font-weight:700' },
+        { t:'Brick 1 VALIDATED — 4/4 correct on content it taught', c:'tgreen' },
+        { t:'Untaught content (Q10,12,13,15) left blank, not guessed', c:'tgreen' },
+        { t:'Trajectory: 7 &rarr; 6 &rarr; 10', c:'torange' },
+        { t:'&rarr; Bricks 2 &amp; 3 built as Unit 57', c:'torange' }
       ],
-      note: '6/15 (40%) &#10007; <strong>NOT PASSED</strong> &mdash; Sec A 4/5, Sec B 1/5, Sec C 1/5. Prem&rsquo;s 2nd attempt at U56 (1st scored 7/15); in between, a separate model rewrote both lessons for "more detail," which made things measurably worse (7&rarr;6). The cleanest lesson-vs-lesson split seen yet: every Lesson 1 (Choose 3) question was attempted and correct or a transcription slip (Q1,2,3,5,6,14 correct; Q4 had 504&divide;6=84 correctly worked, then 86 written &mdash; a copying slip). Every Lesson 2 (Total Minus Bad) question &mdash; Q7&ndash;13, Q15, seven in a row &mdash; was left completely blank, zero attempts. Root cause: the lesson-review-driven revision grew from 9 to 13 screens (2 labs, an SVG, a 2nd worked example, a multi-case extension) while its worked examples broke arithmetic into bare unlabeled lines without re-explaining WHY each number appears, beyond the first example. Prem: "too many steps to understand and remember." &rarr; Lesson 2 rebuilt as Brick 1 of 3 (Counting_Lesson_MultiConstraint.html, 17 Aug 2026): single bad-case only, one context throughout, every worked-example number gets its own inline reason every time. Bricks 2 (multi-case + zero edge case) and 3 (new contexts + reverse/capstone) follow once Brick 1 lands. The U56 test was also fully rebuilt with 15 new questions + 2 new warm-ups (fresh numbers throughout) &mdash; ready once all bricks are taught.',
+      note: '10/15 (67%) &#10007; <strong>NOT PASSED</strong>, but a big jump &mdash; Sec A 4/5, Sec B 4/5, Sec C 2/5. Prem&rsquo;s 3rd attempt at U56, taken after Lesson 2 was rebuilt as Brick 1 of 3. Trajectory across three attempts: 7&rarr;6&rarr;10. Total Minus Bad went from 0/8 (every question blank on the 2nd attempt) to 4/8 correct &mdash; and the split is exactly clean: every single-bad-case, people-context question Brick 1 taught (Q7, Q8, Q9, Q11 &mdash; a bigger-pool version of the same shape) was answered correctly, 4/4. Every question needing content Brick 1 never taught (Q10 &amp; Q12 need points-on-a-circle, Q13 needs multi-case bad, Q15 needs the reverse-capstone) was left blank, not guessed at &mdash; Prem correctly recognised unfamiliar territory rather than misapplying the method. New isolated miss: Q4 (11 hikers, choose 3) wrote 115 not 165, no working shown &mdash; reads as an arithmetic slip given every other Lesson-1 question was correct. &rarr; Following project precedent, the remaining remediation (Bricks 2 &amp; 3, targeting Q10/Q12/Q13/Q15) is built and numbered Unit 57 rather than a 4th U56 attempt.',
       status: 'done'
     },
     {
