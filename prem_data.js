@@ -20,7 +20,7 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:57, topic:'Art of Counting — Total Minus Bad: Multi-Case &amp; New Contexts (Bricks 2&ndash;3 + Retest)', status:'Bricks 2 &amp; 3 Built, Test Ready (Attempt Pending)' },
+  currentUnit: { n:57, topic:'Art of Counting — Total Minus Bad: Multi-Case &amp; New Contexts (Bricks 2&ndash;3 + Retest)', status:'Bricks 2 & 3 Built, Test Ready (Attempt Pending)' },
   lastUnit: {
     n:56, score:10, outOf:15, pct:67, delta:-4, prevScore:14, prevOutOf:15, prevLabel:'U55',
     patternLabel: 'U56 — Choose 3 &amp; Total Minus Bad, 3rd attempt (post Brick 1), NOT PASSED but a big jump — Brick 1 validated',
