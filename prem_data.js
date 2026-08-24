@@ -20,7 +20,7 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:57, topic:'Art of Counting — Total Minus Bad: Multi-Case &amp; New Contexts (Bricks 2&ndash;3 + Retest)', status:'Bricks 2 & 3 Built, Test Ready (Attempt Pending)' },
+  currentUnit: { n:57, topic:'Art of Counting — Total Minus Bad: Multi-Case &amp; Zero-Edge (Brick 2 Retest)', status:'Brick 2 Redesigned (Gaming Style), Test Ready (Attempt Pending)' },
   lastUnit: {
     n:56, score:10, outOf:15, pct:67, delta:-4, prevScore:14, prevOutOf:15, prevLabel:'U55',
     patternLabel: 'U56 — Choose 3 &amp; Total Minus Bad, 3rd attempt (post Brick 1), NOT PASSED but a big jump — Brick 1 validated',
@@ -394,14 +394,14 @@ var PREM_DATA = {
     {
       n: 57,
       badge: 'linear-gradient(135deg,#4A148C,#38096B)',
-      title: 'Art of Counting — Total Minus Bad: Multi-Case &amp; New Contexts (Bricks 2&ndash;3 + Retest)',
+      title: 'Art of Counting — Total Minus Bad: Multi-Case &amp; Zero-Edge (Brick 2 Retest)',
       tags: [
-        { t:'Bricks 2 &amp; 3 built, test ready — attempt pending', s:'background:#F3E8FF;color:#4A148C;font-weight:700' },
-        { t:'Targets 3rd-attempt U56 gaps: Q10, Q12, Q13, Q15', c:'torange' },
-        { t:'Takes next sequential unit number (project precedent)', c:'torange' },
-        { t:'15 fresh Qs, none reusing U56 3rd-attempt numbers', c:'tgreen' }
+        { t:'Brick 2 redesigned as an interactive game, test ready', s:'background:#F3E8FF;color:#4A148C;font-weight:700' },
+        { t:'Scope narrowed to Brick 2 only — targets U56 Q13', c:'torange' },
+        { t:'Brick 3 deferred as an optional bonus (not tested)', c:'torange' },
+        { t:'15 fresh Brick-2-only Qs, none reusing lesson/prior numbers', c:'tgreen' }
       ],
-      note: 'Remediation unit, numbered U57 rather than a 4th U56 attempt, following project precedent (U40&rarr;U41, U49&rarr;U50, U47&rarr;U48, U44&rarr;U45). Brick 2 (multi-case bad &mdash; sum several bad cases together + the "fewer than needed = write 0" edge case, Counting_Lesson_MultiConstraint_Brick2.html) targets U56 3rd-attempt Q13 (marbles, not-all-same-colour). Brick 3 (new context &mdash; points on a circle forming triangles, collinear points as bad cases, plus working BACKWARDS from a given triangle count to find a missing group size, Counting_Lesson_MultiConstraint_Brick3.html) targets Q10, Q12, and Q15. Both built 20 Aug 2026 with the same brick discipline validated by Brick 1: 8 screens each, every worked-example number gets its own inline reason every time it appears, a real interactive widget, an SVG for the geometry framing, a discrimination screen, and 4 practice questions. The test was rebuilt with 15 entirely fresh questions covering only Brick 2/3 content (per the on-topic rule &mdash; already-secure Lesson 1/Brick 1 content isn&rsquo;t re-tested), none reusing U56 3rd-attempt&rsquo;s Q4/Q10/Q12/Q13/Q15 numbers, plus 2 spiral-maintenance warm-ups (Balance Scales/Ratio Substitution, ~6.5 weeks stale; Rectangle Counting Any Grid, ~7 weeks stale). Awaiting Prem&rsquo;s attempt.',
+      note: 'Remediation unit, numbered U57 rather than a 4th U56 attempt, following project precedent (U40&rarr;U41, U49&rarr;U50, U47&rarr;U48, U44&rarr;U45). Brick 2 (multi-case bad &mdash; sum several bad cases together + the "fewer than needed = write 0" edge case, Counting_Lesson_MultiConstraint_Brick2.html) targets U56 3rd-attempt Q13 (marbles, not-all-same-colour). First built 20 Aug 2026 in the same worked-example format as Brick 1, but Lui reported it "too hard &amp; confusing" &mdash; hard enough that even an adult reading it cold couldn&rsquo;t follow it, a more serious signal than any prior lesson-difficulty note. Rebuilt 24 Aug 2026 from scratch as an interactive game ("Bag Sorting Challenge"): Prem sorts all 10 real handfuls of a small 5-counter jar by hand first (discovering the zero-edge case himself, since he never finds an all-blue card when only 2 blues exist), THEN meets the Choose-3 shortcut and sees it match what he just found, THEN plays through a bigger jar as 5 click-to-reveal scored rounds instead of one dense block, THEN predicts-before-reveals the zero-trap and the "not all same vs at least 1" discrimination, with a running &#11088; star score throughout. U57&rsquo;s scope is narrowed to Brick 2 only for this unit &mdash; Brick 3 (points-on-a-circle context + reverse-solving) is fully built and verified but deferred, linked from Brick 2&rsquo;s recap as an optional, not-tested bonus rather than folded into this unit. The test was rebuilt to match: 15 entirely fresh Brick-2-only questions (not-all-same-colour, zero-edge, double zero-edge, at-least-1 discrimination, a four-colour capstone generalisation, and a "read carefully" precision trap asking for BAD instead of GOOD), none reusing the lesson&rsquo;s or any prior test&rsquo;s numbers, plus the same 2 spiral-maintenance warm-ups (Balance Scales/Ratio Substitution; Rectangle Counting Any Grid). Awaiting Prem&rsquo;s attempt.',
       status: 'pending'
     },
     {
