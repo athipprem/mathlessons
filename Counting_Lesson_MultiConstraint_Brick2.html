@@ -113,6 +113,23 @@ li{margin-bottom:4px}
 .badge-earn{background:linear-gradient(135deg,#FFF3CD,#FFE9A8);border:2px solid #F9A825;border-radius:12px;padding:18px;text-align:center;margin-bottom:14px}
 .badge-earn .trophy{font-size:2.4rem}
 .badge-earn .btitle{font-weight:800;color:#7B4B00;font-size:1.1rem;margin-top:6px}
+/* ---- s3 pick-your-own-counters game ---- */
+.jar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;min-height:56px;background:#fff;border:1.5px solid #E0D0F0;border-radius:10px;padding:10px;margin:10px 0}
+.jar .cdot{cursor:pointer;transition:transform .12s;box-shadow:0 2px 4px rgba(0,0,0,.25)}
+.jar .cdot:hover{transform:scale(1.18)}
+.jar .cdot:active{transform:scale(.92)}
+.pickslots{display:flex;gap:10px;justify-content:center;align-items:center;margin:10px 0}
+.pickslot{width:40px;height:40px;border-radius:50%;border:2px dashed #CE93D8;display:flex;align-items:center;justify-content:center;color:#CE93D8;font-weight:800;font-size:.8rem;background:#FDFBFF}
+.pickarrow{color:#CE93D8;font-weight:800;font-size:1.1rem}
+.multline{text-align:center;font-size:1.35rem;font-weight:800;color:#38096B;margin:10px 0;min-height:34px;letter-spacing:.5px}
+.permrow{display:flex;gap:6px;justify-content:center;align-items:center;margin:5px 0;font-size:.8rem}
+.permrow .cdot{width:26px;height:26px;line-height:26px;font-size:.62rem;margin:0;box-shadow:none}
+.permlabel{color:#7B1FA2;font-weight:700;font-size:.78rem;min-width:64px;text-align:right}
+.dividestamp{text-align:center;font-size:1.5rem;font-weight:900;color:#C62828;margin:10px 0}
+.combine-bar{height:38px;border-radius:8px;overflow:hidden;display:flex;margin:12px 0;border:2px solid #7B1FA2}
+.combine-bar .seg-bad{background:#EF5350;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.78rem;white-space:nowrap;overflow:hidden}
+.combine-bar .seg-good{background:#66BB6A;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.82rem;white-space:nowrap;overflow:hidden}
+.chip{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:34px;border-radius:8px;color:#fff;font-weight:800;font-size:.85rem;padding:0 10px;margin:0 4px}
 </style>
 </head>
 <body>
@@ -180,71 +197,57 @@ li{margin-bottom:4px}
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Level Up &#8594;</button></div>
 </div>
 
-<!-- ============ s3 LEVEL 2: GUIDED ROUNDS ============ -->
+<!-- ============ s3 LEVEL 2: PICK-YOUR-OWN-COUNTERS GAME ============ -->
 <div class="screen" id="s3">
 <div class="card">
   <h2>&#x1F680; Level 2 &mdash; Too Many To Sort By Hand</h2>
   <p><strong>A jar has 12 counters: 5 red, 4 blue, 3 green. A handful of 3 is picked. How many handfuls are NOT ALL THE SAME COLOUR?</strong></p>
-  <p style="margin-top:6px">This jar is too big to deal out and sort one at a time &mdash; that would take forever. Instead, play through 5 short rounds using the shortcut. Tap "Play Round" to reveal each one and earn points.</p>
+  <p style="margin-top:6px">This jar is too big to deal out and sort one at a time &mdash; that would take forever. But YOU can still build the multiplication yourself: in each round below, tap 3 real counters out of the jar, one at a time, and watch the &times; chain appear as you go. Then you'll SEE why we always &divide;6 at the end.</p>
 
   <div class="round-card shown" id="round1Card">
-    <div class="round-head"><span class="round-title">Round 1 &mdash; ALL (ignore the rule)</span><button class="btn-play" id="round1Btn" onclick="playRound(1)">&#9654; Play Round 1</button></div>
-    <div class="round-content" id="round1Content">
-      <div class="step-line"><div class="step-num">1</div><div class="step-body">
-        <div class="step-math">12 &times; 11 &times; 10 &divide; 6</div>
-        <div class="step-why"><strong>12</strong> is the whole jar. <strong>11</strong>,<strong>10</strong> count down. Divide by <strong>6</strong> to remove repeat-orders.</div>
-        <div class="step-result">12&times;11=132, 132&times;10=1320, 1320&divide;6=<strong>220 (this is ALL)</strong></div>
-      </div></div>
-      <div class="points-flash">+10 points! &#11088;</div>
-    </div>
+    <div class="round-head"><span class="round-title" id="title1">Round 1 &mdash; ALL (ignore the rule)</span></div>
+    <p class="lab-hint" id="hint1">Tap any 3 counters from the jar below, one at a time.</p>
+    <div class="jar" id="jar1"></div>
+    <div class="pickslots" id="slots1"></div>
+    <div class="multline" id="mult1">&nbsp;</div>
+    <button class="btn-play" id="whyBtn1" style="display:none" onclick="showDivide(1)">&#9654; See why we &divide;6</button>
+    <div class="round-content" id="divide1"></div>
   </div>
 
   <div class="round-card" id="round2Card">
-    <div class="round-head"><span class="round-title">Round 2 &mdash; BAD case: all-red</span><button class="btn-play" id="round2Btn" onclick="playRound(2)">&#9654; Play Round 2</button></div>
-    <div class="round-content" id="round2Content">
-      <div class="step-line"><div class="step-num">a</div><div class="step-body">
-        <div class="step-math">5 &times; 4 &times; 3 &divide; 6</div>
-        <div class="step-why">Switch pools to just red: <strong>5</strong> reds total (n=5). <strong>4</strong>,<strong>3</strong> count down. Divide by <strong>6</strong>.</div>
-        <div class="step-result bad">5&times;4=20, 20&times;3=60, 60&divide;6=<strong>10 all-red handfuls</strong></div>
-      </div></div>
-      <div class="points-flash">+10 points! &#11088;</div>
-    </div>
+    <div class="round-head"><span class="round-title" id="title2">Round 2 &mdash; BAD case: all-red</span></div>
+    <p class="lab-hint" id="hint2">Now the jar only has the RED counters. Tap 3 of them.</p>
+    <div class="jar" id="jar2"></div>
+    <div class="pickslots" id="slots2"></div>
+    <div class="multline" id="mult2">&nbsp;</div>
+    <button class="btn-play" id="whyBtn2" style="display:none" onclick="showDivide(2)">&#9654; See why we &divide;6</button>
+    <div class="round-content" id="divide2"></div>
   </div>
 
   <div class="round-card" id="round3Card">
-    <div class="round-head"><span class="round-title">Round 3 &mdash; BAD case: all-blue</span><button class="btn-play" id="round3Btn" onclick="playRound(3)">&#9654; Play Round 3</button></div>
-    <div class="round-content" id="round3Content">
-      <div class="step-line"><div class="step-num">b</div><div class="step-body">
-        <div class="step-math">4 &times; 3 &times; 2 &divide; 6</div>
-        <div class="step-why">Switch pools to just blue: <strong>4</strong> blues total (n=4). <strong>3</strong>,<strong>2</strong> count down. Divide by <strong>6</strong>.</div>
-        <div class="step-result bad">4&times;3=12, 12&times;2=24, 24&divide;6=<strong>4 all-blue handfuls</strong></div>
-      </div></div>
-      <div class="points-flash">+10 points! &#11088;</div>
-    </div>
+    <div class="round-head"><span class="round-title" id="title3">Round 3 &mdash; BAD case: all-blue</span></div>
+    <p class="lab-hint" id="hint3">Now the jar only has the BLUE counters. Tap 3 of them.</p>
+    <div class="jar" id="jar3"></div>
+    <div class="pickslots" id="slots3"></div>
+    <div class="multline" id="mult3">&nbsp;</div>
+    <button class="btn-play" id="whyBtn3" style="display:none" onclick="showDivide(3)">&#9654; See why we &divide;6</button>
+    <div class="round-content" id="divide3"></div>
   </div>
 
   <div class="round-card" id="round4Card">
-    <div class="round-head"><span class="round-title">Round 4 &mdash; BAD case: all-green</span><button class="btn-play" id="round4Btn" onclick="playRound(4)">&#9654; Play Round 4</button></div>
-    <div class="round-content" id="round4Content">
-      <div class="step-line"><div class="step-num">c</div><div class="step-body">
-        <div class="step-math">3 &times; 2 &times; 1 &divide; 6</div>
-        <div class="step-why">Switch pools to just green: <strong>3</strong> greens total (n=3 &mdash; exactly 3 exist, so there's only ONE way to pick all of them). <strong>2</strong>,<strong>1</strong> count down. Divide by <strong>6</strong>.</div>
-        <div class="step-result bad">3&times;2=6, 6&times;1=6, 6&divide;6=<strong>1 all-green handful</strong></div>
-      </div></div>
-      <div class="points-flash">+10 points! &#11088;</div>
-    </div>
+    <div class="round-head"><span class="round-title" id="title4">Round 4 &mdash; BAD case: all-green</span></div>
+    <p class="lab-hint" id="hint4">Now the jar only has the GREEN counters &mdash; there are exactly 3. Tap all of them.</p>
+    <div class="jar" id="jar4"></div>
+    <div class="pickslots" id="slots4"></div>
+    <div class="multline" id="mult4">&nbsp;</div>
+    <button class="btn-play" id="whyBtn4" style="display:none" onclick="showDivide(4)">&#9654; See why we &divide;6</button>
+    <div class="round-content" id="divide4"></div>
   </div>
 
   <div class="round-card" id="round5Card">
-    <div class="round-head"><span class="round-title">Round 5 &mdash; ADD every bad case, THEN subtract</span><button class="btn-play" id="round5Btn" onclick="playRound(5)">&#9654; Play Final Round</button></div>
-    <div class="round-content" id="round5Content">
-      <div class="step-line"><div class="step-num">&#10003;</div><div class="step-body">
-        <div class="step-math">(10 + 4 + 1) then 220 &minus; 15</div>
-        <div class="step-why">Add all 3 bad cases first: 10 (red) + 4 (blue) + 1 (green) = 15 total bad. THEN subtract that ONE combined number from ALL &mdash; you only subtract once.</div>
-        <div class="step-result"><strong>220 &minus; 15 = 205 handfuls that are NOT all the same colour</strong></div>
-      </div></div>
-      <div class="reveal-summary" style="margin-top:10px"><strong>&#x1F3C6; LEVEL 2 COMPLETE!</strong> +20 bonus points!</div>
-    </div>
+    <div class="round-head"><span class="round-title">Round 5 &mdash; Combine every bad case, THEN subtract</span></div>
+    <div class="round-content" id="round5Content" style="display:none"></div>
+    <button class="btn-play" id="round5Btn" style="display:none" onclick="playFinalRound()">&#9654; Combine The Rounds</button>
   </div>
 
   <div class="big-rule" id="s3BigRule" style="display:none">More than one way to be bad? &nbsp;Find EACH bad case &nbsp;&rarr;&nbsp; ADD them &nbsp;&rarr;&nbsp; THEN subtract the total from ALL.</div>
@@ -257,6 +260,7 @@ li{margin-bottom:4px}
 <div class="card">
   <h2>&#x26A0;&#xFE0F; Predict First &mdash; The Zero Trap</h2>
   <p><strong>A jar has 11 counters: 2 red, 5 blue, 4 green (11 in total). A handful of 3 is picked.</strong></p>
+  <div class="jar" id="jar4trap" style="cursor:default"></div>
   <div class="q-card">
     <div class="q-text">PREDICT: there are only 2 red counters. How many different ALL-RED handfuls of 3 can you make?</div>
     <div class="predict-btns" id="zeroPredictBtns">
@@ -567,19 +571,134 @@ function nextCard(){
 }
 renderCard();
 
-/* ---------- s3: guided rounds ---------- */
-function playRound(n){
-  document.getElementById('round'+n+'Content').classList.add('shown');
-  document.getElementById('round'+n+'Btn').style.display='none';
-  addStars(n===5?20:10);
-  if(n<5){
-    document.getElementById('round'+(n+1)+'Card').classList.add('shown');
-  } else {
-    document.getElementById('s3BigRule').style.display='block';
+/* ---------- s3: pick-your-own-counters game ---------- */
+var S3_ROUNDS=[
+  {n:1, comp:[{color:'red',count:5},{color:'blue',count:4},{color:'green',count:3}]},
+  {n:2, comp:[{color:'red',count:5}]},
+  {n:3, comp:[{color:'blue',count:4}]},
+  {n:4, comp:[{color:'green',count:3}]}
+];
+var s3State={};
+function colHexS3(c){return c==='red'?'#C62828':(c==='blue'?'#1565C0':'#2E7D32');}
+function buildPool(comp){
+  var arr=[];
+  comp.forEach(function(c){for(var i=1;i<=c.count;i++){arr.push({id:c.color+i,color:c.color,label:String(i)});}});
+  return arr;
+}
+function initRound(n){
+  var rd=S3_ROUNDS[n-1];
+  var pool=buildPool(rd.comp);
+  s3State[n]={pool:pool,total:pool.length,picks:[]};
+  renderJar(n);
+  renderSlots(n);
+  document.getElementById('mult'+n).innerHTML='&nbsp;';
+}
+function renderJar(n){
+  var st=s3State[n];
+  var html='';
+  st.pool.forEach(function(item){
+    html+='<span class="cdot" style="background:'+colHexS3(item.color)+'" onclick="pickItem('+n+',\''+item.id+'\')">'+item.label+'</span>';
+  });
+  document.getElementById('jar'+n).innerHTML=html || '<span style="font-size:.85rem;color:#999">(jar empty)</span>';
+}
+function renderSlots(n){
+  var st=s3State[n];
+  var html='';
+  for(var i=0;i<3;i++){
+    if(i>0) html+='<span class="pickarrow">&times;</span>';
+    if(st.picks[i]){
+      var it=st.picks[i];
+      html+='<span class="pickslot" style="background:'+colHexS3(it.color)+';color:#fff;border-style:solid;border-color:'+colHexS3(it.color)+'">'+it.label+'</span>';
+    } else {
+      html+='<span class="pickslot">'+(i+1)+(i===0?'st':(i===1?'nd':'rd'))+'</span>';
+    }
+  }
+  document.getElementById('slots'+n).innerHTML=html;
+}
+function pickItem(n,itemId){
+  var st=s3State[n];
+  if(!st||st.picks.length>=3)return;
+  var idx=-1;
+  for(var i=0;i<st.pool.length;i++){if(st.pool[i].id===itemId){idx=i;break;}}
+  if(idx===-1)return;
+  var item=st.pool.splice(idx,1)[0];
+  st.picks.push(item);
+  renderJar(n);
+  renderSlots(n);
+  updateMultLine(n);
+  if(st.picks.length===3){
+    document.getElementById('whyBtn'+n).style.display='inline-block';
   }
 }
+function updateMultLine(n){
+  var st=s3State[n];
+  var parts=[];
+  for(var i=0;i<st.picks.length;i++){parts.push(st.total-i);}
+  var text=parts.join(' &times; ');
+  if(parts.length===3){
+    var product=parts[0]*parts[1]*parts[2];
+    text+=' = '+product;
+  }
+  document.getElementById('mult'+n).innerHTML=text;
+}
+function permute3(arr){
+  var res=[];
+  for(var i=0;i<3;i++)for(var j=0;j<3;j++){if(j===i)continue;for(var k=0;k<3;k++){if(k===i||k===j)continue;res.push([arr[i],arr[j],arr[k]]);}}
+  return res;
+}
+function showDivide(n){
+  var st=s3State[n];
+  var product=st.total*(st.total-1)*(st.total-2);
+  var result=product/6;
+  var perms=permute3(st.picks);
+  var html='<div class="warn-box"><p>You picked these 3 counters in ONE order. But the exact same 3 counters could have been tapped in <strong>6 different click-orders</strong> &mdash; and every one of them is still the SAME group of 3. Watch:</p></div>';
+  perms.forEach(function(p,i){
+    html+='<div class="permrow"><span class="permlabel">Order '+(i+1)+':</span>';
+    p.forEach(function(it){html+='<span class="cdot" style="background:'+colHexS3(it.color)+'">'+it.label+'</span>';});
+    html+='</div>';
+  });
+  if(st.total===3){
+    html+='<div class="why" style="margin-top:10px"><div class="why-title">Notice</div><p>With exactly 3 greens in the jar, there was only ONE possible group of 3 to begin with &mdash; only the CLICK ORDER changed. That\'s exactly why we &divide;6.</p></div>';
+  }
+  html+='<div class="dividestamp">&divide; 6 &nbsp;&rarr;&nbsp; all 6 orders count as ONE group</div>';
+  html+='<div class="step-result" style="text-align:center">'+product+' &divide; 6 = <strong>'+result+'</strong></div>';
+  var div=document.getElementById('divide'+n);
+  div.innerHTML=html;
+  div.classList.add('shown');
+  document.getElementById('whyBtn'+n).style.display='none';
+  addStars(10);
+  st.result=result;
+  if(n<4){
+    document.getElementById('round'+(n+1)+'Card').classList.add('shown');
+    initRound(n+1);
+  } else {
+    document.getElementById('round5Card').classList.add('shown');
+    document.getElementById('round5Btn').style.display='inline-block';
+  }
+}
+function playFinalRound(){
+  var badRed=s3State[2].result, badBlue=s3State[3].result, badGreen=s3State[4].result;
+  var all=s3State[1].result;
+  var bad=badRed+badBlue+badGreen;
+  var good=all-bad;
+  var pctBad=Math.max(6,(bad/all*100));
+  var html='<div style="text-align:center;margin-bottom:6px">';
+  html+='<span class="chip" style="background:#C62828">red '+badRed+'</span>+<span class="chip" style="background:#1565C0">blue '+badBlue+'</span>+<span class="chip" style="background:#2E7D32">green '+badGreen+'</span> = <strong>'+bad+' total bad</strong>';
+  html+='</div>';
+  html+='<div class="combine-bar"><div class="seg-bad" style="width:'+pctBad+'%">BAD '+bad+'</div><div class="seg-good" style="width:'+(100-pctBad)+'%">GOOD '+good+'</div></div>';
+  html+='<div class="step-result" style="text-align:center;margin-top:8px">'+all+' &minus; '+bad+' = <strong>'+good+' handfuls NOT all the same colour</strong></div>';
+  html+='<div class="reveal-summary" style="margin-top:10px;text-align:center"><strong>&#x1F3C6; LEVEL 2 COMPLETE!</strong> +20 bonus points!</div>';
+  var el=document.getElementById('round5Content');
+  el.innerHTML=html;
+  el.style.display='block';
+  document.getElementById('round5Btn').style.display='none';
+  document.getElementById('s3BigRule').style.display='block';
+  addStars(20);
+}
+initRound(1);
 
 /* ---------- s4: predict zero trap ---------- */
+document.getElementById('jar4trap').innerHTML=dots(2,'#C62828')+dots(5,'#1565C0')+dots(4,'#2E7D32');
 function predictZero(btn,val){
   var btns=document.getElementById('zeroPredictBtns').querySelectorAll('button');
   for(var i=0;i<btns.length;i++)btns[i].classList.remove('picked');
@@ -591,7 +710,7 @@ function predictZero(btn,val){
     addStars(10);
   } else {
     fb.className='card-feedback err';
-    fb.textContent='Not quite — think about how many reds actually exist.';
+    fb.textContent='Not quite — count the red dots above again.';
   }
   document.getElementById('zeroReveal').style.display='block';
 }
