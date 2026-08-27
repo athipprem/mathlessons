@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exponents &amp; Nested Brackets — PEMDAS Lesson 2</title>
+<style>
+:root{--nav:#5E35B1;--nav-dark:#4527A0;--bg:#EDE7F6;--card:#fff;--acc:#5E35B1;--ok:#2E7D32;--err:#C62828;--warn:#4527A0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#4527A0;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#EDE7F6,#F5F2FB);border:2px solid #B39DDB;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#4527A0;font-weight:700;margin-bottom:6px}
+.big-rule{background:#EDE7F6;border:2px solid #5E35B1;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#4527A0;margin:14px 0}
+.golden{background:linear-gradient(135deg,#EDE7F6,#D1C4E9);border:2px solid #B39DDB;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#EDE7F6;border:1.5px solid #5E35B1;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#4527A0;text-align:center;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F5F2FB;border:1px solid #B39DDB;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#5E35B1}
+.steps .ln.ans{color:#4527A0;font-weight:800}
+.tree{background:#FCFBFE;border:2px dashed #B39DDB;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#5E35B1;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.tree .node.new{border-color:#5E35B1;border-width:2px;background:#F5F2FB}
+.warn-box{background:#EDE7F6;border:1.5px solid #B39DDB;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#4527A0}
+.q-card{background:#F5F2FB;border:1.5px solid #B39DDB;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#EDE7F6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#EDE7F6;color:#4527A0;border:2px solid #4527A0;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#5E35B1;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#EDE7F6;color:#4527A0;border:1.5px solid #B39DDB;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#8D6E63;font-size:.85rem;margin-bottom:6px}
+/* op-picker widget (reused pattern from Lesson 1) */
+.exprbox{text-align:center;font-size:1.4rem;font-weight:800;color:#1a1a2e;background:#FCFBFE;border:2px dashed #B39DDB;border-radius:10px;padding:20px;margin:14px 0}
+.opbtns{display:flex;justify-content:center;gap:10px;margin:12px 0;flex-wrap:wrap}
+.opbtn{min-width:56px;height:56px;padding:0 10px;border-radius:28px;border:2px solid #5E35B1;background:#fff;color:#5E35B1;font-size:1.15rem;font-weight:800;cursor:pointer}
+.opbtn.done{background:#5E35B1;color:#fff;opacity:.5;cursor:default}
+.opbtn.wrong{animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.widget-msg{text-align:center;font-weight:700;color:#4527A0;min-height:24px;margin-top:6px}
+/* nested brackets widget */
+.nestbox{background:#FCFBFE;border:2px dashed #B39DDB;border-radius:10px;padding:20px;margin:14px 0;text-align:center}
+.nestexpr{font-size:1.4rem;font-weight:800;color:#1a1a2e}
+.nestexpr .layer1{padding:2px 6px;border-radius:6px}
+.nestexpr .layer1.hl{background:#D1C4E9}
+.nestexpr .layer2{padding:2px 6px;border-radius:6px}
+.nestexpr .layer2.hl{background:#5E35B1;color:#fff}
+.reveal-btn{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin:6px 6px 6px 0;display:block;width:100%;text-align:center}
+.reveal-line{display:none;background:#F5F2FB;border:1px solid #B39DDB;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:.98rem;font-weight:700;color:#4527A0}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Exponents &amp; Nested Brackets — PEMDAS Lesson 2</span>
+  <span class="tnav-pill" id="pill">1 / 9</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">Shorthand for repeated multiplying</div>
+    <p>A square garden with side 5 m has an area of 5 &times; 5 m&sup2; — mathematicians write that as <strong>5&sup2;</strong> instead of writing "&times; 5" over and over. Exponents show up everywhere: squared areas, cubed volumes, doubling patterns, and LOTS of competition questions.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Your new superpower</div>
+    <p>In Lesson 1 you learned Brackets &rarr; Multiply/Divide &rarr; Add/Subtract. Today you add TWO new pieces to that same ladder: <strong>Exponents</strong> (which slot in right after brackets), and <strong>brackets inside brackets</strong> — for when a question is extra tricky.</p>
+  </div>
+  <div class="big-rule">An exponent is just a fast way to write repeated multiplying.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: what is an exponent -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F9EE; What Is An Exponent?</h2>
+  <div class="why">
+    <div class="why-title">The one new idea</div>
+    <p>An exponent has two parts: the <strong>base</strong> (the number being multiplied) and the small raised number, the <strong>exponent</strong> (how many times to multiply the base by itself).</p>
+  </div>
+  <div class="tree">
+    <div class="node"><strong>3&sup2;</strong> — base 3, exponent 2 &nbsp;&rarr;&nbsp; 3 &times; 3 = <strong>9</strong></div>
+    <div class="node"><strong>2&sup3;</strong> — base 2, exponent 3 &nbsp;&rarr;&nbsp; 2 &times; 2 &times; 2 = <strong>8</strong></div>
+    <div class="node"><strong>4&sup2;</strong> — base 4, exponent 2 &nbsp;&rarr;&nbsp; 4 &times; 4 = <strong>16</strong></div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; A very common mistake: 3&sup2; is NOT 3 &times; 2 = 6. The exponent tells you how many 3's to multiply together, not what to multiply 3 by. 3&sup2; = 3 &times; 3 = 9.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Full Ladder &#8594;</button></div>
+</div>
+
+<!-- s2: the full ladder -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>The Full Order Ladder</h2>
+  <p>Here's the complete ladder from Lesson 1, now with Exponents filled in:</p>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span><strong>Brackets ( )</strong> — always done first, no matter what's inside.</div>
+    <div class="node new"><span class="step-n">2</span><strong>Exponents</strong> (powers, like 3&sup2;) — done next, BEFORE Multiply/Divide.</div>
+    <div class="node"><span class="step-n">3</span><strong>Multiply &times; and Divide &divide;</strong> — left to right.</div>
+    <div class="node"><span class="step-n">4</span><strong>Add + and Subtract &minus;</strong> — left to right.</div>
+  </div>
+  <div class="rulebar">Brackets &rarr; Exponents &rarr; Multiply/Divide (left&rarr;right) &rarr; Add/Subtract (left&rarr;right)</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Exponents Before Multiply &#8594;</button></div>
+</div>
+
+<!-- s3: exponent-before-multiply contrast -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Worked Example — Exponents Before Multiply</h2>
+  <p><strong>5 &times; 3&sup2; = ?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — no brackets. Step 2 — Exponents come before Multiply, so do 3&sup2; first:</span></div>
+    <div class="ln">3&sup2; = 3 &times; 3 = 9</div>
+    <div class="ln"><span class="note">Step 3 — the expression is now:</span></div>
+    <div class="ln">5 &times; 9</div>
+    <div class="ln ans">5 &times; 3&sup2; = 45</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; If you multiplied 5 &times; 3 FIRST and then squared the result — (5&times;3)&sup2; = 15&sup2; = 225 — you'd get a totally different, WRONG answer. Only the number touching the small exponent gets squared, not everything before it.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try It Yourself &#8594;</button></div>
+</div>
+
+<!-- s4: interactive pick-the-next-op widget with exponent -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F4CB; Pick The Next Step (Now With Exponents)</h2>
+  <p class="tap-hint">Tap the buttons in the correct ladder order for this expression.</p>
+  <div class="exprbox" id="exprDisplay">4 &nbsp;+&nbsp; 2&sup3; &nbsp;&times;&nbsp; 3</div>
+  <div class="opbtns">
+    <button class="opbtn" id="opBtnExp" onclick="pickOp('exp')">2&sup3;</button>
+    <button class="opbtn" id="opBtnMul" onclick="pickOp('mul')">&times;</button>
+    <button class="opbtn" id="opBtnPlus" onclick="pickOp('plus')">+</button>
+  </div>
+  <div class="widget-msg" id="widgetMsg">Which piece should be worked out FIRST? (Hint: check the ladder!)</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Brackets Inside Brackets &#8594;</button></div>
+</div>
+
+<!-- s5: nested brackets worked example -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>Worked Example — Brackets Inside Brackets</h2>
+  <p><strong>3 &times; (4 + (6 &minus; 2)) = ?</strong> When brackets are nested (one inside another), always solve the INNERMOST pair first — the one with no other brackets inside it.</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1a — find the INNERMOST brackets: (6 &minus; 2). Solve that first:</span></div>
+    <div class="ln">(6 &minus; 2) = 4</div>
+    <div class="ln"><span class="note">Step 1b — the expression is now, with only ONE bracket layer left:</span></div>
+    <div class="ln">3 &times; (4 + 4)</div>
+    <div class="ln"><span class="note">Step 1c — solve that remaining bracket:</span></div>
+    <div class="ln">(4 + 4) = 8</div>
+    <div class="ln"><span class="note">Step 2 — now it's just Multiply, no brackets left:</span></div>
+    <div class="ln ans">3 &times; (4 + (6 &minus; 2)) = 24</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Work from the INSIDE OUT, like peeling an onion — innermost brackets first, then the next layer out, and so on, until there are no brackets left.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Explore Nesting &#8594;</button></div>
+</div>
+
+<!-- s6: interactive nested brackets widget -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>&#x1F4CB; Peel The Brackets, Layer By Layer</h2>
+  <p class="tap-hint">Press each button in order to see which bracket layer gets solved first.</p>
+  <div class="nestbox">
+    <div class="nestexpr" id="nestExpr">2 &times; <span class="layer1" id="nl1">(<span class="layer2" id="nl2">(5 &minus; 2)</span> + 3)</span></div>
+  </div>
+  <button class="reveal-btn" onclick="nestStep(1)">Step 1 — highlight the INNERMOST brackets</button>
+  <button class="reveal-btn" onclick="nestStep(2)">Step 2 — solve them: (5&minus;2) = 3</button>
+  <button class="reveal-btn" onclick="nestStep(3)">Step 3 — highlight the remaining outer brackets</button>
+  <button class="reveal-btn" onclick="nestStep(4)">Step 4 — solve them and finish</button>
+  <div class="reveal-line" id="nestResult">
+    (5&minus;2)=3 &rarr; (3+3)=6 &rarr; 2&times;6 = <strong>12</strong>. Innermost bracket always goes first, then work outward.
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s7: practice -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Exponents &amp; Nested Brackets</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 7 + 2&sup3; = ?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 13</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 15</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 21</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">2&sup3; = 2&times;2&times;2 = 8 (exponent before add)</div>
+      <div class="ln ans">7 + 8 = 15</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; (9 &minus; 4)&sup2; = ?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 25</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 34</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 10</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">Brackets first: (9&minus;4)=5</div>
+      <div class="ln ans">5&sup2; = 5&times;5 = 25</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; 2 &times; (5 + 3&sup2;) = ?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 28</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 64</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 22</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">Inside the brackets, exponent before add: 3&sup2;=9, so (5+9)=14</div>
+      <div class="ln ans">2 &times; 14 = 28</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4 (Word Problem).&nbsp; A square garden bed has side (2 + 4) m. What is its area in square metres?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 12 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 36 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 20 m&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">Side = (2+4) = 6 m. Area = side&sup2;</div>
+      <div class="ln ans">6&sup2; = 36 m&sup2;</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Mastery Checklist &#8594;</button></div>
+</div>
+
+<!-- s8: recap -->
+<div class="screen" id="s8">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>The full ladder is Brackets &rarr; Exponents &rarr; Multiply/Divide (left to right) &rarr; Add/Subtract (left to right). When brackets are nested, always solve the INNERMOST pair first and work outward, like peeling an onion.</strong></p>
+</div>
+<div class="card" style="background:#EDE7F6;border:1px solid #B39DDB">
+  <h3 style="color:#4527A0">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You know an exponent means "multiply the base by itself that many times" — not "multiply by the exponent"</li>
+    <li>You solve exponents BEFORE multiply/divide, but AFTER brackets</li>
+    <li>You find the INNERMOST bracket pair first when brackets are nested, then work outward</li>
+    <li>You can combine ALL FOUR ladder stages in one expression without getting lost</li>
+    <li>You always finish by checking: did I answer the EXACT question asked?</li>
+  </ul>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#5E35B1;color:#fff;border:2px solid #5E35B1;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ---- s4: pick-the-next-op widget (4 + 2^3 * 3) ----
+// correct order: exp(step1) -> mul(step2) -> plus(step3)
+var opState = { step: 1 };
+var opDisplays = {
+  0: '4 &nbsp;+&nbsp; 2&sup3; &nbsp;&times;&nbsp; 3',
+  1: '4 &nbsp;+&nbsp; 8 &nbsp;&times;&nbsp; 3',
+  2: '4 &nbsp;+&nbsp; 24',
+  3: '= 28'
+};
+function pickOp(which){
+  var correctForStep = {1:'exp', 2:'mul', 3:'plus'};
+  var msg = document.getElementById('widgetMsg');
+  var btnMap = {exp:'opBtnExp', mul:'opBtnMul', plus:'opBtnPlus'};
+  var btn = document.getElementById(btnMap[which]);
+  if(opState.step>3){ return; }
+  if(correctForStep[opState.step] === which){
+    btn.classList.add('done');
+    btn.disabled = true;
+    opState.step++;
+    document.getElementById('exprDisplay').innerHTML = opDisplays[opState.step-1];
+    if(opState.step>3){
+      msg.textContent = 'All done — 4 + 2³ × 3 = 28. Exponents before Multiply, every time!';
+      msg.style.color = '#2E7D32';
+    } else {
+      msg.textContent = 'Correct! Now pick the NEXT step.';
+      msg.style.color = '#4527A0';
+    }
+  } else {
+    btn.classList.add('wrong');
+    setTimeout(function(){btn.classList.remove('wrong');}, 300);
+    msg.textContent = 'Not yet — check the ladder (Brackets, Exponents, then Multiply/Divide, then Add/Subtract).';
+    msg.style.color = '#C62828';
+  }
+}
+
+// ---- s6: nested brackets peel widget ----
+function nestStep(step){
+  var l1 = document.getElementById('nl1'), l2 = document.getElementById('nl2'),
+      expr = document.getElementById('nestExpr'), result = document.getElementById('nestResult');
+  if(step===1){
+    l2.classList.add('hl');
+  } else if(step===2){
+    expr.innerHTML = '2 &times; <span class="layer1" id="nl1">(3 + 3)</span>';
+  } else if(step===3){
+    document.getElementById('nl1').classList.add('hl');
+  } else if(step===4){
+    expr.innerHTML = '2 &times; 6';
+    result.style.display = 'block';
+  }
+}
+</script>
+</body>
+</html>

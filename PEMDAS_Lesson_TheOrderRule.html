@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Order Rule — PEMDAS Lesson 1</title>
+<style>
+:root{--nav:#5E35B1;--nav-dark:#4527A0;--bg:#EDE7F6;--card:#fff;--acc:#5E35B1;--ok:#2E7D32;--err:#C62828;--warn:#4527A0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#4527A0;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#EDE7F6,#F5F2FB);border:2px solid #B39DDB;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#4527A0;font-weight:700;margin-bottom:6px}
+.big-rule{background:#EDE7F6;border:2px solid #5E35B1;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#4527A0;margin:14px 0}
+.golden{background:linear-gradient(135deg,#EDE7F6,#D1C4E9);border:2px solid #B39DDB;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#EDE7F6;border:1.5px solid #5E35B1;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#4527A0;text-align:center;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F5F2FB;border:1px solid #B39DDB;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#5E35B1}
+.steps .ln.ans{color:#4527A0;font-weight:800}
+.tree{background:#FCFBFE;border:2px dashed #B39DDB;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#5E35B1;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.tree .node.future{opacity:.55;border-style:dashed}
+.warn-box{background:#EDE7F6;border:1.5px solid #B39DDB;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#4527A0}
+.q-card{background:#F5F2FB;border:1.5px solid #B39DDB;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#EDE7F6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#EDE7F6;color:#4527A0;border:2px solid #4527A0;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#5E35B1;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#EDE7F6;color:#4527A0;border:1.5px solid #B39DDB;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+/* op-picker widget */
+.exprbox{text-align:center;font-size:1.5rem;font-weight:800;color:#1a1a2e;background:#FCFBFE;border:2px dashed #B39DDB;border-radius:10px;padding:20px;margin:14px 0}
+.opbtns{display:flex;justify-content:center;gap:10px;margin:12px 0;flex-wrap:wrap}
+.opbtn{width:56px;height:56px;border-radius:50%;border:2px solid #5E35B1;background:#fff;color:#5E35B1;font-size:1.4rem;font-weight:800;cursor:pointer}
+.opbtn.done{background:#5E35B1;color:#fff;opacity:.5;cursor:default}
+.opbtn.wrong{animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.widget-msg{text-align:center;font-weight:700;color:#4527A0;min-height:24px;margin-top:6px}
+/* predict widget */
+.predict-row{display:flex;gap:14px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.predict-card{flex:1;min-width:180px;max-width:260px;background:#fff;border:2px solid #B39DDB;border-radius:10px;padding:14px;text-align:center;cursor:pointer;font-size:1.15rem;font-weight:800;color:#1a1a2e}
+.predict-card:hover{border-color:var(--acc)}
+.predict-card.picked{border-color:#5E35B1;background:#EDE7F6}
+.predict-card.reveal-bigger{border-color:#2E7D32;background:#E8F5E9}
+.reveal-line{display:none;background:#F5F2FB;border:1px solid #B39DDB;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:.98rem;font-weight:700;color:#4527A0}
+.reveal-btn{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin:6px 6px 6px 0}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">The Order Rule — PEMDAS Lesson 1</span>
+  <span class="tnav-pill" id="pill">1 / 9</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">One expression, two different answers?</div>
+    <p>Try this in your head: <strong>6 + 4 &times; 2</strong>. Did you get <strong>20</strong> (add first) or <strong>14</strong> (multiply first)? Both feel reasonable — but only ONE can be correct, because maths needs everyone in the world to get the SAME answer to the SAME expression. That's exactly why there's a fixed ORDER for doing operations, followed by every calculator, computer, and maths competition on Earth.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Your new superpower</div>
+    <p>Once you know the order, you'll NEVER be unsure which operation to do first again — in homework, in competitions, or on a calculator. This lesson teaches the core order. The next lesson adds two more pieces: exponents (powers) and brackets-inside-brackets.</p>
+  </div>
+  <div class="big-rule">There is ONE correct order for every expression — and it never changes.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: the ladder -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F9EE; The Order Ladder</h2>
+  <div class="why">
+    <div class="why-title">The one new idea</div>
+    <p>Every expression is solved in FOUR stages, from top to bottom. Today we learn stages 1, 3 and 4 (stage 2, Exponents, comes in the next lesson — for now, treat it as "not yet used").</p>
+  </div>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span><strong>Brackets ( )</strong> — anything inside brackets is done FIRST, before anything outside them.</div>
+    <div class="node future"><span class="step-n">2</span><strong>Exponents</strong> (powers, like 3&sup2;) — coming in Lesson 2.</div>
+    <div class="node"><span class="step-n">3</span><strong>Multiply &times; and Divide &divide;</strong> — done together, working strictly LEFT TO RIGHT.</div>
+    <div class="node"><span class="step-n">4</span><strong>Add + and Subtract &minus;</strong> — done together, working strictly LEFT TO RIGHT.</div>
+  </div>
+  <div class="rulebar">Brackets &rarr; (Exponents) &rarr; Multiply/Divide (left&rarr;right) &rarr; Add/Subtract (left&rarr;right)</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Common mix-up: multiply is NOT always done before divide, and add is NOT always done before subtract. When two operations are on the SAME step of the ladder, you do whichever one comes FIRST when reading left to right.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Worked Example &#8594;</button></div>
+</div>
+
+<!-- s2: worked example 1 -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Worked Example — Multiply Before Add</h2>
+  <p><strong>9 + 3 &times; 5 = ?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — scan for brackets: there are none, so skip straight to Multiply/Divide.</span></div>
+    <div class="ln"><span class="note">Step 2 — Multiply/Divide: only one, so do it first.</span></div>
+    <div class="ln">3 &times; 5 = 15</div>
+    <div class="ln"><span class="note">Step 3 — the expression is now:</span></div>
+    <div class="ln">9 + 15</div>
+    <div class="ln"><span class="note">Step 4 — Add/Subtract: only one left, so do it last.</span></div>
+    <div class="ln ans">9 + 3 &times; 5 = 24</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; If you'd added first (9+3=12, then 12&times;5=60), you'd get a completely different, WRONG answer. The order genuinely changes the result — it's not just a style choice.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Left-To-Right Ties &#8594;</button></div>
+</div>
+
+<!-- s3: worked example 2, left-to-right tie -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Worked Example — Multiply AND Divide, Left To Right</h2>
+  <p><strong>24 &divide; 6 &times; 2 = ?</strong> Multiply and Divide are on the SAME ladder step, so we don't pick a favourite — we just go left to right.</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — no brackets. Step 2 — Multiply/Divide are tied, so read LEFT TO RIGHT: the &divide; comes first (it's further left).</span></div>
+    <div class="ln">24 &divide; 6 = 4</div>
+    <div class="ln"><span class="note">Step 2 continued — the expression is now:</span></div>
+    <div class="ln">4 &times; 2</div>
+    <div class="ln ans">24 &divide; 6 &times; 2 = 8</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; If you'd done the multiply first out of habit (6&times;2=12, then 24&divide;12=2), you'd get the WRONG answer, 2 instead of 8. When it's a tie, left-to-right decides — not "multiply always wins."</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try It Yourself &#8594;</button></div>
+</div>
+
+<!-- s4: interactive pick-the-next-op widget -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F4CB; Pick The Next Step</h2>
+  <p class="tap-hint">Here's an expression with THREE operations. Tap the buttons in the correct ladder order — the app will only accept the right operation at each stage.</p>
+  <div class="exprbox" id="exprDisplay">7 &nbsp;+&nbsp; 6 &nbsp;&divide;&nbsp; 2 &nbsp;&minus;&nbsp; 3</div>
+  <div class="opbtns">
+    <button class="opbtn" id="opBtnPlus" onclick="pickOp('plus')">+</button>
+    <button class="opbtn" id="opBtnDiv" onclick="pickOp('div')">&divide;</button>
+    <button class="opbtn" id="opBtnMinus" onclick="pickOp('minus')">&minus;</button>
+  </div>
+  <div class="widget-msg" id="widgetMsg">Which operation should happen FIRST? (Hint: check the ladder!)</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Brackets Change Everything &#8594;</button></div>
+</div>
+
+<!-- s5: worked example 3, brackets override -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>Worked Example — Brackets Jump To The Front Of The Line</h2>
+  <p><strong>15 &minus; 2 &times; 4 = ?</strong> vs a NEW question with brackets added: <strong>30 &divide; (2 + 3) = ?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">15 &minus; 2 &times; 4: no brackets, so Multiply/Divide still goes first.</span></div>
+    <div class="ln">2 &times; 4 = 8 &nbsp;&rarr;&nbsp; 15 &minus; 8</div>
+    <div class="ln ans">15 &minus; 2 &times; 4 = 7</div>
+    <div class="ln"><span class="note">30 &divide; (2 + 3): brackets are stage 1, so they ALWAYS go first, no matter what's outside them.</span></div>
+    <div class="ln">(2 + 3) = 5 &nbsp;&rarr;&nbsp; 30 &divide; 5</div>
+    <div class="ln ans">30 &divide; (2 + 3) = 6</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Brackets don't care what operation is inside them or outside them — Multiply, Divide, Add, Subtract, it doesn't matter. If it's in brackets, it's done FIRST, every single time.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Predict First &#8594;</button></div>
+</div>
+
+<!-- s6: predict-then-reveal brackets widget -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>&#x1F4CB; Predict, Then Check</h2>
+  <p class="tap-hint">These two expressions use the SAME three numbers — only the brackets are different. Tap the one you think gives the BIGGER answer, then press Reveal.</p>
+  <div class="predict-row">
+    <div class="predict-card" id="predA" onclick="pickPredict('A')">8 &minus; 3 &times; 2</div>
+    <div class="predict-card" id="predB" onclick="pickPredict('B')">(8 &minus; 3) &times; 2</div>
+  </div>
+  <button class="reveal-btn" onclick="revealPredict()">Reveal The Answers</button>
+  <div class="reveal-line" id="predictReveal">
+    <strong>8 &minus; 3 &times; 2</strong>: no brackets, so &times; goes first &rarr; 3&times;2=6 &rarr; 8&minus;6 = <strong>2</strong>.<br>
+    <strong>(8 &minus; 3) &times; 2</strong>: brackets go first &rarr; 8&minus;3=5 &rarr; 5&times;2 = <strong>10</strong>.<br>
+    The brackets version is bigger (10 &gt; 2) — moving the brackets completely changed which operation happens first, and changed the answer.
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s7: practice -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — The Order Rule</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 10 + 4 &times; 3 = ?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 42</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 22</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 40</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">No brackets &rarr; Multiply first: 4&times;3=12</div>
+      <div class="ln ans">10 + 12 = 22</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; (10 + 4) &times; 3 = ?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 22</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 17</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 42</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">Brackets first: 10+4=14</div>
+      <div class="ln ans">14 &times; 3 = 42</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; 16 &divide; 4 &times; 2 = ?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 2</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 32</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">&divide; and &times; tied — left to right: 16&divide;4=4</div>
+      <div class="ln ans">4 &times; 2 = 8</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4 (Word Problem).&nbsp; Pens cost $2 each. Mia buys 5 pens, plus a $3 eraser. What is the total cost?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; $13</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; $25</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; $10</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">5 pens &times; $2 = 5 &times; 2 = 10 (multiply first, no brackets)</div>
+      <div class="ln ans">$10 + $3 eraser = $13</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Mastery Checklist &#8594;</button></div>
+</div>
+
+<!-- s8: recap -->
+<div class="screen" id="s8">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>Every expression follows the SAME fixed order: Brackets first, then Multiply/Divide (left to right), then Add/Subtract (left to right). Two operations on the same ladder step are never "always this one first" — you read left to right.</strong></p>
+</div>
+<div class="card" style="background:#EDE7F6;border:1px solid #B39DDB">
+  <h3 style="color:#4527A0">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You solve anything inside brackets before anything outside them, no matter what operation is outside</li>
+    <li>You know Multiply and Divide are equal rank — you do whichever is more to the LEFT first</li>
+    <li>You know Add and Subtract are equal rank — same left-to-right rule</li>
+    <li>You never assume "multiply always beats divide" or "add always beats subtract"</li>
+    <li>You're ready for Lesson 2, which adds Exponents and brackets-inside-brackets to the ladder</li>
+  </ul>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#5E35B1;color:#fff;border:2px solid #5E35B1;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ---- s4: pick-the-next-op widget (7 + 6 / 2 - 3) ----
+// correct order: div(step1) -> plus(step2, leftmost of the A/S tie) -> minus(step3)
+var opState = { step: 1 };
+var opDisplays = {
+  0: '7 &nbsp;+&nbsp; 6 &nbsp;&divide;&nbsp; 2 &nbsp;&minus;&nbsp; 3',
+  1: '7 &nbsp;+&nbsp; 3 &nbsp;&minus;&nbsp; 3',
+  2: '10 &nbsp;&minus;&nbsp; 3',
+  3: '= 7'
+};
+function pickOp(which){
+  var correctForStep = {1:'div', 2:'plus', 3:'minus'};
+  var msg = document.getElementById('widgetMsg');
+  var btnMap = {plus:'opBtnPlus', div:'opBtnDiv', minus:'opBtnMinus'};
+  var btn = document.getElementById(btnMap[which]);
+  if(opState.step>3){ return; }
+  if(correctForStep[opState.step] === which){
+    btn.classList.add('done');
+    btn.disabled = true;
+    opState.step++;
+    document.getElementById('exprDisplay').innerHTML = opDisplays[opState.step-1];
+    if(opState.step>3){
+      msg.textContent = 'All done — 7 + 6 ÷ 2 − 3 = 7. You followed the ladder perfectly!';
+      msg.style.color = '#2E7D32';
+    } else {
+      msg.textContent = 'Correct! Now pick the NEXT step.';
+      msg.style.color = '#4527A0';
+    }
+  } else {
+    btn.classList.add('wrong');
+    setTimeout(function(){btn.classList.remove('wrong');}, 300);
+    msg.textContent = 'Not yet — check the ladder (Brackets, then Multiply/Divide left-to-right, then Add/Subtract left-to-right).';
+    msg.style.color = '#C62828';
+  }
+}
+
+// ---- s6: predict-then-reveal brackets widget ----
+var predictPicked = null;
+function pickPredict(which){
+  predictPicked = which;
+  document.getElementById('predA').classList.remove('picked');
+  document.getElementById('predB').classList.remove('picked');
+  document.getElementById(which==='A'?'predA':'predB').classList.add('picked');
+}
+function revealPredict(){
+  document.getElementById('predictReveal').style.display='block';
+  document.getElementById('predA').classList.remove('picked');
+  document.getElementById('predB').classList.remove('picked');
+  document.getElementById('predB').classList.add('reveal-bigger');
+}
+</script>
+</body>
+</html>
