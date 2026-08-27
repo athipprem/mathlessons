@@ -20,7 +20,7 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:57, topic:'Art of Counting — Total Minus Bad: Multi-Case &amp; Zero-Edge (Brick 2 Retest)', status:'Brick 2 Redesigned (Gaming Style), Test Ready (Attempt Pending)' },
+  currentUnit: { n:58, topic:'Fractions — Add, Subtract &amp; Multiply Mixed Numbers (School-Curriculum Pivot)', status:'Lessons Built, Test Ready (Attempt Pending)' },
   lastUnit: {
     n:56, score:10, outOf:15, pct:67, delta:-4, prevScore:14, prevOutOf:15, prevLabel:'U55',
     patternLabel: 'U56 — Choose 3 &amp; Total Minus Bad, 3rd attempt (post Brick 1), NOT PASSED but a big jump — Brick 1 validated',
@@ -392,17 +392,30 @@ var PREM_DATA = {
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 58,
+      badge: 'linear-gradient(135deg,#E65100,#BF360C)',
+      title: 'Fractions — Add, Subtract &amp; Multiply Mixed Numbers (School-Curriculum Pivot)',
+      tags: [
+        { t:'Major pivot — U58&ndash;U62 redirected to real school curriculum', s:'background:#FFF3E0;color:#BF360C;font-weight:700' },
+        { t:'2 lessons: Add/Subtract Mixed Numbers, Multiplying Fractions', c:'tgreen' },
+        { t:'Weighted Intermediate/Applied, no reuse from lessons', c:'tgreen' },
+        { t:'15Q test + 2 warm-ups (Vert. Opp. Angles, Path &amp; Frame)', c:'tgreen' }
+      ],
+      note: 'Prem started Year 5 at school; Lui shared his school exam ("Test 1 &ndash; Whole Numbers," 21 Aug 2026, 47/50 = 94%) and the textbook driving it, Shaping Maths Activity Book 5A (Marshall Cavendish). U58&ndash;U62 are redirected to follow this real curriculum: U58 Fractions (Ch.3), U59 Whole Numbers Recap (Ch.1&ndash;2), U60 Area of Triangles (Ch.4) &rarr; M6 (timing unchanged), U61 Ratio (Ch.5), U62 Volume (Ch.6) &mdash; see coaching-rules memory for the full spec. This replaces (defers, not cancels) the previously-planned S&amp;P II / Finish-The-Question Checkpoint / S&amp;P III / Consolidation sequence. Two lessons built: <em>Add &amp; Subtract Mixed Numbers</em> (unlike-denominator common-denominator method, then borrowing/regrouping when the fraction to subtract is bigger than what you have) and <em>Multiplying With Fractions</em> (one unifying "write everything as a fraction, multiply straight across" rule applied to fraction-of-a-set, fraction&times;fraction with an area-model visual, and mixed-number&times;whole reusing Lesson 1&rsquo;s mixed&harr;improper conversion skill). Both lessons include genuine click-driven interactive widgets (a live borrow/regroup simulator; a tap-to-select fraction-of-a-set counter grid; a step-through area-model overlap builder) rather than reveal-text only. Test: 15Q weighted toward Intermediate/Applied tiers (Sec A add/subtract, Sec B multiply, Sec C applied word problems + a reverse-fraction-of-a-set question + a capstone combining both lessons), entirely fresh numbers not reused from either lesson, plus 2 ungraded spiral-maintenance warm-ups on skills stale 4+ weeks (Vertically Opposite Angles, last seen decayed at U55; Path &amp; Frame, closed since U28). Fractions&ndash;decimals conversion and fraction-as-division are deliberately deferred to a later slot to keep this unit&rsquo;s scope to one cohesive skill per lesson. Awaiting Prem&rsquo;s attempt.',
+      status: 'pending'
+    },
+    {
       n: 57,
       badge: 'linear-gradient(135deg,#4A148C,#38096B)',
-      title: 'Art of Counting — Total Minus Bad: Multi-Case &amp; Zero-Edge (Brick 2 Retest)',
+      title: 'Art of Counting — Total Minus Bad: Multi-Case &amp; Zero-Edge (Brick 2 Retest) — HELD',
       tags: [
-        { t:'Brick 2 redesigned as an interactive game, test ready', s:'background:#F3E8FF;color:#4A148C;font-weight:700' },
-        { t:'Scope narrowed to Brick 2 only — targets U56 Q13', c:'torange' },
-        { t:'Brick 3 deferred as an optional bonus (not tested)', c:'torange' },
-        { t:'15 fresh Brick-2-only Qs, none reusing lesson/prior numbers', c:'tgreen' }
+        { t:'HELD 27 Aug 2026 — paused, not cancelled', s:'background:#F3E8FF;color:#4A148C;font-weight:700' },
+        { t:'Brick 2 redesigned as an interactive game, fully verified', c:'tgreen' },
+        { t:'Lui: still too hard for Prem right now — resume later', c:'torange' },
+        { t:'&rarr; U58 Fractions (school-curriculum pivot) takes over', c:'torange' }
       ],
-      note: 'Remediation unit, numbered U57 rather than a 4th U56 attempt, following project precedent (U40&rarr;U41, U49&rarr;U50, U47&rarr;U48, U44&rarr;U45). Brick 2 (multi-case bad &mdash; sum several bad cases together + the "fewer than needed = write 0" edge case, Counting_Lesson_MultiConstraint_Brick2.html) targets U56 3rd-attempt Q13 (marbles, not-all-same-colour). First built 20 Aug 2026 in the same worked-example format as Brick 1, but Lui reported it "too hard &amp; confusing" &mdash; hard enough that even an adult reading it cold couldn&rsquo;t follow it, a more serious signal than any prior lesson-difficulty note. Rebuilt 24 Aug 2026 from scratch as an interactive game ("Bag Sorting Challenge"): Prem sorts all 10 real handfuls of a small 5-counter jar by hand first (discovering the zero-edge case himself, since he never finds an all-blue card when only 2 blues exist), THEN meets the Choose-3 shortcut and sees it match what he just found, THEN plays through a bigger jar as 5 click-to-reveal scored rounds instead of one dense block, THEN predicts-before-reveals the zero-trap and the "not all same vs at least 1" discrimination, with a running &#11088; star score throughout. U57&rsquo;s scope is narrowed to Brick 2 only for this unit &mdash; Brick 3 (points-on-a-circle context + reverse-solving) is fully built and verified but deferred, linked from Brick 2&rsquo;s recap as an optional, not-tested bonus rather than folded into this unit. The test was rebuilt to match: 15 entirely fresh Brick-2-only questions (not-all-same-colour, zero-edge, double zero-edge, at-least-1 discrimination, a four-colour capstone generalisation, and a "read carefully" precision trap asking for BAD instead of GOOD), none reusing the lesson&rsquo;s or any prior test&rsquo;s numbers, plus the same 2 spiral-maintenance warm-ups (Balance Scales/Ratio Substitution; Rectangle Counting Any Grid). Awaiting Prem&rsquo;s attempt.',
-      status: 'pending'
+      note: 'Remediation unit, numbered U57 rather than a 4th U56 attempt, following project precedent (U40&rarr;U41, U49&rarr;U50, U47&rarr;U48, U44&rarr;U45). Brick 2 (multi-case bad &mdash; sum several bad cases together + the "fewer than needed = write 0" edge case, Counting_Lesson_MultiConstraint_Brick2.html) targets U56 3rd-attempt Q13 (marbles, not-all-same-colour). First built 20 Aug 2026 in the same worked-example format as Brick 1, but Lui reported it "too hard &amp; confusing" &mdash; hard enough that even an adult reading it cold couldn&rsquo;t follow it. Rebuilt 24 Aug 2026 from scratch as an interactive game ("Bag Sorting Challenge"): Prem sorts real handfuls of a small counter jar by hand first (discovering the zero-edge case himself), THEN meets the Choose-3 shortcut, THEN plays a bigger jar as 5 click-to-reveal scored rounds, THEN predicts-before-reveals the zero-trap and the "not all same vs at least 1" discrimination. Fully built and verified via headless simulation. <strong>27 Aug 2026: Lui&rsquo;s call &mdash; even after two redesigns, this is still too hard for Prem at this time. The whole Brick 2/3 track is HELD/paused, not cancelled</strong> &mdash; both lesson files and the Brick-2-only test remain built and ready, and the unit resumes (renumbered) whenever Lui says so. U58 onward pivots to Prem&rsquo;s real school curriculum instead (Fractions, Whole Numbers Recap, Area of Triangles, Ratio, Volume) &mdash; see the U58 entry above.',
+      status: 'held'
     },
     {
       n: 56,
@@ -1692,6 +1705,8 @@ PREM_DATA.renderSessionLog = function(containerId) {
     var pad = u.n < 10 ? '0' + u.n : '' + u.n;
     var statusHtml = u.status === 'pending'
       ? '<span class="sstatus" style="background:#fff5e6;color:#c05621;border:1px solid #fbd38d">&#9201; Pending</span>'
+      : u.status === 'held'
+      ? '<span class="sstatus" style="background:#F3E8FF;color:#4A148C;border:1px solid #CE93D8">&#10074;&#10074; Held</span>'
       : '<span class="sstatus sdone">&#10003; Done</span>';
     var tagsHtml = '';
     u.tags.forEach(function(tg) {

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multiplying With Fractions — Fractions Lesson 2</title>
+<style>
+:root{--nav:#EF6C00;--nav-dark:#BF360C;--bg:#FFF3E0;--card:#fff;--acc:#EF6C00;--ok:#2E7D32;--err:#C62828;--warn:#BF360C}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#BF360C;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#FFF3E0,#FFF8EE);border:2px solid #FFB74D;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#BF360C;font-weight:700;margin-bottom:6px}
+.big-rule{background:#FFF3E0;border:2px solid #EF6C00;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#BF360C;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FFB74D;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#FFF3E0;border:1.5px solid #EF6C00;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#BF360C;text-align:center;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#FFF8EE;border:1px solid #FFB74D;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#EF6C00}
+.steps .ln.ans{color:#BF360C;font-weight:800}
+.tree{background:#FFFCF8;border:2px dashed #FFB74D;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #FFB74D;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#EF6C00;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.warn-box{background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#BF360C}
+.q-card{background:#FFF8EE;border:1.5px solid #FFB74D;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #FFB74D;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#FFF3E0}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#FFF3E0;color:#BF360C;border:2px solid #BF360C;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#EF6C00;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E0;color:#BF360C;border:1.5px solid #FFB74D;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.reveal-btn{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin:6px 6px 6px 0}
+.reveal-line{display:none;background:#FFF8EE;border:1px solid #FFB74D;border-radius:8px;padding:10px 14px;margin:6px 0;font-size:.98rem;font-weight:700;color:#BF360C}
+/* fraction-of-set widget */
+.counter-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0}
+.counter{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.7rem;box-shadow:0 1px 3px rgba(0,0,0,.25);cursor:pointer;background:#FFB74D;user-select:none}
+.counter.picked{background:#EF6C00;transform:scale(1.08)}
+.tap-state{text-align:center;font-weight:800;color:#BF360C;font-size:1.05rem;margin:8px 0}
+.tap-hint{text-align:center;color:#8D6E63;font-size:.85rem;margin-bottom:6px}
+/* area model */
+.areawrap{display:flex;justify-content:center;margin:16px 0}
+.areagrid{display:grid;border:2px solid #333;width:220px;height:150px}
+.acell{border:1px solid #ccc}
+.acell.hit{background:#EF6C00}
+.acell.rowon{background:#FFCC80}
+.acell.colon{background:#FFE0B2}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Multiplying With Fractions — Fractions Lesson 2</span>
+  <span class="tnav-pill" id="pill">1 / 9</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">"Of" shows up everywhere</div>
+    <p>"I ate &frac14; <strong>of</strong> the pizza." "The sale takes &frac13; <strong>off</strong> the price." "A recipe for 5 batches needs &#8532; cup <strong>of</strong> sugar EACH." Every time you see a fraction attached to an amount with the word "of," you're being asked to <strong>multiply</strong>. Bakers scale recipes, shoppers work out discounts, and builders cut materials to fractional lengths — all using this one skill.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Your new superpower</div>
+    <p>You already know how to add and subtract mixed numbers (Lesson 1). Now you'll learn to <strong>multiply</strong> with fractions — a fraction of a set, fraction &times; fraction, and mixed number &times; whole number — all using ONE method.</p>
+  </div>
+  <div class="big-rule">Multiplying by a fraction means taking a PART of something.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: the one rule -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F9EE; The ONE Rule For Every Case</h2>
+  <div class="why">
+    <div class="why-title">The one new idea</div>
+    <p>No matter what you're multiplying — a fraction, a whole number, or a mixed number — the method is always the SAME: write everything as a fraction (a whole number n is really n/1; a mixed number gets converted to an improper fraction, like you learned in Lesson 1), then <strong>multiply straight across</strong>: numerator &times; numerator, denominator &times; denominator. Simplify at the end.</p>
+  </div>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Write every number as a fraction (whole number n &rarr; n/1, mixed number &rarr; improper fraction).</div>
+    <div class="node"><span class="step-n">2</span>Multiply the TWO numerators together.</div>
+    <div class="node"><span class="step-n">3</span>Multiply the TWO denominators together.</div>
+    <div class="node"><span class="step-n">4</span>Simplify. If the answer is improper, convert back to a mixed number.</div>
+  </div>
+  <div class="rulebar">Numerator &times; numerator, over denominator &times; denominator. Every single time.</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Don't mix this up with Lesson 1! If you see a <strong>+</strong> or <strong>&minus;</strong> sign, match denominators and combine (Lesson 1's method). Only use THIS multiply-straight-across method when you see a <strong>&times;</strong> sign, or the word "<strong>of</strong>."</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Fraction Of A Set &#8594;</button></div>
+</div>
+
+<!-- s2: fraction of a set worked example -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Case 1 — Fraction Of A Set</h2>
+  <p><strong>What is &frac34; of 20 marbles?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — write 20 as a fraction:</span></div>
+    <div class="ln">20 = 20/1</div>
+    <div class="ln"><span class="note">Step 2 &amp; 3 — multiply straight across:</span></div>
+    <div class="ln">&frac34; &times; 20/1 &nbsp;=&nbsp; (3&times;20) / (4&times;1) &nbsp;=&nbsp; 60/4</div>
+    <div class="ln"><span class="note">Step 4 — simplify (60 &divide; 4):</span></div>
+    <div class="ln ans">&frac34; of 20 = 15</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; You might already know a shortcut here — divide 20 by the denominator (4) first, THEN multiply by the numerator (3): 20&divide;4=5, 5&times;3=15. Same answer! Multiplying straight across always works, even when the shortcut is trickier to spot — so it's the method to trust.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try It Yourself &#8594;</button></div>
+</div>
+
+<!-- s3: interactive fraction of set widget -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F4CB; Tap To Find 2/5 Of 15 Counters</h2>
+  <p class="tap-hint">There are 15 counters below, with small gaps splitting them into 3 groups of 5. In EACH group of 5, tap exactly 2 counters (that's 2/5 of that group — and of the whole set too).</p>
+  <div class="tap-state" id="tapState">Picked: 0 / 15</div>
+  <div class="counter-row" id="counterGrid"></div>
+  <button class="reveal-btn" onclick="showFracOfSetAnswer()">I've picked mine — check the maths</button>
+  <div class="reveal-line" id="fosAnswer">
+    2/5 &times; 15/1 = (2&times;15)/(5&times;1) = 30/5 = <strong>6</strong>. So 2/5 of 15 counters = 6 counters — that's how many you should have tapped!
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Fraction &times; Fraction &#8594;</button></div>
+</div>
+
+<!-- s4: fraction x fraction with area model -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Case 2 — Fraction &times; Fraction</h2>
+  <p><strong>2/3 &times; 3/5 = ?</strong> Here's WHY the "multiply straight across" rule works, using a grid picture: shade 2/3 of the rows one way, and 3/5 of the columns another way. The part shaded in BOTH directions is the answer.</p>
+  <div class="areawrap"><div class="areagrid" id="areaGrid1" style="grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr)"></div></div>
+  <div class="steps">
+    <div class="ln"><span class="note">The grid has 3 rows &times; 5 columns = 15 cells in total (that's the new denominator: 3&times;5).</span></div>
+    <div class="ln"><span class="note">2 of the 3 rows are shaded, and 3 of the 5 columns are shaded — the overlap is 2&times;3 = 6 cells (that's the new numerator).</span></div>
+    <div class="ln">2/3 &times; 3/5 &nbsp;=&nbsp; (2&times;3)/(3&times;5) &nbsp;=&nbsp; 6/15</div>
+    <div class="ln"><span class="note">Simplify (both divisible by 3):</span></div>
+    <div class="ln ans">2/3 &times; 3/5 = 6/15 = 2/5</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Explore The Grid &#8594;</button></div>
+</div>
+
+<!-- s5: interactive area model widget -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x1F4CB; Watch The Overlap — &frac12; &times; 2/3</h2>
+  <p class="tap-hint">Press the button to shade the rows for &frac12;, then the columns for 2/3, and see where they overlap.</p>
+  <div class="areawrap"><div class="areagrid" id="areaGrid2" style="grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr)"></div></div>
+  <button class="reveal-btn" onclick="stepArea2(1)">Step 1 — shade &frac12; (1 of 2 rows)</button>
+  <button class="reveal-btn" onclick="stepArea2(2)">Step 2 — shade 2/3 (2 of 3 columns)</button>
+  <button class="reveal-btn" onclick="stepArea2(3)">Step 3 — show the overlap</button>
+  <div class="reveal-line" id="areaResult2">
+    The grid has 2&times;3 = 6 cells total. The overlap (shaded both ways) is 1&times;2 = 2 cells.
+    <br><strong>&frac12; &times; 2/3 = 2/6 = &#8531;</strong>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Mixed Number &times; Whole &#8594;</button></div>
+</div>
+
+<!-- s6: mixed x whole -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>Case 3 — Mixed Number &times; Whole Number</h2>
+  <div class="why">
+    <div class="why-title">Reusing what you already know</div>
+    <p>From Lesson 1, you can already turn a mixed number into an improper fraction. Do that FIRST, then it's just the same "multiply straight across" rule as before.</p>
+  </div>
+  <p><strong>2&#8531; &times; 4 = ?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — convert the mixed number (from Lesson 1's rule: whole&times;denominator + numerator):</span></div>
+    <div class="ln">2&#8531; &rarr; (2&times;3)+1 = 7 &nbsp;&rarr;&nbsp; 7/3</div>
+    <div class="ln"><span class="note">Step 1b — write the whole number 4 as a fraction:</span></div>
+    <div class="ln">4 = 4/1</div>
+    <div class="ln"><span class="note">Step 2 &amp; 3 — multiply straight across:</span></div>
+    <div class="ln">7/3 &times; 4/1 = (7&times;4)/(3&times;1) = 28/3</div>
+    <div class="ln"><span class="note">Step 4 — 28/3 is improper, convert back to a mixed number (28&divide;3 = 9 remainder 1):</span></div>
+    <div class="ln ans">2&#8531; &times; 4 = 9&#8531;</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; A very common mistake is multiplying only the WHOLE part (2&times;4=8) and forgetting the fraction part entirely. Converting to an improper fraction FIRST avoids that trap completely.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s7: practice -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Multiplying With Fractions</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; What is 5/6 of 24?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 18</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 4</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">5/6 &times; 24/1 = (5&times;24)/(6&times;1) = 120/6</div>
+      <div class="ln ans">5/6 of 24 = 20</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; 3/4 &times; 2/5 = ?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 5/9</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 3/10</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 6/20 (not simplified)</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">3/4 &times; 2/5 = (3&times;2)/(4&times;5) = 6/20</div>
+      <div class="ln ans">6/20 simplified (&divide;2) = 3/10</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; 3 2/5 &times; 3 = ?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 9 2/5</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 10 1/5</label>
+    </div>
+    <button class="btn-check" onclick="chk(2,'C')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">3 2/5 &rarr; (3&times;5)+2 = 17 &rarr; 17/5. Then 17/5 &times; 3/1 = 51/5.</div>
+      <div class="ln ans">51/5 = 10 remainder 1 = 10 1/5</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4 (Word Problem).&nbsp; A recipe needs 2/3 cup of sugar per batch. How much sugar is needed for 5 batches?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 3&#8531; cups</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 2&#8532; cups</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 10/3 cups (not simplified)</label>
+    </div>
+    <button class="btn-check" onclick="chk(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">2/3 &times; 5/1 = 10/3.</div>
+      <div class="ln ans">10/3 = 3 remainder 1 = 3&#8531; cups</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Mastery Checklist &#8594;</button></div>
+</div>
+
+<!-- s8: recap -->
+<div class="screen" id="s8">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>To multiply with fractions, write EVERYTHING as a fraction (whole number n &rarr; n/1, mixed number &rarr; improper fraction), multiply numerator &times; numerator and denominator &times; denominator, then simplify. Same method for a fraction of a set, fraction &times; fraction, and mixed number &times; whole number.</strong></p>
+</div>
+<div class="card" style="background:#FFF3E0;border:1px solid #FFB74D">
+  <h3 style="color:#BF360C">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You can write a whole number as a fraction over 1</li>
+    <li>You can convert a mixed number to an improper fraction (from Lesson 1) before multiplying</li>
+    <li>You multiply numerators together and denominators together — never add them</li>
+    <li>You always simplify, and convert an improper answer back to a mixed number</li>
+    <li>You recognise "of" in a word problem means multiply</li>
+  </ul>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#EF6C00;color:#fff;border:2px solid #EF6C00;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chk(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+function revealLine(id){document.getElementById(id).style.display='block';}
+
+// ---- s3: fraction-of-a-set tap widget (2/5 of 15) ----
+var picks=0, TOTAL=15;
+function renderCounterGrid(){
+  var grid=document.getElementById('counterGrid'); grid.innerHTML='';
+  for(var i=0;i<TOTAL;i++){
+    var c=document.createElement('div'); c.className='counter'; c.textContent=(i+1); c.dataset.i=i;
+    if(i%5===0 && i>0){ c.style.marginLeft='16px'; } // visual gap = new group of 5 starts here
+    c.onclick=(function(idx,el){return function(){toggleCounter(idx,el);};})(i,c);
+    grid.appendChild(c);
+  }
+}
+var pickedSet={};
+function toggleCounter(i,el){
+  if(pickedSet[i]){delete pickedSet[i]; el.classList.remove('picked');}
+  else{pickedSet[i]=true; el.classList.add('picked');}
+  var n=Object.keys(pickedSet).length;
+  document.getElementById('tapState').textContent='Picked: '+n+' / '+TOTAL;
+}
+function showFracOfSetAnswer(){ document.getElementById('fosAnswer').style.display='block'; }
+renderCounterGrid();
+
+// ---- s4: static area model grid (2/3 x 3/5) ----
+function buildAreaGrid1(){
+  var g=document.getElementById('areaGrid1');
+  for(var r=0;r<3;r++){
+    for(var c=0;c<5;c++){
+      var cell=document.createElement('div'); cell.className='acell';
+      if(r<2 && c<3) cell.classList.add('hit');
+      else if(r<2) cell.classList.add('rowon');
+      else if(c<3) cell.classList.add('colon');
+      g.appendChild(cell);
+    }
+  }
+}
+buildAreaGrid1();
+
+// ---- s5: interactive area model (1/2 x 2/3) ----
+var area2cells=[];
+function buildAreaGrid2(){
+  var g=document.getElementById('areaGrid2'); g.innerHTML=''; area2cells=[];
+  for(var r=0;r<2;r++){
+    var rowArr=[];
+    for(var c=0;c<3;c++){
+      var cell=document.createElement('div'); cell.className='acell';
+      g.appendChild(cell); rowArr.push(cell);
+    }
+    area2cells.push(rowArr);
+  }
+}
+function stepArea2(step){
+  for(var r=0;r<2;r++)for(var c=0;c<3;c++){
+    var cell=area2cells[r][c]; cell.className='acell';
+    var rowShaded = (step>=1 && r===0);
+    var colShaded = (step>=2 && c<2);
+    if(step>=3 && rowShaded && colShaded) cell.classList.add('hit');
+    else if(rowShaded) cell.classList.add('rowon');
+    else if(colShaded) cell.classList.add('colon');
+  }
+  if(step>=3) document.getElementById('areaResult2').style.display='block';
+}
+buildAreaGrid2();
+</script>
+</body>
+</html>
