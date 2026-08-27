@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Exponents &amp; Nested Brackets — PEMDAS Lesson 2</title>
+<title>Exponents &amp; Nested Parentheses — PEMDAS Lesson 2</title>
 <style>
 :root{--nav:#5E35B1;--nav-dark:#4527A0;--bg:#EDE7F6;--card:#fff;--acc:#5E35B1;--ok:#2E7D32;--err:#C62828;--warn:#4527A0}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -61,7 +61,7 @@ p,li{font-size:1rem;line-height:1.65}
 .opbtn.wrong{animation:shake .3s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .widget-msg{text-align:center;font-weight:700;color:#4527A0;min-height:24px;margin-top:6px}
-/* nested brackets widget */
+/* nested parentheses widget */
 .nestbox{background:#FCFBFE;border:2px dashed #B39DDB;border-radius:10px;padding:20px;margin:14px 0;text-align:center}
 .nestexpr{font-size:1.4rem;font-weight:800;color:#1a1a2e}
 .nestexpr .layer1{padding:2px 6px;border-radius:6px}
@@ -75,7 +75,7 @@ p,li{font-size:1rem;line-height:1.65}
 <body>
 <nav class="topnav">
   <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
-  <span class="tnav-title">Exponents &amp; Nested Brackets — PEMDAS Lesson 2</span>
+  <span class="tnav-title">Exponents &amp; Nested Parentheses — PEMDAS Lesson 2</span>
   <span class="tnav-pill" id="pill">1 / 9</span>
   <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
 </nav>
@@ -90,7 +90,7 @@ p,li{font-size:1rem;line-height:1.65}
   </div>
   <div class="why">
     <div class="why-title">Your new superpower</div>
-    <p>In Lesson 1 you learned Brackets &rarr; Multiply/Divide &rarr; Add/Subtract. Today you add TWO new pieces to that same ladder: <strong>Exponents</strong> (which slot in right after brackets), and <strong>brackets inside brackets</strong> — for when a question is extra tricky.</p>
+    <p>In Lesson 1 you learned Parentheses &rarr; Multiply/Divide &rarr; Add/Subtract. Today you add TWO new pieces to that same ladder: <strong>Exponents</strong> (which slot in right after parentheses), and <strong>parentheses inside parentheses</strong> — for when a question is extra tricky.</p>
   </div>
   <div class="big-rule">An exponent is just a fast way to write repeated multiplying.</div>
 </div>
@@ -121,12 +121,12 @@ p,li{font-size:1rem;line-height:1.65}
   <h2>The Full Order Ladder</h2>
   <p>Here's the complete ladder from Lesson 1, now with Exponents filled in:</p>
   <div class="tree">
-    <div class="node"><span class="step-n">1</span><strong>Brackets ( )</strong> — always done first, no matter what's inside.</div>
+    <div class="node"><span class="step-n">1</span><strong>Parentheses ( )</strong> — remember, some books call these "Brackets": <strong>Parentheses = Brackets = ( )</strong>. Always done first, no matter what's inside.</div>
     <div class="node new"><span class="step-n">2</span><strong>Exponents</strong> (powers, like 3&sup2;) — done next, BEFORE Multiply/Divide.</div>
     <div class="node"><span class="step-n">3</span><strong>Multiply &times; and Divide &divide;</strong> — left to right.</div>
     <div class="node"><span class="step-n">4</span><strong>Add + and Subtract &minus;</strong> — left to right.</div>
   </div>
-  <div class="rulebar">Brackets &rarr; Exponents &rarr; Multiply/Divide (left&rarr;right) &rarr; Add/Subtract (left&rarr;right)</div>
+  <div class="rulebar">Parentheses &rarr; Exponents &rarr; Multiply/Divide (left&rarr;right) &rarr; Add/Subtract (left&rarr;right)</div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Exponents Before Multiply &#8594;</button></div>
 </div>
@@ -137,7 +137,7 @@ p,li{font-size:1rem;line-height:1.65}
   <h2>Worked Example — Exponents Before Multiply</h2>
   <p><strong>5 &times; 3&sup2; = ?</strong></p>
   <div class="steps">
-    <div class="ln"><span class="note">Step 1 — no brackets. Step 2 — Exponents come before Multiply, so do 3&sup2; first:</span></div>
+    <div class="ln"><span class="note">Step 1 — no parentheses. Step 2 — Exponents come before Multiply, so do 3&sup2; first:</span></div>
     <div class="ln">3&sup2; = 3 &times; 3 = 9</div>
     <div class="ln"><span class="note">Step 3 — the expression is now:</span></div>
     <div class="ln">5 &times; 9</div>
@@ -161,43 +161,43 @@ p,li{font-size:1rem;line-height:1.65}
   </div>
   <div class="widget-msg" id="widgetMsg">Which piece should be worked out FIRST? (Hint: check the ladder!)</div>
 </div>
-<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Brackets Inside Brackets &#8594;</button></div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Parentheses Inside Parentheses &#8594;</button></div>
 </div>
 
-<!-- s5: nested brackets worked example -->
+<!-- s5: nested parentheses worked example -->
 <div class="screen" id="s5">
 <div class="card">
-  <h2>Worked Example — Brackets Inside Brackets</h2>
-  <p><strong>3 &times; (4 + (6 &minus; 2)) = ?</strong> When brackets are nested (one inside another), always solve the INNERMOST pair first — the one with no other brackets inside it.</p>
+  <h2>Worked Example — Parentheses Inside Parentheses</h2>
+  <p><strong>3 &times; (4 + (6 &minus; 2)) = ?</strong> When parentheses are nested (one inside another), always solve the INNERMOST pair first — the one with no other parentheses inside it.</p>
   <div class="steps">
-    <div class="ln"><span class="note">Step 1a — find the INNERMOST brackets: (6 &minus; 2). Solve that first:</span></div>
+    <div class="ln"><span class="note">Step 1a — find the INNERMOST parentheses: (6 &minus; 2). Solve that first:</span></div>
     <div class="ln">(6 &minus; 2) = 4</div>
-    <div class="ln"><span class="note">Step 1b — the expression is now, with only ONE bracket layer left:</span></div>
+    <div class="ln"><span class="note">Step 1b — the expression is now, with only ONE parenthesis layer left:</span></div>
     <div class="ln">3 &times; (4 + 4)</div>
-    <div class="ln"><span class="note">Step 1c — solve that remaining bracket:</span></div>
+    <div class="ln"><span class="note">Step 1c — solve that remaining parenthesis:</span></div>
     <div class="ln">(4 + 4) = 8</div>
-    <div class="ln"><span class="note">Step 2 — now it's just Multiply, no brackets left:</span></div>
+    <div class="ln"><span class="note">Step 2 — now it's just Multiply, no parentheses left:</span></div>
     <div class="ln ans">3 &times; (4 + (6 &minus; 2)) = 24</div>
   </div>
-  <div class="warn-box"><p>&#x26A0;&#xFE0F; Work from the INSIDE OUT, like peeling an onion — innermost brackets first, then the next layer out, and so on, until there are no brackets left.</p></div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Work from the INSIDE OUT, like peeling an onion — innermost parentheses first, then the next layer out, and so on, until there are no parentheses left.</p></div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Explore Nesting &#8594;</button></div>
 </div>
 
-<!-- s6: interactive nested brackets widget -->
+<!-- s6: interactive nested parentheses widget -->
 <div class="screen" id="s6">
 <div class="card">
-  <h2>&#x1F4CB; Peel The Brackets, Layer By Layer</h2>
-  <p class="tap-hint">Press each button in order to see which bracket layer gets solved first.</p>
+  <h2>&#x1F4CB; Peel The Parentheses, Layer By Layer</h2>
+  <p class="tap-hint">Press each button in order to see which parenthesis layer gets solved first.</p>
   <div class="nestbox">
     <div class="nestexpr" id="nestExpr">2 &times; <span class="layer1" id="nl1">(<span class="layer2" id="nl2">(5 &minus; 2)</span> + 3)</span></div>
   </div>
-  <button class="reveal-btn" onclick="nestStep(1)">Step 1 — highlight the INNERMOST brackets</button>
+  <button class="reveal-btn" onclick="nestStep(1)">Step 1 — highlight the INNERMOST parentheses</button>
   <button class="reveal-btn" onclick="nestStep(2)">Step 2 — solve them: (5&minus;2) = 3</button>
-  <button class="reveal-btn" onclick="nestStep(3)">Step 3 — highlight the remaining outer brackets</button>
+  <button class="reveal-btn" onclick="nestStep(3)">Step 3 — highlight the remaining outer parentheses</button>
   <button class="reveal-btn" onclick="nestStep(4)">Step 4 — solve them and finish</button>
   <div class="reveal-line" id="nestResult">
-    (5&minus;2)=3 &rarr; (3+3)=6 &rarr; 2&times;6 = <strong>12</strong>. Innermost bracket always goes first, then work outward.
+    (5&minus;2)=3 &rarr; (3+3)=6 &rarr; 2&times;6 = <strong>12</strong>. Innermost parenthesis always goes first, then work outward.
   </div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
@@ -207,7 +207,7 @@ p,li{font-size:1rem;line-height:1.65}
 <div class="screen" id="s7">
 <div class="card">
   <span class="badge-cap">&#11088; Your Turn</span>
-  <h2>Practice — Exponents &amp; Nested Brackets</h2>
+  <h2>Practice — Exponents &amp; Nested Parentheses</h2>
   <div class="q-card">
     <div class="q-text">P1.&nbsp; 7 + 2&sup3; = ?</div>
     <div class="options">
@@ -234,7 +234,7 @@ p,li{font-size:1rem;line-height:1.65}
     <div class="feedback" id="fb1"></div>
     <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
     <div class="steps-reveal" id="sr1"><div class="steps">
-      <div class="ln">Brackets first: (9&minus;4)=5</div>
+      <div class="ln">Parentheses first: (9&minus;4)=5</div>
       <div class="ln ans">5&sup2; = 5&times;5 = 25</div>
     </div></div>
   </div>
@@ -249,7 +249,7 @@ p,li{font-size:1rem;line-height:1.65}
     <div class="feedback" id="fb2"></div>
     <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
     <div class="steps-reveal" id="sr2"><div class="steps">
-      <div class="ln">Inside the brackets, exponent before add: 3&sup2;=9, so (5+9)=14</div>
+      <div class="ln">Inside the parentheses, exponent before add: 3&sup2;=9, so (5+9)=14</div>
       <div class="ln ans">2 &times; 14 = 28</div>
     </div></div>
   </div>
@@ -276,14 +276,14 @@ p,li{font-size:1rem;line-height:1.65}
 <div class="screen" id="s8">
 <div class="golden">
   <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
-  <p style="font-size:1.05rem"><strong>The full ladder is Brackets &rarr; Exponents &rarr; Multiply/Divide (left to right) &rarr; Add/Subtract (left to right). When brackets are nested, always solve the INNERMOST pair first and work outward, like peeling an onion.</strong></p>
+  <p style="font-size:1.05rem"><strong>The full ladder is Parentheses &rarr; Exponents &rarr; Multiply/Divide (left to right) &rarr; Add/Subtract (left to right). When parentheses are nested, always solve the INNERMOST pair first and work outward, like peeling an onion.</strong></p>
 </div>
 <div class="card" style="background:#EDE7F6;border:1px solid #B39DDB">
   <h3 style="color:#4527A0">&#x1F3C6; You've got it when&hellip;</h3>
   <ul>
     <li>You know an exponent means "multiply the base by itself that many times" — not "multiply by the exponent"</li>
-    <li>You solve exponents BEFORE multiply/divide, but AFTER brackets</li>
-    <li>You find the INNERMOST bracket pair first when brackets are nested, then work outward</li>
+    <li>You solve exponents BEFORE multiply/divide, but AFTER parentheses</li>
+    <li>You find the INNERMOST parenthesis pair first when parentheses are nested, then work outward</li>
     <li>You can combine ALL FOUR ladder stages in one expression without getting lost</li>
     <li>You always finish by checking: did I answer the EXACT question asked?</li>
   </ul>
@@ -333,12 +333,12 @@ function pickOp(which){
   } else {
     btn.classList.add('wrong');
     setTimeout(function(){btn.classList.remove('wrong');}, 300);
-    msg.textContent = 'Not yet — check the ladder (Brackets, Exponents, then Multiply/Divide, then Add/Subtract).';
+    msg.textContent = 'Not yet — check the ladder (Parentheses, Exponents, then Multiply/Divide, then Add/Subtract).';
     msg.style.color = '#C62828';
   }
 }
 
-// ---- s6: nested brackets peel widget ----
+// ---- s6: nested parentheses peel widget ----
 function nestStep(step){
   var l1 = document.getElementById('nl1'), l2 = document.getElementById('nl2'),
       expr = document.getElementById('nestExpr'), result = document.getElementById('nestResult');
