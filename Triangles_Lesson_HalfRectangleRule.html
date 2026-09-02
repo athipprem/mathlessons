@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Area of a Triangle — The Half-Rectangle Rule — Triangles Lesson 1</title>
+<style>
+:root{--nav:#BF360C;--nav-dark:#8D2B08;--bg:#FFF3E8;--card:#fff;--acc:#BF360C;--ok:#2E7D32;--err:#C62828;--warn:#8D2B08}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#8D2B08;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#FFF3E8,#FFF8F2);border:2px solid #FFCCBC;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#8D2B08;font-weight:700;margin-bottom:6px}
+.big-rule{background:#FFF3E8;border:2px solid #BF360C;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#8D2B08;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF3E8,#FFE0CC);border:2px solid #FFCCBC;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#FFF3E8;border:1.5px solid #BF360C;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#8D2B08;text-align:center;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#FFF8F2;border:1px solid #FFCCBC;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#BF360C}
+.steps .ln.ans{color:#8D2B08;font-weight:800}
+.tree{background:#FFFBF8;border:2px dashed #FFCCBC;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #FFCCBC;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#BF360C;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.tree .node.new{border-color:#BF360C;border-width:2px;background:#FFF8F2}
+.warn-box{background:#FFF3E8;border:1.5px solid #FFCCBC;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#8D2B08}
+.q-card{background:#FFF8F2;border:1.5px solid #FFCCBC;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #FFCCBC;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#FFF3E8}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#FFF3E8;color:#8D2B08;border:2px solid #8D2B08;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#BF360C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E8;color:#8D2B08;border:1.5px solid #FFCCBC;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#A1887F;font-size:.85rem;margin-bottom:6px}
+.diagram{text-align:center;background:#FFFBF8;border:2px dashed #FFCCBC;border-radius:10px;padding:16px;margin:12px 0}
+.diagram svg{max-width:100%;height:auto}
+.diagram .cap{font-size:.85rem;color:#8D2B08;margin-top:6px;font-weight:600}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Area of a Triangle — The Half-Rectangle Rule</span>
+  <span class="tnav-pill" id="pill">1 / 9</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">Triangles are everywhere</div>
+    <p>A sailboat's sail, a slice of pizza, a roof truss, a warning road sign, a triangular garden bed — all triangles. If you know how much MATERIAL or SPACE a triangle takes up (its <strong>area</strong>), you can figure out how much fabric to buy for a sail, how much paint a roof needs, or how much soil fills a garden bed.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Your new superpower</div>
+    <p>You already know how to find the area of a rectangle (length &times; width). Today you'll learn a simple trick: <strong>every triangle is exactly HALF of a rectangle</strong> — once you see that, finding a triangle's area is easy.</p>
+  </div>
+  <div class="big-rule">A triangle's area is always HALF of a matching rectangle's area.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: base and height definition -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F4D0; Base and Height</h2>
+  <div class="why">
+    <div class="why-title">Two words you need first</div>
+    <p>Every triangle has a <strong>base</strong> (any one side, usually drawn flat on the bottom) and a <strong>height</strong> (the STRAIGHT UP-AND-DOWN distance from the base to the opposite corner — mathematicians call this "perpendicular," which just means it makes a perfect right angle (&#x1F4D0;) with the base).</p>
+  </div>
+  <div class="diagram">
+    <svg viewBox="0 0 200 180" width="260">
+      <polygon points="20,150 20,30 140,150" fill="#FFE0CC" stroke="#BF360C" stroke-width="2.5"/>
+      <line x1="20" y1="150" x2="20" y2="30" stroke="#8D2B08" stroke-width="3"/>
+      <rect x="20" y="138" width="12" height="12" fill="none" stroke="#8D2B08" stroke-width="2"/>
+      <text x="65" y="168" font-size="13" fill="#8D2B08" font-weight="700">base</text>
+      <text x="-2" y="90" font-size="13" fill="#8D2B08" font-weight="700" transform="rotate(-90,10,90)">height</text>
+    </svg>
+    <div class="cap">The little square = a right angle. Height meets the base at exactly 90&deg;.</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The height is NOT the slanted side of the triangle. It's the straight up-and-down (perpendicular) distance — imagine dropping a plumb line from the top corner straight down to the base.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Rule &#8594;</button></div>
+</div>
+
+<!-- s2: the rule - half rectangle -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>The Half-Rectangle Rule</h2>
+  <p>Take any rectangle. Draw ONE diagonal line corner to corner. You get TWO identical triangles — each one is exactly half the rectangle.</p>
+  <div class="diagram">
+    <svg viewBox="0 0 220 150" width="260">
+      <rect x="20" y="20" width="180" height="100" fill="none" stroke="#8D2B08" stroke-width="2"/>
+      <polygon points="20,20 20,120 200,120" fill="#FFCCBC" stroke="none"/>
+      <line x1="20" y1="20" x2="200" y2="120" stroke="#BF360C" stroke-width="2.5"/>
+      <text x="90" y="138" font-size="13" fill="#8D2B08" font-weight="700">base</text>
+      <text x="0" y="75" font-size="13" fill="#8D2B08" font-weight="700">height</text>
+    </svg>
+    <div class="cap">The shaded triangle is exactly HALF of the whole rectangle.</div>
+  </div>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span>Rectangle area = base &times; height</div>
+    <div class="node new"><span class="step-n">2</span>Triangle = HALF the rectangle, so&hellip;</div>
+  </div>
+  <div class="big-rule">Area of a Triangle = &frac12; &times; base &times; height</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Worked Example &#8594;</button></div>
+</div>
+
+<!-- s3: worked example right triangle -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Worked Example — Right Triangle</h2>
+  <p>A right triangle has base = 8 cm and height = 6 cm. What is its area?</p>
+  <div class="diagram">
+    <svg viewBox="0 0 200 180" width="220">
+      <polygon points="20,150 20,30 140,150" fill="#FFE0CC" stroke="#BF360C" stroke-width="2.5"/>
+      <rect x="20" y="138" width="12" height="12" fill="none" stroke="#8D2B08" stroke-width="2"/>
+      <text x="65" y="168" font-size="13" fill="#8D2B08" font-weight="700">base = 8 cm</text>
+      <text x="-30" y="90" font-size="13" fill="#8D2B08" font-weight="700" transform="rotate(-90,10,90)">height = 6 cm</text>
+    </svg>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — write the rule:</span></div>
+    <div class="ln">Area = &frac12; &times; base &times; height</div>
+    <div class="ln"><span class="note">Step 2 — put in the numbers:</span></div>
+    <div class="ln">Area = &frac12; &times; 8 &times; 6</div>
+    <div class="ln"><span class="note">Step 3 — multiply base &times; height first:</span></div>
+    <div class="ln">8 &times; 6 = 48</div>
+    <div class="ln"><span class="note">Step 4 — take half:</span></div>
+    <div class="ln">48 &divide; 2 = 24</div>
+    <div class="ln ans">Area = 24 cm&sup2;</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The unit is always SQUARE units (cm&sup2;, m&sup2;) because area measures flat SPACE, not a length. Never forget the little "&sup2;".</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Acute Triangle &#8594;</button></div>
+</div>
+
+<!-- s4: worked example acute triangle -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>Worked Example — Acute Triangle (Height Falls INSIDE)</h2>
+  <p>An acute triangle (all angles less than 90&deg;) has base = 10 cm and height = 7 cm. Here, the height line drops straight down from the top corner and lands INSIDE the base.</p>
+  <div class="diagram">
+    <svg viewBox="0 0 220 180" width="240">
+      <polygon points="20,150 190,150 100,30" fill="#FFE0CC" stroke="#BF360C" stroke-width="2.5"/>
+      <line x1="100" y1="30" x2="100" y2="150" stroke="#8D2B08" stroke-width="2.5" stroke-dasharray="5,4"/>
+      <rect x="94" y="138" width="12" height="12" fill="none" stroke="#8D2B08" stroke-width="2"/>
+      <text x="80" y="168" font-size="13" fill="#8D2B08" font-weight="700">base = 10 cm</text>
+      <text x="106" y="95" font-size="13" fill="#8D2B08" font-weight="700">height = 7 cm</text>
+    </svg>
+    <div class="cap">The dashed line is the height — it doesn't have to be a SIDE of the triangle, just a straight perpendicular drop to the base.</div>
+  </div>
+  <div class="steps">
+    <div class="ln">Area = &frac12; &times; base &times; height</div>
+    <div class="ln">Area = &frac12; &times; 10 &times; 7</div>
+    <div class="ln">10 &times; 7 = 70</div>
+    <div class="ln">70 &divide; 2 = 35</div>
+    <div class="ln ans">Area = 35 cm&sup2;</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Spot The Height &#8594;</button></div>
+</div>
+
+<!-- s5: interactive spot-the-height -->
+<div class="screen" id="s5">
+<div class="card">
+  <span class="badge-cap">&#x1F50E; Spot The Height</span>
+  <h2>Which Line Is The Height?</h2>
+  <p class="tap-hint">For each triangle, the base is the flat bottom side. Pick which lettered line is the HEIGHT (the perpendicular one, making a right angle with the base).</p>
+
+  <div class="q-card">
+    <div class="q-text">Triangle 1 (right triangle):</div>
+    <div class="diagram">
+      <svg viewBox="0 0 200 170" width="200">
+        <polygon points="20,140 20,30 150,140" fill="#FFE0CC" stroke="#BF360C" stroke-width="2"/>
+        <text x="78" y="158" font-size="13" fill="#8D2B08" font-weight="700">A</text>
+        <text x="0" y="88" font-size="13" fill="#8D2B08" font-weight="700">B</text>
+        <text x="95" y="78" font-size="13" fill="#8D2B08" font-weight="700">C</text>
+      </svg>
+    </div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="s5q0" value="A"> A — the bottom (base)</label>
+      <label class="opt"><input type="radio" name="s5q0" value="B"> B — the left side</label>
+      <label class="opt"><input type="radio" name="s5q0" value="C"> C — the slanted side</label>
+    </div>
+    <button class="btn-check" onclick="chk('s5q0','fbs5q0','B')">Check</button>
+    <div class="feedback" id="fbs5q0"></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Triangle 2 (acute triangle, height drawn dashed):</div>
+    <div class="diagram">
+      <svg viewBox="0 0 220 170" width="220">
+        <polygon points="20,140 190,140 100,30" fill="#FFE0CC" stroke="#BF360C" stroke-width="2"/>
+        <line x1="100" y1="30" x2="100" y2="140" stroke="#8D2B08" stroke-width="2" stroke-dasharray="5,4"/>
+        <text x="95" y="158" font-size="13" fill="#8D2B08" font-weight="700">A</text>
+        <text x="106" y="90" font-size="13" fill="#8D2B08" font-weight="700">B</text>
+        <text x="50" y="80" font-size="13" fill="#8D2B08" font-weight="700">C</text>
+      </svg>
+    </div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="s5q1" value="A"> A — the bottom (base)</label>
+      <label class="opt"><input type="radio" name="s5q1" value="B"> B — the dashed line</label>
+      <label class="opt"><input type="radio" name="s5q1" value="C"> C — the left slanted side</label>
+    </div>
+    <button class="btn-check" onclick="chk('s5q1','fbs5q1','B')">Check</button>
+    <div class="feedback" id="fbs5q1"></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Triangle 3 (obtuse triangle — the tricky one!):</div>
+    <div class="diagram">
+      <svg viewBox="0 0 240 170" width="240">
+        <polygon points="30,140 120,140 190,30" fill="#FFE0CC" stroke="#BF360C" stroke-width="2"/>
+        <line x1="30" y1="140" x2="190" y2="140" stroke="#BF360C" stroke-width="2" stroke-dasharray="2,3"/>
+        <line x1="190" y1="30" x2="190" y2="140" stroke="#8D2B08" stroke-width="2" stroke-dasharray="5,4"/>
+        <text x="65" y="158" font-size="13" fill="#8D2B08" font-weight="700">A</text>
+        <text x="196" y="90" font-size="13" fill="#8D2B08" font-weight="700">B</text>
+        <text x="150" y="80" font-size="13" fill="#8D2B08" font-weight="700">C</text>
+      </svg>
+    </div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="s5q2" value="A"> A — the bottom (base)</label>
+      <label class="opt"><input type="radio" name="s5q2" value="B"> B — the dashed line outside the triangle</label>
+      <label class="opt"><input type="radio" name="s5q2" value="C"> C — the right slanted side</label>
+    </div>
+    <button class="btn-check" onclick="chk('s5q2','fbs5q2','B')">Check</button>
+    <div class="feedback" id="fbs5q2"></div>
+    <div class="warn-box"><p>&#x26A0;&#xFE0F; In an obtuse triangle, the height line can land OUTSIDE the triangle, on the base's line extended. It's still the height — same rule, just drawn further along.</p></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Obtuse Worked Example &#8594;</button></div>
+</div>
+
+<!-- s6: worked example obtuse triangle -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>Worked Example — Obtuse Triangle (Height Falls OUTSIDE)</h2>
+  <p>This obtuse triangle has base = 6 cm and height = 5 cm (the height line, dashed, lands outside the triangle on the extended base). The RULE doesn't change at all.</p>
+  <div class="diagram">
+    <svg viewBox="0 0 240 170" width="240">
+      <polygon points="30,140 110,140 180,30" fill="#FFE0CC" stroke="#BF360C" stroke-width="2.5"/>
+      <line x1="30" y1="140" x2="180" y2="140" stroke="#BF360C" stroke-width="1.5" stroke-dasharray="2,3"/>
+      <line x1="180" y1="30" x2="180" y2="140" stroke="#8D2B08" stroke-width="2.5" stroke-dasharray="5,4"/>
+      <rect x="168" y="128" width="12" height="12" fill="none" stroke="#8D2B08" stroke-width="2"/>
+      <text x="55" y="158" font-size="13" fill="#8D2B08" font-weight="700">base = 6 cm</text>
+      <text x="186" y="90" font-size="13" fill="#8D2B08" font-weight="700">height = 5 cm</text>
+    </svg>
+  </div>
+  <div class="steps">
+    <div class="ln">Area = &frac12; &times; base &times; height</div>
+    <div class="ln">Area = &frac12; &times; 6 &times; 5</div>
+    <div class="ln">6 &times; 5 = 30</div>
+    <div class="ln">30 &divide; 2 = 15</div>
+    <div class="ln ans">Area = 15 cm&sup2;</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Same rule, every single time: Area = &frac12; &times; base &times; height. It doesn't matter if the triangle is right, acute, or obtuse — or which way the height line has to be drawn to make it perpendicular.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s7: practice -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Area of a Triangle</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A triangle has base = 12 cm and height = 5 cm. What is its area?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 17 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 30 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 60 cm&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">&frac12; &times; 12 &times; 5 = &frac12; &times; 60</div>
+      <div class="ln ans">= 30 cm&sup2;</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A triangle has base = 9 cm and height = 8 cm. What is its area?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 36 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 72 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 17 cm&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">&frac12; &times; 9 &times; 8 = &frac12; &times; 72</div>
+      <div class="ln ans">= 36 cm&sup2;</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; A triangle has base = 14 cm and height = 3 cm. What is its area?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 21 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 42 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 17 cm&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">&frac12; &times; 14 &times; 3 = &frac12; &times; 42</div>
+      <div class="ln ans">= 21 cm&sup2;</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4 (Word Problem).&nbsp; A triangular flag has a base of 20 cm and a height of 15 cm. How much fabric (area) does the flag use?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 150 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 300 cm&sup2;</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 35 cm&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">&frac12; &times; 20 &times; 15 = &frac12; &times; 300</div>
+      <div class="ln ans">= 150 cm&sup2;</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Mastery Checklist &#8594;</button></div>
+</div>
+
+<!-- s8: recap -->
+<div class="screen" id="s8">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>Area of a Triangle = &frac12; &times; base &times; height. The height is always the PERPENDICULAR distance from the base to the opposite corner — it can fall inside the triangle (acute), be a side (right), or fall outside on the extended base (obtuse). The rule never changes.</strong></p>
+</div>
+<div class="card" style="background:#FFF3E8;border:1px solid #FFCCBC">
+  <h3 style="color:#8D2B08">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You know Area = &frac12; &times; base &times; height, every single time</li>
+    <li>You can correctly spot the height even when it's NOT a side of the triangle</li>
+    <li>You know the height falls outside the triangle for obtuse triangles — and that's still fine</li>
+    <li>You always write your final answer in SQUARE units (cm&sup2;, m&sup2;)</li>
+    <li>You always finish by checking: did I answer the EXACT question asked?</li>
+  </ul>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#FFF3E8;color:#8D2B08;border:2px solid #8D2B08;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+  <a href="Triangles_Lesson_MissingPieceAndComposite.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#BF360C;color:#fff;border:2px solid #BF360C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Go to Lesson 2 &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chkQ(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// spot-the-height mini checks (s5)
+function chk(name,fbId,correct){
+  var sel=document.querySelector('input[name="'+name+'"]:checked'), fb=document.getElementById(fbId);
+  fb.style.display='block';
+  if(!sel){fb.className='feedback err';fb.textContent='Pick a letter first.';return;}
+  if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct! That\'s the perpendicular line — the height.';}
+  else{fb.className='feedback err';fb.textContent='Not quite — the height must make a right angle (90°) with the base. Try again.';}
+}
+</script>
+</body>
+</html>

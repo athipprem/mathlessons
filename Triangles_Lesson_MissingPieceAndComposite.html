@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Missing Piece &amp; Composite Figures — Triangles Lesson 2</title>
+<style>
+:root{--nav:#BF360C;--nav-dark:#8D2B08;--bg:#FFF3E8;--card:#fff;--acc:#BF360C;--ok:#2E7D32;--err:#C62828;--warn:#8D2B08}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#8D2B08;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#FFF3E8,#FFF8F2);border:2px solid #FFCCBC;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#8D2B08;font-weight:700;margin-bottom:6px}
+.big-rule{background:#FFF3E8;border:2px solid #BF360C;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#8D2B08;margin:14px 0}
+.golden{background:linear-gradient(135deg,#FFF3E8,#FFE0CC);border:2px solid #FFCCBC;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#FFF3E8;border:1.5px solid #BF360C;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#8D2B08;text-align:center;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#FFF8F2;border:1px solid #FFCCBC;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#BF360C}
+.steps .ln.ans{color:#8D2B08;font-weight:800}
+.tree{background:#FFFBF8;border:2px dashed #FFCCBC;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #FFCCBC;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#BF360C;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.tree .node.new{border-color:#BF360C;border-width:2px;background:#FFF8F2}
+.warn-box{background:#FFF3E8;border:1.5px solid #FFCCBC;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#8D2B08}
+.q-card{background:#FFF8F2;border:1.5px solid #FFCCBC;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #FFCCBC;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#FFF3E8}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#FFF3E8;color:#8D2B08;border:2px solid #8D2B08;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#BF360C;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#FFF3E8;color:#8D2B08;border:1.5px solid #FFCCBC;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#A1887F;font-size:.85rem;margin-bottom:6px}
+.diagram{text-align:center;background:#FFFBF8;border:2px dashed #FFCCBC;border-radius:10px;padding:16px;margin:12px 0}
+.diagram svg{max-width:100%;height:auto}
+.diagram .cap{font-size:.85rem;color:#8D2B08;margin-top:6px;font-weight:600}
+.exprbox{text-align:center;font-size:1.25rem;font-weight:800;color:#1a1a2e;background:#FCFBFE;border:2px dashed #FFCCBC;border-radius:10px;padding:20px;margin:14px 0}
+.opbtns{display:flex;justify-content:center;gap:10px;margin:12px 0;flex-wrap:wrap}
+.opbtn{min-width:56px;height:56px;padding:0 10px;border-radius:28px;border:2px solid #BF360C;background:#fff;color:#BF360C;font-size:.95rem;font-weight:800;cursor:pointer}
+.opbtn.done{background:#BF360C;color:#fff;opacity:.5;cursor:default}
+.opbtn.wrong{animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.widget-msg{text-align:center;font-weight:700;color:#8D2B08;min-height:24px;margin-top:6px}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Missing Piece &amp; Composite Figures — Triangles Lesson 2</span>
+  <span class="tnav-pill" id="pill">1 / 9</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">Sometimes you know the area, not the shape</div>
+    <p>An architect might say "this roof panel needs to cover 40 m&sup2;, and I've only got 10 m of base to work with — how TALL does it need to be?" That's working BACKWARDS from the area — exactly what today's lesson teaches.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">Real shapes aren't always simple</div>
+    <p>A garden might be a rectangle with a triangular flowerbed cut out of one corner, or a tent's cross-section might be a rectangle with a triangular roof on top. Today you'll also learn how to find the area of these COMPOSITE (combined) shapes.</p>
+  </div>
+  <div class="big-rule">Same one rule as Lesson 1 — Area = &frac12; &times; base &times; height — just used in new ways.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: rearranging the formula -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F504; Rearranging The Formula</h2>
+  <div class="why">
+    <div class="why-title">The one new idea</div>
+    <p>If you already know the AREA and one of base/height, you can work BACKWARDS to find the missing one. You just move the pieces of the formula around — the same "sort it to one side" method you already know from algebra.</p>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Start with the rule:</span></div>
+    <div class="ln">Area = &frac12; &times; b &times; h</div>
+    <div class="ln"><span class="note">Step 1 — multiply BOTH sides by 2, to clear the &frac12;:</span></div>
+    <div class="ln">2 &times; Area = b &times; h</div>
+    <div class="ln"><span class="note">Step 2a — to find HEIGHT, divide both sides by b:</span></div>
+    <div class="ln ans">h = (2 &times; Area) &divide; b</div>
+    <div class="ln"><span class="note">Step 2b — OR to find BASE, divide both sides by h instead:</span></div>
+    <div class="ln ans">b = (2 &times; Area) &divide; h</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Both new formulas start the exact same way: double the area first. Then divide by whichever piece you already have.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Find The Height &#8594;</button></div>
+</div>
+
+<!-- s2: worked example reverse - find height -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>Worked Example — Find The Height</h2>
+  <p>A triangle has an area of 40 cm&sup2; and a base of 10 cm. What is its height?</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — write the rearranged rule:</span></div>
+    <div class="ln">h = (2 &times; Area) &divide; b</div>
+    <div class="ln"><span class="note">Step 2 — put in the numbers:</span></div>
+    <div class="ln">h = (2 &times; 40) &divide; 10</div>
+    <div class="ln"><span class="note">Step 3 — double the area first:</span></div>
+    <div class="ln">2 &times; 40 = 80</div>
+    <div class="ln"><span class="note">Step 4 — divide by the base:</span></div>
+    <div class="ln">80 &divide; 10 = 8</div>
+    <div class="ln ans">height = 8 cm</div>
+  </div>
+  <div class="rulebar">Check it: &frac12; &times; 10 &times; 8 = &frac12; &times; 80 = 40 cm&sup2; &#x2713; matches!</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Find The Base &#8594;</button></div>
+</div>
+
+<!-- s3: worked example reverse - find base -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>Worked Example — Find The Base</h2>
+  <p>A triangle has an area of 54 cm&sup2; and a height of 9 cm. What is its base?</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — write the rearranged rule:</span></div>
+    <div class="ln">b = (2 &times; Area) &divide; h</div>
+    <div class="ln"><span class="note">Step 2 — put in the numbers:</span></div>
+    <div class="ln">b = (2 &times; 54) &divide; 9</div>
+    <div class="ln"><span class="note">Step 3 — double the area first:</span></div>
+    <div class="ln">2 &times; 54 = 108</div>
+    <div class="ln"><span class="note">Step 4 — divide by the height:</span></div>
+    <div class="ln">108 &divide; 9 = 12</div>
+    <div class="ln ans">base = 12 cm</div>
+  </div>
+  <div class="rulebar">Check it: &frac12; &times; 12 &times; 9 = &frac12; &times; 108 = 54 cm&sup2; &#x2713; matches!</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Try The Rearrangement &#8594;</button></div>
+</div>
+
+<!-- s4: interactive rearrange widget -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F4CB; Build The Rearrangement Yourself</h2>
+  <p class="tap-hint">A triangle has area = 21 m&sup2; and base = 6 m. Tap the buttons IN ORDER to work out the height.</p>
+  <div class="exprbox" id="exprDisplay">Area = &frac12; &times; b &times; h &nbsp;&nbsp;(Area=21, b=6)</div>
+  <div class="opbtns">
+    <button class="opbtn" id="opBtnDbl" onclick="pickOp('dbl')">&times;2 both sides</button>
+    <button class="opbtn" id="opBtnDiv" onclick="pickOp('div')">&divide;b both sides</button>
+  </div>
+  <div class="widget-msg" id="widgetMsg">Which move clears the &frac12; first?</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Adding Shapes Together &#8594;</button></div>
+</div>
+
+<!-- s5: composite worked example - add -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>Composite Shapes — ADD The Triangle</h2>
+  <p>A tent's cross-section is a rectangle (10 m wide, 6 m tall) with a triangular roof on top (base 10 m, height 4 m). What is the TOTAL area of the cross-section?</p>
+  <div class="diagram">
+    <svg viewBox="0 0 220 170" width="240">
+      <rect x="30" y="90" width="160" height="70" fill="#FFE0CC" stroke="#8D2B08" stroke-width="2"/>
+      <polygon points="30,90 190,90 110,30" fill="#FFCCBC" stroke="#BF360C" stroke-width="2"/>
+      <text x="85" y="130" font-size="12" fill="#8D2B08" font-weight="700">10 &times; 6</text>
+      <text x="90" y="65" font-size="12" fill="#8D2B08" font-weight="700">b10,h4</text>
+    </svg>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — rectangle part:</span></div>
+    <div class="ln">10 &times; 6 = 60 m&sup2;</div>
+    <div class="ln"><span class="note">Step 2 — triangle part:</span></div>
+    <div class="ln">&frac12; &times; 10 &times; 4 = 20 m&sup2;</div>
+    <div class="ln"><span class="note">Step 3 — ADD them together (the shapes are stacked, not overlapping):</span></div>
+    <div class="ln">60 + 20 = 80</div>
+    <div class="ln ans">Total area = 80 m&sup2;</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Subtracting Shapes &#8594;</button></div>
+</div>
+
+<!-- s6: composite worked example - subtract -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>Composite Shapes — SUBTRACT The Triangle</h2>
+  <p>A rectangular sign (12 cm by 8 cm) has a triangular corner (base 6 cm, height 8 cm) cut off. What area is LEFT?</p>
+  <div class="diagram">
+    <svg viewBox="0 0 200 150" width="220">
+      <rect x="20" y="20" width="150" height="100" fill="#FFE0CC" stroke="#8D2B08" stroke-width="2"/>
+      <polygon points="170,20 170,120 110,120" fill="#fff" stroke="#BF360C" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="70" y="75" font-size="12" fill="#8D2B08" font-weight="700">12 &times; 8</text>
+      <text x="120" y="105" font-size="11" fill="#BF360C" font-weight="700">cut: b6,h8</text>
+    </svg>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — whole rectangle:</span></div>
+    <div class="ln">12 &times; 8 = 96 cm&sup2;</div>
+    <div class="ln"><span class="note">Step 2 — the cut-off triangle:</span></div>
+    <div class="ln">&frac12; &times; 6 &times; 8 = 24 cm&sup2;</div>
+    <div class="ln"><span class="note">Step 3 — SUBTRACT the missing corner (it's been removed, not added):</span></div>
+    <div class="ln">96 &minus; 24 = 72</div>
+    <div class="ln ans">Area left = 72 cm&sup2;</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The key question for any composite shape: is the triangle ADDED on (a roof, a bump) or CUT OUT (a corner missing, a hole)? That tells you whether to add or subtract.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s7: practice -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Missing Piece &amp; Composite Figures</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A triangle has an area of 48 cm&sup2; and a base of 12 cm. What is its height?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 4 cm</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 8 cm</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 96 cm</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">h = (2&times;48) &divide; 12 = 96 &divide; 12</div>
+      <div class="ln ans">= 8 cm</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; A triangle has an area of 63 cm&sup2; and a height of 7 cm. What is its base?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 9 cm</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 126 cm</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 18 cm</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(1,'C')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">b = (2&times;63) &divide; 7 = 126 &divide; 7</div>
+      <div class="ln ans">= 18 cm</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; A garden shed's front wall is a rectangle 8 m wide and 5 m tall, topped by a triangular gable (base 8 m, height 3 m). What is the TOTAL area of the front wall?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 40 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 52 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 64 m&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">Rectangle: 8&times;5=40. Triangle: &frac12;&times;8&times;3=12.</div>
+      <div class="ln ans">ADD: 40+12 = 52 m&sup2;</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4 (Word Problem).&nbsp; A square garden is 10 m by 10 m. A triangular pond (base 8 m, height 5 m) is dug into one corner. What area of the garden is left as lawn?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 20 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 60 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 80 m&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(3,'C')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">Square: 10&times;10=100. Pond triangle: &frac12;&times;8&times;5=20.</div>
+      <div class="ln ans">SUBTRACT (pond is dug out): 100&minus;20 = 80 m&sup2;</div>
+    </div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Mastery Checklist &#8594;</button></div>
+</div>
+
+<!-- s8: recap -->
+<div class="screen" id="s8">
+<div class="golden">
+  <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+  <p style="font-size:1.05rem"><strong>To find a missing base or height, double the area first, then divide by the piece you already have: h = (2&times;Area)&divide;b, or b = (2&times;Area)&divide;h. For composite shapes, work out each piece separately, then ADD if the triangle is stuck on, or SUBTRACT if it's cut out.</strong></p>
+</div>
+<div class="card" style="background:#FFF3E8;border:1px solid #FFCCBC">
+  <h3 style="color:#8D2B08">&#x1F3C6; You've got it when&hellip;</h3>
+  <ul>
+    <li>You can rearrange Area = &frac12;&times;b&times;h to solve for either the base or the height</li>
+    <li>You always double the area FIRST, before dividing</li>
+    <li>You can tell whether a composite shape needs ADDING or SUBTRACTING</li>
+    <li>You work out each piece of a composite shape separately before combining</li>
+    <li>You always finish by checking: did I answer the EXACT question asked?</li>
+  </ul>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#BF360C;color:#fff;border:2px solid #BF360C;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chkQ(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ---- s4: rearrange widget (Area=21, b=6, find h) ----
+var opState = { step: 1 };
+var opDisplays = {
+  0: 'Area = &frac12; &times; b &times; h &nbsp;&nbsp;(Area=21, b=6)',
+  1: '2 &times; 21 = b &times; h &nbsp;&nbsp;&rarr;&nbsp;&nbsp; 42 = 6 &times; h',
+  2: 'h = 42 &divide; 6 = <strong>7 m</strong>'
+};
+function pickOp(which){
+  var correctForStep = {1:'dbl', 2:'div'};
+  var msg = document.getElementById('widgetMsg');
+  var btnMap = {dbl:'opBtnDbl', div:'opBtnDiv'};
+  var btn = document.getElementById(btnMap[which]);
+  if(opState.step>2){ return; }
+  if(correctForStep[opState.step] === which){
+    btn.classList.add('done');
+    btn.disabled = true;
+    opState.step++;
+    document.getElementById('exprDisplay').innerHTML = opDisplays[opState.step-1];
+    if(opState.step>2){
+      msg.textContent = 'All done — height = 7 m. Double the area, then divide by what you already have!';
+      msg.style.color = '#2E7D32';
+    } else {
+      msg.textContent = 'Correct! Now do the next move.';
+      msg.style.color = '#8D2B08';
+    }
+  } else {
+    btn.classList.add('wrong');
+    setTimeout(function(){btn.classList.remove('wrong');}, 300);
+    msg.textContent = 'Not yet — clear the ½ first, THEN divide by the base.';
+    msg.style.color = '#C62828';
+  }
+}
+</script>
+</body>
+</html>

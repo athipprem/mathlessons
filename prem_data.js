@@ -20,8 +20,58 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:59, topic:'Order of Operations — PEMDAS (School-Curriculum Pivot) — 2 units active: U58 Fractions + U59 PEMDAS', status:'Lessons Built, Test Ready (Attempt Pending)' },
+  currentUnit: { n:60, topic:'Area of Triangles — Half-Rectangle Rule & Missing Piece (School-Curriculum Pivot)', status:'Lessons Built, Test Ready (Attempt Pending)' },
   lastUnit: {
+    n:59, score:14, outOf:15, pct:93, delta:+10, prevScore:15, prevOutOf:15, prevLabel:'U58',
+    patternLabel: 'U59 — Order of Operations (PEMDAS), PASSED — near-perfect debut on mid-cycle-pivoted live-school content',
+    patternInsight: '14/15 (93%) <strong>PASSED</strong> &mdash; Sec A 5/5, Sec B 5/5, Sec C 4/5. First attempt at the newly-added PEMDAS unit, pulled forward mid-cycle (27 Aug 2026) after Prem reported studying Order of Operations live at school. Every Basic and Intermediate question landed &mdash; all four exponent questions, the two-separate-brackets question &mdash; and 4 of 5 Hard/Capstone questions landed too, including the area-application transfer question and the four-operation capstone. The single miss, Q11 (3&times;(2+(5&minus;1)&sup2;)=54, wrote 108), has a precise, diagnosable cause: 108 = 3&times;(2+(5&minus;1))&sup2; &mdash; Prem correctly resolved the innermost bracket (5&minus;1=4), but let the exponent&rsquo;s scope drift outward to cover the whole "(2+(5&minus;1))" group instead of applying it only to the sealed "(5&minus;1)&sup2;" unit before adding the 2. A nested-bracket <strong>scoping</strong> error &mdash; he can peel one bracket layer correctly and knows exponents beat addition, but hadn&rsquo;t yet locked onto which bracket group an exponent attaches to at three nesting levels. No working was shown, so this is inferred from the wrong-answer pattern, not confirmed directly. Maps precisely onto Lesson 2&rsquo;s "peel the innermost bracket" widget &mdash; one level deeper than practiced, not a fresh gap.',
+    analysisLabel: 'Next: Unit 60 — Area of Triangles (Ch.4), then Milestone 6 fires directly after',
+    analysisInsight: 'A standalone extra PEMDAS practice test (Lui&rsquo;s request, docx only, no lesson, 3 Basic/6 Intermediate/6 Applied-Capstone, ASMOPSS-weighted) was built and graded the following day (30 Aug 2026): 13/15 (87%). Two NEW misses, both distinct from Q11&rsquo;s scoping gap: (1) 70&minus;2&times;3&sup3; answered as 70&minus;2&times;3&sup2;=52 &mdash; squared instead of cubed, the first bare &sup3; seen after a run of only &sup2;s; (2) 2&times;(3+(8&minus;5)&sup2;) answered as 2+12=14 &mdash; a plain final-operator misread (&times; read as +), not a scoping error. Encouragingly, that same extra test&rsquo;s own nested-bracket-plus-exponent question was answered correctly, suggesting the original U59 scoping gap may already be closing. Both U58 (100%) and U59 (93%) together (combined 29/30 = 97%) confirm the 27 Aug school-curriculum pivot was the right call. Recommended: fold a bare-&sup3; item and a "read the final operator" item into a future warm-up (not a full lesson); proceed to U60 (Area of Triangles) exactly as planned, with Milestone 6 firing directly after U60. Full write-ups (U58, U59, and the extra practice test) in the Executive Summary.',
+    qSummary: '<strong>Sec A 5/5 | Sec B 5/5 | Sec C 4/5</strong> — 14/15 (93%) PASSED',
+    qBreakdown: [
+      { q:'Q1', topic:'Order of Operations', lvl:'w', pass:true,  note:'&#10003; 24 (9+3&times;5).' },
+      { q:'Q2', topic:'Order of Operations', lvl:'w', pass:true,  note:'&#10003; 60 ((9+3)&times;5).' },
+      { q:'Q3', topic:'Order of Operations', lvl:'w', pass:true,  note:'&#10003; 8 (24&divide;6&times;2, tied &divide;/&times; left to right).' },
+      { q:'Q4', topic:'Order of Operations', lvl:'w', pass:true,  note:'&#10003; 7 (15&minus;2&times;4).' },
+      { q:'Q5', topic:'Order of Operations', lvl:'w', pass:true,  note:'&#10003; 6 (30&divide;(2+3)).' },
+      { q:'Q6', topic:'Order of Operations (Exponents)', lvl:'m', pass:true,  note:'&#10003; 14 (5+3&sup2;).' },
+      { q:'Q7', topic:'Order of Operations (Exponents)  &#9733;', lvl:'m', pass:true,  note:'&#10003; 32 (2&times;4&sup2;).' },
+      { q:'Q8', topic:'Order of Operations (Exponents)  &#9733;', lvl:'m', pass:true,  note:'&#10003; 9 ((10&minus;4)&sup2;&divide;4).' },
+      { q:'Q9', topic:'Order of Operations (Exponents)  &#9733;', lvl:'m', pass:true,  note:'&#10003; 26 (50&minus;3&times;2&sup3;).' },
+      { q:'Q10',topic:'Two Separate Bracket Groups  &#9733;', lvl:'m', pass:true,  note:'&#10003; 20 ((2+3)&times;(6&minus;2)).' },
+      { q:'Q11',topic:'Nested Brackets + Exponents  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote 108; correct 54 (3&times;(2+(5&minus;1)&sup2;)). 108 = 3&times;(2+(5&minus;1))&sup2; &mdash; a nested-bracket scoping error, applying the exponent to the outer group instead of the sealed innermost unit. No working shown.' },
+      { q:'Q12',topic:'Brackets + Exponents  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 15 ((8&minus;3)&sup2;&minus;2&times;(4+1)).' },
+      { q:'Q13',topic:'Applied — Area  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 16 cm&sup2; (square tile, side=(6&minus;2)).' },
+      { q:'Q14',topic:'Applied — Word Problem  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 17 (3 bags &times; 2&sup2; marbles + 5 extra).' },
+      { q:'Q15',topic:'Capstone  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 9 ((3+2)&sup2;&minus;4&times;(7&minus;5)&sup2;) &mdash; full four-operation capstone, correct.' }
+    ]
+  },
+  _U58archived: {
+    n:58, score:15, outOf:15, pct:100, delta:+11, prevScore:4, prevOutOf:15, prevLabel:'U57 (HELD)',
+    patternLabel: 'U58 — Fractions, Add/Subtract/Multiply, PERFECT SCORE — first attempt, school-curriculum pivot',
+    patternInsight: '15/15 (100%) <strong>PERFECT</strong> &mdash; Sec A 5/5, Sec B 5/5, Sec C 5/5. A clean first-attempt perfect score on entirely new content, at Intermediate/Applied density, on the first unit built under the 27 Aug school-curriculum pivot. The three hardest, most ASMOPSS-shaped questions on the paper &mdash; Q11 (chained fraction-of-a-set), Q14 (reverse fraction-of-a-set), and Q15 (capstone multiply-then-subtract with a "does she have enough?" precision check) &mdash; were all answered correctly with working shown throughout. Q11 also carries a small, encouraging tell: Prem annotated the question himself with "(soccer)" next to "football," suggesting careful, engaged reading rather than mechanical pattern-matching. The one blemish is the ungraded W1 warm-up (Vertically Opposite Angles, closed since U20): wrote 228&deg; instead of 132&deg; &mdash; 228=360&minus;132, the reflex angle around the full point, a DIFFERENT wrong answer than U55&rsquo;s 122&deg; (the adjacent/supplementary trap). Two different wrong answers across two exposures to the same closed skill is a stronger decay signal than one slip.',
+    analysisLabel: 'Next: Unit 59 — Order of Operations (PEMDAS), built same day, mid-cycle pivot',
+    analysisInsight: 'No remediation needed on Fractions &mdash; content closed at full Intermediate/Applied density. Vertically Opposite Angles escalates from "spiral warm-up" to "needs a short re-teach" next time it&rsquo;s due, given the two-different-wrong-answers pattern (122&deg; at U55, 228&deg; here). Digit-overlap fix and the "(numerator&times;numerator)/(denominator&times;denominator)" practical-formula shortcut, added mid-build after Lui flagged the original Case 2 example as confusing, are validated by this result. Full write-up in the Executive Summary.',
+    qSummary: '<strong>Sec A 5/5 | Sec B 5/5 | Sec C 5/5</strong> — 15/15 (100%) PERFECT',
+    qBreakdown: [
+      { q:'Q1', topic:'Add/Subtract Mixed', lvl:'w', pass:true,  note:'&#10003; 5&frac34; (3&frac14;+2&frac12;).' },
+      { q:'Q2', topic:'Add/Subtract Mixed', lvl:'w', pass:true,  note:'&#10003; 2&#8532; (6 2/9&minus;3 5/9).' },
+      { q:'Q3', topic:'Add/Subtract Mixed', lvl:'w', pass:true,  note:'&#10003; 6&#8322;&frasl;&#8325; (4 3/5+1 4/5).' },
+      { q:'Q4', topic:'Add/Subtract Mixed  &#9733;', lvl:'w', pass:true,  note:'&#10003; 6 1/12 (2 5/6+3&frac14;).' },
+      { q:'Q5', topic:'Add/Subtract Mixed  &#9733;', lvl:'w', pass:true,  note:'&#10003; 4 7/12 (7&#8531;&minus;2&frac34;).' },
+      { q:'Q6', topic:'Multiplying — Fraction of a Set', lvl:'m', pass:true,  note:'&#10003; 12 (2/3 of 18).' },
+      { q:'Q7', topic:'Multiplying — Fraction &times; Fraction', lvl:'m', pass:true,  note:'&#10003; 12/35 (3/5&times;4/7).' },
+      { q:'Q8', topic:'Multiplying — Mixed &times; Whole  &#9733;', lvl:'m', pass:true,  note:'&#10003; 13&frac12; (4&frac12;&times;3).' },
+      { q:'Q9', topic:'Multiplying — Fraction &times; Fraction  &#9733;', lvl:'m', pass:true,  note:'&#10003; 5/12 (5/8&times;2/3, simplest form).' },
+      { q:'Q10',topic:'Multiplying — Word Problem  &#9733;', lvl:'m', pass:true,  note:'&#10003; 4&frac12; L (3/4 L &times; 6 bottles).' },
+      { q:'Q11',topic:'Chained Fraction of a Set  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 8 (5/8 of 32, then 2/5 play football) &mdash; self-annotated "(soccer)".' },
+      { q:'Q12',topic:'Add/Subtract — Word Problem  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 2 m (8&#8521; m ribbon, cut 2&frac12;+3&#8523;).' },
+      { q:'Q13',topic:'Multiply — Word Problem  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 18&#8321;&frasl;&#8325; kg (2&#8541; kg &times; 7 shelves).' },
+      { q:'Q14',topic:'Reverse Fraction of a Set  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 36 (3/4 of a number is 27).' },
+      { q:'Q15',topic:'Capstone — Multiply &amp; Subtract  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; &frac34; cup short (1&frac34;&times;3 cups needed vs 4&frac12; on hand).' }
+    ]
+  },
+  _U57archived: {
     n:57, score:4, outOf:15, pct:27, delta:-6, prevScore:10, prevOutOf:15, prevLabel:'U56 (3rd attempt)',
     patternLabel: 'U57 — Total Minus Bad, Brick 2 Retest (interactive-game rebuild), NOT PASSED — weakest score in the whole arc, HELD 27 Aug 2026',
     patternInsight: '4/15 (27%) <strong>NOT PASSED</strong> &mdash; Sec A 3/5, Sec B 0/5, Sec C 1/5. This is the test built for Brick 2 (multi-case bad + the zero-edge "fewer than needed = write 0" rule), taught via the fully interactive "Bag Sorting Challenge" rebuild. Prem sat this test BEFORE the 27 Aug HELD decision &mdash; this result is the evidence the decision was built on, not a coincidence of timing. <strong>It is the weakest score anywhere in the entire Total Minus Bad arc</strong> (U56 attempts: 7 &rarr; 6 &rarr; 10; this Brick-2 test: 4). Two distinct, genuinely useful findings underneath the low score: (1) the core ALL-minus-BAD framework survives at small scale (Q1, Q2, Q5 all correct), and the standing "finish the exact question" precision habit held even inside an otherwise-collapsed test &mdash; Q14, purpose-built to ask for BAD instead of the usual GOOD, was answered correctly with full working; (2) every zero-edge question (Q6, Q8, Q10, Q12) carries the same margin note in Prem&rsquo;s own hand, "zero edge?" &mdash; he correctly spots the trigger the game taught but never completes the C(2,3)=0 step through to a finished subtraction, and separately, three fully-worked questions (Q4, Q9, Q15) failed on a miscalculated multi-digit product/quotient early in the chain (e.g. Q9&rsquo;s C(17,3) first-step multiplication read 172 instead of 272) &mdash; the same arithmetic-scale ceiling the U42 factorial "staircase" fix solved before, not a conceptual gap.',
@@ -412,36 +462,53 @@ var PREM_DATA = {
     { n:54, score:11, delta:0,    color:'linear-gradient(135deg,#EF5350,#C62828)', star:false },
     { n:55, score:14, delta:+3,   color:'linear-gradient(135deg,#6A1B9A,#4A148C)', star:false },
     { n:56, score:10, delta:-4,   color:'linear-gradient(135deg,#EF5350,#C62828)', star:false },
-    { n:57, score:4,  delta:-6,   color:'linear-gradient(135deg,#B71C1C,#7F0000)', star:false }
+    { n:57, score:4,  delta:-6,   color:'linear-gradient(135deg,#B71C1C,#7F0000)', star:false },
+    { n:58, score:15, delta:+11,  color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true },
+    { n:59, score:14, delta:-1,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 60,
+      badge: 'linear-gradient(135deg,#BF360C,#8D2B08)',
+      title: 'Area of Triangles — Half-Rectangle Rule &amp; Missing Piece (School-Curriculum Pivot)',
+      tags: [
+        { t:'U58 (100%) &amp; U59 (93%) both PASSED — pivot confirmed', s:'background:#FFF3E8;color:#8D2B08;font-weight:700' },
+        { t:'2 lessons: Half-Rectangle Rule, Missing Piece &amp; Composite', c:'tgreen' },
+        { t:'Weighted Intermediate/Applied, no reuse from lessons', c:'tgreen' },
+        { t:'15Q test + 2 warm-ups (Sequences Formula, Ratio)', c:'tgreen' },
+        { t:'Milestone 6 fires directly after this unit', c:'torange' }
+      ],
+      note: 'Fourth unit in the 27 Aug 2026 school-curriculum pivot (Shaping Maths Ch.4: base &amp; height, finding area), following U58 Fractions (15/15) and U59 PEMDAS (14/15) &mdash; both real results now folded into this sync per the standing "sync together with the next pack" rule. Two lessons built from zero (ground rule: brand-new topic, one idea at a time): <em>Area of a Triangle &mdash; The Half-Rectangle Rule</em> (base/height definition, the rectangle-cut-in-half visual proof, worked examples across right/acute/obtuse triangles &mdash; including the tricky case where the height falls OUTSIDE an obtuse triangle &mdash; and a 3-round "Spot The Height" interactive identification check) and <em>Missing Piece &amp; Composite Figures</em> (rearranging Area=&frac12;&times;b&times;h to solve for a missing base or height, a click-through rearrangement widget, and composite shapes built by ADDING a triangle on or SUBTRACTING one cut out). Test: 15Q weighted toward Intermediate/Applied tiers (Sec A direct area, Sec B reverse-formula + composite intro, Sec C applied word problems + a same-area reasoning/compare question + a two-flap capstone), entirely fresh numbers not reused from either lesson (verified via an exhaustive duplicate-pair scan), plus 2 ungraded spiral-maintenance warm-ups on skills stale 4+ weeks (Sequences Formula T&#8345;=a+(n&minus;1)d, long-closed since the U21&ndash;30 era; Ratio sharing, closed since U26). All worked examples and test answers independently verified via Python before writing. Awaiting Prem&rsquo;s attempt.',
+      status: 'pending'
+    },
+    {
       n: 59,
       badge: 'linear-gradient(135deg,#5E35B1,#4527A0)',
       title: 'Order of Operations — PEMDAS (School-Curriculum Pivot)',
       tags: [
-        { t:'2 active units on index — U58 Fractions + U59 PEMDAS', s:'background:#EDE7F6;color:#4527A0;font-weight:700' },
+        { t:'14/15 (93%) &#10003; PASSED — 1 miss, nested-bracket scoping', s:'background:#E8F5E9;color:#1B5E20;font-weight:700' },
         { t:'2 lessons: The Order Rule, Exponents &amp; Nested Brackets', c:'tgreen' },
         { t:'Scope changed 27 Aug 2026: PEMDAS, not Whole Numbers Recap', c:'tgreen' },
-        { t:'15Q test + 2 warm-ups (Balance Scale, Divisibility/LCM)', c:'tgreen' }
+        { t:'15Q test + 2 warm-ups (Balance Scale, Divisibility/LCM)', c:'tgreen' },
+        { t:'Extra practice test (30 Aug): 13/15 — 2 new, distinct slips', c:'torange' }
       ],
-      note: 'U59 was originally planned as a broad "Whole Numbers Recap (Ch.1&ndash;2)" under the 27 Aug school-curriculum pivot, informed by Prem&rsquo;s 94% school exam. Changed the same day after Prem reported he&rsquo;s currently studying Order of Operations (PEMDAS) at school right now &mdash; U59 was refocused to target that live material directly instead of a general review. Two lessons built from zero (ground rule: brand-new topic, one idea at a time): <em>The Order Rule</em> (Brackets &rarr; Multiply/Divide left-to-right &rarr; Add/Subtract left-to-right, deferring Exponents to Lesson 2; includes a click-through "pick the next step" widget and a predict-then-reveal brackets-change-the-answer widget) and <em>Exponents &amp; Nested Brackets</em> (what an exponent is, the full four-stage ladder, exponents-before-multiply contrast, and innermost-first nested brackets; includes an extended click-through widget with an exponent step and a layer-by-layer "peel the brackets" widget). Test: 15Q weighted toward Intermediate/Applied tiers (Sec A basic order, Sec B exponents + two-bracket-group, Sec C nested brackets/exponents/applied word problems + a true capstone), entirely fresh numbers not reused from either lesson, plus 2 ungraded spiral-maintenance warm-ups on skills stale 4+ weeks (Balance-Scale ratio substitution, last dedicated content U39, ~7 weeks stale; Divisibility/LCM, last dedicated content U46, ~5 weeks stale). All worked examples and test answers independently verified via Python before writing. This sync also carries U57&rsquo;s real done-test result (4/15, see the U57 entry below) and U58&rsquo;s continued pending status, per Lui&rsquo;s instruction to batch both with the U59 build. Awaiting Prem&rsquo;s attempt.',
-      status: 'pending'
+      note: 'U59 was originally planned as a broad "Whole Numbers Recap (Ch.1&ndash;2)" under the 27 Aug school-curriculum pivot, informed by Prem&rsquo;s 94% school exam. Changed the same day after Prem reported he&rsquo;s currently studying Order of Operations (PEMDAS) at school right now &mdash; U59 was refocused to target that live material directly instead of a general review. Two lessons built from zero (ground rule: brand-new topic, one idea at a time): <em>The Order Rule</em> (Brackets &rarr; Multiply/Divide left-to-right &rarr; Add/Subtract left-to-right, deferring Exponents to Lesson 2; includes a click-through "pick the next step" widget and a predict-then-reveal brackets-change-the-answer widget) and <em>Exponents &amp; Nested Brackets</em> (what an exponent is, the full four-stage ladder, exponents-before-multiply contrast, and innermost-first nested brackets; includes an extended click-through widget with an exponent step and a layer-by-layer "peel the brackets" widget). <strong>Real result (graded 29 Aug 2026): 14/15 (93%) PASSED</strong> &mdash; Sec A 5/5, Sec B 5/5, Sec C 4/5. Single miss Q11, a nested-bracket scoping error (applied the exponent to the wrong bracket group one level too far out) &mdash; see [[lastUnit]] above for full diagnosis. A standalone extra PEMDAS practice test (Lui&rsquo;s request, docx only, no lesson, ASMOPSS-weighted 3/6/6) was graded 30 Aug 2026: 13/15 (87%), with two further, newly-diagnosed, DISTINCT misses (cube-vs-square exponent confusion; a final-operator misread) &mdash; not a repeat of Q11&rsquo;s gap, and encouragingly its own nested-bracket question was answered correctly. Full write-ups (both tests) in the Executive Summary.',
+      status: 'done'
     },
     {
       n: 58,
       badge: 'linear-gradient(135deg,#E65100,#BF360C)',
       title: 'Fractions — Add, Subtract &amp; Multiply Mixed Numbers (School-Curriculum Pivot)',
       tags: [
-        { t:'Major pivot — U58&ndash;U62 redirected to real school curriculum', s:'background:#FFF3E0;color:#BF360C;font-weight:700' },
+        { t:'15/15 (100%) &#10003; PERFECT SCORE — first attempt', s:'background:#E8F5E9;color:#1B5E20;font-weight:700' },
         { t:'2 lessons: Add/Subtract Mixed Numbers, Multiplying Fractions', c:'tgreen' },
         { t:'Weighted Intermediate/Applied, no reuse from lessons', c:'tgreen' },
         { t:'15Q test + 2 warm-ups (Vert. Opp. Angles, Path &amp; Frame)', c:'tgreen' }
       ],
-      note: 'Prem started Year 5 at school; Lui shared his school exam ("Test 1 &ndash; Whole Numbers," 21 Aug 2026, 47/50 = 94%) and the textbook driving it, Shaping Maths Activity Book 5A (Marshall Cavendish). U58&ndash;U62 are redirected to follow this real curriculum: U58 Fractions (Ch.3), U59 Order of Operations/PEMDAS (Ch.2 sub-topic, refined 27 Aug 2026 from an originally-planned Whole Numbers Recap), U60 Area of Triangles (Ch.4) &rarr; M6 (timing unchanged), U61 Ratio (Ch.5), U62 Volume (Ch.6) &mdash; see coaching-rules memory for the full spec. This replaces (defers, not cancels) the previously-planned S&amp;P II / Finish-The-Question Checkpoint / S&amp;P III / Consolidation sequence. Two lessons built: <em>Add &amp; Subtract Mixed Numbers</em> (unlike-denominator common-denominator method, then borrowing/regrouping when the fraction to subtract is bigger than what you have) and <em>Multiplying With Fractions</em> (one unifying "write everything as a fraction, multiply straight across" rule applied to fraction-of-a-set, fraction&times;fraction with an area-model visual, and mixed-number&times;whole reusing Lesson 1&rsquo;s mixed&harr;improper conversion skill). Both lessons include genuine click-driven interactive widgets (a live borrow/regroup simulator; a tap-to-select fraction-of-a-set counter grid; a step-through area-model overlap builder) rather than reveal-text only. Test: 15Q weighted toward Intermediate/Applied tiers (Sec A add/subtract, Sec B multiply, Sec C applied word problems + a reverse-fraction-of-a-set question + a capstone combining both lessons), entirely fresh numbers not reused from either lesson, plus 2 ungraded spiral-maintenance warm-ups on skills stale 4+ weeks (Vertically Opposite Angles, last seen decayed at U55; Path &amp; Frame, closed since U28). Fractions&ndash;decimals conversion and fraction-as-division are deliberately deferred to a later slot to keep this unit&rsquo;s scope to one cohesive skill per lesson. Awaiting Prem&rsquo;s attempt.',
-      status: 'pending'
+      note: 'Prem started Year 5 at school; Lui shared his school exam ("Test 1 &ndash; Whole Numbers," 21 Aug 2026, 47/50 = 94%) and the textbook driving it, Shaping Maths Activity Book 5A (Marshall Cavendish). U58&ndash;U62 are redirected to follow this real curriculum: U58 Fractions (Ch.3), U59 Order of Operations/PEMDAS (Ch.2 sub-topic, refined 27 Aug 2026 from an originally-planned Whole Numbers Recap), U60 Area of Triangles (Ch.4) &rarr; M6 (timing unchanged), U61 Ratio (Ch.5), U62 Volume (Ch.6) &mdash; see coaching-rules memory for the full spec. This replaces (defers, not cancels) the previously-planned S&amp;P II / Finish-The-Question Checkpoint / S&amp;P III / Consolidation sequence. Two lessons built: <em>Add &amp; Subtract Mixed Numbers</em> (unlike-denominator common-denominator method, then borrowing/regrouping when the fraction to subtract is bigger than what you have) and <em>Multiplying With Fractions</em> (one unifying "write everything as a fraction, multiply straight across" rule applied to fraction-of-a-set, fraction&times;fraction with an area-model visual, and mixed-number&times;whole reusing Lesson 1&rsquo;s mixed&harr;improper conversion skill). Both lessons include genuine click-driven interactive widgets (a live borrow/regroup simulator; a tap-to-select fraction-of-a-set counter grid; a step-through area-model overlap builder) rather than reveal-text only. <strong>Real result (graded 29 Aug 2026): 15/15 (100%) PERFECT</strong> &mdash; first attempt, full Intermediate/Applied density, including the three hardest questions (chained fraction-of-a-set, reverse fraction-of-a-set, multiply-then-subtract capstone). See [[_U58archived]] above for full breakdown. Fractions&ndash;decimals conversion and fraction-as-division are deliberately deferred to a later slot to keep this unit&rsquo;s scope to one cohesive skill per lesson.',
+      status: 'done'
     },
     {
       n: 57,
