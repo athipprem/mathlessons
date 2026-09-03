@@ -20,8 +20,33 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:60, topic:'Area of Triangles — Half-Rectangle Rule & Missing Piece (School-Curriculum Pivot)', status:'Lessons Built, Test Ready (Attempt Pending)' },
+  currentUnit: { n:60, topic:'Area of Triangles — Half-Rectangle Rule & Missing Piece (School-Curriculum Pivot)', status:'Lesson 2 Revamped, Retest Ready (1st Attempt 8/15 Verified, NOT PASSED)' },
   lastUnit: {
+    n:60, score:8, outOf:15, pct:53, delta:-6, prevScore:14, prevOutOf:15, prevLabel:'U59',
+    patternLabel: 'U60 — Area of Triangles, 1st Attempt, NOT PASSED — Lesson 2 rearrangement collapse, revamp + retest in progress',
+    patternInsight: '8/15 (53%) independently verified <strong>NOT PASSED</strong> (marked 7/15 on paper &mdash; a Q15 marking discrepancy was found on re-check, see analysis note) &mdash; Sec A 5/5 PERFECT, Sec B 0/5, Sec C 3/5 (verified). Prem&rsquo;s own report going in: "understood nothing at all on Lesson 2." Section A (pure direct-area, Lesson 1) held perfectly. Every single "reverse the formula" question &mdash; Q6, Q7, Q8, Q11, the ONE new idea Lesson 2 was built to teach &mdash; was left as a bare "?", 4 for 4, total non-attempt, not even a guess. Composite-shape questions were mixed: Q9, Q10, Q12 were also "?", but Q13 and Q15 &mdash; both composite-subtract, both framed as concrete real-world scenes (a garden, a banner) &mdash; were answered correctly with the right method. Root cause, confirmed by Lui&rsquo;s own review of the lesson: screen s1 ("Rearranging The Formula") compressed the algebra into two bare lines with no fraction-form derivation and no explanation of WHY moving a term across the equals sign flips its operation &mdash; an under-application of the standing step-by-step-granularity rule on this one screen specifically.',
+    analysisLabel: 'Next: Lesson 2 revamped (screen s1 split into a 2-screen fraction-derivation + side-switching-logic sequence, per Lui\'s own worked breakdown) + entirely new 15Q+2-warm-up retest built, zero reuse from either lesson or the original test',
+    analysisInsight: 'Marking discrepancy found on Q15: the printed test states the two cut flaps are base 6m/height 5m, giving 130 m&sup2; &mdash; the exact number Prem wrote &mdash; but the paper marked it wrong, most likely graded against an earlier draft answer key (140 m&sup2;, from different flap dimensions) left over from a late duplicate-question fix during the original build. Re-verified by hand against the words actually printed on the page; treating Prem&rsquo;s Q15 as correct raises the real score from 7/15 to 8/15. Lesson 2 screen s1 has been rebuilt into two screens: (1) deriving Area=bh/2 via full fraction form (½&times;b/1&times;h/1 &rarr; (1&times;b&times;h)/(2&times;1&times;1) &rarr; bh/2), then (2) solving backwards for b or h using an explicitly-stated general rule ("whatever crosses the = sign flips its operation") applied one micro-step at a time to both variants. The U60 test has been fully rebuilt from scratch &mdash; entirely new 15 questions plus 2 new warm-ups (Divisibility, Simple Equations), verified via Python and an exhaustive duplicate-pair scan against Lesson 1, the revamped Lesson 2, and the original test (zero collisions), and overwrites Unit_060_Test_AreaOfTriangles.docx in place. Do not fold Area of Triangles into spiral maintenance yet &mdash; retest first. Full write-up in the Executive Summary.',
+    qSummary: '<strong>Sec A 5/5 | Sec B 0/5 | Sec C 3/5 (verified)</strong> — 8/15 (53%) NOT PASSED — 1st attempt, retest pending',
+    qBreakdown: [
+      { q:'Q1', topic:'Direct Area', lvl:'w', pass:true,  note:'&#10003; 42 cm&sup2; (b14,h6).' },
+      { q:'Q2', topic:'Direct Area', lvl:'w', pass:true,  note:'&#10003; 45 (b9,h10) &mdash; number correct, unit label written as cm&sup2; instead of m&sup2;.' },
+      { q:'Q3', topic:'Direct Area', lvl:'w', pass:true,  note:'&#10003; 40 cm&sup2; (b16,h5).' },
+      { q:'Q4', topic:'Direct Area', lvl:'w', pass:true,  note:'&#10003; 44 cm&sup2; (b11,h8).' },
+      { q:'Q5', topic:'Direct Area', lvl:'w', pass:true,  note:'&#10003; 90 cm&sup2; (b20,h9).' },
+      { q:'Q6', topic:'Reverse — Find Height', lvl:'m', pass:false, note:'&#10007; left as "?" (no attempt); correct 12 cm (area42,base7). Every reverse-formula question was left unanswered &mdash; Lesson 2\'s one new idea never landed.' },
+      { q:'Q7', topic:'Reverse — Find Base', lvl:'m', pass:false, note:'&#10007; left as "?" (no attempt); correct 13 cm (area52,height8).' },
+      { q:'Q8', topic:'Reverse — Find Height  &#9733;', lvl:'m', pass:false, note:'&#10007; left as "?" (no attempt); correct 6 cm (area45,base15).' },
+      { q:'Q9', topic:'Composite — Add  &#9733;', lvl:'m', pass:false, note:'&#10007; left as "?" (no attempt); correct 56 m&sup2; (rect7&times;6+tri(7,4)).' },
+      { q:'Q10',topic:'Composite — Subtract  &#9733;', lvl:'m', pass:false, note:'&#10007; left as "?" (no attempt); correct 63 cm&sup2; (sq9&times;9&minus;tri(6,6)).' },
+      { q:'Q11',topic:'Applied — Reverse Word Problem  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; left as "?" (no attempt); correct 14 m (sail area84,height12).' },
+      { q:'Q12',topic:'Applied — Composite Add  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; left as "?" (no attempt); correct 119 m&sup2; (tent rect14&times;6+tri(14,5)).' },
+      { q:'Q13',topic:'Applied — Composite Subtract  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 144 m&sup2; (garden rect18&times;10&minus;tri(8,9)) &mdash; correct, full method shown despite the Section B collapse.' },
+      { q:'Q14',topic:'Reasoning — Compare  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; "Equal" (triA(5,16)=40, triB(8,10)=40).' },
+      { q:'Q15',topic:'Composite Subtract, Capstone  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 130 m&sup2; (banner 16&times;10&minus;2&times;tri(6,5)) &mdash; correct per the numbers actually printed on the test; originally marked wrong on paper against a stale answer-key draft (140), corrected here after independent re-verification.' }
+    ]
+  },
+  _U59archived: {
     n:59, score:14, outOf:15, pct:93, delta:+10, prevScore:15, prevOutOf:15, prevLabel:'U58',
     patternLabel: 'U59 — Order of Operations (PEMDAS), PASSED — near-perfect debut on mid-cycle-pivoted live-school content',
     patternInsight: '14/15 (93%) <strong>PASSED</strong> &mdash; Sec A 5/5, Sec B 5/5, Sec C 4/5. First attempt at the newly-added PEMDAS unit, pulled forward mid-cycle (27 Aug 2026) after Prem reported studying Order of Operations live at school. Every Basic and Intermediate question landed &mdash; all four exponent questions, the two-separate-brackets question &mdash; and 4 of 5 Hard/Capstone questions landed too, including the area-application transfer question and the four-operation capstone. The single miss, Q11 (3&times;(2+(5&minus;1)&sup2;)=54, wrote 108), has a precise, diagnosable cause: 108 = 3&times;(2+(5&minus;1))&sup2; &mdash; Prem correctly resolved the innermost bracket (5&minus;1=4), but let the exponent&rsquo;s scope drift outward to cover the whole "(2+(5&minus;1))" group instead of applying it only to the sealed "(5&minus;1)&sup2;" unit before adding the 2. A nested-bracket <strong>scoping</strong> error &mdash; he can peel one bracket layer correctly and knows exponents beat addition, but hadn&rsquo;t yet locked onto which bracket group an exponent attaches to at three nesting levels. No working was shown, so this is inferred from the wrong-answer pattern, not confirmed directly. Maps precisely onto Lesson 2&rsquo;s "peel the innermost bracket" widget &mdash; one level deeper than practiced, not a fresh gap.',
@@ -464,7 +489,8 @@ var PREM_DATA = {
     { n:56, score:10, delta:-4,   color:'linear-gradient(135deg,#EF5350,#C62828)', star:false },
     { n:57, score:4,  delta:-6,   color:'linear-gradient(135deg,#B71C1C,#7F0000)', star:false },
     { n:58, score:15, delta:+11,  color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true },
-    { n:59, score:14, delta:-1,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false }
+    { n:59, score:14, delta:-1,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
+    { n:60, score:8,  delta:-6,   color:'linear-gradient(135deg,#EF5350,#B71C1C)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
@@ -474,14 +500,14 @@ var PREM_DATA = {
       badge: 'linear-gradient(135deg,#BF360C,#8D2B08)',
       title: 'Area of Triangles — Half-Rectangle Rule &amp; Missing Piece (School-Curriculum Pivot)',
       tags: [
-        { t:'U58 (100%) &amp; U59 (93%) both PASSED — pivot confirmed', s:'background:#FFF3E8;color:#8D2B08;font-weight:700' },
-        { t:'2 lessons: Half-Rectangle Rule, Missing Piece &amp; Composite', c:'tgreen' },
-        { t:'Weighted Intermediate/Applied, no reuse from lessons', c:'tgreen' },
-        { t:'15Q test + 2 warm-ups (Sequences Formula, Ratio)', c:'tgreen' },
-        { t:'Milestone 6 fires directly after this unit', c:'torange' }
+        { t:'1st attempt: 8/15 verified — NOT PASSED', s:'background:#FFEBEE;color:#B71C1C;font-weight:700' },
+        { t:'Lesson 2 revamp: deep fraction-derivation + side-switching logic', c:'tgreen' },
+        { t:'Every reverse-formula Q (4/4) left unanswered — root cause fixed', c:'torange' },
+        { t:'Test fully rebuilt: all-new 15Q + 2 warm-ups, zero reuse', c:'tgreen' },
+        { t:'Retest ready — Milestone 6 fires after U60 clears', c:'torange' }
       ],
-      note: 'Fourth unit in the 27 Aug 2026 school-curriculum pivot (Shaping Maths Ch.4: base &amp; height, finding area), following U58 Fractions (15/15) and U59 PEMDAS (14/15) &mdash; both real results now folded into this sync per the standing "sync together with the next pack" rule. Two lessons built from zero (ground rule: brand-new topic, one idea at a time): <em>Area of a Triangle &mdash; The Half-Rectangle Rule</em> (base/height definition, the rectangle-cut-in-half visual proof, worked examples across right/acute/obtuse triangles &mdash; including the tricky case where the height falls OUTSIDE an obtuse triangle &mdash; and a 3-round "Spot The Height" interactive identification check) and <em>Missing Piece &amp; Composite Figures</em> (rearranging Area=&frac12;&times;b&times;h to solve for a missing base or height, a click-through rearrangement widget, and composite shapes built by ADDING a triangle on or SUBTRACTING one cut out). Test: 15Q weighted toward Intermediate/Applied tiers (Sec A direct area, Sec B reverse-formula + composite intro, Sec C applied word problems + a same-area reasoning/compare question + a two-flap capstone), entirely fresh numbers not reused from either lesson (verified via an exhaustive duplicate-pair scan), plus 2 ungraded spiral-maintenance warm-ups on skills stale 4+ weeks (Sequences Formula T&#8345;=a+(n&minus;1)d, long-closed since the U21&ndash;30 era; Ratio sharing, closed since U26). All worked examples and test answers independently verified via Python before writing. Awaiting Prem&rsquo;s attempt.',
-      status: 'pending'
+      note: 'Fourth unit in the 27 Aug 2026 school-curriculum pivot (Shaping Maths Ch.4: base &amp; height, finding area), following U58 Fractions (15/15) and U59 PEMDAS (14/15). <strong>1st attempt (graded 3 Sep 2026): 8/15 independently verified, NOT PASSED</strong> &mdash; Sec A 5/5 perfect, Sec B 0/5, Sec C 3/5. Prem: "understood nothing at all on Lesson 2." Every single reverse-formula question (Q6, Q7, Q8, Q11 &mdash; the one new idea Lesson 2 was built to teach) was left as a bare non-attempt. Lui reviewed the lesson directly and found screen s1 ("Rearranging The Formula") compressed the algebra into two bare lines with no fraction-form derivation and no explanation of WHY moving a term across "=" flips its operation &mdash; an under-application of the project&rsquo;s standing step-by-step-granularity rule on this one screen. <strong>Response:</strong> <em>Triangles_Lesson_MissingPieceAndComposite.html</em> screen s1 has been rebuilt into two screens using Lui&rsquo;s own worked breakdown &mdash; first deriving Area=bh/2 via full fraction form, then solving backwards for b or h one micro-step at a time with the general "crossing = flips the operation" logic stated explicitly on every step. The U60 test has been entirely rebuilt from scratch (all-new 15Q + 2 new warm-ups: Divisibility, Simple Equations), verified via Python and an exhaustive duplicate-pair scan against Lesson 1, the revamped Lesson 2, and the original test (zero collisions), overwriting Unit_060_Test_AreaOfTriangles.docx in place. A marking discrepancy was also found and corrected on the original attempt&rsquo;s Q15 (see [[lastUnit]] above) &mdash; real score is 8/15, not the 7/15 marked on paper. Retest ready; Milestone 6 still fires directly after U60 clears.',
+      status: 'done'
     },
     {
       n: 59,

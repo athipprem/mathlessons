@@ -90,23 +90,48 @@ p,li{font-size:1rem;line-height:1.65}
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
 </div>
 
-<!-- s1: rearranging the formula -->
+<!-- s1: where does bh/2 come from -->
 <div class="screen" id="s1">
 <div class="card">
-  <h2>&#x1F504; Rearranging The Formula</h2>
+  <h2>&#x1F50D; Where Does "bh &divide; 2" Come From?</h2>
   <div class="why">
-    <div class="why-title">The one new idea</div>
-    <p>If you already know the AREA and one of base/height, you can work BACKWARDS to find the missing one. You just move the pieces of the formula around — the same "sort it to one side" method you already know from algebra.</p>
+    <div class="why-title">The one new idea (part 1 of 2)</div>
+    <p>If you already know the AREA and one of base/height, you can work BACKWARDS to find the missing one. Before we do that, let's rewrite the rule in a slightly different form — it makes the "working backwards" trick much easier to see.</p>
   </div>
   <div class="steps">
-    <div class="ln"><span class="note">Start with the rule:</span></div>
+    <div class="ln"><span class="note">Start with the rule you already know:</span></div>
     <div class="ln">Area = &frac12; &times; b &times; h</div>
-    <div class="ln"><span class="note">Step 1 — multiply BOTH sides by 2, to clear the &frac12;:</span></div>
-    <div class="ln">2 &times; Area = b &times; h</div>
-    <div class="ln"><span class="note">Step 2a — to find HEIGHT, divide both sides by b:</span></div>
-    <div class="ln ans">h = (2 &times; Area) &divide; b</div>
-    <div class="ln"><span class="note">Step 2b — OR to find BASE, divide both sides by h instead:</span></div>
+    <div class="ln"><span class="note">Every number can be written as a fraction over 1 — it doesn't change its value. So let's write b and h that way too:</span></div>
+    <div class="ln">Area = &frac12; &times; b/1 &times; h/1</div>
+    <div class="ln"><span class="note">To multiply fractions, multiply straight across — all the TOPS together, all the BOTTOMS together:</span></div>
+    <div class="ln">Area = (1 &times; b &times; h) / (2 &times; 1 &times; 1)</div>
+    <div class="ln"><span class="note">1 &times; b &times; h is just b &times; h. And 2 &times; 1 &times; 1 is just 2. So it simplifies to:</span></div>
+    <div class="ln ans">Area = bh / 2</div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; This is NOT a new rule — it's the exact same rule as Lesson 1, just written as one fraction instead of "&frac12; &times;". Now that Area is written as a single fraction, we can use it to work backwards. That's part 2, next screen.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Solve For b Or h &#8594;</button></div>
+</div>
+
+<!-- s1b: solving backwards for b or h -->
+<div class="screen" id="s1b">
+<div class="card">
+  <h2>&#x1F504; Solving Backwards For b Or h</h2>
+  <div class="why">
+    <div class="why-title">The one new idea (part 2 of 2)</div>
+    <p>We now have Area = bh &divide; 2. To find a missing base or height, we move the pieces of this equation around — one piece at a time. Here's the ONE rule that makes this always work:</p>
+  </div>
+  <div class="big-rule">Whatever crosses the "=" sign flips its operation.<br>&times; becomes &divide;, and &divide; becomes &times;.<br>(Same idea as sorting letters in algebra: crossing "=" flips + to &minus;, or &minus; to +.)</div>
+  <div class="rulebar">Rule we just derived: Area = bh &divide; 2</div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — the "&divide; 2" is on the right side. To move it to the LEFT side, divide flips to multiply:</span></div>
+    <div class="ln ans">2 &times; Area = bh</div>
+    <div class="ln"><span class="note">Step 2 — that's the same equation, just written the other way round. Let's use it to solve for b, or for h:</span></div>
+    <div class="ln ans">bh = 2 &times; Area</div>
+    <div class="ln"><span class="note">Step 2a — to find b: right now, h is MULTIPLYING b. To move h across to the right side, multiply flips to divide:</span></div>
     <div class="ln ans">b = (2 &times; Area) &divide; h</div>
+    <div class="ln"><span class="note">Step 2b — OR to find h instead: b is MULTIPLYING h. To move b across to the right side, multiply flips to divide:</span></div>
+    <div class="ln ans">h = (2 &times; Area) &divide; b</div>
   </div>
   <div class="warn-box"><p>&#x26A0;&#xFE0F; Both new formulas start the exact same way: double the area first. Then divide by whichever piece you already have.</p></div>
 </div>
@@ -119,7 +144,7 @@ p,li{font-size:1rem;line-height:1.65}
   <h2>Worked Example — Find The Height</h2>
   <p>A triangle has an area of 40 cm&sup2; and a base of 10 cm. What is its height?</p>
   <div class="steps">
-    <div class="ln"><span class="note">Step 1 — write the rearranged rule:</span></div>
+    <div class="ln"><span class="note">Step 1 — write the rearranged rule we just derived (h = (2&times;Area)&divide;b):</span></div>
     <div class="ln">h = (2 &times; Area) &divide; b</div>
     <div class="ln"><span class="note">Step 2 — put in the numbers:</span></div>
     <div class="ln">h = (2 &times; 40) &divide; 10</div>
@@ -140,7 +165,7 @@ p,li{font-size:1rem;line-height:1.65}
   <h2>Worked Example — Find The Base</h2>
   <p>A triangle has an area of 54 cm&sup2; and a height of 9 cm. What is its base?</p>
   <div class="steps">
-    <div class="ln"><span class="note">Step 1 — write the rearranged rule:</span></div>
+    <div class="ln"><span class="note">Step 1 — write the rearranged rule we just derived (b = (2&times;Area)&divide;h):</span></div>
     <div class="ln">b = (2 &times; Area) &divide; h</div>
     <div class="ln"><span class="note">Step 2 — put in the numbers:</span></div>
     <div class="ln">b = (2 &times; 54) &divide; 9</div>
