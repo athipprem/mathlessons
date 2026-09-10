@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turning Words Into One Expression — PEMDAS School Test Prep</title>
+<style>
+:root{--nav:#5E35B1;--nav-dark:#4527A0;--bg:#EDE7F6;--card:#fff;--acc:#5E35B1;--ok:#2E7D32;--err:#C62828;--warn:#4527A0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#4527A0;font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#EDE7F6,#F5F2FB);border:2px solid #B39DDB;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:#4527A0;font-weight:700;margin-bottom:6px}
+.big-rule{background:#EDE7F6;border:2px solid #5E35B1;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#4527A0;margin:14px 0}
+.golden{background:linear-gradient(135deg,#EDE7F6,#D1C4E9);border:2px solid #B39DDB;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#EDE7F6;border:1.5px solid #5E35B1;border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:#4527A0;text-align:center;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F5F2FB;border:1px solid #B39DDB;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:#5E35B1}
+.steps .ln.ans{color:#4527A0;font-weight:800}
+.tree{background:#FCFBFE;border:2px dashed #B39DDB;border-radius:12px;padding:16px;margin:12px 0}
+.tree .node{background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.96rem}
+.tree .step-n{display:inline-block;background:#5E35B1;color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-weight:700;margin-right:8px;font-size:.85rem}
+.warn-box{background:#EDE7F6;border:1.5px solid #B39DDB;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#4527A0}
+.q-card{background:#F5F2FB;border:1.5px solid #B39DDB;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #B39DDB;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#EDE7F6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#EDE7F6;color:#4527A0;border:2px solid #4527A0;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:#5E35B1;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#EDE7F6;color:#4527A0;border:1.5px solid #B39DDB;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#8677B3;font-size:.85rem;margin-bottom:6px}
+.trigger-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.94rem}
+.trigger-table th{background:#5E35B1;color:#fff;padding:8px 10px;text-align:left}
+.trigger-table td{padding:8px 10px;border-bottom:1px solid #E0D6F5;background:#fff}
+.trigger-table tr:nth-child(even) td{background:#F5F2FB}
+.side-by-side{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.side-card{flex:1;min-width:230px;background:#fff;border:2px solid #B39DDB;border-radius:10px;padding:14px}
+.side-card.brackets{border-color:#2E7D32;background:#E8F5E9}
+.side-card .side-title{font-weight:700;color:#4527A0;margin-bottom:8px;font-size:.95rem}
+.side-card.brackets .side-title{color:#1B5E20}
+.exprbox{text-align:center;font-size:1.4rem;font-weight:800;color:#1a1a2e;background:#FCFBFE;border:2px dashed #B39DDB;border-radius:10px;padding:18px;margin:14px 0}
+.togglebtn{display:block;margin:0 auto 14px auto;background:var(--acc);color:#fff;border:none;padding:10px 24px;border-radius:24px;font-size:.95rem;font-weight:700;cursor:pointer}
+.togglebtn.off{background:#fff;color:var(--acc);border:2px solid var(--acc)}
+.widget-msg{text-align:center;font-weight:700;color:#4527A0;min-height:24px;margin-top:6px}
+.value-tag{display:inline-block;margin-top:8px;font-size:1.15rem;font-weight:800}
+.value-tag.small{color:#C62828}
+.value-tag.big{color:#1B5E20}
+.grid-compare{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin:10px auto;max-width:220px}
+.grid-compare div{background:#5E35B1;aspect-ratio:1;border-radius:3px}
+.compare-cap{text-align:center;font-size:.85rem;color:#4527A0;font-weight:700;margin-top:4px}
+.stuck-link{display:block;text-align:center;margin-top:14px;padding:10px;background:#FFF8E1;border:1.5px solid #F9A825;border-radius:8px;color:#F57F17;font-weight:700;text-decoration:none;font-size:.9rem}
+.stuck-link:hover{background:#FFECB3}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Turning Words Into One Expression — PEMDAS School Test Prep</span>
+  <span class="tnav-pill" id="pill">1 / 7</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">On Friday, no one hands you the sum</div>
+    <p>Every PEMDAS test you've done so far gave you the expression already built — like <strong>9 + 3 &times; 5</strong>. You just had to follow the ladder. On Friday's school test, the questions will be STORIES: "a baker makes 24 cupcakes in the morning and 16 in the afternoon, and packs them into boxes of 8." Nobody writes <strong>(24+16)&divide;8</strong> for you — YOU have to build it, out of the words.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">You already own the hard half</div>
+    <p>Here's the good news: once the expression is built, you already know exactly what to do with it — you've done the order ladder for weeks (U59: 14/15, extra practice: 13/15). This lesson only teaches the OTHER half: reading a story and turning it into one line of maths, and knowing when it needs brackets.</p>
+  </div>
+  <div class="big-rule">Your job: turn the story into ONE line of maths. Then use the ladder you already know.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: the 3-step routine -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F9ED; The 3-Step Routine</h2>
+  <div class="why">
+    <div class="why-title">The one new idea</div>
+    <p>Every word problem, no matter how it's worded, gets turned into an expression the SAME three-step way. Learn this routine once — use it on every question Friday.</p>
+  </div>
+  <div class="tree">
+    <div class="node"><span class="step-n">1</span><strong>Find the number facts</strong> — underline every number in the story and write next to it what it counts (e.g. "24 = cupcakes, morning").</div>
+    <div class="node"><span class="step-n">2</span><strong>Decide what happens FIRST</strong> — read the story again and ask: which event happens before the others, in real life?</div>
+    <div class="node"><span class="step-n">3</span><strong>Write it as ONE line</strong> — put brackets around whatever must happen first, if it's an add or subtract that needs protecting from a &times; or &divide; nearby.</div>
+  </div>
+  <div class="rulebar">Step 1: find the numbers &rarr; Step 2: what happens first? &rarr; Step 3: write ONE line</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; This band (Find &rarr; Decide &rarr; Write) will appear again on the next few screens — it's the spine of everything in this lesson.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Trigger Words &#8594;</button></div>
+</div>
+
+<!-- s2: trigger words + 2 worked examples -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F5DD;&#xFE0F; Trigger Words</h2>
+  <div class="rulebar">Step 1: find the numbers &rarr; Step 2: what happens first? &rarr; Step 3: write ONE line</div>
+  <p>Certain words are a strong clue for which operation a sentence means. Learn these four groups:</p>
+  <table class="trigger-table">
+    <tr><th>Words in the story</th><th>Usually means</th></tr>
+    <tr><td>each, every, per, groups of, rows of</td><td>&times; multiply</td></tr>
+    <tr><td>shared equally, split between, packed into boxes of</td><td>&divide; divide</td></tr>
+    <tr><td>altogether, in total, combined, also</td><td>+ add</td></tr>
+    <tr><td>left, remaining, change, broken, gives away</td><td>&minus; subtract</td></tr>
+  </table>
+  <h3>Worked Example — Multiply Then Add</h3>
+  <p><em>"A pack of stickers costs 8 baht. Ploy buys 4 packs, and also buys a pen for 15 baht. How much does she spend altogether?"</em></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — the numbers: 4 (packs), 8 (baht per pack — "costs...packs" &rarr; multiply trigger), 15 (baht for the pen).</span></div>
+    <div class="ln"><span class="note">Step 2 — what happens first? She buys the packs (a multiply), THEN adds the pen. "Also" is an add trigger.</span></div>
+    <div class="ln"><span class="note">Step 3 — write it as one line: the ladder already multiplies before adding, so no brackets are needed.</span></div>
+    <div class="ln ans">4 &times; 8 + 15 = 47 baht</div>
+  </div>
+  <h3>Worked Example — Divide With A Leftover</h3>
+  <p><em>"Nine friends each bring 6 sweets to a party. They eat 20 sweets. How many sweets are left?"</em></p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — the numbers: 9 (friends), 6 (sweets each &rarr; "each" = multiply trigger), 20 (eaten &rarr; "left" = subtract trigger).</span></div>
+    <div class="ln"><span class="note">Step 2 — what happens first? All the sweets get brought together (multiply), THEN some are eaten (subtract).</span></div>
+    <div class="ln"><span class="note">Step 3 — write it as one line: multiply happens first anyway on the ladder, so no brackets needed here either.</span></div>
+    <div class="ln ans">9 &times; 6 &minus; 20 = 34 sweets</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Bracket Test &#8594;</button></div>
+</div>
+
+<!-- s3: the bracket test (core screen) -->
+<div class="screen" id="s3">
+<div class="card">
+  <span class="badge-cap">&#x1F511; Core Idea</span>
+  <h2>The Bracket Test</h2>
+  <div class="big-rule">Does an add or subtract have to happen BEFORE a &times; or &divide;? If yes, it needs brackets.</div>
+  <p>Not every story needs brackets — most of the time the ladder already does the right thing on its own (like both examples on the last screen). Brackets are only needed when the story's FIRST event would otherwise happen LAST on the ladder.</p>
+  <div class="side-by-side">
+    <div class="side-card brackets">
+      <div class="side-title">&#x2705; NEEDS brackets</div>
+      <p><em>"A baker makes 24 cupcakes in the morning and 16 in the afternoon. He packs them into boxes of 8."</em></p>
+      <p style="margin-top:8px">The two batches must be <strong>combined first</strong> — you pack the WHOLE pile, not each batch separately.</p>
+      <div class="steps"><div class="ln ans">(24 + 16) &divide; 8 = 5</div></div>
+    </div>
+    <div class="side-card">
+      <div class="side-title">&#x274C; does NOT need brackets</div>
+      <p><em>"4 packs of stickers at 8 baht, plus a pen for 15 baht."</em></p>
+      <p style="margin-top:8px">The packs get multiplied <strong>first anyway</strong> — the ladder already does &times; before +, so the pen just joins on at the end.</p>
+      <div class="steps"><div class="ln ans">4 &times; 8 + 15 = 47</div></div>
+    </div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Both stories above contain an ADD. Only ONE of them needs brackets. That's the actual skill — not "does this story have an add in it," but "does that add have to happen before the multiply/divide next to it?"</p></div>
+
+  <h3 style="margin-top:16px">&#x1F4CB; See It Move</h3>
+  <p class="tap-hint">Same numbers, same story ingredients — tap the button to add or remove the brackets and watch the value change.</p>
+  <div class="exprbox" id="toggleExpr">24 + 16 &divide; 8</div>
+  <button class="togglebtn off" id="toggleBtn" onclick="toggleBrackets()">Add Brackets</button>
+  <div class="widget-msg" id="toggleMsg">Without brackets: divide happens to the 16 alone first (16&divide;8=2), then 24+2=26.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Exponents In Words &#8594;</button></div>
+</div>
+
+<!-- s4: exponents hiding in words -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F522; Exponents Hiding In Words</h2>
+  <div class="why">
+    <div class="why-title">A square arrangement is an exponent in disguise</div>
+    <p><em>"5 layers with 5 boxes in each layer"</em> — that's 5 groups of 5, so it's 5&times;5. But because BOTH numbers are the same, it can be written as a square: <strong>5&sup2;</strong>.</p>
+  </div>
+  <div class="grid-compare">
+    <div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div>
+  </div>
+  <div class="compare-cap">5 rows &times; 5 columns = 5&sup2; = 25 boxes</div>
+  <div class="steps" style="margin-top:14px">
+    <div class="ln"><span class="note">"5 layers with 5 boxes in each layer" — same number both times, so it's a square:</span></div>
+    <div class="ln ans">5 &times; 5 = 5&sup2; = 25</div>
+  </div>
+  <h3 style="margin-top:14px">The Discrimination That Matters</h3>
+  <div class="steps">
+    <div class="ln"><span class="note">"6 rows of 6" — same number both times &rarr; IS a square:</span></div>
+    <div class="ln ans">6&sup2; = 36</div>
+    <div class="ln"><span class="note">"6 rows of 4" — DIFFERENT numbers &rarr; is NOT a square, just a plain multiply:</span></div>
+    <div class="ln ans">6 &times; 4 = 24</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Only write it as an exponent when BOTH numbers in the "rows of / layers of" phrase are the SAME. Different numbers = ordinary multiply, no exponent.</p></div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Also watch the exponent itself: &sup3; means THREE of the number multiplied together (n&times;n&times;n), not "&times;3". 2&sup3; = 2&times;2&times;2 = 8, NOT 2&times;3=6.</p></div>
+  <h3 style="margin-top:14px">The Squaring Trap</h3>
+  <p><strong>(5 + 4)&sup2;</strong> means "add first, THEN square" — it is <strong>NOT</strong> the same as 5&sup2;+4&sup2;. Work out both and see:</p>
+  <div class="steps">
+    <div class="ln">(5 + 4)&sup2; = 9&sup2; = <strong>81</strong></div>
+    <div class="ln">5&sup2; + 4&sup2; = 25 + 16 = <strong>41</strong></div>
+    <div class="ln ans">81 &ne; 41 — brackets around an addition, then squaring, is a completely different journey than squaring two separate numbers and adding.</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Two Traps &#8594;</button></div>
+</div>
+
+<!-- s5: two traps -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x26A0;&#xFE0F; Two Traps To Watch For</h2>
+  <h3>Trap 1 — "Subtract FROM" Flips The Order</h3>
+  <p><em>"Multiply it by 4, then subtract the answer from 50."</em> His number is 9.</p>
+  <div class="steps">
+    <div class="ln"><span class="note">"Subtract A from B" always means B &minus; A, NOT A &minus; B. Say it out loud, twice, before writing anything.</span></div>
+    <div class="ln"><span class="note">A = the answer (4&times;9=36). B = 50. So it's 50 minus the answer:</span></div>
+    <div class="ln ans">50 &minus; 4 &times; 9 = 50 &minus; 36 = 14</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; A quick self-check: if you wrote 4&times;9&minus;50 instead, you'd get a NEGATIVE number (36&minus;50=&minus;14). If your answer to a "how much is left / what's the result" question comes out negative, that's a sign you flipped the subtraction the wrong way — go back and re-read "subtract FROM."</p></div>
+  <h3 style="margin-top:16px">Trap 2 — Same-Tier Chains Run Left To Right</h3>
+  <p><em>Nut saves 35 baht a week for 6 weeks, then spends 90 baht on a book. His sister gives him 40 baht.</em></p>
+  <div class="steps">
+    <div class="ln"><span class="note">35&times;6 (multiply, happens first on the ladder) = 210. Then &minus;90 and +40 are BOTH Add/Subtract tier — do them in the order they're written, left to right:</span></div>
+    <div class="ln">210 &minus; 90 = 120</div>
+    <div class="ln ans">120 + 40 = 160 baht</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; Don't do all the adds before all the subtracts (or the reverse) just because it feels tidier — when + and &minus; are tied on the ladder, left-to-right decides, exactly like Lesson 1's ladder rule.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s6: practice + close -->
+<div class="screen" id="s6">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Words Into One Expression</h2>
+  <div class="q-card">
+    <div class="q-text">P1 (needs brackets).&nbsp; A shop receives 15 boxes of pens in the morning and 25 in the afternoon. The boxes are shared equally across 8 shelves. How many boxes go on each shelf?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 18</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 40</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">Both batches are combined first, THEN shared: (15+25)&divide;8 = 40&divide;8</div>
+      <div class="ln ans">= 5</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2 (no brackets needed).&nbsp; Tickets cost 6 baht each. Anda buys 5 tickets and also buys a 12-baht snack. How much does she spend in total?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 90</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 42</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 23</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">The tickets multiply first anyway, no brackets needed: 5&times;6+12 = 30+12</div>
+      <div class="ln ans">= 42</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3 (exponent in words).&nbsp; A garden has 4 rows with 4 plants in each row. 3 plants die. How many plants are left?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 13</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 16</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 19</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">Same number both times (4 rows, 4 each) &rarr; it's a square: 4&sup2;=16, then 3 die: 16&minus;3</div>
+      <div class="ln ans">= 13</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4 (the "subtract FROM" trap).&nbsp; Multiply a number by 5, then subtract the answer from 60. The number is 8. What is the result?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 20</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; &minus;20</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 45</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">"Subtract the answer FROM 60" means 60 minus the answer: 60&minus;5&times;8 = 60&minus;40</div>
+      <div class="ln ans">= 20</div>
+    </div></div>
+  </div>
+  <div class="golden" style="margin-top:16px">
+    <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+    <p style="font-size:1.05rem"><strong>Turn the story into ONE line of maths: find the numbers, decide what happens first, write brackets around anything that must happen before a &times; or &divide; next to it. Then use the order ladder you already know.</strong></p>
+  </div>
+  <div class="warn-box"><p><strong>Finish-the-question check:</strong> before you write your final answer — did you answer the EXACT question asked?</p></div>
+  <div class="warn-box"><p>&#x1F4C5; <strong>Day-2 line:</strong> tomorrow, before the practice test, redo practice questions P2 and P4 from memory — no peeking. If both come back clean, you're ready.</p></div>
+  <a class="stuck-link" href="PEMDAS_StuckCard_BracketDecision.html">&#x1F4A1; Stuck on a bracket question? Open the Stuck Card.</a>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#fff;color:#5E35B1;border:2px solid #5E35B1;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+  <a href="PEMDAS_StuckCard_BracketDecision.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#F9A825;color:#fff;border:2px solid #F9A825;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Stuck? Open Stuck Card</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chkQ(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ---- s3: bracket toggle widget ----
+var bracketsOn = false;
+function toggleBrackets(){
+  bracketsOn = !bracketsOn;
+  var expr = document.getElementById('toggleExpr');
+  var btn = document.getElementById('toggleBtn');
+  var msg = document.getElementById('toggleMsg');
+  if(bracketsOn){
+    expr.innerHTML = '(24 + 16) &divide; 8';
+    btn.textContent = 'Remove Brackets';
+    btn.classList.remove('off');
+    msg.innerHTML = '<span class="value-tag big">With brackets: 24+16=40 combined first, then 40&divide;8 = 5.</span>';
+  } else {
+    expr.innerHTML = '24 + 16 &divide; 8';
+    btn.textContent = 'Add Brackets';
+    btn.classList.add('off');
+    msg.innerHTML = '<span class="value-tag small">Without brackets: divide happens to the 16 alone first (16&divide;8=2), then 24+2 = 26.</span>';
+  }
+}
+</script>
+</body>
+</html>
