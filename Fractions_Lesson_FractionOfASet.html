@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fraction of a Set — Fractions Lesson 1 (Unit 61)</title>
+<style>
+:root{--nav:#0097A7;--nav-dark:#006978;--bg:#E0F7FA;--card:#fff;--acc:#0097A7;--ok:#2E7D32;--err:#C62828;--warn:#006978}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E0F7FA,#F0FDFF);border:2px solid #80DEEA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E0F7FA;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E0F7FA,#B2EBF2);border:2px solid #80DEEA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E0F7FA;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin-bottom:12px}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0FDFF;border:1px solid #80DEEA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E0F7FA;border:1.5px solid #80DEEA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0FDFF;border:1.5px solid #80DEEA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #80DEEA;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E0F7FA}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E0F7FA;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E0F7FA;color:var(--warn);border:1.5px solid #80DEEA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+/* pile widget */
+.stepper-row{display:flex;justify-content:center;gap:24px;margin-bottom:14px;flex-wrap:wrap}
+.stepper{text-align:center}
+.stepper-label{font-size:.85rem;font-weight:700;color:var(--warn);margin-bottom:4px}
+.stepper-ctrl{display:flex;align-items:center;gap:8px}
+.stepper-btn{width:32px;height:32px;border-radius:50%;border:2px solid var(--acc);background:#fff;color:var(--acc);font-weight:800;font-size:1.1rem;cursor:pointer}
+.stepper-val{min-width:70px;text-align:center;font-weight:800;font-size:1.1rem;color:#1a1a2e}
+.pile-wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:16px 0;min-height:60px}
+.pile{display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:2px dashed #80DEEA;border-radius:10px;max-width:120px;transition:all .2s}
+.pile.taken{border-color:var(--acc);background:#E0F7FA}
+.dot{width:16px;height:16px;border-radius:50%;background:#B2EBF2}
+.pile.taken .dot{background:var(--acc)}
+.pile-readout{text-align:center;font-weight:800;color:var(--warn);font-size:1.05rem;margin-top:6px;min-height:24px}
+.stuck-link{display:block;text-align:center;color:var(--warn);font-size:.9rem;margin-top:10px;text-decoration:none;font-weight:600}
+.stuck-link:hover{text-decoration:underline}
+.diagram{text-align:center;background:#F0FDFF;border:2px dashed #80DEEA;border-radius:10px;padding:16px;margin:12px 0}
+.diagram svg{max-width:100%;height:auto}
+.diagram .cap{font-size:.85rem;color:var(--warn);margin-top:6px;font-weight:600}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Fraction of a Set — Fractions Lesson 1 (Unit 61)</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">You use this every time something gets shared</div>
+    <p>Three friends split a &pound;24 bill and you have to pay 2/3 of it. A shop sign says "2/3 off" a &pound;30 jacket. A bag has 30 sweets and you're told 5/6 of them are yours. In every one of these, you need to find PART of a GROUP — without lining everything up and counting one by one.</p>
+  </div>
+  <div class="why">
+    <div class="why-title">This is a real superpower</div>
+    <p>Once you know the trick, "2/3 of 24" takes about 3 seconds — no counters, no drawing, no listing every item. It works whether the group has 6 things or 6,000.</p>
+  </div>
+  <div class="big-rule">Today's superpower: find part of any group, instantly, without counting one by one.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1: Route A concrete -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F9EE; Route A — See It With Counters</h2>
+  <div class="why">
+    <div class="why-title">Two ways to understand today's idea</div>
+    <p>The next TWO screens teach the SAME thing in two different ways. Try this one first. If it clicks, great — skip ahead. If it doesn't quite click, the next screen shows the same idea as a written rule instead.</p>
+  </div>
+  <p class="tap-hint">Pick a total and a fraction. Watch the counters split into equal piles, then see which piles get "taken."</p>
+  <div class="stepper-row">
+    <div class="stepper">
+      <div class="stepper-label">Total counters</div>
+      <div class="stepper-ctrl">
+        <button class="stepper-btn" onclick="changeTotal(-1)">&minus;</button>
+        <span class="stepper-val" id="totalVal">24</span>
+        <button class="stepper-btn" onclick="changeTotal(1)">+</button>
+      </div>
+    </div>
+    <div class="stepper">
+      <div class="stepper-label">Fraction</div>
+      <div class="stepper-ctrl">
+        <button class="stepper-btn" onclick="changeFrac(-1)">&minus;</button>
+        <span class="stepper-val" id="fracVal">2/3</span>
+        <button class="stepper-btn" onclick="changeFrac(1)">+</button>
+      </div>
+    </div>
+  </div>
+  <div class="pile-wrap" id="pileWrap"></div>
+  <div class="pile-readout" id="pileReadout"></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See It As A Rule &#8594;</button></div>
+</div>
+
+<!-- s2: Route B procedural -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F4D0; Route B — See It As A Rule</h2>
+  <div class="bridge">Same idea as the last screen, written a different way. If the counters made sense, this shows you how to write it down. If they didn't quite click, try this route instead — some people find the written rule easier.</div>
+  <div class="rulebar">DIVIDE by the bottom number, then MULTIPLY by the top number.</div>
+  <p><strong>Worked example:</strong> Find &#8532; of 24.</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — the bottom number (3) tells you how many EQUAL piles to split into. Divide the total by it:</span></div>
+    <div class="ln">24 &divide; 3 = 8 &nbsp;<span class="note">(this is ONE third)</span></div>
+    <div class="ln"><span class="note">Step 2 — the top number (2) tells you how MANY of those piles you want. Multiply:</span></div>
+    <div class="ln">8 &times; 2 = 16 &nbsp;<span class="note">(this is TWO thirds)</span></div>
+    <div class="ln ans">&#8532; of 24 = 16</div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; Notice this matches the counters screen: 24 counters split into 3 piles of 8, then take 2 of those piles &rarr; 16. Same answer, two ways of seeing it.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Chaining Two Fractions &#8594;</button></div>
+</div>
+
+<!-- s3: chained -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F517; A Fraction OF A Fraction</h2>
+  <div class="why">
+    <div class="why-title">What if there are two fractions?</div>
+    <p>Sometimes a question gives you a fraction of a fraction — like "&#8532; of &frac34; of 24 stickers are gold." You do it in exactly two steps: find the FIRST fraction of the total, then find the SECOND fraction of THAT answer.</p>
+  </div>
+  <div class="diagram">
+    <svg viewBox="0 0 260 130" width="280">
+      <rect x="10" y="20" width="240" height="30" fill="#F0FDFF" stroke="#0097A7" stroke-width="2"/>
+      <text x="130" y="15" font-size="11" fill="#006978" text-anchor="middle" font-weight="700">24 stickers (the whole)</text>
+      <rect x="10" y="20" width="180" height="30" fill="#B2EBF2" stroke="#0097A7" stroke-width="2"/>
+      <text x="100" y="40" font-size="11" fill="#006978" text-anchor="middle" font-weight="700">&frac34; of 24 = 18</text>
+      <rect x="10" y="70" width="120" height="30" fill="#0097A7" stroke="#006978" stroke-width="2"/>
+      <text x="70" y="90" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">&#8532; of 18 = 12</text>
+      <text x="130" y="115" font-size="10" fill="#455A64" text-anchor="middle">(the dark bar is inside the 18-bar, which is inside the 24-bar)</text>
+    </svg>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — do the FIRST fraction of the total:</span></div>
+    <div class="ln">&frac34; of 24 &rarr; 24 &divide; 4 = 6, &nbsp; 6 &times; 3 = 18</div>
+    <div class="ln"><span class="note">Step 2 — do the SECOND fraction of your Step 1 answer (not the original 24!):</span></div>
+    <div class="ln">&#8532; of 18 &rarr; 18 &divide; 3 = 6, &nbsp; 6 &times; 2 = 12</div>
+    <div class="ln ans">&#8532; of &frac34; of 24 = 12</div>
+  </div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The most common mistake: doing BOTH fractions of the original 24. Always use your Step 1 answer as the new "total" for Step 2.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Working Backwards &#8594;</button></div>
+</div>
+
+<!-- s4: reverse -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F504; Working Backwards — Find The Whole</h2>
+  <div class="why">
+    <div class="why-title">The question can flip around</div>
+    <p>So far you've been given the WHOLE and asked to find a PART. This time it's flipped: you're given the PART and told which fraction it is, and you have to find the WHOLE. It uses the exact same tools, just in reverse order.</p>
+  </div>
+  <p><strong>Worked example:</strong> &#8541; of a number is 25. What is the number?</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — "&#8541; of a number is 25" means 5 EQUAL piles are worth 25 altogether. Find what ONE pile (&#8531;<sub>6</sub>) is worth by dividing:</span></div>
+    <div class="ln">25 &divide; 5 = 5 &nbsp;<span class="note">(one sixth of the number is 5)</span></div>
+    <div class="ln"><span class="note">Step 2 — the WHOLE number is made of 6 of those piles (not 5!) — because the whole is always 6/6. Multiply by 6:</span></div>
+    <div class="ln">5 &times; 6 = 30</div>
+    <div class="ln ans">The number is 30</div>
+  </div>
+  <div class="rulebar">Check it: is &#8541; of 30 equal to 25? 30 &divide; 6 = 5, and 5 &times; 5 = 25. &#10003; Yes!</div>
+  <div class="warn-box"><p>&#x1F4A1; The trick for reverse questions: divide by the TOP number (not the bottom) to find "one piece," then multiply by the BOTTOM number (the total number of pieces in the whole) to rebuild the whole.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s5: practice -->
+<div class="screen" id="s5">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Fraction of a Set</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; &#8539; of a class of 24 students wear glasses. How many students wear glasses?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 15</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 19</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">24 &divide; 8 = 3 (one eighth). &nbsp; 3 &times; 5 = 15</div>
+      <div class="ln ans">= 15 students</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2 (chained).&nbsp; &frac34; of &#8532; of 18 apples are ripe. How many apples are ripe?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 9</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 6</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">&#8532; of 18 = 12 first. Then &frac34; of 12: 12&divide;4=3, 3&times;3=9</div>
+      <div class="ln ans">= 9 apples</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3 (reverse).&nbsp; &#8535; of a number is 21. What is the number?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 28</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 25</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 35</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(2,'C')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">21 &divide; 3 = 7 (one fifth). &nbsp; 7 &times; 5 = 35</div>
+      <div class="ln ans">= 35</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4 (Word Problem).&nbsp; A baker used &#8534; of his flour to bake bread, using 8 kg. (a) How many kg of flour did he have to start with? (b) How many kg does he have left?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; (a) 20 kg &nbsp;(b) 12 kg</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; (a) 16 kg &nbsp;(b) 8 kg</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; (a) 20 kg &nbsp;(b) 8 kg</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(3,'A')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">8 kg is &#8534; of the total. One fifth = 8&divide;2=4. Whole = 4&times;5=20 kg</div>
+      <div class="ln ans">(a) 20 kg &nbsp; (b) 20 &minus; 8 = 12 kg left</div>
+    </div></div>
+  </div>
+  <div class="golden" style="margin-top:16px">
+    <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+    <p style="font-size:1.05rem"><strong>To find a fraction of a set: divide by the bottom, multiply by the top. For a fraction of a fraction, do it in two steps — using your first answer as the new total. To work BACKWARDS from a part to the whole, divide by the top number, then multiply by the bottom.</strong></p>
+  </div>
+  <div class="warn-box"><p><strong>Finish-the-question check:</strong> before you write your final answer — did you answer the EXACT question asked? (Some questions have TWO parts, like P4.)</p></div>
+  <div class="warn-box"><p>&#x1F4C5; <strong>Day-2 line:</strong> tomorrow, before Lesson 2, redo questions P2 and P4 from memory — no peeking. If both come back clean, you're ready.</p></div>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#fff;color:#006978;border:2px solid #006978;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+  <a href="Fractions_Lesson_FractionAsDivision.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#0097A7;color:#fff;border:2px solid #0097A7;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 2 &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chkQ(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ---- s1: pile widget ----
+var totals=[12,18,24,30], totalIdx=2;
+var fracs=[{n:1,d:2,label:'1/2'},{n:1,d:3,label:'1/3'},{n:2,d:3,label:'2/3'},{n:1,d:4,label:'1/4'},{n:3,d:4,label:'3/4'},{n:1,d:6,label:'1/6'},{n:5,d:6,label:'5/6'}];
+var fracIdx=2;
+function changeTotal(dir){totalIdx=(totalIdx+dir+totals.length)%totals.length;document.getElementById('totalVal').textContent=totals[totalIdx];renderPiles();}
+function changeFrac(dir){fracIdx=(fracIdx+dir+fracs.length)%fracs.length;document.getElementById('fracVal').textContent=fracs[fracIdx].label;renderPiles();}
+function renderPiles(){
+  var total=totals[totalIdx], f=fracs[fracIdx];
+  var wrap=document.getElementById('pileWrap'); wrap.innerHTML='';
+  var readout=document.getElementById('pileReadout');
+  if(total % f.d !== 0){ readout.textContent="That fraction doesn't split "+total+" evenly — try another total or fraction."; return; }
+  var perPile = total / f.d;
+  for(var p=0;p<f.d;p++){
+    var pile=document.createElement('div'); pile.className='pile'+(p<f.n?' taken':'');
+    for(var i=0;i<perPile;i++){ var dot=document.createElement('div'); dot.className='dot'; pile.appendChild(dot); }
+    wrap.appendChild(pile);
+  }
+  var answer = perPile * f.n;
+  readout.innerHTML = total+' &divide; '+f.d+' = '+perPile+' per pile &nbsp;&middot;&nbsp; take '+f.n+' pile'+(f.n>1?'s':'')+' &nbsp;&middot;&nbsp; '+f.label+' of '+total+' = <span style="color:#0097A7">'+answer+'</span>';
+}
+renderPiles();
+</script>
+</body>
+</html>

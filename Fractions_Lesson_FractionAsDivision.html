@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fraction as Division — Fractions Lesson 2 (Unit 61)</title>
+<style>
+:root{--nav:#00838F;--nav-dark:#006064;--bg:#E0F7FA;--card:#fff;--acc:#00838F;--ok:#2E7D32;--err:#C62828;--warn:#006064}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E0F7FA,#F0FDFF);border:2px solid #80DEEA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E0F7FA;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E0F7FA,#B2EBF2);border:2px solid #80DEEA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E0F7FA;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin-bottom:12px}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0FDFF;border:1px solid #80DEEA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E0F7FA;border:1.5px solid #80DEEA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0FDFF;border:1.5px solid #80DEEA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #80DEEA;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E0F7FA}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E0F7FA;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E0F7FA;color:var(--warn);border:1.5px solid #80DEEA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.recall-badge{display:inline-block;background:#FFF3E0;color:#E65100;border:1.5px solid #FFB74D;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stuck-link{display:block;text-align:center;color:var(--warn);font-size:.9rem;margin-top:10px;text-decoration:none;font-weight:600}
+.stuck-link:hover{text-decoration:underline}
+.diagram{text-align:center;background:#F0FDFF;border:2px dashed #80DEEA;border-radius:10px;padding:16px;margin:12px 0}
+.diagram svg{max-width:100%;height:auto}
+.diagram .cap{font-size:.85rem;color:var(--warn);margin-top:6px;font-weight:600}
+.btn-slice{background:var(--acc);color:#fff;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:.95rem;font-weight:700;display:block;margin:0 auto}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Fraction as Division — Fractions Lesson 2 (Unit 61)</span>
+  <span class="tnav-pill" id="pill">1 / 7</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: Day-2 recall -->
+<div class="screen active" id="s0">
+<div class="card">
+  <span class="recall-badge">&#8635; Day-2 Recall — No New Teaching</span>
+  <h2>Before We Start — 3 From Yesterday</h2>
+  <p>No teaching on this screen. These are the exact skills from Lesson 1 — try them from memory before moving on. If any feel shaky, that's useful to know now.</p>
+  <div class="q-card">
+    <div class="q-text">R1.&nbsp; &#8532; of 21 conkers are shiny. How many are shiny?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="r0" value="A"> A)&nbsp; 6</label>
+      <label class="opt"><input type="radio" name="r0" value="B"> B)&nbsp; 14</label>
+      <label class="opt"><input type="radio" name="r0" value="C"> C)&nbsp; 7</label>
+    </div>
+    <button class="btn-check" onclick="chkQ('r0','B')">Check</button>
+    <div class="feedback" id="fbr0"></div>
+    <button class="btn-show-steps" id="ssr0" onclick="showSteps('srr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="srr0"><div class="steps"><div class="ln">21 &divide; 3 = 7. &nbsp; 7 &times; 2 = 14</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">R2 (chained).&nbsp; &frac34; of &frac25; of 40 stickers are gold. How many are gold?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="r1" value="A"> A)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="r1" value="B"> B)&nbsp; 16</label>
+      <label class="opt"><input type="radio" name="r1" value="C"> C)&nbsp; 24</label>
+    </div>
+    <button class="btn-check" onclick="chkQ('r1','A')">Check</button>
+    <div class="feedback" id="fbr1"></div>
+    <button class="btn-show-steps" id="ssr1" onclick="showSteps('srr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="srr1"><div class="steps"><div class="ln">&frac25; of 40 = 16 first. Then &frac34; of 16 = 12</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">R3 (reverse).&nbsp; &#8539; of a number is 16. What is the number?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="r2" value="A"> A)&nbsp; 32</label>
+      <label class="opt"><input type="radio" name="r2" value="B"> B)&nbsp; 36</label>
+      <label class="opt"><input type="radio" name="r2" value="C"> C)&nbsp; 20</label>
+    </div>
+    <button class="btn-check" onclick="chkQ('r2','B')">Check</button>
+    <div class="feedback" id="fbr2"></div>
+    <button class="btn-show-steps" id="ssr2" onclick="showSteps('srr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="srr2"><div class="steps"><div class="ln">16 &divide; 4 = 4 (one ninth). &nbsp; 4 &times; 9 = 36</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start Lesson 2 &#8594;</button></div>
+</div>
+
+<!-- s1: WHY -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F3AF; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">You already know the answer to this</div>
+    <p>3 pizzas are shared equally between 4 people. How much does each person get? You probably already know it's "three quarters each" — you just haven't seen it written as maths yet. This screen shows that <strong>3 &divide; 4</strong> and <strong>&frac34;</strong> are the SAME THING, just written two different ways.</p>
+  </div>
+  <div class="big-rule">a &divide; b is always the same value as a/b.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See It With Pizzas &#8594;</button></div>
+</div>
+
+<!-- s2: Route A concrete -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F355; Route A — Share The Pizzas</h2>
+  <div class="why">
+    <div class="why-title">Two ways to understand today's idea</div>
+    <p>Try this one first. If it clicks, skip ahead. If not, the next screen shows the same idea as a written rule.</p>
+  </div>
+  <p class="tap-hint">3 pizzas, 4 people. Each pizza gets cut into 4 equal slices — one slice per person, per pizza. Tap the button to share them out.</p>
+  <div class="diagram" id="pizzaDiagram">
+    <svg viewBox="0 0 260 100" width="280" id="pizzaSvg">
+      <!-- 3 circles, each split into 4 -->
+    </svg>
+    <div class="cap" id="pizzaCap">3 whole pizzas, not yet shared</div>
+  </div>
+  <button class="btn-slice" onclick="sharePizzas()">Share Them Out</button>
+  <div class="warn-box" id="pizzaResult" style="display:none"><p></p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See It As A Rule &#8594;</button></div>
+</div>
+
+<!-- s3: Route B procedural -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F4D0; Route B — See It As A Rule</h2>
+  <div class="bridge">Same idea as the pizza screen, written a different way. If the pizzas made sense, this shows you how to write it down.</div>
+  <div class="rulebar">a &divide; b = a/b &nbsp;&mdash;&nbsp; just write the first number on top, the second on the bottom.</div>
+  <p><strong>Worked example:</strong> Write 9 &divide; 4 as a fraction, then as a mixed number.</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — write it straight across, top and bottom:</span></div>
+    <div class="ln">9 &divide; 4 = 9/4</div>
+    <div class="ln"><span class="note">Step 2 — 9/4 is an IMPROPER fraction (top bigger than bottom). To turn it into a mixed number, divide and find the remainder:</span></div>
+    <div class="ln">9 &divide; 4 = 2 remainder 1</div>
+    <div class="ln"><span class="note">Step 3 — the whole-number part is 2. The remainder (1) becomes the new top number, over the same bottom number (4):</span></div>
+    <div class="ln ans">9/4 = 2&frac14;</div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; Notice this matches the pizza idea: 9 pizza-quarters shared out makes 2 whole pizzas with 1 quarter left over.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Link Back To Lesson 1 &#8594;</button></div>
+</div>
+
+<!-- s4: explicit link -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F517; This Is Lesson 1, Flipped</h2>
+  <div class="why">
+    <div class="why-title">Same idea, written the other way round</div>
+    <p>Lesson 1 was "a FRACTION of a GROUP" — you started with a fraction and a total, and found a part. Today's idea is "one NUMBER divided by ANOTHER" — you start with two whole numbers, and the answer itself IS the fraction.</p>
+  </div>
+  <div class="steps">
+    <div class="ln"><span class="note">Lesson 1 direction:</span></div>
+    <div class="ln">&#8532; of 24 = 16 &nbsp;<span class="note">(fraction &times; total &rarr; a part)</span></div>
+    <div class="ln"><span class="note">Today's direction:</span></div>
+    <div class="ln ans">3 &divide; 4 = &frac34; &nbsp;<span class="note">(number &divide; number &rarr; a fraction)</span></div>
+  </div>
+  <div class="rulebar">Same machinery, opposite job: Lesson 1 turns a fraction INTO a number. Today turns a division INTO a fraction.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Dividing A Fraction &#8594;</button></div>
+</div>
+
+<!-- s5: dividing a fraction by a whole number -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x2702;&#xFE0F; Dividing A FRACTION By A Whole Number</h2>
+  <div class="why">
+    <div class="why-title">One more shape of question</div>
+    <p>What if you already have a fraction of something, and THAT gets shared further? Example: half a cake is left, and it gets shared equally between 3 people.</p>
+  </div>
+  <div class="diagram">
+    <svg viewBox="0 0 220 110" width="240">
+      <circle cx="110" cy="55" r="45" fill="#F0FDFF" stroke="#00838F" stroke-width="2"/>
+      <path d="M110,55 L110,10 A45,45 0 0,1 110,55 Z" fill="#00838F"/>
+      <line x1="110" y1="10" x2="110" y2="55" stroke="#006064" stroke-width="1.5"/>
+      <text x="150" y="30" font-size="11" fill="#006064" font-weight="700">&frac12; cake left</text>
+    </svg>
+    <div class="cap">The shaded &frac12; now gets cut into 3 equal smaller pieces (one per person)</div>
+  </div>
+  <p><strong>Worked example:</strong> &frac12; of a cake is shared equally between 3 people. What fraction of the WHOLE cake does each person get?</p>
+  <div class="steps">
+    <div class="ln"><span class="note">Step 1 — sharing a fraction between more people means the bottom number gets MULTIPLIED by however many people:</span></div>
+    <div class="ln">(&frac12;) &divide; 3 = 1 / (2 &times; 3)</div>
+    <div class="ln"><span class="note">Step 2 — work out the new bottom number:</span></div>
+    <div class="ln">2 &times; 3 = 6</div>
+    <div class="ln ans">Each person gets 1/6 of the whole cake</div>
+  </div>
+  <div class="rulebar">Rule: (a/b) &divide; c = a / (b &times; c)</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s6: practice -->
+<div class="screen" id="s6">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Fraction as Division</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; Write 13 &divide; 4 as a fraction, then as a mixed number.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 13/4 = 3&frac14;</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 4/13 = &#8531;<sub>3</sub></label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 13/4 = 4&frac14;</label>
+    </div>
+    <button class="btn-check" onclick="chkQ2(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps"><div class="ln ans">13/4 = 3&frac14; (13&divide;4 = 3 remainder 1)</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; 5 cakes are shared equally among 6 children. What fraction of a cake does each child get?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 6/5</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 5/6</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 1/5</label>
+    </div>
+    <button class="btn-check" onclick="chkQ2(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps"><div class="ln ans">5 &divide; 6 = 5/6 of a cake each</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3 (fraction &divide; whole number).&nbsp; &#8531; of a cake is shared equally between 2 people. What fraction of the WHOLE cake does each person get?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 2/3</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 1/5</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 1/6</label>
+    </div>
+    <button class="btn-check" onclick="chkQ2(2,'C')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps"><div class="ln ans">(&#8531;) &divide; 2 = 1/(3&times;2) = 1/6</div></div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4 (Word Problem).&nbsp; A rope 7 m long is cut into 3 equal pieces. How long is each piece? Give your answer as a mixed number.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 2&frac12; m</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 2&#8531; m</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 3&#8532; m</label>
+    </div>
+    <button class="btn-check" onclick="chkQ2(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps"><div class="ln ans">7 &divide; 3 = 7/3 = 2&#8531; m (2 remainder 1)</div></div></div>
+  </div>
+  <div class="golden" style="margin-top:16px">
+    <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+    <p style="font-size:1.05rem"><strong>a &divide; b is always the same as a/b — just write the first number on top. If the fraction is improper (top bigger than bottom), divide to find the whole-number part and put the remainder over the same bottom number. To share a fraction further between c people: (a/b) &divide; c = a/(b&times;c).</strong></p>
+  </div>
+  <div class="warn-box"><p><strong>Finish-the-question check:</strong> before you write your final answer — did the question ask for a fraction, or a mixed number? Give exactly what's asked.</p></div>
+  <a class="stuck-link" href="U61_StuckCard_FractionOfASet.html">&#x1F4A1; Stuck on which number goes where? Open the Stuck Card.</a>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#fff;color:#006064;border:2px solid #006064;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+  <a href="U61_SelfCheck_U061.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#00838F;color:#fff;border:2px solid #00838F;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Self-Check &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chkQ(name,correct){var sel=document.querySelector('input[name="'+name+'"]:checked'),fb=document.getElementById('fb'+name),ss=document.getElementById('ss'+name);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not quite. Tap Show Steps.';ss.style.display='inline-block';}}
+function chkQ2(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ---- s2: pizza sharing widget ----
+function drawPizzas(shared){
+  var svg=document.getElementById('pizzaSvg');
+  var html='';
+  var centers=[[45,50],[130,50],[215,50]];
+  var colors = shared ? ['#00838F','#00838F','#00838F'] : ['#F0FDFF','#F0FDFF','#F0FDFF'];
+  for(var i=0;i<3;i++){
+    var cx=centers[i][0], cy=centers[i][1], r=35;
+    html+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="'+colors[i]+'" stroke="#006064" stroke-width="2"/>';
+    // 4 slice lines
+    html+='<line x1="'+cx+'" y1="'+(cy-r)+'" x2="'+cx+'" y2="'+(cy+r)+'" stroke="#006064" stroke-width="1.2"/>';
+    html+='<line x1="'+(cx-r)+'" y1="'+cy+'" x2="'+(cx+r)+'" y2="'+cy+'" stroke="#006064" stroke-width="1.2"/>';
+    if(shared){
+      html+='<text x="'+cx+'" y="'+(cy+r+16)+'" font-size="10" fill="#006064" text-anchor="middle" font-weight="700">4 slices &rarr; 1 each</text>';
+    }
+  }
+  svg.innerHTML=html;
+}
+drawPizzas(false);
+function sharePizzas(){
+  drawPizzas(true);
+  document.getElementById('pizzaCap').textContent='Each pizza cut into 4 slices, one slice given to each of the 4 people';
+  var res=document.getElementById('pizzaResult');
+  res.style.display='block';
+  res.querySelector('p').innerHTML='Each person collects 1 slice from EACH of the 3 pizzas = 3 slices out of 4 possible = <strong>&frac34; of a pizza</strong>. So 3 &divide; 4 = &frac34;.';
+}
+</script>
+</body>
+</html>

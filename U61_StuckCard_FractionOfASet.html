@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Divide By The Bottom, Multiply By The Top — Stuck Card</title>
+<style>
+:root{--nav:#F9A825;--nav-dark:#F57F17;--bg:#FFF8E1;--card:#fff;--acc:#F57F17}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:15px;font-weight:700;text-align:center;flex:1;min-width:0}
+.wrap{max-width:760px;margin:0 auto;padding:16px}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.2rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:#F57F17;font-size:1.02rem;margin-bottom:8px}
+p,li{font-size:1rem;line-height:1.65}
+.ask-box{background:linear-gradient(135deg,#FFF8E1,#FFF3CD);border:2px solid #FFD54F;border-radius:10px;padding:16px;text-align:center;margin-bottom:14px}
+.ask-box .big{font-size:1.15rem;font-weight:800;color:#F57F17}
+.coin-steps{background:#FFF8E1;border:1px solid #FFD54F;border-radius:10px;padding:14px 16px;margin:12px 0}
+.coin-steps ol{margin-left:20px}
+.coin-steps li{margin-bottom:8px}
+.widget-card{background:#FFFBF0;border:2px dashed #FFD54F;border-radius:12px;padding:16px;margin:14px 0;text-align:center}
+.pile-wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:16px 0;min-height:60px}
+.pile{display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:2px dashed #FFD54F;border-radius:10px;max-width:120px;transition:all .2s}
+.pile.taken{border-color:#F57F17;background:#FFF3CD}
+.dot{width:16px;height:16px;border-radius:50%;background:#FFE9A8}
+.pile.taken .dot{background:#F9A825}
+.pushbtn{background:var(--acc);color:#fff;border:none;padding:10px 22px;border-radius:22px;font-size:.95rem;font-weight:700;cursor:pointer;margin:8px 0}
+.widget-msg{text-align:center;font-weight:700;color:#F57F17;min-height:24px;margin-top:6px}
+.side-by-side{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.side-card{flex:1;min-width:230px;background:#fff;border:2px solid #FFD54F;border-radius:10px;padding:14px}
+.side-card.yes{border-color:#2E7D32;background:#E8F5E9}
+.side-card .side-title{font-weight:700;color:#F57F17;margin-bottom:6px;font-size:.93rem}
+.side-card.yes .side-title{color:#1B5E20}
+.side-card .ln{font-size:.95rem;padding:2px 0}
+.side-card .ln.note{font-style:italic;color:#8d6e00;font-size:.85rem}
+.big-rule{background:#FFF3CD;border:2px solid #F9A825;border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:#F57F17;margin:14px 0}
+.warn-box{background:#FFF8E1;border:1.5px solid #FFD54F;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:#F57F17}
+.q-card{background:#FFFBF0;border:1.5px solid #FFD54F;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #FFD54F;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#FFF3CD}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.dad-line{background:linear-gradient(135deg,#FFF3CD,#FFE9A8);border:2px solid #F9A825;border-radius:10px;padding:16px;text-align:center;margin-top:16px}
+.dad-line p{font-weight:700;color:#F57F17;font-size:1.02rem}
+.backhub{display:block;text-align:center;margin-top:6px;padding:13px 0;background:#F9A825;color:#fff;border:2px solid #F9A825;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">&#x1F4A1; Divide By The Bottom, Multiply By The Top — Stuck Card</span>
+  <span style="width:60px"></span>
+</nav>
+
+<div class="wrap">
+
+<div class="card">
+  <div class="ask-box">
+    <p>Before you read anything below — ask yourself:</p>
+    <p class="big">"Which number is the WHOLE thing? And what does the BOTTOM of the fraction tell me to do to it?"</p>
+    <p style="margin-top:8px">Say your answer out loud. Then scroll down and check.</p>
+  </div>
+  <p style="text-align:center;color:#A1887F;font-size:.9rem">(If you already know, you don't need the rest of this page — go answer the question!)</p>
+</div>
+
+<div class="card">
+  <h2>&#x1F9EE; Go And Get 24 Counters</h2>
+  <p>Or coins, Lego, buttons — anything you can count. Try this with the question "what is &#8532; of 24?"</p>
+  <div class="coin-steps">
+    <ol>
+      <li>Count out <strong>24</strong> counters. That's your WHOLE.</li>
+      <li>The bottom number of &#8532; is <strong>3</strong>. Split your 24 counters into <strong>3 equal piles</strong>. Each pile should have <strong>8</strong> in it.</li>
+      <li>The top number of &#8532; is <strong>2</strong>. Push <strong>2 of your 3 piles</strong> together — leave the third pile alone.</li>
+      <li>Count what's in your pushed-together piles: <strong>16</strong>. That's your answer: &#8532; of 24 = 16.</li>
+    </ol>
+  </div>
+
+  <h3 style="margin-top:14px">No counters handy? Try it here instead:</h3>
+  <div class="widget-card">
+    <p style="margin-bottom:10px">24 counters split into 3 equal piles of 8. Tap the button to take 2 of the 3 piles.</p>
+    <div class="pile-wrap" id="pileWrap"></div>
+    <button class="pushbtn" id="takeBtn" onclick="takePiles()">Take 2 Piles</button>
+    <div class="widget-msg" id="pileMsg">Not taken yet — all 3 piles are still separate.</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Two Contrasted Examples, Side By Side</h3>
+  <div class="side-by-side">
+    <div class="side-card">
+      <div class="side-title">&#x274C; Just "24 &divide; 3" on its own</div>
+      <div class="ln">24 &divide; 3 = <strong>8</strong></div>
+      <div class="ln note">This only tells you what ONE pile is worth (one third). It stops too early if the question asked for &#8532;.</div>
+    </div>
+    <div class="side-card yes">
+      <div class="side-title">&#x2705; "&#8532; of 24"</div>
+      <div class="ln">Step 1: 24 &divide; 3 = 8 &nbsp;<span class="note">(one third)</span></div>
+      <div class="ln">Step 2: 8 &times; 2 = <strong>16</strong> &nbsp;<span class="note">(two thirds)</span></div>
+    </div>
+  </div>
+  <div class="big-rule">Dividing by the bottom only gets you ONE piece. You must then multiply by the top to get the number of pieces the question actually asked for.</div>
+  <div class="warn-box"><p>&#x26A0;&#xFE0F; The single most common slip: stopping after the division. If the top number of the fraction isn't 1, you're not done yet.</p></div>
+</div>
+
+<div class="card">
+  <h3>Now You Try</h3>
+  <div class="q-card">
+    <div class="q-text">1.&nbsp; What is &frac34; of 20?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="sq0" value="A"> A)&nbsp; 5</label>
+      <label class="opt"><input type="radio" name="sq0" value="B"> B)&nbsp; 15</label>
+      <label class="opt"><input type="radio" name="sq0" value="C"> C)&nbsp; 16</label>
+    </div>
+    <button class="btn-check" onclick="chk(0,'B')">Check</button>
+    <div class="feedback" id="sfb0"></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">2.&nbsp; &#8535; of a number is 18. What is the number?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="sq1" value="A"> A)&nbsp; 30</label>
+      <label class="opt"><input type="radio" name="sq1" value="B"> B)&nbsp; 15</label>
+      <label class="opt"><input type="radio" name="sq1" value="C"> C)&nbsp; 24</label>
+    </div>
+    <button class="btn-check" onclick="chk(1,'A')">Check</button>
+    <div class="feedback" id="sfb1"></div>
+  </div>
+  <div class="warn-box"><p><strong>You've got it if</strong> you can say WHY you divide first and multiply second (or, for question 2, why you divide by the TOP and multiply by the BOTTOM) — not just get both numbers right.</p></div>
+</div>
+
+<div class="dad-line">
+  <p>Still stuck after all of this? Tell Dad — that means the lesson has a problem, not you.</p>
+</div>
+
+<a class="backhub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Back to Hub</a>
+
+</div>
+
+<script>
+function chk(qi,correct){
+  var sel=document.querySelector('input[name="sq'+qi+'"]:checked'), fb=document.getElementById('sfb'+qi);
+  fb.style.display='block';
+  if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+  if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';}
+  else{fb.className='feedback err';fb.textContent=(qi===0)?'Not quite — divide by the bottom (4) first, THEN multiply by the top (3).':'Not quite — for reverse questions, divide by the TOP number, then multiply by the BOTTOM number.';}
+}
+
+function buildPiles(){
+  var wrap = document.getElementById('pileWrap');
+  wrap.innerHTML = '';
+  for(var p=0;p<3;p++){
+    var pile = document.createElement('div');
+    pile.className = 'pile';
+    pile.id = 'pile'+p;
+    for(var i=0;i<8;i++){ var d=document.createElement('div'); d.className='dot'; pile.appendChild(d); }
+    wrap.appendChild(pile);
+  }
+}
+buildPiles();
+
+var taken = false;
+function takePiles(){
+  taken = !taken;
+  var btn = document.getElementById('takeBtn');
+  var msg = document.getElementById('pileMsg');
+  document.getElementById('pile0').classList.toggle('taken', taken);
+  document.getElementById('pile1').classList.toggle('taken', taken);
+  if(taken){
+    btn.textContent = 'Put The 2 Piles Back';
+    msg.textContent = '2 piles taken = 16 counters. That is 2/3 of 24.';
+    msg.style.color = '#1B5E20';
+  } else {
+    btn.textContent = 'Take 2 Piles';
+    msg.textContent = 'Not taken yet — all 3 piles are still separate.';
+    msg.style.color = '#F57F17';
+  }
+}
+</script>
+</body>
+</html>
