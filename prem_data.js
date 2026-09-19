@@ -20,7 +20,7 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:61, topic:'Cycle 7 opens — Fraction of a Set + Fraction as Division (Shaping Maths 5A Ch.3, Core)', status:'Live — both lessons, Self-Check and Stuck Card built 17 Sep 2026. Built without Ch.3 activity-book pages (Lui chose to proceed without them); Applied tier carries an unverified-against-book flag. Test pinned: Unit_061_Test_Fractions_SetAndDivision.docx (16Q two-part, pass 10/12 + Recall 3/4).' },
+  currentUnit: { n:61, topic:'Cycle 7 opens — Fraction of a Set + Fraction as Division (Shaping Maths 5A Ch.3, Core)', status:'Live — built without Ch.3 activity-book pages (Lui chose to proceed without them); Applied tier carries an unverified-against-book flag. Both lessons shipped 17 Sep with six worked-example/practice defects (wrong Unicode fraction glyph vs. the stated working); fixed in place 19 Sep per REVISION 2 &mdash; all fractions now written as plain a/b text, verify_lesson_pack.py delivery gate PASS. Test Q6 swapped to "4/7 of a number is 20" (&rarr;35) since the old Q6 duplicated the (now-fixed) L1 worked example. Test otherwise unchanged: Unit_061_Test_Fractions_SetAndDivision.docx (16Q two-part, pass 10/12 + Recall 3/4).' },
   lastUnit: {
     n:'M6', outOf:20, score:12, markedScore:11, pct:60, delta:null, prevScore:13, prevOutOf:15, prevLabel:'U60 (retest, coached)',
     coached: false, independentResult: true, distanceFromClass: 'Cumulative review, Units 51-60 — mixed old/new material by design',
