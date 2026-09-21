@@ -15,13 +15,40 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '12 Aug 2026',
+  updated:        '21 Sep 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:61, topic:'Cycle 7 opens — Fraction of a Set + Fraction as Division (Shaping Maths 5A Ch.3, Core)', status:'Live — built without Ch.3 activity-book pages (Lui chose to proceed without them); Applied tier carries an unverified-against-book flag. Both lessons shipped 17 Sep with six worked-example/practice defects (wrong Unicode fraction glyph vs. the stated working); fixed in place 19 Sep per REVISION 2 &mdash; all fractions now written as plain a/b text, verify_lesson_pack.py delivery gate PASS. Test Q6 swapped to "4/7 of a number is 20" (&rarr;35) since the old Q6 duplicated the (now-fixed) L1 worked example. Test otherwise unchanged: Unit_061_Test_Fractions_SetAndDivision.docx (16Q two-part, pass 10/12 + Recall 3/4).' },
+  currentUnit: { n:62, topic:'Cycle 7 continues — Mixed Numbers + The Bar Model (Shaping Maths 5A Ch.3, Core, +0 from live class)', status:'Built 21 Sep 2026 per BUILD_PLAN_MATH_U62_MixedNumbers_BarModel.md. Two lessons (Fractions_Lesson_BarModelBasics.html, Fractions_Lesson_ImproperAndMixed.html) install the bar model as the standing visual representation and close the improper&harr;mixed-number gap that U61 actually showed (Q5/Q10 abandoned at the conversion step, not at fraction-of-a-set or fraction-as-division, both of which tested clean). Stuck Card + Self-Check shipped alongside. Test (Unit_062_Test_MixedNumbers_BarModel.docx, 16Q two-part, pass 10/12 + Recall 3/4) has the scored Recall Round moved to the FRONT of the paper (was last at U61, a possible fatigue confound behind the 0/4). Three content-isolation collisions the plan flagged were fixed before shipping; verify_lesson_pack.py extended with two new mechanical checks (bar-diagram pixel-vs-caption, mixed-number top&lt;bottom) and both pass. Gate #1 (was U61 coached or independent) resolved &mdash; Lui confirmed fully independent. Gate #2 (Ch.3 activity-book pages) still outstanding &mdash; built without them per the same standing choice made at U61; Applied tier carries the same unverified-against-book flag.' },
   lastUnit: {
+    n:61, outOf:12, score:9, markedScore:null, pct:75, delta:null, prevScore:12, prevOutOf:20, prevLabel:'M6',
+    coached: false, independentResult: true, distanceFromClass: 'Opened Cycle 7 against Shaping Maths 5A Ch.3, Core — built without the Ch.3 activity-book pages (Lui chose to proceed without them)',
+    patternLabel: 'Unit 61 — Fraction of a Set + Fraction as Division, graded 20 Sep 2026 (paper sat before, marking pass was interrupted) — Part 1 9/12 clean (10/12 at face value) &middot; Recall 0/4',
+    patternInsight: 'Both score boxes on the paper were left blank and 6 of 16 questions carried no mark at all &mdash; this record comes from independent verification against each question\'s own printed answer, not from existing ticks. <strong>Basic 3/3 &middot; Intermediate 4/5 at face value (3/5 excluding Q6, tainted &mdash; see below) &middot; Applied 3/4.</strong> Fraction of a set and fraction as division, the two skills this unit actually taught, both tested clean: every fraction-of-a-set question landed (Q1,2,4,7,9,11,12 all correct, including the reverse-then-forward capstone Q12 and the chained-with-NOT Q11), and Q9\'s fraction-as-division chain was fully worked and correct. <strong>The real Part-1 gap is narrower than the raw score suggests: Q5 and Q10 (both "fraction as division, mixed number" / two-part) were abandoned at the exact same step &mdash; Q5\'s working shows a fraction-shaped mark before the "?", consistent with reaching 11/4 and stalling at the improper&rarr;mixed conversion. Q8 (simplify 6/8&rarr;3/4) was correct alongside six hand-drawn circles cut into pieces in the working &mdash; unprompted pictorial reasoning on a question he got right.</strong> Q6 is flagged tainted: this paper printed the pre-fix version ("5/6 of a number is 25&rarr;30"), which duplicated Lesson 1\'s own broken worked example verbatim; his correct 30 cannot be treated as clean evidence for reverse-fraction-of-a-set specifically. <strong>Recall Round: 0/4</strong>, the first sitting of the new scored Recall Round &mdash; Q15 (circular arrangements) used 6! instead of (6&minus;1)!, the third recorded regression on this skill; Q16 (divisibility) found a valid but non-largest common multiple; Q13 and Q14 show scribbled-out working reaching no final answer. The Recall Round was printed LAST, after 12 questions of new material &mdash; a possible fatigue confound, not necessarily decay.',
+    analysisLabel: 'Next: Unit 62 &mdash; Mixed Numbers + The Bar Model (built 21 Sep 2026)',
+    analysisInsight: 'Two corrections to how this result was first read: (1) an earlier note flagged the source PDF as misnamed; both test PDFs have since been correctly restored/renamed by Lui, so no rename is needed now &mdash; but a real mixup did occur and was fixed, it was not an imagined finding. (2) Provenance (coached vs. independent) was unconfirmed when this record was first written; Lui has since confirmed the paper was sat fully independently. U62 targets exactly the narrowed gap: improper&rarr;mixed-number conversion (not fraction-of-a-set, which is secure) and the Recall Round (moved to print first, to separate decay from fatigue). Circular arrangements retired from the Recall rotation after this third regression (see Review_Note_CircularArrangements.md). Full write-up in TEST_RECORD_U61.md and the Executive Summary.',
+    qSummary: '<strong>Basic 3/3 | Intermediate 4/5 (3/5 excl. tainted Q6) | Applied 3/4</strong> — Part 1 9/12 clean (10/12 incl. Q6) | <strong>Recall 0/4</strong>',
+    qBreakdown: [
+      { q:'Q1', topic:'Fraction of a Set', lvl:'w', pass:true,  note:'&#10003; 12.' },
+      { q:'Q2', topic:'Fraction of a Set (Word Problem)', lvl:'w', pass:true,  note:'&#10003; 20.' },
+      { q:'Q3', topic:'Fraction as Division', lvl:'w', pass:true,  note:'&#10003; 5/8.' },
+      { q:'Q4', topic:'Fraction of a Set — NOT', lvl:'m', pass:true,  note:'&#10003; 27.' },
+      { q:'Q5', topic:'Fraction as Division (Mixed Number)  &#9733;', lvl:'m', pass:false, note:'&#10007; illegible + "?"; correct 2&frac34; m. Working carries a fraction-shaped mark before the "?", consistent with reaching 11/4 and stalling at the improper&rarr;mixed conversion &mdash; not a blank non-attempt.' },
+      { q:'Q6', topic:'Fraction of a Set — Reverse  &#9733;  (TAINTED)', lvl:'m', pass:true,  note:'&#10003; 30, correct against the pre-fix paper actually printed ("5/6 of a number is 25"). This question duplicated Lesson 1\'s own broken worked example verbatim &mdash; not usable as clean evidence for reverse-fraction-of-a-set.' },
+      { q:'Q7', topic:'Fraction of a Set (Chained)  &#9733;', lvl:'m', pass:true,  note:'&#10003; 5, working shown (3/8 of 40=15, then 5) &mdash; correct two-step chain.' },
+      { q:'Q8', topic:'Fraction as Division (Simplify)  &#9733;', lvl:'m', pass:true,  note:'&#10003; 3/4 (6/8 simplified) &mdash; six hand-drawn circles cut into pieces in the working, unprompted pictorial reasoning.' },
+      { q:'Q9', topic:'Fraction of a Set + Division (Word Problem)  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 7, full correct chain shown (56, 3/8 of it, remainder, then 7).' },
+      { q:'Q10',topic:'Fraction as Division, Two-Part  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; illegible, no numeric answer; correct (a) 4&frac12; m (b) 9 m. Same abandon-at-conversion shape as Q5.' },
+      { q:'Q11',topic:'Fraction of a Set — Chained with NOT  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 3, full correct chain shown (9 wear glasses, 12 do not, 3 of those play piano).' },
+      { q:'Q12',topic:'Fraction of a Set — Reverse Then Forward (Capstone)  &#9733;&#9733;', lvl:'h', pass:true,  note:'&#10003; 28, messy but correct across several scratch lines.' },
+      { q:'R13',topic:'Recall: Average Changes (Unit 48)', lvl:'k', pass:false, note:'&#10007; wrote 17, crossed out; correct 36 (sum 90&rarr;126, added 36). No usable working for how 17 was reached.' },
+      { q:'R14',topic:'Recall: Equations, Variables Both Sides (Unit 21)', lvl:'k', pass:false, note:'&#10007; "?" over scribbled-out working; correct n=6. Same gave-up shape as Q5/Q10.' },
+      { q:'R15',topic:'Recall: Circular Arrangements (Unit 43)', lvl:'k', pass:false, note:'&#10007; wrote 720; correct 120. Used 6! instead of (6&minus;1)!=5! &mdash; the third recorded regression on this exact skill (after M4, M5). Retired from the Recall rotation as a result.' },
+      { q:'R16',topic:'Recall: Divisibility (Unit 29)', lvl:'k', pass:false, note:'&#10007; wrote 936; correct 972. 936 is genuinely divisible by both 4 and 9 &mdash; a valid common multiple, just not the LARGEST 3-digit one. Stopped at the first multiple found.' }
+    ]
+  },
+  _M6archived: {
     n:'M6', outOf:20, score:12, markedScore:11, pct:60, delta:null, prevScore:13, prevOutOf:15, prevLabel:'U60 (retest, coached)',
     coached: false, independentResult: true, distanceFromClass: 'Cumulative review, Units 51-60 — mixed old/new material by design',
     patternLabel: 'Milestone 6 — Units 51–60, first tier-split report — 12/20 verified (marked 11/20), independent',
@@ -549,11 +576,40 @@ var PREM_DATA = {
     { n:58, score:15, delta:+11,  color:'linear-gradient(135deg,#FFD700,#FFA500)', star:true },
     { n:59, score:14, delta:-1,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:60, score:13, delta:-1,   color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, coached:true },
-    { n:'M6', label:'M6', score:11, outOf:15, delta:-2, color:'linear-gradient(135deg,#283593,#1A237E)', star:false }
+    { n:'M6', label:'M6', score:11, outOf:15, delta:-2, color:'linear-gradient(135deg,#283593,#1A237E)', star:false },
+    { n:61, score:9, outOf:12, delta:null, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:0, recallOutOf:4 }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 62,
+      badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 62 &mdash; Mixed Numbers + The Bar Model (Shaping Maths 5A Ch.3, Core)',
+      tags: [
+        { t:'Built 21 Sep 2026', c:'tblue' },
+        { t:'Targets: improper&harr;mixed conversion + Recall Round', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'Bar model installed as standing visual', c:'tgreen' },
+        { t:'Recall Round moved to front of paper', c:'torange' },
+        { t:'Gate: sat independently &mdash; confirmed by Lui', c:'tgreen' }
+      ],
+      note: 'Built from <code>BUILD_PLAN_MATH_U62_MixedNumbers_BarModel.md</code> straight off U61&rsquo;s real result. U61&rsquo;s Part-1 miss was narrower than the raw score suggested: fraction of a set and fraction as division both tested clean (Q1,2,4,7,9,11,12 all correct); the actual gap was Q5 and Q10, both abandoned at the exact same step &mdash; converting an improper fraction to a mixed number after the division was already done correctly. Two lessons (bar-model basics, then improper&harr;mixed) install the bar model as a manipulable, not illustrative, representation and close that specific gap with two explanation routes each. The Recall Round (0/4 at U61) moves to print FIRST this time, to separate genuine decay from end-of-paper fatigue &mdash; it was last at U61. Circular arrangements retired from the Recall rotation after a third regression (see <code>Review_Note_CircularArrangements.md</code>). Three content-isolation collisions the plan flagged (Lesson 1 practice, two Self-Check questions) were fixed before shipping; the delivery gate (<code>verify_lesson_pack.py</code>) was extended with two new mechanical checks &mdash; a bar-diagram pixel-vs-caption check and a mixed-number top&lt;bottom check &mdash; both validated against a deliberate known-bad input before trusting a real PASS. Ch.3 activity-book pages remain outstanding; built without them per the same standing choice made at U61.',
+      status: 'live'
+    },
+    {
+      n: 61,
+      badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 61 &mdash; Fraction of a Set + Fraction as Division (Cycle 7 opens, Shaping Maths 5A Ch.3)',
+      tags: [
+        { t:'Part 1: 9/12 clean (10/12 incl. tainted Q6)', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'Recall: 0/4 (first sitting)', c:'tred' },
+        { t:'Fraction of a set &amp; as division both clean', c:'tgreen' },
+        { t:'Gap narrowed to improper&rarr;mixed conversion', c:'torange' },
+        { t:'&rarr; Unit 62, Mixed Numbers + The Bar Model', c:'torange' }
+      ],
+      note: 'Graded 20 Sep 2026 (paper sat before; the marking pass on the physical paper was interrupted &mdash; both score boxes left blank, 6 of 16 questions carried no mark at all). This record comes from independent verification against each question&rsquo;s own printed answer. <strong>Basic 3/3 &middot; Intermediate 4/5 at face value (3/5 excluding Q6, tainted by a pre-fix lesson leak) &middot; Applied 3/4.</strong> The two skills this unit taught both tested clean &mdash; every fraction-of-a-set question landed, including the reverse-then-forward capstone (Q12) and the chained-with-NOT question (Q11). <strong>Q5 and Q10 (fraction as division, mixed number) were both abandoned at the identical step</strong> &mdash; Q5&rsquo;s working shows a fraction-shaped mark before the "?", consistent with reaching 11/4 and stalling at the conversion to a mixed number, not a blank guess. Q8 was correct alongside six hand-drawn circles cut into pieces in the working &mdash; unprompted pictorial reasoning, which U62&rsquo;s bar model builds directly on rather than imposing something new. <strong>Recall Round: 0/4</strong>, first sitting of the new scored format, printed last after 12 questions of new material (a possible fatigue confound). Q15 (circular arrangements) used 6! instead of (6&minus;1)! &mdash; the third recorded regression on this skill, now retired from the rotation. Full write-up in <code>TEST_RECORD_U61.md</code> and the Executive Summary.',
+      status: 'done'
+    },
     {
       n: 'M6',
       badge: 'linear-gradient(135deg,#283593,#1A237E)',

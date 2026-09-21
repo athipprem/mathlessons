@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Improper Fractions &amp; Mixed Numbers — Fractions Lesson 2 (Unit 62)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#C62828;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin-bottom:12px}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #9FA8DA;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E8EAF6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.diagram{text-align:center;background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:16px;margin:12px 0}
+.diagram svg{max-width:100%;height:auto}
+.strip-wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:16px 0}
+.sq{width:40px;height:40px;background:#3F51B5;border:2px solid #283593;border-radius:4px;color:#fff;font-size:.7rem;display:flex;align-items:center;justify-content:center;font-weight:700}
+.grouprow{display:flex;gap:4px;padding:4px;border-radius:6px}
+.grouprow.partial{border:2px dashed #283593}
+.grp-label{text-align:center;font-size:.8rem;font-weight:700;color:var(--warn);margin-top:2px}
+.groupcol{display:flex;flex-direction:column;gap:8px;align-items:center;margin:0 8px}
+.actionbtn{background:var(--acc);color:#fff;border:none;padding:10px 22px;border-radius:20px;font-size:.95rem;font-weight:700;cursor:pointer;display:block;margin:10px auto 0}
+.actionbtn.secondary{background:#fff;color:var(--acc);border:2px solid var(--acc)}
+.w3-readout{text-align:center;font-weight:800;color:var(--warn);font-size:1.05rem;margin-top:12px;min-height:26px}
+.nline-wrap{text-align:center;margin:16px 0}
+.nline-labels{text-align:center;margin-top:8px}
+.nline-improper{font-size:1.3rem;font-weight:800;color:var(--warn)}
+.nline-mixed{font-size:1.1rem;font-weight:700;color:var(--acc);margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Improper Fractions &amp; Mixed Numbers — Fractions Lesson 2 (Unit 62)</span>
+  <span class="tnav-pill" id="pill">1 / 8</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: Day-2 recall -->
+<div class="screen active" id="s0">
+<div class="card">
+  <span class="badge-cap">&#x1F501; Day-2 Recall</span>
+  <h2>Before We Start — From Memory</h2>
+  <p class="tap-hint">No teaching on this screen. Try these from memory first — they're from Lesson 1, plus one new one.</p>
+  <div class="q-card">
+    <div class="q-text">D1 (Lesson 1, P2).&nbsp; 5/6 of a class of 54 students bring lunch. How many bring lunch?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="d0" value="A"> A)&nbsp; 40</label>
+      <label class="opt"><input type="radio" name="d0" value="B"> B)&nbsp; 45</label>
+      <label class="opt"><input type="radio" name="d0" value="C"> C)&nbsp; 48</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">D2 (Lesson 1, P4).&nbsp; A box holds 28 pencils. 3/7 are red. How many are NOT red?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="d1" value="A"> A)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="d1" value="B"> B)&nbsp; 16</label>
+      <label class="opt"><input type="radio" name="d1" value="C"> C)&nbsp; 20</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">D3 (new).&nbsp; 3/8 of 32 counters are green. How many are green?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="d2" value="A"> A)&nbsp; 8</label>
+      <label class="opt"><input type="radio" name="d2" value="B"> B)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="d2" value="C"> C)&nbsp; 16</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start Lesson 2 &#8594;</button></div>
+</div>
+
+<!-- s1: Why - naming the gap -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F3AF; Why — What Happened Last Time</h2>
+  <div class="why">
+    <div class="why-title">One idea, and you already have half of it</div>
+    <p>On the last test there were two questions you left blank with a question mark: 11 metres of ribbon cut into 4 pieces, and 18 metres of rope cut into 4 pieces. Here's the thing &mdash; you had the hard half right. 11 divided by 4 IS the answer. You just hadn't been shown how to write it in the way the question asked for. That's this lesson, and it's one idea.</p>
+  </div>
+  <div class="big-rule">When a division doesn't come out even, the remainder becomes the top of a fraction &mdash; it doesn't disappear.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See It, Grouped &#8594;</button></div>
+</div>
+
+<!-- s2: Route A concrete, W3 -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F9EE; Route A — See It, Grouped</h2>
+  <p class="tap-hint">11 metre-squares. Group them into 4s and see what's left over.</p>
+  <div class="strip-wrap" id="stripWrap"></div>
+  <button class="actionbtn" id="groupBtn" onclick="groupStrips()">Group Into 4s</button>
+  <button class="actionbtn secondary" id="resetBtn" onclick="resetStrips()" style="display:none">Reset</button>
+  <div class="w3-readout" id="w3readout"></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Two Names, One Amount &#8594;</button></div>
+</div>
+
+<!-- s3: number line W4 -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F4CF; The Two Names For One Amount</h2>
+  <p class="tap-hint">Drag the marker along the line. Watch both labels change together.</p>
+  <div class="nline-wrap"><svg id="nlineSvg" viewBox="0 0 460 90" width="460" height="90"></svg></div>
+  <div class="nline-labels">
+    <div class="nline-improper" id="nlImproper"></div>
+    <div class="nline-mixed" id="nlMixed"></div>
+  </div>
+  <div class="warn-box"><p>Same place on the line. Same amount. Two ways of writing it.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Same Thing In Numbers &#8594;</button></div>
+</div>
+
+<!-- s4: Route B numbers -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F4D0; Route B — In Numbers</h2>
+  <div class="bridge">This is the last screen written as numbers. The remainder you already know how to find IS the top of the fraction.</div>
+  <p><strong>11 &divide; 4</strong></p>
+  <div class="steps">
+    <div class="ln">11 &divide; 4 = 2 remainder 3</div>
+    <div class="ln"><span class="note">the 2 is how many whole pieces</span></div>
+    <div class="ln"><span class="note">the 3 is what's left over &mdash; it becomes the TOP</span></div>
+    <div class="ln"><span class="note">the 4 never changes &mdash; it's how many pieces the whole was cut into, so it stays on the BOTTOM</span></div>
+    <div class="ln ans">11 &divide; 4 = 2 3/4</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Other Direction &#8594;</button></div>
+</div>
+
+<!-- s5: mixed -> improper -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x21C4; The Other Direction — Mixed To Improper</h2>
+  <p><strong>Write 3 2/5 as an improper fraction.</strong></p>
+  <div class="diagram">
+    <!-- BARMODEL-UNITS 17 unit=12 -->
+    <svg viewBox="0 0 340 90" width="340" height="90">
+      <rect x="10" y="10" width="60" height="30" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect x="74" y="10" width="60" height="30" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect x="138" y="10" width="60" height="30" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect x="202" y="10" width="12" height="30" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect x="214" y="10" width="12" height="30" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect x="226" y="10" width="36" height="30" fill="#F0F1FA" stroke="#9FA8DA" stroke-width="2" stroke-dasharray="3,2"/>
+      <text x="150" y="60" font-size="11" fill="#283593" text-anchor="middle">3 full bars of 5 parts, plus 2 parts of a 4th bar &mdash; all 17 parts highlighted</text>
+    </svg>
+  </div>
+  <div class="steps">
+    <div class="ln">3 wholes = 3 &times; 5 = 15 fifths</div>
+    <div class="ln">15 + 2 = 17</div>
+    <div class="ln ans">3 2/5 = 17/5</div>
+  </div>
+  <div class="warn-box"><p>Count every single part, including the whole bars.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Two-Part Questions &#8594;</button></div>
+</div>
+
+<!-- s6: two-part -->
+<div class="screen" id="s6">
+<div class="card">
+  <h2>&#x1F9E9; Two-Part Questions — Where You Lost Q10</h2>
+  <p><strong>A 17-metre rope is cut into 5 equal pieces. (a) How long is each piece? (b) Three pieces are joined. How long is the joined rope?</strong></p>
+  <div class="steps">
+    <div class="ln"><span class="note">(a) 17 &divide; 5 = 3 remainder 2</span></div>
+    <div class="ln ans">(a) 3 2/5 m</div>
+    <div class="ln"><span class="note">(b) 3 &times; 3 2/5 &rarr; 3 &times; 3 = 9, and 3 &times; 2/5 = 6/5 = 1 1/5</span></div>
+    <div class="ln ans">(b) 9 + 1 1/5 = 10 1/5 m</div>
+  </div>
+  <div class="warn-box"><p>Part (b) always uses part (a). If (a) is blank, (b) can't happen &mdash; so write SOMETHING for (a), even a guess.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s7: practice -->
+<div class="screen" id="s7">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Improper &amp; Mixed</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; Write 7/4 as a mixed number.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 1 3/4</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 1 1/4</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 2 3/4</label>
+    </div>
+    <button class="btn-check" onclick="chkQP(0,'A')">Check</button>
+    <div class="feedback" id="fbp0"></div>
+    <button class="btn-show-steps" id="ssp0" onclick="showSteps('srp0',this)">Show Steps</button>
+    <div class="steps-reveal" id="srp0"><div class="steps">
+      <div class="ln">7 &divide; 4 = 1 remainder 3</div>
+      <div class="ln ans">= 1 3/4</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; Write 2 1/3 as an improper fraction.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 6/3</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 7/3</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 8/3</label>
+    </div>
+    <button class="btn-check" onclick="chkQP(1,'B')">Check</button>
+    <div class="feedback" id="fbp1"></div>
+    <button class="btn-show-steps" id="ssp1" onclick="showSteps('srp1',this)">Show Steps</button>
+    <div class="steps-reveal" id="srp1"><div class="steps">
+      <div class="ln">2 &times; 3 = 6. &nbsp; 6 + 1 = 7</div>
+      <div class="ln ans">= 7/3</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; 30 metres of tape is cut into 7 equal pieces. How long is each piece?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 4 1/7 m</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 4 2/7 m</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 3 2/7 m</label>
+    </div>
+    <button class="btn-check" onclick="chkQP(2,'B')">Check</button>
+    <div class="feedback" id="fbp2"></div>
+    <button class="btn-show-steps" id="ssp2" onclick="showSteps('srp2',this)">Show Steps</button>
+    <div class="steps-reveal" id="srp2"><div class="steps">
+      <div class="ln">30 &divide; 7 = 4 remainder 2</div>
+      <div class="ln ans">= 4 2/7 m</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; 4 cakes are shared equally among 3 children. How much does each child get?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 1 1/3 cakes</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 1 1/4 cakes</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 1 3/4 cakes</label>
+    </div>
+    <button class="btn-check" onclick="chkQP(3,'A')">Check</button>
+    <div class="feedback" id="fbp3"></div>
+    <button class="btn-show-steps" id="ssp3" onclick="showSteps('srp3',this)">Show Steps</button>
+    <div class="steps-reveal" id="srp3"><div class="steps">
+      <div class="ln">4 &divide; 3 = 1 remainder 1</div>
+      <div class="ln ans">= 1 1/3 cakes</div>
+    </div></div>
+  </div>
+  <div class="golden">
+    <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+    <p style="font-size:1.05rem"><strong>A division that doesn't come out even: the remainder becomes the top of the fraction, and the number you divided by stays on the bottom. To go the other way, multiply the whole number by the bottom, add the top.</strong></p>
+  </div>
+  <div class="warn-box"><p><strong>Finish-the-question check:</strong> before you write your final answer &mdash; did you answer the EXACT question asked, including BOTH parts if there are two?</p></div>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#fff;color:#283593;border:2px solid #283593;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+  <a href="U62_StuckCard_MixedNumbers.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#3F51B5;color:#fff;border:2px solid #3F51B5;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Stuck Card &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);
+if(screens[cur].id==='s3'){ setTimeout(drawNumberLine,0); }
+}
+function chkQ(qi,correct){var sel=document.querySelector('input[name="d'+qi+'"]:checked'),fb=document.getElementById('fb'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';}
+else{fb.className='feedback err';fb.textContent='Not quite — try again, or move on and check the lesson.';}}
+function chkQP(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fbp'+qi),ss=document.getElementById('ssp'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ---- W3: strip grouper ----
+var grouped=false;
+function buildStrips(){
+  var wrap=document.getElementById('stripWrap'); wrap.innerHTML='';
+  for(var i=0;i<11;i++){ var sq=document.createElement('div'); sq.className='sq'; sq.textContent='1 m'; wrap.appendChild(sq); }
+  document.getElementById('w3readout').textContent='11 squares, one row.';
+  document.getElementById('groupBtn').style.display='inline-block';
+  document.getElementById('resetBtn').style.display='none';
+  grouped=false;
+}
+function groupStrips(){
+  var wrap=document.getElementById('stripWrap'); wrap.innerHTML='';
+  wrap.style.flexDirection='column';
+  wrap.style.alignItems='center';
+  // row 1: 4 whole
+  var r1=document.createElement('div'); r1.className='grouprow';
+  for(var i=0;i<4;i++){ var sq=document.createElement('div'); sq.className='sq'; sq.textContent='1 m'; r1.appendChild(sq); }
+  var l1=document.createElement('div'); l1.className='grp-label'; l1.textContent='1 whole piece';
+  var c1=document.createElement('div'); c1.className='groupcol'; c1.appendChild(r1); c1.appendChild(l1);
+  // row 2: 4 whole
+  var r2=document.createElement('div'); r2.className='grouprow';
+  for(var i=0;i<4;i++){ var sq=document.createElement('div'); sq.className='sq'; sq.textContent='1 m'; r2.appendChild(sq); }
+  var l2=document.createElement('div'); l2.className='grp-label'; l2.textContent='1 whole piece';
+  var c2=document.createElement('div'); c2.className='groupcol'; c2.appendChild(r2); c2.appendChild(l2);
+  // row 3: 3 filled + 1 dashed outline slot, inside a partial dashed 4-cell outline
+  var r3=document.createElement('div'); r3.className='grouprow partial';
+  for(var i=0;i<3;i++){ var sq=document.createElement('div'); sq.className='sq'; sq.textContent='1 m'; r3.appendChild(sq); }
+  var ghost=document.createElement('div'); ghost.className='sq'; ghost.style.background='transparent'; ghost.style.color='#9FA8DA'; ghost.style.borderStyle='dashed'; ghost.textContent='?'; r3.appendChild(ghost);
+  var l3=document.createElement('div'); l3.className='grp-label'; l3.textContent='3 out of 4 = 3/4';
+  var c3=document.createElement('div'); c3.className='groupcol'; c3.appendChild(r3); c3.appendChild(l3);
+
+  wrap.appendChild(c1); wrap.appendChild(c2); wrap.appendChild(c3);
+  document.getElementById('w3readout').innerHTML='11 &divide; 4 = 2 and 3/4';
+  document.getElementById('groupBtn').style.display='none';
+  document.getElementById('resetBtn').style.display='inline-block';
+  grouped=true;
+}
+function resetStrips(){
+  document.getElementById('stripWrap').style.flexDirection='';
+  document.getElementById('stripWrap').style.alignItems='';
+  buildStrips();
+}
+buildStrips();
+
+// ---- W4: number line ----
+var nlineVal=11; // quarters, 0 to 16
+function drawNumberLine(){
+  var svg=document.getElementById('nlineSvg');
+  var x0=20,x1=440,y=45;
+  var html='<line x1="'+x0+'" y1="'+y+'" x2="'+x1+'" y2="'+y+'" stroke="#283593" stroke-width="2"/>';
+  for(var q=0;q<=16;q++){
+    var x=x0+(x1-x0)*(q/16);
+    var isMajor=(q%4===0);
+    html+='<line x1="'+x+'" y1="'+(y-(isMajor?12:6))+'" x2="'+x+'" y2="'+(y+(isMajor?12:6))+'" stroke="#283593" stroke-width="'+(isMajor?2:1)+'"/>';
+    if(isMajor){ html+='<text x="'+x+'" y="'+(y+28)+'" font-size="12" fill="#283593" text-anchor="middle" font-weight="700">'+(q/4)+'</text>'; }
+  }
+  var mx=x0+(x1-x0)*(nlineVal/16);
+  html+='<circle cx="'+mx+'" cy="'+y+'" r="9" fill="#3F51B5" stroke="#283593" stroke-width="2" id="nlMarker" style="cursor:grab"/>';
+  svg.innerHTML=html;
+  attachDrag();
+  updateNlineLabels();
+}
+function attachDrag(){
+  var svg=document.getElementById('nlineSvg');
+  var marker=document.getElementById('nlMarker');
+  var dragging=false;
+  function pos(evt){
+    var rect=svg.getBoundingClientRect();
+    var clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
+    var svgX = (clientX-rect.left) * (460/rect.width);
+    var x0=20,x1=440;
+    var frac=(svgX-x0)/(x1-x0);
+    var q=Math.round(frac*16);
+    q=Math.max(0,Math.min(16,q));
+    return q;
+  }
+  function start(evt){ dragging=true; }
+  function move(evt){ if(!dragging) return; nlineVal=pos(evt); drawNumberLine(); }
+  function end(){ dragging=false; }
+  marker.addEventListener('mousedown',start);
+  marker.addEventListener('touchstart',start);
+  svg.addEventListener('mousemove',move);
+  svg.addEventListener('touchmove',move);
+  window.addEventListener('mouseup',end);
+  window.addEventListener('touchend',end);
+  svg.addEventListener('click',function(evt){ nlineVal=pos(evt); drawNumberLine(); });
+}
+function updateNlineLabels(){
+  var whole=Math.floor(nlineVal/4);
+  var rem=nlineVal%4;
+  document.getElementById('nlImproper').textContent=nlineVal+'/4';
+  var mixed;
+  if(rem===0){ mixed=''+whole; }
+  else if(nlineVal===14){ mixed='3 2/4 = 3 1/2'; }
+  else { mixed=whole+' '+rem+'/4'; }
+  document.getElementById('nlMixed').textContent=mixed;
+}
+</script>
+</body>
+</html>

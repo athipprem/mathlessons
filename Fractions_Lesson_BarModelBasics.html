@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Bar Model — Fractions Lesson 1 (Unit 62)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#C62828;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin-bottom:12px}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #9FA8DA;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E8EAF6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stepper-row{display:flex;justify-content:center;gap:24px;margin-bottom:14px;flex-wrap:wrap}
+.stepper{text-align:center}
+.stepper-label{font-size:.85rem;font-weight:700;color:var(--warn);margin-bottom:4px}
+.stepper-ctrl{display:flex;align-items:center;gap:8px}
+.stepper-btn{width:32px;height:32px;border-radius:50%;border:2px solid var(--acc);background:#fff;color:var(--acc);font-weight:800;font-size:1.1rem;cursor:pointer}
+.stepper-val{min-width:60px;text-align:center;font-weight:800;font-size:1.1rem;color:#1a1a2e}
+.bar-wrap{text-align:center;margin:16px 0}
+.bar-readout{text-align:center;font-weight:800;color:var(--warn);font-size:1.1rem;margin-top:10px;min-height:26px}
+.diagram{text-align:center;background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:16px;margin:12px 0}
+.diagram svg{max-width:100%;height:auto}
+.reveal-btn{background:var(--acc);color:#fff;border:none;padding:10px 22px;border-radius:20px;font-size:.95rem;font-weight:700;cursor:pointer;display:block;margin:14px auto 0}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">The Bar Model — Fractions Lesson 1 (Unit 62)</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s1: WHY -->
+<div class="screen active" id="s0">
+<div class="card">
+  <h2>&#x1F3AF; Why Learn This?</h2>
+  <div class="why">
+    <div class="why-title">You already know how to do everything in this lesson</div>
+    <p>You already know how to do everything in this lesson. Last test you got the 40-students question, the glasses question and the notebooks question right &mdash; all of them, on your own. So this lesson isn't new maths. It's the drawing your school uses, and once you can draw it, the hard questions later this term stop being hard.</p>
+  </div>
+  <div class="big-rule">The bar is just the whole thing, drawn as a rectangle, cut into equal parts.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s2: Route A - bar built -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F4CF; Route A — The Bar, Built</h2>
+  <p class="tap-hint">Cut it into the bottom number of parts. Shade the top number of them. Change the total or the number of parts, and click any part to shade or unshade it.</p>
+  <div class="stepper-row">
+    <div class="stepper">
+      <div class="stepper-label">Total</div>
+      <div class="stepper-ctrl">
+        <button class="stepper-btn" onclick="changeTotal(-1)">&minus;</button>
+        <span class="stepper-val" id="totalVal">24</span>
+        <button class="stepper-btn" onclick="changeTotal(1)">+</button>
+      </div>
+    </div>
+    <div class="stepper">
+      <div class="stepper-label">Parts (bottom number)</div>
+      <div class="stepper-ctrl">
+        <button class="stepper-btn" onclick="changeParts(-1)">&minus;</button>
+        <span class="stepper-val" id="partsVal">3</span>
+        <button class="stepper-btn" onclick="changeParts(1)">+</button>
+      </div>
+    </div>
+  </div>
+  <div class="bar-wrap"><svg id="barSvg" viewBox="0 0 480 56" width="480" height="56"></svg></div>
+  <div class="bar-readout" id="barReadout"></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Same Thing In Numbers &#8594;</button></div>
+</div>
+
+<!-- s3: Route B numbers -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F4D0; Route B — The Same Thing In Numbers</h2>
+  <div class="bridge">Same job as the last screen, written instead of drawn. If the bar made sense, this shows you how to write it down. If it didn't, this one might click instead &mdash; then go back and look at the bar again.</div>
+  <p><strong>Worked example:</strong> 3/8 of 40.</p>
+  <div class="steps">
+    <div class="ln">40 &divide; 8 = 5 &nbsp;<span class="note">(that is ONE part)</span></div>
+    <div class="ln">5 &times; 3 = 15 &nbsp;<span class="note">(three parts)</span></div>
+    <div class="ln ans">3/8 of 40 = 15</div>
+  </div>
+  <div class="rulebar">DIVIDE by the bottom number, then MULTIPLY by the top number.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Working Backwards &#8594;</button></div>
+</div>
+
+<!-- s4: Reverse -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F504; Reverse — The Bar Does The Work</h2>
+  <p><strong>2/3 of a number is 16. What is the number?</strong></p>
+  <div class="diagram"><svg id="w2svg" viewBox="0 0 400 140" width="400" height="140"></svg></div>
+  <button class="reveal-btn" id="w2btn" onclick="revealW2()">Show Me</button>
+  <div class="steps" id="w2steps" style="display:none">
+    <div class="ln" id="w2l1"></div>
+    <div class="ln" id="w2l2"></div>
+    <div class="ln ans" id="w2l3"></div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; When you know a piece and want the whole, find ONE part first. Always one part first.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">NOT, And Chained &#8594;</button></div>
+</div>
+
+<!-- s5: NOT and chained -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F517; NOT, And Chained — On The Bar</h2>
+  <p><strong>30 students. 2/5 walk to school. Of those who do NOT walk, 1/3 come by bus. How many come by bus?</strong></p>
+  <div class="diagram">
+    <!-- BARMODEL-RATIO 2/5 -->
+    <svg viewBox="0 0 300 190" width="300" height="190">
+      <rect x="10" y="10" width="280" height="34" fill="#F0F1FA" stroke="#3F51B5" stroke-width="2"/>
+      <line x1="66" y1="10" x2="66" y2="44" stroke="#3F51B5" stroke-width="1.5"/>
+      <line x1="122" y1="10" x2="122" y2="44" stroke="#3F51B5" stroke-width="1.5"/>
+      <line x1="178" y1="10" x2="178" y2="44" stroke="#3F51B5" stroke-width="1.5"/>
+      <line x1="234" y1="10" x2="234" y2="44" stroke="#3F51B5" stroke-width="1.5"/>
+      <rect x="10" y="10" width="112" height="34" fill="#3F51B5"/>
+      <text x="66" y="31" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">walk = 12</text>
+      <text x="206" y="31" font-size="11" fill="#283593" text-anchor="middle" font-weight="700">do NOT walk = 18</text>
+      <text x="150" y="60" font-size="10" fill="#455A64" text-anchor="middle">30 in 5 parts, 2 shaded (walk) = 12, 3 unshaded (NOT walk) = 18</text>
+      <!-- BARMODEL-RATIO 1/3 -->
+      <rect x="60" y="80" width="180" height="34" fill="#F0F1FA" stroke="#3F51B5" stroke-width="2"/>
+      <line x1="120" y1="80" x2="120" y2="114" stroke="#3F51B5" stroke-width="1.5"/>
+      <line x1="180" y1="80" x2="180" y2="114" stroke="#3F51B5" stroke-width="1.5"/>
+      <rect x="60" y="80" width="60" height="34" fill="#3F51B5"/>
+      <text x="90" y="101" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">bus = 6</text>
+      <text x="150" y="140" font-size="10" fill="#455A64" text-anchor="middle">the 18 becomes a NEW bar, in 3 parts, 1 shaded = 6</text>
+    </svg>
+  </div>
+  <div class="steps">
+    <div class="ln">30 &divide; 5 = 6 per part. &nbsp; 2 parts walk = 12. &nbsp; 3 parts do NOT walk = 18.</div>
+    <div class="ln">New bar: 18 &divide; 3 = 6 per part. &nbsp; 1 part by bus = 6.</div>
+    <div class="ln ans">6 come by bus</div>
+  </div>
+  <div class="warn-box"><p>&#x1F4A1; The second fraction is a fraction of the NEW bar, not the old one. That's why we draw the new bar.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s6: practice -->
+<div class="screen" id="s5">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — The Bar Model</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; 3/4 of 36 marbles are blue. How many are blue?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 24</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 27</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 30</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(0,'B')">Check</button>
+    <div class="feedback" id="fb0"></div>
+    <button class="btn-show-steps" id="ss0" onclick="showSteps('sr0',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr0"><div class="steps">
+      <div class="ln">36 &divide; 4 = 9 (one part). &nbsp; 9 &times; 3 = 27</div>
+      <div class="ln ans">= 27 marbles</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; 5/6 of a class of 54 students bring lunch. How many bring lunch?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 40</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 45</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 48</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(1,'B')">Check</button>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn-show-steps" id="ss1" onclick="showSteps('sr1',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr1"><div class="steps">
+      <div class="ln">54 &divide; 6 = 9 (one part). &nbsp; 9 &times; 5 = 45</div>
+      <div class="ln ans">= 45 students</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3 (reverse).&nbsp; 2/7 of a number is 12. What is the number?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 36</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 42</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 28</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(2,'B')">Check</button>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn-show-steps" id="ss2" onclick="showSteps('sr2',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr2"><div class="steps">
+      <div class="ln">12 &divide; 2 = 6 (one part). &nbsp; 6 &times; 7 = 42</div>
+      <div class="ln ans">= 42</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; A box holds 28 pencils. 3/7 are red. How many are NOT red?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 12</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 16</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 20</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(3,'B')">Check</button>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn-show-steps" id="ss3" onclick="showSteps('sr3',this)">Show Steps</button>
+    <div class="steps-reveal" id="sr3"><div class="steps">
+      <div class="ln">28 &divide; 7 = 4 (one part). &nbsp; Red = 4 &times; 3 = 12. &nbsp; NOT red = 28 &minus; 12 = 16</div>
+      <div class="ln ans">= 16 pencils</div>
+    </div></div>
+  </div>
+  <div class="golden" style="margin-top:16px">
+    <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+    <p style="font-size:1.05rem"><strong>Cut the bar into the bottom number of parts. Shade the top number of them. To work backwards from a part to the whole, find ONE part first, then multiply by the bottom number to rebuild the whole.</strong></p>
+  </div>
+  <div class="warn-box"><p><strong>Finish-the-question check:</strong> before you write your final answer &mdash; did you answer the EXACT question asked?</p></div>
+  <div class="warn-box"><p>&#x1F4C5; <strong>Day-2 line:</strong> tomorrow, before Lesson 2, redo P2 and P4 from memory &mdash; no peeking.</p></div>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#fff;color:#283593;border:2px solid #283593;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+  <a href="Fractions_Lesson_ImproperAndMixed.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#3F51B5;color:#fff;border:2px solid #3F51B5;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Lesson 2 &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chkQ(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fb'+qi),ss=document.getElementById('ss'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ---- W1: bar splitter (s1) ----
+var totals=[12,24,30,40], totalIdx=1;
+var parts=3, shaded=[true,true,false]; // default 2/3 of 24
+function divisibleParts(t){var arr=[];for(var p=2;p<=8;p++){if(t%p===0)arr.push(p);}return arr;}
+function changeTotal(dir){
+  totalIdx=(totalIdx+dir+totals.length)%totals.length;
+  var t=totals[totalIdx];
+  var ok=divisibleParts(t);
+  if(ok.indexOf(parts)===-1){ parts=ok[0]; }
+  resizeShaded();
+  document.getElementById('totalVal').textContent=t;
+  document.getElementById('partsVal').textContent=parts;
+  renderBar();
+}
+function changeParts(dir){
+  var t=totals[totalIdx];
+  var ok=divisibleParts(t);
+  var i=ok.indexOf(parts); if(i===-1)i=0;
+  i=(i+dir+ok.length)%ok.length;
+  parts=ok[i];
+  resizeShaded();
+  document.getElementById('partsVal').textContent=parts;
+  renderBar();
+}
+function resizeShaded(){
+  var newShaded=[];
+  for(var i=0;i<parts;i++){ newShaded.push(i<shaded.filter(Boolean).length && i<2); }
+  // keep it simple: default 2 shaded (or all if parts<2)
+  var n=Math.min(2,parts);
+  shaded=[]; for(var i=0;i<parts;i++) shaded.push(i<n);
+}
+function toggleSeg(i){ shaded[i]=!shaded[i]; renderBar(); }
+function renderBar(){
+  var t=totals[totalIdx];
+  var svg=document.getElementById('barSvg');
+  var w=480,h=56,gap=2;
+  var segW=(w-gap*(parts-1))/parts;
+  var html='';
+  for(var i=0;i<parts;i++){
+    var x=i*(segW+gap);
+    var fill= shaded[i] ? '#3F51B5' : '#F0F1FA';
+    var stroke='#283593';
+    html+='<rect x="'+x+'" y="0" width="'+segW+'" height="'+h+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="2" style="cursor:pointer" onclick="toggleSeg('+i+')"/>';
+  }
+  svg.innerHTML=html;
+  var shadedCount=shaded.filter(Boolean).length;
+  var per=t/parts;
+  var answer=per*shadedCount;
+  document.getElementById('barReadout').innerHTML = shadedCount+'/'+parts+' of '+t+' = <span style="color:#3F51B5">'+answer+'</span> &nbsp;&middot;&nbsp; ('+t+' &divide; '+parts+' = '+per+' per part, take '+shadedCount+')';
+}
+renderBar();
+
+// ---- W2: reverse bar (s3) ----
+function drawW2(){
+  var svg=document.getElementById('w2svg');
+  var segW=110,h=40,x0=40,y0=20,gap=2;
+  var html='';
+  for(var i=0;i<3;i++){
+    var x=x0+i*(segW+gap);
+    var fill = i<2 ? '#3F51B5' : '#F0F1FA';
+    html+='<rect x="'+x+'" y="'+y0+'" width="'+segW+'" height="'+h+'" fill="'+fill+'" stroke="#283593" stroke-width="2" id="w2seg'+i+'"/>';
+    html+='<text x="'+(x+segW/2)+'" y="'+(y0+h/2+5)+'" font-size="13" fill="'+(i<2?'#fff':'#283593')+'" text-anchor="middle" font-weight="700" id="w2txt'+i+'"></text>';
+  }
+  // brace under first two (16)
+  html+='<path d="M '+x0+' '+(y0+h+8)+' L '+x0+' '+(y0+h+14)+' L '+(x0+2*segW+gap)+' '+(y0+h+14)+' L '+(x0+2*segW+gap)+' '+(y0+h+8)+'" fill="none" stroke="#283593" stroke-width="1.5"/>';
+  html+='<text x="'+(x0+segW+gap/2)+'" y="'+(y0+h+30)+'" font-size="13" fill="#283593" text-anchor="middle" font-weight="800">16</text>';
+  // brace under whole (?)
+  var xend=x0+3*segW+2*gap;
+  html+='<path d="M '+x0+' '+(y0+h+46)+' L '+x0+' '+(y0+h+52)+' L '+xend+' '+(y0+h+52)+' L '+xend+' '+(y0+h+46)+'" fill="none" stroke="#283593" stroke-width="1.5"/>';
+  html+='<text x="'+((x0+xend)/2)+'" y="'+(y0+h+68)+'" font-size="15" fill="#283593" text-anchor="middle" font-weight="800">?</text>';
+  svg.innerHTML=html;
+}
+drawW2();
+function revealW2(){
+  document.getElementById('w2steps').style.display='block';
+  document.getElementById('w2l1').textContent='2 parts = 16';
+  document.getElementById('w2l2').textContent='1 part = 16 ÷ 2 = 8';
+  document.getElementById('w2l3').textContent='whole = 3 × 8 = 24';
+  for(var i=0;i<3;i++){ document.getElementById('w2txt'+i).textContent='8'; }
+  document.getElementById('w2btn').style.display='none';
+}
+</script>
+</body>
+</html>
