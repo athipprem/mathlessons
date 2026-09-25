@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Self-Check — Unit 63 (Fraction &times; Fraction)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#C62828;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:15px;font-weight:700;text-align:center;flex:1;min-width:0}
+.wrap{max-width:760px;margin:0 auto;padding:16px}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.2rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+p,li{font-size:1rem;line-height:1.65}
+.intro{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1px solid #9FA8DA;border-radius:14px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #9FA8DA;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E8EAF6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:12px 30px;border-radius:10px;cursor:pointer;font-size:1rem;font-weight:700;display:block;margin:16px auto 0}
+.result-box{display:none;border-radius:12px;padding:20px;margin-top:16px;text-align:center}
+.result-box.ready{background:#E8F5E9;border:2px solid #A5D6A7}
+.result-box.ready .big{color:#1B5E20;font-size:1.3rem;font-weight:800}
+.result-box.retry{background:#FFF3E0;border:2px solid #FFB74D}
+.result-box.retry .big{color:#8d6e00;font-size:1.2rem;font-weight:800}
+.retry-item{background:#fff;border:1.5px solid #FFB74D;border-radius:8px;padding:10px 14px;margin:10px 0;text-align:left;font-size:.92rem}
+.retry-item a{color:#283593;font-weight:700;text-decoration:none}
+.retry-item a:hover{text-decoration:underline}
+.btn-go{display:inline-block;margin-top:14px;padding:12px 26px;background:var(--acc);color:#fff;border-radius:10px;font-weight:700;text-decoration:none}
+.qmark{display:inline-block;width:22px;height:22px;border-radius:50%;font-size:.8rem;font-weight:800;text-align:center;line-height:22px;margin-right:6px}
+.qmark.right{background:#A5D6A7;color:#1B5E20}
+.qmark.wrong{background:#EF9A9A;color:#C62828}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Self-Check — Unit 63 (Fraction &times; Fraction)</span>
+  <span style="width:60px"></span>
+</nav>
+
+<div class="wrap">
+<div class="card">
+  <div class="intro">
+    <p><strong>5 questions, one per idea from both lessons.</strong> Get 4 or 5 right and you're ready for the test. If not, this page tells you exactly which screen to go back to &mdash; no guessing.</p>
+  </div>
+
+  <div class="q-card">
+    <span class="q-cap">Idea 1 &middot; The product</span>
+    <div class="q-text">1.&nbsp; Work out 3/5 &times; 5/8.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 3/8</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 8/13</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 15/40</label>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-cap">Idea 2 &middot; "Of" a fraction</span>
+    <div class="q-text">2.&nbsp; 4/7 of a cake was left. Omar ate 1/2 of what was left. What fraction of the whole cake did he eat?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 2/7</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 4/9</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 1/2</label>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-cap">Idea 3 &middot; Cancel first</span>
+    <div class="q-text">3.&nbsp; Work out 14/15 &times; 5/21.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 2/9</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 70/315</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 1/3</label>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-cap">Idea 4 &middot; Mixed &times; mixed</span>
+    <div class="q-text">4.&nbsp; Work out 2 1/3 &times; 1 1/2.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 3 1/2</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 2 1/6</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 3</label>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-cap">Idea 5 &middot; Size sense</span>
+    <div class="q-text">5.&nbsp; Is 5/6 &times; 9/10 more or less than 5/6?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q4" value="A"> A)&nbsp; Less &mdash; &times;9/10 shrinks it (the value is 3/4)</label>
+      <label class="opt"><input type="radio" name="q4" value="B"> B)&nbsp; More</label>
+      <label class="opt"><input type="radio" name="q4" value="C"> C)&nbsp; The same</label>
+    </div>
+  </div>
+
+  <button class="btn-check" onclick="markSelfCheck()">Check My 5 Answers</button>
+
+  <div class="result-box ready" id="resultReady">
+    <div class="big">&#127881; You're ready! <span id="scoreReady"></span></div>
+    <p style="margin-top:8px">You've got both ideas from both lessons. Go take the Unit 63 test.</p>
+  </div>
+
+  <div class="result-box retry" id="resultRetry">
+    <div class="big">Not quite yet &mdash; <span id="scoreRetry"></span></div>
+    <p style="margin-top:8px">That's useful to know now, not on the test. Here's exactly where to go back to:</p>
+    <div id="retryList"></div>
+  </div>
+</div>
+</div>
+
+<script>
+var answers = ['A','A','A','A','A'];
+var retryInfo = [
+  {concept:'The product', href:'Fractions_Lesson_FractionOfAFraction.html', screen:'Screen 2 — "Route A — The Overlap Grid, Built"'},
+  {concept:'"Of" a fraction', href:'Fractions_Lesson_FractionOfAFraction.html', screen:'Screen 4 — "\'Of A Fraction\' In A Story, On The Bar"'},
+  {concept:'Cancel first', href:'Fractions_Lesson_FractionOfAFraction.html', screen:'Screen 5 — "Route A For Cancelling — The Long Way First"'},
+  {concept:'Mixed × mixed', href:'Fractions_Lesson_MultiplyMixedNumbers.html', screen:'Screen 2 — "Route A — Count The Small Cells"'},
+  {concept:'Size sense', href:'Fractions_Lesson_MultiplyMixedNumbers.html', screen:'Screen 5 — "Bigger Or Smaller?"'}
+];
+
+function markSelfCheck(){
+  var score = 0;
+  var wrong = [];
+  for(var i=0;i<5;i++){
+    var sel = document.querySelector('input[name="q'+i+'"]:checked');
+    if(sel && sel.value === answers[i]){ score++; } else { wrong.push(i); }
+  }
+  var totalAnswered = document.querySelectorAll('input[type="radio"]:checked').length;
+  if(totalAnswered < 5){ alert('Answer all 5 questions first.'); return; }
+
+  document.getElementById('resultReady').style.display = 'none';
+  document.getElementById('resultRetry').style.display = 'none';
+
+  if(score >= 4){
+    document.getElementById('scoreReady').textContent = score + '/5';
+    document.getElementById('resultReady').style.display = 'block';
+  } else {
+    document.getElementById('scoreRetry').textContent = score + '/5';
+    var list = document.getElementById('retryList');
+    var html = '';
+    for(var j=0;j<wrong.length;j++){
+      var info = retryInfo[wrong[j]];
+      html += '<div class="retry-item"><span class="qmark wrong">&#10007;</span><strong>'+info.concept+'</strong><br>Go back to <a href="'+info.href+'">'+info.href.replace('.html','').replace(/_/g,' ')+'</a>, '+info.screen+'.</div>';
+    }
+    html += '<a class="btn-go" href="U63_StuckCard_MultiplyMixedNumbers.html">Or open the Stuck Card</a>';
+    list.innerHTML = html;
+    document.getElementById('resultRetry').style.display = 'block';
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multiplying Mixed Numbers — Fractions Lesson 2 (Unit 63)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#C62828;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px;white-space:nowrap}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin-bottom:12px}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #9FA8DA;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E8EAF6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stepper-row{display:flex;justify-content:center;gap:24px;margin-bottom:14px;flex-wrap:wrap}
+.stepper{text-align:center}
+.stepper-label{font-size:.85rem;font-weight:700;color:var(--warn);margin-bottom:4px}
+.stepper-ctrl{display:flex;align-items:center;gap:8px}
+.stepper-btn{width:32px;height:32px;border-radius:50%;border:2px solid var(--acc);background:#fff;color:var(--acc);font-weight:800;font-size:1.1rem;cursor:pointer}
+.stepper-val{min-width:36px;text-align:center;font-weight:800;font-size:1.1rem;color:#1a1a2e}
+.grid-wrap{text-align:center;margin:16px 0}
+.grid-readout{text-align:center;font-weight:800;color:var(--warn);font-size:1.1rem;margin-top:10px;min-height:26px}
+.diagram{text-align:center;background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:16px;margin:12px 0}
+.diagram svg{max-width:100%;height:auto}
+.stop-here{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FB8C00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:800;color:#E65100;margin:16px 0}
+.toggle-btn{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin:8px 0;display:block;margin-left:auto;margin-right:auto}
+.wrong-way{background:#FFEBEE;border:2px solid #EF9A9A;border-radius:10px;padding:12px 16px;margin:10px 0}
+.wrong-way .ln{font-size:.98rem;color:#C62828;padding:2px 0}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Multiplying Mixed Numbers — Fractions Lesson 2 (Unit 63)</span>
+  <span class="tnav-pill" id="pill">1 / 7</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: Day-2 recall -->
+<div class="screen active" id="s0">
+<div class="card">
+  <span class="badge-cap">&#x1F501; Day-2 Recall</span>
+  <h2>Before We Start — From Memory</h2>
+  <p class="tap-hint">No teaching on this screen. These are from Lesson 1, plus one new one.</p>
+  <div class="q-card">
+    <div class="q-text">D1 (L1 P2).&nbsp; 4/5 of a garden is grass. Daisies grow on 5/6 of the grass. What fraction of the whole garden has daisies?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="d0" value="A"> A)&nbsp; 2/3</label>
+      <label class="opt"><input type="radio" name="d0" value="B"> B)&nbsp; 3/5</label>
+      <label class="opt"><input type="radio" name="d0" value="C"> C)&nbsp; 4/6</label>
+    </div>
+    <button class="btn-check" onclick="chkQ('0','A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">D2 (L1 P3).&nbsp; Work out 9/16 &times; 4/15.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="d1" value="A"> A)&nbsp; 3/20</label>
+      <label class="opt"><input type="radio" name="d1" value="B"> B)&nbsp; 3/10</label>
+      <label class="opt"><input type="radio" name="d1" value="C"> C)&nbsp; 36/240</label>
+    </div>
+    <button class="btn-check" onclick="chkQ('1','A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">D3 (new).&nbsp; Work out 3/7 &times; 14/15.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="d2" value="A"> A)&nbsp; 2/5</label>
+      <label class="opt"><input type="radio" name="d2" value="B"> B)&nbsp; 42/105</label>
+      <label class="opt"><input type="radio" name="d2" value="C"> C)&nbsp; 2/3</label>
+    </div>
+    <button class="btn-check" onclick="chkQ('2','A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start Lesson 2 &#8594;</button></div>
+</div>
+
+<!-- s1: Why -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F3AF; Why — Rooms, Rugs and Gardens</h2>
+  <div class="why">
+    <p>Rooms, rugs and gardens are almost never whole numbers of metres. A rug 2 1/2 m by 1 1/3 m &mdash; how much floor does it cover? You can't count squares, because the sides aren't whole. This lesson shows you how.</p>
+  </div>
+  <div class="big-rule">Change every mixed number into an improper fraction first — then multiply exactly like before.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Count The Small Cells &#8594;</button></div>
+</div>
+
+<!-- s2: Route A W6 -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F9EE; Route A — Count The Small Cells</h2>
+  <p class="tap-hint">A rectangle 2 1/2 m wide and 1 1/3 m tall, drawn on a grid where each cell is 1/2 m across and 1/3 m up. Steppers show the width in halves and the height in thirds.</p>
+  <div class="stepper-row">
+    <div class="stepper">
+      <div class="stepper-label">Width (halves)</div>
+      <div class="stepper-ctrl"><button class="stepper-btn" onclick="w6Change('w',-1)">&minus;</button><span class="stepper-val" id="w6w">5</span><button class="stepper-btn" onclick="w6Change('w',1)">+</button></div>
+    </div>
+    <div class="stepper">
+      <div class="stepper-label">Height (thirds)</div>
+      <div class="stepper-ctrl"><button class="stepper-btn" onclick="w6Change('h',-1)">&minus;</button><span class="stepper-val" id="w6h">4</span><button class="stepper-btn" onclick="w6Change('h',1)">+</button></div>
+    </div>
+  </div>
+  <div class="grid-wrap"><svg id="w6svg" viewBox="0 0 360 300" width="320" height="266"></svg></div>
+  <div class="grid-readout" id="w6readout"></div>
+  <p>The heavy outline is one whole square metre &mdash; 2 half-columns &times; 3 third-rows = 6 cells, so each cell is 1/6 m&sup2;.</p>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Same Thing, Converted &#8594;</button></div>
+</div>
+
+<!-- s3: Route B -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F4D0; Route B — Convert, Then Multiply</h2>
+  <div class="bridge">Look at the 5 and the 4 you just counted — they ARE the tops when you change the mixed numbers into improper fractions. That's why we always convert first.</div>
+  <p><strong>2 1/2 &times; 1 1/3</strong></p>
+  <div class="steps">
+    <div class="ln">2 1/2 &times; 1 1/3 = 5/2 &times; 4/3 <span class="note">(2 1/2 = 5 halves; 1 1/3 = 4 thirds)</span></div>
+    <div class="ln">cancel 4 with 2 &rarr; 5/1 &times; 2/3</div>
+    <div class="ln">= 10/3</div>
+    <div class="ln ans">= 3 1/3</div>
+  </div>
+</div>
+<div class="stop-here">&#9209; STOP HERE — come back tomorrow.</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Trap &#8594;</button></div>
+</div>
+
+<!-- s4: trap / discrimination -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x26A0;&#xFE0F; The Trap: ADD or MULTIPLY?</h2>
+  <p>Your strongest mixed-number habit, from adding, is: <em>wholes with wholes, parts with parts</em>. For multiplying, that habit gives a WRONG answer.</p>
+  <div class="wrong-way">
+    <div class="ln">2 &times; 1 = 2</div>
+    <div class="ln">1/2 &times; 1/3 = 1/6</div>
+    <div class="ln"><strong>"answer" 2 1/6 &nbsp;&#10007;&nbsp; WRONG</strong></div>
+  </div>
+  <button class="toggle-btn" onclick="toggleRegions()">Show me why, on the picture</button>
+  <div class="grid-wrap" id="w6b-wrap" style="display:none">
+    <svg id="w6bsvg" viewBox="0 0 360 300" width="320" height="266"></svg>
+    <p style="margin-top:8px">The rectangle splits into FOUR regions: <strong>2</strong> (whole&times;whole), <strong>2/3</strong>, <strong>1/2</strong>, <strong>1/6</strong>. The wrong way only counted the first and last region.</p>
+    <div class="steps">
+      <div class="ln">True total = 2 + 2/3 + 1/2 + 1/6</div>
+      <div class="ln ans">= 3 1/3</div>
+    </div>
+  </div>
+  <div class="big-rule">Adding mixed numbers: wholes with wholes, parts with parts — fine. MULTIPLYING mixed numbers: change BOTH to improper fractions first. Always.</div>
+  <h3>Sorter — which method?</h3>
+  <div class="q-card">
+    <div class="q-text">(i)&nbsp; 1 1/2 + 2 1/5 &mdash; can you split wholes and parts?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="t0" value="A"> A)&nbsp; Yes, splitting is fine &rarr; 3 7/10</label>
+      <label class="opt"><input type="radio" name="t0" value="B"> B)&nbsp; No, must convert first</label>
+    </div>
+    <button class="btn-check" onclick="chkQ('t0','A')">Check</button>
+    <div class="feedback" id="fbt0"></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">(ii)&nbsp; 1 1/2 &times; 2 1/5 &mdash; can you split wholes and parts?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="t1" value="A"> A)&nbsp; Yes, splitting is fine</label>
+      <label class="opt"><input type="radio" name="t1" value="B"> B)&nbsp; No &mdash; convert first &rarr; 3/2 &times; 11/5 = 33/10 = 3 3/10</label>
+    </div>
+    <button class="btn-check" onclick="chkQ('t1','B')">Check</button>
+    <div class="feedback" id="fbt1"></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">(iii)&nbsp; 1 1/2 &times; 6 &mdash; can you split wholes and parts?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="t2" value="A"> A)&nbsp; Yes &mdash; one side is a whole number, either way works &rarr; 9</label>
+      <label class="opt"><input type="radio" name="t2" value="B"> B)&nbsp; No</label>
+    </div>
+    <button class="btn-check" onclick="chkQ('t2','A')">Check</button>
+    <div class="feedback" id="fbt2"></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Bigger Or Smaller? &#8594;</button></div>
+</div>
+
+<!-- s5: size sense W7 -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x1F4C8; Bigger Or Smaller?</h2>
+  <p class="tap-hint">A bar of length 12. Step the multiplier and watch the product bar.</p>
+  <div class="stepper-row">
+    <div class="stepper">
+      <div class="stepper-label">Multiplier</div>
+      <div class="stepper-ctrl"><button class="stepper-btn" onclick="w7Change(-1)">&minus;</button><span class="stepper-val" id="w7mLabel">1</span><button class="stepper-btn" onclick="w7Change(1)">+</button></div>
+    </div>
+  </div>
+  <div class="grid-wrap"><svg id="w7svg" viewBox="0 0 760 110" width="100%" height="110" style="max-width:760px"></svg></div>
+  <div class="grid-readout" id="w7readout"></div>
+  <div class="big-rule">Times a number LESS than 1 &rarr; the answer gets smaller. Times MORE than 1 &rarr; bigger. Times exactly 1 &rarr; the same.</div>
+  <div class="q-card">
+    <div class="q-text">Check: Tia says 4/5 &times; 3/8 = 1 1/5. Without working it out, how do you know she's wrong?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="tia" value="A"> A)&nbsp; &times;3/8 must make 4/5 smaller, so the answer must be less than 4/5 &mdash; but 1 1/5 is more than 1</label>
+      <label class="opt"><input type="radio" name="tia" value="B"> B)&nbsp; It's not, that's correct</label>
+    </div>
+    <button class="btn-check" onclick="chkQ('tia','A')">Check</button>
+    <div class="feedback" id="fbtia"></div>
+    <button class="btn-show-steps" id="sstia" onclick="showSteps('srtia',this)">Show correct value</button>
+    <div class="steps-reveal" id="srtia"><div class="steps"><div class="ln ans">Correct value: 3/10</div></div></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s6: practice -->
+<div class="screen" id="s6">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Multiplying Mixed Numbers</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; Work out 1 1/4 &times; 2 2/5.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 3</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 2 3/5</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 3 1/4</label>
+    </div>
+    <button class="btn-check" onclick="chkQP(0,'A')">Check</button>
+    <div class="feedback" id="fbp0"></div>
+    <button class="btn-show-steps" id="ssp0" onclick="showSteps('srp0',this)">Show Steps</button>
+    <div class="steps-reveal" id="srp0"><div class="steps">
+      <div class="ln">5/4 &times; 12/5 = 60/20</div>
+      <div class="ln ans">= 3</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; Work out 7/2 &times; 5/3. Give your answer as a mixed number.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; 5 5/6</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; 5 1/6</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; 4 5/6</label>
+    </div>
+    <button class="btn-check" onclick="chkQP(1,'A')">Check</button>
+    <div class="feedback" id="fbp1"></div>
+    <button class="btn-show-steps" id="ssp1" onclick="showSteps('srp1',this)">Show Steps</button>
+    <div class="steps-reveal" id="srp1"><div class="steps">
+      <div class="ln">7/2 &times; 5/3 = 35/6</div>
+      <div class="ln ans">= 5 5/6</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; A mat is 1 1/3 m long and 2 5/8 m wide. What is its area?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 3 1/2 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 3 1/4 m&sup2;</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 4 m&sup2;</label>
+    </div>
+    <button class="btn-check" onclick="chkQP(2,'A')">Check</button>
+    <div class="feedback" id="fbp2"></div>
+    <button class="btn-show-steps" id="ssp2" onclick="showSteps('srp2',this)">Show Steps</button>
+    <div class="steps-reveal" id="srp2"><div class="steps">
+      <div class="ln">4/3 &times; 21/8, cancel 4 with 8 and 3 with 21 &rarr; 1/1 &times; 7/2</div>
+      <div class="ln ans">= 3 1/2 m&sup2;</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; Which answer must be wrong, without working it out: 4/5 &times; 5/6 = 2/3, or 4/5 &times; 5/6 = 1 1/6?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 1 1/6 (too big — must be less than 4/5)</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 2/3</label>
+    </div>
+    <button class="btn-check" onclick="chkQP(3,'A')">Check</button>
+    <div class="feedback" id="fbp3"></div>
+    <button class="btn-show-steps" id="ssp3" onclick="showSteps('srp3',this)">Show Steps</button>
+    <div class="steps-reveal" id="srp3"><div class="steps">
+      <div class="ln"><span class="note">true value: 4/5 &times; 5/6 = 20/30 = 2/3</span></div>
+      <div class="ln ans">1 1/6 must be wrong</div>
+    </div></div>
+  </div>
+  <div class="golden">
+    <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+    <p style="font-size:1.05rem"><strong>Multiplying mixed numbers: convert BOTH to improper fractions first, then multiply top&times;top, bottom&times;bottom, cancelling where you can. Never split into wholes and parts the way you do for adding.</strong></p>
+  </div>
+  <div class="warn-box"><p><strong>Finish-the-question check:</strong> before you write your final answer &mdash; did you answer the EXACT question asked?</p></div>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#fff;color:#283593;border:2px solid #283593;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+  <a href="U63_StuckCard_MultiplyMixedNumbers.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#3F51B5;color:#fff;border:2px solid #3F51B5;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Stuck Card &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);
+if(screens[cur].id==='s5'){ setTimeout(renderW7,0); }
+}
+function chkQ(qi,correct){var sel=document.querySelector('input[name="d'+qi+'"]:checked')||document.querySelector('input[name="'+qi+'"]:checked'),fb=document.getElementById('fb'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';}
+else{fb.className='feedback err';fb.textContent='Not quite — try again, or move on and check the lesson.';}}
+function chkQP(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fbp'+qi),ss=document.getElementById('ssp'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+// ---- W6: mixed rectangle ----
+var w6={w:5,h:4};
+function w6Change(k,d){
+  var v=w6[k]+d;
+  if(k==='w'){ if(v<2||v>8)return; w6.w=v; }
+  else { if(v<3||v>9)return; w6.h=v; }
+  document.getElementById('w6w').textContent=w6.w;
+  document.getElementById('w6h').textContent=w6.h;
+  renderW6();
+}
+function mixedFromHalves(n){ var whole=Math.floor(n/2), rem=n%2; return rem===0? (''+whole+' m') : (whole>0? (whole+' 1/2 m') : '1/2 m'); }
+function mixedFromThirds(n){ var whole=Math.floor(n/3), rem=n%3; return rem===0? (''+whole+' m') : (whole>0? (whole+' '+rem+'/3 m') : (rem+'/3 m')); }
+function gcd2(a,b){return b===0?a:gcd2(b,a%b);}
+function renderW6(svgId, regionsMode){
+  svgId = svgId || 'w6svg';
+  var svg=document.getElementById(svgId);
+  var cols=w6.w, rows=w6.h, cw=300/cols, rh=240/rows, x0=30, y0=20;
+  var html='';
+  for(var r=0;r<rows;r++){
+    for(var c=0;c<cols;c++){
+      html+='<rect x="'+(x0+c*cw)+'" y="'+(y0+r*rh)+'" width="'+cw+'" height="'+rh+'" fill="#F0F1FA" stroke="#9FA8DA" stroke-width="1"/>';
+    }
+  }
+  // heavy outline: 2 cols x 3 rows = one whole m^2 (only meaningful at 5x4 default region, but draw generally up to available)
+  var wholeCols=Math.min(2,cols), wholeRows=Math.min(3,rows);
+  html+='<rect x="'+x0+'" y="'+y0+'" width="'+(wholeCols*cw)+'" height="'+(wholeRows*rh)+'" fill="none" stroke="#283593" stroke-width="4"/>';
+  // outer border
+  html+='<rect x="'+x0+'" y="'+y0+'" width="'+(cols*cw)+'" height="'+(rows*rh)+'" fill="none" stroke="#3F51B5" stroke-width="2.5"/>';
+  if(regionsMode && cols===5 && rows===4){
+    // heavy lines at 4 half-cols and 3 third-rows boundaries
+    html+='<line x1="'+(x0+4*cw)+'" y1="'+y0+'" x2="'+(x0+4*cw)+'" y2="'+(y0+rows*rh)+'" stroke="#283593" stroke-width="3"/>';
+    html+='<line x1="'+x0+'" y1="'+(y0+3*rh)+'" x2="'+(x0+cols*cw)+'" y2="'+(y0+3*rh)+'" stroke="#283593" stroke-width="3"/>';
+    html+='<text x="'+(x0+2*cw)+'" y="'+(y0+1.5*rh+5)+'" font-size="14" fill="#283593" text-anchor="middle" font-weight="800">2</text>';
+    html+='<text x="'+(x0+4.5*cw)+'" y="'+(y0+1.5*rh+5)+'" font-size="12" fill="#283593" text-anchor="middle" font-weight="800">2/3</text>';
+    html+='<text x="'+(x0+2*cw)+'" y="'+(y0+3.5*rh+5)+'" font-size="12" fill="#283593" text-anchor="middle" font-weight="800">1/2</text>';
+    html+='<text x="'+(x0+4.5*cw)+'" y="'+(y0+3.5*rh+5)+'" font-size="12" fill="#283593" text-anchor="middle" font-weight="800">1/6</text>';
+  }
+  // width label
+  html+='<text x="'+(x0+cols*cw/2)+'" y="'+(y0+rows*rh+18)+'" font-size="12" fill="#283593" text-anchor="middle" font-weight="700">'+mixedFromHalves(cols)+'</text>';
+  html+='<text x="'+(x0-8)+'" y="'+(y0+rows*rh/2)+'" font-size="12" fill="#283593" text-anchor="middle" font-weight="700" transform="rotate(-90 '+(x0-8)+' '+(y0+rows*rh/2)+')">'+mixedFromThirds(rows)+'</text>';
+  svg.innerHTML=html;
+  var cells=cols*rows;
+  var whole=Math.floor(cells/6), rem=cells%6;
+  var readoutHtml = cells+' cells &times; 1/6 = '+cells+'/6';
+  if(rem===0){
+    readoutHtml += ' = '+whole;
+  } else {
+    var rg=gcd2(rem,6);
+    var simpRem=rem/rg, simpDen=6/rg;
+    readoutHtml += ' = '+whole+' '+rem+'/6';
+    if(rg>1){ readoutHtml += ' = '+whole+' '+simpRem+'/'+simpDen; }
+  }
+  if(svgId==='w6svg'){
+    document.getElementById('w6readout').innerHTML = readoutHtml;
+  }
+}
+renderW6();
+
+// ---- s4 trap regions toggle ----
+var regionsShown=false;
+function toggleRegions(){
+  regionsShown=!regionsShown;
+  document.getElementById('w6b-wrap').style.display = regionsShown ? 'block':'none';
+  if(regionsShown){ renderW6('w6bsvg', true); }
+}
+
+// ---- W7: stretch or shrink ----
+var w7mults=['1/4','1/2','3/4','1','1 1/4','1 1/2','2'];
+var w7vals=[0.25,0.5,0.75,1,1.25,1.5,2];
+var w7idx=3;
+function w7Change(d){ w7idx=Math.max(0,Math.min(w7mults.length-1,w7idx+d)); document.getElementById('w7mLabel').textContent=w7mults[w7idx]; renderW7(); }
+function renderW7(){
+  var svg=document.getElementById('w7svg');
+  var base=12, scale=30, x0=20,y0=20;
+  var product=base*w7vals[w7idx];
+  var baseLen=base*scale, prodLen=product*scale;
+  var html='';
+  html+='<rect x="'+x0+'" y="'+y0+'" width="'+baseLen+'" height="24" fill="#9FA8DA" stroke="#283593" stroke-width="2"/>';
+  html+='<text x="'+(x0+baseLen/2)+'" y="'+(y0+16)+'" font-size="12" fill="#1a1a2e" text-anchor="middle" font-weight="700">base = 12</text>';
+  html+='<rect x="'+x0+'" y="'+(y0+40)+'" width="'+prodLen+'" height="24" fill="#3F51B5" stroke="#283593" stroke-width="2"/>';
+  html+='<text x="'+(x0+Math.min(prodLen,700)/2)+'" y="'+(y0+56)+'" font-size="12" fill="#fff" text-anchor="middle" font-weight="700">12 &times; '+w7mults[w7idx]+' = '+product+'</text>';
+  svg.innerHTML=html;
+  var word = product<base ? 'smaller' : (product>base ? 'bigger' : 'the same');
+  document.getElementById('w7readout').innerHTML = '12 &times; '+w7mults[w7idx]+' = '+product+' &mdash; '+word;
+}
+document.addEventListener('DOMContentLoaded', function(){ if(document.getElementById('w7svg')) renderW7(); });
+</script>
+</body>
+</html>
