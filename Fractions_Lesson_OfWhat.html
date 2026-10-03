@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Of What? — Fractions Lesson 2 (Unit 64)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#C62828;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin-bottom:12px}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border:1.5px solid #9FA8DA;border-radius:8px;padding:7px 14px;font-size:.95rem}
+.opt:hover{border-color:var(--acc);background:#E8EAF6}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.diagram{text-align:center;background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:16px;margin:12px 0}
+.diagram svg{max-width:100%;height:auto}
+.diagram-cap{text-align:center;font-size:.85rem;color:#455A64;margin-top:4px}
+.stop-here{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FB8C00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:800;color:#E65100;margin:16px 0}
+.flip-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.flip-card{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:12px 18px;font-size:.95rem;font-weight:700;color:var(--warn);text-align:center}
+.flip-arrow{font-size:1.4rem;color:var(--acc)}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Of What? — Fractions Lesson 2 (Unit 64)</span>
+  <span class="tnav-pill" id="pill">1 / 7</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+
+<!-- s0: Day-2 recall from L1 -->
+<div class="screen active" id="s0">
+<div class="card">
+  <span class="badge-cap">&#x1F501; Recall — From Lesson 1</span>
+  <h2>Before We Start — From Memory</h2>
+  <p class="tap-hint">No teaching on this screen. P1 and P3 again, plus one new one.</p>
+  <div class="q-card">
+    <div class="q-text">(a)&nbsp; A jar holds 7/8 kg of honey. 2/7 of the honey is used. How much honey is used?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="d0" value="A"> A)&nbsp; 1/4 kg</label>
+      <label class="opt"><input type="radio" name="d0" value="B"> B)&nbsp; 5/8 kg</label>
+      <label class="opt"><input type="radio" name="d0" value="C"> C)&nbsp; 4 3/8 kg</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(0,'A')">Check</button>
+    <div class="feedback" id="fb0"></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">(b)&nbsp; Lin had 9/10 L of paint. She used 1/5 L. How much is left?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="d1" value="A"> A)&nbsp; 7/10 L</label>
+      <label class="opt"><input type="radio" name="d1" value="B"> B)&nbsp; 9/50 L</label>
+      <label class="opt"><input type="radio" name="d1" value="C"> C)&nbsp; 1 1/10 L</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(1,'A')">Check</button>
+    <div class="feedback" id="fb1"></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">(c)&nbsp; Work out 2/3 of 1 1/8 kg.</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="d2" value="A"> A)&nbsp; 3/4 kg</label>
+      <label class="opt"><input type="radio" name="d2" value="B"> B)&nbsp; 2 3/8 kg</label>
+      <label class="opt"><input type="radio" name="d2" value="C"> C)&nbsp; 1/3 kg</label>
+    </div>
+    <button class="btn-check" onclick="chkQ(2,'A')">Check</button>
+    <div class="feedback" id="fb2"></div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start Lesson &#8594;</button></div>
+</div>
+
+<!-- s1: why -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F3AF; Why — Two Fractions, Two Wholes</h2>
+  <div class="why">
+    <div class="why-title">This is the harder half of the same idea.</div>
+    <p>In a story with two fractions, each fraction acts on a DIFFERENT whole. The whole trick is asking: OF WHAT?</p>
+  </div>
+  <div class="big-rule">Every fraction needs its own "of what?" before you can multiply.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Redraw The Bar &#8594;</button></div>
+</div>
+
+<!-- s2: Route A - redraw bar -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F4CF; Route A — Redraw The Bar For Each New Whole</h2>
+  <p><strong>A rope is 7 1/2 m long. Jo uses 2/5 of the rope for a swing. She uses 1/4 of the swing rope for knots. How much rope is in the knots?</strong></p>
+  <div class="diagram">
+    <svg viewBox="0 0 320 60" width="320" height="60">
+      <rect x="10" y="10" width="60" height="34" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect x="70" y="10" width="60" height="34" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect x="130" y="10" width="60" height="34" fill="#F0F1FA" stroke="#283593" stroke-width="2"/>
+      <rect x="190" y="10" width="60" height="34" fill="#F0F1FA" stroke="#283593" stroke-width="2"/>
+      <rect x="250" y="10" width="60" height="34" fill="#F0F1FA" stroke="#283593" stroke-width="2"/>
+      <text x="40" y="31" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">1 1/2 m</text>
+      <text x="100" y="31" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">1 1/2 m</text>
+    </svg>
+    <div class="diagram-cap">Bar 1 — the whole rope, 7 1/2 m in 5 equal parts. 2 shaded = the swing rope = 2/5 &times; 7 1/2 = <strong>3 m</strong>.</div>
+  </div>
+  <div class="diagram">
+    <svg viewBox="0 0 220 60" width="220" height="60">
+      <rect x="10" y="10" width="50" height="34" fill="#43A047" stroke="#2E7D32" stroke-width="2"/>
+      <rect x="60" y="10" width="50" height="34" fill="#F0F1FA" stroke="#2E7D32" stroke-width="2"/>
+      <rect x="110" y="10" width="50" height="34" fill="#F0F1FA" stroke="#2E7D32" stroke-width="2"/>
+      <rect x="160" y="10" width="50" height="34" fill="#F0F1FA" stroke="#2E7D32" stroke-width="2"/>
+      <text x="35" y="31" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">3/4 m</text>
+    </svg>
+    <div class="diagram-cap">Bar 2, redrawn — the SWING ROPE (3 m) is the new whole, cut into 4. 1 shaded = the knots = 1/4 &times; 3 = <strong>3/4 m</strong>.</div>
+  </div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Arrow Chain &#8594;</button></div>
+</div>
+
+<!-- s3: Route B - arrow chain -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F517; Route B — The Arrow Chain</h2>
+  <div class="bridge">Each new bar is a new whole. Written down, it's a chain of OF-sentences.</div>
+  <div class="steps">
+    <div class="ln">rope 7 1/2 m &rarr; swing = 2/5 of 7 1/2 = 3 m &rarr; knots = 1/4 of 3 m = <span class="ans">3/4 m</span></div>
+  </div>
+  <div class="rulebar">Before every fraction, ask: OF WHAT? Write the answer above the arrow.</div>
+</div>
+<div class="stop-here">&#9209; STOP HERE — come back tomorrow.</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">"Of The Rest" &#8594;</button></div>
+</div>
+
+<!-- s4: of the rest -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F465; "Of The Rest" — The Whole Is The REST</h2>
+  <p><strong>In a class, 2/5 of the children sing in the choir. Of the rest, 1/3 play football.</strong></p>
+  <p style="margin-top:6px"><strong>(a) What fraction of the class play football?</strong></p>
+  <div class="diagram">
+    <svg viewBox="0 0 300 60" width="300" height="60">
+      <rect x="10" y="10" width="56" height="34" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect x="66" y="10" width="56" height="34" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect x="122" y="10" width="56" height="34" fill="#43A047" stroke="#2E7D32" stroke-width="2"/>
+      <rect x="178" y="10" width="56" height="34" fill="#F0F1FA" stroke="#283593" stroke-width="2"/>
+      <rect x="234" y="10" width="56" height="34" fill="#F0F1FA" stroke="#283593" stroke-width="2"/>
+      <text x="38" y="31" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">choir</text>
+      <text x="94" y="31" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">choir</text>
+      <text x="150" y="31" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">football</text>
+      <path d="M 122 50 L 122 56 L 290 56 L 290 50" fill="none" stroke="#2E7D32" stroke-width="1.5"/>
+      <text x="206" y="70" font-size="9" fill="#455A64" text-anchor="middle">"the rest" — 3 parts of the class</text>
+    </svg>
+    <div class="diagram-cap">1 of the 3 "rest" parts plays football = 1 part out of 5 total.</div>
+  </div>
+  <div class="steps">
+    <div class="ln">rest = 1 &minus; 2/5 = 3/5</div>
+    <div class="ln">football = 1/3 &times; 3/5 = <span class="ans">1/5</span> of the class</div>
+  </div>
+  <p style="margin-top:6px"><strong>(b) 9 children play football. How many children are in the class?</strong></p>
+  <div class="steps">
+    <div class="ln">1/5 of the class = 9</div>
+    <div class="ln ans">class = 9 &times; 5 = 45</div>
+  </div>
+  <div class="rulebar">"Of the rest" — the rest is the new whole. Find the rest FIRST.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">"As Many As" &#8594;</button></div>
+</div>
+
+<!-- s5: as many as -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x1F504; "As Many As" Means Times</h2>
+  <div class="flip-row">
+    <div class="flip-card">Tuesday: 3/5 AS MANY pages AS Monday</div>
+    <span class="flip-arrow">&#8594;</span>
+    <div class="flip-card">Tuesday = 3/5 OF Monday's pages</div>
+  </div>
+  <p><strong>Ella read 5/12 of a book on Monday. On Tuesday she read 3/5 as many pages as on Monday.</strong></p>
+  <p style="margin-top:6px"><strong>(a) What fraction of the book did she read on Tuesday?</strong></p>
+  <div class="steps">
+    <div class="ln">3/5 &times; 5/12 = <span class="ans">1/4</span></div>
+  </div>
+  <p style="margin-top:6px"><strong>(b) She read 24 pages on Tuesday. How many pages are in the book?</strong></p>
+  <div class="steps">
+    <div class="ln">1/4 of the book = 24</div>
+    <div class="ln ans">book = 24 &times; 4 = 96</div>
+  </div>
+  <div class="warn-box"><p><strong>Check:</strong> Monday = 5/12 &times; 96 = 40 pages. Tuesday = 3/5 &times; 40 = 24 pages. &#x2713;</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s6: practice -->
+<div class="screen" id="s6">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice — Of What?</h2>
+  <div class="q-card">
+    <div class="q-text">P1.&nbsp; A cake weighs 2 2/3 kg. 3/4 of the cake is sponge. 3/8 of the sponge is iced. How much of the cake is iced sponge?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q0" value="A"> A)&nbsp; 3/4 kg</label>
+      <label class="opt"><input type="radio" name="q0" value="B"> B)&nbsp; 1 kg</label>
+      <label class="opt"><input type="radio" name="q0" value="C"> C)&nbsp; 1/4 kg</label>
+    </div>
+    <button class="btn-check" onclick="chkQP(0,'A')">Check</button>
+    <div class="feedback" id="fbp0"></div>
+    <button class="btn-show-steps" id="ssp0" onclick="showSteps('srp0',this)">Show Steps</button>
+    <div class="steps-reveal" id="srp0"><div class="steps">
+      <div class="ln">sponge = 3/4 &times; 2 2/3 = 3/4 &times; 8/3 = 2 kg</div>
+      <div class="ln">iced = 3/8 &times; 2</div>
+      <div class="ln ans">= 3/4 kg</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P2.&nbsp; In a box, 1/5 of the pens are red. 1/4 of the rest are blue. (a) What fraction of all the pens are blue? (b) 6 pens are blue. How many pens are in the box?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q1" value="A"> A)&nbsp; (a) 1/5&nbsp; (b) 30</label>
+      <label class="opt"><input type="radio" name="q1" value="B"> B)&nbsp; (a) 1/4&nbsp; (b) 24</label>
+      <label class="opt"><input type="radio" name="q1" value="C"> C)&nbsp; (a) 1/20&nbsp; (b) 120</label>
+    </div>
+    <button class="btn-check" onclick="chkQP(1,'A')">Check</button>
+    <div class="feedback" id="fbp1"></div>
+    <button class="btn-show-steps" id="ssp1" onclick="showSteps('srp1',this)">Show Steps</button>
+    <div class="steps-reveal" id="srp1"><div class="steps">
+      <div class="ln">rest = 1 &minus; 1/5 = 4/5</div>
+      <div class="ln">blue = 1/4 &times; 4/5 = 1/5 of all the pens</div>
+      <div class="ln">1/5 of the box = 6 &rarr; box = 6 &times; 5</div>
+      <div class="ln ans">= 30</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P3.&nbsp; Max ran 3 3/4 km. Sam ran 4/5 as far as Max. How far did Sam run?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q2" value="A"> A)&nbsp; 3 km</label>
+      <label class="opt"><input type="radio" name="q2" value="B"> B)&nbsp; 4 11/20 km</label>
+      <label class="opt"><input type="radio" name="q2" value="C"> C)&nbsp; 2 19/20 km</label>
+    </div>
+    <button class="btn-check" onclick="chkQP(2,'A')">Check</button>
+    <div class="feedback" id="fbp2"></div>
+    <button class="btn-show-steps" id="ssp2" onclick="showSteps('srp2',this)">Show Steps</button>
+    <div class="steps-reveal" id="srp2"><div class="steps">
+      <div class="ln">"as far as" = &times;: 4/5 &times; 3 3/4 = 4/5 &times; 15/4</div>
+      <div class="ln ans">= 3 km</div>
+    </div></div>
+  </div>
+  <div class="q-card">
+    <div class="q-text">P4.&nbsp; Raj had 2 1/2 L of juice. He drank 2/5 of it. Then he poured out 1/4 L. How much juice is left?</div>
+    <div class="options">
+      <label class="opt"><input type="radio" name="q3" value="A"> A)&nbsp; 1 1/4 L</label>
+      <label class="opt"><input type="radio" name="q3" value="B"> B)&nbsp; 1 1/2 L</label>
+      <label class="opt"><input type="radio" name="q3" value="C"> C)&nbsp; 2 1/4 L</label>
+    </div>
+    <button class="btn-check" onclick="chkQP(3,'A')">Check</button>
+    <div class="feedback" id="fbp3"></div>
+    <button class="btn-show-steps" id="ssp3" onclick="showSteps('srp3',this)">Show Steps</button>
+    <div class="steps-reveal" id="srp3"><div class="steps">
+      <div class="ln">drank (of it, &times;): 2/5 &times; 2 1/2 = 1 L</div>
+      <div class="ln">after drinking: 2 1/2 &minus; 1 = 1 1/2 L</div>
+      <div class="ln">poured out 1/4 L is an AMOUNT &mdash; take away: 1 1/2 &minus; 1/4</div>
+      <div class="ln ans">= 1 1/4 L</div>
+    </div></div>
+  </div>
+  <div class="golden">
+    <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+    <p style="font-size:1.05rem"><strong>Every fraction has its own "of what?" — find the whole it acts on before you multiply. "Of the rest" means find the rest first. "As many as" means times.</strong></p>
+  </div>
+  <div class="warn-box"><p><strong>Finish-the-question check:</strong> before you write your final answer &mdash; did you answer the EXACT question asked, is your fraction in simplest form, and did you write the UNIT?</p></div>
+  <div class="warn-box"><p>&#x1F192; Stuck on which operation to use? The <a href="U64_StuckCard_WhichOperation.html">Stuck Card</a> has a fold-paper demo that shows the difference in your hands.</p></div>
+</div>
+<div class="navrow">
+  <a href="https://athipprem.github.io/mathlessons/index.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#fff;color:#283593;border:2px solid #283593;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Back to Hub</a>
+  <a href="U64_SelfCheck_U064.html" style="flex:1;display:block;text-align:center;padding:13px 0;background:#3F51B5;color:#fff;border:2px solid #3F51B5;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none">Self-Check &#8594;</a>
+</div>
+</div>
+
+<script>
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function chkQ(qi,correct){var sel=document.querySelector('input[name="d'+qi+'"]:checked'),fb=document.getElementById('fb'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';}
+else{fb.className='feedback err';fb.textContent='Not quite — try again, or move on and check the lesson.';}}
+function chkQP(qi,correct){var sel=document.querySelector('input[name="q'+qi+'"]:checked'),fb=document.getElementById('fbp'+qi),ss=document.getElementById('ssp'+qi);fb.style.display='block';
+if(!sel){fb.className='feedback err';fb.textContent='Pick an answer first.';return;}
+if(sel.value===correct){fb.className='feedback ok';fb.textContent='✓ Correct!';ss.style.display='inline-block';}
+else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';ss.style.display='inline-block';}}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+</script>
+</body>
+</html>

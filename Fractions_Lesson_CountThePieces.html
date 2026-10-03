@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Count The Pieces — Fractions Lesson 1 (Unit 65)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#C62828;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.wrap{max-width:760px;margin:0 auto;padding:16px;width:100%}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin:12px 0}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.q-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1px solid #9FA8DA;border-radius:14px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stop-here{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FB8C00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:800;color:#E65100;margin:16px 0}
+.flip-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.flip-card{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:12px 18px;font-size:.95rem;font-weight:700;color:var(--warn);text-align:center}
+/* answer frame */
+.frame{background:#fff;border:2px solid var(--acc);border-radius:10px;padding:10px 12px;margin:10px 0}
+.frame .fr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0}
+.frame .fl{font-weight:700;color:var(--warn);font-size:.92rem;min-width:150px}
+.frame .fv{font-size:1rem;color:#1a1a2e}
+.frame .fv.ans{font-weight:800;color:var(--warn)}
+.frame input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:6px 8px;font-size:1rem;width:170px;font-family:inherit}
+.frame input[type=text].wide{width:230px}
+.frame input[type=text]:focus{outline:2px solid #9FA8DA}
+.frame .fr.pieces input{width:90px}
+/* piece cutter W10 */
+.w10{background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:12px;margin:12px 0}
+.w10 svg{width:100%;height:auto;display:block}
+.w10-lines{margin-top:8px;min-height:60px}
+.w10-lines .ln{font-size:1rem;padding:3px 0;color:#1a1a2e}
+.w10-lines .ln.last{font-weight:800;color:var(--warn)}
+.w10-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.w10-btns button{border:none;border-radius:8px;padding:8px 16px;font-size:.92rem;font-weight:700;cursor:pointer}
+.w10-btns .go{background:var(--acc);color:#fff}
+.w10-btns .go:disabled{background:#9FA8DA;cursor:default}
+.w10-btns .rs{background:#fff;color:var(--acc);border:1.5px solid var(--acc)}
+.two-cards{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.two-cards .q-card{flex:1;min-width:250px;margin-bottom:0}
+.ans-input{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 10px;font-size:1rem;width:190px;font-family:inherit;margin-right:8px}
+.nav-link{flex:1;display:block;text-align:center;padding:13px 0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.nav-link.out{background:#fff;color:#283593;border:2px solid #283593}
+.nav-link.fill{background:#3F51B5;color:#fff;border:2px solid #3F51B5}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Count The Pieces &mdash; Fractions Lesson 1 (Unit 65)</span>
+  <span class="tnav-pill" id="pill">1 / 7</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+<!-- s0: Day-2 recall -->
+<div class="screen active" id="s0">
+<div class="card">
+  <span class="badge-cap">&#x1F501; Recall</span>
+  <h2>Before We Start &mdash; From Memory</h2>
+  <p class="tap-hint">No teaching on this screen. Three quick ones that today's lesson rides on.</p>
+<div class="q-card" id="r0" data-ans="9/2" data-type="improper">
+  <div class="q-text">(a)&nbsp; Write 4 1/2 as an improper fraction.</div>
+  <input type="text" class="ans-input" aria-label="answer">
+  <button class="btn-check" onclick="chkIn('r0')">Check</button>
+  <div class="feedback"></div>
+</div>
+<div class="q-card" id="r1" data-ans="10" data-type="val">
+  <div class="q-text">(b)&nbsp; What is 2/3 of 15?</div>
+  <input type="text" class="ans-input" aria-label="answer">
+  <button class="btn-check" onclick="chkIn('r1')">Check</button>
+  <div class="feedback"></div>
+</div>
+<div class="q-card" id="r2" data-ans="7/4" data-type="improper">
+  <div class="q-text">(c)&nbsp; Write 1 3/4 as an improper fraction.</div>
+  <input type="text" class="ans-input" aria-label="answer">
+  <button class="btn-check" onclick="chkIn('r2')">Check</button>
+  <div class="feedback"></div>
+</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start Lesson &#8594;</button></div>
+</div>
+
+<!-- s1: why -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F3AF; Why &mdash; One Trick, Not Five Rules</h2>
+  <div class="why">
+    <div class="why-title">Before anything else:</div>
+    <p>Last test was too hard, and that was my fault, not yours &mdash; too many rules at once. Here's what your paper showed me: every time the story was about a SET of things &mdash; like the tickets &mdash; you got it. So this lesson has ONE trick: turn any amount into a set of pieces. Then it's a question you already know how to do.</p>
+  </div>
+  <div class="big-rule">Turn the amount into a SET of equal pieces.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Count The Pieces &#8594;</button></div>
+</div>
+
+<!-- s2: Route A -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F9F1; Route A &mdash; Count The Pieces</h2>
+  <p><strong>Remember the rope: 3/5 of 3 1/3 m.</strong></p>
+  <p class="tap-hint">Tap the button under the picture, one step at a time.</p>
+  <div class="w10" id="w10a"></div>
+  <div class="rulebar">Same as 3/5 of 10 sweets. The sweets just happen to be pieces of rope.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Shortcut &#8594;</button></div>
+</div>
+
+<!-- s3: Route B -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x26A1; Route B &mdash; The Shortcut</h2>
+  <div class="bridge">Look: the 10 pieces you counted is the TOP of 10/3. That's why the shortcut works.</div>
+  <div class="steps">
+    <div class="ln">3/5 &times; 3 1/3</div>
+    <div class="ln">= 3/5 &times; 10/3 <span class="note">(3 1/3 = 10 thirds)</span></div>
+    <div class="ln">cancel the 3s, and 10 &divide; 5 = 2: 1/1 &times; 2/1</div>
+    <div class="ln ans">= 2 m</div>
+  </div>
+</div>
+<div class="stop-here">&#9209; STOP HERE &mdash; come back tomorrow.</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Next Story &#8594;</button></div>
+</div>
+
+<!-- s4: frame, new story -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F4DD; The Frame, Filled In</h2>
+  <p><strong>A jug holds 1 3/5 L of juice. Tia pours 3/4 of it into a glass. How much juice is in the glass?</strong></p>
+  <div class="w10" id="w10b"></div>
+  <p style="margin-top:10px">Here is what goes in the frame:</p>
+<div class="frame">
+  <div class="fr"><span class="fl">The WHOLE is:</span><span class="fv">1 3/5 L</span></div>
+  <div class="fr"><span class="fl">Cut it into pieces:</span><span class="fv">8 pieces of 1/5 L</span></div>
+  <div class="fr"><span class="fl">Working:</span><span class="fv">8 &divide; 4 = 2, &times; 3 = 6 pieces</span></div>
+  <div class="fr"><span class="fl">Answer (with unit):</span><span class="fv ans">6 fifths = 1 1/5 L</span></div>
+</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">One Contrast &#8594;</button></div>
+</div>
+
+<!-- s5: contrast -->
+<div class="screen" id="s5">
+<div class="card">
+  <h2>&#x2696; One Contrast &mdash; "1/3 L" Or "1/3 OF It"?</h2>
+  <p class="tap-hint">Two cards, one word apart. Do both.</p>
+  <div class="two-cards">
+<div class="q-card" id="c0" data-ans="2/5" data-type="val">
+  <div class="q-text">A pot has 1 1/5 L of soup. Dan eats 1/3 OF the soup. How much does he eat?</div>
+  <input type="text" class="ans-input" aria-label="answer">
+  <button class="btn-check" onclick="chkIn('c0')">Check</button>
+  <div class="feedback"></div>
+</div>
+<div class="q-card" id="c1" data-ans="13/15" data-type="val">
+  <div class="q-text">A pot has 1 1/5 L of soup. Dan eats 1/3 L. How much is left?</div>
+  <input type="text" class="ans-input" aria-label="answer">
+  <button class="btn-check" onclick="chkIn('c1')">Check</button>
+  <div class="feedback"></div>
+</div>
+  </div>
+  <div class="steps">
+    <div class="ln"><b>OF</b> &rarr; 6 pieces of 1/5 L &rarr; 6 &divide; 3 &times; 1 = 2 pieces = 2/5 L</div>
+    <div class="ln"><b>1/3 L</b> &rarr; no pieces needed, it is an amount: 1 1/5 &minus; 1/3 = 13/15 L</div>
+  </div>
+  <div class="big-rule">OF &rarr; count the pieces. A fraction with a unit after it (1/3 L) &rarr; it's an amount.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s6: practice -->
+<div class="screen" id="s6">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice &mdash; Fill In The Frame Every Time</h2>
+<div class="q-card" id="p0" data-ans="5/7" data-type="val">
+  <div class="q-text">P1.&nbsp; What is 5/6 of 6/7 kg?</div>
+<div class="frame">
+  <div class="fr"><span class="fl">The WHOLE is:</span><input type="text" class="fi wide" aria-label="the whole"></div>
+  <div class="fr pieces"><span class="fl">Cut it into pieces:</span><input type="text" class="fi" style="width:70px" aria-label="how many pieces"> <span class="fv">pieces of</span> <input type="text" class="fi" style="width:90px" aria-label="size of each piece"></div>
+  <div class="fr"><span class="fl">Working:</span><span class="fv"><i>do this on your paper</i></span></div>
+  <div class="fr"><span class="fl">Answer (with unit):</span><input type="text" class="ans-input" aria-label="answer"></div>
+</div>
+  <button class="btn-check" onclick="chkIn('p0')">Check</button>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_p0',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_p0"><div class="steps">
+    <div class="ln">WHOLE: 6/7 kg</div>
+    <div class="ln">6 pieces of 1/7 kg</div>
+    <div class="ln">6 &divide; 6 = 1, 1 &times; 5 = 5 pieces</div>
+    <div class="ln ans">5 pieces of 1/7 kg = 5/7 kg</div>
+  </div></div>
+</div>
+<div class="q-card" id="p1" data-ans="1" data-type="val">
+  <div class="q-text">P2.&nbsp; A ribbon is 2 2/3 m long. 3/8 of it is red. How long is the red part?</div>
+<div class="frame">
+  <div class="fr"><span class="fl">The WHOLE is:</span><input type="text" class="fi wide" aria-label="the whole"></div>
+  <div class="fr pieces"><span class="fl">Cut it into pieces:</span><input type="text" class="fi" style="width:70px" aria-label="how many pieces"> <span class="fv">pieces of</span> <input type="text" class="fi" style="width:90px" aria-label="size of each piece"></div>
+  <div class="fr"><span class="fl">Working:</span><span class="fv"><i>do this on your paper</i></span></div>
+  <div class="fr"><span class="fl">Answer (with unit):</span><input type="text" class="ans-input" aria-label="answer"></div>
+</div>
+  <button class="btn-check" onclick="chkIn('p1')">Check</button>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_p1',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_p1"><div class="steps">
+    <div class="ln">WHOLE: 2 2/3 m</div>
+    <div class="ln">8 pieces of 1/3 m</div>
+    <div class="ln">8 &divide; 8 = 1, 1 &times; 3 = 3 pieces</div>
+    <div class="ln ans">3 pieces of 1/3 m = 3/3 = 1 m</div>
+  </div></div>
+</div>
+<div class="q-card" id="p2" data-ans="3/4" data-type="val">
+  <div class="q-text">P3.&nbsp; Tom walked 1 1/4 km. Kim walked 3/5 as far as Tom. How far did Kim walk?</div>
+<div class="frame">
+  <div class="fr"><span class="fl">The WHOLE is:</span><input type="text" class="fi wide" aria-label="the whole"></div>
+  <div class="fr pieces"><span class="fl">Cut it into pieces:</span><input type="text" class="fi" style="width:70px" aria-label="how many pieces"> <span class="fv">pieces of</span> <input type="text" class="fi" style="width:90px" aria-label="size of each piece"></div>
+  <div class="fr"><span class="fl">Working:</span><span class="fv"><i>do this on your paper</i></span></div>
+  <div class="fr"><span class="fl">Answer (with unit):</span><input type="text" class="ans-input" aria-label="answer"></div>
+</div>
+  <button class="btn-check" onclick="chkIn('p2')">Check</button>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_p2',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_p2"><div class="steps">
+    <div class="ln">WHOLE: Tom's walk, 1 1/4 km</div>
+    <div class="ln">5 pieces of 1/4 km</div>
+    <div class="ln">5 &divide; 5 = 1, 1 &times; 3 = 3 pieces</div>
+    <div class="ln ans">3 pieces of 1/4 km = 3/4 km</div>
+  </div></div>
+</div>
+<div class="q-card" id="p3" data-ans="7/15" data-type="val">
+  <div class="q-text">P4.&nbsp; Lily had 4/5 kg of clay. She used 1/3 kg. How much is left?</div>
+<div class="frame">
+  <div class="fr"><span class="fl">The WHOLE is:</span><input type="text" class="fi wide" aria-label="the whole"></div>
+  <div class="fr pieces"><span class="fl">Cut it into pieces:</span><input type="text" class="fi" style="width:70px" aria-label="how many pieces"> <span class="fv">pieces of</span> <input type="text" class="fi" style="width:90px" aria-label="size of each piece"></div>
+  <div class="fr"><span class="fl">Working:</span><span class="fv"><i>do this on your paper</i></span></div>
+  <div class="fr"><span class="fl">Answer (with unit):</span><input type="text" class="ans-input" aria-label="answer"></div>
+</div>
+  <button class="btn-check" onclick="chkIn('p3')">Check</button>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_p3',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_p3"><div class="steps">
+    <div class="ln">1/3 kg has a unit after it &mdash; it is an amount, not "of" the clay</div>
+    <div class="ln">4/5 &minus; 1/3 = 12/15 &minus; 5/15</div>
+    <div class="ln ans">7/15 kg</div>
+  </div></div>
+</div>
+  <div class="golden">
+    <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+    <p style="font-size:1.05rem"><strong>To find a fraction OF an amount, cut the amount into equal pieces and count them. Then it is a set &mdash; and you already know sets.</strong></p>
+  </div>
+  <div class="warn-box"><p><strong>Finish-the-question check:</strong> did you answer the EXACT question asked, is your fraction in simplest form, and did you write the UNIT?</p></div>
+  <div class="warn-box"><p>Tomorrow, before Lesson 2, redo P2 and P4 from memory.</p></div>
+  <div class="warn-box"><p>&#x1F192; Stuck? The <a href="U65_StuckCard_CountThePieces.html">Stuck Card</a> has a Lego-brick demo.</p></div>
+</div>
+<div class="navrow">
+  <a class="nav-link out" href="https://athipprem.github.io/mathlessons/index.html">Back to Hub</a>
+  <a class="nav-link fill" href="Fractions_Lesson_HowMuchIsLeft.html">Lesson 2 &#8594;</a>
+</div>
+</div>
+
+<script>
+
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a);}
+function mixedStr(n,d){var g=gcd(n,d);n=n/g;d=d/g;var w=Math.floor(n/d),r=n-w*d;if(r===0)return ''+w;return (w?w+' ':'')+r+'/'+d;}
+/* parse "1 1/5", "6/5", "2", "1.2", "1 1/5 m" -> [num,den] reduced, or null */
+function parseVal(s){
+  if(s==null)return null; s=String(s).toLowerCase().replace(/[²]/g,'').replace(/(kg|km|cups?|cm|ml|l|m|litres?|liters?|metres?|meters?|sq\.?|squared)\b/g,' ').replace(/\s+/g,' ').trim();
+  if(!s)return null; var m;
+  if((m=s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/))){var d=+m[3];if(!d)return null;var n=(+m[1])*d+(+m[2]);var g=gcd(n,d);return [n/g,d/g,'mixed'];}
+  if((m=s.match(/^(\d+)\s*\/\s*(\d+)$/))){var d2=+m[2];if(!d2)return null;var g2=gcd(+m[1],d2);return [(+m[1])/g2,d2/g2,'frac',+m[1],d2];}
+  if((m=s.match(/^(\d+)$/))){return [+m[1],1,'int'];}
+  if((m=s.match(/^(\d*)\.(\d+)$/))){var den=Math.pow(10,m[2].length);var n3=(+m[1]||0)*den+(+m[2]);var g3=gcd(n3,den);return [n3/g3,den/g3,'dec'];}
+  return null;}
+function sameVal(a,b){return a&&b&&a[0]===b[0]&&a[1]===b[1];}
+function isImproperText(s){var m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);return !!m&&(+m[1])>(+m[2]);}
+/* ---- W10 piece cutter ---- */
+var W10=(function(){
+function mount(el,cfg){
+  var ad=cfg.ad,pd=cfg.pd||ad,a=cfg.a,b=cfg.b,mode=cfg.mode||'of';
+  var Nf=(cfg.w*ad+cfg.n)*pd/ad; var N=Math.round(Nf);
+  if(Math.abs(Nf-N)>1e-9)throw new Error('amount is not a whole number of pieces');
+  if(N%b!==0)throw new Error(N+' pieces do not split into '+b+' groups');
+  var g=N/b,k=g*a,left=N-k;
+  var st={step:0};
+  var pw=cfg.pieceWord||'pieces';
+  var amt=mixedStr(cfg.w*ad+cfg.n,ad);
+  var lines;
+  function build(){
+    var ans=mixedStr(mode==='left'?left:k,pd);
+    var fracTxt=(mode==='left'?left:k)+'/'+pd;
+    var a4=(fracTxt===ans)?(' = <b>'+ans+' '+cfg.unit+'</b>'):(' '+fracTxt+' = <b>'+ans+' '+cfg.unit+'</b>');
+    var gtxt=(a===1)?'1 group':(a+' groups');
+    lines=[
+      '&#9312; The WHOLE is <b>'+amt+' '+cfg.unit+'</b>.',
+      '&#9313; Cut every '+cfg.unitWord+' into '+cfg.denWord+' &rarr; <b>'+N+' '+pw+'</b>, each 1/'+pd+' '+cfg.unit+'.',
+      (mode==='left'
+        ?'&#9314; Used: '+a+'/'+b+' of '+N+' '+pw+' &rarr; '+N+' &divide; '+b+' = <b>'+g+' in each group</b>.'
+        :'&#9314; Now it is a set: '+a+'/'+b+' of '+N+' '+pw+' &rarr; '+N+' &divide; '+b+' = <b>'+g+' in each group</b>.'),
+      (mode==='left'
+        ?'Cross out '+gtxt+': '+g+' &times; '+a+' = <b>'+k+' '+pw+'</b> used. '+N+' &minus; '+k+' = <b>'+left+' '+pw+' left</b>.'
+        :'Take '+gtxt+': '+g+' &times; '+a+' = <b>'+k+' '+pw+'</b>.'),
+      '&#9315; '+(mode==='left'?left:k)+' '+pw+' of 1/'+pd+' '+cfg.unit+' ='+a4
+    ];
+  }
+  build();
+  var W=680,H=130,M=20,UG=10,GG=16;
+  function geom(step){
+    var gaps=(step>=2)?(b-1)*GG:(Math.ceil(N/pd)-1)*UG;
+    var tw=Math.min(56,(W-2*M-gaps)/N);var xs=[];var x=M;
+    for(var i=0;i<N;i++){
+      if(i>0){ if(step>=2){ if(i%g===0)x+=GG; } else { if(i%pd===0)x+=UG; } }
+      xs.push(x);x+=tw;}
+    return {tw:tw,xs:xs};}
+  var svgNS='http://www.w3.org/2000/svg';
+  el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="piece cutter"></svg><div class="w10-lines"></div><div class="w10-btns"><button class="go"></button><button class="rs">&#8634; Start over</button></div>';
+  var svg=el.querySelector('svg'),box=el.querySelector('.w10-lines'),go=el.querySelector('.go'),rs=el.querySelector('.rs');
+  var goTxt=['&#9986; Cut it into pieces','&#128101; Make equal groups',(mode==='left'?'&#10060; Cross out the used group':'&#9757; Take the groups'),'&#10004; Get the answer','Done'];
+  function esc(s){return s;}
+  function draw(){
+    var step=st.step,gm=geom(step),tw=gm.tw,h='';
+    var ty=34,th=50;
+    if(step===0){
+      var units=Math.ceil(N/pd);
+      for(var u=0;u<units;u++){var cnt=Math.min(pd,N-u*pd);var x0=M+u*(pd*tw+UG);
+        h+='<rect class="unitblock" x="'+x0+'" y="'+ty+'" width="'+(cnt*tw)+'" height="'+th+'" fill="#C5CAE9" stroke="#283593" stroke-width="2"/>';
+        h+='<text x="'+(x0+cnt*tw/2)+'" y="'+(ty+th/2+5)+'" text-anchor="middle" font-size="14" font-weight="700" fill="#283593">'+(cnt===pd?'1':mixedStr(cnt,pd))+' '+cfg.unit+'</text>';}
+      h+='<text x="'+M+'" y="22" font-size="13" fill="#455A64">the whole amount, '+amt+' '+cfg.unit+'</text>';
+    } else {
+      for(var i=0;i<N;i++){
+        var gi=Math.floor(i/g),fill='#E8EAF6',stroke='#3F51B5',taken=0,x_=0;
+        if(step>=2)fill=(gi%2===0)?'#C5CAE9':'#FFE082';
+        if(step>=3){taken=(gi<a)?1:0;
+          if(mode==='left'){fill=taken?'#EF9A9A':'#A5D6A7';x_=taken;}
+          else fill=taken?'#3F51B5':'#F0F1FA';}
+        h+='<rect class="tile" data-i="'+i+'" data-g="'+(step>=2?gi:-1)+'" data-taken="'+taken+'" data-x="'+x_+'" x="'+gm.xs[i]+'" y="'+ty+'" width="'+(tw-2)+'" height="'+th+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="1.5"/>';
+        if(x_){h+='<line class="xmark" x1="'+(gm.xs[i]+3)+'" y1="'+(ty+4)+'" x2="'+(gm.xs[i]+tw-5)+'" y2="'+(ty+th-4)+'" stroke="#B71C1C" stroke-width="2"/><line class="xmark" x1="'+(gm.xs[i]+tw-5)+'" y1="'+(ty+4)+'" x2="'+(gm.xs[i]+3)+'" y2="'+(ty+th-4)+'" stroke="#B71C1C" stroke-width="2"/>';}
+        if(tw>=26){var tc=(step>=3&&mode!=='left'&&taken)?'#fff':'#283593';h+='<text x="'+(gm.xs[i]+tw/2-1)+'" y="'+(ty+th/2+4)+'" text-anchor="middle" font-size="11" font-weight="700" fill="'+tc+'">1/'+pd+'</text>';}
+      }
+      h+='<text x="'+M+'" y="22" font-size="13" fill="#455A64">'+N+' '+pw+' of 1/'+pd+' '+cfg.unit+'</text>';
+      if(step>=2){ // group braces
+        for(var j=0;j<b;j++){var x1=gm.xs[j*g],x2=gm.xs[j*g+g-1]+tw-2;
+          h+='<path d="M '+x1+' '+(ty+th+8)+' L '+x1+' '+(ty+th+13)+' L '+x2+' '+(ty+th+13)+' L '+x2+' '+(ty+th+8)+'" fill="none" stroke="#283593" stroke-width="1.5"/>';
+          h+='<text x="'+((x1+x2)/2)+'" y="'+(ty+th+28)+'" text-anchor="middle" font-size="11" fill="#455A64">'+g+'</text>';}}
+    }
+    svg.innerHTML=h;
+    var out='';for(var s=0;s<=step;s++){out+='<div class="ln'+(s===4&&step===4?' last':'')+'">'+lines[s]+'</div>';}
+    box.innerHTML=out;
+    go.innerHTML=goTxt[step];go.disabled=(step>=4);
+    el._w10={step:step,N:N,b:b,g:g,a:a,k:k,left:left,pd:pd,mode:mode,labelLines:lines.slice(0,step+1)};
+  }
+  go.onclick=function(){if(st.step<4){st.step++;draw();}};
+  rs.onclick=function(){st.step=0;draw();};
+  el._w10step=function(s){st.step=s;draw();};
+  draw();
+}
+return {mount:mount};
+})();
+/* ---- generic input check ---- */
+function frameFilled(card){var ins=card.querySelectorAll('.frame input.fi');for(var i=0;i<ins.length;i++){if(!ins[i].value.trim())return false;}return true;}
+function chkIn(id){
+  var card=document.getElementById(id);var inp=card.querySelector('.ans-input');var fb=card.querySelector('.feedback');var ss=card.querySelector('.btn-show-steps');
+  var want=parseVal(card.getAttribute('data-ans')),mode=card.getAttribute('data-type')||'val';
+  fb.style.display='block';
+  if(card.querySelector('.frame') && !frameFilled(card)){fb.className='feedback err';fb.textContent='First fill in the WHOLE and the pieces boxes — that is the trick. Then press Check.';return;}
+  var got=parseVal(inp.value);
+  if(!inp.value.trim()||!got){fb.className='feedback err';fb.textContent='Type your answer first (like 1 1/5 or 7/4).';return;}
+  var ok=sameVal(got,want);
+  if(ok&&mode==='improper'&&!isImproperText(inp.value))ok=false;
+  if(ok){fb.className='feedback ok';fb.textContent='✓ Correct!';if(ss)ss.style.display='inline-block';}
+  else{fb.className='feedback err';fb.textContent=(mode==='improper'?'Not yet — write it as ONE fraction with the top bigger than the bottom.':'Not yet.')+(ss?' Tap Show Steps.':' Look again, then try once more.');if(ss)ss.style.display='inline-block';}
+}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+
+W10.mount(document.getElementById('w10a'),{w:3,n:1,ad:3,a:3,b:5,unit:'m',unitWord:'metre',denWord:'thirds',mode:'of'});
+W10.mount(document.getElementById('w10b'),{w:1,n:3,ad:5,a:3,b:4,unit:'L',unitWord:'litre',denWord:'fifths',mode:'of'});
+</script>
+</body>
+</html>

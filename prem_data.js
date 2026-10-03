@@ -15,13 +15,67 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '21 Sep 2026',
+  updated:        '3 Oct 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:63, topic:'Cycle 7 continues — Fraction &times; Fraction (Shaping Maths 5A Ch.3, Core, +0 from live class)', status:'In Progress', buildNote:'Built 24 Sep 2026 per BUILD_PLAN_MATH_U63_FractionTimesFraction.md. Prem\'s own request, Lui agreed 24 Sep. Two lessons (Fractions_Lesson_FractionOfAFraction.html, Fractions_Lesson_MultiplyMixedNumbers.html) install the area grid as the standing visual representation for multiplying fractions and mixed numbers, deepening the one rule he already has (top&times;top, bottom&times;bottom) rather than teaching anything new beyond cancelling. Stuck Card + Self-Check shipped alongside. Test (Unit_063_Test_FractionTimesFraction.docx, 16Q two-part, pass 10/12 + Recall 3/4) keeps the scored Recall Round at the front (validated at U62, up from 0/4 to 3/4) and re-checks U62 Q11\'s exact NOT-chain shape with the working enforced. All 55 pinned answers verified programmatically with zero content-isolation leaks and zero reuse across 197 prior files.' },
+  currentUnit: { n:65, topic:'Cycle 7 continues — Fraction of an Amount: Count the Pieces (Shaping Maths 5A Ch.3, Core, +0 from live class)', status:'Test Pending', buildNote:'Built 3 Oct 2026 per BUILD_PLAN_MATH_U65_CountThePieces.md (v1.1) — the third and final version on operation choice (U63 and U64 were strikes 1 and 2; U64_ReviewNote_FractionOperationChoice.md). New root cause: on U64 Prem used the ± common-denominator routine whenever a fraction sat next to an amount (Q3, Q4, Q7, Q11), so this unit swaps the decision for a device — turn the amount into n equal pieces of 1/d, group by the denominator, take the numerator\'s worth of groups; for \'left\', cross out the used groups and keep the same pieces to the end. Two lessons (Fractions_Lesson_CountThePieces.html, 7 screens; Fractions_Lesson_HowMuchIsLeft.html, 6 screens) share one piece-cutter widget; Stuck Card (Lego-brick demo) and a compulsory Self-Check that now SAVES a results JSON (Lessons\\SelfCheck Results\\). Test (Unit_065_Test_FractionOfAnAmount.docx, 16Q, 5 pages) prints the same WHOLE / pieces of / Working / Answer frame on every Part-1 question, and no question header names an operation (U64 header leak). Gates: verify_u65_plan.py and verify_u65_build.py PASS on device; verify_lesson_pack.py gained an I-PIECES check that executes the widget.' },
   lastUnit: {
+    n:64, outOf:12, score:4, markedScore:4, pct:33, delta:-2, prevScore:6, prevOutOf:12, prevLabel:'U63',
+    coached: false, independentResult: true, distanceFromClass: 'Same chapter as U63, +0 — Shaping Maths 5A Ch.3, Core',
+    patternLabel: 'Unit 64 — Fraction Word Problems: Which Operation, Of What?, graded 3 Oct 2026 — Part 1 4/12 (marked 4, re-added 4) &middot; Recall 1/4 &middot; Self-Check blank',
+    patternInsight: '<strong>Basic 2/3 · Intermediate 2/5 · Applied 0/4 · Recall 1/4.</strong> This was U63\'s one revision and it did not close the gap: the same shape recurred — when a fraction acted on an amount, the working reached for ± instead of ×. Q3 subtracted 3/5 from 3 1/3, Q4 subtracted 1/3, Q7 added 5/6, Q11 subtracted 3/8. Where the correct operation was used (Q1, Q5, Q6, Q9b, Q11\'s area step) the answers were right. Q8 multiplied correctly in step 1 but the answer line carried the 3/8 from the stem. Units missing or written as lowercase l on several answers. Self-Check score line and Recall score line were blank. Strike 2: see U64_ReviewNote_FractionOperationChoice.md. Full per-question record in TEST_RECORD_U64.md. Observation only — the build plan for U65 was written from this result.',
+    analysisLabel: 'Next: Unit 65 &mdash; Fraction of an Amount: Count the Pieces (built 3 Oct 2026, third and final version)',
+    analysisInsight: 'Provenance independent (standing rule); chapter distance +0. Pass bar 10/12 not met. Paper-defect flags: Q9(a) 4/10 marked wrong on simplest form alone (value correct, so Applied would be 1/4 if credited on value); the compulsory Self-Check line was blank; partial date. U65 replaces the which-operation decision with the count-the-pieces device and prints the same answer frame on every Part-1 question.',
+    qSummary: '<strong>Basic 2/3 | Intermediate 2/5 | Applied 0/4</strong> — Part 1 4/12 (33%) | <strong>Recall 1/4</strong>',
+    qBreakdown: [
+      { q:'R1', topic:'Recall: Average Changes (Unit 48)', lvl:'k', pass:false, note:'&#10007; wrote 24 (after a crossed-out 28 and a scribbled first attempt); correct 25. No working.' },
+      { q:'R2', topic:'Recall: Sequences, Find The Term Number (Unit 25)', lvl:'k', pass:false, note:'&#10007; bare "?"; correct 17th term. Unattempted despite the prompt asking for the formula.' },
+      { q:'R3', topic:'Recall: Divisibility — Largest 3-Digit Multiple of 6 and 15 (Unit 29)', lvl:'k', pass:false, note:'&#10007; bare "?"; correct 990. Fourth consecutive miss on the largest-multiple shape.' },
+      { q:'R4', topic:'Recall: Logic, Balance (Unit 35)', lvl:'k', pass:true, note:'&#10003; 36, answer only.' },
+      { q:'Q1', topic:'"Of" A Fraction, Word Problem (juice)', lvl:'w', pass:true, note:'&#10003; 1/5 L (lowercase l).' },
+      { q:'Q2', topic:'Amount, Take Away (rice)', lvl:'w', pass:true, note:'&#10003; 5/8, unit kg not written.' },
+      { q:'Q3', topic:'"Of" A Mixed Amount (rope)', lvl:'w', pass:false, note:'&#10007; wrote 9/15 m; correct 2 m. Working subtracted 3/5 as an amount (3 5/15 &minus; 9/15 = 2 11/15), then the answer line matches neither.' },
+      { q:'Q4', topic:'Times Then Take Away, "pours out" trap  &#9733;', lvl:'m', pass:false, note:'&#10007; 3 5/12; correct 2 1/2 L. Rewrote 1/3 as 4/12 and subtracted it as an amount (1/3 treated as 1/3 L). Subtraction itself correct.' },
+      { q:'Q5', topic:'Times Not Divide (oil)  &#9733;', lvl:'m', pass:true, note:'&#10003; 9/10 cup, full working, cancelled before multiplying.' },
+      { q:'Q6', topic:'Shared Equally, Divide (pizza)  &#9733;', lvl:'m', pass:true, note:'&#10003; 2/5, answer only.' },
+      { q:'Q7', topic:'"As Far As" Means Times  &#9733;', lvl:'m', pass:false, note:'&#10007; 3 7/30 km; correct 2 km. 2 2/5 converted correctly, then the fractions were ADDED (12/5 + 5/6).' },
+      { q:'Q8', topic:'Of What? (tape)  &#9733;', lvl:'m', pass:false, note:'&#10007; wrote 3/8 m; correct 1 1/2 m. First step right (16/3 &times; 3/4 = 4 m used), then the answer line carries the 3/8 from the question.' },
+      { q:'Q9', topic:'Chain Via The Rest, Reverse  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; (a) 4/10 marked wrong (equals 2/5 in value, not in simplest form); (b) 200 tickets correct. Counted wrong because part (a) is marked X (U63 convention).' },
+      { q:'Q10', topic:'"As Many As" Plus Reverse  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; 90; correct 120. A drawn bar with a brace labelled 30; no calculation written.' },
+      { q:'Q11', topic:'Cross-Link Geometry, Garden Area  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; 10 1/8 m&sup2;; correct 7 1/2 m&sup2;. Area 12 m&sup2; correct, then 3/8 SUBTRACTED from 12 instead of taking 5/8 of 12.' },
+      { q:'Q12', topic:'Three Operation Types, One Story (paint)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; 1/4 l; correct 1/2 L. Two drawn bars, no calculation written.' }
+    ]
+  },
+  _U63archived: {
+    n:63, outOf:12, score:6, markedScore:null, pct:50, delta:-4, prevScore:10, prevOutOf:12, prevLabel:'U62',
+    coached: false, independentResult: true, distanceFromClass: 'Same chapter as U62, +0 — Shaping Maths 5A Ch.3, Core',
+    patternLabel: 'Unit 63 — Fraction &times; Fraction, graded 28 Sep 2026 — Part 1 6/12 verified (paper\'s own score box left blank) &middot; Recall 2/4',
+    patternInsight: 'The paper\'s Part 1 Score field was never filled in, and only correct answers were ticked (no cross on wrong ones) &mdash; this record is the first total of record, independently verified against the pinned answer key question by question. <strong>Basic 2/3 &middot; Intermediate 4/5 &middot; Applied 0/4 &middot; Recall 2/4.</strong> <strong>The multiplication mechanics themselves were 7/7 clean</strong> &mdash; cancelling, improper&times;improper, mixed&times;mixed all landed cold, including Q12\'s operation CHOICE (&times; for both rug areas). <strong>Every miss shares one shape: choosing the wrong operation when a fraction acts on a non-count amount.</strong> Q2 subtracted instead of multiplying ("pours out 2/5 of the juice"); Q8 divided instead of multiplying ("makes only 2/3 of the recipe"); Q9\'s working is fully legible and is the same subtraction-chain shape a third time (4&frac12;&minus;2/3&minus;3/4=3 1/12, correct is &times;then&times;=2&frac14;); Q10 was honestly left blank ("Me no understand???" &mdash; exactly the right thing to write, not a guess) on an "as many pages as" reverse chain; Q11(a) copied a given sub-fraction directly instead of multiplying by the complement (2/5 written, correct 1/4), though Q11(b) still back-solved to the correct 56. Q12 chose the right operation for both rug areas but slipped one times-table fact (7&times;12 written as 72, not 84), tipping the comparison to the wrong rug &mdash; a computation slip, not an operation-choice miss. Q6\'s numeric answer was correct (6) but the unit was written "m" instead of "m&sup2;" for an area question, the second sighting of this exact slip shape after a U62 monitor flag.',
+    analysisLabel: 'Next: Unit 64 &mdash; Fraction Word Problems: Which Operation, Of What? (built 28 Sep 2026, U63\'s one revision)',
+    analysisInsight: 'Provenance confirmed independent (standing rule from Lui, 28 Sep: Prem always sits alone, not asked again). Chapter distance +0 (Lui confirmed, still Ch.3). The Self-Check was skipped before this paper &mdash; Lui has since made it compulsory, with its score now printed on every test header from U64. This is logged as strike 1 on "fraction word problems, choosing &times;" (U63\'s lessons gave story-translation one worked example against seven test questions &mdash; a planning gap, not a Prem gap). Per the standing two-strike rule, U64 is the ONE revision: if Basic Q1&ndash;3 isn\'t 3/3 on U64, this stops for a Review Note rather than a second rebuild. Full write-up in TEST_RECORD_U63.md, the planner\'s corrections appended to it, and the Executive Summary.',
+    qSummary: '<strong>Basic 2/3 | Intermediate 4/5 | Applied 0/4</strong> — Part 1 6/12 (50%) verified | <strong>Recall 2/4</strong>',
+    qBreakdown: [
+      { q:'R1', topic:'Recall: Average Changes (Unit 48)', lvl:'k', pass:true,  note:'&#10003; 18, after a scratched-out first attempt.' },
+      { q:'R2', topic:'Recall: Highest Common Factor (Unit 15)', lvl:'k', pass:true,  note:'&#10003; 12.' },
+      { q:'R3', topic:'Recall: Sequences, Find The Term Number (Unit 25)', lvl:'k', pass:false, note:'&#10007; left blank with a "?"; correct 24th term. Decay &mdash; last touched Unit 25.' },
+      { q:'R4', topic:'Recall: Divisibility — Largest 3-Digit Multiple of 8 and 14 (Unit 29)', lvl:'k', pass:false, note:'&#10007; no answer written (illegible squiggle only); correct 952. Third miss of this exact habit (U61 936, U62 960, U63 blank) &mdash; becomes a standing band line on future papers rather than a fourth re-teach.' },
+      { q:'Q1', topic:'Product of Two Fractions', lvl:'w', pass:true,  note:'&#10003; 10/21.' },
+      { q:'Q2', topic:'"Of" A Fraction, Word Problem (jug/juice)', lvl:'w', pass:false, note:'&#10007; wrote 13/30 (subtracted 5/6&minus;2/5); correct 1/3 (=10/30, 2/5 &times; 5/6). Wrong operation &mdash; the subtraction itself was executed correctly.' },
+      { q:'Q3', topic:'Overlap Grid (diagram)', lvl:'w', pass:true,  note:'&#10003; 2/15, diagram read correctly.' },
+      { q:'Q4', topic:'Cancel First  &#9733;', lvl:'m', pass:true,  note:'&#10003; 4/5, cancelled correctly before multiplying.' },
+      { q:'Q5', topic:'Improper &times; Improper, Give As Mixed  &#9733;', lvl:'m', pass:true,  note:'&#10003; 8&frac34;.' },
+      { q:'Q6', topic:'Mixed &times; Mixed, Word Problem — Area  &#9733;', lvl:'m', pass:true,  note:'&#10003; 6 (correct magnitude) but wrote unit "m" instead of "m&sup2;" &mdash; recurrence of the U62-flagged length/area unit slip.' },
+      { q:'Q7', topic:'Size Sense, Justify  &#9733;', lvl:'m', pass:true,  note:'&#10003; 5/8, correct working shown; written justification ("it ain\'t mixed, Ben") gestures at the reasoning but doesn\'t state it.' },
+      { q:'Q8', topic:'"Of" A Fraction, Word Problem (cake recipe)  &#9733;', lvl:'m', pass:false, note:'&#10007; wrote 5&frac58; (divided 3&frac34;&divide;2/3); correct 2&frac12; (&times;2/3). Same wrong-operation shape as Q2.' },
+      { q:'Q9', topic:'Chain Three Factors  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote 3 1/12 (planner-confirmed legible: 4&frac12;&minus;2/3&minus;3/4, a subtraction chain); correct 2&frac14; (&times;2/3 then &times;3/4). Same wrong-operation shape a third time on this paper.' },
+      { q:'Q10',topic:'Withheld Fraction, Reverse  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; left blank, wrote "Me no understand???"; correct 84 pages. An honest flag on the "as many pages as" reverse-ratio phrasing, not a guess.' },
+      { q:'Q11',topic:'Chain Via "The Rest", Reverse  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; (a) wrote 2/5 (copied the given sub-fraction; correct 1/4, needs &times;5/8 first); (b) wrote 56, correct &mdash; but the working is too obscured to see the route. Counted as incorrect as a whole since part (a) is the harder reverse step.' },
+      { q:'Q12',topic:'Cross-Link Geometry, Compare  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; wrote "Rug A by 1 1/5 m"; correct "Rug B by 1/5 m&sup2;". Planner-confirmed: right operation for both areas, but 7&times;12 was computed as 72 instead of 84 &mdash; one times-table slip, not an operation-choice miss.' }
+    ]
+  },
+  _U62archived: {
     n:62, outOf:12, score:10, markedScore:10, pct:83, delta:8, prevScore:9, prevOutOf:12, prevLabel:'U61',
     coached: false, independentResult: true, distanceFromClass: 'Same chapter as U61, +0 — Shaping Maths 5A Ch.3, Core',
     patternLabel: 'Unit 62 — Mixed Numbers + The Bar Model, graded 24 Sep 2026 — Part 1 10/12 &middot; Recall 3/4 &mdash; both marked totals independently re-verified and confirmed exact',
@@ -604,11 +658,42 @@ var PREM_DATA = {
     { n:59, score:14, delta:-1,   color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:60, score:13, delta:-1,   color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, coached:true },
     { n:'M6', label:'M6', score:11, outOf:15, delta:-2, color:'linear-gradient(135deg,#283593,#1A237E)', star:false },
-    { n:61, score:9, outOf:12, delta:null, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:0, recallOutOf:4 }
+    { n:61, score:9, outOf:12, delta:null, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:0, recallOutOf:4 },
+    { n:62, score:10, outOf:12, delta:+1, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 },
+    { n:63, score:6, outOf:12, delta:-4, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false, recallScore:2, recallOutOf:4 },
+    { n:64, score:4, outOf:12, delta:-2, color:'linear-gradient(135deg,#B71C1C,#7F0000)', star:false, recallScore:1, recallOutOf:4 }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
+    {
+      n: 65,
+      badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 65 &mdash; Fraction of an Amount: Count the Pieces (Shaping Maths 5A Ch.3, Core)',
+      tags: [
+        { t:'Built 3 Oct 2026', c:'tblue' },
+        { t:'Third and final version on operation choice', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Self-Check now saves a results file', c:'tgreen' },
+        { t:'Gates: plan + build + I-PIECES PASS', c:'tgreen' }
+      ],
+      note: 'Built from BUILD_PLAN_MATH_U65_CountThePieces.md (v1.1) after two strikes on operation choice. The device: turn the amount into equal pieces, group by the denominator, take the numerator\'s worth of groups; for \'left\', cross out the used groups. Two lessons (7 + 6 screens), Stuck Card, compulsory Self-Check with a saved results JSON, and a 16Q test with the answer frame printed on every Part-1 question and no operation named in any header. Not yet sat.',
+      status: 'live'
+    },
+    {
+      n: 64,
+      badge: 'linear-gradient(135deg,#B71C1C,#7F0000)',
+      title: 'Unit 64 &mdash; Fraction Word Problems: Which Operation, Of What? (Shaping Maths 5A Ch.3, Core)',
+      tags: [
+        { t:'Part 1: 4/12 (33%)', s:'background:#FFEBEE;color:#C62828;font-weight:700' },
+        { t:'Recall: 1/4', c:'tred' },
+        { t:'Independent', c:'tgreen' },
+        { t:'Self-Check blank', c:'torange' },
+        { t:'Header leak: operations printed on Q2, Q4, Q5, Q6, Q7', c:'torange' },
+        { t:'&rarr; Unit 65, Count the Pieces', c:'torange' }
+      ],
+      note: 'Graded 3 Oct 2026. Basic 2/3, Intermediate 2/5, Applied 0/4, Recall 1/4. Same shape as U63: with a fraction next to an amount, the working reached for subtract or add instead of times (Q3, Q4, Q7, Q11). Strike 2; see U64_ReviewNote_FractionOperationChoice.md. Full record in TEST_RECORD_U64.md.',
+      status: 'done'
+    },
     {
       n: 62,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
@@ -621,7 +706,7 @@ var PREM_DATA = {
         { t:'Gate: sat independently &mdash; confirmed by Lui', c:'tgreen' }
       ],
       note: 'Built from <code>BUILD_PLAN_MATH_U62_MixedNumbers_BarModel.md</code> straight off U61&rsquo;s real result. U61&rsquo;s Part-1 miss was narrower than the raw score suggested: fraction of a set and fraction as division both tested clean (Q1,2,4,7,9,11,12 all correct); the actual gap was Q5 and Q10, both abandoned at the exact same step &mdash; converting an improper fraction to a mixed number after the division was already done correctly. Two lessons (bar-model basics, then improper&harr;mixed) install the bar model as a manipulable, not illustrative, representation and close that specific gap with two explanation routes each. The Recall Round (0/4 at U61) moves to print FIRST this time, to separate genuine decay from end-of-paper fatigue &mdash; it was last at U61. Circular arrangements retired from the Recall rotation after a third regression (see <code>Review_Note_CircularArrangements.md</code>). Three content-isolation collisions the plan flagged (Lesson 1 practice, two Self-Check questions) were fixed before shipping; the delivery gate (<code>verify_lesson_pack.py</code>) was extended with two new mechanical checks &mdash; a bar-diagram pixel-vs-caption check and a mixed-number top&lt;bottom check &mdash; both validated against a deliberate known-bad input before trusting a real PASS. Ch.3 activity-book pages remain outstanding; built without them per the same standing choice made at U61.',
-      status: 'live'
+      status: 'done'
     },
     {
       n: 61,
