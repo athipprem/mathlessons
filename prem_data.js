@@ -15,13 +15,40 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '3 Oct 2026',
+  updated:        '5 Oct 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:65, topic:'Cycle 7 continues — Fraction of an Amount: Count the Pieces (Shaping Maths 5A Ch.3, Core, +0 from live class)', status:'Test Pending', buildNote:'Built 3 Oct 2026 per BUILD_PLAN_MATH_U65_CountThePieces.md (v1.1) — the third and final version on operation choice (U63 and U64 were strikes 1 and 2; U64_ReviewNote_FractionOperationChoice.md). New root cause: on U64 Prem used the ± common-denominator routine whenever a fraction sat next to an amount (Q3, Q4, Q7, Q11), so this unit swaps the decision for a device — turn the amount into n equal pieces of 1/d, group by the denominator, take the numerator\'s worth of groups; for \'left\', cross out the used groups and keep the same pieces to the end. Two lessons (Fractions_Lesson_CountThePieces.html, 7 screens; Fractions_Lesson_HowMuchIsLeft.html, 6 screens) share one piece-cutter widget; Stuck Card (Lego-brick demo) and a compulsory Self-Check that now SAVES a results JSON (Lessons\\SelfCheck Results\\). Test (Unit_065_Test_FractionOfAnAmount.docx, 16Q, 5 pages) prints the same WHOLE / pieces of / Working / Answer frame on every Part-1 question, and no question header names an operation (U64 header leak). Gates: verify_u65_plan.py and verify_u65_build.py PASS on device; verify_lesson_pack.py gained an I-PIECES check that executes the widget.' },
+  currentUnit: { n:66, topic:'Cycle 7 continues — Part First: a fraction OF an amount, and what is LEFT (Shaping Maths 5A Ch.3, Core, +0 from live class)', status:'Test Pending', buildNote:'Built 5 Oct 2026 per BUILD_PLAN_MATH_U66_PartFirst.md (v1.0). Lui, 5 Oct: do not move on until Prem passes 80% AND shows he understands. U65 came back 5/12: removal verbs (drinks, cuts off, pours out, uses) were subtracted 0/6, static verbs multiplied 4/4, comparison stories 0/3, and the WHOLE/pieces frame was blank 17/17. So the optional device is dropped for TWO TAP-DECISIONS that must be answered before any number box opens: (1) is the fraction OF something, or an AMOUNT? (2) does the question want the PART, or what is LEFT? Lesson (Fractions_Lesson_PartFirst.html, 6 screens: his own U65 Q1 on a bar, then the two taps), Stuck Card (12 Lego bricks), and a compulsory 32-item mastery drill (U66_Drill_PartOrLeft.html: 10 right in a row, containing at least 3 \'left\' and 2 \'amount\' items; shows the code OF-FIRST-66 and saves MATH_U066_Drill_[date]_a[n].json) instead of the Self-Check. Test (Unit_066_Test_PartOrLeft.docx, 16Q, 5 pages): a Drill code box in the header, two tick-rows under every Part-1 question (scored separately as Decisions /12), Q12 shows Kai\'s mistake and asks Prem to explain it. Pass = Part 1 >= 10/12 AND Decisions >= 10/12 AND Q12(a) explained. No code on the paper = not a measurement. Gates PASS: verify_u66_plan.py (on device, 0 collisions, 0 leaks, 0 prior reuse across 212 files), verify_u66_build.py (new: rendered paper, 32 drill bars checked in the DOM), verify_lesson_pack.py.' },
   lastUnit: {
+    n:65, outOf:12, score:5, markedScore:5, pct:42, delta:+1, prevScore:4, prevOutOf:12, prevLabel:'U64',
+    coached: false, independentResult: true, distanceFromClass: 'Same chapter as U64, +0 — Shaping Maths 5A Ch.3, Core',
+    patternLabel: 'Unit 65 — Fraction of an Amount: Count the Pieces, graded 5 Oct 2026 — Part 1 5/12 (marked 5, re-added 5) &middot; Recall 2/4 &middot; Self-Check 3/5 (ready:false, 1.8 min, saved)',
+    patternInsight: '<strong>Basic 2/3 · Intermediate 2/5 · Applied 1/4 · Recall 2/4.</strong> Split by the story&rsquo;s verb: static verbs (is painted, makes, is grass) multiplied correctly 4/4; removal verbs (drinks, cuts off, pours out, uses) had the fraction subtracted as if it were an amount 0/6 (Q1, Q5, Q8, Q11, Q12, and Self-Check Q4); comparison stories (&ldquo;as far as&rdquo;, &ldquo;as many as&rdquo;) 0/3 (Q6 added; Q10 left with &ldquo;X or +&rdquo; circled). Q4 (an amount with a unit) was right. The printed WHOLE / pieces frame was blank on all 12 Part-1 questions and the Self-Check frame blank on all 5. The Self-Check was submitted with ready:false and the test was then sat. Q9 unit written &ldquo;m&rdquo; for m&sup2; (counted correct on value). R2 and R4 were bare &ldquo;?&rdquo;. Full per-question record in TEST_RECORD_U65.md. Observation only.',
+    analysisLabel: 'Next: Unit 66 &mdash; Part First (built 5 Oct 2026)',
+    analysisInsight: 'Provenance independent (standing rule); chapter distance +0. Pass bar 10/12 not met. Paper flags: partial date; Applied band mark a lone stroke (read as 1); Q9 unit strictness differs from U64 Q9(a). Self-Check JSON present, parses, header score and &ldquo;saved&rdquo; tick match it. U66 replaces the frame with two tap-decisions, replaces the advisory Self-Check with a mastery drill, and scores the decisions separately.',
+    qSummary: '<strong>Basic 2/3 | Intermediate 2/5 | Applied 1/4</strong> — Part 1 5/12 (42%) | <strong>Recall 2/4</strong>',
+    qBreakdown: [
+      { q:'R1', topic:'Recall: Average Changes (Unit 48)', lvl:'k', pass:true, note:'&#10003; 17, answer only.' },
+      { q:'R2', topic:'Recall: Remainders (Unit 34)', lvl:'k', pass:false, note:'&#10007; bare "?"; correct 29. Unattempted.' },
+      { q:'R3', topic:'Recall: Highest Common Factor (Unit 15)', lvl:'k', pass:true, note:'&#10003; 24, after a scribbled-out first figure.' },
+      { q:'R4', topic:'Recall: Words to Expression (Unit 59)', lvl:'k', pass:false, note:'&#10007; bare "?"; correct 3 &times; (4 + 6) + 5 = 35. Unattempted.' },
+      { q:'Q1', topic:'Fraction Of An Amount, "drinks" (milk)', lvl:'w', pass:false, note:'&#10007; 17/30 L; correct 3/10 L. Working 27/30 &minus; 10/30: 1/3 subtracted as an amount.' },
+      { q:'Q2', topic:'Fraction Of A Mixed Amount (ribbon)', lvl:'w', pass:true, note:'&#10003; 1 1/2 m, cancelled before multiplying.' },
+      { q:'Q3', topic:'Fraction Of A Mixed Amount (rice)', lvl:'w', pass:true, note:'&#10003; 2 1/4 kg, reduced at the end.' },
+      { q:'Q4', topic:'An Amount With A Unit, Not "Of" (juice)  &#9733;', lvl:'m', pass:true, note:'&#10003; 3/8 L, answer only.' },
+      { q:'Q5', topic:'Left, "cuts off" (rope)  &#9733;', lvl:'m', pass:false, note:'&#10007; 5 1/12 m; correct 4 m. 5 1/3 &rarr; 16/3 correct, then 1/4 subtracted as an amount (64/12 &minus; 3/12).' },
+      { q:'Q6', topic:'"As Far As" (swim)  &#9733;', lvl:'m', pass:false, note:'&#10007; 2 19/40 km; correct 1 1/8 km. 1 35/40 + 24/40: the two quantities added.' },
+      { q:'Q7', topic:'Fraction Of An Amount (recipe)  &#9733;', lvl:'m', pass:true, note:'&#10003; 1 (unit "cups" not written). Working 8/5 &times; 5/8 = stops without a result.' },
+      { q:'Q8', topic:'Left, "pours out" (tank)  &#9733;', lvl:'m', pass:false, note:'&#10007; 4 5/21 L; correct 2 2/3 L. 3/7 written as 9/21 and subtracted as an amount.' },
+      { q:'Q9', topic:'Area, Then A Fraction Of The Area (garden)  &#9733;&#9733;', lvl:'h', pass:true, note:'&#10003; 5, value correct; unit written "m" for m&sup2; (counted correct on value). Area 8 found correctly.' },
+      { q:'Q10', topic:'"As Many As", Then Altogether (apples)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; "?"; correct 4 1/5 kg. "X or +" circled in the working column; no calculation.' },
+      { q:'Q11', topic:'Two Fractions, Changing Wholes (paint)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; 2 53/60 L; correct 1 L. Both 1/5 and 2/3 subtracted as amounts.' },
+      { q:'Q12', topic:'An Amount, Then A Fraction Of The Rest (water)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; 1 1/8 L; correct 1/4 L. First step right (3/4 L subtracted as an amount), then 7/8 subtracted instead of taking 7/8 of 2 L.' }
+    ]
+  },
+  _U64archived: {
     n:64, outOf:12, score:4, markedScore:4, pct:33, delta:-2, prevScore:6, prevOutOf:12, prevLabel:'U63',
     coached: false, independentResult: true, distanceFromClass: 'Same chapter as U63, +0 — Shaping Maths 5A Ch.3, Core',
     patternLabel: 'Unit 64 — Fraction Word Problems: Which Operation, Of What?, graded 3 Oct 2026 — Part 1 4/12 (marked 4, re-added 4) &middot; Recall 1/4 &middot; Self-Check blank',
@@ -661,23 +688,41 @@ var PREM_DATA = {
     { n:61, score:9, outOf:12, delta:null, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:0, recallOutOf:4 },
     { n:62, score:10, outOf:12, delta:+1, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 },
     { n:63, score:6, outOf:12, delta:-4, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false, recallScore:2, recallOutOf:4 },
-    { n:64, score:4, outOf:12, delta:-2, color:'linear-gradient(135deg,#B71C1C,#7F0000)', star:false, recallScore:1, recallOutOf:4 }
+    { n:64, score:4, outOf:12, delta:-2, color:'linear-gradient(135deg,#B71C1C,#7F0000)', star:false, recallScore:1, recallOutOf:4 },
+    { n:65, score:5, outOf:12, delta:+1, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false, recallScore:2, recallOutOf:4 }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 65,
+      n: 66,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 66 &mdash; Part First: a fraction OF an amount, and what is LEFT (Shaping Maths 5A Ch.3, Core)',
+      tags: [
+        { t:'Built 5 Oct 2026', c:'tblue' },
+        { t:'Two tap-decisions replace the answer frame', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'Compulsory 10-in-a-row drill with a code word', c:'tgreen' },
+        { t:'Decisions scored separately /12', c:'tgreen' },
+        { t:'Gates: plan + build + lesson pack PASS', c:'tgreen' }
+      ],
+      note: 'Built from BUILD_PLAN_MATH_U66_PartFirst.md (v1.0) after Lui\'s 5 Oct rule: no moving on until 80% and real understanding. Lesson (6 screens), Stuck Card, a 32-item mastery drill that saves MATH_U066_Drill_[date]_a[n].json and shows the code on mastery only, and a 16Q test with a Drill code box, two tick-rows under every Part-1 question, and Q12 (explain Kai\'s mistake). Pass = Part 1 >= 10/12 AND Decisions >= 10/12 AND Q12(a) explained. Not yet sat.',
+      status: 'live'
+    },
+    {
+      n: 65,
+      badge: 'linear-gradient(135deg,#EF5350,#C62828)',
       title: 'Unit 65 &mdash; Fraction of an Amount: Count the Pieces (Shaping Maths 5A Ch.3, Core)',
       tags: [
-        { t:'Built 3 Oct 2026', c:'tblue' },
-        { t:'Third and final version on operation choice', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
-        { t:'Self-Check now saves a results file', c:'tgreen' },
-        { t:'Gates: plan + build + I-PIECES PASS', c:'tgreen' }
+        { t:'Part 1: 5/12 (42%)', s:'background:#FFEBEE;color:#C62828;font-weight:700' },
+        { t:'Recall: 2/4', c:'torange' },
+        { t:'Decisions: not measured', c:'torange' },
+        { t:'Self-Check 3/5 (ready:false, 1.8 min)', c:'torange' },
+        { t:'Independent', c:'tgreen' },
+        { t:'Frame blank 17/17', c:'torange' },
+        { t:'&rarr; Unit 66, Part First', c:'torange' }
       ],
-      note: 'Built from BUILD_PLAN_MATH_U65_CountThePieces.md (v1.1) after two strikes on operation choice. The device: turn the amount into equal pieces, group by the denominator, take the numerator\'s worth of groups; for \'left\', cross out the used groups. Two lessons (7 + 6 screens), Stuck Card, compulsory Self-Check with a saved results JSON, and a 16Q test with the answer frame printed on every Part-1 question and no operation named in any header. Not yet sat.',
-      status: 'live'
+      note: 'Graded 5 Oct 2026. Basic 2/3, Intermediate 2/5, Applied 1/4, Recall 2/4. Static verbs multiplied 4/4; removal verbs (drinks, cuts off, pours out, uses) had the fraction subtracted 0/6; comparison stories 0/3. The WHOLE / pieces frame was never used (17/17 blank). The Self-Check was saved with ready:false and the test was sat anyway. Full record in TEST_RECORD_U65.md.',
+      status: 'done'
     },
     {
       n: 64,

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part First — Fractions Lesson (Unit 66)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#C62828;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.wrap{max-width:760px;margin:0 auto;padding:16px;width:100%}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin:12px 0}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.q-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1px solid #9FA8DA;border-radius:14px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stop-here{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FB8C00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:800;color:#E65100;margin:16px 0}
+.flip-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.flip-card{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:12px 18px;font-size:.95rem;font-weight:700;color:var(--warn);text-align:center}
+/* answer frame */
+.frame{background:#fff;border:2px solid var(--acc);border-radius:10px;padding:10px 12px;margin:10px 0}
+.frame .fr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0}
+.frame .fl{font-weight:700;color:var(--warn);font-size:.92rem;min-width:150px}
+.frame .fv{font-size:1rem;color:#1a1a2e}
+.frame .fv.ans{font-weight:800;color:var(--warn)}
+.frame input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:6px 8px;font-size:1rem;width:170px;font-family:inherit}
+.frame input[type=text].wide{width:230px}
+.frame input[type=text]:focus{outline:2px solid #9FA8DA}
+.frame .fr.pieces input{width:90px}
+/* piece cutter W10 */
+.w10{background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:12px;margin:12px 0}
+.w10 svg{width:100%;height:auto;display:block}
+.w10-lines{margin-top:8px;min-height:60px}
+.w10-lines .ln{font-size:1rem;padding:3px 0;color:#1a1a2e}
+.w10-lines .ln.last{font-weight:800;color:var(--warn)}
+.w10-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.w10-btns button{border:none;border-radius:8px;padding:8px 16px;font-size:.92rem;font-weight:700;cursor:pointer}
+.w10-btns .go{background:var(--acc);color:#fff}
+.w10-btns .go:disabled{background:#9FA8DA;cursor:default}
+.w10-btns .rs{background:#fff;color:var(--acc);border:1.5px solid var(--acc)}
+.two-cards{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.two-cards .q-card{flex:1;min-width:250px;margin-bottom:0}
+.ans-input{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 10px;font-size:1rem;width:190px;font-family:inherit;margin-right:8px}
+.nav-link{flex:1;display:block;text-align:center;padding:13px 0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.nav-link.out{background:#fff;color:#283593;border:2px solid #283593}
+.nav-link.fill{background:#3F51B5;color:#fff;border:2px solid #3F51B5}
+
+.tapq{margin:8px 0}
+.tapq .tl{font-weight:700;color:#283593;margin-bottom:6px;font-size:.97rem}
+.tbtns{display:flex;gap:8px;flex-wrap:wrap}
+.tbtns button{background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:9px 16px;font-size:.95rem;font-weight:700;color:#283593;cursor:pointer;font-family:inherit}
+.tbtns button:hover:not(:disabled){background:#E8EAF6}
+.tbtns button.ok{background:#C8E6C9;border-color:#2E7D32;color:#1B5E20}
+.tbtns button.bad{background:#FFCDD2;border-color:#C62828;color:#B71C1C}
+.tbtns button:disabled{cursor:default;opacity:.85}
+.tapq.off{opacity:.45;pointer-events:none}
+.tfb{margin-top:6px;font-size:.92rem;color:#B71C1C;font-weight:600;min-height:0}
+.ansrow{margin-top:10px}
+.ansrow.locked{opacity:.5}
+.ansrow .lockmsg{font-size:.85rem;color:#607D8B;margin-bottom:6px}
+.reveal{display:none;margin-top:10px}
+.cross{display:inline-block;text-decoration:line-through;text-decoration-color:#C62828;text-decoration-thickness:2px;color:#455A64;font-weight:700;background:#FFEBEE;border-radius:6px;padding:4px 10px}
+.verbtrap{background:#FFF3E0;border:2px solid #FB8C00;border-radius:10px;padding:12px 16px;margin:12px 0;color:#BF360C;font-weight:700}
+.tap-chip{display:inline-block;background:#E8EAF6;border:1.5px solid #9FA8DA;color:#283593;border-radius:14px;padding:2px 10px;font-size:.82rem;font-weight:700;margin:0 4px}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Part First &mdash; Fractions Lesson (Unit 66)</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+<!-- s0: Day-2 recall -->
+<div class="screen active" id="s0">
+<div class="card">
+  <span class="badge-cap">&#x1F501; Recall &mdash; Skills You Already Own</span>
+  <h2>Before We Start &mdash; From Memory</h2>
+  <p class="tap-hint">No teaching on this screen. Three things you can already do.</p>
+<div class="q-card" id="r0" data-ans="2" data-type="val">
+  <div class="q-text">(a)&nbsp; What is 5/7 &times; 2 4/5?</div>
+  <input type="text" class="ans-input" aria-label="answer">
+  <button class="btn-check" onclick="chkIn('r0')">Check</button>
+  <div class="feedback"></div>
+</div>
+<div class="q-card" id="r1" data-ans="1 1/2" data-type="val">
+  <div class="q-text">(b)&nbsp; What is 2 1/4 &minus; 3/4?</div>
+  <input type="text" class="ans-input" aria-label="answer">
+  <button class="btn-check" onclick="chkIn('r1')">Check</button>
+  <div class="feedback"></div>
+</div>
+<div class="q-card" id="r2" data-ans="12" data-type="val">
+  <div class="q-text">(c)&nbsp; What is 3/7 of 28?</div>
+  <input type="text" class="ans-input" aria-label="answer">
+  <button class="btn-check" onclick="chkIn('r2')">Check</button>
+  <div class="feedback"></div>
+</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start Lesson &#8594;</button></div>
+</div>
+
+<!-- s1: naming it -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F3AF; Why This Lesson &mdash; Your Last Test Told Us Something</h2>
+  <div class="why">
+    <p>Here's what your last test showed. When the story said "is blue" or "cooks", you multiplied &mdash; and got them right. When it said "drinks", "cuts off" or "pours out", you took the fraction away instead. And you wrote "X or +" &mdash; you knew you were choosing. This lesson is about one choice, and how to make it every time.</p>
+  </div>
+  <div class="verbtrap">Drinks, uses, cuts off, pours out, eats, gives away &mdash; these words do NOT mean "take the fraction away". They tell you which part we are finding.</div>
+  <div class="big-rule">You can already multiply. This is about deciding BEFORE you calculate.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See It On A Bar &#8594;</button></div>
+</div>
+
+<!-- s2: Route A -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F4CF; Route A &mdash; The Bar, On Your Own Question</h2>
+  <p><strong>Kai drinks 1/3 of 9/10 L of milk.</strong> That was Question 1 on your last test.</p>
+  <p class="tap-hint">The bar is the milk: 9/10 L. Cut it into 3 equal parts. Shade 1 part.</p>
+  <div class="w10" style="border-style:solid">
+    <!-- BARMODEL-RATIO 1/3 -->
+    <svg viewBox="0 0 560 130" role="img" aria-label="a bar for 9/10 L of milk cut into 3 equal parts with 1 part shaded">
+      <text x="10" y="20" font-size="14" fill="#455A64">the milk: 9/10 L</text>
+      <rect x="10" y="30" width="540" height="46" fill="#E8EAF6" stroke="#283593" stroke-width="2"/>
+      <rect x="10" y="30" width="180" height="46" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <line x1="190" y1="30" x2="190" y2="76" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+      <line x1="370" y1="30" x2="370" y2="76" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+      <text x="100" y="58" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">3/10 L</text>
+      <text x="280" y="58" text-anchor="middle" font-size="15" font-weight="700" fill="#283593">3/10 L</text>
+      <text x="460" y="58" text-anchor="middle" font-size="15" font-weight="700" fill="#283593">3/10 L</text>
+      <text x="100" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#1B5E20">1 part = what he drinks</text>
+    </svg>
+  </div>
+  <div class="steps"><div class="ln">9/10 L cut into 3 equal parts: each part is 9/10 &divide; 3 = 3/10 L <span class="note">(9 tenths shared into 3 gives 3 tenths each)</span></div>
+    <div class="ln ans">He drinks 1 part = 3/10 L</div></div>
+  <p style="margin-top:12px">Your test line was:</p>
+  <p><span class="cross">9/10 &minus; 1/3 = 17/30</span></p>
+  <div class="warn-box"><p>That takes away one-third of a LITRE, not one-third of the MILK.</p></div>
+  <div class="big-rule">"1/3 OF the milk" is a piece of the bar. We have to find how big that piece is.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Two Taps &#8594;</button></div>
+</div>
+
+<!-- s3: Route B -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F446; Route B &mdash; Two Taps, Then The Numbers</h2>
+  <div class="bridge">Same thing, as two questions you answer before any numbers.</div>
+<div class="q-card tapcard" id="d3" data-t1="OF" data-t2="PART">
+  <div class="q-text">Worked example.&nbsp; A bag has 1 4/5 kg of flour. Jo uses 1/3 OF the flour. How much does she use?</div>
+  <div class="tapq" id="d3_t1"><div class="tl">&#9312; Is the fraction OF something, or an AMOUNT?</div>
+    <div class="tbtns"><button type="button" data-k="1" data-v="OF" onclick="tap('d3',this)">OF something</button><button type="button" data-k="1" data-v="AMT" onclick="tap('d3',this)">an AMOUNT (it has a unit)</button></div><div class="tfb"></div></div>
+  <div class="tapq off" id="d3_t2"><div class="tl">&#9313; Does the question want the PART, or what is LEFT?</div>
+    <div class="tbtns"><button type="button" data-k="2" data-v="PART" onclick="tap('d3',this)">the PART</button><button type="button" data-k="2" data-v="LEFT" onclick="tap('d3',this)">what is LEFT</button></div><div class="tfb"></div></div>
+  <div class="reveal"><div class="steps">
+    <div class="ln">1 4/5 = 9/5 <span class="note">(1 whole is 5/5, plus 4/5)</span></div>
+    <div class="ln">The fraction OF something = fraction &times; the whole: 1/3 &times; 9/5</div>
+    <div class="ln">cancel the 3 on the bottom with the 9 on top: 9 &divide; 3 = 3 <span class="note">(so 1/3 &times; 9/5 = 1/1 &times; 3/5)</span></div>
+    <div class="ln ans">= 3/5 kg</div>
+  </div></div>
+</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">What Is LEFT? &#8594;</button></div>
+</div>
+
+<!-- s4: LEFT -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x2796; LEFT = Whole Take Away The Part</h2>
+<div class="q-card tapcard" id="d4a" data-t1="OF" data-t2="LEFT">
+  <div class="q-text">Example 1.&nbsp; Same bag: 1 4/5 kg of flour. Jo uses 1/3 OF the flour. How much flour is LEFT?</div>
+  <div class="tapq" id="d4a_t1"><div class="tl">&#9312; Is the fraction OF something, or an AMOUNT?</div>
+    <div class="tbtns"><button type="button" data-k="1" data-v="OF" onclick="tap('d4a',this)">OF something</button><button type="button" data-k="1" data-v="AMT" onclick="tap('d4a',this)">an AMOUNT (it has a unit)</button></div><div class="tfb"></div></div>
+  <div class="tapq off" id="d4a_t2"><div class="tl">&#9313; Does the question want the PART, or what is LEFT?</div>
+    <div class="tbtns"><button type="button" data-k="2" data-v="PART" onclick="tap('d4a',this)">the PART</button><button type="button" data-k="2" data-v="LEFT" onclick="tap('d4a',this)">what is LEFT</button></div><div class="tfb"></div></div>
+  <div class="reveal"><div class="steps">
+    <div class="ln">Part first: 3/5 kg <span class="note">(from the last screen)</span></div>
+    <div class="ln">1 4/5 &minus; 3/5 = 9/5 &minus; 3/5 = 6/5 <span class="note">(whole take away the part, same fifths)</span></div>
+    <div class="ln ans">= 1 1/5 kg</div>
+    <div class="ln"><span class="note">Or: if 1/3 is used, 2/3 is left &rarr; 2/3 &times; 9/5 = 18/15 = 1 1/5 kg.</span></div>
+  </div></div>
+</div>
+<div class="q-card tapcard" id="d4b" data-t1="AMT" data-t2="LEFT">
+  <div class="q-text">Example 2 (the contrast).&nbsp; Now a different bag: 1 4/5 kg of flour. Jo uses 1/3 <u>kg</u>. How much flour is LEFT?</div>
+  <div class="tapq" id="d4b_t1"><div class="tl">&#9312; Is the fraction OF something, or an AMOUNT?</div>
+    <div class="tbtns"><button type="button" data-k="1" data-v="OF" onclick="tap('d4b',this)">OF something</button><button type="button" data-k="1" data-v="AMT" onclick="tap('d4b',this)">an AMOUNT (it has a unit)</button></div><div class="tfb"></div></div>
+  <div class="tapq off" id="d4b_t2"><div class="tl">&#9313; Does the question want the PART, or what is LEFT?</div>
+    <div class="tbtns"><button type="button" data-k="2" data-v="PART" onclick="tap('d4b',this)">the PART</button><button type="button" data-k="2" data-v="LEFT" onclick="tap('d4b',this)">what is LEFT</button></div><div class="tfb"></div></div>
+  <div class="reveal"><div class="steps">
+    <div class="ln">"1/3 kg" has a unit, so it is already an amount. Nothing to find first.</div>
+    <div class="ln">1 4/5 &minus; 1/3 = 9/5 &minus; 1/3 = 27/15 &minus; 5/15 <span class="note">(fifths and thirds both become fifteenths)</span></div>
+    <div class="ln ans">= 22/15 = 1 7/15 kg</div>
+  </div></div>
+</div>
+  <div class="big-rule">OF something &rarr; find the part first. LEFT &rarr; whole take away the part. A fraction with a unit &rarr; it's already an amount.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s5: practice -->
+<div class="screen" id="s5">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice &mdash; Tap First, Then Work</h2>
+<div class="q-card tapcard" id="p0" data-ans="3/5" data-t1="OF" data-t2="PART">
+  <div class="q-text">P1.&nbsp; Max has 1 1/5 L of juice. He drinks 1/2 of the juice. How much does he drink?</div>
+  <div class="tapq" id="p0_t1"><div class="tl">&#9312; Is the fraction OF something, or an AMOUNT?</div>
+    <div class="tbtns"><button type="button" data-k="1" data-v="OF" onclick="tap('p0',this)">OF something</button><button type="button" data-k="1" data-v="AMT" onclick="tap('p0',this)">an AMOUNT (it has a unit)</button></div><div class="tfb"></div></div>
+  <div class="tapq off" id="p0_t2"><div class="tl">&#9313; Does the question want the PART, or what is LEFT?</div>
+    <div class="tbtns"><button type="button" data-k="2" data-v="PART" onclick="tap('p0',this)">the PART</button><button type="button" data-k="2" data-v="LEFT" onclick="tap('p0',this)">what is LEFT</button></div><div class="tfb"></div></div>
+  <div class="ansrow locked"><div class="lockmsg">Tap both boxes above to open the answer box.</div><input type="text" class="ans-input" aria-label="answer" disabled> <button class="btn-check" disabled onclick="chkAns('p0')">Check</button></div>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_p0',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_p0"><div class="steps">
+    <div class="ln">&#9312; OF the juice &nbsp; &#9313; the PART</div>
+    <div class="ln">1 1/5 = 6/5 <span class="note">(1 whole is 5/5, plus 1/5)</span></div>
+    <div class="ln">1/2 &times; 6/5 = 6/10 <span class="note">(top times top, bottom times bottom)</span></div>
+    <div class="ln">6/10 = 3/5 <span class="note">(both &divide; 2)</span></div>
+    <div class="ln ans">He drinks 3/5 L</div>
+  </div></div>
+</div>
+<div class="q-card tapcard" id="p1" data-ans="7/10" data-t1="AMT" data-t2="LEFT">
+  <div class="q-text">P2.&nbsp; Max has 1 1/5 L of juice. He drinks 1/2 L. How much is left?</div>
+  <div class="tapq" id="p1_t1"><div class="tl">&#9312; Is the fraction OF something, or an AMOUNT?</div>
+    <div class="tbtns"><button type="button" data-k="1" data-v="OF" onclick="tap('p1',this)">OF something</button><button type="button" data-k="1" data-v="AMT" onclick="tap('p1',this)">an AMOUNT (it has a unit)</button></div><div class="tfb"></div></div>
+  <div class="tapq off" id="p1_t2"><div class="tl">&#9313; Does the question want the PART, or what is LEFT?</div>
+    <div class="tbtns"><button type="button" data-k="2" data-v="PART" onclick="tap('p1',this)">the PART</button><button type="button" data-k="2" data-v="LEFT" onclick="tap('p1',this)">what is LEFT</button></div><div class="tfb"></div></div>
+  <div class="ansrow locked"><div class="lockmsg">Tap both boxes above to open the answer box.</div><input type="text" class="ans-input" aria-label="answer" disabled> <button class="btn-check" disabled onclick="chkAns('p1')">Check</button></div>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_p1',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_p1"><div class="steps">
+    <div class="ln">&#9312; an AMOUNT (1/2 <u>L</u>) &nbsp; &#9313; LEFT</div>
+    <div class="ln">1 1/5 = 6/5 = 12/10 <span class="note">(same size pieces: tenths)</span></div>
+    <div class="ln">1/2 = 5/10</div>
+    <div class="ln">12/10 &minus; 5/10 = 7/10</div>
+    <div class="ln ans">7/10 L is left</div>
+  </div></div>
+</div>
+<div class="q-card tapcard" id="p2" data-ans="2" data-t1="OF" data-t2="LEFT">
+  <div class="q-text">P3.&nbsp; A rope is 3 1/3 m long. 2/5 of the rope is cut off. How much rope is left?</div>
+  <div class="tapq" id="p2_t1"><div class="tl">&#9312; Is the fraction OF something, or an AMOUNT?</div>
+    <div class="tbtns"><button type="button" data-k="1" data-v="OF" onclick="tap('p2',this)">OF something</button><button type="button" data-k="1" data-v="AMT" onclick="tap('p2',this)">an AMOUNT (it has a unit)</button></div><div class="tfb"></div></div>
+  <div class="tapq off" id="p2_t2"><div class="tl">&#9313; Does the question want the PART, or what is LEFT?</div>
+    <div class="tbtns"><button type="button" data-k="2" data-v="PART" onclick="tap('p2',this)">the PART</button><button type="button" data-k="2" data-v="LEFT" onclick="tap('p2',this)">what is LEFT</button></div><div class="tfb"></div></div>
+  <div class="ansrow locked"><div class="lockmsg">Tap both boxes above to open the answer box.</div><input type="text" class="ans-input" aria-label="answer" disabled> <button class="btn-check" disabled onclick="chkAns('p2')">Check</button></div>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_p2',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_p2"><div class="steps">
+    <div class="ln">&#9312; OF the rope &nbsp; &#9313; LEFT: part first, then take it away</div>
+    <div class="ln">3 1/3 = 10/3 <span class="note">(3 wholes = 9/3, plus 1/3)</span></div>
+    <div class="ln">Part: 2/5 &times; 10/3 = 20/15 = 1 1/3 m <span class="note">(cut off)</span></div>
+    <div class="ln">Left: 3 1/3 &minus; 1 1/3 = 2</div>
+    <div class="ln ans">2 m is left</div>
+  </div></div>
+</div>
+<div class="q-card tapcard" id="p3" data-ans="1/2" data-t1="OF" data-t2="LEFT">
+  <div class="q-text">P4.&nbsp; A pizza weighs 1 1/2 kg. 2/3 of the pizza is eaten. How much pizza is left?</div>
+  <div class="tapq" id="p3_t1"><div class="tl">&#9312; Is the fraction OF something, or an AMOUNT?</div>
+    <div class="tbtns"><button type="button" data-k="1" data-v="OF" onclick="tap('p3',this)">OF something</button><button type="button" data-k="1" data-v="AMT" onclick="tap('p3',this)">an AMOUNT (it has a unit)</button></div><div class="tfb"></div></div>
+  <div class="tapq off" id="p3_t2"><div class="tl">&#9313; Does the question want the PART, or what is LEFT?</div>
+    <div class="tbtns"><button type="button" data-k="2" data-v="PART" onclick="tap('p3',this)">the PART</button><button type="button" data-k="2" data-v="LEFT" onclick="tap('p3',this)">what is LEFT</button></div><div class="tfb"></div></div>
+  <div class="ansrow locked"><div class="lockmsg">Tap both boxes above to open the answer box.</div><input type="text" class="ans-input" aria-label="answer" disabled> <button class="btn-check" disabled onclick="chkAns('p3')">Check</button></div>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_p3',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_p3"><div class="steps">
+    <div class="ln">&#9312; OF the pizza &nbsp; &#9313; LEFT</div>
+    <div class="ln">1 1/2 = 3/2</div>
+    <div class="ln">Part: 2/3 &times; 3/2 = 6/6 = 1 kg <span class="note">(eaten)</span></div>
+    <div class="ln">Left: 1 1/2 &minus; 1 = 1/2</div>
+    <div class="ln ans">1/2 kg is left</div>
+  </div></div>
+</div>
+  <div class="golden">
+    <div class="golden-title">&#x1F4D6; Today's Big Idea</div>
+    <p style="font-size:1.05rem"><strong>Decide first. A fraction OF something &rarr; find the part. LEFT &rarr; whole take away the part. A fraction with a unit &rarr; already an amount.</strong></p>
+  </div>
+  <div class="warn-box"><p><strong>Finish-the-question check:</strong> did you answer the EXACT question asked, is your fraction in simplest form, and did you write the UNIT?</p></div>
+  <div class="big-rule">Now the drill &rarr; get 10 in a row.</div>
+</div>
+<div class="navrow">
+  <a class="nav-link out" href="https://athipprem.github.io/mathlessons/index.html">Back to Hub</a>
+  <a class="nav-link fill" href="U66_Drill_PartOrLeft.html">Start the Drill &#8594;</a>
+</div>
+<div class="warn-box" style="margin-top:12px"><p>&#x1F192; Stuck? Open the <a href="U66_StuckCard_PartOrLeft.html">Stuck Card</a> (it has a Lego demo).</p></div>
+</div>
+
+<script>
+
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a);}
+function mixedStr(n,d){var g=gcd(n,d);n=n/g;d=d/g;var w=Math.floor(n/d),r=n-w*d;if(r===0)return ''+w;return (w?w+' ':'')+r+'/'+d;}
+/* parse "1 1/5", "6/5", "2", "1.2", "1 1/5 m" -> [num,den] reduced, or null */
+function parseVal(s){
+  if(s==null)return null; s=String(s).toLowerCase().replace(/[²]/g,'').replace(/(kg|km|cups?|cm|ml|l|m|litres?|liters?|metres?|meters?|sq\.?|squared)\b/g,' ').replace(/\s+/g,' ').trim();
+  if(!s)return null; var m;
+  if((m=s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/))){var d=+m[3];if(!d)return null;var n=(+m[1])*d+(+m[2]);var g=gcd(n,d);return [n/g,d/g,'mixed'];}
+  if((m=s.match(/^(\d+)\s*\/\s*(\d+)$/))){var d2=+m[2];if(!d2)return null;var g2=gcd(+m[1],d2);return [(+m[1])/g2,d2/g2,'frac',+m[1],d2];}
+  if((m=s.match(/^(\d+)$/))){return [+m[1],1,'int'];}
+  if((m=s.match(/^(\d*)\.(\d+)$/))){var den=Math.pow(10,m[2].length);var n3=(+m[1]||0)*den+(+m[2]);var g3=gcd(n3,den);return [n3/g3,den/g3,'dec'];}
+  return null;}
+function sameVal(a,b){return a&&b&&a[0]===b[0]&&a[1]===b[1];}
+function isImproperText(s){var m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);return !!m&&(+m[1])>(+m[2]);}
+
+function chkIn(id){var card=document.getElementById(id),inp=card.querySelector('.ans-input'),fb=card.querySelector('.feedback');
+  var want=parseVal(card.getAttribute('data-ans')),got=parseVal(inp.value);fb.style.display='block';
+  if(!inp.value.trim()||!got){fb.className='feedback err';fb.textContent='Type your answer first (like 1 1/5 or 7/4).';return;}
+  if(sameVal(got,want)){fb.className='feedback ok';fb.textContent='\u2713 Correct!';}else{fb.className='feedback err';fb.textContent='Not yet \u2014 look again and try once more.';}}
+
+var REASON={'1OF':"Look after the fraction: \'of the milk / of the rope\' — it\'s a fraction OF something, so find the part first.",'1AMT':"There\'s a unit straight after the fraction (L, kg, m) — it\'s already an amount.",'2LEFT':"The question says \'is left\' — find the part, then take it away.",'2PART':"The question asks how much was drunk/used/cut off — that\'s the part itself."};
+function tap(cid,btn){
+  var card=document.getElementById(cid),k=btn.getAttribute('data-k'),v=btn.getAttribute('data-v');
+  var want=card.getAttribute('data-t'+k),grp=btn.parentNode,fb=grp.parentNode.querySelector('.tfb');
+  if(v===want){btn.className='ok';var bs=grp.querySelectorAll('button');for(var i=0;i<bs.length;i++)bs[i].disabled=true;fb.innerHTML='';
+    if(k==='1'){document.getElementById(cid+'_t2').classList.remove('off');}
+    else{unlock(card);}
+  }else{btn.className='bad';btn.disabled=true;fb.innerHTML=REASON[k+want];card.setAttribute('data-tapmiss',(+card.getAttribute('data-tapmiss')||0)+1);}
+}
+function unlock(card){
+  var a=card.querySelector('.ansrow');if(a){a.classList.remove('locked');var ins=a.querySelectorAll('input,button');for(var i=0;i<ins.length;i++)ins[i].disabled=false;var m=a.querySelector('.lockmsg');if(m)m.style.display='none';}
+  var r=card.querySelector('.reveal');if(r)r.style.display='block';
+}
+function chkAns(id){
+  var card=document.getElementById(id),inp=card.querySelector('.ans-input'),fb=card.querySelector('.feedback'),ss=card.querySelector('.btn-show-steps');
+  var want=parseVal(card.getAttribute('data-ans')),got=parseVal(inp.value);fb.style.display='block';
+  if(!inp.value.trim()||!got){fb.className='feedback err';fb.textContent='Type your answer first (like 1 1/5 or 7/4).';return;}
+  if(sameVal(got,want)){fb.className='feedback ok';fb.textContent='✓ Correct!';}
+  else{fb.className='feedback err';fb.textContent='Not yet. Tap Show Steps.';}
+  if(ss)ss.style.display='inline-block';
+}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+</script>
+</body>
+</html>

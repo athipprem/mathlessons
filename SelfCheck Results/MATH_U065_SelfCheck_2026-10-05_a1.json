@@ -1,0 +1,70 @@
+{
+  "student": "Prem",
+  "subject": "Math",
+  "unit": "U065",
+  "type": "selfcheck",
+  "attempt": 1,
+  "openedAt": "2026-10-05T11:40:46.659Z",
+  "submittedAt": "2026-10-05T11:42:35.789Z",
+  "minutesSpent": 1.8,
+  "lessonsDone": {
+    "L1": true,
+    "L2": true
+  },
+  "difficulty": "ok",
+  "score": 3,
+  "outOf": 5,
+  "ready": false,
+  "answers": [
+    {
+      "q": 1,
+      "concept": "Pieces, proper amount",
+      "whole": "",
+      "pieces": "",
+      "given": "12/21",
+      "correct": "4/7",
+      "isCorrect": true,
+      "sentTo": null
+    },
+    {
+      "q": 2,
+      "concept": "Pieces, mixed amount",
+      "whole": "",
+      "pieces": "",
+      "given": "1 1/3",
+      "correct": "1 1/3",
+      "isCorrect": true,
+      "sentTo": null
+    },
+    {
+      "q": 3,
+      "concept": "An amount, not \"of\"",
+      "whole": "",
+      "pieces": "",
+      "given": "1/2",
+      "correct": "1/2",
+      "isCorrect": true,
+      "sentTo": null
+    },
+    {
+      "q": 4,
+      "concept": "Left",
+      "whole": "",
+      "pieces": "",
+      "given": "2 4/5",
+      "correct": "2",
+      "isCorrect": false,
+      "sentTo": "L2 s2"
+    },
+    {
+      "q": 5,
+      "concept": "As far as",
+      "whole": "",
+      "pieces": "",
+      "given": "1 13/15",
+      "correct": "4/5",
+      "isCorrect": false,
+      "sentTo": "L1 s6 P3"
+    }
+  ]
+}
