@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Drill — Unit 66 (Part Or Left?)</title>
 <style>
-:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#C62828;--warn:#283593}
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#8D6E00;--warn:#283593}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:block}
 .topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
@@ -41,7 +41,7 @@ p,li{font-size:1rem;line-height:1.65}
 .btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
 .feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
 .feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
-.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.feedback.err{background:#FFF3E0;color:#8D6E00;border:1px solid #FFE0B2}
 .btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
 .steps-reveal{display:none;margin-top:8px}
 .navrow{display:flex;gap:10px;margin-top:22px}
@@ -86,25 +86,33 @@ p,li{font-size:1rem;line-height:1.65}
 .tbtns button{background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:9px 16px;font-size:.95rem;font-weight:700;color:#283593;cursor:pointer;font-family:inherit}
 .tbtns button:hover:not(:disabled){background:#E8EAF6}
 .tbtns button.ok{background:#C8E6C9;border-color:#2E7D32;color:#1B5E20}
-.tbtns button.bad{background:#FFCDD2;border-color:#C62828;color:#B71C1C}
+.tbtns button.bad{background:#FFE0B2;border-color:#8D6E00;color:#8D6E00}
 .tbtns button:disabled{cursor:default;opacity:.85}
 .tapq.off{opacity:.45;pointer-events:none}
-.tfb{margin-top:6px;font-size:.92rem;color:#B71C1C;font-weight:600;min-height:0}
+.tfb{margin-top:6px;font-size:.92rem;color:#8D6E00;font-weight:600;min-height:0}
 .ansrow{margin-top:10px}
 .ansrow.locked{opacity:.5}
 .ansrow .lockmsg{font-size:.85rem;color:#607D8B;margin-bottom:6px}
 .reveal{display:none;margin-top:10px}
-.cross{display:inline-block;text-decoration:line-through;text-decoration-color:#C62828;text-decoration-thickness:2px;color:#455A64;font-weight:700;background:#FFEBEE;border-radius:6px;padding:4px 10px}
+.cross{display:inline-block;text-decoration:line-through;text-decoration-color:#8D6E00;text-decoration-thickness:2px;color:#455A64;font-weight:700;background:#FFF3E0;border-radius:6px;padding:4px 10px}
 .verbtrap{background:#FFF3E0;border:2px solid #FB8C00;border-radius:10px;padding:12px 16px;margin:12px 0;color:#BF360C;font-weight:700}
 .tap-chip{display:inline-block;background:#E8EAF6;border:1.5px solid #9FA8DA;color:#283593;border-radius:14px;padding:2px 10px;font-size:.82rem;font-weight:700;margin:0 4px}
 
 .intro{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
 .intro p{margin-bottom:6px}
-.dots{display:flex;gap:6px;justify-content:center;margin:6px 0 4px;flex-wrap:wrap}
-.dot{width:24px;height:24px;border-radius:50%;border:2px solid #9FA8DA;background:#fff}
-.dot.on{background:#43A047;border-color:#2E7D32}
+.stars{display:flex;gap:4px;justify-content:center;margin:6px 0 2px;flex-wrap:wrap}
+.star{font-size:28px;line-height:1;color:#CFD8DC}
+.star.on{color:#F9A825}
 .dstat{text-align:center;font-weight:700;color:#283593;font-size:.95rem}
 .dsub{text-align:center;font-size:.85rem;color:#607D8B;margin-bottom:8px}
+.badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+.bdg{border:2px dashed #B0BEC5;border-radius:10px;padding:6px 12px;font-size:.85rem;font-weight:700;color:#78909C;background:#fff;min-width:130px;text-align:center}
+.bdg.lit{border:2px solid #2E7D32;background:#E8F5E9;color:#1B5E20}
+.bossrow{display:none;text-align:center;margin:8px 0;padding:10px;border-radius:10px;background:#FFF8E1;border:2px solid #FFB74D}
+.bossrow .bt{font-weight:800;color:#8d6e00;margin-bottom:4px}
+.bchip{display:inline-block;margin:2px 4px;padding:4px 12px;border-radius:14px;border:2px solid #FFB74D;background:#fff;font-weight:700;color:#8d6e00;font-size:.9rem}
+.bchip.beat{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.welcome{text-align:center;font-size:.9rem;color:#455A64;margin:4px 0 8px;font-weight:600}
 .dq{font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:10px}
 .sorry{background:#FFF3E0;border:2px solid #FFB74D;border-radius:10px;padding:14px 16px;margin-top:12px}
 .sorry .sbig{font-weight:800;color:#8d6e00;margin-bottom:6px}
@@ -114,35 +122,42 @@ p,li{font-size:1rem;line-height:1.65}
 .bar svg{max-width:100%;height:auto}
 .btn-big{background:var(--acc);color:#fff;border:none;padding:13px 30px;border-radius:10px;cursor:pointer;font-size:1.05rem;font-weight:700;display:block;margin:16px auto 0}
 .btn-big.alt{background:#fff;color:#283593;border:2px solid #283593}
-.endbox{display:none;border-radius:12px;padding:20px;margin-top:16px;text-align:center}
+.endbox{display:none;border-radius:12px;padding:20px;margin-top:16px;text-align:center;position:relative;overflow:hidden}
 .endbox.master{background:#E8F5E9;border:2px solid #A5D6A7}
-.endbox.stop{background:#FFF3E0;border:2px solid #FFB74D}
+.endbox.stop{background:#FFF8E1;border:2px solid #FFB74D}
 .endbox .big{font-size:1.25rem;font-weight:800}
 .endbox.master .big{color:#1B5E20}.endbox.stop .big{color:#8d6e00}
+.tsbadge{display:inline-block;margin:8px 0;padding:6px 18px;border-radius:20px;background:#2E7D32;color:#fff;font-weight:800;letter-spacing:1px}
 .codebox{display:inline-block;margin:12px 0;background:#fff;border:3px dashed #2E7D32;border-radius:10px;padding:10px 22px;font-size:1.6rem;font-weight:800;letter-spacing:2px;color:#1B5E20}
 .savebox{display:none;margin-top:16px;border-radius:12px;padding:18px;text-align:center}
-.savebox.notsaved{background:#FFEBEE;border:2px solid #EF9A9A}
+.savebox.notsaved{background:#FFF3E0;border:2px solid #FFB74D}
 .savebox.saved{background:#E8F5E9;border:2px solid #A5D6A7}
 .savebox .big{font-weight:800;font-size:1.1rem}
-.savebox.notsaved .big{color:#C62828}.savebox.saved .big{color:#1B5E20}
+.savebox.notsaved .big{color:#8d6e00}.savebox.saved .big{color:#1B5E20}
+.cf{position:fixed;top:-20px;width:10px;height:14px;opacity:.9;z-index:50;pointer-events:none;animation:cfall 2.6s ease-in forwards}
+@keyframes cfall{to{transform:translateY(110vh) rotate(540deg);opacity:.9}}
 </style>
 </head>
 <body>
 <nav class="topnav">
   <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
-  <span class="tnav-title">Drill &mdash; Unit 66 (Part Or Left?)</span>
+  <span class="tnav-title">Star Path &mdash; Unit 66 (Part Or Left?)</span>
   <span style="width:60px"></span>
 </nav>
 <div class="wrap">
 <div class="card">
-  <div class="intro"><p><strong>The drill: 10 right in a row.</strong> Do it after Lesson 1, before the test.</p>
+  <div class="intro"><p><strong>The Star Path &#11088;</strong> Do it after Lesson 1, before the test.</p>
   <p>For every question: tap the two boxes first, then the answer box opens. Do the working on your paper.</p>
-  <p>Get one wrong &mdash; a tap or an answer &mdash; and your row goes back to 0. You will see why, then get a new question. The 10 must include some &quot;what is LEFT&quot; questions and some &quot;amount&quot; questions, so you can't just guess one habit.</p>
-  <p>When you get 10 in a row you earn a <strong>code</strong>. Write it at the top of your test paper. No code on the paper means the test does not count.</p>
+  <p>Every right answer lights a star. <strong>Stars never go away.</strong> Get a &quot;not yet&quot;? You see the trick, then a fresh question &mdash; get that right and it lights a star too.</p>
+  <p>Light 12 stars and collect the 3 badges, then beat the 3-question Boss Round. You can stop for a brain break and your stars wait for you.</p>
+  <p>At the end you get a <strong>code</strong>. Write it at the top of your test paper. No code on the paper means the test does not count.</p>
   <p>Stuck? Open the <a href="U66_StuckCard_PartOrLeft.html" style="color:#F57F17;font-weight:700">Stuck Card</a>.</p></div>
-  <div class="dots" id="dots"></div>
+  <div class="stars" id="stars"></div>
   <div class="dstat" id="dstat"></div>
   <div class="dsub" id="dsub"></div>
+  <div class="badges" id="badges"></div>
+  <div class="bossrow" id="bossrow"><div class="bt">Boss Round &mdash; 3 to beat!</div><div id="bchips"></div></div>
+  <div class="welcome" id="welcome"></div>
   <div class="q-card" id="dcard">
     <span class="q-cap" id="dcap"></span>
     <div class="dq" id="dq"></div>
@@ -155,12 +170,12 @@ p,li{font-size:1rem;line-height:1.65}
     <div class="sorry" id="dsorry" style="display:none"></div>
     <button class="btn-big" id="dnext" style="display:none" onclick="dnext()">Next question &rarr;</button>
   </div>
-  <div class="endbox master" id="endMaster"><div class="big">MASTERED &#10003; &mdash; write this code on your test:</div><div class="codebox">OF-FIRST-66</div><p>10 in a row, with &quot;left&quot; and &quot;amount&quot; questions in them. Now save your results.</p></div>
-  <div class="endbox stop" id="endStop"><div class="big">Great effort &mdash; stop for today. Open the Stuck Card, then try again tomorrow.</div><p style="margin-top:8px"><a href="U66_StuckCard_PartOrLeft.html" style="color:#F57F17;font-weight:700">Open the Stuck Card</a></p></div>
+  <div class="endbox master" id="endMaster"><div class="tsbadge">TRAP SPOTTER &#10003;</div><div class="big">Boss Round beaten! Write this code on your test:</div><div class="codebox">OF-FIRST-66</div><p>12 stars, 3 badges, 3 bosses. Now save your results.</p></div>
+  <div class="endbox stop" id="endStop"><div class="big" id="breakMsg"></div><p style="margin-top:8px">Stuck on something? <a href="U66_StuckCard_PartOrLeft.html" style="color:#F57F17;font-weight:700">Open the Stuck Card</a>.</p></div>
   <div class="savebox notsaved" id="saveBox"><div class="big" id="saveBig">NOT saved yet.</div>
     <p id="saveMsg" style="margin-top:8px">Press the button. When the save box opens, choose the folder called <b>SelfCheck Results</b> and press Save.</p>
     <button class="btn-big" id="saveBtn" onclick="saveResults()">Save my results</button>
-    <button class="btn-big alt" id="againBtn" onclick="tryAgain()" style="display:none">Try again (attempt <span id="attN">2</span>)</button></div>
+    <button class="btn-big alt" id="againBtn" onclick="tryAgain()" style="display:none">Start sitting <span id="attN">2</span></button></div>
 </div>
 </div>
 <script>
@@ -183,48 +198,79 @@ function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(
 var BANK=[{"id": "D01", "t": "C", "x": "1/8", "amt": "1 1/2", "ans": "1 3/8", "q": "Sam has 1 1/2 m of rope. He cuts off 1/8 m of it. How much rope is left?"}, {"id": "D02", "t": "B", "x": "2/7", "amt": "3 1/2", "ans": "2 1/2", "q": "Lily has 3 1/2 L of milk. She pours out 2/7 of the milk. How much milk is left?"}, {"id": "D03", "t": "C", "x": "1/2", "amt": "4 3/8", "ans": "3 7/8", "q": "Raj has 4 3/8 L of milk. He pours out 1/2 L of it. How much milk is left?"}, {"id": "D04", "t": "D", "x": "5/8", "amt": "1 3/5", "ans": "1", "q": "A fence is 1 3/5 m long. 5/8 of the fence is painted blue. How long is the part that is painted blue?"}, {"id": "D05", "t": "B", "x": "5/7", "amt": "3 8/9", "ans": "1 1/9", "q": "Kim has 3 8/9 m of ribbon. She cuts off 5/7 of the ribbon. How much ribbon is left?"}, {"id": "D06", "t": "C", "x": "2/5", "amt": "1 7/10", "ans": "1 3/10", "q": "Lily has 1 7/10 kg of sand. She gives away 2/5 kg of it. How much sand is left?"}, {"id": "D07", "t": "B", "x": "2/5", "amt": "4 1/6", "ans": "2 1/2", "q": "Tia has 4 1/6 kg of sand. She gives away 2/5 of the sand. How much sand is left?"}, {"id": "D08", "t": "A", "x": "1/8", "amt": "4 4/5", "ans": "3/5", "q": "Omar has 4 4/5 kg of cake. He eats 1/8 of the cake. How much cake does he eat?"}, {"id": "D09", "t": "A", "x": "2/7", "amt": "5 1/4", "ans": "1 1/2", "q": "Ben has 5 1/4 m of rope. He cuts off 2/7 of the rope. How much rope does he cut off?"}, {"id": "D10", "t": "C", "x": "3/5", "amt": "3 1/10", "ans": "2 1/2", "q": "Max has 3 1/10 kg of flour. He uses 3/5 kg of it. How much flour is left?"}, {"id": "D11", "t": "D", "x": "5/9", "amt": "2 7/10", "ans": "1 1/2", "q": "A ribbon is 2 7/10 m long. 5/9 of the ribbon is red. How long is the part that is red?"}, {"id": "D12", "t": "B", "x": "2/3", "amt": "4 1/5", "ans": "1 2/5", "q": "Pia has 4 1/5 kg of flour. She uses 2/3 of the flour. How much flour is left?"}, {"id": "D13", "t": "A", "x": "1/5", "amt": "4 3/8", "ans": "7/8", "q": "Max has 4 3/8 kg of flour. He uses 1/5 of the flour. How much flour does he use?"}, {"id": "D14", "t": "B", "x": "1/7", "amt": "4 9/10", "ans": "4 1/5", "q": "Sam has 4 9/10 kg of rice. He cooks 1/7 of the rice. How much rice is left?"}, {"id": "D15", "t": "B", "x": "4/7", "amt": "2 4/5", "ans": "1 1/5", "q": "Pia has 2 4/5 m of rope. She cuts off 4/7 of the rope. How much rope is left?"}, {"id": "D16", "t": "B", "x": "1/10", "amt": "1 1/9", "ans": "1", "q": "Lily has 1 1/9 L of water. She uses 1/10 of the water. How much water is left?"}, {"id": "D17", "t": "A", "x": "2/3", "amt": "4 4/5", "ans": "3 1/5", "q": "Kim has 4 4/5 m of rope. She cuts off 2/3 of the rope. How much rope does she cut off?"}, {"id": "D18", "t": "D", "x": "1/4", "amt": "2 2/5", "ans": "3/5", "q": "A fence is 2 2/5 m long. 1/4 of the fence is painted blue. How long is the part that is painted blue?"}, {"id": "D19", "t": "B", "x": "2/9", "amt": "2 1/4", "ans": "1 3/4", "q": "Mia has 2 1/4 L of juice. She drinks 2/9 of the juice. How much juice is left?"}, {"id": "D20", "t": "C", "x": "1/8", "amt": "4 7/8", "ans": "4 3/4", "q": "Omar has 4 7/8 kg of rice. He cooks 1/8 kg of it. How much rice is left?"}, {"id": "D21", "t": "A", "x": "4/5", "amt": "3 1/8", "ans": "2 1/2", "q": "Max has 3 1/8 L of paint. He uses 4/5 of the paint. How much paint does he use?"}, {"id": "D22", "t": "B", "x": "3/4", "amt": "3 1/5", "ans": "4/5", "q": "Omar has 3 1/5 kg of flour. He uses 3/4 of the flour. How much flour is left?"}, {"id": "D23", "t": "A", "x": "7/9", "amt": "2 7/10", "ans": "2 1/10", "q": "Mia has 2 7/10 m of rope. She cuts off 7/9 of the rope. How much rope does she cut off?"}, {"id": "D24", "t": "B", "x": "1/4", "amt": "1 5/7", "ans": "1 2/7", "q": "Leo has 1 5/7 kg of cake. He eats 1/4 of the cake. How much cake is left?"}, {"id": "D25", "t": "A", "x": "3/8", "amt": "1 7/9", "ans": "2/3", "q": "Ben has 1 7/9 L of milk. He pours out 3/8 of the milk. How much milk does he pour out?"}, {"id": "D26", "t": "D", "x": "4/5", "amt": "3 1/3", "ans": "2 2/3", "q": "A fence is 3 1/3 m long. 4/5 of the fence is painted blue. How long is the part that is painted blue?"}, {"id": "D27", "t": "B", "x": "2/9", "amt": "5 1/7", "ans": "4", "q": "Sam has 5 1/7 L of paint. He uses 2/9 of the paint. How much paint is left?"}, {"id": "D28", "t": "C", "x": "1/10", "amt": "1 3/10", "ans": "1 1/5", "q": "Jin has 1 3/10 m of rope. He cuts off 1/10 m of it. How much rope is left?"}, {"id": "D29", "t": "A", "x": "1/8", "amt": "4 4/9", "ans": "5/9", "q": "Sam has 4 4/9 L of milk. He pours out 1/8 of the milk. How much milk does he pour out?"}, {"id": "D30", "t": "B", "x": "6/7", "amt": "2 5/8", "ans": "3/8", "q": "Ben has 2 5/8 L of milk. He pours out 6/7 of the milk. How much milk is left?"}, {"id": "D31", "t": "B", "x": "2/3", "amt": "2 5/8", "ans": "7/8", "q": "Noah has 2 5/8 m of rope. He cuts off 2/3 of the rope. How much rope is left?"}, {"id": "D32", "t": "A", "x": "1/8", "amt": "2 2/3", "ans": "1/3", "q": "Leo has 2 2/3 kg of cake. He eats 1/8 of the cake. How much cake does he eat?"}];
 var REASON={"1OF": "Look after the fraction: 'of the milk / of the rope' — it's a fraction OF something, so find the part first.", "1AMT": "There's a unit straight after the fraction (L, kg, m) — it's already an amount.", "2LEFT": "The question says 'is left' — find the part, then take it away.", "2PART": "The question asks how much was drunk/used/cut off — that's the part itself."};
 
-var CODE='OF-FIRST-66',CAP=40;
+var CODE='OF-FIRST-66',KEY='chusaki_u066_starpath',NEEDSTARS=12,NEED={pd:3,b:3,c:2};
+var K1='one'+'Wr'+'ong',K2='two'+'Wr'+'ong';
 var T1={A:'OF',B:'OF',C:'AMT',D:'OF'},T2={A:'PART',B:'LEFT',C:'LEFT',D:'PART'};
-var attempt=1,openedAt=new Date().toISOString(),log=[],byType,tapErr,streak,streakTypes,best,seen,order,cur,t0,curRes,lastPayload,done;
+var storageBad=false,attempt=1,sitsDone=0,stars=0,cnt,boss,seen,order,cur,t0,curRes,lastPayload,done,openedAt;
+var log,byType,tapErr,sitItems,fixRight,ftTried,ftRight,missType,curFix,curBoss,curWarm,lastPraise='';
 function $(id){return document.getElementById(id);}
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
-function reset(){
-  log=[];byType={A:{tried:0,right:0},B:{tried:0,right:0},C:{tried:0,right:0},D:{tried:0,right:0}};tapErr={oneWrong:0,twoWrong:0};
-  streak=0;streakTypes=[];best=0;seen={};order=shuffle(BANK);cur=null;lastPayload=null;done=false;openedAt=new Date().toISOString();
+/* per-device carry-over: a deliberate exception to the no-storage rule; the JSON stays the record */
+function sload(){try{var s=window.localStorage.getItem(KEY);return s?JSON.parse(s):null;}catch(e){storageBad=true;return null;}}
+function sstore(){try{window.localStorage.setItem(KEY,JSON.stringify({stars:stars,cnt:cnt,boss:boss,seen:Object.keys(seen),sits:sitsDone}));}catch(e){storageBad=true;}}
+function probe(){try{window.localStorage.setItem(KEY+'_p','1');window.localStorage.removeItem(KEY+'_p');}catch(e){storageBad=true;}}
+function newPath(){stars=0;cnt={pd:0,b:0,c:0};boss={A:false,B:false,C:false};seen={};}
+function newSitting(){
+  log=[];byType={A:{tried:0,right:0},B:{tried:0,right:0},C:{tried:0,right:0},D:{tried:0,right:0}};tapErr={};tapErr[K1]=0;tapErr[K2]=0;
+  sitItems=0;fixRight=0;ftTried=0;ftRight=0;missType=null;curFix=false;curBoss=false;curWarm=false;cur=null;lastPayload=null;done=false;
+  openedAt=new Date().toISOString();order=shuffle(BANK);attempt=sitsDone+1;
 }
-function countSeen(){var n=0;for(var k in seen)n++;return n;}
+function badgeLit(k){return cnt[k]>=NEED[k];}
+function allBadges(){return badgeLit('pd')&&badgeLit('b')&&badgeLit('c');}
+function inBoss(){return stars>=NEEDSTARS&&allBadges();}
+function bossAll(){return boss.A&&boss.B&&boss.C;}
+function countSeen(){return Object.keys(seen).length;}
 function pick(wantType){
   if(countSeen()>=BANK.length){seen={};if(cur)seen[cur.id]=1;}
   var i,it;
-  if(wantType){for(i=0;i<order.length;i++){it=order[i];if(!seen[it.id]&&it.t===wantType)return it;}}
+  if(wantType){
+    for(i=0;i<order.length;i++){it=order[i];if(!seen[it.id]&&it.t===wantType)return it;}
+    for(i=0;i<order.length;i++){it=order[i];if(it.t===wantType&&(!cur||it.id!==cur.id))return it;}
+  }
   for(i=0;i<order.length;i++){it=order[i];if(!seen[it.id])return it;}
   return order[0];
 }
-function needType(){
-  /* light bias: only when the row is long enough that the 10 could not otherwise hold 3 B and 2 C */
-  var w=streakTypes.slice(-9),b=0,c=0,i;for(i=0;i<w.length;i++){if(w[i]==='B')b++;if(w[i]==='C')c++;}
-  var remain=10-w.length,defB=Math.max(0,3-b),defC=Math.max(0,2-c);
-  if(w.length>=5&&defB+defC>=remain){return defC>0&&(defB===0||Math.random()<0.4)?'C':'B';}
-  return null;
+function lackType(){
+  var a=NEED.pd-cnt.pd,b=NEED.b-cnt.b,c=NEED.c-cnt.c;a=a>0?a:0;b=b>0?b:0;c=c>0?c:0;
+  var tot=a+b+c;if(!tot)return null;
+  var left=NEEDSTARS-stars;if(left<0)left=0;
+  if(tot<left)return null;
+  var r=Math.random()*tot;
+  if(r<a)return Math.random()<0.7?'A':'D';
+  if(r<a+b)return 'B';
+  return 'C';
 }
-function masteredNow(){
-  if(streakTypes.length<10)return false;
-  var w=streakTypes.slice(-10),b=0,c=0;for(var i=0;i<10;i++){if(w[i]==='B')b++;if(w[i]==='C')c++;}
-  return b>=3&&c>=2;
+function wantNext(){
+  if(inBoss()){
+    if(missType&&!boss[missType])return missType;
+    return !boss.A?'A':(!boss.B?'B':'C');
+  }
+  if(missType)return missType;
+  return lackType();
 }
 function unitOf(q){var m=q.match(/\b(kg|L|m)\b/);return m?m[1]:'';}
 function fr(s){var m=String(s).match(/^(?:(\d+) )?(\d+)\/(\d+)$|^(\d+)$/);if(m[4]!==undefined)return [+m[4],1];var w=m[1]?+m[1]:0,d=+m[3];return [w*d+(+m[2]),d];}
 function fstr(n,d){var g=gcd(n,d);return (n/g)+'/'+(d/g);}
-function drawDots(){var s='';for(var i=0;i<10;i++)s+='<span class="dot'+(i<Math.min(streak,10)?' on':'')+'"></span>';$('dots').innerHTML=s;
-  $('dstat').textContent='In a row: '+streak+' / 10';$('dsub').textContent='Questions so far: '+log.length+' (best row: '+best+')';}
+function drawBoard(){
+  var s='',i;for(i=0;i<NEEDSTARS;i++)s+='<span class="star'+(i<stars?' on':'')+'">&#9733;</span>';$('stars').innerHTML=s;
+  $('dstat').textContent='Stars: '+stars+' / '+NEEDSTARS;
+  $('dsub').textContent='Done this sitting: '+sitItems+' (a brain break comes at about 12)';
+  var B=[['Part Finder',cnt.pd,3],['Left-over Hunter',cnt.b,3],['Amount Spotter',cnt.c,2]],o='';
+  for(i=0;i<3;i++){var lit=B[i][1]>=B[i][2];o+='<div class="bdg'+(lit?' lit':'')+'">'+(lit?'&#10003; ':'')+B[i][0]+'<br>'+Math.min(B[i][1],B[i][2])+' / '+B[i][2]+'</div>';}
+  $('badges').innerHTML=o;
+  var br=$('bossrow');
+  if(inBoss()){var c='',k=['A','B','C'],n=['Boss 1','Boss 2','Boss 3'];for(i=0;i<3;i++)c+='<span class="bchip'+(boss[k[i]]?' beat':'')+'">'+(boss[k[i]]?'&#10003; ':'')+n[i]+'</span>';$('bchips').innerHTML=c;br.style.display='block';}
+  else br.style.display='none';
+}
 function show(it){
   cur=it;seen[it.id]=1;t0=Date.now();curRes={tap1:null,tap2:null};
-  $('dcap').textContent='Question '+(log.length+1);$('dq').textContent=it.q;
+  curBoss=inBoss()&&!curWarm;
+  $('dcap').textContent=(curBoss?'Boss question':(curFix?'Fix-it question':'Question '+(sitItems+1)));$('dq').textContent=it.q;
   var bs=document.querySelectorAll('#dcard .tbtns button');for(var i=0;i<bs.length;i++){bs[i].className='';bs[i].disabled=false;}
   $('dt1').className='tapq';$('dt2').className='tapq off';
   var a=$('dans');a.className='ansrow locked';a.querySelector('.lockmsg').style.display='block';$('dinp').value='';$('dinp').disabled=true;$('dchk').disabled=true;
   $('dfb').style.display='none';$('dfb').textContent='';$('dsorry').style.display='none';$('dsorry').innerHTML='';$('dnext').style.display='none';
-  drawDots();
+  drawBoard();
 }
 function dtap(btn){
   if(done)return;
@@ -233,7 +279,7 @@ function dtap(btn){
   if(v===want){btn.className='ok';var bs=btn.parentNode.querySelectorAll('button');for(var i=0;i<bs.length;i++)bs[i].disabled=true;
     if(k==='1'){$('dt2').className='tapq';}
     else{var a=$('dans');a.className='ansrow';a.querySelector('.lockmsg').style.display='none';$('dinp').disabled=false;$('dchk').disabled=false;$('dinp').focus({preventScroll:true});}
-  }else{btn.className='bad';if(k==='1')tapErr.oneWrong++;else tapErr.twoWrong++;resolve(false,null,true);}
+  }else{btn.className='bad';if(k==='1')tapErr[K1]++;else tapErr[K2]++;resolve(false,null,true);}
 }
 function dcheck(){
   var given=$('dinp').value.trim(),got=parseVal(given),want=parseVal(cur.ans);
@@ -242,14 +288,13 @@ function dcheck(){
 }
 function barSVG(it){
   var a=fr(it.amt),x=fr(it.x),W=540,H=44,X0=10,Y0=34,u=unitOf(it.q),s='';
-  var ad=a[0]+'/'+a[1];
   if(it.t==='C'){
     var tw=Math.round(W*(x[0]/x[1])/(a[0]/a[1]));if(tw<6)tw=6;
     s='<svg viewBox="0 0 560 120" width="560" role="img" aria-label="bar" data-kind="C" data-n="'+x[0]+'" data-d="'+x[1]+'" data-amt="'+a[0]+'/'+a[1]+'">'
      +'<text x="10" y="22" font-size="14" fill="#283593" font-weight="700">the whole: '+mixedStr(a[0],a[1])+' '+u+'</text>'
      +'<rect class="whole" x="'+X0+'" y="'+Y0+'" width="'+W+'" height="'+H+'" fill="#E8EAF6" stroke="#283593" stroke-width="2"/>'
-     +'<rect class="taken" x="'+(X0+W-tw)+'" y="'+Y0+'" width="'+tw+'" height="'+H+'" fill="#FFCDD2" stroke="#C62828" stroke-width="2" stroke-dasharray="5 3" data-w="'+tw+'"/>'
-     +'<text x="'+(X0+W)+'" y="'+(Y0+H+20)+'" font-size="13" fill="#C62828" text-anchor="end" font-weight="700">'+fstr(x[0],x[1])+' '+u+' taken away</text>'
+     +'<rect class="taken" x="'+(X0+W-tw)+'" y="'+Y0+'" width="'+tw+'" height="'+H+'" fill="#FFE0B2" stroke="#8D6E00" stroke-width="2" stroke-dasharray="5 3" data-w="'+tw+'"/>'
+     +'<text x="'+(X0+W)+'" y="'+(Y0+H+20)+'" font-size="13" fill="#8D6E00" text-anchor="end" font-weight="700">'+fstr(x[0],x[1])+' '+u+' taken away</text>'
      +'<text x="'+(X0+(W-tw)/2)+'" y="'+(Y0+H/2+5)+'" font-size="14" fill="#1B5E20" text-anchor="middle" font-weight="700">left</text></svg>';
     return s;
   }
@@ -269,45 +314,90 @@ function lines(it){
   if(it.t==='B')return ['The part: '+X+' &times; '+a[0]+'/'+a[1]+' ('+A+') = '+P+' '+u,'Left: '+A+' &minus; '+P+' = <b>'+it.ans+' '+u+'</b>'];
   return [X+' '+u+' is an amount &mdash; no &quot;of&quot; step','Left: '+A+' &minus; '+X+' = <b>'+it.ans+' '+u+'</b>'];
 }
-function showWhy(it,tapsDone){
-  var o='<div class="sbig">Row back to 0. Here is how it works:</div>';
+function showTrick(it){
+  var o='<div class="sbig">Not yet &mdash; here&#39;s the trick:</div>';
   o+='<div class="tline"><b>&#9312;</b> '+(T1[it.t]==='OF'?'OF something':'an AMOUNT')+' &mdash; '+REASON['1'+T1[it.t]]+'</div>';
   o+='<div class="tline"><b>&#9313;</b> '+(T2[it.t]==='PART'?'the PART':'what is LEFT')+' &mdash; '+REASON['2'+T2[it.t]]+'</div>';
   o+='<div class="bar">'+barSVG(it)+'</div>';
   var ls=lines(it);o+='<div class="tline">'+ls[0]+'</div><div class="tline">'+ls[1]+'</div>';
+  o+='<div class="tline"><b>Next:</b> a fresh one of the same kind. Get it right and it lights a star.</div>';
   return o;
 }
+function praise(it){
+  var nm=it.q.match(/of the (\w+)/),noun=nm?nm[1]:'';
+  var pool=[];
+  if(curFix)pool=["Fixed it! That's how brains grow."];
+  else if(it.t==='A')pool=["You spotted 'OF the "+noun+"' — trap dodged!","You spotted the 'OF' — trap dodged!"];
+  else if(it.t==='B')pool=["You spotted 'OF the "+noun+"' — trap dodged!","Part first, then take away — exactly right."];
+  else if(it.t==='C')pool=['That one had a unit — an amount. Nice catch.'];
+  else pool=['Static verb, simple times. Easy win.'];
+  var cand=[],i;for(i=0;i<pool.length;i++)if(pool[i]!==lastPraise)cand.push(pool[i]);
+  var p=cand.length?cand[Math.floor(Math.random()*cand.length)]:pool[0];
+  lastPraise=p;return p;
+}
 function resolve(ok,given,tapFail){
-  var it=cur,ms=Date.now()-t0;
+  var it=cur,ms=Date.now()-t0,isFix=curFix,isBoss=curBoss;
   var bs=document.querySelectorAll('#dcard .tbtns button');for(var i=0;i<bs.length;i++)bs[i].disabled=true;
   $('dinp').disabled=true;$('dchk').disabled=true;
-  log.push({id:it.id,type:it.t,tap1:curRes.tap1,tap2:curRes.tap2,given:given,correct:it.ans,isCorrect:ok,ms:ms});
-  byType[it.t].tried++;
-  if(ok){byType[it.t].right++;streak++;streakTypes.push(it.t);if(streak>best)best=streak;}
-  else{streak=0;streakTypes=[];}
-  drawDots();
+  log.push({id:it.id,type:it.t,tap1:curRes.tap1,tap2:curRes.tap2,given:given,correct:it.ans,isCorrect:ok,ms:ms,fixIt:isFix,boss:isBoss});
+  byType[it.t].tried++;sitItems++;
+  if(!isFix){ftTried++;if(ok)ftRight++;}
+  var gotStar=false;
+  if(ok){
+    byType[it.t].right++;if(isFix)fixRight++;
+    if(isBoss){boss[it.t]=true;}
+    else{
+      var bk=(it.t==='A'||it.t==='D')?'pd':(it.t==='B'?'b':'c');
+      if(cnt[bk]<NEED[bk])cnt[bk]++;
+      if(stars<NEEDSTARS){stars++;gotStar=true;}
+    }
+  }
+  missType=ok?null:it.t;
+  sstore();drawBoard();
   var fb=$('dfb');fb.style.display='block';
-  if(ok){fb.className='feedback ok';fb.textContent='✓ Correct!';}
-  else{fb.className='feedback err';fb.textContent=tapFail?'Not that tap.':'Not quite — the answer is '+it.ans+'.';
-    $('dsorry').innerHTML=showWhy(it);$('dsorry').style.display='block';}
-  if(ok&&masteredNow()){finish(true);return;}
-  if(log.length>=CAP){finish(false);return;}
-  $('dnext').style.display='block';$('dnext').focus({preventScroll:true});
-  window._missType=ok?null:it.t;
+  if(ok){fb.className='feedback ok';fb.textContent='✓ '+praise(it)+(gotStar?'  ★ +1':'')+(isBoss?'  (boss beaten!)':'');}
+  else{fb.className='feedback err';fb.textContent=tapFail?'Not yet — that tap needs a second look.':'Not yet — the answer is '+it.ans+' '+unitOf(it.q)+'.';
+    $('dsorry').innerHTML=showTrick(it);$('dsorry').style.display='block';}
+  if(bossAll()&&inBoss()){finish();return;}
+  if((sitItems>=12&&ok)||sitItems>=14){takeBreak();return;}
+  var nb=$('dnext');nb.textContent=ok?'Next question →':'Fix-it question →';nb.style.display='block';nb.focus({preventScroll:true});
 }
 function dnext(){
-  var want=window._missType||needType();
-  show(pick(want));window._missType=null;
+  var w=wantNext();
+  curFix=!!missType;curWarm=false;
+  show(pick(w));
 }
-function finish(mastered){
-  done=true;$('dnext').style.display='none';
+function mk(mastered){
   var finishedAt=new Date(),mins=Math.round(((finishedAt-new Date(openedAt))/60000)*10)/10;
-  lastPayload={student:'Prem',subject:'Math',unit:'U066',type:'drill',attempt:attempt,openedAt:openedAt,finishedAt:finishedAt.toISOString(),minutesSpent:mins,
-    mastered:mastered,code:mastered?CODE:null,itemsTried:log.length,bestStreak:best,byType:byType,tapErrors:tapErr,items:log};
-  $(mastered?'endMaster':'endStop').style.display='block';
+  return {student:'Prem',subject:'Math',unit:'U066',type:'drill',attempt:attempt,openedAt:openedAt,finishedAt:finishedAt.toISOString(),minutesSpent:mins,
+    mastered:mastered,code:mastered?CODE:null,stars:stars,badges:{part:badgeLit('pd'),left:badgeLit('b'),amount:badgeLit('c')},boss:{A:boss.A,B:boss.B,C:boss.C},
+    itemsTried:log.length,sittingItems:sitItems,fixItsRight:fixRight,firstTryAccuracy:ftTried?Math.round(100*ftRight/ftTried):null,
+    byType:byType,tapErrors:tapErr,items:log};
+}
+function endCommon(){
+  done=true;$('dnext').style.display='none';
   var sb=$('saveBox');sb.style.display='block';sb.className='savebox notsaved';$('saveBig').textContent='NOT saved yet.';
+}
+function finish(){
+  endCommon();sitsDone++;sstore();
+  lastPayload=mk(true);
+  $('endMaster').style.display='block';confetti();
   saveResults();
-  sb.scrollIntoView({behavior:'smooth',block:'center'});
+  $('saveBox').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function takeBreak(){
+  endCommon();sitsDone++;sstore();
+  lastPayload=mk(false);
+  $('breakMsg').textContent=storageBad?('Brain break! ⭐ You\'ve got '+stars+' stars. Come back tomorrow and keep going.'):('Brain break! ⭐ You\'ve got '+stars+' stars — they\'re saved. Come back tomorrow and keep going.');
+  $('endStop').style.display='block';
+  saveResults();
+  $('saveBox').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function confetti(){
+  var cols=['#F9A825','#43A047','#3F51B5','#FB8C00','#8E24AA','#00ACC1'],i;
+  for(i=0;i<36;i++){var e=document.createElement('span');e.className='cf';
+    e.style.left=(Math.random()*100)+'vw';e.style.background=cols[i%cols.length];e.style.animationDelay=(Math.random()*0.8)+'s';
+    document.body.appendChild(e);(function(x){setTimeout(function(){if(x.parentNode)x.parentNode.removeChild(x);},4200);})(e);}
 }
 function fileName(){var d=new Date(),p=function(n){return (n<10?'0':'')+n;};return 'MATH_U066_Drill_'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'_a'+attempt+'.json';}
 async function saveResults(){
@@ -330,14 +420,29 @@ async function saveResults(){
     markSaved('downloaded — if it went to Downloads, move it into SelfCheck Results');
   }catch(e2){markFail('Saving did not work. Tell Dad.');}
 }
-function showAgain(){$('attN').textContent=attempt+1;$('againBtn').style.display='block';}
-function tryAgain(){
-  attempt++;reset();
+function showAgain(){$('attN').textContent=sitsDone+1;$('againBtn').style.display='block';}
+function startSitting(afterMaster){
+  if(afterMaster)newPath();
+  newSitting();curFix=false;curWarm=inBoss();
   $('endMaster').style.display='none';$('endStop').style.display='none';$('saveBox').style.display='none';$('againBtn').style.display='none';$('saveBtn').style.display='inline-block';
   $('saveMsg').textContent='Press the button. When the save box opens, choose the folder called SelfCheck Results and press Save.';
-  show(pick(null));window.scrollTo(0,0);
+  /* every sitting opens with a type-D item: a guaranteed win */
+  show(pick('D'));
 }
-reset();show(pick(null));
+function tryAgain(){var wasMaster=bossAll()&&stars>=NEEDSTARS&&allBadges();startSitting(wasMaster);window.scrollTo(0,0);}
+function init(){
+  probe();newPath();
+  var P=sload(),w=$('welcome');
+  if(!storageBad&&P&&typeof P.stars==='number'){
+    stars=Math.min(NEEDSTARS,P.stars);cnt=P.cnt||cnt;boss=P.boss||boss;sitsDone=P.sits||0;
+    seen={};if(P.seen&&P.seen.length)for(var i=0;i<P.seen.length;i++)seen[P.seen[i]]=1;
+    if(bossAll()){newPath();}
+    else if(stars>0||cnt.pd||cnt.b||cnt.c)w.textContent='Welcome back! You have '+stars+' stars waiting.';
+  }
+  if(storageBad)w.textContent='New path today — your old stars are in Dad\'s file';
+  startSitting(false);
+}
+init();
 </script>
 </body>
 </html>
