@@ -1,0 +1,219 @@
+{
+  "student": "Prem",
+  "subject": "Math",
+  "unit": "U066",
+  "type": "drill",
+  "attempt": 1,
+  "openedAt": "2026-10-07T10:51:57.251Z",
+  "finishedAt": "2026-10-07T10:58:05.136Z",
+  "minutesSpent": 6.1,
+  "mastered": false,
+  "code": null,
+  "stars": 2,
+  "badges": {
+    "part": false,
+    "left": false,
+    "amount": false
+  },
+  "boss": {
+    "A": false,
+    "B": false,
+    "C": false
+  },
+  "itemsTried": 14,
+  "sittingItems": 14,
+  "fixItsRight": 2,
+  "firstTryAccuracy": 0,
+  "byType": {
+    "A": {
+      "tried": 0,
+      "right": 0
+    },
+    "B": {
+      "tried": 8,
+      "right": 0
+    },
+    "C": {
+      "tried": 4,
+      "right": 1
+    },
+    "D": {
+      "tried": 2,
+      "right": 1
+    }
+  },
+  "tapErrors": {
+    "oneWrong": 2,
+    "twoWrong": 4
+  },
+  "items": [
+    {
+      "id": "D26",
+      "type": "D",
+      "tap1": "OF",
+      "tap2": "LEFT",
+      "given": null,
+      "correct": "2 2/3",
+      "isCorrect": false,
+      "ms": 19955,
+      "fixIt": false,
+      "boss": false
+    },
+    {
+      "id": "D04",
+      "type": "D",
+      "tap1": "OF",
+      "tap2": "PART",
+      "given": "1",
+      "correct": "1",
+      "isCorrect": true,
+      "ms": 25163,
+      "fixIt": true,
+      "boss": false
+    },
+    {
+      "id": "D28",
+      "type": "C",
+      "tap1": "OF",
+      "tap2": null,
+      "given": null,
+      "correct": "1 1/5",
+      "isCorrect": false,
+      "ms": 31690,
+      "fixIt": false,
+      "boss": false
+    },
+    {
+      "id": "D06",
+      "type": "C",
+      "tap1": "AMT",
+      "tap2": "PART",
+      "given": null,
+      "correct": "1 3/10",
+      "isCorrect": false,
+      "ms": 1381,
+      "fixIt": true,
+      "boss": false
+    },
+    {
+      "id": "D10",
+      "type": "C",
+      "tap1": "AMT",
+      "tap2": "LEFT",
+      "given": "1 1/5",
+      "correct": "2 1/2",
+      "isCorrect": false,
+      "ms": 5238,
+      "fixIt": true,
+      "boss": false
+    },
+    {
+      "id": "D01",
+      "type": "C",
+      "tap1": "AMT",
+      "tap2": "LEFT",
+      "given": "1 3/8",
+      "correct": "1 3/8",
+      "isCorrect": true,
+      "ms": 40046,
+      "fixIt": true,
+      "boss": false
+    },
+    {
+      "id": "D27",
+      "type": "B",
+      "tap1": "AMT",
+      "tap2": null,
+      "given": null,
+      "correct": "4",
+      "isCorrect": false,
+      "ms": 13264,
+      "fixIt": false,
+      "boss": false
+    },
+    {
+      "id": "D07",
+      "type": "B",
+      "tap1": "OF",
+      "tap2": "PART",
+      "given": null,
+      "correct": "2 1/2",
+      "isCorrect": false,
+      "ms": 964,
+      "fixIt": true,
+      "boss": false
+    },
+    {
+      "id": "D12",
+      "type": "B",
+      "tap1": "OF",
+      "tap2": "LEFT",
+      "given": "2 4/5",
+      "correct": "1 2/5",
+      "isCorrect": false,
+      "ms": 36507,
+      "fixIt": true,
+      "boss": false
+    },
+    {
+      "id": "D24",
+      "type": "B",
+      "tap1": "OF",
+      "tap2": "LEFT",
+      "given": "1 2/5",
+      "correct": "1 2/7",
+      "isCorrect": false,
+      "ms": 7836,
+      "fixIt": true,
+      "boss": false
+    },
+    {
+      "id": "D22",
+      "type": "B",
+      "tap1": "OF",
+      "tap2": "LEFT",
+      "given": "2 2/5",
+      "correct": "4/5",
+      "isCorrect": false,
+      "ms": 86171,
+      "fixIt": true,
+      "boss": false
+    },
+    {
+      "id": "D15",
+      "type": "B",
+      "tap1": "OF",
+      "tap2": "PART",
+      "given": null,
+      "correct": "1 1/5",
+      "isCorrect": false,
+      "ms": 2346,
+      "fixIt": true,
+      "boss": false
+    },
+    {
+      "id": "D30",
+      "type": "B",
+      "tap1": "OF",
+      "tap2": "LEFT",
+      "given": "5",
+      "correct": "3/8",
+      "isCorrect": false,
+      "ms": 7752,
+      "fixIt": true,
+      "boss": false
+    },
+    {
+      "id": "D02",
+      "type": "B",
+      "tap1": "OF",
+      "tap2": "LEFT",
+      "given": "1 1/5",
+      "correct": "2 1/2",
+      "isCorrect": false,
+      "ms": 23100,
+      "fixIt": true,
+      "boss": false
+    }
+  ]
+}

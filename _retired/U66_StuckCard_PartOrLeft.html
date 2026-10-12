@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>They Drank 1/3 OF It — Why Can't I Just Take Away 1/3? — Stuck Card (Unit 66)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#C62828;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:block}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.wrap{max-width:760px;margin:0 auto;padding:16px;width:100%}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin:12px 0}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.q-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1px solid #9FA8DA;border-radius:14px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stop-here{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FB8C00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:800;color:#E65100;margin:16px 0}
+.flip-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.flip-card{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:12px 18px;font-size:.95rem;font-weight:700;color:var(--warn);text-align:center}
+/* answer frame */
+.frame{background:#fff;border:2px solid var(--acc);border-radius:10px;padding:10px 12px;margin:10px 0}
+.frame .fr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0}
+.frame .fl{font-weight:700;color:var(--warn);font-size:.92rem;min-width:150px}
+.frame .fv{font-size:1rem;color:#1a1a2e}
+.frame .fv.ans{font-weight:800;color:var(--warn)}
+.frame input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:6px 8px;font-size:1rem;width:170px;font-family:inherit}
+.frame input[type=text].wide{width:230px}
+.frame input[type=text]:focus{outline:2px solid #9FA8DA}
+.frame .fr.pieces input{width:90px}
+/* piece cutter W10 */
+.w10{background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:12px;margin:12px 0}
+.w10 svg{width:100%;height:auto;display:block}
+.w10-lines{margin-top:8px;min-height:60px}
+.w10-lines .ln{font-size:1rem;padding:3px 0;color:#1a1a2e}
+.w10-lines .ln.last{font-weight:800;color:var(--warn)}
+.w10-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.w10-btns button{border:none;border-radius:8px;padding:8px 16px;font-size:.92rem;font-weight:700;cursor:pointer}
+.w10-btns .go{background:var(--acc);color:#fff}
+.w10-btns .go:disabled{background:#9FA8DA;cursor:default}
+.w10-btns .rs{background:#fff;color:var(--acc);border:1.5px solid var(--acc)}
+.two-cards{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.two-cards .q-card{flex:1;min-width:250px;margin-bottom:0}
+.ans-input{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 10px;font-size:1rem;width:190px;font-family:inherit;margin-right:8px}
+.nav-link{flex:1;display:block;text-align:center;padding:13px 0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.nav-link.out{background:#fff;color:#283593;border:2px solid #283593}
+.nav-link.fill{background:#3F51B5;color:#fff;border:2px solid #3F51B5}
+
+.tapq{margin:8px 0}
+.tapq .tl{font-weight:700;color:#283593;margin-bottom:6px;font-size:.97rem}
+.tbtns{display:flex;gap:8px;flex-wrap:wrap}
+.tbtns button{background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:9px 16px;font-size:.95rem;font-weight:700;color:#283593;cursor:pointer;font-family:inherit}
+.tbtns button:hover:not(:disabled){background:#E8EAF6}
+.tbtns button.ok{background:#C8E6C9;border-color:#2E7D32;color:#1B5E20}
+.tbtns button.bad{background:#FFCDD2;border-color:#C62828;color:#B71C1C}
+.tbtns button:disabled{cursor:default;opacity:.85}
+.tapq.off{opacity:.45;pointer-events:none}
+.tfb{margin-top:6px;font-size:.92rem;color:#B71C1C;font-weight:600;min-height:0}
+.ansrow{margin-top:10px}
+.ansrow.locked{opacity:.5}
+.ansrow .lockmsg{font-size:.85rem;color:#607D8B;margin-bottom:6px}
+.reveal{display:none;margin-top:10px}
+.cross{display:inline-block;text-decoration:line-through;text-decoration-color:#C62828;text-decoration-thickness:2px;color:#455A64;font-weight:700;background:#FFEBEE;border-radius:6px;padding:4px 10px}
+.verbtrap{background:#FFF3E0;border:2px solid #FB8C00;border-radius:10px;padding:12px 16px;margin:12px 0;color:#BF360C;font-weight:700}
+.tap-chip{display:inline-block;background:#E8EAF6;border:1.5px solid #9FA8DA;color:#283593;border-radius:14px;padding:2px 10px;font-size:.82rem;font-weight:700;margin:0 4px}
+
+.ask-box{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:16px;text-align:center;margin-bottom:14px}
+.ask-box .big{font-size:1.1rem;font-weight:800;color:#283593}
+.coin-steps{background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin:12px 0}
+.coin-steps ol{margin-left:20px}.coin-steps li{margin-bottom:8px}
+.side-by-side{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.side-card{flex:1;min-width:230px;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:14px}
+.side-card.yes{border-color:#2E7D32;background:#E8F5E9}
+.side-card .side-title{font-weight:700;color:#8d6e00;margin-bottom:6px;font-size:.93rem}
+.side-card.yes .side-title{color:#1B5E20}
+.side-card .ln{font-size:.95rem;padding:2px 0}.side-card .ln.note{font-style:italic;color:#455A64;font-size:.85rem}
+.dad-line{background:linear-gradient(135deg,#FFF3CD,#FFE9A8);border:2px solid #F9A825;border-radius:10px;padding:16px;text-align:center;margin-top:16px}
+.dad-line p{font-weight:700;color:#8d6e00;font-size:1.02rem}
+.backhub{display:block;text-align:center;margin-top:6px;padding:13px 0;background:#F9A825;color:#fff;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+:root{--nav:#F9A825;--acc:#F57F17;--warn:#8d6e00;--bg:#FFF8E1}
+.topnav{background:#F9A825}
+h2{color:#F57F17;border-left-color:#F57F17}
+.btn-check{background:#F57F17}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">&#x1F4A1; Stuck Card &mdash; Unit 66</span>
+  <span style="width:60px"></span>
+</nav>
+<div class="wrap">
+<div class="card">
+  <h2>&#10067; "They drank 1/3 OF it &mdash; why can't I just take away 1/3?"</h2>
+  <div class="ask-box">
+    <p>Before you read anything below &mdash; ask yourself:</p>
+    <p class="big">"Is 1/3 OF the milk the same as 1/3 of a LITRE? Which is bigger if there's lots of milk?"</p>
+    <p style="margin-top:8px">Say your answer out loud. Then scroll down and check.</p>
+  </div>
+</div>
+<div class="card">
+  <h2>&#129521; Go And Get 12 Lego Bricks</h2>
+  <p>12 bricks, all the same size.</p>
+  <div class="coin-steps"><ol>
+    <li>Each brick is <strong>1/4 kg of clay</strong>, so all 12 bricks = <strong>3 kg</strong> of clay <span style="font-style:italic;color:#455A64">(4 bricks make 1 kg, and 12 &divide; 4 = 3)</span>.</li>
+    <li>"Use <strong>1/3 OF the clay</strong>": make <strong>3 equal piles</strong> and take one &rarr; <strong>4 bricks = 1 kg</strong>.</li>
+    <li>"Use <strong>1/3 kg</strong>": that is not even 2 bricks. <strong>Same "1/3", very different amounts.</strong></li>
+  </ol></div>
+  <h3 style="margin-top:14px">No bricks handy? Look at the picture:</h3>
+  <div class="w10" style="border-style:solid"><svg id="bricks" viewBox="0 0 560 150" role="img" aria-label="12 bricks in 3 piles of 4, one pile shaded">
+      <rect class="brick on" x="20" y="40" width="36" height="44" rx="4" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect class="brick on" x="60" y="40" width="36" height="44" rx="4" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect class="brick on" x="100" y="40" width="36" height="44" rx="4" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect class="brick on" x="140" y="40" width="36" height="44" rx="4" fill="#3F51B5" stroke="#283593" stroke-width="2"/>
+      <rect class="brick" x="200" y="40" width="36" height="44" rx="4" fill="#E8EAF6" stroke="#283593" stroke-width="2"/>
+      <rect class="brick" x="240" y="40" width="36" height="44" rx="4" fill="#E8EAF6" stroke="#283593" stroke-width="2"/>
+      <rect class="brick" x="280" y="40" width="36" height="44" rx="4" fill="#E8EAF6" stroke="#283593" stroke-width="2"/>
+      <rect class="brick" x="320" y="40" width="36" height="44" rx="4" fill="#E8EAF6" stroke="#283593" stroke-width="2"/>
+      <rect class="brick" x="380" y="40" width="36" height="44" rx="4" fill="#E8EAF6" stroke="#283593" stroke-width="2"/>
+      <rect class="brick" x="420" y="40" width="36" height="44" rx="4" fill="#E8EAF6" stroke="#283593" stroke-width="2"/>
+      <rect class="brick" x="460" y="40" width="36" height="44" rx="4" fill="#E8EAF6" stroke="#283593" stroke-width="2"/>
+      <rect class="brick" x="500" y="40" width="36" height="44" rx="4" fill="#E8EAF6" stroke="#283593" stroke-width="2"/>
+      <text x="90" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#1B5E20">pile 1 = 4 bricks = 1 kg</text>
+      <text x="280" y="22" text-anchor="middle" font-size="13" fill="#455A64">12 bricks = 3 kg, in 3 equal piles</text>
+      <text x="280" y="135" text-anchor="middle" font-size="13" fill="#B71C1C">1/3 kg is only a bit more than 1 brick</text>
+  </svg></div>
+</div>
+<div class="card">
+  <h3>Two Contrasted Examples</h3>
+  <div class="side-by-side">
+    <div class="side-card yes">
+      <div class="side-title">&#x2705; 1/3 OF 3 kg of clay</div>
+      <div class="ln">3 kg &divide; 3 = 1 kg <span class="note">(1/3 OF means split the 3 kg into 3 equal parts)</span></div>
+      <div class="ln"><strong>1/3 OF 3 kg = 1 kg &#10003;</strong></div>
+    </div>
+    <div class="side-card">
+      <div class="side-title">&#x1F536; 3 &minus; 1/3</div>
+      <div class="ln">3 &minus; 1/3: break one whole into thirds, so 3 = 2 + 3/3 <span class="note">(then take 1/3 from the 3/3)</span></div>
+      <div class="ln"><strong>= 2 2/3 kg</strong></div>
+      <div class="ln note">took away 1/3 of a kg, not 1/3 of the clay.</div>
+    </div>
+  </div>
+  <div class="big-rule">"1/3 OF it" is a piece of the clay. "1/3 kg" is an amount you take away.</div>
+</div>
+<div class="card">
+  <h3>Now You Try</h3>
+<div class="q-card" id="s0" data-ans="1 1/5">
+  <div class="q-text">1.&nbsp; A tub has 1 3/5 kg of butter. 1/4 OF the butter is used. How much is left?</div>
+  <input type="text" class="ans-input" aria-label="answer">
+  <button class="btn-check" onclick="chkIn('s0')">Check</button>
+  <div class="feedback"></div>
+</div>
+<div class="q-card" id="s1" data-ans="1 7/20">
+  <div class="q-text">2.&nbsp; A tub has 1 3/5 kg of butter. 1/4 kg is used. How much is left?</div>
+  <input type="text" class="ans-input" aria-label="answer">
+  <button class="btn-check" onclick="chkIn('s1')">Check</button>
+  <div class="feedback"></div>
+</div>
+  <div class="warn-box"><p><strong>You've got it if</strong> you can say which little word made the answers different.</p></div>
+</div>
+<div class="dad-line">
+  <p>Still stuck after all this? Tell Dad &mdash; that means the lesson has a problem, not you.</p>
+</div>
+<a class="backhub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Back to Hub</a>
+</div>
+<script>
+
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a);}
+function mixedStr(n,d){var g=gcd(n,d);n=n/g;d=d/g;var w=Math.floor(n/d),r=n-w*d;if(r===0)return ''+w;return (w?w+' ':'')+r+'/'+d;}
+/* parse "1 1/5", "6/5", "2", "1.2", "1 1/5 m" -> [num,den] reduced, or null */
+function parseVal(s){
+  if(s==null)return null; s=String(s).toLowerCase().replace(/[²]/g,'').replace(/(kg|km|cups?|cm|ml|l|m|litres?|liters?|metres?|meters?|sq\.?|squared)\b/g,' ').replace(/\s+/g,' ').trim();
+  if(!s)return null; var m;
+  if((m=s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/))){var d=+m[3];if(!d)return null;var n=(+m[1])*d+(+m[2]);var g=gcd(n,d);return [n/g,d/g,'mixed'];}
+  if((m=s.match(/^(\d+)\s*\/\s*(\d+)$/))){var d2=+m[2];if(!d2)return null;var g2=gcd(+m[1],d2);return [(+m[1])/g2,d2/g2,'frac',+m[1],d2];}
+  if((m=s.match(/^(\d+)$/))){return [+m[1],1,'int'];}
+  if((m=s.match(/^(\d*)\.(\d+)$/))){var den=Math.pow(10,m[2].length);var n3=(+m[1]||0)*den+(+m[2]);var g3=gcd(n3,den);return [n3/g3,den/g3,'dec'];}
+  return null;}
+function sameVal(a,b){return a&&b&&a[0]===b[0]&&a[1]===b[1];}
+function isImproperText(s){var m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);return !!m&&(+m[1])>(+m[2]);}
+
+function chkIn(id){var card=document.getElementById(id),inp=card.querySelector('.ans-input'),fb=card.querySelector('.feedback');
+  var want=parseVal(card.getAttribute('data-ans')),got=parseVal(inp.value);fb.style.display='block';
+  if(!inp.value.trim()||!got){fb.className='feedback err';fb.textContent='Type your answer first (like 1 1/5 or 7/4).';return;}
+  if(sameVal(got,want)){fb.className='feedback ok';fb.textContent='\u2713 Correct!';}else{fb.className='feedback err';fb.textContent='Not yet \u2014 look again and try once more.';}}
+</script>
+</body>
+</html>
