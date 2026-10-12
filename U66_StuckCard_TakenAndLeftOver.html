@@ -99,6 +99,50 @@ p,li{font-size:1rem;line-height:1.65}
 .bar-wrap{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px;margin:10px 0}
 .bar-wrap svg{width:100%;height:auto;display:block}
 
+.wlb{margin:10px 0;border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:6px 8px}
+.wlb .wls{margin-bottom:4px}
+.wl{display:none;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:12px;padding:7px 6px;border-bottom:1px dashed #C5CAE9;align-items:start}
+.wl.on{display:grid}
+.wl.cur{background:#F0F1FA}
+.wl[data-glow].on{background:#FFF8E1;box-shadow:inset 4px 0 0 #F9A825}
+.wl .m{font-family:Consolas,'Courier New',monospace;font-weight:700;color:#283593;font-size:1rem}
+.wl .why{color:#455A64;font-size:.88rem;line-height:1.35;border:0;background:none;padding:0;margin:0;border-radius:0;box-shadow:none}
+.wl .why:before{content:"\2190  ";color:#9FA8DA}
+.btn-next{background:#fff;color:#283593;border:2px solid #283593;border-radius:8px;padding:7px 16px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit}
+.wlb.alldone .btn-next{display:none}
+.wlb.closed{display:none}
+.taps{margin:8px 0;padding:8px 10px;border:2px solid #C5CAE9;border-radius:10px;background:#F7F9FD}
+.taps .thead{font-weight:800;color:#283593;font-size:.9rem;margin-bottom:4px}
+.tq{margin:8px 0}.tq.off{display:none}
+.tq .tl{font-weight:700;color:#283593}
+.tq .tsub{font-weight:400;color:#607D8B;font-size:.85rem;display:block}
+.tb2{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.tb2 button{border:2px solid #9FA8DA;background:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem;cursor:pointer;font-family:inherit;color:#283593;font-weight:600;text-align:left}
+.tb2 button.good{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.tb2 button.lit{outline:3px solid #2E7D32}
+.tb2 button.nope{background:#FFF3E0;border-color:#FFB74D;color:#8d6e00}
+.thint{color:#8d6e00;font-size:.88rem;margin-top:4px;min-height:1em}
+.bx.locked label{opacity:.55}
+.fmap{max-width:640px;margin:10px auto}
+.mn{border:2px solid #283593;border-radius:10px;padding:8px 12px;background:#fff;color:#283593;font-size:.95rem}
+.mn.start{background:#E8EAF6}.mn.q{background:#F0F1FA}.mn.bonus{background:#FFF8E1;border-color:#FFB74D;color:#8d6e00}
+.mn b.k{background:#283593;color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+.mn i{display:block;font-size:.84rem;color:#455A64;font-style:normal;margin-top:2px}
+.arr{text-align:center;color:#9FA8DA;font-size:1.1rem;line-height:1.2}
+.two{display:flex;gap:8px;flex-wrap:wrap}
+.two .br{flex:1;min-width:230px;border:2px solid #9FA8DA;border-radius:10px;padding:8px 10px;background:#fff;font-size:.9rem;color:#37474F}
+.br b.yn{color:#283593}
+.mp .tk{background:#90CAF9;color:#0D47A1;border-radius:6px;padding:0 6px;font-weight:700}
+.mp .lf{background:#fff;color:#283593;border:1.5px solid #283593;border-radius:6px;padding:0 6px;font-weight:700}
+.lit-node{background:#E8F5E9 !important;border-color:#2E7D32 !important;box-shadow:0 0 0 3px #A5D6A7}
+.fmap .cap{display:none;margin-top:5px;font-family:Consolas,'Courier New',monospace;font-weight:700;color:#1B5E20;font-size:.88rem}
+.lit-node .cap{display:block}
+.ex{margin-top:5px;font-size:.82rem;color:#455A64;border-top:1px dashed #C5CAE9;padding-top:4px}
+.wtrow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;align-items:center}
+.btn-map{display:inline-block;border:2px solid #283593;color:#283593;background:#fff;border-radius:10px;padding:8px 16px;font-weight:700;text-decoration:none;font-size:.95rem;cursor:pointer;font-family:inherit}
+.maplink{position:fixed;right:12px;bottom:12px;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+@media (max-width:560px){.wl{grid-template-columns:1fr;gap:2px}}
+
 .ask-box{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:16px;text-align:center;margin-bottom:14px}
 .ask-box .big{font-size:1.1rem;font-weight:800;color:#283593}
 .coin-steps{background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin:12px 0}
@@ -155,8 +199,8 @@ h2{color:#F57F17;border-left-color:#F57F17}
       <rect class="brick" x="420" y="40" width="36" height="44" rx="4" fill="#FFFFFF" stroke="#1565C0" stroke-width="2"/>
       <rect class="brick" x="460" y="40" width="36" height="44" rx="4" fill="#FFFFFF" stroke="#1565C0" stroke-width="2"/>
       <rect class="brick" x="500" y="40" width="36" height="44" rx="4" fill="#FFFFFF" stroke="#1565C0" stroke-width="2"/>
-      <text x="90" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#0D47A1">pile 1 = 4 bricks = 1 kg taken</text>
-      <text x="280" y="22" text-anchor="middle" font-size="13" fill="#455A64">12 bricks = 3 kg, in 3 equal piles</text>
+      <text x="90" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#0D47A1">pile 1: 4 bricks, 1 kg taken</text>
+      <text x="280" y="22" text-anchor="middle" font-size="13" fill="#455A64">12 bricks make 3 kg, in 3 equal piles</text>
       <text x="280" y="135" text-anchor="middle" font-size="13" fill="#8d6e00">1/3 kg is only a bit more than 1 brick</text>
   </svg></div>
 </div>
@@ -195,17 +239,44 @@ h2{color:#F57F17;border-left-color:#F57F17}
 </div>
 <div class="card">
   <h3>Now You Try</h3>
+  <p class="tap-hint"><a class="btn-map" href="U66_FirstStep_Map.html" target="_blank">&#x1F5FA; Open my map</a></p>
 <div class="q-card" id="s0" data-ans="1 1/5">
   <div class="q-text">1.&nbsp; A tub has 1 3/5 kg of butter. 1/4 of the butter is used. How much is left over?</div>
   <input type="text" class="ans-input" aria-label="answer">
-  <button class="btn-check" onclick="chkIn('s0')">Check</button>
+  <button class="btn-check" onclick="chkIn('s0');scOpen('s0')">Check</button>
   <div class="feedback"></div>
+  <div class="stepsbox"><div class="wlb closed" data-bid="SCq1">
+<div class="wls">
+<div class="wl"><span class="m">Taken = 1/4 × 1 3/5</span><span class="why">"1/4 of the butter" means 1/4 × the whole</span></div>
+<div class="wl"><span class="m">= 1/4 × 8/5</span><span class="why">1 3/5 = 8/5 (1 whole = 5 fifths, plus 3 fifths = 8 fifths)</span></div>
+<div class="wl"><span class="m">= 8/20</span><span class="why">tops: 1 × 8 = 8; bottoms: 4 × 5 = 20</span></div>
+<div class="wl"><span class="m">= 2/5 kg</span><span class="why">simplify: divide the top and the bottom by 4</span></div>
+<div class="wl"><span class="m">Left over = 1 3/5 − 2/5</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 8/5 − 2/5</span><span class="why">change the whole to an improper fraction: 1 3/5 = 8/5 (1 whole = 5 fifths, plus 3 fifths = 8 fifths)</span></div>
+<div class="wl"><span class="m">= 6/5</span><span class="why">8 fifths take away 2 fifths = 6 fifths</span></div>
+<div class="wl"><span class="m">= 1 1/5 kg</span><span class="why">6 fifths = 1 whole and 1 fifth over</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+</div>
 </div>
 <div class="q-card" id="s1" data-ans="1 7/20">
   <div class="q-text">2.&nbsp; A tub has 1 3/5 kg of butter. 1/4 kg is used. How much is left over?</div>
   <input type="text" class="ans-input" aria-label="answer">
-  <button class="btn-check" onclick="chkIn('s1')">Check</button>
+  <button class="btn-check" onclick="chkIn('s1');scOpen('s1')">Check</button>
   <div class="feedback"></div>
+  <div class="stepsbox"><div class="wlb closed" data-bid="SCq2">
+<div class="wls">
+<div class="wl"><span class="m">Taken = 1/4 kg</span><span class="why">the story TOLD us the taken piece: a number with a unit right after it</span></div>
+<div class="wl"><span class="m">Left over = 1 3/5 − 1/4</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 8/5 − 1/4</span><span class="why">change the whole to an improper fraction: 1 3/5 = 8/5 (1 whole = 5 fifths, plus 3 fifths = 8 fifths)</span></div>
+<div class="wl"><span class="m">= 32/20 − 5/20</span><span class="why">make the bottoms the same: 8/5 = 32/20 (top and bottom × 4); 1/4 = 5/20 (top and bottom × 5)</span></div>
+<div class="wl"><span class="m">= 27/20</span><span class="why">32 twentieths take away 5 twentieths = 27 twentieths</span></div>
+<div class="wl"><span class="m">= 1 7/20 kg</span><span class="why">27 twentieths = 1 whole and 7 twentieths over</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+</div>
 </div>
   <div class="warn-box"><p><strong>You've got it if</strong> you can say which word made the taken pieces different.</p></div>
 </div>
@@ -230,24 +301,80 @@ function parseVal(s){
 function sameVal(a,b){return a&&b&&a[0]===b[0]&&a[1]===b[1];}
 function isImproperText(s){var m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);return !!m&&(+m[1])>(+m[2]);}
 
+function wlShow(b,n){var rows=b.querySelectorAll('.wl'),i;for(i=0;i<rows.length;i++){rows[i].classList.remove('cur');if(i<n)rows[i].classList.add('on');}
+  if(n>0&&rows[n-1])rows[n-1].classList.add('cur');if(n>=rows.length){b.classList.add('alldone');var a=b.getAttribute('data-after');if(a){var e=document.getElementById(a);if(e)e.style.display='block';}}}
+function wlCount(b){return b.querySelectorAll('.wl.on').length;}
+function wlNext(btn){var b=btn.parentNode;wlShow(b,wlCount(b)+1);}
+function wlOpen(b){b.classList.remove('closed');if(wlCount(b)===0)wlShow(b,1);}
+function stepsToggle(btn){var b=btn.parentNode.querySelector('.wlb');if(b.classList.contains('closed')){wlOpen(b);btn.textContent='Hide steps';}else{b.classList.add('closed');btn.textContent='Show steps';}}
+var HINT={q1:'Look right after the fraction — is there a unit (L, kg or m)?',
+ q2:'Is the whole — the number at the start of the story — a plain whole number like 12 L, or a fraction bottle like 2 4/5 L?',
+ q3:'Read the question itself: how much was taken, how much is left, or both (a) and (b)?'};
+function tapsInit(root,spec,done){
+  var q1=(spec.kind==='told')?'told':'work',q2=(spec.whole==='whole')?'whole':'frac',q3=spec.asks;
+  var st={wrong:{q1:0,q2:0,q3:0},mapWrong:[],path:[],done:false};
+  root.innerHTML='<div class="thead">&#128506; Map first — three taps</div>'+
+   '<div class="tq" data-q="1"><div class="tl">Q1. Does the story TELL me the taken piece?<span class="tsub">Look right after the fraction: is there a unit (L, kg, m)?</span></div>'+
+   '<div class="tb2"><button type="button" data-v="told">YES — a number with a unit, like “drinks 1/3 L”</button><button type="button" data-v="work">NO — it says “of the …”, like “1/3 of the juice”</button></div><div class="thint"></div></div>'+
+   '<div class="tq off" data-q="2"><div class="tl">Q2. Is the whole a whole number, or a fraction bottle?</div>'+
+   '<div class="tb2"><button type="button" data-v="whole">WHOLE NUMBER, like 12 L</button><button type="button" data-v="frac">FRACTION BOTTLE, like 2 4/5 L</button></div><div class="thint"></div></div>'+
+   '<div class="tq off" data-q="3"><div class="tl">Q3. Which box does the question ask for?</div>'+
+   '<div class="tb2"><button type="button" data-v="taken">the TAKEN box — it asks how much was taken</button><button type="button" data-v="left">the LEFT-OVER box — it asks how much is left</button><button type="button" data-v="both">BOTH boxes — it asks (a) and (b)</button></div><div class="thint"></div></div>';
+  var want={1:q1,2:q2,3:q3},names={1:'Q1',2:'Q2',3:'Q3'};
+  function tq(n){return root.querySelector('.tq[data-q="'+n+'"]');}
+  function open(n){tq(n).classList.remove('off');}
+  function finish(){if(st.done)return;st.done=true;if(done)done(st);}
+  function hit(n,b){
+    var q=tq(n),btns=q.querySelectorAll('button'),hint=q.querySelector('.thint'),i,v=b.getAttribute('data-v');
+    if(v===want[n]){for(i=0;i<btns.length;i++){btns[i].classList.remove('lit','nope');}b.classList.add('good');hint.textContent='';st.path.push(v);
+      for(i=0;i<btns.length;i++)btns[i].disabled=true;
+      if(n===1){if(q1==='told'){st.path.push('skip');open(3);}else open(2);}else if(n===2)open(3);else finish();}
+    else{st.wrong['q'+n]++;st.mapWrong.push(names[n]+':'+v);b.classList.add('nope');hint.textContent='Not yet — '+HINT['q'+n];
+      for(i=0;i<btns.length;i++)if(btns[i].getAttribute('data-v')===want[n])btns[i].classList.add('lit');}
+  }
+  [1,2,3].forEach(function(n){var bs=tq(n).querySelectorAll('button'),i;for(i=0;i<bs.length;i++)(function(b){b.addEventListener('click',function(){hit(n,b);});})(bs[i]);});
+  return st;
+}
+function initCards(){
+  var cards=document.querySelectorAll('.q-card[data-kind]'),i;
+  for(i=0;i<cards.length;i++)(function(c){
+    var tp=c.querySelector('.taps');if(!tp)return;
+    var inputs=c.querySelectorAll('input.tb,input.lb'),chk=c.querySelector('.btn-check'),j;
+    for(j=0;j<inputs.length;j++)inputs[j].disabled=true;chk.disabled=true;
+    c._st=tapsInit(tp,{kind:c.getAttribute('data-kind'),whole:c.getAttribute('data-whole'),asks:c.getAttribute('data-asks')},function(){
+      var k;for(k=0;k<inputs.length;k++)inputs[k].disabled=false;chk.disabled=false;c.querySelector('.bx').classList.remove('locked');
+      var m=c.querySelector('.tapdone');if(m)m.style.display='block';});
+  })(cards[i]);
+  var plain=document.querySelectorAll('.wlb.auto'),p;for(p=0;p<plain.length;p++)wlShow(plain[p],1);
+}
 var lastP='';
 function say(fb,ok,msg){fb.style.display='block';fb.className='feedback '+(ok?'ok':'err');fb.textContent=msg;}
 function chkIn(id){var card=document.getElementById(id),inp=card.querySelector('.ans-input'),fb=card.querySelector('.feedback');
   var want=parseVal(card.getAttribute('data-ans')),got=parseVal(inp.value);
   if(!inp.value.trim()||!got){say(fb,false,'Type your answer first (like 1 1/5 or 7/4).');return;}
+  var ex=card.getAttribute('data-exact');
+  if(ex){if(inp.value.replace(/\s+/g,'')===ex){say(fb,true,'✓ Correct!');}else say(fb,false,'Not yet — count the quarters: every whole is cut into 4 quarters.');return;}
   if(sameVal(got,want))say(fb,true,'✓ Correct!');else say(fb,false,'Not yet — look again and try once more.');}
-function chk2(id){
+function chk21(id){
   var card=document.getElementById(id),fb=card.querySelector('.feedback'),ss=card.querySelector('.btn-show-steps');
-  var t=card.querySelector('.tb').value,l=card.querySelector('.lb').value;
-  var gt=parseVal(t),gl=parseVal(l);
-  if(!t.trim()||!l.trim()||!gt||!gl){say(fb,false,'Fill both boxes first (like 1 1/5 or 7/4).');return;}
-  var okT=sameVal(gt,parseVal(card.getAttribute('data-taken'))),okL=sameVal(gl,parseVal(card.getAttribute('data-left')));
-  if(okT&&okL){var P=["You shaded the taken piece first \u2014 that\u2019s the whole trick.","Worked out the piece, then the left-over. Two-step star!","Told you exactly how much \u2014 straight to taking away. Nice."],k=card.getAttribute('data-kind'),pool=(k==='told')?[P[2]]:[P[0],P[1]],p=pool[Math.floor(Math.random()*pool.length)];if(p===lastP&&pool.length>1)p=(p===pool[0])?pool[1]:pool[0];lastP=p;say(fb,true,'✓ '+p);}
-  else if(okT)say(fb,false,'Not yet — your taken piece is right. Now check the left-over piece.');
-  else say(fb,false,'Not yet — look at the bar again, then the taken piece.');
+  var asks=card.getAttribute('data-asks'),t=card.querySelector('.tb').value,l=card.querySelector('.lb').value,gt=parseVal(t),gl=parseVal(l);
+  var needT=(asks!=='left'),needL=(asks!=='taken');
+  if((needT&&(!t.trim()||!gt))||(needL&&(!l.trim()||!gl))){say(fb,false,'Fill '+((needT&&needL)?'both boxes':(needT?'the taken box':'the left-over box'))+' first (like 1 1/5 or 7/4).');return;}
+  var okT=!needT||sameVal(gt,parseVal(card.getAttribute('data-taken'))),okL=!needL||sameVal(gl,parseVal(card.getAttribute('data-left')));
+  if(okT&&okL){var P=PRAISE21,k=card.getAttribute('data-kind'),pool=(k==='told')?[P[1]]:[P[0],P[2]],p=pool[Math.floor(Math.random()*pool.length)];if(p===lastP&&pool.length>1)p=(p===pool[0])?pool[1]:pool[0];lastP=p;say(fb,true,'✓ '+p);}
+  else if(okT&&needT&&needL)say(fb,false,'Not yet — your taken piece is right. Now check the left-over piece. Tap Show steps to see it line by line.');
+  else say(fb,false,'Not yet — look at the bar again. Tap Show steps to see it line by line.');
   if(ss)ss.style.display='inline-block';
 }
-function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+var PRAISE21=["You checked for a unit straight after the fraction — that’s the whole trick.","Told you exactly how much — straight to taking away. Nice.","One line at a time — and it came out. Two-step star!","Fixed it! That’s how brains grow."];
+var WALKS={};
+function walkInit(id,steps){WALKS[id]={steps:steps,i:0};}
+function walkNext(id,btn){var w=WALKS[id],box=document.getElementById(id);if(w.i>=w.steps.length){w.i=0;var all=box.querySelectorAll('.lit-node'),k;for(k=0;k<all.length;k++){all[k].classList.remove('lit-node');}btn.textContent='Next step ▸';return;}
+  var s=w.steps[w.i],el=box.querySelector('#'+s[0]);el.classList.add('lit-node');el.querySelector('.cap').textContent=s[1];w.i++;if(w.i>=w.steps.length)btn.textContent='Start again';}
+function walkPick(boxId,key,btn){var all=document.querySelectorAll('#'+boxId+' .lit-node'),k;for(k=0;k<all.length;k++)all[k].classList.remove('lit-node');
+  var w=WALKSETS[key];WALKS[boxId]={steps:w,i:0};document.getElementById(boxId+'_nx').textContent='Next step ▸';document.getElementById(boxId+'_nx').style.display='inline-block';}
+var WALKSETS={};
+function scOpen(id){var b=document.querySelector("#"+id+" .wlb");wlOpen(b);}
 </script>
 </body>
 </html>

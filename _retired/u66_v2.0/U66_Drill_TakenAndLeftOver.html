@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Star Path — Unit 66 (Taken Piece & Left-over Piece)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#8D6E00;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:block}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.wrap{max-width:760px;margin:0 auto;padding:16px;width:100%}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin:12px 0}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.q-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1px solid #9FA8DA;border-radius:14px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFF3E0;color:#8D6E00;border:1px solid #FFE0B2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stop-here{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FB8C00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:800;color:#E65100;margin:16px 0}
+.flip-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.flip-card{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:12px 18px;font-size:.95rem;font-weight:700;color:var(--warn);text-align:center}
+/* answer frame */
+.frame{background:#fff;border:2px solid var(--acc);border-radius:10px;padding:10px 12px;margin:10px 0}
+.frame .fr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0}
+.frame .fl{font-weight:700;color:var(--warn);font-size:.92rem;min-width:150px}
+.frame .fv{font-size:1rem;color:#1a1a2e}
+.frame .fv.ans{font-weight:800;color:var(--warn)}
+.frame input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:6px 8px;font-size:1rem;width:170px;font-family:inherit}
+.frame input[type=text].wide{width:230px}
+.frame input[type=text]:focus{outline:2px solid #9FA8DA}
+.frame .fr.pieces input{width:90px}
+/* piece cutter W10 */
+.w10{background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:12px;margin:12px 0}
+.w10 svg{width:100%;height:auto;display:block}
+.w10-lines{margin-top:8px;min-height:60px}
+.w10-lines .ln{font-size:1rem;padding:3px 0;color:#1a1a2e}
+.w10-lines .ln.last{font-weight:800;color:var(--warn)}
+.w10-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.w10-btns button{border:none;border-radius:8px;padding:8px 16px;font-size:.92rem;font-weight:700;cursor:pointer}
+.w10-btns .go{background:var(--acc);color:#fff}
+.w10-btns .go:disabled{background:#9FA8DA;cursor:default}
+.w10-btns .rs{background:#fff;color:var(--acc);border:1.5px solid var(--acc)}
+.two-cards{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.two-cards .q-card{flex:1;min-width:250px;margin-bottom:0}
+.ans-input{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 10px;font-size:1rem;width:190px;font-family:inherit;margin-right:8px}
+.nav-link{flex:1;display:block;text-align:center;padding:13px 0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.nav-link.out{background:#fff;color:#283593;border:2px solid #283593}
+.nav-link.fill{background:#3F51B5;color:#fff;border:2px solid #3F51B5}
+
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.chip{display:inline-block;border-radius:14px;padding:3px 12px;font-size:.88rem;font-weight:700;border:2px solid #1565C0}
+.chip.t{background:#90CAF9;color:#0D47A1}.chip.l{background:#fff;color:#283593;border-color:#283593}
+.chip.told{background:#FFF8E1;color:#8d6e00;border-color:#FFB74D}
+.bx{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.bx label{font-weight:700;color:#283593;font-size:.95rem}
+.bx input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 9px;font-size:1rem;width:120px;font-family:inherit}
+.bx .opt{font-weight:400;color:#607D8B;font-size:.82rem}
+.boxes-static{background:#fff;border:2px solid #1565C0;border-radius:10px;padding:10px 14px;margin:10px 0}
+.boxes-static .r{padding:3px 0;font-size:1rem}.boxes-static b{color:#0D47A1}
+.circ{border:3px solid #2E7D32;border-radius:10px;padding:2px 8px;font-weight:800;color:#1B5E20;display:inline-block}
+.amberwarn{background:#FFF8E1;border:2px solid #FFB74D;border-radius:10px;padding:12px 16px;margin:12px 0;color:#8d6e00;font-weight:700}
+.sbs{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.sbs .sc{flex:1;min-width:240px;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:12px}
+.sbs .sc.a{border-color:#1565C0;background:#E3F2FD}.sbs .sc.b{border-color:#FFB74D;background:#FFF8E1}
+.sbs .sc .st{font-weight:800;margin-bottom:4px;color:#283593}
+.bar-wrap{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px;margin:10px 0}
+.bar-wrap svg{width:100%;height:auto;display:block}
+
+.intro{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.intro p{margin-bottom:6px}
+.meters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+.lv{flex:1;min-width:120px;border:2px dashed #B0BEC5;border-radius:10px;padding:6px 8px;text-align:center;background:#fff;color:#78909C}
+.lv .ln1{font-weight:800;font-size:.9rem}.lv .ln2{font-size:.78rem;margin-bottom:3px}
+.lv.now{border:2px solid #283593;color:#283593;background:#E8EAF6}
+.lv.done{border:2px solid #2E7D32;color:#1B5E20;background:#E8F5E9}
+.lv.boss{border-color:#FFB74D;color:#8d6e00;background:#FFF8E1}
+.lv.boss.now{border:2px solid #F9A825}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid #B0BEC5;margin:0 2px;background:#fff}
+.dot.on{background:#F9A825;border-color:#F9A825}
+.bchip{display:inline-block;margin:2px 3px;padding:2px 8px;border-radius:12px;border:2px solid #FFB74D;background:#fff;font-weight:700;color:#8d6e00;font-size:.78rem}
+.bchip.beat{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.dstat{text-align:center;font-weight:700;color:#283593;font-size:.95rem}
+.dsub{text-align:center;font-size:.85rem;color:#607D8B;margin-bottom:8px}
+.welcome{text-align:center;font-size:.9rem;color:#455A64;margin:4px 0 8px;font-weight:600}
+.lvmsg{text-align:center;font-weight:800;color:#1B5E20;margin:4px 0;min-height:1em}
+.dq{font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:10px}
+.walk{background:#E3F2FD;border:2px solid #1565C0;border-radius:10px;padding:12px 14px;margin:10px 0}
+.walk .wt{font-weight:800;color:#0D47A1;margin-bottom:6px}
+.wholelab{text-align:center;font-weight:700;color:#283593;margin-top:6px}
+.sorry{background:#FFF3E0;border:2px solid #FFB74D;border-radius:10px;padding:14px 16px;margin-top:12px}
+.sorry .sbig{font-weight:800;color:#8d6e00;margin-bottom:6px}
+.tline{margin:4px 0;font-size:.95rem}
+.tline b{color:#283593}
+.btn-big{background:var(--acc);color:#fff;border:none;padding:13px 30px;border-radius:10px;cursor:pointer;font-size:1.05rem;font-weight:700;display:block;margin:16px auto 0}
+.btn-big.alt{background:#fff;color:#283593;border:2px solid #283593}
+.endbox{display:none;border-radius:12px;padding:20px;margin-top:16px;text-align:center;position:relative;overflow:hidden}
+.endbox.master{background:#E8F5E9;border:2px solid #A5D6A7}
+.endbox.stop{background:#FFF8E1;border:2px solid #FFB74D}
+.endbox .big{font-size:1.25rem;font-weight:800}
+.endbox.master .big{color:#1B5E20}.endbox.stop .big{color:#8d6e00}
+.tsbadge{display:inline-block;margin:8px 0;padding:6px 18px;border-radius:20px;background:#2E7D32;color:#fff;font-weight:800;letter-spacing:1px}
+.codebox{display:inline-block;margin:12px 0;background:#fff;border:3px dashed #2E7D32;border-radius:10px;padding:10px 22px;font-size:1.6rem;font-weight:800;letter-spacing:2px;color:#1B5E20}
+.savebox{display:none;margin-top:16px;border-radius:12px;padding:18px;text-align:center}
+.savebox.notsaved{background:#FFF3E0;border:2px solid #FFB74D}
+.savebox.saved{background:#E8F5E9;border:2px solid #A5D6A7}
+.savebox .big{font-weight:800;font-size:1.1rem}
+.savebox.notsaved .big{color:#8d6e00}.savebox.saved .big{color:#1B5E20}
+.cf{position:fixed;top:-20px;width:10px;height:14px;opacity:.9;z-index:50;pointer-events:none;animation:cfall 2.6s ease-in forwards}
+@keyframes cfall{to{transform:translateY(110vh) rotate(540deg);opacity:.9}}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Star Path &mdash; Unit 66 (Taken &amp; Left-over)</span>
+  <span style="width:60px"></span>
+</nav>
+<div class="wrap">
+<div class="card">
+  <div class="intro"><p><strong>The Star Path &#11088;</strong> Do it after both lessons, before the test.</p>
+  <p>Every question has a bar and two boxes: <strong>Taken piece</strong> and <strong>Left-over piece</strong>. Tap the bar to shade the taken piece if you like. Do the working on your paper.</p>
+  <p>It is a ladder: <strong>Level 1</strong> easy numbers, <strong>Level 2</strong> smaller bottles, <strong>Level 3</strong> one question, then the <strong>Boss Round</strong>.</p>
+  <p>Every right answer lights a star. <strong>Stars never go away.</strong> Get a &quot;not yet&quot;? You see the trick, then an easier question, then you climb back.</p>
+  <p>At the end you get a <strong>code</strong>. Write it at the top of your test paper. No code on the paper means the test does not count.</p>
+  <p>Stuck? Open the <a href="U66_StuckCard_TakenAndLeftOver.html" style="color:#F57F17;font-weight:700">Stuck Card</a>.</p></div>
+  <div class="meters" id="meters"></div>
+  <div class="dstat" id="dstat"></div>
+  <div class="dsub" id="dsub"></div>
+  <div class="welcome" id="welcome"></div>
+  <div class="lvmsg" id="lvmsg"></div>
+  <div class="q-card" id="dcard">
+    <span class="q-cap" id="dcap"></span>
+    <div class="dq" id="dq"></div>
+    <div class="walk" id="walk" style="display:none"></div>
+    <div class="bar-wrap" id="dbar"></div>
+    <div class="bx" id="dbx"><label id="tlab">Taken piece = <input type="text" class="tb" id="tb" aria-label="taken piece"></label><label id="llab">Left-over piece = <input type="text" class="lb" id="lb" aria-label="left-over piece"></label><button class="btn-check" id="dchk" onclick="dcheck()">Check</button></div>
+    <div class="feedback" id="dfb"></div>
+    <div class="sorry" id="dsorry" style="display:none"></div>
+    <button class="btn-big" id="dnext" style="display:none" onclick="dnext()">Next question &rarr;</button>
+  </div>
+  <div class="endbox master" id="endMaster"><div class="tsbadge">TRAP SPOTTER &#10003;</div><div class="big">Boss Round beaten! Write this code on your test:</div><div class="codebox">PIECE-66</div><p>Level 1, 2, 3 and all 3 bosses. Now save your results.</p></div>
+  <div class="endbox stop" id="endStop"><div class="big" id="breakMsg"></div><p style="margin-top:8px">Stuck on something? <a href="U66_StuckCard_TakenAndLeftOver.html" style="color:#F57F17;font-weight:700">Open the Stuck Card</a>.</p></div>
+  <div class="savebox notsaved" id="saveBox"><div class="big" id="saveBig">NOT saved yet.</div>
+    <p id="saveMsg" style="margin-top:8px">Press the button. When the save box opens, choose the folder called <b>SelfCheck Results</b> and press Save.</p>
+    <button class="btn-big" id="saveBtn" onclick="saveResults()">Save my results</button>
+    <button class="btn-big alt" id="againBtn" onclick="tryAgain()" style="display:none">Start sitting <span id="attN">2</span></button></div>
+</div>
+</div>
+<script>
+
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a);}
+function mixedStr(n,d){var g=gcd(n,d);n=n/g;d=d/g;var w=Math.floor(n/d),r=n-w*d;if(r===0)return ''+w;return (w?w+' ':'')+r+'/'+d;}
+/* parse "1 1/5", "6/5", "2", "1.2", "1 1/5 m" -> [num,den] reduced, or null */
+function parseVal(s){
+  if(s==null)return null; s=String(s).toLowerCase().replace(/[²]/g,'').replace(/(kg|km|cups?|cm|ml|l|m|litres?|liters?|metres?|meters?|sq\.?|squared)\b/g,' ').replace(/\s+/g,' ').trim();
+  if(!s)return null; var m;
+  if((m=s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/))){var d=+m[3];if(!d)return null;var n=(+m[1])*d+(+m[2]);var g=gcd(n,d);return [n/g,d/g,'mixed'];}
+  if((m=s.match(/^(\d+)\s*\/\s*(\d+)$/))){var d2=+m[2];if(!d2)return null;var g2=gcd(+m[1],d2);return [(+m[1])/g2,d2/g2,'frac',+m[1],d2];}
+  if((m=s.match(/^(\d+)$/))){return [+m[1],1,'int'];}
+  if((m=s.match(/^(\d*)\.(\d+)$/))){var den=Math.pow(10,m[2].length);var n3=(+m[1]||0)*den+(+m[2]);var g3=gcd(n3,den);return [n3/g3,den/g3,'dec'];}
+  return null;}
+function sameVal(a,b){return a&&b&&a[0]===b[0]&&a[1]===b[1];}
+function isImproperText(s){var m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);return !!m&&(+m[1])>(+m[2]);}
+
+var BANK=[{"id": "S01", "lv": "L1", "kind": "of", "asks": "both", "f": "4/9", "W": "18", "t": "8", "l": "10", "u": "L", "q": "Kim has 18 L of water. She uses 4/9 of the water. (a) How much water does she use? (b) How much water is left?"}, {"id": "S02", "lv": "L1", "kind": "of", "asks": "both", "f": "1/4", "W": "40", "t": "10", "l": "30", "u": "L", "q": "Noah has 40 L of water. He uses 1/4 of the water. (a) How much water does he use? (b) How much water is left?"}, {"id": "S03", "lv": "L1", "kind": "of", "asks": "both", "f": "5/6", "W": "42", "t": "35", "l": "7", "u": "L", "q": "Noah has 42 L of milk. He pours out 5/6 of the milk. (a) How much milk does he pour out? (b) How much milk is left?"}, {"id": "S04", "lv": "L1", "kind": "of", "asks": "both", "f": "2/3", "W": "36", "t": "24", "l": "12", "u": "m", "q": "Zoe has 36 m of rope. She cuts off 2/3 of the rope. (a) How much rope does she cut off? (b) How much rope is left?"}, {"id": "S05", "lv": "L1", "kind": "of", "asks": "both", "f": "1/6", "W": "18", "t": "3", "l": "15", "u": "L", "q": "Eva has 18 L of milk. She pours out 1/6 of the milk. (a) How much milk does she pour out? (b) How much milk is left?"}, {"id": "S06", "lv": "L1", "kind": "of", "asks": "both", "f": "2/3", "W": "45", "t": "30", "l": "15", "u": "L", "q": "Noah has 45 L of milk. He pours out 2/3 of the milk. (a) How much milk does he pour out? (b) How much milk is left?"}, {"id": "S07", "lv": "L1", "kind": "told", "asks": "both", "f": "1/2", "W": "45", "t": "1/2", "l": "44 1/2", "u": "kg", "q": "Ana has 45 kg of clay. She uses 1/2 kg of the clay. (a) How much clay does she use? (b) How much clay is left?"}, {"id": "S08", "lv": "L1", "kind": "told", "asks": "both", "f": "3/4", "W": "20", "t": "3/4", "l": "19 1/4", "u": "L", "q": "Kim has 20 L of milk. She pours out 3/4 L of the milk. (a) How much milk does she pour out? (b) How much milk is left?"}, {"id": "S09", "lv": "L2", "kind": "of", "asks": "both", "f": "2/9", "W": "3 3/5", "t": "4/5", "l": "2 4/5", "u": "kg", "q": "Dan has 3 3/5 kg of sand. He gives away 2/9 of the sand. (a) How much sand does he give away? (b) How much sand is left?"}, {"id": "S10", "lv": "L2", "kind": "of", "asks": "both", "f": "1/3", "W": "1 1/5", "t": "2/5", "l": "4/5", "u": "kg", "q": "Kim has 1 1/5 kg of flour. She uses 1/3 of the flour. (a) How much flour does she use? (b) How much flour is left?"}, {"id": "S11", "lv": "L2", "kind": "of", "asks": "both", "f": "2/7", "W": "4 3/8", "t": "1 1/4", "l": "3 1/8", "u": "kg", "q": "Noah has 4 3/8 kg of clay. He uses 2/7 of the clay. (a) How much clay does he use? (b) How much clay is left?"}, {"id": "S12", "lv": "L2", "kind": "of", "asks": "both", "f": "2/3", "W": "2 5/8", "t": "1 3/4", "l": "7/8", "u": "L", "q": "Ana has 2 5/8 L of water. She uses 2/3 of the water. (a) How much water does she use? (b) How much water is left?"}, {"id": "S13", "lv": "L2", "kind": "of", "asks": "both", "f": "6/7", "W": "2 1/3", "t": "2", "l": "1/3", "u": "m", "q": "Lily has 2 1/3 m of rope. She cuts off 6/7 of the rope. (a) How much rope does she cut off? (b) How much rope is left?"}, {"id": "S14", "lv": "L2", "kind": "of", "asks": "both", "f": "2/7", "W": "4 1/5", "t": "1 1/5", "l": "3", "u": "L", "q": "Zoe has 4 1/5 L of water. She uses 2/7 of the water. (a) How much water does she use? (b) How much water is left?"}, {"id": "S15", "lv": "L2", "kind": "of", "asks": "both", "f": "2/5", "W": "1 2/3", "t": "2/3", "l": "1", "u": "L", "q": "Ana has 1 2/3 L of milk. She pours out 2/5 of the milk. (a) How much milk does she pour out? (b) How much milk is left?"}, {"id": "S16", "lv": "L2", "kind": "of", "asks": "both", "f": "1/3", "W": "5 1/4", "t": "1 3/4", "l": "3 1/2", "u": "kg", "q": "Ana has 5 1/4 kg of clay. She uses 1/3 of the clay. (a) How much clay does she use? (b) How much clay is left?"}, {"id": "S17", "lv": "L2", "kind": "told", "asks": "both", "f": "7/8", "W": "2 1/2", "t": "7/8", "l": "1 5/8", "u": "kg", "q": "Jin has 2 1/2 kg of sand. He gives away 7/8 kg of the sand. (a) How much sand does he give away? (b) How much sand is left?"}, {"id": "S18", "lv": "L2", "kind": "told", "asks": "both", "f": "2/3", "W": "3 1/4", "t": "2/3", "l": "2 7/12", "u": "m", "q": "Leo has 3 1/4 m of ribbon. He cuts off 2/3 m of the ribbon. (a) How much ribbon does he cut off? (b) How much ribbon is left?"}, {"id": "S19", "lv": "L3", "kind": "of", "asks": "taken", "f": "2/9", "W": "2 1/4", "t": "1/2", "l": "1 3/4", "u": "L", "q": "Max has 2 1/4 L of juice. He drinks 2/9 of the juice. How much juice does he drink?"}, {"id": "S20", "lv": "L3", "kind": "of", "asks": "taken", "f": "1/5", "W": "1 1/4", "t": "1/4", "l": "1", "u": "kg", "q": "Zoe has 1 1/4 kg of clay. She uses 1/5 of the clay. How much clay does she use?"}, {"id": "S21", "lv": "L3", "kind": "of", "asks": "taken", "f": "6/7", "W": "2 4/5", "t": "2 2/5", "l": "2/5", "u": "L", "q": "Lily has 2 4/5 L of milk. She pours out 6/7 of the milk. How much milk does she pour out?"}, {"id": "S22", "lv": "L3", "kind": "of", "asks": "taken", "f": "1/3", "W": "4 4/5", "t": "1 3/5", "l": "3 1/5", "u": "L", "q": "Max has 4 4/5 L of milk. He pours out 1/3 of the milk. How much milk does he pour out?"}, {"id": "S23", "lv": "L3", "kind": "of", "asks": "left", "f": "3/5", "W": "2 1/2", "t": "1 1/2", "l": "1", "u": "kg", "q": "Noah has 2 1/2 kg of rice. He cooks 3/5 of the rice. How much rice is left?"}, {"id": "S24", "lv": "L3", "kind": "of", "asks": "left", "f": "1/3", "W": "3 3/5", "t": "1 1/5", "l": "2 2/5", "u": "kg", "q": "Mia has 3 3/5 kg of clay. She uses 1/3 of the clay. How much clay is left?"}, {"id": "S25", "lv": "L3", "kind": "of", "asks": "left", "f": "3/7", "W": "2 4/5", "t": "1 1/5", "l": "1 3/5", "u": "L", "q": "Ana has 2 4/5 L of water. She uses 3/7 of the water. How much water is left?"}, {"id": "S26", "lv": "L3", "kind": "of", "asks": "left", "f": "8/9", "W": "1 4/5", "t": "1 3/5", "l": "1/5", "u": "L", "q": "Pia has 1 4/5 L of juice. She drinks 8/9 of the juice. How much juice is left?"}, {"id": "S27", "lv": "L3", "kind": "told", "asks": "left", "f": "1/3", "W": "4 1/2", "t": "1/3", "l": "4 1/6", "u": "L", "q": "Leo has 4 1/2 L of paint. He uses 1/3 L of the paint. How much paint is left?"}, {"id": "S28", "lv": "L3", "kind": "told", "asks": "left", "f": "1/2", "W": "4 1/8", "t": "1/2", "l": "3 5/8", "u": "kg", "q": "Mia has 4 1/8 kg of flour. She uses 1/2 kg of the flour. How much flour is left?"}, {"id": "S29", "lv": "BOSS", "kind": "of", "asks": "taken", "f": "4/7", "W": "3 1/2", "t": "2", "l": "1 1/2", "u": "kg", "q": "Ivy has 3 1/2 kg of rice. She cooks 4/7 of the rice. How much rice does she cook?"}, {"id": "S30", "lv": "BOSS", "kind": "of", "asks": "taken", "f": "1/8", "W": "3 1/5", "t": "2/5", "l": "2 4/5", "u": "L", "q": "Jin has 3 1/5 L of milk. He pours out 1/8 of the milk. How much milk does he pour out?"}, {"id": "S31", "lv": "BOSS", "kind": "of", "asks": "left", "f": "1/6", "W": "3 3/5", "t": "3/5", "l": "3", "u": "m", "q": "Pia has 3 3/5 m of rope. She cuts off 1/6 of the rope. How much rope is left?"}, {"id": "S32", "lv": "BOSS", "kind": "of", "asks": "left", "f": "4/5", "W": "1 1/4", "t": "1", "l": "1/4", "u": "kg", "q": "Lily has 1 1/4 kg of clay. She uses 4/5 of the clay. How much clay is left?"}, {"id": "S33", "lv": "BOSS", "kind": "told", "asks": "left", "f": "1/2", "W": "4 2/5", "t": "1/2", "l": "3 9/10", "u": "kg", "q": "Tia has 4 2/5 kg of sand. She gives away 1/2 kg of the sand. How much sand is left?"}, {"id": "S34", "lv": "BOSS", "kind": "told", "asks": "left", "f": "1/3", "W": "3 1/3", "t": "1/3", "l": "3", "u": "kg", "q": "Noah has 3 1/3 kg of sand. He gives away 1/3 kg of the sand. How much sand is left?"}];
+
+var CODE='PIECE-66',KEY='chusaki_u066v2_starpath',NEEDL={1:3,2:4,3:4};
+var PR=["You shaded the taken piece first — that’s the whole trick.","Told you exactly how much — straight to taking away. Nice.","Worked out the piece, then the left-over. Two-step star!","Fixed it! That’s how brains grow."];
+var storageBad=false,attempt=1,sitsDone=0,stars=0,level=1,levelStars,boss,seen,order,cur,curRole,t0,lastPayload,done,openedAt,missStreak,pending,lastPraise='';
+var log,sitItems,firstTry,stepDowns,walkthroughs,walkStep,walkDone,curShaded;
+function $(id){return document.getElementById(id);}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function sload(){try{var s=window.localStorage.getItem(KEY);return s?JSON.parse(s):null;}catch(e){storageBad=true;return null;}}
+function sstore(){try{window.localStorage.setItem(KEY,JSON.stringify({stars:stars,level:level,levelStars:levelStars,boss:boss,seen:Object.keys(seen),sits:sitsDone}));}catch(e){storageBad=true;}}
+function probe(){try{window.localStorage.setItem(KEY+'_p','1');window.localStorage.removeItem(KEY+'_p');}catch(e){storageBad=true;}}
+function newPath(){stars=0;level=1;levelStars={L1:0,L2:0,L3:0};boss={taken:false,left:false,told:false};seen={};}
+function newSitting(){
+  log=[];sitItems=0;firstTry=0;stepDowns=0;walkthroughs=0;missStreak=0;pending=null;cur=null;curRole='normal';lastPayload=null;done=false;
+  openedAt=new Date().toISOString();order=shuffle(BANK);attempt=sitsDone+1;
+}
+function bossAll(){return boss.taken&&boss.left&&boss.told;}
+function bossType(it){return it.asks==='taken'?'taken':(it.kind==='told'?'told':'left');}
+function pick(f){
+  var c=[],i;for(i=0;i<order.length;i++)if(f(order[i]))c.push(order[i]);
+  if(!c.length)return order[0];
+  for(i=0;i<c.length;i++)if(!seen[c[i].id]&&(!cur||c[i].id!==cur.id))return c[i];
+  for(i=0;i<c.length;i++)delete seen[c[i].id];
+  for(i=0;i<c.length;i++)if(!cur||c[i].id!==cur.id)return c[i];
+  return c[0];
+}
+function lvIs(n){return function(it){return it.lv==='L'+n;};}
+function pickDown(){
+  if(level===1)return pick(function(it){return it.lv==='L1'&&it.kind==='of';});
+  if(level===2)return pick(lvIs(1));
+  if(level===3)return pick(lvIs(2));
+  var want=cur?bossType(cur):'taken';
+  if(want==='taken')return pick(function(it){return it.lv==='L3'&&it.asks==='taken';});
+  if(want==='told')return pick(function(it){return it.lv==='L3'&&it.kind==='told';});
+  return pick(function(it){return it.lv==='L3'&&it.asks==='left'&&it.kind==='of';});
+}
+function pickNormal(){
+  if(level<=3)return pick(lvIs(level));
+  var t=!boss.taken?'taken':(!boss.left?'left':'told');
+  return pick(function(it){return it.lv==='BOSS'&&bossType(it)===t;});
+}
+function pickOpener(){
+  if(level<=2)return pick(function(it){return it.lv==='L1'&&it.kind==='of';});
+  if(level===3)return pick(lvIs(2));
+  return pick(lvIs(3));
+}
+function unitOf(it){return it.u;}
+function mx(n,d){return mixedStr(n,d);}
+function V(s){return parseVal(s);}
+function noun(it){var m=it.q.match(/of the (\w+)/);return m?m[1]:'it';}
+/* ---------- rendering ---------- */
+function drawMeters(){
+  var o='',n,k,i;
+  for(n=1;n<=3;n++){
+    var need=NEEDL[n],got=levelStars['L'+n];if(got>need)got=need;
+    var cls='lv'+(level===n?' now':'')+(level>n?' done':'');
+    var dots='';for(i=0;i<need;i++)dots+='<span class="dot'+(i<got?' on':'')+'"></span>';
+    o+='<div class="'+cls+'"><div class="ln1">Level '+n+'</div><div class="ln2">'+['','Easy numbers','Smaller bottles','One question'][n]+'</div><div>'+dots+'</div></div>';
+  }
+  var bc='',ks=['taken','left','told'],kn=['Boss 1','Boss 2','Boss 3'];
+  for(i=0;i<3;i++)bc+='<span class="bchip'+(boss[ks[i]]?' beat':'')+'">'+(boss[ks[i]]?'&#10003; ':'')+kn[i]+'</span>';
+  o+='<div class="lv boss'+(level===4?' now':'')+'"><div class="ln1">Boss Round</div><div class="ln2">3 to beat</div><div>'+bc+'</div></div>';
+  $('meters').innerHTML=o;
+  $('dstat').textContent='⭐ Stars: '+stars;
+  $('dsub').textContent='Done this sitting: '+sitItems+' (a brain break comes at about 12)';
+}
+function barHTML(it,shadeN,clickable){
+  var a=V(it.W),f=it.f.split('/'),n=+f[0],d=+f[1],W=540,H=46,X0=10,Y0=32,i,s;
+  var Wm=mx(a[0],a[1]);
+  if(it.kind==='told'){
+    s='<div class="wholelab">the whole: '+Wm+' '+it.u+'</div><div style="text-align:center"><svg viewBox="0 0 200 120" width="170" role="img" aria-label="a measuring jug with a tiny mark"><path d="M60 14 L140 14 L130 104 Q100 112 70 104 Z" fill="#fff" stroke="#283593" stroke-width="3"/><path d="M64 88 L136 88 L130 104 Q100 112 70 104 Z" fill="#90CAF9" stroke="none"/><line x1="60" y1="88" x2="140" y2="88" stroke="#1565C0" stroke-width="3"/><text x="146" y="92" font-size="13" font-weight="700" fill="#0D47A1">'+it.f+' '+it.u+'</text></svg></div>';
+    return s;
+  }
+  s='<svg id="barsvg" viewBox="0 0 560 100" role="img" aria-label="a bar cut into '+d+' equal pieces" data-d="'+d+'" data-n="'+n+'">'
+   +'<text x="10" y="20" font-size="14" font-weight="700" fill="#283593">the whole: '+Wm+' '+it.u+' — cut into '+d+' equal pieces</text>';
+  for(i=0;i<d;i++){
+    var on=i<shadeN;
+    s+='<rect class="pc'+(on?' on':'')+'" data-i="'+i+'" x="'+(X0+W*i/d)+'" y="'+Y0+'" width="'+(W/d)+'" height="'+H+'" fill="'+(on?'#90CAF9':'#FFFFFF')+'" stroke="#283593" stroke-width="2"'+(clickable?' style="cursor:pointer" onclick="togglePc(this)"':'')+'/>';
+  }
+  return s+'</svg>'+(clickable?'<p class="tap-hint">Tap a piece to shade it. Shade the taken piece.</p>':'');
+}
+function togglePc(r){
+  if(done)return;
+  var on=r.classList.contains('on');
+  if(on){r.classList.remove('on');r.setAttribute('fill','#FFFFFF');}else{r.classList.add('on');r.setAttribute('fill','#90CAF9');}
+}
+function shadedCount(){return document.querySelectorAll('#dbar rect.pc.on').length;}
+function setShaded(n){var r=document.querySelectorAll('#dbar rect.pc');for(var i=0;i<r.length;i++){if(i<n){r[i].classList.add('on');r[i].setAttribute('fill','#90CAF9');}else{r[i].classList.remove('on');r[i].setAttribute('fill','#FFFFFF');}}}
+function needBoxes(it){
+  if(curRole==='boss'||it.lv==='L3'||it.lv==='BOSS')return it.asks==='taken'?['t']:['l'];
+  return ['t','l'];
+}
+function show(it,role){
+  cur=it;curRole=role;seen[it.id]=1;t0=Date.now();walkStep=0;walkDone=(role!=='walk');
+  var cap=(role==='boss'?'Boss question':(role==='open'?'Warm-up win':(role==='down'?'Easier one':(role==='walk'?'Let’s do one together':'Question '+(sitItems+1)))));
+  $('dcap').textContent=cap;$('dq').textContent=it.q;
+  $('dbar').innerHTML=barHTML(it,0,it.kind!=='told'&&role!=='walk');
+  $('tb').value='';$('lb').value='';
+  var nb=needBoxes(it),asked=(it.lv==='L3'||it.lv==='BOSS');
+  $('tlab').firstChild.nodeValue='Taken piece'+(asked?(nb.indexOf('t')>=0?' (the answer)':' (optional stepping stone)'):'')+' = ';
+  $('llab').firstChild.nodeValue='Left-over piece'+(asked?(nb.indexOf('l')>=0?' (the answer)':' (optional)'):'')+' = ';
+  $('tb').disabled=false;$('lb').disabled=false;$('dchk').disabled=false;
+  $('dfb').style.display='none';$('dfb').textContent='';$('dsorry').style.display='none';$('dsorry').innerHTML='';$('dnext').style.display='none';
+  var w=$('walk');
+  if(role==='walk'){w.style.display='block';$('tb').disabled=true;$('lb').disabled=true;$('dchk').disabled=true;walkthroughs++;renderWalk();}
+  else{w.style.display='none';w.innerHTML='';}
+  drawMeters();
+}
+function walkLines(it){
+  var a=V(it.W),Wm=mx(a[0],a[1]),u=it.u,t=V(it.t),l=V(it.l),f=it.f.split('/'),n=+f[0],d=+f[1];
+  if(it.kind==='told')return ['The whole is '+Wm+' '+u+'.','The story TELLS us how much was taken: '+it.t+' '+u+'. That is the taken piece.','Left-over piece = '+Wm+' − '+it.t+' = '+it.l+' '+u+'.'];
+  var P=mx(a[0],a[1]*d);
+  return ['The whole is '+Wm+' '+u+'. The bottom number is '+d+', so the bar is cut into '+d+' equal pieces.','Each piece = '+Wm+' ÷ '+d+' = '+P+' '+u+'.',
+          'The story says '+it.f+' OF the '+noun(it)+', so shade '+n+' piece'+(n>1?'s':'')+'.',
+          'Taken piece = '+n+' × '+P+' = '+it.t+' '+u+'. Left-over piece = '+Wm+' − '+it.t+' = '+it.l+' '+u+'.'];
+}
+function renderWalk(){
+  var L=walkLines(cur),o='<div class="wt">Let’s do one together</div>',i;
+  for(i=0;i<=walkStep&&i<L.length;i++)o+='<div class="tline">'+(i+1)+'. '+L[i]+'</div>';
+  if(cur.kind!=='told'&&walkStep>=2){var f=cur.f.split('/');setShaded(+f[0]);}
+  if(walkStep<L.length-1)o+='<button class="btn-big alt" onclick="walkNext()">Next step</button>';
+  else{o+='<div class="tline"><b>Now type the two boxes.</b></div>';walkDone=true;$('tb').disabled=false;$('lb').disabled=false;$('dchk').disabled=false;}
+  $('walk').innerHTML=o;
+}
+function walkNext(){walkStep++;renderWalk();}
+/* ---------- checking ---------- */
+function dcheck(){
+  var tv=$('tb').value.trim(),lv=$('lb').value.trim(),nb=needBoxes(cur),gt=V(tv),gl=V(lv);
+  if((nb.indexOf('t')>=0&&(!tv||!gt))||(nb.indexOf('l')>=0&&(!lv||!gl))){var fb=$('dfb');fb.className='feedback err';fb.style.display='block';fb.textContent='Fill the box'+(nb.length>1?'es':'')+' first (like 1 1/5 or 7/4).';return;}
+  var okT=nb.indexOf('t')<0||sameVal(gt,V(cur.t)),okL=nb.indexOf('l')<0||sameVal(gl,V(cur.l));
+  resolve(okT&&okL,tv,lv);
+}
+function praise(){
+  var pool;
+  if(curRole==='down'||curRole==='walk')pool=[3];
+  else if(cur.kind==='told')pool=[1];
+  else pool=curShaded>0?[0,2]:[2];
+  var c=[],i;for(i=0;i<pool.length;i++)if(PR[pool[i]]!==lastPraise)c.push(pool[i]);
+  var p=PR[c.length?c[Math.floor(Math.random()*c.length)]:pool[0]];lastPraise=p;return p;
+}
+function trick(it){
+  var a=V(it.W),Wm=mx(a[0],a[1]),f=it.f.split('/'),n=+f[0],o='<div class="sbig">Not yet — here’s the trick:</div>';
+  o+='<div class="bar-wrap">'+barHTML(it,it.kind==='told'?0:n,false)+'</div>';
+  o+='<div class="tline">Taken piece = <b>'+it.t+' '+it.u+'</b> &nbsp;&middot;&nbsp; Left-over piece = <b>'+it.l+' '+it.u+'</b></div>';
+  if(it.kind==='told')o+='<div class="tline">The story TELLS us how much was taken ('+it.t+' '+it.u+'), so that is the taken piece. Left over = '+Wm+' − '+it.t+' = '+it.l+' '+it.u+'.</div>';
+  else o+='<div class="tline">It says '+it.f+' OF the '+noun(it)+', so work out the taken piece first: '+it.f+' × '+Wm+' = '+it.t+' '+it.u+'. Left over = '+Wm+' − '+it.t+' = '+it.l+' '+it.u+'.</div>';
+  var nx=missStreak>=2?'a question we do together':'an easier question, then you climb back';
+  o+='<div class="tline"><b>Next:</b> '+nx+'.</div>';
+  return o;
+}
+function resolve(ok,tv,lv){
+  var it=cur,role=curRole,ms=Date.now()-t0;
+  curShaded=it.kind==='told'?0:shadedCount();
+  $('tb').disabled=true;$('lb').disabled=true;$('dchk').disabled=true;
+  log.push({id:it.id,level:it.lv,kind:it.kind==='told'?'told':'work',asks:it.asks,role:role,shaded:curShaded,takenGiven:tv,leftGiven:lv,correctTaken:it.t,correctLeft:it.l,isCorrect:ok,ms:ms});
+  sitItems++;
+  if(role==='down')stepDowns++;
+  if(ok&&(role==='normal'||role==='boss'))firstTry+=(missStreak===0?1:0);
+  var lvlUp=null;
+  if(ok){
+    stars++;
+    if(role==='boss')boss[bossType(it)]=true;
+    else if(role==='normal'&&level<=3){levelStars['L'+level]++;if(levelStars['L'+level]>=NEEDL[level]){level++;lvlUp=level;}}
+  }
+  if(ok){missStreak=0;pending=null;}
+  else{missStreak++;if(role==='walk'){missStreak=0;pending='down';}else pending=(missStreak>=2)?'walk':'down';}
+  if(role==='walk'&&ok)missStreak=0;
+  sstore();drawMeters();
+  var fb=$('dfb');fb.style.display='block';
+  if(ok){fb.className='feedback ok';fb.textContent='✓ '+praise()+(role==='open'||role==='down'||role==='walk'?'  ★ +1':'  ★ +1');}
+  else{fb.className='feedback err';fb.textContent='Not yet — the taken piece is '+it.t+' '+it.u+' and the left-over piece is '+it.l+' '+it.u+'.';$('dsorry').innerHTML=trick(it);$('dsorry').style.display='block';}
+  $('lvmsg').textContent=lvlUp?(lvlUp===4?'Level 3 complete! Boss Round next — 3 to beat.':'Level up! Welcome to Level '+lvlUp+' — '+['','','Smaller bottles','One question'][lvlUp]+'.'):'';
+  if(bossAll()){finish();return;}
+  if((sitItems>=12&&ok)||sitItems>=14){takeBreak();return;}
+  var nb=$('dnext');nb.textContent=ok?'Next question →':(missStreak>=2?'Let’s do one together →':'Easier one next →');nb.style.display='block';nb.focus({preventScroll:true});
+}
+function dnext(){
+  var role=pending||'normal',it;
+  $('lvmsg').textContent='';
+  if(role==='walk')it=pickDown();
+  else if(role==='down')it=pickDown();
+  else it=pickNormal();
+  if(role==='normal'&&level===4)role='boss';
+  pending=null;
+  show(it,role);
+}
+function mk(mastered){
+  var fin=new Date(),mins=Math.round(((fin-new Date(openedAt))/60000)*10)/10;
+  return {student:'Prem',subject:'Math',unit:'U066v2',type:'drill',attempt:attempt,openedAt:openedAt,finishedAt:fin.toISOString(),minutesSpent:mins,mastered:mastered,code:mastered?CODE:null,
+    stars:stars,level:level,levelStars:{L1:levelStars.L1,L2:levelStars.L2,L3:levelStars.L3},boss:{taken:boss.taken,left:boss.left,told:boss.told},
+    itemsTried:log.length,firstTryRight:firstTry,stepDowns:stepDowns,walkthroughs:walkthroughs,items:log};
+}
+function endCommon(){done=true;$('dnext').style.display='none';var sb=$('saveBox');sb.style.display='block';sb.className='savebox notsaved';$('saveBig').textContent='NOT saved yet.';}
+function finish(){endCommon();sitsDone++;sstore();lastPayload=mk(true);$('endMaster').style.display='block';confetti();saveResults();$('saveBox').scrollIntoView({behavior:'smooth',block:'center'});}
+function takeBreak(){
+  endCommon();sitsDone++;sstore();lastPayload=mk(false);
+  $('breakMsg').textContent=storageBad?('Brain break! ⭐ You’ve got '+stars+' stars. Come back tomorrow and keep going.'):('Brain break! ⭐ You’ve got '+stars+' stars — they’re saved. Come back tomorrow and keep going.');
+  $('endStop').style.display='block';saveResults();$('saveBox').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function confetti(){
+  var cols=['#F9A825','#43A047','#3F51B5','#FB8C00','#8E24AA','#00ACC1'],i;
+  for(i=0;i<36;i++){var e=document.createElement('span');e.className='cf';e.style.left=(Math.random()*100)+'vw';e.style.background=cols[i%cols.length];e.style.animationDelay=(Math.random()*0.8)+'s';
+    document.body.appendChild(e);(function(x){setTimeout(function(){if(x.parentNode)x.parentNode.removeChild(x);},4200);})(e);}
+}
+function fileName(){var d=new Date(),p=function(n){return (n<10?'0':'')+n;};return 'MATH_U066v2_Drill_'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'_a'+attempt+'.json';}
+async function saveResults(){
+  if(!lastPayload)return;
+  var json=JSON.stringify(lastPayload,null,2),name=fileName(),sb=$('saveBox');
+  function markSaved(how){sb.className='savebox saved';$('saveBig').textContent='Saved — Dad and Chusaki can see it now';$('saveMsg').textContent='File: '+name+' ('+how+')';$('saveBtn').style.display='none';showAgain();}
+  function markFail(msg){sb.className='savebox notsaved';$('saveBig').textContent='NOT saved yet.';$('saveMsg').textContent=msg;}
+  if(window.showSaveFilePicker){
+    try{
+      var handle=await window.showSaveFilePicker({suggestedName:name,types:[{description:'JSON results',accept:{'application/json':['.json']}}]});
+      var w=await handle.createWritable();await w.write(json);await w.close();markSaved('saved to the folder you chose');return;
+    }catch(e){if(e&&e.name==='AbortError'){markFail('You closed the save box, so nothing was saved. Press Save my results again.');return;}}
+  }
+  try{
+    var blob=new Blob([json],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},4000);
+    markSaved('downloaded — if it went to Downloads, move it into SelfCheck Results');
+  }catch(e2){markFail('Saving did not work. Tell Dad.');}
+}
+function showAgain(){$('attN').textContent=sitsDone+1;$('againBtn').style.display='block';}
+function startSitting(afterMaster){
+  if(afterMaster)newPath();
+  newSitting();
+  $('endMaster').style.display='none';$('endStop').style.display='none';$('saveBox').style.display='none';$('againBtn').style.display='none';$('saveBtn').style.display='inline-block';
+  $('saveMsg').textContent='Press the button. When the save box opens, choose the folder called SelfCheck Results and press Save.';
+  /* every sitting opens with one item from the level below: a guaranteed win */
+  show(pickOpener(),'open');
+}
+function tryAgain(){var was=bossAll();startSitting(was);window.scrollTo(0,0);}
+function init(){
+  probe();newPath();
+  var P=sload(),w=$('welcome');
+  if(!storageBad&&P&&typeof P.stars==='number'){
+    stars=P.stars;level=P.level||1;levelStars=P.levelStars||levelStars;boss=P.boss||boss;sitsDone=P.sits||0;
+    seen={};if(P.seen&&P.seen.length)for(var i=0;i<P.seen.length;i++)seen[P.seen[i]]=1;
+    if(bossAll()){newPath();}
+    else if(stars>0)w.textContent='Welcome back! You have '+stars+' stars waiting.';
+  }
+  if(storageBad){level=2;levelStars={L1:NEEDL[1],L2:0,L3:0};w.textContent='New path today — your old stars are in Dad’s file. We start at Level 2.';}
+  startSitting(false);
+}
+init();
+</script>
+</body>
+</html>

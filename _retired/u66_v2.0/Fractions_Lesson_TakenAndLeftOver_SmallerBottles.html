@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taken Piece & Left-over Piece — Lesson 2: Smaller Bottles (Unit 66)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#8D6E00;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.wrap{max-width:760px;margin:0 auto;padding:16px;width:100%}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin:12px 0}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.q-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1px solid #9FA8DA;border-radius:14px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFF3E0;color:#8D6E00;border:1px solid #FFE0B2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stop-here{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FB8C00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:800;color:#E65100;margin:16px 0}
+.flip-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.flip-card{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:12px 18px;font-size:.95rem;font-weight:700;color:var(--warn);text-align:center}
+/* answer frame */
+.frame{background:#fff;border:2px solid var(--acc);border-radius:10px;padding:10px 12px;margin:10px 0}
+.frame .fr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0}
+.frame .fl{font-weight:700;color:var(--warn);font-size:.92rem;min-width:150px}
+.frame .fv{font-size:1rem;color:#1a1a2e}
+.frame .fv.ans{font-weight:800;color:var(--warn)}
+.frame input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:6px 8px;font-size:1rem;width:170px;font-family:inherit}
+.frame input[type=text].wide{width:230px}
+.frame input[type=text]:focus{outline:2px solid #9FA8DA}
+.frame .fr.pieces input{width:90px}
+/* piece cutter W10 */
+.w10{background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:12px;margin:12px 0}
+.w10 svg{width:100%;height:auto;display:block}
+.w10-lines{margin-top:8px;min-height:60px}
+.w10-lines .ln{font-size:1rem;padding:3px 0;color:#1a1a2e}
+.w10-lines .ln.last{font-weight:800;color:var(--warn)}
+.w10-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.w10-btns button{border:none;border-radius:8px;padding:8px 16px;font-size:.92rem;font-weight:700;cursor:pointer}
+.w10-btns .go{background:var(--acc);color:#fff}
+.w10-btns .go:disabled{background:#9FA8DA;cursor:default}
+.w10-btns .rs{background:#fff;color:var(--acc);border:1.5px solid var(--acc)}
+.two-cards{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.two-cards .q-card{flex:1;min-width:250px;margin-bottom:0}
+.ans-input{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 10px;font-size:1rem;width:190px;font-family:inherit;margin-right:8px}
+.nav-link{flex:1;display:block;text-align:center;padding:13px 0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.nav-link.out{background:#fff;color:#283593;border:2px solid #283593}
+.nav-link.fill{background:#3F51B5;color:#fff;border:2px solid #3F51B5}
+
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.chip{display:inline-block;border-radius:14px;padding:3px 12px;font-size:.88rem;font-weight:700;border:2px solid #1565C0}
+.chip.t{background:#90CAF9;color:#0D47A1}.chip.l{background:#fff;color:#283593;border-color:#283593}
+.chip.told{background:#FFF8E1;color:#8d6e00;border-color:#FFB74D}
+.bx{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.bx label{font-weight:700;color:#283593;font-size:.95rem}
+.bx input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 9px;font-size:1rem;width:120px;font-family:inherit}
+.bx .opt{font-weight:400;color:#607D8B;font-size:.82rem}
+.boxes-static{background:#fff;border:2px solid #1565C0;border-radius:10px;padding:10px 14px;margin:10px 0}
+.boxes-static .r{padding:3px 0;font-size:1rem}.boxes-static b{color:#0D47A1}
+.circ{border:3px solid #2E7D32;border-radius:10px;padding:2px 8px;font-weight:800;color:#1B5E20;display:inline-block}
+.amberwarn{background:#FFF8E1;border:2px solid #FFB74D;border-radius:10px;padding:12px 16px;margin:12px 0;color:#8d6e00;font-weight:700}
+.sbs{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.sbs .sc{flex:1;min-width:240px;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:12px}
+.sbs .sc.a{border-color:#1565C0;background:#E3F2FD}.sbs .sc.b{border-color:#FFB74D;background:#FFF8E1}
+.sbs .sc .st{font-weight:800;margin-bottom:4px;color:#283593}
+.bar-wrap{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px;margin:10px 0}
+.bar-wrap svg{width:100%;height:auto;display:block}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Lesson 2 &mdash; Smaller Bottles (Unit 66)</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+<!-- s0 -->
+<div class="screen active" id="s0">
+<div class="card">
+  <span class="badge-cap">&#x1F501; Day-2 warm-up</span>
+  <h2>Before We Start &mdash; Yesterday's Stories</h2>
+  <p class="tap-hint">Fill both boxes, like yesterday.</p>
+<div class="q-card" id="w0" data-kind="work" data-taken="10" data-left="15">
+  <div class="q-text">(a)&nbsp; A rope is 25 m long. Leo cuts off 2/5 of the rope.</div>
+  <div class="bx"><label>Taken piece = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk2('w0')">Check</button></div>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_w0',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_w0"><div class="steps">
+    <div class="ln">The story says 2/5 OF the rope &mdash; work out the taken piece first <span class="note">(a piece of the bar)</span></div>
+    <div class="ln">Taken = 2/5 &times; 25 = 10 m</div>
+    <div class="ln ans">Left over = 25 &minus; 10 = <b>15 m</b> <span class="note">(whole take away the taken piece)</span></div>
+  </div></div>
+</div>
+<div class="q-card" id="w1" data-kind="work" data-taken="15" data-left="9">
+  <div class="q-text">(b)&nbsp; A bag has 24 kg of flour. Jo uses 5/8 of the flour.</div>
+  <div class="bx"><label>Taken piece = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk2('w1')">Check</button></div>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_w1',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_w1"><div class="steps">
+    <div class="ln">The story says 5/8 OF the flour &mdash; work out the taken piece first <span class="note">(a piece of the bar)</span></div>
+    <div class="ln">Taken = 5/8 &times; 24 = 15 kg</div>
+    <div class="ln ans">Left over = 24 &minus; 15 = <b>9 kg</b> <span class="note">(whole take away the taken piece)</span></div>
+  </div></div>
+</div>
+<div class="q-card" id="w2" data-ans="33">
+  <div class="q-text">(c)&nbsp; What is 3/4 of 44 L?</div>
+  <input type="text" class="ans-input" aria-label="answer">
+  <button class="btn-check" onclick="chkIn('w2')">Check</button>
+  <div class="feedback"></div>
+</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start Lesson 2 &#8594;</button></div>
+</div>
+
+<!-- s1 -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F3AF; Same Stories &mdash; Smaller Bottles</h2>
+  <div class="why"><p><strong>Same stories &mdash; but now the bottle holds a fraction of a litre. The steps don't change at all: bar, shade the taken piece, two boxes.</strong></p></div>
+  <p>The same two colours:</p>
+<div class="legend"><span class="chip t">&#x1F7E6; taken piece</span><span class="chip l">&#x2B1C; left-over piece</span></div>
+  <div class="big-rule">Nothing new to learn &mdash; just a smaller bottle.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">See It On A Bar &#8594;</button></div>
+</div>
+
+<!-- s2 -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x1F4CF; Route A &mdash; The Bar</h2>
+  <p><strong>A bottle has 2 4/5 L of juice. Tia drinks 1/4 of the juice.</strong></p>
+  <p class="tap-hint">Cut the bar into 4 equal pieces (the 4 in 1/4). Each piece is 2 4/5 &divide; 4 = 7/10 L. Shade 1 piece.</p>
+<div class="bar-wrap">
+<!-- BARMODEL-RATIO 1/4 -->
+<svg viewBox="0 0 560 130" role="img" aria-label="a bar cut into equal pieces with the taken piece shaded">
+  <text x="10" y="20" font-size="14" font-weight="700" fill="#283593">the whole: 2 4/5 L — cut into 4 equal pieces</text>
+  <rect x="10" y="32" width="540" height="46" fill="#FFFFFF" stroke="#283593" stroke-width="2"/>
+  <rect x="10" y="32" width="135.0" height="46" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+  <line x1="145.0" y1="32" x2="145.0" y2="78" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="280.0" y1="32" x2="280.0" y2="78" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="415.0" y1="32" x2="415.0" y2="78" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="77.5" y="60.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0D47A1">7/10 L</text>
+  <text x="212.5" y="60.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0D47A1">7/10 L</text>
+  <text x="347.5" y="60.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0D47A1">7/10 L</text>
+  <text x="482.5" y="60.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0D47A1">7/10 L</text>
+  <text x="77.5" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#0D47A1">taken: 7/10 L</text>
+  <text x="347.5" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#283593">left over: 2 1/10 L</text>
+</svg>
+<p class="tap-hint">&#x1F7E6; shaded = taken piece &nbsp;&nbsp; &#x2B1C; white = left-over piece</p>
+</div>
+<div class="boxes-static"><div class="r">Taken piece = <b>7/10 L</b></div><div class="r">Left-over piece = <b>2 1/10 L</b></div></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Route B: Numbers &#8594;</button></div>
+</div>
+
+<!-- s3 -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F522; Route B &mdash; The Same Bottle, As Numbers</h2>
+  <div class="bridge">Same as Lesson 1, just with a fraction bottle.</div>
+  <div class="steps">
+    <div class="ln">Taken = 1/4 &times; 2 4/5 = 1/4 &times; 14/5 = 14/20 = 7/10 L</div>
+    <div class="ln">Left over = 2 4/5 &minus; 7/10 = 28/10 &minus; 7/10 = 21/10 = 2 1/10 L</div>
+  </div>
+  <div class="amberwarn">Never 2 4/5 &minus; 1/4 here! That takes away a quarter of a LITRE, not a quarter of the JUICE.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">One Question Only &#8594;</button></div>
+</div>
+
+<!-- s4 -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F4DD; Only One Question Asked? Fill Both Boxes Anyway</h2>
+  <p><strong>A tank has 3 3/4 L of water. Leo uses 2/5 of the water. How much water is left?</strong></p>
+  <p class="tap-hint">Cut the bar into 5 equal pieces. Each piece is 3 3/4 &divide; 5 = 3/4 L. Shade 2 pieces.</p>
+<div class="bar-wrap">
+<!-- BARMODEL-RATIO 2/5 -->
+<svg viewBox="0 0 560 130" role="img" aria-label="a bar cut into equal pieces with the taken piece shaded">
+  <text x="10" y="20" font-size="14" font-weight="700" fill="#283593">the whole: 3 3/4 L — cut into 5 equal pieces</text>
+  <rect x="10" y="32" width="540" height="46" fill="#FFFFFF" stroke="#283593" stroke-width="2"/>
+  <rect x="10" y="32" width="216.0" height="46" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+  <line x1="118.0" y1="32" x2="118.0" y2="78" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="226.0" y1="32" x2="226.0" y2="78" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="334.0" y1="32" x2="334.0" y2="78" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="442.0" y1="32" x2="442.0" y2="78" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="64.0" y="60.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0D47A1">3/4 L</text>
+  <text x="172.0" y="60.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0D47A1">3/4 L</text>
+  <text x="280.0" y="60.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0D47A1">3/4 L</text>
+  <text x="388.0" y="60.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0D47A1">3/4 L</text>
+  <text x="496.0" y="60.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0D47A1">3/4 L</text>
+  <text x="118.0" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#0D47A1">taken: 1 1/2 L</text>
+  <text x="388.0" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#283593">left over: 2 1/4 L</text>
+</svg>
+<p class="tap-hint">&#x1F7E6; shaded = taken piece &nbsp;&nbsp; &#x2B1C; white = left-over piece</p>
+</div>
+  <div class="steps">
+    <div class="ln">Taken = 2/5 &times; 3 3/4 = 2/5 &times; 15/4 = 30/20 = 3/2 = 1 1/2 L</div>
+    <div class="ln">Left over = 3 3/4 &minus; 1 1/2 = 2 1/4 L</div>
+  </div>
+<div class="boxes-static"><div class="r">Taken piece = <b>1 1/2 L</b></div><div class="r">Left-over piece = <span class="circ">2 1/4 L</span></div></div>
+  <div class="big-rule">The taken box is your stepping stone &mdash; always fill it first.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s5 -->
+<div class="screen" id="s5">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Practice &mdash; Fill Both Boxes</h2>
+  <p class="tap-hint">Draw the bar on your paper first.</p>
+<div class="q-card" id="p0" data-kind="work" data-taken="1 1/2" data-left="3/4">
+  <div class="q-text">P1.&nbsp; A ribbon is 2 1/4 m long. Kim cuts off 2/3 of the ribbon. <b>(a)</b> How much ribbon does Kim cut off? <b>(b)</b> How much ribbon is left?</div>
+  <div class="bx"><label>Taken piece = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk2('p0')">Check</button></div>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_p0',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_p0"><div class="steps">
+    <div class="ln">The story says 2/3 OF the ribbon &mdash; work out the taken piece first <span class="note">(a piece of the bar)</span></div>
+    <div class="ln">Taken = 2/3 &times; 2 1/4 = 2/3 &times; 9/4 = 3/2 = 1 1/2 m</div>
+    <div class="ln ans">Left over = 2 1/4 &minus; 1 1/2 = <b>3/4 m</b> <span class="note">(whole take away the taken piece)</span></div>
+  </div></div>
+</div>
+<div class="q-card" id="p1" data-kind="told" data-taken="1/4" data-left="1 1/4">
+  <div class="q-text">P2.&nbsp; A jug has 1 1/2 L of milk. Tom pours out 1/4 L of the milk. How much milk is left?</div>
+  <div class="bx"><label>Taken piece <span class="opt">(stepping stone &mdash; fill it first)</span> = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece <span class="opt">(the answer)</span> = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk2('p1')">Check</button></div>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_p1',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_p1"><div class="steps">
+    <div class="ln">The story TELLS us how much was taken: 1/4 L &mdash; so that is the taken piece</div>
+    <div class="ln ans">Left over = 1 1/2 &minus; 1/4 = <b>1 1/4 L</b> <span class="note">(whole take away the taken piece)</span></div>
+  </div></div>
+</div>
+<div class="q-card" id="p2" data-kind="work" data-taken="2/3" data-left="2 2/3">
+  <div class="q-text">P3.&nbsp; A bag has 3 1/3 kg of sand. Raj gives away 1/5 of the sand. How much sand is left?</div>
+  <div class="bx"><label>Taken piece <span class="opt">(stepping stone &mdash; fill it first)</span> = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece <span class="opt">(the answer)</span> = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk2('p2')">Check</button></div>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_p2',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_p2"><div class="steps">
+    <div class="ln">The story says 1/5 OF the sand &mdash; work out the taken piece first <span class="note">(a piece of the bar)</span></div>
+    <div class="ln">Taken = 1/5 &times; 3 1/3 = 1/5 &times; 10/3 = 2/3 kg</div>
+    <div class="ln ans">Left over = 3 1/3 &minus; 2/3 = <b>2 2/3 kg</b> <span class="note">(whole take away the taken piece)</span></div>
+  </div></div>
+</div>
+<div class="q-card" id="p3" data-kind="work" data-taken="3/4" data-left="1">
+  <div class="q-text">P4.&nbsp; A tub has 1 3/4 kg of butter. Jo uses 3/7 of the butter. How much butter is left?</div>
+  <div class="bx"><label>Taken piece <span class="opt">(stepping stone &mdash; fill it first)</span> = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece <span class="opt">(the answer)</span> = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk2('p3')">Check</button></div>
+  <div class="feedback"></div>
+  <button class="btn-show-steps" onclick="showSteps('sr_p3',this)">Show Steps</button>
+  <div class="steps-reveal" id="sr_p3"><div class="steps">
+    <div class="ln">The story says 3/7 OF the butter &mdash; work out the taken piece first <span class="note">(a piece of the bar)</span></div>
+    <div class="ln">Taken = 3/7 &times; 1 3/4 = 3/7 &times; 7/4 = 3/4 kg</div>
+    <div class="ln ans">Left over = 1 3/4 &minus; 3/4 = <b>1 kg</b> <span class="note">(whole take away the taken piece)</span></div>
+  </div></div>
+</div>
+  <div class="warn-box"><p><strong>Finish-the-question check:</strong> did you answer the EXACT question asked, is your fraction in simplest form, and did you write the UNIT?</p></div>
+  <div class="big-rule">Now the Star Path &#11088;.</div>
+</div>
+<div class="navrow">
+  <a class="nav-link out" href="https://athipprem.github.io/mathlessons/index.html">Back to Hub</a>
+  <a class="nav-link fill" href="U66_Drill_TakenAndLeftOver.html">Start the Star Path &#8594;</a>
+</div>
+<div class="warn-box" style="margin-top:12px"><p>&#x1F192; Stuck? Open the <a href="U66_StuckCard_TakenAndLeftOver.html">Stuck Card</a> (it has a Lego demo).</p></div>
+</div>
+
+<script>
+
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a);}
+function mixedStr(n,d){var g=gcd(n,d);n=n/g;d=d/g;var w=Math.floor(n/d),r=n-w*d;if(r===0)return ''+w;return (w?w+' ':'')+r+'/'+d;}
+/* parse "1 1/5", "6/5", "2", "1.2", "1 1/5 m" -> [num,den] reduced, or null */
+function parseVal(s){
+  if(s==null)return null; s=String(s).toLowerCase().replace(/[²]/g,'').replace(/(kg|km|cups?|cm|ml|l|m|litres?|liters?|metres?|meters?|sq\.?|squared)\b/g,' ').replace(/\s+/g,' ').trim();
+  if(!s)return null; var m;
+  if((m=s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/))){var d=+m[3];if(!d)return null;var n=(+m[1])*d+(+m[2]);var g=gcd(n,d);return [n/g,d/g,'mixed'];}
+  if((m=s.match(/^(\d+)\s*\/\s*(\d+)$/))){var d2=+m[2];if(!d2)return null;var g2=gcd(+m[1],d2);return [(+m[1])/g2,d2/g2,'frac',+m[1],d2];}
+  if((m=s.match(/^(\d+)$/))){return [+m[1],1,'int'];}
+  if((m=s.match(/^(\d*)\.(\d+)$/))){var den=Math.pow(10,m[2].length);var n3=(+m[1]||0)*den+(+m[2]);var g3=gcd(n3,den);return [n3/g3,den/g3,'dec'];}
+  return null;}
+function sameVal(a,b){return a&&b&&a[0]===b[0]&&a[1]===b[1];}
+function isImproperText(s){var m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);return !!m&&(+m[1])>(+m[2]);}
+
+var lastP='';
+function say(fb,ok,msg){fb.style.display='block';fb.className='feedback '+(ok?'ok':'err');fb.textContent=msg;}
+function chkIn(id){var card=document.getElementById(id),inp=card.querySelector('.ans-input'),fb=card.querySelector('.feedback');
+  var want=parseVal(card.getAttribute('data-ans')),got=parseVal(inp.value);
+  if(!inp.value.trim()||!got){say(fb,false,'Type your answer first (like 1 1/5 or 7/4).');return;}
+  if(sameVal(got,want))say(fb,true,'✓ Correct!');else say(fb,false,'Not yet — look again and try once more.');}
+function chk2(id){
+  var card=document.getElementById(id),fb=card.querySelector('.feedback'),ss=card.querySelector('.btn-show-steps');
+  var t=card.querySelector('.tb').value,l=card.querySelector('.lb').value;
+  var gt=parseVal(t),gl=parseVal(l);
+  if(!t.trim()||!l.trim()||!gt||!gl){say(fb,false,'Fill both boxes first (like 1 1/5 or 7/4).');return;}
+  var okT=sameVal(gt,parseVal(card.getAttribute('data-taken'))),okL=sameVal(gl,parseVal(card.getAttribute('data-left')));
+  if(okT&&okL){var P=["You shaded the taken piece first \u2014 that\u2019s the whole trick.","Worked out the piece, then the left-over. Two-step star!","Told you exactly how much \u2014 straight to taking away. Nice."],k=card.getAttribute('data-kind'),pool=(k==='told')?[P[2]]:[P[0],P[1]],p=pool[Math.floor(Math.random()*pool.length)];if(p===lastP&&pool.length>1)p=(p===pool[0])?pool[1]:pool[0];lastP=p;say(fb,true,'✓ '+p);}
+  else if(okT)say(fb,false,'Not yet — your taken piece is right. Now check the left-over piece.');
+  else say(fb,false,'Not yet — look at the bar again, then the taken piece.');
+  if(ss)ss.style.display='inline-block';
+}
+function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+</script>
+</body>
+</html>

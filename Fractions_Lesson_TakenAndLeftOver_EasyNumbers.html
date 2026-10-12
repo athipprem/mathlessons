@@ -98,15 +98,67 @@ p,li{font-size:1rem;line-height:1.65}
 .sbs .sc .st{font-weight:800;margin-bottom:4px;color:#283593}
 .bar-wrap{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px;margin:10px 0}
 .bar-wrap svg{width:100%;height:auto;display:block}
+
+.wlb{margin:10px 0;border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:6px 8px}
+.wlb .wls{margin-bottom:4px}
+.wl{display:none;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:12px;padding:7px 6px;border-bottom:1px dashed #C5CAE9;align-items:start}
+.wl.on{display:grid}
+.wl.cur{background:#F0F1FA}
+.wl[data-glow].on{background:#FFF8E1;box-shadow:inset 4px 0 0 #F9A825}
+.wl .m{font-family:Consolas,'Courier New',monospace;font-weight:700;color:#283593;font-size:1rem}
+.wl .why{color:#455A64;font-size:.88rem;line-height:1.35;border:0;background:none;padding:0;margin:0;border-radius:0;box-shadow:none}
+.wl .why:before{content:"\2190  ";color:#9FA8DA}
+.btn-next{background:#fff;color:#283593;border:2px solid #283593;border-radius:8px;padding:7px 16px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit}
+.wlb.alldone .btn-next{display:none}
+.wlb.closed{display:none}
+.taps{margin:8px 0;padding:8px 10px;border:2px solid #C5CAE9;border-radius:10px;background:#F7F9FD}
+.taps .thead{font-weight:800;color:#283593;font-size:.9rem;margin-bottom:4px}
+.tq{margin:8px 0}.tq.off{display:none}
+.tq .tl{font-weight:700;color:#283593}
+.tq .tsub{font-weight:400;color:#607D8B;font-size:.85rem;display:block}
+.tb2{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.tb2 button{border:2px solid #9FA8DA;background:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem;cursor:pointer;font-family:inherit;color:#283593;font-weight:600;text-align:left}
+.tb2 button.good{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.tb2 button.lit{outline:3px solid #2E7D32}
+.tb2 button.nope{background:#FFF3E0;border-color:#FFB74D;color:#8d6e00}
+.thint{color:#8d6e00;font-size:.88rem;margin-top:4px;min-height:1em}
+.bx.locked label{opacity:.55}
+.fmap{max-width:640px;margin:10px auto}
+.mn{border:2px solid #283593;border-radius:10px;padding:8px 12px;background:#fff;color:#283593;font-size:.95rem}
+.mn.start{background:#E8EAF6}.mn.q{background:#F0F1FA}.mn.bonus{background:#FFF8E1;border-color:#FFB74D;color:#8d6e00}
+.mn b.k{background:#283593;color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+.mn i{display:block;font-size:.84rem;color:#455A64;font-style:normal;margin-top:2px}
+.arr{text-align:center;color:#9FA8DA;font-size:1.1rem;line-height:1.2}
+.two{display:flex;gap:8px;flex-wrap:wrap}
+.two .br{flex:1;min-width:230px;border:2px solid #9FA8DA;border-radius:10px;padding:8px 10px;background:#fff;font-size:.9rem;color:#37474F}
+.br b.yn{color:#283593}
+.mp .tk{background:#90CAF9;color:#0D47A1;border-radius:6px;padding:0 6px;font-weight:700}
+.mp .lf{background:#fff;color:#283593;border:1.5px solid #283593;border-radius:6px;padding:0 6px;font-weight:700}
+.lit-node{background:#E8F5E9 !important;border-color:#2E7D32 !important;box-shadow:0 0 0 3px #A5D6A7}
+.fmap .cap{display:none;margin-top:5px;font-family:Consolas,'Courier New',monospace;font-weight:700;color:#1B5E20;font-size:.88rem}
+.lit-node .cap{display:block}
+.ex{margin-top:5px;font-size:.82rem;color:#455A64;border-top:1px dashed #C5CAE9;padding-top:4px}
+.wtrow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;align-items:center}
+.btn-map{display:inline-block;border:2px solid #283593;color:#283593;background:#fff;border-radius:10px;padding:8px 16px;font-weight:700;text-decoration:none;font-size:.95rem;cursor:pointer;font-family:inherit}
+.maplink{position:fixed;right:12px;bottom:12px;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+@media (max-width:560px){.wl{grid-template-columns:1fr;gap:2px}}
+
+.btn-show-steps{display:none;margin-top:6px}
+.ws-frame{border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:8px 10px;margin:8px 0}
+.ws-frame .r{display:flex;gap:8px;align-items:center;margin:4px 0}
+.ws-frame .n{width:22px;color:#9FA8DA;font-weight:700}
+.ws-frame input[type=text]{flex:1;border:1.5px solid #9FA8DA;border-radius:6px;padding:6px 8px;font-size:1rem;font-family:Consolas,'Courier New',monospace}
+.ws-frame .pre{flex:1;font-family:Consolas,'Courier New',monospace;font-weight:700;color:#283593;padding:6px 8px;background:#F0F1FA;border-radius:6px}
 </style>
 </head>
 <body>
 <nav class="topnav">
   <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
   <span class="tnav-title">Lesson 1 &mdash; Easy Numbers (Unit 66)</span>
-  <span class="tnav-pill" id="pill">1 / 6</span>
+  <span class="tnav-pill" id="pill">1 / 7</span>
   <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
 </nav>
+<div class="wrap">
 <!-- s0 -->
 <div class="screen active" id="s0">
 <div class="card">
@@ -131,6 +183,7 @@ p,li{font-size:1rem;line-height:1.65}
   <button class="btn-check" onclick="chkIn('w2')">Check</button>
   <div class="feedback"></div>
 </div>
+  <div class="wtrow"><button type="button" class="btn-map" onclick="goTo(5)">Already did Lesson 1? Jump to the Map (screen 6) &rarr;</button></div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start Lesson &#8594;</button></div>
 </div>
@@ -158,7 +211,7 @@ p,li{font-size:1rem;line-height:1.65}
 <div class="card">
   <h2>&#x1F4CF; Route A &mdash; The Bar</h2>
   <p><strong>A bottle has 12 L of juice. Ben drinks 1/3 of the juice.</strong></p>
-  <p class="tap-hint">The bar is the bottle: 12 L. Cut it into 3 equal pieces (that is the 3 in 1/3). Each piece is 12 &divide; 3 = 4 L. Shade 1 piece.</p>
+  <p class="tap-hint">The bar is the bottle: 12 L. Cut it into 3 equal pieces (that is the 3 in 1/3). Shade 1 piece. Tap Next line to see each move.</p>
 <div class="bar-wrap">
 <!-- BARMODEL-RATIO 1/3 -->
 <svg viewBox="0 0 560 130" role="img" aria-label="a bar cut into equal pieces with the taken piece shaded">
@@ -175,112 +228,198 @@ p,li{font-size:1rem;line-height:1.65}
 </svg>
 <p class="tap-hint">&#x1F7E6; shaded = taken piece &nbsp;&nbsp; &#x2B1C; white = left-over piece</p>
 </div>
-<div class="boxes-static"><div class="r">Taken piece = <b>4 L</b></div><div class="r">Left-over piece = <b>8 L</b></div></div>
-  <div class="big-rule">The juice he drinks is a piece of the bottle. Cut the bar, shade the piece.</div>
+<div class="wlb auto" data-bid="L1s2_bar">
+<div class="wls">
+<div class="wl"><span class="m">One piece = 12 ÷ 3</span><span class="why">cut the 12 L bar into 3 equal pieces</span></div>
+<div class="wl"><span class="m">= 4</span><span class="why">12 ÷ 3 = 4, so one piece is 4 L</span></div>
+<div class="wl"><span class="m">Taken = 4 × 1</span><span class="why">the taken piece is 1 of those pieces (the top number)</span></div>
+<div class="wl"><span class="m">= 4 L</span><span class="why">4 × 1 = 4</span></div>
+<div class="wl"><span class="m">Left over = 12 − 4</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 8 L</span><span class="why">12 − 4 = 8</span></div>
 </div>
-<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Other Kind &#8594;</button></div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+<div class="boxes-static"><div class="r">Taken piece = <b>4 L</b></div><div class="r">Left-over piece = <b>8 L</b></div></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Route B: Numbers &#8594;</button></div>
 </div>
 
 <!-- s3 -->
 <div class="screen" id="s3">
 <div class="card">
-  <h2>&#x1F4A7; The Other Kind &mdash; The Story TELLS You</h2>
-  <p><strong>A bottle has 12 L of juice. Ben drinks 1/3 L.</strong></p>
-  <div style="text-align:center"><svg viewBox="0 0 200 120" width="170" role="img" aria-label="a measuring jug with a tiny mark"><path d="M60 14 L140 14 L130 104 Q100 112 70 104 Z" fill="#fff" stroke="#283593" stroke-width="3"/><path d="M64 88 L136 88 L130 104 Q100 112 70 104 Z" fill="#90CAF9" stroke="none"/><line x1="60" y1="88" x2="140" y2="88" stroke="#1565C0" stroke-width="3"/><text x="148" y="92" font-size="14" font-weight="700" fill="#0D47A1">1/3 L</text></svg></div>
-  <p class="tap-hint">1/3 L is just a small splash &mdash; the story told us exactly how much was taken.</p>
-<div class="bar-wrap">
-<!-- BARMODEL-RATIO 1/36 -->
-<svg viewBox="0 0 560 130" role="img" aria-label="a bar for the whole with a tiny taken sliver">
-  <text x="10" y="20" font-size="14" font-weight="700" fill="#283593">the whole: 12 L</text>
-  <rect x="10" y="32" width="540" height="46" fill="#FFFFFF" stroke="#283593" stroke-width="2"/>
-  <rect x="10" y="32" width="15.0" height="46" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
-  <text x="10" y="100" font-size="13" font-weight="700" fill="#0D47A1">taken: 1/3 L (told)</text>
-  <text x="550" y="100" text-anchor="end" font-size="13" font-weight="700" fill="#283593">left over: 11 2/3 L</text>
-</svg>
-<p class="tap-hint">the taken piece is only a tiny sliver of the bottle</p>
+  <h2>&#x1F522; Route B &mdash; The Same Bottle, As Numbers</h2>
+  <div class="bridge">Same bottle, written as a times sum. Watch: same answer.</div>
+<div class="wlb auto" data-bid="L1s3_numbers">
+<div class="wls">
+<div class="wl"><span class="m">Taken = 1/3 × 12</span><span class="why">"1/3 of the juice" means 1/3 × the whole</span></div>
+<div class="wl"><span class="m">= 1/3 × 12/1</span><span class="why">a whole number is a fraction over 1: 12 = 12/1</span></div>
+<div class="wl"><span class="m">= 12/3</span><span class="why">tops: 1 × 12 = 12; bottoms: 3 × 1 = 3</span></div>
+<div class="wl"><span class="m">= 4 L</span><span class="why">12 ÷ 3 = 4 — the same 4 L the bar gave us</span></div>
+<div class="wl"><span class="m">Left over = 12 − 4</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 8 L</span><span class="why">12 − 4 = 8</span></div>
 </div>
-<div class="boxes-static"><div class="r">Taken piece = <b>1/3 L</b></div><div class="r">Left-over piece = <b>11 2/3 L</b></div></div>
-  <div class="steps"><div class="ln">Taken piece = 1/3 L <span class="note">(the story told us)</span></div><div class="ln ans">Left-over piece = 12 &minus; 1/3 = 11 2/3 L</div></div>
-  <div class="sbs"><div class="sc a"><div class="st">1/3 OF the juice</div><div>= 4 L &mdash; a big piece</div></div><div class="sc b"><div class="st">1/3 L</div><div>= a small splash</div></div></div>
-  <div class="big-rule">Does the story TELL you how much was taken? Then that's the taken piece. If it says '1/3 OF the juice', work it out first.</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
 </div>
-<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Route B: Numbers &#8594;</button></div>
+  <div class="big-rule">Bar or times sum &mdash; they always agree. In Lesson 2 the times sum does the heavy lifting.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Other Kind &#8594;</button></div>
 </div>
 
 <!-- s4 -->
 <div class="screen" id="s4">
 <div class="card">
-  <h2>&#x1F522; Route B &mdash; The Same Bottle, As Numbers</h2>
-  <div class="bridge">Same bottle, written as numbers.</div>
-  <div class="steps">
-    <div class="ln">Taken = 1/3 &times; 12 = 4 L <span class="note">(1/3 of the whole)</span></div>
-    <div class="ln">Left over = 12 &minus; 4 = 8 L <span class="note">(whole take away the taken piece)</span></div>
-    <div class="ln">or: 2/3 is left over &rarr; 2/3 &times; 12 = 8 L</div>
-  </div>
-  <div class="stop-here">&#9940; STOP HERE &mdash; come back tomorrow. The practice is waiting on the next page whenever you are ready.</div>
+  <h2>&#x1F4A7; The Other Kind &mdash; The Story TELLS You</h2>
+  <p><strong>A bottle has 12 L of juice. Ben drinks 1/3 L.</strong></p>
+  <div style="text-align:center"><svg viewBox="0 0 200 120" width="170" role="img" aria-label="a measuring jug with a tiny mark"><path d="M60 14 L140 14 L130 104 Q100 112 70 104 Z" fill="#fff" stroke="#283593" stroke-width="3"/><path d="M64 88 L136 88 L130 104 Q100 112 70 104 Z" fill="#90CAF9" stroke="none"/><line x1="60" y1="88" x2="140" y2="88" stroke="#1565C0" stroke-width="3"/><text x="148" y="92" font-size="14" font-weight="700" fill="#0D47A1">1/3 L</text></svg></div>
+  <p class="tap-hint">1/3 L is just a small splash &mdash; the story told us exactly how much was taken.</p>
+<div class="wlb auto" data-bid="L1s4_told">
+<div class="wls">
+<div class="wl"><span class="m">Taken = 1/3 L</span><span class="why">the story TOLD us the taken piece: a number with a unit right after it</span></div>
+<div class="wl"><span class="m">Left over = 12 − 1/3</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 36/3 − 1/3</span><span class="why">make the bottoms the same: 12 wholes = 36 thirds</span></div>
+<div class="wl"><span class="m">= 35/3</span><span class="why">36 thirds take away 1 third = 35 thirds</span></div>
+<div class="wl"><span class="m">= 11 2/3 L</span><span class="why">35 thirds = 11 wholes and 2 thirds over</span></div>
 </div>
-<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+  <div class="sbs"><div class="sc a"><div class="st">1/3 OF the juice</div><div>&rarr; 4 L &mdash; a big piece</div></div><div class="sc b"><div class="st">1/3 L</div><div>&rarr; a small splash</div></div></div>
+  <div class="stop-here">&#9940; STOP HERE &mdash; come back tomorrow. The map is waiting on the next page whenever you are ready.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Map &#8594;</button></div>
 </div>
 
 <!-- s5 -->
 <div class="screen" id="s5">
 <div class="card">
+  <h2>&#x1F5FA; The First-Step Map</h2>
+  <p class="tap-hint">The bar shows you <b>what</b> the story is. The map tells you <b>what to write first</b>. Tap Next step and watch the path light up.</p>
+  <p><b>Walk 1:</b> the bar story (Ben drinks 1/3 of the juice). <b>Walk 2:</b> the told story (Ben drinks 1/3 L).</p>
+<div class="wtrow"><button type="button" class="btn-map" onclick="walkPick('walk1','a',this)">Walk 1</button><button type="button" class="btn-map" onclick="walkPick('walk1','b',this)">Walk 2</button></div>
+<div id="walk1">
+<div class="fmap mp">
+<div class="mn start" id="n-start"><b class="k">START</b> Find the WHOLE (what was there at the start). Draw the bar. Write the whole on top.<div class="cap"></div></div>
+<div class="arr">&#9660;</div>
+<div class="mn q" id="n-q1"><b class="k">Q1</b> Does the story TELL me the taken piece?<i>Look right after the fraction: is there a unit (L, kg, m)?</i><div class="cap"></div></div>
+<div class="arr">&#9660;</div>
+<div class="two">
+<div class="br" id="n-q1y"><b class="yn">YES</b> &mdash; &quot;drinks 1/3 L&quot; &rarr; <span class="tk">Taken = 1/3 L.</span> Jump to Q3.<div class="ex">Example: A bottle has 12 L. Ben drinks 1/3 L. The taken piece is 1/3 L.</div><div class="cap"></div></div>
+<div class="br" id="n-q1n"><b class="yn">NO</b> &mdash; &quot;drinks 1/3 of the juice&quot; &rarr; work it out. Go to Q2.<div class="cap"></div></div>
+</div>
+<div class="arr">&#9660;</div>
+<div class="mn q" id="n-q2"><b class="k">Q2</b> Is the whole a whole number, or a fraction bottle?<div class="cap"></div></div>
+<div class="arr">&#9660;</div>
+<div class="two">
+<div class="br" id="n-q2w"><b class="yn">WHOLE NUMBER</b> (12 L) &rarr; One piece = whole &divide; bottom number. Taken = one piece &times; top number.<div class="ex">Example: 1/3 of 12 L: one piece 12 &divide; 3, taken 4 &times; 1.</div><div class="cap"></div></div>
+<div class="br" id="n-q2f"><b class="yn">FRACTION BOTTLE</b> (2 4/5 L) &rarr; Taken = fraction &times; whole, then one line each: change the whole to an improper fraction &middot; tops &times; tops, bottoms &times; bottoms &middot; simplify &middot; back to a mixed number.<div class="ex">Example: 1/4 of 2 4/5 L: 1/4 &times; 14/5, then 14/20, then 7/10 L.</div><div class="cap"></div></div>
+</div>
+<div class="arr">&#9660;</div>
+<div class="mn q" id="n-q3"><b class="k">Q3</b> Which box does the question ask for?<div class="cap"></div></div>
+<div class="arr">&#9660;</div>
+<div class="two">
+<div class="br" id="n-q3t"><b class="yn">&quot;How much does he drink / use / cut off?&quot;</b> &rarr; the <span class="tk">TAKEN</span> box. Done.<div class="cap"></div></div>
+<div class="br" id="n-q3l"><b class="yn">&quot;How much is left?&quot;</b> &rarr; <span class="lf">Left over</span> = whole &minus; taken, then one line each: improper fractions &middot; same bottoms &middot; take away &middot; simplify &middot; mixed number.<div class="cap"></div></div>
+</div>
+<div class="arr">&#9660;</div>
+<div class="mn bonus" id="n-bonus"><b class="k">BONUS</b> Does the story keep going: &quot;then &hellip; of what was left&quot;? The left-over piece becomes the NEW whole. Go back to START.<div class="cap"></div></div>
+</div>
+</div>
+<div class="wtrow"><button type="button" class="btn-next" id="walk1_nx" onclick="walkNext('walk1',this)">Next step &#9656;</button> <a class="btn-map" href="U66_FirstStep_Map.html" target="_blank">&#x1F5FA; Print my map</a></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div>
+
+<!-- s6 -->
+<div class="screen" id="s6">
+<div class="card">
   <span class="badge-cap">&#11088; Your Turn</span>
-  <h2>Practice &mdash; Fill Both Boxes</h2>
-  <p class="tap-hint">Draw the bar on your paper first.</p>
-<div class="q-card" id="p0" data-kind="work" data-taken="15" data-left="5">
+  <h2>Practice &mdash; Map First, Then Both Boxes</h2>
+  <p class="tap-hint">Draw the bar on your paper. Tap the three map questions first. Then fill the boxes.</p>
+<div class="q-card" id="p0" data-kind="work" data-whole="whole" data-asks="both" data-taken="15" data-left="5">
   <div class="q-text">P1.&nbsp; A tank has 20 L of water. Mia uses 3/4 of the water.</div>
-  <div class="bx"><label>Taken piece = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk2('p0')">Check</button></div>
+  <div class="taps" id="taps_p0"></div>
+  <div class="bx locked"><label>Taken piece = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk21('p0')">Check</button></div>
   <div class="feedback"></div>
-  <button class="btn-show-steps" onclick="showSteps('sr_p0',this)">Show Steps</button>
-  <div class="steps-reveal" id="sr_p0"><div class="steps">
-    <div class="ln">The story says 3/4 OF the water &mdash; work out the taken piece first <span class="note">(a piece of the bar)</span></div>
-    <div class="ln">Taken = 3/4 &times; 20 = 15 L</div>
-    <div class="ln ans">Left over = 20 &minus; 15 = <b>5 L</b> <span class="note">(whole take away the taken piece)</span></div>
-  </div></div>
+  <div class="stepsbox"><button type="button" class="btn-show-steps" onclick="stepsToggle(this)">Show steps</button>
+<div class="wlb closed" data-bid="L1P1">
+<div class="wls">
+<div class="wl"><span class="m">One piece = 20 ÷ 4</span><span class="why">cut the 20 L bar into 4 equal pieces</span></div>
+<div class="wl"><span class="m">= 5</span><span class="why">20 ÷ 4 = 5, so one piece is 5 L</span></div>
+<div class="wl"><span class="m">Taken = 5 × 3</span><span class="why">the taken piece is 3 of those pieces (the top number)</span></div>
+<div class="wl"><span class="m">= 15 L</span><span class="why">5 × 3 = 15</span></div>
+<div class="wl"><span class="m">Left over = 20 − 15</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 5 L</span><span class="why">20 − 15 = 5</span></div>
 </div>
-<div class="q-card" id="p1" data-kind="work" data-taken="10" data-left="15">
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+  </div>
+</div>
+<div class="q-card" id="p1" data-kind="work" data-whole="whole" data-asks="both" data-taken="10" data-left="15">
   <div class="q-text">P2.&nbsp; A rope is 25 m long. Leo cuts off 2/5 of the rope.</div>
-  <div class="bx"><label>Taken piece = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk2('p1')">Check</button></div>
+  <div class="taps" id="taps_p1"></div>
+  <div class="bx locked"><label>Taken piece = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk21('p1')">Check</button></div>
   <div class="feedback"></div>
-  <button class="btn-show-steps" onclick="showSteps('sr_p1',this)">Show Steps</button>
-  <div class="steps-reveal" id="sr_p1"><div class="steps">
-    <div class="ln">The story says 2/5 OF the rope &mdash; work out the taken piece first <span class="note">(a piece of the bar)</span></div>
-    <div class="ln">Taken = 2/5 &times; 25 = 10 m</div>
-    <div class="ln ans">Left over = 25 &minus; 10 = <b>15 m</b> <span class="note">(whole take away the taken piece)</span></div>
-  </div></div>
+  <div class="stepsbox"><button type="button" class="btn-show-steps" onclick="stepsToggle(this)">Show steps</button>
+<div class="wlb closed" data-bid="L1P2">
+<div class="wls">
+<div class="wl"><span class="m">One piece = 25 ÷ 5</span><span class="why">cut the 25 m bar into 5 equal pieces</span></div>
+<div class="wl"><span class="m">= 5</span><span class="why">25 ÷ 5 = 5, so one piece is 5 m</span></div>
+<div class="wl"><span class="m">Taken = 5 × 2</span><span class="why">the taken piece is 2 of those pieces (the top number)</span></div>
+<div class="wl"><span class="m">= 10 m</span><span class="why">5 × 2 = 10</span></div>
+<div class="wl"><span class="m">Left over = 25 − 10</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 15 m</span><span class="why">25 − 10 = 15</span></div>
 </div>
-<div class="q-card" id="p2" data-kind="told" data-taken="2/3" data-left="8 1/3">
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+  </div>
+</div>
+<div class="q-card" id="p2" data-kind="told" data-whole="whole" data-asks="both" data-taken="2/3" data-left="8 1/3">
   <div class="q-text">P3.&nbsp; A bag has 9 kg of rice. Sam cooks 2/3 kg of the rice.</div>
-  <div class="bx"><label>Taken piece = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk2('p2')">Check</button></div>
+  <div class="taps" id="taps_p2"></div>
+  <div class="bx locked"><label>Taken piece = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk21('p2')">Check</button></div>
   <div class="feedback"></div>
-  <button class="btn-show-steps" onclick="showSteps('sr_p2',this)">Show Steps</button>
-  <div class="steps-reveal" id="sr_p2"><div class="steps">
-    <div class="ln">The story TELLS us how much was taken: 2/3 kg &mdash; so that is the taken piece</div>
-    <div class="ln ans">Left over = 9 &minus; 2/3 = <b>8 1/3 kg</b> <span class="note">(whole take away the taken piece)</span></div>
-  </div></div>
+  <div class="stepsbox"><button type="button" class="btn-show-steps" onclick="stepsToggle(this)">Show steps</button>
+<div class="wlb closed" data-bid="L1P3">
+<div class="wls">
+<div class="wl"><span class="m">Taken = 2/3 kg</span><span class="why">the story TOLD us the taken piece: a number with a unit right after it</span></div>
+<div class="wl"><span class="m">Left over = 9 − 2/3</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 27/3 − 2/3</span><span class="why">make the bottoms the same: 9 wholes = 27 thirds</span></div>
+<div class="wl"><span class="m">= 25/3</span><span class="why">27 thirds take away 2 thirds = 25 thirds</span></div>
+<div class="wl"><span class="m">= 8 1/3 kg</span><span class="why">25 thirds = 8 wholes and 1 third over</span></div>
 </div>
-<div class="q-card" id="p3" data-kind="work" data-taken="15" data-left="9">
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+  </div>
+</div>
+<div class="q-card" id="p3" data-kind="work" data-whole="whole" data-asks="both" data-taken="15" data-left="9">
   <div class="q-text">P4.&nbsp; A bag has 24 kg of flour. Jo uses 5/8 of the flour.</div>
-  <div class="bx"><label>Taken piece = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk2('p3')">Check</button></div>
+  <div class="taps" id="taps_p3"></div>
+  <div class="bx locked"><label>Taken piece = <input type="text" class="tb" aria-label="taken piece"></label><label>Left-over piece = <input type="text" class="lb" aria-label="left-over piece"></label><button class="btn-check" onclick="chk21('p3')">Check</button></div>
   <div class="feedback"></div>
-  <button class="btn-show-steps" onclick="showSteps('sr_p3',this)">Show Steps</button>
-  <div class="steps-reveal" id="sr_p3"><div class="steps">
-    <div class="ln">The story says 5/8 OF the flour &mdash; work out the taken piece first <span class="note">(a piece of the bar)</span></div>
-    <div class="ln">Taken = 5/8 &times; 24 = 15 kg</div>
-    <div class="ln ans">Left over = 24 &minus; 15 = <b>9 kg</b> <span class="note">(whole take away the taken piece)</span></div>
-  </div></div>
+  <div class="stepsbox"><button type="button" class="btn-show-steps" onclick="stepsToggle(this)">Show steps</button>
+<div class="wlb closed" data-bid="L1P4">
+<div class="wls">
+<div class="wl"><span class="m">One piece = 24 ÷ 8</span><span class="why">cut the 24 kg bar into 8 equal pieces</span></div>
+<div class="wl"><span class="m">= 3</span><span class="why">24 ÷ 8 = 3, so one piece is 3 kg</span></div>
+<div class="wl"><span class="m">Taken = 3 × 5</span><span class="why">the taken piece is 5 of those pieces (the top number)</span></div>
+<div class="wl"><span class="m">= 15 kg</span><span class="why">3 × 5 = 15</span></div>
+<div class="wl"><span class="m">Left over = 24 − 15</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 9 kg</span><span class="why">24 − 15 = 9</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+  </div>
 </div>
   <div class="warn-box"><p><strong>Finish-the-question check:</strong> did you answer the EXACT question asked, is your fraction in simplest form, and did you write the UNIT?</p></div>
-  <div class="big-rule">Tomorrow: Lesson 2 &mdash; same stories, smaller bottles.</div>
+  <div class="big-rule">Next: Star Path Set A (6 practice stories), then Lesson 2.</div>
 </div>
 <div class="navrow">
   <a class="nav-link out" href="https://athipprem.github.io/mathlessons/index.html">Back to Hub</a>
-  <a class="nav-link fill" href="Fractions_Lesson_TakenAndLeftOver_SmallerBottles.html">Lesson 2 &#8594;</a>
+  <a class="nav-link fill" href="U66_Drill_TakenAndLeftOver.html?set=A">Star Path Set A &#8594;</a>
 </div>
-<div class="warn-box" style="margin-top:12px"><p>&#x1F192; Stuck? Open the <a href="U66_StuckCard_TakenAndLeftOver.html">Stuck Card</a> (it has a Lego demo).</p></div>
+<div class="warn-box" style="margin-top:12px"><p>&#x1F192; Stuck? Open the <a href="U66_StuckCard_TakenAndLeftOver.html">Stuck Card</a> (it has a Lego demo) or <a href="U66_FirstStep_Map.html" target="_blank">&#x1F5FA; my map</a>.</p></div>
 </div>
 
+</div>
 <script>
 
 function gcd(a,b){return b?gcd(b,a%b):Math.abs(a);}
@@ -297,28 +436,88 @@ function parseVal(s){
 function sameVal(a,b){return a&&b&&a[0]===b[0]&&a[1]===b[1];}
 function isImproperText(s){var m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);return !!m&&(+m[1])>(+m[2]);}
 
+function wlShow(b,n){var rows=b.querySelectorAll('.wl'),i;for(i=0;i<rows.length;i++){rows[i].classList.remove('cur');if(i<n)rows[i].classList.add('on');}
+  if(n>0&&rows[n-1])rows[n-1].classList.add('cur');if(n>=rows.length){b.classList.add('alldone');var a=b.getAttribute('data-after');if(a){var e=document.getElementById(a);if(e)e.style.display='block';}}}
+function wlCount(b){return b.querySelectorAll('.wl.on').length;}
+function wlNext(btn){var b=btn.parentNode;wlShow(b,wlCount(b)+1);}
+function wlOpen(b){b.classList.remove('closed');if(wlCount(b)===0)wlShow(b,1);}
+function stepsToggle(btn){var b=btn.parentNode.querySelector('.wlb');if(b.classList.contains('closed')){wlOpen(b);btn.textContent='Hide steps';}else{b.classList.add('closed');btn.textContent='Show steps';}}
+var HINT={q1:'Look right after the fraction — is there a unit (L, kg or m)?',
+ q2:'Is the whole — the number at the start of the story — a plain whole number like 12 L, or a fraction bottle like 2 4/5 L?',
+ q3:'Read the question itself: how much was taken, how much is left, or both (a) and (b)?'};
+function tapsInit(root,spec,done){
+  var q1=(spec.kind==='told')?'told':'work',q2=(spec.whole==='whole')?'whole':'frac',q3=spec.asks;
+  var st={wrong:{q1:0,q2:0,q3:0},mapWrong:[],path:[],done:false};
+  root.innerHTML='<div class="thead">&#128506; Map first — three taps</div>'+
+   '<div class="tq" data-q="1"><div class="tl">Q1. Does the story TELL me the taken piece?<span class="tsub">Look right after the fraction: is there a unit (L, kg, m)?</span></div>'+
+   '<div class="tb2"><button type="button" data-v="told">YES — a number with a unit, like “drinks 1/3 L”</button><button type="button" data-v="work">NO — it says “of the …”, like “1/3 of the juice”</button></div><div class="thint"></div></div>'+
+   '<div class="tq off" data-q="2"><div class="tl">Q2. Is the whole a whole number, or a fraction bottle?</div>'+
+   '<div class="tb2"><button type="button" data-v="whole">WHOLE NUMBER, like 12 L</button><button type="button" data-v="frac">FRACTION BOTTLE, like 2 4/5 L</button></div><div class="thint"></div></div>'+
+   '<div class="tq off" data-q="3"><div class="tl">Q3. Which box does the question ask for?</div>'+
+   '<div class="tb2"><button type="button" data-v="taken">the TAKEN box — it asks how much was taken</button><button type="button" data-v="left">the LEFT-OVER box — it asks how much is left</button><button type="button" data-v="both">BOTH boxes — it asks (a) and (b)</button></div><div class="thint"></div></div>';
+  var want={1:q1,2:q2,3:q3},names={1:'Q1',2:'Q2',3:'Q3'};
+  function tq(n){return root.querySelector('.tq[data-q="'+n+'"]');}
+  function open(n){tq(n).classList.remove('off');}
+  function finish(){if(st.done)return;st.done=true;if(done)done(st);}
+  function hit(n,b){
+    var q=tq(n),btns=q.querySelectorAll('button'),hint=q.querySelector('.thint'),i,v=b.getAttribute('data-v');
+    if(v===want[n]){for(i=0;i<btns.length;i++){btns[i].classList.remove('lit','nope');}b.classList.add('good');hint.textContent='';st.path.push(v);
+      for(i=0;i<btns.length;i++)btns[i].disabled=true;
+      if(n===1){if(q1==='told'){st.path.push('skip');open(3);}else open(2);}else if(n===2)open(3);else finish();}
+    else{st.wrong['q'+n]++;st.mapWrong.push(names[n]+':'+v);b.classList.add('nope');hint.textContent='Not yet — '+HINT['q'+n];
+      for(i=0;i<btns.length;i++)if(btns[i].getAttribute('data-v')===want[n])btns[i].classList.add('lit');}
+  }
+  [1,2,3].forEach(function(n){var bs=tq(n).querySelectorAll('button'),i;for(i=0;i<bs.length;i++)(function(b){b.addEventListener('click',function(){hit(n,b);});})(bs[i]);});
+  return st;
+}
+function initCards(){
+  var cards=document.querySelectorAll('.q-card[data-kind]'),i;
+  for(i=0;i<cards.length;i++)(function(c){
+    var tp=c.querySelector('.taps');if(!tp)return;
+    var inputs=c.querySelectorAll('input.tb,input.lb'),chk=c.querySelector('.btn-check'),j;
+    for(j=0;j<inputs.length;j++)inputs[j].disabled=true;chk.disabled=true;
+    c._st=tapsInit(tp,{kind:c.getAttribute('data-kind'),whole:c.getAttribute('data-whole'),asks:c.getAttribute('data-asks')},function(){
+      var k;for(k=0;k<inputs.length;k++)inputs[k].disabled=false;chk.disabled=false;c.querySelector('.bx').classList.remove('locked');
+      var m=c.querySelector('.tapdone');if(m)m.style.display='block';});
+  })(cards[i]);
+  var plain=document.querySelectorAll('.wlb.auto'),p;for(p=0;p<plain.length;p++)wlShow(plain[p],1);
+}
 var lastP='';
 function say(fb,ok,msg){fb.style.display='block';fb.className='feedback '+(ok?'ok':'err');fb.textContent=msg;}
 function chkIn(id){var card=document.getElementById(id),inp=card.querySelector('.ans-input'),fb=card.querySelector('.feedback');
   var want=parseVal(card.getAttribute('data-ans')),got=parseVal(inp.value);
   if(!inp.value.trim()||!got){say(fb,false,'Type your answer first (like 1 1/5 or 7/4).');return;}
+  var ex=card.getAttribute('data-exact');
+  if(ex){if(inp.value.replace(/\s+/g,'')===ex){say(fb,true,'✓ Correct!');}else say(fb,false,'Not yet — count the quarters: every whole is cut into 4 quarters.');return;}
   if(sameVal(got,want))say(fb,true,'✓ Correct!');else say(fb,false,'Not yet — look again and try once more.');}
-function chk2(id){
+function chk21(id){
   var card=document.getElementById(id),fb=card.querySelector('.feedback'),ss=card.querySelector('.btn-show-steps');
-  var t=card.querySelector('.tb').value,l=card.querySelector('.lb').value;
-  var gt=parseVal(t),gl=parseVal(l);
-  if(!t.trim()||!l.trim()||!gt||!gl){say(fb,false,'Fill both boxes first (like 1 1/5 or 7/4).');return;}
-  var okT=sameVal(gt,parseVal(card.getAttribute('data-taken'))),okL=sameVal(gl,parseVal(card.getAttribute('data-left')));
-  if(okT&&okL){var P=["You shaded the taken piece first \u2014 that\u2019s the whole trick.","Worked out the piece, then the left-over. Two-step star!","Told you exactly how much \u2014 straight to taking away. Nice."],k=card.getAttribute('data-kind'),pool=(k==='told')?[P[2]]:[P[0],P[1]],p=pool[Math.floor(Math.random()*pool.length)];if(p===lastP&&pool.length>1)p=(p===pool[0])?pool[1]:pool[0];lastP=p;say(fb,true,'✓ '+p);}
-  else if(okT)say(fb,false,'Not yet — your taken piece is right. Now check the left-over piece.');
-  else say(fb,false,'Not yet — look at the bar again, then the taken piece.');
+  var asks=card.getAttribute('data-asks'),t=card.querySelector('.tb').value,l=card.querySelector('.lb').value,gt=parseVal(t),gl=parseVal(l);
+  var needT=(asks!=='left'),needL=(asks!=='taken');
+  if((needT&&(!t.trim()||!gt))||(needL&&(!l.trim()||!gl))){say(fb,false,'Fill '+((needT&&needL)?'both boxes':(needT?'the taken box':'the left-over box'))+' first (like 1 1/5 or 7/4).');return;}
+  var okT=!needT||sameVal(gt,parseVal(card.getAttribute('data-taken'))),okL=!needL||sameVal(gl,parseVal(card.getAttribute('data-left')));
+  if(okT&&okL){var P=PRAISE21,k=card.getAttribute('data-kind'),pool=(k==='told')?[P[1]]:[P[0],P[2]],p=pool[Math.floor(Math.random()*pool.length)];if(p===lastP&&pool.length>1)p=(p===pool[0])?pool[1]:pool[0];lastP=p;say(fb,true,'✓ '+p);}
+  else if(okT&&needT&&needL)say(fb,false,'Not yet — your taken piece is right. Now check the left-over piece. Tap Show steps to see it line by line.');
+  else say(fb,false,'Not yet — look at the bar again. Tap Show steps to see it line by line.');
   if(ss)ss.style.display='inline-block';
 }
-function showSteps(id,btn){var el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';btn.textContent=(el.style.display==='block')?'Hide Steps':'Show Steps';}
+var PRAISE21=["You checked for a unit straight after the fraction — that’s the whole trick.","Told you exactly how much — straight to taking away. Nice.","One line at a time — and it came out. Two-step star!","Fixed it! That’s how brains grow."];
+var WALKS={};
+function walkInit(id,steps){WALKS[id]={steps:steps,i:0};}
+function walkNext(id,btn){var w=WALKS[id],box=document.getElementById(id);if(w.i>=w.steps.length){w.i=0;var all=box.querySelectorAll('.lit-node'),k;for(k=0;k<all.length;k++){all[k].classList.remove('lit-node');}btn.textContent='Next step ▸';return;}
+  var s=w.steps[w.i],el=box.querySelector('#'+s[0]);el.classList.add('lit-node');el.querySelector('.cap').textContent=s[1];w.i++;if(w.i>=w.steps.length)btn.textContent='Start again';}
+function walkPick(boxId,key,btn){var all=document.querySelectorAll('#'+boxId+' .lit-node'),k;for(k=0;k<all.length;k++)all[k].classList.remove('lit-node');
+  var w=WALKSETS[key];WALKS[boxId]={steps:w,i:0};document.getElementById(boxId+'_nx').textContent='Next step ▸';document.getElementById(boxId+'_nx').style.display='inline-block';}
+var WALKSETS={};
 
 var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
 pill.textContent='1 / '+screens.length;
 function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function goTo(i){nav(i-cur);}
+WALKSETS.a=[['n-start','Whole: 12 L. Draw the bar.'],['n-q1','"Ben drinks 1/3 of the juice" has no unit.'],['n-q1n','NO: work it out.'],['n-q2','12 L is a whole number.'],['n-q2w','One piece = 12 \u00f7 3'],['n-q3','The question asks (a) and (b).'],['n-q3t','Taken = 4 \u00d7 1'],['n-q3l','Left over = 12 \u2212 4']];
+WALKSETS.b=[['n-start','Whole: 12 L. Draw the bar.'],['n-q1','"Ben drinks 1/3 L" has a unit right after the fraction.'],['n-q1y','YES. Taken = 1/3 L'],['n-q3','The question asks (a) and (b).'],['n-q3l','Left over = 12 \u2212 1/3']];
+walkPick('walk1','a');
+initCards();
 </script>
 </body>
 </html>
