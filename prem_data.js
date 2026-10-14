@@ -15,13 +15,40 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '5 Oct 2026',
+  updated:        '14 Oct 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:66, topic:'Cycle 7 continues — Taken piece & Left-over piece: a fraction OF an amount, and what is left (Shaping Maths 5A Ch.3, Core, +0 from live class)', status:'Test Pending', buildNote:'Lessons and Star Path revised 12 Oct 2026 as v2.1 per BUILD_PLAN_MATH_U66v2_TakenAndLeftOver.md (test unchanged, not yet sat; v2.1 is a non-strike revision). Why: the v2.0 Lesson 2 working was compressed (several steps on one line) and Prem went blank; the v2.0 Star Path needed every star plus a Boss round, so it behaved like a second test. v2.1: every calculation is one micro-step per line with its reason, shown one line at a time (pinned in u66v21_worklines.json, checked by the J-ONESTEP gate); a First-Step Map (decision tree: Q1 does the story TELL the taken piece, Q2 whole number or fraction bottle, Q3 which box) in both lessons, as a printable page (U66_FirstStep_Map.html) and in every not-yet card; Lesson 1 = 7 screens with a jump-to-map button, Lesson 2 = 8 screens with a bridge (33 L, 2/3) and a worked example split in two halves; the Star Path is now practice, not a test: Set A (6 stories) after Lesson 1, Set B (8 stories) after Lesson 2, optional Extra (the other 20), map taps first, star for first try, sparkle for fixed after the lit path and line-by-line working, no repeat or step-down or Boss, finishing Set B in any score shows TRAP SPOTTER and the code PIECE-66, no fraction or percentage anywhere; saves MATH_U066v2_Drill_[date]_a[n].json (practice schema with mapPath, mapWrong, linesViewed). Test: Unit_066v2_Test_TakenAndLeftOver.docx, 16Q, Pass = Part 1 >= 10/12 AND Q12(a) explained. No code on the paper = not a measurement. Gates: verify_u66v2_plan.py (113 answers, J-ONESTEP 379 lines 0 failures, 262 dumped Star Path lines 0 bad; its own compressed-runs counter flags the plan\'s pinned lines and scripts, reported to Lui), verify_u66v2_build.py (amended counter 0 runs, 34/34 not-yet cards rendered), verify_lesson_pack.py PASS.' },
+  currentUnit: { n:67, topic:'Cycle 7 continues — Two-Round Stories: the left-over piece becomes the NEW whole (Shaping Maths 5A Ch.3, Core, +0 from live class)', status:'Test Pending', buildNote:'Built 14 Oct 2026 per BUILD_PLAN_MATH_U67_NewWhole.md v1.0. Idea in kid words: when the story says "of what was LEFT", the left-over piece is the NEW whole \u2014 draw a new bar under it and do the same steps again. Why: U66 Applied was 0/4 (Q9, Q10, Q11 wrong; Q12(a) not credited) and those were two-round stories no U66 lesson taught. Route: Lesson 1 (whole numbers, 8 screens) \u2192 Star Path Set A (6) \u2192 Lesson 2 (fraction bottles and area, 7 screens) \u2192 Star Path Set B (8) \u2192 the paper with the code ROUND-67 (badge NEW WHOLE). Two-bar picture: round 1 bar with the left-over piece dashed green, round 2 bar drawn directly under it with the same width. Every sum one line at a time with its reason (u67_worklines.json, 50 blocks, 744 lines). First-Step Map: per round, Q1 does the story TELL the taken piece, Q2 yes/no ... of what was left? Practice: stepping-stone box (Left after round 1), swap check, explain frames for the two mistakes. Test: Unit_067_Test_NewWhole.docx, 16Q (R1\u2013R4 recall, Q1\u2013Q12), Pass = Part 1 >= 10/12 AND Q12(a) credited (Ivy used all the clay when the story means the clay that was left). A swapped pair scores 0. Gates: verify_u67_plan.py (answers, collisions, leaks, onestep all 0; its compressed-runs counter fires on the pinned lines, flagged), verify_u67_build.py PASS (amended counter 0), verify_lesson_pack.py F-BARMODEL PASS, Playwright Star Path pass. Stopped for the Set A and Set B JSONs and the paper with its code.' },
   lastUnit: {
+    n:66, outOf:12, score:7, markedScore:null, pct:58, delta:+2, prevScore:5, prevOutOf:12, prevLabel:'U65',
+    coached: false, independentResult: true, distanceFromClass: 'Same chapter as U65, +0 — Shaping Maths 5A Ch.3, Core',
+    patternLabel: 'Unit 66 — Taken piece &amp; Left-over piece, graded 13 Oct 2026 — Part 1 7/12 strict (no total written on the paper) &middot; Recall 2/4 &middot; Star Path Set A 6 stars, Set B 6 stars + 2 fixed, code PIECE-66',
+    patternInsight: '<strong>Basic 3/3 &middot; Intermediate 4/5 &middot; Applied 0/4 &middot; Recall 2/4.</strong> The one-round stories landed: told, whole-number bottle and fraction-bottle items were right (Q1&ndash;Q3, Q5&ndash;Q8). Q4 had the two correct numbers in each other&rsquo;s boxes (Lui, 13 Oct: wrong is wrong, so 4/5). All three two-round stories (Q9, Q10, Q11) were wrong: the second round never started or the second fraction was subtracted as an amount. Q12(b) right, Q12(a) not credited. Planner note: those two-round stories were never taught or practised in U66, so this is a design fault in the unit, not a strike. The printed WHOLE / Taken / Left-over frame was blank on all 12 questions. Full per-question record in TEST_RECORD_U66.md. Observation only.',
+    analysisLabel: 'Next: Unit 67 &mdash; Two-Round Stories, the left-over piece becomes the NEW whole (built 14 Oct 2026)',
+    analysisInsight: 'Provenance independent (standing rule); chapter distance +0. Pass bar 10/12 not met. Paper flags: no Part 1 total, band marks &ldquo;4 or 5 ?&rdquo; and &ldquo;0 or 1 ?&rdquo; left unresolved, partial date, Q11 unit missing. U67 teaches exactly the missing step: the left-over piece slides down and becomes the new whole.',
+    qSummary: '<strong>Basic 3/3 | Intermediate 4/5 | Applied 0/4</strong> — Part 1 7/12 (58%) | <strong>Recall 2/4</strong>',
+    qBreakdown: [
+      { q:'R1', topic:'Recall: Fraction Of A Set (Unit 61)', lvl:'k', pass:true, note:'&#10003; 25, answer only.' },
+      { q:'R2', topic:'Recall: Average Changes (Unit 48)', lvl:'k', pass:true, note:'&#10003; 20.' },
+      { q:'R3', topic:'Recall: Remainders (Unit 34)', lvl:'k', pass:false, note:'&#10007; bare "?"; correct 37. Unattempted.' },
+      { q:'R4', topic:'Recall: Words To Expression (Unit 59)', lvl:'k', pass:false, note:'&#10007; bare "?"; correct 44. Unattempted.' },
+      { q:'Q1', topic:'Taken + Left, Whole-Number Bottle (water)', lvl:'w', pass:true, note:'&#10003; 18 L and 9 L, no working.' },
+      { q:'Q2', topic:'Left, Told (rope)', lvl:'w', pass:true, note:'&#10003; 29 5/8 m.' },
+      { q:'Q3', topic:'Left, Work It Out (rice)', lvl:'w', pass:true, note:'&#10003; 20 kg; the taken piece 15 written in the working column.' },
+      { q:'Q4', topic:'Taken + Left, Fraction Bottle (juice)  &#9733;', lvl:'m', pass:false, note:'&#10007; (a) 3/5 L, (b) 1 L; correct (a) 1 L, (b) 3/5 L. Both numbers right but in each other\'s boxes; Lui 13 Oct: wrong is wrong.' },
+      { q:'Q5', topic:'Taken, Work It Out (rope)  &#9733;', lvl:'m', pass:true, note:'&#10003; 2 m, cancelled to 2/1 and 1/1.' },
+      { q:'Q6', topic:'Left, Told (paint)  &#9733;', lvl:'m', pass:true, note:'&#10003; 1 3/4 L.' },
+      { q:'Q7', topic:'Taken + Left, Fraction Bottle (sugar)  &#9733;', lvl:'m', pass:true, note:'&#10003; 2 4/5 kg and 4/5 kg.' },
+      { q:'Q8', topic:'Left, Work It Out (cake)  &#9733;', lvl:'m', pass:true, note:'&#10003; 1 kg.' },
+      { q:'Q9', topic:'Two Rounds: Take An Amount, Then A Fraction Of The Rest (paint)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; 2 1/3 L; correct 1 L. Only the first subtraction (3 1/2 &minus; 1/2 = 3) was written; the second round never started.' },
+      { q:'Q10', topic:'Two Rounds: A Fraction, Then A Fraction Of The Rest (milk)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; 1 3/4 L; correct 1/2 L. 3/12 and then 8/12 subtracted as amounts.' },
+      { q:'Q11', topic:'Area, Then A Fraction Of The Area (field)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; 4 17/40, no unit; correct 5 m&sup2;. Area 24/5 found, then 3/8 subtracted from 4 4/5 instead of taking 3/8 of it.' },
+      { q:'Q12', topic:'Explain Kai\'s Mistake + A Fraction Of An Amount (juice)  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; (b) 2 L correct; (a) &ldquo;He wrote L at the back of 2/5&rdquo; names no subtraction, not credited.' }
+    ]
+  },
+  _U65archived: {
     n:65, outOf:12, score:5, markedScore:5, pct:42, delta:+1, prevScore:4, prevOutOf:12, prevLabel:'U64',
     coached: false, independentResult: true, distanceFromClass: 'Same chapter as U64, +0 — Shaping Maths 5A Ch.3, Core',
     patternLabel: 'Unit 65 — Fraction of an Amount: Count the Pieces, graded 5 Oct 2026 — Part 1 5/12 (marked 5, re-added 5) &middot; Recall 2/4 &middot; Self-Check 3/5 (ready:false, 1.8 min, saved)',
@@ -689,24 +716,40 @@ var PREM_DATA = {
     { n:62, score:10, outOf:12, delta:+1, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 },
     { n:63, score:6, outOf:12, delta:-4, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false, recallScore:2, recallOutOf:4 },
     { n:64, score:4, outOf:12, delta:-2, color:'linear-gradient(135deg,#B71C1C,#7F0000)', star:false, recallScore:1, recallOutOf:4 },
-    { n:65, score:5, outOf:12, delta:+1, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false, recallScore:2, recallOutOf:4 }
+    { n:65, score:5, outOf:12, delta:+1, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false, recallScore:2, recallOutOf:4 },
+    { n:66, score:7, outOf:12, delta:+2, color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, recallScore:2, recallOutOf:4 }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
-      n: 66,
+      n: 67,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 67 &mdash; Two-Round Stories: the left-over piece becomes the NEW whole (Shaping Maths 5A Ch.3, Core)',
+      tags: [
+        { t:'Built 14 Oct 2026 (plan v1.0)', c:'tblue' },
+        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Two bars: the left-over piece slides down', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'Star Path = practice (Set A, Set B, Extra), code ROUND-67', c:'tgreen' },
+        { t:'Gates: plan + build + lesson pack + Star Path PASS', c:'tgreen' }
+      ],
+      note: 'Built from BUILD_PLAN_MATH_U67_NewWhole.md v1.0 after U66 Applied came back 0/4 on two-round stories nobody had taught. Lesson 1 (whole numbers, 8 screens), Star Path Set A (6), Lesson 2 (fraction bottles and area, 7 screens), Star Path Set B (8) with optional Extra, Stuck Card and a First-Step Map. Every calculation is one line with its reason, shown one line at a time. Test: 16 questions, Pass = Part 1 >= 10/12 AND Q12(a) credited; a swapped pair scores 0. Stopped for the Set A and Set B JSONs and the paper with its code ROUND-67.',
+      status: 'live'
+    },
+    {
+      n: 66,
+      badge: 'linear-gradient(135deg,#F9A825,#F57F17)',
       title: 'Unit 66 &mdash; Taken piece &amp; Left-over piece: a fraction OF an amount, and what is left (Shaping Maths 5A Ch.3, Core)',
       tags: [
-        { t:'v2 built 12 Oct 2026; lessons + Star Path revised v2.1 (12 Oct)', c:'tblue' },
-        { t:'v1 drill: not finished (14 items, 0 first-try, 2 stars) &mdash; design fault, superseded', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
-        { t:'Whole numbers first, then smaller bottles', s:'background:#E8EAF6;color:#283593;font-weight:700' },
-        { t:'Star Path = practice (Set A, Set B, Extra), not a test', c:'tgreen' },
-        { t:'Gates: plan + build + lesson pack PASS', c:'tgreen' }
+        { t:'Part 1: 7/12 (58%) strict', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Recall: 2/4', c:'torange' },
+        { t:'Basic 3/3 &middot; Intermediate 4/5 &middot; Applied 0/4', c:'torange' },
+        { t:'Star Path: Set A 6 stars; Set B 6 stars + 2 fixed; code PIECE-66', c:'tgreen' },
+        { t:'Independent', c:'tgreen' },
+        { t:'&rarr; Unit 67, the NEW whole', c:'torange' }
       ],
-      note: 'Lessons and Star Path revised as v2.1 (12 Oct 2026, non-strike; test unchanged and not yet sat). Every calculation is one micro-step per line, shown one line at a time with its reason; a First-Step Map (3 questions) is in both lessons, on a printable page and in every not-yet card; Lesson 2 has a bridge and a split worked example. The Star Path is practice: Set A after Lesson 1, Set B after Lesson 2, optional Extra; star for first try, sparkle for fixed; finishing Set B shows TRAP SPOTTER and the code PIECE-66. Pass = Part 1 >= 10/12 AND Q12(a) explained. Not yet sat.',
-      status: 'live'
+      note: 'Sat 13 Oct 2026. One-round stories landed (Q1&ndash;Q3, Q5&ndash;Q8). Q4 had the two right numbers in each other\'s boxes (Lui: wrong is wrong). All three two-round stories (Q9&ndash;Q11) wrong; Q12(a) not credited. Those stories were never taught in U66, a planner design fault, not a strike. Full record in TEST_RECORD_U66.md.',
+      status: 'done'
     },
     {
       n: 65,

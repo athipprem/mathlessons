@@ -1,0 +1,185 @@
+{
+  "student": "Prem",
+  "subject": "Math",
+  "unit": "U066v2",
+  "type": "practice",
+  "set": "B",
+  "attempt": 2,
+  "openedAt": "2026-10-13T09:50:48.611Z",
+  "finishedAt": "2026-10-13T10:00:08.703Z",
+  "minutesSpent": 9.3,
+  "finished": true,
+  "code": "PIECE-66",
+  "firstTry": 6,
+  "fixed": 2,
+  "mapTaps": {
+    "q1Wrong": 2,
+    "q2Wrong": 2,
+    "q3Wrong": 9
+  },
+  "items": [
+    {
+      "id": "S10",
+      "kind": "work",
+      "asks": "both",
+      "mapPath": [
+        "work",
+        "frac",
+        "both"
+      ],
+      "mapWrong": [
+        "Q2:whole",
+        "Q3:left",
+        "Q3:left"
+      ],
+      "takenGiven": "2/5",
+      "leftGiven": "4/5",
+      "correctTaken": "2/5",
+      "correctLeft": "4/5",
+      "firstTryRight": true,
+      "linesViewed": 0,
+      "ms": 77815
+    },
+    {
+      "id": "S09",
+      "kind": "work",
+      "asks": "both",
+      "mapPath": [
+        "work",
+        "frac",
+        "both"
+      ],
+      "mapWrong": [
+        "Q2:whole",
+        "Q3:left"
+      ],
+      "takenGiven": "4/5",
+      "leftGiven": "2 4/5",
+      "correctTaken": "4/5",
+      "correctLeft": "2 4/5",
+      "firstTryRight": true,
+      "linesViewed": 0,
+      "ms": 31394
+    },
+    {
+      "id": "S17",
+      "kind": "told",
+      "asks": "both",
+      "mapPath": [
+        "told",
+        "skip",
+        "both"
+      ],
+      "mapWrong": [
+        "Q1:work",
+        "Q3:taken",
+        "Q3:left"
+      ],
+      "takenGiven": "7/8",
+      "leftGiven": "1 5/8",
+      "correctTaken": "7/8",
+      "correctLeft": "1 5/8",
+      "firstTryRight": true,
+      "linesViewed": 0,
+      "ms": 76904
+    },
+    {
+      "id": "S15",
+      "kind": "work",
+      "asks": "both",
+      "mapPath": [
+        "work",
+        "frac",
+        "both"
+      ],
+      "mapWrong": [],
+      "takenGiven": "2/3",
+      "leftGiven": "1",
+      "correctTaken": "2/3",
+      "correctLeft": "1",
+      "firstTryRight": true,
+      "linesViewed": 0,
+      "ms": 45192
+    },
+    {
+      "id": "S12",
+      "kind": "work",
+      "asks": "both",
+      "mapPath": [
+        "work",
+        "frac",
+        "both"
+      ],
+      "mapWrong": [],
+      "takenGiven": "1 3/4",
+      "leftGiven": "1 7/8",
+      "correctTaken": "1 3/4",
+      "correctLeft": "7/8",
+      "firstTryRight": false,
+      "linesViewed": 10,
+      "ms": 135447
+    },
+    {
+      "id": "S23",
+      "kind": "work",
+      "asks": "left",
+      "mapPath": [
+        "work",
+        "frac",
+        "left"
+      ],
+      "mapWrong": [
+        "Q3:both"
+      ],
+      "takenGiven": "",
+      "leftGiven": "1",
+      "correctTaken": "1 1/2",
+      "correctLeft": "1",
+      "firstTryRight": true,
+      "linesViewed": 0,
+      "ms": 68120
+    },
+    {
+      "id": "S27",
+      "kind": "told",
+      "asks": "left",
+      "mapPath": [
+        "told",
+        "skip",
+        "left"
+      ],
+      "mapWrong": [
+        "Q1:work",
+        "Q3:taken",
+        "Q3:both"
+      ],
+      "takenGiven": "",
+      "leftGiven": "4 1/6",
+      "correctTaken": "1/3",
+      "correctLeft": "4 1/6",
+      "firstTryRight": true,
+      "linesViewed": 0,
+      "ms": 32167
+    },
+    {
+      "id": "S24",
+      "kind": "work",
+      "asks": "left",
+      "mapPath": [
+        "work",
+        "frac",
+        "left"
+      ],
+      "mapWrong": [
+        "Q3:both"
+      ],
+      "takenGiven": "",
+      "leftGiven": "1 1/5",
+      "correctTaken": "1 1/5",
+      "correctLeft": "2 2/5",
+      "firstTryRight": false,
+      "linesViewed": 10,
+      "ms": 63779
+    }
+  ]
+}
