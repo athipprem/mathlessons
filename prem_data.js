@@ -20,8 +20,35 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:67, topic:'Cycle 7 continues — Two-Round Stories: the left-over piece becomes the NEW whole (Shaping Maths 5A Ch.3, Core, +0 from live class)', status:'Test Pending', buildNote:'Built 14 Oct 2026 per BUILD_PLAN_MATH_U67_NewWhole.md v2.0, lesson rebuilt 15 Oct per v2.1 (test unchanged). v1.0 split: area, three rounds and explain moved to U68. Idea in kid words: when the story says "of what was LEFT", the left-over piece is the NEW whole \u2014 draw a new bar under it and do the same steps again. Why: U66 Applied was 0/4 on two-round stories no U66 lesson taught. v2.1 root cause (Lui, 15 Oct): the map and Stuck Card sat on separate pages he could not open while learning, in confusing words. Now ONE lesson, Fractions_Lesson_NewWhole.html, 6 screens, with a Fraction Formula Card built in (docks beside the lesson on a wide screen, bottom sheet on a narrow one, open on screens 2\u20134, always one tap away, printable): \u2460 taken part = fraction \u00d7 whole (told? take it as given), \u2461 left part = whole \u2212 taken part, \u2462 \u201cof what was LEFT\u201d = new whole; \u00d70\u2013\u00d72 and \u22120\u2013\u22123 steps. Every worked line shows its card step and that step lights up. Whole numbers use the same \u00d7 route (12 = 12/1). Then Your turn x5 on the last screen (saves after every item, resumes where he stopped); no Star Path, no code. The Stuck Card and First-Step Map are retired to Lessons\\_retired\\u67_v2.0. Test: Unit_067_Test_NewWhole.docx unchanged, 16Q (R1\u2013R4 recall, Q1\u2013Q12 Part 1); Pass = Part 1 >= 10/12; key question Q9; a swapped pair scores 0. Gates: verify_u67_plan.py (answers, collisions, leaks, onestep, card tags all 0; its compressed-runs counter fires on pinned lines, flagged), verify_u67_build.py PASS (amended counter 0), verify_lesson_pack.py PASS, Playwright lesson and card runs PASS. Stopped for the lesson JSON and the paper.' },
+  currentUnit: { n:68, topic:'Cycle 7 continues \u2014 The Left Part, Done Right: taking away when the bottoms differ (Shaping Maths 5A Ch.3, Core, +0 from live class)', status:'Test Pending', buildNote:'Built 15 Oct 2026 per BUILD_PLAN_MATH_U68_LeftPartDoneRight.md v1.0. Why: U67 Part 1 was 9/12 and the new-whole idea landed (Intermediate 5/5, key Q9 right), but three of the four subtractions with different bottoms were wrong (Q1b, R4, lesson B3), Q12 answered the wrong part of the story, the scaffold box was left blank on all 7, and the paper was sat about 33 minutes after the lesson. Idea in kid words: to take away, make everything improper, give it the same bottoms, then top \u2212 top. Habit: read the question again \u2014 does it ask for the TAKEN part, the LEFT part, or HOW MUCH MORE? (\u2463 on the card). ONE lesson, Fractions_Lesson_LeftPartDoneRight.html, 6 screens: warm-up, a picture (bars recut into twelfths) and the card\u2019s \u22121 rule, a count-up strip to find the same bottom, a three-part story with the last-check, Your turn x5 (saved after every item, resumes where he stopped, answer-check nudge if he answers a different part of the story), and a 2-minute Memory Boost (Sequences, Remainders). The Formula Card gets the \u2463 LAST CHECK step and a new \u22121 wording (count up in the BIGGER bottom). Test: Unit_068_Test_LeftPartDoneRight.docx, 16Q (R1\u2013R4 recall: Sequences, Remainders, Perimeter & Area, Fraction of a Set; Q1 a bare calculation 3 2/5 \u2212 1 3/4; Q2\u2013Q12 stories), no scaffold boxes; Pass = Part 1 >= 10/12; key question Q1; a swapped pair scores 0 and an answer that is a different part of the story scores 0. Gates: verify_u68_plan.py (answers, collisions, leaks, onestep, card tags all 0; its compressed-runs counter fires on pinned lines, flagged), verify_u68_build.py PASS (amended counter 0), verify_lesson_pack.py PASS, Playwright lesson runs PASS. Stopped for the lesson JSON and the paper; U69 stays an outline.' },
   lastUnit: {
+    n:67, outOf:12, score:9, markedScore:null, pct:75, delta:+2, prevScore:7, prevOutOf:12, prevLabel:'U66',
+    coached: false, independentResult: true, distanceFromClass: 'Same chapter as U66, +0 \u2014 Shaping Maths 5A Ch.3, Core',
+    patternLabel: 'Unit 67 \u2014 Two-Round Stories, the NEW whole, graded 15 Oct 2026 \u2014 Part 1 9/12 strict (no total written on the paper) &middot; Recall 2/4 &middot; lesson 4 stars + 1 fixed, 0 swaps (33.8 min)',
+    patternInsight: '<strong>Basic 1/3 &middot; Intermediate 5/5 &middot; Applied 3/4 &middot; Recall 2/4.</strong> The new-whole idea landed: all five Intermediate stories right and the key question Q9 right. No swapped answers. The slips: three of the four subtractions with different bottoms were wrong (Q1(b), R4, lesson B3), and Q12 had the correct 7/8 in the working but the circled answer was the left-over. The scaffold box was left blank on all 7. The paper was sat about 33 minutes after the lesson (the plan said tomorrow). Full record in TEST_RECORD_U67.md. Observation only.',
+    analysisLabel: 'Next: Unit 68 &mdash; The Left Part, Done Right: taking away when the bottoms differ (built 15 Oct 2026)',
+    analysisInsight: 'Provenance independent (standing rule); chapter distance +0. Pass bar 10/12 not met (9/12). Paper flags: no Part 1 total, partial date, Q8(a) wording ambiguous. U68 teaches exactly the missing step: make everything improper, give it the same bottoms, then top &minus; top, and re-read what the question asks for.',
+    qSummary: '<strong>Basic 1/3 | Intermediate 5/5 | Applied 3/4</strong> &mdash; Part 1 9/12 (75%) | <strong>Recall 2/4</strong>',
+    qBreakdown: [
+      { q:'R1', topic:'Recall: Average Changes (Unit 48)', lvl:'k', pass:true, note:'&#10003; 17; the 48 and 65 totals side by side in the working.' },
+      { q:'R2', topic:'Recall: Ratio (Unit 18)', lvl:'k', pass:true, note:'&#10003; 40, no visible working.' },
+      { q:'R3', topic:'Recall: Sequences (Unit 25)', lvl:'k', pass:false, note:'&#10007; one character reading 9; correct 127. No formula in the working although the stem asks for it.' },
+      { q:'R4', topic:'Recall: Mixed Numbers (Unit 58)', lvl:'k', pass:false, note:'&#10007; 4 7/12; correct 2 7/12. Three loose fractions, no wholes or signs.' },
+      { q:'Q1', topic:'Taken + Left, Fraction Bottle (2 7/9 L, 3/5)', lvl:'w', pass:false, note:'&#10007; (a) 1 2/3 L right; (b) 1 8/9 L, correct 1 1/9. Subtraction with different bottoms (2 7/9 &minus; 1 2/3) was not written. A two-part question scores 1 only if both parts are right.' },
+      { q:'Q2', topic:'Of &rarr; Of, Whole Number (45 kg)', lvl:'w', pass:true, note:'&#10003; 12 kg; scaffold box blank.' },
+      { q:'Q3', topic:'Told &rarr; Of, Whole Number (50 m)', lvl:'w', pass:false, note:'&#10007; 14 m; correct 18 m. 42 (the left-over) found right, then the second round slipped. Scaffold blank.' },
+      { q:'Q4', topic:'Of &rarr; Of, (a)(b)  &#9733;', lvl:'m', pass:true, note:'&#10003; 8 L and 32 L.' },
+      { q:'Q5', topic:'Of &rarr; Of, Mixed Number  &#9733;', lvl:'m', pass:true, note:'&#10003; 1 L.' },
+      { q:'Q6', topic:'Of &rarr; Told, Mixed Number  &#9733;', lvl:'m', pass:true, note:'&#10003; 1 1/6 kg.' },
+      { q:'Q7', topic:'Of &rarr; Of, Asks Round 2  &#9733;', lvl:'m', pass:true, note:'&#10003; 3 1/3 m after several restarts.' },
+      { q:'Q8', topic:'Of &rarr; Of, (a)(b)  &#9733;', lvl:'m', pass:true, note:'&#10003; 1 1/8 kg and 1 7/8 kg. Wording of (a) was ambiguous; fixed forward.' },
+      { q:'Q9', topic:'Told &rarr; Of, KEY QUESTION  &#9733;&#9733;', lvl:'h', pass:true, note:'&#10003; 2 L. The left-over 21/6 was written and used as the new whole.' },
+      { q:'Q10', topic:'Of &rarr; Told  &#9733;&#9733;', lvl:'h', pass:true, note:'&#10003; 4 5/8 L.' },
+      { q:'Q11', topic:'Of &rarr; Of, (a)(b)  &#9733;&#9733;', lvl:'h', pass:true, note:'&#10003; 2 2/7 kg and 1 5/7 kg.' },
+      { q:'Q12', topic:'Told &rarr; Of, Asks Round 2  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; 1 11/24 L, circled; correct 7/8 L. 7/8 is written in the working, then he went on and answered the left-over. Method right, wrong part of the story.' }
+    ]
+  },
+  _U66archived: {
     n:66, outOf:12, score:7, markedScore:null, pct:58, delta:+2, prevScore:5, prevOutOf:12, prevLabel:'U65',
     coached: false, independentResult: true, distanceFromClass: 'Same chapter as U65, +0 — Shaping Maths 5A Ch.3, Core',
     patternLabel: 'Unit 66 — Taken piece &amp; Left-over piece, graded 13 Oct 2026 — Part 1 7/12 strict (no total written on the paper) &middot; Recall 2/4 &middot; Star Path Set A 6 stars, Set B 6 stars + 2 fixed, code PIECE-66',
@@ -717,24 +744,40 @@ var PREM_DATA = {
     { n:63, score:6, outOf:12, delta:-4, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false, recallScore:2, recallOutOf:4 },
     { n:64, score:4, outOf:12, delta:-2, color:'linear-gradient(135deg,#B71C1C,#7F0000)', star:false, recallScore:1, recallOutOf:4 },
     { n:65, score:5, outOf:12, delta:+1, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false, recallScore:2, recallOutOf:4 },
-    { n:66, score:7, outOf:12, delta:+2, color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, recallScore:2, recallOutOf:4 }
+    { n:66, score:7, outOf:12, delta:+2, color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, recallScore:2, recallOutOf:4 },
+    { n:67, score:9, outOf:12, delta:+2, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:2, recallOutOf:4 }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 68,
+      badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 68 &mdash; The Left Part, Done Right: taking away when the bottoms differ (Shaping Maths 5A Ch.3, Core)',
+      tags: [
+        { t:'Built 15 Oct 2026 (plan v1.0)', c:'tblue' },
+        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Make everything improper, same bottoms, top &minus; top', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'One lesson + Formula Card (new last-check) + Your turn x5 + Memory Boost', c:'tgreen' },
+        { t:'Gates: build + lesson pack + lesson run PASS; plan gate FAIL only on its unsatisfiable compressed-runs counter', c:'tgreen' }
+      ],
+      note: 'Built from BUILD_PLAN_MATH_U68_LeftPartDoneRight.md v1.0 after U67 (9/12): the new-whole idea landed, but subtraction with different bottoms and answering the right part of the story did not. One lesson of 6 screens with the Formula Card (new step four: read the question again, taken part, left part or how much more; new rule for the same bottom). Test: 16 questions, Q1 a bare calculation, no scaffold boxes, Pass = Part 1 >= 10/12, key question Q1; a swapped pair scores 0, an answer that is a different part of the story scores 0. Stopped for the lesson JSON and the paper.',
+      status: 'live'
+    },
+    {
       n: 67,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
       title: 'Unit 67 &mdash; Two-Round Stories: the left-over piece becomes the NEW whole (Shaping Maths 5A Ch.3, Core)',
       tags: [
-        { t:'Built 14 Oct 2026 (plan v2.1)', c:'tblue' },
-        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
-        { t:'Two bars: the left-over piece slides down', s:'background:#E8EAF6;color:#283593;font-weight:700' },
-        { t:'One lesson + Formula Card + Your turn x5, saves per item', c:'tgreen' },
-        { t:'Gates: plan + build + lesson pack + lesson run PASS', c:'tgreen' }
+        { t:'Part 1: 9/12 (75%) strict', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Recall: 2/4', c:'torange' },
+        { t:'Basic 1/3 &middot; Intermediate 5/5 &middot; Applied 3/4', c:'torange' },
+        { t:'Key question Q9 right', c:'tgreen' },
+        { t:'Independent', c:'tgreen' },
+        { t:'&rarr; Unit 68, the left part done right', c:'torange' }
       ],
-      note: 'Built from BUILD_PLAN_MATH_U67_NewWhole.md v2.0; lesson rebuilt 15 Oct per v2.1 after Lui found the map and Stuck Card sat on pages Prem could not open while learning. Now one lesson of 6 screens with a Fraction Formula Card built in (taken part = fraction x whole; left part = whole - taken part; of what was LEFT = new whole), every worked line pointing at a card step, then Your turn x5 saved after each item. Test unchanged: 16 questions, Pass = Part 1 >= 10/12, key question Q9; a swapped pair scores 0. Stopped for the lesson JSON and the paper.',
-      status: 'live'
+      note: 'Sat 15 Oct 2026, about 33 minutes after the lesson. The new-whole idea landed. Three of the four subtractions with different bottoms were wrong (Q1(b), R4, lesson B3); Q12 had 7/8 in the working but the circled answer was the left-over; the scaffold box was blank on all 7. No swaps. Full record in TEST_RECORD_U67.md.',
+      status: 'done'
     },
     {
       n: 66,

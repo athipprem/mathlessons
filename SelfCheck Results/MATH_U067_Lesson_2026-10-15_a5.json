@@ -1,0 +1,96 @@
+{
+  "student": "Prem",
+  "subject": "Math",
+  "unit": "U067",
+  "type": "lesson",
+  "attempt": 5,
+  "openedAt": "2026-10-15T09:05:43.472Z",
+  "lastSavedAt": "2026-10-15T09:39:21.492Z",
+  "minutesSpent": 33.8,
+  "screensSeen": 6,
+  "finished": true,
+  "stars": 4,
+  "fixed": 1,
+  "swaps": 0,
+  "items": [
+    {
+      "id": "A6",
+      "left1Given": "45",
+      "left1Correct": "45",
+      "answersGiven": {
+        "a": "25",
+        "b": "20"
+      },
+      "answersCorrect": {
+        "a": "25",
+        "b": "20"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "linesViewed": 0,
+      "ms": 69739
+    },
+    {
+      "id": "A5",
+      "left1Given": "8",
+      "left1Correct": "28",
+      "answersGiven": {
+        "ans": "23"
+      },
+      "answersCorrect": {
+        "ans": "23"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "linesViewed": 0,
+      "ms": 110465
+    },
+    {
+      "id": "B2",
+      "left1Given": "2 1/3",
+      "left1Correct": "2 1/3",
+      "answersGiven": {
+        "a": "1 2/3",
+        "b": "2/3"
+      },
+      "answersCorrect": {
+        "a": "1 2/3",
+        "b": "2/3"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "linesViewed": 0,
+      "ms": 68085
+    },
+    {
+      "id": "B3",
+      "left1Given": "2 3/5",
+      "left1Correct": "2 1/2",
+      "answersGiven": {
+        "ans": "9/10"
+      },
+      "answersCorrect": {
+        "ans": "1"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "linesViewed": 18,
+      "ms": 161445
+    },
+    {
+      "id": "B4",
+      "left1Given": "2 1/4",
+      "left1Correct": "1 1/2",
+      "answersGiven": {
+        "ans": "3/4"
+      },
+      "answersCorrect": {
+        "ans": "3/4"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "linesViewed": 0,
+      "ms": 810451
+    }
+  ]
+}
