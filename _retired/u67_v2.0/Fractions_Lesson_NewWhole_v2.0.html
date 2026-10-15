@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Whole — Lesson (Unit 67)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#8D6E00;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.wrap{max-width:760px;margin:0 auto;padding:16px;width:100%}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin:12px 0}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.q-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1px solid #9FA8DA;border-radius:14px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFF3E0;color:#8D6E00;border:1px solid #FFE0B2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stop-here{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FB8C00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:800;color:#E65100;margin:16px 0}
+.flip-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.flip-card{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:12px 18px;font-size:.95rem;font-weight:700;color:var(--warn);text-align:center}
+/* answer frame */
+.frame{background:#fff;border:2px solid var(--acc);border-radius:10px;padding:10px 12px;margin:10px 0}
+.frame .fr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0}
+.frame .fl{font-weight:700;color:var(--warn);font-size:.92rem;min-width:150px}
+.frame .fv{font-size:1rem;color:#1a1a2e}
+.frame .fv.ans{font-weight:800;color:var(--warn)}
+.frame input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:6px 8px;font-size:1rem;width:170px;font-family:inherit}
+.frame input[type=text].wide{width:230px}
+.frame input[type=text]:focus{outline:2px solid #9FA8DA}
+.frame .fr.pieces input{width:90px}
+/* piece cutter W10 */
+.w10{background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:12px;margin:12px 0}
+.w10 svg{width:100%;height:auto;display:block}
+.w10-lines{margin-top:8px;min-height:60px}
+.w10-lines .ln{font-size:1rem;padding:3px 0;color:#1a1a2e}
+.w10-lines .ln.last{font-weight:800;color:var(--warn)}
+.w10-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.w10-btns button{border:none;border-radius:8px;padding:8px 16px;font-size:.92rem;font-weight:700;cursor:pointer}
+.w10-btns .go{background:var(--acc);color:#fff}
+.w10-btns .go:disabled{background:#9FA8DA;cursor:default}
+.w10-btns .rs{background:#fff;color:var(--acc);border:1.5px solid var(--acc)}
+.two-cards{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.two-cards .q-card{flex:1;min-width:250px;margin-bottom:0}
+.ans-input{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 10px;font-size:1rem;width:190px;font-family:inherit;margin-right:8px}
+.nav-link{flex:1;display:block;text-align:center;padding:13px 0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.nav-link.out{background:#fff;color:#283593;border:2px solid #283593}
+.nav-link.fill{background:#3F51B5;color:#fff;border:2px solid #3F51B5}
+
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.chip{display:inline-block;border-radius:14px;padding:3px 12px;font-size:.88rem;font-weight:700;border:2px solid #1565C0}
+.chip.t{background:#90CAF9;color:#0D47A1}.chip.l{background:#fff;color:#283593;border-color:#283593}
+.chip.told{background:#FFF8E1;color:#8d6e00;border-color:#FFB74D}
+.bx{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.bx label{font-weight:700;color:#283593;font-size:.95rem}
+.bx input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 9px;font-size:1rem;width:120px;font-family:inherit}
+.bx .opt{font-weight:400;color:#607D8B;font-size:.82rem}
+.boxes-static{background:#fff;border:2px solid #1565C0;border-radius:10px;padding:10px 14px;margin:10px 0}
+.boxes-static .r{padding:3px 0;font-size:1rem}.boxes-static b{color:#0D47A1}
+.circ{border:3px solid #2E7D32;border-radius:10px;padding:2px 8px;font-weight:800;color:#1B5E20;display:inline-block}
+.amberwarn{background:#FFF8E1;border:2px solid #FFB74D;border-radius:10px;padding:12px 16px;margin:12px 0;color:#8d6e00;font-weight:700}
+.sbs{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.sbs .sc{flex:1;min-width:240px;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:12px}
+.sbs .sc.a{border-color:#1565C0;background:#E3F2FD}.sbs .sc.b{border-color:#FFB74D;background:#FFF8E1}
+.sbs .sc .st{font-weight:800;margin-bottom:4px;color:#283593}
+.bar-wrap{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px;margin:10px 0}
+.bar-wrap svg{width:100%;height:auto;display:block}
+
+.wlb{margin:10px 0;border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:6px 8px}
+.wlb .wls{margin-bottom:4px}
+.wl,.bl{display:none;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:12px;padding:7px 6px;border-bottom:1px dashed #C5CAE9;align-items:start}
+.wl.on,.bl.on{display:grid}
+.wl.cur,.bl.cur{background:#F0F1FA}
+.wl[data-glow].on{background:#FFF8E1;box-shadow:inset 4px 0 0 #F9A825}
+.wl .m,.bl .m{font-family:Consolas,'Courier New',monospace;font-weight:700;color:#283593;font-size:1rem}
+.wl .why,.bl .why{color:#455A64;font-size:.88rem;line-height:1.35;border:0;background:none;padding:0;margin:0;border-radius:0;box-shadow:none}
+.wl .why:before,.bl .why:before{content:"\2190  ";color:#9FA8DA}
+.btn-next{background:#fff;color:#283593;border:2px solid #283593;border-radius:8px;padding:7px 16px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit}
+.wlb.alldone .btn-next{display:none}
+.wlb.closed{display:none}
+.chip.nw{background:#FFF8E1;color:#8d6e00;border-color:#F9A825}
+.taps{margin:8px 0;padding:8px 10px;border:2px solid #C5CAE9;border-radius:10px;background:#F7F9FD}
+.taps .thead{font-weight:800;color:#283593;font-size:.9rem;margin-bottom:4px}
+.tq{margin:8px 0}
+.tq .tl{font-weight:700;color:#283593}
+.tq .tsub{font-weight:400;color:#607D8B;font-size:.85rem;display:block}
+.tb2{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.tb2 button{border:2px solid #9FA8DA;background:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem;cursor:pointer;font-family:inherit;color:#283593;font-weight:600;text-align:left}
+.tb2 button.good{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.tb2 button.lit{outline:3px solid #2E7D32}
+.tb2 button.nope{background:#FFF3E0;border-color:#FFB74D;color:#8d6e00}
+.thint{color:#8d6e00;font-size:.88rem;margin-top:4px;min-height:1em}
+.stones,.alines{margin:10px 0}
+.stones .sr,.alines .al{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:7px 0}
+.stones label,.alines label{font-weight:700;color:#283593;font-size:.95rem}
+.stones input[type=text],.alines input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 9px;font-size:1rem;width:130px;font-family:inherit}
+.stones .tag{font-size:.78rem;background:#FFF8E1;border:1.5px solid #FFB74D;color:#8d6e00;border-radius:12px;padding:1px 8px;font-weight:700}
+.alines .al label{flex:1 1 100%}
+.locked label{opacity:.55}
+.fmap{max-width:640px;margin:10px auto}
+.mn{border:2px solid #283593;border-radius:10px;padding:8px 12px;background:#fff;color:#283593;font-size:.95rem}
+.mn.start{background:#E8EAF6}.mn.q{background:#F0F1FA}
+.mn b.k{background:#283593;color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+.mn i,.br i{display:block;font-size:.84rem;color:#455A64;font-style:normal;margin-top:2px}
+.arr{text-align:center;color:#9FA8DA;font-size:1.1rem;line-height:1.2}
+.two{display:flex;gap:8px;flex-wrap:wrap}
+.two .br{flex:1;min-width:230px;border:2px solid #9FA8DA;border-radius:10px;padding:8px 10px;background:#fff;font-size:.9rem;color:#37474F}
+.br b.yn{color:#283593}
+.mp .tk{background:#90CAF9;color:#0D47A1;border-radius:6px;padding:0 6px;font-weight:700}
+.mp .lf{background:#fff;color:#283593;border:1.5px solid #283593;border-radius:6px;padding:0 6px;font-weight:700}
+.lit-node{background:#E8F5E9 !important;border-color:#2E7D32 !important;box-shadow:0 0 0 3px #A5D6A7}
+.fmap .cap{display:none;margin-top:5px;font-family:Consolas,'Courier New',monospace;font-weight:700;color:#1B5E20;font-size:.88rem}
+.lit-node .cap{display:block}
+.ex{margin-top:5px;font-size:.82rem;color:#455A64;border-top:1px dashed #C5CAE9;padding-top:4px}
+.wtrow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;align-items:center}
+.btn-map{display:inline-block;border:2px solid #283593;color:#283593;background:#fff;border-radius:10px;padding:8px 16px;font-weight:700;text-decoration:none;font-size:.95rem;cursor:pointer;font-family:inherit}
+.maplink{position:fixed;right:12px;bottom:12px;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.btn-show-steps{display:none;margin-top:6px}
+.frame67{border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:10px 12px;margin:10px 0;line-height:2.1}
+.frame67 .fh{font-weight:800;color:#283593;display:block;margin-bottom:2px;line-height:1.4}
+.bl-blank{display:inline-block;min-width:74px;border:2px dashed #9FA8DA;border-radius:8px;padding:0 8px;text-align:center;font-weight:700;color:#283593;cursor:pointer;background:#F7F9FD;line-height:1.7}
+.bl-blank.sel{border-color:#283593;background:#E8EAF6}
+.bl-blank.full{border-style:solid}
+.bl-blank.bad{border-color:#FFB74D;background:#FFF3E0}
+.bl-blank.ok{border-color:#2E7D32;background:#E8F5E9;color:#1B5E20}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chips button{border:2px solid #90CAF9;background:#E3F2FD;border-radius:16px;padding:4px 14px;font-weight:700;color:#0D47A1;cursor:pointer;font-family:inherit;font-size:.95rem}
+.chips button.used{opacity:.35}
+.frame67 input.ft{border:1.5px solid #9FA8DA;border-radius:6px;padding:3px 8px;font-size:.95rem;width:96px;font-family:inherit}
+.goodline{font-weight:800;color:#1B5E20;margin-top:4px}
+.sbs .sc.a{border-color:#2E7D32;background:#E8F5E9}
+.model{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 12px;margin:8px 0;display:none}
+.model label{display:block;margin:4px 0;font-weight:600;color:#283593}
+textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:6px;padding:8px;font-size:1rem;font-family:inherit}
+.boost .q{margin:6px 0}
+@media (max-width:560px){.wl,.bl{grid-template-columns:1fr;gap:2px}}
+
+@keyframes slidedown{from{transform:translateY(-70px);opacity:.15}to{transform:translateY(0);opacity:1}}
+.bar-wrap g.slide{animation:slidedown 1.1s ease-out 0.3s both}
+.bar-wrap .tgl{font-size:.8rem;color:#455A64}
+
+.intro{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.intro p{margin-bottom:6px}
+.meters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+.lv{flex:1;min-width:120px;border:2px dashed #B0BEC5;border-radius:10px;padding:6px 8px;text-align:center;background:#fff;color:#78909C}
+.lv .ln1{font-weight:800;font-size:.9rem}.lv .ln2{font-size:.78rem;margin-bottom:3px}
+.lv.now{border:2px solid #283593;color:#283593;background:#E8EAF6}
+.lv.done{border:2px solid #2E7D32;color:#1B5E20;background:#E8F5E9}
+.lv.boss{border-color:#FFB74D;color:#8d6e00;background:#FFF8E1}
+.lv.boss.now{border:2px solid #F9A825}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid #B0BEC5;margin:0 2px;background:#fff}
+.dot.on{background:#F9A825;border-color:#F9A825}
+.bchip{display:inline-block;margin:2px 3px;padding:2px 8px;border-radius:12px;border:2px solid #FFB74D;background:#fff;font-weight:700;color:#8d6e00;font-size:.78rem}
+.bchip.beat{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.dstat{text-align:center;font-weight:700;color:#283593;font-size:.95rem}
+.dsub{text-align:center;font-size:.85rem;color:#607D8B;margin-bottom:8px}
+.welcome{text-align:center;font-size:.9rem;color:#455A64;margin:4px 0 8px;font-weight:600}
+.lvmsg{text-align:center;font-weight:800;color:#1B5E20;margin:4px 0;min-height:1em}
+.dq{font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:10px}
+.walk{background:#E3F2FD;border:2px solid #1565C0;border-radius:10px;padding:12px 14px;margin:10px 0}
+.walk .wt{font-weight:800;color:#0D47A1;margin-bottom:6px}
+.wholelab{text-align:center;font-weight:700;color:#283593;margin-top:6px}
+.sorry{background:#FFF3E0;border:2px solid #FFB74D;border-radius:10px;padding:14px 16px;margin-top:12px}
+.sorry .sbig{font-weight:800;color:#8d6e00;margin-bottom:6px}
+.tline{margin:4px 0;font-size:.95rem}
+.tline b{color:#283593}
+.btn-big{background:var(--acc);color:#fff;border:none;padding:13px 30px;border-radius:10px;cursor:pointer;font-size:1.05rem;font-weight:700;display:block;margin:16px auto 0}
+.btn-big.alt{background:#fff;color:#283593;border:2px solid #283593}
+.endbox{display:none;border-radius:12px;padding:20px;margin-top:16px;text-align:center;position:relative;overflow:hidden}
+.endbox.master{background:#E8F5E9;border:2px solid #A5D6A7}
+.endbox.stop{background:#FFF8E1;border:2px solid #FFB74D}
+.endbox .big{font-size:1.25rem;font-weight:800}
+.endbox.master .big{color:#1B5E20}.endbox.stop .big{color:#8d6e00}
+.tsbadge{display:inline-block;margin:8px 0;padding:6px 18px;border-radius:20px;background:#2E7D32;color:#fff;font-weight:800;letter-spacing:1px}
+.codebox{display:inline-block;margin:12px 0;background:#fff;border:3px dashed #2E7D32;border-radius:10px;padding:10px 22px;font-size:1.6rem;font-weight:800;letter-spacing:2px;color:#1B5E20}
+.savebox{display:none;margin-top:16px;border-radius:12px;padding:18px;text-align:center}
+.savebox.notsaved{background:#FFF3E0;border:2px solid #FFB74D}
+.savebox.saved{background:#E8F5E9;border:2px solid #A5D6A7}
+.savebox .big{font-weight:800;font-size:1.1rem}
+.savebox.notsaved .big{color:#8d6e00}.savebox.saved .big{color:#1B5E20}
+.cf{position:fixed;top:-20px;width:10px;height:14px;opacity:.9;z-index:50;pointer-events:none;animation:cfall 2.6s ease-in forwards}
+@keyframes cfall{to{transform:translateY(110vh) rotate(540deg);opacity:.9}}
+
+.wrap{max-width:760px;margin:0 auto;padding:0 12px}
+.why-real{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 14px;margin:10px 0;color:#283593}
+.stat2{text-align:center;font-weight:700;color:#283593;margin:6px 0}
+.savebar{margin-top:10px;padding:8px 12px;border-radius:10px;font-size:.9rem;text-align:center;background:#FFF8E1;border:2px solid #FFB74D;color:#8d6e00}
+.savebar.saved{background:#E8F5E9;border-color:#A5D6A7;color:#1B5E20}
+.savebar button{margin-left:8px}
+.finish{display:none;text-align:center;background:#E8F5E9;border:2px solid #A5D6A7;border-radius:12px;padding:20px;margin-top:14px}
+.finish .big{font-size:1.25rem;font-weight:800;color:#1B5E20}
+.finish .both{font-size:1.3rem;font-weight:800;margin:8px 0;color:#283593}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Lesson &mdash; The NEW Whole (Unit 67)</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+<div class="wrap">
+<!-- s0 -->
+<div class="screen active" id="s0">
+<div class="card">
+  <span class="badge-cap">&#x1F501; Warm-up wins</span>
+  <h2>Before We Start &mdash; You Already Know This</h2>
+<div class="why-real"><p><strong>Why this is worth learning.</strong> A shop sells 1/5 of its rice on Monday, then 2/3 of what is left on Tuesday. A baker uses some flour in the morning, then part of what is left in the afternoon. Real stories go on in rounds like this &mdash; and each round starts from the piece the last round left behind.</p></div>
+  <div class="why"><p><strong>In U66 you got every one-step story right. Today: ONE new idea, in a short lesson. And one habit &mdash; read (a) again before you write (a), because two right numbers in the wrong boxes score 0.</strong></p></div>
+  <p class="tap-hint">Two quick ones, no teaching on this page.</p>
+<div class="q-card" id="w0" data-rounds="work" data-iid="L1s0" data-a="14" data-b="21">
+  <div class="q-text">1.&nbsp; Ben has 35 L of juice. He drinks 2/5 of the juice. (a) How much juice does he drink? (b) How much juice is left?</div>
+  <div class="alines">
+    <div class="al"><label>(a)&nbsp;How much juice does he drink? <input type="text" class="aa" aria-label="answer a"></label></div>
+    <div class="al"><label>(b)&nbsp;How much juice is left? <input type="text" class="ab" aria-label="answer b"></label></div>
+  </div>
+  <button class="btn-check" onclick="chk67('w0')">Check</button>
+  <div class="feedback"></div>
+  <div class="stepsbox"><button type="button" class="btn-show-steps" onclick="stepsToggle(this)">Show steps</button>
+<div class="wlb closed" data-bid="L1s0">
+<div class="wls">
+<div class="wl"><span class="m">One piece = 35 ÷ 5</span><span class="why">cut the 35 L bar into 5 equal pieces</span></div>
+<div class="wl"><span class="m">= 7</span><span class="why">35 ÷ 5 = 7, so one piece is 7 L</span></div>
+<div class="wl"><span class="m">Taken in round 1 = 7 × 2</span><span class="why">the taken piece is 2 of those pieces (the top number)</span></div>
+<div class="wl"><span class="m">= 14 L</span><span class="why">7 × 2 = 14</span></div>
+<div class="wl"><span class="m">Left after round 1 = 35 − 14</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 21 L</span><span class="why">35 − 14 = 21</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+  </div>
+</div>
+<div class="q-card" id="w1" data-rounds="work" data-iid="L2s0" data-a="9/10" data-b="1 1/2">
+  <div class="q-text">2.&nbsp; Eva has 2 2/5 L of juice. She drinks 3/8 of the juice. (a) How much juice does she drink? (b) How much juice is left?</div>
+  <div class="alines">
+    <div class="al"><label>(a)&nbsp;How much juice does she drink? <input type="text" class="aa" aria-label="answer a"></label></div>
+    <div class="al"><label>(b)&nbsp;How much juice is left? <input type="text" class="ab" aria-label="answer b"></label></div>
+  </div>
+  <button class="btn-check" onclick="chk67('w1')">Check</button>
+  <div class="feedback"></div>
+  <div class="stepsbox"><button type="button" class="btn-show-steps" onclick="stepsToggle(this)">Show steps</button>
+<div class="wlb closed" data-bid="L2s0">
+<div class="wls">
+<div class="wl"><span class="m">Taken in round 1 = 3/8 × 2 2/5</span><span class="why">"3/8 of the juice" means 3/8 × the whole</span></div>
+<div class="wl"><span class="m">= 3/8 × 12/5</span><span class="why">2 2/5 = 12/5 (2 wholes = 10 fifths, plus 2 fifths = 12 fifths)</span></div>
+<div class="wl"><span class="m">= 36/40</span><span class="why">tops: 3 × 12 = 36; bottoms: 8 × 5 = 40</span></div>
+<div class="wl"><span class="m">= 9/10 L</span><span class="why">simplify: divide the top and the bottom by 4</span></div>
+<div class="wl"><span class="m">Left after round 1 = 2 2/5 − 9/10</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 12/5 − 9/10</span><span class="why">change the whole to an improper fraction: 2 2/5 = 12/5 (2 wholes = 10 fifths, plus 2 fifths = 12 fifths)</span></div>
+<div class="wl"><span class="m">= 24/10 − 9/10</span><span class="why">make the bottoms the same: 12/5 = 24/10 (top and bottom × 2)</span></div>
+<div class="wl"><span class="m">= 15/10</span><span class="why">24 tenths take away 9 tenths = 15 tenths</span></div>
+<div class="wl"><span class="m">= 3/2</span><span class="why">simplify: divide the top and the bottom by 5</span></div>
+<div class="wl"><span class="m">= 1 1/2 L</span><span class="why">3 halves = 1 whole and 1 half over</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+  </div>
+</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Start &#8594;</button></div>
+</div>
+
+<!-- s1 -->
+<div class="screen" id="s1">
+<div class="card">
+  <h2>&#x1F4CF; Two Bars</h2>
+  <p><strong>Amy has 32 L of juice. She drinks 1/4 of the juice. Then she drinks 3/4 of the juice that was left. How much juice is left?</strong></p>
+  <p class="tap-hint">Bar 1 is the 32 L, cut into 4 pieces with 1 shaded. Then the left-over piece slides down and becomes bar 2 &mdash; the NEW whole.</p>
+<div class="legend"><span class="chip t">&#x1F7E6; taken piece</span><span class="chip l">&#x2B1C; left-over piece</span><span class="chip nw">NEW whole</span></div>
+<div class="bar-wrap">
+<svg viewBox="0 0 560 182" role="img" aria-label="a two-bar picture: the left-over piece becomes the new whole">
+<g class="bar b1">
+<!-- BARMODEL-RATIO 1/4 -->
+  <text x="10.0" y="18" text-anchor="start" font-size="13" font-weight="700" fill="#283593">the whole: 32 L — cut into 4 equal pieces</text>
+  <rect x="10.0" y="24" width="540.0" height="34" fill="#FFFFFF" stroke="#283593" stroke-width="2"/>
+  <rect x="10.0" y="24" width="135.0" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+  <line x1="145.0" y1="24" x2="145.0" y2="58" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="280.0" y1="24" x2="280.0" y2="58" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="415.0" y1="24" x2="415.0" y2="58" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="77.5" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">8</text>
+  <text x="212.5" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">8</text>
+  <text x="347.5" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">8</text>
+  <text x="482.5" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">8</text>
+  <rect x="145.0" y="22" width="405.0" height="38" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <text x="77.5" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">taken: 8 L</text>
+  <text x="347.5" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#1B5E20">left over: 24 L</text>
+</g>
+<line x1="145.0" y1="80" x2="145.0" y2="116" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="3,3"/>
+<line x1="550.0" y1="80" x2="550.0" y2="116" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="3,3"/>
+<g class="bar b2 slide">
+<!-- BARMODEL-RATIO 3/4 -->
+  <text x="145.0" y="110" text-anchor="start" font-size="13" font-weight="700" fill="#8d6e00">NEW whole = 24 L — cut into 4 equal pieces</text>
+  <rect x="145.0" y="116" width="405.0" height="34" fill="#FFFFFF" stroke="#283593" stroke-width="2"/>
+  <rect x="145.0" y="116" width="303.8" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+  <line x1="246.2" y1="116" x2="246.2" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="347.5" y1="116" x2="347.5" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="448.8" y1="116" x2="448.8" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="195.6" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">6</text>
+  <text x="296.9" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">6</text>
+  <text x="398.1" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">6</text>
+  <text x="499.4" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">6</text>
+  <rect x="448.8" y="114" width="101.2" height="38" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <text x="296.9" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">taken: 18 L</text>
+  <text x="499.4" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#1B5E20">left over: 6 L</text>
+</g>
+</svg>
+<p class="tap-hint">&#x1F7E6; shaded = taken piece &nbsp;&nbsp; &#x2B1C; dashed green = left-over piece, which slides down and becomes the NEW whole</p>
+</div>
+<div class="wlb auto" data-bid="L1s2">
+<div class="wls">
+<div class="wl"><span class="m">One piece = 32 ÷ 4</span><span class="why">cut the 32 L bar into 4 equal pieces</span></div>
+<div class="wl"><span class="m">= 8</span><span class="why">32 ÷ 4 = 8, so one piece is 8 L</span></div>
+<div class="wl"><span class="m">Taken in round 1 = 8 × 1</span><span class="why">the taken piece is 1 of those pieces (the top number)</span></div>
+<div class="wl"><span class="m">= 8 L</span><span class="why">8 × 1 = 8</span></div>
+<div class="wl"><span class="m">Left after round 1 = 32 − 8</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 24 L</span><span class="why">32 − 8 = 24</span></div>
+<div class="wl"><span class="m">New whole = 24 L</span><span class="why">round 2: "of the juice that was LEFT" — the left-over piece is the NEW whole</span></div>
+<div class="wl"><span class="m">One piece = 24 ÷ 4</span><span class="why">cut the 24 L bar into 4 equal pieces</span></div>
+<div class="wl"><span class="m">= 6</span><span class="why">24 ÷ 4 = 6, so one piece is 6 L</span></div>
+<div class="wl"><span class="m">Taken in round 2 = 6 × 3</span><span class="why">the taken piece is 3 of those pieces (the top number)</span></div>
+<div class="wl"><span class="m">= 18 L</span><span class="why">6 × 3 = 18</span></div>
+<div class="wl"><span class="m">Left after round 2 = 24 − 18</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 6 L</span><span class="why">24 − 18 = 6</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+  <div class="boxes-static"><div class="r">Answer: <b>6 L</b> of juice is left.</div></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Trap &#8594;</button></div>
+</div>
+
+<!-- s2 -->
+<div class="screen" id="s2">
+<div class="card">
+  <h2>&#x26A0;&#xFE0F; Spot The Trap</h2>
+  <p class="tap-hint">Same story as the last page: 32 L of juice, 1/4 first, then 3/4.</p>
+  <div class="sbs"><div class="sc a"><div class="st">&#x2705; The new whole</div><div>3/4 of what was LEFT = 3/4 &times; 24 = 18 L.</div></div><div class="sc b"><div class="st">&#x1F536; The old whole</div><div>3/4 of ALL the juice = 3/4 &times; 32 = 24 L &rarr; nothing left?! But the story says some is left.</div></div></div>
+  <h3 style="margin-top:12px">Now the told version</h3>
+  <p><strong>Sam has 20 L of water. He uses 5 L of the water. Then he uses 2/5 of the water that was left. How much water is left?</strong></p>
+<div class="bar-wrap">
+<svg viewBox="0 0 560 182" role="img" aria-label="a two-bar picture: the left-over piece becomes the new whole">
+<g class="bar b1">
+<!-- BARMODEL-RATIO 1/4 -->
+  <text x="10.0" y="18" text-anchor="start" font-size="13" font-weight="700" fill="#283593">the whole: 20 L — the taken piece is told</text>
+  <rect x="10.0" y="24" width="540.0" height="34" fill="#FFFFFF" stroke="#283593" stroke-width="2"/>
+  <rect x="10.0" y="24" width="135.0" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+  <rect x="145.0" y="22" width="405.0" height="38" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <text x="77.5" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">taken: 5 L</text>
+  <text x="347.5" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#1B5E20">left over: 15 L</text>
+</g>
+<line x1="145.0" y1="80" x2="145.0" y2="116" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="3,3"/>
+<line x1="550.0" y1="80" x2="550.0" y2="116" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="3,3"/>
+<g class="bar b2 slide">
+<!-- BARMODEL-RATIO 2/5 -->
+  <text x="145.0" y="110" text-anchor="start" font-size="13" font-weight="700" fill="#8d6e00">NEW whole = 15 L — cut into 5 equal pieces</text>
+  <rect x="145.0" y="116" width="405.0" height="34" fill="#FFFFFF" stroke="#283593" stroke-width="2"/>
+  <rect x="145.0" y="116" width="162.0" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+  <line x1="226.0" y1="116" x2="226.0" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="307.0" y1="116" x2="307.0" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="388.0" y1="116" x2="388.0" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="469.0" y1="116" x2="469.0" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="185.5" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">3</text>
+  <text x="266.5" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">3</text>
+  <text x="347.5" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">3</text>
+  <text x="428.5" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">3</text>
+  <text x="509.5" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">3</text>
+  <rect x="307.0" y="114" width="243.0" height="38" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <text x="226.0" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">taken: 6 L</text>
+  <text x="428.5" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#1B5E20">left over: 9 L</text>
+</g>
+</svg>
+<p class="tap-hint">&#x1F7E6; shaded = taken piece &nbsp;&nbsp; &#x2B1C; dashed green = left-over piece, which slides down and becomes the NEW whole</p>
+</div>
+<div class="wlb auto" data-bid="L1s4">
+<div class="wls">
+<div class="wl"><span class="m">Taken in round 1 = 5 L</span><span class="why">the story TOLD us the taken piece: a number with a unit right after it</span></div>
+<div class="wl"><span class="m">Left after round 1 = 20 − 5</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 15 L</span><span class="why">20 − 5 = 15</span></div>
+<div class="wl"><span class="m">New whole = 15 L</span><span class="why">round 2: "of the water that was LEFT" — the left-over piece is the NEW whole</span></div>
+<div class="wl"><span class="m">One piece = 15 ÷ 5</span><span class="why">cut the 15 L bar into 5 equal pieces</span></div>
+<div class="wl"><span class="m">= 3</span><span class="why">15 ÷ 5 = 3, so one piece is 3 L</span></div>
+<div class="wl"><span class="m">Taken in round 2 = 3 × 2</span><span class="why">the taken piece is 2 of those pieces (the top number)</span></div>
+<div class="wl"><span class="m">= 6 L</span><span class="why">3 × 2 = 6</span></div>
+<div class="wl"><span class="m">Left after round 2 = 15 − 6</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 9 L</span><span class="why">15 − 6 = 9</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+  <div class="big-rule">Told amount? Take it straight off. &lsquo;Of what was LEFT&rsquo;? New whole.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Fraction Bottles &#8594;</button></div>
+</div>
+
+<!-- s3 -->
+<div class="screen" id="s3">
+<div class="card">
+  <h2>&#x1F4A7; Fraction Bottles &mdash; Same Lines</h2>
+  <p><strong>Kim has 2 2/5 L of juice. She drinks 1/6 of the juice. Then she pours out 3/4 of the juice that was left. How much juice is left?</strong></p>
+  <p class="tap-hint">Watch for the glowing yellow line: that is where the NEW whole is written.</p>
+<div class="bar-wrap">
+<svg viewBox="0 0 560 182" role="img" aria-label="a two-bar picture: the left-over piece becomes the new whole">
+<g class="bar b1">
+<!-- BARMODEL-RATIO 1/6 -->
+  <text x="10.0" y="18" text-anchor="start" font-size="13" font-weight="700" fill="#283593">the whole: 2 2/5 L — cut into 6 equal pieces</text>
+  <rect x="10.0" y="24" width="540.0" height="34" fill="#FFFFFF" stroke="#283593" stroke-width="2"/>
+  <rect x="10.0" y="24" width="90.0" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+  <line x1="100.0" y1="24" x2="100.0" y2="58" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="190.0" y1="24" x2="190.0" y2="58" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="280.0" y1="24" x2="280.0" y2="58" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="370.0" y1="24" x2="370.0" y2="58" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="460.0" y1="24" x2="460.0" y2="58" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="55.0" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">2/5</text>
+  <text x="145.0" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">2/5</text>
+  <text x="235.0" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">2/5</text>
+  <text x="325.0" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">2/5</text>
+  <text x="415.0" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">2/5</text>
+  <text x="505.0" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">2/5</text>
+  <rect x="100.0" y="22" width="450.0" height="38" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <text x="10.0" y="74" text-anchor="start" font-size="12" font-weight="700" fill="#0D47A1">taken: 2/5 L</text>
+  <text x="325.0" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#1B5E20">left over: 2 L</text>
+</g>
+<line x1="100.0" y1="80" x2="100.0" y2="116" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="3,3"/>
+<line x1="550.0" y1="80" x2="550.0" y2="116" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="3,3"/>
+<g class="bar b2 slide">
+<!-- BARMODEL-RATIO 3/4 -->
+  <text x="100.0" y="110" text-anchor="start" font-size="13" font-weight="700" fill="#8d6e00">NEW whole = 2 L — cut into 4 equal pieces</text>
+  <rect x="100.0" y="116" width="450.0" height="34" fill="#FFFFFF" stroke="#283593" stroke-width="2"/>
+  <rect x="100.0" y="116" width="337.5" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+  <line x1="212.5" y1="116" x2="212.5" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="325.0" y1="116" x2="325.0" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="437.5" y1="116" x2="437.5" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="156.2" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">1/2</text>
+  <text x="268.8" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">1/2</text>
+  <text x="381.2" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">1/2</text>
+  <text x="493.8" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">1/2</text>
+  <rect x="437.5" y="114" width="112.5" height="38" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <text x="268.8" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">taken: 1 1/2 L</text>
+  <text x="493.8" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#1B5E20">left over: 1/2 L</text>
+</g>
+</svg>
+<p class="tap-hint">&#x1F7E6; shaded = taken piece &nbsp;&nbsp; &#x2B1C; dashed green = left-over piece, which slides down and becomes the NEW whole</p>
+</div>
+<div class="wlb auto" data-bid="L2s2">
+<div class="wls">
+<div class="wl"><span class="m">Taken in round 1 = 1/6 × 2 2/5</span><span class="why">"1/6 of the juice" means 1/6 × the whole</span></div>
+<div class="wl"><span class="m">= 1/6 × 12/5</span><span class="why">2 2/5 = 12/5 (2 wholes = 10 fifths, plus 2 fifths = 12 fifths)</span></div>
+<div class="wl"><span class="m">= 12/30</span><span class="why">tops: 1 × 12 = 12; bottoms: 6 × 5 = 30</span></div>
+<div class="wl"><span class="m">= 2/5 L</span><span class="why">simplify: divide the top and the bottom by 6</span></div>
+<div class="wl"><span class="m">Left after round 1 = 2 2/5 − 2/5</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 12/5 − 2/5</span><span class="why">change the whole to an improper fraction: 2 2/5 = 12/5 (2 wholes = 10 fifths, plus 2 fifths = 12 fifths)</span></div>
+<div class="wl"><span class="m">= 10/5</span><span class="why">12 fifths take away 2 fifths = 10 fifths</span></div>
+<div class="wl"><span class="m">= 2 L</span><span class="why">10 ÷ 5 = 2</span></div>
+<div class="wl" data-glow="1"><span class="m">New whole = 2 L</span><span class="why">round 2: "of the juice that was LEFT" — the left-over piece is the NEW whole</span></div>
+<div class="wl"><span class="m">One piece = 2 ÷ 4</span><span class="why">cut the 2 L bar into 4 equal pieces</span></div>
+<div class="wl"><span class="m">= 1/2</span><span class="why">2 ÷ 4 = 1/2, so one piece is 1/2 L</span></div>
+<div class="wl"><span class="m">Taken in round 2 = 1/2 × 3</span><span class="why">the taken piece is 3 of those pieces (the top number)</span></div>
+<div class="wl"><span class="m">= 1 1/2 L</span><span class="why">1/2 × 3 = 1 1/2</span></div>
+<div class="wl"><span class="m">Left after round 2 = 2 − 1 1/2</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 2 − 3/2</span><span class="why">change the taken piece to an improper fraction: 1 1/2 = 3/2 (1 whole = 2 halves, plus 1 half = 3 halves)</span></div>
+<div class="wl"><span class="m">= 4/2 − 3/2</span><span class="why">make the bottoms the same: 2 wholes = 4 halves</span></div>
+<div class="wl"><span class="m">= 1/2 L</span><span class="why">4 halves take away 3 halves = 1 half</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+  <div class="big-rule">Nothing new &mdash; the U66 lines, then &lsquo;New whole =&rsquo;, then the U66 lines again.</div>
+  <div class="boxes-static"><div class="r">Answer: <b>1/2 L</b> of juice is left.</div></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Map &#8594;</button></div>
+</div>
+
+<!-- s4 -->
+<div class="screen" id="s4">
+<div class="card">
+  <h2>&#x1F5FA; The Map</h2>
+  <p class="tap-hint">Three questions: told or work it out? &middot; &ldquo;of what was LEFT&rdquo; means a new whole &middot; read (a) again. Tap Next step and watch the path light up for this story:</p>
+  <p><strong>Raj has 3 1/4 L of paint. He uses 3/4 L of the paint. Then he uses 3/5 of the paint that was left. How much paint is left?</strong></p>
+<div id="walk1">
+<div class="fmap mp">
+<div class="mn start" id="n-start"><b class="k">START</b> Find the WHOLE. Draw the bar.<i>Area story? The whole is length &times; width &mdash; work that out first.</i><div class="cap"></div></div>
+<div class="arr">&#9660;</div>
+<div class="mn q" id="n-q1"><b class="k">Q1</b> Is there a unit right after the fraction?<div class="cap"></div></div>
+<div class="arr">&#9660;</div>
+<div class="two">
+<div class="br" id="n-q1y"><b class="yn">YES</b> &quot;uses 3/4 L&quot; &rarr; <b>TOLD.</b> <span class="tk">Taken = 3/4 L.</span><div class="ex">Example: 20 L, uses 5 L. The taken piece is 5 L.</div><div class="cap"></div></div>
+<div class="br" id="n-q1n"><b class="yn">NO</b> &quot;uses 3/4 of the paint&quot; &rarr; <b>WORK IT OUT.</b> <span class="tk">Taken = 3/4 &times; the whole.</span><div class="ex">Example: 1/4 of 32 L: 1/4 &times; 32 = 8 L.</div><div class="cap"></div></div>
+</div>
+<div class="arr">Then: <span class="lf">Left = whole &minus; taken.</span></div>
+<div class="mn q" id="n-q2"><b class="k">Q2</b> Does the story go on &mdash; &quot;then &hellip; of what was LEFT&quot;?<div class="cap"></div></div>
+<div class="arr">&#9660;</div>
+<div class="two">
+<div class="br" id="n-q2y"><b class="yn">YES</b> &rarr; The left-over piece is the <b>NEW whole.</b> Draw a new bar under it. Write: <span class="tk">New whole = ____.</span> Go back to Q1 for round 2.<i>&quot;then &hellip; 1/2 kg more&quot; is TOLD: take it straight off the left-over.</i><div class="cap"></div></div>
+<div class="br" id="n-q2n"><b class="yn">NO</b> &rarr; Q3.<div class="cap"></div></div>
+</div>
+<div class="arr">&#9660;</div>
+<div class="mn q" id="n-q3"><b class="k">Q3</b> Read (a) again. Does it ask for a TAKEN piece (which round?) or what is LEFT at the end? Write the answer. Then read (b) again.<div class="cap"></div></div>
+</div>
+</div>
+<div class="wtrow"><button type="button" class="btn-next" id="walk1_nx" onclick="walkNext('walk1',this)">Next step &#9656;</button> <a class="btn-map" href="U67_FirstStep_Map.html" target="_blank">&#x1F5FA; Print my map</a></div>
+<div class="bar-wrap">
+<svg viewBox="0 0 560 182" role="img" aria-label="a two-bar picture: the left-over piece becomes the new whole">
+<g class="bar b1">
+<!-- BARMODEL-RATIO 3/13 -->
+  <text x="10.0" y="18" text-anchor="start" font-size="13" font-weight="700" fill="#283593">the whole: 3 1/4 L — the taken piece is told</text>
+  <rect x="10.0" y="24" width="540.0" height="34" fill="#FFFFFF" stroke="#283593" stroke-width="2"/>
+  <rect x="10.0" y="24" width="124.6" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+  <rect x="134.6" y="22" width="415.4" height="38" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <text x="72.3" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">taken: 3/4 L</text>
+  <text x="342.3" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#1B5E20">left over: 2 1/2 L</text>
+</g>
+<line x1="134.6" y1="80" x2="134.6" y2="116" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="3,3"/>
+<line x1="550.0" y1="80" x2="550.0" y2="116" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="3,3"/>
+<g class="bar b2 slide">
+<!-- BARMODEL-RATIO 3/5 -->
+  <text x="134.6" y="110" text-anchor="start" font-size="13" font-weight="700" fill="#8d6e00">NEW whole = 2 1/2 L — cut into 5 equal pieces</text>
+  <rect x="134.6" y="116" width="415.4" height="34" fill="#FFFFFF" stroke="#283593" stroke-width="2"/>
+  <rect x="134.6" y="116" width="249.2" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>
+  <line x1="217.7" y1="116" x2="217.7" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="300.8" y1="116" x2="300.8" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="383.8" y1="116" x2="383.8" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="466.9" y1="116" x2="466.9" y2="150" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="176.1" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">1/2</text>
+  <text x="259.2" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">1/2</text>
+  <text x="342.3" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">1/2</text>
+  <text x="425.4" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">1/2</text>
+  <text x="508.5" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">1/2</text>
+  <rect x="383.8" y="114" width="166.2" height="38" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <text x="259.2" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">taken: 1 1/2 L</text>
+  <text x="466.9" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#1B5E20">left over: 1 L</text>
+</g>
+</svg>
+<p class="tap-hint">&#x1F7E6; shaded = taken piece &nbsp;&nbsp; &#x2B1C; dashed green = left-over piece, which slides down and becomes the NEW whole</p>
+</div>
+<div class="wlb auto" data-bid="L2s3">
+<div class="wls">
+<div class="wl"><span class="m">Taken in round 1 = 3/4 L</span><span class="why">the story TOLD us the taken piece: a number with a unit right after it</span></div>
+<div class="wl"><span class="m">Left after round 1 = 3 1/4 − 3/4</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 13/4 − 3/4</span><span class="why">change the whole to an improper fraction: 3 1/4 = 13/4 (3 wholes = 12 quarters, plus 1 quarter = 13 quarters)</span></div>
+<div class="wl"><span class="m">= 10/4</span><span class="why">13 quarters take away 3 quarters = 10 quarters</span></div>
+<div class="wl"><span class="m">= 5/2</span><span class="why">simplify: divide the top and the bottom by 2</span></div>
+<div class="wl"><span class="m">= 2 1/2 L</span><span class="why">5 halves = 2 wholes and 1 half over</span></div>
+<div class="wl"><span class="m">New whole = 2 1/2 L</span><span class="why">round 2: "of the paint that was LEFT" — the left-over piece is the NEW whole</span></div>
+<div class="wl"><span class="m">Taken in round 2 = 3/5 × 2 1/2</span><span class="why">"3/5 of the paint that was left" means 3/5 × the whole</span></div>
+<div class="wl"><span class="m">= 3/5 × 5/2</span><span class="why">2 1/2 = 5/2 (2 wholes = 4 halves, plus 1 half = 5 halves)</span></div>
+<div class="wl"><span class="m">= 15/10</span><span class="why">tops: 3 × 5 = 15; bottoms: 5 × 2 = 10</span></div>
+<div class="wl"><span class="m">= 3/2</span><span class="why">simplify: divide the top and the bottom by 5</span></div>
+<div class="wl"><span class="m">= 1 1/2 L</span><span class="why">3 halves = 1 whole and 1 half over</span></div>
+<div class="wl"><span class="m">Left after round 2 = 2 1/2 − 1 1/2</span><span class="why">the whole take away the taken piece</span></div>
+<div class="wl"><span class="m">= 5/2 − 1 1/2</span><span class="why">change the whole to an improper fraction: 2 1/2 = 5/2 (2 wholes = 4 halves, plus 1 half = 5 halves)</span></div>
+<div class="wl"><span class="m">= 5/2 − 3/2</span><span class="why">change the taken piece to an improper fraction: 1 1/2 = 3/2 (1 whole = 2 halves, plus 1 half = 3 halves)</span></div>
+<div class="wl"><span class="m">= 2/2</span><span class="why">5 halves take away 3 halves = 2 halves</span></div>
+<div class="wl"><span class="m">= 1 L</span><span class="why">2 ÷ 2 = 1</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+  <div class="boxes-static"><div class="r">Answer: <b>1 L</b> of paint is left.</div></div>
+  <div class="stop-here">Tired? Stop here &mdash; Your turn will wait for you.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Your Turn &#8594;</button></div>
+</div>
+
+<!-- s5 -->
+<div class="screen" id="s5">
+<div class="card">
+  <span class="badge-cap">&#11088; Your Turn</span>
+  <h2>Your Turn &mdash; 5 Stories</h2>
+  <p class="tap-hint">Draw the bars on your paper. Fill <b>Left after round 1</b> first, then the answers. Any equal value is fine, and the unit is optional.</p>
+  <div class="stat2" id="ytstat"></div>
+  <div class="stat2" id="ytsub" style="font-weight:400;font-size:.85rem;color:#607D8B"></div>
+  <div class="q-card" id="ytcard">
+    <span class="q-cap" id="ytcap"></span>
+    <div class="dq" id="ytq"></div>
+    <div class="stones" id="ytstones"></div>
+    <div class="alines" id="ytlines"></div>
+    <button class="btn-check" id="ytchk" onclick="ytCheck()">Check</button>
+    <div class="feedback" id="ytfb"></div>
+    <div class="sorry" id="ytsorry" style="display:none"></div>
+    <button class="btn-big" id="ytnext" style="display:none" onclick="ytNext()">Next story &rarr;</button>
+    <div class="savebar" id="savebar" style="display:none"></div>
+  </div>
+  <div class="finish" id="finish"><div class="tsbadge">NEW WHOLE &#10003;</div><div class="big">You finished all 5!</div><div class="both" id="fboth"></div><p style="font-weight:700">You&rsquo;re ready for the test. Take it tomorrow, fresh.</p><div class="savebar" id="savebar2" style="display:none"></div><a class="btn-big alt" style="text-decoration:none;display:block;width:fit-content" href="https://athipprem.github.io/mathlessons/index.html">Back to Hub</a></div>
+  <div class="warn-box" style="margin-top:12px"><p>&#x1F192; Stuck? Open the <a href="U67_StuckCard_NewWhole.html">Stuck Card</a> or <a href="U67_FirstStep_Map.html" target="_blank">&#x1F5FA; my map</a>.</p></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button></div>
+</div>
+
+</div>
+<script>
+
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a);}
+function mixedStr(n,d){var g=gcd(n,d);n=n/g;d=d/g;var w=Math.floor(n/d),r=n-w*d;if(r===0)return ''+w;return (w?w+' ':'')+r+'/'+d;}
+/* parse "1 1/5", "6/5", "2", "1.2", "1 1/5 m" -> [num,den] reduced, or null */
+function parseVal(s){
+  if(s==null)return null; s=String(s).toLowerCase().replace(/[²]/g,'').replace(/(kg|km|cups?|cm|ml|l|m|litres?|liters?|metres?|meters?|sq\.?|squared)\b/g,' ').replace(/\s+/g,' ').trim();
+  if(!s)return null; var m;
+  if((m=s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/))){var d=+m[3];if(!d)return null;var n=(+m[1])*d+(+m[2]);var g=gcd(n,d);return [n/g,d/g,'mixed'];}
+  if((m=s.match(/^(\d+)\s*\/\s*(\d+)$/))){var d2=+m[2];if(!d2)return null;var g2=gcd(+m[1],d2);return [(+m[1])/g2,d2/g2,'frac',+m[1],d2];}
+  if((m=s.match(/^(\d+)$/))){return [+m[1],1,'int'];}
+  if((m=s.match(/^(\d*)\.(\d+)$/))){var den=Math.pow(10,m[2].length);var n3=(+m[1]||0)*den+(+m[2]);var g3=gcd(n3,den);return [n3/g3,den/g3,'dec'];}
+  return null;}
+function sameVal(a,b){return a&&b&&a[0]===b[0]&&a[1]===b[1];}
+function isImproperText(s){var m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);return !!m&&(+m[1])>(+m[2]);}
+
+function wlShow(b,n){var rows=b.querySelectorAll('.wl,.bl'),i;for(i=0;i<rows.length;i++){rows[i].classList.remove('cur');if(i<n)rows[i].classList.add('on');}
+  if(n>0&&rows[n-1])rows[n-1].classList.add('cur');if(n>=rows.length){b.classList.add('alldone');var a=b.getAttribute('data-after');if(a){var e=document.getElementById(a);if(e)e.style.display='block';}}}
+function wlCount(b){return b.querySelectorAll('.wl.on,.bl.on').length;}
+function wlNext(btn){var b=btn.parentNode;wlShow(b,wlCount(b)+1);}
+function wlOpen(b){b.classList.remove('closed');if(wlCount(b)===0)wlShow(b,1);}
+function stepsToggle(btn){var b=btn.parentNode.querySelector('.wlb');if(b.classList.contains('closed')){wlOpen(b);btn.textContent='Hide steps';}else{b.classList.add('closed');btn.textContent='Show steps';}}
+var HINT67={q1:'Look right after the fraction — is there a unit (L, kg, m or m²)?',
+ q2:'Read to the end of the story. Is there a “then …” still to come after this round?'};
+function tapsInit67(root,rounds,done){
+  var st={wrong:{q1:0,q2:0},mapWrong:[],path:[],done:false},r=0;
+  root.innerHTML='<div class="thead">&#128506; Map first — tap your way along it</div>';
+  function btn(v,t){return '<button type="button" data-v="'+v+'">'+t+'</button>';}
+  function ask(kind){
+    var d=document.createElement('div'),want,k=r+1;d.className='tq';
+    if(kind==='q1'){d.setAttribute('data-q','1');d.setAttribute('data-r',k);want=rounds[r];
+      d.innerHTML='<div class="tl">Q1 · Round '+k+'. Is there a unit right after the fraction?<span class="tsub">Look at the words for this round only.</span></div><div class="tb2">'+
+        btn('told','YES — a number with a unit, like “uses 3/4 L”')+btn('work','NO — it says “of the …”, like “uses 3/4 of the paint”')+'</div><div class="thint"></div>';}
+    else{d.setAttribute('data-q','2');d.setAttribute('data-r',k);want=(r<rounds.length-1)?'yes':'no';
+      d.innerHTML='<div class="tl">Q2 · Does the story go on — “then … of what was LEFT”?<span class="tsub">(“then … 1/2 kg more” also means the story goes on.)</span></div><div class="tb2">'+
+        btn('yes','YES — another round')+btn('no','NO — that was the last round')+'</div><div class="thint"></div>';}
+    root.appendChild(d);
+    var bs=d.querySelectorAll('button'),hint=d.querySelector('.thint'),i;
+    function go(b){
+      var v=b.getAttribute('data-v'),j;
+      if(v===want){for(j=0;j<bs.length;j++){bs[j].classList.remove('lit','nope');bs[j].disabled=true;}b.classList.add('good');hint.textContent='';st.path.push(kind+':'+v);
+        if(kind==='q1')ask('q2');else if(want==='yes'){r++;ask('q1');}else{if(!st.done){st.done=true;if(done)done(st);}}}
+      else{st.wrong[kind]++;st.mapWrong.push((kind==='q1'?'Q1':'Q2')+':'+v);b.classList.add('nope');hint.textContent='Not yet — '+HINT67[kind];
+        for(j=0;j<bs.length;j++)if(bs[j].getAttribute('data-v')===want)bs[j].classList.add('lit');}
+    }
+    for(i=0;i<bs.length;i++)(function(b){b.addEventListener('click',function(){go(b);});})(bs[i]);
+  }
+  ask('q1');return st;
+}
+function initCards(){
+  var cards=document.querySelectorAll('.q-card[data-rounds]'),i;
+  for(i=0;i<cards.length;i++)(function(c){
+    var tp=c.querySelector('.taps');if(!tp)return;
+    var inputs=c.querySelectorAll('input[type=text],textarea'),chk=c.querySelector('.btn-check'),j,rd=c.getAttribute('data-rounds').split(',');
+    for(j=0;j<inputs.length;j++)inputs[j].disabled=true;chk.disabled=true;
+    c._st=tapsInit67(tp,rd,function(){var k;for(k=0;k<inputs.length;k++)inputs[k].disabled=false;chk.disabled=false;
+      var lk=c.querySelectorAll('.locked'),m;for(m=0;m<lk.length;m++)lk[m].classList.remove('locked');});
+  })(cards[i]);
+  var plain=document.querySelectorAll('.wlb.auto'),p;for(p=0;p<plain.length;p++)wlShow(plain[p],1);
+}
+var lastP='';
+function say(fb,ok,msg){fb.style.display='block';fb.className='feedback '+(ok?'ok':'err');fb.textContent=msg;}
+var SWAPMSG='Both numbers are right — but they’re in each other’s boxes. On the test that’s 0. Read (a) again, then put the right number under it.';
+var PRAISE67=["You wrote ‘New whole =’ before round 2 — that’s the whole trick.","Read (a) again and put the right number under it. Exam-proof.","Told amount, straight off the left-over. Nice.","Fixed it! That’s how brains grow."];
+function praise67(rounds,two){var P=PRAISE67,pool=[P[0]];if(two)pool.push(P[1]);if(rounds.indexOf('told')>=0)pool.push(P[2]);
+  var p=pool[Math.floor(Math.random()*pool.length)];if(p===lastP&&pool.length>1)p=(p===pool[0])?pool[1]:pool[0];lastP=p;return p;}
+function nudge67(which){return which==='area'?'Check the whole first — is it length × width? Everything after it stands on it.':(which==='r2'?'Check round 2 — is the left-over piece right? Everything after it stands on it.':'Check round 1 — is the left-over piece right? Everything after it stands on it.');}
+function chk67(id){
+  var c=document.getElementById(id),fb=c.querySelector('.feedback'),ss=c.querySelector('.btn-show-steps');
+  var st1=c.querySelector('.st1'),st2=c.querySelector('.st2'),aa=c.querySelector('.aa'),ab=c.querySelector('.ab');
+  var ins=[st1,st2,aa,ab].filter(Boolean),i,rd=(c.getAttribute('data-rounds')||'').split(',');
+  for(i=0;i<ins.length;i++){if(!ins[i].value.trim()||!parseVal(ins[i].value)){say(fb,false,'Fill every box first (like 1 1/5 or 7/4).');return;}}
+  var kind=c.getAttribute('data-stone')||'r1';
+  if(st1&&!sameVal(parseVal(st1.value),parseVal(c.getAttribute('data-s1')))){c._nud=(c._nud||0)+1;say(fb,false,nudge67(kind==='area'?'area':'r1'));return;}
+  if(st2&&!sameVal(parseVal(st2.value),parseVal(c.getAttribute('data-s2')))){c._nud=(c._nud||0)+1;say(fb,false,nudge67('r2'));return;}
+  var wa=parseVal(c.getAttribute('data-a')),wb=ab?parseVal(c.getAttribute('data-b')):null;
+  var ga=parseVal(aa.value),gb=ab?parseVal(ab.value):null;
+  var okA=sameVal(ga,wa),okB=ab?sameVal(gb,wb):true;
+  if(okA&&okB){say(fb,true,'✓ '+praise67(rd,!!ab));}
+  else if(ab&&sameVal(ga,wb)&&sameVal(gb,wa)){c._sw=(c._sw||0)+1;say(fb,false,SWAPMSG);}
+  else if(ab&&(okA||okB))say(fb,false,'Not yet — one of your answers is right. Read the other question again. Tap Show steps to see it line by line.');
+  else say(fb,false,'Not yet — look at the bar again. Tap Show steps to see it line by line.');
+  if(ss)ss.style.display='inline-block';
+}
+function chkIn(id){var card=document.getElementById(id),inp=card.querySelector('.ans-input'),fb=card.querySelector('.feedback');
+  var want=parseVal(card.getAttribute('data-ans')),got=parseVal(inp.value);
+  if(!inp.value.trim()||!got){say(fb,false,'Type your answer first (like 1 1/5 or 7/4).');return;}
+  var ex=card.getAttribute('data-exact');
+  if(ex){if(inp.value.replace(/\s+/g,'')===ex){say(fb,true,'✓ Correct!');}else say(fb,false,'Not yet — read the question again.');return;}
+  if(sameVal(got,want))say(fb,true,'✓ Correct!');else say(fb,false,'Not yet — look again and try once more.');}
+function scOpen(id){var b=document.querySelector('#'+id+' .wlb');if(b)wlOpen(b);}
+/* ---- sentence frames: tap a blank, then tap a chip ---- */
+var FR={};
+function frameInit(id,want,chips,box){
+  var f=document.getElementById(id);FR[id]={want:want,sel:0,vals:[]};
+  var bl=f.querySelectorAll('.bl-blank'),i;for(i=0;i<bl.length;i++)(function(b,n){b.addEventListener('click',function(){frameSel(id,n);});})(bl[i],i);
+  var cb=f.querySelector('.chips');cb.innerHTML='';
+  for(i=0;i<chips.length;i++){var e=document.createElement('button');e.type='button';e.textContent=chips[i];(function(t,el){el.addEventListener('click',function(){frameFill(id,t);});})(chips[i],e);cb.appendChild(e);}
+  frameSel(id,0);
+}
+function frameSel(id,n){var f=document.getElementById(id),bl=f.querySelectorAll('.bl-blank'),i;FR[id].sel=n;for(i=0;i<bl.length;i++){bl[i].classList.toggle('sel',i===n);}
+  if(FR[id].vals[n]){FR[id].vals[n]=null;bl[n].textContent='';bl[n].classList.remove('full','bad','ok');}}
+function frameFill(id,t){var f=document.getElementById(id),bl=f.querySelectorAll('.bl-blank'),n=FR[id].sel,i;
+  FR[id].vals[n]=t;bl[n].textContent=t;bl[n].classList.add('full');bl[n].classList.remove('bad','ok');
+  for(i=0;i<bl.length;i++){if(!FR[id].vals[i]){frameSel(id,i);return;}}}
+function frameCheck(id){var f=document.getElementById(id),bl=f.querySelectorAll('.bl-blank'),fb=f.querySelector('.feedback'),i,all=true;
+  for(i=0;i<bl.length;i++){var v=FR[id].vals[i];if(!v){all=false;bl[i].classList.add('bad');}else if(v===FR[id].want[i]){bl[i].classList.remove('bad');bl[i].classList.add('ok');}else{all=false;bl[i].classList.remove('ok');bl[i].classList.add('bad');}}
+  if(all){say(fb,true,'✓ That says WHAT they did AND what the story really means.');var g=f.querySelector('.after');if(g)g.style.display='block';var w=f.querySelector('.wlb');if(w){w.classList.remove('closed');wlOpen(w);}}
+  else say(fb,false,'Not yet — the amber blanks need another look. Tap a blank to clear it, then pick a chip.');}
+function norm67(s){return String(s).toLowerCase().replace(/[^a-z0-9\/ ]/g,' ').replace(/\s+/g,' ').trim();}
+function freeCheck(id,rules){var f=document.getElementById(id),ins=f.querySelectorAll('input.ft'),fb=f.querySelector('.feedback'),i,all=true;
+  for(i=0;i<ins.length;i++){var v=norm67(ins[i].value),ok=v&&rules[i].some(function(r){return v.indexOf(r)>=0;});ins[i].style.borderColor=ok?'#2E7D32':'#FFB74D';if(!ok)all=false;}
+  if(all)say(fb,true,'✓ That says WHAT they did AND what the story really means.');else say(fb,false,'Not yet — check the blanks with the amber edge. Read the story again.');}
+function chkExplain(id){
+  var c=document.getElementById(id),fb=c.querySelector('.feedback'),st1=c.querySelector('.st1'),ab=c.querySelector('.ab'),ss=c.querySelector('.btn-show-steps');
+  if(!st1.value.trim()||!parseVal(st1.value)||!ab.value.trim()||!parseVal(ab.value)){say(fb,false,'Fill both numbers first (like 1 1/5 or 7/4).');return;}
+  if(!sameVal(parseVal(st1.value),parseVal(c.getAttribute('data-s1')))){say(fb,false,nudge67('r1'));return;}
+  if(sameVal(parseVal(ab.value),parseVal(c.getAttribute('data-b'))))say(fb,true,'✓ '+praise67(['work','work'],false));
+  else say(fb,false,'Not yet — look at the bars again. Tap Show steps to see it line by line.');
+  if(ss)ss.style.display='inline-block';
+}
+function showModel(id){var c=document.getElementById(id),t=c.querySelector('textarea.ex'),m=c.querySelector('.model'),fb=c.querySelector('.fbx');
+  if(t.value.trim().length<8){fb.style.display='block';fb.className='feedback err';fb.textContent='Write your own sentence first — then look at the model.';return;}
+  fb.style.display='none';m.style.display='block';}
+var WALKS={};
+function walkInit(id,steps){WALKS[id]={steps:steps,i:0};}
+function walkNext(id,btn){var w=WALKS[id],box=document.getElementById(id);if(w.i>=w.steps.length){w.i=0;var all=box.querySelectorAll('.lit-node'),k;for(k=0;k<all.length;k++){all[k].classList.remove('lit-node');}btn.innerHTML='Next step &#9656;';return;}
+  var s=w.steps[w.i],el=box.querySelector('#'+s[0]);el.classList.add('lit-node');el.querySelector('.cap').textContent=s[1];w.i++;if(w.i>=w.steps.length)btn.textContent='Start again';}
+function walkPick(boxId,key,btn){var all=document.querySelectorAll('#'+boxId+' .lit-node'),k;for(k=0;k<all.length;k++)all[k].classList.remove('lit-node');
+  var caps=document.querySelectorAll('#'+boxId+' .cap');for(k=0;k<caps.length;k++)caps[k].textContent='';
+  WALKS[boxId]={steps:WALKSETS[key],i:0};var nx=document.getElementById(boxId+'_nx');nx.innerHTML='Next step &#9656;';nx.style.display='inline-block';}
+var WALKSETS={};
+
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function goTo(i){nav(i-cur);}
+
+function F2(n,d){return n/d;}
+function barSvg(bars){
+  var n=bars.length,H=8+92*n-10,s='<svg viewBox="0 0 560 '+H+'" role="img" aria-label="a two-bar picture: the left-over piece becomes the new whole">',i,j,b;
+  for(i=0;i<n;i++){b=bars[i];var k=b.k,y0=6+(k-1)*92,x=b.x,w=b.w,by=y0+18,bh=34,r=b.ratio[0]/b.ratio[1];
+    s+='<g class="bar b'+k+(k>1?' slide':'')+'">';
+    var title=(k===1?'the whole: ':'NEW whole = ')+b.whole+(b.cuts?' — cut into '+b.cuts+' equal pieces':' — the taken piece is told');
+    var anchor='start',tx=x;if(x>230){anchor='end';tx=x+w;}
+    s+='<text x="'+tx.toFixed(1)+'" y="'+(y0+12)+'" text-anchor="'+anchor+'" font-size="13" font-weight="700" fill="'+(k>1?'#8d6e00':'#283593')+'">'+title+'</text>';
+    s+='<rect x="'+x.toFixed(1)+'" y="'+by+'" width="'+w.toFixed(1)+'" height="'+bh+'" fill="#FFFFFF" stroke="#283593" stroke-width="2"/>';
+    var tw=Math.max(w*r,b.kind==='told'?5:0);
+    s+='<rect x="'+x.toFixed(1)+'" y="'+by+'" width="'+tw.toFixed(1)+'" height="'+bh+'" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/>';
+    for(j=1;j<b.cuts;j++){var xx=x+w*j/b.cuts;s+='<line x1="'+xx.toFixed(1)+'" y1="'+by+'" x2="'+xx.toFixed(1)+'" y2="'+(by+bh)+'" stroke="#283593" stroke-width="2" stroke-dasharray="5,3"/>';}
+    if(b.cuts&&w/b.cuts>=34)for(j=0;j<b.cuts;j++){var cx=x+w*(j+.5)/b.cuts;s+='<text x="'+cx.toFixed(1)+'" y="'+(by+22)+'" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">'+b.piece+'</text>';}
+    var lx0=x+tw,lw=w-tw;
+    s+='<rect x="'+lx0.toFixed(1)+'" y="'+(by-2)+'" width="'+lw.toFixed(1)+'" height="'+(bh+4)+'" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-dasharray="6,4"/>';
+    var ly=by+bh+16,tcx=x+tw/2;
+    if(tw<92)s+='<text x="'+x.toFixed(1)+'" y="'+ly+'" text-anchor="start" font-size="12" font-weight="700" fill="#0D47A1">taken: '+b.taken+'</text>';
+    else s+='<text x="'+tcx.toFixed(1)+'" y="'+ly+'" text-anchor="middle" font-size="12" font-weight="700" fill="#0D47A1">taken: '+b.taken+'</text>';
+    var lcx=lx0+lw/2;if(tw<92&&lcx-50<x+100)lcx=Math.max(lcx,x+175);
+    s+='<text x="'+lcx.toFixed(1)+'" y="'+ly+'" text-anchor="middle" font-size="12" font-weight="700" fill="#1B5E20">left over: '+b.left+'</text></g>';
+    if(!b.last){var nb=bars[i+1],ny=6+k*92+18;
+      s+='<line x1="'+nb.x.toFixed(1)+'" y1="'+(by+bh+22)+'" x2="'+nb.x.toFixed(1)+'" y2="'+ny+'" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="3,3"/>';
+      s+='<line x1="'+(nb.x+nb.w).toFixed(1)+'" y1="'+(by+bh+22)+'" x2="'+(nb.x+nb.w).toFixed(1)+'" y2="'+ny+'" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="3,3"/>';}
+  }
+  return s+'</svg>';
+}
+var YT=["A6", "A5", "B2", "B3", "B4"];
+var ITEMS=[{"id": "A6", "q": "Ben has 60 L of milk. He pours out 1/4 of the milk. Then he pours out 4/9 of the milk that was left. (a) How much milk is left? (b) How much milk does he pour out the second time?", "rounds": ["work", "work"], "stone": "45", "lines": [{"k": "a", "lab": "(a) How much milk is left?", "v": "25"}, {"k": "b", "lab": "(b) How much milk does he pour out the second time?", "v": "20"}], "bars": [{"k": 1, "x": 10.0, "w": 540.0, "kind": "of", "ratio": [1, 4], "whole": "60 L", "taken": "15 L", "left": "45 L", "newwhole": false, "last": false, "cuts": 4, "shade": 1, "piece": "15"}, {"k": 2, "x": 145.0, "w": 405.0, "kind": "of", "ratio": [4, 9], "whole": "45 L", "taken": "20 L", "left": "25 L", "newwhole": true, "last": true, "cuts": 9, "shade": 4, "piece": "5"}], "told": false}, {"id": "A5", "q": "Ivy has 36 kg of sand. She gives away 2/9 of the sand. Then she gives away 5 kg more. How much sand is left?", "rounds": ["work", "told"], "stone": "28", "lines": [{"k": "ans", "lab": "How much sand is left?", "v": "23"}], "bars": [{"k": 1, "x": 10.0, "w": 540.0, "kind": "of", "ratio": [2, 9], "whole": "36 kg", "taken": "8 kg", "left": "28 kg", "newwhole": false, "last": false, "cuts": 9, "shade": 2, "piece": "4"}, {"k": 2, "x": 130.0, "w": 420.0, "kind": "told", "ratio": [5, 28], "whole": "28 kg", "taken": "5 kg", "left": "23 kg", "newwhole": true, "last": true, "cuts": 0}], "told": true}, {"id": "B2", "q": "Kai has 2 2/3 kg of flour. He uses 1/8 of the flour. Then he uses 2/7 of the flour that was left. (a) How much flour is left? (b) How much flour does he use the second time?", "rounds": ["work", "work"], "stone": "2 1/3", "lines": [{"k": "a", "lab": "(a) How much flour is left?", "v": "1 2/3"}, {"k": "b", "lab": "(b) How much flour does he use the second time?", "v": "2/3"}], "bars": [{"k": 1, "x": 10.0, "w": 540.0, "kind": "of", "ratio": [1, 8], "whole": "2 2/3 kg", "taken": "1/3 kg", "left": "2 1/3 kg", "newwhole": false, "last": false, "cuts": 8, "shade": 1, "piece": "1/3"}, {"k": 2, "x": 77.5, "w": 472.5, "kind": "of", "ratio": [2, 7], "whole": "2 1/3 kg", "taken": "2/3 kg", "left": "1 2/3 kg", "newwhole": true, "last": true, "cuts": 7, "shade": 2, "piece": "1/3"}], "told": false}, {"id": "B3", "q": "Mia has 2 5/6 L of paint. She uses 1/3 L of the paint. Then she uses 3/5 of the paint that was left. How much paint is left?", "rounds": ["told", "work"], "stone": "2 1/2", "lines": [{"k": "ans", "lab": "How much paint is left?", "v": "1"}], "bars": [{"k": 1, "x": 10.0, "w": 540.0, "kind": "told", "ratio": [2, 17], "whole": "2 5/6 L", "taken": "1/3 L", "left": "2 1/2 L", "newwhole": false, "last": false, "cuts": 0}, {"k": 2, "x": 73.5, "w": 476.5, "kind": "of", "ratio": [3, 5], "whole": "2 1/2 L", "taken": "1 1/2 L", "left": "1 L", "newwhole": true, "last": true, "cuts": 5, "shade": 3, "piece": "1/2"}], "told": true}, {"id": "B4", "q": "Sam has 3 3/4 kg of clay. He uses 3/5 of the clay. Then he uses 3/4 kg more. How much clay is left?", "rounds": ["work", "told"], "stone": "1 1/2", "lines": [{"k": "ans", "lab": "How much clay is left?", "v": "3/4"}], "bars": [{"k": 1, "x": 10.0, "w": 540.0, "kind": "of", "ratio": [3, 5], "whole": "3 3/4 kg", "taken": "2 1/4 kg", "left": "1 1/2 kg", "newwhole": false, "last": false, "cuts": 5, "shade": 3, "piece": "3/4"}, {"k": 2, "x": 334.0, "w": 216.0, "kind": "told", "ratio": [1, 2], "whole": "1 1/2 kg", "taken": "3/4 kg", "left": "3/4 kg", "newwhole": true, "last": true, "cuts": 0}], "told": true}];
+var WL={"A6": [["One piece = 60 ÷ 4", "cut the 60 L bar into 4 equal pieces"], ["= 15", "60 ÷ 4 = 15, so one piece is 15 L"], ["Taken in round 1 = 15 × 1", "the taken piece is 1 of those pieces (the top number)"], ["= 15 L", "15 × 1 = 15"], ["Left after round 1 = 60 − 15", "the whole take away the taken piece"], ["= 45 L", "60 − 15 = 45"], ["New whole = 45 L", "round 2: \"of the milk that was LEFT\" — the left-over piece is the NEW whole"], ["One piece = 45 ÷ 9", "cut the 45 L bar into 9 equal pieces"], ["= 5", "45 ÷ 9 = 5, so one piece is 5 L"], ["Taken in round 2 = 5 × 4", "the taken piece is 4 of those pieces (the top number)"], ["= 20 L", "5 × 4 = 20"], ["Left after round 2 = 45 − 20", "the whole take away the taken piece"], ["= 25 L", "45 − 20 = 25"]], "A5": [["One piece = 36 ÷ 9", "cut the 36 kg bar into 9 equal pieces"], ["= 4", "36 ÷ 9 = 4, so one piece is 4 kg"], ["Taken in round 1 = 4 × 2", "the taken piece is 2 of those pieces (the top number)"], ["= 8 kg", "4 × 2 = 8"], ["Left after round 1 = 36 − 8", "the whole take away the taken piece"], ["= 28 kg", "36 − 8 = 28"], ["New whole = 28 kg", "round 2: the next piece comes out of what is LEFT, so the left-over piece is the new whole"], ["Taken in round 2 = 5 kg", "the story TOLD us the taken piece: a number with a unit right after it"], ["Left after round 2 = 28 − 5", "the whole take away the taken piece"], ["= 23 kg", "28 − 5 = 23"]], "B2": [["Taken in round 1 = 1/8 × 2 2/3", "\"1/8 of the flour\" means 1/8 × the whole"], ["= 1/8 × 8/3", "2 2/3 = 8/3 (2 wholes = 6 thirds, plus 2 thirds = 8 thirds)"], ["= 8/24", "tops: 1 × 8 = 8; bottoms: 8 × 3 = 24"], ["= 1/3 kg", "simplify: divide the top and the bottom by 8"], ["Left after round 1 = 2 2/3 − 1/3", "the whole take away the taken piece"], ["= 8/3 − 1/3", "change the whole to an improper fraction: 2 2/3 = 8/3 (2 wholes = 6 thirds, plus 2 thirds = 8 thirds)"], ["= 7/3", "8 thirds take away 1 third = 7 thirds"], ["= 2 1/3 kg", "7 thirds = 2 wholes and 1 third over"], ["New whole = 2 1/3 kg", "round 2: \"of the flour that was LEFT\" — the left-over piece is the NEW whole"], ["Taken in round 2 = 2/7 × 2 1/3", "\"2/7 of the flour that was left\" means 2/7 × the whole"], ["= 2/7 × 7/3", "2 1/3 = 7/3 (2 wholes = 6 thirds, plus 1 third = 7 thirds)"], ["= 14/21", "tops: 2 × 7 = 14; bottoms: 7 × 3 = 21"], ["= 2/3 kg", "simplify: divide the top and the bottom by 7"], ["Left after round 2 = 2 1/3 − 2/3", "the whole take away the taken piece"], ["= 7/3 − 2/3", "change the whole to an improper fraction: 2 1/3 = 7/3 (2 wholes = 6 thirds, plus 1 third = 7 thirds)"], ["= 5/3", "7 thirds take away 2 thirds = 5 thirds"], ["= 1 2/3 kg", "5 thirds = 1 whole and 2 thirds over"]], "B3": [["Taken in round 1 = 1/3 L", "the story TOLD us the taken piece: a number with a unit right after it"], ["Left after round 1 = 2 5/6 − 1/3", "the whole take away the taken piece"], ["= 17/6 − 1/3", "change the whole to an improper fraction: 2 5/6 = 17/6 (2 wholes = 12 sixths, plus 5 sixths = 17 sixths)"], ["= 17/6 − 2/6", "make the bottoms the same: 1/3 = 2/6 (top and bottom × 2)"], ["= 15/6", "17 sixths take away 2 sixths = 15 sixths"], ["= 5/2", "simplify: divide the top and the bottom by 3"], ["= 2 1/2 L", "5 halves = 2 wholes and 1 half over"], ["New whole = 2 1/2 L", "round 2: \"of the paint that was LEFT\" — the left-over piece is the NEW whole"], ["Taken in round 2 = 3/5 × 2 1/2", "\"3/5 of the paint that was left\" means 3/5 × the whole"], ["= 3/5 × 5/2", "2 1/2 = 5/2 (2 wholes = 4 halves, plus 1 half = 5 halves)"], ["= 15/10", "tops: 3 × 5 = 15; bottoms: 5 × 2 = 10"], ["= 3/2", "simplify: divide the top and the bottom by 5"], ["= 1 1/2 L", "3 halves = 1 whole and 1 half over"], ["Left after round 2 = 2 1/2 − 1 1/2", "the whole take away the taken piece"], ["= 5/2 − 1 1/2", "change the whole to an improper fraction: 2 1/2 = 5/2 (2 wholes = 4 halves, plus 1 half = 5 halves)"], ["= 5/2 − 3/2", "change the taken piece to an improper fraction: 1 1/2 = 3/2 (1 whole = 2 halves, plus 1 half = 3 halves)"], ["= 2/2", "5 halves take away 3 halves = 2 halves"], ["= 1 L", "2 ÷ 2 = 1"]], "B4": [["Taken in round 1 = 3/5 × 3 3/4", "\"3/5 of the clay\" means 3/5 × the whole"], ["= 3/5 × 15/4", "3 3/4 = 15/4 (3 wholes = 12 quarters, plus 3 quarters = 15 quarters)"], ["= 45/20", "tops: 3 × 15 = 45; bottoms: 5 × 4 = 20"], ["= 9/4", "simplify: divide the top and the bottom by 5"], ["= 2 1/4 kg", "9 quarters = 2 wholes and 1 quarter over"], ["Left after round 1 = 3 3/4 − 2 1/4", "the whole take away the taken piece"], ["= 15/4 − 2 1/4", "change the whole to an improper fraction: 3 3/4 = 15/4 (3 wholes = 12 quarters, plus 3 quarters = 15 quarters)"], ["= 15/4 − 9/4", "change the taken piece to an improper fraction: 2 1/4 = 9/4 (2 wholes = 8 quarters, plus 1 quarter = 9 quarters)"], ["= 6/4", "15 quarters take away 9 quarters = 6 quarters"], ["= 3/2", "simplify: divide the top and the bottom by 2"], ["= 1 1/2 kg", "3 halves = 1 whole and 1 half over"], ["New whole = 1 1/2 kg", "round 2: the next piece comes out of what is LEFT, so the left-over piece is the new whole"], ["Taken in round 2 = 3/4 kg", "the story TOLD us the taken piece: a number with a unit right after it"], ["Left after round 2 = 1 1/2 − 3/4", "the whole take away the taken piece"], ["= 3/2 − 3/4", "change the whole to an improper fraction: 1 1/2 = 3/2 (1 whole = 2 halves, plus 1 half = 3 halves)"], ["= 6/4 − 3/4", "make the bottoms the same: 3/2 = 6/4 (top and bottom × 2)"], ["= 3/4 kg", "6 quarters take away 3 quarters = 3 quarters"]]};
+WALKSETS.r=[['n-start','Whole: 3 1/4 L of paint. Draw the bar.'],['n-q1','"uses 3/4 L of the paint" has a unit right after the number.'],['n-q1y','YES: TOLD. Taken = 3/4 L, so left over 2 1/2 L.'],['n-q2','The story goes on: "then 3/5 of the paint that was LEFT".'],['n-q2y','YES: New whole = 2 1/2 L. Back to Q1.'],['n-q1','Round 2: "3/5 of the paint that was left" has no unit right after the fraction.'],['n-q1n','NO: work it out. Taken 1 1/2 L, so left over 1 L.'],['n-q2','Does the story go on? No.'],['n-q2n','NO: go to Q3.'],['n-q3','The question asks how much paint is left: 1 L.']];
+walkInit('walk1',WALKSETS.r);
+initCards();
+
+var KEY='chusaki_u067_lesson';
+var PR=["You wrote the left-over first — that’s the whole trick.","Read (a) again and put the right number under it. Exam-proof.","Told amount, straight off the left-over. Nice.","Fixed it! That’s how brains grow."];
+var SW='Both numbers are right — but they’re in each other’s boxes. On the test that’s 0. Read (a) again, then put the right number under it.';
+var S=null,t0=0,first=null,swapped=false,state='idle',fh=null,openedAt=new Date().toISOString(),lastSavedAt=null,wrote=0,storageBad=false,attempt=1;
+function $(id){return document.getElementById(id);}
+function sload(){try{var s=window.localStorage.getItem(KEY);return s?JSON.parse(s):null;}catch(e){storageBad=true;return null;}}
+function sstore(){try{S.min=(S.base||0)+(Date.now()-new Date(openedAt).getTime())/60000;window.localStorage.setItem(KEY,JSON.stringify(S));}catch(e){storageBad=true;}}
+function byId(id){for(var i=0;i<ITEMS.length;i++)if(ITEMS[i].id===id)return ITEMS[i];}
+function doneMap(){var o={},i;for(i=0;i<S.items.length;i++)o[S.items[i].id]=1;return o;}
+function nextId(){var d=doneMap(),i;for(i=0;i<YT.length;i++)if(!d[YT[i]])return YT[i];return null;}
+var _nav=nav;nav=function(d){_nav(d);S.screen=cur;if(S.seen.indexOf(cur)<0)S.seen.push(cur);sstore();if(cur===5)ytShow();};
+function init(){
+  var P=sload();S={screen:0,seen:[0],items:[],min:0,sittings:0};
+  if(P&&typeof P==='object'&&P.items&&P.seen){S=P;}
+  S.base=S.min||0;S.sittings=(S.sittings||0)+1;attempt=S.sittings;sstore();
+  if(S.screen>0){nav(S.screen);}
+  if(cur===5)ytShow();
+}
+function ytStat(){var f=0,x=0,i;for(i=0;i<S.items.length;i++){if(S.items[i].firstTryRight)f++;else x++;}
+  $('ytstat').textContent='⭐ '+f+' first-try  ·  ✨ '+x+' fixed';
+  $('ytsub').textContent='Story '+Math.min(S.items.length+1,YT.length)+' of '+YT.length;}
+function ytShow(){
+  ytStat();var id=nextId();
+  if(!id){$('ytcard').style.display='none';showFinish();return;}
+  if(cur_ok(id))return;
+  showItem(id);
+}
+function cur_ok(id){return cur_item&&cur_item.id===id&&state!=='idle'&&state!=='done';}
+var cur_item=null;
+function showItem(id){
+  cur_item=byId(id);t0=Date.now();state='box';first=null;swapped=false;
+  $('ytcap').textContent='Story '+(S.items.length+1);
+  $('ytq').textContent=cur_item.q;
+  var sh='<div class="sr"><label>Left after round 1 = <input type="text" class="st1" aria-label="Left after round 1"></label><span class="tag">fill this first</span></div>',lh='',i,l;
+  for(i=0;i<cur_item.lines.length;i++){l=cur_item.lines[i];lh+='<div class="al"><label>'+l.lab+' <input type="text" class="ln-'+l.k+'" aria-label="answer '+l.k+'"></label></div>';}
+  $('ytstones').innerHTML=sh;$('ytlines').innerHTML=lh;
+  $('ytchk').disabled=false;$('ytfb').style.display='none';$('ytfb').textContent='';$('ytsorry').style.display='none';$('ytsorry').innerHTML='';$('ytnext').style.display='none';
+  $('savebar').style.display='none';
+  ytStat();
+}
+function val(sel){var e=$('ytcard').querySelector(sel);return e?e.value.trim():'';}
+function givenLines(){var o={},i,l;for(i=0;i<cur_item.lines.length;i++){l=cur_item.lines[i];o[l.k]=val('.ln-'+l.k);}return o;}
+function wantLines(){var o={},i,l;for(i=0;i<cur_item.lines.length;i++){l=cur_item.lines[i];o[l.k]=l.v;}return o;}
+function err(m){var fb=$('ytfb');fb.className='feedback err';fb.style.display='block';fb.textContent=m;}
+function lockAll(){var els=$('ytcard').querySelectorAll('.stones input,.alines input'),i;for(i=0;i<els.length;i++)els[i].disabled=true;$('ytchk').disabled=true;}
+function ytCheck(){
+  var gv=givenLines(),wv=wantLines(),ks=Object.keys(wv),i,s1=val('.st1');
+  if(!s1||!parseVal(s1)){err('Fill “Left after round 1” first (like 1 1/5 or 7/4).');return;}
+  for(i=0;i<ks.length;i++){if(!gv[ks[i]]||!parseVal(gv[ks[i]])){err('Fill every box first (like 1 1/5 or 7/4).');return;}}
+  if(state==='fix'){var ok0=true;for(i=0;i<ks.length;i++)if(!sameVal(parseVal(gv[ks[i]]),parseVal(wv[ks[i]])))ok0=false;
+    if(ok0)return fixedIt(gv);err('Not yet — read the last lines again and copy the answers into the right boxes.');return;}
+  if(first===null)first={s:s1,g:gv};
+  if(!sameVal(parseVal(s1),parseVal(cur_item.stone))){err('Check round 1 — everything after it stands on it.');return;}
+  var ok=true;for(i=0;i<ks.length;i++)if(!sameVal(parseVal(gv[ks[i]]),parseVal(wv[ks[i]])))ok=false;
+  if(ok)return gotIt(gv);
+  var sw=false;if(ks.length===2)sw=sameVal(parseVal(gv.a),parseVal(wv.b))&&sameVal(parseVal(gv.b),parseVal(wv.a));
+  swapped=sw;notYet(gv,sw);
+}
+var lastP='';
+function praise(){var pool=[PR[0]];if(cur_item.lines.length>1)pool.push(PR[1]);if(cur_item.told)pool.push(PR[2]);
+  var p=pool[Math.floor(Math.random()*pool.length)];if(p===lastP&&pool.length>1)p=(p===pool[0])?pool[1]:pool[0];lastP=p;return p;}
+function record(firstRight,gv,lines){
+  S.items.push({id:cur_item.id,left1Given:first?first.s:val('.st1'),left1Correct:cur_item.stone,answersGiven:gv,answersCorrect:wantLines(),swapped:swapped,firstTryRight:firstRight,linesViewed:lines,ms:Date.now()-t0});
+  sstore();
+}
+function gotIt(gv){record(true,gv,0);lockAll();state='done';var fb=$('ytfb');fb.className='feedback ok';fb.style.display='block';fb.textContent='⭐ '+praise();after();}
+function rowEl(a,cls){var d=document.createElement('div'),m=document.createElement('span'),w=document.createElement('span');d.className=cls;m.className='m';w.className='why';m.textContent=a[0];w.textContent=a[1];d.appendChild(m);d.appendChild(w);return d;}
+function notYet(gv,sw){
+  state='lines';lockAll();first.g=gv;
+  var o='<div class="sbig">Not yet — here’s how it goes:</div>'+(sw?'<p class="swapmsg" style="font-weight:700;color:#8d6e00;margin:6px 0">'+SW+'</p>':'')+'<div class="bar-wrap">'+barSvg(cur_item.bars)+'</div>';
+  $('ytsorry').innerHTML=o;$('ytsorry').style.display='block';
+  var blk=document.createElement('div'),ws=document.createElement('div'),L=WL[cur_item.id],i,bt=document.createElement('button');
+  blk.className='wlb';blk.id='nywl';blk.setAttribute('data-bid',cur_item.id);ws.className='wls';for(i=0;i<L.length;i++)ws.appendChild(rowEl(L[i],'wl'));
+  bt.type='button';bt.className='btn-next';bt.innerHTML='Next line &#9656;';bt.onclick=function(){nyNext(bt);};blk.appendChild(ws);blk.appendChild(bt);$('ytsorry').appendChild(blk);wlShow(blk,1);
+  $('ytfb').style.display='none';
+}
+function nyNext(btn){var b=btn.parentNode;wlShow(b,wlCount(b)+1);if(b.classList.contains('alldone')){state='fix';
+  var fb=$('ytfb');fb.className='feedback';fb.style.display='block';fb.textContent='Now type the answers from the last lines — each one under its own question.';
+  var els=$('ytlines').querySelectorAll('input'),i;for(i=0;i<els.length;i++){els[i].disabled=false;els[i].value='';}
+  $('ytstones').querySelector('input').disabled=false;$('ytchk').disabled=false;}}
+function fixedIt(gv){var n=$('nywl')?wlCount($('nywl')):0;record(false,first.g,n);lockAll();state='done';var fb=$('ytfb');fb.className='feedback ok';fb.style.display='block';fb.textContent='✨ '+PR[3];after();}
+function after(){ytStat();autoSave();
+  if(S.items.length>=YT.length){setTimeout(function(){$('ytcard').style.display='none';showFinish();},900);return;}
+  $('ytnext').style.display='block';}
+function ytNext(){$('ytsorry').style.display='none';showItem(nextId());window.scrollTo(0,0);}
+function showFinish(){
+  var f=0,x=0,i;for(i=0;i<S.items.length;i++){if(S.items[i].firstTryRight)f++;else x++;}
+  $('fboth').textContent='⭐ '+f+'   ✨ '+x;$('finish').style.display='block';
+  if(!S.celebrated){S.celebrated=true;sstore();confetti();}
+  var b=$('savebar');if(b.style.display==='block'){$('savebar2').className=b.className;$('savebar2').innerHTML=b.innerHTML;$('savebar2').style.display='block';}
+}
+function confetti(){var cols=['#F9A825','#43A047','#3F51B5','#FB8C00','#8E24AA','#00ACC1'],i;
+  for(i=0;i<36;i++){var e=document.createElement('span');e.className='cf';e.style.left=(Math.random()*100)+'vw';e.style.background=cols[i%cols.length];e.style.animationDelay=(Math.random()*0.8)+'s';
+    document.body.appendChild(e);(function(z){setTimeout(function(){if(z.parentNode)z.parentNode.removeChild(z);},4200);})(e);}}
+/* ---- saving: after every item; one picker press per sitting, then it keeps writing to the same file ---- */
+function fileName(){var d=new Date(),p=function(n){return (n<10?'0':'')+n;};return 'MATH_U067_Lesson_'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'_a'+attempt+'.json';}
+function payload(){
+  var f=0,x=0,sw=0,i,now=new Date();for(i=0;i<S.items.length;i++){var r=S.items[i];if(r.firstTryRight)f++;else x++;if(r.swapped)sw++;}
+  lastSavedAt=now.toISOString();
+  return {student:'Prem',subject:'Math',unit:'U067',type:'lesson',attempt:attempt,openedAt:openedAt,lastSavedAt:lastSavedAt,
+    minutesSpent:Math.round(((S.base||0)+(now-new Date(openedAt))/60000)*10)/10,screensSeen:S.seen.length,finished:S.items.length>=YT.length,stars:f,fixed:x,swaps:sw,items:S.items};
+}
+function bars(){return [$('savebar'),$('savebar2')];}
+function setBar(cls,html){var b=bars(),i;for(i=0;i<b.length;i++){b[i].className='savebar'+(cls?' '+cls:'');b[i].style.display=(i===1&&$('finish').style.display!=='block')?'none':'block';b[i].innerHTML=html;}}
+function markSaved(how){setBar('saved','Saved — Dad and Chusaki can see it now ('+how+')');}
+function markNot(msg,btn){setBar('', msg+(btn?' <button type="button" class="btn-map" onclick="saveClick()">Save my progress</button>':''));}
+function writeTo(h){return h.createWritable().then(function(w){return w.write(JSON.stringify(payload(),null,2)).then(function(){return w.close();});});}
+function autoSave(){
+  if(!S.items.length)return;
+  if(fh){writeTo(fh).then(function(){wrote++;markSaved(S.items.length+' of '+YT.length+' stories, file '+fileName());}).catch(function(){fh=null;markNot('The file could not be updated.',true);});return;}
+  if(window.showSaveFilePicker){markNot('Your stories are kept on this computer. Press the button once, choose the folder called <b>SelfCheck Results</b> and press Save. After that it saves by itself after every story.',true);return;}
+  if(S.items.length>=YT.length){markNot('This browser cannot save to a folder by itself. Press the button to get the results file.',true);return;}
+  setBar('','Your stories are kept on this computer. When you finish, press Save to get your results file.');
+}
+async function saveClick(){
+  var name=fileName(),json;
+  if(window.showSaveFilePicker){
+    try{fh=await window.showSaveFilePicker({suggestedName:name,types:[{description:'JSON results',accept:{'application/json':['.json']}}]});
+      await writeTo(fh);wrote++;markSaved(S.items.length+' of '+YT.length+' stories, file '+name);return;
+    }catch(e){fh=null;if(e&&e.name==='AbortError'){markNot('You closed the save box, so nothing was saved yet.',true);return;}}}
+  try{json=JSON.stringify(payload(),null,2);var blob=new Blob([json],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},4000);
+    markSaved('downloaded — if it went to Downloads, move it into SelfCheck Results');
+  }catch(e2){markNot('Saving did not work. Tell Dad.',false);}
+}
+init();
+</script>
+</body>
+</html>

@@ -214,6 +214,55 @@ textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:
 .cf{position:fixed;top:-20px;width:10px;height:14px;opacity:.9;z-index:50;pointer-events:none;animation:cfall 2.6s ease-in forwards}
 @keyframes cfall{to{transform:translateY(110vh) rotate(540deg);opacity:.9}}
 
+#fcbtn{position:fixed;left:12px;bottom:12px;z-index:60;background:#F9A825;color:#3E2723;border:0;border-radius:22px;padding:10px 16px;font-weight:800;font-size:.95rem;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer}
+.fc{position:fixed;z-index:70;background:#FFFDF3;border:3px solid #F9A825;color:#263238;font-size:.92rem;line-height:1.35;padding:10px 12px 14px;overflow-y:auto;display:none}
+body.fc-open .fc{display:block}
+body.fc-open #fcbtn{background:#FFE082}
+.fc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;color:#283593}
+.fc-btns button{background:#fff;border:2px solid #9FA8DA;border-radius:8px;font-size:1rem;margin-left:6px;padding:2px 8px;cursor:pointer}
+.fc-sec{font-weight:800;color:#8d6e00;letter-spacing:.04em;margin:6px 0 4px}
+.fc-st{padding:5px 8px;margin:4px 0;border-radius:8px;border:2px solid transparent;background:#fff}
+.fc-st b{color:#283593;margin-right:6px}
+.fc-st.glow{background:#FFF59D;border-color:#F9A825;box-shadow:0 0 0 3px rgba(249,168,37,.35)}
+.fc-q{color:#607D8B;font-style:italic;font-size:.85rem}
+.fc-told{margin:2px 0 4px 18px;font-size:.88rem;color:#37474F}
+.fc-why{background:#E8EAF6;border:2px solid #9FA8DA;color:#283593;border-radius:8px;padding:3px 10px;margin:2px 0 4px 18px;font-weight:700;cursor:pointer}
+.fc-bricks{display:none;margin:4px 0 6px 18px;padding:8px;background:#fff;border:2px dashed #9FA8DA;border-radius:8px;font-size:.88rem}
+.fc-bricks.open{display:block}
+.bk-row{display:flex;gap:10px;margin-bottom:6px}
+.bk-row .grp{display:flex;gap:2px;padding:3px;border:2px solid #C5CAE9;border-radius:6px}
+.bk-row i{display:block;width:16px;height:12px;background:#CFD8DC;border-radius:2px}
+.bk-row .grp.lit{border-color:#F9A825}.bk-row .grp.lit i{background:#F9A825}
+.fc-two{display:block}
+.fc-blk{margin-top:8px;padding:6px;border:2px solid #E0E0E0;border-radius:10px;background:#FAFAFA}
+.fc-bh{display:block;width:100%;text-align:left;background:none;border:0;font-weight:800;color:#283593;cursor:pointer;font-size:.95rem;padding:2px 2px 4px}
+.fc-ex{display:none;margin:6px 0 2px;padding:6px 8px;background:#fff;border:1px dashed #9FA8DA;border-radius:8px;font-family:Consolas,'Courier New',monospace;font-size:.88rem}
+.fc-ex u{text-decoration:none;color:#283593;font-weight:800;margin-left:6px}
+.fc-blk.open .fc-ex{display:block}
+.fc-exh{font-family:inherit;font-weight:800;color:#8d6e00}
+.wl[data-card]{position:relative;padding-left:46px}
+.wl[data-card]::before{content:attr(data-card);position:absolute;left:4px;top:7px;min-width:30px;text-align:center;background:#E8EAF6;color:#283593;border:2px solid #9FA8DA;border-radius:12px;font-size:.78rem;font-weight:800;line-height:1.3}
+.wl.cur[data-card]::before{background:#FFF59D;border-color:#F9A825}
+@media (min-width:900px){
+  .fc{top:0;right:0;bottom:0;width:340px;border-width:0 0 0 3px}
+  body.fc-open{padding-right:350px}
+  body.fc-open #fcbtn{display:none}
+}
+@media (max-width:899px){
+  .fc{left:0;right:0;bottom:0;max-height:62vh;border-width:3px 0 0 0;border-radius:14px 14px 0 0;box-shadow:0 -4px 14px rgba(0,0,0,.25)}
+}
+@media print{
+  body.printing > *:not(#fcard){display:none!important}
+  body.printing #fcard{display:block!important;position:static!important;width:auto!important;max-height:none!important;border:2px solid #444!important;background:#fff!important;box-shadow:none!important;font-size:12pt;padding:8mm}
+  body.printing .fc-btns,body.printing .fc-why{display:none!important}
+  body.printing .fc-bricks{display:block!important}
+  body.printing .fc-ex{display:block!important}
+  body.printing .fc-st{background:#fff!important;border:1px solid #bbb!important}
+  body.printing .fc-st.glow{box-shadow:none!important}
+  body.printing .fc-two{display:flex;gap:8mm}body.printing .fc-blk{flex:1}
+  @page{size:A4;margin:10mm}
+}
+
 .wrap{max-width:760px;margin:0 auto;padding:0 12px}
 .why-real{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 14px;margin:10px 0;color:#283593}
 .stat2{text-align:center;font-weight:700;color:#283593;margin:6px 0}
@@ -240,6 +289,7 @@ textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:
   <h2>Before We Start &mdash; You Already Know This</h2>
 <div class="why-real"><p><strong>Why this is worth learning.</strong> A shop sells 1/5 of its rice on Monday, then 2/3 of what is left on Tuesday. A baker uses some flour in the morning, then part of what is left in the afternoon. Real stories go on in rounds like this &mdash; and each round starts from the piece the last round left behind.</p></div>
   <div class="why"><p><strong>In U66 you got every one-step story right. Today: ONE new idea, in a short lesson. And one habit &mdash; read (a) again before you write (a), because two right numbers in the wrong boxes score 0.</strong></p></div>
+  <div class="why"><p><strong>Meet your &#x1F4CC; Formula Card &mdash; it stays with you the whole lesson.</strong></p></div>
   <p class="tap-hint">Two quick ones, no teaching on this page.</p>
 <div class="q-card" id="w0" data-rounds="work" data-iid="L1s0" data-a="14" data-b="21">
   <div class="q-text">1.&nbsp; Ben has 35 L of juice. He drinks 2/5 of the juice. (a) How much juice does he drink? (b) How much juice is left?</div>
@@ -252,12 +302,12 @@ textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:
   <div class="stepsbox"><button type="button" class="btn-show-steps" onclick="stepsToggle(this)">Show steps</button>
 <div class="wlb closed" data-bid="L1s0">
 <div class="wls">
-<div class="wl"><span class="m">One piece = 35 ÷ 5</span><span class="why">cut the 35 L bar into 5 equal pieces</span></div>
-<div class="wl"><span class="m">= 7</span><span class="why">35 ÷ 5 = 7, so one piece is 7 L</span></div>
-<div class="wl"><span class="m">Taken in round 1 = 7 × 2</span><span class="why">the taken piece is 2 of those pieces (the top number)</span></div>
-<div class="wl"><span class="m">= 14 L</span><span class="why">7 × 2 = 14</span></div>
-<div class="wl"><span class="m">Left after round 1 = 35 − 14</span><span class="why">the whole take away the taken piece</span></div>
-<div class="wl"><span class="m">= 21 L</span><span class="why">35 − 14 = 21</span></div>
+<div class="wl" data-card="①"><span class="m">Taken part 1 = 2/5 × 35</span><span class="why">① "2/5 of the juice" → taken part = 2/5 × whole</span></div>
+<div class="wl" data-card="×0"><span class="m">= 2/5 × 35/1</span><span class="why">a whole number is a fraction over 1: 35 = 35/1</span></div>
+<div class="wl" data-card="×1"><span class="m">= 70/5</span><span class="why">tops: 2 × 35 = 70; bottoms: 5 × 1 = 5</span></div>
+<div class="wl" data-card="×2"><span class="m">= 14 L</span><span class="why">70 ÷ 5 = 14</span></div>
+<div class="wl" data-card="②"><span class="m">Left part 1 = 35 − 14</span><span class="why">② left part = whole − taken part</span></div>
+<div class="wl" data-card="−2"><span class="m">= 21 L</span><span class="why">35 − 14 = 21</span></div>
 </div>
 <button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
 </div>
@@ -274,16 +324,16 @@ textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:
   <div class="stepsbox"><button type="button" class="btn-show-steps" onclick="stepsToggle(this)">Show steps</button>
 <div class="wlb closed" data-bid="L2s0">
 <div class="wls">
-<div class="wl"><span class="m">Taken in round 1 = 3/8 × 2 2/5</span><span class="why">"3/8 of the juice" means 3/8 × the whole</span></div>
-<div class="wl"><span class="m">= 3/8 × 12/5</span><span class="why">2 2/5 = 12/5 (2 wholes = 10 fifths, plus 2 fifths = 12 fifths)</span></div>
-<div class="wl"><span class="m">= 36/40</span><span class="why">tops: 3 × 12 = 36; bottoms: 8 × 5 = 40</span></div>
-<div class="wl"><span class="m">= 9/10 L</span><span class="why">simplify: divide the top and the bottom by 4</span></div>
-<div class="wl"><span class="m">Left after round 1 = 2 2/5 − 9/10</span><span class="why">the whole take away the taken piece</span></div>
-<div class="wl"><span class="m">= 12/5 − 9/10</span><span class="why">change the whole to an improper fraction: 2 2/5 = 12/5 (2 wholes = 10 fifths, plus 2 fifths = 12 fifths)</span></div>
-<div class="wl"><span class="m">= 24/10 − 9/10</span><span class="why">make the bottoms the same: 12/5 = 24/10 (top and bottom × 2)</span></div>
-<div class="wl"><span class="m">= 15/10</span><span class="why">24 tenths take away 9 tenths = 15 tenths</span></div>
-<div class="wl"><span class="m">= 3/2</span><span class="why">simplify: divide the top and the bottom by 5</span></div>
-<div class="wl"><span class="m">= 1 1/2 L</span><span class="why">3 halves = 1 whole and 1 half over</span></div>
+<div class="wl" data-card="①"><span class="m">Taken part 1 = 3/8 × 2 2/5</span><span class="why">① "3/8 of the juice" → taken part = 3/8 × whole</span></div>
+<div class="wl" data-card="×0"><span class="m">= 3/8 × 12/5</span><span class="why">2 2/5 = 12/5 (2 wholes = 10 fifths, plus 2 fifths = 12 fifths)</span></div>
+<div class="wl" data-card="×1"><span class="m">= 36/40</span><span class="why">tops: 3 × 12 = 36; bottoms: 8 × 5 = 40</span></div>
+<div class="wl" data-card="×2"><span class="m">= 9/10 L</span><span class="why">simplify: divide the top and the bottom by 4</span></div>
+<div class="wl" data-card="②"><span class="m">Left part 1 = 2 2/5 − 9/10</span><span class="why">② left part = whole − taken part</span></div>
+<div class="wl" data-card="−0"><span class="m">= 12/5 − 9/10</span><span class="why">change the whole to an improper fraction: 2 2/5 = 12/5 (2 wholes = 10 fifths, plus 2 fifths = 12 fifths)</span></div>
+<div class="wl" data-card="−1"><span class="m">= 24/10 − 9/10</span><span class="why">make the bottoms the same: 12/5 = 24/10 (top and bottom × 2)</span></div>
+<div class="wl" data-card="−2"><span class="m">= 15/10</span><span class="why">24 tenths take away 9 tenths = 15 tenths</span></div>
+<div class="wl" data-card="−3"><span class="m">= 3/2</span><span class="why">simplify: divide the top and the bottom by 5</span></div>
+<div class="wl" data-card="−3"><span class="m">= 1 1/2 L</span><span class="why">3 halves = 1 whole and 1 half over</span></div>
 </div>
 <button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
 </div>
@@ -341,22 +391,23 @@ textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:
 </div>
 <div class="wlb auto" data-bid="L1s2">
 <div class="wls">
-<div class="wl"><span class="m">One piece = 32 ÷ 4</span><span class="why">cut the 32 L bar into 4 equal pieces</span></div>
-<div class="wl"><span class="m">= 8</span><span class="why">32 ÷ 4 = 8, so one piece is 8 L</span></div>
-<div class="wl"><span class="m">Taken in round 1 = 8 × 1</span><span class="why">the taken piece is 1 of those pieces (the top number)</span></div>
-<div class="wl"><span class="m">= 8 L</span><span class="why">8 × 1 = 8</span></div>
-<div class="wl"><span class="m">Left after round 1 = 32 − 8</span><span class="why">the whole take away the taken piece</span></div>
-<div class="wl"><span class="m">= 24 L</span><span class="why">32 − 8 = 24</span></div>
-<div class="wl"><span class="m">New whole = 24 L</span><span class="why">round 2: "of the juice that was LEFT" — the left-over piece is the NEW whole</span></div>
-<div class="wl"><span class="m">One piece = 24 ÷ 4</span><span class="why">cut the 24 L bar into 4 equal pieces</span></div>
-<div class="wl"><span class="m">= 6</span><span class="why">24 ÷ 4 = 6, so one piece is 6 L</span></div>
-<div class="wl"><span class="m">Taken in round 2 = 6 × 3</span><span class="why">the taken piece is 3 of those pieces (the top number)</span></div>
-<div class="wl"><span class="m">= 18 L</span><span class="why">6 × 3 = 18</span></div>
-<div class="wl"><span class="m">Left after round 2 = 24 − 18</span><span class="why">the whole take away the taken piece</span></div>
-<div class="wl"><span class="m">= 6 L</span><span class="why">24 − 18 = 6</span></div>
+<div class="wl" data-card="①"><span class="m">Taken part 1 = 1/4 × 32</span><span class="why">① "1/4 of the juice" → taken part = 1/4 × whole</span></div>
+<div class="wl" data-card="×0"><span class="m">= 1/4 × 32/1</span><span class="why">a whole number is a fraction over 1: 32 = 32/1</span></div>
+<div class="wl" data-card="×1"><span class="m">= 32/4</span><span class="why">tops: 1 × 32 = 32; bottoms: 4 × 1 = 4</span></div>
+<div class="wl" data-card="×2"><span class="m">= 8 L</span><span class="why">32 ÷ 4 = 8</span></div>
+<div class="wl" data-card="②"><span class="m">Left part 1 = 32 − 8</span><span class="why">② left part = whole − taken part</span></div>
+<div class="wl" data-card="−2"><span class="m">= 24 L</span><span class="why">32 − 8 = 24</span></div>
+<div class="wl" data-card="③"><span class="m">New whole = 24 L</span><span class="why">③ "of the juice that was LEFT" → the left part is the NEW whole</span></div>
+<div class="wl" data-card="①"><span class="m">Taken part 2 = 3/4 × 24</span><span class="why">① "3/4 of the juice that was left" → taken part = 3/4 × whole</span></div>
+<div class="wl" data-card="×0"><span class="m">= 3/4 × 24/1</span><span class="why">a whole number is a fraction over 1: 24 = 24/1</span></div>
+<div class="wl" data-card="×1"><span class="m">= 72/4</span><span class="why">tops: 3 × 24 = 72; bottoms: 4 × 1 = 4</span></div>
+<div class="wl" data-card="×2"><span class="m">= 18 L</span><span class="why">72 ÷ 4 = 18</span></div>
+<div class="wl" data-card="②"><span class="m">Left part 2 = 24 − 18</span><span class="why">② left part = whole − taken part</span></div>
+<div class="wl" data-card="−2"><span class="m">= 6 L</span><span class="why">24 − 18 = 6</span></div>
 </div>
 <button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
 </div>
+  <div class="big-rule">&#9312; then &#9313; then &#9314; then &#9312; &#9313; again.</div>
   <div class="boxes-static"><div class="r">Answer: <b>6 L</b> of juice is left.</div></div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Trap &#8594;</button></div>
@@ -367,7 +418,7 @@ textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:
 <div class="card">
   <h2>&#x26A0;&#xFE0F; Spot The Trap</h2>
   <p class="tap-hint">Same story as the last page: 32 L of juice, 1/4 first, then 3/4.</p>
-  <div class="sbs"><div class="sc a"><div class="st">&#x2705; The new whole</div><div>3/4 of what was LEFT = 3/4 &times; 24 = 18 L.</div></div><div class="sc b"><div class="st">&#x1F536; The old whole</div><div>3/4 of ALL the juice = 3/4 &times; 32 = 24 L &rarr; nothing left?! But the story says some is left.</div></div></div>
+  <div class="sbs"><div class="sc a"><div class="st">&#x2705; The new whole</div><div>&#9314; New whole = 24 L &rarr; &#9312; 3/4 &times; 24 = 18 L.</div></div><div class="sc b"><div class="st">&#x1F536; The old whole</div><div>3/4 &times; 32 uses the OLD whole. That gives 24 L &rarr; nothing left?! But the story says some is left.</div></div></div>
   <h3 style="margin-top:12px">Now the told version</h3>
   <p><strong>Sam has 20 L of water. He uses 5 L of the water. Then he uses 2/5 of the water that was left. How much water is left?</strong></p>
 <div class="bar-wrap">
@@ -406,16 +457,16 @@ textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:
 </div>
 <div class="wlb auto" data-bid="L1s4">
 <div class="wls">
-<div class="wl"><span class="m">Taken in round 1 = 5 L</span><span class="why">the story TOLD us the taken piece: a number with a unit right after it</span></div>
-<div class="wl"><span class="m">Left after round 1 = 20 − 5</span><span class="why">the whole take away the taken piece</span></div>
-<div class="wl"><span class="m">= 15 L</span><span class="why">20 − 5 = 15</span></div>
-<div class="wl"><span class="m">New whole = 15 L</span><span class="why">round 2: "of the water that was LEFT" — the left-over piece is the NEW whole</span></div>
-<div class="wl"><span class="m">One piece = 15 ÷ 5</span><span class="why">cut the 15 L bar into 5 equal pieces</span></div>
-<div class="wl"><span class="m">= 3</span><span class="why">15 ÷ 5 = 3, so one piece is 3 L</span></div>
-<div class="wl"><span class="m">Taken in round 2 = 3 × 2</span><span class="why">the taken piece is 2 of those pieces (the top number)</span></div>
-<div class="wl"><span class="m">= 6 L</span><span class="why">3 × 2 = 6</span></div>
-<div class="wl"><span class="m">Left after round 2 = 15 − 6</span><span class="why">the whole take away the taken piece</span></div>
-<div class="wl"><span class="m">= 9 L</span><span class="why">15 − 6 = 9</span></div>
+<div class="wl" data-card="①"><span class="m">Taken part 1 = 5 L</span><span class="why">TOLD: a unit right after the fraction — this IS the taken part, no × needed</span></div>
+<div class="wl" data-card="②"><span class="m">Left part 1 = 20 − 5</span><span class="why">② left part = whole − taken part</span></div>
+<div class="wl" data-card="−2"><span class="m">= 15 L</span><span class="why">20 − 5 = 15</span></div>
+<div class="wl" data-card="③"><span class="m">New whole = 15 L</span><span class="why">③ "of the water that was LEFT" → the left part is the NEW whole</span></div>
+<div class="wl" data-card="①"><span class="m">Taken part 2 = 2/5 × 15</span><span class="why">① "2/5 of the water that was left" → taken part = 2/5 × whole</span></div>
+<div class="wl" data-card="×0"><span class="m">= 2/5 × 15/1</span><span class="why">a whole number is a fraction over 1: 15 = 15/1</span></div>
+<div class="wl" data-card="×1"><span class="m">= 30/5</span><span class="why">tops: 2 × 15 = 30; bottoms: 5 × 1 = 5</span></div>
+<div class="wl" data-card="×2"><span class="m">= 6 L</span><span class="why">30 ÷ 5 = 6</span></div>
+<div class="wl" data-card="②"><span class="m">Left part 2 = 15 − 6</span><span class="why">② left part = whole − taken part</span></div>
+<div class="wl" data-card="−2"><span class="m">= 9 L</span><span class="why">15 − 6 = 9</span></div>
 </div>
 <button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
 </div>
@@ -475,60 +526,39 @@ textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:
 </div>
 <div class="wlb auto" data-bid="L2s2">
 <div class="wls">
-<div class="wl"><span class="m">Taken in round 1 = 1/6 × 2 2/5</span><span class="why">"1/6 of the juice" means 1/6 × the whole</span></div>
-<div class="wl"><span class="m">= 1/6 × 12/5</span><span class="why">2 2/5 = 12/5 (2 wholes = 10 fifths, plus 2 fifths = 12 fifths)</span></div>
-<div class="wl"><span class="m">= 12/30</span><span class="why">tops: 1 × 12 = 12; bottoms: 6 × 5 = 30</span></div>
-<div class="wl"><span class="m">= 2/5 L</span><span class="why">simplify: divide the top and the bottom by 6</span></div>
-<div class="wl"><span class="m">Left after round 1 = 2 2/5 − 2/5</span><span class="why">the whole take away the taken piece</span></div>
-<div class="wl"><span class="m">= 12/5 − 2/5</span><span class="why">change the whole to an improper fraction: 2 2/5 = 12/5 (2 wholes = 10 fifths, plus 2 fifths = 12 fifths)</span></div>
-<div class="wl"><span class="m">= 10/5</span><span class="why">12 fifths take away 2 fifths = 10 fifths</span></div>
-<div class="wl"><span class="m">= 2 L</span><span class="why">10 ÷ 5 = 2</span></div>
-<div class="wl" data-glow="1"><span class="m">New whole = 2 L</span><span class="why">round 2: "of the juice that was LEFT" — the left-over piece is the NEW whole</span></div>
-<div class="wl"><span class="m">One piece = 2 ÷ 4</span><span class="why">cut the 2 L bar into 4 equal pieces</span></div>
-<div class="wl"><span class="m">= 1/2</span><span class="why">2 ÷ 4 = 1/2, so one piece is 1/2 L</span></div>
-<div class="wl"><span class="m">Taken in round 2 = 1/2 × 3</span><span class="why">the taken piece is 3 of those pieces (the top number)</span></div>
-<div class="wl"><span class="m">= 1 1/2 L</span><span class="why">1/2 × 3 = 1 1/2</span></div>
-<div class="wl"><span class="m">Left after round 2 = 2 − 1 1/2</span><span class="why">the whole take away the taken piece</span></div>
-<div class="wl"><span class="m">= 2 − 3/2</span><span class="why">change the taken piece to an improper fraction: 1 1/2 = 3/2 (1 whole = 2 halves, plus 1 half = 3 halves)</span></div>
-<div class="wl"><span class="m">= 4/2 − 3/2</span><span class="why">make the bottoms the same: 2 wholes = 4 halves</span></div>
-<div class="wl"><span class="m">= 1/2 L</span><span class="why">4 halves take away 3 halves = 1 half</span></div>
+<div class="wl" data-card="①"><span class="m">Taken part 1 = 1/6 × 2 2/5</span><span class="why">① "1/6 of the juice" → taken part = 1/6 × whole</span></div>
+<div class="wl" data-card="×0"><span class="m">= 1/6 × 12/5</span><span class="why">2 2/5 = 12/5 (2 wholes = 10 fifths, plus 2 fifths = 12 fifths)</span></div>
+<div class="wl" data-card="×1"><span class="m">= 12/30</span><span class="why">tops: 1 × 12 = 12; bottoms: 6 × 5 = 30</span></div>
+<div class="wl" data-card="×2"><span class="m">= 2/5 L</span><span class="why">simplify: divide the top and the bottom by 6</span></div>
+<div class="wl" data-card="②"><span class="m">Left part 1 = 2 2/5 − 2/5</span><span class="why">② left part = whole − taken part</span></div>
+<div class="wl" data-card="−0"><span class="m">= 12/5 − 2/5</span><span class="why">change the whole to an improper fraction: 2 2/5 = 12/5 (2 wholes = 10 fifths, plus 2 fifths = 12 fifths)</span></div>
+<div class="wl" data-card="−2"><span class="m">= 10/5</span><span class="why">12 fifths take away 2 fifths = 10 fifths</span></div>
+<div class="wl" data-card="−3"><span class="m">= 2 L</span><span class="why">10 ÷ 5 = 2</span></div>
+<div class="wl" data-glow="1" data-card="③"><span class="m">New whole = 2 L</span><span class="why">③ "of the juice that was LEFT" → the left part is the NEW whole</span></div>
+<div class="wl" data-card="①"><span class="m">Taken part 2 = 3/4 × 2</span><span class="why">① "3/4 of the juice that was left" → taken part = 3/4 × whole</span></div>
+<div class="wl" data-card="×0"><span class="m">= 3/4 × 2/1</span><span class="why">a whole number is a fraction over 1: 2 = 2/1</span></div>
+<div class="wl" data-card="×1"><span class="m">= 6/4</span><span class="why">tops: 3 × 2 = 6; bottoms: 4 × 1 = 4</span></div>
+<div class="wl" data-card="×2"><span class="m">= 3/2</span><span class="why">simplify: divide the top and the bottom by 2</span></div>
+<div class="wl" data-card="×2"><span class="m">= 1 1/2 L</span><span class="why">3 halves = 1 whole and 1 half over</span></div>
+<div class="wl" data-card="②"><span class="m">Left part 2 = 2 − 1 1/2</span><span class="why">② left part = whole − taken part</span></div>
+<div class="wl" data-card="−0"><span class="m">= 2 − 3/2</span><span class="why">change the taken part to an improper fraction: 1 1/2 = 3/2 (1 whole = 2 halves, plus 1 half = 3 halves)</span></div>
+<div class="wl" data-card="−1"><span class="m">= 4/2 − 3/2</span><span class="why">make the bottoms the same: 2 wholes = 4 halves</span></div>
+<div class="wl" data-card="−2"><span class="m">= 1/2 L</span><span class="why">4 halves take away 3 halves = 1 half</span></div>
 </div>
 <button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
 </div>
-  <div class="big-rule">Nothing new &mdash; the U66 lines, then &lsquo;New whole =&rsquo;, then the U66 lines again.</div>
+  <div class="big-rule">Same card, fraction bottle. &times;0 is the only extra line.</div>
   <div class="boxes-static"><div class="r">Answer: <b>1/2 L</b> of juice is left.</div></div>
 </div>
-<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">The Map &#8594;</button></div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Your Card &#8594;</button></div>
 </div>
 
 <!-- s4 -->
 <div class="screen" id="s4">
 <div class="card">
-  <h2>&#x1F5FA; The Map</h2>
-  <p class="tap-hint">Three questions: told or work it out? &middot; &ldquo;of what was LEFT&rdquo; means a new whole &middot; read (a) again. Tap Next step and watch the path light up for this story:</p>
+  <h2>&#x1F4CC; Your Card, Step By Step</h2>
+  <p class="tap-hint">Tap Next line. Each line says which step of your card it uses &mdash; and that step lights up on the card.</p>
   <p><strong>Raj has 3 1/4 L of paint. He uses 3/4 L of the paint. Then he uses 3/5 of the paint that was left. How much paint is left?</strong></p>
-<div id="walk1">
-<div class="fmap mp">
-<div class="mn start" id="n-start"><b class="k">START</b> Find the WHOLE. Draw the bar.<i>Area story? The whole is length &times; width &mdash; work that out first.</i><div class="cap"></div></div>
-<div class="arr">&#9660;</div>
-<div class="mn q" id="n-q1"><b class="k">Q1</b> Is there a unit right after the fraction?<div class="cap"></div></div>
-<div class="arr">&#9660;</div>
-<div class="two">
-<div class="br" id="n-q1y"><b class="yn">YES</b> &quot;uses 3/4 L&quot; &rarr; <b>TOLD.</b> <span class="tk">Taken = 3/4 L.</span><div class="ex">Example: 20 L, uses 5 L. The taken piece is 5 L.</div><div class="cap"></div></div>
-<div class="br" id="n-q1n"><b class="yn">NO</b> &quot;uses 3/4 of the paint&quot; &rarr; <b>WORK IT OUT.</b> <span class="tk">Taken = 3/4 &times; the whole.</span><div class="ex">Example: 1/4 of 32 L: 1/4 &times; 32 = 8 L.</div><div class="cap"></div></div>
-</div>
-<div class="arr">Then: <span class="lf">Left = whole &minus; taken.</span></div>
-<div class="mn q" id="n-q2"><b class="k">Q2</b> Does the story go on &mdash; &quot;then &hellip; of what was LEFT&quot;?<div class="cap"></div></div>
-<div class="arr">&#9660;</div>
-<div class="two">
-<div class="br" id="n-q2y"><b class="yn">YES</b> &rarr; The left-over piece is the <b>NEW whole.</b> Draw a new bar under it. Write: <span class="tk">New whole = ____.</span> Go back to Q1 for round 2.<i>&quot;then &hellip; 1/2 kg more&quot; is TOLD: take it straight off the left-over.</i><div class="cap"></div></div>
-<div class="br" id="n-q2n"><b class="yn">NO</b> &rarr; Q3.<div class="cap"></div></div>
-</div>
-<div class="arr">&#9660;</div>
-<div class="mn q" id="n-q3"><b class="k">Q3</b> Read (a) again. Does it ask for a TAKEN piece (which round?) or what is LEFT at the end? Write the answer. Then read (b) again.<div class="cap"></div></div>
-</div>
-</div>
-<div class="wtrow"><button type="button" class="btn-next" id="walk1_nx" onclick="walkNext('walk1',this)">Next step &#9656;</button> <a class="btn-map" href="U67_FirstStep_Map.html" target="_blank">&#x1F5FA; Print my map</a></div>
 <div class="bar-wrap">
 <svg viewBox="0 0 560 182" role="img" aria-label="a two-bar picture: the left-over piece becomes the new whole">
 <g class="bar b1">
@@ -565,23 +595,23 @@ textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:
 </div>
 <div class="wlb auto" data-bid="L2s3">
 <div class="wls">
-<div class="wl"><span class="m">Taken in round 1 = 3/4 L</span><span class="why">the story TOLD us the taken piece: a number with a unit right after it</span></div>
-<div class="wl"><span class="m">Left after round 1 = 3 1/4 − 3/4</span><span class="why">the whole take away the taken piece</span></div>
-<div class="wl"><span class="m">= 13/4 − 3/4</span><span class="why">change the whole to an improper fraction: 3 1/4 = 13/4 (3 wholes = 12 quarters, plus 1 quarter = 13 quarters)</span></div>
-<div class="wl"><span class="m">= 10/4</span><span class="why">13 quarters take away 3 quarters = 10 quarters</span></div>
-<div class="wl"><span class="m">= 5/2</span><span class="why">simplify: divide the top and the bottom by 2</span></div>
-<div class="wl"><span class="m">= 2 1/2 L</span><span class="why">5 halves = 2 wholes and 1 half over</span></div>
-<div class="wl"><span class="m">New whole = 2 1/2 L</span><span class="why">round 2: "of the paint that was LEFT" — the left-over piece is the NEW whole</span></div>
-<div class="wl"><span class="m">Taken in round 2 = 3/5 × 2 1/2</span><span class="why">"3/5 of the paint that was left" means 3/5 × the whole</span></div>
-<div class="wl"><span class="m">= 3/5 × 5/2</span><span class="why">2 1/2 = 5/2 (2 wholes = 4 halves, plus 1 half = 5 halves)</span></div>
-<div class="wl"><span class="m">= 15/10</span><span class="why">tops: 3 × 5 = 15; bottoms: 5 × 2 = 10</span></div>
-<div class="wl"><span class="m">= 3/2</span><span class="why">simplify: divide the top and the bottom by 5</span></div>
-<div class="wl"><span class="m">= 1 1/2 L</span><span class="why">3 halves = 1 whole and 1 half over</span></div>
-<div class="wl"><span class="m">Left after round 2 = 2 1/2 − 1 1/2</span><span class="why">the whole take away the taken piece</span></div>
-<div class="wl"><span class="m">= 5/2 − 1 1/2</span><span class="why">change the whole to an improper fraction: 2 1/2 = 5/2 (2 wholes = 4 halves, plus 1 half = 5 halves)</span></div>
-<div class="wl"><span class="m">= 5/2 − 3/2</span><span class="why">change the taken piece to an improper fraction: 1 1/2 = 3/2 (1 whole = 2 halves, plus 1 half = 3 halves)</span></div>
-<div class="wl"><span class="m">= 2/2</span><span class="why">5 halves take away 3 halves = 2 halves</span></div>
-<div class="wl"><span class="m">= 1 L</span><span class="why">2 ÷ 2 = 1</span></div>
+<div class="wl" data-card="①"><span class="m">Taken part 1 = 3/4 L</span><span class="why">TOLD: a unit right after the fraction — this IS the taken part, no × needed</span></div>
+<div class="wl" data-card="②"><span class="m">Left part 1 = 3 1/4 − 3/4</span><span class="why">② left part = whole − taken part</span></div>
+<div class="wl" data-card="−0"><span class="m">= 13/4 − 3/4</span><span class="why">change the whole to an improper fraction: 3 1/4 = 13/4 (3 wholes = 12 quarters, plus 1 quarter = 13 quarters)</span></div>
+<div class="wl" data-card="−2"><span class="m">= 10/4</span><span class="why">13 quarters take away 3 quarters = 10 quarters</span></div>
+<div class="wl" data-card="−3"><span class="m">= 5/2</span><span class="why">simplify: divide the top and the bottom by 2</span></div>
+<div class="wl" data-card="−3"><span class="m">= 2 1/2 L</span><span class="why">5 halves = 2 wholes and 1 half over</span></div>
+<div class="wl" data-card="③"><span class="m">New whole = 2 1/2 L</span><span class="why">③ "of the paint that was LEFT" → the left part is the NEW whole</span></div>
+<div class="wl" data-card="①"><span class="m">Taken part 2 = 3/5 × 2 1/2</span><span class="why">① "3/5 of the paint that was left" → taken part = 3/5 × whole</span></div>
+<div class="wl" data-card="×0"><span class="m">= 3/5 × 5/2</span><span class="why">2 1/2 = 5/2 (2 wholes = 4 halves, plus 1 half = 5 halves)</span></div>
+<div class="wl" data-card="×1"><span class="m">= 15/10</span><span class="why">tops: 3 × 5 = 15; bottoms: 5 × 2 = 10</span></div>
+<div class="wl" data-card="×2"><span class="m">= 3/2</span><span class="why">simplify: divide the top and the bottom by 5</span></div>
+<div class="wl" data-card="×2"><span class="m">= 1 1/2 L</span><span class="why">3 halves = 1 whole and 1 half over</span></div>
+<div class="wl" data-card="②"><span class="m">Left part 2 = 2 1/2 − 1 1/2</span><span class="why">② left part = whole − taken part</span></div>
+<div class="wl" data-card="−0"><span class="m">= 5/2 − 1 1/2</span><span class="why">change the whole to an improper fraction: 2 1/2 = 5/2 (2 wholes = 4 halves, plus 1 half = 5 halves)</span></div>
+<div class="wl" data-card="−0"><span class="m">= 5/2 − 3/2</span><span class="why">change the taken part to an improper fraction: 1 1/2 = 3/2 (1 whole = 2 halves, plus 1 half = 3 halves)</span></div>
+<div class="wl" data-card="−2"><span class="m">= 2/2</span><span class="why">5 halves take away 3 halves = 2 halves</span></div>
+<div class="wl" data-card="−3"><span class="m">= 1 L</span><span class="why">2 ÷ 2 = 1</span></div>
 </div>
 <button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
 </div>
@@ -610,13 +640,43 @@ textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:
     <button class="btn-big" id="ytnext" style="display:none" onclick="ytNext()">Next story &rarr;</button>
     <div class="savebar" id="savebar" style="display:none"></div>
   </div>
-  <div class="finish" id="finish"><div class="tsbadge">NEW WHOLE &#10003;</div><div class="big">You finished all 5!</div><div class="both" id="fboth"></div><p style="font-weight:700">You&rsquo;re ready for the test. Take it tomorrow, fresh.</p><div class="savebar" id="savebar2" style="display:none"></div><a class="btn-big alt" style="text-decoration:none;display:block;width:fit-content" href="https://athipprem.github.io/mathlessons/index.html">Back to Hub</a></div>
-  <div class="warn-box" style="margin-top:12px"><p>&#x1F192; Stuck? Open the <a href="U67_StuckCard_NewWhole.html">Stuck Card</a> or <a href="U67_FirstStep_Map.html" target="_blank">&#x1F5FA; my map</a>.</p></div>
+  <div class="finish" id="finish"><div class="tsbadge">NEW WHOLE &#10003;</div><div class="big">You finished all 5!</div><div class="both" id="fboth"></div><p style="font-weight:700">You&rsquo;re ready for the test. Take it tomorrow, fresh.</p><p>Print your card if you like &mdash; and put it away for the test. The test checks that it&rsquo;s in your head.</p><button type="button" class="btn-map" onclick="fcPrint()">&#x1F5A8; Print my card</button><div class="savebar" id="savebar2" style="display:none"></div><a class="btn-big alt" style="text-decoration:none;display:block;width:fit-content" href="https://athipprem.github.io/mathlessons/index.html">Back to Hub</a></div>
 </div>
 <div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button></div>
 </div>
 
 </div>
+<!-- FORMULA-CARD START -->
+<button type="button" id="fcbtn" onclick="fcToggle(true)" aria-controls="fcard">&#x1F4CC; Formula Card</button>
+<aside id="fcard" class="fc" aria-label="Fraction Formula Card">
+<div class="fc-top"><b>&#x1F4CC; MY FRACTION FORMULA CARD</b><span class="fc-btns"><button type="button" onclick="fcPrint()" aria-label="Print the card">&#x1F5A8;</button><button type="button" onclick="fcToggle(true)" aria-label="Close the card">&#10005;</button></span></div>
+<div class="fc-sec">THE BIG PICTURE</div>
+<div class="fc-st" data-step="&#9312;"><b>&#9312;</b> Taken part = fraction &times; whole <span class="fc-q">&ldquo;1/4 OF the juice&rdquo;</span></div>
+<div class="fc-told">Told? &ldquo;3/4 L&rdquo; &rarr; Taken part = 3/4 L. No &times; needed!</div>
+<button type="button" class="fc-why" onclick="fcBricks(this)">Why &times;? &#9662;</button>
+<div class="fc-bricks" id="fcbricks">
+<div class="bk-row"><span class="grp lit"><i></i><i></i><i></i><i></i></span><span class="grp"><i></i><i></i><i></i><i></i></span><span class="grp"><i></i><i></i><i></i><i></i></span></div>
+<div>1/3 OF 12 bricks: the bricks split into 3 equal groups, one group lights up, giving <b>4</b>.</div>
+<div><b>1/3 &times; 12 = 12/3 = 4.</b> &lsquo;Of&rsquo; means &times;.</div>
+<div class="fc-q">1/3 kg is just a small lump &mdash; that&rsquo;s TOLD, not &times;.</div>
+</div>
+<div class="fc-st" data-step="&#9313;"><b>&#9313;</b> Left part = whole &minus; taken part</div>
+<div class="fc-st" data-step="&#9314;"><b>&#9314;</b> &ldquo;&hellip; of what was LEFT&rdquo;? &rarr; the left part is the NEW whole. Back to &#9312;.</div>
+<div class="fc-two">
+<div class="fc-blk" id="fcmul"><button type="button" class="fc-bh" onclick="fcOpen('fcmul')">HOW TO &times; &#9662;</button>
+<div class="fc-st" data-step="&times;0"><b>&times;0</b> Mixed number? Make it improper.<br><span class="fc-q">2 1/4 = 9/4 &nbsp; Whole number? 12 = 12/1</span></div>
+<div class="fc-st" data-step="&times;1"><b>&times;1</b> top &times; top, bottom &times; bottom</div>
+<div class="fc-st" data-step="&times;2"><b>&times;2</b> Simplify &rarr; mixed number</div>
+<div class="fc-ex"><div class="fc-exh">Example:</div><div>5/6 &times; 1 4/5</div><div>= 5/6 &times; 9/5 <u>&times;0</u></div><div>= 45/30 <u>&times;1</u></div><div>= 3/2 <u>&times;2</u></div><div>= 1 1/2 <u>&times;2</u></div></div></div>
+<div class="fc-blk" id="fcsub"><button type="button" class="fc-bh" onclick="fcOpen('fcsub')">HOW TO &minus; &#9662;</button>
+<div class="fc-st" data-step="&minus;0"><b>&minus;0</b> Mixed number? Make it improper.</div>
+<div class="fc-st" data-step="&minus;1"><b>&minus;1</b> Make the bottoms the same</div>
+<div class="fc-st" data-step="&minus;2"><b>&minus;2</b> top &minus; top (the bottom stays!)</div>
+<div class="fc-st" data-step="&minus;3"><b>&minus;3</b> Simplify &rarr; mixed number</div>
+<div class="fc-ex"><div class="fc-exh">Example:</div><div>3 1/2 &minus; 3/4</div><div>= 7/2 &minus; 3/4 <u>&minus;0</u></div><div>= 14/4 &minus; 3/4 <u>&minus;1</u></div><div>= 11/4 <u>&minus;2</u></div><div>= 2 3/4 <u>&minus;3</u></div></div></div>
+</div>
+</aside>
+<!-- FORMULA-CARD END -->
 <script>
 
 function gcd(a,b){return b?gcd(b,a%b):Math.abs(a);}
@@ -783,10 +843,26 @@ function barSvg(bars){
 }
 var YT=["A6", "A5", "B2", "B3", "B4"];
 var ITEMS=[{"id": "A6", "q": "Ben has 60 L of milk. He pours out 1/4 of the milk. Then he pours out 4/9 of the milk that was left. (a) How much milk is left? (b) How much milk does he pour out the second time?", "rounds": ["work", "work"], "stone": "45", "lines": [{"k": "a", "lab": "(a) How much milk is left?", "v": "25"}, {"k": "b", "lab": "(b) How much milk does he pour out the second time?", "v": "20"}], "bars": [{"k": 1, "x": 10.0, "w": 540.0, "kind": "of", "ratio": [1, 4], "whole": "60 L", "taken": "15 L", "left": "45 L", "newwhole": false, "last": false, "cuts": 4, "shade": 1, "piece": "15"}, {"k": 2, "x": 145.0, "w": 405.0, "kind": "of", "ratio": [4, 9], "whole": "45 L", "taken": "20 L", "left": "25 L", "newwhole": true, "last": true, "cuts": 9, "shade": 4, "piece": "5"}], "told": false}, {"id": "A5", "q": "Ivy has 36 kg of sand. She gives away 2/9 of the sand. Then she gives away 5 kg more. How much sand is left?", "rounds": ["work", "told"], "stone": "28", "lines": [{"k": "ans", "lab": "How much sand is left?", "v": "23"}], "bars": [{"k": 1, "x": 10.0, "w": 540.0, "kind": "of", "ratio": [2, 9], "whole": "36 kg", "taken": "8 kg", "left": "28 kg", "newwhole": false, "last": false, "cuts": 9, "shade": 2, "piece": "4"}, {"k": 2, "x": 130.0, "w": 420.0, "kind": "told", "ratio": [5, 28], "whole": "28 kg", "taken": "5 kg", "left": "23 kg", "newwhole": true, "last": true, "cuts": 0}], "told": true}, {"id": "B2", "q": "Kai has 2 2/3 kg of flour. He uses 1/8 of the flour. Then he uses 2/7 of the flour that was left. (a) How much flour is left? (b) How much flour does he use the second time?", "rounds": ["work", "work"], "stone": "2 1/3", "lines": [{"k": "a", "lab": "(a) How much flour is left?", "v": "1 2/3"}, {"k": "b", "lab": "(b) How much flour does he use the second time?", "v": "2/3"}], "bars": [{"k": 1, "x": 10.0, "w": 540.0, "kind": "of", "ratio": [1, 8], "whole": "2 2/3 kg", "taken": "1/3 kg", "left": "2 1/3 kg", "newwhole": false, "last": false, "cuts": 8, "shade": 1, "piece": "1/3"}, {"k": 2, "x": 77.5, "w": 472.5, "kind": "of", "ratio": [2, 7], "whole": "2 1/3 kg", "taken": "2/3 kg", "left": "1 2/3 kg", "newwhole": true, "last": true, "cuts": 7, "shade": 2, "piece": "1/3"}], "told": false}, {"id": "B3", "q": "Mia has 2 5/6 L of paint. She uses 1/3 L of the paint. Then she uses 3/5 of the paint that was left. How much paint is left?", "rounds": ["told", "work"], "stone": "2 1/2", "lines": [{"k": "ans", "lab": "How much paint is left?", "v": "1"}], "bars": [{"k": 1, "x": 10.0, "w": 540.0, "kind": "told", "ratio": [2, 17], "whole": "2 5/6 L", "taken": "1/3 L", "left": "2 1/2 L", "newwhole": false, "last": false, "cuts": 0}, {"k": 2, "x": 73.5, "w": 476.5, "kind": "of", "ratio": [3, 5], "whole": "2 1/2 L", "taken": "1 1/2 L", "left": "1 L", "newwhole": true, "last": true, "cuts": 5, "shade": 3, "piece": "1/2"}], "told": true}, {"id": "B4", "q": "Sam has 3 3/4 kg of clay. He uses 3/5 of the clay. Then he uses 3/4 kg more. How much clay is left?", "rounds": ["work", "told"], "stone": "1 1/2", "lines": [{"k": "ans", "lab": "How much clay is left?", "v": "3/4"}], "bars": [{"k": 1, "x": 10.0, "w": 540.0, "kind": "of", "ratio": [3, 5], "whole": "3 3/4 kg", "taken": "2 1/4 kg", "left": "1 1/2 kg", "newwhole": false, "last": false, "cuts": 5, "shade": 3, "piece": "3/4"}, {"k": 2, "x": 334.0, "w": 216.0, "kind": "told", "ratio": [1, 2], "whole": "1 1/2 kg", "taken": "3/4 kg", "left": "3/4 kg", "newwhole": true, "last": true, "cuts": 0}], "told": true}];
-var WL={"A6": [["One piece = 60 ÷ 4", "cut the 60 L bar into 4 equal pieces"], ["= 15", "60 ÷ 4 = 15, so one piece is 15 L"], ["Taken in round 1 = 15 × 1", "the taken piece is 1 of those pieces (the top number)"], ["= 15 L", "15 × 1 = 15"], ["Left after round 1 = 60 − 15", "the whole take away the taken piece"], ["= 45 L", "60 − 15 = 45"], ["New whole = 45 L", "round 2: \"of the milk that was LEFT\" — the left-over piece is the NEW whole"], ["One piece = 45 ÷ 9", "cut the 45 L bar into 9 equal pieces"], ["= 5", "45 ÷ 9 = 5, so one piece is 5 L"], ["Taken in round 2 = 5 × 4", "the taken piece is 4 of those pieces (the top number)"], ["= 20 L", "5 × 4 = 20"], ["Left after round 2 = 45 − 20", "the whole take away the taken piece"], ["= 25 L", "45 − 20 = 25"]], "A5": [["One piece = 36 ÷ 9", "cut the 36 kg bar into 9 equal pieces"], ["= 4", "36 ÷ 9 = 4, so one piece is 4 kg"], ["Taken in round 1 = 4 × 2", "the taken piece is 2 of those pieces (the top number)"], ["= 8 kg", "4 × 2 = 8"], ["Left after round 1 = 36 − 8", "the whole take away the taken piece"], ["= 28 kg", "36 − 8 = 28"], ["New whole = 28 kg", "round 2: the next piece comes out of what is LEFT, so the left-over piece is the new whole"], ["Taken in round 2 = 5 kg", "the story TOLD us the taken piece: a number with a unit right after it"], ["Left after round 2 = 28 − 5", "the whole take away the taken piece"], ["= 23 kg", "28 − 5 = 23"]], "B2": [["Taken in round 1 = 1/8 × 2 2/3", "\"1/8 of the flour\" means 1/8 × the whole"], ["= 1/8 × 8/3", "2 2/3 = 8/3 (2 wholes = 6 thirds, plus 2 thirds = 8 thirds)"], ["= 8/24", "tops: 1 × 8 = 8; bottoms: 8 × 3 = 24"], ["= 1/3 kg", "simplify: divide the top and the bottom by 8"], ["Left after round 1 = 2 2/3 − 1/3", "the whole take away the taken piece"], ["= 8/3 − 1/3", "change the whole to an improper fraction: 2 2/3 = 8/3 (2 wholes = 6 thirds, plus 2 thirds = 8 thirds)"], ["= 7/3", "8 thirds take away 1 third = 7 thirds"], ["= 2 1/3 kg", "7 thirds = 2 wholes and 1 third over"], ["New whole = 2 1/3 kg", "round 2: \"of the flour that was LEFT\" — the left-over piece is the NEW whole"], ["Taken in round 2 = 2/7 × 2 1/3", "\"2/7 of the flour that was left\" means 2/7 × the whole"], ["= 2/7 × 7/3", "2 1/3 = 7/3 (2 wholes = 6 thirds, plus 1 third = 7 thirds)"], ["= 14/21", "tops: 2 × 7 = 14; bottoms: 7 × 3 = 21"], ["= 2/3 kg", "simplify: divide the top and the bottom by 7"], ["Left after round 2 = 2 1/3 − 2/3", "the whole take away the taken piece"], ["= 7/3 − 2/3", "change the whole to an improper fraction: 2 1/3 = 7/3 (2 wholes = 6 thirds, plus 1 third = 7 thirds)"], ["= 5/3", "7 thirds take away 2 thirds = 5 thirds"], ["= 1 2/3 kg", "5 thirds = 1 whole and 2 thirds over"]], "B3": [["Taken in round 1 = 1/3 L", "the story TOLD us the taken piece: a number with a unit right after it"], ["Left after round 1 = 2 5/6 − 1/3", "the whole take away the taken piece"], ["= 17/6 − 1/3", "change the whole to an improper fraction: 2 5/6 = 17/6 (2 wholes = 12 sixths, plus 5 sixths = 17 sixths)"], ["= 17/6 − 2/6", "make the bottoms the same: 1/3 = 2/6 (top and bottom × 2)"], ["= 15/6", "17 sixths take away 2 sixths = 15 sixths"], ["= 5/2", "simplify: divide the top and the bottom by 3"], ["= 2 1/2 L", "5 halves = 2 wholes and 1 half over"], ["New whole = 2 1/2 L", "round 2: \"of the paint that was LEFT\" — the left-over piece is the NEW whole"], ["Taken in round 2 = 3/5 × 2 1/2", "\"3/5 of the paint that was left\" means 3/5 × the whole"], ["= 3/5 × 5/2", "2 1/2 = 5/2 (2 wholes = 4 halves, plus 1 half = 5 halves)"], ["= 15/10", "tops: 3 × 5 = 15; bottoms: 5 × 2 = 10"], ["= 3/2", "simplify: divide the top and the bottom by 5"], ["= 1 1/2 L", "3 halves = 1 whole and 1 half over"], ["Left after round 2 = 2 1/2 − 1 1/2", "the whole take away the taken piece"], ["= 5/2 − 1 1/2", "change the whole to an improper fraction: 2 1/2 = 5/2 (2 wholes = 4 halves, plus 1 half = 5 halves)"], ["= 5/2 − 3/2", "change the taken piece to an improper fraction: 1 1/2 = 3/2 (1 whole = 2 halves, plus 1 half = 3 halves)"], ["= 2/2", "5 halves take away 3 halves = 2 halves"], ["= 1 L", "2 ÷ 2 = 1"]], "B4": [["Taken in round 1 = 3/5 × 3 3/4", "\"3/5 of the clay\" means 3/5 × the whole"], ["= 3/5 × 15/4", "3 3/4 = 15/4 (3 wholes = 12 quarters, plus 3 quarters = 15 quarters)"], ["= 45/20", "tops: 3 × 15 = 45; bottoms: 5 × 4 = 20"], ["= 9/4", "simplify: divide the top and the bottom by 5"], ["= 2 1/4 kg", "9 quarters = 2 wholes and 1 quarter over"], ["Left after round 1 = 3 3/4 − 2 1/4", "the whole take away the taken piece"], ["= 15/4 − 2 1/4", "change the whole to an improper fraction: 3 3/4 = 15/4 (3 wholes = 12 quarters, plus 3 quarters = 15 quarters)"], ["= 15/4 − 9/4", "change the taken piece to an improper fraction: 2 1/4 = 9/4 (2 wholes = 8 quarters, plus 1 quarter = 9 quarters)"], ["= 6/4", "15 quarters take away 9 quarters = 6 quarters"], ["= 3/2", "simplify: divide the top and the bottom by 2"], ["= 1 1/2 kg", "3 halves = 1 whole and 1 half over"], ["New whole = 1 1/2 kg", "round 2: the next piece comes out of what is LEFT, so the left-over piece is the new whole"], ["Taken in round 2 = 3/4 kg", "the story TOLD us the taken piece: a number with a unit right after it"], ["Left after round 2 = 1 1/2 − 3/4", "the whole take away the taken piece"], ["= 3/2 − 3/4", "change the whole to an improper fraction: 1 1/2 = 3/2 (1 whole = 2 halves, plus 1 half = 3 halves)"], ["= 6/4 − 3/4", "make the bottoms the same: 3/2 = 6/4 (top and bottom × 2)"], ["= 3/4 kg", "6 quarters take away 3 quarters = 3 quarters"]]};
-WALKSETS.r=[['n-start','Whole: 3 1/4 L of paint. Draw the bar.'],['n-q1','"uses 3/4 L of the paint" has a unit right after the number.'],['n-q1y','YES: TOLD. Taken = 3/4 L, so left over 2 1/2 L.'],['n-q2','The story goes on: "then 3/5 of the paint that was LEFT".'],['n-q2y','YES: New whole = 2 1/2 L. Back to Q1.'],['n-q1','Round 2: "3/5 of the paint that was left" has no unit right after the fraction.'],['n-q1n','NO: work it out. Taken 1 1/2 L, so left over 1 L.'],['n-q2','Does the story go on? No.'],['n-q2n','NO: go to Q3.'],['n-q3','The question asks how much paint is left: 1 L.']];
-walkInit('walk1',WALKSETS.r);
+var WL={"A6": [["Taken part 1 = 1/4 × 60", "① \"1/4 of the milk\" → taken part = 1/4 × whole", "①"], ["= 1/4 × 60/1", "a whole number is a fraction over 1: 60 = 60/1", "×0"], ["= 60/4", "tops: 1 × 60 = 60; bottoms: 4 × 1 = 4", "×1"], ["= 15 L", "60 ÷ 4 = 15", "×2"], ["Left part 1 = 60 − 15", "② left part = whole − taken part", "②"], ["= 45 L", "60 − 15 = 45", "−2"], ["New whole = 45 L", "③ \"of the milk that was LEFT\" → the left part is the NEW whole", "③"], ["Taken part 2 = 4/9 × 45", "① \"4/9 of the milk that was left\" → taken part = 4/9 × whole", "①"], ["= 4/9 × 45/1", "a whole number is a fraction over 1: 45 = 45/1", "×0"], ["= 180/9", "tops: 4 × 45 = 180; bottoms: 9 × 1 = 9", "×1"], ["= 20 L", "180 ÷ 9 = 20", "×2"], ["Left part 2 = 45 − 20", "② left part = whole − taken part", "②"], ["= 25 L", "45 − 20 = 25", "−2"]], "A5": [["Taken part 1 = 2/9 × 36", "① \"2/9 of the sand\" → taken part = 2/9 × whole", "①"], ["= 2/9 × 36/1", "a whole number is a fraction over 1: 36 = 36/1", "×0"], ["= 72/9", "tops: 2 × 36 = 72; bottoms: 9 × 1 = 9", "×1"], ["= 8 kg", "72 ÷ 9 = 8", "×2"], ["Left part 1 = 36 − 8", "② left part = whole − taken part", "②"], ["= 28 kg", "36 − 8 = 28", "−2"], ["New whole = 28 kg", "③ the next part comes out of what is LEFT → the left part is the NEW whole", "③"], ["Taken part 2 = 5 kg", "TOLD: a unit right after the fraction — this IS the taken part, no × needed", "①"], ["Left part 2 = 28 − 5", "② left part = whole − taken part", "②"], ["= 23 kg", "28 − 5 = 23", "−2"]], "B2": [["Taken part 1 = 1/8 × 2 2/3", "① \"1/8 of the flour\" → taken part = 1/8 × whole", "①"], ["= 1/8 × 8/3", "2 2/3 = 8/3 (2 wholes = 6 thirds, plus 2 thirds = 8 thirds)", "×0"], ["= 8/24", "tops: 1 × 8 = 8; bottoms: 8 × 3 = 24", "×1"], ["= 1/3 kg", "simplify: divide the top and the bottom by 8", "×2"], ["Left part 1 = 2 2/3 − 1/3", "② left part = whole − taken part", "②"], ["= 8/3 − 1/3", "change the whole to an improper fraction: 2 2/3 = 8/3 (2 wholes = 6 thirds, plus 2 thirds = 8 thirds)", "−0"], ["= 7/3", "8 thirds take away 1 third = 7 thirds", "−2"], ["= 2 1/3 kg", "7 thirds = 2 wholes and 1 third over", "−3"], ["New whole = 2 1/3 kg", "③ \"of the flour that was LEFT\" → the left part is the NEW whole", "③"], ["Taken part 2 = 2/7 × 2 1/3", "① \"2/7 of the flour that was left\" → taken part = 2/7 × whole", "①"], ["= 2/7 × 7/3", "2 1/3 = 7/3 (2 wholes = 6 thirds, plus 1 third = 7 thirds)", "×0"], ["= 14/21", "tops: 2 × 7 = 14; bottoms: 7 × 3 = 21", "×1"], ["= 2/3 kg", "simplify: divide the top and the bottom by 7", "×2"], ["Left part 2 = 2 1/3 − 2/3", "② left part = whole − taken part", "②"], ["= 7/3 − 2/3", "change the whole to an improper fraction: 2 1/3 = 7/3 (2 wholes = 6 thirds, plus 1 third = 7 thirds)", "−0"], ["= 5/3", "7 thirds take away 2 thirds = 5 thirds", "−2"], ["= 1 2/3 kg", "5 thirds = 1 whole and 2 thirds over", "−3"]], "B3": [["Taken part 1 = 1/3 L", "TOLD: a unit right after the fraction — this IS the taken part, no × needed", "①"], ["Left part 1 = 2 5/6 − 1/3", "② left part = whole − taken part", "②"], ["= 17/6 − 1/3", "change the whole to an improper fraction: 2 5/6 = 17/6 (2 wholes = 12 sixths, plus 5 sixths = 17 sixths)", "−0"], ["= 17/6 − 2/6", "make the bottoms the same: 1/3 = 2/6 (top and bottom × 2)", "−1"], ["= 15/6", "17 sixths take away 2 sixths = 15 sixths", "−2"], ["= 5/2", "simplify: divide the top and the bottom by 3", "−3"], ["= 2 1/2 L", "5 halves = 2 wholes and 1 half over", "−3"], ["New whole = 2 1/2 L", "③ \"of the paint that was LEFT\" → the left part is the NEW whole", "③"], ["Taken part 2 = 3/5 × 2 1/2", "① \"3/5 of the paint that was left\" → taken part = 3/5 × whole", "①"], ["= 3/5 × 5/2", "2 1/2 = 5/2 (2 wholes = 4 halves, plus 1 half = 5 halves)", "×0"], ["= 15/10", "tops: 3 × 5 = 15; bottoms: 5 × 2 = 10", "×1"], ["= 3/2", "simplify: divide the top and the bottom by 5", "×2"], ["= 1 1/2 L", "3 halves = 1 whole and 1 half over", "×2"], ["Left part 2 = 2 1/2 − 1 1/2", "② left part = whole − taken part", "②"], ["= 5/2 − 1 1/2", "change the whole to an improper fraction: 2 1/2 = 5/2 (2 wholes = 4 halves, plus 1 half = 5 halves)", "−0"], ["= 5/2 − 3/2", "change the taken part to an improper fraction: 1 1/2 = 3/2 (1 whole = 2 halves, plus 1 half = 3 halves)", "−0"], ["= 2/2", "5 halves take away 3 halves = 2 halves", "−2"], ["= 1 L", "2 ÷ 2 = 1", "−3"]], "B4": [["Taken part 1 = 3/5 × 3 3/4", "① \"3/5 of the clay\" → taken part = 3/5 × whole", "①"], ["= 3/5 × 15/4", "3 3/4 = 15/4 (3 wholes = 12 quarters, plus 3 quarters = 15 quarters)", "×0"], ["= 45/20", "tops: 3 × 15 = 45; bottoms: 5 × 4 = 20", "×1"], ["= 9/4", "simplify: divide the top and the bottom by 5", "×2"], ["= 2 1/4 kg", "9 quarters = 2 wholes and 1 quarter over", "×2"], ["Left part 1 = 3 3/4 − 2 1/4", "② left part = whole − taken part", "②"], ["= 15/4 − 2 1/4", "change the whole to an improper fraction: 3 3/4 = 15/4 (3 wholes = 12 quarters, plus 3 quarters = 15 quarters)", "−0"], ["= 15/4 − 9/4", "change the taken part to an improper fraction: 2 1/4 = 9/4 (2 wholes = 8 quarters, plus 1 quarter = 9 quarters)", "−0"], ["= 6/4", "15 quarters take away 9 quarters = 6 quarters", "−2"], ["= 3/2", "simplify: divide the top and the bottom by 2", "−3"], ["= 1 1/2 kg", "3 halves = 1 whole and 1 half over", "−3"], ["New whole = 1 1/2 kg", "③ the next part comes out of what is LEFT → the left part is the NEW whole", "③"], ["Taken part 2 = 3/4 kg", "TOLD: a unit right after the fraction — this IS the taken part, no × needed", "①"], ["Left part 2 = 1 1/2 − 3/4", "② left part = whole − taken part", "②"], ["= 3/2 − 3/4", "change the whole to an improper fraction: 1 1/2 = 3/2 (1 whole = 2 halves, plus 1 half = 3 halves)", "−0"], ["= 6/4 − 3/4", "make the bottoms the same: 3/2 = 6/4 (top and bottom × 2)", "−1"], ["= 3/4 kg", "6 quarters take away 3 quarters = 3 quarters", "−2"]]};
 initCards();
+
+var FCKEY='chusaki_u067_card';
+function fcPref(){try{return window.localStorage.getItem(FCKEY);}catch(e){return null;}}
+function fcSetPref(v){try{window.localStorage.setItem(FCKEY,v);}catch(e){}}
+function fcIsOpen(){return document.body.classList.contains('fc-open');}
+function fcShow(on){document.body.classList.toggle('fc-open',!!on);}
+function fcToggle(manual){var on=!fcIsOpen();fcShow(on);if(manual&&cur>=4)fcSetPref(on?'open':'closed');}
+function fcAuto(){if(cur>=1&&cur<=3)fcShow(true);else fcShow(fcPref()==='open'&&cur>=4);}
+function fcOpen(id){document.getElementById(id).classList.toggle('open');}
+function fcBricks(b){document.getElementById('fcbricks').classList.toggle('open');}
+function cardGlow(b,n){var g=document.querySelectorAll('#fcard .fc-st.glow'),i;for(i=0;i<g.length;i++)g[i].classList.remove('glow');
+  var rows=b.querySelectorAll('.wl');if(n<1||!rows[n-1])return;var tag=rows[n-1].getAttribute('data-card');if(!tag)return;
+  var st=document.querySelectorAll('#fcard .fc-st'),k;for(k=0;k<st.length;k++){if(st[k].getAttribute('data-step')===tag){st[k].classList.add('glow');
+    var blk=st[k].parentNode;if(blk&&blk.classList.contains('fc-blk'))blk.classList.add('open');}}}
+var _wl0=wlShow;wlShow=function(b,n){_wl0(b,n);cardGlow(b,n);};
+function fcPrint(){document.body.classList.add('printing');try{window.print();}catch(e){}setTimeout(function(){document.body.classList.remove('printing');},300);}
+var _nv0=nav;nav=function(d){_nv0(d);fcAuto();var b=document.querySelector('#s'+cur+' .wlb');if(b)cardGlow(b,wlCount(b));else cardGlow(document.body,0);};
+fcAuto();
 
 var KEY='chusaki_u067_lesson';
 var PR=["You wrote the left-over first — that’s the whole trick.","Read (a) again and put the right number under it. Exam-proof.","Told amount, straight off the left-over. Nice.","Fixed it! That’s how brains grow."];
@@ -854,7 +930,7 @@ function record(firstRight,gv,lines){
   sstore();
 }
 function gotIt(gv){record(true,gv,0);lockAll();state='done';var fb=$('ytfb');fb.className='feedback ok';fb.style.display='block';fb.textContent='⭐ '+praise();after();}
-function rowEl(a,cls){var d=document.createElement('div'),m=document.createElement('span'),w=document.createElement('span');d.className=cls;m.className='m';w.className='why';m.textContent=a[0];w.textContent=a[1];d.appendChild(m);d.appendChild(w);return d;}
+function rowEl(a,cls){var d=document.createElement('div'),m=document.createElement('span'),w=document.createElement('span');d.className=cls;if(a[2])d.setAttribute('data-card',a[2]);m.className='m';w.className='why';m.textContent=a[0];w.textContent=a[1];d.appendChild(m);d.appendChild(w);return d;}
 function notYet(gv,sw){
   state='lines';lockAll();first.g=gv;
   var o='<div class="sbig">Not yet — here’s how it goes:</div>'+(sw?'<p class="swapmsg" style="font-weight:700;color:#8d6e00;margin:6px 0">'+SW+'</p>':'')+'<div class="bar-wrap">'+barSvg(cur_item.bars)+'</div>';
