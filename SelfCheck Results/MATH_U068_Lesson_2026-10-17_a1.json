@@ -1,0 +1,125 @@
+{
+  "student": "Prem",
+  "subject": "Math",
+  "unit": "U068",
+  "type": "lesson",
+  "attempt": 1,
+  "openedAt": "2026-10-17T10:59:59.658Z",
+  "lastSavedAt": "2026-10-17T11:13:00.852Z",
+  "minutesSpent": 13,
+  "screensSeen": 6,
+  "finished": true,
+  "stars": 2,
+  "fixed": 3,
+  "swaps": 0,
+  "items": [
+    {
+      "id": "Y1",
+      "left1Given": "",
+      "left1Correct": null,
+      "left1Used": false,
+      "answersGiven": {
+        "ans": "2 8/15"
+      },
+      "answersCorrect": {
+        "ans": "2 8/15"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "answeredOtherPart": false,
+      "linesViewed": 0,
+      "ms": 30260
+    },
+    {
+      "id": "Y2",
+      "left1Given": "",
+      "left1Correct": null,
+      "left1Used": false,
+      "answersGiven": {
+        "ans": "1 7/8"
+      },
+      "answersCorrect": {
+        "ans": "2 1/8"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "answeredOtherPart": false,
+      "linesViewed": 7,
+      "ms": 36051
+    },
+    {
+      "id": "Y3",
+      "left1Given": "2 5/8",
+      "left1Correct": "2 5/8",
+      "left1Used": true,
+      "answersGiven": {
+        "ans": "7/8"
+      },
+      "answersCorrect": {
+        "ans": "7/8"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "answeredOtherPart": false,
+      "linesViewed": 0,
+      "ms": 89844
+    },
+    {
+      "id": "Y4",
+      "left1Given": "2 6/21",
+      "left1Correct": "1 7/9",
+      "left1Used": true,
+      "answersGiven": {
+        "a": "1 3/7",
+        "b": "6/7"
+      },
+      "answersCorrect": {
+        "a": "1 1/9",
+        "b": "2/3"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "answeredOtherPart": false,
+      "linesViewed": 18,
+      "ms": 341751
+    },
+    {
+      "id": "Y5",
+      "left1Given": "",
+      "left1Correct": null,
+      "left1Used": false,
+      "answersGiven": {
+        "ans": "2/9"
+      },
+      "answersCorrect": {
+        "ans": "5/9"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "answeredOtherPart": false,
+      "linesViewed": 14,
+      "ms": 80685
+    }
+  ],
+  "boost": [
+    {
+      "id": "bk1",
+      "answerGiven": "65",
+      "answerCorrect": "65",
+      "right": true,
+      "tries": 3
+    },
+    {
+      "id": "bk2",
+      "answerGiven": "17",
+      "answerCorrect": "17",
+      "right": true,
+      "tries": 1
+    }
+  ]
+}

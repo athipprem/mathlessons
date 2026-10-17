@@ -15,13 +15,40 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '14 Oct 2026',
+  updated:        '17 Oct 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:68, topic:'Cycle 7 continues \u2014 The Left Part, Done Right: taking away when the bottoms differ (Shaping Maths 5A Ch.3, Core, +0 from live class)', status:'Test Pending', buildNote:'Built 15 Oct 2026 per BUILD_PLAN_MATH_U68_LeftPartDoneRight.md v1.0. Why: U67 Part 1 was 9/12 and the new-whole idea landed (Intermediate 5/5, key Q9 right), but three of the four subtractions with different bottoms were wrong (Q1b, R4, lesson B3), Q12 answered the wrong part of the story, the scaffold box was left blank on all 7, and the paper was sat about 33 minutes after the lesson. Idea in kid words: to take away, make everything improper, give it the same bottoms, then top \u2212 top. Habit: read the question again \u2014 does it ask for the TAKEN part, the LEFT part, or HOW MUCH MORE? (\u2463 on the card). ONE lesson, Fractions_Lesson_LeftPartDoneRight.html, 6 screens: warm-up, a picture (bars recut into twelfths) and the card\u2019s \u22121 rule, a count-up strip to find the same bottom, a three-part story with the last-check, Your turn x5 (saved after every item, resumes where he stopped, answer-check nudge if he answers a different part of the story), and a 2-minute Memory Boost (Sequences, Remainders). The Formula Card gets the \u2463 LAST CHECK step and a new \u22121 wording (count up in the BIGGER bottom). Test: Unit_068_Test_LeftPartDoneRight.docx, 16Q (R1\u2013R4 recall: Sequences, Remainders, Perimeter & Area, Fraction of a Set; Q1 a bare calculation 3 2/5 \u2212 1 3/4; Q2\u2013Q12 stories), no scaffold boxes; Pass = Part 1 >= 10/12; key question Q1; a swapped pair scores 0 and an answer that is a different part of the story scores 0. Gates: verify_u68_plan.py (answers, collisions, leaks, onestep, card tags all 0; its compressed-runs counter fires on pinned lines, flagged), verify_u68_build.py PASS (amended counter 0), verify_lesson_pack.py PASS, Playwright lesson runs PASS. Stopped for the lesson JSON and the paper; U69 stays an outline.' },
+  currentUnit: { n:69, topic:'Cycle 7 \u2014 School-test prep: all of Chapter 3 Fractions (Shaping Maths 5A Ch.3, school test Tue 20 Oct)', status:'Test Pending', buildNote:'Built 17 Oct 2026 per BUILD_PLAN_MATH_U69_SchoolTestPrep_Ch3.md v1.0. Why: school fractions test Tue 20 Oct covers all of Chapter 3 (Activity Book pp.39-71). U68 (7/12) showed the subtraction step and \u2019answer the part the question asks\u2019 are the live risks; this unit is a review, not new teaching. Route: Sun 18 Oct the lesson, Mon 19 Oct the mock, Tue 20 Oct the school test. ONE lesson, Fractions_Lesson_ChapterReview.html, 6 screens (recall of the card; add/subtract; multiply and of-what-was-left; the four-part story with the 4th check; division and decimals; working backwards), each with a worked example and a Your turn (8 in all, saved after each, resumes where he stopped, nudge if he answers a different part of the story). The Chapter-3 Formula Card adds HOW TO +, division (a / b), decimals and rounding, working backwards and a 5th step CHECK TWICE; it prints on one A4 page (link from the hub). Mock: Unit_069_Mock_Ch3Fractions.docx, 16Q in three parts (A six calculations, B six word problems, C four challenge), 45 minutes, card put away, self-marked from a line-by-line key on Monday; Lui confirms later. Key question C1. After-marking table (13+ ready; Part A under 5 redo A; A6/B4/B5 redo screen 4; C2/C3 redo screen 5; other-part on C1/C4 say the 4th step aloud). Gates: verify_u69_build.py PASS (amended compressed-runs counter 0), verify_lesson_pack.py PASS, Playwright lesson runs PASS (0 page errors); verify_u69_plan.py FAIL only on its unsatisfiable compressed-runs counter (fires on pinned lines, known defect). Stopped for the lesson JSON, the mock and the school result; U70 stays an outline.' },
   lastUnit: {
+    n:68, outOf:12, score:7, markedScore:null, pct:58, delta:-2, prevScore:9, prevOutOf:12, prevLabel:'U67',
+    coached: false, independentResult: true, distanceFromClass: 'Same chapter as U67, +0 \u2014 Shaping Maths 5A Ch.3, Core',
+    patternLabel: 'Unit 68 \u2014 The Left Part, Done Right, graded 17 Oct 2026 \u2014 Part 1 7/12 verified (header reads 5; band marks add to 7) &middot; Recall 3/4 &middot; lesson 2 stars + 3 fixed, 0 swaps (13 min)',
+    patternInsight: '<strong>Basic 3/3 &middot; Intermediate 2/5 &middot; Applied 2/4 &middot; Recall 3/4.</strong> Key question Q1 (3 2/5 &minus; 1 3/4) right, and the subtraction step itself was carried out correctly on every line of working. No swapped answers. The misses are different: three questions gave a different part of the same story (Q6 the left-over for the taken part, Q11(b) the poured amount, Q12(b) a left-over minus the wrong round), Q7 stopped after round 1, and Q4 had two improper &rarr; mixed conversion slips. The right number was in the working on Q6 and Q10. The paper was sat about 64 minutes after the lesson, not the next day. Full record in TEST_RECORD_U68.md. Observation only.',
+    analysisLabel: 'Next: Unit 69 &mdash; School-test prep, all of Chapter 3 (built 17 Oct 2026; lesson Sun 18, mock Mon 19, school test Tue 20 Oct)',
+    analysisInsight: 'Provenance independent (standing rule); chapter distance +0. Pass bar 10/12 not met (7/12). Paper flags: header Part 1 "5" vs verified 7 (Lui to confirm), Q7 answer read as 2/3 or 7/3, partial date. U69 puts the 4th check (which part does the question ask for?) into every word problem and reviews the whole chapter before the school test.',
+    qSummary: '<strong>Basic 3/3 | Intermediate 2/5 | Applied 2/4</strong> &mdash; Part 1 7/12 (58%) | <strong>Recall 3/4</strong>',
+    qBreakdown: [
+      { q:'R1', topic:'Recall: Sequences (Unit 25)', lvl:'k', pass:true, note:'&#10003; 209; a vertical multiplication in the working, no formula written although the stem asks for it.' },
+      { q:'R2', topic:'Recall: Remainders (Unit 34)', lvl:'k', pass:true, note:'&#10003; 26.' },
+      { q:'R3', topic:'Recall: Perimeter &amp; Area (Unit 11)', lvl:'k', pass:false, note:'&#10007; "72 cm"; correct 96 cm&sup2;. Working column empty; unit "cm" for an area.' },
+      { q:'R4', topic:'Recall: Fraction of a Set (Unit 61)', lvl:'k', pass:true, note:'&#10003; 16 marbles.' },
+      { q:'Q1', topic:'Calculation, different bottoms (3 2/5 &minus; 1 3/4), KEY QUESTION', lvl:'w', pass:true, note:'&#10003; 1 13/20. Both mixed numbers rewritten over 20ths and subtracted as written.' },
+      { q:'Q2', topic:'Taken + Left, Fraction Bottle (4 2/3 L, 1/6)', lvl:'w', pass:true, note:'&#10003; (a) 7/9 L, (b) 3 8/9 L.' },
+      { q:'Q3', topic:'One-step, told amount (5 3/4 m &minus; 1 1/2 m)', lvl:'w', pass:true, note:'&#10003; 4 1/4 m.' },
+      { q:'Q4', topic:'Of &rarr; Of, 5 1/4 kg  &#9733;', lvl:'m', pass:false, note:'&#10007; 2 9/28 kg circled; correct 2 1/4. 63/28 (the correct left-over) is in the working; two improper &rarr; mixed conversions were wrong, and 42/28 was written 92/28.' },
+      { q:'Q5', topic:'Told &rarr; Of  &#9733;', lvl:'m', pass:true, note:'&#10003; 3/4 L.' },
+      { q:'Q6', topic:'Told &rarr; Of, asks the TAKEN part  &#9733;', lvl:'m', pass:false, note:'&#10007; 1 3/4 kg circled (the left-over); correct 3 1/2 kg. 7/2 is in the working. Whole copied as 5 1/4 for 5 1/2. Right method, other part of the story.' },
+      { q:'Q7', topic:'Of &rarr; Told amount  &#9733;', lvl:'m', pass:false, note:'&#10007; "2/3 m"; correct 2 1/3. Working stops after round 1 (5/6); the second round never starts.' },
+      { q:'Q8', topic:'Of &rarr; Of, (a)(b)  &#9733;', lvl:'m', pass:true, note:'&#10003; 5/6 L and 1 2/3 L.' },
+      { q:'Q9', topic:'Told &rarr; Of, two rounds  &#9733;&#9733;', lvl:'h', pass:true, note:'&#10003; 1 1/3 L.' },
+      { q:'Q10', topic:'Of &rarr; Told, asks HOW MUCH MORE  &#9733;&#9733;', lvl:'h', pass:true, note:'&#10003; 1 7/12 kg. The left-over 2 3/6 is in the working but not circled.' },
+      { q:'Q11', topic:'Told &rarr; Of, (a) left, (b) HOW MUCH MORE  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; (a) 1 1/6 L right; (b) 2 1/6 L (the amount poured); correct 1 5/6. A two-part question scores 1 only if both parts are right.' },
+      { q:'Q12', topic:'Of &rarr; Of, (a) second amount, (b) HOW MUCH MORE  &#9733;&#9733;', lvl:'h', pass:false, note:'&#10007; (a) 15/41 kg (correct 5/12) and (b) 1 33/72 kg (correct 2 1/12). 5/2 correct in the working but not used in (b); neither in simplest form.' }
+    ]
+  },
+  _U67archived: {
     n:67, outOf:12, score:9, markedScore:null, pct:75, delta:+2, prevScore:7, prevOutOf:12, prevLabel:'U66',
     coached: false, independentResult: true, distanceFromClass: 'Same chapter as U66, +0 \u2014 Shaping Maths 5A Ch.3, Core',
     patternLabel: 'Unit 67 \u2014 Two-Round Stories, the NEW whole, graded 15 Oct 2026 \u2014 Part 1 9/12 strict (no total written on the paper) &middot; Recall 2/4 &middot; lesson 4 stars + 1 fixed, 0 swaps (33.8 min)',
@@ -745,24 +772,44 @@ var PREM_DATA = {
     { n:64, score:4, outOf:12, delta:-2, color:'linear-gradient(135deg,#B71C1C,#7F0000)', star:false, recallScore:1, recallOutOf:4 },
     { n:65, score:5, outOf:12, delta:+1, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false, recallScore:2, recallOutOf:4 },
     { n:66, score:7, outOf:12, delta:+2, color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, recallScore:2, recallOutOf:4 },
-    { n:67, score:9, outOf:12, delta:+2, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:2, recallOutOf:4 }
+    { n:67, score:9, outOf:12, delta:+2, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:2, recallOutOf:4 },
+    { n:68, score:7, outOf:12, delta:-2, color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, recallScore:3, recallOutOf:4 }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 69,
+      badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 69 &mdash; School-test prep: all of Chapter 3 Fractions (school test Tue 20 Oct)',
+      tags: [
+        { t:'Built 17 Oct 2026 (plan v1.0)', c:'tblue' },
+        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Lesson Sun 18 &rarr; Mock Mon 19 &rarr; School test Tue 20', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'One review lesson + Chapter-3 Formula Card (prints on one page) + Your turn x8', c:'tgreen' },
+        { t:'Mock: 16Q, 45 min, card put away, self-marked from the key', c:'tgreen' },
+        { t:'Gates: build + lesson pack + lesson run PASS; plan gate FAIL only on its unsatisfiable compressed-runs counter', c:'tgreen' }
+      ],
+      note: 'Built from BUILD_PLAN_MATH_U69_SchoolTestPrep_Ch3.md v1.0 for the school fractions test on Tue 20 Oct (all of Chapter 3, Activity Book pp.39-71). A review, not new teaching. Six screens, each with a worked example and a Your turn; the Chapter-3 card adds + , division, decimals, working backwards and a check-twice step. Mock: 16 questions in three parts (A calculations, B word problems, C challenge), key question C1, with a Monday-evening decision table. The lesson and the mock are on different days. Stopped for the lesson JSON, the mock and the school result.',
+      status: 'live'
+    },
+    {
       n: 68,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
       title: 'Unit 68 &mdash; The Left Part, Done Right: taking away when the bottoms differ (Shaping Maths 5A Ch.3, Core)',
       tags: [
-        { t:'Built 15 Oct 2026 (plan v1.0)', c:'tblue' },
-        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+                { t:'Part 1: 7/12 (58%) verified', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Recall: 3/4', c:'torange' },
+        { t:'Basic 3/3 &middot; Intermediate 2/5 &middot; Applied 2/4', c:'torange' },
+        { t:'Key question Q1 right', c:'tgreen' },
+        { t:'Independent', c:'tgreen' },
+        { t:'&rarr; Unit 69, school-test prep', c:'torange' },
         { t:'Make everything improper, same bottoms, top &minus; top', s:'background:#E8EAF6;color:#283593;font-weight:700' },
         { t:'One lesson + Formula Card (new last-check) + Your turn x5 + Memory Boost', c:'tgreen' },
         { t:'Gates: build + lesson pack + lesson run PASS; plan gate FAIL only on its unsatisfiable compressed-runs counter', c:'tgreen' }
       ],
-      note: 'Built from BUILD_PLAN_MATH_U68_LeftPartDoneRight.md v1.0 after U67 (9/12): the new-whole idea landed, but subtraction with different bottoms and answering the right part of the story did not. One lesson of 6 screens with the Formula Card (new step four: read the question again, taken part, left part or how much more; new rule for the same bottom). Test: 16 questions, Q1 a bare calculation, no scaffold boxes, Pass = Part 1 >= 10/12, key question Q1; a swapped pair scores 0, an answer that is a different part of the story scores 0. Stopped for the lesson JSON and the paper.',
-      status: 'live'
+      note: 'Sat 17 Oct 2026, about 64 minutes after the lesson (the plan said tomorrow). Key question Q1 right and the subtraction step right on every line; no swaps. Three questions gave a different part of the same story (Q6, Q11(b), Q12(b)); Q7 stopped after round 1; Q4 had two improper to mixed slips. Header Part 1 reads 5, the band marks add to 7 (Lui to confirm). Full record in TEST_RECORD_U68.md.',
+      status: 'done'
     },
     {
       n: 67,

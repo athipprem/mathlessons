@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 3 Review — Lesson (Unit 69)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#8D6E00;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.wrap{max-width:760px;margin:0 auto;padding:16px;width:100%}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin:12px 0}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.q-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1px solid #9FA8DA;border-radius:14px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFF3E0;color:#8D6E00;border:1px solid #FFE0B2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stop-here{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FB8C00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:800;color:#E65100;margin:16px 0}
+.flip-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.flip-card{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:12px 18px;font-size:.95rem;font-weight:700;color:var(--warn);text-align:center}
+/* answer frame */
+.frame{background:#fff;border:2px solid var(--acc);border-radius:10px;padding:10px 12px;margin:10px 0}
+.frame .fr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0}
+.frame .fl{font-weight:700;color:var(--warn);font-size:.92rem;min-width:150px}
+.frame .fv{font-size:1rem;color:#1a1a2e}
+.frame .fv.ans{font-weight:800;color:var(--warn)}
+.frame input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:6px 8px;font-size:1rem;width:170px;font-family:inherit}
+.frame input[type=text].wide{width:230px}
+.frame input[type=text]:focus{outline:2px solid #9FA8DA}
+.frame .fr.pieces input{width:90px}
+/* piece cutter W10 */
+.w10{background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:12px;margin:12px 0}
+.w10 svg{width:100%;height:auto;display:block}
+.w10-lines{margin-top:8px;min-height:60px}
+.w10-lines .ln{font-size:1rem;padding:3px 0;color:#1a1a2e}
+.w10-lines .ln.last{font-weight:800;color:var(--warn)}
+.w10-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.w10-btns button{border:none;border-radius:8px;padding:8px 16px;font-size:.92rem;font-weight:700;cursor:pointer}
+.w10-btns .go{background:var(--acc);color:#fff}
+.w10-btns .go:disabled{background:#9FA8DA;cursor:default}
+.w10-btns .rs{background:#fff;color:var(--acc);border:1.5px solid var(--acc)}
+.two-cards{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.two-cards .q-card{flex:1;min-width:250px;margin-bottom:0}
+.ans-input{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 10px;font-size:1rem;width:190px;font-family:inherit;margin-right:8px}
+.nav-link{flex:1;display:block;text-align:center;padding:13px 0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.nav-link.out{background:#fff;color:#283593;border:2px solid #283593}
+.nav-link.fill{background:#3F51B5;color:#fff;border:2px solid #3F51B5}
+
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.chip{display:inline-block;border-radius:14px;padding:3px 12px;font-size:.88rem;font-weight:700;border:2px solid #1565C0}
+.chip.t{background:#90CAF9;color:#0D47A1}.chip.l{background:#fff;color:#283593;border-color:#283593}
+.chip.told{background:#FFF8E1;color:#8d6e00;border-color:#FFB74D}
+.bx{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.bx label{font-weight:700;color:#283593;font-size:.95rem}
+.bx input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 9px;font-size:1rem;width:120px;font-family:inherit}
+.bx .opt{font-weight:400;color:#607D8B;font-size:.82rem}
+.boxes-static{background:#fff;border:2px solid #1565C0;border-radius:10px;padding:10px 14px;margin:10px 0}
+.boxes-static .r{padding:3px 0;font-size:1rem}.boxes-static b{color:#0D47A1}
+.circ{border:3px solid #2E7D32;border-radius:10px;padding:2px 8px;font-weight:800;color:#1B5E20;display:inline-block}
+.amberwarn{background:#FFF8E1;border:2px solid #FFB74D;border-radius:10px;padding:12px 16px;margin:12px 0;color:#8d6e00;font-weight:700}
+.sbs{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.sbs .sc{flex:1;min-width:240px;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:12px}
+.sbs .sc.a{border-color:#1565C0;background:#E3F2FD}.sbs .sc.b{border-color:#FFB74D;background:#FFF8E1}
+.sbs .sc .st{font-weight:800;margin-bottom:4px;color:#283593}
+.bar-wrap{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px;margin:10px 0}
+.bar-wrap svg{width:100%;height:auto;display:block}
+
+.wlb{margin:10px 0;border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:6px 8px}
+.wlb .wls{margin-bottom:4px}
+.wl,.bl{display:none;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:12px;padding:7px 6px;border-bottom:1px dashed #C5CAE9;align-items:start}
+.wl.on,.bl.on{display:grid}
+.wl.cur,.bl.cur{background:#F0F1FA}
+.wl[data-glow].on{background:#FFF8E1;box-shadow:inset 4px 0 0 #F9A825}
+.wl .m,.bl .m{font-family:Consolas,'Courier New',monospace;font-weight:700;color:#283593;font-size:1rem}
+.wl .why,.bl .why{color:#455A64;font-size:.88rem;line-height:1.35;border:0;background:none;padding:0;margin:0;border-radius:0;box-shadow:none}
+.wl .why:before,.bl .why:before{content:"\2190  ";color:#9FA8DA}
+.btn-next{background:#fff;color:#283593;border:2px solid #283593;border-radius:8px;padding:7px 16px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit}
+.wlb.alldone .btn-next{display:none}
+.wlb.closed{display:none}
+.chip.nw{background:#FFF8E1;color:#8d6e00;border-color:#F9A825}
+.taps{margin:8px 0;padding:8px 10px;border:2px solid #C5CAE9;border-radius:10px;background:#F7F9FD}
+.taps .thead{font-weight:800;color:#283593;font-size:.9rem;margin-bottom:4px}
+.tq{margin:8px 0}
+.tq .tl{font-weight:700;color:#283593}
+.tq .tsub{font-weight:400;color:#607D8B;font-size:.85rem;display:block}
+.tb2{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.tb2 button{border:2px solid #9FA8DA;background:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem;cursor:pointer;font-family:inherit;color:#283593;font-weight:600;text-align:left}
+.tb2 button.good{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.tb2 button.lit{outline:3px solid #2E7D32}
+.tb2 button.nope{background:#FFF3E0;border-color:#FFB74D;color:#8d6e00}
+.thint{color:#8d6e00;font-size:.88rem;margin-top:4px;min-height:1em}
+.stones,.alines{margin:10px 0}
+.stones .sr,.alines .al{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:7px 0}
+.stones label,.alines label{font-weight:700;color:#283593;font-size:.95rem}
+.stones input[type=text],.alines input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 9px;font-size:1rem;width:130px;font-family:inherit}
+.stones .tag{font-size:.78rem;background:#FFF8E1;border:1.5px solid #FFB74D;color:#8d6e00;border-radius:12px;padding:1px 8px;font-weight:700}
+.alines .al label{flex:1 1 100%}
+.locked label{opacity:.55}
+.fmap{max-width:640px;margin:10px auto}
+.mn{border:2px solid #283593;border-radius:10px;padding:8px 12px;background:#fff;color:#283593;font-size:.95rem}
+.mn.start{background:#E8EAF6}.mn.q{background:#F0F1FA}
+.mn b.k{background:#283593;color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+.mn i,.br i{display:block;font-size:.84rem;color:#455A64;font-style:normal;margin-top:2px}
+.arr{text-align:center;color:#9FA8DA;font-size:1.1rem;line-height:1.2}
+.two{display:flex;gap:8px;flex-wrap:wrap}
+.two .br{flex:1;min-width:230px;border:2px solid #9FA8DA;border-radius:10px;padding:8px 10px;background:#fff;font-size:.9rem;color:#37474F}
+.br b.yn{color:#283593}
+.mp .tk{background:#90CAF9;color:#0D47A1;border-radius:6px;padding:0 6px;font-weight:700}
+.mp .lf{background:#fff;color:#283593;border:1.5px solid #283593;border-radius:6px;padding:0 6px;font-weight:700}
+.lit-node{background:#E8F5E9 !important;border-color:#2E7D32 !important;box-shadow:0 0 0 3px #A5D6A7}
+.fmap .cap{display:none;margin-top:5px;font-family:Consolas,'Courier New',monospace;font-weight:700;color:#1B5E20;font-size:.88rem}
+.lit-node .cap{display:block}
+.ex{margin-top:5px;font-size:.82rem;color:#455A64;border-top:1px dashed #C5CAE9;padding-top:4px}
+.wtrow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;align-items:center}
+.btn-map{display:inline-block;border:2px solid #283593;color:#283593;background:#fff;border-radius:10px;padding:8px 16px;font-weight:700;text-decoration:none;font-size:.95rem;cursor:pointer;font-family:inherit}
+.maplink{position:fixed;right:12px;bottom:12px;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.btn-show-steps{display:none;margin-top:6px}
+.frame67{border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:10px 12px;margin:10px 0;line-height:2.1}
+.frame67 .fh{font-weight:800;color:#283593;display:block;margin-bottom:2px;line-height:1.4}
+.bl-blank{display:inline-block;min-width:74px;border:2px dashed #9FA8DA;border-radius:8px;padding:0 8px;text-align:center;font-weight:700;color:#283593;cursor:pointer;background:#F7F9FD;line-height:1.7}
+.bl-blank.sel{border-color:#283593;background:#E8EAF6}
+.bl-blank.full{border-style:solid}
+.bl-blank.bad{border-color:#FFB74D;background:#FFF3E0}
+.bl-blank.ok{border-color:#2E7D32;background:#E8F5E9;color:#1B5E20}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chips button{border:2px solid #90CAF9;background:#E3F2FD;border-radius:16px;padding:4px 14px;font-weight:700;color:#0D47A1;cursor:pointer;font-family:inherit;font-size:.95rem}
+.chips button.used{opacity:.35}
+.frame67 input.ft{border:1.5px solid #9FA8DA;border-radius:6px;padding:3px 8px;font-size:.95rem;width:96px;font-family:inherit}
+.goodline{font-weight:800;color:#1B5E20;margin-top:4px}
+.sbs .sc.a{border-color:#2E7D32;background:#E8F5E9}
+.model{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 12px;margin:8px 0;display:none}
+.model label{display:block;margin:4px 0;font-weight:600;color:#283593}
+textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:6px;padding:8px;font-size:1rem;font-family:inherit}
+.boost .q{margin:6px 0}
+@media (max-width:560px){.wl,.bl{grid-template-columns:1fr;gap:2px}}
+
+@keyframes slidedown{from{transform:translateY(-70px);opacity:.15}to{transform:translateY(0);opacity:1}}
+.bar-wrap g.slide{animation:slidedown 1.1s ease-out 0.3s both}
+.bar-wrap .tgl{font-size:.8rem;color:#455A64}
+
+.intro{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.intro p{margin-bottom:6px}
+.meters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+.lv{flex:1;min-width:120px;border:2px dashed #B0BEC5;border-radius:10px;padding:6px 8px;text-align:center;background:#fff;color:#78909C}
+.lv .ln1{font-weight:800;font-size:.9rem}.lv .ln2{font-size:.78rem;margin-bottom:3px}
+.lv.now{border:2px solid #283593;color:#283593;background:#E8EAF6}
+.lv.done{border:2px solid #2E7D32;color:#1B5E20;background:#E8F5E9}
+.lv.boss{border-color:#FFB74D;color:#8d6e00;background:#FFF8E1}
+.lv.boss.now{border:2px solid #F9A825}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid #B0BEC5;margin:0 2px;background:#fff}
+.dot.on{background:#F9A825;border-color:#F9A825}
+.bchip{display:inline-block;margin:2px 3px;padding:2px 8px;border-radius:12px;border:2px solid #FFB74D;background:#fff;font-weight:700;color:#8d6e00;font-size:.78rem}
+.bchip.beat{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.dstat{text-align:center;font-weight:700;color:#283593;font-size:.95rem}
+.dsub{text-align:center;font-size:.85rem;color:#607D8B;margin-bottom:8px}
+.welcome{text-align:center;font-size:.9rem;color:#455A64;margin:4px 0 8px;font-weight:600}
+.lvmsg{text-align:center;font-weight:800;color:#1B5E20;margin:4px 0;min-height:1em}
+.dq{font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:10px}
+.walk{background:#E3F2FD;border:2px solid #1565C0;border-radius:10px;padding:12px 14px;margin:10px 0}
+.walk .wt{font-weight:800;color:#0D47A1;margin-bottom:6px}
+.wholelab{text-align:center;font-weight:700;color:#283593;margin-top:6px}
+.sorry{background:#FFF3E0;border:2px solid #FFB74D;border-radius:10px;padding:14px 16px;margin-top:12px}
+.sorry .sbig{font-weight:800;color:#8d6e00;margin-bottom:6px}
+.tline{margin:4px 0;font-size:.95rem}
+.tline b{color:#283593}
+.btn-big{background:var(--acc);color:#fff;border:none;padding:13px 30px;border-radius:10px;cursor:pointer;font-size:1.05rem;font-weight:700;display:block;margin:16px auto 0}
+.btn-big.alt{background:#fff;color:#283593;border:2px solid #283593}
+.endbox{display:none;border-radius:12px;padding:20px;margin-top:16px;text-align:center;position:relative;overflow:hidden}
+.endbox.master{background:#E8F5E9;border:2px solid #A5D6A7}
+.endbox.stop{background:#FFF8E1;border:2px solid #FFB74D}
+.endbox .big{font-size:1.25rem;font-weight:800}
+.endbox.master .big{color:#1B5E20}.endbox.stop .big{color:#8d6e00}
+.tsbadge{display:inline-block;margin:8px 0;padding:6px 18px;border-radius:20px;background:#2E7D32;color:#fff;font-weight:800;letter-spacing:1px}
+.codebox{display:inline-block;margin:12px 0;background:#fff;border:3px dashed #2E7D32;border-radius:10px;padding:10px 22px;font-size:1.6rem;font-weight:800;letter-spacing:2px;color:#1B5E20}
+.savebox{display:none;margin-top:16px;border-radius:12px;padding:18px;text-align:center}
+.savebox.notsaved{background:#FFF3E0;border:2px solid #FFB74D}
+.savebox.saved{background:#E8F5E9;border:2px solid #A5D6A7}
+.savebox .big{font-weight:800;font-size:1.1rem}
+.savebox.notsaved .big{color:#8d6e00}.savebox.saved .big{color:#1B5E20}
+.cf{position:fixed;top:-20px;width:10px;height:14px;opacity:.9;z-index:50;pointer-events:none;animation:cfall 2.6s ease-in forwards}
+@keyframes cfall{to{transform:translateY(110vh) rotate(540deg);opacity:.9}}
+
+#fcbtn{position:fixed;left:12px;bottom:12px;z-index:60;background:#F9A825;color:#3E2723;border:0;border-radius:22px;padding:10px 16px;font-weight:800;font-size:.95rem;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer}
+.fc{position:fixed;z-index:70;background:#FFFDF3;border:3px solid #F9A825;color:#263238;font-size:.92rem;line-height:1.35;padding:10px 12px 14px;overflow-y:auto;display:none}
+body.fc-open .fc{display:block}
+body.fc-open #fcbtn{background:#FFE082}
+.fc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;color:#283593}
+.fc-btns button{background:#fff;border:2px solid #9FA8DA;border-radius:8px;font-size:1rem;margin-left:6px;padding:2px 8px;cursor:pointer}
+.fc-sec{font-weight:800;color:#8d6e00;letter-spacing:.04em;margin:6px 0 4px}
+.fc-st{padding:5px 8px;margin:4px 0;border-radius:8px;border:2px solid transparent;background:#fff}
+.fc-st b{color:#283593;margin-right:6px}
+.fc-st.glow{background:#FFF59D;border-color:#F9A825;box-shadow:0 0 0 3px rgba(249,168,37,.35)}
+.fc-q{color:#607D8B;font-style:italic;font-size:.85rem}
+.fc-told{margin:2px 0 4px 18px;font-size:.88rem;color:#37474F}
+.fc-why{background:#E8EAF6;border:2px solid #9FA8DA;color:#283593;border-radius:8px;padding:3px 10px;margin:2px 0 4px 18px;font-weight:700;cursor:pointer}
+.fc-bricks{display:none;margin:4px 0 6px 18px;padding:8px;background:#fff;border:2px dashed #9FA8DA;border-radius:8px;font-size:.88rem}
+.fc-bricks.open{display:block}
+.bk-row{display:flex;gap:10px;margin-bottom:6px}
+.bk-row .grp{display:flex;gap:2px;padding:3px;border:2px solid #C5CAE9;border-radius:6px}
+.bk-row i{display:block;width:16px;height:12px;background:#CFD8DC;border-radius:2px}
+.bk-row .grp.lit{border-color:#F9A825}.bk-row .grp.lit i{background:#F9A825}
+.fc-two{display:block}
+.fc-blk{margin-top:8px;padding:6px;border:2px solid #E0E0E0;border-radius:10px;background:#FAFAFA}
+.fc-bh{display:block;width:100%;text-align:left;background:none;border:0;font-weight:800;color:#283593;cursor:pointer;font-size:.95rem;padding:2px 2px 4px}
+.fc-ex{display:none;margin:6px 0 2px;padding:6px 8px;background:#fff;border:1px dashed #9FA8DA;border-radius:8px;font-family:Consolas,'Courier New',monospace;font-size:.88rem}
+.fc-ex u{text-decoration:none;color:#283593;font-weight:800;margin-left:6px}
+.fc-blk.open .fc-ex{display:block}
+.fc-exh{font-family:inherit;font-weight:800;color:#8d6e00}
+.wl[data-card]{position:relative;padding-left:46px}
+.wl[data-card]::before{content:attr(data-card);position:absolute;left:4px;top:7px;min-width:30px;text-align:center;background:#E8EAF6;color:#283593;border:2px solid #9FA8DA;border-radius:12px;font-size:.78rem;font-weight:800;line-height:1.3}
+.wl.cur[data-card]::before{background:#FFF59D;border-color:#F9A825}
+@media (min-width:900px){
+  .fc{top:0;right:0;bottom:0;width:340px;border-width:0 0 0 3px}
+  body.fc-open{padding-right:350px}
+  body.fc-open #fcbtn{display:none}
+}
+@media (max-width:899px){
+  .fc{left:0;right:0;bottom:0;max-height:62vh;border-width:3px 0 0 0;border-radius:14px 14px 0 0;box-shadow:0 -4px 14px rgba(0,0,0,.25)}
+}
+@media print{
+  body.printing > *:not(#fcard){display:none!important}
+  body.printing #fcard{display:block!important;position:static!important;width:auto!important;max-height:none!important;border:2px solid #444!important;background:#fff!important;box-shadow:none!important;font-size:12pt;padding:8mm}
+  body.printing .fc-btns,body.printing .fc-why{display:none!important}
+  body.printing .fc-bricks{display:block!important}
+  body.printing .fc-ex{display:block!important}
+  body.printing .fc-st{background:#fff!important;border:1px solid #bbb!important}
+  body.printing .fc-st.glow{box-shadow:none!important}
+  body.printing .fc-two{display:flex;gap:8mm}body.printing .fc-blk{flex:1}
+  @page{size:A4;margin:10mm}
+}
+
+.fc-st{cursor:pointer}
+.fc-st.seen{border-color:#81C784}
+.fc-st.seen::after{content:" \2713";color:#2E7D32;font-weight:800}
+.fc-tour{font-size:.85rem;color:#607D8B;margin:2px 0 6px}
+@media (max-width:899px){body.fc-full .fc{top:0;max-height:100vh;border-radius:0;border-width:0}}
+@media print{body.printing #fcard{font-size:8.6pt;padding:5mm;line-height:1.22}body.printing .fc-st{margin:2px 0;padding:2px 5px}body.printing .fc-st.seen::after{content:""}body.printing .fc-tour{display:none}body.printing .fc-bricks{font-size:8pt}body.printing .fc-top{margin-bottom:2px}}
+
+.wrap{max-width:760px;margin:0 auto;padding:0 12px}
+.stat2{text-align:center;font-weight:700;color:#283593;margin:6px 0}
+.savebar{margin-top:10px;padding:8px 12px;border-radius:10px;font-size:.9rem;text-align:center;background:#FFF8E1;border:2px solid #FFB74D;color:#8d6e00}
+.savebar.saved{background:#E8F5E9;border-color:#A5D6A7;color:#1B5E20}
+.savebar button{margin-left:8px}
+.finish{display:none;text-align:center;background:#E8F5E9;border:2px solid #A5D6A7;border-radius:12px;padding:20px;margin-top:14px}
+.finish .both{font-size:1.3rem;font-weight:800;margin:8px 0;color:#283593}
+.wlb.closed{display:none}
+.lastchk{display:none;margin:6px 0;padding:8px 12px;border-radius:10px;background:#FFF8E1;border:2px solid #FFB74D;color:#5D4037}
+.lastchk.on{display:block}
+.lastchk .chip4{display:inline-block;background:#F9A825;color:#3E2723;font-weight:800;border-radius:12px;padding:1px 9px;margin-right:6px}
+.yt{margin-top:14px}
+.yt.hidden{display:none}
+.yt.done{opacity:.92}
+.btn-circ{display:block;margin:8px 0;padding:8px 14px;border-radius:10px;border:2px solid #F9A825;background:#FFF8E1;color:#5D4037;font-weight:800;cursor:pointer}
+.btn-circ.on{background:#E8F5E9;border-color:#81C784;color:#1B5E20}
+.chip5{display:inline-block;margin-left:8px;background:#E8EAF6;color:#283593;border:2px solid #9FA8DA;border-radius:12px;padding:0 9px;font-weight:800}
+.dtree{border:2px solid #9FA8DA;border-radius:12px;background:#FAFBFF;padding:8px 12px;margin:10px 0}
+.dtree table{border-collapse:collapse;width:100%}.dtree td{padding:4px 8px;border-bottom:1px dashed #C5CAE9;vertical-align:top}
+.dtree td:first-child{font-weight:700;color:#283593;width:46%}
+.act{display:inline-block;background:#E8EAF6;color:#283593;font-weight:800;border-radius:12px;padding:2px 12px;margin-bottom:4px;font-size:.9rem}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-hub" href="https://athipprem.github.io/mathlessons/index.html">&#8592; Hub</a>
+  <span class="tnav-title">Lesson &mdash; Chapter 3 Fractions Review (Unit 69)</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+<div class="wrap">
+<!-- s0 -->
+<div class="screen active" id="s0">
+<div class="card">
+<span class="act">Recall 3 &middot; Fractions: the whole chapter</span><br>
+  <h2>&#x1F4CC; The Whole Chapter On One Card</h2>
+  <div class="why-real" style="background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 14px;margin:10px 0;color:#283593"><p><strong>Why this is worth learning.</strong> Your school test on Tuesday is about all of Chapter 3. Fractions turn up in money, recipes, sharing and measuring &mdash; and the same few steps solve every one of them. Today you learn those steps from one card, so on Tuesday you can see the card in your head.</p></div>
+  <p class="tap-hint">60-second tour: your &#x1F4CC; card is open. <b>Tap each box</b> to read it. Then try the first worked example.</p>
+<div class="dtree"><b>Which box do I use?</b><table><tr><td>&ldquo;3/4 L&rdquo; (a unit right after the fraction)</td><td>TOLD &rarr; &#9312; no &times; needed</td></tr><tr><td>&ldquo;3/4 OF the &hellip;&rdquo;</td><td>&#9312; fraction &times; whole</td></tr><tr><td>&ldquo;&hellip; of what was LEFT&rdquo;</td><td>&#9313; then &#9314; a NEW whole</td></tr><tr><td>Add or take away</td><td>+ or &minus; boxes: improper, same bottoms, tops</td></tr><tr><td>5 &divide; 6, or &ldquo;as a decimal&rdquo;</td><td>&divide; box, then the decimal box, then &asymp; round</td></tr><tr><td>&ldquo;How much at FIRST?&rdquo;</td><td>B box: work backwards</td></tr><tr><td>Before you write</td><td>&#9315; what does it ask for? &#9316; check twice</td></tr></table></div>
+<p class="tap-hint"><b>Worked example:</b></p>
+<p><strong>Write 29/8 as a mixed number.</strong></p>
+<div class="wlb auto" data-bid="W0">
+<div class="wls">
+<div class="wl" data-card="÷"><span class="m">29/8 = 29 ÷ 8</span><span class="why">a fraction is a division: top ÷ bottom</span></div>
+<div class="wl" data-card="÷"><span class="m">= 3 5/8</span><span class="why">29 ÷ 8 = 3 remainder 5 → 3 wholes and 5 eighths</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+<div class="q-card yt" id="yt_T0" data-iid="T0">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_T0"></div>
+  <button type="button" class="btn-circ" id="circ_T0" onclick="circTap('T0')">&#9316; I circled the numbers</button>
+  <div class="alines" id="ln_T0"></div>
+  <button class="btn-check" id="chk_T0" onclick="ytCheck('T0')" disabled>Check</button>
+  <div class="feedback" id="fb_T0"></div>
+  <div class="sorry" id="sorry_T0" style="display:none"></div>
+</div>
+<div class="savebar" style="display:none"></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Add &amp; Take Away &#8594;</button></div>
+</div>
+
+<!-- s1 -->
+<div class="screen" id="s1">
+<div class="card">
+<span class="act">Activity 1&ndash;3 &middot; Add and take away</span><br>
+  <h2>&#10133; Add And Take Away</h2>
+  <p class="tap-hint">Adding is the same as taking away, except you add the tops. Tap Next line &mdash; each line says which box of your card it uses.</p>
+<p class="tap-hint"><b>Worked example:</b></p>
+<p><strong>Work out 3 1/2 + 1 5/6.</strong></p>
+<div class="wlb auto" data-bid="W1">
+<div class="wls">
+<div class="wl" data-card="+0"><span class="m">Answer = 3 1/2 + 1 5/6</span><span class="why">add: + side of the card</span></div>
+<div class="wl" data-card="+0"><span class="m">= 7/2 + 1 5/6</span><span class="why">change the first number to an improper fraction: 3 1/2 = 7/2 (3 wholes = 6 halves, plus 1 half = 7 halves)</span></div>
+<div class="wl" data-card="+0"><span class="m">= 7/2 + 11/6</span><span class="why">change the second number to an improper fraction: 1 5/6 = 11/6 (1 whole = 6 sixths, plus 5 sixths = 11 sixths)</span></div>
+<div class="wl" data-card="+1"><span class="m">= 21/6 + 11/6</span><span class="why">make the bottoms the same: 7/2 = 21/6 (top and bottom × 3)</span></div>
+<div class="wl" data-card="+2"><span class="m">= 32/6</span><span class="why">21 sixths and 11 sixths make 32 sixths</span></div>
+<div class="wl" data-card="+3"><span class="m">= 16/3</span><span class="why">simplify: divide the top and the bottom by 2</span></div>
+<div class="wl" data-card="+3"><span class="m">= 5 1/3</span><span class="why">16 thirds = 5 wholes and 1 third over</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+<div class="q-card yt" id="yt_T1" data-iid="T1">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_T1"></div>
+  <button type="button" class="btn-circ" id="circ_T1" onclick="circTap('T1')">&#9316; I circled the numbers</button>
+  <div class="alines" id="ln_T1"></div>
+  <button class="btn-check" id="chk_T1" onclick="ytCheck('T1')" disabled>Check</button>
+  <div class="feedback" id="fb_T1"></div>
+  <div class="sorry" id="sorry_T1" style="display:none"></div>
+</div>
+<div class="savebar" style="display:none"></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Multiply &#8594;</button></div>
+</div>
+
+<!-- s2 -->
+<div class="screen" id="s2">
+<div class="card">
+<span class="act">Activity 5, 7, 8 &middot; Multiply</span><br>
+  <h2>&#10006;&#65039; Multiply</h2>
+  <p class="tap-hint">Tops &times; tops, bottoms &times; bottoms. A whole number is a fraction over 1.</p>
+<p class="tap-hint"><b>Worked example:</b></p>
+<p><strong>Work out 9/14 x 7/12.</strong></p>
+<div class="wlb auto" data-bid="W2a">
+<div class="wls">
+<div class="wl" data-card="②"><span class="m">Answer = 9/14 × 7/12</span><span class="why">multiply: × side of the card</span></div>
+<div class="wl" data-card="×1"><span class="m">= 63/168</span><span class="why">tops: 9 × 7 = 63; bottoms: 14 × 12 = 168</span></div>
+<div class="wl" data-card="−3"><span class="m">= 3/8</span><span class="why">simplify: divide the top and the bottom by 21</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+<p class="tap-hint"><b>Worked example:</b></p>
+<p><strong>Work out 2 1/3 x 6.</strong></p>
+<div class="wlb auto" data-bid="W2b">
+<div class="wls">
+<div class="wl" data-card="②"><span class="m">Answer = 2 1/3 × 6</span><span class="why">multiply: × side of the card</span></div>
+<div class="wl" data-card="−0"><span class="m">= 7/3 × 6</span><span class="why">change the first number to an improper fraction: 2 1/3 = 7/3 (2 wholes = 6 thirds, plus 1 third = 7 thirds)</span></div>
+<div class="wl" data-card="−0"><span class="m">= 7/3 × 6/1</span><span class="why">a whole number is a fraction over 1: 6 = 6/1</span></div>
+<div class="wl" data-card="×1"><span class="m">= 42/3</span><span class="why">tops: 7 × 6 = 42; bottoms: 3 × 1 = 3</span></div>
+<div class="wl" data-card="−3"><span class="m">= 14</span><span class="why">42 ÷ 3 = 14</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+<div class="q-card yt" id="yt_T2" data-iid="T2">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_T2"></div>
+  <button type="button" class="btn-circ" id="circ_T2" onclick="circTap('T2')">&#9316; I circled the numbers</button>
+  <div class="alines" id="ln_T2"></div>
+  <button class="btn-check" id="chk_T2" onclick="ytCheck('T2')" disabled>Check</button>
+  <div class="feedback" id="fb_T2"></div>
+  <div class="sorry" id="sorry_T2" style="display:none"></div>
+</div>
+<div class="savebar" style="display:none"></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Of, Remainder, How Much More &#8594;</button></div>
+</div>
+
+<!-- s3 -->
+<div class="screen" id="s3">
+<div class="card">
+<span class="act">Activity 4, 6, 11&ndash;12 &middot; Of, remainder, how much more</span><br>
+  <h2>&#x1F4B0; Of, The Remainder, How Much More</h2>
+  <p class="tap-hint">Tap Next line. Before part (b) a &#9315; chip tells you what &ldquo;how much more&rdquo; means.</p>
+<p class="tap-hint"><b>Worked example:</b></p>
+<p><strong>Nina had $540. She spent 1/3 of it on a bike and 5/9 of the remainder on a helmet. (a) How much money did she have left? (b) How much more did she spend on the helmet than on the bike?</strong></p>
+<div class="wlb auto" data-bid="W3" data-chip-at="13" data-chip="chip3">
+<div class="wls">
+<div class="wl" data-card="①"><span class="m">Taken part 1 = 1/3 × 540</span><span class="why">① "1/3 of the money" → taken part = 1/3 × whole</span></div>
+<div class="wl" data-card="×0"><span class="m">= 1/3 × 540/1</span><span class="why">a whole number is a fraction over 1: 540 = 540/1</span></div>
+<div class="wl" data-card="×1"><span class="m">= 540/3</span><span class="why">tops: 1 × 540 = 540; bottoms: 3 × 1 = 3</span></div>
+<div class="wl" data-card="×2"><span class="m">= 180 </span><span class="why">540 ÷ 3 = 180</span></div>
+<div class="wl" data-card="②"><span class="m">Left part 1 = 540 − 180</span><span class="why">② left part = whole − taken part</span></div>
+<div class="wl" data-card="−2"><span class="m">= 360 </span><span class="why">540 − 180 = 360</span></div>
+<div class="wl" data-card="③"><span class="m">New whole = 360 </span><span class="why">③ "of the money that was LEFT" → the left part is the NEW whole</span></div>
+<div class="wl" data-card="①"><span class="m">Taken part 2 = 5/9 × 360</span><span class="why">① "5/9 of the money that was left" → taken part = 5/9 × whole</span></div>
+<div class="wl" data-card="×0"><span class="m">= 5/9 × 360/1</span><span class="why">a whole number is a fraction over 1: 360 = 360/1</span></div>
+<div class="wl" data-card="×1"><span class="m">= 1800/9</span><span class="why">tops: 5 × 360 = 1800; bottoms: 9 × 1 = 9</span></div>
+<div class="wl" data-card="×2"><span class="m">= 200 </span><span class="why">1800 ÷ 9 = 200</span></div>
+<div class="wl" data-card="②"><span class="m">Left part 2 = 360 − 200</span><span class="why">② left part = whole − taken part</span></div>
+<div class="wl" data-card="−2"><span class="m">= 160 </span><span class="why">360 − 200 = 160</span></div>
+<div class="wl" data-card="④"><span class="m">How much more = 200 − 180</span><span class="why">④ "how much MORE?" → bigger part − smaller part</span></div>
+<div class="wl" data-card="−2"><span class="m">= 20</span><span class="why">200 − 180 = 20</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+<div class="lastchk" id="chip3"><span class="chip4">&#9315;</span>how much more = bigger &minus; smaller: helmet $200 &minus; bike $180</div>
+<div class="q-card yt" id="yt_T3" data-iid="T3">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_T3"></div>
+  <button type="button" class="btn-circ" id="circ_T3" onclick="circTap('T3')">&#9316; I circled the numbers</button>
+  <div class="alines" id="ln_T3"></div>
+  <button class="btn-check" id="chk_T3" onclick="ytCheck('T3')" disabled>Check</button>
+  <div class="feedback" id="fb_T3"></div>
+  <div class="sorry" id="sorry_T3" style="display:none"></div>
+</div>
+<div class="savebar" style="display:none"></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Division &amp; Decimals &#8594;</button></div>
+</div>
+
+<!-- s4 -->
+<div class="screen" id="s4">
+<div class="card">
+<span class="act">Activity 9&ndash;10 &middot; Fractions, Division and Decimals</span><br>
+  <h2>&#10135; Division And Decimals</h2>
+  <p class="tap-hint">A fraction is a division: a &divide; b = a/b. To make a decimal, divide the top by the bottom. Rounding to 2 decimal places: look at the 3rd digit.</p>
+<p class="tap-hint"><b>Worked example:</b></p>
+<p><strong>Write 7 ÷ 8 as a fraction, then as a decimal.</strong></p>
+<div class="wlb auto" data-bid="W4a">
+<div class="wls">
+<div class="wl" data-card="÷"><span class="m">7 ÷ 8 = 7/8</span><span class="why">a ÷ b = a/b (÷ box of the card)</span></div>
+<div class="wl" data-card="."><span class="m">7/8 = 875/1000</span><span class="why">make the bottom 1000: top and bottom × 125</span></div>
+<div class="wl" data-card="."><span class="m">7/8 = 0.875</span><span class="why">875/1000 = 0.875</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+<div class="q-card yt" id="yt_T4a" data-iid="T4a">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_T4a"></div>
+  <button type="button" class="btn-circ" id="circ_T4a" onclick="circTap('T4a')">&#9316; I circled the numbers</button>
+  <div class="alines" id="ln_T4a"></div>
+  <button class="btn-check" id="chk_T4a" onclick="ytCheck('T4a')" disabled>Check</button>
+  <div class="feedback" id="fb_T4a"></div>
+  <div class="sorry" id="sorry_T4a" style="display:none"></div>
+</div>
+<p class="tap-hint"><b>Worked example:</b></p>
+<p><strong>Write 2 ÷ 3 as a decimal correct to 2 decimal places.</strong></p>
+<div class="wlb auto" data-bid="W4b">
+<div class="wls">
+<div class="wl" data-card="÷"><span class="m">2 ÷ 3 = 2/3</span><span class="why">a ÷ b = a/b (÷ box of the card)</span></div>
+<div class="wl" data-card="≈"><span class="m">2/3 ≈ 0.67</span><span class="why">2 ÷ 3 = 0.666… and never stops; the 3rd decimal digit is 6: 5 or more, so round up</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+<div class="q-card yt" id="yt_T4b" data-iid="T4b">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_T4b"></div>
+  <button type="button" class="btn-circ" id="circ_T4b" onclick="circTap('T4b')">&#9316; I circled the numbers</button>
+  <div class="alines" id="ln_T4b"></div>
+  <button class="btn-check" id="chk_T4b" onclick="ytCheck('T4b')" disabled>Check</button>
+  <div class="feedback" id="fb_T4b"></div>
+  <div class="sorry" id="sorry_T4b" style="display:none"></div>
+</div>
+<div class="savebar" style="display:none"></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Working Backwards &#8594;</button></div>
+</div>
+
+<!-- s5 -->
+<div class="screen" id="s5">
+<div class="card">
+<span class="act">Activity 3 Q6, 11&ndash;13 &middot; Working backwards</span><br>
+  <h2>&#x23EA; Working Backwards</h2>
+  <p class="tap-hint">&ldquo;How much at FIRST?&rdquo; Use bars, units and the B box of your card.</p>
+<p class="tap-hint"><b>Worked example:</b></p>
+<p><strong>Raj used 2/7 of his paint. He had 15 L left. How much paint did he have at first?</strong></p>
+<div class="wlb auto" data-bid="W5a">
+<div class="wls">
+<div class="wl" data-card="B"><span class="m">Left fraction 1 = 1 − 2/7</span><span class="why">round 1 took 2/7, so what is left is the rest of the whole</span></div>
+<div class="wl" data-card="B"><span class="m">= 5/7</span><span class="why">7/7 − 2/7 = 5/7</span></div>
+<div class="wl" data-card="B"><span class="m">5 units = 15</span><span class="why">5 of the 7 equal units are left, and that is 15 L</span></div>
+<div class="wl" data-card="B"><span class="m">1 unit = 15 ÷ 5</span><span class="why">share it equally into the units</span></div>
+<div class="wl" data-card="B"><span class="m">= 3</span><span class="why">15 ÷ 5 = 3</span></div>
+<div class="wl" data-card="B"><span class="m">Whole = 3 × 7</span><span class="why">the whole is all 7 units</span></div>
+<div class="wl" data-card="B"><span class="m">= 21 L</span><span class="why">3 × 7 = 21</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+<div class="bar-wrap"><svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="one bar of 7 units"><text x="20" y="20" font-size="13" font-weight="700" fill="#283593">The whole = 7 equal units. 2 units were used (shaded).</text><rect class="u5a" x="20.0" y="30" width="70.0" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/><rect class="u5a" x="90.0" y="30" width="70.0" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/><rect class="u5a" x="160.0" y="30" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><rect class="u5a" x="230.0" y="30" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><rect class="u5a" x="300.0" y="30" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><rect class="u5a" x="370.0" y="30" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><rect class="u5a" x="440.0" y="30" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><text x="20" y="84" font-size="13" fill="#455A64">used 2/7</text><text x="230" y="84" font-size="13" font-weight="700" fill="#1B5E20">5 units are left = 15 L</text><text x="20" y="116" font-size="13" fill="#283593">5 units = 15 L &#8594; 1 unit = 3 L &#8594; 7 units = 21 L</text></svg></div>
+<p class="tap-hint">The shaded part is the taken fraction. The unshaded units are the part you know.</p>
+<div class="q-card yt" id="yt_T5a" data-iid="T5a">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_T5a"></div>
+  <button type="button" class="btn-circ" id="circ_T5a" onclick="circTap('T5a')">&#9316; I circled the numbers</button>
+  <div class="alines" id="ln_T5a"></div>
+  <button class="btn-check" id="chk_T5a" onclick="ytCheck('T5a')" disabled>Check</button>
+  <div class="feedback" id="fb_T5a"></div>
+  <div class="sorry" id="sorry_T5a" style="display:none"></div>
+</div>
+<p class="tap-hint"><b>Worked example:</b></p>
+<p><strong>Tom spent 1/6 of his money. Then he spent 3/7 of the money he had left. He had $40 left in the end. How much money did he have at first?</strong></p>
+<div class="wlb auto" data-bid="W5b">
+<div class="wls">
+<div class="wl" data-card="B"><span class="m">Left fraction 2 = 1 − 3/7</span><span class="why">round 2 took 3/7, so what is left is the rest of the whole</span></div>
+<div class="wl" data-card="B"><span class="m">= 4/7</span><span class="why">7/7 − 3/7 = 4/7</span></div>
+<div class="wl" data-card="B"><span class="m">4 units = 40</span><span class="why">4 of the 7 equal units are left, and that is 40</span></div>
+<div class="wl" data-card="B"><span class="m">1 unit = 40 ÷ 4</span><span class="why">share it equally into the units</span></div>
+<div class="wl" data-card="B"><span class="m">= 10</span><span class="why">40 ÷ 4 = 10</span></div>
+<div class="wl" data-card="B"><span class="m">Left after round 1 = 10 × 7</span><span class="why">the amount before round 2 is all 7 units</span></div>
+<div class="wl" data-card="B"><span class="m">= 70</span><span class="why">10 × 7 = 70</span></div>
+<div class="wl" data-card="B"><span class="m">Left fraction 1 = 1 − 1/6</span><span class="why">round 1 took 1/6, so what is left is the rest of the whole</span></div>
+<div class="wl" data-card="B"><span class="m">= 5/6</span><span class="why">6/6 − 1/6 = 5/6</span></div>
+<div class="wl" data-card="B"><span class="m">5 units = 70</span><span class="why">5 of the 6 equal units are left, and that is 70</span></div>
+<div class="wl" data-card="B"><span class="m">1 unit = 70 ÷ 5</span><span class="why">share it equally into the units</span></div>
+<div class="wl" data-card="B"><span class="m">= 14</span><span class="why">70 ÷ 5 = 14</span></div>
+<div class="wl" data-card="B"><span class="m">Whole = 14 × 6</span><span class="why">the whole is all 6 units</span></div>
+<div class="wl" data-card="B"><span class="m">= 84</span><span class="why">14 × 6 = 84</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+<div class="bar-wrap"><svg viewBox="0 0 560 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="two bars, solved right to left"><text x="20" y="20" font-size="13" font-weight="700" fill="#283593">Bar 2 (solve this one FIRST): the money after round 1 = 7 units. 3 units spent.</text><rect class="u5b2" x="20.0" y="28" width="70.0" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/><rect class="u5b2" x="90.0" y="28" width="70.0" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/><rect class="u5b2" x="160.0" y="28" width="70.0" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/><rect class="u5b2" x="230.0" y="28" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><rect class="u5b2" x="300.0" y="28" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><rect class="u5b2" x="370.0" y="28" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><rect class="u5b2" x="440.0" y="28" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><text x="230" y="82" font-size="13" font-weight="700" fill="#1B5E20">4 units are left = $40</text><text x="20" y="104" font-size="13" fill="#283593">4 units = $40 &#8594; 1 unit = $10 &#8594; 7 units = $70</text><text x="20" y="144" font-size="13" font-weight="700" fill="#283593">Bar 1: the whole = 6 equal units. 1 unit spent. The 5 units left = the $70 from bar 2.</text><rect class="u5b1" x="20.0" y="152" width="70.0" height="34" fill="#90CAF9" stroke="#1565C0" stroke-width="2"/><rect class="u5b1" x="90.0" y="152" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><rect class="u5b1" x="160.0" y="152" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><rect class="u5b1" x="230.0" y="152" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><rect class="u5b1" x="300.0" y="152" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><rect class="u5b1" x="370.0" y="152" width="70.0" height="34" fill="#fff" stroke="#1565C0" stroke-width="2"/><text x="20" y="206" font-size="13" fill="#455A64">spent 1/6</text><text x="100" y="206" font-size="13" font-weight="700" fill="#1B5E20">5 units are left = $70</text><text x="20" y="236" font-size="13" fill="#283593">5 units = $70 &#8594; 1 unit = $14 &#8594; 6 units = $84</text></svg></div>
+<p class="tap-hint"><b>Backwards = the new-whole picture, played in reverse.</b></p>
+<div class="q-card yt" id="yt_T5b" data-iid="T5b">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_T5b"></div>
+  <button type="button" class="btn-circ" id="circ_T5b" onclick="circTap('T5b')">&#9316; I circled the numbers</button>
+  <div class="alines" id="ln_T5b"></div>
+  <button class="btn-check" id="chk_T5b" onclick="ytCheck('T5b')" disabled>Check</button>
+  <div class="feedback" id="fb_T5b"></div>
+  <div class="sorry" id="sorry_T5b" style="display:none"></div>
+</div>
+<div class="stat2" id="ytstat"></div>
+<div class="savebar" style="display:none"></div>
+  <div class="finish" id="finish"><div class="tsbadge">&#11088; Chapter 3 done.</div><div class="both" id="fboth"></div><p style="font-weight:700">STOP here today. Tomorrow: the mock paper, 45 minutes, card put away. Tuesday: show your school what you know. Print your card tonight if you like.</p><button type="button" class="btn-map" onclick="fcPrint()">&#x1F5A8; Print my Chapter 3 card</button><a class="btn-big alt" style="text-decoration:none;display:block;width:fit-content;margin-top:10px" href="https://athipprem.github.io/mathlessons/index.html">Back to Hub</a></div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button></div>
+</div>
+
+</div>
+<!-- FORMULA-CARD START -->
+<button type="button" id="fcbtn" onclick="fcToggle(true)" aria-controls="fcard">&#x1F4CC; Formula Card</button>
+<aside id="fcard" class="fc" aria-label="Fraction Formula Card">
+<div class="fc-top"><b>&#x1F4CC; MY FRACTION FORMULA CARD</b> <span class="fc-q">Chapter 3 edition</span><span class="fc-btns"><button type="button" onclick="fcPrint()" aria-label="Print the card">&#x1F5A8;</button><button type="button" onclick="fcToggle(true)" aria-label="Close the card">&#10005;</button></span></div>
+<div class="fc-tour" id="fctour">Tap each box to read it. Boxes read: <b id="fcseen">0</b></div>
+<div class="fc-sec">THE BIG PICTURE</div>
+<div class="fc-st" data-step="&#9312;"><b>&#9312;</b> Taken part = fraction &times; whole <span class="fc-q">&ldquo;1/4 OF the juice&rdquo;</span></div>
+<div class="fc-told">Told? &ldquo;3/4 L&rdquo; &rarr; Taken part = 3/4 L. No &times; needed!</div>
+<button type="button" class="fc-why" onclick="fcBricks(this)">Why &times;? &#9662;</button>
+<div class="fc-bricks" id="fcbricks">
+<div class="bk-row"><span class="grp lit"><i></i><i></i><i></i><i></i></span><span class="grp"><i></i><i></i><i></i><i></i></span><span class="grp"><i></i><i></i><i></i><i></i></span></div>
+<div>1/3 OF 12 bricks: the bricks split into 3 equal groups, one group lights up, giving <b>4</b>.</div>
+<div><b>1/3 &times; 12 = 12/3 = 4.</b> &lsquo;Of&rsquo; means &times;.</div>
+<div class="fc-q">1/3 kg is just a small lump &mdash; that&rsquo;s TOLD, not &times;.</div>
+</div>
+<div class="fc-st" data-step="&#9313;"><b>&#9313;</b> Left part = whole &minus; taken part</div>
+<div class="fc-st" data-step="&#9314;"><b>&#9314;</b> &ldquo;&hellip; of what was LEFT&rdquo;? &rarr; the left part is the NEW whole. Back to &#9312;.</div>
+<div class="fc-st" data-step="&#9315;"><b>&#9315;</b> LAST CHECK: read the question again &mdash; does it ask for a TAKEN part, the LEFT part, or HOW MUCH MORE?<br><span class="fc-q">&ldquo;How much more?&rdquo; = bigger part &minus; smaller part (that&rsquo;s the &minus; side too)</span></div>
+<div class="fc-two">
+<div class="fc-blk" id="fcmul"><button type="button" class="fc-bh" onclick="fcOpen('fcmul')">HOW TO &times; &#9662;</button>
+<div class="fc-st" data-step="&times;0"><b>&times;0</b> Mixed number? Make it improper.<br><span class="fc-q">2 1/4 = 9/4 &nbsp; Whole number? 12 = 12/1</span></div>
+<div class="fc-st" data-step="&times;1"><b>&times;1</b> top &times; top, bottom &times; bottom</div>
+<div class="fc-st" data-step="&times;2"><b>&times;2</b> Simplify &rarr; mixed number</div>
+<div class="fc-ex"><div class="fc-exh">Example:</div><div>5/6 &times; 1 4/5</div><div>= 5/6 &times; 9/5 <u>&times;0</u></div><div>= 45/30 <u>&times;1</u></div><div>= 3/2 <u>&times;2</u></div><div>= 1 1/2 <u>&times;2</u></div></div></div>
+<div class="fc-blk" id="fcsub"><button type="button" class="fc-bh" onclick="fcOpen('fcsub')">HOW TO &minus; &#9662;</button>
+<div class="fc-st" data-step="&minus;0"><b>&minus;0</b> Mixed number? Make it improper.</div>
+<div class="fc-st" data-step="&minus;1"><b>&minus;1</b> Make the bottoms the same.<br><span class="fc-q">Count up in the BIGGER bottom until the smaller one fits:<br>thirds &amp; quarters &rarr; 4, 8, 12 &#10003; &rarr; twelfths</span></div>
+<div class="fc-st" data-step="&minus;2"><b>&minus;2</b> top &minus; top (the bottom stays!)</div>
+<div class="fc-st" data-step="&minus;3"><b>&minus;3</b> Simplify &rarr; mixed number</div>
+<div class="fc-ex"><div class="fc-exh">Example:</div><div>3 1/2 &minus; 3/4</div><div>= 7/2 &minus; 3/4 <u>&minus;0</u></div><div>= 14/4 &minus; 3/4 <u>&minus;1</u></div><div>= 11/4 <u>&minus;2</u></div><div>= 2 3/4 <u>&minus;3</u></div></div></div>
+</div>
+<div class="fc-blk" id="fcadd"><button type="button" class="fc-bh" onclick="fcOpen('fcadd')">HOW TO + (same as &minus;, but add the tops) &#9662;</button>
+<div class="fc-st" data-step="+0"><b>+0</b> Mixed? Make it improper.</div>
+<div class="fc-st" data-step="+1"><b>+1</b> Same bottoms (count up in the bigger bottom).</div>
+<div class="fc-st" data-step="+2"><b>+2</b> top + top (bottom stays!)</div>
+<div class="fc-st" data-step="+3"><b>+3</b> Simplify &rarr; mixed number</div></div>
+<div class="fc-st" data-step="&divide;"><b>&divide;</b> FRACTIONS ARE DIVISIONS<br><span class="fc-q">a &divide; b = a/b &nbsp; 5 &divide; 6 &rarr; 5/6 each &nbsp; 13 &divide; 4 = 13/4 = 3 1/4<br>Improper &rarr; mixed: top &divide; bottom = wholes, remainder = the new top.</span></div>
+<div class="fc-st" data-step="."><b>.</b> FRACTION &rarr; DECIMAL<br><span class="fc-q">Make the bottom 10, 100 or 1000: &nbsp; 3/4 = 75/100 = 0.75<br>Can&rsquo;t? Divide top by bottom: &nbsp; 1/3 = 0.333&hellip;</span></div>
+<div class="fc-st" data-step="&asymp;"><b>&asymp;</b> ROUND to 2 decimal places: look at the 3rd digit &rarr; 5 or more, round up. <span class="fc-q">0.333&hellip; &asymp; 0.33</span></div>
+<div class="fc-st" data-step="B"><b>B</b> WORKING BACKWARDS <span class="fc-q">(&ldquo;how much at FIRST?&rdquo;)</span><br>1. Left fraction = 1 &minus; taken fraction<br>2. That many units = the amount you know<br>3. 1 unit = amount &divide; units<br>4. Whole = 1 unit &times; the bottom number<br><span class="fc-q">Two rounds? Undo the LAST round first, then the first round.</span></div>
+<div class="fc-st" data-step="&#9316;"><b>&#9316;</b> CHECK TWICE before you write the answer:<br><span class="fc-q">copied numbers &#10003; (circle them in the question) &nbsp;&middot;&nbsp; improper &rarr; mixed &#10003; (multiply back: 2 1/4 &rarr; 2 &times; 4 + 1 = 9 &#10003;)</span></div>
+</aside>
+<!-- FORMULA-CARD END -->
+<script>
+
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a);}
+function mixedStr(n,d){var g=gcd(n,d);n=n/g;d=d/g;var w=Math.floor(n/d),r=n-w*d;if(r===0)return ''+w;return (w?w+' ':'')+r+'/'+d;}
+/* parse "1 1/5", "6/5", "2", "1.2", "1 1/5 m" -> [num,den] reduced, or null */
+function parseVal(s){
+  if(s==null)return null; s=String(s).toLowerCase().replace(/[²]/g,'').replace(/(kg|km|cups?|cm|ml|l|m|litres?|liters?|metres?|meters?|sq\.?|squared)\b/g,' ').replace(/\s+/g,' ').trim();
+  if(!s)return null; var m;
+  if((m=s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/))){var d=+m[3];if(!d)return null;var n=(+m[1])*d+(+m[2]);var g=gcd(n,d);return [n/g,d/g,'mixed'];}
+  if((m=s.match(/^(\d+)\s*\/\s*(\d+)$/))){var d2=+m[2];if(!d2)return null;var g2=gcd(+m[1],d2);return [(+m[1])/g2,d2/g2,'frac',+m[1],d2];}
+  if((m=s.match(/^(\d+)$/))){return [+m[1],1,'int'];}
+  if((m=s.match(/^(\d*)\.(\d+)$/))){var den=Math.pow(10,m[2].length);var n3=(+m[1]||0)*den+(+m[2]);var g3=gcd(n3,den);return [n3/g3,den/g3,'dec'];}
+  return null;}
+function sameVal(a,b){return a&&b&&a[0]===b[0]&&a[1]===b[1];}
+function isImproperText(s){var m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);return !!m&&(+m[1])>(+m[2]);}
+
+function wlShow(b,n){var rows=b.querySelectorAll('.wl,.bl'),i;for(i=0;i<rows.length;i++){rows[i].classList.remove('cur');if(i<n)rows[i].classList.add('on');}
+  if(n>0&&rows[n-1])rows[n-1].classList.add('cur');if(n>=rows.length){b.classList.add('alldone');var a=b.getAttribute('data-after');if(a){var e=document.getElementById(a);if(e)e.style.display='block';}}}
+function wlCount(b){return b.querySelectorAll('.wl.on,.bl.on').length;}
+function wlNext(btn){var b=btn.parentNode;wlShow(b,wlCount(b)+1);}
+function wlOpen(b){b.classList.remove('closed');if(wlCount(b)===0)wlShow(b,1);}
+function stepsToggle(btn){var b=btn.parentNode.querySelector('.wlb');if(b.classList.contains('closed')){wlOpen(b);btn.textContent='Hide steps';}else{b.classList.add('closed');btn.textContent='Show steps';}}
+var HINT67={q1:'Look right after the fraction — is there a unit (L, kg, m or m²)?',
+ q2:'Read to the end of the story. Is there a “then …” still to come after this round?'};
+function tapsInit67(root,rounds,done){
+  var st={wrong:{q1:0,q2:0},mapWrong:[],path:[],done:false},r=0;
+  root.innerHTML='<div class="thead">&#128506; Map first — tap your way along it</div>';
+  function btn(v,t){return '<button type="button" data-v="'+v+'">'+t+'</button>';}
+  function ask(kind){
+    var d=document.createElement('div'),want,k=r+1;d.className='tq';
+    if(kind==='q1'){d.setAttribute('data-q','1');d.setAttribute('data-r',k);want=rounds[r];
+      d.innerHTML='<div class="tl">Q1 · Round '+k+'. Is there a unit right after the fraction?<span class="tsub">Look at the words for this round only.</span></div><div class="tb2">'+
+        btn('told','YES — a number with a unit, like “uses 3/4 L”')+btn('work','NO — it says “of the …”, like “uses 3/4 of the paint”')+'</div><div class="thint"></div>';}
+    else{d.setAttribute('data-q','2');d.setAttribute('data-r',k);want=(r<rounds.length-1)?'yes':'no';
+      d.innerHTML='<div class="tl">Q2 · Does the story go on — “then … of what was LEFT”?<span class="tsub">(“then … 1/2 kg more” also means the story goes on.)</span></div><div class="tb2">'+
+        btn('yes','YES — another round')+btn('no','NO — that was the last round')+'</div><div class="thint"></div>';}
+    root.appendChild(d);
+    var bs=d.querySelectorAll('button'),hint=d.querySelector('.thint'),i;
+    function go(b){
+      var v=b.getAttribute('data-v'),j;
+      if(v===want){for(j=0;j<bs.length;j++){bs[j].classList.remove('lit','nope');bs[j].disabled=true;}b.classList.add('good');hint.textContent='';st.path.push(kind+':'+v);
+        if(kind==='q1')ask('q2');else if(want==='yes'){r++;ask('q1');}else{if(!st.done){st.done=true;if(done)done(st);}}}
+      else{st.wrong[kind]++;st.mapWrong.push((kind==='q1'?'Q1':'Q2')+':'+v);b.classList.add('nope');hint.textContent='Not yet — '+HINT67[kind];
+        for(j=0;j<bs.length;j++)if(bs[j].getAttribute('data-v')===want)bs[j].classList.add('lit');}
+    }
+    for(i=0;i<bs.length;i++)(function(b){b.addEventListener('click',function(){go(b);});})(bs[i]);
+  }
+  ask('q1');return st;
+}
+function initCards(){
+  var cards=document.querySelectorAll('.q-card[data-rounds]'),i;
+  for(i=0;i<cards.length;i++)(function(c){
+    var tp=c.querySelector('.taps');if(!tp)return;
+    var inputs=c.querySelectorAll('input[type=text],textarea'),chk=c.querySelector('.btn-check'),j,rd=c.getAttribute('data-rounds').split(',');
+    for(j=0;j<inputs.length;j++)inputs[j].disabled=true;chk.disabled=true;
+    c._st=tapsInit67(tp,rd,function(){var k;for(k=0;k<inputs.length;k++)inputs[k].disabled=false;chk.disabled=false;
+      var lk=c.querySelectorAll('.locked'),m;for(m=0;m<lk.length;m++)lk[m].classList.remove('locked');});
+  })(cards[i]);
+  var plain=document.querySelectorAll('.wlb.auto'),p;for(p=0;p<plain.length;p++)wlShow(plain[p],1);
+}
+var lastP='';
+function say(fb,ok,msg){fb.style.display='block';fb.className='feedback '+(ok?'ok':'err');fb.textContent=msg;}
+var SWAPMSG='Both numbers are right — but they’re in each other’s boxes. On the test that’s 0. Read (a) again, then put the right number under it.';
+var PRAISE67=["You wrote ‘New whole =’ before round 2 — that’s the whole trick.","Read (a) again and put the right number under it. Exam-proof.","Told amount, straight off the left-over. Nice.","Fixed it! That’s how brains grow."];
+function praise67(rounds,two){var P=PRAISE67,pool=[P[0]];if(two)pool.push(P[1]);if(rounds.indexOf('told')>=0)pool.push(P[2]);
+  var p=pool[Math.floor(Math.random()*pool.length)];if(p===lastP&&pool.length>1)p=(p===pool[0])?pool[1]:pool[0];lastP=p;return p;}
+function nudge67(which){return which==='area'?'Check the whole first — is it length × width? Everything after it stands on it.':(which==='r2'?'Check round 2 — is the left-over piece right? Everything after it stands on it.':'Check round 1 — is the left-over piece right? Everything after it stands on it.');}
+function chk67(id){
+  var c=document.getElementById(id),fb=c.querySelector('.feedback'),ss=c.querySelector('.btn-show-steps');
+  var st1=c.querySelector('.st1'),st2=c.querySelector('.st2'),aa=c.querySelector('.aa'),ab=c.querySelector('.ab');
+  var ins=[st1,st2,aa,ab].filter(Boolean),i,rd=(c.getAttribute('data-rounds')||'').split(',');
+  for(i=0;i<ins.length;i++){if(!ins[i].value.trim()||!parseVal(ins[i].value)){say(fb,false,'Fill every box first (like 1 1/5 or 7/4).');return;}}
+  var kind=c.getAttribute('data-stone')||'r1';
+  if(st1&&!sameVal(parseVal(st1.value),parseVal(c.getAttribute('data-s1')))){c._nud=(c._nud||0)+1;say(fb,false,nudge67(kind==='area'?'area':'r1'));return;}
+  if(st2&&!sameVal(parseVal(st2.value),parseVal(c.getAttribute('data-s2')))){c._nud=(c._nud||0)+1;say(fb,false,nudge67('r2'));return;}
+  var wa=parseVal(c.getAttribute('data-a')),wb=ab?parseVal(c.getAttribute('data-b')):null;
+  var ga=parseVal(aa.value),gb=ab?parseVal(ab.value):null;
+  var okA=sameVal(ga,wa),okB=ab?sameVal(gb,wb):true;
+  if(okA&&okB){say(fb,true,'✓ '+praise67(rd,!!ab));}
+  else if(ab&&sameVal(ga,wb)&&sameVal(gb,wa)){c._sw=(c._sw||0)+1;say(fb,false,SWAPMSG);}
+  else if(ab&&(okA||okB))say(fb,false,'Not yet — one of your answers is right. Read the other question again. Tap Show steps to see it line by line.');
+  else say(fb,false,'Not yet — look at the bar again. Tap Show steps to see it line by line.');
+  if(ss)ss.style.display='inline-block';
+}
+function chkIn(id){var card=document.getElementById(id),inp=card.querySelector('.ans-input'),fb=card.querySelector('.feedback');
+  var want=parseVal(card.getAttribute('data-ans')),got=parseVal(inp.value);
+  if(!inp.value.trim()||!got){say(fb,false,'Type your answer first (like 1 1/5 or 7/4).');return;}
+  var ex=card.getAttribute('data-exact');
+  if(ex){if(inp.value.replace(/\s+/g,'')===ex){say(fb,true,'✓ Correct!');}else say(fb,false,'Not yet — read the question again.');return;}
+  if(sameVal(got,want))say(fb,true,'✓ Correct!');else say(fb,false,'Not yet — look again and try once more.');}
+function scOpen(id){var b=document.querySelector('#'+id+' .wlb');if(b)wlOpen(b);}
+/* ---- sentence frames: tap a blank, then tap a chip ---- */
+var FR={};
+function frameInit(id,want,chips,box){
+  var f=document.getElementById(id);FR[id]={want:want,sel:0,vals:[]};
+  var bl=f.querySelectorAll('.bl-blank'),i;for(i=0;i<bl.length;i++)(function(b,n){b.addEventListener('click',function(){frameSel(id,n);});})(bl[i],i);
+  var cb=f.querySelector('.chips');cb.innerHTML='';
+  for(i=0;i<chips.length;i++){var e=document.createElement('button');e.type='button';e.textContent=chips[i];(function(t,el){el.addEventListener('click',function(){frameFill(id,t);});})(chips[i],e);cb.appendChild(e);}
+  frameSel(id,0);
+}
+function frameSel(id,n){var f=document.getElementById(id),bl=f.querySelectorAll('.bl-blank'),i;FR[id].sel=n;for(i=0;i<bl.length;i++){bl[i].classList.toggle('sel',i===n);}
+  if(FR[id].vals[n]){FR[id].vals[n]=null;bl[n].textContent='';bl[n].classList.remove('full','bad','ok');}}
+function frameFill(id,t){var f=document.getElementById(id),bl=f.querySelectorAll('.bl-blank'),n=FR[id].sel,i;
+  FR[id].vals[n]=t;bl[n].textContent=t;bl[n].classList.add('full');bl[n].classList.remove('bad','ok');
+  for(i=0;i<bl.length;i++){if(!FR[id].vals[i]){frameSel(id,i);return;}}}
+function frameCheck(id){var f=document.getElementById(id),bl=f.querySelectorAll('.bl-blank'),fb=f.querySelector('.feedback'),i,all=true;
+  for(i=0;i<bl.length;i++){var v=FR[id].vals[i];if(!v){all=false;bl[i].classList.add('bad');}else if(v===FR[id].want[i]){bl[i].classList.remove('bad');bl[i].classList.add('ok');}else{all=false;bl[i].classList.remove('ok');bl[i].classList.add('bad');}}
+  if(all){say(fb,true,'✓ That says WHAT they did AND what the story really means.');var g=f.querySelector('.after');if(g)g.style.display='block';var w=f.querySelector('.wlb');if(w){w.classList.remove('closed');wlOpen(w);}}
+  else say(fb,false,'Not yet — the amber blanks need another look. Tap a blank to clear it, then pick a chip.');}
+function norm67(s){return String(s).toLowerCase().replace(/[^a-z0-9\/ ]/g,' ').replace(/\s+/g,' ').trim();}
+function freeCheck(id,rules){var f=document.getElementById(id),ins=f.querySelectorAll('input.ft'),fb=f.querySelector('.feedback'),i,all=true;
+  for(i=0;i<ins.length;i++){var v=norm67(ins[i].value),ok=v&&rules[i].some(function(r){return v.indexOf(r)>=0;});ins[i].style.borderColor=ok?'#2E7D32':'#FFB74D';if(!ok)all=false;}
+  if(all)say(fb,true,'✓ That says WHAT they did AND what the story really means.');else say(fb,false,'Not yet — check the blanks with the amber edge. Read the story again.');}
+function chkExplain(id){
+  var c=document.getElementById(id),fb=c.querySelector('.feedback'),st1=c.querySelector('.st1'),ab=c.querySelector('.ab'),ss=c.querySelector('.btn-show-steps');
+  if(!st1.value.trim()||!parseVal(st1.value)||!ab.value.trim()||!parseVal(ab.value)){say(fb,false,'Fill both numbers first (like 1 1/5 or 7/4).');return;}
+  if(!sameVal(parseVal(st1.value),parseVal(c.getAttribute('data-s1')))){say(fb,false,nudge67('r1'));return;}
+  if(sameVal(parseVal(ab.value),parseVal(c.getAttribute('data-b'))))say(fb,true,'✓ '+praise67(['work','work'],false));
+  else say(fb,false,'Not yet — look at the bars again. Tap Show steps to see it line by line.');
+  if(ss)ss.style.display='inline-block';
+}
+function showModel(id){var c=document.getElementById(id),t=c.querySelector('textarea.ex'),m=c.querySelector('.model'),fb=c.querySelector('.fbx');
+  if(t.value.trim().length<8){fb.style.display='block';fb.className='feedback err';fb.textContent='Write your own sentence first — then look at the model.';return;}
+  fb.style.display='none';m.style.display='block';}
+var WALKS={};
+function walkInit(id,steps){WALKS[id]={steps:steps,i:0};}
+function walkNext(id,btn){var w=WALKS[id],box=document.getElementById(id);if(w.i>=w.steps.length){w.i=0;var all=box.querySelectorAll('.lit-node'),k;for(k=0;k<all.length;k++){all[k].classList.remove('lit-node');}btn.innerHTML='Next step &#9656;';return;}
+  var s=w.steps[w.i],el=box.querySelector('#'+s[0]);el.classList.add('lit-node');el.querySelector('.cap').textContent=s[1];w.i++;if(w.i>=w.steps.length)btn.textContent='Start again';}
+function walkPick(boxId,key,btn){var all=document.querySelectorAll('#'+boxId+' .lit-node'),k;for(k=0;k<all.length;k++)all[k].classList.remove('lit-node');
+  var caps=document.querySelectorAll('#'+boxId+' .cap');for(k=0;k<caps.length;k++)caps[k].textContent='';
+  WALKS[boxId]={steps:WALKSETS[key],i:0};var nx=document.getElementById(boxId+'_nx');nx.innerHTML='Next step &#9656;';nx.style.display='inline-block';}
+var WALKSETS={};
+
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;
+pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function goTo(i){nav(i-cur);}
+var YT=["T0", "T1", "T2", "T3", "T4a", "T4b", "T5a", "T5b"];
+var ITEMS=[{"id": "T0", "q": "Simplify 18/24.", "lines": [{"k": "ans", "lab": "Simplest form =", "v": "3/4"}], "oth": [], "screen": 0}, {"id": "T1", "q": "Work out 5 1/4 - 2 5/6.", "lines": [{"k": "ans", "lab": "5 1/4 − 2 5/6 =", "v": "2 5/12"}], "oth": [], "screen": 1}, {"id": "T2", "q": "Work out 3 1/4 x 8.", "lines": [{"k": "ans", "lab": "3 1/4 × 8 =", "v": "26"}], "oth": [], "screen": 2}, {"id": "T3", "q": "Ella had 5 1/2 L of water. She poured 2 1/8 L into a jug. Then she drank 2/9 of the water that was left. How much water did she drink?", "lines": [{"k": "ans", "lab": "How much water did she drink?", "v": "3/4"}], "oth": [{"v": "2 1/8", "part": "TAKEN part"}, {"v": "3 3/8", "part": "LEFT part"}, {"v": "2 5/8", "part": "LEFT part"}], "screen": 3}, {"id": "T4a", "q": "Write 11 ÷ 8 as a mixed number, then as a decimal.", "lines": [{"k": "m", "lab": "As a mixed number =", "v": "1 3/8"}, {"k": "d", "lab": "As a decimal =", "v": "1.375"}], "oth": [], "screen": 4}, {"id": "T4b", "q": "Write 5 ÷ 7 as a decimal correct to 2 decimal places.", "lines": [{"k": "ans", "lab": "As a decimal (2 d.p.) =", "v": "0.71"}], "oth": [], "screen": 4}, {"id": "T5a", "q": "Lily has read 4/9 of her book. She has 35 pages left to read. How many pages are in the book?", "lines": [{"k": "ans", "lab": "How many pages are in the book?", "v": "63"}], "oth": [], "screen": 5}, {"id": "T5b", "q": "Amy gave away 2/9 of her stickers. Then she gave away 1/3 of the stickers she had left. She had 42 stickers left in the end. How many stickers did she have at first?", "lines": [{"k": "ans", "lab": "How many stickers did she have at first?", "v": "81"}], "oth": [], "screen": 5}];
+var WL={"T0": [["18/24 = 3/4", "divide the top and the bottom by 6 (the biggest number that goes into both)", "×2"]], "T1": [["Answer = 5 1/4 − 2 5/6", "take away: − side of the card", "②"], ["= 21/4 − 2 5/6", "change the first number to an improper fraction: 5 1/4 = 21/4 (5 wholes = 20 quarters, plus 1 quarter = 21 quarters)", "−0"], ["= 21/4 − 17/6", "change the second number to an improper fraction: 2 5/6 = 17/6 (2 wholes = 12 sixths, plus 5 sixths = 17 sixths)", "−0"], ["= 63/12 − 34/12", "make the bottoms the same: 21/4 = 63/12 (top and bottom × 3); 17/6 = 34/12 (top and bottom × 2)", "−1"], ["= 29/12", "63 twelfths take away 34 twelfths = 29 twelfths", "−2"], ["= 2 5/12", "29 twelfths = 2 wholes and 5 twelfths over", "−3"]], "T2": [["Answer = 3 1/4 × 8", "multiply: × side of the card", "②"], ["= 13/4 × 8", "change the first number to an improper fraction: 3 1/4 = 13/4 (3 wholes = 12 quarters, plus 1 quarter = 13 quarters)", "−0"], ["= 13/4 × 8/1", "a whole number is a fraction over 1: 8 = 8/1", "−0"], ["= 104/4", "tops: 13 × 8 = 104; bottoms: 4 × 1 = 4", "×1"], ["= 26", "104 ÷ 4 = 26", "−3"]], "T3": [["Taken part 1 = 2 1/8 L", "TOLD: a unit right after the fraction — this IS the taken part, no × needed", "①"], ["Left part 1 = 5 1/2 − 2 1/8", "② left part = whole − taken part", "②"], ["= 11/2 − 2 1/8", "change the whole to an improper fraction: 5 1/2 = 11/2 (5 wholes = 10 halves, plus 1 half = 11 halves)", "−0"], ["= 11/2 − 17/8", "change the taken part to an improper fraction: 2 1/8 = 17/8 (2 wholes = 16 eighths, plus 1 eighth = 17 eighths)", "−0"], ["= 44/8 − 17/8", "make the bottoms the same: 11/2 = 44/8 (top and bottom × 4)", "−1"], ["= 27/8", "44 eighths take away 17 eighths = 27 eighths", "−2"], ["= 3 3/8 L", "27 eighths = 3 wholes and 3 eighths over", "−3"], ["New whole = 3 3/8 L", "③ \"of the water that was LEFT\" → the left part is the NEW whole", "③"], ["Taken part 2 = 2/9 × 3 3/8", "① \"2/9 of the water that was left\" → taken part = 2/9 × whole", "①"], ["= 2/9 × 27/8", "3 3/8 = 27/8 (3 wholes = 24 eighths, plus 3 eighths = 27 eighths)", "×0"], ["= 54/72", "tops: 2 × 27 = 54; bottoms: 9 × 8 = 72", "×1"], ["= 3/4 L", "simplify: divide the top and the bottom by 18", "×2"]], "T4a": [["11 ÷ 8 = 11/8", "a ÷ b = a/b (÷ box of the card)", "÷"], ["= 1 3/8", "11 ÷ 8 = 1 remainder 3", "÷"], ["3/8 = 375/1000", "make the bottom 1000: top and bottom × 125", "."], ["1 3/8 = 1.375", "375/1000 = 0.375, with the 1 whole in front", "."]], "T4b": [["5 ÷ 7 = 5/7", "a ÷ b = a/b (÷ box of the card)", "÷"], ["5/7 ≈ 0.71", "5 ÷ 7 = 0.714… and never stops; the 3rd decimal digit is 4: less than 5, so keep", "≈"]], "T5a": [["Left fraction 1 = 1 − 4/9", "round 1 took 4/9, so what is left is the rest of the whole", "B"], ["= 5/9", "9/9 − 4/9 = 5/9", "B"], ["5 units = 35", "5 of the 9 equal units are left, and that is 35", "B"], ["1 unit = 35 ÷ 5", "share it equally into the units", "B"], ["= 7", "35 ÷ 5 = 7", "B"], ["Whole = 7 × 9", "the whole is all 9 units", "B"], ["= 63", "7 × 9 = 63", "B"]], "T5b": [["Left fraction 2 = 1 − 1/3", "round 2 took 1/3, so what is left is the rest of the whole", "B"], ["= 2/3", "3/3 − 1/3 = 2/3", "B"], ["2 units = 42", "2 of the 3 equal units are left, and that is 42", "B"], ["1 unit = 42 ÷ 2", "share it equally into the units", "B"], ["= 21", "42 ÷ 2 = 21", "B"], ["Left after round 1 = 21 × 3", "the amount before round 2 is all 3 units", "B"], ["= 63", "21 × 3 = 63", "B"], ["Left fraction 1 = 1 − 2/9", "round 1 took 2/9, so what is left is the rest of the whole", "B"], ["= 7/9", "9/9 − 2/9 = 7/9", "B"], ["7 units = 63", "7 of the 9 equal units are left, and that is 63", "B"], ["1 unit = 63 ÷ 7", "share it equally into the units", "B"], ["= 9", "63 ÷ 7 = 9", "B"], ["Whole = 9 × 9", "the whole is all 9 units", "B"], ["= 81", "9 × 9 = 81", "B"]]};
+
+var FCKEY='chusaki_u069_card';
+function fcPref(){try{return window.localStorage.getItem(FCKEY);}catch(e){return null;}}
+function fcSetPref(v){try{window.localStorage.setItem(FCKEY,v);}catch(e){}}
+function fcIsOpen(){return document.body.classList.contains('fc-open');}
+function fcShow(on){document.body.classList.toggle('fc-open',!!on);}
+function fcToggle(manual){var on=!fcIsOpen();fcShow(on);if(on&&cur!==0)document.body.classList.remove('fc-full');if(manual&&cur>=1)fcSetPref(on?'open':'closed');}
+function fcAuto(){var wide=window.innerWidth>=900;document.body.classList.toggle('fc-full',!wide&&cur===0);if(wide||cur===0)fcShow(true);else fcShow(fcPref()==='open');}
+function fcOpen(id){document.getElementById(id).classList.toggle('open');}
+function fcBricks(b){document.getElementById('fcbricks').classList.toggle('open');}
+function cardGlow(b,n){var g=document.querySelectorAll('#fcard .fc-st.glow'),i;for(i=0;i<g.length;i++)g[i].classList.remove('glow');
+  var rows=b.querySelectorAll('.wl');if(n<1||!rows[n-1])return;var tag=rows[n-1].getAttribute('data-card');if(!tag)return;
+  var st=document.querySelectorAll('#fcard .fc-st'),k;for(k=0;k<st.length;k++){if(st[k].getAttribute('data-step')===tag){st[k].classList.add('glow');
+    var blk=st[k].parentNode;if(blk&&blk.classList.contains('fc-blk'))blk.classList.add('open');}}}
+var _wl0=wlShow;wlShow=function(b,n){_wl0(b,n);cardGlow(b,n);};
+function fcPrint(){document.body.classList.add('printing');try{window.print();}catch(e){}setTimeout(function(){document.body.classList.remove('printing');},300);}
+try{if(location.hash==='#printcard'){setTimeout(fcPrint,500);}}catch(e){}
+var _nv0=nav;nav=function(d){_nv0(d);fcAuto();var b=document.querySelector('#s'+cur+' .wlb');if(b)cardGlow(b,wlCount(b));else cardGlow(document.body,0);};
+fcAuto();
+
+(function(){var st=document.querySelectorAll('#fcard .fc-st'),n=0,i;
+ for(i=0;i<st.length;i++)(function(e){e.addEventListener('click',function(){if(!e.classList.contains('seen')){e.classList.add('seen');n++;var s=document.getElementById('fcseen');if(s)s.textContent=n+' of '+st.length;}});})(st[i]);
+ var s0=document.getElementById('fcseen');if(s0)s0.textContent='0 of '+st.length;})();
+
+var KEY='chusaki_u069_lesson';
+var PR=["Right first time. That’s the card working.","Read the question again, and it paid off. Exam-proof.","Clean. Keep that for Tuesday.","Fixed it! That’s how brains grow."];
+var SW='Both numbers are right — but they’re in each other’s boxes. On the test that’s 0. Read (a) again, then put the right number under it.';
+var S=null,fh=null,openedAt=new Date().toISOString(),lastSavedAt=null,wrote=0,storageBad=false,attempt=1,ST={},lastP='';
+function $(id){return document.getElementById(id);}
+function sload(){try{var s=window.localStorage.getItem(KEY);return s?JSON.parse(s):null;}catch(e){storageBad=true;return null;}}
+function sstore(){try{S.min=(S.base||0)+(Date.now()-new Date(openedAt).getTime())/60000;window.localStorage.setItem(KEY,JSON.stringify(S));}catch(e){storageBad=true;}}
+function byId(id){for(var i=0;i<ITEMS.length;i++)if(ITEMS[i].id===id)return ITEMS[i];}
+function isDone(id){for(var i=0;i<S.items.length;i++)if(S.items[i].id===id)return true;return false;}
+function nDone(){return S.items.length;}
+var _nav=nav;nav=function(d){_nav(d);S.screen=cur;if(S.seen.indexOf(cur)<0)S.seen.push(cur);sstore();if(cur===5)showFinish();};
+function chipWatch(b){var at=b.getAttribute('data-chip-at');if(!at)return;var e=$(b.getAttribute('data-chip'));if(e&&wlCount(b)>=(+at))e.classList.add('on');}
+var _wlc=wlShow;wlShow=function(b,n){_wlc(b,n);chipWatch(b);};
+function init(){
+  Array.prototype.forEach.call(document.querySelectorAll('.wlb.auto'),function(b){wlShow(b,1);});
+  var P=sload();S={screen:0,seen:[0],items:[],min:0,sittings:0};
+  if(P&&typeof P==='object'&&P.items&&P.seen){S=P;}
+  S.base=S.min||0;S.sittings=(S.sittings||0)+1;attempt=S.sittings;sstore();
+  var i;for(i=0;i<ITEMS.length;i++)setupCard(ITEMS[i].id);
+  revealCards();
+  if(S.screen>0){nav(S.screen);}
+  ytStat();
+}
+function setupCard(id){
+  var it=byId(id),lh='',i,l;$('q_'+id).textContent=it.q;
+  for(i=0;i<it.lines.length;i++){l=it.lines[i];lh+='<div class="al"><label>'+l.lab+' <input type="text" class="ln-'+l.k+'" aria-label="answer '+l.k+'" disabled></label></div>';}
+  $('ln_'+id).innerHTML=lh;
+  ST[id]={state:'idle',first:null,nudged:false,otherPart:false,swapped:false,t0:null,circled:false};
+  if(isDone(id)){var r=null,k;for(k=0;k<S.items.length;k++)if(S.items[k].id===id)r=S.items[k];
+    var ins=$('yt_'+id).querySelectorAll('input');for(k=0;k<ins.length;k++){ins[k].disabled=true;var kk=ins[k].className.replace('ln-','');ins[k].value=(r.answersCorrect&&r.answersCorrect[kk])||'';}
+    $('chk_'+id).disabled=true;$('circ_'+id).classList.add('on');$('circ_'+id).disabled=true;$('yt_'+id).classList.add('done');
+    $('fb_'+id).className='feedback ok';$('fb_'+id).style.display='block';$('fb_'+id).textContent=(r.firstTryRight||r.selfFixedAfterNudge)?'⭐ done':'✨ done';ST[id].state='done';}
+}
+function revealCards(){var seen={},i,it;for(i=0;i<ITEMS.length;i++){it=ITEMS[i];var prev=null,j;for(j=i-1;j>=0;j--)if(ITEMS[j].screen===it.screen){prev=ITEMS[j];break;}
+  $('yt_'+it.id).classList.toggle('hidden',!!prev&&!isDone(prev.id));}}
+function circTap(id){var s=ST[id];if(s.state==='done')return;s.circled=true;s.t0=s.t0||Date.now();$('circ_'+id).classList.add('on');$('circ_'+id).textContent='⑤ I circled the numbers ✓';
+  var ins=$('yt_'+id).querySelectorAll('input'),i;for(i=0;i<ins.length;i++)ins[i].disabled=false;$('chk_'+id).disabled=false;if(ins[0])ins[0].focus();}
+function stat(){var f=0,x=0,i,r;for(i=0;i<S.items.length;i++){r=S.items[i];if(r.firstTryRight||r.selfFixedAfterNudge)f++;else x++;}return [f,x];}
+function ytStat(){var s=stat();var e=$('ytstat');if(e)e.textContent='⭐ '+s[0]+' right  ·  ✨ '+s[1]+' fixed  ·  '+nDone()+' of '+YT.length+' Your-turn questions done';}
+function val(id,k){var e=$('yt_'+id).querySelector('.ln-'+k);return e?e.value.trim():'';}
+function givenLines(id){var it=byId(id),o={},i;for(i=0;i<it.lines.length;i++)o[it.lines[i].k]=val(id,it.lines[i].k);return o;}
+function wantLines(id){var it=byId(id),o={},i;for(i=0;i<it.lines.length;i++)o[it.lines[i].k]=it.lines[i].v;return o;}
+function err(id,m){var fb=$('fb_'+id);fb.className='feedback err';fb.style.display='block';fb.textContent=m;}
+function lockAll(id){var els=$('yt_'+id).querySelectorAll('input'),i;for(i=0;i<els.length;i++)els[i].disabled=true;$('chk_'+id).disabled=true;}
+function gcdn(a,b){return b?gcdn(b,a%b):a;}
+function dp(s){var m=String(s).match(/\.(\d+)$/);return m?m[1].length:0;}
+function fmtOK(id,k,g,w){
+  var v=parseVal(g);if(!v)return 'Fill every box first (like 1 1/5, 7/4 or 0.75).';
+  if(w.indexOf('.')>=0){if(g.indexOf('.')<0)return 'This one is a decimal, like 0.75.';if(dp(g)>dp(w))return 'Round to '+dp(w)+' decimal places — look at the next digit.';}
+  if(k==='m'&&!/^\d+\s+\d+\s*\/\s*\d+$/.test(g))return 'Write it as a mixed number, like 1 3/8.';
+  if(v[2]==='frac'&&gcdn(v[3],v[4])>1)return 'Is it in simplest form? Divide the top and bottom by the same number.';
+  return '';
+}
+function okLine(g,w){return sameVal(parseVal(g),parseVal(w))&&(w.indexOf('.')<0||g.indexOf('.')>=0);}
+function ytCheck(id){
+  var it=byId(id),s=ST[id],gv=givenLines(id),wv=wantLines(id),ks=Object.keys(wv),i,k,m;
+  for(i=0;i<ks.length;i++){m=fmtOK(id,ks[i],gv[ks[i]],wv[ks[i]]);if(m){err(id,m);return;}}
+  if(s.state==='fix'){var ok0=true;for(i=0;i<ks.length;i++)if(!okLine(gv[ks[i]],wv[ks[i]]))ok0=false;
+    if(ok0)return fixedIt(id,gv);err(id,'Not yet — read the last lines again and copy the answers into the right boxes.');return;}
+  if(!s.first)s.first={g:gv};
+  var ok=true;for(i=0;i<ks.length;i++)if(!okLine(gv[ks[i]],wv[ks[i]]))ok=false;
+  if(ok)return gotIt(id,gv);
+  if(!s.nudged){
+    for(i=0;i<ks.length;i++){k=ks[i];if(okLine(gv[k],wv[k]))continue;
+      var j,o;for(j=0;j<it.oth.length;j++){o=it.oth[j];if(sameVal(parseVal(gv[k]),parseVal(o.v))){
+        s.nudged=true;s.otherPart=true;err(id,'That’s a real number from this story — but it’s the '+o.part+'. ④ What does the question ask for?');return;}}}
+  }
+  var sw=false;if(ks.length===2&&ks[0]==='a')sw=sameVal(parseVal(gv.a),parseVal(wv.b))&&sameVal(parseVal(gv.b),parseVal(wv.a));
+  s.swapped=sw;notYet(id,gv,sw);
+}
+function praise(){var p=PR[Math.floor(Math.random()*3)];if(p===lastP)p=PR[(PR.indexOf(p)+1)%3];lastP=p;return p;}
+function hasMixed(id){var it=byId(id),i;for(i=0;i<it.lines.length;i++)if(/^\d+\s+\d+\/\d+$/.test(it.lines[i].v))return true;return false;}
+function record(id,firstRight,gv,lines,selfFixed){
+  var s=ST[id];
+  S.items.push({id:id,left1Given:'',left1Correct:null,left1Used:false,circledTapped:!!s.circled,answersGiven:gv,answersCorrect:wantLines(id),swapped:s.swapped,firstTryRight:firstRight,selfFixedAfterNudge:!!selfFixed,answeredOtherPart:s.otherPart,linesViewed:lines,ms:Date.now()-(s.t0||Date.now())});
+  sstore();
+}
+function gotIt(id,gv){var s=ST[id],f=!s.nudged;record(id,f,f?gv:s.first.g,0,s.nudged);lockAll(id);s.state='done';var fb=$('fb_'+id);fb.className='feedback ok';fb.style.display='block';
+  fb.textContent='⭐ '+praise();if(hasMixed(id)){var c=document.createElement('span');c.className='chip5';c.textContent='⑤ multiply back: ✓';fb.appendChild(c);}after(id);}
+function rowEl(a,cls){var d=document.createElement('div'),m=document.createElement('span'),w=document.createElement('span');d.className=cls;if(a[2])d.setAttribute('data-card',a[2]);m.className='m';w.className='why';m.textContent=a[0];w.textContent=a[1];d.appendChild(m);d.appendChild(w);return d;}
+function notYet(id,gv,sw){
+  var s=ST[id];s.state='lines';lockAll(id);s.first.g=s.first.g||gv;var so=$('sorry_'+id);
+  so.innerHTML='<div class="sbig">Not yet — here’s how it goes:</div>'+(sw?'<p class="swapmsg" style="font-weight:700;color:#8d6e00;margin:6px 0">'+SW+'</p>':'');so.style.display='block';
+  var blk=document.createElement('div'),ws=document.createElement('div'),Lr=WL[id],i,bt=document.createElement('button');
+  blk.className='wlb';blk.id='nywl_'+id;blk.setAttribute('data-bid',id);ws.className='wls';for(i=0;i<Lr.length;i++)ws.appendChild(rowEl(Lr[i],'wl'));
+  bt.type='button';bt.className='btn-next';bt.innerHTML='Next line &#9656;';bt.onclick=function(){nyNext(id,bt);};blk.appendChild(ws);blk.appendChild(bt);so.appendChild(blk);wlShow(blk,1);
+  $('fb_'+id).style.display='none';
+}
+function nyNext(id,btn){var b=btn.parentNode;wlShow(b,wlCount(b)+1);if(b.classList.contains('alldone')){ST[id].state='fix';
+  var fb=$('fb_'+id);fb.className='feedback';fb.style.display='block';fb.textContent='Now type the answers from the last lines.';
+  var els=$('yt_'+id).querySelectorAll('input'),i;for(i=0;i<els.length;i++){els[i].disabled=false;els[i].value='';}$('chk_'+id).disabled=false;}}
+function fixedIt(id,gv){var s=ST[id],n=$('nywl_'+id)?wlCount($('nywl_'+id)):0;record(id,false,s.first.g,n,false);lockAll(id);s.state='done';var fb=$('fb_'+id);fb.className='feedback ok';fb.style.display='block';fb.textContent='✨ '+PR[3];after(id);}
+function after(id){$('yt_'+id).classList.add('done');ytStat();revealCards();autoSave();if(nDone()>=YT.length&&cur===5)showFinish();}
+function showFinish(){
+  if(nDone()<YT.length)return;var s=stat();$('fboth').textContent='⭐ '+s[0]+'   ✨ '+s[1];$('finish').style.display='block';
+  if(!S.celebrated){S.celebrated=true;sstore();confetti();}
+}
+function confetti(){var cols=['#F9A825','#43A047','#3F51B5','#FB8C00','#8E24AA','#00ACC1'],i;
+  for(i=0;i<36;i++){var e=document.createElement('span');e.className='cf';e.style.left=(Math.random()*100)+'vw';e.style.background=cols[i%cols.length];e.style.animationDelay=(Math.random()*0.8)+'s';
+    document.body.appendChild(e);(function(z){setTimeout(function(){if(z.parentNode)z.parentNode.removeChild(z);},4200);})(e);}}
+/* ---- saving: after every item; one picker press per sitting, then it keeps writing to the same file ---- */
+function fileName(){var d=new Date(),p=function(n){return (n<10?'0':'')+n;};return 'MATH_U069_Lesson_'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'_a'+attempt+'.json';}
+function payload(){
+  var s=stat(),sw=0,i,now=new Date();for(i=0;i<S.items.length;i++)if(S.items[i].swapped)sw++;
+  lastSavedAt=now.toISOString();
+  return {student:'Prem',subject:'Math',unit:'U069',type:'lesson',attempt:attempt,openedAt:openedAt,lastSavedAt:lastSavedAt,
+    minutesSpent:Math.round(((S.base||0)+(now-new Date(openedAt))/60000)*10)/10,screensSeen:S.seen.length,finished:S.items.length>=YT.length,stars:s[0],fixed:s[1],swaps:sw,items:S.items};
+}
+function setBar(cls,html){var b=document.querySelectorAll('.savebar'),i;for(i=0;i<b.length;i++){b[i].className='savebar'+(cls?' '+cls:'');b[i].style.display='block';b[i].innerHTML=html;}}
+function markSaved(how){setBar('saved','Saved — Dad and Chusaki can see it now ('+how+')');}
+function markNot(msg,btn){setBar('', msg+(btn?' <button type="button" class="btn-map" onclick="saveClick()">Save my progress</button>':''));}
+function writeTo(h){return h.createWritable().then(function(w){return w.write(JSON.stringify(payload(),null,2)).then(function(){return w.close();});});}
+function autoSave(){
+  if(!S.items.length)return;
+  if(fh){writeTo(fh).then(function(){wrote++;markSaved(S.items.length+' of '+YT.length+' questions, file '+fileName());}).catch(function(){fh=null;markNot('The file could not be updated.',true);});return;}
+  if(window.showSaveFilePicker){markNot('Your answers are kept on this computer. Press the button once, choose the folder called <b>SelfCheck Results</b> and press Save. After that it saves by itself after every question.',true);return;}
+  if(S.items.length>=YT.length){markNot('This browser cannot save to a folder by itself. Press the button to get the results file.',true);return;}
+  setBar('','Your answers are kept on this computer. When you finish, press Save to get your results file.');
+}
+async function saveClick(){
+  var name=fileName(),json;
+  if(window.showSaveFilePicker){
+    try{fh=await window.showSaveFilePicker({suggestedName:name,types:[{description:'JSON results',accept:{'application/json':['.json']}}]});
+      await writeTo(fh);wrote++;markSaved(S.items.length+' of '+YT.length+' questions, file '+name);return;
+    }catch(e){fh=null;if(e&&e.name==='AbortError'){markNot('You closed the save box, so nothing was saved yet.',true);return;}}}
+  try{json=JSON.stringify(payload(),null,2);var blob=new Blob([json],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},4000);
+    markSaved('downloaded — if it went to Downloads, move it into SelfCheck Results');
+  }catch(e2){markNot('Saving did not work. Tell Dad.',false);}
+}
+init();
+</script>
+</body>
+</html>
