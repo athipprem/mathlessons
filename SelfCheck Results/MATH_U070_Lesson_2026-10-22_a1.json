@@ -1,0 +1,110 @@
+{
+  "student": "Prem",
+  "subject": "Math",
+  "unit": "U070",
+  "type": "lesson",
+  "attempt": 1,
+  "openedAt": "2026-10-22T11:03:17.763Z",
+  "lastSavedAt": "2026-10-22T11:10:00.830Z",
+  "minutesSpent": 6.7,
+  "screensSeen": 5,
+  "finished": false,
+  "stars": 3,
+  "fixed": 2,
+  "swaps": 0,
+  "usedSlant": 0,
+  "forgotHalf": 0,
+  "mb3Right": null,
+  "items": [
+    {
+      "id": "Y1",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "90"
+      },
+      "answersCorrect": {
+        "ans": "90"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "linesViewed": 0,
+      "ms": 24649
+    },
+    {
+      "id": "Y2",
+      "circledTapped": true,
+      "answersGiven": {
+        "a": "44",
+        "b": "44"
+      },
+      "answersCorrect": {
+        "a": "44",
+        "b": "44"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "linesViewed": 0,
+      "ms": 23743
+    },
+    {
+      "id": "Y3",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "2 2/3"
+      },
+      "answersCorrect": {
+        "ans": "1 2/3"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "linesViewed": 11,
+      "ms": 73714
+    },
+    {
+      "id": "Y4",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "204"
+      },
+      "answersCorrect": {
+        "ans": "204"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "linesViewed": 0,
+      "ms": 40338
+    },
+    {
+      "id": "Y5",
+      "circledTapped": true,
+      "answersGiven": {
+        "w": "Same",
+        "a": "28"
+      },
+      "answersCorrect": {
+        "w": "same",
+        "a": "27"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "linesViewed": 6,
+      "ms": 32659
+    }
+  ],
+  "boost": []
+}

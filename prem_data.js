@@ -15,13 +15,40 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '20 Oct 2026',
+  updated:        '22 Oct 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:70, topic:'Cycle 7 \u2014 Chapter 4 opens: Base and Height of a triangle (Shaping Maths 5A Unit 4, Activities 1\u20133) + a fractions check-in', status:'Test Pending', buildNote:'Built 20 Oct 2026 per BUILD_PLAN_MATH_U70_BaseAndHeight.md v1.0, written from M7 (12/20; Kangaroo 4/5; fractions block 7/12; Q15 missed on the reverse step, not the half-rectangle step). ONE idea: every base has its own height, the straight-up line from the opposite corner that meets the base line at a square corner; slanted sides are not heights; the height can be OUTSIDE (leaning triangles). The area rule (base x height / 2) is U60\'s. Lesson Triangles_Lesson_BaseAndHeight.html, 6 screens: warm-up; the picture (box, turned three ways); the lines (slanted sides are not heights); the leaning triangle (height outside, checked two ways); Your turn x5 (a nudge if he uses a slanted side, another if he forgets to halve); a 2-minute fractions check-in (improper first). A Triangle Card sits beside him with the Fraction Card as a second tab. The Save button sits alone at the end of the page, the only way back is the X top-left, and it warns if anything is unsaved. Test Unit_070_Test_BaseAndHeight.docx: 16Q = 4 fraction Recall (borrow, carry, of-what-was-left, working backwards) + Part 1 x12 (Basic 3, Intermediate 5, Applied 4), figures drawn from the plan coordinates. Key question Q5 (leaning triangle, height outside). Lesson and test on different days. Gates: verify_u70_plan.py --html PASS (262 worked lines, 0 bad, 0 untagged, prior reuse 0), verify_lesson_pack.py PASS, 52 Playwright checks PASS. U71 (missing height or base) is planned from TEST_RECORD_U70.md.' },
+  currentUnit: { n:71, topic:'Cycle 7 \u2014 Chapter 4: the missing height or base of a triangle (undo the half first)', status:'Test Pending', buildNote:'Built 22 Oct 2026 per BUILD_PLAN_MATH_U71_MissingHeight.md v1.0, written from TEST_RECORD_U70.md and the school Chapter 4 map. ONE idea: undo the half first (box = area x 2), then the missing side = box / the side you know. Triangle Card gains T5 and T6; the new Answer Check (check 1: what does it ask for, all of it? check 2: every number copied right? check 3: back-check, undo your last step) sits on the card and the test band. Lesson Triangles_Lesson_MissingHeight.html, 6 screens: warm-up; a 3-question check-in (working backwards, free items, half-check); the missing height; the missing base and the table; two bases, one triangle; Your turn x5. Test Unit_071_Test_MissingHeight.docx: 16Q = Recall x4 (1 fractions, 2 whole numbers, 1 area) + Part 1 x12 (Basic 3, Intermediate 5, Applied 4); key question Q5, a leaning triangle with its height outside and the area given. 8 pages with the key. Lesson and test on different days. Gates: verify_u71_plan.py --html PASS (315 worked lines, 0 bad, 0 leaks, 0 prior reuse), verify_lesson_pack.py PASS, 82 Playwright checks PASS. U72 is planned from TEST_RECORD_U71.md.' },
   lastUnit: {
+    n:70, outOf:12, score:9, markedScore:9, pct:75, delta:null, prevScore:null, prevOutOf:null, prevLabel:'M7 (different scale)',
+    coached: false, independentResult: true, distanceFromClass: 'Shaping Maths 5A Ch.4 Unit 4: Recall 4 and Activity 1 done in class; area pages blank when sat',
+    patternLabel: 'Unit 70 &mdash; Base and Height, graded 22 Oct 2026 &mdash; Part 1 9/12 verified &middot; Recall 3/4 &middot; alone ticked',
+    patternInsight: '<strong>Basic 3/3 &middot; Intermediate 3/5 &middot; Applied 3/4 &middot; Recall 3/4.</strong> Key question Q5 wrong (71 for 66; 12 x 11 written as 142, then halved). A slanted side used as a height: 0 of 12. Area units missing: 0 of 12. Three halving misses (Q5, Q7, Q12), two of them with fraction lengths. R4 (work backwards) wrong for the second time. Lesson JSON: 3/5 first try, 6.7 min, not finished; the test was sat 39 minutes after the lesson, the same day. Full record in TEST_RECORD_U70.md. Observation only.',
+    analysisLabel: 'Next: Unit 71 &mdash; the missing height or base (built 22 Oct 2026)',
+    analysisInsight: 'U71 opens from this record and the school Chapter 4 map: undo the half first, an Answer Check on every question, and a short check-in on working backwards.',
+    qSummary: '<strong>Basic 3/3 | Intermediate 3/5 | Applied 3/4 | Recall 3/4</strong> &mdash; 9/12 (75%)',
+    qBreakdown: [
+      { q:'R1', topic:'Subtract mixed, borrow (Recall)', lvl:'l', pass:true, note:'&#10003; 2 13/24; first try crossed out.' },
+      { q:'R2', topic:'Add mixed, carry (Recall)', lvl:'l', pass:true, note:'&#10003; 6 5/24.' },
+      { q:'R3', topic:'Left part, then 3/5 of what was left (Recall)', lvl:'m', pass:true, note:'&#10003; 1 1/3 kg after a crossed-out 2 kg.' },
+      { q:'R4', topic:'Work backwards, two rounds (Recall)', lvl:'h', pass:false, note:'&#10007; 224; correct 56. 32 x 5 = 160, then x 7/5.' },
+      { q:'Q1', topic:'Right-angled triangle 15, 8, 17', lvl:'w', pass:true, note:'&#10003; 60 cm&sup2;.' },
+      { q:'Q2', topic:'Base 17, height 4', lvl:'w', pass:true, note:'&#10003; 34 cm&sup2; (68 crossed out).' },
+      { q:'Q3', topic:'Which line is the height', lvl:'w', pass:true, note:'&#10003; b.' },
+      { q:'Q4', topic:'14, 13, 15 with a 12 cm height', lvl:'m', pass:true, note:'&#10003; 84 cm&sup2;.' },
+      { q:'Q5', topic:'KEY: leaning triangle, height 12 outside, base 11', lvl:'m', pass:false, note:'&#10007; 71; correct 66. 12 x 11 written as 142, then halved.' },
+      { q:'Q6', topic:'Height is 3/5 of a 20 cm base', lvl:'m', pass:true, note:'&#10003; 120 cm&sup2;.' },
+      { q:'Q7', topic:'Base 3 m, height 4 1/2 m', lvl:'m', pass:false, note:'&#10007; 28; correct 6 3/4. x 2 written, then 54 / 2 = 28.' },
+      { q:'Q8', topic:'Soil bags, 3 m&sup2; each', lvl:'m', pass:true, note:'&#10003; 7 bags.' },
+      { q:'Q9', topic:'Triangle in a 14 x 9 rectangle', lvl:'h', pass:true, note:'&#10003; 63 m&sup2;.' },
+      { q:'Q10', topic:'12 x 8 card, area not painted', lvl:'h', pass:true, note:'&#10003; 48 cm&sup2;.' },
+      { q:'Q11', topic:'Same base, same height; Ali claim', lvl:'h', pass:true, note:'&#10003; No; one area given (40 cm&sup2;).' },
+      { q:'Q12', topic:'Two flags, one triangular, mixed numbers', lvl:'h', pass:false, note:'&#10007; Ben, 1 1/8; correct Amy, 3/8. Triangle flag not halved.' }
+    ]
+  },
+  _M7archived: {
     n:'M7', outOf:20, score:12, markedScore:12, pct:60, delta:0, prevScore:12, prevOutOf:20, prevLabel:'M6 (verified)',
     coached: false, independentResult: null, distanceFromClass: 'Cumulative review, Units 61-69 (Shaping Maths 5A Ch.3 Fractions) \u2014 +0 for Q1-7 and Q10-14; Q9 and Q15 are area (Ch.4, not yet reached in class)',
     patternLabel: 'Milestone 7 \u2014 Units 61\u201369, Fractions \u2014 12/20 verified (12 ticks; header boxes blank) \u2014 sat 19 Oct 2026, the day it was built',
@@ -806,25 +833,41 @@ var PREM_DATA = {
     { n:67, score:9, outOf:12, delta:+2, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:2, recallOutOf:4 },
     { n:68, score:7, outOf:12, delta:-2, color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, recallScore:3, recallOutOf:4 },
     { n:69, score:15, outOf:16, delta:null, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
-    { n:'M7', label:'M7', score:12, outOf:20, delta:0, color:'linear-gradient(135deg,#283593,#1A237E)', star:false }
+    ,
+    { n:70, score:9, outOf:12, delta:null, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 71,
+      badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 71 &mdash; The missing height or base of a triangle: undo the half first (Shaping Maths 5A Unit 4)',
+      tags: [
+        { t:'Built 22 Oct 2026 (plan v1.0)', c:'tblue' },
+        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Lesson one day, test the NEXT day', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'One lesson + Triangle Card (T5, T6) + Answer Check + Your turn x5 + 3-question check-in', c:'tgreen' },
+        { t:'Test: 4 Recall + 12 questions; key question Q5, a leaning triangle, area given', c:'tgreen' },
+        { t:'Gates: plan gate + lesson pack + 82 browser checks PASS', c:'tgreen' }
+      ],
+      note: 'Built from BUILD_PLAN_MATH_U71_MissingHeight.md v1.0, written from TEST_RECORD_U70.md. One idea: undo the half first (box = area x 2), then the missing side = box / the side you know. New: the Answer Check (what does it ask for, every number copied right, back-check) on the card and the test band. The Save button sits alone at the end; the only way back is the X, which warns if anything is unsaved.',
+      status: 'live'
+    },
+    {
       n: 70,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
       title: 'Unit 70 &mdash; Base and Height of a triangle: Chapter 4 opens (Shaping Maths 5A Unit 4), with a fractions check-in',
       tags: [
-        { t:'Built 20 Oct 2026 (plan v1.0)', c:'tblue' },
-        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
-        { t:'Lesson one day, test the NEXT day', s:'background:#E8EAF6;color:#283593;font-weight:700' },
-        { t:'One lesson + Triangle Card (Fraction Card as a second tab) + Your turn x5 + fractions check-in', c:'tgreen' },
-        { t:'Test: 4 fraction Recall + 12 questions; key question Q5, a leaning triangle', c:'tgreen' },
-        { t:'Gates: plan gate + lesson pack + 52 browser checks PASS', c:'tgreen' }
+        { t:'9/12 verified &middot; Recall 3/4 &mdash; alone', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'Basic 3/3 &middot; Intermediate 3/5 &middot; Applied 3/4', c:'torange' },
+        { t:'Key question Q5 wrong (12 x 11 slip, then halved)', s:'background:#FFF8E1;color:#E65100;font-weight:700' },
+        { t:'Slanted side used as a height: 0 of 12', c:'tgreen' },
+        { t:'Sat 39 min after the lesson, same day', c:'torange' },
+        { t:'&rarr; Unit 71', c:'torange' }
       ],
       note: 'Built from BUILD_PLAN_MATH_U70_BaseAndHeight.md v1.0, written from M7. One idea: every base has its own height, the line from the opposite corner that meets the base line at a square corner; slanted sides are not heights and the height can be outside the triangle. The area rule is U60\'s. Figures are drawn from the plan coordinates. The lesson nudges (once) if he uses a slanted side, or forgets to halve. The Save button sits alone at the end; the only way back is the X, which warns while anything is unsaved. Fractions run alongside Chapter 4 by default (plan section 9 asks Lui whether to hold Chapter 4 back instead).',
-      status: 'live'
+      status: 'done'
     },
     {
       n: 'M7',
