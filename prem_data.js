@@ -15,13 +15,44 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '17 Oct 2026',
+  updated:        '20 Oct 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:69, topic:'Cycle 7 \u2014 School-test prep: all of Chapter 3 Fractions (Shaping Maths 5A Ch.3, school test Tue 20 Oct)', status:'Test Pending', buildNote:'Built 17 Oct 2026 per BUILD_PLAN_MATH_U69_SchoolTestPrep_Ch3.md v1.0. Why: school fractions test Tue 20 Oct covers all of Chapter 3 (Activity Book pp.39-71). U68 (7/12) showed the subtraction step and \u2019answer the part the question asks\u2019 are the live risks; this unit is a review, not new teaching. Route: Sun 18 Oct the lesson, Mon 19 Oct the mock, Tue 20 Oct the school test. ONE lesson, Fractions_Lesson_ChapterReview.html, 6 screens (recall of the card; add/subtract; multiply and of-what-was-left; the four-part story with the 4th check; division and decimals; working backwards), each with a worked example and a Your turn (8 in all, saved after each, resumes where he stopped, nudge if he answers a different part of the story). The Chapter-3 Formula Card adds HOW TO +, division (a / b), decimals and rounding, working backwards and a 5th step CHECK TWICE; it prints on one A4 page (link from the hub). Mock: Unit_069_Mock_Ch3Fractions.docx, 16Q in three parts (A six calculations, B six word problems, C four challenge), 45 minutes, card put away, self-marked from a line-by-line key on Monday; Lui confirms later. Key question C1. After-marking table (13+ ready; Part A under 5 redo A; A6/B4/B5 redo screen 4; C2/C3 redo screen 5; other-part on C1/C4 say the 4th step aloud). Gates: verify_u69_build.py PASS (amended compressed-runs counter 0), verify_lesson_pack.py PASS, Playwright lesson runs PASS (0 page errors); verify_u69_plan.py FAIL only on its unsatisfiable compressed-runs counter (fires on pinned lines, known defect). Stopped for the lesson JSON, the mock and the school result; U70 stays an outline.' },
+  currentUnit: { n:70, topic:'Cycle 7 \u2014 Chapter 4 opens: Base and Height of a triangle (Shaping Maths 5A Unit 4, Activities 1\u20133) + a fractions check-in', status:'Test Pending', buildNote:'Built 20 Oct 2026 per BUILD_PLAN_MATH_U70_BaseAndHeight.md v1.0, written from M7 (12/20; Kangaroo 4/5; fractions block 7/12; Q15 missed on the reverse step, not the half-rectangle step). ONE idea: every base has its own height, the straight-up line from the opposite corner that meets the base line at a square corner; slanted sides are not heights; the height can be OUTSIDE (leaning triangles). The area rule (base x height / 2) is U60\'s. Lesson Triangles_Lesson_BaseAndHeight.html, 6 screens: warm-up; the picture (box, turned three ways); the lines (slanted sides are not heights); the leaning triangle (height outside, checked two ways); Your turn x5 (a nudge if he uses a slanted side, another if he forgets to halve); a 2-minute fractions check-in (improper first). A Triangle Card sits beside him with the Fraction Card as a second tab. The Save button sits alone at the end of the page, the only way back is the X top-left, and it warns if anything is unsaved. Test Unit_070_Test_BaseAndHeight.docx: 16Q = 4 fraction Recall (borrow, carry, of-what-was-left, working backwards) + Part 1 x12 (Basic 3, Intermediate 5, Applied 4), figures drawn from the plan coordinates. Key question Q5 (leaning triangle, height outside). Lesson and test on different days. Gates: verify_u70_plan.py --html PASS (262 worked lines, 0 bad, 0 untagged, prior reuse 0), verify_lesson_pack.py PASS, 52 Playwright checks PASS. U71 (missing height or base) is planned from TEST_RECORD_U70.md.' },
   lastUnit: {
+    n:'M7', outOf:20, score:12, markedScore:12, pct:60, delta:0, prevScore:12, prevOutOf:20, prevLabel:'M6 (verified)',
+    coached: false, independentResult: null, distanceFromClass: 'Cumulative review, Units 61-69 (Shaping Maths 5A Ch.3 Fractions) \u2014 +0 for Q1-7 and Q10-14; Q9 and Q15 are area (Ch.4, not yet reached in class)',
+    patternLabel: 'Milestone 7 \u2014 Units 61\u201369, Fractions \u2014 12/20 verified (12 ticks; header boxes blank) \u2014 sat 19 Oct 2026, the day it was built',
+    patternInsight: '<strong>Basic 2/3 &middot; Intermediate 3/6 &middot; Applied 3/6 &middot; Kangaroo 4/5 &middot; Fractions block (Q1\u20137, Q10\u201314) 7/12 &middot; Recall 1/3.</strong> Kangaroo went from 1/5 (M6) to 4/5 on fraction puzzles: Q17\u201320 right, Q16 wrong (A for C). Wrong: Q2 (2 1/2 for 2 7/18), Q5 (3 1/4 for 2 1/4; the sum written as 7 7/12), Q6 (1 9/10 for 1 1/2; first subtraction right, the 2/5 step began from 3/2), Q9 (18 cm, the missing length; area not written), Q10 (96 for 80), Q11 (shoes right, $90 for $50 more), Q15 (4 cm for 8 cm; area 36 right, height line absent). Right: Q1, 3, 4, 7, 8, 12, 13, 14. Independence not recorded on the paper; no provenance box. <strong>Paper defect:</strong> the key page printed the value, not the letter, for Q16\u201320 (an executor bug, fixed). Full record in TEST_RECORD_M7.md. Observation only.',
+    analysisLabel: 'Next: Unit 70 &mdash; Chapter 4 opens: Base and Height (built 20 Oct 2026)',
+    analysisInsight: 'Plan section 5 rows hit (facts, not a plan): fractions block 7/12 is in the flag-to-Lui row; Q15 wrong is in the half-rectangle row, but the working shows that step intact (72, then 36) and the doubling absent, so the planner moved the reverse formula to U71. Kangaroo 4/5 is in the breakthrough row (Applied Problems radar bumped). The U70 plan runs fractions alongside Chapter 4 (a check-in screen and four fraction Recall questions).',
+    qSummary: '<strong>Basic 2/3 | Intermediate 3/6 | Applied 3/6 | Kangaroo 4/5</strong> &mdash; 12/20 (60%) | Fractions block 7/12',
+    qBreakdown: [
+      { q:'Q1', topic:'Fraction as division (8 &divide; 12)', lvl:'w', pass:true, note:'&#10003; 2/3.' },
+      { q:'Q2', topic:'Subtract mixed, unlike bottoms (6 2/9 &minus; 3 5/6)', lvl:'w', pass:false, note:'&#10007; 2 1/2; correct 2 7/18. Both conversions to eighteenths are right; the answer does not follow from them.' },
+      { q:'Q3', topic:'Multiply with cancelling (10/21 &times; 14/15)', lvl:'w', pass:true, note:'&#10003; 4/9.' },
+      { q:'Q4', topic:'Fraction left &rarr; whole (4/7 given away, 18 left)', lvl:'m', pass:true, note:'&#10003; 42 beads.' },
+      { q:'Q5', topic:'Add then subtract mixed numbers', lvl:'m', pass:false, note:'&#10007; 3 1/4 m; correct 2 1/4 m. 3 9/12 + 2 10/12 was written as 7 7/12 (key 6 7/12); the later subtraction is right for that start.' },
+      { q:'Q6', topic:'Left part, then 2/5 of what was left', lvl:'m', pass:false, note:'&#10007; 1 9/10 kg; correct 1 1/2 kg. 3 2/3 &minus; 1 1/6 = 2 3/6 right; the 2/5 step began from 3/2 for 2 1/2.' },
+      { q:'Q7', topic:'Division to a decimal (17 &divide; 6, 2 d.p.)', lvl:'m', pass:true, note:'&#10003; 2.83 m. Long division shown; a crossed-out entry on the answer line.' },
+      { q:'Q8', topic:'Nth term of a +8 pattern (Recall)', lvl:'m', pass:true, note:'&#10003; 491 (59 &times; 8 + 19).' },
+      { q:'Q9', topic:'Perimeter to area (Recall)', lvl:'m', pass:false, note:'&#10007; 18 cm; correct 198 cm&sup2;. 18 is the missing length; no working on the page.' },
+      { q:'Q10', topic:'Two-stage fraction gone, bar model', lvl:'h', pass:false, note:'&#10007; 96 marbles; correct 80. Bars drawn; 24 &times; 4 = 96.' },
+      { q:'Q11', topic:'2/9 of $450 then 3/7 of the rest; compare', lvl:'h', pass:false, note:'&#10007; Shoes, $90; correct the shoes, $50 more. Part one right.' },
+      { q:'Q12', topic:'Fraction of a mixed number, two flags', lvl:'h', pass:true, note:'&#10003; Ben, 1/4 kg more.' },
+      { q:'Q13', topic:'Fraction of the whole with 10 more girls', lvl:'h', pass:true, note:'&#10003; 40 pupils.' },
+      { q:'Q14', topic:'Compare a mixed number and a decimal', lvl:'h', pass:true, note:'&#10003; Mia, 0.03 km further.' },
+      { q:'Q15', topic:'Triangle of equal area, find the height (Recall + Ch.4 baseline)', lvl:'h', pass:false, note:'&#10007; 4 cm; correct 8 cm. Area 36 right (72, then 36); the final line is absent; 4 equals 36 &divide; 9.' },
+      { q:'Q16', topic:'Kangaroo &mdash; 1/2 of 1/3 vs 1/3 of 1/2', lvl:'k', pass:false, note:'&#10007; A; correct C (both are 10). A red note "10 is A ?" beside it: the printed key showed 10, not the letter C (fixed).' },
+      { q:'Q17', topic:'Kangaroo &mdash; cups in a full bottle', lvl:'k', pass:true, note:'&#10003; D (12).' },
+      { q:'Q18', topic:'Kangaroo &mdash; 1/2 + 1/6 + 1/12 + 1/20 + 1/30', lvl:'k', pass:true, note:'&#10003; A (5/6); sixtieths shown.' },
+      { q:'Q19', topic:'Kangaroo &mdash; half of what is left, three times', lvl:'k', pass:true, note:'&#10003; B (1/8).' },
+      { q:'Q20', topic:'Kangaroo &mdash; ribbon in halves, then thirds', lvl:'k', pass:true, note:'&#10003; E (30 cm).' }
+    ]
+  },
+  _U68archived: {
     n:68, outOf:12, score:7, markedScore:null, pct:58, delta:-2, prevScore:9, prevOutOf:12, prevLabel:'U67',
     coached: false, independentResult: true, distanceFromClass: 'Same chapter as U67, +0 \u2014 Shaping Maths 5A Ch.3, Core',
     patternLabel: 'Unit 68 \u2014 The Left Part, Done Right, graded 17 Oct 2026 \u2014 Part 1 7/12 verified (header reads 5; band marks add to 7) &middot; Recall 3/4 &middot; lesson 2 stars + 3 fixed, 0 swaps (13 min)',
@@ -687,13 +718,13 @@ var PREM_DATA = {
     { name: 'Geometry',          c: 74, t: 80 },
     { name: 'Counting',          c: 87, t: 85 },
     { name: 'Number Theory',     c: 89, t: 82 },
-    { name: 'Applied Problems',  c: 76, t: 80 },
+    { name: 'Applied Problems',  c: 80, t: 80 },
     { name: 'Statistics & Probability', c: 80, t: 85 }
   ],
 
   // Radar chart axes order: Logic, Geometry, NumSense, Algebra, Counting, Arith, NumTheory, Applied, Statistics & Probability
   // NOTE: dashboard's buildRadar() has its own hardcoded `labels` array that must stay in sync with this order — see Prems_Math_Coach_Dashboard.html.
-  radarCurrent:  [88, 74, 88, 99, 87, 83, 89, 76, 80],
+  radarCurrent:  [88, 74, 88, 99, 87, 83, 89, 80, 80],
   radarTarget:   [90, 85, 90, 85, 80, 85, 82, 80, 85],
   radarBaseline: [80, 68, 85, 75, 20, 45, 35, 15, 20],
 
@@ -773,25 +804,56 @@ var PREM_DATA = {
     { n:65, score:5, outOf:12, delta:+1, color:'linear-gradient(135deg,#EF5350,#C62828)', star:false, recallScore:2, recallOutOf:4 },
     { n:66, score:7, outOf:12, delta:+2, color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, recallScore:2, recallOutOf:4 },
     { n:67, score:9, outOf:12, delta:+2, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:2, recallOutOf:4 },
-    { n:68, score:7, outOf:12, delta:-2, color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, recallScore:3, recallOutOf:4 }
+    { n:68, score:7, outOf:12, delta:-2, color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, recallScore:3, recallOutOf:4 },
+    { n:69, score:15, outOf:16, delta:null, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
+    { n:'M7', label:'M7', score:12, outOf:20, delta:0, color:'linear-gradient(135deg,#283593,#1A237E)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 70,
+      badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 70 &mdash; Base and Height of a triangle: Chapter 4 opens (Shaping Maths 5A Unit 4), with a fractions check-in',
+      tags: [
+        { t:'Built 20 Oct 2026 (plan v1.0)', c:'tblue' },
+        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Lesson one day, test the NEXT day', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'One lesson + Triangle Card (Fraction Card as a second tab) + Your turn x5 + fractions check-in', c:'tgreen' },
+        { t:'Test: 4 fraction Recall + 12 questions; key question Q5, a leaning triangle', c:'tgreen' },
+        { t:'Gates: plan gate + lesson pack + 52 browser checks PASS', c:'tgreen' }
+      ],
+      note: 'Built from BUILD_PLAN_MATH_U70_BaseAndHeight.md v1.0, written from M7. One idea: every base has its own height, the line from the opposite corner that meets the base line at a square corner; slanted sides are not heights and the height can be outside the triangle. The area rule is U60\'s. Figures are drawn from the plan coordinates. The lesson nudges (once) if he uses a slanted side, or forgets to halve. The Save button sits alone at the end; the only way back is the X, which warns while anything is unsaved. Fractions run alongside Chapter 4 by default (plan section 9 asks Lui whether to hold Chapter 4 back instead).',
+      status: 'live'
+    },
+    {
+      n: 'M7',
+      badge: 'linear-gradient(135deg,#283593,#1A237E)',
+      title: 'Milestone 7 &mdash; Units 61&ndash;69 Review (ISA-Style + Kangaroo, Fractions, Year 5)',
+      tags: [
+        { t:'12/20 (60%) verified (12 ticks; header boxes blank)', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'Basic 2/3 &middot; Intermediate 3/6 &middot; Applied 3/6 &middot; Kangaroo 4/5', c:'torange' },
+        { t:'Fractions block 7/12', c:'torange' },
+        { t:'Kangaroo 1/5 &rarr; 4/5 on fraction puzzles', c:'tgreen' },
+        { t:'Key page printed values, not letters, for Q16&ndash;20 (fixed)', s:'background:#FFF8E1;color:#E65100;font-weight:700' },
+        { t:'&rarr; Unit 70, Chapter 4', c:'torange' }
+      ],
+      note: 'Sat 19 Oct 2026, the day it was built (the plan said 24&ndash;25 Oct) and the day before the school Chapter 3 test; independence not recorded on the paper. Right: Q1, 3, 4, 7, 8, 12, 13, 14, 17&ndash;20. Wrong: Q2, 5, 6, 9, 10, 11, 15, 16. The fraction misses carry visible working with a slip inside it (Q2, Q5, Q6); Q9, Q10, Q11 and Q15 stop short or use a number that does not match. Recall 1/3. Full record in TEST_RECORD_M7.md.',
+      status: 'done'
+    },
+    {
       n: 69,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
       title: 'Unit 69 &mdash; School-test prep: all of Chapter 3 Fractions (school test Tue 20 Oct)',
       tags: [
-        { t:'Built 17 Oct 2026 (plan v1.0)', c:'tblue' },
-        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
-        { t:'Lesson Sun 18 &rarr; Mock Mon 19 &rarr; School test Tue 20', s:'background:#E8EAF6;color:#283593;font-weight:700' },
-        { t:'One review lesson + Chapter-3 Formula Card (prints on one page) + Your turn x8', c:'tgreen' },
-        { t:'Mock: 16Q, 45 min, card put away, self-marked from the key', c:'tgreen' },
-        { t:'Gates: build + lesson pack + lesson run PASS; plan gate FAIL only on its unsatisfiable compressed-runs counter', c:'tgreen' }
+        { t:'Mock 15/16 (A 6/6, B 5/6, C 4/4) &mdash; independent', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'Key question C1 right', c:'tgreen' },
+        { t:'Sat 18 Oct, the same day as the lesson (the plan said Monday)', s:'background:#FFF8E1;color:#E65100;font-weight:700' },
+        { t:'Lesson JSON missing: no Save button was visible on the iPad (fixed)', s:'background:#FFF8E1;color:#E65100;font-weight:700' },
+        { t:'&rarr; M7', c:'torange' }
       ],
-      note: 'Built from BUILD_PLAN_MATH_U69_SchoolTestPrep_Ch3.md v1.0 for the school fractions test on Tue 20 Oct (all of Chapter 3, Activity Book pp.39-71). A review, not new teaching. Six screens, each with a worked example and a Your turn; the Chapter-3 card adds + , division, decimals, working backwards and a check-twice step. Mock: 16 questions in three parts (A calculations, B word problems, C challenge), key question C1, with a Monday-evening decision table. The lesson and the mock are on different days. Stopped for the lesson JSON, the mock and the school result.',
-      status: 'live'
+      note: 'Review lesson Fractions_Lesson_ChapterReview.html plus the 16-question mock Unit_069_Mock_Ch3Fractions.docx. B4 was the only miss. The lesson results file was not written because the Save button only appeared after item 8 on his iPad; the page was fixed and the SAVE BUTTON RULE added. Full record in TEST_RECORD_U69.md.',
+      status: 'done'
     },
     {
       n: 68,
