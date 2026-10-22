@@ -833,7 +833,7 @@ var PREM_DATA = {
     { n:67, score:9, outOf:12, delta:+2, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:2, recallOutOf:4 },
     { n:68, score:7, outOf:12, delta:-2, color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, recallScore:3, recallOutOf:4 },
     { n:69, score:15, outOf:16, delta:null, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
-    ,
+    { n:'M7', label:'M7', score:12, outOf:20, delta:0, color:'linear-gradient(135deg,#283593,#1A237E)', star:false },
     { n:70, score:9, outOf:12, delta:null, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 }
   ],
 
