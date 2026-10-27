@@ -1,0 +1,142 @@
+{
+  "student": "Prem",
+  "subject": "Math",
+  "unit": "U071",
+  "type": "lesson",
+  "attempt": 1,
+  "openedAt": "2026-10-26T13:18:14.024Z",
+  "lastSavedAt": "2026-10-26T13:23:56.817Z",
+  "minutesSpent": 5.7,
+  "screensSeen": 6,
+  "finished": true,
+  "stars": 5,
+  "fixed": 0,
+  "swaps": 0,
+  "usedSlant": 0,
+  "forgotHalf": 0,
+  "forgotDouble": 0,
+  "answeredOtherPart": 0,
+  "mb1tRight": true,
+  "items": [
+    {
+      "id": "Y1",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "13"
+      },
+      "answersCorrect": {
+        "ans": "13"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": null,
+      "fixedAfterLines": false,
+      "linesViewed": 0,
+      "ms": 20130
+    },
+    {
+      "id": "Y2",
+      "circledTapped": true,
+      "answersGiven": {
+        "a": "12",
+        "b": "13"
+      },
+      "answersCorrect": {
+        "a": "12",
+        "b": "13"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": null,
+      "fixedAfterLines": false,
+      "linesViewed": 0,
+      "ms": 12265
+    },
+    {
+      "id": "Y3",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "48"
+      },
+      "answersCorrect": {
+        "ans": "48"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": null,
+      "fixedAfterLines": false,
+      "linesViewed": 0,
+      "ms": 40073
+    },
+    {
+      "id": "Y4",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "9"
+      },
+      "answersCorrect": {
+        "ans": "9"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": null,
+      "fixedAfterLines": false,
+      "linesViewed": 0,
+      "ms": 31677
+    },
+    {
+      "id": "Y5",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "5"
+      },
+      "answersCorrect": {
+        "ans": "5"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": null,
+      "fixedAfterLines": false,
+      "linesViewed": 0,
+      "ms": 22414
+    }
+  ],
+  "boost": [
+    {
+      "id": "MB1t",
+      "answerGiven": "60",
+      "answerCorrect": "60",
+      "right": true,
+      "tries": 1,
+      "selfFixedAfterNudge": false,
+      "fixedAnswer": null,
+      "fixedAfterLines": false,
+      "linesViewed": 0
+    }
+  ]
+}

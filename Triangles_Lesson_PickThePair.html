@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fix-It Corner and Pick the Pair — Lesson (Unit 72)</title>
+<style>
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#8D6E00;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.wrap{max-width:760px;margin:0 auto;padding:16px;width:100%}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin:12px 0}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.q-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1px solid #9FA8DA;border-radius:14px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFF3E0;color:#8D6E00;border:1px solid #FFE0B2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stop-here{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FB8C00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:800;color:#E65100;margin:16px 0}
+.flip-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.flip-card{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:12px 18px;font-size:.95rem;font-weight:700;color:var(--warn);text-align:center}
+/* answer frame */
+.frame{background:#fff;border:2px solid var(--acc);border-radius:10px;padding:10px 12px;margin:10px 0}
+.frame .fr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0}
+.frame .fl{font-weight:700;color:var(--warn);font-size:.92rem;min-width:150px}
+.frame .fv{font-size:1rem;color:#1a1a2e}
+.frame .fv.ans{font-weight:800;color:var(--warn)}
+.frame input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:6px 8px;font-size:1rem;width:170px;font-family:inherit}
+.frame input[type=text].wide{width:230px}
+.frame input[type=text]:focus{outline:2px solid #9FA8DA}
+.frame .fr.pieces input{width:90px}
+/* piece cutter W10 */
+.w10{background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:12px;margin:12px 0}
+.w10 svg{width:100%;height:auto;display:block}
+.w10-lines{margin-top:8px;min-height:60px}
+.w10-lines .ln{font-size:1rem;padding:3px 0;color:#1a1a2e}
+.w10-lines .ln.last{font-weight:800;color:var(--warn)}
+.w10-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.w10-btns button{border:none;border-radius:8px;padding:8px 16px;font-size:.92rem;font-weight:700;cursor:pointer}
+.w10-btns .go{background:var(--acc);color:#fff}
+.w10-btns .go:disabled{background:#9FA8DA;cursor:default}
+.w10-btns .rs{background:#fff;color:var(--acc);border:1.5px solid var(--acc)}
+.two-cards{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.two-cards .q-card{flex:1;min-width:250px;margin-bottom:0}
+.ans-input{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 10px;font-size:1rem;width:190px;font-family:inherit;margin-right:8px}
+.nav-link{flex:1;display:block;text-align:center;padding:13px 0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.nav-link.out{background:#fff;color:#283593;border:2px solid #283593}
+.nav-link.fill{background:#3F51B5;color:#fff;border:2px solid #3F51B5}
+
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.chip{display:inline-block;border-radius:14px;padding:3px 12px;font-size:.88rem;font-weight:700;border:2px solid #1565C0}
+.chip.t{background:#90CAF9;color:#0D47A1}.chip.l{background:#fff;color:#283593;border-color:#283593}
+.chip.told{background:#FFF8E1;color:#8d6e00;border-color:#FFB74D}
+.bx{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.bx label{font-weight:700;color:#283593;font-size:.95rem}
+.bx input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 9px;font-size:1rem;width:120px;font-family:inherit}
+.bx .opt{font-weight:400;color:#607D8B;font-size:.82rem}
+.boxes-static{background:#fff;border:2px solid #1565C0;border-radius:10px;padding:10px 14px;margin:10px 0}
+.boxes-static .r{padding:3px 0;font-size:1rem}.boxes-static b{color:#0D47A1}
+.circ{border:3px solid #2E7D32;border-radius:10px;padding:2px 8px;font-weight:800;color:#1B5E20;display:inline-block}
+.amberwarn{background:#FFF8E1;border:2px solid #FFB74D;border-radius:10px;padding:12px 16px;margin:12px 0;color:#8d6e00;font-weight:700}
+.sbs{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.sbs .sc{flex:1;min-width:240px;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:12px}
+.sbs .sc.a{border-color:#1565C0;background:#E3F2FD}.sbs .sc.b{border-color:#FFB74D;background:#FFF8E1}
+.sbs .sc .st{font-weight:800;margin-bottom:4px;color:#283593}
+.bar-wrap{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px;margin:10px 0}
+.bar-wrap svg{width:100%;height:auto;display:block}
+
+.wlb{margin:10px 0;border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:6px 8px}
+.wlb .wls{margin-bottom:4px}
+.wl,.bl{display:none;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:12px;padding:7px 6px;border-bottom:1px dashed #C5CAE9;align-items:start}
+.wl.on,.bl.on{display:grid}
+.wl.cur,.bl.cur{background:#F0F1FA}
+.wl[data-glow].on{background:#FFF8E1;box-shadow:inset 4px 0 0 #F9A825}
+.wl .m,.bl .m{font-family:Consolas,'Courier New',monospace;font-weight:700;color:#283593;font-size:1rem}
+.wl .why,.bl .why{color:#455A64;font-size:.88rem;line-height:1.35;border:0;background:none;padding:0;margin:0;border-radius:0;box-shadow:none}
+.wl .why:before,.bl .why:before{content:"\2190  ";color:#9FA8DA}
+.btn-next{background:#fff;color:#283593;border:2px solid #283593;border-radius:8px;padding:7px 16px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit}
+.wlb.alldone .btn-next{display:none}
+.wlb.closed{display:none}
+.chip.nw{background:#FFF8E1;color:#8d6e00;border-color:#F9A825}
+.taps{margin:8px 0;padding:8px 10px;border:2px solid #C5CAE9;border-radius:10px;background:#F7F9FD}
+.taps .thead{font-weight:800;color:#283593;font-size:.9rem;margin-bottom:4px}
+.tq{margin:8px 0}
+.tq .tl{font-weight:700;color:#283593}
+.tq .tsub{font-weight:400;color:#607D8B;font-size:.85rem;display:block}
+.tb2{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.tb2 button{border:2px solid #9FA8DA;background:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem;cursor:pointer;font-family:inherit;color:#283593;font-weight:600;text-align:left}
+.tb2 button.good{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.tb2 button.lit{outline:3px solid #2E7D32}
+.tb2 button.nope{background:#FFF3E0;border-color:#FFB74D;color:#8d6e00}
+.thint{color:#8d6e00;font-size:.88rem;margin-top:4px;min-height:1em}
+.stones,.alines{margin:10px 0}
+.stones .sr,.alines .al{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:7px 0}
+.stones label,.alines label{font-weight:700;color:#283593;font-size:.95rem}
+.stones input[type=text],.alines input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 9px;font-size:1rem;width:130px;font-family:inherit}
+.stones .tag{font-size:.78rem;background:#FFF8E1;border:1.5px solid #FFB74D;color:#8d6e00;border-radius:12px;padding:1px 8px;font-weight:700}
+.alines .al label{flex:1 1 100%}
+.locked label{opacity:.55}
+.fmap{max-width:640px;margin:10px auto}
+.mn{border:2px solid #283593;border-radius:10px;padding:8px 12px;background:#fff;color:#283593;font-size:.95rem}
+.mn.start{background:#E8EAF6}.mn.q{background:#F0F1FA}
+.mn b.k{background:#283593;color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+.mn i,.br i{display:block;font-size:.84rem;color:#455A64;font-style:normal;margin-top:2px}
+.arr{text-align:center;color:#9FA8DA;font-size:1.1rem;line-height:1.2}
+.two{display:flex;gap:8px;flex-wrap:wrap}
+.two .br{flex:1;min-width:230px;border:2px solid #9FA8DA;border-radius:10px;padding:8px 10px;background:#fff;font-size:.9rem;color:#37474F}
+.br b.yn{color:#283593}
+.mp .tk{background:#90CAF9;color:#0D47A1;border-radius:6px;padding:0 6px;font-weight:700}
+.mp .lf{background:#fff;color:#283593;border:1.5px solid #283593;border-radius:6px;padding:0 6px;font-weight:700}
+.lit-node{background:#E8F5E9 !important;border-color:#2E7D32 !important;box-shadow:0 0 0 3px #A5D6A7}
+.fmap .cap{display:none;margin-top:5px;font-family:Consolas,'Courier New',monospace;font-weight:700;color:#1B5E20;font-size:.88rem}
+.lit-node .cap{display:block}
+.ex{margin-top:5px;font-size:.82rem;color:#455A64;border-top:1px dashed #C5CAE9;padding-top:4px}
+.wtrow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;align-items:center}
+.btn-map{display:inline-block;border:2px solid #283593;color:#283593;background:#fff;border-radius:10px;padding:8px 16px;font-weight:700;text-decoration:none;font-size:.95rem;cursor:pointer;font-family:inherit}
+.maplink{position:fixed;right:12px;bottom:12px;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.btn-show-steps{display:none;margin-top:6px}
+.frame67{border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:10px 12px;margin:10px 0;line-height:2.1}
+.frame67 .fh{font-weight:800;color:#283593;display:block;margin-bottom:2px;line-height:1.4}
+.bl-blank{display:inline-block;min-width:74px;border:2px dashed #9FA8DA;border-radius:8px;padding:0 8px;text-align:center;font-weight:700;color:#283593;cursor:pointer;background:#F7F9FD;line-height:1.7}
+.bl-blank.sel{border-color:#283593;background:#E8EAF6}
+.bl-blank.full{border-style:solid}
+.bl-blank.bad{border-color:#FFB74D;background:#FFF3E0}
+.bl-blank.ok{border-color:#2E7D32;background:#E8F5E9;color:#1B5E20}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chips button{border:2px solid #90CAF9;background:#E3F2FD;border-radius:16px;padding:4px 14px;font-weight:700;color:#0D47A1;cursor:pointer;font-family:inherit;font-size:.95rem}
+.chips button.used{opacity:.35}
+.frame67 input.ft{border:1.5px solid #9FA8DA;border-radius:6px;padding:3px 8px;font-size:.95rem;width:96px;font-family:inherit}
+.goodline{font-weight:800;color:#1B5E20;margin-top:4px}
+.sbs .sc.a{border-color:#2E7D32;background:#E8F5E9}
+.model{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 12px;margin:8px 0;display:none}
+.model label{display:block;margin:4px 0;font-weight:600;color:#283593}
+textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:6px;padding:8px;font-size:1rem;font-family:inherit}
+.boost .q{margin:6px 0}
+@media (max-width:560px){.wl,.bl{grid-template-columns:1fr;gap:2px}}
+
+@keyframes slidedown{from{transform:translateY(-70px);opacity:.15}to{transform:translateY(0);opacity:1}}
+.bar-wrap g.slide{animation:slidedown 1.1s ease-out 0.3s both}
+.bar-wrap .tgl{font-size:.8rem;color:#455A64}
+
+.intro{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.intro p{margin-bottom:6px}
+.meters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+.lv{flex:1;min-width:120px;border:2px dashed #B0BEC5;border-radius:10px;padding:6px 8px;text-align:center;background:#fff;color:#78909C}
+.lv .ln1{font-weight:800;font-size:.9rem}.lv .ln2{font-size:.78rem;margin-bottom:3px}
+.lv.now{border:2px solid #283593;color:#283593;background:#E8EAF6}
+.lv.done{border:2px solid #2E7D32;color:#1B5E20;background:#E8F5E9}
+.lv.boss{border-color:#FFB74D;color:#8d6e00;background:#FFF8E1}
+.lv.boss.now{border:2px solid #F9A825}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid #B0BEC5;margin:0 2px;background:#fff}
+.dot.on{background:#F9A825;border-color:#F9A825}
+.bchip{display:inline-block;margin:2px 3px;padding:2px 8px;border-radius:12px;border:2px solid #FFB74D;background:#fff;font-weight:700;color:#8d6e00;font-size:.78rem}
+.bchip.beat{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.dstat{text-align:center;font-weight:700;color:#283593;font-size:.95rem}
+.dsub{text-align:center;font-size:.85rem;color:#607D8B;margin-bottom:8px}
+.welcome{text-align:center;font-size:.9rem;color:#455A64;margin:4px 0 8px;font-weight:600}
+.lvmsg{text-align:center;font-weight:800;color:#1B5E20;margin:4px 0;min-height:1em}
+.dq{font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:10px}
+.walk{background:#E3F2FD;border:2px solid #1565C0;border-radius:10px;padding:12px 14px;margin:10px 0}
+.walk .wt{font-weight:800;color:#0D47A1;margin-bottom:6px}
+.wholelab{text-align:center;font-weight:700;color:#283593;margin-top:6px}
+.sorry{background:#FFF3E0;border:2px solid #FFB74D;border-radius:10px;padding:14px 16px;margin-top:12px}
+.sorry .sbig{font-weight:800;color:#8d6e00;margin-bottom:6px}
+.tline{margin:4px 0;font-size:.95rem}
+.tline b{color:#283593}
+.btn-big{background:var(--acc);color:#fff;border:none;padding:13px 30px;border-radius:10px;cursor:pointer;font-size:1.05rem;font-weight:700;display:block;margin:16px auto 0}
+.btn-big.alt{background:#fff;color:#283593;border:2px solid #283593}
+.endbox{display:none;border-radius:12px;padding:20px;margin-top:16px;text-align:center;position:relative;overflow:hidden}
+.endbox.master{background:#E8F5E9;border:2px solid #A5D6A7}
+.endbox.stop{background:#FFF8E1;border:2px solid #FFB74D}
+.endbox .big{font-size:1.25rem;font-weight:800}
+.endbox.master .big{color:#1B5E20}.endbox.stop .big{color:#8d6e00}
+.tsbadge{display:inline-block;margin:8px 0;padding:6px 18px;border-radius:20px;background:#2E7D32;color:#fff;font-weight:800;letter-spacing:1px}
+.codebox{display:inline-block;margin:12px 0;background:#fff;border:3px dashed #2E7D32;border-radius:10px;padding:10px 22px;font-size:1.6rem;font-weight:800;letter-spacing:2px;color:#1B5E20}
+.savebox{display:none;margin-top:16px;border-radius:12px;padding:18px;text-align:center}
+.savebox.notsaved{background:#FFF3E0;border:2px solid #FFB74D}
+.savebox.saved{background:#E8F5E9;border:2px solid #A5D6A7}
+.savebox .big{font-weight:800;font-size:1.1rem}
+.savebox.notsaved .big{color:#8d6e00}.savebox.saved .big{color:#1B5E20}
+.cf{position:fixed;top:-20px;width:10px;height:14px;opacity:.9;z-index:50;pointer-events:none;animation:cfall 2.6s ease-in forwards}
+@keyframes cfall{to{transform:translateY(110vh) rotate(540deg);opacity:.9}}
+
+#fcbtn{position:fixed;left:12px;bottom:12px;z-index:60;background:#F9A825;color:#3E2723;border:0;border-radius:22px;padding:10px 16px;font-weight:800;font-size:.95rem;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer}
+.fc{position:fixed;z-index:70;background:#FFFDF3;border:3px solid #F9A825;color:#263238;font-size:.92rem;line-height:1.35;padding:10px 12px 14px;overflow-y:auto;display:none}
+body.fc-open .fc{display:block}
+body.fc-open #fcbtn{background:#FFE082}
+.fc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;color:#283593}
+.fc-btns button{background:#fff;border:2px solid #9FA8DA;border-radius:8px;font-size:1rem;margin-left:6px;padding:2px 8px;cursor:pointer}
+.fc-sec{font-weight:800;color:#8d6e00;letter-spacing:.04em;margin:6px 0 4px}
+.fc-st{padding:5px 8px;margin:4px 0;border-radius:8px;border:2px solid transparent;background:#fff}
+.fc-st b{color:#283593;margin-right:6px}
+.fc-st.glow{background:#FFF59D;border-color:#F9A825;box-shadow:0 0 0 3px rgba(249,168,37,.35)}
+.fc-q{color:#607D8B;font-style:italic;font-size:.85rem}
+.fc-told{margin:2px 0 4px 18px;font-size:.88rem;color:#37474F}
+.fc-why{background:#E8EAF6;border:2px solid #9FA8DA;color:#283593;border-radius:8px;padding:3px 10px;margin:2px 0 4px 18px;font-weight:700;cursor:pointer}
+.fc-bricks{display:none;margin:4px 0 6px 18px;padding:8px;background:#fff;border:2px dashed #9FA8DA;border-radius:8px;font-size:.88rem}
+.fc-bricks.open{display:block}
+.bk-row{display:flex;gap:10px;margin-bottom:6px}
+.bk-row .grp{display:flex;gap:2px;padding:3px;border:2px solid #C5CAE9;border-radius:6px}
+.bk-row i{display:block;width:16px;height:12px;background:#CFD8DC;border-radius:2px}
+.bk-row .grp.lit{border-color:#F9A825}.bk-row .grp.lit i{background:#F9A825}
+.fc-two{display:block}
+.fc-blk{margin-top:8px;padding:6px;border:2px solid #E0E0E0;border-radius:10px;background:#FAFAFA}
+.fc-bh{display:block;width:100%;text-align:left;background:none;border:0;font-weight:800;color:#283593;cursor:pointer;font-size:.95rem;padding:2px 2px 4px}
+.fc-ex{display:none;margin:6px 0 2px;padding:6px 8px;background:#fff;border:1px dashed #9FA8DA;border-radius:8px;font-family:Consolas,'Courier New',monospace;font-size:.88rem}
+.fc-ex u{text-decoration:none;color:#283593;font-weight:800;margin-left:6px}
+.fc-blk.open .fc-ex{display:block}
+.fc-exh{font-family:inherit;font-weight:800;color:#8d6e00}
+.wl[data-card]{position:relative;padding-left:46px}
+.wl[data-card]::before{content:attr(data-card);position:absolute;left:4px;top:7px;min-width:30px;text-align:center;background:#E8EAF6;color:#283593;border:2px solid #9FA8DA;border-radius:12px;font-size:.78rem;font-weight:800;line-height:1.3}
+.wl.cur[data-card]::before{background:#FFF59D;border-color:#F9A825}
+@media (min-width:900px){
+  .fc{top:0;right:0;bottom:0;width:340px;border-width:0 0 0 3px}
+  body.fc-open{padding-right:350px}
+  body.fc-open #fcbtn{display:none}
+}
+@media (max-width:899px){
+  .fc{left:0;right:0;bottom:0;max-height:62vh;border-width:3px 0 0 0;border-radius:14px 14px 0 0;box-shadow:0 -4px 14px rgba(0,0,0,.25)}
+}
+@media print{
+  body.printing > *:not(#fcard){display:none!important}
+  body.printing #fcard{display:block!important;position:static!important;width:auto!important;max-height:none!important;border:2px solid #444!important;background:#fff!important;box-shadow:none!important;font-size:12pt;padding:8mm}
+  body.printing .fc-btns,body.printing .fc-why{display:none!important}
+  body.printing .fc-bricks{display:block!important}
+  body.printing .fc-ex{display:block!important}
+  body.printing .fc-st{background:#fff!important;border:1px solid #bbb!important}
+  body.printing .fc-st.glow{box-shadow:none!important}
+  body.printing .fc-two{display:flex;gap:8mm}body.printing .fc-blk{flex:1}
+  @page{size:A4;margin:10mm}
+}
+
+.fc-st{cursor:pointer}
+.fc-st.seen{border-color:#81C784}
+.fc-st.seen::after{content:" \2713";color:#2E7D32;font-weight:800}
+.fc-tour{font-size:.85rem;color:#607D8B;margin:2px 0 6px}
+@media (max-width:899px){body.fc-full .fc{top:0;max-height:100vh;border-radius:0;border-width:0}}
+@media print{body.printing #fcard{font-size:8.6pt;padding:5mm;line-height:1.22}body.printing .fc-st{margin:2px 0;padding:2px 5px}body.printing .fc-st.seen::after{content:""}body.printing .fc-tour{display:none}body.printing .fc-bricks{font-size:8pt}body.printing .fc-top{margin-bottom:2px}}
+
+.wrap{max-width:760px;margin:0 auto;padding:0 12px}
+.stat2{text-align:center;font-weight:700;color:#283593;margin:6px 0}
+.savebar{margin-top:10px;padding:8px 12px;border-radius:10px;font-size:.9rem;text-align:center;background:#FFF8E1;border:2px solid #FFB74D;color:#8d6e00}
+.savebar.saved{background:#E8F5E9;border-color:#A5D6A7;color:#1B5E20}
+.savebar button{margin-left:8px}
+.finish{display:none;text-align:center;background:#E8F5E9;border:2px solid #A5D6A7;border-radius:12px;padding:20px;margin-top:14px}
+.finish .both{font-size:1.3rem;font-weight:800;margin:8px 0;color:#283593}
+.wlb.closed{display:none}
+.lastchk{display:none;margin:6px 0;padding:8px 12px;border-radius:10px;background:#FFF8E1;border:2px solid #FFB74D;color:#5D4037}
+.lastchk.on{display:block}
+.lastchk .chip4{display:inline-block;background:#F9A825;color:#3E2723;font-weight:800;border-radius:12px;padding:1px 9px;margin-right:6px}
+.yt{margin-top:14px}
+.yt.hidden{display:none}
+.yt.done{opacity:.92}
+.btn-circ{display:block;margin:8px 0;padding:8px 14px;border-radius:10px;border:2px solid #F9A825;background:#FFF8E1;color:#5D4037;font-weight:800;cursor:pointer}
+.btn-circ.on{background:#E8F5E9;border-color:#81C784;color:#1B5E20}
+.chip5{display:inline-block;margin-left:8px;background:#E8EAF6;color:#283593;border:2px solid #9FA8DA;border-radius:12px;padding:0 9px;font-weight:800}
+.dtree{border:2px solid #9FA8DA;border-radius:12px;background:#FAFBFF;padding:8px 12px;margin:10px 0}
+.dtree table{border-collapse:collapse;width:100%}.dtree td{padding:4px 8px;border-bottom:1px dashed #C5CAE9;vertical-align:top}
+.dtree td:first-child{font-weight:700;color:#283593;width:46%}
+.act{display:inline-block;background:#E8EAF6;color:#283593;font-weight:800;border-radius:12px;padding:2px 12px;margin-bottom:4px;font-size:.9rem}
+
+body{padding-bottom:110px}
+.topnav{position:relative}
+.tnav-x{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.6);color:#fff;text-decoration:none;font-size:18px;font-weight:800;line-height:1;border-radius:8px;padding:5px 11px;cursor:pointer;margin-right:4px}
+.tnav-x:hover{background:rgba(255,255,255,.32)}
+.savezone{max-width:760px;margin:6px auto 0;padding:14px 12px;text-align:center}
+.savezone .sstat{font-size:.92rem;margin-bottom:8px;color:#8d6e00}
+.savezone.saved .sstat{color:#1B5E20}
+.savezone button#savebtn{background:#2E7D32;color:#fff;border:0;border-radius:12px;padding:14px 38px;font-size:1.1rem;font-weight:800;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.savezone button#savebtn:disabled{background:#B0BEC5;cursor:not-allowed;box-shadow:none}
+.savezone.pulse button#savebtn{animation:sv 0.9s ease 3}
+@keyframes sv{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+#unsavedov{display:none;position:fixed;left:0;right:0;top:0;bottom:0;z-index:200;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:18px}
+#unsavedov.on{display:flex}
+#unsavedov .box{background:#fff;border:4px solid #F9A825;border-radius:16px;padding:20px;max-width:420px;text-align:center;color:#3E2723}
+#unsavedov .box p{font-size:1.05rem;font-weight:700;margin-bottom:14px}
+#unsavedov .stay{background:#2E7D32;color:#fff;border:0;border-radius:12px;padding:12px 24px;font-size:1.05rem;font-weight:800;cursor:pointer}
+#unsavedov .leave{display:block;margin:12px auto 0;background:none;border:0;color:#78909C;font-size:.85rem;text-decoration:underline;cursor:pointer}
+.tfigwrap{background:#F6F8FF;border:2px solid #C5CAE9;border-radius:10px;padding:8px;margin:10px 0;text-align:center;overflow-x:auto}
+.tfigwrap svg{max-width:100%;height:auto}
+.tfig3{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.tfig3 .cap{font-size:.85rem;font-weight:700;color:#283593;text-align:center}
+.wl[data-card^="T"]::before{content:"\25B2" attr(data-n)}
+.fc-tabs{display:flex;gap:6px;margin:4px 0 8px}
+.fc-tab{flex:1;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:6px 8px;font-weight:800;color:#283593;cursor:pointer;font-size:.9rem}
+.fc-tab.on{background:#FFF59D;border-color:#F9A825}
+.fc-pane{display:none}.fc-pane.on{display:block}
+@media print{body.printing .fc-pane{display:block!important}body.printing .fc-tabs{display:none}}
+.dtree3 td:first-child{width:52%}
+.boostnote{background:#FFF8E1;border:2px solid #FFB74D;color:#8d6e00;border-radius:10px;padding:10px 14px;margin:10px 0;font-weight:700}
+.mbintro{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 14px;margin:10px 0;color:#283593;font-weight:700}
+.qlab{font-family:inherit}
+.flipin{transform-box:fill-box;transform-origin:center;animation:flipin 2.2s ease .5s both}
+@keyframes flipin{0%{opacity:0;transform:rotate(180deg) scale(.4)}100%{opacity:1;transform:none}}
+.turnin{transform-origin:center;animation:turnin 2.4s ease .4s both}
+@keyframes turnin{0%{transform:rotate(-36.87deg);opacity:.25}100%{transform:none;opacity:1}}
+.tbl71{border-collapse:collapse;margin:10px auto;font-size:1rem}
+.tbl71 th,.tbl71 td{border:2px solid #9FA8DA;padding:7px 14px;text-align:center}
+.tbl71 th{background:#E8EAF6;color:#283593}
+.tbl71 td.qc{background:#FFF8E1;color:#EF6C00;font-weight:900;font-size:1.15rem}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin:10px 0;font-weight:800;color:#283593}
+.flow .fb{background:#E8EAF6;border:2px solid #9FA8DA;border-radius:10px;padding:6px 12px}
+.flow .fb.q{background:#FFF8E1;border-color:#FFB74D;color:#8d6e00}
+.flow .fa{color:#EF6C00}
+.chip3{display:block;margin-top:8px;background:#E8F5E9;border:2px solid #A5D6A7;color:#1B5E20;border-radius:10px;padding:6px 12px;font-weight:700;font-size:.92rem}
+.lockmsg{display:none;background:#FFF8E1;border:2px solid #FFB74D;color:#8d6e00;border-radius:10px;padding:8px 12px;margin:8px 0;font-weight:700}
+.fc-sec.ac{margin-top:10px;color:#2E7D32}
+.fc-st.acs{border-left-color:#2E7D32}
+
+.pickline{margin-top:6px;padding:5px 8px;background:#FFF8E1;border-left:4px solid #F9A825;border-radius:6px;font-weight:700;color:#6D4C00;font-size:.92em}
+.fx{border:2px solid #9FA8DA;border-radius:12px;padding:10px 12px;margin:12px 0;background:#fff}
+.fx.hidden{display:none}
+.fx .fxh{font-weight:800;color:#283593;margin-bottom:6px}
+.fx .fxok{display:none;float:right;color:#2E7D32}
+.fx.fxdone .fxok{display:inline}
+.fx.fxdone .fxbody>.fx-st{display:none!important}
+.fx.fxdone{background:#F1F8E9;border-color:#A5D6A7}
+.fx-st{display:none}.fx-st.on{display:block}
+.fxlab{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#5C6BC0;margin:8px 0 4px}
+.fxyou{background:#FFF3E0;border:2px solid #FFB74D;border-radius:10px;padding:8px 12px;margin:8px 0;font-weight:800;color:#8d6e00}
+.fxopts{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.fxopt{text-align:left;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:10px 12px;font-size:1rem;font-weight:700;color:#283593;cursor:pointer}
+.fxopt:disabled{cursor:default}
+.fxopt.right{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.fxopt.pickedwrong{background:#FFF3E0;border-color:#FFB74D;color:#8d6e00}
+.fxres{margin:6px 0;font-weight:800}.fxres.ok{color:#1B5E20}.fxres.amb{color:#8d6e00}
+.fxbtn{margin:8px 0;background:#3F51B5;color:#fff;border:0;border-radius:10px;padding:10px 20px;font-size:1rem;font-weight:800;cursor:pointer}
+.fxdots{display:flex;gap:8px;justify-content:center;margin:6px 0 10px}
+.fxdots span{width:14px;height:14px;border-radius:50%;background:#CFD8DC;display:inline-block}
+.fxdots span.c{background:#F9A825}.fxdots span.d{background:#43A047}
+.fxfinal{background:#E8F5E9;border:2px solid #A5D6A7;color:#1B5E20;border-radius:10px;padding:10px 14px;margin:10px 0;font-weight:700}
+.tapbox{background:#F6F8FF;border:2px solid #C5CAE9;border-radius:10px;padding:10px 12px;margin:10px 0}
+.tapbtns{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.tapbtns button{background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:8px 14px;font-weight:800;color:#283593;font-size:1rem;cursor:pointer}
+.tapbtns button.right{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.tapbtns button:disabled{cursor:default}
+.tapfb{font-weight:800;margin:4px 0;min-height:1.2em}.tapfb.ok{color:#1B5E20}.tapfb.amb{color:#8d6e00}
+.taprow{margin:6px 0 10px}.tapall{background:#E8F5E9;border:2px solid #A5D6A7;color:#1B5E20;border-radius:10px;padding:8px 12px;margin-top:8px}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-x" id="xclose" href="https://athipprem.github.io/mathlessons/index.html" onclick="return xClick(event)" aria-label="Close and go back to the hub" title="Close">&#10005;</a>
+  <span class="tnav-title">Lesson &mdash; Fix-It Corner and Pick the Pair (Unit 72)</span>
+  <span class="tnav-pill" id="pill">1 / 5</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+<div class="wrap">
+<!-- s0 -->
+<div class="screen active" id="s0">
+<div class="card">
+<span class="act">Chapter 4 &middot; Pick the pair</span><br>
+  <h2>&#129489; Fix It, Then Pick The Pair</h2>
+  <div class="why-real" style="background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 14px;margin:10px 0;color:#283593"><p><strong>Why this is worth learning.</strong> A builder knows a sail&rsquo;s area and one edge, and has to find the missing height. A gardener cuts the same triangular bed from the long side. On a real exam the picture has slanted sides that are traps. Today you learn to pick the right pair every time &mdash; and you fix your own slips first.</p></div>
+  <p class="tap-hint"><b>U71: all 3 Basic right and your 'No' on Q11 was spot on. Today: fix your own slips first, then the one trick that cracks the hard pictures — PICK THE PAIR.</b></p>
+  <p class="tap-hint">Your &#x1F4CC; Triangle Card is open. Each worked line says which card line it uses.</p>
+<p class="tap-hint"><b>Worked example:</b></p>
+<p><strong>Warm-up win (U71 — you got all 3 Basic right): a triangle has an area of 45 cm² and a base of 10 cm. Find its height.</strong></p>
+<div class="wlb auto" data-bid="L0">
+<div class="wls">
+<div class="wl" data-card="T5" data-n="5"><span class="m">Area = 45 cm²</span><span class="why">told: the area of the triangle</span></div>
+<div class="wl" data-card="T5" data-n="5"><span class="m">Box = 45 × 2</span><span class="why">▲5 undo the half: the box (base × height) is twice the triangle</span></div>
+<div class="wl" data-card="T5" data-n="5"><span class="m">= 90</span><span class="why">45 × 2 = 90</span></div>
+<div class="wl" data-card="T6" data-n="6"><span class="m">Height = 90 ÷ 10</span><span class="why">▲6 the box is base × height, so the missing side = box ÷ the base (10)</span></div>
+<div class="wl" data-card="T6" data-n="6"><span class="m">= 9 cm</span><span class="why">90 ÷ 10 = 9</span></div>
+<div class="wl" data-card="A3"><span class="m">10 × 9 = 90</span><span class="why">✔3 back-check: base × my answer gives the box again</span></div>
+<div class="wl" data-card="A3"><span class="m">90 ÷ 2 = 45</span><span class="why">✔3 and half the box is the area in the question ✓</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Fix-It Corner &#8594;</button></div>
+</div>
+
+<!-- s1 -->
+<div class="screen" id="s1">
+<div class="card">
+<span class="act">Fix-It Corner &middot; your own questions</span><br>
+  <h2>&#128295; Fix-It Corner</h2>
+  <div class="mbintro">Five questions from your last paper. For each one: find the slip, redo it, then try a twin with new numbers. Finish all five cards, then press Next.</div>
+  <div class="fxdots" id="fxdots"><span></span><span></span><span></span><span></span><span></span></div>
+<div class="fx" id="fx_FX9" data-fx="FX9">
+<div class="fxh"><span class="fxn">Card 1 of 5</span> &middot; from U71 Q9 (Applied)<span class="fxok">&#10003; done</span></div>
+<div class="fxbody">
+<div class="fx-st on" data-s="0">
+<p class="fxlab">Your answer</p>
+<p class="fxq"><strong>A field is a right-angled triangle with sides 30 m, 40 m and 50 m. A straight path runs from the square corner to the 50 m side and meets it at a square corner. How long is the path?</strong></p>
+<div class="tfigwrap"><svg class="tfig" data-fig="FX9r" data-hlen="24" viewBox="0 0 373 270" width="373" height="270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a right-angled triangle" font-family="Segoe UI,Arial,sans-serif">
+<polygon class="ftri" points="52.0,236.0 321.3,236.0 52.0,34.0" fill="#BBDEFB" fill-opacity="0.85" stroke="#1565C0" stroke-width="2.5" stroke-linejoin="round"/>
+<line class="fh" data-h="24" x1="52.0" y1="236.0" x2="149.0" y2="106.7" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<polyline class="ra" points="63.0,236.0 63.0,225.0 52.0,225.0" fill="none" stroke="#283593" stroke-width="2"/>
+<polyline class="ra" points="143.6,113.9 136.4,108.5 141.8,101.3" fill="none" stroke="#283593" stroke-width="2"/>
+<text class="fv" x="40.8" y="249.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text>
+<text class="fv" x="334.4" y="245.9" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text>
+<text class="fv" x="44.2" y="27.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AB:40" x="186.7" y="257.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">40 m</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AC:30" x="36.0" y="140.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">30 m</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="BC:50" x="196.3" y="127.2" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">50 m</text>
+<text class="qlab" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" x="114.5" y="167.4" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="middle">?</text>
+</svg></div>
+<div class="fxyou">You wrote: ? (blank)</div>
+<button type="button" class="fxbtn" id="fxb1_FX9" onclick="fxGo('FX9')">Find the slip &#9656;</button>
+</div>
+<div class="fx-st" data-s="1">
+<p class="fxlab">Find the slip</p>
+<p class="fxsq"><strong>Which pair do you KNOW both numbers of?</strong></p>
+<div class="fxopts" id="fxo_FX9">
+<button type="button" class="fxopt" data-i="0" onclick="fxPick('FX9',0)">30 and 40 — they meet at the square corner</button>
+<button type="button" class="fxopt" data-i="1" onclick="fxPick('FX9',1)">50 and the path</button>
+<button type="button" class="fxopt" data-i="2" onclick="fxPick('FX9',2)">30 and 50</button>
+</div>
+<div class="fxres" id="fxres_FX9"></div>
+<button type="button" class="fxbtn" id="fxb2_FX9" onclick="fxToRedo('FX9')" style="display:none">Redo it &#9656;</button>
+</div>
+<div class="fx-st" data-s="2">
+<p class="fxlab">Redo &mdash; the same question, with your card open</p>
+<div class="q-card yt" id="yt_FX9r" data-iid="FX9r">
+  <span class="q-cap">Redo</span>
+  <div class="dq" id="q_FX9r"></div>
+<div class="tfigwrap"><svg class="tfig" data-fig="FX9r" data-hlen="24" viewBox="0 0 373 270" width="373" height="270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a right-angled triangle" font-family="Segoe UI,Arial,sans-serif">
+<polygon class="ftri" points="52.0,236.0 321.3,236.0 52.0,34.0" fill="#BBDEFB" fill-opacity="0.85" stroke="#1565C0" stroke-width="2.5" stroke-linejoin="round"/>
+<line class="fh" data-h="24" x1="52.0" y1="236.0" x2="149.0" y2="106.7" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<polyline class="ra" points="63.0,236.0 63.0,225.0 52.0,225.0" fill="none" stroke="#283593" stroke-width="2"/>
+<polyline class="ra" points="143.6,113.9 136.4,108.5 141.8,101.3" fill="none" stroke="#283593" stroke-width="2"/>
+<text class="fv" x="40.8" y="249.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text>
+<text class="fv" x="334.4" y="245.9" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text>
+<text class="fv" x="44.2" y="27.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AB:40" x="186.7" y="257.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">40 m</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AC:30" x="36.0" y="140.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">30 m</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="BC:50" x="196.3" y="127.2" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">50 m</text>
+<text class="qlab" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" x="114.5" y="167.4" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="middle">?</text>
+</svg></div>
+  <button type="button" class="btn-circ" id="circ_FX9r" onclick="circTap('FX9r')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX9r"></div>
+  <button class="btn-check" id="chk_FX9r" onclick="ytCheck('FX9r')" disabled>Check</button>
+  <div class="feedback" id="fb_FX9r"></div>
+  <div class="sorry" id="sorry_FX9r" style="display:none"></div>
+</div>
+</div>
+<div class="fx-st" data-s="3">
+<p class="fxlab">Your twin &mdash; same kind, new numbers</p>
+<div class="q-card yt" id="yt_FX9t" data-iid="FX9t">
+  <span class="q-cap">Your twin</span>
+  <div class="dq" id="q_FX9t"></div>
+<div class="tfigwrap"><svg class="tfig" data-fig="FX9t" data-hlen="60" viewBox="0 0 373 270" width="373" height="270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a right-angled triangle" font-family="Segoe UI,Arial,sans-serif">
+<polygon class="ftri" points="52.0,236.0 321.3,236.0 52.0,34.0" fill="#BBDEFB" fill-opacity="0.85" stroke="#1565C0" stroke-width="2.5" stroke-linejoin="round"/>
+<line class="fh" data-h="60" x1="52.0" y1="236.0" x2="149.0" y2="106.7" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<polyline class="ra" points="63.0,236.0 63.0,225.0 52.0,225.0" fill="none" stroke="#283593" stroke-width="2"/>
+<polyline class="ra" points="143.6,113.9 136.4,108.5 141.8,101.3" fill="none" stroke="#283593" stroke-width="2"/>
+<text class="fv" x="40.8" y="249.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text>
+<text class="fv" x="334.4" y="245.9" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text>
+<text class="fv" x="44.2" y="27.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AB:100" x="186.7" y="257.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">100 m</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AC:75" x="36.0" y="140.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">75 m</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="BC:125" x="196.3" y="127.2" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">125 m</text>
+<text class="qlab" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" x="114.5" y="167.4" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="middle">?</text>
+</svg></div>
+  <button type="button" class="btn-circ" id="circ_FX9t" onclick="circTap('FX9t')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX9t"></div>
+  <button class="btn-check" id="chk_FX9t" onclick="ytCheck('FX9t')" disabled>Check</button>
+  <div class="feedback" id="fb_FX9t"></div>
+  <div class="sorry" id="sorry_FX9t" style="display:none"></div>
+</div>
+</div>
+<button type="button" class="fxbtn" id="fxb3_FX9" onclick="fxNext('FX9')" style="display:none">Next card &#9656;</button>
+</div>
+</div>
+<div class="fx hidden" id="fx_FX11" data-fx="FX11">
+<div class="fxh"><span class="fxn">Card 2 of 5</span> &middot; from U71 Q11 (Applied)<span class="fxok">&#10003; done</span></div>
+<div class="fxbody">
+<div class="fx-st on" data-s="0">
+<p class="fxlab">Your answer</p>
+<p class="fxq"><strong>Triangle P has a base of 10 cm and a height of 6 cm. Triangle Q has the same area as P, but its base is only 4 cm. Ali says Q’s height must also be 6 cm. Is he right? Find Q’s height.</strong></p>
+<div class="fxyou">You wrote: (a) No ✓  (b) 30 cm (working: 4 ) 120)</div>
+<button type="button" class="fxbtn" id="fxb1_FX11" onclick="fxGo('FX11')">Find the slip &#9656;</button>
+</div>
+<div class="fx-st" data-s="1">
+<p class="fxlab">Find the slip</p>
+<p class="fxsq"><strong>Your 'No' was right! Where did 120 come from?</strong></p>
+<div class="fxopts" id="fxo_FX11">
+<button type="button" class="fxopt" data-i="0" onclick="fxPick('FX11',0)">A) 120 is the box of the box: P's area is 30, so the box is 60 — I doubled twice</button>
+<button type="button" class="fxopt" data-i="1" onclick="fxPick('FX11',1)">B) 120 is right, 120 ÷ 4 = 15</button>
+<button type="button" class="fxopt" data-i="2" onclick="fxPick('FX11',2)">C) I should have halved</button>
+</div>
+<div class="fxres" id="fxres_FX11"></div>
+<button type="button" class="fxbtn" id="fxb2_FX11" onclick="fxToRedo('FX11')" style="display:none">Redo it &#9656;</button>
+</div>
+<div class="fx-st" data-s="2">
+<p class="fxlab">Redo &mdash; the same question, with your card open</p>
+<div class="q-card yt" id="yt_FX11r" data-iid="FX11r">
+  <span class="q-cap">Redo</span>
+  <div class="dq" id="q_FX11r"></div>
+  <button type="button" class="btn-circ" id="circ_FX11r" onclick="circTap('FX11r')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX11r"></div>
+  <button class="btn-check" id="chk_FX11r" onclick="ytCheck('FX11r')" disabled>Check</button>
+  <div class="feedback" id="fb_FX11r"></div>
+  <div class="sorry" id="sorry_FX11r" style="display:none"></div>
+</div>
+</div>
+<div class="fx-st" data-s="3">
+<p class="fxlab">Your twin &mdash; same kind, new numbers</p>
+<div class="q-card yt" id="yt_FX11t" data-iid="FX11t">
+  <span class="q-cap">Your twin</span>
+  <div class="dq" id="q_FX11t"></div>
+  <button type="button" class="btn-circ" id="circ_FX11t" onclick="circTap('FX11t')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX11t"></div>
+  <button class="btn-check" id="chk_FX11t" onclick="ytCheck('FX11t')" disabled>Check</button>
+  <div class="feedback" id="fb_FX11t"></div>
+  <div class="sorry" id="sorry_FX11t" style="display:none"></div>
+</div>
+</div>
+<button type="button" class="fxbtn" id="fxb3_FX11" onclick="fxNext('FX11')" style="display:none">Next card &#9656;</button>
+</div>
+</div>
+<div class="fx hidden" id="fx_FX5" data-fx="FX5">
+<div class="fxh"><span class="fxn">Card 3 of 5</span> &middot; from U71 Q5 (Intermediate, key question)<span class="fxok">&#10003; done</span></div>
+<div class="fxbody">
+<div class="fx-st on" data-s="0">
+<p class="fxlab">Your answer</p>
+<p class="fxq"><strong>Triangle ABC leans over. AB = 18 cm, AC = 34 cm and BC = 20 cm. Its area is 144 cm². Find its height from C to the line AB (the dashed line outside the triangle).</strong></p>
+<div class="tfigwrap"><svg class="tfig" data-fig="FX5r" viewBox="0 0 420 241" width="420" height="241" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a triangle" font-family="Segoe UI,Arial,sans-serif">
+<polygon class="ftri" points="48.0,206.8 242.4,206.8 372.0,34.0" fill="#BBDEFB" fill-opacity="0.85" stroke="#1565C0" stroke-width="2.5" stroke-linejoin="round"/>
+<line class="fh" data-h="16" x1="372.0" y1="34.0" x2="372.0" y2="206.8" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<polyline class="ra" points="363.0,206.8 363.0,197.8 372.0,197.8" fill="none" stroke="#283593" stroke-width="2"/>
+<line class="fext" x1="242.4" y1="206.8" x2="372.0" y2="206.8" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<text class="fv" x="34.7" y="216.2" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text>
+<text class="fv" x="247.3" y="224.9" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text>
+<text class="fv" x="383.1" y="30.5" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AB:18" x="145.2" y="226.8" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">18 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AC:34" x="202.9" y="112.2" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">34 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="BC:20" x="319.2" y="134.4" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">20 cm</text>
+<text class="qlab" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" x="380.0" y="135.0" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="start">?</text>
+</svg></div>
+<div class="fxyou">You wrote: IDK (blank) — honest, and that's how we find what to fix</div>
+<button type="button" class="fxbtn" id="fxb1_FX5" onclick="fxGo('FX5')">Find the slip &#9656;</button>
+</div>
+<div class="fx-st" data-s="1">
+<p class="fxlab">Find the slip</p>
+<p class="fxsq"><strong>Tap the TWO numbers you need: the base that goes with the dashed height, and the area.</strong></p>
+<div class="fxopts" id="fxo_FX5">
+<button type="button" class="fxopt" data-i="0" onclick="fxPick('FX5',0)">18 (AB) and 144 (area) — 34 and 20 are slanted decoys</button>
+<button type="button" class="fxopt" data-i="1" onclick="fxPick('FX5',1)">34 and 20</button>
+<button type="button" class="fxopt" data-i="2" onclick="fxPick('FX5',2)">18 and 34</button>
+</div>
+<div class="fxres" id="fxres_FX5"></div>
+<button type="button" class="fxbtn" id="fxb2_FX5" onclick="fxToRedo('FX5')" style="display:none">Redo it &#9656;</button>
+</div>
+<div class="fx-st" data-s="2">
+<p class="fxlab">Redo &mdash; the same question, with your card open</p>
+<div class="q-card yt" id="yt_FX5r" data-iid="FX5r">
+  <span class="q-cap">Redo</span>
+  <div class="dq" id="q_FX5r"></div>
+<div class="tfigwrap"><svg class="tfig" data-fig="FX5r" viewBox="0 0 420 241" width="420" height="241" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a triangle" font-family="Segoe UI,Arial,sans-serif">
+<polygon class="ftri" points="48.0,206.8 242.4,206.8 372.0,34.0" fill="#BBDEFB" fill-opacity="0.85" stroke="#1565C0" stroke-width="2.5" stroke-linejoin="round"/>
+<line class="fh" data-h="16" x1="372.0" y1="34.0" x2="372.0" y2="206.8" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<polyline class="ra" points="363.0,206.8 363.0,197.8 372.0,197.8" fill="none" stroke="#283593" stroke-width="2"/>
+<line class="fext" x1="242.4" y1="206.8" x2="372.0" y2="206.8" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<text class="fv" x="34.7" y="216.2" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text>
+<text class="fv" x="247.3" y="224.9" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text>
+<text class="fv" x="383.1" y="30.5" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AB:18" x="145.2" y="226.8" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">18 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AC:34" x="202.9" y="112.2" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">34 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="BC:20" x="319.2" y="134.4" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">20 cm</text>
+<text class="qlab" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" x="380.0" y="135.0" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="start">?</text>
+</svg></div>
+  <button type="button" class="btn-circ" id="circ_FX5r" onclick="circTap('FX5r')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX5r"></div>
+  <button class="btn-check" id="chk_FX5r" onclick="ytCheck('FX5r')" disabled>Check</button>
+  <div class="feedback" id="fb_FX5r"></div>
+  <div class="sorry" id="sorry_FX5r" style="display:none"></div>
+</div>
+</div>
+<div class="fx-st" data-s="3">
+<p class="fxlab">Your twin &mdash; same kind, new numbers</p>
+<div class="q-card yt" id="yt_FX5t" data-iid="FX5t">
+  <span class="q-cap">Your twin</span>
+  <div class="dq" id="q_FX5t"></div>
+<div class="tfigwrap"><svg class="tfig" data-fig="FX5t" viewBox="0 0 420 203" width="420" height="203" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a triangle" font-family="Segoe UI,Arial,sans-serif">
+<polygon class="ftri" points="48.0,169.0 230.2,169.0 372.0,34.0" fill="#BBDEFB" fill-opacity="0.85" stroke="#1565C0" stroke-width="2.5" stroke-linejoin="round"/>
+<line class="fh" data-h="20" x1="372.0" y1="34.0" x2="372.0" y2="169.0" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<polyline class="ra" points="363.0,169.0 363.0,160.0 372.0,160.0" fill="none" stroke="#283593" stroke-width="2"/>
+<line class="fext" x1="230.2" y1="169.0" x2="372.0" y2="169.0" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<text class="fv" x="34.5" y="177.6" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text>
+<text class="fv" x="234.3" y="187.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text>
+<text class="fv" x="384.1" y="32.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AB:27" x="139.1" y="189.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">27 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AC:52" x="204.2" y="92.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">52 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="BC:29" x="311.5" y="117.4" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">29 cm</text>
+<text class="qlab" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" x="380.0" y="114.2" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="start">?</text>
+</svg></div>
+  <button type="button" class="btn-circ" id="circ_FX5t" onclick="circTap('FX5t')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX5t"></div>
+  <button class="btn-check" id="chk_FX5t" onclick="ytCheck('FX5t')" disabled>Check</button>
+  <div class="feedback" id="fb_FX5t"></div>
+  <div class="sorry" id="sorry_FX5t" style="display:none"></div>
+</div>
+</div>
+<button type="button" class="fxbtn" id="fxb3_FX5" onclick="fxNext('FX5')" style="display:none">Next card &#9656;</button>
+</div>
+</div>
+<div class="fx hidden" id="fx_FX4" data-fx="FX4">
+<div class="fxh"><span class="fxn">Card 4 of 5</span> &middot; from U71 Q4 (Intermediate)<span class="fxok">&#10003; done</span></div>
+<div class="fxbody">
+<div class="fx-st on" data-s="0">
+<p class="fxlab">Your answer</p>
+<p class="fxq"><strong>A triangular sign has an area of 85 m². Its base is 17 m. What is its height?</strong></p>
+<div class="fxyou">You wrote: 20 m (working: 170)</div>
+<button type="button" class="fxbtn" id="fxb1_FX4" onclick="fxGo('FX4')">Find the slip &#9656;</button>
+</div>
+<div class="fx-st" data-s="1">
+<p class="fxlab">Find the slip</p>
+<p class="fxsq"><strong>Your box 85 × 2 = 170 was RIGHT. Which step slipped?</strong></p>
+<div class="fxopts" id="fxo_FX4">
+<button type="button" class="fxopt" data-i="0" onclick="fxPick('FX4',0)">A) 85 × 2 should be 160</button>
+<button type="button" class="fxopt" data-i="1" onclick="fxPick('FX4',1)">B) 170 ÷ 17 is 10, not 20 — ✔3 back-check: 17 × 20 = 340</button>
+<button type="button" class="fxopt" data-i="2" onclick="fxPick('FX4',2)">C) I should not double</button>
+</div>
+<div class="fxres" id="fxres_FX4"></div>
+<button type="button" class="fxbtn" id="fxb2_FX4" onclick="fxToRedo('FX4')" style="display:none">Redo it &#9656;</button>
+</div>
+<div class="fx-st" data-s="2">
+<p class="fxlab">Redo &mdash; the same question, with your card open</p>
+<div class="q-card yt" id="yt_FX4r" data-iid="FX4r">
+  <span class="q-cap">Redo</span>
+  <div class="dq" id="q_FX4r"></div>
+  <button type="button" class="btn-circ" id="circ_FX4r" onclick="circTap('FX4r')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX4r"></div>
+  <button class="btn-check" id="chk_FX4r" onclick="ytCheck('FX4r')" disabled>Check</button>
+  <div class="feedback" id="fb_FX4r"></div>
+  <div class="sorry" id="sorry_FX4r" style="display:none"></div>
+</div>
+</div>
+<div class="fx-st" data-s="3">
+<p class="fxlab">Your twin &mdash; same kind, new numbers</p>
+<div class="q-card yt" id="yt_FX4t" data-iid="FX4t">
+  <span class="q-cap">Your twin</span>
+  <div class="dq" id="q_FX4t"></div>
+  <button type="button" class="btn-circ" id="circ_FX4t" onclick="circTap('FX4t')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX4t"></div>
+  <button class="btn-check" id="chk_FX4t" onclick="ytCheck('FX4t')" disabled>Check</button>
+  <div class="feedback" id="fb_FX4t"></div>
+  <div class="sorry" id="sorry_FX4t" style="display:none"></div>
+</div>
+</div>
+<button type="button" class="fxbtn" id="fxb3_FX4" onclick="fxNext('FX4')" style="display:none">Next card &#9656;</button>
+</div>
+</div>
+<div class="fx hidden" id="fx_FXR2" data-fx="FXR2">
+<div class="fxh"><span class="fxn">Card 5 of 5</span> &middot; from U71 R2 (Recall: free items, school Test 2 Q24)<span class="fxok">&#10003; done</span></div>
+<div class="fxbody">
+<div class="fx-st on" data-s="0">
+<p class="fxlab">Your answer</p>
+<p class="fxq"><strong>Juice boxes cost $3 each. For every 4 boxes you buy, you get 1 box free. A class needs 47 juice boxes. How much does the class pay?</strong></p>
+<div class="fxyou">You wrote: $87 (no working)</div>
+<button type="button" class="fxbtn" id="fxb1_FXR2" onclick="fxGo('FXR2')">Find the slip &#9656;</button>
+</div>
+<div class="fx-st" data-s="1">
+<p class="fxlab">Find the slip</p>
+<p class="fxsq"><strong>What does one GROUP look like?</strong></p>
+<div class="fxopts" id="fxo_FXR2">
+<button type="button" class="fxopt" data-i="0" onclick="fxPick('FXR2',0)">A) 4 boxes</button>
+<button type="button" class="fxopt" data-i="1" onclick="fxPick('FXR2',1)">B) 5 boxes — 4 paid + 1 free</button>
+<button type="button" class="fxopt" data-i="2" onclick="fxPick('FXR2',2)">C) 3 boxes</button>
+</div>
+<div class="fxres" id="fxres_FXR2"></div>
+<button type="button" class="fxbtn" id="fxb2_FXR2" onclick="fxToRedo('FXR2')" style="display:none">Redo it &#9656;</button>
+</div>
+<div class="fx-st" data-s="2">
+<p class="fxlab">Redo &mdash; the same question, with your card open</p>
+<div class="q-card yt" id="yt_FXR2r" data-iid="FXR2r">
+  <span class="q-cap">Redo</span>
+  <div class="dq" id="q_FXR2r"></div>
+  <button type="button" class="btn-circ" id="circ_FXR2r" onclick="circTap('FXR2r')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FXR2r"></div>
+  <button class="btn-check" id="chk_FXR2r" onclick="ytCheck('FXR2r')" disabled>Check</button>
+  <div class="feedback" id="fb_FXR2r"></div>
+  <div class="sorry" id="sorry_FXR2r" style="display:none"></div>
+</div>
+</div>
+<div class="fx-st" data-s="3">
+<p class="fxlab">Your twin &mdash; same kind, new numbers</p>
+<div class="q-card yt" id="yt_FXR2t" data-iid="FXR2t">
+  <span class="q-cap">Your twin</span>
+  <div class="dq" id="q_FXR2t"></div>
+  <button type="button" class="btn-circ" id="circ_FXR2t" onclick="circTap('FXR2t')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FXR2t"></div>
+  <button class="btn-check" id="chk_FXR2t" onclick="ytCheck('FXR2t')" disabled>Check</button>
+  <div class="feedback" id="fb_FXR2t"></div>
+  <div class="sorry" id="sorry_FXR2t" style="display:none"></div>
+</div>
+</div>
+<button type="button" class="fxbtn" id="fxb3_FXR2" onclick="fxNext('FXR2')" style="display:none">Fix-It done &#9656;</button>
+</div>
+</div>
+<div class="lockmsg" id="lockmsg">Finish your five Fix-It cards first &mdash; then Next.</div>
+<div class="fxfinal" id="fxfinal" style="display:none"><b>Fix-It Corner done.</b> Your twins show what stuck. Press Next.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Route A: tap the pair &#8594;</button></div>
+</div>
+
+<!-- s2 -->
+<div class="screen" id="s2">
+<div class="card">
+<span class="act">Route A &middot; Tap the pair</span><br>
+  <h2>&#128073; Tap The Pair</h2>
+  <p class="tap-hint"><b>PICK THE PAIR:</b> a base and the line that meets it at a square corner &#8894;. Slanted sides are decoys.</p>
+<div class="dtree dtree3"><b>Which line is the height?</b><table><tr><td>It meets the base at a square corner &#8894;</td><td>&#9650;2 &mdash; that is the pair</td></tr><tr><td>It is a slanted side</td><td>&#9650;2 &mdash; a decoy: not the pair</td></tr><tr><td>The triangle has a square corner</td><td>&#9650;2 &mdash; its two short sides are a pair, and the long side has its own height</td></tr><tr><td>The area is given and a side is missing?</td><td>&#9650;5 double, then &#9650;6 share out</td></tr></table></div>
+<div class="tfigwrap"><svg class="tfig" data-fig="L2" viewBox="0 0 420 179" width="420" height="179" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a triangle" font-family="Segoe UI,Arial,sans-serif">
+<polygon class="ftri" points="48.0,145.1 223.9,145.1 372.0,34.0" fill="#BBDEFB" fill-opacity="0.85" stroke="#1565C0" stroke-width="2.5" stroke-linejoin="round"/>
+<line class="fh" data-h="12" x1="372.0" y1="34.0" x2="372.0" y2="145.1" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<polyline class="ra" points="363.0,145.1 363.0,136.1 372.0,136.1" fill="none" stroke="#283593" stroke-width="2"/>
+<line class="fext" x1="223.9" y1="145.1" x2="372.0" y2="145.1" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<text class="fv" x="34.3" y="153.1" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text>
+<text class="fv" x="227.3" y="163.7" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text>
+<text class="fv" x="384.7" y="33.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AB:19" x="135.9" y="165.1" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">19 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AC:37" x="205.1" y="80.4" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">37 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="BC:20" x="306.9" y="106.5" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">20 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="h:12" x="380.0" y="116.8" font-size="14" font-weight="800" fill="#283593" text-anchor="start">12 cm</text>
+</svg></div>
+<div class="tapbox" id="tap_L2"><p><strong>For base AB (19 cm), which line is its height: AC (37), BC (20) or the dashed line (12)?</strong></p>
+<div class="tapbtns"><button type="button" onclick="tapL2(0)">AC (37 cm)</button><button type="button" onclick="tapL2(1)">BC (20 cm)</button><button type="button" onclick="tapL2(2)">the dashed line (12 cm)</button></div><div class="tapfb" id="tapfb_L2" aria-live="polite"></div></div>
+<div class="q-card yt hidden" id="yt_L2" data-iid="L2">
+  <span class="q-cap">Now the area</span>
+  <div class="dq" id="q_L2"></div>
+  <button type="button" class="btn-circ" id="circ_L2" onclick="circTap('L2')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_L2"></div>
+  <button class="btn-check" id="chk_L2" onclick="ytCheck('L2')" disabled>Check</button>
+  <div class="feedback" id="fb_L2"></div>
+  <div class="sorry" id="sorry_L2" style="display:none"></div>
+</div>
+<p class="tap-hint"><b>A right-angled triangle has THREE pairs.</b> Tap the height that goes with each base: AB, AC and BC.</p>
+<div class="tfigwrap"><svg class="tfig" data-fig="L2b" data-hlen="7.2" viewBox="0 0 373 270" width="373" height="270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a right-angled triangle" font-family="Segoe UI,Arial,sans-serif">
+<polygon class="ftri" points="52.0,236.0 321.3,236.0 52.0,34.0" fill="#BBDEFB" fill-opacity="0.85" stroke="#1565C0" stroke-width="2.5" stroke-linejoin="round"/>
+<line class="fh" data-h="7.2" x1="52.0" y1="236.0" x2="149.0" y2="106.7" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<polyline class="ra" points="63.0,236.0 63.0,225.0 52.0,225.0" fill="none" stroke="#283593" stroke-width="2"/>
+<polyline class="ra" points="143.6,113.9 136.4,108.5 141.8,101.3" fill="none" stroke="#283593" stroke-width="2"/>
+<text class="fv" x="40.8" y="249.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text>
+<text class="fv" x="334.4" y="245.9" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text>
+<text class="fv" x="44.2" y="27.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AB:12" x="186.7" y="257.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">12 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AC:9" x="36.0" y="140.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">9 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="BC:15" x="196.3" y="127.2" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">15 cm</text>
+<text class="qlab" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" x="114.5" y="167.4" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="middle">?</text>
+</svg></div>
+<div class="tapbox" id="tap_L2b">
+<div class="taprow" id="taprow_0"><p><b>Base AB: tap its height</b></p><div class="tapbtns"><button type="button" onclick="tapB(0,0)">AC</button><button type="button" onclick="tapB(0,1)">BC</button><button type="button" onclick="tapB(0,2)">the dashed line from A</button></div><div class="tapfb" id="tapfb_0" aria-live="polite"></div></div>
+<div class="taprow" id="taprow_1"><p><b>Base AC: tap its height</b></p><div class="tapbtns"><button type="button" onclick="tapB(1,0)">AB</button><button type="button" onclick="tapB(1,1)">BC</button><button type="button" onclick="tapB(1,2)">the dashed line from A</button></div><div class="tapfb" id="tapfb_1" aria-live="polite"></div></div>
+<div class="taprow" id="taprow_2"><p><b>Base BC: tap its height</b></p><div class="tapbtns"><button type="button" onclick="tapB(2,0)">AB</button><button type="button" onclick="tapB(2,1)">AC</button><button type="button" onclick="tapB(2,2)">the dashed line from A</button></div><div class="tapfb" id="tapfb_2" aria-live="polite"></div></div>
+<div class="tapall" id="tapall" style="display:none"><b>Three sides, three pairs.</b></div>
+</div>
+<div id="l2bwl" style="display:none"><p class="tap-hint"><b>Worked example:</b></p>
+<div class="wlb auto" data-bid="L2b">
+<div class="wls">
+<div class="wl" data-card="T2" data-n="2"><span class="m">Pair for AB = AB and AC</span><span class="why">▲2 AC meets AB at the square corner</span></div>
+<div class="wl" data-card="T2" data-n="2"><span class="m">Pair for AC = AC and AB</span><span class="why">the same square corner, turned</span></div>
+<div class="wl" data-card="T2" data-n="2"><span class="m">Pair for BC = BC and the dashed line from A</span><span class="why">▲2 the long side has its own height, from the square corner</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Route B: two steps &#8594;</button></div>
+</div>
+
+<!-- s3 -->
+<div class="screen" id="s3">
+<div class="card">
+<span class="act">Route B &middot; Two steps</span><br>
+  <h2>&#129693; Two Steps: The Pair You Know, Then The Pair You Want</h2>
+  <p class="tap-hint">Same triangle rule, used twice. Each line says which card line it uses.</p>
+<div class="flow"><span class="fb">the pair you KNOW</span><span class="fa">gives</span><span class="fb">the area</span><span class="fa">&times; 2 &divide; the side you know</span><span class="fb q">the side you WANT</span></div>
+<p class="tap-hint"><b>Worked example:</b></p>
+<p><strong>Route B — two steps. Triangle A has a base of 10 cm and an area of 45 cm². Triangle B has the SAME height and a base of 14 cm. Find B's area.</strong></p>
+<div class="wlb auto" data-bid="L3a">
+<div class="wls">
+<div class="wl" data-card="T5" data-n="5"><span class="m">Area = 45 cm²</span><span class="why">triangle A: area 45 cm², base 10 cm</span></div>
+<div class="wl" data-card="T5" data-n="5"><span class="m">Box = 45 × 2</span><span class="why">▲5 undo the half: the box (base × height) is twice the triangle</span></div>
+<div class="wl" data-card="T5" data-n="5"><span class="m">= 90</span><span class="why">45 × 2 = 90</span></div>
+<div class="wl" data-card="T6" data-n="6"><span class="m">Height of A = 90 ÷ 10</span><span class="why">▲6 the box is base × height, so the missing side = box ÷ the base of A (10)</span></div>
+<div class="wl" data-card="T6" data-n="6"><span class="m">= 9 cm</span><span class="why">90 ÷ 10 = 9</span></div>
+<div class="wl" data-card="A3"><span class="m">10 × 9 = 90</span><span class="why">✔3 back-check: base of A × my answer gives the box again</span></div>
+<div class="wl" data-card="A3"><span class="m">90 ÷ 2 = 45</span><span class="why">✔3 and half the box is the area in the question ✓</span></div>
+<div class="wl" data-card="T1" data-n="1"><span class="m">Base = 14 cm</span><span class="why">▲1 triangle B: base 14</span></div>
+<div class="wl" data-card="T2" data-n="2"><span class="m">Height = 9 cm</span><span class="why">▲2 the SAME height as A</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">Rectangle = 14 × 9</span><span class="why">▲3 base × height = the box the triangle fits in</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">= 126</span><span class="why">14 × 9 = 126</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">Area of B = 126 ÷ 2</span><span class="why">▲4 the triangle is half of the box</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">= 63 cm²</span><span class="why">126 ÷ 2 = 63; area is in square units</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+<p class="tap-hint"><b>Worked example:</b></p>
+<p><strong>Two steps again. A right-angled triangle has sides 15 cm, 20 cm and 25 cm. Find the height from the square corner to the 25 cm side.</strong></p>
+<div class="wlb auto" data-bid="L3b">
+<div class="wls">
+<div class="wl" data-card="T1" data-n="1"><span class="m">Base = 20 cm</span><span class="why">▲1 use the pair you KNOW: the 20 cm side</span></div>
+<div class="wl" data-card="T2" data-n="2"><span class="m">Height = 15 cm</span><span class="why">▲2 its height is the 15 cm side (they meet at the square corner)</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">Rectangle = 20 × 15</span><span class="why">▲3 base × height = the box the triangle fits in</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">= 300</span><span class="why">20 × 15 = 300</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">Area = 300 ÷ 2</span><span class="why">▲4 the triangle is half of the box</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">= 150 cm²</span><span class="why">300 ÷ 2 = 150; area is in square units</span></div>
+<div class="wl" data-card="T5" data-n="5"><span class="m">Area = 150 cm²</span><span class="why">same triangle, same area — now the 25 cm side is the base</span></div>
+<div class="wl" data-card="T5" data-n="5"><span class="m">Box = 150 × 2</span><span class="why">▲5 undo the half: the box (base × height) is twice the triangle</span></div>
+<div class="wl" data-card="T5" data-n="5"><span class="m">= 300</span><span class="why">150 × 2 = 300</span></div>
+<div class="wl" data-card="T6" data-n="6"><span class="m">Height to the long side = 300 ÷ 25</span><span class="why">▲6 the box is base × height, so the missing side = box ÷ the new base, 25 cm (25)</span></div>
+<div class="wl" data-card="T6" data-n="6"><span class="m">= 12 cm</span><span class="why">300 ÷ 25 = 12</span></div>
+<div class="wl" data-card="A3"><span class="m">25 × 12 = 300</span><span class="why">✔3 back-check: new base, 25 cm × my answer gives the box again</span></div>
+<div class="wl" data-card="A3"><span class="m">300 ÷ 2 = 150</span><span class="why">✔3 and half the box is the area in the question ✓</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+<div class="bridge">Step 1: the pair you KNOW gives the area. Step 2: the pair you WANT — undo the half.</div>
+</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Your Turn &#8594;</button></div>
+</div>
+
+<!-- s4 -->
+<div class="screen" id="s4">
+<div class="card">
+<span class="act">Your turn &times; 5</span><br>
+  <h2>&#9997;&#65039; Your Turn</h2>
+  <p class="tap-hint">No worked example on this page. Pick the pair, then use the triangle rule forwards or backwards. Your card is there if you want it. After each right answer, check it backwards.</p>
+<div class="q-card yt" id="yt_Y1" data-iid="Y1">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_Y1"></div>
+<div class="tfigwrap"><svg class="tfig" data-fig="Y1" viewBox="0 0 420 203" width="420" height="203" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a triangle" font-family="Segoe UI,Arial,sans-serif">
+<polygon class="ftri" points="48.0,169.0 192.0,169.0 372.0,34.0" fill="#BBDEFB" fill-opacity="0.85" stroke="#1565C0" stroke-width="2.5" stroke-linejoin="round"/>
+<line class="fh" data-h="15" x1="372.0" y1="34.0" x2="372.0" y2="169.0" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<polyline class="ra" points="363.0,169.0 363.0,160.0 372.0,160.0" fill="none" stroke="#283593" stroke-width="2"/>
+<line class="fext" x1="192.0" y1="169.0" x2="372.0" y2="169.0" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<text class="fv" x="34.5" y="177.9" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text>
+<text class="fv" x="188.4" y="187.5" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text>
+<text class="fv" x="384.3" y="32.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AB:16" x="120.0" y="189.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">16 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AC:39" x="204.2" y="92.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">39 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="BC:25" x="291.0" y="118.5" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">25 cm</text>
+<text class="qlab" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" x="380.0" y="114.2" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="start">?</text>
+</svg></div>
+  <button type="button" class="btn-circ" id="circ_Y1" onclick="circTap('Y1')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_Y1"></div>
+  <button class="btn-check" id="chk_Y1" onclick="ytCheck('Y1')" disabled>Check</button>
+  <div class="feedback" id="fb_Y1"></div>
+  <div class="sorry" id="sorry_Y1" style="display:none"></div>
+</div>
+<div class="q-card yt" id="yt_Y2" data-iid="Y2">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_Y2"></div>
+<div class="tfigwrap"><svg class="tfig" data-fig="Y2" viewBox="0 0 420 179" width="420" height="179" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a triangle" font-family="Segoe UI,Arial,sans-serif">
+<polygon class="ftri" points="48.0,145.1 372.0,145.1 48.0,34.0" fill="#BBDEFB" fill-opacity="0.85" stroke="#1565C0" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline class="ra" points="59.0,145.1 59.0,134.1 48.0,134.1" fill="none" stroke="#283593" stroke-width="2"/>
+<text class="fv" x="34.8" y="154.6" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text>
+<text class="fv" x="385.8" y="152.5" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text>
+<text class="fv" x="36.5" y="31.1" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AB:35" x="210.0" y="165.1" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">35 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AC:12" x="33.0" y="94.5" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">12 cm</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="BC:37" x="214.9" y="80.4" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">37 cm</text>
+</svg></div>
+  <button type="button" class="btn-circ" id="circ_Y2" onclick="circTap('Y2')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_Y2"></div>
+  <button class="btn-check" id="chk_Y2" onclick="ytCheck('Y2')" disabled>Check</button>
+  <div class="feedback" id="fb_Y2"></div>
+  <div class="sorry" id="sorry_Y2" style="display:none"></div>
+</div>
+<div class="q-card yt" id="yt_Y3" data-iid="Y3">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_Y3"></div>
+<div class="tfigwrap"><svg class="tfig" data-fig="Y3" data-hlen="84" viewBox="0 0 373 270" width="373" height="270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a right-angled triangle" font-family="Segoe UI,Arial,sans-serif">
+<polygon class="ftri" points="52.0,236.0 321.3,236.0 52.0,34.0" fill="#BBDEFB" fill-opacity="0.85" stroke="#1565C0" stroke-width="2.5" stroke-linejoin="round"/>
+<line class="fh" data-h="84" x1="52.0" y1="236.0" x2="149.0" y2="106.7" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/>
+<polyline class="ra" points="63.0,236.0 63.0,225.0 52.0,225.0" fill="none" stroke="#283593" stroke-width="2"/>
+<polyline class="ra" points="143.6,113.9 136.4,108.5 141.8,101.3" fill="none" stroke="#283593" stroke-width="2"/>
+<text class="fv" x="40.8" y="249.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text>
+<text class="fv" x="334.4" y="245.9" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text>
+<text class="fv" x="44.2" y="27.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AB:140" x="186.7" y="257.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">140 m</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="AC:105" x="36.0" y="140.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">105 m</text>
+<text class="plen" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" data-len="BC:175" x="196.3" y="127.2" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">175 m</text>
+<text class="qlab" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" x="114.5" y="167.4" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="middle">?</text>
+</svg></div>
+  <button type="button" class="btn-circ" id="circ_Y3" onclick="circTap('Y3')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_Y3"></div>
+  <button class="btn-check" id="chk_Y3" onclick="ytCheck('Y3')" disabled>Check</button>
+  <div class="feedback" id="fb_Y3"></div>
+  <div class="sorry" id="sorry_Y3" style="display:none"></div>
+</div>
+<div class="q-card yt" id="yt_Y4" data-iid="Y4">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_Y4"></div>
+  <button type="button" class="btn-circ" id="circ_Y4" onclick="circTap('Y4')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_Y4"></div>
+  <button class="btn-check" id="chk_Y4" onclick="ytCheck('Y4')" disabled>Check</button>
+  <div class="feedback" id="fb_Y4"></div>
+  <div class="sorry" id="sorry_Y4" style="display:none"></div>
+</div>
+<div class="q-card yt" id="yt_Y5" data-iid="Y5">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_Y5"></div>
+  <button type="button" class="btn-circ" id="circ_Y5" onclick="circTap('Y5')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_Y5"></div>
+  <button class="btn-check" id="chk_Y5" onclick="ytCheck('Y5')" disabled>Check</button>
+  <div class="feedback" id="fb_Y5"></div>
+  <div class="sorry" id="sorry_Y5" style="display:none"></div>
+</div>
+<div class="stat2" id="ytstat"></div>
+  <div class="finish" id="finish"><div class="tsbadge">&#11088; You fixed your own mistakes AND cracked the hard pictures.</div><div class="both" id="fboth"></div><p style="font-weight:700">Stop here. The test is TOMORROW &mdash; use your Answer Check.</p></div>
+</div>
+</div>
+
+</div>
+<div class="savezone" id="savezone"><div class="sstat" id="sstat" aria-live="polite"></div><button type="button" id="savebtn" onclick="saveClick()" disabled>Save</button></div>
+<div id="unsavedov" role="alertdialog" aria-live="assertive"><div class="box"><p>You haven&rsquo;t saved yet. If you leave now, Dad and Chusaki will not see your answers.</p><button type="button" class="stay" onclick="stayAndSave()">Stay and save</button><button type="button" class="leave" onclick="leaveAnyway()">Leave without saving</button></div></div>
+<!-- TRIANGLE-CARD START -->
+<button type="button" id="fcbtn" onclick="fcToggle(true)" aria-controls="fcard">&#x1F4CC; Triangle Card</button>
+<aside id="fcard" class="fc" aria-label="Triangle Card and Fraction Card">
+<div class="fc-top"><b>&#x1F4CC; MY CARDS</b><span class="fc-btns"><button type="button" onclick="fcPrint()" aria-label="Print the card">&#x1F5A8;</button><button type="button" onclick="fcToggle(true)" aria-label="Close the card">&#10005;</button></span></div>
+<div class="fc-tabs"><button type="button" class="fc-tab on" id="tab-tri" onclick="fcTab('tri')">&#9650; Triangle Card</button><button type="button" class="fc-tab" id="tab-frac" onclick="fcTab('frac')">Fraction Card</button></div>
+<div class="fc-pane on" id="pane-tri">
+<div class="fc-sec">THE TRIANGLE CARD</div>
+<div class="fc-st" data-step="T1"><b>▲1</b> Pick a BASE — any side can be the base.</div>
+<div class="fc-st" data-step="T2"><b>▲2</b> Its HEIGHT = the straight-up line from the opposite corner down to the base line. It meets the base line at a square corner ⊾. A slanted side is NOT the height. If the top corner hangs past the end of the base, stretch the base line — the height is outside.<div class="pickline">PICK THE PAIR: the base, and the line that meets it at a square corner ⊾. Slanted sides are decoys. A right-angled triangle has 3 pairs.</div></div>
+<div class="fc-st" data-step="T3"><b>▲3</b> Rectangle = base × height (the box the triangle fits in).</div>
+<div class="fc-st" data-step="T4"><b>▲4</b> Area = rectangle ÷ 2 (the triangle is half the box). Write square units: cm², m².</div>
+<div class="fc-st" data-step="T5"><b>▲5</b> Missing height or base? UNDO THE HALF first: box = area × 2.</div>
+<div class="fc-st" data-step="T6"><b>▲6</b> The box is base × height, so the missing side = box ÷ the side you know.</div>
+<div class="fc-sec ac">ANSWER CHECK &mdash; on every question</div>
+<div class="fc-st acs" data-step="A1"><b>✔1</b> What does it ask for? Read the question again — ALL of it (each triangle? the total? how much more?).</div>
+<div class="fc-st acs" data-step="A2"><b>✔2</b> Copy check: is every number in my working the same as in the question?</div>
+<div class="fc-st acs" data-step="A3"><b>✔3</b> Back-check: undo my last step (× ↔ ÷). Do I get the number I started with? (27 × 2 = 54 ✓ · 28 × 2 = 56 ✗)</div>
+<div class="fc-sec ac">FREE ITEMS</div>
+<div class="fc-st acs" data-step="G"><b>G</b> &ldquo;For every 3 you buy, 1 is free&rdquo;: one GROUP = bought + free (3 + 1 = 4). Full groups = people &divide; group size. The extra people pay. Paid = groups &times; bought + extras.</div>
+</div>
+<div class="fc-pane" id="pane-frac">
+<div class="fc-sec">THE BIG PICTURE</div>
+<div class="fc-st" data-step="&#9312;"><b>&#9312;</b> Taken part = fraction &times; whole <span class="fc-q">&ldquo;1/4 OF the juice&rdquo;</span></div>
+<div class="fc-told">Told? &ldquo;3/4 L&rdquo; &rarr; Taken part = 3/4 L. No &times; needed!</div>
+<button type="button" class="fc-why" onclick="fcBricks(this)">Why &times;? &#9662;</button>
+<div class="fc-bricks" id="fcbricks">
+<div class="bk-row"><span class="grp lit"><i></i><i></i><i></i><i></i></span><span class="grp"><i></i><i></i><i></i><i></i></span><span class="grp"><i></i><i></i><i></i><i></i></span></div>
+<div>1/3 OF 12 bricks: the bricks split into 3 equal groups, one group lights up, giving <b>4</b>.</div>
+<div><b>1/3 &times; 12 = 12/3 = 4.</b> &lsquo;Of&rsquo; means &times;.</div>
+<div class="fc-q">1/3 kg is just a small lump &mdash; that&rsquo;s TOLD, not &times;.</div>
+</div>
+<div class="fc-st" data-step="&#9313;"><b>&#9313;</b> Left part = whole &minus; taken part</div>
+<div class="fc-st" data-step="&#9314;"><b>&#9314;</b> &ldquo;&hellip; of what was LEFT&rdquo;? &rarr; the left part is the NEW whole. Back to &#9312;.</div>
+<div class="fc-st" data-step="&#9315;"><b>&#9315;</b> LAST CHECK: read the question again &mdash; does it ask for a TAKEN part, the LEFT part, or HOW MUCH MORE?<br><span class="fc-q">&ldquo;How much more?&rdquo; = bigger part &minus; smaller part (that&rsquo;s the &minus; side too)</span></div>
+<div class="fc-two">
+<div class="fc-blk" id="fcmul"><button type="button" class="fc-bh" onclick="fcOpen('fcmul')">HOW TO &times; &#9662;</button>
+<div class="fc-st" data-step="&times;0"><b>&times;0</b> Mixed number? Make it improper.<br><span class="fc-q">2 1/4 = 9/4 &nbsp; Whole number? 12 = 12/1</span></div>
+<div class="fc-st" data-step="&times;1"><b>&times;1</b> top &times; top, bottom &times; bottom</div>
+<div class="fc-st" data-step="&times;2"><b>&times;2</b> Simplify &rarr; mixed number</div>
+<div class="fc-ex"><div class="fc-exh">Example:</div><div>5/6 &times; 1 4/5</div><div>= 5/6 &times; 9/5 <u>&times;0</u></div><div>= 45/30 <u>&times;1</u></div><div>= 3/2 <u>&times;2</u></div><div>= 1 1/2 <u>&times;2</u></div></div></div>
+<div class="fc-blk" id="fcsub"><button type="button" class="fc-bh" onclick="fcOpen('fcsub')">HOW TO &minus; &#9662;</button>
+<div class="fc-st" data-step="&minus;0"><b>&minus;0</b> Mixed number? Make it improper.</div>
+<div class="fc-st" data-step="&minus;1"><b>&minus;1</b> Make the bottoms the same.<br><span class="fc-q">Count up in the BIGGER bottom until the smaller one fits:<br>thirds &amp; quarters &rarr; 4, 8, 12 &#10003; &rarr; twelfths</span></div>
+<div class="fc-st" data-step="&minus;2"><b>&minus;2</b> top &minus; top (the bottom stays!)</div>
+<div class="fc-st" data-step="&minus;3"><b>&minus;3</b> Simplify &rarr; mixed number</div>
+<div class="fc-ex"><div class="fc-exh">Example:</div><div>3 1/2 &minus; 3/4</div><div>= 7/2 &minus; 3/4 <u>&minus;0</u></div><div>= 14/4 &minus; 3/4 <u>&minus;1</u></div><div>= 11/4 <u>&minus;2</u></div><div>= 2 3/4 <u>&minus;3</u></div></div></div>
+</div>
+<div class="fc-blk" id="fcadd"><button type="button" class="fc-bh" onclick="fcOpen('fcadd')">HOW TO + (same as &minus;, but add the tops) &#9662;</button>
+<div class="fc-st" data-step="+0"><b>+0</b> Mixed? Make it improper.</div>
+<div class="fc-st" data-step="+1"><b>+1</b> Same bottoms (count up in the bigger bottom).</div>
+<div class="fc-st" data-step="+2"><b>+2</b> top + top (bottom stays!)</div>
+<div class="fc-st" data-step="+3"><b>+3</b> Simplify &rarr; mixed number</div></div>
+<div class="fc-st" data-step="&divide;"><b>&divide;</b> FRACTIONS ARE DIVISIONS<br><span class="fc-q">a &divide; b = a/b &nbsp; 5 &divide; 6 &rarr; 5/6 each &nbsp; 13 &divide; 4 = 13/4 = 3 1/4<br>Improper &rarr; mixed: top &divide; bottom = wholes, remainder = the new top.</span></div>
+<div class="fc-st" data-step="."><b>.</b> FRACTION &rarr; DECIMAL<br><span class="fc-q">Make the bottom 10, 100 or 1000: &nbsp; 3/4 = 75/100 = 0.75<br>Can&rsquo;t? Divide top by bottom: &nbsp; 1/3 = 0.333&hellip;</span></div>
+<div class="fc-st" data-step="&asymp;"><b>&asymp;</b> ROUND to 2 decimal places: look at the 3rd digit &rarr; 5 or more, round up. <span class="fc-q">0.333&hellip; &asymp; 0.33</span></div>
+<div class="fc-st" data-step="B"><b>B</b> WORKING BACKWARDS <span class="fc-q">(&ldquo;how much at FIRST?&rdquo;)</span><br>1. Left fraction = 1 &minus; taken fraction<br>2. That many units = the amount you know<br>3. 1 unit = amount &divide; units<br>4. Whole = 1 unit &times; the bottom number<br><span class="fc-q">Two rounds? Undo the LAST round first, then the first round.</span></div>
+<div class="fc-st" data-step="&#9316;"><b>&#9316;</b> CHECK TWICE before you write the answer:<br><span class="fc-q">copied numbers &#10003; (circle them in the question) &nbsp;&middot;&nbsp; improper &rarr; mixed &#10003; (multiply back: 2 1/4 &rarr; 2 &times; 4 + 1 = 9 &#10003;)</span></div>
+</div>
+</aside>
+<!-- TRIANGLE-CARD END -->
+<script>
+
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a);}
+function mixedStr(n,d){var g=gcd(n,d);n=n/g;d=d/g;var w=Math.floor(n/d),r=n-w*d;if(r===0)return ''+w;return (w?w+' ':'')+r+'/'+d;}
+/* parse "1 1/5", "6/5", "2", "1.2", "1 1/5 m" -> [num,den] reduced, or null */
+function parseVal(s){
+  if(s==null)return null; s=String(s).toLowerCase().replace(/[²]/g,'').replace(/(kg|km|cups?|cm|ml|l|m|litres?|liters?|metres?|meters?|sq\.?|squared)\b/g,' ').replace(/\s+/g,' ').trim();
+  if(!s)return null; var m;
+  if((m=s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/))){var d=+m[3];if(!d)return null;var n=(+m[1])*d+(+m[2]);var g=gcd(n,d);return [n/g,d/g,'mixed'];}
+  if((m=s.match(/^(\d+)\s*\/\s*(\d+)$/))){var d2=+m[2];if(!d2)return null;var g2=gcd(+m[1],d2);return [(+m[1])/g2,d2/g2,'frac',+m[1],d2];}
+  if((m=s.match(/^(\d+)$/))){return [+m[1],1,'int'];}
+  if((m=s.match(/^(\d*)\.(\d+)$/))){var den=Math.pow(10,m[2].length);var n3=(+m[1]||0)*den+(+m[2]);var g3=gcd(n3,den);return [n3/g3,den/g3,'dec'];}
+  return null;}
+function sameVal(a,b){return a&&b&&a[0]===b[0]&&a[1]===b[1];}
+function isImproperText(s){var m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);return !!m&&(+m[1])>(+m[2]);}
+
+function wlShow(b,n){var rows=b.querySelectorAll('.wl,.bl'),i;for(i=0;i<rows.length;i++){rows[i].classList.remove('cur');if(i<n)rows[i].classList.add('on');}
+  if(n>0&&rows[n-1])rows[n-1].classList.add('cur');if(n>=rows.length){b.classList.add('alldone');var a=b.getAttribute('data-after');if(a){var e=document.getElementById(a);if(e)e.style.display='block';}}}
+function wlCount(b){return b.querySelectorAll('.wl.on,.bl.on').length;}
+function wlNext(btn){var b=btn.parentNode;wlShow(b,wlCount(b)+1);}
+function wlOpen(b){b.classList.remove('closed');if(wlCount(b)===0)wlShow(b,1);}
+function stepsToggle(btn){var b=btn.parentNode.querySelector('.wlb');if(b.classList.contains('closed')){wlOpen(b);btn.textContent='Hide steps';}else{b.classList.add('closed');btn.textContent='Show steps';}}
+var HINT67={q1:'Look right after the fraction — is there a unit (L, kg, m or m²)?',
+ q2:'Read to the end of the story. Is there a “then …” still to come after this round?'};
+function tapsInit67(root,rounds,done){
+  var st={wrong:{q1:0,q2:0},mapWrong:[],path:[],done:false},r=0;
+  root.innerHTML='<div class="thead">&#128506; Map first — tap your way along it</div>';
+  function btn(v,t){return '<button type="button" data-v="'+v+'">'+t+'</button>';}
+  function ask(kind){
+    var d=document.createElement('div'),want,k=r+1;d.className='tq';
+    if(kind==='q1'){d.setAttribute('data-q','1');d.setAttribute('data-r',k);want=rounds[r];
+      d.innerHTML='<div class="tl">Q1 · Round '+k+'. Is there a unit right after the fraction?<span class="tsub">Look at the words for this round only.</span></div><div class="tb2">'+
+        btn('told','YES — a number with a unit, like “uses 3/4 L”')+btn('work','NO — it says “of the …”, like “uses 3/4 of the paint”')+'</div><div class="thint"></div>';}
+    else{d.setAttribute('data-q','2');d.setAttribute('data-r',k);want=(r<rounds.length-1)?'yes':'no';
+      d.innerHTML='<div class="tl">Q2 · Does the story go on — “then … of what was LEFT”?<span class="tsub">(“then … 1/2 kg more” also means the story goes on.)</span></div><div class="tb2">'+
+        btn('yes','YES — another round')+btn('no','NO — that was the last round')+'</div><div class="thint"></div>';}
+    root.appendChild(d);
+    var bs=d.querySelectorAll('button'),hint=d.querySelector('.thint'),i;
+    function go(b){
+      var v=b.getAttribute('data-v'),j;
+      if(v===want){for(j=0;j<bs.length;j++){bs[j].classList.remove('lit','nope');bs[j].disabled=true;}b.classList.add('good');hint.textContent='';st.path.push(kind+':'+v);
+        if(kind==='q1')ask('q2');else if(want==='yes'){r++;ask('q1');}else{if(!st.done){st.done=true;if(done)done(st);}}}
+      else{st.wrong[kind]++;st.mapWrong.push((kind==='q1'?'Q1':'Q2')+':'+v);b.classList.add('nope');hint.textContent='Not yet — '+HINT67[kind];
+        for(j=0;j<bs.length;j++)if(bs[j].getAttribute('data-v')===want)bs[j].classList.add('lit');}
+    }
+    for(i=0;i<bs.length;i++)(function(b){b.addEventListener('click',function(){go(b);});})(bs[i]);
+  }
+  ask('q1');return st;
+}
+function initCards(){
+  var cards=document.querySelectorAll('.q-card[data-rounds]'),i;
+  for(i=0;i<cards.length;i++)(function(c){
+    var tp=c.querySelector('.taps');if(!tp)return;
+    var inputs=c.querySelectorAll('input[type=text],textarea'),chk=c.querySelector('.btn-check'),j,rd=c.getAttribute('data-rounds').split(',');
+    for(j=0;j<inputs.length;j++)inputs[j].disabled=true;chk.disabled=true;
+    c._st=tapsInit67(tp,rd,function(){var k;for(k=0;k<inputs.length;k++)inputs[k].disabled=false;chk.disabled=false;
+      var lk=c.querySelectorAll('.locked'),m;for(m=0;m<lk.length;m++)lk[m].classList.remove('locked');});
+  })(cards[i]);
+  var plain=document.querySelectorAll('.wlb.auto'),p;for(p=0;p<plain.length;p++)wlShow(plain[p],1);
+}
+var lastP='';
+function say(fb,ok,msg){fb.style.display='block';fb.className='feedback '+(ok?'ok':'err');fb.textContent=msg;}
+var SWAPMSG='Both numbers are right — but they’re in each other’s boxes. On the test that’s 0. Read (a) again, then put the right number under it.';
+var PRAISE67=["You wrote ‘New whole =’ before round 2 — that’s the whole trick.","Read (a) again and put the right number under it. Exam-proof.","Told amount, straight off the left-over. Nice.","Fixed it! That’s how brains grow."];
+function praise67(rounds,two){var P=PRAISE67,pool=[P[0]];if(two)pool.push(P[1]);if(rounds.indexOf('told')>=0)pool.push(P[2]);
+  var p=pool[Math.floor(Math.random()*pool.length)];if(p===lastP&&pool.length>1)p=(p===pool[0])?pool[1]:pool[0];lastP=p;return p;}
+function nudge67(which){return which==='area'?'Check the whole first — is it length × width? Everything after it stands on it.':(which==='r2'?'Check round 2 — is the left-over piece right? Everything after it stands on it.':'Check round 1 — is the left-over piece right? Everything after it stands on it.');}
+function chk67(id){
+  var c=document.getElementById(id),fb=c.querySelector('.feedback'),ss=c.querySelector('.btn-show-steps');
+  var st1=c.querySelector('.st1'),st2=c.querySelector('.st2'),aa=c.querySelector('.aa'),ab=c.querySelector('.ab');
+  var ins=[st1,st2,aa,ab].filter(Boolean),i,rd=(c.getAttribute('data-rounds')||'').split(',');
+  for(i=0;i<ins.length;i++){if(!ins[i].value.trim()||!parseVal(ins[i].value)){say(fb,false,'Fill every box first (like 1 1/5 or 7/4).');return;}}
+  var kind=c.getAttribute('data-stone')||'r1';
+  if(st1&&!sameVal(parseVal(st1.value),parseVal(c.getAttribute('data-s1')))){c._nud=(c._nud||0)+1;say(fb,false,nudge67(kind==='area'?'area':'r1'));return;}
+  if(st2&&!sameVal(parseVal(st2.value),parseVal(c.getAttribute('data-s2')))){c._nud=(c._nud||0)+1;say(fb,false,nudge67('r2'));return;}
+  var wa=parseVal(c.getAttribute('data-a')),wb=ab?parseVal(c.getAttribute('data-b')):null;
+  var ga=parseVal(aa.value),gb=ab?parseVal(ab.value):null;
+  var okA=sameVal(ga,wa),okB=ab?sameVal(gb,wb):true;
+  if(okA&&okB){say(fb,true,'✓ '+praise67(rd,!!ab));}
+  else if(ab&&sameVal(ga,wb)&&sameVal(gb,wa)){c._sw=(c._sw||0)+1;say(fb,false,SWAPMSG);}
+  else if(ab&&(okA||okB))say(fb,false,'Not yet — one of your answers is right. Read the other question again. Tap Show steps to see it line by line.');
+  else say(fb,false,'Not yet — look at the bar again. Tap Show steps to see it line by line.');
+  if(ss)ss.style.display='inline-block';
+}
+function chkIn(id){var card=document.getElementById(id),inp=card.querySelector('.ans-input'),fb=card.querySelector('.feedback');
+  var want=parseVal(card.getAttribute('data-ans')),got=parseVal(inp.value);
+  if(!inp.value.trim()||!got){say(fb,false,'Type your answer first (like 1 1/5 or 7/4).');return;}
+  var ex=card.getAttribute('data-exact');
+  if(ex){if(inp.value.replace(/\s+/g,'')===ex){say(fb,true,'✓ Correct!');}else say(fb,false,'Not yet — read the question again.');return;}
+  if(sameVal(got,want))say(fb,true,'✓ Correct!');else say(fb,false,'Not yet — look again and try once more.');}
+function scOpen(id){var b=document.querySelector('#'+id+' .wlb');if(b)wlOpen(b);}
+/* ---- sentence frames: tap a blank, then tap a chip ---- */
+var FR={};
+function frameInit(id,want,chips,box){
+  var f=document.getElementById(id);FR[id]={want:want,sel:0,vals:[]};
+  var bl=f.querySelectorAll('.bl-blank'),i;for(i=0;i<bl.length;i++)(function(b,n){b.addEventListener('click',function(){frameSel(id,n);});})(bl[i],i);
+  var cb=f.querySelector('.chips');cb.innerHTML='';
+  for(i=0;i<chips.length;i++){var e=document.createElement('button');e.type='button';e.textContent=chips[i];(function(t,el){el.addEventListener('click',function(){frameFill(id,t);});})(chips[i],e);cb.appendChild(e);}
+  frameSel(id,0);
+}
+function frameSel(id,n){var f=document.getElementById(id),bl=f.querySelectorAll('.bl-blank'),i;FR[id].sel=n;for(i=0;i<bl.length;i++){bl[i].classList.toggle('sel',i===n);}
+  if(FR[id].vals[n]){FR[id].vals[n]=null;bl[n].textContent='';bl[n].classList.remove('full','bad','ok');}}
+function frameFill(id,t){var f=document.getElementById(id),bl=f.querySelectorAll('.bl-blank'),n=FR[id].sel,i;
+  FR[id].vals[n]=t;bl[n].textContent=t;bl[n].classList.add('full');bl[n].classList.remove('bad','ok');
+  for(i=0;i<bl.length;i++){if(!FR[id].vals[i]){frameSel(id,i);return;}}}
+function frameCheck(id){var f=document.getElementById(id),bl=f.querySelectorAll('.bl-blank'),fb=f.querySelector('.feedback'),i,all=true;
+  for(i=0;i<bl.length;i++){var v=FR[id].vals[i];if(!v){all=false;bl[i].classList.add('bad');}else if(v===FR[id].want[i]){bl[i].classList.remove('bad');bl[i].classList.add('ok');}else{all=false;bl[i].classList.remove('ok');bl[i].classList.add('bad');}}
+  if(all){say(fb,true,'✓ That says WHAT they did AND what the story really means.');var g=f.querySelector('.after');if(g)g.style.display='block';var w=f.querySelector('.wlb');if(w){w.classList.remove('closed');wlOpen(w);}}
+  else say(fb,false,'Not yet — the amber blanks need another look. Tap a blank to clear it, then pick a chip.');}
+function norm67(s){return String(s).toLowerCase().replace(/[^a-z0-9\/ ]/g,' ').replace(/\s+/g,' ').trim();}
+function freeCheck(id,rules){var f=document.getElementById(id),ins=f.querySelectorAll('input.ft'),fb=f.querySelector('.feedback'),i,all=true;
+  for(i=0;i<ins.length;i++){var v=norm67(ins[i].value),ok=v&&rules[i].some(function(r){return v.indexOf(r)>=0;});ins[i].style.borderColor=ok?'#2E7D32':'#FFB74D';if(!ok)all=false;}
+  if(all)say(fb,true,'✓ That says WHAT they did AND what the story really means.');else say(fb,false,'Not yet — check the blanks with the amber edge. Read the story again.');}
+function chkExplain(id){
+  var c=document.getElementById(id),fb=c.querySelector('.feedback'),st1=c.querySelector('.st1'),ab=c.querySelector('.ab'),ss=c.querySelector('.btn-show-steps');
+  if(!st1.value.trim()||!parseVal(st1.value)||!ab.value.trim()||!parseVal(ab.value)){say(fb,false,'Fill both numbers first (like 1 1/5 or 7/4).');return;}
+  if(!sameVal(parseVal(st1.value),parseVal(c.getAttribute('data-s1')))){say(fb,false,nudge67('r1'));return;}
+  if(sameVal(parseVal(ab.value),parseVal(c.getAttribute('data-b'))))say(fb,true,'✓ '+praise67(['work','work'],false));
+  else say(fb,false,'Not yet — look at the bars again. Tap Show steps to see it line by line.');
+  if(ss)ss.style.display='inline-block';
+}
+function showModel(id){var c=document.getElementById(id),t=c.querySelector('textarea.ex'),m=c.querySelector('.model'),fb=c.querySelector('.fbx');
+  if(t.value.trim().length<8){fb.style.display='block';fb.className='feedback err';fb.textContent='Write your own sentence first — then look at the model.';return;}
+  fb.style.display='none';m.style.display='block';}
+var WALKS={};
+function walkInit(id,steps){WALKS[id]={steps:steps,i:0};}
+function walkNext(id,btn){var w=WALKS[id],box=document.getElementById(id);if(w.i>=w.steps.length){w.i=0;var all=box.querySelectorAll('.lit-node'),k;for(k=0;k<all.length;k++){all[k].classList.remove('lit-node');}btn.innerHTML='Next step &#9656;';return;}
+  var s=w.steps[w.i],el=box.querySelector('#'+s[0]);el.classList.add('lit-node');el.querySelector('.cap').textContent=s[1];w.i++;if(w.i>=w.steps.length)btn.textContent='Start again';}
+function walkPick(boxId,key,btn){var all=document.querySelectorAll('#'+boxId+' .lit-node'),k;for(k=0;k<all.length;k++)all[k].classList.remove('lit-node');
+  var caps=document.querySelectorAll('#'+boxId+' .cap');for(k=0;k<caps.length;k++)caps[k].textContent='';
+  WALKS[boxId]={steps:WALKSETS[key],i:0};var nx=document.getElementById(boxId+'_nx');nx.innerHTML='Next step &#9656;';nx.style.display='inline-block';}
+var WALKSETS={};
+
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function goTo(i){nav(i-cur);}
+var YT=["Y1", "Y2", "Y3", "Y4", "Y5"];
+var ALLI=["Y1", "Y2", "Y3", "Y4", "Y5", "L2", "FX9r", "FX9t", "FX11r", "FX11t", "FX5r", "FX5t", "FX4r", "FX4t", "FXR2r", "FXR2t"];
+var ITEMS=[{"id": "Y1", "q": "Triangle ABC leans over. AB = 16 cm, AC = 39 cm, BC = 25 cm. Its area is 120 cm². Find its height from C to the line AB.", "lines": [{"k": "ans", "lab": "Height =", "v": "15"}], "screen": 4, "dbl": {"ans": ["7.5"]}, "oth": {}, "slant": {"ans": ["39", "25", "9.6", "6.15", "6.2"]}}, {"id": "Y2", "q": "Triangle ABC has a square corner at A. AB = 35 cm, AC = 12 cm and BC = 37 cm. Find its area.", "lines": [{"k": "ans", "lab": "Area =", "v": "210"}], "screen": 4, "dbl": {}, "oth": {}, "slant": {}}, {"id": "Y3", "q": "A right-angled field has sides 105 m, 140 m and 175 m. A path runs from the square corner straight to the 175 m side (meeting it at a square corner). How long is the path?", "lines": [{"k": "ans", "lab": "Path =", "v": "84"}], "screen": 4, "dbl": {"ans": ["42"]}, "oth": {}, "slant": {}}, {"id": "Y4", "q": "Triangle A has a base of 6 cm and an area of 33 cm². Triangle B has the same height and a base of 10 cm. Find B's area.", "lines": [{"k": "ans", "lab": "Triangle B's area =", "v": "55"}], "screen": 4, "dbl": {"ans": ["27.5"]}, "oth": {}, "slant": {}}, {"id": "Y5", "q": "Triangle P has a base of 9 cm and a height of 8 cm. Triangle Q has the same area and a base of 6 cm. How much taller is Q than P?", "lines": [{"k": "ans", "lab": "Q is taller than P by =", "v": "4"}], "screen": 4, "dbl": {}, "oth": {"ans": ["12"]}, "slant": {}}, {"id": "L2", "q": "Route A — tap the pair. For base AB (19 cm), which line is its height: AC (37), BC (20) or the dashed line (12)? Then find the area.", "lines": [{"k": "ans", "lab": "Area of triangle ABC =", "v": "114"}], "screen": 2, "dbl": {}, "oth": {}, "slant": {}}, {"id": "FX9r", "q": "A field is a right-angled triangle with sides 30 m, 40 m and 50 m. A straight path runs from the square corner to the 50 m side and meets it at a square corner. How long is the path?", "lines": [{"k": "ans", "lab": "Path =", "v": "24"}], "screen": 1, "dbl": {"ans": ["12"]}, "oth": {}, "slant": {}}, {"id": "FX9t", "q": "Your twin: a park is a right-angled triangle with sides 75 m, 100 m and 125 m. A straight path runs from the square corner to the 125 m side and meets it at a square corner. How long is the path?", "lines": [{"k": "ans", "lab": "Path =", "v": "60"}], "screen": 1, "dbl": {"ans": ["30"]}, "oth": {}, "slant": {}}, {"id": "FX11r", "q": "Triangle P has a base of 10 cm and a height of 6 cm. Triangle Q has the same area as P, but its base is only 4 cm. Ali says Q’s height must also be 6 cm. Is he right? Find Q’s height.", "lines": [{"k": "ans", "lab": "Q's height =", "v": "15"}], "screen": 1, "dbl": {}, "oth": {}, "slant": {}}, {"id": "FX11t", "q": "Your twin: triangle P has a base of 12 cm and a height of 5 cm. Triangle Q has the same area as P, but its base is only 6 cm. Ali says Q's height must also be 5 cm. Is he right? Find Q's height.", "lines": [{"k": "ans", "lab": "Q's height =", "v": "10"}], "screen": 1, "dbl": {}, "oth": {}, "slant": {}}, {"id": "FX5r", "q": "Triangle ABC leans over. AB = 18 cm, AC = 34 cm and BC = 20 cm. Its area is 144 cm². Find its height from C to the line AB (the dashed line outside the triangle).", "lines": [{"k": "ans", "lab": "Height from C =", "v": "16"}], "screen": 1, "dbl": {"ans": ["8"]}, "oth": {}, "slant": {}}, {"id": "FX5t", "q": "Your twin: triangle ABC leans over. AB = 27 cm, AC = 52 cm and BC = 29 cm. Its area is 270 cm². Find its height from C to the line AB (outside the triangle).", "lines": [{"k": "ans", "lab": "Height from C =", "v": "20"}], "screen": 1, "dbl": {"ans": ["10"]}, "oth": {}, "slant": {}}, {"id": "FX4r", "q": "A triangular sign has an area of 85 m². Its base is 17 m. What is its height?", "lines": [{"k": "ans", "lab": "Height =", "v": "10"}], "screen": 1, "dbl": {"ans": ["5"]}, "oth": {}, "slant": {}}, {"id": "FX4t", "q": "Your twin: a triangular kite has an area of 117 cm². Its base is 13 cm. What is its height?", "lines": [{"k": "ans", "lab": "Height =", "v": "18"}], "screen": 1, "dbl": {"ans": ["9"]}, "oth": {}, "slant": {}}, {"id": "FXR2r", "q": "Juice boxes cost $3 each. For every 4 boxes you buy, you get 1 box free. A class needs 47 juice boxes. How much does the class pay?", "lines": [{"k": "ans", "lab": "The class pays $", "v": "114"}], "screen": 1, "dbl": {}, "oth": {}, "slant": {}}, {"id": "FXR2t", "q": "Your twin: pens cost $2 each. For every 5 pens you buy, you get 2 pens free. A club needs 38 pens. How much does the club pay?", "lines": [{"k": "ans", "lab": "The club pays $", "v": "56"}], "screen": 1, "dbl": {}, "oth": {}, "slant": {}}];
+var WL={"Y1": [["Area = 120 cm²", "told: the area of the triangle", "T5"], ["Box = 120 × 2", "▲5 undo the half: the box (base × height) is twice the triangle", "T5"], ["= 240", "120 × 2 = 240", "T5"], ["Height = 240 ÷ 16", "▲6 the box is base × height, so the missing side = box ÷ the base (16)", "T6"], ["= 15 cm", "240 ÷ 16 = 15", "T6"], ["16 × 15 = 240", "✔3 back-check: base × my answer gives the box again", "A3"], ["240 ÷ 2 = 120", "✔3 and half the box is the area in the question ✓", "A3"]], "Y2": [["Base = 35 cm", "▲1 base AB", "T1"], ["Height = 12 cm", "▲2 AC meets AB at the square corner; BC (37) is slanted", "T2"], ["Rectangle = 35 × 12", "▲3 base × height = the box the triangle fits in", "T3"], ["= 420", "35 × 12 = 420", "T3"], ["Area = 420 ÷ 2", "▲4 the triangle is half of the box", "T4"], ["= 210 cm²", "420 ÷ 2 = 210; area is in square units", "T4"]], "Y3": [["Base = 140 m", "▲1 use the pair you KNOW: the 140 m side", "T1"], ["Height = 105 m", "▲2 its height is the 105 m side (they meet at the square corner)", "T2"], ["Rectangle = 140 × 105", "▲3 base × height = the box the triangle fits in", "T3"], ["= 14700", "140 × 105 = 14700", "T3"], ["Area = 14700 ÷ 2", "▲4 the triangle is half of the box", "T4"], ["= 7350 m²", "14700 ÷ 2 = 7350; area is in square units", "T4"], ["Area = 7350 m²", "same triangle, same area — now the 175 m side is the base", "T5"], ["Box = 7350 × 2", "▲5 undo the half: the box (base × height) is twice the triangle", "T5"], ["= 14700", "7350 × 2 = 14700", "T5"], ["Path = 14700 ÷ 175", "▲6 the box is base × height, so the missing side = box ÷ the new base, 175 m (175)", "T6"], ["= 84 m", "14700 ÷ 175 = 84", "T6"], ["175 × 84 = 14700", "✔3 back-check: new base, 175 m × my answer gives the box again", "A3"], ["14700 ÷ 2 = 7350", "✔3 and half the box is the area in the question ✓", "A3"]], "Y4": [["Area = 33 cm²", "triangle A: area 33 cm², base 6 cm", "T5"], ["Box = 33 × 2", "▲5 undo the half: the box (base × height) is twice the triangle", "T5"], ["= 66", "33 × 2 = 66", "T5"], ["Height of A = 66 ÷ 6", "▲6 the box is base × height, so the missing side = box ÷ the base of A (6)", "T6"], ["= 11 cm", "66 ÷ 6 = 11", "T6"], ["6 × 11 = 66", "✔3 back-check: base of A × my answer gives the box again", "A3"], ["66 ÷ 2 = 33", "✔3 and half the box is the area in the question ✓", "A3"], ["Base = 10 cm", "▲1 triangle B: base 10", "T1"], ["Height = 11 cm", "▲2 the SAME height as A", "T2"], ["Rectangle = 10 × 11", "▲3 base × height = the box the triangle fits in", "T3"], ["= 110", "10 × 11 = 110", "T3"], ["Area of B = 110 ÷ 2", "▲4 the triangle is half of the box", "T4"], ["= 55 cm²", "110 ÷ 2 = 55; area is in square units", "T4"]], "Y5": [["Base = 9 cm", "▲1 triangle P", "T1"], ["Height = 8 cm", "▲2 P's height", "T2"], ["Rectangle = 9 × 8", "▲3 base × height = the box the triangle fits in", "T3"], ["= 72", "9 × 8 = 72", "T3"], ["Area of P = 72 ÷ 2", "▲4 the triangle is half of the box", "T4"], ["= 36 cm²", "72 ÷ 2 = 36; area is in square units", "T4"], ["Area = 36 cm²", "Q has the same area as P (9 × 8 ÷ 2)", "T5"], ["Box = 36 × 2", "▲5 undo the half: the box (base × height) is twice the triangle", "T5"], ["= 72", "36 × 2 = 72", "T5"], ["Height of Q = 72 ÷ 6", "▲6 the box is base × height, so the missing side = box ÷ the base of Q (6)", "T6"], ["= 12 cm", "72 ÷ 6 = 12", "T6"], ["6 × 12 = 72", "✔3 back-check: base of Q × my answer gives the box again", "A3"], ["72 ÷ 2 = 36", "✔3 and half the box is the area in the question ✓", "A3"], ["How much taller = 12 − 8", "✔1 / ④ the question asks HOW MUCH TALLER", "④"], ["= 4 cm", "12 − 8 = 4", "−2"]], "L2": [["Pair for AB = AB and the dashed line", "▲2 the dashed line meets the stretched base line at a square corner; 37 and 20 are slanted decoys", "T2"], ["Base = 19 cm", "▲1 base AB", "T1"], ["Height = 12 cm", "▲2 the dashed height (outside)", "T2"], ["Rectangle = 19 × 12", "▲3 base × height = the box the triangle fits in", "T3"], ["= 228", "19 × 12 = 228", "T3"], ["Area = 228 ÷ 2", "▲4 the triangle is half of the box", "T4"], ["= 114 cm²", "228 ÷ 2 = 114; area is in square units", "T4"]], "FX9r": [["Base = 40 m", "▲1 use the pair you KNOW: the 40 m side", "T1"], ["Height = 30 m", "▲2 its height is the 30 m side (they meet at the square corner)", "T2"], ["Rectangle = 40 × 30", "▲3 base × height = the box the triangle fits in", "T3"], ["= 1200", "40 × 30 = 1200", "T3"], ["Area = 1200 ÷ 2", "▲4 the triangle is half of the box", "T4"], ["= 600 m²", "1200 ÷ 2 = 600; area is in square units", "T4"], ["Area = 600 m²", "same triangle, same area — now the 50 m side is the base", "T5"], ["Box = 600 × 2", "▲5 undo the half: the box (base × height) is twice the triangle", "T5"], ["= 1200", "600 × 2 = 1200", "T5"], ["Path = 1200 ÷ 50", "▲6 the box is base × height, so the missing side = box ÷ the new base, 50 m (50)", "T6"], ["= 24 m", "1200 ÷ 50 = 24", "T6"], ["50 × 24 = 1200", "✔3 back-check: new base, 50 m × my answer gives the box again", "A3"], ["1200 ÷ 2 = 600", "✔3 and half the box is the area in the question ✓", "A3"]], "FX9t": [["Base = 100 m", "▲1 use the pair you KNOW: the 100 m side", "T1"], ["Height = 75 m", "▲2 its height is the 75 m side (they meet at the square corner)", "T2"], ["Rectangle = 100 × 75", "▲3 base × height = the box the triangle fits in", "T3"], ["= 7500", "100 × 75 = 7500", "T3"], ["Area = 7500 ÷ 2", "▲4 the triangle is half of the box", "T4"], ["= 3750 m²", "7500 ÷ 2 = 3750; area is in square units", "T4"], ["Area = 3750 m²", "same triangle, same area — now the 125 m side is the base", "T5"], ["Box = 3750 × 2", "▲5 undo the half: the box (base × height) is twice the triangle", "T5"], ["= 7500", "3750 × 2 = 7500", "T5"], ["Path = 7500 ÷ 125", "▲6 the box is base × height, so the missing side = box ÷ the new base, 125 m (125)", "T6"], ["= 60 m", "7500 ÷ 125 = 60", "T6"], ["125 × 60 = 7500", "✔3 back-check: new base, 125 m × my answer gives the box again", "A3"], ["7500 ÷ 2 = 3750", "✔3 and half the box is the area in the question ✓", "A3"]], "FX11r": [["Base = 10 cm", "▲1 triangle P", "T1"], ["Height = 6 cm", "▲2 P's height", "T2"], ["Rectangle = 10 × 6", "▲3 base × height = the box the triangle fits in", "T3"], ["= 60", "10 × 6 = 60", "T3"], ["Area of P = 60 ÷ 2", "▲4 the triangle is half of the box", "T4"], ["= 30 cm²", "60 ÷ 2 = 30; area is in square units", "T4"], ["Area = 30 cm²", "Q has the same area as P", "T5"], ["Box = 30 × 2", "▲5 undo the half: the box (base × height) is twice the triangle", "T5"], ["= 60", "30 × 2 = 60", "T5"], ["Height of Q = 60 ÷ 4", "▲6 the box is base × height, so the missing side = box ÷ the base of Q (4)", "T6"], ["= 15 cm", "60 ÷ 4 = 15", "T6"], ["4 × 15 = 60", "✔3 back-check: base of Q × my answer gives the box again", "A3"], ["60 ÷ 2 = 30", "✔3 and half the box is the area in the question ✓", "A3"]], "FX11t": [["Base = 12 cm", "▲1 triangle P", "T1"], ["Height = 5 cm", "▲2 P's height", "T2"], ["Rectangle = 12 × 5", "▲3 base × height = the box the triangle fits in", "T3"], ["= 60", "12 × 5 = 60", "T3"], ["Area of P = 60 ÷ 2", "▲4 the triangle is half of the box", "T4"], ["= 30 cm²", "60 ÷ 2 = 30; area is in square units", "T4"], ["Area = 30 cm²", "Q has the same area as P", "T5"], ["Box = 30 × 2", "▲5 undo the half: the box (base × height) is twice the triangle", "T5"], ["= 60", "30 × 2 = 60", "T5"], ["Height of Q = 60 ÷ 6", "▲6 the box is base × height, so the missing side = box ÷ the base of Q (6)", "T6"], ["= 10 cm", "60 ÷ 6 = 10", "T6"], ["6 × 10 = 60", "✔3 back-check: base of Q × my answer gives the box again", "A3"], ["60 ÷ 2 = 30", "✔3 and half the box is the area in the question ✓", "A3"]], "FX5r": [["Area = 144 cm²", "told: the area of the triangle", "T5"], ["Box = 144 × 2", "▲5 undo the half: the box (base × height) is twice the triangle", "T5"], ["= 288", "144 × 2 = 288", "T5"], ["Height = 288 ÷ 18", "▲6 the box is base × height, so the missing side = box ÷ the base (18)", "T6"], ["= 16 cm", "288 ÷ 18 = 16", "T6"], ["18 × 16 = 288", "✔3 back-check: base × my answer gives the box again", "A3"], ["288 ÷ 2 = 144", "✔3 and half the box is the area in the question ✓", "A3"]], "FX5t": [["Area = 270 cm²", "told: the area of the triangle", "T5"], ["Box = 270 × 2", "▲5 undo the half: the box (base × height) is twice the triangle", "T5"], ["= 540", "270 × 2 = 540", "T5"], ["Height = 540 ÷ 27", "▲6 the box is base × height, so the missing side = box ÷ the base (27)", "T6"], ["= 20 cm", "540 ÷ 27 = 20", "T6"], ["27 × 20 = 540", "✔3 back-check: base × my answer gives the box again", "A3"], ["540 ÷ 2 = 270", "✔3 and half the box is the area in the question ✓", "A3"]], "FX4r": [["Area = 85 m²", "told: the area of the triangle", "T5"], ["Box = 85 × 2", "▲5 undo the half: the box (base × height) is twice the triangle", "T5"], ["= 170", "85 × 2 = 170", "T5"], ["Height = 170 ÷ 17", "▲6 the box is base × height, so the missing side = box ÷ the base (17)", "T6"], ["= 10 m", "170 ÷ 17 = 10", "T6"], ["17 × 10 = 170", "✔3 back-check: base × my answer gives the box again", "A3"], ["170 ÷ 2 = 85", "✔3 and half the box is the area in the question ✓", "A3"]], "FX4t": [["Area = 117 cm²", "told: the area of the triangle", "T5"], ["Box = 117 × 2", "▲5 undo the half: the box (base × height) is twice the triangle", "T5"], ["= 234", "117 × 2 = 234", "T5"], ["Height = 234 ÷ 13", "▲6 the box is base × height, so the missing side = box ÷ the base (13)", "T6"], ["= 18 cm", "234 ÷ 13 = 18", "T6"], ["13 × 18 = 234", "✔3 back-check: base × my answer gives the box again", "A3"], ["234 ÷ 2 = 117", "✔3 and half the box is the area in the question ✓", "A3"]], "FXR2r": [["Group = 4 + 1", "for every 4 bought, 1 free: a group of 5 costs 4", "G"], ["= 5", "4 + 1 = 5", "G"], ["Full groups = 45 ÷ 5", "45 is the biggest number (not over 47) that makes full groups of 5", "G"], ["= 9", "45 ÷ 5 = 9", "G"], ["Extra = 47 − 45", "left over — not a full group, so nothing free for these", "G"], ["= 2", "47 − 45 = 2", "G"], ["Paid in groups = 9 × 4", "each group pays for 4", "G"], ["= 36", "9 × 4 = 36", "G"], ["Paid items = 36 + 2", "the extras are paid for too", "G"], ["= 38", "36 + 2 = 38", "G"], ["Cost = 38 × 3", "$3 for each paid one", "G"], ["= 114", "38 × 3 = 114 — $114", "G"], ["38 + 9 = 47", "✔3 back-check: paid + free = everyone/everything needed ✓", "A3"]], "FXR2t": [["Group = 5 + 2", "for every 5 bought, 2 free: a group of 7 costs 5", "G"], ["= 7", "5 + 2 = 7", "G"], ["Full groups = 35 ÷ 7", "35 is the biggest number (not over 38) that makes full groups of 7", "G"], ["= 5", "35 ÷ 7 = 5", "G"], ["Extra = 38 − 35", "left over — not a full group, so nothing free for these", "G"], ["= 3", "38 − 35 = 3", "G"], ["Paid in groups = 5 × 5", "each group pays for 5", "G"], ["= 25", "5 × 5 = 25", "G"], ["Paid items = 25 + 3", "the extras are paid for too", "G"], ["= 28", "25 + 3 = 28", "G"], ["Cost = 28 × 2", "$2 for each paid one", "G"], ["= 56", "28 × 2 = 56 — $56", "G"], ["28 + 10 = 38", "✔3 back-check: paid + free = everyone/everything needed ✓", "A3"]]};
+var CHIP={"Y1": "✔3 back-check: 16 × 15 = 240 · 240 ÷ 2 = 120 ✓", "Y3": "✔3 back-check: 175 × 84 = 14700 · 14700 ÷ 2 = 7350 ✓", "Y4": "✔3 back-check: 6 × 11 = 66 · 66 ÷ 2 = 33 ✓", "Y5": "✔3 back-check: 6 × 12 = 72 · 72 ÷ 2 = 36 ✓", "FX9r": "✔3 back-check: 50 × 24 = 1200 · 1200 ÷ 2 = 600 ✓", "FX9t": "✔3 back-check: 125 × 60 = 7500 · 7500 ÷ 2 = 3750 ✓", "FX11r": "✔3 back-check: 4 × 15 = 60 · 60 ÷ 2 = 30 ✓", "FX11t": "✔3 back-check: 6 × 10 = 60 · 60 ÷ 2 = 30 ✓", "FX5r": "✔3 back-check: 18 × 16 = 288 · 288 ÷ 2 = 144 ✓", "FX5t": "✔3 back-check: 27 × 20 = 540 · 540 ÷ 2 = 270 ✓", "FX4r": "✔3 back-check: 17 × 10 = 170 · 170 ÷ 2 = 85 ✓", "FX4t": "✔3 back-check: 13 × 18 = 234 · 234 ÷ 2 = 117 ✓", "FXR2r": "✔3 back-check: 38 + 9 = 47 ✓", "FXR2t": "✔3 back-check: 28 + 10 = 38 ✓"};
+
+var FCKEY='chusaki_u072_card';
+function fcPref(){try{return window.localStorage.getItem(FCKEY);}catch(e){return null;}}
+function fcSetPref(v){try{window.localStorage.setItem(FCKEY,v);}catch(e){}}
+function fcIsOpen(){return document.body.classList.contains('fc-open');}
+function fcShow(on){document.body.classList.toggle('fc-open',!!on);}
+function fcToggle(manual){var on=!fcIsOpen();fcShow(on);if(on&&cur!==0)document.body.classList.remove('fc-full');if(manual&&cur>=1)fcSetPref(on?'open':'closed');}
+function fcAuto(){var wide=window.innerWidth>=900;document.body.classList.toggle('fc-full',!wide&&cur===0);if(wide||cur===0)fcShow(true);else fcShow(fcPref()==='open');}
+function fcOpen(id){document.getElementById(id).classList.toggle('open');}
+function fcBricks(b){document.getElementById('fcbricks').classList.toggle('open');}
+function cardGlow(b,n){var g=document.querySelectorAll('#fcard .fc-st.glow'),i;for(i=0;i<g.length;i++)g[i].classList.remove('glow');
+  var rows=b.querySelectorAll('.wl');if(n<1||!rows[n-1])return;var tag=rows[n-1].getAttribute('data-card');if(!tag)return;
+  var st=document.querySelectorAll('#fcard .fc-st'),k;for(k=0;k<st.length;k++){if(st[k].getAttribute('data-step')===tag){st[k].classList.add('glow');
+    var blk=st[k].parentNode;if(blk&&blk.classList.contains('fc-blk'))blk.classList.add('open');}}}
+var _wl0=wlShow;wlShow=function(b,n){_wl0(b,n);cardGlow(b,n);};
+function fcPrint(){document.body.classList.add('printing');try{window.print();}catch(e){}setTimeout(function(){document.body.classList.remove('printing');},300);}
+var _nv0=nav;nav=function(d){_nv0(d);fcAuto();var b=document.querySelector('#s'+cur+' .wlb');if(b)cardGlow(b,wlCount(b));else cardGlow(document.body,0);};
+fcAuto();
+
+function fcTab(w){var a=document.getElementById('pane-tri'),b=document.getElementById('pane-frac'),ta=document.getElementById('tab-tri'),tb=document.getElementById('tab-frac');
+  a.classList.toggle('on',w==='tri');b.classList.toggle('on',w!=='tri');ta.classList.toggle('on',w==='tri');tb.classList.toggle('on',w!=='tri');}
+var _cg=cardGlow;cardGlow=function(b,n){_cg(b,n);var g=document.querySelector('#fcard .fc-st.glow');if(g){fcTab(g.closest('#pane-tri')?'tri':'frac');}};
+
+var KEY='chusaki_u072_lesson';
+var PR=["Right first time. Pick the pair, then use the rule.","Read it again and it paid off. Exam-proof.","Clean. And it checks backwards.","Fixed it! That’s how brains grow."];
+var SW='Both numbers are right — but they’re in each other’s boxes. Read it again, then put the right number in the right box.';
+var NDBL='That’s the area shared out — but the triangle is only HALF the box. ▲5: double first.';
+var NOTH='That’s Q’s height. ✔1: the question asks how much TALLER.';
+var NSLANT='That’s a slanted decoy. ▲2: pick the pair.';
+var FXO=["FX9", "FX11", "FX5", "FX4", "FXR2"],FXKEY={"FX9": 0, "FX11": 0, "FX5": 0, "FX4": 1, "FXR2": 1},FXTXT={"FX9": ["30 and 40 — they meet at the square corner", "50 and the path", "30 and 50"], "FX11": ["A) 120 is the box of the box: P's area is 30, so the box is 60 — I doubled twice", "B) 120 is right, 120 ÷ 4 = 15", "C) I should have halved"], "FX5": ["18 (AB) and 144 (area) — 34 and 20 are slanted decoys", "34 and 20", "18 and 34"], "FX4": ["A) 85 × 2 should be 160", "B) 170 ÷ 17 is 10, not 20 — ✔3 back-check: 17 × 20 = 340", "C) I should not double"], "FXR2": ["A) 4 boxes", "B) 5 boxes — 4 paid + 1 free", "C) 3 boxes"]};
+var RB=[["AB", ["AC", "BC", "the dashed line from A"], 0], ["AC", ["AB", "BC", "the dashed line from A"], 0], ["BC", ["AB", "AC", "the dashed line from A"], 2]];
+var S=null,fh=null,openedAt=new Date().toISOString(),lastSavedAt=null,wrote=0,storageBad=false,attempt=1,ST={},lastP='',savedFlag=false;
+function $(id){return document.getElementById(id);}
+function sload(){try{var s=window.localStorage.getItem(KEY);return s?JSON.parse(s):null;}catch(e){storageBad=true;return null;}}
+function sstore(){try{S.min=(S.base||0)+(Date.now()-new Date(openedAt).getTime())/60000;window.localStorage.setItem(KEY,JSON.stringify(S));}catch(e){storageBad=true;}}
+function byId(id){for(var i=0;i<ITEMS.length;i++)if(ITEMS[i].id===id)return ITEMS[i];}
+function isDone(id){var i;for(i=0;i<S.items.length;i++)if(S.items[i].id===id)return true;return !!S.side[id];}
+function recOf(id){var i;for(i=0;i<S.items.length;i++)if(S.items[i].id===id)return S.items[i];return S.side[id];}
+function nSlips(){var n=0,k;for(k in S.fx)if(S.fx[k].slip!==null&&S.fx[k].slip!==undefined)n++;return n;}
+function nDone(){return S.items.length+Object.keys(S.side).length+nSlips();}
+function ytDone(){return S.items.length>=YT.length;}
+function fxAllDone(){var i;for(i=0;i<FXO.length;i++){if(!(S.fx[FXO[i]]&&S.fx[FXO[i]].done))return false;}return true;}
+function allDone(){return ytDone()&&fxAllDone();}
+var _nav=nav;nav=function(d){
+  var t=cur+d;
+  if(t>1&&!fxAllDone()){d=1-cur;var lm=$('lockmsg');if(lm)lm.style.display='block';}
+  _nav(d);S.screen=cur;if(S.seen.indexOf(cur)<0)S.seen.push(cur);sstore();if(cur===4)showFinish();};
+function init(){
+  Array.prototype.forEach.call(document.querySelectorAll('.wlb.auto'),function(b){wlShow(b,1);});
+  var P=sload();S={screen:0,seen:[0],items:[],side:{},fx:{},taps:{},min:0,sittings:0,savedN:0};
+  if(P&&typeof P==='object'&&P.items&&P.seen){S=P;if(!S.side)S.side={};if(!S.fx)S.fx={};if(!S.taps)S.taps={};if(!S.savedN)S.savedN=0;}
+  S.base=S.min||0;S.sittings=(S.sittings||0)+1;attempt=S.sittings;sstore();
+  var i;for(i=0;i<ITEMS.length;i++)setupCard(ITEMS[i].id);
+  revealCards();watchFill();tapRestore();fxRestore();
+  if(S.screen>0){nav(S.screen);}
+  ytStat();paintSave();
+}
+function watchFill(){
+  Array.prototype.forEach.call(document.querySelectorAll('.wlb[data-fill]'),function(b){
+    var f=JSON.parse(b.getAttribute('data-fill'));
+    function go(){if(b.classList.contains('alldone')){f.forEach(function(p){var e=$(p[0]);if(e){e.textContent=p[1];e.style.color='#1B5E20';}});}}
+    new MutationObserver(go).observe(b,{attributes:true,attributeFilter:['class']});go();
+  });
+}
+function setupCard(id){
+  var it=byId(id),lh='',i,l;$('q_'+id).textContent=it.q;
+  for(i=0;i<it.lines.length;i++){l=it.lines[i];lh+='<div class="al"><label>'+l.lab+' <input type="text" class="ln-'+l.k+'" aria-label="answer '+l.k+'" disabled></label></div>';}
+  $('ln_'+id).innerHTML=lh;
+  ST[id]={state:'idle',first:null,nudged:false,forgotDouble:false,answeredOther:false,usedSlant:false,swapped:false,t0:null,circled:false,tries:0};
+  if(isDone(id)){var r=recOf(id),k;
+    var ins=$('yt_'+id).querySelectorAll('input');for(k=0;k<ins.length;k++){ins[k].disabled=true;var kk=ins[k].className.replace('ln-','');ins[k].value=(r.answersCorrect&&r.answersCorrect[kk])||'';}
+    $('chk_'+id).disabled=true;$('circ_'+id).classList.add('on');$('circ_'+id).disabled=true;$('yt_'+id).classList.add('done');
+    $('fb_'+id).className='feedback ok';$('fb_'+id).style.display='block';$('fb_'+id).textContent=(r.firstTryRight||r.selfFixedAfterNudge)?'⭐ done':'✨ done';ST[id].state='done';}
+}
+/* Your-turn cards on screen 5 appear one at a time; Fix-It and the tap card are shown by their own code */
+function revealCards(){var i,it;for(i=0;i<YT.length;i++){var prev=i>0?YT[i-1]:null;$('yt_'+YT[i]).classList.toggle('hidden',!!prev&&!isDone(prev));}}
+function circTap(id){var s=ST[id];if(s.state==='done')return;s.circled=true;s.t0=s.t0||Date.now();$('circ_'+id).classList.add('on');$('circ_'+id).textContent='✔1 I read ALL of the question ✓';
+  var ins=$('yt_'+id).querySelectorAll('input'),i;for(i=0;i<ins.length;i++)ins[i].disabled=false;$('chk_'+id).disabled=false;if(ins[0])ins[0].focus();}
+function stat(){var f=0,x=0,i,r;for(i=0;i<S.items.length;i++){r=S.items[i];if(r.firstTryRight||r.selfFixedAfterNudge)f++;else x++;}return [f,x];}
+function twinStat(){var f=0,x=0,i,r;for(i=0;i<FXO.length;i++){r=S.side[FXO[i]+'t'];if(!r)continue;if(r.firstTryRight||r.selfFixedAfterNudge)f++;else x++;}return [f,x];}
+function ytStat(){var s=stat();var e=$('ytstat');if(e)e.textContent='⭐ '+s[0]+' right  ·  ✨ '+s[1]+' fixed  ·  '+S.items.length+' of '+YT.length+' Your-turn questions done  ·  Fix-It cards '+fxCount()+' of 5';}
+function fxCount(){var n=0,i;for(i=0;i<FXO.length;i++)if(S.fx[FXO[i]]&&S.fx[FXO[i]].done)n++;return n;}
+function val(id,k){var e=$('yt_'+id).querySelector('.ln-'+k);return e?e.value.trim():'';}
+function givenLines(id){var it=byId(id),o={},i;for(i=0;i<it.lines.length;i++)o[it.lines[i].k]=val(id,it.lines[i].k);return o;}
+function wantLines(id){var it=byId(id),o={},i;for(i=0;i<it.lines.length;i++)o[it.lines[i].k]=it.lines[i].v;return o;}
+function err(id,m){var fb=$('fb_'+id);fb.className='feedback err';fb.style.display='block';fb.textContent=m;}
+function lockAll(id){var els=$('yt_'+id).querySelectorAll('input'),i;for(i=0;i<els.length;i++)els[i].disabled=true;$('chk_'+id).disabled=true;}
+function fmtOK(id,k,g,w){var v=parseVal(g);if(!v)return 'Fill every box first (like 13 or 6.5).';return '';}
+function okLine(g,w,k){return sameVal(parseVal(g),parseVal(w));}
+function inList(g,arr){var v=parseVal(g),i;if(!v)return false;for(i=0;i<arr.length;i++)if(sameVal(v,parseVal(arr[i])))return true;return false;}
+function ytCheck(id){
+  var it=byId(id),s=ST[id],gv=givenLines(id),wv=wantLines(id),ks=Object.keys(wv),i,k,m;
+  for(i=0;i<ks.length;i++){m=fmtOK(id,ks[i],gv[ks[i]],wv[ks[i]]);if(m){err(id,m);return;}}
+  s.tries++;
+  if(s.state==='fix'){var ok0=true;for(i=0;i<ks.length;i++)if(!okLine(gv[ks[i]],wv[ks[i]],ks[i]))ok0=false;
+    if(ok0)return fixedIt(id,gv);err(id,'Not yet — read the last lines again and copy the answer into the box.');return;}
+  if(!s.first)s.first={g:gv};
+  var ok=true;for(i=0;i<ks.length;i++)if(!okLine(gv[ks[i]],wv[ks[i]],ks[i]))ok=false;
+  if(ok)return gotIt(id,gv);
+  if(!s.nudged){
+    for(i=0;i<ks.length;i++){k=ks[i];
+      if(okLine(gv[k],wv[k],k))continue;
+      if(it.slant&&it.slant[k]&&inList(gv[k],it.slant[k])){s.nudged=true;s.usedSlant=true;err(id,NSLANT);return;}
+      if(it.dbl&&it.dbl[k]&&inList(gv[k],it.dbl[k])){s.nudged=true;s.forgotDouble=true;err(id,NDBL);return;}
+      if(it.oth&&it.oth[k]&&inList(gv[k],it.oth[k])){s.nudged=true;s.answeredOther=true;err(id,NOTH);return;}
+    }
+  }
+  s.swapped=false;notYet(id,gv,false);
+}
+function praise(){var p=PR[Math.floor(Math.random()*3)];if(p===lastP)p=PR[(PR.indexOf(p)+1)%3];lastP=p;return p;}
+function record(id,firstRight,gv,lines,selfFixed,fixedAns,afterLines){
+  var s=ST[id],want=wantLines(id);
+  var rec={id:id,circledTapped:!!s.circled,answersGiven:gv,answersCorrect:want,swapped:false,firstTryRight:firstRight,selfFixedAfterNudge:!!selfFixed,usedSlant:!!s.usedSlant,forgotHalf:false,
+    forgotDouble:!!s.forgotDouble,answeredOtherPart:!!s.answeredOther,fixedAnswer:fixedAns||null,fixedAfterLines:!!afterLines,linesViewed:lines,ms:Date.now()-(s.t0||Date.now())};
+  if(YT.indexOf(id)>=0)S.items.push(rec);else S.side[id]=rec;
+  sstore();
+}
+function chip(id){var c=CHIP[id];if(!c)return;var fb=$('fb_'+id),d=document.createElement('span');d.className='chip3';d.textContent=c;fb.parentNode.insertBefore(d,fb.nextSibling);}
+function gotIt(id,gv){var s=ST[id],f=!s.nudged;record(id,f,f?gv:s.first.g,0,s.nudged,f?null:gv,false);lockAll(id);s.state='done';var fb=$('fb_'+id);fb.className='feedback ok';fb.style.display='block';
+  fb.textContent='⭐ '+praise();chip(id);after(id);}
+function rowEl(a,cls){var d=document.createElement('div'),m=document.createElement('span'),w=document.createElement('span');d.className=cls;if(a[2])d.setAttribute('data-card',a[2]);if(/^T\d$/.test(a[2]||''))d.setAttribute('data-n',a[2].charAt(1));m.className='m';w.className='why';m.textContent=a[0];w.textContent=a[1];d.appendChild(m);d.appendChild(w);return d;}
+function notYet(id,gv,sw){
+  var s=ST[id];s.state='lines';lockAll(id);s.first.g=s.first.g||gv;var so=$('sorry_'+id);
+  so.innerHTML='<div class="sbig">Not yet — here’s how it goes:</div>';so.style.display='block';
+  var blk=document.createElement('div'),ws=document.createElement('div'),Lr=WL[id],i,bt=document.createElement('button');
+  blk.className='wlb';blk.id='nywl_'+id;blk.setAttribute('data-bid',id);ws.className='wls';for(i=0;i<Lr.length;i++)ws.appendChild(rowEl(Lr[i],'wl'));
+  bt.type='button';bt.className='btn-next';bt.innerHTML='Next line &#9656;';bt.onclick=function(){nyNext(id,bt);};blk.appendChild(ws);blk.appendChild(bt);so.appendChild(blk);wlShow(blk,1);
+  $('fb_'+id).style.display='none';
+}
+function nyNext(id,btn){var b=btn.parentNode;wlShow(b,wlCount(b)+1);if(b.classList.contains('alldone')){ST[id].state='fix';
+  var fb=$('fb_'+id);fb.className='feedback';fb.style.display='block';fb.textContent='Now type the answer from the last lines.';
+  var els=$('yt_'+id).querySelectorAll('input'),i;for(i=0;i<els.length;i++){els[i].disabled=false;els[i].value='';}$('chk_'+id).disabled=false;}}
+function fixedIt(id,gv){var s=ST[id],n=$('nywl_'+id)?wlCount($('nywl_'+id)):0;record(id,false,s.first.g,n,false,gv,true);lockAll(id);s.state='done';var fb=$('fb_'+id);fb.className='feedback ok';fb.style.display='block';fb.textContent='✨ '+PR[3];chip(id);after(id);}
+function after(id){$('yt_'+id).classList.add('done');ytStat();if(YT.indexOf(id)>=0)revealCards();
+  if(/^FX/.test(id))fxAfter(id);
+  autoSave();paintSave();if(allDone()&&cur===4)showFinish();}
+function showFinish(){
+  if(!allDone())return;var s=stat(),t=twinStat();$('fboth').textContent='Your turn: ⭐ '+s[0]+'   ✨ '+s[1]+'   ·   Twins: ⭐ '+t[0]+'   ✨ '+t[1];$('finish').style.display='block';
+  if(!S.celebrated){S.celebrated=true;sstore();confetti();}
+}
+function confetti(){var cols=['#F9A825','#43A047','#3F51B5','#FB8C00','#8E24AA','#00ACC1'],i;
+  for(i=0;i<36;i++){var e=document.createElement('span');e.className='cf';e.style.left=(Math.random()*100)+'vw';e.style.background=cols[i%cols.length];e.style.animationDelay=(Math.random()*0.8)+'s';
+    document.body.appendChild(e);(function(z){setTimeout(function(){if(z.parentNode)z.parentNode.removeChild(z);},4200);})(e);}}
+/* ---- Fix-It Corner: his answer -> find the slip -> redo -> twin. One card at a time, no all-right gate, stars only go up ---- */
+function fxS(id){if(!S.fx[id])S.fx[id]={slip:null,slipRight:null,stage:0,done:false,t0:null,ms:null};return S.fx[id];}
+function fxPaint(){
+  var open=-1,i,j;for(i=0;i<FXO.length;i++){if(!(S.fx[FXO[i]]&&S.fx[FXO[i]].done)){open=i;break;}}
+  var dots=$('fxdots').children;
+  for(i=0;i<FXO.length;i++){var id=FXO[i],el=$('fx_'+id),st=S.fx[id]||{stage:0,done:false};
+    el.classList.toggle('hidden',open>=0&&i>open);el.classList.toggle('fxdone',!!st.done);
+    var sts=el.querySelectorAll('.fx-st');for(j=0;j<sts.length;j++)sts[j].classList.toggle('on',parseInt(sts[j].getAttribute('data-s'),10)<=(st.done?3:st.stage));
+    dots[i].className=st.done?'d':(i===open?'c':'');}
+  $('fxfinal').style.display=fxAllDone()?'block':'none';
+}
+function fxGo(id){var st=fxS(id);st.t0=st.t0||Date.now();if(st.stage<1)st.stage=1;sstore();fxPaint();}
+function fxPick(id,i){var st=fxS(id);if(st.slip!==null)return;var right=(i===FXKEY[id]);st.slip=i;st.slipRight=right;
+  var btns=$('fxo_'+id).querySelectorAll('.fxopt'),k;for(k=0;k<btns.length;k++){btns[k].disabled=true;if(k===FXKEY[id])btns[k].classList.add('right');else if(k===i)btns[k].classList.add('pickedwrong');}
+  $('fxres_'+id).textContent=right?'✓ Yes — that is the slip.':'Not quite. It was: '+FXTXT[id][FXKEY[id]];$('fxres_'+id).className='fxres '+(right?'ok':'amb');
+  $('fxb2_'+id).style.display='inline-block';sstore();paintSave();autoSave();}
+function fxToRedo(id){var st=fxS(id);if(st.stage<2)st.stage=2;sstore();fxPaint();}
+function fxAfter(id){var base=id.replace(/[rt]$/,''),st=fxS(base);
+  if(/r$/.test(id)){if(st.stage<3)st.stage=3;}
+  if(/t$/.test(id)){st.done=true;st.ms=Date.now()-(st.t0||Date.now());}
+  sstore();fxPaint();fxButtons();}
+function fxButtons(){var i;for(i=0;i<FXO.length;i++){var id=FXO[i],st=S.fx[id];var b=$('fxb3_'+id);if(b)b.style.display=(st&&st.done)?'inline-block':'none';var b2=$('fxb2_'+id);if(b2&&st&&st.slip!==null&&st.slip!==undefined&&!(st.stage>=2))b2.style.display='inline-block';}}
+function fxNext(id){fxPaint();var i=FXO.indexOf(id),n=$('fx_'+FXO[Math.min(i+1,FXO.length-1)]);if(n&&i<FXO.length-1)n.scrollIntoView({behavior:'smooth',block:'start'});}
+function fxRestore(){var i,id,st;for(i=0;i<FXO.length;i++){id=FXO[i];st=S.fx[id];
+  if(isDone(id+'t')&&st){st.done=true;}else if(isDone(id+'r')&&st&&st.stage<3){st.stage=3;}
+  if(st&&st.slip!==null&&st.slip!==undefined){var btns=$('fxo_'+id).querySelectorAll('.fxopt'),k;for(k=0;k<btns.length;k++){btns[k].disabled=true;if(k===FXKEY[id])btns[k].classList.add('right');else if(k===st.slip)btns[k].classList.add('pickedwrong');}
+    $('fxres_'+id).textContent=st.slipRight?'✓ Yes — that is the slip.':'Not quite. It was: '+FXTXT[id][FXKEY[id]];$('fxres_'+id).className='fxres '+(st.slipRight?'ok':'amb');$('fxb2_'+id).style.display='inline-block';}}
+  fxPaint();fxButtons();}
+/* ---- tap the pair ---- */
+var TAPWRONG='That side is slanted — follow it: does it meet AB at a square corner?';
+function tapL2(i){var t=S.taps.L2||(S.taps.L2={wrong:0,ok:false});if(t.ok)return;var fb=$('tapfb_L2');
+  if(i===2){t.ok=true;fb.className='tapfb ok';fb.textContent='✓ The dashed line: it meets the stretched base line at a square corner ⊾.';$('yt_L2').classList.remove('hidden');
+    var bs=$('tap_L2').querySelectorAll('button'),k;for(k=0;k<bs.length;k++){bs[k].disabled=true;if(k===2)bs[k].classList.add('right');}}
+  else{t.wrong++;fb.className='tapfb amb';fb.textContent=TAPWRONG;}
+  sstore();}
+function tapB(r,i){var t=S.taps.L2b||(S.taps.L2b={wrong:0,rows:[false,false,false]});if(t.rows[r])return;var fb=$('tapfb_'+r);
+  if(i===RB[r][2]){t.rows[r]=true;fb.className='tapfb ok';fb.textContent='✓ '+RB[r][0]+' goes with '+RB[r][1][i]+'.';
+    var bs=$('taprow_'+r).querySelectorAll('button'),k;for(k=0;k<bs.length;k++){bs[k].disabled=true;if(k===i)bs[k].classList.add('right');}}
+  else{t.wrong++;fb.className='tapfb amb';fb.textContent='Not that one — which line meets '+RB[r][0]+' at a square corner ⊾? Look at where the ⊾ marks are.';}
+  if(t.rows[0]&&t.rows[1]&&t.rows[2]){$('tapall').style.display='block';$('l2bwl').style.display='block';}
+  sstore();}
+function tapRestore(){var t=S.taps.L2,k,bs;if(t&&t.ok){$('tapfb_L2').className='tapfb ok';$('tapfb_L2').textContent='✓ The dashed line: it meets the stretched base line at a square corner ⊾.';$('yt_L2').classList.remove('hidden');
+    bs=$('tap_L2').querySelectorAll('button');for(k=0;k<bs.length;k++){bs[k].disabled=true;if(k===2)bs[k].classList.add('right');}}
+  var tb=S.taps.L2b;if(tb){var r;for(r=0;r<3;r++){if(tb.rows[r]){$('tapfb_'+r).className='tapfb ok';$('tapfb_'+r).textContent='✓ '+RB[r][0]+' goes with '+RB[r][1][RB[r][2]]+'.';
+      bs=$('taprow_'+r).querySelectorAll('button');for(k=0;k<bs.length;k++){bs[k].disabled=true;if(k===RB[r][2])bs[k].classList.add('right');}}}
+    if(tb.rows[0]&&tb.rows[1]&&tb.rows[2]){$('tapall').style.display='block';$('l2bwl').style.display='block';}}}
+/* ---- saving: Save sits alone at the page end, enabled from the first answer; the only hub exit is the top-left X, which warns while anything is unsaved ---- */
+function fileName(){var d=new Date(),p=function(n){return (n<10?'0':'')+n;};return 'MATH_U072_Lesson_'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'_a'+attempt+'.json';}
+function dirty(){return nDone()>(S.savedN||0);}
+function fixItList(){var out=[],i,id,st,r1,r2;for(i=0;i<FXO.length;i++){id=FXO[i];st=S.fx[id]||{};r1=S.side[id+'r'];r2=S.side[id+'t'];
+  out.push({id:id,slipPicked:(st.slip===null||st.slip===undefined)?null:st.slip,slipRight:(st.slipRight===undefined)?null:st.slipRight,
+    redoAnswer:r1?((r1.answersGiven&&r1.answersGiven.ans)||''):null,redoRight:r1?!!r1.firstTryRight:null,redoLinesViewed:r1?r1.linesViewed:null,
+    twinAnswer:r2?((r2.answersGiven&&r2.answersGiven.ans)||''):null,twinRight:r2?!!r2.firstTryRight:null,twinLinesViewed:r2?r2.linesViewed:null,ms:st.ms||null});}
+  return out;}
+function payload(){
+  var s=stat(),fd=0,ao=0,us=0,i,now=new Date();for(i=0;i<S.items.length;i++){if(S.items[i].forgotDouble)fd++;if(S.items[i].answeredOtherPart)ao++;if(S.items[i].usedSlant)us++;}
+  lastSavedAt=now.toISOString();
+  return {student:'Prem',subject:'Math',unit:'U072',type:'lesson',attempt:attempt,openedAt:openedAt,lastSavedAt:lastSavedAt,
+    minutesSpent:Math.round(((S.base||0)+(now-new Date(openedAt))/60000)*10)/10,screensSeen:S.seen.length,finished:allDone(),stars:s[0],fixed:s[1],swaps:0,
+    usedSlant:us,forgotHalf:0,forgotDouble:fd,answeredOtherPart:ao,mb1tRight:null,items:S.items,boost:[],fixIt:fixItList(),taps:S.taps,sideItems:S.side};
+}
+function paintSave(){
+  var z=$('savezone'),st=$('sstat'),bt=$('savebtn'),n=nDone();if(!z)return;
+  bt.disabled=(n<1);
+  z.classList.toggle('saved',n>0&&!dirty());
+  if(n<1)st.textContent='Answer your first question — then press Save so Dad and Chusaki can see it.';
+  else if(!dirty())st.textContent='Saved — Dad and Chusaki can see it now ('+(S.savedN||0)+' answers, file '+fileName()+')';
+  else st.textContent='Not saved yet — '+n+' answer'+(n>1?'s':'')+' kept on this device. Press Save.';
+}
+function markSaved(){S.savedN=nDone();sstore();paintSave();}
+function writeTo(h){return h.createWritable().then(function(w){return w.write(JSON.stringify(payload(),null,2)).then(function(){return w.close();});});}
+function autoSave(){
+  if(!nDone())return;
+  if(fh){writeTo(fh).then(function(){wrote++;markSaved();}).catch(function(){fh=null;paintSave();});}
+}
+async function saveClick(){
+  var name=fileName(),json;
+  if(window.showSaveFilePicker){
+    try{fh=await window.showSaveFilePicker({suggestedName:name,types:[{description:'JSON results',accept:{'application/json':['.json']}}]});
+      await writeTo(fh);wrote++;markSaved();return;
+    }catch(e){fh=null;if(e&&e.name==='AbortError'){$('sstat').textContent='You closed the save box, so nothing was saved yet. Press Save again.';return;}}}
+  try{json=JSON.stringify(payload(),null,2);var blob=new Blob([json],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},4000);
+    markSaved();
+  }catch(e2){$('sstat').textContent='Saving did not work. Tell Dad.';}
+}
+/* ---- the unsaved warning: the X, the browser back button and closing the tab never drop a result silently ---- */
+var bypass=false;
+window.addEventListener('beforeunload',function(e){if(!bypass&&S&&dirty()){e.preventDefault();e.returnValue='';return '';}});
+function xClick(ev){if(S&&dirty()){ev.preventDefault();$('unsavedov').classList.add('on');return false;}return true;}
+function stayAndSave(){$('unsavedov').classList.remove('on');var z=$('savezone');z.classList.add('pulse');z.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){z.classList.remove('pulse');},3000);}
+function leaveAnyway(){bypass=true;window.location.href=$('xclose').href;}
+init();
+</script>
+</body>
+</html>

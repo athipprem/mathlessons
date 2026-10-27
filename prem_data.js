@@ -15,13 +15,40 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '22 Oct 2026',
+  updated:        '27 Oct 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:71, topic:'Cycle 7 \u2014 Chapter 4: the missing height or base of a triangle (undo the half first)', status:'Test Pending', buildNote:'Built 22 Oct 2026 per BUILD_PLAN_MATH_U71_MissingHeight.md v1.0, written from TEST_RECORD_U70.md and the school Chapter 4 map. ONE idea: undo the half first (box = area x 2), then the missing side = box / the side you know. Triangle Card gains T5 and T6; the new Answer Check (check 1: what does it ask for, all of it? check 2: every number copied right? check 3: back-check, undo your last step) sits on the card and the test band. Lesson Triangles_Lesson_MissingHeight.html, 6 screens: warm-up; a 3-question check-in (working backwards, free items, half-check); the missing height; the missing base and the table; two bases, one triangle; Your turn x5. Test Unit_071_Test_MissingHeight.docx: 16Q = Recall x4 (1 fractions, 2 whole numbers, 1 area) + Part 1 x12 (Basic 3, Intermediate 5, Applied 4); key question Q5, a leaning triangle with its height outside and the area given. 8 pages with the key. Lesson and test on different days. Gates: verify_u71_plan.py --html PASS (315 worked lines, 0 bad, 0 leaks, 0 prior reuse), verify_lesson_pack.py PASS, 82 Playwright checks PASS. U72 is planned from TEST_RECORD_U71.md.' },
+  currentUnit: { n:72, topic:'Cycle 7 \u2014 Chapter 4: Fix-It Corner, then PICK THE PAIR (base and the height that meets it at a square corner)', status:'Test Pending', buildNote:'Built 27 Oct 2026 per BUILD_PLAN_MATH_U72_FixIt_PickThePair.md v1.0, written from TEST_RECORD_U71.md. U71 revision: the Fix-It Corner (new, standing) takes five of his own U71 misses (Q9, Q11, Q5, Q4, R2) through find the slip, redo, then a twin with new numbers. ONE new idea: PICK THE PAIR (the base and the height that meets it at a square corner; slanted sides are decoys; a right-angled triangle has three pairs), then use the rule forwards or undo the half. Lesson Triangles_Lesson_PickThePair.html, 5 screens: warm-up; Fix-It Corner; tap the pair; two steps (the pair you know, then the pair you want); Your turn x5 interleaved with no worked example on the page. The Triangle Card gains one line under the height rule. Test Unit_072_Test_PickThePair.docx: 16Q = Recall x4 + Part 1 x12 (Basic 3, Intermediate 5, Applied 4); key question Q4, a leaning triangle with slanted decoys and the area given; 8 pages with the key. Lesson and test on different days. Gates: verify_u72_plan.py --html PASS (366 worked lines, 0 bad, 0 leaks, 0 prior reuse), verify_lesson_pack.py PASS, 38 Playwright checks PASS. Two-strikes rule: if U72 fails on the same kinds, stop and write the ReviewNote. U73 is planned from TEST_RECORD_U72.md and the lesson JSON.' },
   lastUnit: {
+    n:71, outOf:12, score:8, markedScore:8, pct:67, delta:-1, prevScore:9, prevOutOf:12, prevLabel:'U70',
+    coached: false, independentResult: true, distanceFromClass: 'Shaping Maths 5A Ch.4 Unit 4: the missing height or base; lesson 5/5 first try, test the same day',
+    patternLabel: 'Unit 71 &mdash; The Missing Height or Base, graded 27 Oct 2026 &mdash; Part 1 8/12 verified &middot; Recall 3/4 &middot; alone ticked',
+    patternInsight: '<strong>Basic 3/3 &middot; Intermediate 3/5 &middot; Applied 2/4 &middot; Recall 3/4.</strong> Key question Q5 (a leaning triangle, area given) left blank with IDK in the working. Q9 (the two bases) blank. Q4 20 m for 10 m (170 / 17 not checked backwards). Q11 (b) 30 for 15: 120 is the box of the box. R2 (free items) $87 for $114. Lesson JSON: 5/5 first try, 5.7 min, finished; the test was scanned about 1.5 hours later, the same day. A same-kind worked example sat above each Your turn, so the lesson read as copying; the test added slanted decoys and bigger numbers. Full record in TEST_RECORD_U71.md. Observation only.',
+    analysisLabel: 'Next: Unit 72 &mdash; Fix-It Corner + Pick the Pair (built 27 Oct 2026)',
+    analysisInsight: 'U72 opens with the Fix-It Corner on five of these misses, then teaches PICK THE PAIR; the Your-turn items are mixed with no worked example on the page.',
+    qSummary: '<strong>Basic 3/3 | Intermediate 3/5 | Applied 2/4 | Recall 3/4</strong> &mdash; 8/12 (67%)',
+    qBreakdown: [
+      { q:'R1', topic:'Work backwards: 1/4 then 1/3 of the rest (Recall)', lvl:'l', pass:true, note:'&#10003; $84.' },
+      { q:'R2', topic:'Free items: $3 each, buy 4 get 1 free, 47 boxes (Recall)', lvl:'m', pass:false, note:'&#10007; $87; correct $114. No working written.' },
+      { q:'R3', topic:'Two prices, then months at $45 a month (Recall)', lvl:'l', pass:true, note:'&#10003; 10 months.' },
+      { q:'R4', topic:'Leaning triangle, base 9, outside height 16 (Recall)', lvl:'m', pass:true, note:'&#10003; 72 cm&sup2;.' },
+      { q:'Q1', topic:'Missing height: area 28, base 8', lvl:'w', pass:true, note:'&#10003; 7 cm.' },
+      { q:'Q2', topic:'Missing base: area 44, height 8', lvl:'w', pass:true, note:'&#10003; 11 cm.' },
+      { q:'Q3', topic:'Diagram: area 39, height 3, find the base', lvl:'w', pass:true, note:'&#10003; 26 cm.' },
+      { q:'Q4', topic:'Missing height: area 85 m&sup2;, base 17 m', lvl:'m', pass:false, note:'&#10007; 20 m; correct 10 m. Working 170 only; 170 / 17 = 10 not checked backwards.' },
+      { q:'Q5', topic:'KEY: leaning triangle, slants 34 and 20, base 18, area 144', lvl:'m', pass:false, note:'&#10007; blank; IDK in the working; correct 16 cm.' },
+      { q:'Q6', topic:'Table: area, height, base', lvl:'m', pass:true, note:'&#10003; A 33, B 8, C 9.' },
+      { q:'Q7', topic:'Same area as a 10 x 8 rectangle, base 16', lvl:'m', pass:true, note:'&#10003; 10 cm.' },
+      { q:'Q8', topic:'Missing base: area 21 m&sup2;, height 6 m', lvl:'m', pass:true, note:'&#10003; 7 m.' },
+      { q:'Q9', topic:'Right-angled field 30, 40, 50: path to the long side', lvl:'h', pass:false, note:'&#10007; blank; a ? beside the line; correct 24 m.' },
+      { q:'Q10', topic:'Triangle in a rectangle 16 long, area 56: perimeter', lvl:'h', pass:true, note:'&#10003; 46 cm.' },
+      { q:'Q11', topic:'Same area as P, Q has base 4; Ali claim', lvl:'h', pass:false, note:'&#10007; (a) No right; (b) 30 cm; correct 15 cm. Worked 4 ) 120: 120 is the box of the box.' },
+      { q:'Q12', topic:'Base 12, area 48: how much shorter is the height', lvl:'h', pass:true, note:'&#10003; 4 m.' }
+    ]
+  },
+  _U70archived: {
     n:70, outOf:12, score:9, markedScore:9, pct:75, delta:null, prevScore:null, prevOutOf:null, prevLabel:'M7 (different scale)',
     coached: false, independentResult: true, distanceFromClass: 'Shaping Maths 5A Ch.4 Unit 4: Recall 4 and Activity 1 done in class; area pages blank when sat',
     patternLabel: 'Unit 70 &mdash; Base and Height, graded 22 Oct 2026 &mdash; Part 1 9/12 verified &middot; Recall 3/4 &middot; alone ticked',
@@ -834,25 +861,41 @@ var PREM_DATA = {
     { n:68, score:7, outOf:12, delta:-2, color:'linear-gradient(135deg,#F9A825,#F57F17)', star:false, recallScore:3, recallOutOf:4 },
     { n:69, score:15, outOf:16, delta:null, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:'M7', label:'M7', score:12, outOf:20, delta:0, color:'linear-gradient(135deg,#283593,#1A237E)', star:false },
-    { n:70, score:9, outOf:12, delta:null, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 }
+    { n:70, score:9, outOf:12, delta:null, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 },
+    { n:71, score:8, outOf:12, delta:-1, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 72,
+      badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 72 &mdash; Fix-It Corner, then PICK THE PAIR: the base and the height that meets it at a square corner (Shaping Maths 5A Unit 4)',
+      tags: [
+        { t:'Built 27 Oct 2026 (plan v1.0)', c:'tblue' },
+        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Lesson one day, test the NEXT day', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'First Fix-It Corner: 5 of his own U71 misses, find the slip, redo, twin', c:'tgreen' },
+        { t:'Your turn x5 mixed, no worked example on the page', c:'tgreen' },
+        { t:'Test: 4 Recall + 12 questions; key question Q4, a leaning triangle with decoys', c:'tgreen' },
+        { t:'Gates: plan gate + lesson pack + 38 browser checks PASS', c:'tgreen' }
+      ],
+      note: 'Built from BUILD_PLAN_MATH_U72_FixIt_PickThePair.md v1.0, written from TEST_RECORD_U71.md. U71 one revision: the Fix-It Corner, then PICK THE PAIR, then forwards or backwards. Two-strikes rule: if U72 fails on the same kinds, stop and write the ReviewNote. The Save button sits alone at the end; the only way back is the X, which warns if anything is unsaved.',
+      status: 'live'
+    },
+    {
       n: 71,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
       title: 'Unit 71 &mdash; The missing height or base of a triangle: undo the half first (Shaping Maths 5A Unit 4)',
       tags: [
-        { t:'Built 22 Oct 2026 (plan v1.0)', c:'tblue' },
-        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
-        { t:'Lesson one day, test the NEXT day', s:'background:#E8EAF6;color:#283593;font-weight:700' },
-        { t:'One lesson + Triangle Card (T5, T6) + Answer Check + Your turn x5 + 3-question check-in', c:'tgreen' },
-        { t:'Test: 4 Recall + 12 questions; key question Q5, a leaning triangle, area given', c:'tgreen' },
-        { t:'Gates: plan gate + lesson pack + 82 browser checks PASS', c:'tgreen' }
+        { t:'8/12 verified &middot; Recall 3/4 &mdash; alone', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'Basic 3/3 &middot; Intermediate 3/5 &middot; Applied 2/4', c:'torange' },
+        { t:'Key question Q5 blank (IDK); Q9 blank', s:'background:#FFF8E1;color:#E65100;font-weight:700' },
+        { t:'Lesson 5/5 first try, but the test was the same day', c:'torange' },
+        { t:'&rarr; Unit 72', c:'torange' }
       ],
-      note: 'Built from BUILD_PLAN_MATH_U71_MissingHeight.md v1.0, written from TEST_RECORD_U70.md. One idea: undo the half first (box = area x 2), then the missing side = box / the side you know. New: the Answer Check (what does it ask for, every number copied right, back-check) on the card and the test band. The Save button sits alone at the end; the only way back is the X, which warns if anything is unsaved.',
-      status: 'live'
+      note: 'Built from BUILD_PLAN_MATH_U71_MissingHeight.md v1.0. One idea: undo the half first (box = area x 2), then the missing side = box / the side you know. Lesson JSON 26 Oct: 5/5 first try, 5.7 min, finished. Test scanned 26 Oct 14:59, the same day. Q5 and Q9 (leaning reverse and two bases) were blank on the test.',
+      status: 'done'
     },
     {
       n: 70,
