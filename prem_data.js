@@ -15,13 +15,40 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '27 Oct 2026',
+  updated:        '30 Oct 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:72, topic:'Cycle 7 \u2014 Chapter 4: Fix-It Corner, then PICK THE PAIR (base and the height that meets it at a square corner)', status:'Test Pending', buildNote:'Built 27 Oct 2026 per BUILD_PLAN_MATH_U72_FixIt_PickThePair.md v1.0, written from TEST_RECORD_U71.md. U71 revision: the Fix-It Corner (new, standing) takes five of his own U71 misses (Q9, Q11, Q5, Q4, R2) through find the slip, redo, then a twin with new numbers. ONE new idea: PICK THE PAIR (the base and the height that meets it at a square corner; slanted sides are decoys; a right-angled triangle has three pairs), then use the rule forwards or undo the half. Lesson Triangles_Lesson_PickThePair.html, 5 screens: warm-up; Fix-It Corner; tap the pair; two steps (the pair you know, then the pair you want); Your turn x5 interleaved with no worked example on the page. The Triangle Card gains one line under the height rule. Test Unit_072_Test_PickThePair.docx: 16Q = Recall x4 + Part 1 x12 (Basic 3, Intermediate 5, Applied 4); key question Q4, a leaning triangle with slanted decoys and the area given; 8 pages with the key. Lesson and test on different days. Gates: verify_u72_plan.py --html PASS (366 worked lines, 0 bad, 0 leaks, 0 prior reuse), verify_lesson_pack.py PASS, 38 Playwright checks PASS. Two-strikes rule: if U72 fails on the same kinds, stop and write the ReviewNote. U73 is planned from TEST_RECORD_U72.md and the lesson JSON.' },
+  currentUnit: { n:73, topic:'Cycle 7 \u2014 Chapter 4 review for the school test (Wed 4 Nov): shaded parts, the half trick, composite figures, perimeter first, equal areas, with a 50-mark school-format mock', status:'Test Pending', buildNote:'Built 30 Oct 2026 per BUILD_PLAN_MATH_U73_SchoolTestPrep_Ch4.md v1.0 (Lui: the Chapter 4 school test is Wed 4 Nov). ONE review lesson Triangles_Lesson_ChapterReview.html, 6 screens: warm-up plus the one-page Chapter 4 card; Fix-It Corner on his U72 Q12 (find the slip, redo, twin); shaded parts (whole minus the white parts, with a lift-out animation) and the half trick (a slide-the-tip slider); composite figures (add, or take away); perimeter first, identical pieces, the middle line, and why divide by 2; Your turn x8 with no worked example on the page. Mock Unit_073_Mock_Ch4AreaOfTriangles.docx: 50 marks in the school layout (A 10 multiple choice = 15, B 10 short answer = 15, C 5 long = 20), 60 minutes, card put away; key question Q24 (three squares and an unshaded triangle). Timeline: lesson Sat 31 Oct or Sun 1 Nov, mock Mon 2 Nov, Tue 3 Nov key only, school test Wed 4 Nov. Lesson and mock on different days. Gates: verify_u73_plan.py PASS, --html PASS (65 lesson lines, 0 bad), verify_lesson_pack.py PASS, 30 Playwright checks PASS, every screen looked at on phone and desktop. U74 is planned from TEST_RECORD_U73.md.' },
   lastUnit: {
+    n:72, outOf:12, score:9, markedScore:9, pct:75, delta:+1, prevScore:8, prevOutOf:12, prevLabel:'U71',
+    coached: false, independentResult: true, distanceFromClass: 'Shaping Maths 5A Ch.4 Unit 4: pick the pair (the base and the height that meets it at a square corner) after a Fix-It Corner; lesson and test the same day',
+    patternLabel: 'Unit 72 &mdash; Fix-It Corner, then Pick the Pair, graded 30 Oct 2026 &mdash; Part 1 9/12 verified &middot; Recall 4/4 &middot; alone ticked',
+    patternInsight: '<strong>Basic 2/3 &middot; Intermediate 4/5 &middot; Applied 3/4 &middot; Recall 4/4.</strong> Key question Q4 (a leaning triangle with slanted decoys, area given) left with "IDK how 2 do": strike 2 on the leaning reverse, parked (U72_ReviewNote_LeaningReverse.md). Q1: the right pair, but 40 x 9 written as 280, then halved. Q12: divided by the base (12) instead of the shared height (15), giving 7.5. Lesson JSON 30 Oct: 23.2 min, finished, Your turn 1/5 first try and 4 fixed after the lines; Fix-It twins 2/5 first try. Lesson 12:14-12:37 UTC and test scanned 13:14 UTC, the same day. Full record in TEST_RECORD_U72.md. Observation only.',
+    analysisLabel: 'Next: Unit 73 &mdash; Chapter 4 review + a 50-mark mock for the school test (built 30 Oct 2026)',
+    analysisInsight: 'U73 covers the rest of the school chapter (shaded parts, the half trick, composite figures, perimeter first, equal areas) in one review lesson, then a school-format mock on Monday 2 Nov; school test Wed 4 Nov.',
+    qSummary: '<strong>Basic 2/3 | Intermediate 4/5 | Applied 3/4 | Recall 4/4</strong> &mdash; 9/12 (75%)',
+    qBreakdown: [
+      { q:'R1', topic:'Fractions: 4 2/3 - 1 1/6, then 2/7 of the rest (Recall)', lvl:'l', pass:true, note:'&#10003; 2 1/2 kg.' },
+      { q:'R2', topic:'Free items: $4 each, buy 6 get 1 free, 53 stickers (Recall)', lvl:'m', pass:true, note:'&#10003; $184.' },
+      { q:'R3', topic:'Sequence 9, 15, 21, 27: the 40th number (Recall)', lvl:'l', pass:true, note:'&#10003; 243.' },
+      { q:'R4', topic:'Perimeter 50, length 16: area (Recall)', lvl:'m', pass:true, note:'&#10003; 144 cm&sup2;.' },
+      { q:'Q1', topic:'Right-angled at A (40, 9, 41): area', lvl:'w', pass:false, note:'&#10007; 140 cm&sup2;; correct 180. The pair was right; 40 x 9 written as 280 (correct 360), then halved.' },
+      { q:'Q2', topic:'Missing height: area 52, base 13', lvl:'w', pass:true, note:'&#10003; 8 cm.' },
+      { q:'Q3', topic:'Which line is the height for base PQ', lvl:'w', pass:true, note:'&#10003; c. Margin note: \'What is this?\' at the foot point F.' },
+      { q:'Q4', topic:'KEY: leaning triangle, AB 28, decoys 41 and 15, area 126: the height', lvl:'m', pass:false, note:'&#10007; \'IDK how 2 do\'; correct 9 cm. Nothing in the working area (strike 2 on the leaning reverse).' },
+      { q:'Q5', topic:'Banner area 112 m&sup2;, height 14: the base', lvl:'m', pass:true, note:'&#10003; 16 m (counted by 14s).' },
+      { q:'Q6', topic:'Three triangles (9x8, 11x6, 14x5): largest minus smallest', lvl:'m', pass:true, note:'&#10003; 3 cm&sup2;.' },
+      { q:'Q7', topic:'Same height: A base 6 area 27; B base 10', lvl:'m', pass:true, note:'&#10003; 45 cm&sup2;.' },
+      { q:'Q8', topic:'Leaning, AB 25, dashed height 24: area', lvl:'m', pass:true, note:'&#10003; 300 cm&sup2;.' },
+      { q:'Q9', topic:'Field 90, 120, 150: the path to the long side', lvl:'h', pass:true, note:'&#10003; 72 m.' },
+      { q:'Q10', topic:'P 16 x 9; Q same area, base 12; Ben says height 9', lvl:'h', pass:true, note:'&#10003; (a) No (b) 12 cm.' },
+      { q:'Q11', topic:'Triangle in a rectangle 22 long, area 110: perimeter', lvl:'h', pass:true, note:'&#10003; 64; unit written cm&sup2; (a perimeter): recorded, not deducted.' },
+      { q:'Q12', topic:'Same height: A base 12 area 90; B area 135: how much longer is B\'s base', lvl:'h', pass:false, note:'&#10007; 7.5 m; correct 6 m. Divided 270 by the base 12 instead of the shared height 15 (22.5 - 15).' }
+    ]
+  },
+  _U71archived: {
     n:71, outOf:12, score:8, markedScore:8, pct:67, delta:-1, prevScore:9, prevOutOf:12, prevLabel:'U70',
     coached: false, independentResult: true, distanceFromClass: 'Shaping Maths 5A Ch.4 Unit 4: the missing height or base; lesson 5/5 first try, test the same day',
     patternLabel: 'Unit 71 &mdash; The Missing Height or Base, graded 27 Oct 2026 &mdash; Part 1 8/12 verified &middot; Recall 3/4 &middot; alone ticked',
@@ -862,26 +889,41 @@ var PREM_DATA = {
     { n:69, score:15, outOf:16, delta:null, color:'linear-gradient(135deg,#43e97b,#38f9d7)', star:false },
     { n:'M7', label:'M7', score:12, outOf:20, delta:0, color:'linear-gradient(135deg,#283593,#1A237E)', star:false },
     { n:70, score:9, outOf:12, delta:null, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 },
-    { n:71, score:8, outOf:12, delta:-1, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 }
+    { n:71, score:8, outOf:12, delta:-1, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 },
+    { n:72, score:9, outOf:12, delta:+1, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:4, recallOutOf:4 }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 73,
+      badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 73 &mdash; Chapter 4 review for the school test: shaded parts, the half trick, composite figures, perimeter first, equal areas (Shaping Maths 5A Unit 4)',
+      tags: [
+        { t:'Built 30 Oct 2026 (plan v1.0)', c:'tblue' },
+        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Lesson Sat 31 Oct / Sun 1 Nov, mock Mon 2 Nov, school test Wed 4 Nov', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'One review lesson, 6 screens: Fix-It Corner, shaded parts, composite figures, perimeter first', c:'tgreen' },
+        { t:'Mock: 50 marks, A 15 / B 15 / C 20, 60 minutes, school layout', c:'tgreen' },
+        { t:'Gates: plan gate + html + lesson pack + 30 browser checks PASS', c:'tgreen' }
+      ],
+      note: 'Built from BUILD_PLAN_MATH_U73_SchoolTestPrep_Ch4.md v1.0. The planned Activity 4 unit covered one sixth of the school chapter, so U73 reviews the whole of Chapter 4 in one lesson and a 50-mark mock in the school format (the key question is Q24, three squares and an unshaded triangle). The Save button sits alone at the end; the only way back is the X, which warns if anything is unsaved. Lesson and mock on different days; Tuesday is for reading the mock key only.',
+      status: 'live'
+    },
+    {
       n: 72,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
       title: 'Unit 72 &mdash; Fix-It Corner, then PICK THE PAIR: the base and the height that meets it at a square corner (Shaping Maths 5A Unit 4)',
       tags: [
-        { t:'Built 27 Oct 2026 (plan v1.0)', c:'tblue' },
-        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
-        { t:'Lesson one day, test the NEXT day', s:'background:#E8EAF6;color:#283593;font-weight:700' },
-        { t:'First Fix-It Corner: 5 of his own U71 misses, find the slip, redo, twin', c:'tgreen' },
-        { t:'Your turn x5 mixed, no worked example on the page', c:'tgreen' },
-        { t:'Test: 4 Recall + 12 questions; key question Q4, a leaning triangle with decoys', c:'tgreen' },
-        { t:'Gates: plan gate + lesson pack + 38 browser checks PASS', c:'tgreen' }
+        { t:'9/12 verified &middot; Recall 4/4 &mdash; alone', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'Basic 2/3 &middot; Intermediate 4/5 &middot; Applied 3/4', c:'torange' },
+        { t:'Key question Q4: IDK how 2 do (strike 2, leaning reverse parked)', s:'background:#FFF8E1;color:#E65100;font-weight:700' },
+        { t:'Fix-It twins 2/5 first try; Your turn 1/5 first try, 4 fixed', c:'torange' },
+        { t:'Lesson and test the same day', c:'torange' },
+        { t:'&rarr; Unit 73', c:'torange' }
       ],
-      note: 'Built from BUILD_PLAN_MATH_U72_FixIt_PickThePair.md v1.0, written from TEST_RECORD_U71.md. U71 one revision: the Fix-It Corner, then PICK THE PAIR, then forwards or backwards. Two-strikes rule: if U72 fails on the same kinds, stop and write the ReviewNote. The Save button sits alone at the end; the only way back is the X, which warns if anything is unsaved.',
-      status: 'live'
+      note: 'Built from BUILD_PLAN_MATH_U72_FixIt_PickThePair.md v1.0. First Fix-It Corner (five of his U71 misses), then PICK THE PAIR, with Your turn mixed and no worked example on the page. Lesson JSON 30 Oct: 23.2 min, finished. Test scanned 30 Oct 13:14 UTC, 37 minutes after the lesson. Q1 40 x 9 written as 280; Q12 divided by the base instead of the shared height.',
+      status: 'done'
     },
     {
       n: 71,

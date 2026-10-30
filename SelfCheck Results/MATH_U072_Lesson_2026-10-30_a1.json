@@ -1,0 +1,457 @@
+{
+  "student": "Prem",
+  "subject": "Math",
+  "unit": "U072",
+  "type": "lesson",
+  "attempt": 1,
+  "openedAt": "2026-10-30T12:14:05.235Z",
+  "lastSavedAt": "2026-10-30T12:37:19.097Z",
+  "minutesSpent": 23.2,
+  "screensSeen": 5,
+  "finished": true,
+  "stars": 1,
+  "fixed": 4,
+  "swaps": 0,
+  "usedSlant": 0,
+  "forgotHalf": 0,
+  "forgotDouble": 0,
+  "answeredOtherPart": 0,
+  "mb1tRight": null,
+  "items": [
+    {
+      "id": "Y1",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "4"
+      },
+      "answersCorrect": {
+        "ans": "15"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": {
+        "ans": "15"
+      },
+      "fixedAfterLines": true,
+      "linesViewed": 7,
+      "ms": 68215
+    },
+    {
+      "id": "Y2",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "210"
+      },
+      "answersCorrect": {
+        "ans": "210"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": null,
+      "fixedAfterLines": false,
+      "linesViewed": 0,
+      "ms": 20960
+    },
+    {
+      "id": "Y3",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "85"
+      },
+      "answersCorrect": {
+        "ans": "84"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": {
+        "ans": "84"
+      },
+      "fixedAfterLines": true,
+      "linesViewed": 13,
+      "ms": 175676
+    },
+    {
+      "id": "Y4",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "6.6"
+      },
+      "answersCorrect": {
+        "ans": "55"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": {
+        "ans": "55"
+      },
+      "fixedAfterLines": true,
+      "linesViewed": 13,
+      "ms": 52062
+    },
+    {
+      "id": "Y5",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "24"
+      },
+      "answersCorrect": {
+        "ans": "4"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": {
+        "ans": "4"
+      },
+      "fixedAfterLines": true,
+      "linesViewed": 15,
+      "ms": 28128
+    }
+  ],
+  "boost": [],
+  "fixIt": [
+    {
+      "id": "FX9",
+      "slipPicked": 0,
+      "slipRight": true,
+      "redoAnswer": "35",
+      "redoRight": false,
+      "redoLinesViewed": 13,
+      "twinAnswer": "75",
+      "twinRight": false,
+      "twinLinesViewed": 13,
+      "ms": 160441
+    },
+    {
+      "id": "FX11",
+      "slipPicked": 0,
+      "slipRight": true,
+      "redoAnswer": "15",
+      "redoRight": true,
+      "redoLinesViewed": 0,
+      "twinAnswer": "10",
+      "twinRight": true,
+      "twinLinesViewed": 0,
+      "ms": 44819
+    },
+    {
+      "id": "FX5",
+      "slipPicked": 0,
+      "slipRight": true,
+      "redoAnswer": "8",
+      "redoRight": false,
+      "redoLinesViewed": 7,
+      "twinAnswer": "20",
+      "twinRight": true,
+      "twinLinesViewed": 0,
+      "ms": 95887
+    },
+    {
+      "id": "FX4",
+      "slipPicked": 1,
+      "slipRight": true,
+      "redoAnswer": "10",
+      "redoRight": true,
+      "redoLinesViewed": 0,
+      "twinAnswer": "19",
+      "twinRight": false,
+      "twinLinesViewed": 7,
+      "ms": 105972
+    },
+    {
+      "id": "FXR2",
+      "slipPicked": 1,
+      "slipRight": true,
+      "redoAnswer": "114",
+      "redoRight": true,
+      "redoLinesViewed": 0,
+      "twinAnswer": "55",
+      "twinRight": false,
+      "twinLinesViewed": 13,
+      "ms": 265395
+    }
+  ],
+  "taps": {
+    "L2": {
+      "wrong": 1,
+      "ok": true
+    },
+    "L2b": {
+      "wrong": 2,
+      "rows": [
+        true,
+        true,
+        true
+      ]
+    }
+  },
+  "sideItems": {
+    "FX9r": {
+      "id": "FX9r",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "35"
+      },
+      "answersCorrect": {
+        "ans": "24"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": {
+        "ans": "24"
+      },
+      "fixedAfterLines": true,
+      "linesViewed": 13,
+      "ms": 105057
+    },
+    "FX9t": {
+      "id": "FX9t",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "75"
+      },
+      "answersCorrect": {
+        "ans": "60"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": {
+        "ans": "60"
+      },
+      "fixedAfterLines": true,
+      "linesViewed": 13,
+      "ms": 30878
+    },
+    "FX11r": {
+      "id": "FX11r",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "15"
+      },
+      "answersCorrect": {
+        "ans": "15"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": null,
+      "fixedAfterLines": false,
+      "linesViewed": 0,
+      "ms": 22460
+    },
+    "FX11t": {
+      "id": "FX11t",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "10"
+      },
+      "answersCorrect": {
+        "ans": "10"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": null,
+      "fixedAfterLines": false,
+      "linesViewed": 0,
+      "ms": 11897
+    },
+    "FX5r": {
+      "id": "FX5r",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "8"
+      },
+      "answersCorrect": {
+        "ans": "16"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": true,
+      "answeredOtherPart": false,
+      "fixedAnswer": {
+        "ans": "16"
+      },
+      "fixedAfterLines": true,
+      "linesViewed": 7,
+      "ms": 50602
+    },
+    "FX5t": {
+      "id": "FX5t",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "20"
+      },
+      "answersCorrect": {
+        "ans": "20"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": null,
+      "fixedAfterLines": false,
+      "linesViewed": 0,
+      "ms": 20839
+    },
+    "FX4r": {
+      "id": "FX4r",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "10"
+      },
+      "answersCorrect": {
+        "ans": "10"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": null,
+      "fixedAfterLines": false,
+      "linesViewed": 0,
+      "ms": 2829
+    },
+    "FX4t": {
+      "id": "FX4t",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "19"
+      },
+      "answersCorrect": {
+        "ans": "18"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": {
+        "ans": "18"
+      },
+      "fixedAfterLines": true,
+      "linesViewed": 7,
+      "ms": 35788
+    },
+    "FXR2r": {
+      "id": "FXR2r",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "114"
+      },
+      "answersCorrect": {
+        "ans": "114"
+      },
+      "swapped": false,
+      "firstTryRight": true,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": null,
+      "fixedAfterLines": false,
+      "linesViewed": 0,
+      "ms": 46434
+    },
+    "FXR2t": {
+      "id": "FXR2t",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "55"
+      },
+      "answersCorrect": {
+        "ans": "56"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": {
+        "ans": "56"
+      },
+      "fixedAfterLines": true,
+      "linesViewed": 13,
+      "ms": 67706
+    },
+    "L2": {
+      "id": "L2",
+      "circledTapped": true,
+      "answersGiven": {
+        "ans": "228"
+      },
+      "answersCorrect": {
+        "ans": "114"
+      },
+      "swapped": false,
+      "firstTryRight": false,
+      "selfFixedAfterNudge": false,
+      "usedSlant": false,
+      "forgotHalf": false,
+      "forgotDouble": false,
+      "answeredOtherPart": false,
+      "fixedAnswer": {
+        "ans": "114"
+      },
+      "fixedAfterLines": true,
+      "linesViewed": 7,
+      "ms": 148744
+    }
+  }
+}
