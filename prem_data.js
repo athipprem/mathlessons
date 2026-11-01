@@ -15,13 +15,49 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '30 Oct 2026',
+  updated:        '1 Nov 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:73, topic:'Cycle 7 \u2014 Chapter 4 review for the school test (Wed 4 Nov): shaded parts, the half trick, composite figures, perimeter first, equal areas, with a 50-mark school-format mock', status:'Test Pending', buildNote:'Built 30 Oct 2026 per BUILD_PLAN_MATH_U73_SchoolTestPrep_Ch4.md v1.0 (Lui: the Chapter 4 school test is Wed 4 Nov). ONE review lesson Triangles_Lesson_ChapterReview.html, 6 screens: warm-up plus the one-page Chapter 4 card; Fix-It Corner on his U72 Q12 (find the slip, redo, twin); shaded parts (whole minus the white parts, with a lift-out animation) and the half trick (a slide-the-tip slider); composite figures (add, or take away); perimeter first, identical pieces, the middle line, and why divide by 2; Your turn x8 with no worked example on the page. Mock Unit_073_Mock_Ch4AreaOfTriangles.docx: 50 marks in the school layout (A 10 multiple choice = 15, B 10 short answer = 15, C 5 long = 20), 60 minutes, card put away; key question Q24 (three squares and an unshaded triangle). Timeline: lesson Sat 31 Oct or Sun 1 Nov, mock Mon 2 Nov, Tue 3 Nov key only, school test Wed 4 Nov. Lesson and mock on different days. Gates: verify_u73_plan.py PASS, --html PASS (65 lesson lines, 0 bad), verify_lesson_pack.py PASS, 30 Playwright checks PASS, every screen looked at on phone and desktop. U74 is planned from TEST_RECORD_U73.md.' },
+  currentUnit: { n:74, topic:'Cycle 7 \u2014 Close the U73 gaps before the school test (Wed 4 Nov): whole first, walk the fence, count it, add back', status:'Test Pending', buildNote:'Built 1 Nov 2026 per BUILD_PLAN_MATH_U74_WholeFirst_Fence.md v1.0. Four moves from the U73 mock (36/50): WHOLE FIRST (shaded = whole minus white; Q18, Q24), WALK THE FENCE (the perimeter is the outside only; Q21 a), COUNT IT (Q20) and ADD BACK (Q23). One lesson Triangles_Lesson_WholeFirst_Fence.html, 6 screens: the four moves and the Chapter 4 card with four new lines; paint-it and the lines for whole first (Fix-It FX18 and FX24 inside); walk-the-fence and the lines (FX21); count-it and add-back (FX20 and FX23); Your turn x6 with no worked example; a 2-question ready check that sends a miss back to the right picture (paint it or walk the fence) for one more try. Test Unit_074_Test_WholeFirstFence.docx: 12 questions, 1 mark each (Basic 3, Intermediate 5, Applied 4), pass 10/12, key question Q9 (Nina sticker, the whole from three squares), no Recall. Timeline: lesson Mon 2 Nov, test Tue 3 Nov (different days), school test Wed 4 Nov. Gates: verify_u74_plan.py PASS, --html PASS (80 lesson lines, 0 bad), verify_lesson_pack.py PASS, answer-leak check on the rendered paper 0, every lesson screen looked at on phone width and the widgets, Your turn, Fix-It and ready check clicked through. Nothing is planned after U74 until the school result is in.' },
   lastUnit: {
+    n:73, outOf:50, score:36, markedScore:35.5, pct:72, delta:0, prevScore:9, prevOutOf:12, prevLabel:'U72 (12-mark test, not comparable)',
+    coached: false, independentResult: true, distanceFromClass: 'Shaping Maths 5A Chapter 4 in full, the day before the school test prep; lesson and mock the same day (1 h 56 min apart; the plan had the mock on Mon 2 Nov)',
+    patternLabel: 'Unit 73 &mdash; Chapter 4 school-format mock, scanned 1 Nov 2026 &mdash; 36/50 verified (35.5 as marked) &middot; alone circled',
+    patternInsight: '<strong>A 15/15 &middot; B 11/15 &middot; C 10/20.</strong> Key question C24 (three squares and an unshaded triangle) wrong: 60, correct 52. Every 1-mark question was right (10/10). The marks lost: Q18 (white part added), Q20 (3 triangles counted as 4), Q21 (a) (a question mark), Q23 (432 - 198 slip), Q24. Lesson JSON: 15.3 min, Your turn 7/8 first try; Fix-It FX12 redo and twin both wrong first try (parked).',
+    analysisLabel: 'Next: Unit 74 &mdash; four moves before the school test (built 1 Nov 2026)',
+    analysisInsight: 'U74 teaches whole first, walk the fence, count it and add back; lesson Mon 2 Nov, test Tue 3 Nov, school test Wed 4 Nov.',
+    qSummary: '<strong>A 15/15 | B 11/15 | C 10/20</strong> &mdash; 36/50 (72%)',
+    qBreakdown: [
+      { q:'A1', topic:'Which line is the height for base QR', lvl:'l', pass:true, note:'&#10003; C.' },
+      { q:'A2', topic:'Right-angled 14 x 9: area', lvl:'l', pass:true, note:'&#10003; B, 63 cm&sup2;.' },
+      { q:'A3', topic:'Leaning, base 7, outside height 14', lvl:'l', pass:true, note:'&#10003; C, 49 cm&sup2;.' },
+      { q:'A4', topic:'Base that goes with height DE', lvl:'l', pass:true, note:'&#10003; B, EF.' },
+      { q:'A5', topic:'Base 16, decoy AC 15, height 9', lvl:'l', pass:true, note:'&#10003; D, 72 cm&sup2;.' },
+      { q:'A6', topic:'26 x 8 rectangle, half-triangle shaded (2 marks)', lvl:'l', pass:true, note:'&#10003; B, 104 cm&sup2;.' },
+      { q:'A7', topic:'Which two of P, Q, R, S have equal areas (2 marks)', lvl:'l', pass:true, note:'&#10003; C, P and Q.' },
+      { q:'A8', topic:'D middle of AC, ABC 44: ABD (2 marks)', lvl:'l', pass:true, note:'&#10003; D, 22 cm&sup2;.' },
+      { q:'A9', topic:'Square 12 minus a white corner triangle (12, 8) (2 marks)', lvl:'l', pass:true, note:'&#10003; A, 96 cm&sup2;.' },
+      { q:'A10', topic:'Rectangle 9 x 6 plus an end triangle (2 marks)', lvl:'l', pass:true, note:'&#10003; C, 66 cm&sup2;.' },
+      { q:'B11', topic:'Right-angled 17 x 6', lvl:'m', pass:true, note:'&#10003; 51 cm&sup2;.' },
+      { q:'B12', topic:'Leaning, base 18, outside height 5', lvl:'m', pass:true, note:'&#10003; 45 cm&sup2;.' },
+      { q:'B13', topic:'Base 25, decoys 15 and 20, height 12', lvl:'m', pass:true, note:'&#10003; 150 cm&sup2;.' },
+      { q:'B14', topic:'Three triangles: largest minus smallest', lvl:'m', pass:true, note:'&#10003; 9 cm&sup2;.' },
+      { q:'B15', topic:'16 x 7 rectangle, half-triangle', lvl:'m', pass:true, note:'&#10003; 56 cm&sup2;.' },
+      { q:'B16', topic:'24 x 9, two triangles on top (2 marks)', lvl:'m', pass:true, note:'&#10003; 108 cm&sup2;.' },
+      { q:'B17', topic:'20 x 11 minus two corner triangles (2 marks)', lvl:'m', pass:true, note:'&#10003; 143 cm&sup2;.' },
+      { q:'B18', topic:'Square 16 minus a white triangle (16, 10) (2 marks)', lvl:'m', pass:false, note:'&#10007; 128 cm&sup2;; correct 176. In the figure 80 + 48 = 128: the white part was added, not taken away.' },
+      { q:'B19', topic:'Triangle (28, 18) minus a square of side 8 (2 marks)', lvl:'m', pass:true, note:'&#10003; 188 cm&sup2;.' },
+      { q:'B20', topic:'Logo: square 8 plus 4 triangles (tip 6 out) (2 marks)', lvl:'m', pass:false, note:'&#10007; 136 cm&sup2;; correct 160. Working 72 + 64 = 136: the count of triangles was 3 (72), not 4.' },
+      { q:'C21', topic:'(a) AB by perimeter first (b) area of ABCD (3 marks)', lvl:'h', pass:false, note:'&#10007; (a) only a question mark, correct 41 m (b) 288 m&sup2; right. 2 of 3 marks.' },
+      { q:'C22', topic:'Two 15 x 8 rectangles, a half-triangle cut out (3 marks)', lvl:'h', pass:true, note:'&#10003; 120 cm&sup2;. Recorded: 120 is one rectangle, so the plan note says not evidence.' },
+      { q:'C23', topic:'Tile 36 x 12 minus 3 triangles (12, 11) (4 marks)', lvl:'h', pass:false, note:'&#10007; 244 cm&sup2;; correct 234. 432 - 198 worked with borrows, answer 244: a subtraction slip, and no add back.' },
+      { q:'C24', topic:'KEY: three squares (10, 6, 4) and an unshaded triangle (5 marks)', lvl:'h', pass:false, note:'&#10007; 60 cm&sup2;; correct 52. 0 of 5.' },
+      { q:'C25', topic:'Base 14, height 10: (a) (b) Ali claim (c) (5 marks)', lvl:'h', pass:true, note:'&#10003; 70, 70, 140. All right.' }
+    ]
+  },
+  _U72archived: {
     n:72, outOf:12, score:9, markedScore:9, pct:75, delta:+1, prevScore:8, prevOutOf:12, prevLabel:'U71',
     coached: false, independentResult: true, distanceFromClass: 'Shaping Maths 5A Ch.4 Unit 4: pick the pair (the base and the height that meets it at a square corner) after a Fix-It Corner; lesson and test the same day',
     patternLabel: 'Unit 72 &mdash; Fix-It Corner, then Pick the Pair, graded 30 Oct 2026 &mdash; Part 1 9/12 verified &middot; Recall 4/4 &middot; alone ticked',
@@ -896,19 +932,33 @@ var PREM_DATA = {
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 74,
+      badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 74 &mdash; Four moves before the school test: whole first, walk the fence, count it, add back (Shaping Maths 5A Unit 4)',
+      tags: [
+        { t:'Built 1 Nov 2026 (plan v1.0)', c:'tblue' },
+        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Lesson Mon 2 Nov, test Tue 3 Nov, school test Wed 4 Nov', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'6 screens, 5 Fix-It cards, Your turn x6, 2-question ready check', c:'tgreen' },
+        { t:'Test: 12 questions, 3/5/4, pass 10/12, key Q9', c:'tgreen' },
+        { t:'Gates: plan gate + html + lesson pack + leak check PASS', c:'tgreen' }
+      ],
+      note: 'Built from BUILD_PLAN_MATH_U74_WholeFirst_Fence.md v1.0. The four U73 gaps, each with two routes (a picture, then lines), a Fix-It card on his own wrong answer, and a ready check that sends a miss back to the right picture. Lesson and test must be on different days: lesson Monday, test Tuesday.',
+      status: 'live'
+    },
+    {
       n: 73,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
       title: 'Unit 73 &mdash; Chapter 4 review for the school test: shaded parts, the half trick, composite figures, perimeter first, equal areas (Shaping Maths 5A Unit 4)',
       tags: [
-        { t:'Built 30 Oct 2026 (plan v1.0)', c:'tblue' },
-        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
-        { t:'Lesson Sat 31 Oct / Sun 1 Nov, mock Mon 2 Nov, school test Wed 4 Nov', s:'background:#E8EAF6;color:#283593;font-weight:700' },
-        { t:'One review lesson, 6 screens: Fix-It Corner, shaded parts, composite figures, perimeter first', c:'tgreen' },
-        { t:'Mock: 50 marks, A 15 / B 15 / C 20, 60 minutes, school layout', c:'tgreen' },
-        { t:'Gates: plan gate + html + lesson pack + 30 browser checks PASS', c:'tgreen' }
+        { t:'36/50 verified (35.5 as marked) &mdash; alone', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'A 15/15 &middot; B 11/15 &middot; C 10/20', c:'torange' },
+        { t:'Key question C24 wrong (60, correct 52)', s:'background:#FFF8E1;color:#E65100;font-weight:700' },
+        { t:'Lesson and mock the same day', c:'torange' },
+        { t:'&rarr; Unit 74', c:'torange' }
       ],
-      note: 'Built from BUILD_PLAN_MATH_U73_SchoolTestPrep_Ch4.md v1.0. The planned Activity 4 unit covered one sixth of the school chapter, so U73 reviews the whole of Chapter 4 in one lesson and a 50-mark mock in the school format (the key question is Q24, three squares and an unshaded triangle). The Save button sits alone at the end; the only way back is the X, which warns if anything is unsaved. Lesson and mock on different days; Tuesday is for reading the mock key only.',
-      status: 'live'
+      note: 'Built from BUILD_PLAN_MATH_U73_SchoolTestPrep_Ch4.md v1.0. One review lesson (6 screens) and a 50-mark school-format mock. Lesson JSON 1 Nov: 15.3 min, finished, Your turn 7/8 first try. Mock scanned 1 Nov: all ten 1-mark questions right; the marks lost sit in Q18, Q20, Q21 (a), Q23 and Q24. Record: TEST_RECORD_U73.md.',
+      status: 'done'
     },
     {
       n: 72,

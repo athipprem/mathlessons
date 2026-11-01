@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson — Whole First · Walk the Fence (Unit 74)</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#8D6E00;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.wrap{max-width:760px;margin:0 auto;padding:16px;width:100%}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin:12px 0}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.q-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1px solid #9FA8DA;border-radius:14px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFF3E0;color:#8D6E00;border:1px solid #FFE0B2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stop-here{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FB8C00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:800;color:#E65100;margin:16px 0}
+.flip-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.flip-card{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:12px 18px;font-size:.95rem;font-weight:700;color:var(--warn);text-align:center}
+/* answer frame */
+.frame{background:#fff;border:2px solid var(--acc);border-radius:10px;padding:10px 12px;margin:10px 0}
+.frame .fr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0}
+.frame .fl{font-weight:700;color:var(--warn);font-size:.92rem;min-width:150px}
+.frame .fv{font-size:1rem;color:#1a1a2e}
+.frame .fv.ans{font-weight:800;color:var(--warn)}
+.frame input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:6px 8px;font-size:1rem;width:170px;font-family:inherit}
+.frame input[type=text].wide{width:230px}
+.frame input[type=text]:focus{outline:2px solid #9FA8DA}
+.frame .fr.pieces input{width:90px}
+/* piece cutter W10 */
+.w10{background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:12px;margin:12px 0}
+.w10 svg{width:100%;height:auto;display:block}
+.w10-lines{margin-top:8px;min-height:60px}
+.w10-lines .ln{font-size:1rem;padding:3px 0;color:#1a1a2e}
+.w10-lines .ln.last{font-weight:800;color:var(--warn)}
+.w10-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.w10-btns button{border:none;border-radius:8px;padding:8px 16px;font-size:.92rem;font-weight:700;cursor:pointer}
+.w10-btns .go{background:var(--acc);color:#fff}
+.w10-btns .go:disabled{background:#9FA8DA;cursor:default}
+.w10-btns .rs{background:#fff;color:var(--acc);border:1.5px solid var(--acc)}
+.two-cards{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.two-cards .q-card{flex:1;min-width:250px;margin-bottom:0}
+.ans-input{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 10px;font-size:1rem;width:190px;font-family:inherit;margin-right:8px}
+.nav-link{flex:1;display:block;text-align:center;padding:13px 0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.nav-link.out{background:#fff;color:#283593;border:2px solid #283593}
+.nav-link.fill{background:#3F51B5;color:#fff;border:2px solid #3F51B5}
+
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.chip{display:inline-block;border-radius:14px;padding:3px 12px;font-size:.88rem;font-weight:700;border:2px solid #1565C0}
+.chip.t{background:#90CAF9;color:#0D47A1}.chip.l{background:#fff;color:#283593;border-color:#283593}
+.chip.told{background:#FFF8E1;color:#8d6e00;border-color:#FFB74D}
+.bx{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.bx label{font-weight:700;color:#283593;font-size:.95rem}
+.bx input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 9px;font-size:1rem;width:120px;font-family:inherit}
+.bx .opt{font-weight:400;color:#607D8B;font-size:.82rem}
+.boxes-static{background:#fff;border:2px solid #1565C0;border-radius:10px;padding:10px 14px;margin:10px 0}
+.boxes-static .r{padding:3px 0;font-size:1rem}.boxes-static b{color:#0D47A1}
+.circ{border:3px solid #2E7D32;border-radius:10px;padding:2px 8px;font-weight:800;color:#1B5E20;display:inline-block}
+.amberwarn{background:#FFF8E1;border:2px solid #FFB74D;border-radius:10px;padding:12px 16px;margin:12px 0;color:#8d6e00;font-weight:700}
+.sbs{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.sbs .sc{flex:1;min-width:240px;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:12px}
+.sbs .sc.a{border-color:#1565C0;background:#E3F2FD}.sbs .sc.b{border-color:#FFB74D;background:#FFF8E1}
+.sbs .sc .st{font-weight:800;margin-bottom:4px;color:#283593}
+.bar-wrap{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px;margin:10px 0}
+.bar-wrap svg{width:100%;height:auto;display:block}
+
+.wlb{margin:10px 0;border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:6px 8px}
+.wlb .wls{margin-bottom:4px}
+.wl,.bl{display:none;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:12px;padding:7px 6px;border-bottom:1px dashed #C5CAE9;align-items:start}
+.wl.on,.bl.on{display:grid}
+.wl.cur,.bl.cur{background:#F0F1FA}
+.wl[data-glow].on{background:#FFF8E1;box-shadow:inset 4px 0 0 #F9A825}
+.wl .m,.bl .m{font-family:Consolas,'Courier New',monospace;font-weight:700;color:#283593;font-size:1rem}
+.wl .why,.bl .why{color:#455A64;font-size:.88rem;line-height:1.35;border:0;background:none;padding:0;margin:0;border-radius:0;box-shadow:none}
+.wl .why:before,.bl .why:before{content:"\2190  ";color:#9FA8DA}
+.btn-next{background:#fff;color:#283593;border:2px solid #283593;border-radius:8px;padding:7px 16px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit}
+.wlb.alldone .btn-next{display:none}
+.wlb.closed{display:none}
+.chip.nw{background:#FFF8E1;color:#8d6e00;border-color:#F9A825}
+.taps{margin:8px 0;padding:8px 10px;border:2px solid #C5CAE9;border-radius:10px;background:#F7F9FD}
+.taps .thead{font-weight:800;color:#283593;font-size:.9rem;margin-bottom:4px}
+.tq{margin:8px 0}
+.tq .tl{font-weight:700;color:#283593}
+.tq .tsub{font-weight:400;color:#607D8B;font-size:.85rem;display:block}
+.tb2{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.tb2 button{border:2px solid #9FA8DA;background:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem;cursor:pointer;font-family:inherit;color:#283593;font-weight:600;text-align:left}
+.tb2 button.good{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.tb2 button.lit{outline:3px solid #2E7D32}
+.tb2 button.nope{background:#FFF3E0;border-color:#FFB74D;color:#8d6e00}
+.thint{color:#8d6e00;font-size:.88rem;margin-top:4px;min-height:1em}
+.stones,.alines{margin:10px 0}
+.stones .sr,.alines .al{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:7px 0}
+.stones label,.alines label{font-weight:700;color:#283593;font-size:.95rem}
+.stones input[type=text],.alines input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 9px;font-size:1rem;width:130px;font-family:inherit}
+.stones .tag{font-size:.78rem;background:#FFF8E1;border:1.5px solid #FFB74D;color:#8d6e00;border-radius:12px;padding:1px 8px;font-weight:700}
+.alines .al label{flex:1 1 100%}
+.locked label{opacity:.55}
+.fmap{max-width:640px;margin:10px auto}
+.mn{border:2px solid #283593;border-radius:10px;padding:8px 12px;background:#fff;color:#283593;font-size:.95rem}
+.mn.start{background:#E8EAF6}.mn.q{background:#F0F1FA}
+.mn b.k{background:#283593;color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+.mn i,.br i{display:block;font-size:.84rem;color:#455A64;font-style:normal;margin-top:2px}
+.arr{text-align:center;color:#9FA8DA;font-size:1.1rem;line-height:1.2}
+.two{display:flex;gap:8px;flex-wrap:wrap}
+.two .br{flex:1;min-width:230px;border:2px solid #9FA8DA;border-radius:10px;padding:8px 10px;background:#fff;font-size:.9rem;color:#37474F}
+.br b.yn{color:#283593}
+.mp .tk{background:#90CAF9;color:#0D47A1;border-radius:6px;padding:0 6px;font-weight:700}
+.mp .lf{background:#fff;color:#283593;border:1.5px solid #283593;border-radius:6px;padding:0 6px;font-weight:700}
+.lit-node{background:#E8F5E9 !important;border-color:#2E7D32 !important;box-shadow:0 0 0 3px #A5D6A7}
+.fmap .cap{display:none;margin-top:5px;font-family:Consolas,'Courier New',monospace;font-weight:700;color:#1B5E20;font-size:.88rem}
+.lit-node .cap{display:block}
+.ex{margin-top:5px;font-size:.82rem;color:#455A64;border-top:1px dashed #C5CAE9;padding-top:4px}
+.wtrow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;align-items:center}
+.btn-map{display:inline-block;border:2px solid #283593;color:#283593;background:#fff;border-radius:10px;padding:8px 16px;font-weight:700;text-decoration:none;font-size:.95rem;cursor:pointer;font-family:inherit}
+.maplink{position:fixed;right:12px;bottom:12px;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.btn-show-steps{display:none;margin-top:6px}
+.frame67{border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:10px 12px;margin:10px 0;line-height:2.1}
+.frame67 .fh{font-weight:800;color:#283593;display:block;margin-bottom:2px;line-height:1.4}
+.bl-blank{display:inline-block;min-width:74px;border:2px dashed #9FA8DA;border-radius:8px;padding:0 8px;text-align:center;font-weight:700;color:#283593;cursor:pointer;background:#F7F9FD;line-height:1.7}
+.bl-blank.sel{border-color:#283593;background:#E8EAF6}
+.bl-blank.full{border-style:solid}
+.bl-blank.bad{border-color:#FFB74D;background:#FFF3E0}
+.bl-blank.ok{border-color:#2E7D32;background:#E8F5E9;color:#1B5E20}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chips button{border:2px solid #90CAF9;background:#E3F2FD;border-radius:16px;padding:4px 14px;font-weight:700;color:#0D47A1;cursor:pointer;font-family:inherit;font-size:.95rem}
+.chips button.used{opacity:.35}
+.frame67 input.ft{border:1.5px solid #9FA8DA;border-radius:6px;padding:3px 8px;font-size:.95rem;width:96px;font-family:inherit}
+.goodline{font-weight:800;color:#1B5E20;margin-top:4px}
+.sbs .sc.a{border-color:#2E7D32;background:#E8F5E9}
+.model{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 12px;margin:8px 0;display:none}
+.model label{display:block;margin:4px 0;font-weight:600;color:#283593}
+textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:6px;padding:8px;font-size:1rem;font-family:inherit}
+.boost .q{margin:6px 0}
+@media (max-width:560px){.wl,.bl{grid-template-columns:1fr;gap:2px}}
+
+@keyframes slidedown{from{transform:translateY(-70px);opacity:.15}to{transform:translateY(0);opacity:1}}
+.bar-wrap g.slide{animation:slidedown 1.1s ease-out 0.3s both}
+.bar-wrap .tgl{font-size:.8rem;color:#455A64}
+
+.intro{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.intro p{margin-bottom:6px}
+.meters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+.lv{flex:1;min-width:120px;border:2px dashed #B0BEC5;border-radius:10px;padding:6px 8px;text-align:center;background:#fff;color:#78909C}
+.lv .ln1{font-weight:800;font-size:.9rem}.lv .ln2{font-size:.78rem;margin-bottom:3px}
+.lv.now{border:2px solid #283593;color:#283593;background:#E8EAF6}
+.lv.done{border:2px solid #2E7D32;color:#1B5E20;background:#E8F5E9}
+.lv.boss{border-color:#FFB74D;color:#8d6e00;background:#FFF8E1}
+.lv.boss.now{border:2px solid #F9A825}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid #B0BEC5;margin:0 2px;background:#fff}
+.dot.on{background:#F9A825;border-color:#F9A825}
+.bchip{display:inline-block;margin:2px 3px;padding:2px 8px;border-radius:12px;border:2px solid #FFB74D;background:#fff;font-weight:700;color:#8d6e00;font-size:.78rem}
+.bchip.beat{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.dstat{text-align:center;font-weight:700;color:#283593;font-size:.95rem}
+.dsub{text-align:center;font-size:.85rem;color:#607D8B;margin-bottom:8px}
+.welcome{text-align:center;font-size:.9rem;color:#455A64;margin:4px 0 8px;font-weight:600}
+.lvmsg{text-align:center;font-weight:800;color:#1B5E20;margin:4px 0;min-height:1em}
+.dq{font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:10px}
+.walk{background:#E3F2FD;border:2px solid #1565C0;border-radius:10px;padding:12px 14px;margin:10px 0}
+.walk .wt{font-weight:800;color:#0D47A1;margin-bottom:6px}
+.wholelab{text-align:center;font-weight:700;color:#283593;margin-top:6px}
+.sorry{background:#FFF3E0;border:2px solid #FFB74D;border-radius:10px;padding:14px 16px;margin-top:12px}
+.sorry .sbig{font-weight:800;color:#8d6e00;margin-bottom:6px}
+.tline{margin:4px 0;font-size:.95rem}
+.tline b{color:#283593}
+.btn-big{background:var(--acc);color:#fff;border:none;padding:13px 30px;border-radius:10px;cursor:pointer;font-size:1.05rem;font-weight:700;display:block;margin:16px auto 0}
+.btn-big.alt{background:#fff;color:#283593;border:2px solid #283593}
+.endbox{display:none;border-radius:12px;padding:20px;margin-top:16px;text-align:center;position:relative;overflow:hidden}
+.endbox.master{background:#E8F5E9;border:2px solid #A5D6A7}
+.endbox.stop{background:#FFF8E1;border:2px solid #FFB74D}
+.endbox .big{font-size:1.25rem;font-weight:800}
+.endbox.master .big{color:#1B5E20}.endbox.stop .big{color:#8d6e00}
+.tsbadge{display:inline-block;margin:8px 0;padding:6px 18px;border-radius:20px;background:#2E7D32;color:#fff;font-weight:800;letter-spacing:1px}
+.codebox{display:inline-block;margin:12px 0;background:#fff;border:3px dashed #2E7D32;border-radius:10px;padding:10px 22px;font-size:1.6rem;font-weight:800;letter-spacing:2px;color:#1B5E20}
+.savebox{display:none;margin-top:16px;border-radius:12px;padding:18px;text-align:center}
+.savebox.notsaved{background:#FFF3E0;border:2px solid #FFB74D}
+.savebox.saved{background:#E8F5E9;border:2px solid #A5D6A7}
+.savebox .big{font-weight:800;font-size:1.1rem}
+.savebox.notsaved .big{color:#8d6e00}.savebox.saved .big{color:#1B5E20}
+.cf{position:fixed;top:-20px;width:10px;height:14px;opacity:.9;z-index:50;pointer-events:none;animation:cfall 2.6s ease-in forwards}
+@keyframes cfall{to{transform:translateY(110vh) rotate(540deg);opacity:.9}}
+
+#fcbtn{position:fixed;left:12px;bottom:12px;z-index:60;background:#F9A825;color:#3E2723;border:0;border-radius:22px;padding:10px 16px;font-weight:800;font-size:.95rem;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer}
+.fc{position:fixed;z-index:70;background:#FFFDF3;border:3px solid #F9A825;color:#263238;font-size:.92rem;line-height:1.35;padding:10px 12px 14px;overflow-y:auto;display:none}
+body.fc-open .fc{display:block}
+body.fc-open #fcbtn{background:#FFE082}
+.fc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;color:#283593}
+.fc-btns button{background:#fff;border:2px solid #9FA8DA;border-radius:8px;font-size:1rem;margin-left:6px;padding:2px 8px;cursor:pointer}
+.fc-sec{font-weight:800;color:#8d6e00;letter-spacing:.04em;margin:6px 0 4px}
+.fc-st{padding:5px 8px;margin:4px 0;border-radius:8px;border:2px solid transparent;background:#fff}
+.fc-st b{color:#283593;margin-right:6px}
+.fc-st.glow{background:#FFF59D;border-color:#F9A825;box-shadow:0 0 0 3px rgba(249,168,37,.35)}
+.fc-q{color:#607D8B;font-style:italic;font-size:.85rem}
+.fc-told{margin:2px 0 4px 18px;font-size:.88rem;color:#37474F}
+.fc-why{background:#E8EAF6;border:2px solid #9FA8DA;color:#283593;border-radius:8px;padding:3px 10px;margin:2px 0 4px 18px;font-weight:700;cursor:pointer}
+.fc-bricks{display:none;margin:4px 0 6px 18px;padding:8px;background:#fff;border:2px dashed #9FA8DA;border-radius:8px;font-size:.88rem}
+.fc-bricks.open{display:block}
+.bk-row{display:flex;gap:10px;margin-bottom:6px}
+.bk-row .grp{display:flex;gap:2px;padding:3px;border:2px solid #C5CAE9;border-radius:6px}
+.bk-row i{display:block;width:16px;height:12px;background:#CFD8DC;border-radius:2px}
+.bk-row .grp.lit{border-color:#F9A825}.bk-row .grp.lit i{background:#F9A825}
+.fc-two{display:block}
+.fc-blk{margin-top:8px;padding:6px;border:2px solid #E0E0E0;border-radius:10px;background:#FAFAFA}
+.fc-bh{display:block;width:100%;text-align:left;background:none;border:0;font-weight:800;color:#283593;cursor:pointer;font-size:.95rem;padding:2px 2px 4px}
+.fc-ex{display:none;margin:6px 0 2px;padding:6px 8px;background:#fff;border:1px dashed #9FA8DA;border-radius:8px;font-family:Consolas,'Courier New',monospace;font-size:.88rem}
+.fc-ex u{text-decoration:none;color:#283593;font-weight:800;margin-left:6px}
+.fc-blk.open .fc-ex{display:block}
+.fc-exh{font-family:inherit;font-weight:800;color:#8d6e00}
+.wl[data-card]{position:relative;padding-left:46px}
+.wl[data-card]::before{content:attr(data-card);position:absolute;left:4px;top:7px;min-width:30px;text-align:center;background:#E8EAF6;color:#283593;border:2px solid #9FA8DA;border-radius:12px;font-size:.78rem;font-weight:800;line-height:1.3}
+.wl.cur[data-card]::before{background:#FFF59D;border-color:#F9A825}
+@media (min-width:900px){
+  .fc{top:0;right:0;bottom:0;width:340px;border-width:0 0 0 3px}
+  body.fc-open{padding-right:350px}
+  body.fc-open #fcbtn{display:none}
+}
+@media (max-width:899px){
+  .fc{left:0;right:0;bottom:0;max-height:62vh;border-width:3px 0 0 0;border-radius:14px 14px 0 0;box-shadow:0 -4px 14px rgba(0,0,0,.25)}
+}
+@media print{
+  body.printing > *:not(#fcard){display:none!important}
+  body.printing #fcard{display:block!important;position:static!important;width:auto!important;max-height:none!important;border:2px solid #444!important;background:#fff!important;box-shadow:none!important;font-size:12pt;padding:8mm}
+  body.printing .fc-btns,body.printing .fc-why{display:none!important}
+  body.printing .fc-bricks{display:block!important}
+  body.printing .fc-ex{display:block!important}
+  body.printing .fc-st{background:#fff!important;border:1px solid #bbb!important}
+  body.printing .fc-st.glow{box-shadow:none!important}
+  body.printing .fc-two{display:flex;gap:8mm}body.printing .fc-blk{flex:1}
+  @page{size:A4;margin:10mm}
+}
+
+.fc-st{cursor:pointer}
+.fc-st.seen{border-color:#81C784}
+.fc-st.seen::after{content:" \2713";color:#2E7D32;font-weight:800}
+.fc-tour{font-size:.85rem;color:#607D8B;margin:2px 0 6px}
+@media (max-width:899px){body.fc-full .fc{top:0;max-height:100vh;border-radius:0;border-width:0}}
+@media print{body.printing #fcard{font-size:8.6pt;padding:5mm;line-height:1.22}body.printing .fc-st{margin:2px 0;padding:2px 5px}body.printing .fc-st.seen::after{content:""}body.printing .fc-tour{display:none}body.printing .fc-bricks{font-size:8pt}body.printing .fc-top{margin-bottom:2px}}
+
+.wrap{max-width:760px;margin:0 auto;padding:0 12px}
+.stat2{text-align:center;font-weight:700;color:#283593;margin:6px 0}
+.savebar{margin-top:10px;padding:8px 12px;border-radius:10px;font-size:.9rem;text-align:center;background:#FFF8E1;border:2px solid #FFB74D;color:#8d6e00}
+.savebar.saved{background:#E8F5E9;border-color:#A5D6A7;color:#1B5E20}
+.savebar button{margin-left:8px}
+.finish{display:none;text-align:center;background:#E8F5E9;border:2px solid #A5D6A7;border-radius:12px;padding:20px;margin-top:14px}
+.finish .both{font-size:1.3rem;font-weight:800;margin:8px 0;color:#283593}
+.wlb.closed{display:none}
+.lastchk{display:none;margin:6px 0;padding:8px 12px;border-radius:10px;background:#FFF8E1;border:2px solid #FFB74D;color:#5D4037}
+.lastchk.on{display:block}
+.lastchk .chip4{display:inline-block;background:#F9A825;color:#3E2723;font-weight:800;border-radius:12px;padding:1px 9px;margin-right:6px}
+.yt{margin-top:14px}
+.yt.hidden{display:none}
+.yt.done{opacity:.92}
+.btn-circ{display:block;margin:8px 0;padding:8px 14px;border-radius:10px;border:2px solid #F9A825;background:#FFF8E1;color:#5D4037;font-weight:800;cursor:pointer}
+.btn-circ.on{background:#E8F5E9;border-color:#81C784;color:#1B5E20}
+.chip5{display:inline-block;margin-left:8px;background:#E8EAF6;color:#283593;border:2px solid #9FA8DA;border-radius:12px;padding:0 9px;font-weight:800}
+.dtree{border:2px solid #9FA8DA;border-radius:12px;background:#FAFBFF;padding:8px 12px;margin:10px 0}
+.dtree table{border-collapse:collapse;width:100%}.dtree td{padding:4px 8px;border-bottom:1px dashed #C5CAE9;vertical-align:top}
+.dtree td:first-child{font-weight:700;color:#283593;width:46%}
+.act{display:inline-block;background:#E8EAF6;color:#283593;font-weight:800;border-radius:12px;padding:2px 12px;margin-bottom:4px;font-size:.9rem}
+
+body{padding-bottom:110px}
+.topnav{position:relative}
+.tnav-x{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.6);color:#fff;text-decoration:none;font-size:18px;font-weight:800;line-height:1;border-radius:8px;padding:5px 11px;cursor:pointer;margin-right:4px}
+.tnav-x:hover{background:rgba(255,255,255,.32)}
+.savezone{max-width:760px;margin:6px auto 0;padding:14px 12px;text-align:center}
+.savezone .sstat{font-size:.92rem;margin-bottom:8px;color:#8d6e00}
+.savezone.saved .sstat{color:#1B5E20}
+.savezone button#savebtn{background:#2E7D32;color:#fff;border:0;border-radius:12px;padding:14px 38px;font-size:1.1rem;font-weight:800;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.savezone button#savebtn:disabled{background:#B0BEC5;cursor:not-allowed;box-shadow:none}
+.savezone.pulse button#savebtn{animation:sv 0.9s ease 3}
+@keyframes sv{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+#unsavedov{display:none;position:fixed;left:0;right:0;top:0;bottom:0;z-index:200;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:18px}
+#unsavedov.on{display:flex}
+#unsavedov .box{background:#fff;border:4px solid #F9A825;border-radius:16px;padding:20px;max-width:420px;text-align:center;color:#3E2723}
+#unsavedov .box p{font-size:1.05rem;font-weight:700;margin-bottom:14px}
+#unsavedov .stay{background:#2E7D32;color:#fff;border:0;border-radius:12px;padding:12px 24px;font-size:1.05rem;font-weight:800;cursor:pointer}
+#unsavedov .leave{display:block;margin:12px auto 0;background:none;border:0;color:#78909C;font-size:.85rem;text-decoration:underline;cursor:pointer}
+.tfigwrap{background:#F6F8FF;border:2px solid #C5CAE9;border-radius:10px;padding:8px;margin:10px 0;text-align:center;overflow-x:auto}
+.tfigwrap svg{max-width:100%;height:auto}
+.tfig3{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.tfig3 .cap{font-size:.85rem;font-weight:700;color:#283593;text-align:center}
+.wl[data-card^="T"]::before{content:"\25B2" attr(data-n)}
+.fc-tabs{display:flex;gap:6px;margin:4px 0 8px}
+.fc-tab{flex:1;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:6px 8px;font-weight:800;color:#283593;cursor:pointer;font-size:.9rem}
+.fc-tab.on{background:#FFF59D;border-color:#F9A825}
+.fc-pane{display:none}.fc-pane.on{display:block}
+@media print{body.printing .fc-pane{display:block!important}body.printing .fc-tabs{display:none}}
+.dtree3 td:first-child{width:52%}
+.boostnote{background:#FFF8E1;border:2px solid #FFB74D;color:#8d6e00;border-radius:10px;padding:10px 14px;margin:10px 0;font-weight:700}
+.mbintro{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 14px;margin:10px 0;color:#283593;font-weight:700}
+.qlab{font-family:inherit}
+.flipin{transform-box:fill-box;transform-origin:center;animation:flipin 2.2s ease .5s both}
+@keyframes flipin{0%{opacity:0;transform:rotate(180deg) scale(.4)}100%{opacity:1;transform:none}}
+.turnin{transform-origin:center;animation:turnin 2.4s ease .4s both}
+@keyframes turnin{0%{transform:rotate(-36.87deg);opacity:.25}100%{transform:none;opacity:1}}
+.tbl71{border-collapse:collapse;margin:10px auto;font-size:1rem}
+.tbl71 th,.tbl71 td{border:2px solid #9FA8DA;padding:7px 14px;text-align:center}
+.tbl71 th{background:#E8EAF6;color:#283593}
+.tbl71 td.qc{background:#FFF8E1;color:#EF6C00;font-weight:900;font-size:1.15rem}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin:10px 0;font-weight:800;color:#283593}
+.flow .fb{background:#E8EAF6;border:2px solid #9FA8DA;border-radius:10px;padding:6px 12px}
+.flow .fb.q{background:#FFF8E1;border-color:#FFB74D;color:#8d6e00}
+.flow .fa{color:#EF6C00}
+.chip3{display:block;margin-top:8px;background:#E8F5E9;border:2px solid #A5D6A7;color:#1B5E20;border-radius:10px;padding:6px 12px;font-weight:700;font-size:.92rem}
+.lockmsg{display:none;background:#FFF8E1;border:2px solid #FFB74D;color:#8d6e00;border-radius:10px;padding:8px 12px;margin:8px 0;font-weight:700}
+.fc-sec.ac{margin-top:10px;color:#2E7D32}
+.fc-st.acs{border-left-color:#2E7D32}
+
+.pickline{margin-top:6px;padding:5px 8px;background:#FFF8E1;border-left:4px solid #F9A825;border-radius:6px;font-weight:700;color:#6D4C00;font-size:.92em}
+.fx{border:2px solid #9FA8DA;border-radius:12px;padding:10px 12px;margin:12px 0;background:#fff}
+.fx.hidden{display:none}
+.fx .fxh{font-weight:800;color:#283593;margin-bottom:6px}
+.fx .fxok{display:none;float:right;color:#2E7D32}
+.fx.fxdone .fxok{display:inline}
+.fx.fxdone .fxbody>.fx-st{display:none!important}
+.fx.fxdone{background:#F1F8E9;border-color:#A5D6A7}
+.fx-st{display:none}.fx-st.on{display:block}
+.fxlab{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#5C6BC0;margin:8px 0 4px}
+.fxyou{background:#FFF3E0;border:2px solid #FFB74D;border-radius:10px;padding:8px 12px;margin:8px 0;font-weight:800;color:#8d6e00}
+.fxopts{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.fxopt{text-align:left;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:10px 12px;font-size:1rem;font-weight:700;color:#283593;cursor:pointer}
+.fxopt:disabled{cursor:default}
+.fxopt.right{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.fxopt.pickedwrong{background:#FFF3E0;border-color:#FFB74D;color:#8d6e00}
+.fxres{margin:6px 0;font-weight:800}.fxres.ok{color:#1B5E20}.fxres.amb{color:#8d6e00}
+.fxbtn{margin:8px 0;background:#3F51B5;color:#fff;border:0;border-radius:10px;padding:10px 20px;font-size:1rem;font-weight:800;cursor:pointer}
+.fxdots{display:flex;gap:8px;justify-content:center;margin:6px 0 10px}
+.fxdots span{width:14px;height:14px;border-radius:50%;background:#CFD8DC;display:inline-block}
+.fxdots span.c{background:#F9A825}.fxdots span.d{background:#43A047}
+.fxfinal{background:#E8F5E9;border:2px solid #A5D6A7;color:#1B5E20;border-radius:10px;padding:10px 14px;margin:10px 0;font-weight:700}
+.tapbox{background:#F6F8FF;border:2px solid #C5CAE9;border-radius:10px;padding:10px 12px;margin:10px 0}
+.tapbtns{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.tapbtns button{background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:8px 14px;font-weight:800;color:#283593;font-size:1rem;cursor:pointer}
+.tapbtns button.right{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.tapbtns button:disabled{cursor:default}
+.tapfb{font-weight:800;margin:4px 0;min-height:1.2em}.tapfb.ok{color:#1B5E20}.tapfb.amb{color:#8d6e00}
+.taprow{margin:6px 0 10px}.tapall{background:#E8F5E9;border:2px solid #A5D6A7;color:#1B5E20;border-radius:10px;padding:8px 12px;margin-top:8px}
+
+
+.pfig{max-width:100%;height:auto}
+.pc{transition:stroke .2s}
+.pc.lit{stroke:#F9A825!important;stroke-width:5!important}
+.liftme{transition:transform .9s ease}
+svg.lifted .liftme{transform:translateY(var(--lh,-120px))}
+.fbtn{display:inline-block;margin:6px 4px;padding:8px 16px;border:2px solid #3F51B5;background:#fff;color:#283593;border-radius:10px;font-weight:800;font-size:1rem;cursor:pointer;min-height:44px}
+.fbtn:hover{background:#E8EAF6}
+.slrow{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap;justify-content:center}
+.slrow input[type=range]{width:min(240px,55vw);height:36px}
+.slout{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:8px 12px;margin:6px 0;color:#283593;font-weight:700;text-align:center}
+.sec-h{margin:16px 0 4px;color:#283593;font-size:1.12rem;border-top:3px dashed #C5CAE9;padding-top:12px}
+.sec-h:first-of-type{border-top:0;padding-top:0;margin-top:6px}
+.wlq{margin:8px 0;font-weight:700}
+.schem{background:#F6F8FF;border:2px solid #C5CAE9;border-radius:10px;padding:8px;margin:10px 0;text-align:center}
+.schem svg{max-width:100%;height:auto}
+.fc-pane.on{display:block}
+
+
+.wl[data-card="W"]::before{content:"\25B2 7+"}.wl[data-card="C"]::before{content:"\25B2 9+"}.wl[data-card="A3"]::before{content:"\2714 3+"}
+.wl[data-card="\2212 2"]::before,.wl[data-card="−2"]::before{content:"−2"}
+.mvgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin:8px 0}
+.mv{display:flex;gap:10px;align-items:center;border:2px solid #C5CAE9;border-radius:12px;padding:8px 10px;background:#FAFBFF}
+.mvp{flex:0 0 auto}.mvt{font-size:.88rem;line-height:1.35;color:#263238}.mvt b{color:#283593}
+.tapz{cursor:pointer}
+@keyframes fl{0%,100%{opacity:1}50%{opacity:.2}}
+.flash{animation:fl .5s ease 2}
+.tapbox .slout{min-height:2.6em}
+.pc.counted{stroke:#EF6C00!important;stroke-width:4!important}
+.abstrip{margin:10px 0;padding:10px 12px;border:2px solid #A5D6A7;background:#F1F8E9;border-radius:12px}
+.abh{font-weight:800;color:#1B5E20;margin-bottom:6px}
+.abrow{display:flex;gap:0;margin:4px 0}
+.abseg{padding:8px 4px;text-align:center;font-weight:800;border:2px solid #546E7A;color:#263238;font-size:1.05rem}
+.abseg small{display:block;font-weight:600;font-size:.72rem;color:#455A64}
+.abseg.a{background:#C8E6C9}.abseg.b{background:#FFCDD2}.abseg.w{background:#E8EAF6}
+.wk{margin:10px 0}
+.fxdots{display:flex}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-x" id="xclose" href="https://athipprem.github.io/mathlessons/index.html" onclick="return xClick(event)" aria-label="Close and go back to the hub" title="Close">&#10005;</a>
+  <span class="tnav-title">Lesson &mdash; Whole First &middot; Walk the Fence (Unit 74)</span>
+  <span class="tnav-pill" id="pill">1 / 6</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+<div class="wrap">
+<div class="screen active" id="s0">
+<div class="card">
+<span class="act">Unit 74 &middot; four moves</span><br>
+<h2>&#127919; Four Moves to Fix Before Wednesday</h2>
+<div class="intro"><p><b>Your mock: 36 out of 50, and every 1-mark question right. The marks you lost hide in just 4 moves. Fix those 4 today, test tomorrow, school on Wednesday.</b></p></div>
+<div class="why-real" style="background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 14px;margin:10px 0;color:#283593"><p><strong>Why this is worth learning.</strong> A farmer buys fencing for the OUTSIDE of a field, never for a line inside it. A sticker maker needs the card that is LEFT after a piece is cut away. A tile shop counts the triangles before it works out the price. Four small moves turn any odd shape into numbers you can trust.</p></div>
+<div class="dtree dtree3"><b>Which move do I need?</b><table>
+<tr><td>A shaded part, with a white piece cut away</td><td>&#9650;7+ &mdash; WHOLE first, then take the white away</td></tr>
+<tr><td>Triangles that are all the same, along an edge or round a square</td><td>&#9650;9+ &mdash; COUNT them, then &times; the count</td></tr>
+<tr><td>The perimeter is given and one side is missing</td><td>&#9650;10+ &mdash; WALK THE FENCE: the outside only</td></tr>
+<tr><td>I just took something away</td><td>&#10004;3+ &mdash; ADD BACK to check</td></tr></table></div>
+<p class="tap-hint"><b>Your Chapter 4 Card now has four new lines:</b></p>
+<div class="mvgrid">
+<div class="mv"><div class="mvp"><svg viewBox="0 0 120 74" width="120" height="74"><rect x="6" y="8" width="62" height="58" fill="#B0BEC5" stroke="#546E7A" stroke-width="2"/><rect x="68" y="38" width="38" height="28" fill="#B0BEC5" stroke="#546E7A" stroke-width="2"/><polygon points="6,8 106,66 6,66" fill="#fff" stroke="#546E7A" stroke-width="2"/><text x="60" y="72" font-size="9" fill="#283593" text-anchor="middle" font-weight="700" opacity="0">.</text></svg></div><div class="mvt"><b>▲7+</b> WHOLE FIRST. Whole = the full outline (made of 2 or 3 squares? add them up first). White = the parts that are NOT shaded. Shaded = Whole − White. Never add a white part to the shaded answer.</div></div>
+<div class="mv"><div class="mvp"><svg viewBox="0 0 120 74" width="120" height="74"><rect x="8" y="42" width="104" height="22" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/><polygon points="8,42 36,42 22,8" fill="#FFE0B2" stroke="#1565C0" stroke-width="2"/><polygon points="36,42 64,42 50,8" fill="#FFE0B2" stroke="#1565C0" stroke-width="2"/><polygon points="64,42 92,42 78,8" fill="#FFE0B2" stroke="#1565C0" stroke-width="2"/><text x="108" y="24" font-size="16" font-weight="800" fill="#EF6C00" text-anchor="middle">×3</text></svg></div><div class="mvt"><b>▲9+</b> COUNT THE PIECES. Tap each piece once and write × the count. Pieces along an edge? Count = edge ÷ one base.</div></div>
+<div class="mv"><div class="mvp"><svg viewBox="0 0 120 74" width="120" height="74"><polygon points="8,62 70,62 70,20" fill="#BBDEFB"/><rect x="70" y="20" width="40" height="42" fill="#FFE0B2"/><polyline points="8,62 70,20 110,20 110,62 8,62" fill="none" stroke="#2E7D32" stroke-width="4" stroke-linejoin="round"/><line x1="70" y1="20" x2="70" y2="62" stroke="#78909C" stroke-width="1.6" stroke-dasharray="4 3"/><text x="86" y="45" font-size="9" fill="#78909C" text-anchor="middle" font-weight="700">inside</text></svg></div><div class="mvt"><b>▲10+</b> WALK THE FENCE. The perimeter goes round the OUTSIDE once, corner to corner. A line inside the shape (like BE) is NOT on the fence. A side made of two parts: add them (DA = AE + ED).</div></div>
+<div class="mv"><div class="mvp"><svg viewBox="0 0 120 74" width="120" height="74"><rect x="6" y="10" width="68" height="20" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/><rect x="74" y="10" width="40" height="20" fill="#FFCDD2" stroke="#C62828" stroke-width="2"/><text x="40" y="25" font-size="11" font-weight="800" fill="#1B5E20" text-anchor="middle">234</text><text x="94" y="25" font-size="11" font-weight="800" fill="#B71C1C" text-anchor="middle">198</text><rect x="6" y="40" width="108" height="20" fill="#E8EAF6" stroke="#283593" stroke-width="2"/><text x="60" y="55" font-size="12" font-weight="800" fill="#283593" text-anchor="middle">432 ✓</text></svg></div><div class="mvt"><b>✔3+</b> ADD BACK. After a take-away, add your answer to what you took away. You must get the number you started with (234 + 198 = 432 ✓ · 244 + 198 = 442 ✗).</div></div>
+</div>
+<p class="tap-hint">Your &#x1F4CC; Chapter 4 Card is open. Each worked line says which card line it uses.</p>
+<div class="navrow"><button class="next" onclick="nav(1)">Move 1: Whole first &#8594;</button></div>
+</div>
+</div>
+<div class="screen" id="s1">
+<div class="card">
+<span class="act">Move 1 &middot; whole first</span><br>
+<h2>&#127912; Whole First</h2>
+<h3 class="sec-h">&#9650;7+ &mdash; Shaded = Whole &minus; White</h3>
+<p class="tap-hint">Two ways to see it. First you paint it. Then the same thing in lines.</p>
+<div class="tapbox" id="paint"><p class="tap-hint"><b>&#127912; Paint it.</b> Two squares side by side and a white triangle. Tap the shape to paint the whole. Then tap the white triangle.</p>
+<div class="tfigwrap"><svg class="pfig" id="svg_PT" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 250" width="340" height="250" role="img" aria-label="paint it figure" font-family="Segoe UI,Arial,sans-serif"><polygon id="pt_big" points="44,202 206,202 206,40 44,40" fill="#fff" stroke="#546E7A" stroke-width="2.4"/><polygon id="pt_small" points="206,202 296,202 296,112 206,112" fill="#fff" stroke="#546E7A" stroke-width="2.4"/><polygon id="pt_whole" class="tapz" onclick="ptTap('whole')" points="44,202 296,202 296,112 206,112 206,40 44,40" fill="rgba(0,0,0,0)" stroke="#283593" stroke-width="2" stroke-dasharray="6 4"/><polygon id="pt_under" class="tapz" onclick="ptTap('white')" points="44,202 296,202 44,40" fill="rgba(0,0,0,0)" stroke="#546E7A" stroke-width="2.4" stroke-dasharray="5 4"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" x="125" y="31" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">9 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" x="251" y="103" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">5 cm</text></svg></div>
+<div class="slout" id="pt_ct">Tap the shape to paint the whole.</div><div class="tapfb" id="pt_msg"></div><button type="button" class="fbtn" onclick="ptReset()">&#8635; Start again</button></div>
+<div class="bridge">Same thing in lines: whole, then white, then whole &minus; white, then add back.</div>
+<h3 class="sec-h">In lines</h3>
+<div class="wk" id="wk_L1">
+<p class="wlq">Whole first. A square has sides of 20 cm. A white triangle in its top corner has sides 20 cm (along the top) and 6 cm (down the side) at a square corner. Everything else is shaded. Find the shaded area.</p>
+<div class="tfigwrap"><svg class="pfig" id="svg_L1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272.0 250.0" width="272" height="250" role="img" aria-label="L1 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="sq" data-role="add" points="56.0,198.0 216.0,198.0 216.0,38.0 56.0,38.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="w" data-role="sub" points="56.0,38.0 216.0,38.0 56.0,86.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">20 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="47.0" y="67.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="end">6 cm</text><polyline points="65.0,38.0 65.0,47.0 56.0,47.0" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+<div class="wlb auto" id="wlb_L1" data-bid="L1">
+<div class="wls">
+<div class="wl" data-card="W"><span class="m">Whole = 20 × 20</span><span class="why">the whole rectangle: length × width</span></div>
+<div class="wl" data-card="W"><span class="m">= 400</span><span class="why">20 × 20 = 400</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">White box = 20 × 6</span><span class="why">▲3  20 cm along the top;  6 cm down the side: base × height</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">= 120</span><span class="why">20 × 6 = 120</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">White = 120 ÷ 2</span><span class="why">▲4 a triangle is half its box</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">= 60</span><span class="why">120 ÷ 2 = 60</span></div>
+<div class="wl" data-card="T7" data-n="7"><span class="m">Shaded = 400 − 60</span><span class="why">▲7 shaded = whole − the white parts you can find</span></div>
+<div class="wl" data-card="−2"><span class="m">= 340 cm²</span><span class="why">400 − 60 = 340</span></div>
+<div class="wl" data-card="A3"><span class="m">Check = 340 + 60</span><span class="why">✔3+ add back: my answer + what I took away</span></div>
+<div class="wl" data-card="A3"><span class="m">= 400</span><span class="why">340 + 60 = 400 — the whole I started with ✓</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+</div>
+<div class="wk" id="wk_L2">
+<p class="wlq">Two squares of sides 9 cm and 5 cm stand side by side. A line goes from the top-left corner of the big square to the bottom-right corner of the small square. The triangle under the line is white; the rest is shaded. Find the shaded area.</p>
+<div class="tfigwrap"><svg class="pfig" id="svg_L2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360.9 250.0" width="361" height="250" role="img" aria-label="L2 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="big" data-role="add" points="56.0,198.0 216.0,198.0 216.0,38.0 56.0,38.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="small" data-role="add" points="216.0,198.0 304.9,198.0 304.9,109.1 216.0,109.1" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="under" data-role="sub" points="56.0,198.0 304.9,198.0 56.0,38.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">9 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="260.4" y="100.1" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">5 cm</text></svg></div>
+<div class="wlb auto" id="wlb_L2" data-bid="L2">
+<div class="wls">
+<div class="wl" data-card="W"><span class="m">Square = 9 × 9</span><span class="why">a square: side × side</span></div>
+<div class="wl" data-card="W"><span class="m">= 81</span><span class="why">9 × 9 = 81</span></div>
+<div class="wl" data-card="W"><span class="m">Square = 5 × 5</span><span class="why">a square: side × side</span></div>
+<div class="wl" data-card="W"><span class="m">= 25</span><span class="why">5 × 5 = 25</span></div>
+<div class="wl" data-card="W"><span class="m">Whole = 81 + 25</span><span class="why">▲7+ WHOLE FIRST: add the squares to get the whole outline</span></div>
+<div class="wl" data-card="W"><span class="m">= 106</span><span class="why">81 + 25 = 106</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">White box = 14 × 9</span><span class="why">▲3  its base runs along both squares: 9 + 5 = 14 cm;  its height is the big square's side, 9 cm: base × height</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">= 126</span><span class="why">14 × 9 = 126</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">White = 126 ÷ 2</span><span class="why">▲4 a triangle is half its box</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">= 63</span><span class="why">126 ÷ 2 = 63</span></div>
+<div class="wl" data-card="T7" data-n="7"><span class="m">Shaded = 106 − 63</span><span class="why">▲7 shaded = whole − the white parts you can find</span></div>
+<div class="wl" data-card="−2"><span class="m">= 43 cm²</span><span class="why">106 − 63 = 43</span></div>
+<div class="wl" data-card="A3"><span class="m">Check = 43 + 63</span><span class="why">✔3+ add back: my answer + what I took away</span></div>
+<div class="wl" data-card="A3"><span class="m">= 106</span><span class="why">43 + 63 = 106 — the whole I started with ✓</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+</div>
+<h3 class="sec-h">&#128295; Fix-It Corner &mdash; your own questions</h3>
+<div class="mbintro">Find the slip, redo it, then try a twin with new numbers. Finish the cards, then press Next.</div>
+<div class="fxdots" id="fxdots_1"><span></span><span></span></div>
+<div class="fx" id="fx_FX18" data-fx="FX18">
+<div class="fxh"><span class="fxn">Your question</span> &middot; from U73 mock B18 (Intermediate)<span class="fxok">&#10003; done</span></div>
+<div class="fxbody">
+<div class="fx-st on" data-s="0">
+<p class="fxlab">Your answer</p>
+<p class="fxq"><strong>A square has sides of 16 cm. A white triangle in one corner has sides 16 cm and 10 cm at a square corner. Find the shaded area.</strong></p>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX18r_q" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272.0 250.0" width="272" height="250" role="img" aria-label="FX18r figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="sq" data-role="add" points="56.0,198.0 216.0,198.0 216.0,38.0 56.0,38.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="w" data-role="sub" points="216.0,38.0 56.0,38.0 216.0,138.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">16 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="225.0" y="93.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">10 cm</text><polyline points="207.0,38.0 207.0,47.0 216.0,47.0" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+<div class="fxyou">You wrote: 128 cm² (working in the figure: 80 and 48; 80 + 48 = 128)</div>
+<button type="button" class="fxbtn" id="fxb1_FX18" onclick="fxGo('FX18')">Find the slip &#9656;</button>
+</div>
+<div class="fx-st" data-s="1">
+<p class="fxlab">Find the slip</p>
+<p class="fxsq"><strong>You found the white triangle (80) and another piece (48), then added them. What went wrong?</strong></p>
+<div class="fxopts" id="fxo_FX18">
+<button type="button" class="fxopt" data-i="0" onclick="fxPick('FX18',0)">A) I added the WHITE part. Whole first: 16 × 16 = 256, then 256 − 80</button>
+<button type="button" class="fxopt" data-i="1" onclick="fxPick('FX18',1)">B) The white triangle should be 160</button>
+<button type="button" class="fxopt" data-i="2" onclick="fxPick('FX18',2)">C) The other piece should be 64</button>
+</div>
+<div class="fxres" id="fxres_FX18"></div>
+<button type="button" class="fxbtn" id="fxb2_FX18" onclick="fxToRedo('FX18')" style="display:none">Redo it &#9656;</button>
+</div>
+<div class="fx-st" data-s="2">
+<p class="fxlab">Redo &mdash; the same question, with your card open</p>
+<div class="q-card yt" id="yt_FX18r" data-iid="FX18r">
+  <span class="q-cap">Redo</span>
+  <div class="dq" id="q_FX18r"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX18r" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272.0 250.0" width="272" height="250" role="img" aria-label="FX18r figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="sq" data-role="add" points="56.0,198.0 216.0,198.0 216.0,38.0 56.0,38.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="w" data-role="sub" points="216.0,38.0 56.0,38.0 216.0,138.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">16 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="225.0" y="93.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">10 cm</text><polyline points="207.0,38.0 207.0,47.0 216.0,47.0" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_FX18r" onclick="circTap('FX18r')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX18r"></div>
+  <button class="btn-check" id="chk_FX18r" onclick="ytCheck('FX18r')" disabled>Check</button>
+  <div class="feedback" id="fb_FX18r"></div>
+  <div class="sorry" id="sorry_FX18r" style="display:none"></div>
+</div>
+</div>
+<div class="fx-st" data-s="3">
+<p class="fxlab">Your twin &mdash; same kind, new numbers</p>
+<div class="q-card yt" id="yt_FX18t" data-iid="FX18t">
+  <span class="q-cap">Your twin</span>
+  <div class="dq" id="q_FX18t"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX18t" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272.0 250.0" width="272" height="250" role="img" aria-label="FX18t figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="sq" data-role="add" points="56.0,198.0 216.0,198.0 216.0,38.0 56.0,38.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="w" data-role="sub" points="216.0,38.0 56.0,38.0 216.0,152.3" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">14 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="225.0" y="100.1" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">10 cm</text><polyline points="207.0,38.0 207.0,47.0 216.0,47.0" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_FX18t" onclick="circTap('FX18t')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX18t"></div>
+  <button class="btn-check" id="chk_FX18t" onclick="ytCheck('FX18t')" disabled>Check</button>
+  <div class="feedback" id="fb_FX18t"></div>
+  <div class="sorry" id="sorry_FX18t" style="display:none"></div>
+</div>
+</div>
+<button type="button" class="fxbtn" id="fxb3_FX18" onclick="fxNext('FX18')" style="display:none">Fix-It done &#9656;</button>
+</div>
+</div>
+<div class="fx" id="fx_FX24" data-fx="FX24">
+<div class="fxh"><span class="fxn">Your question</span> &middot; from U73 mock C24 (Applied, key question)<span class="fxok">&#10003; done</span></div>
+<div class="fxbody">
+<div class="fx-st on" data-s="0">
+<p class="fxlab">Your answer</p>
+<p class="fxq"><strong>Three squares of sides 10 cm, 6 cm and 4 cm stand side by side on a straight line. A straight line is drawn from the top-left corner of the big square to the bottom-right corner of the small square; the triangle under that line is unshaded and the rest of the three squares is shaded. Find the shaded area.</strong></p>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX24r_q" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 244.0" width="420" height="244" role="img" aria-label="FX24r figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="big" data-role="add" points="56.0,192.0 210.0,192.0 210.0,38.0 56.0,38.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="mid" data-role="add" points="210.0,192.0 302.4,192.0 302.4,99.6 210.0,99.6" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="small" data-role="add" points="302.4,192.0 364.0,192.0 364.0,130.4 302.4,130.4" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="under" data-role="sub" points="56.0,192.0 364.0,192.0 56.0,38.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="133.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">10 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="256.2" y="90.6" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">6 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="333.2" y="121.4" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">4 cm</text></svg></div>
+<div class="fxyou">You wrote: 60 cm² (working: 100 − 16 = 84, 84 − 24 = 60)</div>
+<button type="button" class="fxbtn" id="fxb1_FX24" onclick="fxGo('FX24')">Find the slip &#9656;</button>
+</div>
+<div class="fx-st" data-s="1">
+<p class="fxlab">Find the slip</p>
+<p class="fxsq"><strong>You started from 100 and took away 16 and 24. What was missing?</strong></p>
+<div class="fxopts" id="fxo_FX24">
+<button type="button" class="fxopt" data-i="0" onclick="fxPick('FX24',0)">A) The WHOLE. Whole first: 100 + 36 + 16 = 152, then take away the white triangle (20 × 10 ÷ 2)</button>
+<button type="button" class="fxopt" data-i="1" onclick="fxPick('FX24',1)">B) 16 should be 36</button>
+<button type="button" class="fxopt" data-i="2" onclick="fxPick('FX24',2)">C) I should start from 200</button>
+</div>
+<div class="fxres" id="fxres_FX24"></div>
+<button type="button" class="fxbtn" id="fxb2_FX24" onclick="fxToRedo('FX24')" style="display:none">Redo it &#9656;</button>
+</div>
+<div class="fx-st" data-s="2">
+<p class="fxlab">Redo &mdash; the same question, with your card open</p>
+<div class="q-card yt" id="yt_FX24r" data-iid="FX24r">
+  <span class="q-cap">Redo</span>
+  <div class="dq" id="q_FX24r"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX24r" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 244.0" width="420" height="244" role="img" aria-label="FX24r figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="big" data-role="add" points="56.0,192.0 210.0,192.0 210.0,38.0 56.0,38.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="mid" data-role="add" points="210.0,192.0 302.4,192.0 302.4,99.6 210.0,99.6" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="small" data-role="add" points="302.4,192.0 364.0,192.0 364.0,130.4 302.4,130.4" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="under" data-role="sub" points="56.0,192.0 364.0,192.0 56.0,38.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="133.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">10 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="256.2" y="90.6" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">6 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="333.2" y="121.4" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">4 cm</text></svg></div>
+  <button type="button" class="btn-circ" id="circ_FX24r" onclick="circTap('FX24r')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX24r"></div>
+  <button class="btn-check" id="chk_FX24r" onclick="ytCheck('FX24r')" disabled>Check</button>
+  <div class="feedback" id="fb_FX24r"></div>
+  <div class="sorry" id="sorry_FX24r" style="display:none"></div>
+</div>
+</div>
+<div class="fx-st" data-s="3">
+<p class="fxlab">Your twin &mdash; same kind, new numbers</p>
+<div class="q-card yt" id="yt_FX24t" data-iid="FX24t">
+  <span class="q-cap">Your twin</span>
+  <div class="dq" id="q_FX24t"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX24t" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 405.3 250.0" width="405" height="250" role="img" aria-label="FX24t figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="big" data-role="add" points="56.0,198.0 216.0,198.0 216.0,38.0 56.0,38.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="mid" data-role="add" points="216.0,198.0 296.0,198.0 296.0,118.0 216.0,118.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="small" data-role="add" points="296.0,198.0 349.3,198.0 349.3,144.7 296.0,144.7" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="under" data-role="sub" points="56.0,198.0 349.3,198.0 56.0,38.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">12 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="256.0" y="109.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">6 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="322.7" y="135.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">4 cm</text></svg></div>
+  <button type="button" class="btn-circ" id="circ_FX24t" onclick="circTap('FX24t')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX24t"></div>
+  <button class="btn-check" id="chk_FX24t" onclick="ytCheck('FX24t')" disabled>Check</button>
+  <div class="feedback" id="fb_FX24t"></div>
+  <div class="sorry" id="sorry_FX24t" style="display:none"></div>
+</div>
+</div>
+<button type="button" class="fxbtn" id="fxb3_FX24" onclick="fxNext('FX24')" style="display:none">Fix-It done &#9656;</button>
+</div>
+</div>
+<div class="lockmsg" id="lockmsg_1">Finish your Fix-It cards first &mdash; then Next.</div>
+<div class="fxfinal" id="fxfinal_1" style="display:none"><b>Fix-It cards done.</b> Your twin shows what stuck. Press Next.</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Walk the fence &#8594;</button></div>
+</div>
+</div>
+<div class="screen" id="s2">
+<div class="card">
+<span class="act">Move 2 &middot; walk the fence</span><br>
+<h2>&#128027; Walk the Fence</h2>
+<h3 class="sec-h">&#9650;10+ &mdash; The perimeter goes round the OUTSIDE</h3>
+<div class="tapbox" id="fence"><p class="tap-hint"><b>&#128027; Walk the fence.</b> The fence goes round the OUTSIDE of figure ABCD once, and it is <b>76 m</b> long altogether. A bug starts at A. Tap each OUTSIDE side. Tap BE too, if you dare.</p>
+<div class="tfigwrap"><svg class="pfig" id="svg_FN" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 190" width="430" height="190" role="img" aria-label="walk the fence figure" font-family="Segoe UI,Arial,sans-serif"><polygon points="34,118 286,118 286,44" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/><polygon points="286,118 391,118 391,44 286,44" fill="#FFE0B2" stroke="#1565C0" stroke-width="2"/><line id="fn_BE" x1="286" y1="44" x2="286" y2="118" stroke="#1565C0" stroke-width="1.6" stroke-dasharray="4 3"/><line id="hl_AB" x1="34" y1="118" x2="286" y2="44" stroke="#2E7D32" stroke-width="6" stroke-linecap="round" opacity="0"/><line id="hl_BC" x1="286" y1="44" x2="391" y2="44" stroke="#2E7D32" stroke-width="6" stroke-linecap="round" opacity="0"/><line id="hl_CD" x1="391" y1="44" x2="391" y2="118" stroke="#2E7D32" stroke-width="6" stroke-linecap="round" opacity="0"/><line id="hl_AE" x1="34" y1="118" x2="286" y2="118" stroke="#2E7D32" stroke-width="6" stroke-linecap="round" opacity="0"/><line id="hl_ED" x1="286" y1="118" x2="391" y2="118" stroke="#2E7D32" stroke-width="6" stroke-linecap="round" opacity="0"/><line id="hit_BE" class="tapz fnhit" onclick="fnTap('BE')" x1="286" y1="44" x2="286" y2="118" stroke="rgba(0,0,0,0)" stroke-width="18" stroke-linecap="round"/><line id="hit_AB" class="tapz fnhit" onclick="fnTap('AB')" x1="34" y1="118" x2="286" y2="44" stroke="rgba(0,0,0,0)" stroke-width="16" stroke-linecap="round"/><line id="hit_BC" class="tapz fnhit" onclick="fnTap('BC')" x1="286" y1="44" x2="391" y2="44" stroke="rgba(0,0,0,0)" stroke-width="16" stroke-linecap="round"/><line id="hit_CD" class="tapz fnhit" onclick="fnTap('CD')" x1="391" y1="44" x2="391" y2="118" stroke="rgba(0,0,0,0)" stroke-width="16" stroke-linecap="round"/><line id="hit_DA" class="tapz fnhit" onclick="fnTap('DA')" x1="34" y1="118" x2="391" y2="118" stroke="rgba(0,0,0,0)" stroke-width="16" stroke-linecap="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" x="160" y="136" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">24 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" x="338" y="136" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">10 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" x="400" y="86" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">7 m</text><text id="fn_q" class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" x="152" y="75" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="end">?</text><text class="fv" x="23" y="134" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text><text class="fv" x="286" y="150" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">E</text><text class="fv" x="402" y="134" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">D</text><text class="fv" x="402" y="38" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text><text class="fv" x="286" y="35" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text></svg></div><div class="slout" id="fn_ct">Fence so far: nothing yet.</div><div class="tapfb" id="fn_msg"></div>
+<button type="button" class="fbtn" onclick="fnReset()">&#8635; Start again</button></div>
+<div class="bridge">Same thing in lines: the two-part side, the other sides, perimeter &minus; known.</div>
+<h3 class="sec-h">In lines</h3>
+<div class="wk" id="wk_L3">
+<p class="wlq">Walk the fence. Figure ABCD is triangle ABE joined to rectangle BCDE. AE = 24 m, ED = 10 m, CD = 7 m. The perimeter of ABCD is 76 m. (a) Find AB. (b) Find the area of ABCD.</p>
+<div class="tfigwrap"><svg class="pfig" id="svg_L3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 153.4" width="420" height="153" role="img" aria-label="L3 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="ABE" data-role="add" points="56.0,101.4 273.4,101.4 273.4,38.0" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="BCDE" data-role="add" points="273.4,101.4 364.0,101.4 364.0,38.0 273.4,38.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><line x1="273.4" y1="38.0" x2="273.4" y2="101.4" stroke="#1565C0" stroke-width="1.3" stroke-dasharray="4 3"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="164.7" y="118.4" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">24 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="318.7" y="118.4" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">10 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="373.0" y="74.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">7 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="156.7" y="63.7" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="end">?</text><text class="fv" x="45.0" y="118.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text><text class="fv" x="273.4" y="132.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">E</text><text class="fv" x="375.0" y="118.4" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">D</text><text class="fv" x="375.0" y="30.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text><text class="fv" x="273.4" y="28.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text><polyline points="273.4,92.4 282.4,92.4 282.4,101.4" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+<div class="wlb auto" id="wlb_L3" data-bid="L3">
+<div class="wls">
+<div class="wl" data-card="T10" data-n="10"><span class="m">DA = 24 + 10</span><span class="why">▲10+ DA is one fence side made of two parts: AE + ED</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">= 34</span><span class="why">24 + 10 = 34</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">Known = 10 + 7</span><span class="why">▲10+ walk the fence: the other outside sides are BC = 10 m and CD = 7 m</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">= 17</span><span class="why">10 + 7 = 17</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">Known = 17 + 34</span><span class="why">and DA = 34 m</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">= 51</span><span class="why">17 + 34 = 51</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">AB = 76 − 51</span><span class="why">▲10 perimeter − the sides you know</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">= 25 m</span><span class="why">76 − 51 = 25</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">Triangle ABE box = 24 × 7</span><span class="why">▲3  AE = 24 m;  BE = 7 m (the rectangle's side, square corner at E): base × height</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">= 168</span><span class="why">24 × 7 = 168</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">Triangle ABE = 168 ÷ 2</span><span class="why">▲4 a triangle is half its box</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">= 84</span><span class="why">168 ÷ 2 = 84</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">Rectangle BCDE = 10 × 7</span><span class="why">the whole rectangle: length × width</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">= 70</span><span class="why">10 × 7 = 70</span></div>
+<div class="wl" data-card="T9" data-n="9"><span class="m">Total = 84 + 70</span><span class="why">▲9 add the pieces</span></div>
+<div class="wl" data-card="T9" data-n="9"><span class="m">= 154 m²</span><span class="why">84 + 70 = 154</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+</div>
+<div class="wk" id="wk_L4">
+<p class="wlq">The fence the other way round. Figure ACDE is rectangle ABDE joined to triangle BCD (square corner at B). AB = 11 cm, BC = 16 cm, AE = 12 cm. The perimeter of ACDE is 70 cm. (a) Find CD. (b) Find the area of ACDE.</p>
+<div class="tfigwrap"><svg class="pfig" id="svg_L4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 226.9" width="420" height="227" role="img" aria-label="L4 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="ABDE" data-role="add" points="56.0,174.9 181.5,174.9 181.5,38.0 56.0,38.0" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="BCD" data-role="add" points="181.5,174.9 364.0,174.9 181.5,38.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><line x1="181.5" y1="174.9" x2="181.5" y2="38.0" stroke="#1565C0" stroke-width="1.3" stroke-dasharray="4 3"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="118.7" y="191.9" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">11 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="272.7" y="191.9" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">16 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="47.0" y="111.4" font-size="14" font-weight="700" fill="#37474F" text-anchor="end">12 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="280.7" y="100.4" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="start">?</text><text class="fv" x="45.0" y="191.9" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text><text class="fv" x="181.5" y="205.9" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text><text class="fv" x="375.0" y="191.9" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text><text class="fv" x="181.5" y="28.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">D</text><text class="fv" x="45.0" y="30.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">E</text><polyline points="181.5,165.9 190.5,165.9 190.5,174.9" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+<div class="wlb auto" id="wlb_L4" data-bid="L4">
+<div class="wls">
+<div class="wl" data-card="T10" data-n="10"><span class="m">AC = 11 + 16</span><span class="why">▲10+ AC is one fence side made of two parts: AB + BC</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">= 27</span><span class="why">11 + 16 = 27</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">Known = 11 + 12</span><span class="why">▲10+ walk the fence: the other outside sides are DE = 11 cm and EA = 12 cm</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">= 23</span><span class="why">11 + 12 = 23</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">Known = 23 + 27</span><span class="why">and AC = 27 cm</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">= 50</span><span class="why">23 + 27 = 50</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">CD = 70 − 50</span><span class="why">▲10 perimeter − the sides you know</span></div>
+<div class="wl" data-card="T10" data-n="10"><span class="m">= 20 cm</span><span class="why">70 − 50 = 20</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">Rectangle ABDE = 11 × 12</span><span class="why">the whole rectangle: length × width</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">= 132</span><span class="why">11 × 12 = 132</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">Triangle BCD box = 16 × 12</span><span class="why">▲3  BC = 16 cm;  BD = 12 cm (the rectangle's side, square corner at B): base × height</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">= 192</span><span class="why">16 × 12 = 192</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">Triangle BCD = 192 ÷ 2</span><span class="why">▲4 a triangle is half its box</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">= 96</span><span class="why">192 ÷ 2 = 96</span></div>
+<div class="wl" data-card="T9" data-n="9"><span class="m">Total = 132 + 96</span><span class="why">▲9 add the pieces</span></div>
+<div class="wl" data-card="T9" data-n="9"><span class="m">= 228 cm²</span><span class="why">132 + 96 = 228</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div>
+</div>
+<h3 class="sec-h">&#128295; Fix-It Corner &mdash; your own questions</h3>
+<div class="mbintro">Find the slip, redo it, then try a twin with new numbers. Finish the cards, then press Next.</div>
+<div class="fxdots" id="fxdots_2"><span></span></div>
+<div class="fx" id="fx_FX21" data-fx="FX21">
+<div class="fxh"><span class="fxn">Your question</span> &middot; from U73 mock C21 (a) (Applied)<span class="fxok">&#10003; done</span></div>
+<div class="fxbody">
+<div class="fx-st on" data-s="0">
+<p class="fxlab">Your answer</p>
+<p class="fxq"><strong>Figure ABCD is made of triangle ABE and rectangle BCDE. AE = 40 m, ED = 12 m and CD = 9 m. The perimeter of figure ABCD is 114 m. Find the length of AB.</strong></p>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX21r_q" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 143.3" width="420" height="143" role="img" aria-label="FX21r figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="ABE" data-role="add" points="56.0,91.3 292.9,91.3 292.9,38.0" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="BCDE" data-role="add" points="292.9,91.3 364.0,91.3 364.0,38.0 292.9,38.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><line x1="292.9" y1="38.0" x2="292.9" y2="91.3" stroke="#1565C0" stroke-width="1.3" stroke-dasharray="4 3"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="174.5" y="108.3" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">40 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="328.5" y="108.3" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">12 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="373.0" y="69.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">9 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="166.5" y="58.7" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="end">?</text><text class="fv" x="45.0" y="108.3" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text><text class="fv" x="292.9" y="122.3" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">E</text><text class="fv" x="375.0" y="108.3" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">D</text><text class="fv" x="375.0" y="30.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text><text class="fv" x="292.9" y="28.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text><polyline points="292.9,82.3 301.9,82.3 301.9,91.3" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+<div class="fxyou">You wrote: "?" (no perimeter sum anywhere)</div>
+<button type="button" class="fxbtn" id="fxb1_FX21" onclick="fxGo('FX21')">Find the slip &#9656;</button>
+</div>
+<div class="fx-st" data-s="1">
+<p class="fxlab">Find the slip</p>
+<p class="fxsq"><strong>The perimeter (114 m) is the fence all the way round the OUTSIDE. Which sides are on the fence?</strong></p>
+<div class="fxopts" id="fxo_FX21">
+<button type="button" class="fxopt" data-i="0" onclick="fxPick('FX21',0)">A) AB, BC, CD and DA — and DA is AE + ED = 52 m. BE is inside, so it is not on the fence</button>
+<button type="button" class="fxopt" data-i="1" onclick="fxPick('FX21',1)">B) AB, BE, ED and AE</button>
+<button type="button" class="fxopt" data-i="2" onclick="fxPick('FX21',2)">C) AE, ED and CD only</button>
+</div>
+<div class="fxres" id="fxres_FX21"></div>
+<button type="button" class="fxbtn" id="fxb2_FX21" onclick="fxToRedo('FX21')" style="display:none">Redo it &#9656;</button>
+</div>
+<div class="fx-st" data-s="2">
+<p class="fxlab">Redo &mdash; the same question, with your card open</p>
+<div class="q-card yt" id="yt_FX21r" data-iid="FX21r">
+  <span class="q-cap">Redo</span>
+  <div class="dq" id="q_FX21r"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX21r" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 143.3" width="420" height="143" role="img" aria-label="FX21r figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="ABE" data-role="add" points="56.0,91.3 292.9,91.3 292.9,38.0" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="BCDE" data-role="add" points="292.9,91.3 364.0,91.3 364.0,38.0 292.9,38.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><line x1="292.9" y1="38.0" x2="292.9" y2="91.3" stroke="#1565C0" stroke-width="1.3" stroke-dasharray="4 3"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="174.5" y="108.3" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">40 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="328.5" y="108.3" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">12 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="373.0" y="69.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">9 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="166.5" y="58.7" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="end">?</text><text class="fv" x="45.0" y="108.3" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text><text class="fv" x="292.9" y="122.3" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">E</text><text class="fv" x="375.0" y="108.3" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">D</text><text class="fv" x="375.0" y="30.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text><text class="fv" x="292.9" y="28.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text><polyline points="292.9,82.3 301.9,82.3 301.9,91.3" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_FX21r" onclick="circTap('FX21r')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX21r"></div>
+  <button class="btn-check" id="chk_FX21r" onclick="ytCheck('FX21r')" disabled>Check</button>
+  <div class="feedback" id="fb_FX21r"></div>
+  <div class="sorry" id="sorry_FX21r" style="display:none"></div>
+</div>
+</div>
+<div class="fx-st" data-s="3">
+<p class="fxlab">Your twin &mdash; same kind, new numbers</p>
+<div class="q-card yt" id="yt_FX21t" data-iid="FX21t">
+  <span class="q-cap">Your twin</span>
+  <div class="dq" id="q_FX21t"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX21t" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 202.0" width="420" height="202" role="img" aria-label="FX21t figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="ABE" data-role="add" points="56.0,150.0 266.0,150.0 266.0,38.0" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="BCDE" data-role="add" points="266.0,150.0 364.0,150.0 364.0,38.0 266.0,38.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><line x1="266.0" y1="38.0" x2="266.0" y2="150.0" stroke="#1565C0" stroke-width="1.3" stroke-dasharray="4 3"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="161.0" y="167.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">30 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="315.0" y="167.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">14 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="373.0" y="99.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">16 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="153.0" y="88.0" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="end">?</text><text class="fv" x="45.0" y="167.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text><text class="fv" x="266.0" y="181.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">E</text><text class="fv" x="375.0" y="167.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">D</text><text class="fv" x="375.0" y="30.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text><text class="fv" x="266.0" y="28.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text><polyline points="266.0,141.0 275.0,141.0 275.0,150.0" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_FX21t" onclick="circTap('FX21t')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX21t"></div>
+  <button class="btn-check" id="chk_FX21t" onclick="ytCheck('FX21t')" disabled>Check</button>
+  <div class="feedback" id="fb_FX21t"></div>
+  <div class="sorry" id="sorry_FX21t" style="display:none"></div>
+</div>
+</div>
+<button type="button" class="fxbtn" id="fxb3_FX21" onclick="fxNext('FX21')" style="display:none">Fix-It done &#9656;</button>
+</div>
+</div>
+<div class="lockmsg" id="lockmsg_2">Finish your Fix-It cards first &mdash; then Next.</div>
+<div class="fxfinal" id="fxfinal_2" style="display:none"><b>Fix-It cards done.</b> Your twin shows what stuck. Press Next.</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Count it &middot; Add back &#8594;</button></div>
+</div>
+</div>
+<div class="screen" id="s3">
+<div class="card">
+<span class="act">Moves 3 and 4 &middot; count it &middot; add back</span><br>
+<h2>&#128290; Count It, Then Add Back</h2>
+<h3 class="sec-h">&#9650;9+ &mdash; Count the pieces</h3>
+<div class="wk" id="wk_L5"><p class="wlq">Count it. A banner is a rectangle 20 cm by 6 cm. Identical triangles hang from its bottom edge, side by side; each has a base of 4 cm and its tip is 5 cm down. There are 5 of them. Find the area of the banner.</p><div class="tfigwrap"><svg class="pfig" id="svg_L5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 402.9 250.0" width="403" height="250" role="img" aria-label="L5 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="rect" data-role="add" points="56.0,125.3 346.9,125.3 346.9,38.0 56.0,38.0" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t0" data-role="add" points="56.0,125.3 114.2,125.3 85.1,198.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t1" data-role="add" points="114.2,125.3 172.4,125.3 143.3,198.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t2" data-role="add" points="172.4,125.3 230.5,125.3 201.5,198.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t3" data-role="add" points="230.5,125.3 288.7,125.3 259.6,198.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t4" data-role="add" points="288.7,125.3 346.9,125.3 317.8,198.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="201.5" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">20 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="47.0" y="86.6" font-size="14" font-weight="700" fill="#37474F" text-anchor="end">6 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="85.1" y="116.3" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">4 cm</text><line x1="85.1" y1="125.3" x2="85.1" y2="198.0" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="94.1" y="166.6" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">5 cm</text><polyline points="94.1,125.3 94.1,134.3 85.1,134.3" fill="none" stroke="#283593" stroke-width="1.6"/></svg></div><div class="tapbox" id="cnt"><p class="tap-hint"><b>Tap each hanging triangle, one by one.</b> Count them before you multiply.</p><div class="slout" id="cnt_ct">Counted: 0</div></div><div class="wlb closed" id="wlb_L5" data-bid="L5">
+<div class="wls">
+<div class="wl" data-card="T3" data-n="3"><span class="m">Rectangle = 20 × 6</span><span class="why">the whole rectangle: length × width</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">= 120</span><span class="why">20 × 6 = 120</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">One triangle box = 4 × 5</span><span class="why">▲3  base 4 cm on the bottom edge;  its tip is 5 cm down: base × height</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">= 20</span><span class="why">4 × 5 = 20</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">One triangle = 20 ÷ 2</span><span class="why">▲4 a triangle is half its box</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">= 10</span><span class="why">20 ÷ 2 = 10</span></div>
+<div class="wl" data-card="C"><span class="m">All triangles = 10 × 5</span><span class="why">▲9+ COUNT: 5 identical pieces — tap each one</span></div>
+<div class="wl" data-card="C"><span class="m">= 50</span><span class="why">10 × 5 = 50</span></div>
+<div class="wl" data-card="T9" data-n="9"><span class="m">Total = 120 + 50</span><span class="why">▲9 add the pieces</span></div>
+<div class="wl" data-card="T9" data-n="9"><span class="m">= 170 cm²</span><span class="why">120 + 50 = 170</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div></div>
+<h3 class="sec-h">&#9650;9+ then &#10004;3+ &mdash; Count, take away, add back</h3>
+<div class="wk" id="wk_L6"><p class="wlq">Count it, then add back. A tile is 30 cm by 16 cm. Identical shaded triangles stand side by side along the whole bottom edge; each has a base of 10 cm and a height of 14 cm. Find the area of the UNSHADED part.</p><div class="tfigwrap"><svg class="pfig" id="svg_L6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412.0 250.0" width="412" height="250" role="img" aria-label="L6 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="tile" data-role="add" points="56.0,198.0 356.0,198.0 356.0,38.0 56.0,38.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s0" data-role="sub" points="56.0,198.0 156.0,198.0 106.0,58.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s1" data-role="sub" points="156.0,198.0 256.0,198.0 206.0,58.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s2" data-role="sub" points="256.0,198.0 356.0,198.0 306.0,58.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="206.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">30 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="47.0" y="123.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="end">16 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="106.0" y="215.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">10 cm</text><line x1="106.0" y1="198.0" x2="106.0" y2="58.0" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="115.0" y="133.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">14 cm</text><polyline points="115.0,198.0 115.0,189.0 106.0,189.0" fill="none" stroke="#283593" stroke-width="1.6"/></svg></div><div class="wlb auto" id="wlb_L6" data-bid="L6" data-after="ab_L6">
+<div class="wls">
+<div class="wl" data-card="T3" data-n="3"><span class="m">Tile = 30 × 16</span><span class="why">the whole rectangle: length × width</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">= 480</span><span class="why">30 × 16 = 480</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">One triangle box = 10 × 14</span><span class="why">▲3  its base;  its height: base × height</span></div>
+<div class="wl" data-card="T3" data-n="3"><span class="m">= 140</span><span class="why">10 × 14 = 140</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">One triangle = 140 ÷ 2</span><span class="why">▲4 a triangle is half its box</span></div>
+<div class="wl" data-card="T4" data-n="4"><span class="m">= 70</span><span class="why">140 ÷ 2 = 70</span></div>
+<div class="wl" data-card="C"><span class="m">Count = 30 ÷ 10</span><span class="why">▲9+ the pieces cover the whole 30 cm edge, each base 10 cm</span></div>
+<div class="wl" data-card="C"><span class="m">= 3</span><span class="why">30 ÷ 10 = 3</span></div>
+<div class="wl" data-card="C"><span class="m">All triangles = 70 × 3</span><span class="why">▲9+ COUNT: 3 identical pieces — tap each one</span></div>
+<div class="wl" data-card="C"><span class="m">= 210</span><span class="why">70 × 3 = 210</span></div>
+<div class="wl" data-card="T7" data-n="7"><span class="m">Unshaded = 480 − 210</span><span class="why">▲7 shaded = whole − the white parts you can find</span></div>
+<div class="wl" data-card="−2"><span class="m">= 270 cm²</span><span class="why">480 − 210 = 270</span></div>
+<div class="wl" data-card="A3"><span class="m">Check = 270 + 210</span><span class="why">✔3+ add back: my answer + what I took away</span></div>
+<div class="wl" data-card="A3"><span class="m">= 480</span><span class="why">270 + 210 = 480 — the whole I started with ✓</span></div>
+</div>
+<button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button>
+</div><div class="abstrip" id="ab_L6" style="display:none"><div class="abh">&#10004;3+ ADD BACK &mdash; my answer + what I took away = the whole</div><div class="abrow"><div class="abseg a" style="flex:270">270<small>my answer</small></div><div class="abseg b" style="flex:210">210<small>what I took away</small></div></div><div class="abrow"><div class="abseg w" style="flex:480">480 &#10003;<small>the whole I started with</small></div></div></div></div>
+<h3 class="sec-h">&#128295; Fix-It Corner &mdash; your own questions</h3>
+<div class="mbintro">Find the slip, redo it, then try a twin with new numbers. Finish the cards, then press Next.</div>
+<div class="fxdots" id="fxdots_3"><span></span><span></span></div>
+<div class="fx" id="fx_FX20" data-fx="FX20">
+<div class="fxh"><span class="fxn">Your question</span> &middot; from U73 mock B20 (Intermediate)<span class="fxok">&#10003; done</span></div>
+<div class="fxbody">
+<div class="fx-st on" data-s="0">
+<p class="fxlab">Your answer</p>
+<p class="fxq"><strong>A logo is a square of side 8 cm with 4 identical triangles, one on each side. Each triangle's tip is 6 cm out from the square. Find the area of the logo.</strong></p>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX20r_q" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272.0 250.0" width="272" height="250" role="img" aria-label="FX20r figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="sq" data-role="add" points="104.0,150.0 168.0,150.0 168.0,86.0 104.0,86.0" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t1" data-role="add" points="104.0,150.0 168.0,150.0 136.0,198.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t2" data-role="add" points="168.0,150.0 168.0,86.0 216.0,118.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t3" data-role="add" points="168.0,86.0 104.0,86.0 136.0,38.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t4" data-role="add" points="104.0,86.0 104.0,150.0 56.0,118.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="103.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">8 cm</text><line x1="136.0" y1="150.0" x2="136.0" y2="198.0" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="145.0" y="179.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">6 cm</text><polyline points="145.0,150.0 145.0,159.0 136.0,159.0" fill="none" stroke="#283593" stroke-width="1.6"/></svg></div>
+<div class="fxyou">You wrote: 136 cm² (working: 72 + 64 = 136)</div>
+<button type="button" class="fxbtn" id="fxb1_FX20" onclick="fxGo('FX20')">Find the slip &#9656;</button>
+</div>
+<div class="fx-st" data-s="1">
+<p class="fxlab">Find the slip</p>
+<p class="fxsq"><strong>Each triangle is 8 × 6 ÷ 2 = 24 cm². Where did 72 come from?</strong></p>
+<div class="fxopts" id="fxo_FX20">
+<button type="button" class="fxopt" data-i="0" onclick="fxPick('FX20',0)">A) I counted 3 triangles (24 × 3 = 72). Tap each one: there are 4, so 24 × 4</button>
+<button type="button" class="fxopt" data-i="1" onclick="fxPick('FX20',1)">B) The square is 72</button>
+<button type="button" class="fxopt" data-i="2" onclick="fxPick('FX20',2)">C) Each triangle is 18</button>
+</div>
+<div class="fxres" id="fxres_FX20"></div>
+<button type="button" class="fxbtn" id="fxb2_FX20" onclick="fxToRedo('FX20')" style="display:none">Redo it &#9656;</button>
+</div>
+<div class="fx-st" data-s="2">
+<p class="fxlab">Redo &mdash; the same question, with your card open</p>
+<div class="q-card yt" id="yt_FX20r" data-iid="FX20r">
+  <span class="q-cap">Redo</span>
+  <div class="dq" id="q_FX20r"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX20r" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272.0 250.0" width="272" height="250" role="img" aria-label="FX20r figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="sq" data-role="add" points="104.0,150.0 168.0,150.0 168.0,86.0 104.0,86.0" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t1" data-role="add" points="104.0,150.0 168.0,150.0 136.0,198.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t2" data-role="add" points="168.0,150.0 168.0,86.0 216.0,118.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t3" data-role="add" points="168.0,86.0 104.0,86.0 136.0,38.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t4" data-role="add" points="104.0,86.0 104.0,150.0 56.0,118.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="103.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">8 cm</text><line x1="136.0" y1="150.0" x2="136.0" y2="198.0" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="145.0" y="179.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">6 cm</text><polyline points="145.0,150.0 145.0,159.0 136.0,159.0" fill="none" stroke="#283593" stroke-width="1.6"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_FX20r" onclick="circTap('FX20r')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX20r"></div>
+  <button class="btn-check" id="chk_FX20r" onclick="ytCheck('FX20r')" disabled>Check</button>
+  <div class="feedback" id="fb_FX20r"></div>
+  <div class="sorry" id="sorry_FX20r" style="display:none"></div>
+</div>
+</div>
+<div class="fx-st" data-s="3">
+<p class="fxlab">Your twin &mdash; same kind, new numbers</p>
+<div class="q-card yt" id="yt_FX20t" data-iid="FX20t">
+  <span class="q-cap">Your twin</span>
+  <div class="dq" id="q_FX20t"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX20t" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272.0 250.0" width="272" height="250" role="img" aria-label="FX20t figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="sq" data-role="add" points="102.7,151.3 169.3,151.3 169.3,84.7 102.7,84.7" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t1" data-role="add" points="102.7,151.3 169.3,151.3 136.0,198.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t2" data-role="add" points="169.3,151.3 169.3,84.7 216.0,118.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t3" data-role="add" points="169.3,84.7 102.7,84.7 136.0,38.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t4" data-role="add" points="102.7,84.7 102.7,151.3 56.0,118.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="101.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">10 cm</text><line x1="136.0" y1="151.3" x2="136.0" y2="198.0" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="145.0" y="179.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">7 cm</text><polyline points="145.0,151.3 145.0,160.3 136.0,160.3" fill="none" stroke="#283593" stroke-width="1.6"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_FX20t" onclick="circTap('FX20t')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX20t"></div>
+  <button class="btn-check" id="chk_FX20t" onclick="ytCheck('FX20t')" disabled>Check</button>
+  <div class="feedback" id="fb_FX20t"></div>
+  <div class="sorry" id="sorry_FX20t" style="display:none"></div>
+</div>
+</div>
+<button type="button" class="fxbtn" id="fxb3_FX20" onclick="fxNext('FX20')" style="display:none">Fix-It done &#9656;</button>
+</div>
+</div>
+<div class="fx" id="fx_FX23" data-fx="FX23">
+<div class="fxh"><span class="fxn">Your question</span> &middot; from U73 mock C23 (Applied)<span class="fxok">&#10003; done</span></div>
+<div class="fxbody">
+<div class="fx-st on" data-s="0">
+<p class="fxlab">Your answer</p>
+<p class="fxq"><strong>A rectangular tile is 36 cm by 12 cm. Three identical shaded triangles sit along its bottom edge; each has a base of 12 cm and a height of 11 cm. Find the area of the unshaded part of the tile.</strong></p>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX23r_q" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 192.7" width="420" height="193" role="img" aria-label="FX23r figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="tile" data-role="add" points="56.0,140.7 364.0,140.7 364.0,38.0 56.0,38.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s1" data-role="sub" points="56.0,140.7 158.7,140.7 107.3,46.6" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s2" data-role="sub" points="158.7,140.7 261.3,140.7 210.0,46.6" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s3" data-role="sub" points="261.3,140.7 364.0,140.7 312.7,46.6" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="210.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">36 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="47.0" y="94.3" font-size="14" font-weight="700" fill="#37474F" text-anchor="end">12 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="107.3" y="157.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">12 cm</text><line x1="107.3" y1="140.7" x2="107.3" y2="46.6" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="116.3" y="98.6" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">11 cm</text><polyline points="116.3,140.7 116.3,131.7 107.3,131.7" fill="none" stroke="#283593" stroke-width="1.6"/></svg></div>
+<div class="fxyou">You wrote: 244 cm² (working: 432 − 198 = 244)</div>
+<button type="button" class="fxbtn" id="fxb1_FX23" onclick="fxGo('FX23')">Find the slip &#9656;</button>
+</div>
+<div class="fx-st" data-s="1">
+<p class="fxlab">Find the slip</p>
+<p class="fxsq"><strong>Your 432 and your 198 were both RIGHT. Add back: 244 + 198 = ?</strong></p>
+<div class="fxopts" id="fxo_FX23">
+<button type="button" class="fxopt" data-i="0" onclick="fxPick('FX23',0)">A) 442, not 432 — so the take-away slipped. 432 − 198 = 234</button>
+<button type="button" class="fxopt" data-i="1" onclick="fxPick('FX23',1)">B) 432, so 244 is right</button>
+<button type="button" class="fxopt" data-i="2" onclick="fxPick('FX23',2)">C) The tile should be 442</button>
+</div>
+<div class="fxres" id="fxres_FX23"></div>
+<button type="button" class="fxbtn" id="fxb2_FX23" onclick="fxToRedo('FX23')" style="display:none">Redo it &#9656;</button>
+</div>
+<div class="fx-st" data-s="2">
+<p class="fxlab">Redo &mdash; the same question, with your card open</p>
+<div class="q-card yt" id="yt_FX23r" data-iid="FX23r">
+  <span class="q-cap">Redo</span>
+  <div class="dq" id="q_FX23r"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX23r" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 192.7" width="420" height="193" role="img" aria-label="FX23r figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="tile" data-role="add" points="56.0,140.7 364.0,140.7 364.0,38.0 56.0,38.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s1" data-role="sub" points="56.0,140.7 158.7,140.7 107.3,46.6" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s2" data-role="sub" points="158.7,140.7 261.3,140.7 210.0,46.6" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s3" data-role="sub" points="261.3,140.7 364.0,140.7 312.7,46.6" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="210.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">36 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="47.0" y="94.3" font-size="14" font-weight="700" fill="#37474F" text-anchor="end">12 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="107.3" y="157.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">12 cm</text><line x1="107.3" y1="140.7" x2="107.3" y2="46.6" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="116.3" y="98.6" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">11 cm</text><polyline points="116.3,140.7 116.3,131.7 107.3,131.7" fill="none" stroke="#283593" stroke-width="1.6"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_FX23r" onclick="circTap('FX23r')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX23r"></div>
+  <button class="btn-check" id="chk_FX23r" onclick="ytCheck('FX23r')" disabled>Check</button>
+  <div class="feedback" id="fb_FX23r"></div>
+  <div class="sorry" id="sorry_FX23r" style="display:none"></div>
+</div>
+</div>
+<div class="fx-st" data-s="3">
+<p class="fxlab">Your twin &mdash; same kind, new numbers</p>
+<div class="q-card yt" id="yt_FX23t" data-iid="FX23t">
+  <span class="q-cap">Your twin</span>
+  <div class="dq" id="q_FX23t"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_FX23t" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 234.4" width="420" height="234" role="img" aria-label="FX23t figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="tile" data-role="add" points="56.0,182.4 364.0,182.4 364.0,38.0 56.0,38.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s0" data-role="sub" points="56.0,182.4 133.0,182.4 94.5,57.2" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s1" data-role="sub" points="133.0,182.4 210.0,182.4 171.5,57.2" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s2" data-role="sub" points="210.0,182.4 287.0,182.4 248.5,57.2" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s3" data-role="sub" points="287.0,182.4 364.0,182.4 325.5,57.2" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="210.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">32 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="47.0" y="115.2" font-size="14" font-weight="700" fill="#37474F" text-anchor="end">15 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="94.5" y="199.4" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">8 cm</text><line x1="94.5" y1="182.4" x2="94.5" y2="57.2" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="103.5" y="124.8" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">13 cm</text><polyline points="103.5,182.4 103.5,173.4 94.5,173.4" fill="none" stroke="#283593" stroke-width="1.6"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_FX23t" onclick="circTap('FX23t')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_FX23t"></div>
+  <button class="btn-check" id="chk_FX23t" onclick="ytCheck('FX23t')" disabled>Check</button>
+  <div class="feedback" id="fb_FX23t"></div>
+  <div class="sorry" id="sorry_FX23t" style="display:none"></div>
+</div>
+</div>
+<button type="button" class="fxbtn" id="fxb3_FX23" onclick="fxNext('FX23')" style="display:none">Fix-It done &#9656;</button>
+</div>
+</div>
+<div class="lockmsg" id="lockmsg_3">Finish your Fix-It cards first &mdash; then Next.</div>
+<div class="fxfinal" id="fxfinal_3" style="display:none"><b>Fix-It cards done.</b> Your twin shows what stuck. Press Next.</div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Your turn &#8594;</button></div>
+</div>
+</div>
+<div class="screen" id="s4">
+<div class="card">
+<span class="act">Your turn &times; 6</span><br>
+<h2>&#9997;&#65039; Your Turn</h2>
+<p class="tap-hint">No worked example on this page. Pick the move from your card, then add back to check. Your card is there if you want it.</p>
+<div class="q-card yt" id="yt_Y1" data-iid="Y1">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_Y1"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_Y1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272.0 250.0" width="272" height="250" role="img" aria-label="Y1 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="sq" data-role="add" points="56.0,198.0 216.0,198.0 216.0,38.0 56.0,38.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="w" data-role="sub" points="216.0,38.0 56.0,38.0 216.0,96.2" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">22 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="225.0" y="72.1" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">8 cm</text><polyline points="207.0,38.0 207.0,47.0 216.0,47.0" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_Y1" onclick="circTap('Y1')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_Y1"></div>
+  <button class="btn-check" id="chk_Y1" onclick="ytCheck('Y1')" disabled>Check</button>
+  <div class="feedback" id="fb_Y1"></div>
+  <div class="sorry" id="sorry_Y1" style="display:none"></div>
+</div>
+<div class="q-card yt" id="yt_Y2" data-iid="Y2">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_Y2"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_Y2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 163.3" width="420" height="163" role="img" aria-label="Y2 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="ABE" data-role="add" points="56.0,111.3 232.0,111.3 232.0,38.0" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="BCDE" data-role="add" points="232.0,111.3 364.0,111.3 364.0,38.0 232.0,38.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><line x1="232.0" y1="38.0" x2="232.0" y2="111.3" stroke="#1565C0" stroke-width="1.3" stroke-dasharray="4 3"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="144.0" y="128.3" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">12 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="298.0" y="128.3" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">9 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="373.0" y="79.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">5 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="68.7" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="end">?</text><text class="fv" x="45.0" y="128.3" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text><text class="fv" x="232.0" y="142.3" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">E</text><text class="fv" x="375.0" y="128.3" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">D</text><text class="fv" x="375.0" y="30.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text><text class="fv" x="232.0" y="28.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text><polyline points="232.0,102.3 241.0,102.3 241.0,111.3" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_Y2" onclick="circTap('Y2')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_Y2"></div>
+  <button class="btn-check" id="chk_Y2" onclick="ytCheck('Y2')" disabled>Check</button>
+  <div class="feedback" id="fb_Y2"></div>
+  <div class="sorry" id="sorry_Y2" style="display:none"></div>
+</div>
+<div class="q-card yt" id="yt_Y3" data-iid="Y3">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_Y3"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_Y3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272.0 250.0" width="272" height="250" role="img" aria-label="Y3 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="sq" data-role="add" points="93.6,160.4 178.4,160.4 178.4,75.6 93.6,75.6" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t1" data-role="add" points="93.6,160.4 178.4,160.4 131.3,198.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t2" data-role="add" points="178.4,160.4 178.4,75.6 216.0,122.7" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t3" data-role="add" points="178.4,75.6 93.6,75.6 131.3,38.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="t4" data-role="add" points="93.6,75.6 93.6,160.4 56.0,122.7" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="66.6" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">9 cm</text><line x1="131.3" y1="160.4" x2="131.3" y2="198.0" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="140.3" y="184.2" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">4 cm</text><polyline points="140.3,160.4 140.3,169.4 131.3,169.4" fill="none" stroke="#283593" stroke-width="1.6"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_Y3" onclick="circTap('Y3')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_Y3"></div>
+  <button class="btn-check" id="chk_Y3" onclick="ytCheck('Y3')" disabled>Check</button>
+  <div class="feedback" id="fb_Y3"></div>
+  <div class="sorry" id="sorry_Y3" style="display:none"></div>
+</div>
+<div class="q-card yt" id="yt_Y4" data-iid="Y4">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_Y4"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_Y4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400.0 250.0" width="400" height="250" role="img" aria-label="Y4 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="big" data-role="add" points="56.0,198.0 216.0,198.0 216.0,38.0 56.0,38.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="mid" data-role="add" points="216.0,198.0 312.0,198.0 312.0,102.0 216.0,102.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="small" data-role="add" points="312.0,198.0 344.0,198.0 344.0,166.0 312.0,166.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="under" data-role="sub" points="56.0,198.0 344.0,198.0 56.0,38.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="136.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">10 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="264.0" y="93.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">6 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="328.0" y="157.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">2 cm</text></svg></div>
+  <button type="button" class="btn-circ" id="circ_Y4" onclick="circTap('Y4')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_Y4"></div>
+  <button class="btn-check" id="chk_Y4" onclick="ytCheck('Y4')" disabled>Check</button>
+  <div class="feedback" id="fb_Y4"></div>
+  <div class="sorry" id="sorry_Y4" style="display:none"></div>
+</div>
+<div class="q-card yt" id="yt_Y5" data-iid="Y5">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_Y5"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_Y5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 200.0" width="420" height="200" role="img" aria-label="Y5 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="tile" data-role="add" points="56.0,148.0 364.0,148.0 364.0,38.0 56.0,38.0" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s0" data-role="sub" points="56.0,148.0 133.0,148.0 89.0,60.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s1" data-role="sub" points="133.0,148.0 210.0,148.0 166.0,60.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s2" data-role="sub" points="210.0,148.0 287.0,148.0 243.0,60.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="s3" data-role="sub" points="287.0,148.0 364.0,148.0 320.0,60.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="210.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">28 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="47.0" y="98.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="end">10 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="94.5" y="165.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">7 cm</text><line x1="89.0" y1="148.0" x2="89.0" y2="60.0" stroke="#283593" stroke-width="2.2" stroke-dasharray="6 4"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="98.0" y="109.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">8 cm</text><polyline points="98.0,148.0 98.0,139.0 89.0,139.0" fill="none" stroke="#283593" stroke-width="1.6"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_Y5" onclick="circTap('Y5')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_Y5"></div>
+  <button class="btn-check" id="chk_Y5" onclick="ytCheck('Y5')" disabled>Check</button>
+  <div class="feedback" id="fb_Y5"></div>
+  <div class="sorry" id="sorry_Y5" style="display:none"></div>
+</div>
+<div class="q-card yt" id="yt_Y6" data-iid="Y6">
+  <span class="q-cap">Your turn</span>
+  <div class="dq" id="q_Y6"></div>
+<div class="tfigwrap"><svg class="pfig" id="svg_Y6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 192.7" width="420" height="193" role="img" aria-label="Y6 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="ABDE" data-role="add" points="56.0,140.7 171.5,140.7 171.5,38.0 56.0,38.0" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="BCD" data-role="add" points="171.5,140.7 364.0,140.7 171.5,38.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><line x1="171.5" y1="140.7" x2="171.5" y2="38.0" stroke="#1565C0" stroke-width="1.3" stroke-dasharray="4 3"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="113.8" y="157.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">9 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="267.8" y="157.7" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">15 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="47.0" y="94.3" font-size="14" font-weight="700" fill="#37474F" text-anchor="end">8 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="275.8" y="83.3" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="start">?</text><text class="fv" x="45.0" y="157.7" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text><text class="fv" x="171.5" y="171.7" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text><text class="fv" x="375.0" y="157.7" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text><text class="fv" x="171.5" y="28.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">D</text><text class="fv" x="45.0" y="30.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">E</text><polyline points="171.5,131.7 180.5,131.7 180.5,140.7" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+  <button type="button" class="btn-circ" id="circ_Y6" onclick="circTap('Y6')">&#10003;1 I read ALL of the question and I know what it asks for</button>
+  <div class="alines" id="ln_Y6"></div>
+  <button class="btn-check" id="chk_Y6" onclick="ytCheck('Y6')" disabled>Check</button>
+  <div class="feedback" id="fb_Y6"></div>
+  <div class="sorry" id="sorry_Y6" style="display:none"></div>
+</div>
+<div class="stat2" id="ytstat"></div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Ready check &#8594;</button></div>
+</div>
+</div>
+<div class="screen" id="s5">
+<div class="card">
+<span class="act">Ready check &times; 2</span><br>
+<h2>&#9989; Ready Check</h2>
+<p class="tap-hint">Two questions. If one is wrong, the page sends you back to the right picture, and you get one more try.</p>
+<div class="q-card" id="rc_R1">
+  <span class="q-cap">Ready check 1</span>
+  <div class="dq">A rectangle is 17 cm by 8 cm. A white triangle in its top corner has sides 17 cm and 4 cm at a square corner. Find the shaded area.</div>
+<div class="tfigwrap"><svg class="pfig" id="svg_R1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.0 234.9" width="420" height="235" role="img" aria-label="R1 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="rect" data-role="add" points="56.0,182.9 364.0,182.9 364.0,38.0 56.0,38.0" fill="#B0BEC5" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="w" data-role="sub" points="364.0,38.0 56.0,38.0 364.0,110.5" fill="#FFFFFF" stroke="#546E7A" stroke-width="2.4" stroke-linejoin="round"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="210.0" y="29.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">17 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="47.0" y="115.5" font-size="14" font-weight="700" fill="#37474F" text-anchor="end">8 cm</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="373.0" y="79.2" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">4 cm</text><polyline points="355.0,38.0 355.0,47.0 364.0,47.0" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+  <div class="alines"><div class="al"><label>Shaded area = <input type="text" id="rcin_R1" aria-label="answer"></label></div></div>
+  <button class="btn-check" id="rcchk_R1" onclick="rcCheck('R1')">Check</button>
+  <div class="feedback" id="rcfb_R1"></div>
+  <button type="button" class="fxbtn" id="rcgo_R1" onclick="rcGo('R1')" style="display:none"></button>
+  <div class="sorry" id="rcso_R1" style="display:none"></div>
+</div>
+<div class="q-card" id="rc_R2">
+  <span class="q-cap">Ready check 2</span>
+  <div class="dq">Figure ABCD is triangle ABE joined to rectangle BCDE. AE = 21 m, ED = 5 m, CD = 20 m. The perimeter of ABCD is 80 m. Find AB.</div>
+<div class="tfigwrap"><svg class="pfig" id="svg_R2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320.0 250.0" width="320" height="250" role="img" aria-label="R2 figure" font-family="Segoe UI,Arial,sans-serif"><polygon class="pc" data-piece="ABE" data-role="add" points="56.0,198.0 224.0,198.0 224.0,38.0" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><polygon class="pc" data-piece="BCDE" data-role="add" points="224.0,198.0 264.0,198.0 264.0,38.0 224.0,38.0" fill="#FFE0B2" stroke="#1565C0" stroke-width="2.4" stroke-linejoin="round"/><line x1="224.0" y1="38.0" x2="224.0" y2="198.0" stroke="#1565C0" stroke-width="1.3" stroke-dasharray="4 3"/><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="140.0" y="215.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">21 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="244.0" y="215.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="middle">5 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="273.0" y="123.0" font-size="14" font-weight="700" fill="#37474F" text-anchor="start">20 m</text><text class="plen" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round" x="132.0" y="112.0" font-size="20" font-weight="900" fill="#EF6C00" text-anchor="end">?</text><text class="fv" x="45.0" y="215.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">A</text><text class="fv" x="224.0" y="229.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">E</text><text class="fv" x="275.0" y="215.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">D</text><text class="fv" x="275.0" y="30.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">C</text><text class="fv" x="224.0" y="28.0" font-size="14" font-weight="700" fill="#283593" text-anchor="middle">B</text><polyline points="224.0,189.0 233.0,189.0 233.0,198.0" fill="none" stroke="#283593" stroke-width="1.8"/></svg></div>
+  <div class="alines"><div class="al"><label>AB = <input type="text" id="rcin_R2" aria-label="answer"></label></div></div>
+  <button class="btn-check" id="rcchk_R2" onclick="rcCheck('R2')">Check</button>
+  <div class="feedback" id="rcfb_R2"></div>
+  <button type="button" class="fxbtn" id="rcgo_R2" onclick="rcGo('R2')" style="display:none"></button>
+  <div class="sorry" id="rcso_R2" style="display:none"></div>
+</div>
+<div class="finish" id="finish"><p style="font-weight:800;font-size:1.1rem;color:#1B5E20">&#11088; Four moves fixed. STOP for today. The test is TOMORROW, then the school test on WEDNESDAY.</p><div class="both" id="fboth"></div><p id="rcmsg" style="font-weight:700;color:#283593"></p></div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button></div>
+</div>
+</div>
+</div>
+<div class="savezone" id="savezone"><div class="sstat" id="sstat" aria-live="polite"></div><button type="button" id="savebtn" onclick="saveClick()" disabled>Save</button></div>
+<div id="unsavedov" role="alertdialog" aria-live="assertive"><div class="box"><p>You haven&rsquo;t saved yet. If you leave now, Dad and Chusaki will not see your answers.</p><button type="button" class="stay" onclick="stayAndSave()">Stay and save</button><button type="button" class="leave" onclick="leaveAnyway()">Leave without saving</button></div></div>
+<!-- CHAPTER-4-CARD START -->
+<button type="button" id="fcbtn" onclick="fcToggle(true)" aria-controls="fcard">&#x1F4CC; Chapter 4 Card</button>
+<aside id="fcard" class="fc" aria-label="Chapter 4 Card">
+<div class="fc-top"><b>&#x1F4CC; CHAPTER 4 CARD</b><span class="fc-btns"><button type="button" onclick="fcPrint()" aria-label="Print the card">&#x1F5A8;</button><button type="button" onclick="fcToggle(true)" aria-label="Close the card">&#10005;</button></span></div>
+<div class="fc-pane on" id="pane-tri">
+<div class="fc-st" data-step="T1 T2"><b>▲1</b> Pick a BASE. ▲2 Its HEIGHT meets the base line at a square corner ⊾ — slanted sides are decoys; the height can be outside.</div>
+<div class="fc-st" data-step="T3 T4"><b>▲3/▲4</b> Area of a triangle = base × height ÷ 2 (half its box). Square units: cm², m².</div>
+<div class="fc-st" data-step="T7"><b>▲7</b> Shaded part = whole − the white parts you can find.</div>
+<div class="fc-st" data-step="W"><b>&#9650;7+</b> WHOLE FIRST. Whole = the full outline (made of 2 or 3 squares? add them up first). White = the parts that are NOT shaded. Shaded = Whole &minus; White. Never add a white part to the shaded answer.</div>
+<div class="fc-st" data-step="T8"><b>▲8</b> Base on one side of a rectangle, tip on the opposite side = HALF the rectangle, wherever the tip is.</div>
+<div class="fc-st" data-step="T9"><b>▲9</b> Odd shape? SPLIT it into rectangles and triangles. ADD the pieces — or WHOLE − the piece taken away.</div>
+<div class="fc-st" data-step="C"><b>&#9650;9+</b> COUNT THE PIECES. Tap each piece once and write &times; the count. Pieces along an edge? Count = edge &divide; one base.</div>
+<div class="fc-st" data-step="T10"><b>▲10</b> Perimeter given? Find the missing side first: perimeter − the sides you know.</div>
+<div class="fc-st" data-step="T10"><b>&#9650;10+</b> WALK THE FENCE. The perimeter goes round the OUTSIDE once, corner to corner. A line inside the shape (like BE) is NOT on the fence. A side made of two parts: add them (DA = AE + ED).</div>
+<div class="fc-st" data-step="T11"><b>▲11</b> Same base + same height = same area. A line from a corner to the MIDDLE of the opposite side cuts a triangle into two equal halves.</div>
+<div class="fc-st" data-step="T12"><b>▲12</b> Why ÷ 2? Two copies of the same triangle make a rectangle (box) — one triangle is half of it.</div>
+<div class="fc-st acs" data-step="A3"><b>&#10004;3+</b> ADD BACK. After a take-away, add your answer to what you took away. You must get the number you started with (234 + 198 = 432 &#10003; &middot; 244 + 198 = 442 &#10007;).</div>
+<div class="fc-st acs" data-step="A1 A2 A3"><b>ANSWER CHECK:</b> ✔1 what does it ask (all of it)? ✔2 numbers copied right? ✔3 back-check / ESTIMATE every ×.</div>
+</div>
+</aside>
+<script>
+var YT=["Y1", "Y2", "Y3", "Y4", "Y5", "Y6"];
+var ALLI=["Y1", "Y2", "Y3", "Y4", "Y5", "Y6", "FX18r", "FX18t", "FX24r", "FX24t", "FX21r", "FX21t", "FX20r", "FX20t", "FX23r", "FX23t"];
+var ITEMS=[{"id": "Y1", "q": "A square has sides of 22 cm. A white triangle in its top corner has sides 22 cm and 8 cm at a square corner. Find the shaded area.", "lines": [{"k": "ans", "lab": "Shaded area =", "v": "396"}], "addW": {"ans": ["484", "572"]}, "half": {"ans": ["308"]}}, {"id": "Y2", "q": "Figure ABCD is triangle ABE joined to rectangle BCDE. AE = 12 m, ED = 9 m, CD = 5 m, and the perimeter of ABCD is 48 m. (a) Find AB. (b) Find the area of ABCD.", "lines": [{"k": "ab", "lab": "(a) AB =", "v": "13"}, {"k": "ar", "lab": "(b) Area =", "v": "75"}], "oth": {"ab": ["75"], "ar": ["13"]}}, {"id": "Y3", "q": "A badge is a square of side 9 cm with an identical triangle on each of its sides. Each triangle's tip is 4 cm out from the square. Find the area of the badge.", "lines": [{"k": "ans", "lab": "Area of the badge =", "v": "153"}], "mis": {"ans": ["135", "171"]}, "half": {"ans": ["225"]}, "add": {"ans": ["9"]}}, {"id": "Y4", "q": "Three squares of sides 10 cm, 6 cm and 2 cm stand side by side. A line goes from the top-left corner of the big square to the bottom-right corner of the small square. The triangle under the line is white; the rest is shaded. Find the shaded area.", "lines": [{"k": "ans", "lab": "Shaded area =", "v": "50"}], "addW": {"ans": ["140", "230"]}}, {"id": "Y5", "q": "A tile is 28 cm by 10 cm. Identical shaded triangles stand side by side along the whole bottom edge; each has a base of 7 cm and a height of 8 cm. Find the area of the UNSHADED part.", "lines": [{"k": "ans", "lab": "Unshaded area =", "v": "168"}], "mis": {"ans": ["196", "140"]}, "half": {"ans": ["56"]}, "addW": {"ans": ["392"]}}, {"id": "Y6", "q": "Figure ACDE is rectangle ABDE joined to triangle BCD (square corner at B). AB = 9 cm, BC = 15 cm, AE = 8 cm. The perimeter of ACDE is 58 cm. (a) Find CD. (b) Find the area of ACDE.", "lines": [{"k": "ab", "lab": "(a) CD =", "v": "17"}, {"k": "ar", "lab": "(b) Area =", "v": "132"}], "oth": {"ab": ["132"], "ar": ["17"]}}, {"id": "FX18r", "q": "A square has sides of 16 cm. A white triangle in one corner has sides 16 cm and 10 cm at a square corner. Find the shaded area.", "lines": [{"k": "ans", "lab": "Shaded area =", "v": "176"}]}, {"id": "FX18t", "q": "Your twin: a square has sides of 14 cm. A white triangle in its top corner has sides 14 cm and 10 cm at a square corner. Find the shaded area.", "lines": [{"k": "ans", "lab": "Shaded area =", "v": "126"}]}, {"id": "FX24r", "q": "Three squares of sides 10 cm, 6 cm and 4 cm stand side by side on a straight line. A straight line is drawn from the top-left corner of the big square to the bottom-right corner of the small square; the triangle under that line is unshaded and the rest of the three squares is shaded. Find the shaded area.", "lines": [{"k": "ans", "lab": "Shaded area =", "v": "52"}]}, {"id": "FX24t", "q": "Your twin: three squares of sides 12 cm, 6 cm and 4 cm stand side by side. A line goes from the top-left corner of the big square to the bottom-right corner of the small square. The triangle under the line is white; the rest is shaded. Find the shaded area.", "lines": [{"k": "ans", "lab": "Shaded area =", "v": "64"}]}, {"id": "FX21r", "q": "Figure ABCD is made of triangle ABE and rectangle BCDE. AE = 40 m, ED = 12 m and CD = 9 m. The perimeter of figure ABCD is 114 m. Find the length of AB.", "lines": [{"k": "ans", "lab": "AB =", "v": "41"}]}, {"id": "FX21t", "q": "Your twin: figure ABCD is triangle ABE joined to rectangle BCDE. AE = 30 m, ED = 14 m and CD = 16 m. The perimeter of ABCD is 108 m. Find AB.", "lines": [{"k": "ans", "lab": "AB =", "v": "34"}]}, {"id": "FX20r", "q": "A logo is a square of side 8 cm with 4 identical triangles, one on each side. Each triangle's tip is 6 cm out from the square. Find the area of the logo.", "lines": [{"k": "ans", "lab": "Area of the logo =", "v": "160"}]}, {"id": "FX20t", "q": "Your twin: a logo is a square of side 10 cm with 4 identical triangles, one on each side. Each triangle's tip is 7 cm out from the square. Find the area of the logo.", "lines": [{"k": "ans", "lab": "Area of the logo =", "v": "240"}]}, {"id": "FX23r", "q": "A rectangular tile is 36 cm by 12 cm. Three identical shaded triangles sit along its bottom edge; each has a base of 12 cm and a height of 11 cm. Find the area of the unshaded part of the tile.", "lines": [{"k": "ans", "lab": "Unshaded area =", "v": "234"}]}, {"id": "FX23t", "q": "Your twin: a tile is 32 cm by 15 cm. Identical shaded triangles stand side by side along the whole bottom edge; each has a base of 8 cm and a height of 13 cm. Find the area of the unshaded part.", "lines": [{"k": "ans", "lab": "Unshaded area =", "v": "272"}]}];
+var WL={"Y1": [["Whole = 22 × 22", "the whole rectangle: length × width", "T3"], ["= 484", "22 × 22 = 484", "T3"], ["White box = 22 × 8", "▲3  22 cm along the top;  8 cm down the side: base × height", "T3"], ["= 176", "22 × 8 = 176", "T3"], ["White = 176 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 88", "176 ÷ 2 = 88", "T4"], ["Shaded = 484 − 88", "▲7 shaded = whole − the white parts you can find", "T7"], ["= 396 cm²", "484 − 88 = 396", "−2"], ["Check = 396 + 88", "✔3+ add back: my answer + what I took away", "A3"], ["= 484", "396 + 88 = 484 — the whole I started with ✓", "A3"]], "Y2": [["DA = 12 + 9", "▲10+ DA is one fence side made of two parts: AE + ED", "T10"], ["= 21", "12 + 9 = 21", "T10"], ["Known = 9 + 5", "▲10+ walk the fence: the other outside sides are BC = 9 m and CD = 5 m", "T10"], ["= 14", "9 + 5 = 14", "T10"], ["Known = 14 + 21", "and DA = 21 m", "T10"], ["= 35", "14 + 21 = 35", "T10"], ["AB = 48 − 35", "▲10 perimeter − the sides you know", "T10"], ["= 13 m", "48 − 35 = 13", "T10"], ["Triangle ABE box = 12 × 5", "▲3  AE = 12 m;  BE = 5 m: base × height", "T3"], ["= 60", "12 × 5 = 60", "T3"], ["Triangle ABE = 60 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 30", "60 ÷ 2 = 30", "T4"], ["Rectangle BCDE = 9 × 5", "the whole rectangle: length × width", "T3"], ["= 45", "9 × 5 = 45", "T3"], ["Total = 30 + 45", "▲9 add the pieces", "T9"], ["= 75 m²", "30 + 45 = 75", "T9"]], "Y3": [["Square = 9 × 9", "the whole rectangle: length × width", "T3"], ["= 81", "9 × 9 = 81", "T3"], ["One triangle box = 9 × 4", "▲3  its base;  its height: base × height", "T3"], ["= 36", "9 × 4 = 36", "T3"], ["One triangle = 36 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 18", "36 ÷ 2 = 18", "T4"], ["All triangles = 18 × 4", "▲9+ COUNT: 4 identical pieces — tap each one", "C"], ["= 72", "18 × 4 = 72", "C"], ["Total = 81 + 72", "▲9 add the pieces", "T9"], ["= 153 cm²", "81 + 72 = 153", "T9"]], "Y4": [["Square = 10 × 10", "a square: side × side", "W"], ["= 100", "10 × 10 = 100", "W"], ["Square = 6 × 6", "a square: side × side", "W"], ["= 36", "6 × 6 = 36", "W"], ["Square = 2 × 2", "a square: side × side", "W"], ["= 4", "2 × 2 = 4", "W"], ["Whole = 100 + 36", "▲7+ WHOLE FIRST: add the squares to get the whole outline", "W"], ["= 136", "100 + 36 = 136", "W"], ["Whole = 136 + 4", "▲9 add the pieces", "W"], ["= 140", "136 + 4 = 140", "W"], ["White box = 18 × 10", "▲3  base along all three squares: 10 + 6 + 2 = 18 cm;  height = the big square's side, 10 cm: base × height", "T3"], ["= 180", "18 × 10 = 180", "T3"], ["White = 180 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 90", "180 ÷ 2 = 90", "T4"], ["Shaded = 140 − 90", "▲7 shaded = whole − the white parts you can find", "T7"], ["= 50 cm²", "140 − 90 = 50", "−2"], ["Check = 50 + 90", "✔3+ add back: my answer + what I took away", "A3"], ["= 140", "50 + 90 = 140 — the whole I started with ✓", "A3"]], "Y5": [["Tile = 28 × 10", "the whole rectangle: length × width", "T3"], ["= 280", "28 × 10 = 280", "T3"], ["One triangle box = 7 × 8", "▲3  its base;  its height: base × height", "T3"], ["= 56", "7 × 8 = 56", "T3"], ["One triangle = 56 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 28", "56 ÷ 2 = 28", "T4"], ["Count = 28 ÷ 7", "▲9+ the pieces cover the whole 28 cm edge, each base 7 cm", "C"], ["= 4", "28 ÷ 7 = 4", "C"], ["All triangles = 28 × 4", "▲9+ COUNT: 4 identical pieces — tap each one", "C"], ["= 112", "28 × 4 = 112", "C"], ["Unshaded = 280 − 112", "▲7 shaded = whole − the white parts you can find", "T7"], ["= 168 cm²", "280 − 112 = 168", "−2"], ["Check = 168 + 112", "✔3+ add back: my answer + what I took away", "A3"], ["= 280", "168 + 112 = 280 — the whole I started with ✓", "A3"]], "Y6": [["AC = 9 + 15", "▲10+ AC is one fence side made of two parts: AB + BC", "T10"], ["= 24", "9 + 15 = 24", "T10"], ["Known = 9 + 8", "▲10+ walk the fence: the other outside sides are DE = 9 cm and EA = 8 cm", "T10"], ["= 17", "9 + 8 = 17", "T10"], ["Known = 17 + 24", "and AC = 24 cm", "T10"], ["= 41", "17 + 24 = 41", "T10"], ["CD = 58 − 41", "▲10 perimeter − the sides you know", "T10"], ["= 17 cm", "58 − 41 = 17", "T10"], ["Rectangle ABDE = 9 × 8", "the whole rectangle: length × width", "T3"], ["= 72", "9 × 8 = 72", "T3"], ["Triangle BCD box = 15 × 8", "▲3  BC = 15 cm;  BD = 8 cm: base × height", "T3"], ["= 120", "15 × 8 = 120", "T3"], ["Triangle BCD = 120 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 60", "120 ÷ 2 = 60", "T4"], ["Total = 72 + 60", "▲9 add the pieces", "T9"], ["= 132 cm²", "72 + 60 = 132", "T9"]], "FX18r": [["Whole = 16 × 16", "the whole rectangle: length × width", "T3"], ["= 256", "16 × 16 = 256", "T3"], ["White box = 16 × 10", "▲3  16 cm along the top;  10 cm down the side: base × height", "T3"], ["= 160", "16 × 10 = 160", "T3"], ["White = 160 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 80", "160 ÷ 2 = 80", "T4"], ["Shaded = 256 − 80", "▲7 shaded = whole − the white parts you can find", "T7"], ["= 176 cm²", "256 − 80 = 176", "−2"], ["Check = 176 + 80", "✔3+ add back: my answer + what I took away", "A3"], ["= 256", "176 + 80 = 256 — the whole I started with ✓", "A3"]], "FX18t": [["Whole = 14 × 14", "the whole rectangle: length × width", "T3"], ["= 196", "14 × 14 = 196", "T3"], ["White box = 14 × 10", "▲3  14 cm along the top;  10 cm down the side: base × height", "T3"], ["= 140", "14 × 10 = 140", "T3"], ["White = 140 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 70", "140 ÷ 2 = 70", "T4"], ["Shaded = 196 − 70", "▲7 shaded = whole − the white parts you can find", "T7"], ["= 126 cm²", "196 − 70 = 126", "−2"], ["Check = 126 + 70", "✔3+ add back: my answer + what I took away", "A3"], ["= 196", "126 + 70 = 196 — the whole I started with ✓", "A3"]], "FX24r": [["Square = 10 × 10", "a square: side × side", "W"], ["= 100", "10 × 10 = 100", "W"], ["Square = 6 × 6", "a square: side × side", "W"], ["= 36", "6 × 6 = 36", "W"], ["Square = 4 × 4", "a square: side × side", "W"], ["= 16", "4 × 4 = 16", "W"], ["Whole = 100 + 36", "▲7+ WHOLE FIRST: add the squares to get the whole outline", "W"], ["= 136", "100 + 36 = 136", "W"], ["Whole = 136 + 16", "▲9 add the pieces", "W"], ["= 152", "136 + 16 = 152", "W"], ["White box = 20 × 10", "▲3  base along all three squares: 10 + 6 + 4 = 20 cm;  height = the big square's side, 10 cm: base × height", "T3"], ["= 200", "20 × 10 = 200", "T3"], ["White = 200 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 100", "200 ÷ 2 = 100", "T4"], ["Shaded = 152 − 100", "▲7 shaded = whole − the white parts you can find", "T7"], ["= 52 cm²", "152 − 100 = 52", "−2"], ["Check = 52 + 100", "✔3+ add back: my answer + what I took away", "A3"], ["= 152", "52 + 100 = 152 — the whole I started with ✓", "A3"]], "FX24t": [["Square = 12 × 12", "a square: side × side", "W"], ["= 144", "12 × 12 = 144", "W"], ["Square = 6 × 6", "a square: side × side", "W"], ["= 36", "6 × 6 = 36", "W"], ["Square = 4 × 4", "a square: side × side", "W"], ["= 16", "4 × 4 = 16", "W"], ["Whole = 144 + 36", "▲7+ WHOLE FIRST: add the squares to get the whole outline", "W"], ["= 180", "144 + 36 = 180", "W"], ["Whole = 180 + 16", "▲9 add the pieces", "W"], ["= 196", "180 + 16 = 196", "W"], ["White box = 22 × 12", "▲3  base along all three squares: 12 + 6 + 4 = 22 cm;  height = the big square's side, 12 cm: base × height", "T3"], ["= 264", "22 × 12 = 264", "T3"], ["White = 264 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 132", "264 ÷ 2 = 132", "T4"], ["Shaded = 196 − 132", "▲7 shaded = whole − the white parts you can find", "T7"], ["= 64 cm²", "196 − 132 = 64", "−2"], ["Check = 64 + 132", "✔3+ add back: my answer + what I took away", "A3"], ["= 196", "64 + 132 = 196 — the whole I started with ✓", "A3"]], "FX21r": [["DA = 40 + 12", "▲10+ DA is one fence side made of two parts: AE + ED", "T10"], ["= 52", "40 + 12 = 52", "T10"], ["Known = 12 + 9", "▲10+ walk the fence: the other outside sides are BC = 12 m and CD = 9 m", "T10"], ["= 21", "12 + 9 = 21", "T10"], ["Known = 21 + 52", "and DA = 52 m", "T10"], ["= 73", "21 + 52 = 73", "T10"], ["AB = 114 − 73", "▲10 perimeter − the sides you know", "T10"], ["= 41 m", "114 − 73 = 41", "T10"]], "FX21t": [["DA = 30 + 14", "▲10+ DA is one fence side made of two parts: AE + ED", "T10"], ["= 44", "30 + 14 = 44", "T10"], ["Known = 14 + 16", "▲10+ walk the fence: the other outside sides are BC = 14 m and CD = 16 m", "T10"], ["= 30", "14 + 16 = 30", "T10"], ["Known = 30 + 44", "and DA = 44 m", "T10"], ["= 74", "30 + 44 = 74", "T10"], ["AB = 108 − 74", "▲10 perimeter − the sides you know", "T10"], ["= 34 m", "108 − 74 = 34", "T10"]], "FX20r": [["Square = 8 × 8", "the whole rectangle: length × width", "T3"], ["= 64", "8 × 8 = 64", "T3"], ["One triangle box = 8 × 6", "▲3  its base;  its height: base × height", "T3"], ["= 48", "8 × 6 = 48", "T3"], ["One triangle = 48 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 24", "48 ÷ 2 = 24", "T4"], ["All triangles = 24 × 4", "▲9+ COUNT: 4 identical pieces — tap each one", "C"], ["= 96", "24 × 4 = 96", "C"], ["Total = 64 + 96", "▲9 add the pieces", "T9"], ["= 160 cm²", "64 + 96 = 160", "T9"]], "FX20t": [["Square = 10 × 10", "the whole rectangle: length × width", "T3"], ["= 100", "10 × 10 = 100", "T3"], ["One triangle box = 10 × 7", "▲3  its base;  its height: base × height", "T3"], ["= 70", "10 × 7 = 70", "T3"], ["One triangle = 70 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 35", "70 ÷ 2 = 35", "T4"], ["All triangles = 35 × 4", "▲9+ COUNT: 4 identical pieces — tap each one", "C"], ["= 140", "35 × 4 = 140", "C"], ["Total = 100 + 140", "▲9 add the pieces", "T9"], ["= 240 cm²", "100 + 140 = 240", "T9"]], "FX23r": [["Tile = 36 × 12", "the whole rectangle: length × width", "T3"], ["= 432", "36 × 12 = 432", "T3"], ["One triangle box = 12 × 11", "▲3  its base;  its height: base × height", "T3"], ["= 132", "12 × 11 = 132", "T3"], ["One triangle = 132 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 66", "132 ÷ 2 = 66", "T4"], ["All triangles = 66 × 3", "▲9+ COUNT: 3 identical pieces — tap each one", "C"], ["= 198", "66 × 3 = 198", "C"], ["Unshaded = 432 − 198", "▲7 shaded = whole − the white parts you can find", "T7"], ["= 234 cm²", "432 − 198 = 234", "−2"], ["Check = 234 + 198", "✔3+ add back: my answer + what I took away", "A3"], ["= 432", "234 + 198 = 432 — the whole I started with ✓", "A3"]], "FX23t": [["Tile = 32 × 15", "the whole rectangle: length × width", "T3"], ["= 480", "32 × 15 = 480", "T3"], ["One triangle box = 8 × 13", "▲3  its base;  its height: base × height", "T3"], ["= 104", "8 × 13 = 104", "T3"], ["One triangle = 104 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 52", "104 ÷ 2 = 52", "T4"], ["Count = 32 ÷ 8", "▲9+ the pieces cover the whole 32 cm edge, each base 8 cm", "C"], ["= 4", "32 ÷ 8 = 4", "C"], ["All triangles = 52 × 4", "▲9+ COUNT: 4 identical pieces — tap each one", "C"], ["= 208", "52 × 4 = 208", "C"], ["Unshaded = 480 − 208", "▲7 shaded = whole − the white parts you can find", "T7"], ["= 272 cm²", "480 − 208 = 272", "−2"], ["Check = 272 + 208", "✔3+ add back: my answer + what I took away", "A3"], ["= 480", "272 + 208 = 480 — the whole I started with ✓", "A3"]], "R1": [["Whole = 17 × 8", "the whole rectangle: length × width", "T3"], ["= 136", "17 × 8 = 136", "T3"], ["White box = 17 × 4", "▲3  17 cm along the top;  4 cm down the side: base × height", "T3"], ["= 68", "17 × 4 = 68", "T3"], ["White = 68 ÷ 2", "▲4 a triangle is half its box", "T4"], ["= 34", "68 ÷ 2 = 34", "T4"], ["Shaded = 136 − 34", "▲7 shaded = whole − the white parts you can find", "T7"], ["= 102 cm²", "136 − 34 = 102", "−2"], ["Check = 102 + 34", "✔3+ add back: my answer + what I took away", "A3"], ["= 136", "102 + 34 = 136 — the whole I started with ✓", "A3"]], "R2": [["DA = 21 + 5", "▲10+ DA is one fence side made of two parts: AE + ED", "T10"], ["= 26", "21 + 5 = 26", "T10"], ["Known = 5 + 20", "▲10+ walk the fence: the other outside sides are BC = 5 m and CD = 20 m", "T10"], ["= 25", "5 + 20 = 25", "T10"], ["Known = 25 + 26", "and DA = 26 m", "T10"], ["= 51", "25 + 26 = 51", "T10"], ["AB = 80 − 51", "▲10 perimeter − the sides you know", "T10"], ["= 29 m", "80 − 51 = 29", "T10"]]};
+var CHIP={"Y1": "✔3+ add back: 396 + 88 = 484 — the whole I started with ✓", "Y4": "✔3+ add back: 50 + 90 = 140 — the whole I started with ✓", "Y5": "✔3+ add back: 168 + 112 = 280 — the whole I started with ✓", "FX18r": "✔3+ add back: 176 + 80 = 256 — the whole I started with ✓", "FX18t": "✔3+ add back: 126 + 70 = 196 — the whole I started with ✓", "FX24r": "✔3+ add back: 52 + 100 = 152 — the whole I started with ✓", "FX24t": "✔3+ add back: 64 + 132 = 196 — the whole I started with ✓", "FX23r": "✔3+ add back: 234 + 198 = 432 — the whole I started with ✓", "FX23t": "✔3+ add back: 272 + 208 = 480 — the whole I started with ✓"};
+
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a);}
+function mixedStr(n,d){var g=gcd(n,d);n=n/g;d=d/g;var w=Math.floor(n/d),r=n-w*d;if(r===0)return ''+w;return (w?w+' ':'')+r+'/'+d;}
+/* parse "1 1/5", "6/5", "2", "1.2", "1 1/5 m" -> [num,den] reduced, or null */
+function parseVal(s){
+  if(s==null)return null; s=String(s).toLowerCase().replace(/[²]/g,'').replace(/(kg|km|cups?|cm|ml|l|m|litres?|liters?|metres?|meters?|sq\.?|squared)\b/g,' ').replace(/\s+/g,' ').trim();
+  if(!s)return null; var m;
+  if((m=s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/))){var d=+m[3];if(!d)return null;var n=(+m[1])*d+(+m[2]);var g=gcd(n,d);return [n/g,d/g,'mixed'];}
+  if((m=s.match(/^(\d+)\s*\/\s*(\d+)$/))){var d2=+m[2];if(!d2)return null;var g2=gcd(+m[1],d2);return [(+m[1])/g2,d2/g2,'frac',+m[1],d2];}
+  if((m=s.match(/^(\d+)$/))){return [+m[1],1,'int'];}
+  if((m=s.match(/^(\d*)\.(\d+)$/))){var den=Math.pow(10,m[2].length);var n3=(+m[1]||0)*den+(+m[2]);var g3=gcd(n3,den);return [n3/g3,den/g3,'dec'];}
+  return null;}
+function sameVal(a,b){return a&&b&&a[0]===b[0]&&a[1]===b[1];}
+function isImproperText(s){var m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);return !!m&&(+m[1])>(+m[2]);}
+
+function wlShow(b,n){var rows=b.querySelectorAll('.wl,.bl'),i;for(i=0;i<rows.length;i++){rows[i].classList.remove('cur');if(i<n)rows[i].classList.add('on');}
+  if(n>0&&rows[n-1])rows[n-1].classList.add('cur');if(n>=rows.length){b.classList.add('alldone');var a=b.getAttribute('data-after');if(a){var e=document.getElementById(a);if(e)e.style.display='block';}}}
+function wlCount(b){return b.querySelectorAll('.wl.on,.bl.on').length;}
+function wlNext(btn){var b=btn.parentNode;wlShow(b,wlCount(b)+1);}
+function wlOpen(b){b.classList.remove('closed');if(wlCount(b)===0)wlShow(b,1);}
+function stepsToggle(btn){var b=btn.parentNode.querySelector('.wlb');if(b.classList.contains('closed')){wlOpen(b);btn.textContent='Hide steps';}else{b.classList.add('closed');btn.textContent='Show steps';}}
+
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function goTo(i){nav(i-cur);}
+
+
+var FCKEY='chusaki_u074_card';
+function fcPref(){try{return window.localStorage.getItem(FCKEY);}catch(e){return null;}}
+function fcSetPref(v){try{window.localStorage.setItem(FCKEY,v);}catch(e){}}
+function fcIsOpen(){return document.body.classList.contains('fc-open');}
+function fcShow(on){document.body.classList.toggle('fc-open',!!on);}
+function fcToggle(manual){var on=!fcIsOpen();fcShow(on);if(on&&cur!==0)document.body.classList.remove('fc-full');if(manual&&cur>=1)fcSetPref(on?'open':'closed');}
+function fcAuto(){var wide=window.innerWidth>=900;document.body.classList.toggle('fc-full',!wide&&cur===0);if(wide||cur===0)fcShow(true);else fcShow(fcPref()==='open');}
+function fcOpen(id){document.getElementById(id).classList.toggle('open');}
+function fcBricks(b){document.getElementById('fcbricks').classList.toggle('open');}
+function cardGlow(b,n){var g=document.querySelectorAll('#fcard .fc-st.glow'),i;for(i=0;i<g.length;i++)g[i].classList.remove('glow');
+  var rows=b.querySelectorAll('.wl');if(n<1||!rows[n-1])return;var tag=rows[n-1].getAttribute('data-card');if(!tag)return;
+  var st=document.querySelectorAll('#fcard .fc-st'),k;for(k=0;k<st.length;k++){if((' '+st[k].getAttribute('data-step')+' ').indexOf(' '+tag+' ')>=0){st[k].classList.add('glow');
+    var blk=st[k].parentNode;if(blk&&blk.classList.contains('fc-blk'))blk.classList.add('open');}}}
+var _wl0=wlShow;wlShow=function(b,n){_wl0(b,n);cardGlow(b,n);};
+function fcPrint(){document.body.classList.add('printing');try{window.print();}catch(e){}setTimeout(function(){document.body.classList.remove('printing');},300);}
+var _nv0=nav;nav=function(d){_nv0(d);fcAuto();var b=document.querySelector('#s'+cur+' .wlb');if(b)cardGlow(b,wlCount(b));else cardGlow(document.body,0);};
+fcAuto();
+
+
+var _wl1=wlShow;wlShow=function(b,n){_wl1(b,n);pieceLight(b,n);};
+function pieceLight(b,n){var id=b.getAttribute('data-bid'),svg=id?document.getElementById('svg_'+id):null;if(!svg)return;
+  var all=svg.querySelectorAll('.pc'),i;for(i=0;i<all.length;i++)all[i].classList.remove('lit');
+  var rows=b.querySelectorAll('.wl');if(n<1||!rows[n-1])return;var pc=rows[n-1].getAttribute('data-pc');if(!pc)return;
+  var names=pc.split(',');for(i=0;i<all.length;i++){if(names.indexOf(all[i].getAttribute('data-piece'))>=0)all[i].classList.add('lit');}}
+
+var KEY='chusaki_u074_lesson';
+var PR=["Right first time. Pick the move from your card, then add back to check.","Read it again and it paid off. Exam-proof.","Clean. And it checks backwards.","Fixed it! That’s how brains grow."];
+var SW='Both numbers are right — but they’re in each other’s boxes. Read it again, then put the right number in the right box.';
+var NHALF='That’s the whole box. ▲4: a triangle is only HALF its box.';
+var NADD='Check: does this piece get ADDED or TAKEN AWAY? ▲7+ / ▲9+: look at the picture.';
+var NADDW='Check ▲7+: never ADD a white part. Whole first, then take the white away.';
+var NMISC='Count the pieces again — tap each one. ▲9+: count it before you multiply.';
+var NOTH='Check ✔1: you gave the answer to the other part. (a) is the side, (b) is the area.';
+var NSLANT='';
+var FXO=["FX18", "FX24", "FX21", "FX20", "FX23"],FXKEY={"FX18": 0, "FX24": 0, "FX21": 0, "FX20": 0, "FX23": 0},FXTXT={"FX18": ["A) I added the WHITE part. Whole first: 16 × 16 = 256, then 256 − 80", "B) The white triangle should be 160", "C) The other piece should be 64"], "FX24": ["A) The WHOLE. Whole first: 100 + 36 + 16 = 152, then take away the white triangle (20 × 10 ÷ 2)", "B) 16 should be 36", "C) I should start from 200"], "FX21": ["A) AB, BC, CD and DA — and DA is AE + ED = 52 m. BE is inside, so it is not on the fence", "B) AB, BE, ED and AE", "C) AE, ED and CD only"], "FX20": ["A) I counted 3 triangles (24 × 3 = 72). Tap each one: there are 4, so 24 × 4", "B) The square is 72", "C) Each triangle is 18"], "FX23": ["A) 442, not 432 — so the take-away slipped. 432 − 198 = 234", "B) 432, so 244 is right", "C) The tile should be 442"]},FXSCR={"1": ["FX18", "FX24"], "2": ["FX21"], "3": ["FX20", "FX23"]};
+var S=null,fh=null,openedAt=new Date().toISOString(),lastSavedAt=null,wrote=0,storageBad=false,attempt=1,ST={},lastP='',savedFlag=false;
+function $(id){return document.getElementById(id);}
+function sload(){try{var s=window.localStorage.getItem(KEY);return s?JSON.parse(s):null;}catch(e){storageBad=true;return null;}}
+function sstore(){try{S.min=(S.base||0)+(Date.now()-new Date(openedAt).getTime())/60000;window.localStorage.setItem(KEY,JSON.stringify(S));}catch(e){storageBad=true;}}
+function byId(id){for(var i=0;i<ITEMS.length;i++)if(ITEMS[i].id===id)return ITEMS[i];}
+function isDone(id){var i;for(i=0;i<S.items.length;i++)if(S.items[i].id===id)return true;return !!S.side[id];}
+function recOf(id){var i;for(i=0;i<S.items.length;i++)if(S.items[i].id===id)return S.items[i];return S.side[id];}
+function nRc(){return Object.keys(S.rc||{}).length;}
+function nSlips(){var n=0,k;for(k in S.fx)if(S.fx[k].slip!==null&&S.fx[k].slip!==undefined)n++;return n;}
+function nDone(){return S.items.length+Object.keys(S.side).length+nSlips()+nRc();}
+function ytDone(){return S.items.length>=YT.length;}
+function fxAllDone(){var i;for(i=0;i<FXO.length;i++){if(!(S.fx[FXO[i]]&&S.fx[FXO[i]].done))return false;}return true;}
+function rcDone(){return !!(S.rc&&S.rc.R1&&S.rc.R1.done&&S.rc.R2&&S.rc.R2.done);}
+function allDone(){return ytDone()&&fxAllDone()&&rcDone();}
+function fxOK(s){var a=FXSCR[s],i;if(!a)return true;for(i=0;i<a.length;i++){if(!(S.fx[a[i]]&&S.fx[a[i]].done))return false;}return true;}
+var _nav=nav;nav=function(d){
+  if(d>0&&!fxOK(cur)){var lm=$('lockmsg_'+cur);if(lm){lm.style.display='block';lm.scrollIntoView({behavior:'smooth',block:'center'});}return;}
+  _nav(d);S.screen=cur;if(S.seen.indexOf(cur)<0)S.seen.push(cur);sstore();if(cur===5){rcPaint();showFinish();}};
+function init(){
+  Array.prototype.forEach.call(document.querySelectorAll('.wlb.auto'),function(b){wlShow(b,1);});
+  var P=sload();S={screen:0,seen:[0],items:[],side:{},fx:{},taps:{},rc:{},min:0,sittings:0,savedN:0};
+  if(P&&typeof P==='object'&&P.items&&P.seen){S=P;if(!S.side)S.side={};if(!S.fx)S.fx={};if(!S.taps)S.taps={};if(!S.rc)S.rc={};if(!S.savedN)S.savedN=0;}
+  S.base=S.min||0;S.sittings=(S.sittings||0)+1;attempt=S.sittings;sstore();
+  var i;for(i=0;i<ITEMS.length;i++)setupCard(ITEMS[i].id);
+  revealCards();watchFill();fxRestore();cntInit();rcPaint();
+  if(S.screen>0){nav(S.screen);}
+  ytStat();paintSave();
+}
+function watchFill(){
+  Array.prototype.forEach.call(document.querySelectorAll('.wlb[data-fill]'),function(b){
+    var f=JSON.parse(b.getAttribute('data-fill'));
+    function go(){if(b.classList.contains('alldone')){f.forEach(function(p){var e=$(p[0]);if(e){e.textContent=p[1];e.style.color='#1B5E20';}});}}
+    new MutationObserver(go).observe(b,{attributes:true,attributeFilter:['class']});go();
+  });
+}
+function setupCard(id){
+  var it=byId(id),lh='',i,l;$('q_'+id).textContent=it.q;
+  for(i=0;i<it.lines.length;i++){l=it.lines[i];lh+='<div class="al"><label>'+l.lab+' <input type="text" class="ln-'+l.k+'" aria-label="answer '+l.k+'" disabled></label></div>';}
+  $('ln_'+id).innerHTML=lh;
+  ST[id]={state:'idle',first:null,nudged:false,forgotHalf:false,addedNotTook:false,addedWhite:false,miscount:false,answeredOther:false,usedSlant:false,swapped:false,t0:null,circled:false,tries:0};
+  if(isDone(id)){var r=recOf(id),k;
+    var ins=$('yt_'+id).querySelectorAll('input');for(k=0;k<ins.length;k++){ins[k].disabled=true;var kk=ins[k].className.replace('ln-','');ins[k].value=(r.answersCorrect&&r.answersCorrect[kk])||'';}
+    $('chk_'+id).disabled=true;$('circ_'+id).classList.add('on');$('circ_'+id).disabled=true;$('yt_'+id).classList.add('done');
+    $('fb_'+id).className='feedback ok';$('fb_'+id).style.display='block';$('fb_'+id).textContent=(r.firstTryRight||r.selfFixedAfterNudge)?'⭐ done':'✨ done';ST[id].state='done';}
+}
+/* Your-turn cards on screen 5 appear one at a time; Fix-It and the tap card are shown by their own code */
+function revealCards(){var i,it;for(i=0;i<YT.length;i++){var prev=i>0?YT[i-1]:null;$('yt_'+YT[i]).classList.toggle('hidden',!!prev&&!isDone(prev));}}
+function circTap(id){var s=ST[id];if(s.state==='done')return;s.circled=true;s.t0=s.t0||Date.now();$('circ_'+id).classList.add('on');$('circ_'+id).textContent='✔1 I read ALL of the question ✓';
+  var ins=$('yt_'+id).querySelectorAll('input'),i;for(i=0;i<ins.length;i++)ins[i].disabled=false;$('chk_'+id).disabled=false;if(ins[0])ins[0].focus();}
+function stat(){var f=0,x=0,i,r;for(i=0;i<S.items.length;i++){r=S.items[i];if(r.firstTryRight||r.selfFixedAfterNudge)f++;else x++;}return [f,x];}
+function twinStat(){var f=0,x=0,i,r;for(i=0;i<FXO.length;i++){r=S.side[FXO[i]+'t'];if(!r)continue;if(r.firstTryRight||r.selfFixedAfterNudge)f++;else x++;}return [f,x];}
+function ytStat(){var s=stat();var e=$('ytstat');if(e)e.textContent='⭐ '+s[0]+' right  ·  ✨ '+s[1]+' fixed  ·  '+S.items.length+' of '+YT.length+' Your-turn questions done  ·  Fix-It cards '+fxCount()+' of 5';}
+function fxCount(){var n=0,i;for(i=0;i<FXO.length;i++)if(S.fx[FXO[i]]&&S.fx[FXO[i]].done)n++;return n;}
+function val(id,k){var e=$('yt_'+id).querySelector('.ln-'+k);return e?e.value.trim():'';}
+function givenLines(id){var it=byId(id),o={},i;for(i=0;i<it.lines.length;i++)o[it.lines[i].k]=val(id,it.lines[i].k);return o;}
+function wantLines(id){var it=byId(id),o={},i;for(i=0;i<it.lines.length;i++)o[it.lines[i].k]=it.lines[i].v;return o;}
+function err(id,m){var fb=$('fb_'+id);fb.className='feedback err';fb.style.display='block';fb.textContent=m;}
+function lockAll(id){var els=$('yt_'+id).querySelectorAll('input'),i;for(i=0;i<els.length;i++)els[i].disabled=true;$('chk_'+id).disabled=true;}
+function fmtOK(id,k,g,w){var v=parseVal(g);if(!v)return 'Fill every box first (like 13 or 6.5).';return '';}
+function okLine(g,w,k){return sameVal(parseVal(g),parseVal(w));}
+function inList(g,arr){var v=parseVal(g),i;if(!v)return false;for(i=0;i<arr.length;i++)if(sameVal(v,parseVal(arr[i])))return true;return false;}
+function ytCheck(id){
+  var it=byId(id),s=ST[id],gv=givenLines(id),wv=wantLines(id),ks=Object.keys(wv),i,k,m;
+  for(i=0;i<ks.length;i++){m=fmtOK(id,ks[i],gv[ks[i]],wv[ks[i]]);if(m){err(id,m);return;}}
+  s.tries++;
+  if(s.state==='fix'){var ok0=true;for(i=0;i<ks.length;i++)if(!okLine(gv[ks[i]],wv[ks[i]],ks[i]))ok0=false;
+    if(ok0)return fixedIt(id,gv);err(id,'Not yet — read the last lines again and copy the answer into the box.');return;}
+  if(!s.first)s.first={g:gv};
+  var ok=true;for(i=0;i<ks.length;i++)if(!okLine(gv[ks[i]],wv[ks[i]],ks[i]))ok=false;
+  if(ok)return gotIt(id,gv);
+  if(!s.nudged){
+    for(i=0;i<ks.length;i++){k=ks[i];
+      if(okLine(gv[k],wv[k],k))continue;
+      if(it.slant&&it.slant[k]&&inList(gv[k],it.slant[k])){s.nudged=true;s.usedSlant=true;err(id,NSLANT);return;}
+      if(it.half&&it.half[k]&&inList(gv[k],it.half[k])){s.nudged=true;s.forgotHalf=true;err(id,NHALF);return;}
+      if(it.addW&&it.addW[k]&&inList(gv[k],it.addW[k])){s.nudged=true;s.addedWhite=true;err(id,NADDW);return;}
+      if(it.mis&&it.mis[k]&&inList(gv[k],it.mis[k])){s.nudged=true;s.miscount=true;err(id,NMISC);return;}
+      if(it.add&&it.add[k]&&inList(gv[k],it.add[k])){s.nudged=true;s.addedNotTook=true;err(id,NADD);return;}
+      if(it.oth&&it.oth[k]&&inList(gv[k],it.oth[k])){s.nudged=true;s.answeredOther=true;err(id,NOTH);return;}
+    }
+  }
+  s.swapped=false;notYet(id,gv,false);
+}
+function praise(){var p=PR[Math.random()<0.5?0:2];if(p===lastP)p=(p===PR[0])?PR[2]:PR[0];lastP=p;return p;}
+function record(id,firstRight,gv,lines,selfFixed,fixedAns,afterLines){
+  var s=ST[id],want=wantLines(id);
+  var rec={id:id,circledTapped:!!s.circled,answersGiven:gv,answersCorrect:want,swapped:false,firstTryRight:firstRight,selfFixedAfterNudge:!!selfFixed,usedSlant:!!s.usedSlant,forgotHalf:!!s.forgotHalf,addedNotTook:!!s.addedNotTook,addedWhite:!!s.addedWhite,miscount:!!s.miscount,answeredOtherPart:!!s.answeredOther,fixedAnswer:fixedAns||null,fixedAfterLines:!!afterLines,linesViewed:lines,ms:Date.now()-(s.t0||Date.now())};
+  if(YT.indexOf(id)>=0)S.items.push(rec);else S.side[id]=rec;
+  sstore();
+}
+function chip(id){var c=CHIP[id];if(!c)return;var fb=$('fb_'+id),d=document.createElement('span');d.className='chip3';d.textContent=c;fb.parentNode.insertBefore(d,fb.nextSibling);}
+function gotIt(id,gv){var s=ST[id],f=!s.nudged;record(id,f,f?gv:s.first.g,0,s.nudged,f?null:gv,false);lockAll(id);s.state='done';var fb=$('fb_'+id);fb.className='feedback ok';fb.style.display='block';
+  fb.textContent='⭐ '+(s.nudged?PR[1]:praise());chip(id);after(id);}
+function rowEl(a,cls){var d=document.createElement('div'),m=document.createElement('span'),w=document.createElement('span');d.className=cls;if(a[2])d.setAttribute('data-card',a[2]);if(/^T\d+$/.test(a[2]||''))d.setAttribute('data-n',a[2].slice(1));m.className='m';w.className='why';m.textContent=a[0];w.textContent=a[1];d.appendChild(m);d.appendChild(w);return d;}
+function notYet(id,gv,sw){
+  var s=ST[id];s.state='lines';lockAll(id);s.first.g=s.first.g||gv;var so=$('sorry_'+id);
+  so.innerHTML='<div class="sbig">Not yet — here’s how it goes:</div>';so.style.display='block';
+  var blk=document.createElement('div'),ws=document.createElement('div'),Lr=WL[id],i,bt=document.createElement('button');
+  blk.className='wlb';blk.id='nywl_'+id;blk.setAttribute('data-bid',id);ws.className='wls';for(i=0;i<Lr.length;i++)ws.appendChild(rowEl(Lr[i],'wl'));
+  bt.type='button';bt.className='btn-next';bt.innerHTML='Next line &#9656;';bt.onclick=function(){nyNext(id,bt);};blk.appendChild(ws);blk.appendChild(bt);so.appendChild(blk);wlShow(blk,1);
+  $('fb_'+id).style.display='none';
+}
+function nyNext(id,btn){var b=btn.parentNode;wlShow(b,wlCount(b)+1);if(b.classList.contains('alldone')){ST[id].state='fix';
+  var fb=$('fb_'+id);fb.className='feedback';fb.style.display='block';fb.textContent='Now type the answer from the last lines.';
+  var els=$('yt_'+id).querySelectorAll('input'),i;for(i=0;i<els.length;i++){els[i].disabled=false;els[i].value='';}$('chk_'+id).disabled=false;}}
+function fixedIt(id,gv){var s=ST[id],n=$('nywl_'+id)?wlCount($('nywl_'+id)):0;record(id,false,s.first.g,n,false,gv,true);lockAll(id);s.state='done';var fb=$('fb_'+id);fb.className='feedback ok';fb.style.display='block';fb.textContent='✨ '+PR[3];chip(id);after(id);}
+function after(id){$('yt_'+id).classList.add('done');ytStat();if(YT.indexOf(id)>=0)revealCards();
+  if(/^FX/.test(id))fxAfter(id);
+  autoSave();paintSave();if(allDone()&&cur===5)showFinish();}
+function showFinish(){
+  if(!allDone())return;var rm=$('rcmsg');if(rm){rm.textContent=(S.rc.R1.firstRight&&S.rc.R2.firstRight)?'Ready. Test tomorrow — on its own, no lesson open.':'Test tomorrow — on its own, no lesson open. Your card can be open.';}var s=stat(),t=twinStat();$('fboth').textContent='Your turn: ⭐ '+s[0]+'   ✨ '+s[1]+'   ·   Twins: ⭐ '+t[0]+'   ✨ '+t[1];$('finish').style.display='block';
+  if(!S.celebrated){S.celebrated=true;sstore();confetti();}
+}
+function confetti(){var cols=['#F9A825','#43A047','#3F51B5','#FB8C00','#8E24AA','#00ACC1'],i;
+  for(i=0;i<36;i++){var e=document.createElement('span');e.className='cf';e.style.left=(Math.random()*100)+'vw';e.style.background=cols[i%cols.length];e.style.animationDelay=(Math.random()*0.8)+'s';
+    document.body.appendChild(e);(function(z){setTimeout(function(){if(z.parentNode)z.parentNode.removeChild(z);},4200);})(e);}}
+/* ---- Fix-It Corner: his answer -> find the slip -> redo -> twin. One card at a time, no all-right gate, stars only go up ---- */
+function fxS(id){if(!S.fx[id])S.fx[id]={slip:null,slipRight:null,stage:0,done:false,t0:null,ms:null};return S.fx[id];}
+function fxPaint(){
+  var scr,i,j,g;
+  for(scr in FXSCR){g=FXSCR[scr];var open=-1;for(i=0;i<g.length;i++){if(!(S.fx[g[i]]&&S.fx[g[i]].done)){open=i;break;}}
+    var dots=$('fxdots_'+scr).children;
+    for(i=0;i<g.length;i++){var id=g[i],el=$('fx_'+id),st=S.fx[id]||{stage:0,done:false};
+      el.classList.toggle('hidden',open>=0&&i>open);el.classList.toggle('fxdone',!!st.done);
+      var sts=el.querySelectorAll('.fx-st');for(j=0;j<sts.length;j++)sts[j].classList.toggle('on',parseInt(sts[j].getAttribute('data-s'),10)<=(st.done?3:st.stage));
+      dots[i].className=st.done?'d':(i===open?'c':'');}
+    $('fxfinal_'+scr).style.display=(open<0)?'block':'none';}
+}
+function fxGo(id){var st=fxS(id);st.t0=st.t0||Date.now();if(st.stage<1)st.stage=1;sstore();fxPaint();}
+function fxPick(id,i){var st=fxS(id);if(st.slip!==null)return;var right=(i===FXKEY[id]);st.slip=i;st.slipRight=right;
+  var btns=$('fxo_'+id).querySelectorAll('.fxopt'),k;for(k=0;k<btns.length;k++){btns[k].disabled=true;if(k===FXKEY[id])btns[k].classList.add('right');else if(k===i)btns[k].classList.add('pickedwrong');}
+  $('fxres_'+id).textContent=right?'✓ Yes — that is the slip.':'Not quite. It was: '+FXTXT[id][FXKEY[id]];$('fxres_'+id).className='fxres '+(right?'ok':'amb');
+  $('fxb2_'+id).style.display='inline-block';sstore();paintSave();autoSave();}
+function fxToRedo(id){var st=fxS(id);if(st.stage<2)st.stage=2;sstore();fxPaint();}
+function fxAfter(id){var base=id.replace(/[rt]$/,''),st=fxS(base);
+  if(/r$/.test(id)){if(st.stage<3)st.stage=3;}
+  if(/t$/.test(id)){st.done=true;st.ms=Date.now()-(st.t0||Date.now());}
+  sstore();fxPaint();fxButtons();}
+function fxButtons(){var i;for(i=0;i<FXO.length;i++){var id=FXO[i],st=S.fx[id];var b=$('fxb3_'+id);if(b)b.style.display=(st&&st.done)?'inline-block':'none';var b2=$('fxb2_'+id);if(b2&&st&&st.slip!==null&&st.slip!==undefined&&!(st.stage>=2))b2.style.display='inline-block';}}
+function fxNext(id){fxPaint();var scr,g,i;for(scr in FXSCR){g=FXSCR[scr];i=g.indexOf(id);if(i>=0&&i<g.length-1){var n=$('fx_'+g[i+1]);if(n)n.scrollIntoView({behavior:'smooth',block:'start'});}}}
+function fxRestore(){var i,id,st;for(i=0;i<FXO.length;i++){id=FXO[i];st=S.fx[id];
+  if(isDone(id+'t')&&st){st.done=true;}else if(isDone(id+'r')&&st&&st.stage<3){st.stage=3;}
+  if(st&&st.slip!==null&&st.slip!==undefined){var btns=$('fxo_'+id).querySelectorAll('.fxopt'),k;for(k=0;k<btns.length;k++){btns[k].disabled=true;if(k===FXKEY[id])btns[k].classList.add('right');else if(k===st.slip)btns[k].classList.add('pickedwrong');}
+    $('fxres_'+id).textContent=st.slipRight?'✓ Yes — that is the slip.':'Not quite. It was: '+FXTXT[id][FXKEY[id]];$('fxres_'+id).className='fxres '+(st.slipRight?'ok':'amb');$('fxb2_'+id).style.display='inline-block';}}
+  fxPaint();fxButtons();}
+/* ---- saving: Save sits alone at the page end, enabled from the first answer; the only hub exit is the top-left X, which warns while anything is unsaved ---- */
+function fileName(){var d=new Date(),p=function(n){return (n<10?'0':'')+n;};return 'MATH_U074_Lesson_'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'_a'+attempt+'.json';}
+function dirty(){return nDone()>(S.savedN||0);}
+function fixItList(){var out=[],i,id,st,r1,r2;for(i=0;i<FXO.length;i++){id=FXO[i];st=S.fx[id]||{};r1=S.side[id+'r'];r2=S.side[id+'t'];
+  out.push({id:id,slipPicked:(st.slip===null||st.slip===undefined)?null:st.slip,slipRight:(st.slipRight===undefined)?null:st.slipRight,
+    redoAnswer:r1?((r1.answersGiven&&r1.answersGiven.ans)||''):null,redoRight:r1?!!r1.firstTryRight:null,redoLinesViewed:r1?r1.linesViewed:null,
+    twinAnswer:r2?((r2.answersGiven&&r2.answersGiven.ans)||''):null,twinRight:r2?!!r2.firstTryRight:null,twinLinesViewed:r2?r2.linesViewed:null,ms:st.ms||null});}
+  return out;}
+function rcOut(id){var r=S.rc[id];if(!r)return null;return {answerFirst:r.first,firstRight:r.firstRight,detourTaken:!!r.detour,answerRetry:r.retry,retryRight:r.retryRight,linesShown:!!r.linesShown,done:!!r.done,ms:r.ms||null};}
+function payload(){
+  var s=stat(),fh2=0,an=0,aw=0,mc=0,ao=0,us=0,i,now=new Date();for(i=0;i<S.items.length;i++){var it=S.items[i];if(it.forgotHalf)fh2++;if(it.addedNotTook)an++;if(it.addedWhite)aw++;if(it.miscount)mc++;if(it.answeredOtherPart)ao++;if(it.usedSlant)us++;}
+  lastSavedAt=now.toISOString();var det=[];if(S.rc.R1&&S.rc.R1.detour)det.push('R1');if(S.rc.R2&&S.rc.R2.detour)det.push('R2');
+  return {student:'Prem',subject:'Math',unit:'U074',type:'lesson',attempt:attempt,openedAt:openedAt,lastSavedAt:lastSavedAt,
+    minutesSpent:Math.round(((S.base||0)+(now-new Date(openedAt))/60000)*10)/10,screensSeen:S.seen.length,finished:allDone(),stars:s[0],fixed:s[1],swaps:0,
+    usedSlant:us,forgotHalf:fh2,addedNotTook:an,addedWhite:aw,miscount:mc,answeredOtherPart:ao,items:S.items,fixIt:fixItList(),sideItems:S.side,
+    readyCheck:{R1:rcOut('R1'),R2:rcOut('R2'),detour:det}};
+}
+function paintSave(){
+  var z=$('savezone'),st=$('sstat'),bt=$('savebtn'),n=nDone();if(!z)return;
+  bt.disabled=(n<1);
+  z.classList.toggle('saved',n>0&&!dirty());
+  if(n<1)st.textContent='Answer your first question — then press Save so Dad and Chusaki can see it.';
+  else if(!dirty())st.textContent='Saved — Dad and Chusaki can see it now ('+(S.savedN||0)+' answers, file '+fileName()+')';
+  else st.textContent='Not saved yet — '+n+' answer'+(n>1?'s':'')+' kept on this device. Press Save.';
+}
+function markSaved(){S.savedN=nDone();sstore();paintSave();}
+function writeTo(h){return h.createWritable().then(function(w){return w.write(JSON.stringify(payload(),null,2)).then(function(){return w.close();});});}
+function autoSave(){
+  if(!nDone())return;
+  if(fh){writeTo(fh).then(function(){wrote++;markSaved();}).catch(function(){fh=null;paintSave();});}
+}
+async function saveClick(){
+  var name=fileName(),json;
+  if(window.showSaveFilePicker){
+    try{fh=await window.showSaveFilePicker({suggestedName:name,types:[{description:'JSON results',accept:{'application/json':['.json']}}]});
+      await writeTo(fh);wrote++;markSaved();return;
+    }catch(e){fh=null;if(e&&e.name==='AbortError'){$('sstat').textContent='You closed the save box, so nothing was saved yet. Press Save again.';return;}}}
+  try{json=JSON.stringify(payload(),null,2);var blob=new Blob([json],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},4000);
+    markSaved();
+  }catch(e2){$('sstat').textContent='Saving did not work. Tell Dad.';}
+}
+/* ---- the unsaved warning: the X, the browser back button and closing the tab never drop a result silently ---- */
+var bypass=false;
+window.addEventListener('beforeunload',function(e){if(!bypass&&S&&dirty()){e.preventDefault();e.returnValue='';return '';}});
+function xClick(ev){if(S&&dirty()){ev.preventDefault();$('unsavedov').classList.add('on');return false;}return true;}
+function stayAndSave(){$('unsavedov').classList.remove('on');var z=$('savezone');z.classList.add('pulse');z.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){z.classList.remove('pulse');},3000);}
+function leaveAnyway(){bypass=true;window.location.href=$('xclose').href;}
+/* ---- paint it (screen 2) ---- */
+var PT={whole:false,white:false};
+function ptTap(w){var ct=$('pt_ct'),msg=$('pt_msg'),u=$('pt_under');
+  if(w==='whole'){if(PT.whole)return;PT.whole=true;$('pt_big').setAttribute('fill','#B0BEC5');$('pt_small').setAttribute('fill','#B0BEC5');
+    ct.innerHTML='Whole: 9 × 9 = 81 &nbsp;+&nbsp; 5 × 5 = 25 &nbsp;→&nbsp; <b>106</b>';msg.textContent='Now tap the white triangle. It is the part to take away.';msg.className='tapfb amb';}
+  else{if(!PT.whole){u.classList.remove('flash');void u.getBoundingClientRect();u.classList.add('flash');msg.textContent='White = take away. Paint the whole first!';msg.className='tapfb amb';return;}
+    if(PT.white)return;PT.white=true;u.setAttribute('fill','#fff');
+    ct.innerHTML='Whole: 81 + 25 = 106 &nbsp;|&nbsp; White triangle: 14 × 9 ÷ 2 = 63 &nbsp;→&nbsp; <b>− 63</b><br>Shaded = 106 − 63 = <b>43</b>';msg.textContent='What is left in grey is the shaded part.';msg.className='tapfb ok';}}
+function ptReset(){PT={whole:false,white:false};$('pt_big').setAttribute('fill','#fff');$('pt_small').setAttribute('fill','#fff');$('pt_under').setAttribute('fill','rgba(0,0,0,0)');$('pt_ct').textContent='Tap the shape to paint the whole.';$('pt_msg').textContent='';}
+/* ---- walk the fence (screen 3) ---- */
+var FN={};
+function fnShow(id,on){var e=$('hl_'+id);if(e)e.setAttribute('opacity',on?'1':'0');}
+function fnPaint(){var t=0,parts=[],k;
+  if(FN.BC){t+=10;parts.push('BC 10');} if(FN.CD){t+=7;parts.push('CD 7');} if(FN.DA){t+=34;parts.push('DA 24 + 10 = 34');}
+  $('fn_ct').innerHTML=parts.length?('Fence so far: '+parts.join(' &nbsp;+&nbsp; ')+(parts.length>1?' &nbsp;=&nbsp; <b>'+t+'</b>':'')):'Fence so far: nothing yet.';
+  if(FN.BC&&FN.CD&&FN.DA&&!FN.AB){$('fn_msg').textContent='Every known fence side is done. The missing side is AB. Tap it.';$('fn_msg').className='tapfb amb';}}
+function fnTap(id){var m=$('fn_msg');
+  if(id==='BE'){$('fn_BE').setAttribute('stroke','#B0BEC5');m.textContent='BE is inside the figure, so it is NOT on the fence. It stays grey.';m.className='tapfb amb';return;}
+  if(id==='AB'){if(!(FN.BC&&FN.CD&&FN.DA)){m.textContent='AB is the side we do not know yet. Tap the other fence sides first.';m.className='tapfb amb';return;}
+    if(FN.AB)return;FN.AB=true;fnShow('AB',true);$('fn_q').textContent='25 m';$('fn_ct').innerHTML='Fence so far: 10 + 7 + 34 = <b>51</b> &nbsp;|&nbsp; AB = 76 − 51 = <b>25 m</b>';m.textContent='The missing side is the perimeter minus the sides you know.';m.className='tapfb ok';return;}
+  if(FN[id])return;FN[id]=true;
+  if(id==='BC'){fnShow('BC',true);m.textContent='BC = ED = 10 m (opposite sides of a rectangle are equal).';m.className='tapfb ok';}
+  if(id==='CD'){fnShow('CD',true);m.textContent='CD = 7 m. It is on the outside, so it counts.';m.className='tapfb ok';}
+  if(id==='DA'){fnShow('AE',true);fnShow('ED',true);m.textContent='DA is ONE side made of two parts: AE + ED = 24 + 10 = 34 m.';m.className='tapfb ok';}
+  fnPaint();}
+function fnReset(){FN={};['AB','BC','CD','AE','ED'].forEach(function(i){fnShow(i,false);});$('fn_BE').setAttribute('stroke','#1565C0');$('fn_q').textContent='?';$('fn_msg').textContent='';fnPaint();}
+/* ---- count the triangles (L5) ---- */
+var CNT={n:0,seen:{}};
+function cntInit(){var svg=$('svg_L5');if(!svg)return;var ps=svg.querySelectorAll('.pc'),i;
+  for(i=0;i<ps.length;i++){var nm=ps[i].getAttribute('data-piece');if(/^t\d$/.test(nm)){ps[i].classList.add('tapz');(function(p,nm){p.addEventListener('click',function(){cntTap(p,nm);});})(ps[i],nm);}}
+  if(S.taps&&S.taps.cnt>=5){cntDone(true);}}
+function cntTap(p,nm){if(CNT.seen[nm])return;CNT.seen[nm]=true;CNT.n++;p.classList.add('counted');
+  var pts=p.getAttribute('points').split(' ').map(function(s){return s.split(',').map(Number);}),cx=(pts[0][0]+pts[1][0]+pts[2][0])/3,cy=(pts[0][1]+pts[1][1]+pts[2][1])/3;
+  var t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',cx);t.setAttribute('y',cy+5);t.setAttribute('font-size','15');t.setAttribute('font-weight','900');t.setAttribute('fill','#BF360C');t.setAttribute('text-anchor','middle');t.textContent=CNT.n;p.parentNode.appendChild(t);
+  $('cnt_ct').textContent='Counted: '+CNT.n+(CNT.n>=5?'  —  that is all 5.':'');if(CNT.n>=5){S.taps.cnt=5;sstore();cntDone(false);}}
+function cntDone(restore){var b=$('wlb_L5');if(!b)return;b.classList.remove('closed');if(wlCount(b)===0)wlShow(b,1);if(restore)$('cnt_ct').textContent='Counted: 5  —  that is all 5.';}
+/* ---- ready check ---- */
+var RC={R1:{want:'102',det:1,msg:'Go to ‘paint it’ on screen 2, then come back.',go:'Go to ‘paint it’ on screen 2'},R2:{want:'29',det:2,msg:'Go to ‘walk the fence’ on screen 3, then come back.',go:'Go to ‘walk the fence’ on screen 3'}};
+function say(fb,ok,msg){fb.style.display='block';fb.className='feedback '+(ok?'ok':'err');fb.textContent=msg;}
+function rcLines(id){var so=$('rcso_'+id),r=S.rc[id];r.linesShown=true;sstore();so.innerHTML='<div class="sbig">Here is how it goes:</div>';so.style.display='block';
+  var blk=document.createElement('div'),ws=document.createElement('div'),Lr=WL[id],i;blk.className='wlb';ws.className='wls';for(i=0;i<Lr.length;i++){var row=rowEl(Lr[i],'wl');row.className='wl on';ws.appendChild(row);}blk.appendChild(ws);so.appendChild(blk);}
+function rcFinish(id,txt,ok){var r=S.rc[id];r.done=true;r.ms=Date.now()-(r.t0||Date.now());$('rcin_'+id).disabled=true;$('rcchk_'+id).disabled=true;$('rcgo_'+id).style.display='none';say($('rcfb_'+id),ok,txt);sstore();paintSave();autoSave();showFinish();}
+function rcCheck(id){var inp=$('rcin_'+id),fb=$('rcfb_'+id),g=parseVal(inp.value),want=parseVal(RC[id].want);
+  if(!inp.value.trim()||!g){say(fb,false,'Type your answer first (like 102 or 29).');return;}
+  var r=S.rc[id]||(S.rc[id]={first:null,firstRight:null,detour:false,retry:null,retryRight:null,done:false,t0:Date.now(),ms:null,linesShown:false});
+  var right=sameVal(g,want);
+  if(r.first===null){r.first=inp.value.trim();r.firstRight=right;
+    if(right){rcFinish(id,'⭐ Right first time.',true);return;}
+    say(fb,false,'Not yet. '+RC[id].msg);var go=$('rcgo_'+id);go.textContent=RC[id].go+' ▸';go.style.display='inline-block';sstore();paintSave();autoSave();return;}
+  if(r.retry===null&&!r.detour){say(fb,false,'Take the detour first: '+RC[id].go+'.');return;}
+  if(r.retry===null){r.retry=inp.value.trim();r.retryRight=right;
+    if(right){rcFinish(id,'✨ Fixed it! That’s how brains grow.',true);return;}
+    rcLines(id);rcFinish(id,'Not yet. Read the lines below. You can take the test tomorrow with your card open.',false);}}
+function rcGo(id){var r=S.rc[id];r.detour=true;sstore();goTo(RC[id].det);}
+function rcPaint(){var id,ids=['R1','R2'],i;
+  for(i=0;i<ids.length;i++){id=ids[i];var r=S.rc[id];if(!r)continue;
+    $('rcin_'+id).value=r.done?(r.retry!==null?r.retry:r.first):(r.detour&&r.retry===null?'':r.first||'');
+    if(r.done){$('rcin_'+id).disabled=true;$('rcchk_'+id).disabled=true;say($('rcfb_'+id),!!(r.firstRight||r.retryRight),r.firstRight?'⭐ Right first time.':(r.retryRight?'✨ Fixed it! That’s how brains grow.':'Not yet. You can take the test tomorrow with your card open.'));if(r.linesShown&&$('rcso_'+id).style.display!=='block')rcLines(id);}
+    else if(r.first!==null){var go=$('rcgo_'+id);go.textContent=RC[id].go+' ▸';go.style.display='inline-block';
+      if(r.detour){say($('rcfb_'+id),false,'Back from the detour. Try the same question once more.');}}}}
+
+init();
+
+</script>
+</body>
+</html>
