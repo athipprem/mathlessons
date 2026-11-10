@@ -15,13 +15,36 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '1 Nov 2026',
+  updated:        '10 Nov 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:74, topic:'Cycle 7 \u2014 Close the U73 gaps before the school test (Wed 4 Nov): whole first, walk the fence, count it, add back', status:'Test Pending', buildNote:'Built 1 Nov 2026 per BUILD_PLAN_MATH_U74_WholeFirst_Fence.md v1.0. Four moves from the U73 mock (36/50): WHOLE FIRST (shaded = whole minus white; Q18, Q24), WALK THE FENCE (the perimeter is the outside only; Q21 a), COUNT IT (Q20) and ADD BACK (Q23). One lesson Triangles_Lesson_WholeFirst_Fence.html, 6 screens: the four moves and the Chapter 4 card with four new lines; paint-it and the lines for whole first (Fix-It FX18 and FX24 inside); walk-the-fence and the lines (FX21); count-it and add-back (FX20 and FX23); Your turn x6 with no worked example; a 2-question ready check that sends a miss back to the right picture (paint it or walk the fence) for one more try. Test Unit_074_Test_WholeFirstFence.docx: 12 questions, 1 mark each (Basic 3, Intermediate 5, Applied 4), pass 10/12, key question Q9 (Nina sticker, the whole from three squares), no Recall. Timeline: lesson Mon 2 Nov, test Tue 3 Nov (different days), school test Wed 4 Nov. Gates: verify_u74_plan.py PASS, --html PASS (80 lesson lines, 0 bad), verify_lesson_pack.py PASS, answer-leak check on the rendered paper 0, every lesson screen looked at on phone width and the widgets, Your turn, Fix-It and ready check clicked through. Nothing is planned after U74 until the school result is in.' },
+  currentUnit: { n:75, topic:'Chapter 5 Ratio, part 1 \u2014 finding a ratio, simplest form, work it out first (Shaping Maths 5A Unit 5, Activities 1\u20133)', status:'Test Pending', buildNote:'Built 10 Nov 2026 per BUILD_PLAN_MATH_U75_Ratio_FindingRatio.md v1.0. His class started Chapter 5 Ratio (Lui, 4 Nov). One lesson Ratio_Lesson_FindingRatio.html, 6 screens: Fix-It Corner (three U74 slips: 14 x 2 as 38, the 7 cm square as 35, 112 - 82 as 28, each with a slip pick, a redo and a twin); what a ratio is (line them up, then the lines: order and part : total); simplest form and equal ratios (equal groups slider, then the lines); work it out first (more than, ages, giving, squares: real amounts boxes before the ratio box); Your turn x8 with no worked example (Next stays locked until all 8 have an answer); a 2-question ready check that sends a miss back to line them up or to the real-amounts animation. The Ratio Card is a panel on every screen. Test Unit_075_Test_Ratio_FindingRatio.docx: 16 questions. Part 1 = Q1-Q12, 1 mark each (Basic 3, Intermediate 5, Applied 4), pass 10/12, key question Q12 (perimeters to areas as a ratio). Part 2 Recall = Q13-Q16 (U74 whole first, U74 walk the fence, U66 fractions, U71 buy-and-get-free), scored separately, target 3/4. Timeline: lesson one day, test a DIFFERENT day (the last 9 units were all the same day). Gates: verify_u75_plan.py PASS, --html PASS (40 lesson lines, 0 bad, 0 untagged), verify_lesson_pack.py PASS, answer-leak check on the rendered paper 0, marks re-added from the document (12 + 4). Lesson looked at on phone width and clicked through (Fix-It, line-up, slider, nudges, Your-turn lock, detours, JSON save). The Chapter 4 school test result (sat Wed 4 Nov) is still awaited.' },
   lastUnit: {
+    n:74, outOf:12, score:9, markedScore:9, pct:75, delta:0, prevScore:36, prevOutOf:50, prevLabel:'U73 (50-mark mock, not comparable)',
+    coached: false, independentResult: true, distanceFromClass: 'Shaping Maths 5A Chapter 4 (school test sat Wed 4 Nov, result awaited); lesson and test the same day (lesson 12:14-12:29 UTC, scan 13:26 UTC on 2 Nov; the plan had the test on Tue 3 Nov)',
+    patternLabel: 'Unit 74 &mdash; Four moves before the school test, scanned 2 Nov 2026 &mdash; 9/12 verified (marked 9/12) &middot; alone ticked',
+    patternInsight: '<strong>Basic 3/3 &middot; Intermediate 4/5 &middot; Applied 2/4.</strong> Pass 10/12 not reached. Key question Q9 (Nina sticker, three squares) wrong: 56, correct 70, the 7 cm square written as 35. Q6 (b) 232 for 222 (14 x 2 written as 38). Q10 (a) 112 - 82 written as 28. Q6 and Q10 are two-part, so each scored 0. Count it 4/4. Lesson JSON: 14.9 min, finished false, only Y1 recorded. Lesson and test the same day. Full record in TEST_RECORD_U74.md. Observation only.',
+    analysisLabel: 'Next: Unit 75 &mdash; Ratio, part 1 (built 10 Nov 2026)',
+    analysisInsight: 'U75 opens Chapter 5 Ratio: finding a ratio, simplest form, work it out first. Its Fix-It Corner takes the three U74 slips. Lesson one day, test another day.',
+    qSummary: '<strong>Basic 3/3 | Intermediate 4/5 | Applied 2/4</strong> &mdash; 9/12 (75%)',
+    qBreakdown: [
+      { q:'Q1', topic:'Rectangle 19 x 7 minus a white corner triangle', lvl:'l', pass:true, note:'&#10003; 98 cm&sup2;.' },
+      { q:'Q2', topic:'Rectangle 12 x 4 plus 3 triangles', lvl:'l', pass:true, note:'&#10003; 78 cm&sup2;.' },
+      { q:'Q3', topic:'Fence, perimeter first: find AB', lvl:'l', pass:true, note:'&#10003; 37 (unit written m&sup2; for a length).' },
+      { q:'Q4', topic:'Square 24 minus a white triangle', lvl:'m', pass:true, note:'&#10003; 468 cm&sup2;.' },
+      { q:'Q5', topic:'Square tile 16, 4 white triangles', lvl:'m', pass:true, note:'&#10003; 184 cm&sup2;.' },
+      { q:'Q6', topic:'Fence the other way: (a) CD (b) area (both parts needed)', lvl:'m', pass:false, note:'&#10007; (a) 15 right; (b) 232, correct 222 (14 x 2 as 38). 0 of 1.' },
+      { q:'Q7', topic:'Two squares 10 and 4, white triangle under the line', lvl:'m', pass:true, note:'&#10003; 46 cm&sup2;.' },
+      { q:'Q8', topic:'Tile 45 x 12 minus 5 triangles', lvl:'m', pass:true, note:'&#10003; 315 cm&sup2;.' },
+      { q:'Q9', topic:'Nina sticker: squares 12, 7, 3, piece under the line thrown away (key)', lvl:'h', pass:false, note:'&#10007; 56, correct 70 (7 cm square written as 35).' },
+      { q:'Q10', topic:'Farmer Lim field: (a) AB (b) area (both parts needed)', lvl:'h', pass:false, note:'&#10007; (a) 28, correct 30 (112 - 82 slip); (b) 576 right. 0 of 1.' },
+      { q:'Q11', topic:'L-shaped garden minus a pond', lvl:'h', pass:true, note:'&#10003; 233 cm&sup2;.' },
+      { q:'Q12', topic:'Paper crown: rectangle plus identical triangles', lvl:'h', pass:true, note:'&#10003; 252 cm&sup2;.' }
+    ]
+  },
+  _U73archived: {
     n:73, outOf:50, score:36, markedScore:35.5, pct:72, delta:0, prevScore:9, prevOutOf:12, prevLabel:'U72 (12-mark test, not comparable)',
     coached: false, independentResult: true, distanceFromClass: 'Shaping Maths 5A Chapter 4 in full, the day before the school test prep; lesson and mock the same day (1 h 56 min apart; the plan had the mock on Mon 2 Nov)',
     patternLabel: 'Unit 73 &mdash; Chapter 4 school-format mock, scanned 1 Nov 2026 &mdash; 36/50 verified (35.5 as marked) &middot; alone circled',
@@ -926,25 +949,40 @@ var PREM_DATA = {
     { n:'M7', label:'M7', score:12, outOf:20, delta:0, color:'linear-gradient(135deg,#283593,#1A237E)', star:false },
     { n:70, score:9, outOf:12, delta:null, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 },
     { n:71, score:8, outOf:12, delta:-1, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 },
-    { n:72, score:9, outOf:12, delta:+1, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:4, recallOutOf:4 }
+    { n:72, score:9, outOf:12, delta:+1, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:4, recallOutOf:4 },
+    { n:74, score:9, outOf:12, delta:null, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 75,
+      badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 75 &mdash; Ratio, part 1: finding a ratio, simplest form, work it out first (Shaping Maths 5A Unit 5)',
+      tags: [
+        { t:'Built 10 Nov 2026 (plan v1.0)', c:'tblue' },
+        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Lesson one day, test a DIFFERENT day', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'6 screens, 3 Fix-It cards, Your turn x8, 2-question ready check', c:'tgreen' },
+        { t:'Test: Part 1 = 12 (3/5/4, pass 10, key Q12) + Recall 4 (target 3)', c:'tgreen' },
+        { t:'Gates: plan gate + html + lesson pack + leak check PASS', c:'tgreen' }
+      ],
+      note: 'Built from BUILD_PLAN_MATH_U75_Ratio_FindingRatio.md v1.0. Chapter 5 Ratio opens: order, part : total, simplest form, equal ratios, and work it out first. Each idea has a picture route and then the lines. A Fix-It Corner takes the three U74 slips, and the Ratio Card sits on every screen. Lesson and test must be on different days.',
+      status: 'live'
+    },
+    {
       n: 74,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
       title: 'Unit 74 &mdash; Four moves before the school test: whole first, walk the fence, count it, add back (Shaping Maths 5A Unit 4)',
       tags: [
-        { t:'Built 1 Nov 2026 (plan v1.0)', c:'tblue' },
-        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
-        { t:'Lesson Mon 2 Nov, test Tue 3 Nov, school test Wed 4 Nov', s:'background:#E8EAF6;color:#283593;font-weight:700' },
-        { t:'6 screens, 5 Fix-It cards, Your turn x6, 2-question ready check', c:'tgreen' },
-        { t:'Test: 12 questions, 3/5/4, pass 10/12, key Q9', c:'tgreen' },
-        { t:'Gates: plan gate + html + lesson pack + leak check PASS', c:'tgreen' }
+        { t:'9/12 verified &mdash; alone', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'Basic 3/3 &middot; Intermediate 4/5 &middot; Applied 2/4', c:'torange' },
+        { t:'Key question Q9 wrong (56, correct 70)', s:'background:#FFF8E1;color:#E65100;font-weight:700' },
+        { t:'Lesson and test the same day', c:'torange' },
+        { t:'&rarr; Unit 75', c:'torange' }
       ],
-      note: 'Built from BUILD_PLAN_MATH_U74_WholeFirst_Fence.md v1.0. The four U73 gaps, each with two routes (a picture, then lines), a Fix-It card on his own wrong answer, and a ready check that sends a miss back to the right picture. Lesson and test must be on different days: lesson Monday, test Tuesday.',
-      status: 'live'
+      note: 'Built from BUILD_PLAN_MATH_U74_WholeFirst_Fence.md v1.0. Test scanned 2 Nov, pass 10/12 not reached. Q9 the 7 cm square written as 35; Q6 (b) 14 x 2 written as 38; Q10 (a) 112 - 82 written as 28; Q6 and Q10 each one part wrong. Count it 4/4. Lesson JSON 14.9 min, not finished, only Y1 recorded. Record: TEST_RECORD_U74.md.',
+      status: 'done'
     },
     {
       n: 73,
