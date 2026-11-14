@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson — Sunday top-up (Unit 77)</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+
+
+:root{--nav:#3F51B5;--nav-dark:#283593;--bg:#E8EAF6;--card:#fff;--acc:#3F51B5;--ok:#2E7D32;--err:#8D6E00;--warn:#283593}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column}
+.topnav{background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;flex-wrap:wrap}
+.tnav-hub{color:#fff;text-decoration:none;font-size:14px;white-space:nowrap;opacity:.9}
+.tnav-hub:hover{opacity:1;text-decoration:underline}
+.tnav-title{font-size:14px;font-weight:700;text-align:center;flex:1;min-width:0;line-height:1.3}
+.tnav-pill{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:13px}
+.tnav-btns{display:flex;gap:6px}
+.tnav-btns button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.screen{display:none;flex:1;padding:16px;max-width:800px;margin:0 auto;width:100%}
+.screen.active{display:block}
+.wrap{max-width:760px;margin:0 auto;padding:16px;width:100%}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+h2{color:var(--acc);font-size:1.25rem;margin-bottom:12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{color:var(--warn);font-size:1.05rem;margin-bottom:10px}
+p,li{font-size:1rem;line-height:1.65}
+.why{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.why-title{color:var(--warn);font-weight:700;margin-bottom:6px}
+.big-rule{background:#E8EAF6;border:2px solid var(--acc);border-radius:12px;padding:16px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--warn);margin:14px 0}
+.golden{background:linear-gradient(135deg,#E8EAF6,#C5CAE9);border:2px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.golden-title{color:var(--warn);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.rulebar{background:#E8EAF6;border:1.5px solid var(--acc);border-radius:8px;padding:8px 14px;font-size:.92rem;font-weight:700;color:var(--warn);text-align:center;margin:12px 0}
+.bridge{background:#FFF8E1;border:1.5px dashed #F9A825;border-radius:8px;padding:10px 14px;font-size:.92rem;font-style:italic;color:#8d6e00;margin-bottom:12px}
+.steps{margin:10px 0 6px 0;background:#F0F1FA;border:1px solid #9FA8DA;border-radius:10px;padding:14px 16px}
+.steps .ln{font-size:1.02rem;color:#1a1a2e;padding:4px 0}
+.steps .ln .note{font-style:italic;font-size:.85rem;color:var(--acc)}
+.steps .ln.ans{color:var(--warn);font-weight:800}
+.warn-box{background:#E8EAF6;border:1.5px solid #9FA8DA;border-radius:8px;padding:12px 16px;margin-top:12px}
+.warn-box p{font-size:.95rem;color:var(--warn)}
+.q-card{background:#F0F1FA;border:1.5px solid #9FA8DA;border-radius:10px;padding:16px;margin-bottom:14px}
+.q-text{font-size:1rem;margin-bottom:12px;font-weight:600}
+.q-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1px solid #9FA8DA;border-radius:14px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px}
+.btn-check{background:var(--acc);color:#fff;border:none;padding:8px 22px;border-radius:8px;cursor:pointer;font-size:.92rem;font-weight:600}
+.feedback{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.95rem;display:none}
+.feedback.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.feedback.err{background:#FFF3E0;color:#8D6E00;border:1px solid #FFE0B2}
+.btn-show-steps{background:#fff;color:var(--acc);border:1.5px solid var(--acc);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.88rem;margin-top:8px;display:none}
+.steps-reveal{display:none;margin-top:8px}
+.navrow{display:flex;gap:10px;margin-top:22px}
+.navrow .prev{flex:1;padding:12px 0;background:#E8EAF6;color:var(--warn);border:2px solid var(--warn);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.navrow .next{flex:1;padding:12px 0;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.badge-cap{display:inline-block;background:#E8EAF6;color:var(--warn);border:1.5px solid #9FA8DA;border-radius:20px;padding:3px 12px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.tap-hint{text-align:center;color:#607D8B;font-size:.85rem;margin-bottom:6px}
+.stop-here{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px solid #FB8C00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:800;color:#E65100;margin:16px 0}
+.flip-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.flip-card{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:12px 18px;font-size:.95rem;font-weight:700;color:var(--warn);text-align:center}
+/* answer frame */
+.frame{background:#fff;border:2px solid var(--acc);border-radius:10px;padding:10px 12px;margin:10px 0}
+.frame .fr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0}
+.frame .fl{font-weight:700;color:var(--warn);font-size:.92rem;min-width:150px}
+.frame .fv{font-size:1rem;color:#1a1a2e}
+.frame .fv.ans{font-weight:800;color:var(--warn)}
+.frame input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:6px 8px;font-size:1rem;width:170px;font-family:inherit}
+.frame input[type=text].wide{width:230px}
+.frame input[type=text]:focus{outline:2px solid #9FA8DA}
+.frame .fr.pieces input{width:90px}
+/* piece cutter W10 */
+.w10{background:#F0F1FA;border:2px dashed #9FA8DA;border-radius:10px;padding:12px;margin:12px 0}
+.w10 svg{width:100%;height:auto;display:block}
+.w10-lines{margin-top:8px;min-height:60px}
+.w10-lines .ln{font-size:1rem;padding:3px 0;color:#1a1a2e}
+.w10-lines .ln.last{font-weight:800;color:var(--warn)}
+.w10-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.w10-btns button{border:none;border-radius:8px;padding:8px 16px;font-size:.92rem;font-weight:700;cursor:pointer}
+.w10-btns .go{background:var(--acc);color:#fff}
+.w10-btns .go:disabled{background:#9FA8DA;cursor:default}
+.w10-btns .rs{background:#fff;color:var(--acc);border:1.5px solid var(--acc)}
+.two-cards{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.two-cards .q-card{flex:1;min-width:250px;margin-bottom:0}
+.ans-input{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 10px;font-size:1rem;width:190px;font-family:inherit;margin-right:8px}
+.nav-link{flex:1;display:block;text-align:center;padding:13px 0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
+.nav-link.out{background:#fff;color:#283593;border:2px solid #283593}
+.nav-link.fill{background:#3F51B5;color:#fff;border:2px solid #3F51B5}
+
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.chip{display:inline-block;border-radius:14px;padding:3px 12px;font-size:.88rem;font-weight:700;border:2px solid #1565C0}
+.chip.t{background:#90CAF9;color:#0D47A1}.chip.l{background:#fff;color:#283593;border-color:#283593}
+.chip.told{background:#FFF8E1;color:#8d6e00;border-color:#FFB74D}
+.bx{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.bx label{font-weight:700;color:#283593;font-size:.95rem}
+.bx input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 9px;font-size:1rem;width:120px;font-family:inherit}
+.bx .opt{font-weight:400;color:#607D8B;font-size:.82rem}
+.boxes-static{background:#fff;border:2px solid #1565C0;border-radius:10px;padding:10px 14px;margin:10px 0}
+.boxes-static .r{padding:3px 0;font-size:1rem}.boxes-static b{color:#0D47A1}
+.circ{border:3px solid #2E7D32;border-radius:10px;padding:2px 8px;font-weight:800;color:#1B5E20;display:inline-block}
+.amberwarn{background:#FFF8E1;border:2px solid #FFB74D;border-radius:10px;padding:12px 16px;margin:12px 0;color:#8d6e00;font-weight:700}
+.sbs{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.sbs .sc{flex:1;min-width:240px;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:12px}
+.sbs .sc.a{border-color:#1565C0;background:#E3F2FD}.sbs .sc.b{border-color:#FFB74D;background:#FFF8E1}
+.sbs .sc .st{font-weight:800;margin-bottom:4px;color:#283593}
+.bar-wrap{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px;margin:10px 0}
+.bar-wrap svg{width:100%;height:auto;display:block}
+
+.wlb{margin:10px 0;border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:6px 8px}
+.wlb .wls{margin-bottom:4px}
+.wl,.bl{display:none;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:12px;padding:7px 6px;border-bottom:1px dashed #C5CAE9;align-items:start}
+.wl.on,.bl.on{display:grid}
+.wl.cur,.bl.cur{background:#F0F1FA}
+.wl[data-glow].on{background:#FFF8E1;box-shadow:inset 4px 0 0 #F9A825}
+.wl .m,.bl .m{font-family:Consolas,'Courier New',monospace;font-weight:700;color:#283593;font-size:1rem}
+.wl .why,.bl .why{color:#455A64;font-size:.88rem;line-height:1.35;border:0;background:none;padding:0;margin:0;border-radius:0;box-shadow:none}
+.wl .why:before,.bl .why:before{content:"\2190  ";color:#9FA8DA}
+.btn-next{background:#fff;color:#283593;border:2px solid #283593;border-radius:8px;padding:7px 16px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit}
+.wlb.alldone .btn-next{display:none}
+.wlb.closed{display:none}
+.chip.nw{background:#FFF8E1;color:#8d6e00;border-color:#F9A825}
+.taps{margin:8px 0;padding:8px 10px;border:2px solid #C5CAE9;border-radius:10px;background:#F7F9FD}
+.taps .thead{font-weight:800;color:#283593;font-size:.9rem;margin-bottom:4px}
+.tq{margin:8px 0}
+.tq .tl{font-weight:700;color:#283593}
+.tq .tsub{font-weight:400;color:#607D8B;font-size:.85rem;display:block}
+.tb2{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.tb2 button{border:2px solid #9FA8DA;background:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem;cursor:pointer;font-family:inherit;color:#283593;font-weight:600;text-align:left}
+.tb2 button.good{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.tb2 button.lit{outline:3px solid #2E7D32}
+.tb2 button.nope{background:#FFF3E0;border-color:#FFB74D;color:#8d6e00}
+.thint{color:#8d6e00;font-size:.88rem;margin-top:4px;min-height:1em}
+.stones,.alines{margin:10px 0}
+.stones .sr,.alines .al{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:7px 0}
+.stones label,.alines label{font-weight:700;color:#283593;font-size:.95rem}
+.stones input[type=text],.alines input[type=text]{border:1.5px solid #9FA8DA;border-radius:6px;padding:7px 9px;font-size:1rem;width:130px;font-family:inherit}
+.stones .tag{font-size:.78rem;background:#FFF8E1;border:1.5px solid #FFB74D;color:#8d6e00;border-radius:12px;padding:1px 8px;font-weight:700}
+.alines .al label{flex:1 1 100%}
+.locked label{opacity:.55}
+.fmap{max-width:640px;margin:10px auto}
+.mn{border:2px solid #283593;border-radius:10px;padding:8px 12px;background:#fff;color:#283593;font-size:.95rem}
+.mn.start{background:#E8EAF6}.mn.q{background:#F0F1FA}
+.mn b.k{background:#283593;color:#fff;border-radius:6px;padding:1px 8px;margin-right:6px}
+.mn i,.br i{display:block;font-size:.84rem;color:#455A64;font-style:normal;margin-top:2px}
+.arr{text-align:center;color:#9FA8DA;font-size:1.1rem;line-height:1.2}
+.two{display:flex;gap:8px;flex-wrap:wrap}
+.two .br{flex:1;min-width:230px;border:2px solid #9FA8DA;border-radius:10px;padding:8px 10px;background:#fff;font-size:.9rem;color:#37474F}
+.br b.yn{color:#283593}
+.mp .tk{background:#90CAF9;color:#0D47A1;border-radius:6px;padding:0 6px;font-weight:700}
+.mp .lf{background:#fff;color:#283593;border:1.5px solid #283593;border-radius:6px;padding:0 6px;font-weight:700}
+.lit-node{background:#E8F5E9 !important;border-color:#2E7D32 !important;box-shadow:0 0 0 3px #A5D6A7}
+.fmap .cap{display:none;margin-top:5px;font-family:Consolas,'Courier New',monospace;font-weight:700;color:#1B5E20;font-size:.88rem}
+.lit-node .cap{display:block}
+.ex{margin-top:5px;font-size:.82rem;color:#455A64;border-top:1px dashed #C5CAE9;padding-top:4px}
+.wtrow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;align-items:center}
+.btn-map{display:inline-block;border:2px solid #283593;color:#283593;background:#fff;border-radius:10px;padding:8px 16px;font-weight:700;text-decoration:none;font-size:.95rem;cursor:pointer;font-family:inherit}
+.maplink{position:fixed;right:12px;bottom:12px;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.btn-show-steps{display:none;margin-top:6px}
+.frame67{border:2px solid #9FA8DA;border-radius:10px;background:#fff;padding:10px 12px;margin:10px 0;line-height:2.1}
+.frame67 .fh{font-weight:800;color:#283593;display:block;margin-bottom:2px;line-height:1.4}
+.bl-blank{display:inline-block;min-width:74px;border:2px dashed #9FA8DA;border-radius:8px;padding:0 8px;text-align:center;font-weight:700;color:#283593;cursor:pointer;background:#F7F9FD;line-height:1.7}
+.bl-blank.sel{border-color:#283593;background:#E8EAF6}
+.bl-blank.full{border-style:solid}
+.bl-blank.bad{border-color:#FFB74D;background:#FFF3E0}
+.bl-blank.ok{border-color:#2E7D32;background:#E8F5E9;color:#1B5E20}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chips button{border:2px solid #90CAF9;background:#E3F2FD;border-radius:16px;padding:4px 14px;font-weight:700;color:#0D47A1;cursor:pointer;font-family:inherit;font-size:.95rem}
+.chips button.used{opacity:.35}
+.frame67 input.ft{border:1.5px solid #9FA8DA;border-radius:6px;padding:3px 8px;font-size:.95rem;width:96px;font-family:inherit}
+.goodline{font-weight:800;color:#1B5E20;margin-top:4px}
+.sbs .sc.a{border-color:#2E7D32;background:#E8F5E9}
+.model{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 12px;margin:8px 0;display:none}
+.model label{display:block;margin:4px 0;font-weight:600;color:#283593}
+textarea.ex{width:100%;min-height:70px;border:1.5px solid #9FA8DA;border-radius:6px;padding:8px;font-size:1rem;font-family:inherit}
+.boost .q{margin:6px 0}
+@media (max-width:560px){.wl,.bl{grid-template-columns:1fr;gap:2px}}
+
+@keyframes slidedown{from{transform:translateY(-70px);opacity:.15}to{transform:translateY(0);opacity:1}}
+.bar-wrap g.slide{animation:slidedown 1.1s ease-out 0.3s both}
+.bar-wrap .tgl{font-size:.8rem;color:#455A64}
+
+.intro{background:linear-gradient(135deg,#E8EAF6,#F0F1FA);border:2px solid #9FA8DA;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.intro p{margin-bottom:6px}
+.meters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+.lv{flex:1;min-width:120px;border:2px dashed #B0BEC5;border-radius:10px;padding:6px 8px;text-align:center;background:#fff;color:#78909C}
+.lv .ln1{font-weight:800;font-size:.9rem}.lv .ln2{font-size:.78rem;margin-bottom:3px}
+.lv.now{border:2px solid #283593;color:#283593;background:#E8EAF6}
+.lv.done{border:2px solid #2E7D32;color:#1B5E20;background:#E8F5E9}
+.lv.boss{border-color:#FFB74D;color:#8d6e00;background:#FFF8E1}
+.lv.boss.now{border:2px solid #F9A825}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid #B0BEC5;margin:0 2px;background:#fff}
+.dot.on{background:#F9A825;border-color:#F9A825}
+.bchip{display:inline-block;margin:2px 3px;padding:2px 8px;border-radius:12px;border:2px solid #FFB74D;background:#fff;font-weight:700;color:#8d6e00;font-size:.78rem}
+.bchip.beat{background:#E8F5E9;border-color:#2E7D32;color:#1B5E20}
+.dstat{text-align:center;font-weight:700;color:#283593;font-size:.95rem}
+.dsub{text-align:center;font-size:.85rem;color:#607D8B;margin-bottom:8px}
+.welcome{text-align:center;font-size:.9rem;color:#455A64;margin:4px 0 8px;font-weight:600}
+.lvmsg{text-align:center;font-weight:800;color:#1B5E20;margin:4px 0;min-height:1em}
+.dq{font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:10px}
+.walk{background:#E3F2FD;border:2px solid #1565C0;border-radius:10px;padding:12px 14px;margin:10px 0}
+.walk .wt{font-weight:800;color:#0D47A1;margin-bottom:6px}
+.wholelab{text-align:center;font-weight:700;color:#283593;margin-top:6px}
+.sorry{background:#FFF3E0;border:2px solid #FFB74D;border-radius:10px;padding:14px 16px;margin-top:12px}
+.sorry .sbig{font-weight:800;color:#8d6e00;margin-bottom:6px}
+.tline{margin:4px 0;font-size:.95rem}
+.tline b{color:#283593}
+.btn-big{background:var(--acc);color:#fff;border:none;padding:13px 30px;border-radius:10px;cursor:pointer;font-size:1.05rem;font-weight:700;display:block;margin:16px auto 0}
+.btn-big.alt{background:#fff;color:#283593;border:2px solid #283593}
+.endbox{display:none;border-radius:12px;padding:20px;margin-top:16px;text-align:center;position:relative;overflow:hidden}
+.endbox.master{background:#E8F5E9;border:2px solid #A5D6A7}
+.endbox.stop{background:#FFF8E1;border:2px solid #FFB74D}
+.endbox .big{font-size:1.25rem;font-weight:800}
+.endbox.master .big{color:#1B5E20}.endbox.stop .big{color:#8d6e00}
+.tsbadge{display:inline-block;margin:8px 0;padding:6px 18px;border-radius:20px;background:#2E7D32;color:#fff;font-weight:800;letter-spacing:1px}
+.codebox{display:inline-block;margin:12px 0;background:#fff;border:3px dashed #2E7D32;border-radius:10px;padding:10px 22px;font-size:1.6rem;font-weight:800;letter-spacing:2px;color:#1B5E20}
+.savebox{display:none;margin-top:16px;border-radius:12px;padding:18px;text-align:center}
+.savebox.notsaved{background:#FFF3E0;border:2px solid #FFB74D}
+.savebox.saved{background:#E8F5E9;border:2px solid #A5D6A7}
+.savebox .big{font-weight:800;font-size:1.1rem}
+.savebox.notsaved .big{color:#8d6e00}.savebox.saved .big{color:#1B5E20}
+.cf{position:fixed;top:-20px;width:10px;height:14px;opacity:.9;z-index:50;pointer-events:none;animation:cfall 2.6s ease-in forwards}
+@keyframes cfall{to{transform:translateY(110vh) rotate(540deg);opacity:.9}}
+
+#fcbtn{position:fixed;left:12px;bottom:12px;z-index:60;background:#F9A825;color:#3E2723;border:0;border-radius:22px;padding:10px 16px;font-weight:800;font-size:.95rem;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer}
+.fc{position:fixed;z-index:70;background:#FFFDF3;border:3px solid #F9A825;color:#263238;font-size:.92rem;line-height:1.35;padding:10px 12px 14px;overflow-y:auto;display:none}
+body.fc-open .fc{display:block}
+body.fc-open #fcbtn{background:#FFE082}
+.fc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;color:#283593}
+.fc-btns button{background:#fff;border:2px solid #9FA8DA;border-radius:8px;font-size:1rem;margin-left:6px;padding:2px 8px;cursor:pointer}
+.fc-sec{font-weight:800;color:#8d6e00;letter-spacing:.04em;margin:6px 0 4px}
+.fc-st{padding:5px 8px;margin:4px 0;border-radius:8px;border:2px solid transparent;background:#fff}
+.fc-st b{color:#283593;margin-right:6px}
+.fc-st.glow{background:#FFF59D;border-color:#F9A825;box-shadow:0 0 0 3px rgba(249,168,37,.35)}
+.fc-q{color:#607D8B;font-style:italic;font-size:.85rem}
+.fc-told{margin:2px 0 4px 18px;font-size:.88rem;color:#37474F}
+.fc-why{background:#E8EAF6;border:2px solid #9FA8DA;color:#283593;border-radius:8px;padding:3px 10px;margin:2px 0 4px 18px;font-weight:700;cursor:pointer}
+.fc-bricks{display:none;margin:4px 0 6px 18px;padding:8px;background:#fff;border:2px dashed #9FA8DA;border-radius:8px;font-size:.88rem}
+.fc-bricks.open{display:block}
+.bk-row{display:flex;gap:10px;margin-bottom:6px}
+.bk-row .grp{display:flex;gap:2px;padding:3px;border:2px solid #C5CAE9;border-radius:6px}
+.bk-row i{display:block;width:16px;height:12px;background:#CFD8DC;border-radius:2px}
+.bk-row .grp.lit{border-color:#F9A825}.bk-row .grp.lit i{background:#F9A825}
+.fc-two{display:block}
+.fc-blk{margin-top:8px;padding:6px;border:2px solid #E0E0E0;border-radius:10px;background:#FAFAFA}
+.fc-bh{display:block;width:100%;text-align:left;background:none;border:0;font-weight:800;color:#283593;cursor:pointer;font-size:.95rem;padding:2px 2px 4px}
+.fc-ex{display:none;margin:6px 0 2px;padding:6px 8px;background:#fff;border:1px dashed #9FA8DA;border-radius:8px;font-family:Consolas,'Courier New',monospace;font-size:.88rem}
+.fc-ex u{text-decoration:none;color:#283593;font-weight:800;margin-left:6px}
+.fc-blk.open .fc-ex{display:block}
+.fc-exh{font-family:inherit;font-weight:800;color:#8d6e00}
+.wl[data-card]{position:relative;padding-left:46px}
+.wl[data-card]::before{content:attr(data-card);position:absolute;left:4px;top:7px;min-width:30px;text-align:center;background:#E8EAF6;color:#283593;border:2px solid #9FA8DA;border-radius:12px;font-size:.78rem;font-weight:800;line-height:1.3}
+.wl.cur[data-card]::before{background:#FFF59D;border-color:#F9A825}
+@media (min-width:900px){
+  .fc{top:0;right:0;bottom:0;width:340px;border-width:0 0 0 3px}
+  body.fc-open{padding-right:350px}
+  body.fc-open #fcbtn{display:none}
+}
+@media (max-width:899px){
+  .fc{left:0;right:0;bottom:0;max-height:62vh;border-width:3px 0 0 0;border-radius:14px 14px 0 0;box-shadow:0 -4px 14px rgba(0,0,0,.25)}
+}
+@media print{
+  body.printing > *:not(#fcard){display:none!important}
+  body.printing #fcard{display:block!important;position:static!important;width:auto!important;max-height:none!important;border:2px solid #444!important;background:#fff!important;box-shadow:none!important;font-size:12pt;padding:8mm}
+  body.printing .fc-btns,body.printing .fc-why{display:none!important}
+  body.printing .fc-bricks{display:block!important}
+  body.printing .fc-ex{display:block!important}
+  body.printing .fc-st{background:#fff!important;border:1px solid #bbb!important}
+  body.printing .fc-st.glow{box-shadow:none!important}
+  body.printing .fc-two{display:flex;gap:8mm}body.printing .fc-blk{flex:1}
+  @page{size:A4;margin:10mm}
+}
+
+.fc-st{cursor:pointer}
+.fc-st.seen{border-color:#81C784}
+.fc-st.seen::after{content:" \2713";color:#2E7D32;font-weight:800}
+.fc-tour{font-size:.85rem;color:#607D8B;margin:2px 0 6px}
+@media (max-width:899px){body.fc-full .fc{top:0;max-height:100vh;border-radius:0;border-width:0}}
+@media print{body.printing #fcard{font-size:8.6pt;padding:5mm;line-height:1.22}body.printing .fc-st{margin:2px 0;padding:2px 5px}body.printing .fc-st.seen::after{content:""}body.printing .fc-tour{display:none}body.printing .fc-bricks{font-size:8pt}body.printing .fc-top{margin-bottom:2px}}
+
+.wrap{max-width:760px;margin:0 auto;padding:0 12px}
+.stat2{text-align:center;font-weight:700;color:#283593;margin:6px 0}
+.savebar{margin-top:10px;padding:8px 12px;border-radius:10px;font-size:.9rem;text-align:center;background:#FFF8E1;border:2px solid #FFB74D;color:#8d6e00}
+.savebar.saved{background:#E8F5E9;border-color:#A5D6A7;color:#1B5E20}
+.savebar button{margin-left:8px}
+.finish{display:none;text-align:center;background:#E8F5E9;border:2px solid #A5D6A7;border-radius:12px;padding:20px;margin-top:14px}
+.finish .both{font-size:1.3rem;font-weight:800;margin:8px 0;color:#283593}
+.wlb.closed{display:none}
+.lastchk{display:none;margin:6px 0;padding:8px 12px;border-radius:10px;background:#FFF8E1;border:2px solid #FFB74D;color:#5D4037}
+.lastchk.on{display:block}
+.lastchk .chip4{display:inline-block;background:#F9A825;color:#3E2723;font-weight:800;border-radius:12px;padding:1px 9px;margin-right:6px}
+.yt{margin-top:14px}
+.yt.hidden{display:none}
+.yt.done{opacity:.92}
+.btn-circ{display:block;margin:8px 0;padding:8px 14px;border-radius:10px;border:2px solid #F9A825;background:#FFF8E1;color:#5D4037;font-weight:800;cursor:pointer}
+.btn-circ.on{background:#E8F5E9;border-color:#81C784;color:#1B5E20}
+.chip5{display:inline-block;margin-left:8px;background:#E8EAF6;color:#283593;border:2px solid #9FA8DA;border-radius:12px;padding:0 9px;font-weight:800}
+.dtree{border:2px solid #9FA8DA;border-radius:12px;background:#FAFBFF;padding:8px 12px;margin:10px 0}
+.dtree table{border-collapse:collapse;width:100%}.dtree td{padding:4px 8px;border-bottom:1px dashed #C5CAE9;vertical-align:top}
+.dtree td:first-child{font-weight:700;color:#283593;width:46%}
+.act{display:inline-block;background:#E8EAF6;color:#283593;font-weight:800;border-radius:12px;padding:2px 12px;margin-bottom:4px;font-size:.9rem}
+
+body{padding-bottom:110px}
+.topnav{position:relative}
+.tnav-x{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.6);color:#fff;text-decoration:none;font-size:18px;font-weight:800;line-height:1;border-radius:8px;padding:5px 11px;cursor:pointer;margin-right:4px}
+.tnav-x:hover{background:rgba(255,255,255,.32)}
+.savezone{max-width:760px;margin:6px auto 0;padding:14px 12px;text-align:center}
+.savezone .sstat{font-size:.92rem;margin-bottom:8px;color:#8d6e00}
+.savezone.saved .sstat{color:#1B5E20}
+.savezone button#savebtn{background:#2E7D32;color:#fff;border:0;border-radius:12px;padding:14px 38px;font-size:1.1rem;font-weight:800;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.savezone button#savebtn:disabled{background:#B0BEC5;cursor:not-allowed;box-shadow:none}
+.savezone.pulse button#savebtn{animation:sv 0.9s ease 3}
+@keyframes sv{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+#unsavedov{display:none;position:fixed;left:0;right:0;top:0;bottom:0;z-index:200;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:18px}
+#unsavedov.on{display:flex}
+#unsavedov .box{background:#fff;border:4px solid #F9A825;border-radius:16px;padding:20px;max-width:420px;text-align:center;color:#3E2723}
+#unsavedov .box p{font-size:1.05rem;font-weight:700;margin-bottom:14px}
+#unsavedov .stay{background:#2E7D32;color:#fff;border:0;border-radius:12px;padding:12px 24px;font-size:1.05rem;font-weight:800;cursor:pointer}
+#unsavedov .leave{display:block;margin:12px auto 0;background:none;border:0;color:#78909C;font-size:.85rem;text-decoration:underline;cursor:pointer}
+.tfigwrap{background:#F6F8FF;border:2px solid #C5CAE9;border-radius:10px;padding:8px;margin:10px 0;text-align:center;overflow-x:auto}
+.tfigwrap svg{max-width:100%;height:auto}
+.tfig3{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.tfig3 .cap{font-size:.85rem;font-weight:700;color:#283593;text-align:center}
+.wl[data-card^="T"]::before{content:"\25B2" attr(data-n)}
+.fc-tabs{display:flex;gap:6px;margin:4px 0 8px}
+.fc-tab{flex:1;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:6px 8px;font-weight:800;color:#283593;cursor:pointer;font-size:.9rem}
+.fc-tab.on{background:#FFF59D;border-color:#F9A825}
+.fc-pane{display:none}.fc-pane.on{display:block}
+@media print{body.printing .fc-pane{display:block!important}body.printing .fc-tabs{display:none}}
+.dtree3 td:first-child{width:52%}
+.boostnote{background:#FFF8E1;border:2px solid #FFB74D;color:#8d6e00;border-radius:10px;padding:10px 14px;margin:10px 0;font-weight:700}
+.mbintro{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 14px;margin:10px 0;color:#283593;font-weight:700}
+.qlab{font-family:inherit}
+.flipin{transform-box:fill-box;transform-origin:center;animation:flipin 2.2s ease .5s both}
+@keyframes flipin{0%{opacity:0;transform:rotate(180deg) scale(.4)}100%{opacity:1;transform:none}}
+.turnin{transform-origin:center;animation:turnin 2.4s ease .4s both}
+@keyframes turnin{0%{transform:rotate(-36.87deg);opacity:.25}100%{transform:none;opacity:1}}
+.tbl71{border-collapse:collapse;margin:10px auto;font-size:1rem}
+.tbl71 th,.tbl71 td{border:2px solid #9FA8DA;padding:7px 14px;text-align:center}
+.tbl71 th{background:#E8EAF6;color:#283593}
+.tbl71 td.qc{background:#FFF8E1;color:#EF6C00;font-weight:900;font-size:1.15rem}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin:10px 0;font-weight:800;color:#283593}
+.flow .fb{background:#E8EAF6;border:2px solid #9FA8DA;border-radius:10px;padding:6px 12px}
+.flow .fb.q{background:#FFF8E1;border-color:#FFB74D;color:#8d6e00}
+.flow .fa{color:#EF6C00}
+.chip3{display:block;margin-top:8px;background:#E8F5E9;border:2px solid #A5D6A7;color:#1B5E20;border-radius:10px;padding:6px 12px;font-weight:700;font-size:.92rem}
+.lockmsg{display:none;background:#FFF8E1;border:2px solid #FFB74D;color:#8d6e00;border-radius:10px;padding:8px 12px;margin:8px 0;font-weight:700}
+.fc-sec.ac{margin-top:10px;color:#2E7D32}
+.fc-st.acs{border-left-color:#2E7D32}
+
+.pickline{margin-top:6px;padding:5px 8px;background:#FFF8E1;border-left:4px solid #F9A825;border-radius:6px;font-weight:700;color:#6D4C00;font-size:.92em}
+.fx{border:2px solid #9FA8DA;border-radius:12px;padding:10px 12px;margin:12px 0;background:#fff}
+.fx.hidden{display:none}
+.fx .fxh{font-weight:800;color:#283593;margin-bottom:6px}
+.fx .fxok{display:none;float:right;color:#2E7D32}
+.fx.fxdone .fxok{display:inline}
+.fx.fxdone .fxbody>.fx-st{display:none!important}
+.fx.fxdone{background:#F1F8E9;border-color:#A5D6A7}
+.fx-st{display:none}.fx-st.on{display:block}
+.fxlab{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#5C6BC0;margin:8px 0 4px}
+.fxyou{background:#FFF3E0;border:2px solid #FFB74D;border-radius:10px;padding:8px 12px;margin:8px 0;font-weight:800;color:#8d6e00}
+.fxopts{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.fxopt{text-align:left;background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:10px 12px;font-size:1rem;font-weight:700;color:#283593;cursor:pointer}
+.fxopt:disabled{cursor:default}
+.fxopt.right{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.fxopt.pickedwrong{background:#FFF3E0;border-color:#FFB74D;color:#8d6e00}
+.fxres{margin:6px 0;font-weight:800}.fxres.ok{color:#1B5E20}.fxres.amb{color:#8d6e00}
+.fxbtn{margin:8px 0;background:#3F51B5;color:#fff;border:0;border-radius:10px;padding:10px 20px;font-size:1rem;font-weight:800;cursor:pointer}
+.fxdots{display:flex;gap:8px;justify-content:center;margin:6px 0 10px}
+.fxdots span{width:14px;height:14px;border-radius:50%;background:#CFD8DC;display:inline-block}
+.fxdots span.c{background:#F9A825}.fxdots span.d{background:#43A047}
+.fxfinal{background:#E8F5E9;border:2px solid #A5D6A7;color:#1B5E20;border-radius:10px;padding:10px 14px;margin:10px 0;font-weight:700}
+.tapbox{background:#F6F8FF;border:2px solid #C5CAE9;border-radius:10px;padding:10px 12px;margin:10px 0}
+.tapbtns{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.tapbtns button{background:#fff;border:2px solid #9FA8DA;border-radius:10px;padding:8px 14px;font-weight:800;color:#283593;font-size:1rem;cursor:pointer}
+.tapbtns button.right{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.tapbtns button:disabled{cursor:default}
+.tapfb{font-weight:800;margin:4px 0;min-height:1.2em}.tapfb.ok{color:#1B5E20}.tapfb.amb{color:#8d6e00}
+.taprow{margin:6px 0 10px}.tapall{background:#E8F5E9;border:2px solid #A5D6A7;color:#1B5E20;border-radius:10px;padding:8px 12px;margin-top:8px}
+
+
+.pfig{max-width:100%;height:auto}
+.pc{transition:stroke .2s}
+.pc.lit{stroke:#F9A825!important;stroke-width:5!important}
+.liftme{transition:transform .9s ease}
+svg.lifted .liftme{transform:translateY(var(--lh,-120px))}
+.fbtn{display:inline-block;margin:6px 4px;padding:8px 16px;border:2px solid #3F51B5;background:#fff;color:#283593;border-radius:10px;font-weight:800;font-size:1rem;cursor:pointer;min-height:44px}
+.fbtn:hover{background:#E8EAF6}
+.slrow{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap;justify-content:center}
+.slrow input[type=range]{width:min(240px,55vw);height:36px}
+.slout{background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:8px 12px;margin:6px 0;color:#283593;font-weight:700;text-align:center}
+.sec-h{margin:16px 0 4px;color:#283593;font-size:1.12rem;border-top:3px dashed #C5CAE9;padding-top:12px}
+.sec-h:first-of-type{border-top:0;padding-top:0;margin-top:6px}
+.wlq{margin:8px 0;font-weight:700}
+.schem{background:#F6F8FF;border:2px solid #C5CAE9;border-radius:10px;padding:8px;margin:10px 0;text-align:center}
+.schem svg{max-width:100%;height:auto}
+.fc-pane.on{display:block}
+
+
+.wl[data-card="W"]::before{content:"\25B2 7+"}.wl[data-card="C"]::before{content:"\25B2 9+"}.wl[data-card="A3"]::before{content:"\2714 3+"}
+.wl[data-card="\2212 2"]::before,.wl[data-card="−2"]::before{content:"−2"}
+.mvgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin:8px 0}
+.mv{display:flex;gap:10px;align-items:center;border:2px solid #C5CAE9;border-radius:12px;padding:8px 10px;background:#FAFBFF}
+.mvp{flex:0 0 auto}.mvt{font-size:.88rem;line-height:1.35;color:#263238}.mvt b{color:#283593}
+.tapz{cursor:pointer}
+@keyframes fl{0%,100%{opacity:1}50%{opacity:.2}}
+.flash{animation:fl .5s ease 2}
+.tapbox .slout{min-height:2.6em}
+.pc.counted{stroke:#EF6C00!important;stroke-width:4!important}
+.abstrip{margin:10px 0;padding:10px 12px;border:2px solid #A5D6A7;background:#F1F8E9;border-radius:12px}
+.abh{font-weight:800;color:#1B5E20;margin-bottom:6px}
+.abrow{display:flex;gap:0;margin:4px 0}
+.abseg{padding:8px 4px;text-align:center;font-weight:800;border:2px solid #546E7A;color:#263238;font-size:1.05rem}
+.abseg small{display:block;font-weight:600;font-size:.72rem;color:#455A64}
+.abseg.a{background:#C8E6C9}.abseg.b{background:#FFCDD2}.abseg.w{background:#E8EAF6}
+.wk{margin:10px 0}
+.fxdots{display:flex}
+
+.wl[data-card]::before{content:none!important}
+.rbox{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.rbox input{width:64px!important;text-align:center;font-size:1.15rem!important}
+.rbox .colon{font-weight:900;font-size:1.4rem;color:#283593}
+.unit{font-weight:700;color:#283593}
+.bm-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
+.bm-tabs button{flex:1 1 30%;min-width:120px;border:2px solid #9FA8DA;background:#fff;color:#283593;font-weight:800;border-radius:10px;padding:8px 6px;font-size:.95rem;cursor:pointer}
+.bm-tabs button.on{background:#283593;color:#fff;border-color:#283593}
+.bm-tabs button.done::after{content:" \2713"}
+.bm-story{margin:4px 0}
+.bm-rows{display:flex;flex-direction:column;gap:8px;margin:6px 0}
+.bm-row{display:flex;align-items:center;gap:8px;padding:6px 8px;border:2px solid #C5CAE9;border-radius:10px;background:#fff;cursor:pointer}
+.bm-lab{width:52px;font-weight:800;color:#283593;flex:0 0 auto}
+.bm-boxes{display:flex;gap:3px;flex-wrap:nowrap}
+.ub{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border:2px solid #5C6BC0;border-radius:6px;background:#E8EAF6;font-size:.8rem;font-weight:800;color:#1A237E;font-style:normal;flex:0 0 auto}
+.ub.r2{background:#FFE0B2;border-color:#FB8C00;color:#6D4C41}
+.ub.gapb{outline:3px dashed #EF6C00;outline-offset:1px}
+.bm-whole{display:block;width:100%;margin:6px 0;border:2px solid #2E7D32;background:#F1F8E9;color:#1B5E20;font-weight:800;border-radius:10px;padding:8px;cursor:pointer;font-size:.98rem}
+.bm-chipwrap{min-height:56px;display:flex;justify-content:center;align-items:center}
+.bm-chip{display:inline-block;touch-action:none;cursor:grab;user-select:none;background:#FFE082;border:3px solid #F9A825;border-radius:14px;padding:8px 16px;font-weight:900;color:#6D4C41;font-size:1.1rem;position:relative;z-index:5}
+.bm-chip.drag{z-index:30;box-shadow:0 4px 12px rgba(0,0,0,.3);cursor:grabbing}
+.bm-chip.sel{background:#FFF59D;box-shadow:0 0 0 4px #FFB74D}
+.fe-grps{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;min-height:36px}
+.fe-grp{display:inline-flex;gap:2px;align-items:center;padding:4px 6px;border:2px solid #C5CAE9;border-radius:10px;background:#fff}
+.cat,.dog{display:inline-block;width:13px;height:13px}
+.cat{border-radius:50%;background:#FB8C00}.dog{border-radius:3px;background:#5C6BC0}
+.rrbad{display:none;background:#FFEBEE;border:2px solid #EF9A9A;border-radius:10px;padding:8px 12px;margin:8px 0;font-weight:700;color:#B71C1C}
+.gp-rows{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.gp-row{display:flex;flex-wrap:wrap;gap:6px;padding:6px;border:2px solid #C5CAE9;border-radius:10px;background:#fff}
+.gp-g{display:inline-flex;flex-wrap:wrap;width:68px;gap:2px;padding:3px;border:2px solid #A5D6A7;border-radius:8px;background:#F1F8E9}
+.gp-g.bad{border-color:#EF9A9A;background:#FFEBEE}
+.d{display:inline-block;width:11px;height:11px;border-radius:50%}
+.d.ok{background:#43A047}.d.bad{background:#E53935}
+.gp-lab{font-weight:800;color:#283593;margin-top:4px}
+.rabox{border:2px solid #FFB74D;border-radius:10px;background:#FFFBF0;padding:8px 10px;margin:10px 0}
+.cmpbox{border:2px solid #9FA8DA;border-radius:10px;background:#F6F8FF;padding:8px 10px;margin:10px 0}
+.cmpbox .cmpq{font-weight:800;color:#283593;margin-bottom:6px}
+.cmpbox button{margin-right:8px}
+.gdr{border:2px solid #9FA8DA;border-radius:10px;background:#F6F8FF;padding:8px 10px;margin:10px 0}
+.exblk{margin:10px 0;padding:8px;border:1px solid #E0E0E0;border-radius:10px;background:#FAFAFA}
+.detbar{display:none;position:sticky;top:0;z-index:30;background:#FFF59D;border:2px solid #F9A825;border-radius:10px;padding:8px 12px;margin-bottom:10px;font-weight:800;color:#5D4037}
+.detbar button{margin-left:8px}
+.bridgeline{background:#E8F5E9;border-left:5px solid #43A047;border-radius:8px;padding:8px 12px;margin:12px 0;font-weight:800;color:#1B5E20}
+.sidenote{background:#F0F1FA;border-radius:8px;padding:6px 12px;margin:8px 0;font-weight:700;color:#283593}
+.arrowrow{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.3rem;color:#283593;margin:6px 0}
+.arrowrow .eq{color:#78909C}.xarr{display:none;color:#EF6C00;font-size:1.05rem}
+#fcbtn{left:auto!important;right:8px!important;top:auto!important;bottom:14px!important;transform:none!important;border-radius:20px!important;padding:8px 14px!important;z-index:60}
+.wrap{padding-bottom:84px}
+.exblk .btn-show-steps{display:inline-block}
+@media (max-width:560px){.gp-g{width:60px}.rbox input{width:54px!important}.bm-lab{width:46px}.ub{width:28px;height:28px}}
+
+.bcbox{border:2px solid #FFB74D;border-radius:10px;background:#FFFBF0;padding:8px 10px;margin:10px 0}
+.bcbox input{width:60px;text-align:center;font-size:1.1rem}
+.bcout{margin-top:6px;font-weight:800;color:#546E7A}.bcout.ok{color:#1B5E20}.bcout.bad{color:#B71C1C}
+.cmpcols{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.cmpcol{flex:1 1 150px;border:2px solid #A5D6A7;border-radius:10px;background:#F1F8E9;padding:8px 10px;font-weight:700;color:#1B5E20}
+.cmpcol.bad{border-color:#EF9A9A;background:#FFEBEE;color:#B71C1C}
+.cmpcol .ct{font-size:.95rem;margin-bottom:4px;text-transform:uppercase;letter-spacing:.03em}
+.pickrow{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pickrow button{flex:1 1 40%;border:2px solid #9FA8DA;background:#fff;color:#283593;font-weight:800;border-radius:10px;padding:10px 8px;font-size:.95rem;cursor:pointer}
+.pickrow button.on{background:#2E7D32;border-color:#2E7D32;color:#fff}.pickrow button:disabled{opacity:.7;cursor:default}
+.exblk .btn-show-steps{display:none}
+
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="tnav-x" id="xclose" href="https://athipprem.github.io/mathlessons/index.html" onclick="return xClick(event)" aria-label="Close and go back to the hub" title="Close">&#10005;</a>
+  <span class="tnav-title">Lesson &mdash; Sunday top-up (Unit 77)</span>
+  <span class="tnav-pill" id="pill">1 / 3</span>
+  <div class="tnav-btns"><button onclick="nav(-1)">&#8592; Prev</button><button onclick="nav(1)">Next &#8594;</button></div>
+</nav>
+<div class="wrap">
+<div class="screen active" id="s0"><div class="card">
+<span class="act">Unit 77 &middot; Fix-It Corner</span><br>
+<h2>&#128295; Fix-It Corner</h2>
+<div class="intro"><p><b>Mock: 39 out of 50 &mdash; and the hardest question (C24) was perfect. The 11 marks you lost hide in just 3 habits. Fix them today. Tomorrow: school test.</b></p></div>
+<div class="why-real" style="background:#F0F1FA;border:2px solid #9FA8DA;border-radius:10px;padding:10px 14px;margin:10px 0;color:#283593"><p><strong>Why 15 minutes is enough.</strong> On a test, one wrong amount or one early rounding costs the same marks as not knowing the topic at all. You already know the topic. These 3 habits are the last 11 marks.</p></div>
+<h3 class="sec-h">Fix-It Corner &mdash; your own questions</h3>
+<div class="mbintro">Find the slip, redo it, then try a twin with new numbers. Finish the five cards, then press Next.</div>
+<div class="fxdots" id="fxdots_0"><span></span><span></span><span></span><span></span><span></span></div>
+<div class="fx" id="fx_FX6" data-fx="FX6"><div class="fxh"><span class="fxn">Your question</span> &middot; from U76 mock A6<span class="fxok">&#10003; done</span></div><div class="fxbody"><div class="fx-st on" data-s="0"><p class="fxlab">The question</p><p class="fxq"><strong>The ratio of Uma&#x27;s stickers to Val&#x27;s stickers is 3 : 8. They have 121 stickers altogether. How many stickers does Val have?</strong></p><div class="fxyou">You wrote: (A) 33</div><button type="button" class="fxbtn" id="fxb1_FX6" onclick="fxGo('FX6')">Find the slip &#9656;</button></div><div class="fx-st" data-s="1"><p class="fxlab">Find the slip</p><p class="fxsq"><strong>Your 1 unit (121 ÷ 11 = 11) was RIGHT. Whose stickers does the question ask for?</strong></p><div class="fxopts" id="fxo_FX6"><button type="button" class="fxopt" data-i="0" onclick="fxPick('FX6',0)">A) Uma&#x27;s: 3 × 11 = 33</button><button type="button" class="fxopt" data-i="1" onclick="fxPick('FX6',1)">B) Val&#x27;s: 8 × 11 = 88</button><button type="button" class="fxopt" data-i="2" onclick="fxPick('FX6',2)">C) Both: 121</button></div><div class="fxres" id="fxres_FX6"></div><button type="button" class="fxbtn" id="fxb2_FX6" onclick="fxToRedo('FX6')" style="display:none">Redo it &#9656;</button></div><div class="fx-st" data-s="2"><p class="fxlab">Redo &mdash; the same question, with your card open</p><div class="q-card yt" id="yt_FX6r" data-iid="FX6r"><span class="q-cap">Redo</span><div class="dq" id="q_FX6r"></div><button type="button" class="btn-circ" id="circ_FX6r" onclick="circTap('FX6r')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_FX6r"></div><button class="btn-check" id="chk_FX6r" onclick="ytCheck('FX6r')" disabled>Check</button><div class="feedback" id="fb_FX6r"></div><div class="sorry" id="sorry_FX6r" style="display:none"></div></div></div><div class="fx-st" data-s="3"><p class="fxlab">Your twin &mdash; same kind, new numbers</p><div class="q-card yt" id="yt_FX6t" data-iid="FX6t"><span class="q-cap">Your twin</span><div class="dq" id="q_FX6t"></div><button type="button" class="btn-circ" id="circ_FX6t" onclick="circTap('FX6t')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_FX6t"></div><button class="btn-check" id="chk_FX6t" onclick="ytCheck('FX6t')" disabled>Check</button><div class="feedback" id="fb_FX6t"></div><div class="sorry" id="sorry_FX6t" style="display:none"></div></div></div><button type="button" class="fxbtn" id="fxb3_FX6" onclick="fxNext('FX6')" style="display:none">Fix-It done &#9656;</button></div></div>
+<div class="fx" id="fx_FX19" data-fx="FX19"><div class="fxh"><span class="fxn">Your question</span> &middot; from U76 mock B19<span class="fxok">&#10003; done</span></div><div class="fxbody"><div class="fx-st on" data-s="0"><p class="fxlab">The question</p><p class="fxq"><strong>At a fruit stall, for every 4 apples sold, 9 oranges are sold. 72 oranges were sold. How many apples and oranges were sold altogether?</strong></p><div class="fxyou">You wrote: 32 (no working)</div><button type="button" class="fxbtn" id="fxb1_FX19" onclick="fxGo('FX19')">Find the slip &#9656;</button></div><div class="fx-st" data-s="1"><p class="fxlab">Find the slip</p><p class="fxsq"><strong>Your 1 unit (72 ÷ 9 = 8) and your 32 apples were RIGHT. What does the question ask for?</strong></p><div class="fxopts" id="fxo_FX19"><button type="button" class="fxopt" data-i="0" onclick="fxPick('FX19',0)">A) The apples: 32</button><button type="button" class="fxopt" data-i="1" onclick="fxPick('FX19',1)">B) The oranges: 72</button><button type="button" class="fxopt" data-i="2" onclick="fxPick('FX19',2)">C) Apples AND oranges altogether: 13 units = 13 × 8 = 104</button></div><div class="fxres" id="fxres_FX19"></div><button type="button" class="fxbtn" id="fxb2_FX19" onclick="fxToRedo('FX19')" style="display:none">Redo it &#9656;</button></div><div class="fx-st" data-s="2"><p class="fxlab">Redo &mdash; the same question, with your card open</p><div class="q-card yt" id="yt_FX19r" data-iid="FX19r"><span class="q-cap">Redo</span><div class="dq" id="q_FX19r"></div><button type="button" class="btn-circ" id="circ_FX19r" onclick="circTap('FX19r')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_FX19r"></div><button class="btn-check" id="chk_FX19r" onclick="ytCheck('FX19r')" disabled>Check</button><div class="feedback" id="fb_FX19r"></div><div class="sorry" id="sorry_FX19r" style="display:none"></div></div></div><div class="fx-st" data-s="3"><p class="fxlab">Your twin &mdash; same kind, new numbers</p><div class="q-card yt" id="yt_FX19t" data-iid="FX19t"><span class="q-cap">Your twin</span><div class="dq" id="q_FX19t"></div><button type="button" class="btn-circ" id="circ_FX19t" onclick="circTap('FX19t')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_FX19t"></div><button class="btn-check" id="chk_FX19t" onclick="ytCheck('FX19t')" disabled>Check</button><div class="feedback" id="fb_FX19t"></div><div class="sorry" id="sorry_FX19t" style="display:none"></div></div></div><button type="button" class="fxbtn" id="fxb3_FX19" onclick="fxNext('FX19')" style="display:none">Fix-It done &#9656;</button></div></div>
+<div class="fx" id="fx_FX11" data-fx="FX11"><div class="fxh"><span class="fxn">Your question</span> &middot; from U76 mock B11<span class="fxok">&#10003; done</span></div><div class="fxbody"><div class="fx-st on" data-s="0"><p class="fxlab">The question</p><p class="fxq"><strong>Write 54 : 24 in its simplest form.</strong></p><div class="fxyou">You wrote: 7 : 3 (working: 28 : 12, 14 : 6, 7 : 3)</div><button type="button" class="fxbtn" id="fxb1_FX11" onclick="fxGo('FX11')">Find the slip &#9656;</button></div><div class="fx-st" data-s="1"><p class="fxlab">Find the slip</p><p class="fxsq"><strong>Back-check your answer: 7 × 8 = 56. Does the question say 56?</strong></p><div class="fxopts" id="fxo_FX11"><button type="button" class="fxopt" data-i="0" onclick="fxPick('FX11',0)">A) Yes, so 7 : 3 is right</button><button type="button" class="fxopt" data-i="1" onclick="fxPick('FX11',1)">B) No — it says 54. Half of 54 is 27, not 28. 54 : 24 ÷ 6 = 9 : 4</button><button type="button" class="fxopt" data-i="2" onclick="fxPick('FX11',2)">C) Back-checks don&#x27;t matter</button></div><div class="fxres" id="fxres_FX11"></div><button type="button" class="fxbtn" id="fxb2_FX11" onclick="fxToRedo('FX11')" style="display:none">Redo it &#9656;</button></div><div class="fx-st" data-s="2"><p class="fxlab">Redo &mdash; the same question, with your card open</p><div class="q-card yt" id="yt_FX11r" data-iid="FX11r"><span class="q-cap">Redo</span><div class="dq" id="q_FX11r"></div><button type="button" class="btn-circ" id="circ_FX11r" onclick="circTap('FX11r')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_FX11r"></div><button class="btn-check" id="chk_FX11r" onclick="ytCheck('FX11r')" disabled>Check</button><div class="feedback" id="fb_FX11r"></div><div class="sorry" id="sorry_FX11r" style="display:none"></div></div></div><div class="fx-st" data-s="3"><p class="fxlab">Your twin &mdash; same kind, new numbers</p><div class="q-card yt" id="yt_FX11t" data-iid="FX11t"><span class="q-cap">Your twin</span><div class="dq" id="q_FX11t"></div><button type="button" class="btn-circ" id="circ_FX11t" onclick="circTap('FX11t')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_FX11t"></div><button class="btn-check" id="chk_FX11t" onclick="ytCheck('FX11t')" disabled>Check</button><div class="feedback" id="fb_FX11t"></div><div class="sorry" id="sorry_FX11t" style="display:none"></div></div></div><button type="button" class="fxbtn" id="fxb3_FX11" onclick="fxNext('FX11')" style="display:none">Fix-It done &#9656;</button></div></div>
+<div class="fx" id="fx_FX14" data-fx="FX14"><div class="fxh"><span class="fxn">Your question</span> &middot; from U76 mock B14<span class="fxok">&#10003; done</span></div><div class="fxbody"><div class="fx-st on" data-s="0"><p class="fxlab">The question</p><p class="fxq"><strong>Write 16 : 56 : 24 in its simplest form.</strong></p><div class="fxyou">You wrote: 2 : 8 : 3 (no working)</div><button type="button" class="fxbtn" id="fxb1_FX14" onclick="fxGo('FX14')">Find the slip &#9656;</button></div><div class="fx-st" data-s="1"><p class="fxlab">Find the slip</p><p class="fxsq"><strong>Back-check the middle number: 8 × 8 = ?</strong></p><div class="fxopts" id="fxo_FX14"><button type="button" class="fxopt" data-i="0" onclick="fxPick('FX14',0)">A) 64 — not 56. So 56 ÷ 8 = 7, and the answer is 2 : 7 : 3</button><button type="button" class="fxopt" data-i="1" onclick="fxPick('FX14',1)">B) 56, so 2 : 8 : 3 is right</button><button type="button" class="fxopt" data-i="2" onclick="fxPick('FX14',2)">C) 48</button></div><div class="fxres" id="fxres_FX14"></div><button type="button" class="fxbtn" id="fxb2_FX14" onclick="fxToRedo('FX14')" style="display:none">Redo it &#9656;</button></div><div class="fx-st" data-s="2"><p class="fxlab">Redo &mdash; the same question, with your card open</p><div class="q-card yt" id="yt_FX14r" data-iid="FX14r"><span class="q-cap">Redo</span><div class="dq" id="q_FX14r"></div><button type="button" class="btn-circ" id="circ_FX14r" onclick="circTap('FX14r')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_FX14r"></div><button class="btn-check" id="chk_FX14r" onclick="ytCheck('FX14r')" disabled>Check</button><div class="feedback" id="fb_FX14r"></div><div class="sorry" id="sorry_FX14r" style="display:none"></div></div></div><div class="fx-st" data-s="3"><p class="fxlab">Your twin &mdash; same kind, new numbers</p><div class="q-card yt" id="yt_FX14t" data-iid="FX14t"><span class="q-cap">Your twin</span><div class="dq" id="q_FX14t"></div><button type="button" class="btn-circ" id="circ_FX14t" onclick="circTap('FX14t')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_FX14t"></div><button class="btn-check" id="chk_FX14t" onclick="ytCheck('FX14t')" disabled>Check</button><div class="feedback" id="fb_FX14t"></div><div class="sorry" id="sorry_FX14t" style="display:none"></div></div></div><button type="button" class="fxbtn" id="fxb3_FX14" onclick="fxNext('FX14')" style="display:none">Fix-It done &#9656;</button></div></div>
+<div class="fx" id="fx_FX25" data-fx="FX25"><div class="fxh"><span class="fxn">Your question</span> &middot; from U76 mock C25 (a)<span class="fxok">&#10003; done</span></div><div class="fxbody"><div class="fx-st on" data-s="0"><p class="fxlab">The question</p><p class="fxq"><strong>In a bakery, the ratio of the mass of flour to the mass of sugar used each day is 7 : 3. 50 kg of flour is used in a day. Find the mass of sugar used in a day, correct to 2 decimal places.</strong></p><div class="fxyou">You wrote: 7.14 (working: 50 ÷ 7 = 7.142854…, then 7.14 × 3 = 21.42)</div><button type="button" class="fxbtn" id="fxb1_FX25" onclick="fxGo('FX25')">Find the slip &#9656;</button></div><div class="fx-st" data-s="1"><p class="fxlab">Find the slip</p><p class="fxsq"><strong>Your 50 ÷ 7 = 7.142… was RIGHT. What went wrong?</strong></p><div class="fxopts" id="fxo_FX25"><button type="button" class="fxopt" data-i="0" onclick="fxPick('FX25',0)">A) I rounded 1 unit to 7.14 FIRST, then × 3 gave 21.42. Keep it exact: 7 1/7 × 3 = 21 3/7 ≈ 21.43. And the answer is the SUGAR, not 1 unit</button><button type="button" class="fxopt" data-i="1" onclick="fxPick('FX25',1)">B) 50 ÷ 7 should be 7</button><button type="button" class="fxopt" data-i="2" onclick="fxPick('FX25',2)">C) The sugar is 3 + 7 = 10 kg</button></div><div class="fxres" id="fxres_FX25"></div><button type="button" class="fxbtn" id="fxb2_FX25" onclick="fxToRedo('FX25')" style="display:none">Redo it &#9656;</button></div><div class="fx-st" data-s="2"><p class="fxlab">Redo &mdash; the same question, with your card open</p><div class="q-card yt" id="yt_FX25r" data-iid="FX25r"><span class="q-cap">Redo</span><div class="dq" id="q_FX25r"></div><button type="button" class="btn-circ" id="circ_FX25r" onclick="circTap('FX25r')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_FX25r"></div><button class="btn-check" id="chk_FX25r" onclick="ytCheck('FX25r')" disabled>Check</button><div class="feedback" id="fb_FX25r"></div><div class="sorry" id="sorry_FX25r" style="display:none"></div></div></div><div class="fx-st" data-s="3"><p class="fxlab">Your twin &mdash; same kind, new numbers</p><div class="q-card yt" id="yt_FX25t" data-iid="FX25t"><span class="q-cap">Your twin</span><div class="dq" id="q_FX25t"></div><button type="button" class="btn-circ" id="circ_FX25t" onclick="circTap('FX25t')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_FX25t"></div><button class="btn-check" id="chk_FX25t" onclick="ytCheck('FX25t')" disabled>Check</button><div class="feedback" id="fb_FX25t"></div><div class="sorry" id="sorry_FX25t" style="display:none"></div></div></div><button type="button" class="fxbtn" id="fxb3_FX25" onclick="fxNext('FX25')" style="display:none">Fix-It done &#9656;</button></div></div>
+<div class="fxfinal" id="fxfinal_0" style="display:none"><p style="font-weight:800;color:#1B5E20">&#10003; All five fixed. Two moves to see, then practice.</p></div>
+<div class="lockmsg" id="lockmsg_0">Finish the five Fix-It cards first, then press Next.</div>
+<div class="navrow"><button class="next" onclick="nav(1)">Two moves, shown &#8594;</button></div>
+</div></div>
+<div class="screen" id="s1"><div class="card">
+<span class="act">Two moves, shown</span><br>
+<h2>&#128270; Two Moves, Shown</h2>
+<div class="dtree"><b>Before you write the answer, what are they asking for?</b><table>
+<tr><td>ONE part (just one person&rsquo;s amount)</td><td>★1 &mdash; that part&rsquo;s units × 1 unit</td></tr>
+<tr><td>The OTHER part</td><td>★1 &mdash; the other part&rsquo;s units × 1 unit</td></tr>
+<tr><td>ALTOGETHER (the total)</td><td>★1 &mdash; all the units × 1 unit</td></tr>
+<tr><td>How many MORE</td><td>★1 &mdash; the units between × 1 unit</td></tr></table></div>
+<h3 class="sec-h">★1 &mdash; point at what the question asks for</h3>
+<div class="q-card yt" id="yt_W1" data-iid="W1"><span class="q-cap">★1 Asked for what?</span><div class="dq" id="q_W1"></div><p class="tap-hint">Tap what the question asks for. The answer box opens after that.</p><div class="bm-rows"><div class="bm-row"><span class="bm-lab">Cal</span><span class="bm-boxes" id="w1row1"><i class="ub"></i><i class="ub"></i><i class="ub"></i><i class="ub"></i></span></div><div class="bm-row"><span class="bm-lab">Dee</span><span class="bm-boxes" id="w1row2"><i class="ub r2"></i><i class="ub r2"></i><i class="ub r2"></i><i class="ub r2"></i><i class="ub r2"></i><i class="ub r2"></i><i class="ub r2"></i></span></div></div><div class="pickrow" id="w1pick"><button type="button" onclick="w1Pick(0)">Cal’s bar</button><button type="button" onclick="w1Pick(1)">Dee’s bar</button><button type="button" onclick="w1Pick(2)">Both bars together</button><button type="button" onclick="w1Pick(3)">The gap between them</button></div><div class="feedback" id="w1fb"></div><div class="alines" id="ln_W1"></div><button class="btn-check" id="chk_W1" onclick="ytCheck('W1')" disabled>Check</button><div class="feedback" id="fb_W1"></div><div class="sorry" id="sorry_W1" style="display:none"></div><div class="wlb closed" id="wwl_W1" data-bid="W1"><div class="wls"><div class="wl" data-card="U1"><span class="m">Units = 4 + 7</span><span class="why">◆7 all the units together</span></div><div class="wl" data-card="U1"><span class="m">= 11</span><span class="why">4 + 7 = 11</span></div><div class="wl" data-card="U2"><span class="m">1 unit = 99 ÷ 11</span><span class="why">◆8 TOTAL ÷ all the units</span></div><div class="wl" data-card="U2"><span class="m">= 9</span><span class="why">99 ÷ 11 = 9</span></div><div class="wl" data-card="U1"><span class="m">Units between = 7 − 4</span><span class="why">★1 they ask HOW MANY MORE: the units between</span></div><div class="wl" data-card="U1"><span class="m">= 3</span><span class="why">7 − 4 = 3</span></div><div class="wl" data-card="U3"><span class="m">How many more = 3 × 9</span><span class="why">its units × 1 unit</span></div><div class="wl" data-card="U3"><span class="m">= 27</span><span class="why">3 × 9 = 27</span></div></div><button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button></div></div>
+<h3 class="sec-h">★3 &mdash; round once, at the very end</h3>
+<div class="q-card yt" id="yt_W2" data-iid="W2"><span class="q-cap">★3 Round once</span><div class="dq" id="q_W2"></div><button type="button" class="fbtn" id="w2btn" onclick="w2Show()">Show me both ways &#9656;</button><div id="w2cmp" style="display:none"><div class="cmpcols"><div class="cmpcol"><div class="ct">Exact (keep the fraction)</div>1 unit = 20 ÷ 7 = 2 6/7<br>3 × 2 6/7 = 8 4/7<br>8 4/7 ≈ <b>8.57</b> ✓</div><div class="cmpcol bad"><div class="ct">Rounded early</div>1 unit = 20 ÷ 7 ≈ 2.86<br>3 × 2.86 = <b>8.58</b> ✗<br>&nbsp;</div></div><div class="tapfb amb"><b>One tiny early rounding = a wrong answer.</b></div></div><div class="alines" id="ln_W2"></div><button class="btn-check" id="chk_W2" onclick="ytCheck('W2')" disabled>Check</button><div class="feedback" id="fb_W2"></div><div class="sorry" id="sorry_W2" style="display:none"></div><div class="wlb closed" id="wwl_W2" data-bid="W2"><div class="wls"><div class="wl" data-card="U2"><span class="m">1 unit = 20 ÷ 7</span><span class="why">◆8 the blue ribbon (20 m) is 7 units — ★3 keep the fraction</span></div><div class="wl" data-card="U2"><span class="m">= 2 6/7</span><span class="why">20 ÷ 7 = 2 6/7</span></div><div class="wl" data-card="U3"><span class="m">Red = 3 × 2 6/7</span><span class="why">★1 they ask for RED: 3 units</span></div><div class="wl" data-card="U3"><span class="m">= 8 4/7</span><span class="why">3 × 2 6/7 = 8 4/7</span></div><div class="wl" data-card="D"><span class="m">8 4/7 ≈ 8.57 m</span><span class="why">◆10 round once, at the end: the next digit is 1, so keep</span></div></div><button type="button" class="btn-next" onclick="wlNext(this)">Next line &#9656;</button></div></div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button><button class="next" onclick="nav(1)">Practice &#8594;</button></div>
+</div></div>
+<div class="screen" id="s2"><div class="card">
+<span class="act">Practice &times; 6</span><br>
+<h2>&#9997;&#65039; Practice</h2>
+<p class="tap-hint">Six questions, mixed. No worked example on this page. The Top-up Card is there if you want it.</p>
+<div class="stat2" id="ytstat"></div>
+<div class="q-card yt" id="yt_P1" data-iid="P1"><span class="q-cap">Practice</span><div class="dq" id="q_P1"></div><button type="button" class="btn-circ" id="circ_P1" onclick="circTap('P1')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_P1"></div><button class="btn-check" id="chk_P1" onclick="ytCheck('P1')" disabled>Check</button><div class="feedback" id="fb_P1"></div><div class="sorry" id="sorry_P1" style="display:none"></div></div>
+<div class="q-card yt" id="yt_P2" data-iid="P2"><span class="q-cap">Practice</span><div class="dq" id="q_P2"></div><button type="button" class="btn-circ" id="circ_P2" onclick="circTap('P2')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_P2"></div><button class="btn-check" id="chk_P2" onclick="ytCheck('P2')" disabled>Check</button><div class="feedback" id="fb_P2"></div><div class="sorry" id="sorry_P2" style="display:none"></div></div>
+<div class="q-card yt" id="yt_P3" data-iid="P3"><span class="q-cap">Practice</span><div class="dq" id="q_P3"></div><button type="button" class="btn-circ" id="circ_P3" onclick="circTap('P3')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_P3"></div><div class="bcbox" id="bc_P3"><b>★2 Back-check.</b> Your ratio × <input type="text" inputmode="numeric" id="bck_P3" oninput="bcUpdate('P3')" aria-label="multiply back by" disabled> <div class="bcout" id="bcout_P3">Type your ratio, then the number you × by.</div></div><button class="btn-check" id="chk_P3" onclick="ytCheck('P3')" disabled>Check</button><div class="feedback" id="fb_P3"></div><div class="sorry" id="sorry_P3" style="display:none"></div></div>
+<div class="q-card yt" id="yt_P4" data-iid="P4"><span class="q-cap">Practice</span><div class="dq" id="q_P4"></div><button type="button" class="btn-circ" id="circ_P4" onclick="circTap('P4')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_P4"></div><div class="bcbox" id="bc_P4"><b>★2 Back-check.</b> Your ratio × <input type="text" inputmode="numeric" id="bck_P4" oninput="bcUpdate('P4')" aria-label="multiply back by" disabled> <div class="bcout" id="bcout_P4">Type your ratio, then the number you × by.</div></div><button class="btn-check" id="chk_P4" onclick="ytCheck('P4')" disabled>Check</button><div class="feedback" id="fb_P4"></div><div class="sorry" id="sorry_P4" style="display:none"></div></div>
+<div class="q-card yt" id="yt_P5" data-iid="P5"><span class="q-cap">Practice</span><div class="dq" id="q_P5"></div><button type="button" class="btn-circ" id="circ_P5" onclick="circTap('P5')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_P5"></div><button class="btn-check" id="chk_P5" onclick="ytCheck('P5')" disabled>Check</button><div class="feedback" id="fb_P5"></div><div class="sorry" id="sorry_P5" style="display:none"></div></div>
+<div class="q-card yt" id="yt_P6" data-iid="P6"><span class="q-cap">Practice</span><div class="dq" id="q_P6"></div><button type="button" class="btn-circ" id="circ_P6" onclick="circTap('P6')">&#10004;1 I read ALL of the question and I know what it asks for</button><div class="alines" id="ln_P6"></div><button class="btn-check" id="chk_P6" onclick="ytCheck('P6')" disabled>Check</button><div class="feedback" id="fb_P6"></div><div class="sorry" id="sorry_P6" style="display:none"></div></div>
+<div class="finish" id="finish"><p style="font-weight:800;font-size:1.1rem;color:#1B5E20">&#11088; Three habits fixed. STOP &mdash; no more maths today. Tomorrow: point at what they ask (★1), back-check every simplest form (★2), round once at the end (★3). You&rsquo;ve got this.</p><div class="both" id="fboth"></div></div>
+<div class="navrow"><button class="prev" onclick="nav(-1)">&#8592; Prev</button></div>
+</div></div>
+</div>
+<div class="savezone" id="savezone"><div class="sstat" id="sstat" aria-live="polite"></div><button type="button" id="savebtn" onclick="saveClick()" disabled>Save</button></div>
+<div id="unsavedov" role="alertdialog" aria-live="assertive"><div class="box"><p>You haven&rsquo;t saved yet. If you leave now, Chusaki will not see your answers.</p><button type="button" class="stay" onclick="stayAndSave()">Stay and save</button><button type="button" class="leave" onclick="leaveAnyway()">Leave without saving</button></div></div>
+<button type="button" id="fcbtn" onclick="fcToggle(true)" aria-controls="fcard">&#x1F4CC; Top-up Card</button>
+<aside id="fcard" class="fc" aria-label="Top-up Card"><div class="fc-top"><b>&#x1F4CC; THE 3 HABITS</b><span class="fc-btns"><button type="button" onclick="fcPrint()" aria-label="Print the card">&#x1F5A8;</button><button type="button" onclick="fcToggle(true)" aria-label="Close the card">&#10005;</button></span></div>
+<div class="fc-pane on">
+<div class="fc-st" data-step="K"><b>★1</b> ASKED FOR WHAT? Before you write the answer, point at the question: one part? the OTHER part? ALTOGETHER? how many MORE? Then use THAT many units.</div>
+<div class="fc-st" data-step="A3"><b>★2</b> BACK-CHECK every simplest form: × your answer back up. You must get the numbers in the question (7 × 8 = 56, but the question says 54 ✗).</div>
+<div class="fc-st" data-step="D"><b>★3</b> ROUND ONCE: keep 1 unit as a fraction (50 ÷ 7 = 7 1/7). Multiply. Only the LAST line gets rounded.</div>
+</div></aside>
+<script>
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a);}
+function mixedStr(n,d){var g=gcd(n,d);n=n/g;d=d/g;var w=Math.floor(n/d),r=n-w*d;if(r===0)return ''+w;return (w?w+' ':'')+r+'/'+d;}
+/* parse "1 1/5", "6/5", "2", "1.2", "1 1/5 m" -> [num,den] reduced, or null */
+function parseVal(s){
+  if(s==null)return null; s=String(s).toLowerCase().replace(/[²]/g,'').replace(/(kg|km|cups?|cm|ml|l|m|litres?|liters?|metres?|meters?|sq\.?|squared)\b/g,' ').replace(/\s+/g,' ').trim();
+  if(!s)return null; var m;
+  if((m=s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/))){var d=+m[3];if(!d)return null;var n=(+m[1])*d+(+m[2]);var g=gcd(n,d);return [n/g,d/g,'mixed'];}
+  if((m=s.match(/^(\d+)\s*\/\s*(\d+)$/))){var d2=+m[2];if(!d2)return null;var g2=gcd(+m[1],d2);return [(+m[1])/g2,d2/g2,'frac',+m[1],d2];}
+  if((m=s.match(/^(\d+)$/))){return [+m[1],1,'int'];}
+  if((m=s.match(/^(\d*)\.(\d+)$/))){var den=Math.pow(10,m[2].length);var n3=(+m[1]||0)*den+(+m[2]);var g3=gcd(n3,den);return [n3/g3,den/g3,'dec'];}
+  return null;}
+function sameVal(a,b){return a&&b&&a[0]===b[0]&&a[1]===b[1];}
+function isImproperText(s){var m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);return !!m&&(+m[1])>(+m[2]);}
+
+function wlShow(b,n){var rows=b.querySelectorAll('.wl,.bl'),i;for(i=0;i<rows.length;i++){rows[i].classList.remove('cur');if(i<n)rows[i].classList.add('on');}
+  if(n>0&&rows[n-1])rows[n-1].classList.add('cur');if(n>=rows.length){b.classList.add('alldone');var a=b.getAttribute('data-after');if(a){var e=document.getElementById(a);if(e)e.style.display='block';}}}
+function wlCount(b){return b.querySelectorAll('.wl.on,.bl.on').length;}
+function wlNext(btn){var b=btn.parentNode;wlShow(b,wlCount(b)+1);}
+function wlOpen(b){b.classList.remove('closed');if(wlCount(b)===0)wlShow(b,1);}
+function stepsToggle(btn){var b=btn.parentNode.querySelector('.wlb');if(b.classList.contains('closed')){wlOpen(b);btn.textContent='Hide steps';}else{b.classList.add('closed');btn.textContent='Show steps';}}
+
+var screens=document.querySelectorAll('.screen'),pill=document.getElementById('pill'),cur=0;pill.textContent='1 / '+screens.length;
+function nav(d){screens[cur].classList.remove('active');cur=Math.max(0,Math.min(screens.length-1,cur+d));screens[cur].classList.add('active');pill.textContent=(cur+1)+' / '+screens.length;window.scrollTo(0,0);}
+function goTo(i){nav(i-cur);}
+
+
+var FCKEY='chusaki_u077_card';
+function fcPref(){try{return window.localStorage.getItem(FCKEY);}catch(e){return null;}}
+function fcSetPref(v){try{window.localStorage.setItem(FCKEY,v);}catch(e){}}
+function fcIsOpen(){return document.body.classList.contains('fc-open');}
+function fcShow(on){document.body.classList.toggle('fc-open',!!on);}
+function fcToggle(manual){var on=!fcIsOpen();fcShow(on);if(on&&cur!==0)document.body.classList.remove('fc-full');if(manual&&cur>=1)fcSetPref(on?'open':'closed');}
+function fcAuto(){var wide=window.innerWidth>=900;document.body.classList.toggle('fc-full',!wide&&cur===0);if(wide||cur===0)fcShow(true);else fcShow(fcPref()==='open');}
+function fcOpen(id){document.getElementById(id).classList.toggle('open');}
+function fcBricks(b){document.getElementById('fcbricks').classList.toggle('open');}
+function cardGlow(b,n){var g=document.querySelectorAll('#fcard .fc-st.glow'),i;for(i=0;i<g.length;i++)g[i].classList.remove('glow');
+  var rows=b.querySelectorAll('.wl');if(n<1||!rows[n-1])return;var tag=rows[n-1].getAttribute('data-card');if(!tag)return;
+  var st=document.querySelectorAll('#fcard .fc-st'),k;for(k=0;k<st.length;k++){if((' '+st[k].getAttribute('data-step')+' ').indexOf(' '+tag+' ')>=0){st[k].classList.add('glow');
+    var blk=st[k].parentNode;if(blk&&blk.classList.contains('fc-blk'))blk.classList.add('open');}}}
+var _wl0=wlShow;wlShow=function(b,n){_wl0(b,n);cardGlow(b,n);};
+function fcPrint(){document.body.classList.add('printing');try{window.print();}catch(e){}setTimeout(function(){document.body.classList.remove('printing');},300);}
+var _nv0=nav;nav=function(d){_nv0(d);fcAuto();var b=document.querySelector('#s'+cur+' .wlb');if(b)cardGlow(b,wlCount(b));else cardGlow(document.body,0);};
+fcAuto();
+
+
+
+/* ===== Unit 77 lesson: Sunday top-up before the Chapter 5 school test ===== */
+var D={"ITEMS": {"W1": {"q": "The ratio of Cal's marbles to Dee's marbles is 4 : 7. They have 99 marbles altogether. How many more marbles does Dee have than Cal?", "lines": [{"k": "a", "lab": "How many more marbles does Dee have? =", "t": "num", "v": 27, "wr": {"wrongAmount": [36, 63, 99, 9, 3]}}]}, "W2": {"q": "The ratio of the length of a red ribbon to the length of a blue ribbon is 3 : 7. The blue ribbon is 20 m long. Find the length of the red ribbon, correct to 2 decimal places.", "lines": [{"k": "a", "lab": "Red ribbon =", "t": "num", "v": 8.57, "unit": "m", "wr": {"roundedEarly": [8.58], "wrongAmount": [20, 2.86, 28.57]}}]}, "P1": {"q": "At a camp, the ratio of girls to boys is 5 : 6. There are 45 girls. How many children are at the camp?", "lines": [{"k": "a", "lab": "Children at the camp =", "t": "num", "v": 99, "wr": {"wrongAmount": [45, 54, 9]}}]}, "P2": {"q": "Juice and water are mixed in the ratio 2 : 9 to make 132 ml of drink. How much water is used?", "lines": [{"k": "a", "lab": "Water =", "t": "num", "v": 108, "unit": "ml", "wr": {"wrongAmount": [24, 12, 132]}}]}, "P3": {"q": "Write 84 : 36 in its simplest form.", "lines": [{"k": "a", "lab": "Simplest form =", "t": "rat", "v": [7, 3], "simp": true, "orig": [84, 36]}], "bc": {"orig": [84, 36]}}, "P4": {"q": "Write 45 : 27 : 63 in its simplest form.", "lines": [{"k": "a", "lab": "Simplest form =", "t": "rat", "v": [5, 3, 7], "simp": true, "orig": [45, 27, 63]}], "bc": {"orig": [45, 27, 63]}}, "P5": {"q": "A rope is cut into two pieces in the ratio 3 : 7. The shorter piece is 25 m long. Find the length of the whole rope, correct to 1 decimal place.", "lines": [{"k": "a", "lab": "Whole rope =", "t": "num", "v": 83.3, "unit": "m", "wr": {"roundedEarly": [83.0], "wrongAmount": [25, 58.3, 58.33, 8.3, 8.33]}}]}, "P6": {"q": "In a recipe, the ratio of the mass of flour to the mass of butter is 11 : 6. 25 g of butter is used. Find the mass of flour, correct to 2 decimal places.", "lines": [{"k": "a", "lab": "Flour =", "t": "num", "v": 45.83, "unit": "g", "wr": {"roundedEarly": [45.87], "wrongAmount": [25, 4.17, 70.83]}}]}, "FX6r": {"q": "The ratio of Uma's stickers to Val's stickers is 3 : 8. They have 121 stickers altogether. How many stickers does Val have?", "lines": [{"k": "a", "lab": "Val’s stickers =", "t": "num", "v": 88, "wr": {"wrongAmount": [33, 121, 11]}}]}, "FX6t": {"q": "Your twin: the ratio of Ada's shells to Bea's shells is 5 : 9. They have 126 shells altogether. How many shells does Bea have?", "lines": [{"k": "a", "lab": "Bea’s shells =", "t": "num", "v": 81, "wr": {"wrongAmount": [45, 126, 9]}}]}, "FX19r": {"q": "At a fruit stall, for every 4 apples sold, 9 oranges are sold. 72 oranges were sold. How many apples and oranges were sold altogether?", "lines": [{"k": "a", "lab": "Apples and oranges altogether =", "t": "num", "v": 104, "wr": {"wrongAmount": [32, 72, 8]}}]}, "FX19t": {"q": "Your twin: at a stall, for every 5 cups sold, 3 plates are sold. 45 cups were sold. How many cups and plates were sold altogether?", "lines": [{"k": "a", "lab": "Cups and plates altogether =", "t": "num", "v": 72, "wr": {"wrongAmount": [45, 27, 9]}}]}, "FX11r": {"q": "Write 54 : 24 in its simplest form.", "lines": [{"k": "a", "lab": "Simplest form =", "t": "rat", "v": [9, 4], "simp": true, "orig": [54, 24]}]}, "FX11t": {"q": "Your twin: write 76 : 32 in its simplest form.", "lines": [{"k": "a", "lab": "Simplest form =", "t": "rat", "v": [19, 8], "simp": true, "orig": [76, 32]}]}, "FX14r": {"q": "Write 16 : 56 : 24 in its simplest form.", "lines": [{"k": "a", "lab": "Simplest form =", "t": "rat", "v": [2, 7, 3], "simp": true, "orig": [16, 56, 24]}]}, "FX14t": {"q": "Your twin: write 18 : 42 : 30 in its simplest form.", "lines": [{"k": "a", "lab": "Simplest form =", "t": "rat", "v": [3, 7, 5], "simp": true, "orig": [18, 42, 30]}]}, "FX25r": {"q": "In a bakery, the ratio of the mass of flour to the mass of sugar used each day is 7 : 3. 50 kg of flour is used in a day. Find the mass of sugar used in a day, correct to 2 decimal places.", "lines": [{"k": "a", "lab": "Sugar =", "t": "num", "v": 21.43, "unit": "kg", "wr": {"roundedEarly": [21.42], "wrongAmount": [50, 7.14, 71.43]}}]}, "FX25t": {"q": "Your twin: in a store, the ratio of the mass of rice to the mass of beans is 9 : 4. There are 40 kg of rice. Find the mass of beans, correct to 2 decimal places.", "lines": [{"k": "a", "lab": "Beans =", "t": "num", "v": 17.78, "unit": "kg", "wr": {"roundedEarly": [17.76], "wrongAmount": [40, 4.44, 57.78]}}]}}, "YT": ["P1", "P2", "P3", "P4", "P5", "P6"], "FXO": ["FX6", "FX19", "FX11", "FX14", "FX25"], "FXKEY": {"FX6": 1, "FX19": 2, "FX11": 1, "FX14": 0, "FX25": 0}, "FXLET": {"FX6": "B", "FX19": "C", "FX11": "B", "FX14": "A", "FX25": "A"}, "FXTXT": {"FX6": ["A) Uma's: 3 × 11 = 33", "B) Val's: 8 × 11 = 88", "C) Both: 121"], "FX19": ["A) The apples: 32", "B) The oranges: 72", "C) Apples AND oranges altogether: 13 units = 13 × 8 = 104"], "FX11": ["A) Yes, so 7 : 3 is right", "B) No — it says 54. Half of 54 is 27, not 28. 54 : 24 ÷ 6 = 9 : 4", "C) Back-checks don't matter"], "FX14": ["A) 64 — not 56. So 56 ÷ 8 = 7, and the answer is 2 : 7 : 3", "B) 56, so 2 : 8 : 3 is right", "C) 48"], "FX25": ["A) I rounded 1 unit to 7.14 FIRST, then × 3 gave 21.42. Keep it exact: 7 1/7 × 3 = 21 3/7 ≈ 21.43. And the answer is the SUGAR, not 1 unit", "B) 50 ÷ 7 should be 7", "C) The sugar is 3 + 7 = 10 kg"]}, "WL": {"P1": [["1 unit = 45 ÷ 5", "◆8 the 45 girls are 5 units", "U2"], ["= 9", "45 ÷ 5 = 9", "U2"], ["Units = 5 + 6", "◆7 all the units together", "U1"], ["= 11", "5 + 6 = 11", "U1"], ["Children = 11 × 9", "★1 they ask for ALL the children", "U3"], ["= 99", "11 × 9 = 99", "U3"]], "P2": [["Units = 2 + 9", "◆7 all the units together", "U1"], ["= 11", "2 + 9 = 11", "U1"], ["1 unit = 132 ÷ 11", "◆8 TOTAL ÷ all the units", "U2"], ["= 12", "132 ÷ 11 = 12", "U2"], ["Water = 9 × 12", "★1 they ask for the WATER: 9 units", "U3"], ["= 108 ml", "9 × 12 = 108", "U3"]], "P3": [["Ratio = 84 : 36", "as given", "R1"], ["= 7 : 3", "◆3 ÷ both by 12 — the biggest number that goes into 84 and 36", "R3"], ["7 × 12 = 84", "★2 back-check: × 12 gives 84, as in the question ✓", "A3"], ["3 × 12 = 36", "★2 back-check: × 12 gives 36, as in the question ✓", "A3"]], "P4": [["Ratio = 45 : 27 : 63", "as given", "R1"], ["= 5 : 3 : 7", "◆3 ÷ all by 9 — the biggest number that goes into 45, 27, 63", "R3"], ["5 × 9 = 45", "★2 back-check: × 9 gives 45, as in the question ✓", "A3"], ["3 × 9 = 27", "★2 back-check: × 9 gives 27, as in the question ✓", "A3"], ["7 × 9 = 63", "★2 back-check: × 9 gives 63, as in the question ✓", "A3"]], "P5": [["1 unit = 25 ÷ 3", "◆8 the shorter piece (25 m) is 3 units — ★3 keep the fraction", "U2"], ["= 8 1/3", "25 ÷ 3 = 8 1/3", "U2"], ["Units = 3 + 7", "◆7 all the units together", "U1"], ["= 10", "3 + 7 = 10", "U1"], ["Rope = 10 × 8 1/3", "★1 they ask for the WHOLE rope", "U3"], ["= 83 1/3", "10 × 8 1/3 = 83 1/3", "U3"], ["83 1/3 ≈ 83.3 m", "◆10 round once, at the end: the next digit is 3, so keep", "D"]], "P6": [["1 unit = 25 ÷ 6", "◆8 the butter (25 g) is 6 units — ★3 keep the fraction", "U2"], ["= 4 1/6", "25 ÷ 6 = 4 1/6", "U2"], ["Flour = 11 × 4 1/6", "★1 they ask for the FLOUR: 11 units", "U3"], ["= 45 5/6", "11 × 4 1/6 = 45 5/6", "U3"], ["45 5/6 ≈ 45.83 g", "◆10 round once, at the end: the next digit is 3, so keep", "D"]], "FX6r": [["Units = 3 + 8", "◆7 all the units together", "U1"], ["= 11", "3 + 8 = 11", "U1"], ["1 unit = 121 ÷ 11", "◆8 TOTAL ÷ all the units", "U2"], ["= 11", "121 ÷ 11 = 11", "U2"], ["Val = 8 × 11", "★1 they ask for VAL: 8 units", "U3"], ["= 88", "8 × 11 = 88", "U3"]], "FX6t": [["Units = 5 + 9", "◆7 all the units together", "U1"], ["= 14", "5 + 9 = 14", "U1"], ["1 unit = 126 ÷ 14", "◆8 TOTAL ÷ all the units", "U2"], ["= 9", "126 ÷ 14 = 9", "U2"], ["Bea = 9 × 9", "★1 they ask for BEA: 9 units", "U3"], ["= 81", "9 × 9 = 81", "U3"]], "FX19r": [["1 unit = 72 ÷ 9", "◆8 the 72 oranges are 9 units", "U2"], ["= 8", "72 ÷ 9 = 8", "U2"], ["Units = 4 + 9", "◆7 all the units together", "U1"], ["= 13", "4 + 9 = 13", "U1"], ["Altogether = 13 × 8", "★1 they ask ALTOGETHER: all 13 units", "U3"], ["= 104", "13 × 8 = 104", "U3"]], "FX19t": [["1 unit = 45 ÷ 5", "◆8 the 45 cups are 5 units", "U2"], ["= 9", "45 ÷ 5 = 9", "U2"], ["Units = 5 + 3", "◆7 all the units together", "U1"], ["= 8", "5 + 3 = 8", "U1"], ["Altogether = 8 × 9", "★1 they ask ALTOGETHER: all 8 units", "U3"], ["= 72", "8 × 9 = 72", "U3"]], "FX11r": [["Ratio = 54 : 24", "as given", "R1"], ["= 9 : 4", "◆3 ÷ both by 6 — the biggest number that goes into 54 and 24", "R3"], ["9 × 6 = 54", "★2 back-check: × 6 gives 54, as in the question ✓", "A3"], ["4 × 6 = 24", "★2 back-check: × 6 gives 24, as in the question ✓", "A3"]], "FX11t": [["Ratio = 76 : 32", "as given", "R1"], ["= 19 : 8", "◆3 ÷ both by 4 — the biggest number that goes into 76 and 32", "R3"], ["19 × 4 = 76", "★2 back-check: × 4 gives 76, as in the question ✓", "A3"], ["8 × 4 = 32", "★2 back-check: × 4 gives 32, as in the question ✓", "A3"]], "FX14r": [["Ratio = 16 : 56 : 24", "as given", "R1"], ["= 2 : 7 : 3", "◆3 ÷ all by 8 — the biggest number that goes into 16, 56, 24", "R3"], ["2 × 8 = 16", "★2 back-check: × 8 gives 16, as in the question ✓", "A3"], ["7 × 8 = 56", "★2 back-check: × 8 gives 56, as in the question ✓", "A3"], ["3 × 8 = 24", "★2 back-check: × 8 gives 24, as in the question ✓", "A3"]], "FX14t": [["Ratio = 18 : 42 : 30", "as given", "R1"], ["= 3 : 7 : 5", "◆3 ÷ all by 6 — the biggest number that goes into 18, 42, 30", "R3"], ["3 × 6 = 18", "★2 back-check: × 6 gives 18, as in the question ✓", "A3"], ["7 × 6 = 42", "★2 back-check: × 6 gives 42, as in the question ✓", "A3"], ["5 × 6 = 30", "★2 back-check: × 6 gives 30, as in the question ✓", "A3"]], "FX25r": [["1 unit = 50 ÷ 7", "◆8 the flour (50 kg) is 7 units — ★3 keep it as a fraction", "U2"], ["= 7 1/7", "50 ÷ 7 = 7 1/7", "U2"], ["Sugar = 3 × 7 1/7", "★1 they ask for the SUGAR: 3 units", "U3"], ["= 21 3/7", "3 × 7 1/7 = 21 3/7", "U3"], ["21 3/7 ≈ 21.43 kg", "◆10 round once, at the end: the next digit is 8, so round up", "D"]], "FX25t": [["1 unit = 40 ÷ 9", "◆8 the rice (40 kg) is 9 units — ★3 keep it as a fraction", "U2"], ["= 4 4/9", "40 ÷ 9 = 4 4/9", "U2"], ["Beans = 4 × 4 4/9", "★1 they ask for the BEANS: 4 units", "U3"], ["= 17 7/9", "4 × 4 4/9 = 17 7/9", "U3"], ["17 7/9 ≈ 17.78 kg", "◆10 round once, at the end: the next digit is 7, so round up", "D"]]}};
+var ITEMS=D.ITEMS,YT=D.YT,FXO=D.FXO,FXKEY=D.FXKEY,FXTXT=D.FXTXT,FXLET=D.FXLET,WL=D.WL,WO=['W1','W2'];
+var KEY='chusaki_u077_lesson';
+var FLAGS=['swappedOrder','notSimplest','usedPartNotTotal','rawAmounts','unitsWrongPart','roundedEarly','comparedToWrong','wrongAmount','noBackCheck'];
+function fcAuto(){var wide=window.innerWidth>=900;document.body.classList.remove('fc-full');if(wide)fcShow(true);else fcShow(fcPref()==='open');}
+var NMSG={swappedOrder:'Both numbers are right — but they’re in each other’s boxes. Write the amounts in the order the question names them.',
+  notSimplest:'Right ratio — can ALL the numbers still be ÷ by the same number? Keep going.',
+  usedPartNotTotal:'This question wants part : TOTAL. The total is all the parts added together.',
+  rawAmounts:'Those are the starting amounts. Work out the real amounts first.',
+  unitsWrongPart:'That is a real number from the working — but is it what the question asks for? Point at the question.',
+  roundedEarly:'So close — you rounded too early. Keep 1 unit as a fraction.',
+  comparedToWrong:'Look again — who is that “more / less than” compared to?',
+  wrongAmount:'That’s a real amount — but not the one they asked for. Point at the question.',
+  noBackCheck:'★2 BACK-CHECK: × your answer back up. Do you get the numbers in the question?'};
+var PR=['Right first time. Point at the question, then answer.','Read it again and it paid off. Exam-proof.','Clean. Right amount, right units.','Fixed it! That’s how brains grow.'];
+var S=null,fh=null,openedAt=new Date().toISOString(),lastSavedAt=null,wrote=0,storageBad=false,attempt=1,ST={},lastP='',SAVED={};
+function $(id){return document.getElementById(id);}
+function sload(){try{var s=window.localStorage.getItem(KEY);return s?JSON.parse(s):null;}catch(e){storageBad=true;return null;}}
+function sstore(){try{S.min=(S.base||0)+(Date.now()-new Date(openedAt).getTime())/60000;window.localStorage.setItem(KEY,JSON.stringify(S));}catch(e){storageBad=true;}}
+function isDone(id){return !!SAVED[id];}
+function recOf(id){var i;for(i=0;i<S.items.length;i++)if(S.items[i].id===id)return S.items[i];return S.side[id];}
+function nSlips(){var n=0,k;for(k in S.fx)if(S.fx[k].slip!==null&&S.fx[k].slip!==undefined)n++;return n;}
+function nDone(){return S.items.length+Object.keys(S.side).length+nSlips();}
+function ytDone(){return S.items.length>=YT.length;}
+function fxAllDone(){var i;for(i=0;i<FXO.length;i++){if(!(S.fx[FXO[i]]&&S.fx[FXO[i]].done))return false;}return true;}
+function wDone(){return isDone('W1')&&isDone('W2');}
+function allDone(){return ytDone()&&fxAllDone()&&wDone();}
+function gateOK(i){if(i===0)return fxAllDone();return true;}
+var _nav=nav;nav=function(d){
+  if(d>0){var i,t=Math.min(cur+d,screens.length-1);for(i=cur;i<t;i++){if(!gateOK(i)){var lm=$('lockmsg_'+i);if(lm){lm.style.display='block';lm.scrollIntoView({behavior:'smooth',block:'center'});}return;}}}
+  _nav(d);S.screen=cur;if(S.seen.indexOf(cur)<0)S.seen.push(cur);sstore();if(cur===2)showFinish();};
+function init(){
+  var P=sload();S={screen:0,seen:[0],items:[],side:{},fx:{},w:{},taps:{},min:0,sittings:0,savedN:0,attemptNo:1};
+  if(P&&typeof P==='object'&&P.items&&P.seen){S=P;if(!S.side)S.side={};if(!S.fx)S.fx={};if(!S.w)S.w={};if(!S.savedN)S.savedN=0;}
+  var i,k,seen={},clean=[];for(i=0;i<S.items.length;i++){if(!seen[S.items[i].id]){seen[S.items[i].id]=1;clean.push(S.items[i]);}}S.items=clean; /* every id saved exactly once */
+  for(i=0;i<S.items.length;i++)SAVED[S.items[i].id]=true;for(k in S.side)SAVED[k]=true;
+  S.attemptNo=S.attemptNo||1;attempt=S.attemptNo;
+  S.base=S.min||0;S.sittings=(S.sittings||0)+1;sstore();
+  for(k in ITEMS){if($('ln_'+k))setupCard(k);}
+  wSetup();revealCards();fxRestore();
+  if(S.screen>0){nav(S.screen);}
+  ytStat();paintSave();
+}
+/* ---------- inputs ---------- */
+function lineHtml(id,l){
+  var h='<div class="al"><label>'+l.lab+' ';
+  if(l.t==='rat'){var n=l.v.length,j;h+='<span class="rbox">';for(j=0;j<n;j++){if(j)h+='<span class="colon">:</span>';h+='<input type="text" inputmode="numeric" class="ln-'+l.k+'-'+j+'" aria-label="number '+(j+1)+'">';}h+='</span>';}
+  else h+='<input type="text" inputmode="decimal" class="ln-'+l.k+'" aria-label="answer">'+(l.unit?' <span class="unit">'+l.unit+'</span>':'');
+  return h+'</label></div>';}
+function setLines(id,dis){var it=ITEMS[id],h='',i;for(i=0;i<it.lines.length;i++)h+=lineHtml(id,it.lines[i]);$('ln_'+id).innerHTML=h;
+  var ins=$('ln_'+id).querySelectorAll('input');for(i=0;i<ins.length;i++)ins[i].disabled=!!dis;}
+function newFlags(){var o={},i;for(i=0;i<FLAGS.length;i++)o[FLAGS[i]]=false;return o;}
+function setupCard(id){
+  var it=ITEMS[id],isW=WO.indexOf(id)>=0;if($('q_'+id))$('q_'+id).textContent=it.q;
+  setLines(id,true);if($('bck_'+id))$('bck_'+id).disabled=true;
+  ST[id]={state:'idle',first:null,nudged:false,flags:newFlags(),circled:false,t0:null,tries:0};
+  if(it.bc){$('ln_'+id).addEventListener('input',function(){bcUpdate(id);});}
+  if(isDone(id)){var r=recOf(id),ins=$('ln_'+id).querySelectorAll('input'),k;
+    for(k=0;k<ins.length;k++)ins[k].disabled=true;
+    paintGiven(id,r.fixedAnswer||r.answersGiven);
+    if(it.bc&&r.backCheck){$('bck_'+id).value=r.backCheck.k||'';$('bck_'+id).disabled=true;bcUpdate(id);}
+    $('chk_'+id).disabled=true;if($('circ_'+id)){$('circ_'+id).classList.add('on');$('circ_'+id).disabled=true;}$('yt_'+id).classList.add('done');
+    $('fb_'+id).className='feedback ok';$('fb_'+id).style.display='block';$('fb_'+id).textContent=(r.firstTryRight||r.selfFixedAfterNudge)?'⭐ done':'✨ done';ST[id].state='done';}
+}
+function paintGiven(id,g){var it=ITEMS[id],i,l,root=$('ln_'+id),j;if(!g)return;for(i=0;i<it.lines.length;i++){l=it.lines[i];
+  var v=g[l.k]||'';if(l.t==='rat'){var p=String(v).split(':');for(j=0;j<l.v.length;j++){var e=root.querySelector('.ln-'+l.k+'-'+j);if(e)e.value=(p[j]||'').trim();}}
+  else{var e2=root.querySelector('.ln-'+l.k);if(e2)e2.value=String(v).replace(/\s*(cm²|cm|m²|m|kg|ml|g)\s*$/,'');}}}
+function readLine(root,l){
+  if(l.t==='rat'){var n=[],j,txt=[];for(j=0;j<l.v.length;j++){var a=root.querySelector('.ln-'+l.k+'-'+j).value.trim();if(!/^\d+$/.test(a)||+a===0)return null;n.push(+a);txt.push(+a);}return {n:n,txt:txt.join(' : ')};}
+  var v=root.querySelector('.ln-'+l.k).value.trim();var p=parseVal(v);if(!p)return null;return {p:p,txt:v};}
+function same(a,b){var i;if(a.length!==b.length)return false;for(i=0;i<a.length;i++)if(a[i]!==b[i])return false;return true;}
+function lineOK(l,g){if(l.t==='rat')return same(g.n,l.v);return sameVal(g.p,parseVal(String(l.v)));}
+function propEq(a,b){var i;if(a.length!==b.length)return false;for(i=1;i<a.length;i++)if(a[i]*b[0]!==b[i]*a[0])return false;return true;}
+function isPerm(a,b){if(a.length!==b.length)return false;var x=a.slice().sort(function(p,q){return p-q;}),y=b.slice().sort(function(p,q){return p-q;});return same(x,y);}
+function anyEq(g,arr){var i;if(!arr)return false;for(i=0;i<arr.length;i++){if(propEq(g.n,arr[i]))return true;}return false;}
+function scaleOf(g,orig){var i,k;if(g.length!==orig.length)return false;if(orig[0]%g[0])return false;k=orig[0]/g[0];for(i=0;i<g.length;i++)if(g[i]*k!==orig[i])return false;return true;}
+function classify(l,g){ /* the named "not yet" nudges; only for lines that are wrong */
+  if(l.t==='rat'){
+    if(l.simp&&propEq(g.n,l.v)&&!same(g.n,l.v))return 'notSimplest';
+    if(isPerm(g.n,l.v)&&!same(g.n,l.v))return 'swappedOrder';
+    if(l.orig&&!scaleOf(g.n,l.orig))return 'noBackCheck';
+    if(anyEq(g,l.pt))return 'usedPartNotTotal';
+    if(anyEq(g,l.cw))return 'comparedToWrong';
+    if(anyEq(g,l.raw))return 'rawAmounts';
+    return null;}
+  var k,i;if(l.wr){for(k in l.wr){for(i=0;i<l.wr[k].length;i++){if(sameVal(g.p,parseVal(String(l.wr[k][i]))))return k;}}}
+  return null;}
+function givenAll(id,root){var it=ITEMS[id],o={},raw={},i,g;for(i=0;i<it.lines.length;i++){g=readLine(root,it.lines[i]);if(!g){return null;}o[it.lines[i].k]=g;raw[it.lines[i].k]=g.txt;}return {g:o,txt:raw};}
+function wantTxt(id){var it=ITEMS[id],o={},i,l;for(i=0;i<it.lines.length;i++){l=it.lines[i];o[l.k]=(l.t==='rat')?l.v.join(' : '):(l.v+(l.unit?' '+l.unit:''));}return o;}
+function allOK(id,G){var it=ITEMS[id],i;for(i=0;i<it.lines.length;i++)if(!lineOK(it.lines[i],G.g[it.lines[i].k]))return false;return true;}
+function firstBad(id,G){var it=ITEMS[id],i;for(i=0;i<it.lines.length;i++)if(!lineOK(it.lines[i],G.g[it.lines[i].k]))return it.lines[i];return null;}
+function err(id,m){var fb=$('fb_'+id);fb.className='feedback err';fb.style.display='block';fb.textContent=m;}
+function lockAll(id){var els=$('ln_'+id).querySelectorAll('input'),i;for(i=0;i<els.length;i++)els[i].disabled=true;$('chk_'+id).disabled=true;if($('bck_'+id))$('bck_'+id).disabled=true;}
+function circTap(id){var s=ST[id];if(s.state==='done')return;s.circled=true;s.t0=s.t0||Date.now();$('circ_'+id).classList.add('on');$('circ_'+id).textContent='✔1 I read ALL of the question ✓';
+  var ins=$('ln_'+id).querySelectorAll('input'),i;for(i=0;i<ins.length;i++)ins[i].disabled=false;$('chk_'+id).disabled=false;if($('bck_'+id))$('bck_'+id).disabled=false;if(ins[0])ins[0].focus();}
+function stat(){var f=0,x=0,i,r;for(i=0;i<S.items.length;i++){r=S.items[i];if(r.firstTryRight||r.selfFixedAfterNudge)f++;else x++;}return [f,x];}
+function twinStat(){var f=0,x=0,i,r;for(i=0;i<FXO.length;i++){r=S.side[FXO[i]+'t'];if(!r)continue;if(r.firstTryRight||r.selfFixedAfterNudge)f++;else x++;}return [f,x];}
+function fxCount(){var n=0,i;for(i=0;i<FXO.length;i++)if(S.fx[FXO[i]]&&S.fx[FXO[i]].done)n++;return n;}
+function ytStat(){var s=stat();var e=$('ytstat');if(e)e.textContent='⭐ '+s[0]+' right  ·  ✨ '+s[1]+' fixed  ·  '+S.items.length+' of '+YT.length+' practice questions done  ·  Fix-It cards '+fxCount()+' of '+FXO.length;}
+function badMsg(id,l,n){return (n==='rawAmounts'&&l.rawMsg)?l.rawMsg:NMSG[n];}
+function ytCheck(id){
+  var s=ST[id],root=$('ln_'+id),G=givenAll(id,root),it=ITEMS[id];
+  if(s.state==='done')return;
+  if(!G){err(id,it.lines[0].t==='rat'?'Fill every box of the ratio first (whole numbers only).':'Fill the box first (a number like 24 or 73.3).');return;}
+  if(it.bc&&!/^\d+$/.test($('bck_'+id).value.trim())){err(id,'Fill the back-check box too: your ratio × what gives the question’s numbers?');return;}
+  s.tries++;
+  if(s.state==='fix'){if(allOK(id,G))return fixedIt(id,G);err(id,'Not yet — read the last lines again and copy the answer into the box.');return;}
+  if(!s.first)s.first=G.txt;
+  if(allOK(id,G))return gotIt(id,G);
+  if(!s.nudged){var l=firstBad(id,G),n=classify(l,G.g[l.k]);
+    if(n){s.nudged=true;s.flags[n]=true;err(id,badMsg(id,l,n));return;}}
+  notYet(id,G);
+}
+function praise(){var p=PR[Math.random()<0.5?0:2];if(p===lastP)p=(p===PR[0])?PR[2]:PR[0];lastP=p;return p;}
+function flagsOut(f){var o={},i;for(i=0;i<FLAGS.length;i++)o[FLAGS[i]]=!!f[FLAGS[i]];return o;}
+function record(id,firstRight,given,lines,selfFixed,fixedAns,afterLines){
+  if(SAVED[id])return; /* every id saved exactly once */
+  var s=ST[id],f=flagsOut(s.flags);
+  var rec={id:id,circledTapped:!!s.circled||WO.indexOf(id)>=0,answersGiven:given,answersCorrect:wantTxt(id),firstTryRight:firstRight,selfFixedAfterNudge:!!selfFixed,fixedAnswer:fixedAns||null,fixedAfterLines:!!afterLines,linesViewed:lines,ms:Date.now()-(s.t0||Date.now())};
+  var i;for(i=0;i<FLAGS.length;i++)rec[FLAGS[i]]=f[FLAGS[i]];
+  if(ITEMS[id].bc)rec.backCheck=bcState(id);
+  if(id==='W1'&&S.w.W1&&S.w.W1.tapWrong)rec.wrongAmount=true;
+  SAVED[id]=true;if(YT.indexOf(id)>=0)S.items.push(rec);else S.side[id]=rec;sstore();}
+function gotIt(id,G){var s=ST[id],f=!s.nudged;record(id,f,f?G.txt:s.first,0,s.nudged,f?null:G.txt,false);lockAll(id);s.state='done';var fb=$('fb_'+id);fb.className='feedback ok';fb.style.display='block';
+  fb.textContent='⭐ '+(s.nudged?PR[1]:praise());after(id);}
+function rowEl(a,cls){var d=document.createElement('div'),m=document.createElement('span'),w=document.createElement('span');d.className=cls;if(a[2])d.setAttribute('data-card',a[2]);if(/^T\d+$/.test(a[2]||''))d.setAttribute('data-n',a[2].slice(1));m.className='m';w.className='why';m.textContent=a[0];w.textContent=a[1];d.appendChild(m);d.appendChild(w);return d;}
+function notYet(id,G){
+  var s=ST[id];s.state='lines';lockAll(id);var so=$('sorry_'+id);
+  so.innerHTML='<div class="sbig">Not yet — here’s how it goes:</div>';so.style.display='block';
+  var blk=document.createElement('div'),ws=document.createElement('div'),Lr=WL[id],i,bt=document.createElement('button');
+  blk.className='wlb';blk.id='nywl_'+id;blk.setAttribute('data-bid',id);ws.className='wls';for(i=0;i<Lr.length;i++)ws.appendChild(rowEl(Lr[i],'wl'));
+  bt.type='button';bt.className='btn-next';bt.innerHTML='Next line &#9656;';bt.onclick=function(){nyNext(id,bt);};blk.appendChild(ws);blk.appendChild(bt);so.appendChild(blk);wlShow(blk,1);
+  $('fb_'+id).style.display='none';}
+function nyNext(id,btn){var b=btn.parentNode;wlShow(b,wlCount(b)+1);if(b.classList.contains('alldone')){ST[id].state='fix';
+  var fb=$('fb_'+id);fb.className='feedback';fb.style.display='block';fb.textContent='Now type the answer from the last lines.';
+  var els=$('ln_'+id).querySelectorAll('input'),i;for(i=0;i<els.length;i++){els[i].disabled=false;els[i].value='';}$('chk_'+id).disabled=false;}}
+function fixedIt(id,G){var s=ST[id],n=$('nywl_'+id)?wlCount($('nywl_'+id)):0;record(id,false,s.first,n,false,G.txt,true);lockAll(id);s.state='done';var fb=$('fb_'+id);fb.className='feedback ok';fb.style.display='block';fb.textContent='✨ '+PR[3];after(id);}
+function after(id){$('yt_'+id).classList.add('done');ytStat();if(YT.indexOf(id)>=0)revealCards();
+  if(/^FX/.test(id))fxAfter(id);
+  if(/^W/.test(id))wAfter(id);
+  autoSave();paintSave();if(allDone()&&cur===2)showFinish();}
+function revealCards(){var i;for(i=0;i<YT.length;i++){var prev=i>0?YT[i-1]:null;$('yt_'+YT[i]).classList.toggle('hidden',!!prev&&!isDone(prev));}}
+/* ---------- finish ---------- */
+function showFinish(){
+  if(!allDone())return;var s=stat();$('fboth').textContent='Practice: ⭐ '+s[0]+'   ✨ '+s[1];$('finish').style.display='block';
+  if(!S.celebrated){S.celebrated=true;sstore();confetti();}}
+function confetti(){var cols=['#F9A825','#43A047','#3F51B5','#FB8C00','#8E24AA','#00ACC1'],i;
+  for(i=0;i<36;i++){var e=document.createElement('span');e.className='cf';e.style.left=(Math.random()*100)+'vw';e.style.background=cols[i%cols.length];e.style.animationDelay=(Math.random()*0.8)+'s';
+    document.body.appendChild(e);(function(z){setTimeout(function(){if(z.parentNode)z.parentNode.removeChild(z);},4200);})(e);}}
+/* ---------- Fix-It Corner ---------- */
+function fxS(id){if(!S.fx[id])S.fx[id]={slip:null,slipRight:null,stage:0,done:false,t0:null,ms:null};return S.fx[id];}
+function fxPaint(){
+  var g=FXO,open=-1,i,j;for(i=0;i<g.length;i++){if(!(S.fx[g[i]]&&S.fx[g[i]].done)){open=i;break;}}
+  var dots=$('fxdots_0').children;
+  for(i=0;i<g.length;i++){var id=g[i],el=$('fx_'+id),st=S.fx[id]||{stage:0,done:false};
+    el.classList.toggle('hidden',open>=0&&i>open);el.classList.toggle('fxdone',!!st.done);
+    var sts=el.querySelectorAll('.fx-st');for(j=0;j<sts.length;j++)sts[j].classList.toggle('on',parseInt(sts[j].getAttribute('data-s'),10)<=(st.done?3:st.stage));
+    dots[i].className=st.done?'d':(i===open?'c':'');}
+  $('fxfinal_0').style.display=(open<0)?'block':'none';
+  if(open<0){var lm=$('lockmsg_0');if(lm)lm.style.display='none';}}
+function fxGo(id){var st=fxS(id);st.t0=st.t0||Date.now();if(st.stage<1)st.stage=1;sstore();fxPaint();}
+function fxPick(id,i){var st=fxS(id);if(st.slip!==null)return;var right=(i===FXKEY[id]);st.slip=i;st.slipRight=right;
+  var btns=$('fxo_'+id).querySelectorAll('.fxopt'),k;for(k=0;k<btns.length;k++){btns[k].disabled=true;if(k===FXKEY[id])btns[k].classList.add('right');else if(k===i)btns[k].classList.add('pickedwrong');}
+  $('fxres_'+id).textContent=right?'✓ Yes — that is the slip.':'Not quite. It was: '+FXTXT[id][FXKEY[id]];$('fxres_'+id).className='fxres '+(right?'ok':'amb');
+  $('fxb2_'+id).style.display='inline-block';sstore();paintSave();autoSave();}
+function fxToRedo(id){var st=fxS(id);if(st.stage<2)st.stage=2;sstore();fxPaint();}
+function fxAfter(id){var base=id.replace(/[rt]$/,''),st=fxS(base);
+  if(/r$/.test(id)){if(st.stage<3)st.stage=3;}
+  if(/t$/.test(id)){st.done=true;st.ms=Date.now()-(st.t0||Date.now());}
+  sstore();fxPaint();fxButtons();}
+function fxButtons(){var i;for(i=0;i<FXO.length;i++){var id=FXO[i],st=S.fx[id];var b=$('fxb3_'+id);if(b)b.style.display=(st&&st.done)?'inline-block':'none';var b2=$('fxb2_'+id);if(b2&&st&&st.slip!==null&&st.slip!==undefined&&!(st.stage>=2))b2.style.display='inline-block';}}
+function fxNext(id){fxPaint();var g=FXO,i=g.indexOf(id);if(i>=0&&i<g.length-1){var n=$('fx_'+g[i+1]);if(n)n.scrollIntoView({behavior:'smooth',block:'start'});}}
+function fxRestore(){var i,id,st;for(i=0;i<FXO.length;i++){id=FXO[i];st=S.fx[id];
+  if(isDone(id+'t')&&st){st.done=true;}else if(isDone(id+'r')&&st&&st.stage<3){st.stage=3;}
+  if(st&&st.slip!==null&&st.slip!==undefined){var btns=$('fxo_'+id).querySelectorAll('.fxopt'),k;for(k=0;k<btns.length;k++){btns[k].disabled=true;if(k===FXKEY[id])btns[k].classList.add('right');else if(k===st.slip)btns[k].classList.add('pickedwrong');}
+    $('fxres_'+id).textContent=st.slipRight?'✓ Yes — that is the slip.':'Not quite. It was: '+FXTXT[id][FXKEY[id]];$('fxres_'+id).className='fxres '+(st.slipRight?'ok':'amb');$('fxb2_'+id).style.display='inline-block';}}
+  fxPaint();fxButtons();}
+/* ---------- back-check box (P3, P4) ---------- */
+function bcState(id){var it=ITEMS[id],root=$('ln_'+id),l=it.lines[0],n=[],j,k=$('bck_'+id).value.trim();
+  for(j=0;j<l.v.length;j++){var e=root.querySelector('.ln-a-'+j);n.push(e?(+e.value.trim()):0);}
+  var prod=[],m;for(m=0;m<n.length;m++)prod.push(n[m]*(+k));
+  return {k:k,product:prod.join(' : '),matched:!!(/^\d+$/.test(k)&&+k>0&&same(prod,it.bc.orig))};}
+function bcUpdate(id){var it=ITEMS[id];if(!it.bc)return;var root=$('ln_'+id),l=it.lines[0],n=[],j,ok=true;
+  for(j=0;j<l.v.length;j++){var e=root.querySelector('.ln-a-'+j),v=e?e.value.trim():'';if(!/^\d+$/.test(v)||+v===0){ok=false;break;}n.push(+v);}
+  var k=$('bck_'+id).value.trim(),out=$('bcout_'+id);
+  if(!ok||!/^\d+$/.test(k)||+k===0){out.className='bcout';out.textContent='Type your ratio, then the number you × by.';return;}
+  var prod=[],m,parts=[];for(m=0;m<n.length;m++){prod.push(n[m]*(+k));parts.push(n[m]+' × '+k+' = '+prod[m]);}
+  var match=same(prod,it.bc.orig);out.className='bcout '+(match?'ok':'bad');
+  out.textContent=parts.join('  ·  ')+(match?'  —  ✓ the same numbers as the question ('+it.bc.orig.join(' : ')+')':'  —  ✗ the question says '+it.bc.orig.join(' : ')+'. These do not match.');}
+/* ---------- screen 2: two moves, shown ---------- */
+function wS(id){if(!S.w[id])S.w[id]={tapTries:0,tapWrong:0,tapRight:false,seen:false};return S.w[id];}
+var W1MSG=['That is only Cal’s marbles. The question asks how many MORE Dee has than Cal.','That is all of Dee’s marbles. “How many more” is only the extra part.','Both bars together is ALTOGETHER. “How many more” is not the total.'];
+function wUnlock(id){var ins=$('ln_'+id).querySelectorAll('input'),i;for(i=0;i<ins.length;i++)ins[i].disabled=false;$('chk_'+id).disabled=false;if(ST[id])ST[id].t0=ST[id].t0||Date.now();}
+function w1Right(){var bs=$('w1pick').querySelectorAll('button'),i,bx=$('w1row2').querySelectorAll('.ub');
+  for(i=0;i<bs.length;i++){bs[i].disabled=true;if(i===3)bs[i].classList.add('on');}
+  for(i=4;i<bx.length;i++)bx[i].classList.add('gapb');
+  var fb=$('w1fb');fb.className='feedback ok';fb.style.display='block';fb.textContent='✓ Yes — HOW MANY MORE is the gap: the 3 extra boxes. Point at what they ask, then use THAT many units.';}
+function w1Pick(i){var w=wS('W1');if(w.tapRight||isDone('W1'))return;w.tapTries++;
+  if(i===3){w.tapRight=true;sstore();w1Right();wUnlock('W1');return;}
+  w.tapWrong++;if(ST.W1)ST.W1.flags.wrongAmount=true;sstore();var fb=$('w1fb');fb.className='feedback err';fb.style.display='block';fb.textContent=W1MSG[i];}
+function w2Show(){var w=wS('W2');w.seen=true;sstore();$('w2cmp').style.display='block';$('w2btn').style.display='none';wUnlock('W2');}
+function wSetup(){var w1=S.w.W1,w2=S.w.W2;
+  if(w1&&w1.tapRight){w1Right();if(!isDone('W1'))wUnlock('W1');}
+  if(isDone('W1')){w1Right();}
+  if((w2&&w2.seen)||isDone('W2')){$('w2cmp').style.display='block';$('w2btn').style.display='none';if(!isDone('W2'))wUnlock('W2');}
+  var k;for(k=0;k<WO.length;k++)if(isDone(WO[k]))wShowLines(WO[k]);}
+function wShowLines(id){var b=$('wwl_'+id);if(!b)return;var r=recOf(id);if(r&&r.fixedAfterLines)return;b.classList.remove('closed');wlShow(b,b.querySelectorAll('.wl').length);}
+function wAfter(id){wShowLines(id);}
+function wsOut(){var o={},k;for(k in S.w)o[k]={tapTries:S.w[k].tapTries||0,tapWrong:S.w[k].tapWrong||0,tapRight:!!S.w[k].tapRight,compareShown:!!S.w[k].seen};return o;}
+/* ---------- saving ---------- */
+function fileName(){var d=new Date(),p=function(n){return (n<10?'0':'')+n;};return 'MATH_U077_Lesson_'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'_a'+attempt+'.json';}
+function dirty(){return nDone()>(S.savedN||0);}
+function fixItList(){var out=[],i,id,st,r1,r2;for(i=0;i<FXO.length;i++){id=FXO[i];st=S.fx[id]||{};r1=S.side[id+'r'];r2=S.side[id+'t'];
+  out.push({id:id,slipKey:FXLET[id],slipPicked:(st.slip===null||st.slip===undefined)?null:st.slip,slipPickedLetter:(st.slip===null||st.slip===undefined)?null:'ABC'.charAt(st.slip),slipRight:(st.slipRight===undefined)?null:st.slipRight,
+    redoAnswer:r1?((r1.fixedAnswer||r1.answersGiven).ans||(r1.fixedAnswer||r1.answersGiven).a):null,redoRight:r1?!!r1.firstTryRight:null,redoLinesViewed:r1?r1.linesViewed:null,
+    twinAnswer:r2?((r2.fixedAnswer||r2.answersGiven).ans||(r2.fixedAnswer||r2.answersGiven).a):null,twinRight:r2?!!r2.firstTryRight:null,twinLinesViewed:r2?r2.linesViewed:null,ms:st.ms||null});}
+  return out;}
+function flagTotals(){var t={},i,k;for(i=0;i<FLAGS.length;i++)t[FLAGS[i]]=0;
+  for(i=0;i<S.items.length;i++){for(k in t)if(S.items[i][k])t[k]++;}
+  return t;}
+function payload(){
+  var s=stat(),now=new Date(),ft=flagTotals();lastSavedAt=now.toISOString();
+  var o={student:'Prem',subject:'Math',unit:'U077',type:'lesson',attempt:attempt,openedAt:openedAt,lastSavedAt:lastSavedAt,
+    minutesSpent:Math.round(((S.base||0)+(now-new Date(openedAt))/60000)*10)/10,screensSeen:S.seen.length,finished:allDone(),stars:s[0],fixed:s[1],swaps:ft.swappedOrder};
+  var i;for(i=0;i<FLAGS.length;i++)o[FLAGS[i]]=ft[FLAGS[i]];
+  o.items=S.items;o.fixIt=fixItList();o.sideItems=S.side;o.askForWhat=wsOut();return o;}
+function paintSave(){
+  var z=$('savezone'),st=$('sstat'),bt=$('savebtn'),n=nDone();if(!z)return;
+  bt.disabled=(n<1);z.classList.toggle('saved',n>0&&!dirty());
+  if(n<1)st.textContent='Answer your first question — then press Save so Chusaki can see it.';
+  else if(!dirty())st.textContent='Saved — Chusaki can see it now ('+(S.savedN||0)+' answers, file '+fileName()+')';
+  else st.textContent='Not saved yet — '+n+' answer'+(n>1?'s':'')+' kept on this device. Press Save.';}
+function markSaved(){S.savedN=nDone();sstore();paintSave();}
+function writeTo(h){return h.createWritable().then(function(w){return w.write(JSON.stringify(payload(),null,2)).then(function(){return w.close();});});}
+function autoSave(){if(!nDone())return;if(fh){writeTo(fh).then(function(){wrote++;markSaved();}).catch(function(){fh=null;paintSave();});}}
+async function saveClick(){
+  var name=fileName(),json;
+  if(window.showSaveFilePicker){
+    try{fh=await window.showSaveFilePicker({suggestedName:name,types:[{description:'JSON results',accept:{'application/json':['.json']}}]});
+      await writeTo(fh);wrote++;markSaved();return;
+    }catch(e){fh=null;if(e&&e.name==='AbortError'){$('sstat').textContent='You closed the save box, so nothing was saved yet. Press Save again.';return;}}}
+  try{json=JSON.stringify(payload(),null,2);var blob=new Blob([json],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},4000);markSaved();
+  }catch(e2){$('sstat').textContent='Saving did not work. Tell Chusaki.';}}
+var bypass=false;
+window.addEventListener('beforeunload',function(e){if(!bypass&&S&&dirty()){e.preventDefault();e.returnValue='';return '';}});
+function xClick(ev){if(S&&dirty()){ev.preventDefault();$('unsavedov').classList.add('on');return false;}return true;}
+function stayAndSave(){$('unsavedov').classList.remove('on');var z=$('savezone');z.classList.add('pulse');z.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){z.classList.remove('pulse');},3000);}
+function leaveAnyway(){bypass=true;window.location.href=$('xclose').href;}
+init();
+
+</script>
+</body>
+</html>

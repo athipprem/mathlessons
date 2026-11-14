@@ -15,13 +15,30 @@
 var PREM_DATA = {
 
   // ── Meta ─────────────────────────────────────────────────────────
-  updated:        '11 Nov 2026',
+  updated:        '14 Nov 2026',
   coachStartDate: '2026-05-14',
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:76, topic:'Chapter 5 Ratio review for the school test (Mon 16 Nov 2026): the units method, three amounts, decimal answers + a 50-mark school-format mock', status:'Lesson + Mock Pending', buildNote:'Built 11 Nov 2026 per BUILD_PLAN_MATH_U76_SchoolTestPrep_Ch5.md v1.0. School test Mon 16 Nov, all of Chapter 5. One review lesson Ratio_Lesson_ChapterReview.html, 6 screens: Fix-It Corner (four U75 slips: Q6 order, Q7 total, Q10 now-first, Q13 halving, each with a slip pick, a redo and a twin); UNITS with a bar model you drag or tap (I know the total / one part / the difference) then the lines; &ldquo;for every&rdquo; and decimal answers (round once at the end); three amounts (equal-groups slider, find the &times;, a guided chain of more-than / less-than with a &ldquo;compared to whom?&rdquo; tap); Your turn x8 (Next stays locked until all 8 have an answer); a 2-question ready check that sends a miss back to the right screen. Ratio Card on every screen. Mock Unit_076_Mock_Ch5Ratio.docx: 25 questions, 50 marks (A 15, B 15, C 20), key question C24, 60 minutes alone, no Recall. Timeline: lesson Thu 12 or Fri 13 Nov, mock Sat 14 Nov on its own, school test Mon 16 Nov. Gates: verify_u76_plan.py --html PASS (51 lesson lines, 0 bad); lesson run-through scripted and every screen looked at at phone width; mock re-added from the render to 50.' },
+  currentUnit: { n:77, topic:'Sunday top-up before the Chapter 5 school test (Mon 16 Nov 2026): three habits from the U76 mock — point at what is asked, back-check every simplest form, round once at the end', status:'Lesson Pending (no test)', buildNote:'Built 14 Nov 2026 per BUILD_PLAN_MATH_U77_SundayTopUp_Ch5.md v1.0. Lesson only, about 15&ndash;20 minutes, Sunday 15 Nov; no test paper, because Monday&rsquo;s school test is the measurement. One lesson Ratio_Lesson_SundayTopUp.html, 3 screens: Fix-It Corner (five U76 mock slips: A6, B19, B11, B14, C25, each with a slip pick, a redo and a twin); Two moves, shown (W1: tap what the question asks before the box opens; W2: exact against rounded early, 8.57 against 8.58); Practice x6 (P3 and P4 carry a back-check box). The Top-up Card is on every screen. The JSON saves every item once, as _a1. Gates: verify_u77_plan.py --html PASS (98 lines, 0 bad); scripted run-through with wrong paths; screens looked at at phone width. U78 waits for the school paper.' },
   lastUnit: {
+    n:76, outOf:50, score:39, markedScore:39, pct:78, delta:0, prevScore:9, prevOutOf:12, prevLabel:'U75 (12-mark unit test, not comparable)',
+    coached: false, independentResult: null, distanceFromClass: 'Shaping Maths 5A Chapter 5 Ratio, whole chapter; school test Mon 16 Nov. Mock sat the same day as the lesson (lesson JSON 13:08&ndash;13:19 UTC, scan 14:17 UTC on 13 Nov); header provenance blank',
+    patternLabel: 'Unit 76 &mdash; Chapter 5 mock, 50 marks, scanned 13 Nov 2026 &mdash; 39/50 verified (marked 39/50) &middot; provenance not stated',
+    patternInsight: '<strong>Section A 13/15 &middot; B 11/15 &middot; C 15/20 &middot; Basic/Intermediate/Applied by section: A 13/15, B 11/15, C 15/20.</strong> Key question C24 5/5. Marks lost: A6 2 (wrote 33, Uma&rsquo;s share, key 88), B19 2 (wrote 32, key 104), B11 1 (54 : 24 written 7 : 3, key 9 : 4; working starts 28 : 12), B14 1 (wrote 2 : 8 : 3, key 2 : 7 : 3), C25 5 (wrote 7.14 and 28.56, key 21.43 and 71.43). Lesson JSON: attempt 2 only on disk, 11.3 min, 6 of 8 first try right, Y3 recorded twice.',
+    analysisLabel: 'Next: Unit 77 &mdash; Sunday top-up, lesson only (built 14 Nov 2026)',
+    analysisInsight: 'U77 is one 15&ndash;20 minute lesson on Sunday 15 Nov, three habits, no test paper. School test Monday 16 Nov.',
+    qSummary: '<strong>A 13/15 | B 11/15 | C 15/20</strong> &mdash; 39/50 (78%)',
+    qBreakdown: [
+      { q:'A6', topic:'Units: Val&rsquo;s share of 121 in 3 : 8', lvl:'m', pass:false, note:'&#10007; 33; correct 88. 1 unit 11 right, Uma&rsquo;s amount written. 0/2.' },
+      { q:'B11', topic:'Simplest form 54 : 24', lvl:'m', pass:false, note:'&#10007; 7 : 3; correct 9 : 4. Working starts 28 : 12. 0/1.' },
+      { q:'B14', topic:'Three-part simplest form', lvl:'m', pass:false, note:'&#10007; 2 : 8 : 3; correct 2 : 7 : 3. 0/1.' },
+      { q:'B19', topic:'Altogether from a ratio', lvl:'h', pass:false, note:'&#10007; 32; correct 104. 0/2.' },
+      { q:'C24', topic:'KEY question', lvl:'h', pass:true, note:'&#10003; 5/5.' },
+      { q:'C25', topic:'Decimal answers (a) and (b)', lvl:'h', pass:false, note:'&#10007; 7.14 and 28.56; correct 21.43 and 71.43. 0/5.' }
+    ]
+  },
+  _U75archived: {
     n:75, outOf:12, score:9, markedScore:9, pct:75, delta:0, prevScore:9, prevOutOf:12, prevLabel:'U74',
     coached: false, independentResult: null, distanceFromClass: 'Shaping Maths 5A Chapter 5 Ratio, Core 1 (Activities 1\u20133), started at school 4 Nov; lesson and test the same day (lesson JSON 11:34\u201312:06 UTC, scan 12:30 UTC on 11 Nov; the plan had them on different days)',
     patternLabel: 'Unit 75 &mdash; Ratio part 1, scanned 11 Nov 2026 &mdash; 9/12 verified (marked 9/12) &middot; provenance not stated (neither &ldquo;I sat this&rdquo; box ticked)',
@@ -974,25 +991,40 @@ var PREM_DATA = {
     { n:71, score:8, outOf:12, delta:-1, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 },
     { n:72, score:9, outOf:12, delta:+1, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:4, recallOutOf:4 },
     { n:74, score:9, outOf:12, delta:null, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false },
-    { n:75, score:9, outOf:12, delta:0, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 }
+    { n:75, score:9, outOf:12, delta:0, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false, recallScore:3, recallOutOf:4 },
+    { n:76, score:39, outOf:50, delta:0, color:'linear-gradient(135deg,#3F51B5,#283593)', star:false }
   ],
 
   // ── Unit log (newest first — renders Dashboard session log) ───────
   unitLog: [
     {
+      n: 77,
+      badge: 'linear-gradient(135deg,#3F51B5,#283593)',
+      title: 'Unit 77 &mdash; Sunday top-up: three habits before the school test (lesson only)',
+      tags: [
+        { t:'Built 14 Nov 2026 (plan v1.0)', c:'tblue' },
+        { t:'Not yet done', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
+        { t:'Lesson Sun 15 Nov &middot; school test Mon 16 Nov', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'3 screens, 5 Fix-It cards, Practice x6', c:'tgreen' },
+        { t:'No test paper', c:'tgreen' },
+        { t:'Gates: plan gate --html PASS + scripted run-through', c:'tgreen' }
+      ],
+      note: 'Built from BUILD_PLAN_MATH_U77_SundayTopUp_Ch5.md v1.0. Lesson only, 15&ndash;20 minutes: the 11 marks lost on the U76 mock sit in three habits (point at what is asked, back-check every simplest form, round once). Monday&rsquo;s school test is the measurement. U78 waits for the school paper.',
+      status: 'live'
+    },
+    {
       n: 76,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
       title: 'Unit 76 &mdash; Chapter 5 Ratio review for the school test: units, three amounts, decimals (Shaping Maths 5A Unit 5)',
       tags: [
-        { t:'Built 11 Nov 2026 (plan v1.0)', c:'tblue' },
-        { t:'Not yet sat', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
-        { t:'School test Mon 16 Nov &middot; lesson Thu/Fri &middot; mock Sat 14 Nov', s:'background:#E8EAF6;color:#283593;font-weight:700' },
-        { t:'6 screens, 4 Fix-It cards, bar model, Your turn x8, 2-question ready check', c:'tgreen' },
-        { t:'Mock: 25 questions, 50 marks (A 15, B 15, C 20), key C24, 60 min alone', c:'tgreen' },
-        { t:'Gates: plan gate --html PASS + scripted run-through', c:'tgreen' }
+        { t:'39/50 verified &mdash; provenance not stated', s:'background:#E8EAF6;color:#283593;font-weight:700' },
+        { t:'A 13/15 &middot; B 11/15 &middot; C 15/20', c:'torange' },
+        { t:'Key C24 5/5', s:'background:#FFF8E1;color:#E65100;font-weight:700' },
+        { t:'Lesson and mock the same day', c:'torange' },
+        { t:'&rarr; Unit 77', c:'torange' }
       ],
-      note: 'Built from BUILD_PLAN_MATH_U76_SchoolTestPrep_Ch5.md v1.0. One review lesson for the whole chapter (find 1 unit first from the total, one part or the difference; &ldquo;for every&rdquo;; decimals rounded once at the end; three amounts and chains of more-than / less-than), plus a school-format mock for Saturday. A Fix-It Corner takes the four U75 slips. The Section C marks split (2+3 and so on) is the builder&rsquo;s reading of the plan.',
-      status: 'live'
+      note: 'Scanned Fri 13 Nov. Marks lost: A6 2, B19 2, B11 1, B14 1, C25 5. Record: TEST_RECORD_U76.md. Built from BUILD_PLAN_MATH_U76_SchoolTestPrep_Ch5.md v1.0.',
+      status: 'done'
     },
     {
       n: 75,
