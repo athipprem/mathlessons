@@ -20,14 +20,14 @@ var PREM_DATA = {
   isaDate:        '2027-02-26',
 
   // ── Current state ────────────────────────────────────────────────
-  currentUnit: { n:77, topic:'Sunday top-up before the Chapter 5 school test (Mon 16 Nov 2026): three habits from the U76 mock — point at what is asked, back-check every simplest form, round once at the end', status:'Lesson Pending (no test)', buildNote:'Built 14 Nov 2026 per BUILD_PLAN_MATH_U77_SundayTopUp_Ch5.md v1.0. Lesson only, about 15&ndash;20 minutes, Sunday 15 Nov; no test paper, because Monday&rsquo;s school test is the measurement. One lesson Ratio_Lesson_SundayTopUp.html, 3 screens: Fix-It Corner (five U76 mock slips: A6, B19, B11, B14, C25, each with a slip pick, a redo and a twin); Two moves, shown (W1: tap what the question asks before the box opens; W2: exact against rounded early, 8.57 against 8.58); Practice x6 (P3 and P4 carry a back-check box). The Top-up Card is on every screen. The JSON saves every item once, as _a1. Gates: verify_u77_plan.py --html PASS (98 lines, 0 bad); scripted run-through with wrong paths; screens looked at at phone width. U78 waits for the school paper.' },
+  currentUnit: { n:77, topic:'Sunday top-up before the Chapter 5 school test (Mon 16 Nov 2026): three habits from the U76 mock — point at what is asked, back-check every simplest form, round once at the end', status:'Lesson + Paper Pending', buildNote:'Rebuilt 15 Nov 2026 per BUILD_PLAN_MATH_U77_SundayTopUp_Ch5.md v1.2 (Lui: Prem did not follow how U77 coached him). Lesson Ratio_Lesson_SundayTopUp.html, 6 screens, one habit each in plain words: WANT, CHECK BACK, DIVIDE LAST, then which total is possible, practice x5, finish. Each habit screen teaches I do (watch one solved question, one step at a time), We do (his own mock question, one blank per step, Show me and hints, the slip step flagged gently), You do (a twin alone; a wrong answer offers Do it together). DIVIDE LAST (multiply first, divide once) replaces the fraction method; boxes replace units. The JSON saves every item once, as _a1, and records doItTogether. Paper Unit_077_Test_Ratio_Habits.docx: 16 pinned questions (Part 1 Q1&ndash;12, 12 marks, pass 10; Challenge Q13&ndash;16 in ISA, Kangaroo, ASMOPSS and Kangaroo style, target 2/4), key Q12, with every step in the answer key. Lesson as soon as built (about 25 minutes), paper at least 3 hours later; skip the paper if it gets late. The unpinned 9-question Check paper built on 14 Nov was a build defect and is retired. U78 waits for the school paper.' },
   lastUnit: {
     n:76, outOf:50, score:39, markedScore:39, pct:78, delta:0, prevScore:9, prevOutOf:12, prevLabel:'U75 (12-mark unit test, not comparable)',
     coached: false, independentResult: null, distanceFromClass: 'Shaping Maths 5A Chapter 5 Ratio, whole chapter; school test Mon 16 Nov. Mock sat the same day as the lesson (lesson JSON 13:08&ndash;13:19 UTC, scan 14:17 UTC on 13 Nov); header provenance blank',
     patternLabel: 'Unit 76 &mdash; Chapter 5 mock, 50 marks, scanned 13 Nov 2026 &mdash; 39/50 verified (marked 39/50) &middot; provenance not stated',
     patternInsight: '<strong>Section A 13/15 &middot; B 11/15 &middot; C 15/20 &middot; Basic/Intermediate/Applied by section: A 13/15, B 11/15, C 15/20.</strong> Key question C24 5/5. Marks lost: A6 2 (wrote 33, Uma&rsquo;s share, key 88), B19 2 (wrote 32, key 104), B11 1 (54 : 24 written 7 : 3, key 9 : 4; working starts 28 : 12), B14 1 (wrote 2 : 8 : 3, key 2 : 7 : 3), C25 5 (wrote 7.14 and 28.56, key 21.43 and 71.43). Lesson JSON: attempt 2 only on disk, 11.3 min, 6 of 8 first try right, Y3 recorded twice.',
-    analysisLabel: 'Next: Unit 77 &mdash; Sunday top-up, lesson only (built 14 Nov 2026)',
-    analysisInsight: 'U77 is one 15&ndash;20 minute lesson on Sunday 15 Nov, three habits, no test paper. School test Monday 16 Nov.',
+    analysisLabel: 'Next: Unit 77 &mdash; Sunday top-up, lesson + paper (rebuilt 15 Nov 2026, plan v1.2)',
+    analysisInsight: 'U77 is a 25 minute lesson on Sunday 15 Nov (WANT, CHECK BACK, DIVIDE LAST), then a 16-question paper at least 3 hours later. School test Monday 16 Nov.',
     qSummary: '<strong>A 13/15 | B 11/15 | C 15/20</strong> &mdash; 39/50 (78%)',
     qBreakdown: [
       { q:'A6', topic:'Units: Val&rsquo;s share of 121 in 3 : 8', lvl:'m', pass:false, note:'&#10007; 33; correct 88. 1 unit 11 right, Uma&rsquo;s amount written. 0/2.' },
@@ -1000,16 +1000,16 @@ var PREM_DATA = {
     {
       n: 77,
       badge: 'linear-gradient(135deg,#3F51B5,#283593)',
-      title: 'Unit 77 &mdash; Sunday top-up: three habits before the school test (lesson only)',
+      title: 'Unit 77 &mdash; Sunday: WANT &middot; CHECK BACK &middot; DIVIDE LAST (lesson + paper)',
       tags: [
-        { t:'Built 14 Nov 2026 (plan v1.0)', c:'tblue' },
+        { t:'Rebuilt 15 Nov 2026 (plan v1.2)', c:'tblue' },
         { t:'Not yet done', s:'background:#FFF3E0;color:#F57F17;font-weight:700' },
         { t:'Lesson Sun 15 Nov &middot; school test Mon 16 Nov', s:'background:#E8EAF6;color:#283593;font-weight:700' },
-        { t:'3 screens, 5 Fix-It cards, Practice x6', c:'tgreen' },
-        { t:'No test paper', c:'tgreen' },
+        { t:'6 screens: I do / We do / You do, plain words', c:'tgreen' },
+        { t:'Paper: 16 questions (12 + 4 Challenge), key Q12', c:'tgreen' },
         { t:'Gates: plan gate --html PASS + scripted run-through', c:'tgreen' }
       ],
-      note: 'Built from BUILD_PLAN_MATH_U77_SundayTopUp_Ch5.md v1.0. Lesson only, 15&ndash;20 minutes: the 11 marks lost on the U76 mock sit in three habits (point at what is asked, back-check every simplest form, round once). Monday&rsquo;s school test is the measurement. U78 waits for the school paper.',
+      note: 'Built from BUILD_PLAN_MATH_U77_SundayTopUp_Ch5.md v1.2. The 11 marks lost on the U76 mock sit in three habits: WANT (what the question asks for), CHECK BACK (multiply a simplest form back up), DIVIDE LAST (multiply first, divide once). Taught step by step: I do, We do, You do. Paper: 16 questions, Part 1 pass 10/12, Challenge target 2/4. Monday&rsquo;s school test is the real check. U78 waits for the school paper.',
       status: 'live'
     },
     {
