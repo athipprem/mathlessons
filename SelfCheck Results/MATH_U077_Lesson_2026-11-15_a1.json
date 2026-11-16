@@ -1,0 +1,537 @@
+{
+  "student": "Prem",
+  "subject": "Math",
+  "unit": "U077",
+  "type": "lesson",
+  "version": "v1.2",
+  "attempt": 1,
+  "openedAt": "2026-11-15T07:26:21.328Z",
+  "lastSavedAt": "2026-11-15T07:42:02.378Z",
+  "minutesSpent": 15.7,
+  "screensSeen": 6,
+  "finished": true,
+  "itemsSaved": 16,
+  "firstTryRight": 2,
+  "hintsUsed": 6,
+  "flagTotals": {
+    "roundedEarly": 0,
+    "wrongAmount": 3,
+    "noBackCheck": 7,
+    "doItTogether": 6
+  },
+  "items": [
+    {
+      "id": "FX11r",
+      "habit": "CHECK BACK",
+      "stage": "weDo",
+      "firstTryRight": null,
+      "tries": 4,
+      "wrongAnswers": [
+        {
+          "step": 0,
+          "a": "7 3",
+          "flag": "wrong"
+        },
+        {
+          "step": 0,
+          "a": "7 3",
+          "flag": "wrong"
+        },
+        {
+          "step": 1,
+          "a": "36",
+          "flag": "wrong"
+        },
+        {
+          "step": 1,
+          "a": "36",
+          "flag": "wrong"
+        }
+      ],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 0
+      },
+      "wantTries": 0,
+      "wantFirstRight": null,
+      "hintsUsed": 1,
+      "showMeUsed": 1,
+      "doItTogether": false,
+      "stepTries": [
+        2,
+        2
+      ],
+      "answerGiven": "24",
+      "seconds": 345,
+      "done": true
+    },
+    {
+      "id": "FX11t",
+      "habit": "CHECK BACK",
+      "stage": "youDo",
+      "firstTryRight": false,
+      "tries": 1,
+      "wrongAnswers": [
+        {
+          "a": "back 1",
+          "flag": "noBackCheck"
+        }
+      ],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 1
+      },
+      "wantTries": 0,
+      "wantFirstRight": null,
+      "hintsUsed": 0,
+      "showMeUsed": 0,
+      "doItTogether": true,
+      "stepTries": [],
+      "answerGiven": "32",
+      "seconds": 403,
+      "done": true
+    },
+    {
+      "id": "FX14r",
+      "habit": "CHECK BACK",
+      "stage": "weDo",
+      "firstTryRight": null,
+      "tries": 0,
+      "wrongAnswers": [],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 0
+      },
+      "wantTries": 0,
+      "wantFirstRight": null,
+      "hintsUsed": 0,
+      "showMeUsed": 0,
+      "doItTogether": false,
+      "stepTries": [],
+      "answerGiven": "24",
+      "seconds": 423,
+      "done": true
+    },
+    {
+      "id": "FX14t",
+      "habit": "CHECK BACK",
+      "stage": "youDo",
+      "firstTryRight": false,
+      "tries": 5,
+      "wrongAnswers": [
+        {
+          "a": "back 3*8=24",
+          "flag": "noBackCheck"
+        },
+        {
+          "a": "back 1",
+          "flag": "noBackCheck"
+        },
+        {
+          "a": "back 1",
+          "flag": "noBackCheck"
+        },
+        {
+          "a": "back yes",
+          "flag": "noBackCheck"
+        },
+        {
+          "a": "back yes",
+          "flag": "noBackCheck"
+        }
+      ],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 5
+      },
+      "wantTries": 0,
+      "wantFirstRight": null,
+      "hintsUsed": 0,
+      "showMeUsed": 0,
+      "doItTogether": true,
+      "stepTries": [],
+      "answerGiven": "30",
+      "seconds": 544,
+      "done": true
+    },
+    {
+      "id": "FX19r",
+      "habit": "WANT",
+      "stage": "weDo",
+      "firstTryRight": null,
+      "tries": 0,
+      "wrongAnswers": [],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 0
+      },
+      "wantTries": 0,
+      "wantFirstRight": null,
+      "hintsUsed": 0,
+      "showMeUsed": 0,
+      "doItTogether": false,
+      "stepTries": [],
+      "answerGiven": "104",
+      "seconds": 171,
+      "done": true
+    },
+    {
+      "id": "FX19t",
+      "habit": "WANT",
+      "stage": "youDo",
+      "firstTryRight": false,
+      "tries": 2,
+      "wrongAnswers": [
+        {
+          "a": "27",
+          "flag": "wrongAmount"
+        },
+        {
+          "a": "27",
+          "flag": "wrongAmount"
+        }
+      ],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 2,
+        "noBackCheck": 0
+      },
+      "wantTries": 2,
+      "wantFirstRight": false,
+      "hintsUsed": 0,
+      "showMeUsed": 0,
+      "doItTogether": false,
+      "stepTries": [],
+      "answerGiven": "72",
+      "seconds": 203,
+      "done": true
+    },
+    {
+      "id": "FX25r",
+      "habit": "DIVIDE LAST",
+      "stage": "weDo",
+      "firstTryRight": null,
+      "tries": 4,
+      "wrongAnswers": [
+        {
+          "step": 1,
+          "a": "21 3/7",
+          "flag": "wrong"
+        },
+        {
+          "step": 1,
+          "a": "21 3/7",
+          "flag": "wrong"
+        },
+        {
+          "step": 1,
+          "a": "21 43",
+          "flag": "wrong"
+        },
+        {
+          "step": 1,
+          "a": "21 43",
+          "flag": "wrong"
+        }
+      ],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 0
+      },
+      "wantTries": 0,
+      "wantFirstRight": null,
+      "hintsUsed": 1,
+      "showMeUsed": 1,
+      "doItTogether": false,
+      "stepTries": [
+        null,
+        4
+      ],
+      "answerGiven": "21.43 kg",
+      "seconds": 661,
+      "done": true
+    },
+    {
+      "id": "FX25t",
+      "habit": "DIVIDE LAST",
+      "stage": "youDo",
+      "firstTryRight": false,
+      "tries": 1,
+      "wrongAnswers": [
+        {
+          "a": "1",
+          "flag": "wrong"
+        }
+      ],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 0
+      },
+      "wantTries": 1,
+      "wantFirstRight": true,
+      "hintsUsed": 1,
+      "showMeUsed": 1,
+      "doItTogether": true,
+      "stepTries": [],
+      "answerGiven": "17.78 kg",
+      "seconds": 691,
+      "done": true
+    },
+    {
+      "id": "FX6r",
+      "habit": "WANT",
+      "stage": "weDo",
+      "firstTryRight": null,
+      "tries": 1,
+      "wrongAnswers": [
+        {
+          "step": 2,
+          "a": "11 11",
+          "flag": "wrong"
+        }
+      ],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 0
+      },
+      "wantTries": 0,
+      "wantFirstRight": null,
+      "hintsUsed": 2,
+      "showMeUsed": 2,
+      "doItTogether": false,
+      "stepTries": [
+        null,
+        null,
+        1
+      ],
+      "answerGiven": "88",
+      "seconds": 106,
+      "done": true
+    },
+    {
+      "id": "FX6t",
+      "habit": "WANT",
+      "stage": "youDo",
+      "firstTryRight": false,
+      "tries": 1,
+      "wrongAnswers": [
+        {
+          "a": "45",
+          "flag": "wrongAmount"
+        }
+      ],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 1,
+        "noBackCheck": 0
+      },
+      "wantTries": 1,
+      "wantFirstRight": true,
+      "hintsUsed": 0,
+      "showMeUsed": 0,
+      "doItTogether": false,
+      "stepTries": [],
+      "answerGiven": "81",
+      "seconds": 137,
+      "done": true
+    },
+    {
+      "id": "P1",
+      "habit": "WANT",
+      "stage": "youDo",
+      "firstTryRight": false,
+      "tries": 1,
+      "wrongAnswers": [
+        {
+          "a": "81",
+          "flag": "wrong"
+        }
+      ],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 0
+      },
+      "wantTries": 4,
+      "wantFirstRight": false,
+      "hintsUsed": 0,
+      "showMeUsed": 0,
+      "doItTogether": false,
+      "stepTries": [],
+      "answerGiven": "99",
+      "seconds": 776,
+      "done": true
+    },
+    {
+      "id": "P2",
+      "habit": "WANT",
+      "stage": "youDo",
+      "firstTryRight": true,
+      "tries": 0,
+      "wrongAnswers": [],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 0
+      },
+      "wantTries": 2,
+      "wantFirstRight": false,
+      "hintsUsed": 0,
+      "showMeUsed": 0,
+      "doItTogether": false,
+      "stepTries": [],
+      "answerGiven": "108 ml",
+      "seconds": 803,
+      "done": true
+    },
+    {
+      "id": "P4",
+      "habit": "CHECK BACK",
+      "stage": "youDo",
+      "firstTryRight": false,
+      "tries": 3,
+      "wrongAnswers": [
+        {
+          "a": "back 23",
+          "flag": "noBackCheck"
+        },
+        {
+          "step": 0,
+          "a": "9 3 7",
+          "flag": "wrong"
+        },
+        {
+          "step": 0,
+          "a": "9 3 7",
+          "flag": "wrong"
+        }
+      ],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 1
+      },
+      "wantTries": 0,
+      "wantFirstRight": null,
+      "hintsUsed": 0,
+      "showMeUsed": 0,
+      "doItTogether": true,
+      "stepTries": [
+        2
+      ],
+      "answerGiven": "63",
+      "seconds": 849,
+      "done": true
+    },
+    {
+      "id": "P5",
+      "habit": "DIVIDE LAST",
+      "stage": "youDo",
+      "firstTryRight": true,
+      "tries": 0,
+      "wrongAnswers": [],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 0
+      },
+      "wantTries": 2,
+      "wantFirstRight": false,
+      "hintsUsed": 0,
+      "showMeUsed": 0,
+      "doItTogether": false,
+      "stepTries": [],
+      "answerGiven": "83.3 m",
+      "seconds": 885,
+      "done": true
+    },
+    {
+      "id": "P6",
+      "habit": "DIVIDE LAST",
+      "stage": "youDo",
+      "firstTryRight": false,
+      "tries": 1,
+      "wrongAnswers": [
+        {
+          "a": "5",
+          "flag": "wrong"
+        }
+      ],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 0
+      },
+      "wantTries": 3,
+      "wantFirstRight": false,
+      "hintsUsed": 1,
+      "showMeUsed": 1,
+      "doItTogether": true,
+      "stepTries": [],
+      "answerGiven": "45.83 g",
+      "seconds": 934,
+      "done": true
+    },
+    {
+      "id": "P7",
+      "habit": "POSSIBLE TOTALS",
+      "stage": "youDo",
+      "firstTryRight": false,
+      "tries": 2,
+      "wrongAnswers": [
+        {
+          "a": "c",
+          "flag": "wrong"
+        },
+        {
+          "a": "c",
+          "flag": "wrong"
+        }
+      ],
+      "flags": {
+        "roundedEarly": 0,
+        "wrongAmount": 0,
+        "noBackCheck": 0
+      },
+      "wantTries": 0,
+      "wantFirstRight": null,
+      "hintsUsed": 0,
+      "showMeUsed": 0,
+      "doItTogether": true,
+      "stepTries": [],
+      "answerGiven": "40",
+      "seconds": 746,
+      "done": true
+    }
+  ],
+  "iDo": {
+    "W1": {
+      "steps": 8,
+      "done": true,
+      "tapTries": 14,
+      "tapRight": true,
+      "pickTries": 2,
+      "pickRight": true
+    },
+    "P3": {
+      "steps": 4,
+      "done": true
+    },
+    "W2": {
+      "steps": 3,
+      "done": true
+    },
+    "W3": {
+      "steps": 3,
+      "done": true
+    }
+  }
+}
